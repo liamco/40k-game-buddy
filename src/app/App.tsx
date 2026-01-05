@@ -109,8 +109,9 @@ function CombatResolver() {
     const [selectedUnitModel, setSelectedUnitModel] = useState<Model | null>(null);
 
     const [modifiers, setModifiers] = useState({
-        remainedStationary: false,
+        stationaryThisTurn: false,
         inCover: false,
+        inRangeOfObjective: false,
     });
 
     const [activeAttackerStratagems, setActiveAttackerStratagems] = useState<string[]>([]);

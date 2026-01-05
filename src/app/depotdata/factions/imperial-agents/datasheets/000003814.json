@@ -24,7 +24,10 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors refuse to be laid low, even by what should be fatal wounds.</p>Some models have ‘Feel No Pain x+’ listed in their abilities. Each time a model with this ability suffers damage and so would lose a wound (including wounds lost due to <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span>), roll one D6: if the result is greater than or equal to the number denoted by ‘x’, that wound is ignored and is not lost. If a model has more than one Feel No Pain ability, you can only use one of those abilities each time that model suffers damage and so would lose a wound.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Feel No Pain x+:</b> Each time this model would lose a wound, roll one D6: if the result equals or exceeds ‘x’, that wound is not lost.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 6
+      "parameter": 6,
+      "effects": [
+        "FEEL NO PAIN X+"
+      ]
     },
     {
       "id": "000008346",
@@ -32,7 +35,10 @@
       "legend": "Mighty heroes fight at the forefront of battle.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Mighty heroes fight at the forefront of battle.</p>Some <span class=\"kwb\">CHARACTER</span> units have ‘Leader’ listed on their datasheets. Such <span class=\"kwb\">CHARACTER</span> units are known as Leaders, and the units they can lead – known as their Bodyguard units – are listed on their datasheet.<br><br>During the Declare Battle Formations step, for each Leader in your army, if your army also includes one or more of that Leader’s Bodyguard units, you can select one of those Bodyguard units. That Leader will then attach to that Bodyguard unit for the duration of the battle and is said to be leading that unit. Each Bodyguard unit can only have one Leader attached to it.<br><br>While a Bodyguard unit contains a Leader, it is known as an Attached unit and, with the exception of rules that are triggered when units are <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, it is treated as a single unit for all rules purposes. Each time an attack targets an Attached unit, until the attacking unit has resolved all of its attacks, you must use the Toughness characteristic of the Bodyguard models in that unit, even if a Leader in that unit has a different Toughness characteristic. Each time an attack sucessfully wounds an Attached unit, that attack cannot be allocated to a <span class=\"kwb\">CHARACTER</span> model in that unit, even if that <span class=\"kwb\">CHARACTER</span> model has lost one or more wounds or has already had attacks allocated to it this phase. As soon as the last Bodyguard model in an Attached unit has been destroyed, any attacks made against that unit that have yet to be allocated can then be allocated to <span class=\"kwb\">CHARACTER</span> models in that unit.<br><br>Each time the last model in a Bodyguard unit is destroyed, each <span class=\"kwb\">CHARACTER</span> unit that is part of that Attached unit is no longer part of an Attached unit. It becomes a separate unit, with its original Starting Strength. If this happens as the result of an attack, they become separate units after the attacking unit has resolved all of its attacks.<br><br>Each time the last model in a <span class=\"kwb\">CHARACTER</span> unit that is attached to a Bodyguard unit is destroyed and there is not another <span class=\"kwb\">CHARACTER</span> unit attached, that Attached unit’s Bodyguard unit is no longer part of an Attached unit. It becomes a separate unit, with its original Starting Strength. If this happens as the result of an attack, they become separate units after the attacking unit has resolved all of its attacks. <br><br>Each time a unit that is part of an Attached unit is destroyed, it does not have the keywords of any other units that make up that Attached unit (unless it has those keywords on its own datasheet) for the purposes of any rules that would be triggered when that unit is destroyed.<br><br><div class=\"redExample\"><b>Example:</b> If you only destroy the Bodyguard unit that is part of an Attached unit, you have not destroyed a <span class=\"kwb\">CHARACTER</span> unit. If you only destroy the <span class=\"kwb\">CHARACTER</span> unit that is part of an Attached unit, or if you destroy the whole Attached unit, you have destroyed one <span class=\"kwb\">CHARACTER</span> unit.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li>Before the battle, <span class=\"kwb\">CHARACTER</span> units with the Leader ability can be attached to one of their Bodyguard units to form an Attached unit.</li><li>Attached units can only contain one Leader.</li><li>Attacks cannot be allocated to <span class=\"kwb\">CHARACTER</span> models in Attached units.</li></ul></div></div>",
-      "type": "Core"
+      "type": "Core",
+      "effects": [
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008452",
@@ -213,7 +219,6 @@
       "type": "Veiled Blade Elimination Force – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "Unenhanced mortal bodies are routinely – and unknowingly – dosed with experimental stimulant cocktails that serve to reinforce their resilience, at least in the short term.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -229,7 +234,6 @@
       "type": "Alien Hunters – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Only a truly versatile approach to warfare allows the Deathwatch to focus their tactical genius and best the myriad xenos foes they face.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -258,7 +262,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -273,7 +276,6 @@
       "type": "Veiled Blade Elimination Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Aiming concentrated volleys of fire toward an exceptionally resilient foe, these agents erode the will of their target, increasing their vulnerability to the concentrated psychic onslaughts of the Culexus Assassin’s animus speculum.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -330,7 +332,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -345,7 +346,6 @@
       "type": "Imperialis Fleet – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Believing theyfightforthe safety of the Golden Throne motivates warriors to exceptional deeds.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -360,7 +360,6 @@
       "type": "Imperialis Fleet – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "If a high-ranking Imperial agent locates something they wish to acquire, nothing will stop them from unleashing all the forces at their command to seize it.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -391,7 +390,6 @@
       "type": "Alien Hunters – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence and transhuman physiologies of the Deathwatch make them unyielding foes.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -421,7 +419,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -436,7 +433,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -465,7 +461,6 @@
       "type": "Alien Hunters – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Dragonf ire rounds explode just before contact, saturating foes in cover with searing gas and flames.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -494,7 +489,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -509,7 +503,6 @@
       "type": "Veiled Blade Elimination Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A primary target has been revealed. All efforts must be made to ensure the kill.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -525,7 +518,6 @@
       "type": "Alien Hunters – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Kraken rounds utilise adamantine cores and improved propellants to penetrate the thickest hide.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -540,7 +532,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -583,7 +574,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The commander's authoritative tone cuts through the din of battle, guiding the actions of nearby troops.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -598,7 +588,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -613,7 +602,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "The legends of the 41st Millennium are replete with deadly duels between mighty champions.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -628,7 +616,6 @@
       "type": "Core – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Priming their hand-held projectiles, these warriors draw back and hurl death into the enemy’s midst.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -643,7 +630,6 @@
       "type": "Alien Hunters – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Hellfire rounds contain reservoirs of virulent bioacids that eat away the flesh of their victims in seconds and leave nothing but bubbling gruel.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],

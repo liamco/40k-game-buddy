@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D3"
+      "parameter": "D3",
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008526",
@@ -32,7 +36,13 @@
       "legend": "On the eve of battle, the Black Templars gather to be led in prayer and contemplation by their champions. United in their hatred of the foe, they swear a mighty vow to uphold in the battle ahead.",
       "factionId": "SM",
       "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of the first battle round, select one of the following Vows to be active for <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army. While a Vow is active for a unit from your army, that unit has the associated ability shown below.<br><br><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Abhor the Witch, Destroy the Witch</p><p>Each time this unit <span class=\"tooltip00060\" data-tooltip-content=\"#tooltip_content00060\"><span class=\"tt kwbu\">declares</span> <span class=\"tt kwbu\">a</span> <span class=\"tt kwbu\">charge</span></span>, if one or more targets of that charge have the <span class=\"kwb\">PSYKER</span> keyword, you can re-roll the <span class=\"tooltip00060\" data-tooltip-content=\"#tooltip_content00060\"><span class=\"tt kwbu\">Charge</span> <span class=\"tt kwbu\">roll</span></span>. Melee weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00047\" data-tooltip-content=\"#tooltip_content00047\"><span class=\"tt kwbu\">[PRECISION]</span></span></span> ability while targeting <span class=\"kwb\">PSYKER</span> units.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Accept Any Challenge, No Matter the Odds</p><p>Each time a model in this unit makes a melee attack, if the Strength characteristic of that attack is less than or equal to the Toughness characteristic of the target, add 1 to the <span class=\"tooltip00037\" data-tooltip-content=\"#tooltip_content00037\"><span class=\"tt kwbu\">Wound</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Suffer Not the Unclean to Live</p><p>This unit is eligible to declare a charge in a turn in which it <span class=\"tooltip00041\" data-tooltip-content=\"#tooltip_content00041\"><span class=\"tt kwbu\">Fell</span> <span class=\"tt kwbu\">Back</span></span>, and each time a model in this unit makes a <span class=\"tooltip00234\" data-tooltip-content=\"#tooltip_content00234\"><span class=\"tt kwbu\">Pile-in</span></span> or <span class=\"tooltip00235\" data-tooltip-content=\"#tooltip_content00235\"><span class=\"tt kwbu\">Consolidation</span> <span class=\"tt kwbu\">move</span></span>, it does not need to end that move closer to the closest enemy model, provided it ends that move as close as possible to the closest enemy unit.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Uphold the Honour of the Emperor</p><p>If this unit has the <span class=\"tooltip00259\" data-tooltip-content=\"#tooltip_content00259\" data-tooltip-anchor=\"#tooltip_content00259\"><span class=\"kwb kwbu\">INFANTRY</span></span> keyword:<br><ul><li>At the end of your Command phase, if this unit is within range of an <span class=\"tooltip00042\" data-tooltip-content=\"#tooltip_content00042\"><span class=\"tt kwbu\">objective</span> <span class=\"tt kwbu\">marker</span></span> you control, that objective marker remains under your control until your opponent’s Level of Control over that objective marker is greater than yours at the end of a phase.</li><li>If the mission you are playing features Actions, this unit is eligible to start to perform an Action in a turn in which it <span class=\"tooltip00013\" data-tooltip-content=\"#tooltip_content00013\"><span class=\"tt kwbu\">Advanced</span></span>.</li></ul></p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
+      "type": "Faction",
+      "effects": [
+        "ABHOR THE WITCH, DESTROY THE WITCH",
+        "ACCEPT ANY CHALLENGE, NO MATTER THE ODDS",
+        "SUFFER NOT THE UNCLEAN TO LIVE",
+        "UPHOLD THE HONOUR OF THE EMPEROR"
+      ]
     },
     {
       "id": "",
@@ -324,7 +334,6 @@
       "type": "Liberator Assault Group – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The Blood Angels enact a sweeping advance.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -339,7 +348,6 @@
       "type": "Shadowmark Talon – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Retreating from the fight, these warriors lure their enemies on before swiftly turning the tables and hurling themselves into their now overextended foe.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -354,7 +362,6 @@
       "type": "Black Spear Task Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Only a truly versatile approach to warfare allows the tactical genius of the Deathwatch to best the myriad xenos foes they face.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -369,7 +376,6 @@
       "type": "Lion’s Blade Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Combining their specialised methods of warfare, the Ravenwing and Deathwing confound their enemies with high‑speed manoeuvrability and stalwart fortitude.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -398,7 +404,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -428,7 +433,6 @@
       "type": "Lion’s Blade Task Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Engines roar, and teleportation flares erupt across the battlefield. Such is the din and ferocity of the Dark Angels’ assault that even the most veteran foes are given cause to cower before it.",
-      "turn": "EITHER",
       "phase": [
         "COMMAND",
         "FIGHT"
@@ -444,7 +448,6 @@
       "type": "Anvil Siege Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Space Marines train for countless hours to master their weapons and in the heat of battle can trigger mnemonic patterning to recall their ritual drills and ensure the foe’s destruction.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -459,7 +462,6 @@
       "type": "Unforgiven Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "There is no escaping the Unforgiven’s wrath when they bring their disciplined firepower to bear.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -474,7 +476,6 @@
       "type": "Unforgiven Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "With focused aggression, the Dark Angels relentlessly punish the foe.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -490,7 +491,6 @@
       "type": "Champions of Fenris – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The belligerence and transhuman physiologies of the Adeptus Astartes make them unyielding foes.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -506,7 +506,6 @@
       "type": "1st Company Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -522,7 +521,6 @@
       "type": "Gladius Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -538,7 +536,6 @@
       "type": "Blade of Ultramar – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Roaring their famed battle cry, the Ultramarines hurl themselves into the fight, striving all the harder to prevail beneath the unwavering eye of their Chapter Master.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -553,7 +550,6 @@
       "type": "Anvil Siege Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Cleaving to duty, the Adeptus Astartes refuse to be drawn out of position. Instead they secure ground to establish new fire lines to the enemy.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -568,7 +564,6 @@
       "type": "Wrathful Procession – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The sheer momentum and ferocity of so many charging, armoured killers are almost impossible to stop, carrying them forward through rank after rank of the heretical foe.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -583,7 +578,6 @@
       "type": "Angelic Inheritors – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes, combined with their transhuman physiology, makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -599,7 +593,6 @@
       "type": "Firestorm Assault Force – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "Salvo after salvo of burning promethium unleashed in synchronised waves will leave almost any foe as smouldering ash.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -628,7 +621,6 @@
       "type": "Rage-cursed Onslaught – Stratagem",
       "cpCost": 1,
       "legend": "Already swift and aggressive even by Space Marine standards, the Blood Angels can enhance their might yet further by surrendering temporarily to the Red Thirst, albeit at the cost of higher strategic thought.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -643,7 +635,6 @@
       "type": "Saga of the Great Wolf – Stratagem",
       "cpCost": 1,
       "legend": "With his great strategic wisdom, Grimnar predicted the peril these warriors would encounter and warned them to be ready for it.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -659,7 +650,6 @@
       "type": "Wrath of the Rock – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "When the constituent elements of the Dark Angels fight as one, the enemy is often overwhelmed and torn apart by the fluidity of the Chapter’s rapid advances, tactical withdrawals and unexpected counteroffensives.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -674,7 +664,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -703,7 +692,6 @@
       "type": "Wrathful Procession – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "All the enemy’s skill, cunning and trickery come to naught in the face of the Black Templars’ direct and unrelenting brutality.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -718,7 +706,6 @@
       "type": "Black Spear Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerency and transhuman physiologies of the Adeptus Astartes make them unyielding foes.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -734,7 +721,6 @@
       "type": "The Angelic Host – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "The Sanguinary Guard exemplify the noble heritage of Sanguinius, leaping to avenge their battle-brothers without hesitation.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -749,7 +735,6 @@
       "type": "Wrathful Procession – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "There is nowhere that the architects of heresy can hide from the righteous judgement of the Black Templars.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -764,7 +749,6 @@
       "type": "Saga of the Great Wolf – Stratagem",
       "cpCost": 1,
       "legend": "Pivotal as they are to the Great Wolf’s plans, this pack have their own orders to fulfil in this moment that come directly from Grimnar himself.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -779,7 +763,6 @@
       "type": "Rage-cursed Onslaught – Stratagem",
       "cpCost": 1,
       "legend": "While the Blood Angels display skill and discipline at close quarters, it is tinged with a blood-drenched brutality that only increases with their building rage.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -794,7 +777,6 @@
       "type": "Emperor's Shield – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -824,7 +806,6 @@
       "type": "Blade of Ultramar – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "No Chapter’s warriors know better the breadth – theoretical and practical – of the Codex Astartes’ teachings, and how these can and should be adapted to ensure victory.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -839,7 +820,6 @@
       "type": "Ironstorm Spearhead – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "Once a foe is marked for destruction, the Angels of Death must not relent until the target is annihilated.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -855,7 +835,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -884,7 +863,6 @@
       "type": "Saga of the Great Wolf – Stratagem",
       "cpCost": 1,
       "legend": "Knowing their part in the grand plan and determined to execute it with the magnificence of true champions, these warriors fight with a fluid and inescapable ferocity.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -913,7 +891,6 @@
       "type": "Gladius Task Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The tenets of the Codex Astartes allow for unorthodox use of combat tactics and the employment of divergent strategic doctrines if doing so will lead to victory.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -928,7 +905,6 @@
       "type": "Firestorm Assault Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -944,7 +920,6 @@
       "type": "Angelic Inheritors – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Knowing instinctively that the pivotal moment has arrived, these battle-brothers aim and hammer their foes with unrelenting volleys.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -959,7 +934,6 @@
       "type": "Saga of the Great Wolf – Stratagem",
       "cpCost": 1,
       "legend": "Once one Fenrisian warrior has perceived some slight weakness in the defences of their foes, they all strike at it like encircling predators dragging down prey.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -974,7 +948,6 @@
       "type": "Gladius Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Every Chapter has forged its own tales of heroism, and none of its battle-brothers would see that noble record besmirched.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -989,7 +962,6 @@
       "type": "Stormlance Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Warriors of Stormlance Task Forces can suddenly pour heavy and accurate fire into the enemy even as they race to finish off any survivors.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1004,7 +976,6 @@
       "type": "Stormlance Task Force – Wargear Stratagem",
       "cpCost": 2,
       "legend": "On the eve of riding down the most elusive prey, the task force's expert Techmarines will entreat the engine spirits o f their vehicles, honing the iron steeds' performance to elicit even more speed from them.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -1019,7 +990,6 @@
       "type": "Blade of Ultramar – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Long have the Ultramarines guarded both Ultramar and the wider Imperium. No foe can hide from their vengeful gaze or evade the reach of their wrath.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1034,7 +1004,6 @@
       "type": "Vanguard Spearhead – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1050,7 +1019,6 @@
       "type": "The Lost Brethren – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their enhanced physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1066,7 +1034,6 @@
       "type": "Saga of the Hunter – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Several packs converge upon a single target, pinning them in place with the weight of their bodies.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1081,7 +1048,6 @@
       "type": "Spearpoint Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Some foes can be ended with a single charge. Others require sustained savagery to fell. The White Scars are adept at both methods of fighting.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1096,7 +1062,6 @@
       "type": "Forgefather’s Seekers – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1112,7 +1077,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Ramming the foe with a speeding vehicle may be an unsubtle tactic, but it is a murderously effective one.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -1127,7 +1091,6 @@
       "type": "Hammer of Avernii – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1143,7 +1106,6 @@
       "type": "Gladius Task Force – Epic Deed Stratagem",
       "cpCost": 2,
       "legend": "Imminent death does not prevent a Space Marine from enacting his final justice upon the enemies of the Imperium.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1172,7 +1134,6 @@
       "type": "Vindication Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Perhaps guided by visions from the Emperor, Black Templars can pick out heresy wherever it lurks.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1188,7 +1149,6 @@
       "type": "Vindication Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Where the Emperor's domain is imperilled by the unholy, the Black Templars vow to cleanse it.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1203,7 +1163,6 @@
       "type": "Anvil Siege Force – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "To combat an entrenched force of Space Marines, foes resort to armoured vehicles or packs of murderous monstrosities. Even the greatest of behemoths has a chink in its armour and the Adeptus Astartes are well versed in exploiting such weaknesses.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1218,7 +1177,6 @@
       "type": "Wrath of the Rock – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Unflinching in their loyalty to Chapter and Primarch, Dark Angels battle-brothers seize and hold their objectives with unrelenting determination and zealous fury.",
-      "turn": "EITHER",
       "phase": [
         "COMMAND"
       ],
@@ -1233,7 +1191,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -1248,7 +1205,6 @@
       "type": "Ironstorm Spearhead – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Space Marines exemplify obdurate tenacity. Even injured, they will never abandon their oaths.",
-      "turn": "EITHER",
       "phase": [
         "COMMAND"
       ],
@@ -1263,7 +1219,6 @@
       "type": "Saga of the Beastslayer – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Unleashing a storm of firepower, the Space Wolves pin their targets down and halt their advance.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1278,7 +1233,6 @@
       "type": "Angelic Inheritors – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Keeping the beast within under tight control, the Blood Angels nonetheless tap into that inner rage and shackle it to their precisely aimed blows.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1293,7 +1247,6 @@
       "type": "Company Of Hunters – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1309,7 +1262,6 @@
       "type": "Gladius Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "There is no escaping the wrath of the Space Marines, and they use their weapons to bring swift death to their foes wherever they may hide.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1338,7 +1290,6 @@
       "type": "Shadowmark Talon – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1354,7 +1305,6 @@
       "type": "Stormlance Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1370,7 +1320,6 @@
       "type": "Saga of the Hunter – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The wolf packs are ever on the move, seizing ground and repelling their foes with savage violence.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1385,7 +1334,6 @@
       "type": "Rage-cursed Onslaught – Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes, combined with their transhuman physiology, makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1401,7 +1349,6 @@
       "type": "Lion’s Blade Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their transhuman physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1417,7 +1364,6 @@
       "type": "Liberator Assault Group – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "When Blood Angels execute a tactical withdrawal it is but a prelude to a renewed assault.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -1432,7 +1378,6 @@
       "type": "Saga of the Hunter – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "At the barked orders of their Pack Leaders, the Space Wolves focus their fury upon a single target, combining their firepower to bring the foe down.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1447,7 +1392,6 @@
       "type": "Spearpoint Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The White Scars fight their wars at a furious tempo, and their warriors are adept at fire-and-manoeuvre strategies.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -1462,7 +1406,6 @@
       "type": "Forgefather’s Seekers – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "Salvo after salvo of burning promethium unleashed in synchronised waves will leave almost any foe as smouldering ash.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1477,7 +1420,6 @@
       "type": "Vindication Task Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The sacred standards of a crusade embody its warriors' honour, and no one would see them lost.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1493,7 +1435,6 @@
       "type": "The Angelic Host – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their enhanced physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1509,7 +1450,6 @@
       "type": "Godhammer Assault Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Prepared within their troop compartment by a broadcast litany of their foe's ungodly sins, the crusaders emerge with their hearts full of hatred.",
-      "turn": "YOURS",
       "phase": [
         "FIGHT"
       ],
@@ -1552,7 +1492,6 @@
       "type": "Unforgiven Task Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Even the Dark Angels must give ground occasionally, y but their stubborn determination ensures they never do so for long, or without a fight.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -1567,7 +1506,6 @@
       "type": "Inner Circle Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1597,7 +1535,6 @@
       "type": "Liberator Assault Group – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Sanguinius' sons are blessed with the spiritual fortitude of their Primarch.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -1612,7 +1549,6 @@
       "type": "Blade of Ultramar – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1628,7 +1564,6 @@
       "type": "Ironstorm Spearhead – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1644,7 +1579,6 @@
       "type": "Unforgiven Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1660,7 +1594,6 @@
       "type": "Wrathful Procession – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence and transhuman physiologies of the Adeptus Astartes make them unyielding foes.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1676,7 +1609,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -1691,7 +1623,6 @@
       "type": "Librarius Conclave – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1721,7 +1652,6 @@
       "type": "Wrathful Procession – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "So powerfully gripped by holy fervour are these warriors that they fight on through even the most grievous wounds to body and mind.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -1736,7 +1666,6 @@
       "type": "Anvil Siege Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1752,7 +1681,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1767,7 +1695,6 @@
       "type": "Wrath of the Rock – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their transhuman physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1783,7 +1710,6 @@
       "type": "Liberator Assault Group – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "In times of great desperation, fury and ferocity can be a warrior's strongest allies.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -1798,7 +1724,6 @@
       "type": "Liberator Assault Group – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1814,7 +1739,6 @@
       "type": "Firestorm Assault Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Armed with targeting data supplied by their transport's augury gheists, warriors erupt from the assault ramps with weapons blazing in ruthless eradication patterns.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -1829,7 +1753,6 @@
       "type": "Ironstorm Spearhead – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Carefully cogitated binharic prayers can focus a machine spirit’s ire into near-obsessive hatred of its slayers, ensuring that vengeance is meted out even in death.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -1844,7 +1767,6 @@
       "type": "Blade of Ultramar – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "With the enemy’s countermeasures and responses predicted and allowed for in advance, the Ultramarines can weather their most ferocious attacks.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -1860,7 +1782,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -1875,7 +1796,6 @@
       "type": "Godhammer Assault Force – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Like the mailed fist of the Master of Mankind, the crusade's armoured battle tanks, transports and combat walkers smash their way through choked war zones to reach those deserving execution.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -1890,7 +1810,6 @@
       "type": "Spearpoint Task Force – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The belligerence of the Adeptus Astartes combined with their post-human physiology makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"

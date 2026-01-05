@@ -81,21 +81,28 @@ function convertWargearDescription(value) {
  * Examples:
  * - "Your turn" -> "YOURS"  
  * - "Opponent's turn" -> "OPPONENTS"
- * - "Either player’s turn" -> "EITHER"
+ * - "Either player's turn" -> "EITHER"
+ * - Already converted values ("YOURS", "OPPONENTS", "EITHER") are returned as-is
  */
 function convertTurnValue(value) {
   if (typeof value === 'string') {
     const turnKey = value.trim();
   
-    // Map each phase to uppercase GamePhase value
+    // If already in the correct format, return as-is
+    const validValues = ['YOURS', 'OPPONENTS', 'EITHER'];
+    if (validValues.includes(turnKey)) {
+      return turnKey;
+    }
+  
+    // Map each turn string to uppercase GameTurn value
     const turnMap = {
       'Your turn': 'YOURS',
       "Opponent's turn": 'OPPONENTS',
-      "Either player’s turn": 'EITHER'
+      "Either player's turn": 'EITHER'
     };
 
-    return turnMap[turnKey];
-
+    // Return mapped value if found, otherwise return original value
+    return turnMap[turnKey] || value;
   }
   return value;
 }
@@ -142,6 +149,90 @@ function convertPhaseValue(value) {
 }
 
 /**
+ * Extracts effects from a single ability description
+ * Looks for effect names in various HTML patterns:
+ * 1. <p class="impact18">Effect Name</p> - Common pattern for listed effects
+ * 2. <b>Effect Name:</b> - Bold text followed by colon (effect names in lists)
+ * Returns an array of effect names, or null if no effects found
+ * Examples:
+ * - Extracts "Tactical Doctrine", "Assault Doctrine", "Devastator Doctrine" from Combat Doctrines ability
+ * - Extracts "Eliminate At All Costs", "Acquire At All Costs" from Imperialis Fleet ability
+ * - Extracts "Sanguinary Grace", "Carmine Wrath", "Their Appointed Hour" from Angelic Inheritors ability
+ */
+function extractAbilityEffects(description) {
+  if (!description || typeof description !== 'string') {
+    return null;
+  }
+
+  const effects = [];
+  
+  // Pattern 1: Extract text from <p class="impact18">Effect Name</p> tags
+  // This is the most common pattern for listed effects/options
+  const impact18Pattern = /<p[^>]*class="impact18"[^>]*>([^<]+)<\/p>/gi;
+  const impact18Matches = [...description.matchAll(impact18Pattern)];
+  
+  if (impact18Matches && impact18Matches.length > 0) {
+    impact18Matches.forEach(match => {
+      if (match[1]) {
+        const effectName = match[1].trim();
+        // Convert to uppercase and add to effects
+        effects.push(effectName.toUpperCase());
+      }
+    });
+  }
+  
+  // Pattern 2: Extract text from <b>Effect Name:</b> patterns
+  // These are effect names in bold followed by a colon
+  // Only extract if it's not a stratagem keyword (WHEN, TARGET, EFFECT, RESTRICTIONS)
+  const boldPattern = /<b>([^<]+):<\/b>/gi;
+  const boldMatches = [...description.matchAll(boldPattern)];
+  
+  if (boldMatches && boldMatches.length > 0) {
+    const stratagemKeywords = ['WHEN', 'TARGET', 'EFFECT', 'RESTRICTIONS', 'DESIGNER\'S NOTE'];
+    
+    boldMatches.forEach(match => {
+      if (match[1]) {
+        const effectName = match[1].trim();
+        const upperName = effectName.toUpperCase();
+        
+        // Skip if it's a stratagem keyword
+        if (!stratagemKeywords.includes(upperName)) {
+          effects.push(upperName);
+        }
+      }
+    });
+  }
+  
+  // Remove duplicates
+  const uniqueEffects = [...new Set(effects)];
+  
+  // Define preferred order for specific effects (like doctrines)
+  const preferredOrder = ['TACTICAL DOCTRINE', 'ASSAULT DOCTRINE', 'DEVASTATOR DOCTRINE'];
+  
+  // Sort effects according to preferred order, then alphabetically for others
+  const sortedEffects = uniqueEffects.sort((a, b) => {
+    const aIndex = preferredOrder.indexOf(a);
+    const bIndex = preferredOrder.indexOf(b);
+    
+    // If both are in the preferred order, sort by their index
+    if (aIndex !== -1 && bIndex !== -1) {
+      return aIndex - bIndex;
+    }
+    // If only one is in the preferred order, it comes first
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+    // Otherwise, sort alphabetically
+    return a.localeCompare(b);
+  });
+  
+  if (sortedEffects.length > 0) {
+    return sortedEffects;
+  }
+  
+  return null;
+}
+
+/**
  * Recursively processes a JSON object to convert string numbers
  * Ignores 'id' properties to preserve them as strings
  */
@@ -152,12 +243,35 @@ function processObject(obj) {
   if (Array.isArray(obj)) {
     return obj.map(item => processObject(item));
   } else if (obj !== null && typeof obj === 'object') {
+    // Check if this is a detachment object
+    // Detachments have slug, name, and typically have abilities, enhancements, and/or stratagems
+    const isDetachment = obj.hasOwnProperty('slug') && 
+                        obj.hasOwnProperty('name') && 
+                        (obj.hasOwnProperty('abilities') || obj.hasOwnProperty('enhancements') || obj.hasOwnProperty('stratagems'));
+    
     const processed = {};
     for (const key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
         // Skip conversion for 'id' properties - keep them as strings
         if (ignoredProperties.includes(key)) {
           processed[key] = obj[key];
+        } else if (key === 'effects' && isDetachment) {
+          // Skip effects at detachment level - they should be in ability objects instead
+          continue;
+        } else if (key === 'abilities' && isDetachment && Array.isArray(obj[key])) {
+          // Special handling for abilities array in detachments
+          // Process each ability and add effects if found
+          processed[key] = obj[key].map(ability => {
+            const processedAbility = processObject(ability);
+            // Extract effects from the ability description
+            if (processedAbility.description) {
+              const effects = extractAbilityEffects(processedAbility.description);
+              if (effects) {
+                processedAbility.effects = effects;
+              }
+            }
+            return processedAbility;
+          });
         } else if (key === 'm') {
           // Special handling for movement property - convert "7\"" to 7
           processed[key] = convertMovementValue(obj[key]);
@@ -199,6 +313,7 @@ function processObject(obj) {
         }
       }
     }
+    
     return processed;
   } else {
     return convertValue(obj);

@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 1
+      "parameter": 1,
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008344",
@@ -33,7 +37,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Scouts form the vanguard of many armies. Unnoticed by the enemy, they range ahead of the main force.</p>Some units have ‘Scouts x\"’ listed in their abilities. If every model in a unit has this ability, then at the start of the first battle round, before the first turn begins, it can make a Normal move of up to x\", with the exception that, while making that move, the distance moved by each model in that unit can be greater than that model's Move characteristic, as long as it is not greater than x\".<br><br><span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> models can make use of any Scouts x\" ability listed in their abilities, or a Scouts x\" ability that a unit that starts the battle embarked within that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> model has (provided only models with this ability are embarked within that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> model), regardless of how that embarked unit gained this ability (e.g. listed in their abilities, conferred by an Enhancement or by an <span class=\"tooltip00226\" data-tooltip-content=\"#tooltip_content00226\"><span class=\"tt kwbu\">attached</span></span> <span class=\"kwb\">CHARACTER</span>, etc.).<br><br>A unit that moves using this ability must end that move more than 9\" horizontally away from all enemy models. If both players have units that can do this, the player who is taking the first turn moves their units first.<br><br><div class=\"redExample\"><b>Example:</b> A unit has the Scouts 6\" ability. At the start of the first battle round, the controlling player can make a Normal move with that unit of up to 6\".</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Scouts x\":</b> Unit can make a Normal move of up to x\" before the first turn begins.</li><li>If embarked in a <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span>, that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> can make this move instead.</li><li>Must end this move more than 9\" horizontally away from all enemy models.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "9\""
+      "parameter": "9\"",
+      "effects": [
+        "EXAMPLE",
+        "SCOUTS X\""
+      ]
     },
     {
       "id": "",
@@ -457,7 +465,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -472,7 +479,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -487,7 +493,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -502,7 +507,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -517,7 +521,6 @@
       "type": "Brood Brother Auxilia – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "As the Broodmind coordinates their timing, martial and insurrectionist comrades target their chosen victims in volleys of mutually supportive firepower.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -589,7 +592,6 @@
       "type": "Brood Brother Auxilia – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "With martial pragmatism and the cult's victory at stake, Brood Brothers will willingly open fire on the foe even if it endangers infiltrating cells of allies.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -604,7 +606,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -619,7 +620,6 @@
       "type": "Brood Brother Auxilia – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Disciplined salvoes of fire can drive the foe into cover, leaving them vulnerable to the rest of the cult.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -634,7 +634,6 @@
       "type": "Brood Brother Auxilia – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Hulking armoured war engines provide ideal cover to launch a well-timed ambush.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -649,7 +648,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -664,7 +662,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Ramming the foe with a speeding vehicle may be an unsubtle tactic, but it is a murderously effective one.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -679,7 +676,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],

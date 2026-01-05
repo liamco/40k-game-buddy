@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 1
+      "parameter": 1,
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008382",
@@ -32,7 +36,11 @@
       "legend": "An Adeptus Mechanicus army marching to war is a sight both terrifying and glorious, each holy warrior a disturbing fusion of Human and machine. While the ruling Tech-Priests and their fanatical followers raise modified voices in praise of the Machine God, their Skitarii soldiery and Servitor creations are controlled by doctrina imperatives loaded by their masters to augment and adapt the warriors’ abilities.",
       "factionId": "QI",
       "description": "At the start of the battle round, you can select one of the Doctrina Imperatives below. Until the end of the battle round, that Doctrina Imperative is active for your army, and all units from your army that have the Doctrina Imperatives ability gain the relevant abilities shown below.<div></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Protector Imperative</p><p><ul><li>Ranged weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00162\" data-tooltip-content=\"#tooltip_content00162\"><span class=\"tt kwbu\">[HEAVY]</span></span></span> ability.</li><li>Improve the Ballistic Skill characteristic of ranged weapons equipped by models in this unit by 1.</li><li>Each time a melee attack targets this unit, if this unit has the <span class=\"kwb\">BATTLELINE</span> keyword and/or it is within 6\" of one or more friendly <span class=\"tooltip00229\" data-tooltip-content=\"#tooltip_content00229\" data-tooltip-anchor=\"#tooltip_content00229\"><span class=\"kwb kwbu\">ADEPTUS</span> <span class=\"kwb kwbu\">MECHANICUS</span> <span class=\"kwb kwbu\">BATTLELINE</span></span> units, subtract 1 from the <span class=\"tooltip00014\" data-tooltip-content=\"#tooltip_content00014\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span>.</li></ul></p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Conqueror Imperative</p><p><ul><li>Ranged weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00016\" data-tooltip-content=\"#tooltip_content00016\"><span class=\"tt kwbu\">[ASSAULT]</span></span></span> ability.</li><li>Improve the Weapon Skill characteristic of melee weapons equipped by models in this unit by 1.</li><li>Each time a model in this unit makes an attack, if this unit has the <span class=\"kwb\">BATTLELINE</span> keyword and/or it is within 6\" of one or more friendly <span class=\"tooltip00229\" data-tooltip-content=\"#tooltip_content00229\" data-tooltip-anchor=\"#tooltip_content00229\"><span class=\"kwb kwbu\">ADEPTUS</span> <span class=\"kwb kwbu\">MECHANICUS</span> <span class=\"kwb kwbu\">BATTLELINE</span></span> units, improve the Armour Penetration characteristic of that attack by 1.</li></ul></p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
+      "type": "Faction",
+      "effects": [
+        "CONQUEROR IMPERATIVE",
+        "PROTECTOR IMPERATIVE"
+      ]
     },
     {
       "id": "",
@@ -333,7 +341,6 @@
       "type": "Cohort Cybernetica – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Enhanced static chants can briefly raise a war engine's machine spirits to exultant heights of cogitation and multi-tactical capacity.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -348,7 +355,6 @@
       "type": "Rad-Zone Corps – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Employing targeting data collated by a swarm of servo-skulls released over the enemy's battle lines, the Machine God’s faithful purge the foe stumbling amidst rad-scourged positions.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -363,7 +369,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -378,7 +383,6 @@
       "type": "Haloscreed Battle Clade – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Fresh imperatives flow down from on high. The orders are simple: eliminate the foe.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -394,7 +398,6 @@
       "type": "Cohort Cybernetica – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Encoded with the schemata of the enemy's fortified battle lines and auto-codified vectors of attack, the Cohort's war engines are perfectly aligned to deliver the Machine God's wrath.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -409,7 +412,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -424,7 +426,6 @@
       "type": "Rad-Zone Corps – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Tri-fold sanctified power cells, fuel canisters and solid slugs have spent a decade in the most irradiated forge temple to certify their lethality.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -439,7 +440,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -454,7 +454,6 @@
       "type": "Explorator Maniple – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Death is irrelevant compared to the hallowed duty of securing the Omnissiah's knowledge for future retrieval.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -469,7 +468,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -498,7 +496,6 @@
       "type": "Cohort Cybernetica – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Intensifying the locomotive protocols of a war engine - while not dishonouring its machine spirit - is a millennia-proven method to hasten the foe’s demise.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -513,7 +510,6 @@
       "type": "Cohort Cybernetica – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A protective blessing chanted in pentakairic Novabyte moves machine spirits to defy the most esoteric of assaults.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -528,7 +524,6 @@
       "type": "Haloscreed Battle Clade – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "From their distant strategium pulpit, the Tech-Priest commander’s guiding hand descends, seizing control of allied minds, steering their troops carefully away from harm whilst maintaining a hail of killing fire.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -543,7 +538,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Ramming the foe with a speeding vehicle may be an unsubtle tactic, but it is a murderously effective one.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -558,7 +552,6 @@
       "type": "Cohort Cybernetica – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Let the unenlightened be cast down! Let all feel the fire of the Motive Force, and may the sacred engines crunch over their weak bones without impediment!",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -573,7 +566,6 @@
       "type": "Haloscreed Battle Clade – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Experienced Tech-Priests rapidly analyse the foe’s weaknesses and feed the resultant data to their soldiers, who exploit these flaws to destroy their targets.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -589,7 +581,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -604,7 +595,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -619,7 +609,6 @@
       "type": "Cohort Cybernetica – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "To invigorate the failing machine spirit of a damaged vehicle is a sacred task, greatly aided by certain data-hymns transmitted in the correct sequence.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -634,7 +623,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -649,7 +637,6 @@
       "type": "Haloscreed Battle Clade – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "By projecting their consciousness into the minds of tech thralls, a Tech-Priest may significantly enhance their warriors’ lethality. However, doing so risks overloading their combat units’ more limited neural networks. Such hazards are seen as an opportunity to give one’s life in the name of the Omnissiah.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -678,7 +665,6 @@
       "type": "Explorator Maniple – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Retrieval of the most sacred and ancient fragments of technology is embedded in loops of alpha-logic.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],

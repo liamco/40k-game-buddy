@@ -23,7 +23,11 @@
       "legend": "An Adeptus Mechanicus army marching to war is a sight both terrifying and glorious, each holy warrior a disturbing fusion of Human and machine. While the ruling Tech-Priests and their fanatical followers raise modified voices in praise of the Machine God, their Skitarii soldiery and Servitor creations are controlled by doctrina imperatives loaded by their masters to augment and adapt the warriors’ abilities.",
       "factionId": "QI",
       "description": "At the start of the battle round, you can select one of the Doctrina Imperatives below. Until the end of the battle round, that Doctrina Imperative is active for your army, and all units from your army that have the Doctrina Imperatives ability gain the relevant abilities shown below.<div></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Protector Imperative</p><p><ul><li>Ranged weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00162\" data-tooltip-content=\"#tooltip_content00162\"><span class=\"tt kwbu\">[HEAVY]</span></span></span> ability.</li><li>Improve the Ballistic Skill characteristic of ranged weapons equipped by models in this unit by 1.</li><li>Each time a melee attack targets this unit, if this unit has the <span class=\"kwb\">BATTLELINE</span> keyword and/or it is within 6\" of one or more friendly <span class=\"tooltip00229\" data-tooltip-content=\"#tooltip_content00229\" data-tooltip-anchor=\"#tooltip_content00229\"><span class=\"kwb kwbu\">ADEPTUS</span> <span class=\"kwb kwbu\">MECHANICUS</span> <span class=\"kwb kwbu\">BATTLELINE</span></span> units, subtract 1 from the <span class=\"tooltip00014\" data-tooltip-content=\"#tooltip_content00014\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span>.</li></ul></p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Conqueror Imperative</p><p><ul><li>Ranged weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00016\" data-tooltip-content=\"#tooltip_content00016\"><span class=\"tt kwbu\">[ASSAULT]</span></span></span> ability.</li><li>Improve the Weapon Skill characteristic of melee weapons equipped by models in this unit by 1.</li><li>Each time a model in this unit makes an attack, if this unit has the <span class=\"kwb\">BATTLELINE</span> keyword and/or it is within 6\" of one or more friendly <span class=\"tooltip00229\" data-tooltip-content=\"#tooltip_content00229\" data-tooltip-anchor=\"#tooltip_content00229\"><span class=\"kwb kwbu\">ADEPTUS</span> <span class=\"kwb kwbu\">MECHANICUS</span> <span class=\"kwb kwbu\">BATTLELINE</span></span> units, improve the Armour Penetration characteristic of that attack by 1.</li></ul></p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
+      "type": "Faction",
+      "effects": [
+        "CONQUEROR IMPERATIVE",
+        "PROTECTOR IMPERATIVE"
+      ]
     },
     {
       "id": "000008338",
@@ -32,7 +36,10 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors refuse to be laid low, even by what should be fatal wounds.</p>Some models have ‘Feel No Pain x+’ listed in their abilities. Each time a model with this ability suffers damage and so would lose a wound (including wounds lost due to <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span>), roll one D6: if the result is greater than or equal to the number denoted by ‘x’, that wound is ignored and is not lost. If a model has more than one Feel No Pain ability, you can only use one of those abilities each time that model suffers damage and so would lose a wound.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Feel No Pain x+:</b> Each time this model would lose a wound, roll one D6: if the result equals or exceeds ‘x’, that wound is not lost.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 5
+      "parameter": 5,
+      "effects": [
+        "FEEL NO PAIN X+"
+      ]
     },
     {
       "id": "",
@@ -171,7 +178,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -186,7 +192,6 @@
       "type": "Haloscreed Battle Clade – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "From their distant strategium pulpit, the Tech-Priest commander’s guiding hand descends, seizing control of allied minds, steering their troops carefully away from harm whilst maintaining a hail of killing fire.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -215,7 +220,6 @@
       "type": "Data-Psalm Conclave – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "A cacophonous chorale pours from the emitters and augmented throats of the Cult Mechanicus’ faithful, venerating the Omnissiah in deafening and disconcerting frequencies of praise.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -230,7 +234,6 @@
       "type": "Explorator Maniple – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Death is irrelevant compared to the hallowed duty of securing the Omnissiah's knowledge for future retrieval.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -259,7 +262,6 @@
       "type": "Electromartyrs – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Unified datachoristry sees the servants of the Omnissiah meld their firepower to perfection.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -274,7 +276,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -289,7 +290,6 @@
       "type": "Machine Cult – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "By surrendering all control to the Omnissiah, the faithful are able to target their foes with near-omniscient accuracy.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -304,7 +304,6 @@
       "type": "Explorator Maniple – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Retrieval of the most sacred and ancient fragments of technology is embedded in loops of alpha-logic.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -319,7 +318,6 @@
       "type": "Haloscreed Battle Clade – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "By projecting their consciousness into the minds of tech thralls, a Tech-Priest may significantly enhance their warriors’ lethality. However, doing so risks overloading their combat units’ more limited neural networks. Such hazards are seen as an opportunity to give one’s life in the name of the Omnissiah.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -348,7 +346,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -363,7 +360,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -378,7 +374,6 @@
       "type": "Haloscreed Battle Clade – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Experienced Tech-Priests rapidly analyse the foe’s weaknesses and feed the resultant data to their soldiers, who exploit these flaws to destroy their targets.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -394,7 +389,6 @@
       "type": "Rad-Zone Corps – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Employing targeting data collated by a swarm of servo-skulls released over the enemy's battle lines, the Machine God’s faithful purge the foe stumbling amidst rad-scourged positions.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -423,7 +417,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -466,7 +459,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -481,7 +473,6 @@
       "type": "Machine Cult – Wargear Stratagem",
       "cpCost": 1,
       "legend": "The faithful summon leaping electrogheists whose arcing energies interfere with enemy targeting and swat hostile projectiles from the air.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -497,7 +488,6 @@
       "type": "Data-Psalm Conclave – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "In spitting out a staccato chant to the Motive Force, the faithful warriors of the Cult Mechanicus are filled with merciless surety as well as intent.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -512,7 +502,6 @@
       "type": "Data-Psalm Conclave – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Summoning the spark of the Machine God's divinity that burns within them, the Omnissiah’s faithful manifest blazing auras of energy that lay low the unbeliever.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -527,7 +516,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -542,7 +530,6 @@
       "type": "Rad-Zone Corps – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "By briefly unshielding the most corrosive or irradiated components of their being, the warriors of a Rad-Zone Corps can exhale on isotopic fog, sapping the strength of those not inured to its effects.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -557,7 +544,6 @@
       "type": "Data-Psalm Conclave – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Raising their voices in binharic praise, the Machine God's disciples bolster their spirits - as well as those that inhabit their augmentations - with iron surety.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -586,7 +572,6 @@
       "type": "Electromartyrs – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Inbuilt subroutines fire synapses and muscular fibre bundles, allowing dying warriors to strike out and take their killers with them.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -601,7 +586,6 @@
       "type": "Data-Psalm Conclave – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Rousing code in binharic duometer incites fury for the lost fragments of technological lore. In the grip of vengeance, the devoted extend their remaining functions for one last act of retribution.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -616,7 +600,6 @@
       "type": "Haloscreed Battle Clade – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Fresh imperatives flow down from on high. The orders are simple: eliminate the foe.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -632,7 +615,6 @@
       "type": "Machine Cult – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Seized by overwhelming holy energies, these auto-fanatics hurl themselves into the fight with tendon-straining, inhuman haste.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -647,7 +629,6 @@
       "type": "Electromartyrs – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Predictive gunnery subroutines take over, allowing greater reactions and accuracy at close range than any flesh-and-blood soldier could manage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -676,7 +657,6 @@
       "type": "Rad-Zone Corps – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Tri-fold sanctified power cells, fuel canisters and solid slugs have spent a decade in the most irradiated forge temple to certify their lethality.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],

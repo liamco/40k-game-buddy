@@ -32,7 +32,10 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors refuse to be laid low, even by what should be fatal wounds.</p>Some models have ‘Feel No Pain x+’ listed in their abilities. Each time a model with this ability suffers damage and so would lose a wound (including wounds lost due to <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span>), roll one D6: if the result is greater than or equal to the number denoted by ‘x’, that wound is ignored and is not lost. If a model has more than one Feel No Pain ability, you can only use one of those abilities each time that model suffers damage and so would lose a wound.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Feel No Pain x+:</b> Each time this model would lose a wound, roll one D6: if the result equals or exceeds ‘x’, that wound is not lost.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 5
+      "parameter": 5,
+      "effects": [
+        "FEEL NO PAIN X+"
+      ]
     },
     {
       "id": "000008396",
@@ -40,7 +43,12 @@
       "legend": "The Death Guard are warriors of the Plague God Nurgle. Their bloated bodies are riddled with corruption, and their mere presence causes the foe to sicken and wither in the grip of supernatural diseases while the battlefield falls to rot and ruin around them.",
       "factionId": "DG",
       "description": "<div class=\"BreakInsideAvoid\">If your Army Faction is <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span>, while an enemy unit is within Contagion Range of one or more <span class=\"tooltip00230\" data-tooltip-content=\"#tooltip_content00230\" data-tooltip-anchor=\"#tooltip_content00230\"><span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span></span> models from your army, it is Afflicted (see below).<br><br><span class=\"hi_custom\">CONTAGION RANGE</span><br>Contagion Range changes over the course of the battle:<br><br><div class=\" img-opa\"><img src=\"/wh40k10ed/img/ContagionRange1.png\"></div><br><div class=\" img-opa\"><img src=\"/wh40k10ed/img/ContagionRange2.png\"></div><br><div class=\" img-opa\"><img src=\"/wh40k10ed/img/ContagionRange3.png\"></div><br><br></div><span class=\"hi_custom\">AFFLICTED</span><br>During the Declare Battle Formations step, select one of the Plagues below. Until the end of the battle, while an enemy unit is Afflicted, subtract 1 from the Toughness characteristic of models in that unit, and that unit has the effect of your chosen Plague.<div></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Skullsquirm Blight</p><p class=\"ShowFluff legend2\">This horrifying affliction sees the minds and senses of the victim gnawed gradually away from within.</p><p>Each time a model in this unit makes an attack, subtract 1 from the <span class=\"tooltip00014\" data-tooltip-content=\"#tooltip_content00014\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Rattlejoint Ague</p><p class=\"ShowFluff legend2\">Limbs shuddering with fever palsy, bones turned brittle as glass, these warriors can barely act to defend themselves.</p><p>Worsen the Save characteristic of models in this unit by 1.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Scabrous Soulrot</p><p class=\"ShowFluff legend2\">Victims of this insidious ailment become glassy eyed and morose as their very animus and essence decay.</p><p>Worsen the Move, Leadership, and Objective Control characteristics of models in this unit by 1 (this rule can only worsen a model’s Objective Control characteristic to a minimum of 1).</p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
+      "type": "Faction",
+      "effects": [
+        "RATTLEJOINT AGUE",
+        "SCABROUS SOULROT",
+        "SKULLSQUIRM BLIGHT"
+      ]
     },
     {
       "id": "",
@@ -165,7 +173,6 @@
       "type": "Vectors of Decay – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Crawling tendrils of foulness spread through the voidship at the touch of the Death Guard, poisoning and rotting luckless foes.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -180,7 +187,6 @@
       "type": "Virulent Vectorium – Epic Deed Stratagem",
       "cpCost": 2,
       "legend": "The foul miasma around the Death Guard swells and thickens, boiling outward like putrid smog.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -195,7 +201,6 @@
       "type": "Champions of Contagion – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "The vile talents of such plague specialists act like a filth-smeared lens, focusing and intensifying the infectious gifts of Nurgle.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -211,7 +216,6 @@
       "type": "Mortarion’s Hammer – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Those who languish in misery or cower in terror make themselves easy targets for the Death Guard.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -226,7 +230,6 @@
       "type": "Champions of Contagion – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "After their champion calls down the blessings of Nurgle, these warriors can fight on no matter the catastrophic, often gruesome, damage done to them by the foe.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -256,7 +259,6 @@
       "type": "Vectors of Decay – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Even the slightest weakness is enough for the foulness of the Death Guard to find a way in.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -272,7 +274,6 @@
       "type": "Shamblerot Vectorium – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Gripped by a sudden, monstrous hunger, the Poxwalkers surge forward in a ravenous mass.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -287,7 +288,6 @@
       "type": "Flyblown Host – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The contagion borne by the Death Guard and their attendant swarms of winged vermin triggers bouts of sickness and convulsion in those they encounter.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -316,7 +316,6 @@
       "type": "Vectors of Decay – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Many of the plague weapons and revolting diseases unleashed by the Death Guard inflict endings so hideous that the mere sight of them is enough to send unharmed enemies fleeing in horror.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -332,7 +331,6 @@
       "type": "Unclean Uprising – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Like fever heat bursting into unclean flame, the diseases infesting these Poxwalkers flare with sudden infectious vitality.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -347,7 +345,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -362,7 +359,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -377,7 +373,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -392,7 +387,6 @@
       "type": "Virulent Vectorium – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Billowing from this warrior's wounds come clouds of parasitic spores that settle on the foe and drain their vitality, stealing it for the one who spawned them.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -407,7 +401,6 @@
       "type": "Flyblown Host – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The vermin swarms intensify as the Death Guard close in upon the enemy. As their foes clutch and tear their crawling skin, pitiless Plague Marines unleash volleys of point‑blank fire into their tormented foes.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -436,7 +429,6 @@
       "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Another wave of Poxwalkers rises from the battlefield’s carrion heaps.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -451,7 +443,6 @@
       "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Hacking a path through a horde of Poxwalkers leaves aggressors coated in infectious matter.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -466,7 +457,6 @@
       "type": "Vectors of Decay – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "What appeared moments before to be a mere carrion heap suddenly lurches into foul and grinning unlife.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -481,7 +471,6 @@
       "type": "Champions of Contagion – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The combined talents of these Death Guard champions drive their followers into a foam-jawed fury, be it through injection with a curdled cocktail of stimms or immersion in a fug of infectious agents.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -496,7 +485,6 @@
       "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Those infected by walking pox may fall as though fatally wounded, but they soon rise again.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -511,7 +499,6 @@
       "type": "Flyblown Host – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Clouds of droning daemon flies sweep across the battlefield to envelop the enemies of the Death Guard. As their victims claw and scratch at the seething swarms, Mortarion’s sons pick off their targets at leisure.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -526,7 +513,6 @@
       "type": "Flyblown Host – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Swathed in a buzzing cloak of pathogenic decay, Nurgle’s chosen crash into the foe, disease dealing death as surely as fist, maul and blade.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -541,7 +527,6 @@
       "type": "Flyblown Host – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The storm of insectile contagion sweeps forward, dragging the Death Guard in its wake. None will escape the Plague God’s embrace.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -556,7 +541,6 @@
       "type": "Virulent Vectorium – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Those in the grip of Nurgle's unholy plagues become weaker by the moment, barely able to lift their weapons, let alone defend themselves from the attacking Death Guard.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -571,7 +555,6 @@
       "type": "Virulent Vectorium – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "Those favoured by Nurgle are inured to pain, their rotting bodies shrugging off all but the most traumatic damage with ease.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -601,7 +584,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -616,7 +598,6 @@
       "type": "Tallyband Summoners – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The daemons of Nurgle grasp their victims tightly with rotting talons and coiling tentacles, their clutch as inescapable as entropy itself.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -631,7 +612,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -646,7 +626,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -661,7 +640,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -676,7 +654,6 @@
       "type": "Champions of Contagion – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Employing their unique gifts, this champion enhances the weapons of their comrades with even greater levels of infectious malevolence.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -706,7 +683,6 @@
       "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Already dismayed by this living nightmare, the enemy falters before another sudden onslaught.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],

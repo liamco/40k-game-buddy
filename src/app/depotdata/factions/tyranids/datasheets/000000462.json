@@ -24,7 +24,10 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors refuse to be laid low, even by what should be fatal wounds.</p>Some models have ‘Feel No Pain x+’ listed in their abilities. Each time a model with this ability suffers damage and so would lose a wound (including wounds lost due to <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span>), roll one D6: if the result is greater than or equal to the number denoted by ‘x’, that wound is ignored and is not lost. If a model has more than one Feel No Pain ability, you can only use one of those abilities each time that model suffers damage and so would lose a wound.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Feel No Pain x+:</b> Each time this model would lose a wound, roll one D6: if the result equals or exceeds ‘x’, that wound is not lost.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 5
+      "parameter": 5,
+      "effects": [
+        "FEEL NO PAIN X+"
+      ]
     },
     {
       "id": "000008346",
@@ -32,7 +35,10 @@
       "legend": "Mighty heroes fight at the forefront of battle.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Mighty heroes fight at the forefront of battle.</p>Some <span class=\"kwb\">CHARACTER</span> units have ‘Leader’ listed on their datasheets. Such <span class=\"kwb\">CHARACTER</span> units are known as Leaders, and the units they can lead – known as their Bodyguard units – are listed on their datasheet.<br><br>During the Declare Battle Formations step, for each Leader in your army, if your army also includes one or more of that Leader’s Bodyguard units, you can select one of those Bodyguard units. That Leader will then attach to that Bodyguard unit for the duration of the battle and is said to be leading that unit. Each Bodyguard unit can only have one Leader attached to it.<br><br>While a Bodyguard unit contains a Leader, it is known as an Attached unit and, with the exception of rules that are triggered when units are <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, it is treated as a single unit for all rules purposes. Each time an attack targets an Attached unit, until the attacking unit has resolved all of its attacks, you must use the Toughness characteristic of the Bodyguard models in that unit, even if a Leader in that unit has a different Toughness characteristic. Each time an attack sucessfully wounds an Attached unit, that attack cannot be allocated to a <span class=\"kwb\">CHARACTER</span> model in that unit, even if that <span class=\"kwb\">CHARACTER</span> model has lost one or more wounds or has already had attacks allocated to it this phase. As soon as the last Bodyguard model in an Attached unit has been destroyed, any attacks made against that unit that have yet to be allocated can then be allocated to <span class=\"kwb\">CHARACTER</span> models in that unit.<br><br>Each time the last model in a Bodyguard unit is destroyed, each <span class=\"kwb\">CHARACTER</span> unit that is part of that Attached unit is no longer part of an Attached unit. It becomes a separate unit, with its original Starting Strength. If this happens as the result of an attack, they become separate units after the attacking unit has resolved all of its attacks.<br><br>Each time the last model in a <span class=\"kwb\">CHARACTER</span> unit that is attached to a Bodyguard unit is destroyed and there is not another <span class=\"kwb\">CHARACTER</span> unit attached, that Attached unit’s Bodyguard unit is no longer part of an Attached unit. It becomes a separate unit, with its original Starting Strength. If this happens as the result of an attack, they become separate units after the attacking unit has resolved all of its attacks. <br><br>Each time a unit that is part of an Attached unit is destroyed, it does not have the keywords of any other units that make up that Attached unit (unless it has those keywords on its own datasheet) for the purposes of any rules that would be triggered when that unit is destroyed.<br><br><div class=\"redExample\"><b>Example:</b> If you only destroy the Bodyguard unit that is part of an Attached unit, you have not destroyed a <span class=\"kwb\">CHARACTER</span> unit. If you only destroy the <span class=\"kwb\">CHARACTER</span> unit that is part of an Attached unit, or if you destroy the whole Attached unit, you have destroyed one <span class=\"kwb\">CHARACTER</span> unit.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li>Before the battle, <span class=\"kwb\">CHARACTER</span> units with the Leader ability can be attached to one of their Bodyguard units to form an Attached unit.</li><li>Attached units can only contain one Leader.</li><li>Attacks cannot be allocated to <span class=\"kwb\">CHARACTER</span> models in Attached units.</li></ul></div></div>",
-      "type": "Core"
+      "type": "Core",
+      "effects": [
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000000705",
@@ -190,7 +196,6 @@
       "type": "Subterranean Assault – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Scrambling through the tunnels come endless multitudes of warrior-beasts and harvester bioforms, spilling out of the depths to reinforce the teeming masses.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -205,7 +210,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -220,7 +224,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The commander's authoritative tone cuts through the din of battle, guiding the actions of nearby troops.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -235,7 +238,6 @@
       "type": "Crusher Stampede – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Highly acidic fluids spray from the creature’s wounds, lethal to those nearby.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -251,7 +253,6 @@
       "type": "Invasion Fleet – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Tyranids in battle form an unstoppable avalanche of flesh and chitin that buries the foe alive.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -266,7 +267,6 @@
       "type": "Synaptic Nexus – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "At need, the focused will of the Tyranid leader-beasts can goad warrior organisms to exhibit strategically beneficial behaviours at the instant they are needed most.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -281,7 +281,6 @@
       "type": "Assimilation Swarm – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The hunger of the Tyranids can never be satiated.",
-      "turn": "YOURS",
       "phase": [
         "FIGHT"
       ],
@@ -310,7 +309,6 @@
       "type": "Subterranean Assault – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Taking advantage of freshly burrowed tunnels, Tyranid bioforms move swiftly across the landscape, emerging in unexpected locations.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -325,7 +323,6 @@
       "type": "Invasion Fleet – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Tyranids care nothing for self-preservation, lashing out even in death.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -340,7 +337,6 @@
       "type": "Crusher Stampede – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "One cannot hide from a gestalt entity with a million eyes, even in the densest cover.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -355,7 +351,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -370,7 +365,6 @@
       "type": "Crusher Stampede – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Employing their sheer bulk and vicious chitinous horns and spikes, the largest Tyranids crash headlong through the foe, often with devastating results.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -385,7 +379,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -400,7 +393,6 @@
       "type": "Invasion Fleet – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "These warrior organisms destroy all as their adrenaline surges.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -415,7 +407,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "The legends of the 41st Millennium are replete with deadly duels between mighty champions.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -430,7 +421,6 @@
       "type": "Invasion Fleet – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Prey stare in horror as chitinous armour regrows and flesh, muscle and sinew knots back together.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -446,7 +436,6 @@
       "type": "Crusher Stampede – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Encircling and entrapping such physically powerful and fearless beasts is nigh on impossible.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -461,7 +450,6 @@
       "type": "Warrior Bioform Onslaught – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Tyranid Warriors focus and amplify the urgency of the Hive Mind’s impulse to nearby broods, lending them increased coordination.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -477,7 +465,6 @@
       "type": "Subterranean Assault – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Emerging from the depths, Tyranid bioforms level their weapon morphs and spit hissing volleys of living ammunition into the exposed backs of outflanked prey.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -506,7 +493,6 @@
       "type": "Assimilation Swarm – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "When rich sources of biomass are identified the warrior organisms of this swarm will stop at nothing to destroy resistance and claim them.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -521,7 +507,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -536,7 +521,6 @@
       "type": "Crusher Stampede – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "This monster is even more terrifying to behold than other bioforms of its kind.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -551,7 +535,6 @@
       "type": "Crusher Stampede – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Tyranid monsters have reserves of energy that they unleash in waves of devastating fury.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -566,7 +549,6 @@
       "type": "Warrior Bioform Onslaught – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Biomorphic symbiotes growing beneath the chitinous plates of some Tyranids can be activated by synaptic impulse, acidifying their bio‑weapons at a moment’s notice.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -582,7 +564,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -597,7 +578,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -612,7 +592,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -627,7 +606,6 @@
       "type": "Synaptic Nexus – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The seemingly omniscient Hive Mind processes the sensory input of its swarms at an impossible rate, and compels its broods to react accordingly.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -642,7 +620,6 @@
       "type": "Invasion Fleet – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Guided by the instincts of leader-beasts, the swarm can be tasked with focusing its hunting instincts.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -671,7 +648,6 @@
       "type": "Subterranean Assault – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "A hive fleet’s vanguard organisms favour mobility and aggression, keeping the foe on the back foot with repeated coordinated assaults.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -686,7 +662,6 @@
       "type": "Vanguard Onslaught – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Warrior organisms erupt from concealment straight into advanced positions.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],

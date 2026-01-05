@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D3"
+      "parameter": "D3",
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008343",
@@ -41,7 +45,10 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some transports have firing hatches, ports or platforms from which embarked passengers can shoot.</p>Some <span class=\"kwb\">TRANSPORT</span> models have ‘Firing Deck x’ listed in their abilities. Each time such a model is selected to shoot in the Shooting phase, you can select up to ‘x’ models <span class=\"tooltip00224\" data-tooltip-content=\"#tooltip_content00224\"><span class=\"tt kwbu\">embarked</span></span> within it whose units have not already shot this phase. Then, for each of those embarked models, you can select one ranged weapon that embarked model is equipped with (excluding weapons with the <span class=\"kwb2 bluefont\">[ONE SHOT]</span> ability). Until that <span class=\"kwb\">TRANSPORT</span> model has resolved all of its attacks, it counts as being equipped with all of the weapons you selected in this way, in addition to its other weapons. Until the end of the phase, those selected models’ units are not eligible to shoot.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Firing Deck ‘x’:</b> Each time this <span class=\"kwb\">TRANSPORT</span> shoots, select one weapon (excluding weapons with the <span class=\"kwb2 bluefont\">[ONE SHOT]</span> ability) from up to ‘x’ models embarked within it whose units have not shot this phase; this <span class=\"kwb\">TRANSPORT</span> counts as being equipped with those weapons as well. Until the end of the phase, those selected models’ units are not eligible to shoot.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 11
+      "parameter": 11,
+      "effects": [
+        "FIRING DECK ‘X’"
+      ]
     },
     {
       "id": "000008507",
@@ -49,7 +56,11 @@
       "legend": "The Drukhari feed on suffering and terror. Every arc of blood that jets from a blade-slit artery, every scream of agonised horror, every vertiginous moment of shock or despair experienced by their prey surges through the Drukhari like an intoxicant. As the battle rages, the denizens of the Dark City drink deep of the floodtide of pain. Sinews singing with stolen strength, motions blurred to preternatural swiftness, they howl in exhilarated bloodlust and fight all the harder to extract yet sweeter agonies from those who dare resist them.",
       "factionId": "DRU",
       "description": "<div class=\"img-inv\"><img src=\"/wh40k10ed/img/DRU_PainToken.png\"></div><span class=\"hi_custom\">Pain Abilities</span><br>All <span class=\"tooltip00252\" data-tooltip-content=\"#tooltip_content00252\" data-tooltip-anchor=\"#tooltip_content00252\"><span class=\"kwb\">DRUKHARI</span></span> units have a Pain ability, tagged with the word ‘Pain’. Pain abilities only apply to a unit while it is Empowered. If your Army Faction is <span class=\"kwb\">DRUKHARI</span>, you can Empower units from your army with Pain abilities by spending Pain tokens (see below).<br><br><b>Designer’s Note:</b> You can also spend Pain tokens to activate additional effects in certain other rules such as Enhancements and Stratagems.<br><br><span class=\"hi_custom\">Gaining Pain Tokens</span><br>If your Army Faction is <span class=\"kwb\">DRUKHARI</span>, you gain Pain tokens as follows:<br><ul><li><b>1 Pain token</b> at the start of your Command phase.</li><li><b>1 Pain token</b> each time an enemy unit is destroyed.</li><li><b>1 Pain token</b> each time an enemy unit fails a Battle-shock test.</li></ul>Each time you gain a Pain token, keep it to one side - this is your Pain token pool. Each time you spend a Pain token, reduce your Pain token pool by the same amount.<br><br><span class=\"hi_custom\">Empowered Through Pain</span><br>Each Pain ability will state when you can spend Pain tokens to Empower that unit. When you do, until the end of the phase, that unit is Empowered and all Pain abilities it has take effect. While an Attached unit is Empowered, the Pain abilities of all Leader and Bodyguard units in that unit take effect - you do not need to spend additional Pain tokens to activate each of those Pain abilities.<br><br><div class=\"redExample\"><b>Example:</b> At the start of your Charge phase, you spend 1 Pain token to Empower a unit of Wyches. The unit becomes Empowered, and so its Acrobatic Gladiators ability takes effect until the end of the phase. A Succubus is leading the unit, and so its Lithe Agility ability also takes effect until the end of the phase (no additional Pain token is required to activate that ability as well).</div>",
-      "type": "Faction"
+      "type": "Faction",
+      "effects": [
+        "DESIGNER’S NOTE",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "",
@@ -272,7 +283,6 @@
       "type": "Realspace Raiders – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The exhilarating promise of bloodshed goads these warriors into battle with preternatural haste.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -287,7 +297,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -316,7 +325,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -331,7 +339,6 @@
       "type": "Reaper’s Wager – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Jealous competition descends into frenzied carnage as the kill count climbs higher and the intoxicating screams of the dying fill the air.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -347,7 +354,6 @@
       "type": "Realspace Raiders – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Even attempting to strike the Drukhari is like trying to lay a blade to smoke, so sly and swift are they.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -363,7 +369,6 @@
       "type": "Spectacle of Spite – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Imitating Lelith Hesperax, these warriors begin their gladiatorial bout with an opening so spectacularly violent that none can fail to be impressed.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -378,7 +383,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -393,7 +397,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -408,7 +411,6 @@
       "type": "Realspace Raiders – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "The Drukhari are masters at using hit-and-run tactics, engaging a target with a flurry of shots before quickly manoeuvring into cover or out of sight.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -423,7 +425,6 @@
       "type": "Reaper’s Wager – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "These warriors are so absorbed by their desire to win the wager that they risk death to land their killing blows.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -453,7 +454,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Ramming the foe with a speeding vehicle may be an unsubtle tactic, but it is a murderously effective one.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -468,7 +468,6 @@
       "type": "Realspace Raiders – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "It is hardwired into the Drukhari psyche to prey upon weakened and suffering victims.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -498,7 +497,6 @@
       "type": "Spectacle of Spite – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Employing a common ruse from the arenas, the Drukhari appear to cower, wounded and exhausted, before surging back at their overconfident opponents with blades and fangs bared.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -513,7 +511,6 @@
       "type": "Reaper’s Wager – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Commorrite or Harlequin, these lithe combatants move with stunning speed, darting in and out of firing lines before their foes can raise their weapons.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT",
         "CHARGE"
@@ -529,7 +526,6 @@
       "type": "Reaper’s Wager – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "In bounding leaps and graceful pirouettes, the cavalcade of capricious killers bounds through hails of fire, cackling gleefully as they come.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -544,7 +540,6 @@
       "type": "Skysplinter Assault – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Wielding a horrifying array of hooked boarding blades, barbed lariats and other specialised tools of agony, these warriors hack and slash at their foes even as their transport skims low overhead.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -559,7 +554,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -574,7 +568,6 @@
       "type": "Covenite Coterie – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "These epicureans of extreme sensation revel in their agonies as much as those of the foe.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -590,7 +583,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -605,7 +597,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -620,7 +611,6 @@
       "type": "Realspace Raiders – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Wicked sickles and serrated blades hack through writhing flesh as the Drukhari harvest agony and suffering.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -635,7 +625,6 @@
       "type": "Reaper’s Wager – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Having selected their victims, these killers strive to complete the kill with speed and brutality whilst moving ever closer to winning their macabre wager.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -664,7 +653,6 @@
       "type": "Kabalite Cartel – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Borne away screaming into the shadows, everyone knows these unfortunates face a dreadful fate.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -679,7 +667,6 @@
       "type": "Covenite Coterie – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "So extreme are the foe's agonies that they spread a shock wave of terror through their comrades.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],

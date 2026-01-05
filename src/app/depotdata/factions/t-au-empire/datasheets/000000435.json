@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D3"
+      "parameter": "D3",
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008334",
@@ -33,7 +37,10 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some transports have firing hatches, ports or platforms from which embarked passengers can shoot.</p>Some <span class=\"kwb\">TRANSPORT</span> models have ‘Firing Deck x’ listed in their abilities. Each time such a model is selected to shoot in the Shooting phase, you can select up to ‘x’ models <span class=\"tooltip00224\" data-tooltip-content=\"#tooltip_content00224\"><span class=\"tt kwbu\">embarked</span></span> within it whose units have not already shot this phase. Then, for each of those embarked models, you can select one ranged weapon that embarked model is equipped with (excluding weapons with the <span class=\"kwb2 bluefont\">[ONE SHOT]</span> ability). Until that <span class=\"kwb\">TRANSPORT</span> model has resolved all of its attacks, it counts as being equipped with all of the weapons you selected in this way, in addition to its other weapons. Until the end of the phase, those selected models’ units are not eligible to shoot.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Firing Deck ‘x’:</b> Each time this <span class=\"kwb\">TRANSPORT</span> shoots, select one weapon (excluding weapons with the <span class=\"kwb2 bluefont\">[ONE SHOT]</span> ability) from up to ‘x’ models embarked within it whose units have not shot this phase; this <span class=\"kwb\">TRANSPORT</span> counts as being equipped with those weapons as well. Until the end of the phase, those selected models’ units are not eligible to shoot.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 11
+      "parameter": 11,
+      "effects": [
+        "FIRING DECK ‘X’"
+      ]
     },
     {
       "id": "",
@@ -178,7 +185,6 @@
       "type": "Kauyon – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Devastating firepower need not be applied from afar, especially when striking an unsuspecting foe.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -193,7 +199,6 @@
       "type": "Mont’ka – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Mont’ka emphasises rapid evolving threat-analysis and the application of overwhelming firepower to eliminate emergent high-priority targets.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -208,7 +213,6 @@
       "type": "Experimental Prototype Cadre – Wargear Stratagem",
       "cpCost": 1,
       "legend": "The Earth caste have been experimenting with implanting AI neurochip-technology into hand-held scanners, enabling the swift calculation of precise firing solutions.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -223,7 +227,6 @@
       "type": "Auxiliary Cadre – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "These Fire Warriors employ sensory data fed to them by supporting alien auxiliary units to maximise accuracy and place their shots against weak points they might not have perceived.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -238,7 +241,6 @@
       "type": "Mont’ka – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "Rather than charge into hand-to-hand combat, T’au soldiery instead intensify their fire patterns, pinning their advancing foes and staving off their onslaught.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -253,7 +255,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -268,7 +269,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Ramming the foe with a speeding vehicle may be an unsubtle tactic, but it is a murderously effective one.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -283,7 +283,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -312,7 +311,6 @@
       "type": "Mont’ka – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Mont’ka doctrine heavily emphasises the massed concentration of fire upon a single target at a time, obliterating each component of the enemy force in succession with a series of unrelenting barrages.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -327,7 +325,6 @@
       "type": "Kauyon – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Kauyon teaches that many things can be used to bait a trap, luring the foe into position.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -342,7 +339,6 @@
       "type": "Kauyon – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "T’au Hunter Cadres work in close coordination to destroy the most dangerous enemy targets.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -357,7 +353,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -372,7 +367,6 @@
       "type": "Mont’ka – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "By advancing swiftly into commanding positions, Mont’ka forces maximise the benefits of their enemies' shock and disorientation.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -387,7 +381,6 @@
       "type": "Experimental Prototype Cadre – Wargear Stratagem",
       "cpCost": 1,
       "legend": "From hardened warheads and amplified ion capacitors, to hyperaccelerated pulse fields and refined fusion cores, the T’au are forever innovating improvements to improve the lethality of their ammunition.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -402,7 +395,6 @@
       "type": "Auxiliary Cadre – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Regular Fire caste forces operating as part of auxiliary cadres are well trained in swift repositioning and fighting retreats, the better to exploit the presence of or provide support for their alien comrades.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -432,7 +424,6 @@
       "type": "Auxiliary Cadre – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "There is much that the alien auxiliaries of the T’au empire can teach the Fire caste, not least through practical and deadly battlefield demonstrations.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -447,7 +438,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -462,7 +452,6 @@
       "type": "Auxiliary Cadre – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Target analysis data from scanning drones is rapidly translated into inputs ideally tailored to a range of alien sensoria and then disseminated through the cadre.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -478,7 +467,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -493,7 +481,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -508,7 +495,6 @@
       "type": "Experimental Prototype Cadre – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "T’au scientists have distributed the latest prototype weapons amongst this cadre’s contingents, all optimised to increase reliability and accuracy.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],

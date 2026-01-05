@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D6"
+      "parameter": "D6",
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000000707",
@@ -251,7 +255,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -266,7 +269,6 @@
       "type": "Invasion Fleet – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Tyranids care nothing for self-preservation, lashing out even in death.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -281,7 +283,6 @@
       "type": "Subterranean Assault – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "A hive fleet’s vanguard organisms favour mobility and aggression, keeping the foe on the back foot with repeated coordinated assaults.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -296,7 +297,6 @@
       "type": "Assimilation Swarm – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "When rich sources of biomass are identified the warrior organisms of this swarm will stop at nothing to destroy resistance and claim them.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -311,7 +311,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -326,7 +325,6 @@
       "type": "Assimilation Swarm – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The hunger of the Tyranids can never be satiated.",
-      "turn": "YOURS",
       "phase": [
         "FIGHT"
       ],
@@ -341,7 +339,6 @@
       "type": "Crusher Stampede – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Tyranid monsters have reserves of energy that they unleash in waves of devastating fury.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -356,7 +353,6 @@
       "type": "Subterranean Assault – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Taking advantage of freshly burrowed tunnels, Tyranid bioforms move swiftly across the landscape, emerging in unexpected locations.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -385,7 +381,6 @@
       "type": "Subterranean Assault – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Scrambling through the tunnels come endless multitudes of warrior-beasts and harvester bioforms, spilling out of the depths to reinforce the teeming masses.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -400,7 +395,6 @@
       "type": "Vanguard Onslaught – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Warrior organisms erupt from concealment straight into advanced positions.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -415,7 +409,6 @@
       "type": "Synaptic Nexus – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The seemingly omniscient Hive Mind processes the sensory input of its swarms at an impossible rate, and compels its broods to react accordingly.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -430,7 +423,6 @@
       "type": "Synaptic Nexus – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Whether paralysing its prey or forcing them to stumble out of cover with its force of will, or else puppeteering nearby warrior organisms, the leader-beast ensures the prey targets are struck down.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -446,7 +438,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -461,7 +452,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "The legends of the 41st Millennium are replete with deadly duels between mighty champions.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -476,7 +466,6 @@
       "type": "Synaptic Nexus – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "In the heart of the swarms, the Shadow in the Warp can literally kill with its smothering power.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -491,7 +480,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The commander's authoritative tone cuts through the din of battle, guiding the actions of nearby troops.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -506,7 +494,6 @@
       "type": "Invasion Fleet – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Guided by the instincts of leader-beasts, the swarm can be tasked with focusing its hunting instincts.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -521,7 +508,6 @@
       "type": "Synaptic Nexus – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "At need, the focused will of the Tyranid leader-beasts can goad warrior organisms to exhibit strategically beneficial behaviours at the instant they are needed most.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -536,7 +522,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -551,7 +536,6 @@
       "type": "Invasion Fleet – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Prey stare in horror as chitinous armour regrows and flesh, muscle and sinew knots back together.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -567,7 +551,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -582,7 +565,6 @@
       "type": "Crusher Stampede – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "This monster is even more terrifying to behold than other bioforms of its kind.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -640,7 +622,6 @@
       "type": "Synaptic Nexus – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Psionic shielding crackles around these leader-beasts, helping to ensure their survival.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -656,7 +637,6 @@
       "type": "Subterranean Assault – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Emerging from the depths, Tyranid bioforms level their weapon morphs and spit hissing volleys of living ammunition into the exposed backs of outflanked prey.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -671,7 +651,6 @@
       "type": "Invasion Fleet – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Tyranids in battle form an unstoppable avalanche of flesh and chitin that buries the foe alive.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -686,7 +665,6 @@
       "type": "Crusher Stampede – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Employing their sheer bulk and vicious chitinous horns and spikes, the largest Tyranids crash headlong through the foe, often with devastating results.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -701,7 +679,6 @@
       "type": "Crusher Stampede – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "One cannot hide from a gestalt entity with a million eyes, even in the densest cover.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -716,7 +693,6 @@
       "type": "Crusher Stampede – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Encircling and entrapping such physically powerful and fearless beasts is nigh on impossible.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -731,7 +707,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -746,7 +721,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -761,7 +735,6 @@
       "type": "Synaptic Nexus – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Tyranids are one with the Hive Mind; individuality is a disadvantage that they surpass.",
-      "turn": "EITHER",
       "phase": [
         "COMMAND"
       ],
@@ -776,7 +749,6 @@
       "type": "Warrior Bioform Onslaught – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Tyranid Warriors focus and amplify the urgency of the Hive Mind’s impulse to nearby broods, lending them increased coordination.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -792,7 +764,6 @@
       "type": "Warrior Bioform Onslaught – Wargear Stratagem",
       "cpCost": 1,
       "legend": "Biomorphic symbiotes growing beneath the chitinous plates of some Tyranids can be activated by synaptic impulse, acidifying their bio‑weapons at a moment’s notice.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -808,7 +779,6 @@
       "type": "Crusher Stampede – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Highly acidic fluids spray from the creature’s wounds, lethal to those nearby.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -824,7 +794,6 @@
       "type": "Invasion Fleet – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "These warrior organisms destroy all as their adrenaline surges.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],

@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D3"
+      "parameter": "D3",
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008391",
@@ -32,7 +36,11 @@
       "legend": "Specialised disciplines mastered by Custodians over decades if not centuries, each ka’tah equips its practitioner to overmaster any foe in a particular discipline or philosophy. Martial katahs allow the warriors of the Adeptus Custodes to deploy stances, movements, war philosophies and lethal skills that enhance their already terrifying martial prowess and focus it against particular threats.",
       "factionId": "AC",
       "description": "Each time a unit from your army with this ability is selected to fight, select one of the Ka’tah Stances below. Until that unit has finished making its attacks, the selected Stance is active for it and it gains the relevant ability:<div></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Dacatarai Stance</p><p class=\"ShowFluff legend2\">Those Custodians skilled in the Dacatarai Ka'tah are able to turn their enemies numerical advantage against them. Reserved for when the Custodians must battle seething hordes of foes, this stance sees them reap a terrible tally</p><p>Melee weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00019\" data-tooltip-content=\"#tooltip_content00019\"><span class=\"tt kwbu\">[SUSTAINED</span> <span class=\"tt kwbu\">HITS</span> <span class=\"tt kwbu\">1]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Rendax Stance</p><p class=\"ShowFluff legend2\">Masters of Rendax are superlative monster and war machine hunters. They have studied every aspect of how to do battle with a foe far larger than themselves, how to evade its powerful attacks, exploit its blind spots and lay it low.</p><p>Melee weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00030\" data-tooltip-content=\"#tooltip_content00030\"><span class=\"tt kwbu\">[LETHAL</span> <span class=\"tt kwbu\">HITS]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
+      "type": "Faction",
+      "effects": [
+        "DACATARAI STANCE",
+        "RENDAX STANCE"
+      ]
     },
     {
       "id": "",
@@ -177,7 +185,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -192,7 +199,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -207,7 +213,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -222,7 +227,6 @@
       "type": "Shield Host – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The Adeptus Custodes are individually engineered on a molecular level using secrets of genetic alchemy that render them virtual demigods in battle.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -237,7 +241,6 @@
       "type": "Shield Host  – Wargear Stratagem",
       "cpCost": 1,
       "legend": "The Shield Hosts have access to stockpiles of ancient and incredibly rare weaponry and ammunition.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -252,7 +255,6 @@
       "type": "Solar Spearhead – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The golden-armoured onslaught smashes through the enemy line, trapping the foe and preventing their escape.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -267,7 +269,6 @@
       "type": "Lions of the Emperor – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "With every strike, the Lions of the Emperor prove themselves the masters of single combat, even when engaging the mightiest foes.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -282,7 +283,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Ramming the foe with a speeding vehicle may be an unsubtle tactic, but it is a murderously effective one.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -297,7 +297,6 @@
       "type": "Shield Host – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "So widely skilled and studied are the Custodians that, whatever situation they find themselves in, they have the martial wisdom to prevail.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -341,7 +340,6 @@
       "type": "Lions of the Emperor – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The Adeptus Custodes are unrelenting in their advance, laying down punishing fire even as they manoeuvre to new positions.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -356,7 +354,6 @@
       "type": "Shield Host – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The loss of a single Talon of the Emperor is commemorated by the tolling of the Bell of Lost Souls on Terra, and by their comrades’ bloody vengeance on the battlefield.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -371,7 +368,6 @@
       "type": "Solar Spearhead – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Custodians coax wrathful fury from their war engines’ machine spirits to hunt down and eliminate their foes at speed.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -386,7 +382,6 @@
       "type": "Talons Of The Emperor – Battle Tactic Stratagem",
       "cpCost": 2,
       "legend": "The Talons of the Emperor tear apart their prey.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -415,7 +410,6 @@
       "type": "Solar Spearhead – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The Ten Thousand are relentless in pursuing the Emperor’s foes and thorough in their annihilation. No armour, sorcery or hiding place can shield an enemy from their wrath.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -430,7 +424,6 @@
       "type": "Talons Of The Emperor – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Custodians and Null Maidens cover one another seamlessly as they manoeuvre to corner their prey.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -445,7 +438,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -460,7 +452,6 @@
       "type": "Solar Spearhead – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Even as death’s cold embrace falls upon them, Custodians vent the last of their wrath upon the foe.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -475,7 +466,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -490,7 +480,6 @@
       "type": "Lions of the Emperor – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The harder the battle, and the heavier their losses, the more resolute the Lions of the Emperor become.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -505,7 +494,6 @@
       "type": "Solar Spearhead – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The vehicles of the Adeptus Custodes are the finest examples of their kind. Their expertly wrought armoured forms contain ancient and esoteric technology, including auto-repair subroutines and reactive field generators.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -521,7 +509,6 @@
       "type": "Solar Spearhead – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Armoured in adamantine and possessed of furious machine spirits, the vehicles of the Adeptus Custodes are almost impossible to stop in their tracks.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT",
         "CHARGE"
@@ -537,7 +524,6 @@
       "type": "Talons Of The Emperor – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Null Maidens quash the manifestations of witches.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -553,7 +539,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -568,7 +553,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],

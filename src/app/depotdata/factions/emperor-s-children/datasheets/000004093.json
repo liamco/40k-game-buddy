@@ -24,7 +24,11 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D3"
+      "parameter": "D3",
+      "effects": [
+        "DEADLY DEMISE X",
+        "EXAMPLE"
+      ]
     },
     {
       "id": "000008334",
@@ -33,7 +37,10 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some transports have firing hatches, ports or platforms from which embarked passengers can shoot.</p>Some <span class=\"kwb\">TRANSPORT</span> models have ‘Firing Deck x’ listed in their abilities. Each time such a model is selected to shoot in the Shooting phase, you can select up to ‘x’ models <span class=\"tooltip00224\" data-tooltip-content=\"#tooltip_content00224\"><span class=\"tt kwbu\">embarked</span></span> within it whose units have not already shot this phase. Then, for each of those embarked models, you can select one ranged weapon that embarked model is equipped with (excluding weapons with the <span class=\"kwb2 bluefont\">[ONE SHOT]</span> ability). Until that <span class=\"kwb\">TRANSPORT</span> model has resolved all of its attacks, it counts as being equipped with all of the weapons you selected in this way, in addition to its other weapons. Until the end of the phase, those selected models’ units are not eligible to shoot.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Firing Deck ‘x’:</b> Each time this <span class=\"kwb\">TRANSPORT</span> shoots, select one weapon (excluding weapons with the <span class=\"kwb2 bluefont\">[ONE SHOT]</span> ability) from up to ‘x’ models embarked within it whose units have not shot this phase; this <span class=\"kwb\">TRANSPORT</span> counts as being equipped with those weapons as well. Until the end of the phase, those selected models’ units are not eligible to shoot.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 2
+      "parameter": 2,
+      "effects": [
+        "FIRING DECK ‘X’"
+      ]
     },
     {
       "id": "000009994",
@@ -269,7 +276,6 @@
       "type": "Mercurial Host – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The visceral thrill of killing causes the warriors of the Emperor’s Children to enter an ecstatic frenzy of butchery and dismemberment.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -284,7 +290,6 @@
       "type": "Carnival of Excess – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Slaaneshi daemons feed upon the emotions of others, with agony a particular delicacy.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -313,7 +318,6 @@
       "type": "Peerless Bladesmen – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "Death is but another thrilling experience and the Emperor's Children are loath to deny the enemy such ecstatic sensation.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -328,7 +332,6 @@
       "type": "Court of the Phoenician – Stratagem",
       "cpCost": 1,
       "legend": "With cocktails of resilience-enhancing stimms or armour inlaid with forbidden runes of warding, the Emperor’s Children sneeringly disregard even powerful blows.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -372,7 +375,6 @@
       "type": "Peerless Bladesmen – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Bedazzled by these warriors’ weaving swordsmanship and hypnotic aura, foes cannot land a telling blow upon them.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -401,7 +403,6 @@
       "type": "Peerless Bladesmen – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Caught up in the joyful exhilaration of violent excess, the momentum of the Emperor's Children is almost impossible to halt.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -416,7 +417,6 @@
       "type": "Boarding Actions – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A well-placed explosive munition in confined shipboard spaces can cause bloody carnage.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -431,7 +431,6 @@
       "type": "Coterie of the Conceited – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Inured to ordinary sensations by several lifetimes of indulgence, there is little that can deter or faze the warriors of the Emperor's Children.",
-      "turn": "EITHER",
       "phase": [
         "COMMAND"
       ],
@@ -460,7 +459,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -475,7 +473,6 @@
       "type": "Court of the Phoenician – Stratagem",
       "cpCost": 2,
       "legend": "The chance to ostentatiously humble the foe’s champions and prove them worthless rivals is a lure few Emperor’s Children can resist.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -490,7 +487,6 @@
       "type": "Carnival of Excess – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "As the violence intensifies, so does the ecstasy of battle empower daemon and mortal alike.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -505,7 +501,6 @@
       "type": "Rapid Evisceration – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The Emperor's Children send forth their front-line troops in swift vehicles to seize ground rapidly.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -534,7 +529,6 @@
       "type": "Coterie of the Conceited – Wargear Stratagem",
       "cpCost": 1,
       "legend": "The abhorrent contempt that the Emperor’s Children possess, combined with their combat-stimmed physiologies, makes them unyielding foes to face.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -550,7 +544,6 @@
       "type": "Peerless Bladesmen – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "Fulgrim’s scions are renowned for their bladecraft, toying with their inferiors while preparing an exquisite, penetrating thrust.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -565,7 +558,6 @@
       "type": "Coterie of the Conceited – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "On occasion, the Dark Prince may grant a boon of protection to his favoured followers in the heat of battle. Such a boon incurs a debt, one that will be paid in the fullness of time.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -580,7 +572,6 @@
       "type": "Court of the Phoenician – Stratagem",
       "cpCost": 1,
       "legend": "At short range, the Emperor’s Children eagerly target weak points in their enemies, exulting over every cry of pain they elicit.",
-      "turn": "YOURS",
       "phase": [
         "SHOOTING"
       ],
@@ -595,7 +586,6 @@
       "type": "Core – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "Ramming the foe with a speeding vehicle may be an unsubtle tactic, but it is a murderously effective one.",
-      "turn": "YOURS",
       "phase": [
         "CHARGE"
       ],
@@ -610,7 +600,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -625,7 +614,6 @@
       "type": "Rapid Evisceration – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Relying upon shock, awe and daemonically enhanced vehicles, the Emperor's Children drive through the enemy lines to outflank the enemy.",
-      "turn": "YOURS",
       "phase": [
         "MOVEMENT"
       ],
@@ -655,7 +643,6 @@
       "type": "Coterie of the Conceited – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "The Emperor’s Children find stimulation in excess, be it brutally shocking acts of violence or gratuitous displays of martial prowess.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -684,7 +671,6 @@
       "type": "Coterie of the Conceited – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "The hubris of the Emperor’s Children is both their greatest strength and their biggest weakness.",
-      "turn": "EITHER",
       "phase": [
         "SHOOTING",
         "FIGHT"
@@ -700,7 +686,6 @@
       "type": "Core – Battle Tactic Stratagem",
       "cpCost": 1,
       "legend": "A great commander can bend even the vagaries of fate and fortune to their will, the better to ensure victory.",
-      "turn": "EITHER",
       "phase": [
         "ANY"
       ],
@@ -715,7 +700,6 @@
       "type": "Boarding Actions – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],
@@ -730,7 +714,6 @@
       "type": "Rapid Evisceration – Strategic Ploy Stratagem",
       "cpCost": 1,
       "legend": "The fleeting obsessions of the Emperor's Children cause them always to seek fresh targets.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -759,7 +742,6 @@
       "type": "Boarding Actions – Strategic Ploy Stratagem",
       "cpCost": 2,
       "legend": "In close-quarters combat, the slightest hesitation can leave an opening for a swift foe to exploit.",
-      "turn": "EITHER",
       "phase": [
         "FIGHT"
       ],
@@ -774,7 +756,6 @@
       "type": "Core – Epic Deed Stratagem",
       "cpCost": 1,
       "legend": "Indifferent to their own survival, these warriors hold their ground against seemingly impossible odds.",
-      "turn": "YOURS",
       "phase": [
         "COMMAND"
       ],

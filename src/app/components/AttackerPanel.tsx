@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, Fragment } from "react";
 import { Info, Search } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 import { Button } from "./ui/button";
@@ -151,8 +151,8 @@ export function AttackerPanel({
                     <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold text-[12px] text-[#1e1e1e]">
                         Select weapon
                     </p>
-                    {unit.wargear.filter((weapon) => weapon.type === "Ranged").map((weapon:Weapon) => (
-                        <div>
+                    {unit.wargear.filter((weapon) => (gamePhase === "SHOOTING") ? weapon.type === "Ranged" : weapon.type === "Melee").map((weapon:Weapon) => (
+                        <Fragment key={weapon.name}>
                             {
                                 weapon.profiles.map((profile:WeaponProfile)=>{
                                     const isSelected = selectedWeaponProfile?.name === profile.name;
@@ -167,7 +167,7 @@ export function AttackerPanel({
                                     )
                                 })
                             }
-                        </div>
+                        </Fragment>
                     ))}
                 </div>
             )}
@@ -176,11 +176,11 @@ export function AttackerPanel({
 
             <div className="space-y-4">
                 <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="stationary-this-turn" className="text-xs font-['Inter:Semi_Bold',sans-serif] font-semibold text-[#1e1e1e]">stationary this turn</label>
+                    <label htmlFor="stationary-this-turn" className="text-xs font-['Inter:Semi_Bold',sans-serif] font-semibold text-[#1e1e1e]">Stationary this turn</label>
                     <Switch id="stationary-this-turn" onCheckedChange={(e) => {onModifiersChange({ ...modifiers, stationaryThisTurn: e })}} />
                 </div>
                 <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="in-objective-range" className="text-xs font-['Inter:Semi_Bold',sans-serif] font-semibold text-[#1e1e1e]">In range of objective</label>
+                    <label htmlFor="in-objective-range" className="text-xs font-['Inter:Semi_Bold',sans-serif] font-semibold text-[#1e1e1e]">In objective range</label>
                     <Switch id="in-objective-range"  onCheckedChange={(e) => {onModifiersChange({ ...modifiers, inRangeOfObjective: e })}}  />
                 </div>    
             </div>
