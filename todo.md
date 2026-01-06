@@ -8,22 +8,28 @@
 FEATURES
 - Dynamically filter weapon options down by ones relevant to selected phase (currently it's hardcoded to SHOOTING)
 
-- Attach enhancements to characters
-- Attach characters to units
+- PRIORITY: Attach enhancements to characters
+- PRIORITY: Attach characters to units
 - Modifiers to build in;
-    - Heavy
-    - Torrent
+    - Heavy ✅
+    - Torrent ✅
     - Lethal hits
     - Sustained hits
     - Devastating wounds
+    - Below starting strength
+    - Below half strength
+    - Damaged
+    - Battle shocked
     - Lance
     - Anti
-    - Ignores cover
-    - Benefit of cover
-    - Stealth
+    - Ignores cover ✅
+    - Benefit of cover ✅
+    - Stealth ✅
     - Lone operative
+    - Is on objective
 - Other bits
     - Range finder
-    - Is on objective
-    - Synapse range
-- Faction specific modifiers e.g. synapse
+    - Faction specific modifiers e.g. synapse
+
+
+    

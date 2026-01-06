@@ -1,6 +1,23 @@
+/**
+ * Parse Depot Data Script
+ * 
+ * Processes JSON files in the depotdata directory, converting string values to numbers,
+ * transforming data formats, and extracting effects from ability descriptions.
+ * 
+ * Usage:
+ *   npm run parse-depot-data
+ * 
+ * For AI-based effects extraction, use the separate script:
+ *   npm run extract-effects
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -94,15 +111,20 @@ function convertTurnValue(value) {
       return turnKey;
     }
   
+    // Strip all apostrophes (straight ', curly ', and other quotation mark variants) and convert to lowercase for matching
+    // Matches: U+0027 (APOSTROPHE), U+2018 (LEFT SINGLE QUOTATION MARK), U+2019 (RIGHT SINGLE QUOTATION MARK)
+    const normalizedKey = turnKey.toLowerCase().replace(/[''\u2018\u2019]/g, '');
+  
     // Map each turn string to uppercase GameTurn value
+    // Use lowercase keys without apostrophes to handle case-insensitive matching and apostrophe variations
     const turnMap = {
-      'Your turn': 'YOURS',
-      "Opponent's turn": 'OPPONENTS',
-      "Either player's turn": 'EITHER'
+      "your turn": 'YOURS',
+      "opponents turn": 'OPPONENTS',
+      "either players turn": 'EITHER'
     };
 
     // Return mapped value if found, otherwise return original value
-    return turnMap[turnKey] || value;
+    return turnMap[normalizedKey] || value;
   }
   return value;
 }
@@ -118,18 +140,14 @@ function convertTurnValue(value) {
  */
 function convertPhaseValue(value) {
   if (typeof value === 'string') {
-    const normalized = value.trim();
-    
-    // Handle "Any phase" specially
-    if (normalized.toLowerCase() === 'any phase') {
-      return ['ANY'];
-    }
-    
+    const normalized = value.trim().toLowerCase();
+        
     // Split on " or " to handle multiple phases
     const phases = normalized.split(/\s+or\s+/i);
     
     // Map each phase to uppercase GamePhase value
     const phaseMap = {
+      'any phase': 'ANY',
       'command': 'COMMAND',
       'movement': 'MOVEMENT',
       'shooting': 'SHOOTING',
@@ -149,99 +167,15 @@ function convertPhaseValue(value) {
 }
 
 /**
- * Extracts effects from a single ability description
- * Looks for effect names in various HTML patterns:
- * 1. <p class="impact18">Effect Name</p> - Common pattern for listed effects
- * 2. <b>Effect Name:</b> - Bold text followed by colon (effect names in lists)
- * Returns an array of effect names, or null if no effects found
- * Examples:
- * - Extracts "Tactical Doctrine", "Assault Doctrine", "Devastator Doctrine" from Combat Doctrines ability
- * - Extracts "Eliminate At All Costs", "Acquire At All Costs" from Imperialis Fleet ability
- * - Extracts "Sanguinary Grace", "Carmine Wrath", "Their Appointed Hour" from Angelic Inheritors ability
- */
-function extractAbilityEffects(description) {
-  if (!description || typeof description !== 'string') {
-    return null;
-  }
-
-  const effects = [];
-  
-  // Pattern 1: Extract text from <p class="impact18">Effect Name</p> tags
-  // This is the most common pattern for listed effects/options
-  const impact18Pattern = /<p[^>]*class="impact18"[^>]*>([^<]+)<\/p>/gi;
-  const impact18Matches = [...description.matchAll(impact18Pattern)];
-  
-  if (impact18Matches && impact18Matches.length > 0) {
-    impact18Matches.forEach(match => {
-      if (match[1]) {
-        const effectName = match[1].trim();
-        // Convert to uppercase and add to effects
-        effects.push(effectName.toUpperCase());
-      }
-    });
-  }
-  
-  // Pattern 2: Extract text from <b>Effect Name:</b> patterns
-  // These are effect names in bold followed by a colon
-  // Only extract if it's not a stratagem keyword (WHEN, TARGET, EFFECT, RESTRICTIONS)
-  const boldPattern = /<b>([^<]+):<\/b>/gi;
-  const boldMatches = [...description.matchAll(boldPattern)];
-  
-  if (boldMatches && boldMatches.length > 0) {
-    const stratagemKeywords = ['WHEN', 'TARGET', 'EFFECT', 'RESTRICTIONS', 'DESIGNER\'S NOTE'];
-    
-    boldMatches.forEach(match => {
-      if (match[1]) {
-        const effectName = match[1].trim();
-        const upperName = effectName.toUpperCase();
-        
-        // Skip if it's a stratagem keyword
-        if (!stratagemKeywords.includes(upperName)) {
-          effects.push(upperName);
-        }
-      }
-    });
-  }
-  
-  // Remove duplicates
-  const uniqueEffects = [...new Set(effects)];
-  
-  // Define preferred order for specific effects (like doctrines)
-  const preferredOrder = ['TACTICAL DOCTRINE', 'ASSAULT DOCTRINE', 'DEVASTATOR DOCTRINE'];
-  
-  // Sort effects according to preferred order, then alphabetically for others
-  const sortedEffects = uniqueEffects.sort((a, b) => {
-    const aIndex = preferredOrder.indexOf(a);
-    const bIndex = preferredOrder.indexOf(b);
-    
-    // If both are in the preferred order, sort by their index
-    if (aIndex !== -1 && bIndex !== -1) {
-      return aIndex - bIndex;
-    }
-    // If only one is in the preferred order, it comes first
-    if (aIndex !== -1) return -1;
-    if (bIndex !== -1) return 1;
-    // Otherwise, sort alphabetically
-    return a.localeCompare(b);
-  });
-  
-  if (sortedEffects.length > 0) {
-    return sortedEffects;
-  }
-  
-  return null;
-}
-
-/**
  * Recursively processes a JSON object to convert string numbers
  * Ignores 'id' properties to preserve them as strings
  */
 
 const ignoredProperties = ['id','factionId','datasheetId','sourceId'];
 
-function processObject(obj) {
+async function processObject(obj) {
   if (Array.isArray(obj)) {
-    return obj.map(item => processObject(item));
+    return Promise.all(obj.map(item => processObject(item)));
   } else if (obj !== null && typeof obj === 'object') {
     // Check if this is a detachment object
     // Detachments have slug, name, and typically have abilities, enhancements, and/or stratagems
@@ -258,26 +192,22 @@ function processObject(obj) {
         } else if (key === 'effects' && isDetachment) {
           // Skip effects at detachment level - they should be in ability objects instead
           continue;
-        } else if (key === 'abilities' && isDetachment && Array.isArray(obj[key])) {
-          // Special handling for abilities array in detachments
-          // Process each ability and add effects if found
-          processed[key] = obj[key].map(ability => {
-            const processedAbility = processObject(ability);
-            // Extract effects from the ability description
-            if (processedAbility.description) {
-              const effects = extractAbilityEffects(processedAbility.description);
-              if (effects) {
-                processedAbility.effects = effects;
-              }
-            }
-            return processedAbility;
-          });
+        } else if ((key === 'abilities' || key === 'enhancements' || key === 'stratagems' || key === 'detachmentAbilities') && Array.isArray(obj[key])) {
+          // Special handling for abilities, enhancements, stratagems, and detachmentAbilities arrays
+          // Process each item and add effects if found
+          const itemType = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim();
+          console.log(`\n📋 Processing ${obj[key].length} ${itemType.toLowerCase()}...`);
+          
+          processed[key] = await Promise.all(obj[key].map(async (item, index) => {
+            const processedItem = await processObject(item);
+            return processedItem;
+          }));
         } else if (key === 'm') {
           // Special handling for movement property - convert "7\"" to 7
           processed[key] = convertMovementValue(obj[key]);
         } else if (key === 'invSv') {
           // Special handling for invSv property - convert "-" to null
-          processed[key] = obj[key] === '-' ? null : processObject(obj[key]);
+          processed[key] = obj[key] === '-' ? null : await processObject(obj[key]);
         } else if (key === 'description') {
           // Special handling for description property in wargear profiles
           // Check if this object looks like a wargear profile (has range, type, a, bsWs, s, ap, d properties)
@@ -288,7 +218,7 @@ function processObject(obj) {
             // Rename 'description' to 'attributes' and convert to uppercase array
             processed['attributes'] = convertWargearDescription(obj[key]);
           } else {
-            processed[key] = processObject(obj[key]);
+            processed[key] = await processObject(obj[key]);
           }
         } else if (key === 'phase') {
           // Special handling for phase property in stratagem objects
@@ -297,19 +227,19 @@ function processObject(obj) {
           if (isStratagem && typeof obj[key] === 'string') {
             processed[key] = convertPhaseValue(obj[key]);
           } else {
-            processed[key] = processObject(obj[key]);
+            processed[key] = await processObject(obj[key]);
           }
         } else if (key === 'turn') {
           // Special handling for turn property in stratagem objects
           // Check if this object looks like a stratagem (has cpCost and phase properties)
-          const isStratagem = obj.hasOwnProperty('cpCost') && obj.hasOwnProperty('turn');
+          const isStratagem = obj.hasOwnProperty('cpCost') && obj.hasOwnProperty('phase');
           if (isStratagem && typeof obj[key] === 'string') {
             processed[key] = convertTurnValue(obj[key]);
           } else {
-            processed[key] = processObject(obj[key]);
+            processed[key] = await processObject(obj[key]);
           }
         } else {
-          processed[key] = processObject(obj[key]);
+          processed[key] = await processObject(obj[key]);
         }
       }
     }
@@ -321,15 +251,106 @@ function processObject(obj) {
 }
 
 /**
- * Processes a single JSON file
+ * Checks if a file path is a unit datasheet file (not a faction file)
+ * Datasheet files are in the datasheets subdirectory
+ * Faction files are named "faction.json" in the faction root directory
+ * @param {string} filePath - Full path to the file
+ * @param {string} depotdataPath - Base path to depotdata directory
+ * @returns {boolean} - True if file is a datasheet file
  */
-function processJsonFile(filePath) {
+function isDatasheetFile(filePath, depotdataPath) {
+  const normalizedPath = filePath.replace(/\\/g, '/');
+  const normalizedDepotPath = depotdataPath.replace(/\\/g, '/');
+  const relativePath = normalizedPath.replace(normalizedDepotPath + '/', '');
+  
+  // Check if the file is in a datasheets subdirectory
+  // Path structure: factions/{faction-name}/datasheets/{id}.json
+  const pathParts = relativePath.split('/');
+  
+  // Check if path contains "datasheets" directory
+  if (pathParts.includes('datasheets')) {
+    return true;
+  }
+  
+  // Faction files are named "faction.json" and are in the faction root
+  // Path structure: factions/{faction-name}/faction.json
+  if (pathParts.length >= 2 && pathParts[pathParts.length - 1] === 'faction.json') {
+    return false;
+  }
+  
+  // Default: if it's not clearly a faction file, assume it's a datasheet
+  // (though this shouldn't happen with the current structure)
+  return false;
+}
+
+/**
+ * Removes stratagems property from a datasheet object
+ * @param {object} obj - The object to process
+ * @returns {object} - The object with stratagems removed
+ */
+function removeStratagemsFromDatasheet(obj) {
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+    const cleaned = { ...obj };
+    if (cleaned.hasOwnProperty('stratagems')) {
+      delete cleaned.stratagems;
+    }
+    return cleaned;
+  }
+  return obj;
+}
+
+/**
+ * Removes detachmentAbilities property from a datasheet object
+ * @param {object} obj - The object to process
+ * @returns {object} - The object with detachmentAbilities removed
+ */
+function removeDetachmentAbilitiesFromDatasheet(obj) {
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+    const cleaned = { ...obj };
+    if (cleaned.hasOwnProperty('detachmentAbilities')) {
+      delete cleaned.detachmentAbilities;
+    }
+    return cleaned;
+  }
+  return obj;
+}
+
+/**
+ * Removes enhancements property from a datasheet object
+ * @param {object} obj - The object to process
+ * @returns {object} - The object with enhancements removed
+ */
+function removeEnhancementsFromDatasheet(obj) {
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+    const cleaned = { ...obj };
+    if (cleaned.hasOwnProperty('enhancements')) {
+      delete cleaned.enhancements;
+    }
+    return cleaned;
+  }
+  return obj;
+}
+
+/**
+ * Processes a single JSON file
+ * @param {string} filePath - Path to the JSON file
+ * @param {string} depotdataPath - Base path to depotdata directory
+ */
+async function processJsonFile(filePath, depotdataPath) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const data = JSON.parse(content);
     
     // Process the data
-    const processedData = processObject(data);
+    let processedData = await processObject(data);
+    
+    // Remove stratagems, detachmentAbilities, and enhancements from datasheet files (but keep them in faction files)
+    const isDatasheet = isDatasheetFile(filePath, depotdataPath);
+    if (isDatasheet) {
+      processedData = removeStratagemsFromDatasheet(processedData);
+      processedData = removeDetachmentAbilitiesFromDatasheet(processedData);
+      processedData = removeEnhancementsFromDatasheet(processedData);
+    }
     
     // Write back to file with proper formatting
     fs.writeFileSync(filePath, JSON.stringify(processedData, null, 2), 'utf-8');
@@ -344,7 +365,7 @@ function processJsonFile(filePath) {
 /**
  * Main function to process all JSON files in depotdata
  */
-function main() {
+async function main() {
   const depotdataPath = path.join(__dirname, '..', 'src', 'app', 'depotdata');
   
   if (!fs.existsSync(depotdataPath)) {
@@ -371,24 +392,38 @@ function main() {
   
   findJsonFiles(depotdataPath);
   
-  console.log(`Found ${jsonFiles.length} JSON files to process...`);
+  console.log(`📁 Found ${jsonFiles.length} JSON files to process...\n`);
   
   let successCount = 0;
   let errorCount = 0;
+  let fileIndex = 0;
   
   for (const jsonFile of jsonFiles) {
-    if (processJsonFile(jsonFile)) {
+    fileIndex++;
+    const relativePath = path.relative(depotdataPath, jsonFile);
+    
+    console.log(`[${fileIndex}/${jsonFiles.length}] Processing: ${relativePath}`);
+    
+    if (await processJsonFile(jsonFile, depotdataPath)) {
       successCount++;
+      console.log(`✅ Completed: ${relativePath}\n`);
     } else {
       errorCount++;
+      console.log(`❌ Failed: ${relativePath}\n`);
     }
   }
   
-  console.log(`\nProcessing complete:`);
-  console.log(`  Success: ${successCount}`);
-  console.log(`  Errors: ${errorCount}`);
+  console.log('═'.repeat(50));
+  console.log(`📊 Processing Summary:`);
+  console.log(`   ✅ Success: ${successCount}`);
+  console.log(`   ❌ Errors: ${errorCount}`);
+  console.log(`   📄 Total: ${jsonFiles.length}`);
+  console.log('═'.repeat(50));
 }
 
 // Run the script
-main();
+main().catch(error => {
+  console.error('Fatal error:', error);
+  process.exit(1);
+});
 
