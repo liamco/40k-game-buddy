@@ -80,77 +80,94 @@ export async function extractStructuredEffectsWithOpenAI(description, itemName =
   const startTime = Date.now();
 
   // Prompt from scratch.tsx
-  const prompt = `Analyze the following Warhammer 40k game rule description and extract structured effects in JSON format.
+  const prompt = `Analyze the following Warhammer 40k game rule description and extract structured mechanics in JSON format.
 
 Description: "${cleanDescription}"
 
-Extract all effects including dice roll modifiers (hit, wound, save, damage, AP), defensive abilities (Feel No Pain, invulnerable saves), keyword additions, and ability additions. Return them as a JSON array following this exact format:
+Extract all mechanics including dice roll modifiers (hit, wound, save, damage, AP), defensive abilities (Feel No Pain, invulnerable saves), keyword additions, and ability additions. Return them as a JSON array following this exact structure:
 
-{
-  "effects": [
+"mechanics": [ {
+  entity:<what does this mechanic target>,
+  effect:<what does this mechanic do>,
+  attribute?: <any base attributes this mechanic can modify>,
+  abilities?: <any abilities this mechanic can add>,
+  keywords?: <any keywords this mechanic can add>,
+  state?: <information about the state of the entity>,
+  value: <a boolean, number, or string value>,
+  conditions: [
     {
-      "type": "hit|wound|save|feelNoPain|invSv|damage|ap|addsKeyword|addsAbility",
-      "effect": "rollBonus|rollPenalty|staticNumber|addsKeyword|addsAbility",
-      "value": <number|string>,
-      "conditions": [
-        {
-          "entity": "target|attacker|unit|model|attack|friendlyObjective|enemyObjective|friendlyUnitWithKeyword|enemyUnitWithKeyword",
-          "status": "<condition property name>",
-          "value": <boolean|string|number>
-        }
-      ]
+      entity:<what entity does this condition rely on>,
+      attribute?: <any base attributes this condition needs to check>,
+      abilities?: <any abilities this condition needs to check>,
+      state?: <any states this condition needs to check>,
+      keywords?: <any keywords this condition needs to check>,
+      operator: <how to compare the value to the condition>,
+      value: <can be a boolean, number, or string>,
     }
   ]
-}
+} ]
 
 Rules:
-- "type" must be one of:
-  * "hit" - modifies Hit rolls
-  * "wound" - modifies Wound rolls
-  * "save" - modifies Save rolls
-  * "feelNoPain" - Feel No Pain ability (use staticNumber effect)
-  * "invSv" - invulnerable save (use staticNumber effect)
-  * "damage" - modifies Damage characteristic
-  * "ap" - modifies Armour Penetration characteristic
-  * "addsKeyword" - adds a keyword to the unit/model
-  * "addsAbility" - grants an ability to the unit/model
+
+- "entity" must be one of:
+  * "thisArmy" - the unit/model's army
+  * "thisUnit" - the unit/model itself
+  * "thisModel" - this specific model
+  * "opponentArmy" - the opponent's army
+  * "opposingUnit" - A unit from the opponent's army
+  * "opposingModel" - A model from the opponent's army
 
 - "effect" must match the type:
-  * For roll modifiers (hit, wound, save, damage, ap): use "rollBonus" (+modifier) or "rollPenalty" (-modifier)
-  * For static values (feelNoPain, invSv): use "staticNumber" (the threshold value, e.g., 5 for "5+")
-  * For keyword additions: use "addsKeyword" and value should be the keyword name as a string
-  * For ability additions: use "addsAbility" and value should be the ability name/ID as a string
+  * "rollBonus" - adds a value to a dice roll
+  * "rollPenalty" - subtracts a value from a dice roll
+  * "staticNumber" - sets a static number for a roll or a damage value
+  * "addsKeyword" - adds a keyword to the entity
+  * "addsAbility" - adds an ability to the entity
+  
+- "attribute" must be one of:
+  * "h" - modifies Hit rolls
+  * "w" - modifies Wound rolls
+  * "s" - modifies Save rolls
+  * "d" - modifies a damage value
+  * "ap" - modifies an Armour Penetration characteristic
+  * "inRangeOfAnyObjective" - is the entity in range of any objective, regardless of whether it is friendly, enemy, or contested
+  * "inRangeOfFriendlyObjective" - is the entity in range of a friendly objective
+  * "inRangeOfEnemyObjective" - is the entity in range of an enemy objective
+  * "inRangeOfContestedObjective" - is the entity in range of a contested objective
+  * "inEngagementRange" - is the entity in engagement range
+  * "isBattleShocked" - is the entity battle-shocked
+  * "hasKeyword" - is the entity having a specific keyword
 
-- "value" format:
-  * For rollBonus/rollPenalty: numeric modifier amount (always positive, effect indicates direction)
-  * For staticNumber: the threshold value (e.g., 5 for "5+", 4 for "4+")
-  * For addsKeyword: the keyword name as a string (e.g., "INFANTRY", "CHARACTER")
-  * For addsAbility: the ability name or ID as a string
+- "keywords" is optional - only include if the mechanic adds a keyword to the entity
+- "keywords" should be an array of strings
 
-- "conditions" is optional - only include if the effect has specific conditions (e.g., "if target is battle-shocked", "while leading a unit")
+- "abilities" is optional - only include if the mechanic adds an ability to the entity
+- "abilities" should be an array of strings
 
-- "conditions.subject" should be one of: "target", "attacker", "unit", "model", "attack", "friendlyObjective", "enemyObjective", "anyObjective",  "friendlyUnitWithKeyword", "enemyUnitWithKeyword"
-- "conditions.property" should be one of: "leadingUnit", "battleShocked", "withinRangeOf", "damage", or a relevant keyword. If none of these are a suitable, a single word or phrase that describes the condition.
-- "conditions.value" should be a boolean or number.
+- "state" is optional - only include if the mechanic adds a state to the entity
+- "state" should be an array of strings
+
+- "value" should usually be an integer (even if it's negative), but can be a string e.g. "D3", "SUSTAINED HITS 1"
+
+- "conditions" is optional - only include if the mechanic needs specific conditions to trigger (e.g., "if target is battle-shocked", "while leading a unit")
+- Condition entities, attributes, and values are the same as the entity, attribute, and value for the main mechanic.
+
+- "conditions.operator" should be one of: "equals", "notEquals", "greaterThan", "greaterThanOrEqualTo", "lessThan", "lessThanOrEqualTo"
 
 Special cases:
-- AP modifications: use type "ap" with effect "rollBonus" (worsen AP = bonus to save) or "rollPenalty" (improve AP = penalty to save)
-- Feel No Pain: type "feelNoPain", effect "staticNumber", value is the roll needed (e.g., 5+ = value 5)
-- Invulnerable save: type "invSv", effect "staticNumber", value is the save value (e.g., 4+ = value 4)
-- Battle-shocked condition: property "battle-shocked", subject "target", value true
-- Leading a unit: property "leading", subject "unit", value true
-- Objective you control: subject "friendlyObjective"
+- Saving throw modifications: The higher the number, the worse the save. A roll bonus should be a negative number and a roll penalty should be a positive number.
+- When adding an ability which carries a number e.g. "SUSTAINED HITS 1" or "FEEL NO PAIN 5+", the value should be the number as an integer.
 
 Examples:
-- "+1 to Hit rolls" → {"type": "hit", "effect": "rollBonus", "value": 1}
-- "5+ Feel No Pain" → {"type": "feelNoPain", "effect": "staticNumber", "value": 5}
-- "4+ invulnerable save" → {"type": "invSv", "effect": "staticNumber", "value": 4}
-- "+1 to Wound if target is battle-shocked" → {"type": "wound", "effect": "rollBonus", "value": 1, "conditions": [{"property": "battle-shocked", "subject": "target", "value": true}]}
-- "gains the INFANTRY keyword" → {"type": "addsKeyword", "effect": "addsKeyword", "value": "INFANTRY"}
-- "has the Deep Strike ability" → {"type": "addsAbility", "effect": "addsAbility", "value": "Deep Strike"}
-- "While this model is leading a unit, add 1 to Hit rolls" → {"type": "hit", "effect": "rollBonus", "value": 1, "conditions": [{"property": "leading", "subject": "unit", "value": true}]}
+- "this model gets +1 to Hit rolls" → {entity:"thisModel", effect:"rollBonus", attribute:"h", value:1}
+- "this model gets a 5+ Feel No Pain" → {entity:"thisModel", effect:"addsAbility", abilities:"FEEL NO PAIN", value:5}
+- "this model gets a 4+ invulnerable save" → {entity:"thisModel", effect:"staticNumber", attributes:"invSv", value:4}
+- "+1 to Wound if target is battle-shocked" → {entity:"thisModel", "effect":"rollBonus", "attribute":"w"  "value":1, "conditions": [{"entity": "targetUnit", "attribute": "battleShock", "value": true}]}
+- "gains the INFANTRY keyword" → {entity:"thisModel", "effect": "addsKeyword", "keywords": ["INFANTRY"]}
+- "has the Deep Strike ability" → {entity:"thisModel", "effect": "addsAbility", "abilities": ["DEEP STRIKE"]}
+- "While this model is leading a unit, add 1 to Hit rolls" → {entity:"thisUnit", "effect": "rollBonus", "attribute":"h", "value":1, "conditions":[{"entity":"thisUnit", "state":"hasLeader", "value": true}]}
 
-If no effects are found, return: {"effects": []}`;
+If no mechanics are found, return: {"mechanics": []}`;
 
   const fullPrompt = `You are a helpful assistant that extracts structured game rule effects from Warhammer 40k descriptions. Always return valid JSON only.\n\n${prompt}`;
 
@@ -202,38 +219,65 @@ If no effects are found, return: {"effects": []}`;
 
     const parsed = JSON.parse(jsonContent);
     
-    if (parsed.effects && Array.isArray(parsed.effects) && parsed.effects.length > 0) {
-      console.log(`[OpenAI] ✅ Extracted ${parsed.effects.length} effect(s) (${elapsed}s)`);
-      parsed.effects.forEach((effect, idx) => {
-        const conditions = effect.conditions && effect.conditions.length > 0 
-          ? ` [conditions: ${effect.conditions.length}]` 
+    if (parsed.mechanics && Array.isArray(parsed.mechanics) && parsed.mechanics.length > 0) {
+      console.log(`[OpenAI] ✅ Extracted ${parsed.mechanics.length} mechanic(s) (${elapsed}s)`);
+      parsed.mechanics.forEach((mechanic, idx) => {
+        const conditions = mechanic.conditions && mechanic.conditions.length > 0 
+          ? ` [conditions: ${mechanic.conditions.length}]` 
           : '';
-        // Format value display based on effect type
-        let valueDisplay = '';
-        if (effect.effect === 'staticNumber') {
-          valueDisplay = `${effect.value}+`;
-        } else if (effect.effect === 'rollBonus') {
-          valueDisplay = `+${effect.value}`;
-        } else if (effect.effect === 'rollPenalty') {
-          valueDisplay = `-${effect.value}`;
-        } else if (effect.effect === 'addsKeyword' || effect.effect === 'addsAbility') {
-          valueDisplay = `"${effect.value}"`;
-        } else {
-          valueDisplay = effect.value;
+        
+        // Build display string for the mechanic
+        let displayParts = [];
+        
+        // Entity
+        displayParts.push(`entity:${mechanic.entity}`);
+        
+        // Effect type
+        displayParts.push(`effect:${mechanic.effect}`);
+        
+        // Attribute (if present)
+        if (mechanic.attribute) {
+          displayParts.push(`attribute:${mechanic.attribute}`);
         }
-        console.log(`[OpenAI]   ${idx + 1}. ${effect.type} ${effect.effect} ${valueDisplay}${conditions}`);
+        
+        // Format value display based on effect type
+        if (mechanic.effect === 'addsKeyword' && mechanic.keywords && Array.isArray(mechanic.keywords)) {
+          displayParts.push(`keywords:[${mechanic.keywords.join(', ')}]`);
+        } else if (mechanic.effect === 'addsAbility' && mechanic.abilities && Array.isArray(mechanic.abilities)) {
+          const abilitiesDisplay = mechanic.abilities.join(', ');
+          if (mechanic.value !== undefined && mechanic.value !== null) {
+            displayParts.push(`abilities:[${abilitiesDisplay}] value:${mechanic.value}`);
+          } else {
+            displayParts.push(`abilities:[${abilitiesDisplay}]`);
+          }
+        } else if (mechanic.effect === 'staticNumber') {
+          displayParts.push(`value:${mechanic.value}+`);
+        } else if (mechanic.effect === 'rollBonus') {
+          displayParts.push(`value:+${mechanic.value}`);
+        } else if (mechanic.effect === 'rollPenalty') {
+          displayParts.push(`value:-${mechanic.value}`);
+        } else if (mechanic.value !== undefined && mechanic.value !== null) {
+          displayParts.push(`value:${mechanic.value}`);
+        }
+        
+        // State (if present)
+        if (mechanic.state && Array.isArray(mechanic.state) && mechanic.state.length > 0) {
+          displayParts.push(`state:[${mechanic.state.join(', ')}]`);
+        }
+        
+        console.log(`[OpenAI]   ${idx + 1}. ${displayParts.join(' ')}${conditions}`);
       });
-      return parsed.effects;
+      return parsed.mechanics;
     }
 
-    console.log(`[OpenAI] ℹ️  No effects found (${elapsed}s)`);
+    console.log(`[OpenAI] ℹ️  No mechanics found (${elapsed}s)`);
     return null;
 
   } catch (error) {
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
     const errorMessage = error?.message || error?.toString() || String(error);
     
-    console.error(`[OpenAI] ❌ Error extracting effects (${elapsed}s): ${errorMessage}`);
+    console.error(`[OpenAI] ❌ Error extracting mechanics (${elapsed}s): ${errorMessage}`);
     
     if (errorMessage.includes('API key')) {
       console.error(`[OpenAI]    Check that OPENAI_API_KEY is set correctly in your .env file`);
@@ -250,19 +294,19 @@ If no effects are found, return: {"effects": []}`;
 /**
  * Checks if an object should have effects extracted (has description)
  */
-function shouldExtractEffects(obj) {
+function shouldExtractMechanics(obj) {
   return obj && typeof obj === 'object' && obj.description && typeof obj.description === 'string';
 }
 
 /**
  * Recursively processes a JSON object to extract effects from abilities, enhancements, stratagems, and detachmentAbilities
  * @param {object} obj - The object to process
- * @param {boolean} skipExistingEffects - Whether to skip items that already have effects
+ * @param {boolean} skipExistingMechanics - Whether to skip items that already have effects
  * @returns {Promise<object>} - The processed object with effects added
  */
-async function processObjectForEffects(obj, skipExistingEffects = true) {
+async function processObjectForEffects(obj, skipExistingMechanics = true) {
   if (Array.isArray(obj)) {
-    return Promise.all(obj.map(item => processObjectForEffects(item, skipExistingEffects)));
+    return Promise.all(obj.map(item => processObjectForEffects(item, skipExistingMechanics)));
   } else if (obj !== null && typeof obj === 'object') {
     const processed = {};
     
@@ -275,15 +319,15 @@ async function processObjectForEffects(obj, skipExistingEffects = true) {
           
           processed[key] = await Promise.all(obj[key].map(async (item, index) => {
             const itemName = item.name || item.id || `${itemType} ${index + 1}`;
-            const processedItem = await processObjectForEffects(item, skipExistingEffects);
+            const processedItem = await processObjectForEffects(item, skipExistingMechanics);
             
             // Extract effects from the description
             if (processedItem.description) {
-              // Skip if item already has effects and skipExistingEffects is enabled
-              const hasExistingEffects = processedItem.effects && Array.isArray(processedItem.effects) && processedItem.effects.length > 0;
+              // Skip if item already has effects and skipExistingMechanics is enabled
+              const hasExistingEffects = processedItem.mechanics && Array.isArray(processedItem.mechanics) && processedItem.mechanics.length > 0;
               
-              if (hasExistingEffects && skipExistingEffects) {
-                console.log(`[OpenAI] ⏭️  Skipping ${itemName} (already has ${processedItem.effects.length} effect(s))`);
+              if (hasExistingEffects && skipExistingMechanics) {
+                console.log(`[OpenAI] ⏭️  Skipping ${itemName} (already has ${processedItem.mechanics.length} effect(s))`);
               } else {
                 // Extract structured effects with OpenAI
                 const structuredEffects = await extractStructuredEffectsWithOpenAI(
@@ -291,7 +335,7 @@ async function processObjectForEffects(obj, skipExistingEffects = true) {
                   itemName
                 );
                 if (structuredEffects && structuredEffects.length > 0) {
-                  processedItem.effects = structuredEffects;
+                  processedItem.mechanics = structuredEffects;
                 }
               }
             }
@@ -299,17 +343,17 @@ async function processObjectForEffects(obj, skipExistingEffects = true) {
           }));
         } else {
           // Check if this object should have effects extracted
-          if (shouldExtractEffects(obj[key]) && typeof obj[key] === 'object') {
-            processed[key] = await processObjectForEffects(obj[key], skipExistingEffects);
+          if (shouldExtractMechanics(obj[key]) && typeof obj[key] === 'object') {
+            processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics);
             
             // Extract structured effects if this is a stratagem, ability, enhancement, or detachmentAbility
             if (obj[key].description) {
               // Check if we should skip items that already have effects
-              const hasExistingEffects = processed[key].effects && Array.isArray(processed[key].effects) && processed[key].effects.length > 0;
+              const hasExistingEffects = processed[key].mechanics && Array.isArray(processed[key].mechanics) && processed[key].mechanics.length > 0;
               
-              if (hasExistingEffects && skipExistingEffects) {
+              if (hasExistingEffects && skipExistingMechanics) {
                 const itemName = obj[key].name || obj[key].id || 'Unknown item';
-                console.log(`[OpenAI] ⏭️  Skipping ${itemName} (already has ${processed[key].effects.length} effect(s))`);
+                console.log(`[OpenAI] ⏭️  Skipping ${itemName} (already has ${processed[key].mechanics.length} effect(s))`);
               } else if (!hasExistingEffects) {
                 const itemName = obj[key].name || obj[key].id || 'Unknown item';
                 const structuredEffects = await extractStructuredEffectsWithOpenAI(
@@ -317,12 +361,12 @@ async function processObjectForEffects(obj, skipExistingEffects = true) {
                   itemName
                 );
                 if (structuredEffects && structuredEffects.length > 0) {
-                  processed[key].effects = structuredEffects;
+                  processed[key].mechanics = structuredEffects;
                 }
               }
             }
           } else {
-            processed[key] = await processObjectForEffects(obj[key], skipExistingEffects);
+            processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics);
           }
         }
       }
@@ -337,15 +381,15 @@ async function processObjectForEffects(obj, skipExistingEffects = true) {
 /**
  * Processes a single JSON file to extract effects
  * @param {string} filePath - Path to the JSON file
- * @param {boolean} skipExistingEffects - Whether to skip items that already have effects
+ * @param {boolean} skipExistingMechanics - Whether to skip items that already have effects
  */
-async function processJsonFileForEffects(filePath, skipExistingEffects) {
+async function processJsonFileForEffects(filePath, skipExistingMechanics) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const data = JSON.parse(content);
     
     // Process the data
-    const processedData = await processObjectForEffects(data, skipExistingEffects);
+    const processedData = await processObjectForEffects(data, skipExistingMechanics);
     
     // Write back to file with proper formatting
     fs.writeFileSync(filePath, JSON.stringify(processedData, null, 2), 'utf-8');
@@ -425,7 +469,7 @@ async function processAllFiles(fileFilters = []) {
   }
   
   // Configuration
-  const skipExistingEffects = process.env.SKIP_EXISTING_EFFECTS !== 'false'; // Default to true
+  const skipExistingMechanics = process.env.SKIP_EXISTING_EFFECTS !== 'false'; // Default to true
   const apiKey = process.env.OPENAI_API_KEY;
   
   if (!apiKey) {
@@ -435,7 +479,7 @@ async function processAllFiles(fileFilters = []) {
   }
   
   console.log('🤖 OpenAI Effects Extraction Script');
-  console.log(`⏭️  Skip existing effects: ${skipExistingEffects ? 'enabled' : 'disabled'}`);
+  console.log(`⏭️  Skip existing effects: ${skipExistingMechanics ? 'enabled' : 'disabled'}`);
   console.log(`🤖 OpenAI Model: ${process.env.OPENAI_MODEL || 'gpt-4o-mini'}`);
   if (fileFilters.length > 0) {
     console.log(`📌 Filtering to ${fileFilters.length} file(s):`);
@@ -483,7 +527,7 @@ async function processAllFiles(fileFilters = []) {
     
     console.log(`[${fileIndex}/${jsonFiles.length}] Processing: ${relativePath}`);
     
-    const result = await processJsonFileForEffects(jsonFile, skipExistingEffects);
+    const result = await processJsonFileForEffects(jsonFile, skipExistingMechanics);
     
     if (result.processed) {
       successCount++;
@@ -547,13 +591,13 @@ async function main() {
     console.log('🤖 OpenAI Effects Extraction (Single Test)');
     console.log('═'.repeat(50));
     
-    const effects = await extractStructuredEffectsWithOpenAI(description, itemName);
+    const mechanics = await extractStructuredEffectsWithOpenAI(description, itemName);
     
     console.log('\n═'.repeat(50));
     
-    if (effects && effects.length > 0) {
+    if (mechanics && mechanics.length > 0) {
       console.log('\n📋 Final Result:');
-      console.log(JSON.stringify({ effects }, null, 2));
+      console.log(JSON.stringify({ mechanics }, null, 2));
       process.exit(0);
     } else {
       console.log('\n⚠️  No effects extracted');
