@@ -41,6 +41,7 @@ export type ArmyListItem = Datasheet & {
     listItemId: string; // Unique ID for this list entry (allows same unit multiple times)
     quantity?: number;
     pointsCost?: number;
+    compositionCounts?: { [line: number]: number }; // Store counts for each unitComposition line
 }
 
 export interface Datasheet {

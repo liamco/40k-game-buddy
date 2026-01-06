@@ -157,6 +157,8 @@ Rules:
 Special cases:
 - Saving throw modifications: The higher the number, the worse the save. A roll bonus should be a negative number and a roll penalty should be a positive number.
 - When adding an ability which carries a number e.g. "SUSTAINED HITS 1" or "FEEL NO PAIN 5+", the value should be the number as an integer.
+- The ability "Leader" can be completely ignored
+- If an ability requires a dice roll such as D3, D6, 2D6, etc, add that to the value exactly as it is written.
 
 Examples:
 - "this model gets +1 to Hit rolls" → {entity:"thisModel", effect:"rollBonus", attribute:"h", value:1}

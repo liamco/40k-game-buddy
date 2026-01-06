@@ -17,7 +17,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "./c
 import { GamePhaseSelector } from "./components/GamePhaseSelector";
 import { AttackerPanel } from "./components/AttackerPanel";
 import { DefenderPanel } from "./components/DefenderPanel";
-import { ListsManager } from "./components/ListsManager";
+import { ListManager } from "./modules/ListManager/ListManager";
 
 function CombatResolver() {
     const [gamePhase, setGamePhase] = useState<GamePhase>("SHOOTING");
@@ -293,6 +293,7 @@ function CombatResolver() {
                         modifiers={modifiers}
                         onModifiersChange={setModifiers}
                         selectedList={defenderList}
+                        selectedWeaponProfile={selectedWeaponProfile}
                     />
                     <StratagemList
                         scope="Attacker"
@@ -341,7 +342,7 @@ export default function App() {
                 <CombatResolver />
             </TabsContent>
             <TabsContent value="lists" className="mt-0">
-                <ListsManager />
+                <ListManager />
             </TabsContent>
         </Tabs>  
             

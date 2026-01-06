@@ -24,7 +24,53 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D6"
+      "parameter": "D6",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": "x",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "mortalWounds",
+          "value": "x",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOf",
+              "value": 6
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "000000707",
@@ -32,7 +78,49 @@
       "legend": "Tyranids flood the battlefield with the psychic signature of the hive fleet - an icy, alien dread that gnaws at the minds of their prey and smothers even the most stalwart courage. When faced with such unfathomable horror, many are driven insane or suffer catastrophic neural damage.",
       "factionId": "TYR",
       "description": "If your Army Faction is <span class=\"kwb\">TYRANIDS</span>, once per battle, in either player’s Command phase, if one or more units from your army with this ability are on the battlefield, you can unleash the Shadow in the Warp. When you do, each enemy unit on the battlefield must take a Battle-shock test. Each time an enemy unit takes such a Battle-shock test, if it is within 6\" of one or more <span class=\"tooltip00223\" data-tooltip-content=\"#tooltip_content00223\" data-tooltip-anchor=\"#tooltip_content00223\"><span class=\"kwb\">SYNAPSE</span></span> units from your army, subtract 1 from that test.",
-      "type": "Faction"
+      "type": "Faction",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "isBattleShocked",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attribute": "hasKeyword",
+              "value": "TYRANIDS",
+              "operator": "equals"
+            },
+            {
+              "entity": "thisUnit",
+              "attribute": "isBattleShocked",
+              "value": true,
+              "operator": "equals"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "isBattleShocked",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "inRangeOfFriendlyObjective",
+              "value": 6,
+              "operator": "lessThanOrEqualTo"
+            },
+            {
+              "entity": "thisArmy",
+              "attribute": "hasKeyword",
+              "value": "SYNAPSE",
+              "operator": "equals"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "000000705",
@@ -40,7 +128,35 @@
       "legend": "Some Tyranids serve as synaptic conduits or nodal relays through which a portion of the Hive Mind’s iron will flows, overriding the natural instincts of the swarm to direct the teeming warrior-beasts to function as a single, gestalt organism on the battlefield.",
       "factionId": "TYR",
       "description": "If your Army Faction is <span class=\"kwb\">TYRANIDS</span>, while a <span class=\"kwb\">TYRANIDS</span> unit from your army is within 6\" of one or more friendly <span class=\"tooltip00223\" data-tooltip-content=\"#tooltip_content00223\" data-tooltip-anchor=\"#tooltip_content00223\"><span class=\"kwb\">SYNAPSE</span></span> models, that <span class=\"kwb\">TYRANIDS</span> unit is said to be within Synapse Range of that model and of your army. While a <span class=\"kwb\">TYRANIDS</span> unit from your army is within Synapse Range of your army: <br><ul><li>Each time that unit takes a Battle-shock test, take that test on 3D6 instead of 2D6. </li><li>Each time a model in that unit makes a melee attack, add 1 to the Strength characteristic of that attack.</li></ul>",
-      "type": "Faction"
+      "type": "Faction",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "isBattleShocked",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "isBattleShocked",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inSynapseRange",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -49,7 +165,43 @@
       "factionId": "",
       "description": "In your Command phase, you can select one friendly <span class=\"kwb kwbo\">TERMAGANTS</span> unit within 6\" of this model and return up to D3+3 destroyed models to that unit. A <span class=\"kwb\">TERMAGANTS</span> unit cannot be selected for this ability more than once per phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "RETURN MODELS"
+          ],
+          "value": "D3+3"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "selectedForAbility",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsKeyword",
+          "keywords": [
+            "TERMAGANTS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inRange",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -58,7 +210,23 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb kwbo\">TERMAGANTS</span> unit is within 6\" of this model, ranged weapons equipped by models in that unit have the <span class=\"kwb2 bluefont\">[LETHAL HITS]</span> ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "inRangeOfAnyObjective",
+              "value": 6
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -232,7 +400,9 @@
     {
       "datasheetId": "000000465",
       "line": 1,
-      "description": "1 Tervigon"
+      "description": "1 Tervigon",
+      "min": 1,
+      "max": 1
     }
   ],
   "modelCosts": [
@@ -240,7 +410,8 @@
       "datasheetId": "000000465",
       "line": 1,
       "description": "1 model",
-      "cost": 160
+      "cost": 160,
+      "count": 1
     }
   ],
   "leaders": [],

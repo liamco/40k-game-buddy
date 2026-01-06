@@ -1,0 +1,84 @@
+Extract all mechanics including dice roll modifiers (hit, wound, save, damage, AP), defensive abilities (Feel No Pain, invulnerable saves), keyword additions, and ability additions. Return them as a JSON array following this exact structure:
+
+"mechanics": [ {
+  entity:<what does this mechanic target>,
+  effect:<what does this mechanic do>,
+  attribute?: <any base attributes this mechanic can modify>,
+  abilities?: <any abilities this mechanic can add>,
+  keywords?: <any keywords this mechanic can add>,
+  state?: <information about the state of the entity>,
+  value: <a boolean, number, or string value>,
+  conditions: [
+    {
+      entity:<what entity does this condition rely on>,
+      attribute?: <any base attributes this condition needs to check>,
+      abilities?: <any abilities this condition needs to check>,
+      state?: <any states this condition needs to check>,
+      keywords?: <any keywords this condition needs to check>,
+      operator: <how to compare the value to the condition>,
+      value: <can be a boolean, number, or string>,
+    }
+  ]
+} ]
+
+Rules:
+
+- "entity" must be one of:
+  * "thisArmy" - the unit/model's army
+  * "thisUnit" - the unit/model itself
+  * "thisModel" - this specific model
+  * "opponentArmy" - the opponent's army
+  * "opposingUnit" - A unit from the opponent's army
+  * "opposingModel" - A model from the opponent's army
+
+- "effect" must match the type:
+  * "rollBonus" - adds a value to a dice roll
+  * "rollPenalty" - subtracts a value from a dice roll
+  * "staticNumber" - sets a static number for a roll or a damage value
+  * "addsKeyword" - adds a keyword to the entity
+  * "addsAbility" - adds an ability to the entity
+  
+- "attribute" must be one of:
+  * "h" - modifies Hit rolls
+  * "w" - modifies Wound rolls
+  * "s" - modifies Save rolls
+  * "d" - modifies a damage value
+  * "ap" - modifies an Armour Penetration characteristic
+  * "inRangeOfAnyObjective" - is the entity in range of any objective, regardless of whether it is friendly, enemy, or contested
+  * "inRangeOfFriendlyObjective" - is the entity in range of a friendly objective
+  * "inRangeOfEnemyObjective" - is the entity in range of an enemy objective
+  * "inRangeOfContestedObjective" - is the entity in range of a contested objective
+  * "inEngagementRange" - is the entity in engagement range
+  * "isBattleShocked" - is the entity battle-shocked
+  * "hasKeyword" - is the entity having a specific keyword
+
+- "keywords" is optional - only include if the mechanic adds a keyword to the entity
+- "keywords" should be an array of strings
+
+- "abilities" is optional - only include if the mechanic adds an ability to the entity
+- "abilities" should be an array of strings
+
+- "state" is optional - only include if the mechanic adds a state to the entity
+- "state" should be an array of strings
+
+- "value" should usually be an integer (even if it's negative), but can be a string e.g. "D3", "SUSTAINED HITS 1"
+
+- "conditions" is optional - only include if the mechanic needs specific conditions to trigger (e.g., "if target is battle-shocked", "while leading a unit")
+- Condition entities, attributes, and values are the same as the entity, attribute, and value for the main mechanic.
+
+- "conditions.operator" should be one of: "equals", "notEquals", "greaterThan", "greaterThanOrEqualTo", "lessThan", "lessThanOrEqualTo"
+
+Special cases:
+- Saving throw modifications: The higher the number, the worse the save. A roll bonus should be a negative number and a roll penalty should be a positive number.
+- When adding an ability which carries a number e.g. "SUSTAINED HITS 1" or "FEEL NO PAIN 5+", the value should be the number as an integer.
+
+Examples:
+- "this model gets +1 to Hit rolls" → {entity:"thisModel", effect:"rollBonus", attribute:"h", value:1}
+- "this model gets a 5+ Feel No Pain" → {entity:"thisModel", effect:"addsAbility", abilities:"FEEL NO PAIN", value:5}
+- "this model gets a 4+ invulnerable save" → {entity:"thisModel", effect:"staticNumber", attributes:"invSv", value:4}
+- "+1 to Wound if target is battle-shocked" → {entity:"thisModel", "effect":"rollBonus", "attribute":"w"  "value":1, "conditions": [{"entity": "targetUnit", "attribute": "battleShock", "value": true}]}
+- "gains the INFANTRY keyword" → {entity:"thisModel", "effect": "addsKeyword", "keywords": ["INFANTRY"]}
+- "has the Deep Strike ability" → {entity:"thisModel", "effect": "addsAbility", "abilities": ["DEEP STRIKE"]}
+- "While this model is leading a unit, add 1 to Hit rolls" → {entity:"thisUnit", "effect": "rollBonus", "attribute":"h", "value":1, "conditions":[{"entity":"thisUnit", "state":"hasLeader", "value": true}]}
+
+If no mechanics are found, return: {"mechanics": []}`

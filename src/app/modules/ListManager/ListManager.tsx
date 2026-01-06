@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Plus, Trash2, X, Search } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverPortal, PopoverContent } from "@radix-ui/react-popover";
-import { Button } from "./ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
+import { Button } from "../../components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
 import {
     Command,
     CommandEmpty,
@@ -10,17 +10,17 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from "./ui/command";
+} from "../../components/ui/command";
 
-import { Badge } from "./ui/badge";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { getAllFactions, loadFactionData, getFactionBySlug, loadDatasheetData } from "../utils/depotDataLoader";
-import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, Detachment } from "../types";
+import { Badge } from "../../components/ui/badge";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { getAllFactions, loadFactionData, getFactionBySlug, loadDatasheetData } from "../../utils/depotDataLoader";
+import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, Detachment } from "../../types";
 
 const STORAGE_KEY = "battle-cogitator-army-lists";
 
-export function ListsManager() {
+export function ListManager() {
     const [lists, setLists] = useState<ArmyList[]>([]);
     const [selectedList, setSelectedList] = useState<ArmyList | null>(null);
     const [factionSearchOpen, setFactionSearchOpen] = useState(false);
@@ -89,6 +89,7 @@ export function ListsManager() {
         }
     }, [selectedList]);
 
+
     // Load bodyguard units when a leader is selected
     useEffect(() => {
         const loadBodyguardUnits = async () => {
@@ -129,6 +130,93 @@ export function ListsManager() {
 
         loadBodyguardUnits();
     }, [selectedItem, factionData]);
+
+    // Split bodyguard units into those in the list and those not in the list
+    const { unitsInList, unitsNotInList } = useMemo(() => {
+        if (!selectedList || bodyguardUnits.length === 0) {
+            return { unitsInList: [], unitsNotInList: [] };
+        }
+        
+        // Create a set of leadable datasheet IDs for quick lookup
+        const leadableDatasheetIds = new Set(bodyguardUnits.map(unit => unit.id));
+        
+        // Find all list items that match leadable datasheet IDs
+        const inList: ArmyListItem[] = selectedList.items.filter(item => 
+            leadableDatasheetIds.has(item.id)
+        );
+        
+        // Find datasheets that are leadable but not in the list
+        const listUnitIds = new Set(selectedList.items.map(item => item.id));
+        const notInList: Datasheet[] = bodyguardUnits.filter(unit => 
+            !listUnitIds.has(unit.id)
+        );
+        
+        return { unitsInList: inList, unitsNotInList: notInList };
+    }, [bodyguardUnits, selectedList]);
+
+    // Reorder list items to group leaders with their attached units
+    const orderedListItems = useMemo(() => {
+        if (!selectedList) return [];
+        
+        const items = [...selectedList.items];
+        const processed = new Set<string>();
+        const ordered: ArmyListItem[] = [];
+        
+        // First pass: add leaders and their attached units together
+        items.forEach(item => {
+            if (processed.has(item.listItemId)) return;
+            
+            // If this item is a leader with an attached unit
+            if (item.leading) {
+                // Find the attached unit by matching both ID and name
+                const attachedUnit = items.find(u => 
+                    u.id === item.leading?.id && 
+                    u.name === item.leading?.name &&
+                    !processed.has(u.listItemId)
+                );
+                
+                if (attachedUnit) {
+                    // Add leader first, then attached unit
+                    ordered.push(item);
+                    ordered.push(attachedUnit);
+                    processed.add(item.listItemId);
+                    processed.add(attachedUnit.listItemId);
+                } else {
+                    // Leader but attached unit not found, add it alone
+                    ordered.push(item);
+                    processed.add(item.listItemId);
+                }
+            }
+        });
+        
+        // Second pass: add units that are being led but their leader wasn't found/processed
+        items.forEach(item => {
+            if (processed.has(item.listItemId)) return;
+            
+            if (item.leadBy) {
+                // Check if the leader exists and was processed
+                const leader = items.find(l => 
+                    l.id === item.leadBy?.id && 
+                    l.name === item.leadBy?.name
+                );
+                
+                if (!leader || !processed.has(leader.listItemId)) {
+                    // Leader not found or not processed, add this unit alone
+                    ordered.push(item);
+                    processed.add(item.listItemId);
+                }
+            }
+        });
+        
+        // Third pass: add remaining items that weren't processed
+        items.forEach(item => {
+            if (!processed.has(item.listItemId)) {
+                ordered.push(item);
+            }
+        });
+        
+        return ordered;
+    }, [selectedList]);
 
     const filteredFactions = useMemo(() => {
         if (!factionSearchValue) return factions;
@@ -241,20 +329,42 @@ export function ListsManager() {
                 
                 // Add suffix to new item (it will be the last one)
                 const newSuffixIndex = duplicateItems.length;
+                
+                // Initialize composition counts from unitComposition
+                const compositionCounts: { [line: number]: number } = {};
+                if (fullDatasheet.unitComposition && Array.isArray(fullDatasheet.unitComposition)) {
+                    fullDatasheet.unitComposition.forEach((comp, idx) => {
+                        const line = comp.line || idx + 1;
+                        compositionCounts[line] = comp.min ?? 0;
+                    });
+                }
+                
                 const newItem: ArmyListItem = {
                     ...fullDatasheet,
                     name: `${baseName} ${getSuffixLetter(newSuffixIndex)}`,
                     listItemId: `${datasheet.id}-${Date.now()}`,
                     pointsCost: datasheet.modelCosts,
+                    compositionCounts: Object.keys(compositionCounts).length > 0 ? compositionCounts : undefined,
                 };
                 
                 updatedItems.push(newItem);
             } else {
                 // No duplicates, add as-is
+                
+                // Initialize composition counts from unitComposition
+                const compositionCounts: { [line: number]: number } = {};
+                if (fullDatasheet.unitComposition && Array.isArray(fullDatasheet.unitComposition)) {
+                    fullDatasheet.unitComposition.forEach((comp, idx) => {
+                        const line = comp.line || idx + 1;
+                        compositionCounts[line] = comp.min ?? 0;
+                    });
+                }
+                
                 const newItem: ArmyListItem = {
                     ...fullDatasheet,
                     listItemId: `${datasheet.id}-${Date.now()}`,
                     pointsCost: datasheet.modelCosts,
+                    compositionCounts: Object.keys(compositionCounts).length > 0 ? compositionCounts : undefined,
                 };
                 updatedItems.push(newItem);
             }
@@ -275,9 +385,39 @@ export function ListsManager() {
     const removeItemFromList = (itemId: string) => {
         if (!selectedList) return;
 
+        // Find the item being removed
+        const itemToRemove = selectedList.items.find(item => item.listItemId === itemId);
+        if (!itemToRemove) return;
+
+        // Clean up attachment relationships before removing the item
+        let updatedItems = selectedList.items.map(item => {
+            // If this item is a leader being removed, remove leadBy from the unit it was leading
+            if (itemToRemove.leading) {
+                // Check if this is the unit that was being led
+                if (item.id === itemToRemove.leading.id && item.name === itemToRemove.leading.name) {
+                    const { leadBy, ...rest } = item;
+                    return rest;
+                }
+            }
+            
+            // If this item is a unit being removed that was being led, remove leading from the leader
+            if (itemToRemove.leadBy) {
+                // Check if this is the leader that was leading the removed unit
+                if (item.id === itemToRemove.leadBy.id && item.name === itemToRemove.leadBy.name) {
+                    const { leading, ...rest } = item;
+                    return rest;
+                }
+            }
+            
+            return item;
+        });
+
+        // Now remove the item itself
+        updatedItems = updatedItems.filter((item) => item.listItemId !== itemId);
+
         const updatedList: ArmyList = {
             ...selectedList,
-            items: selectedList.items.filter((item) => item.listItemId !== itemId),
+            items: updatedItems,
             updatedAt: Date.now(),
         };
 
@@ -291,6 +431,122 @@ export function ListsManager() {
         }
     };
 
+    const attachLeaderToUnit = (leaderItemId: string, targetUnitItemId: string) => {
+        if (!selectedList) return;
+
+        const leaderItem = selectedList.items.find(item => item.listItemId === leaderItemId);
+        const targetUnitItem = selectedList.items.find(item => item.listItemId === targetUnitItemId);
+        
+        if (!leaderItem || !targetUnitItem) return;
+
+        // Find the previous unit this leader was leading (if any)
+        const previousTargetItem = leaderItem.leading 
+            ? selectedList.items.find(
+                item => item.id === leaderItem.leading?.id && item.name === leaderItem.leading?.name
+            )
+            : null;
+
+        const updatedItems = selectedList.items.map(item => {
+            // If this is the leader, update its "leading" property
+            if (item.listItemId === leaderItemId) {
+                const { leading, ...rest } = item;
+                return {
+                    ...rest,
+                    leading: {
+                        id: targetUnitItem.id,
+                        name: targetUnitItem.name
+                    }
+                };
+            }
+            
+            // If this is the target unit, update its "leadBy" property
+            if (item.listItemId === targetUnitItemId) {
+                const { leadBy, ...rest } = item;
+                return {
+                    ...rest,
+                    leadBy: {
+                        id: leaderItem.id,
+                        name: leaderItem.name
+                    }
+                };
+            }
+            
+            // If this was the previous target unit, remove its leadBy relationship
+            if (previousTargetItem && item.listItemId === previousTargetItem.listItemId) {
+                const { leadBy, ...rest } = item;
+                return rest;
+            }
+            
+            // If this item was previously being led by the leader (different instance), remove that relationship
+            if (item.leadBy?.id === leaderItem.id && item.listItemId !== targetUnitItemId) {
+                const { leadBy, ...rest } = item;
+                return rest;
+            }
+            
+            return item;
+        });
+
+        const updatedList: ArmyList = {
+            ...selectedList,
+            items: updatedItems,
+            updatedAt: Date.now(),
+        };
+
+        const updatedLists = lists.map((l) => (l.id === selectedList.id ? updatedList : l));
+        setLists(updatedLists);
+        setSelectedList(updatedList);
+        
+        // Update selected item if it was modified
+        const updatedSelectedItem = updatedItems.find(item => item.listItemId === selectedItem?.listItemId);
+        if (updatedSelectedItem) {
+            setSelectedItem(updatedSelectedItem);
+        }
+    };
+
+    const detachLeaderFromUnit = (leaderItemId: string) => {
+        if (!selectedList) return;
+
+        const leaderItem = selectedList.items.find(item => item.listItemId === leaderItemId);
+        if (!leaderItem?.leading) return;
+
+        // Find the target unit by matching both ID and name
+        const targetUnitItem = selectedList.items.find(
+            item => item.id === leaderItem.leading?.id && item.name === leaderItem.leading?.name
+        );
+
+        const updatedItems = selectedList.items.map(item => {
+            // Remove leading from the leader
+            if (item.listItemId === leaderItemId) {
+                const { leading, ...rest } = item;
+                return rest;
+            }
+            
+            // Remove leadBy from the target unit
+            if (targetUnitItem && item.listItemId === targetUnitItem.listItemId) {
+                const { leadBy, ...rest } = item;
+                return rest;
+            }
+            
+            return item;
+        });
+
+        const updatedList: ArmyList = {
+            ...selectedList,
+            items: updatedItems,
+            updatedAt: Date.now(),
+        };
+
+        const updatedLists = lists.map((l) => (l.id === selectedList.id ? updatedList : l));
+        setLists(updatedLists);
+        setSelectedList(updatedList);
+        
+        // Update selected item if it was modified
+        const updatedSelectedItem = updatedItems.find(item => item.listItemId === selectedItem?.listItemId);
+        if (updatedSelectedItem) {
+            setSelectedItem(updatedSelectedItem);
+        }
+    };
+
     const deleteList = (listId: string) => {
         const updatedLists = lists.filter((l) => l.id !== listId);
         setLists(updatedLists);
@@ -299,6 +555,67 @@ export function ListsManager() {
         }
     };
 
+    // Helper function to calculate total points based on composition counts for any item
+    const calculateItemPoints = useCallback((item: ArmyListItem): number => {
+        // If there's no unitComposition, use the first modelCost
+        if (!item.unitComposition || item.unitComposition.length === 0) {
+            return item.modelCosts?.[0]?.cost ?? 0;
+        }
+        
+        // Calculate total number of models from composition counts
+        let totalModels = 0;
+        item.unitComposition.forEach((comp, idx) => {
+            const line = comp.line || idx + 1;
+            const count = item.compositionCounts?.[line] ?? comp.min ?? 0;
+            totalModels += count;
+        });
+        
+        // Find the modelCost entry for the cost bracket that covers the total model count
+        // The count in modelCosts represents the maximum number of models for that cost bracket
+        // Example: count: 5, cost: 80 means 1-5 models cost 80 points
+        //          count: 10, cost: 160 means 6-10 models cost 160 points
+        if (item.modelCosts && Array.isArray(item.modelCosts)) {
+            // Find all cost brackets that can accommodate the total models (count >= totalModels)
+            const validCosts = item.modelCosts
+                .filter(cost => cost.count !== undefined && cost.count >= totalModels);
+            
+            if (validCosts.length > 0) {
+                // Sort by count ascending to find the smallest bracket that still covers totalModels
+                validCosts.sort((a, b) => (a.count || 0) - (b.count || 0));
+                // Use the smallest bracket (lowest count) that can accommodate the total
+                return validCosts[0].cost;
+            }
+            
+            // If no bracket can accommodate (totalModels exceeds all brackets), use the largest bracket
+            const sortedCosts = [...item.modelCosts]
+                .filter(cost => cost.count !== undefined)
+                .sort((a, b) => (b.count || 0) - (a.count || 0));
+            
+            if (sortedCosts.length > 0) {
+                return sortedCosts[0].cost;
+            }
+            
+            // Fallback to first cost if no match found
+            return item.modelCosts[0]?.cost ?? 0;
+        }
+        
+        return 0;
+    }, []);
+
+    // Calculate total points based on composition counts for selected item
+    const calculatedPoints = useMemo(() => {
+        if (!selectedItem) return null;
+        return calculateItemPoints(selectedItem);
+    }, [selectedItem, calculateItemPoints]);
+
+    // Calculate total points for the selected list
+    const listTotalPoints = useMemo(() => {
+        if (!selectedList) return 0;
+        return selectedList.items.reduce((total, item) => {
+            return total + calculateItemPoints(item);
+        }, 0);
+    }, [selectedList, calculateItemPoints]);
+    
     return (
         <div className="min-h-screen bg-[#f5f5f5] p-6">
             <div className="mb-6">
@@ -556,7 +873,7 @@ export function ListsManager() {
                                     <div>
                                         <CardTitle>{selectedList.name}</CardTitle>
                                         <CardDescription className="mt-1">
-                                            {selectedList.factionName} | {selectedList.detachmentName}
+                                            {selectedList.factionName} | {selectedList.detachmentName} • {listTotalPoints} points
                                         </CardDescription>
                                     </div>
                                 </div>
@@ -660,8 +977,17 @@ export function ListsManager() {
                                             </p>
                                         ) : (
                                             <div className="space-y-2 mt-2">
-                                                {selectedList.items.map((item) => {
+                                                {orderedListItems.map((item, index) => {
                                                     const isSelected = selectedItem?.listItemId === item.listItemId;
+                                                    const isLeader = !!item.leading;
+                                                    const isAttachedUnit = !!item.leadBy;
+                                                    
+                                                    // Check if this is part of a leader/unit pair
+                                                    const prevItem = orderedListItems[index - 1];
+                                                    const nextItem = orderedListItems[index + 1];
+                                                    const isGroupedWithPrev = isAttachedUnit && prevItem?.leading?.id === item.id && prevItem?.leading?.name === item.name;
+                                                    const isGroupedWithNext = isLeader && nextItem?.leadBy?.id === item.id && nextItem?.leadBy?.name === item.name;
+                                                    
                                                     return (
                                                         <div
                                                             key={item.listItemId}
@@ -669,21 +995,34 @@ export function ListsManager() {
                                                                 isSelected
                                                                     ? "bg-blue-50 border-blue-300"
                                                                     : "bg-white border-[#e6e6e6] hover:border-blue-200"
-                                                            }`}
+                                                            } ${isGroupedWithNext ? "mb-0 rounded-b-none border-b-0" : ""} ${isGroupedWithPrev ? "rounded-t-none" : ""}`}
                                                             onClick={() => setSelectedItem(item)}
                                                         >
                                                             <div className="flex-col flex flex-1">
-                                                                <span className="font-medium text-sm">{item.name}</span>
-                                                                <span className="text-sm">{item.modelCosts?.[0]?.cost} points</span>
+                                                                <div className="flex items-center gap-2">
+                                                                    <span className="font-medium text-sm">{item.name}</span>
+                                                                    {isLeader && (
+                                                                        <Badge variant="outline" className="text-xs bg-green-100 border-green-300 text-green-700">
+                                                                            Leader
+                                                                        </Badge>
+                                                                    )}
+                                                                    {isAttachedUnit && (
+                                                                        <Badge variant="outline" className="text-xs bg-blue-100 border-blue-300 text-blue-700">
+                                                                            Attached
+                                                                        </Badge>
+                                                                    )}
+                                                                </div>
+                                                                <span className="text-sm">{calculateItemPoints(item)} points</span>
                                                             </div>
 
                                                             <Button
                                                                 variant="ghost"
                                                                 size="sm"
                                                                 className="h-8 w-8 p-0"
-                                                                onClick={() =>
-                                                                    removeItemFromList(item.listItemId)
-                                                                }
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    removeItemFromList(item.listItemId);
+                                                                }}
                                                             >
                                                                 <X className="h-4 w-4" />
                                                             </Button>
@@ -709,7 +1048,7 @@ export function ListsManager() {
                         </Card>
                     )}
                 </div>
-
+                    
                 {/* Right Column - Unit Details */}
                 <div className="lg:col-span-2">
                     {selectedItem ? (
@@ -717,7 +1056,7 @@ export function ListsManager() {
                             <CardHeader>
                                 <CardTitle>{selectedItem.name}</CardTitle>
                                 <CardDescription>
-                                    {selectedItem.roleLabel} • {selectedItem.modelCosts?.[0]?.cost} points
+                                    {selectedItem.roleLabel} • {calculatedPoints ?? selectedItem.modelCosts?.[0]?.cost ?? 0} points
                                 </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-6">
@@ -778,6 +1117,90 @@ export function ListsManager() {
                                                 )}
                                             </div>
                                         ))}
+                                    </div>
+                                )}
+
+
+                                {/* Unit Composition */}
+                                {selectedItem.unitComposition && selectedItem.unitComposition.length > 0 && (
+                                    <div>
+                                        <h3 className="font-semibold text-sm mb-2">Unit Composition</h3>
+                                        <div className="space-y-3">
+                                            {selectedItem.unitComposition.map((composition, idx) => {
+                                                const line = composition.line || idx + 1;
+                                                const min = composition.min ?? 0;
+                                                const max = composition.max ?? 999;
+                                                
+                                                // Initialize count to min if not set
+                                                const currentCount = selectedItem.compositionCounts?.[line] ?? min;
+                                                
+                                                const handleCountChange = (newCount: number) => {
+                                                    if (!selectedList || !selectedItem) return;
+                                                    
+                                                    // Clamp value between min and max
+                                                    const clampedCount = Math.max(min, Math.min(max, newCount));
+                                                    
+                                                    const updatedItems = selectedList.items.map(item => {
+                                                        if (item.listItemId === selectedItem.listItemId) {
+                                                            return {
+                                                                ...item,
+                                                                compositionCounts: {
+                                                                    ...item.compositionCounts,
+                                                                    [line]: clampedCount
+                                                                }
+                                                            };
+                                                        }
+                                                        return item;
+                                                    });
+                                                    
+                                                    const updatedList: ArmyList = {
+                                                        ...selectedList,
+                                                        items: updatedItems,
+                                                        updatedAt: Date.now(),
+                                                    };
+                                                    
+                                                    const updatedLists = lists.map((l) => (l.id === selectedList.id ? updatedList : l));
+                                                    setLists(updatedLists);
+                                                    setSelectedList(updatedList);
+                                                    
+                                                    // Update selected item
+                                                    const updatedSelectedItem = updatedItems.find(item => item.listItemId === selectedItem.listItemId);
+                                                    if (updatedSelectedItem) {
+                                                        setSelectedItem(updatedSelectedItem);
+                                                    }
+                                                };
+                                                
+                                                return (
+                                                    <div key={idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
+                                                        <div className="flex items-center justify-between">
+                                                            <div className="font-medium text-sm mb-1" dangerouslySetInnerHTML={{ __html: composition.description }} />
+                                                            <div className="ml-4">
+                                                                {
+                                                                    (max !== min)
+                                                                    ?
+                                                                    <Input
+                                                                        type="number"
+                                                                        min={min}
+                                                                        max={max}
+                                                                        value={currentCount}
+                                                                        onChange={(e) => {
+                                                                            const value = parseInt(e.target.value, 10);
+                                                                            if (!isNaN(value)) {
+                                                                                handleCountChange(value);
+                                                                            }
+                                                                        }}
+                                                                        className="w-20 text-center"
+                                                                    />
+                                                                    :
+                                                                    <span className="inline-block bg-slate-100 px-9 py-2 rounded-sm font-bold text-sm mr-1">{min}</span>
+                                                                }
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
                                     </div>
                                 )}
 
@@ -851,18 +1274,81 @@ export function ListsManager() {
                                         {loadingBodyguards ? (
                                             <p className="text-sm text-[#767676]">Loading...</p>
                                         ) : bodyguardUnits.length > 0 ? (
-                                            <div className="space-y-2">
-                                                {bodyguardUnits.map((unit) => (
-                                                    <div
-                                                        key={unit.id}
-                                                        className="border border-[#e6e6e6] rounded-lg p-3 bg-white"
-                                                    >
-                                                        <div className="font-medium text-sm">{unit.name}</div>
-                                                        <div className="text-xs text-[#767676] mt-1">
-                                                            {unit.roleLabel}
+                                            <div className="space-y-4">
+                                                {/* Units in List */}
+                                                {unitsInList.length > 0 && (
+                                                    <div>
+                                                        <h4 className="font-medium text-xs text-[#767676] mb-2">
+                                                            In Your List ({unitsInList.length})
+                                                        </h4>
+                                                        <div className="space-y-2">
+                                                            {unitsInList.map((listItem) => {
+                                                                const isAttached = selectedItem?.leading?.id === listItem.id && 
+                                                                                   selectedItem?.leading?.name === listItem.name;
+                                                                return (
+                                                                    <div
+                                                                        key={listItem.listItemId}
+                                                                        className={`border rounded-lg p-3 bg-white ${
+                                                                            isAttached ? 'border-green-500 bg-green-50' : 'border-[#e6e6e6]'
+                                                                        }`}
+                                                                    >
+                                                                        <div className="flex items-start justify-between">
+                                                                            <div className="flex-1">
+                                                                                <div className="font-medium text-sm">{listItem.name}</div>
+                                                                                <div className="text-xs text-[#767676] mt-1">
+                                                                                    {listItem.roleLabel}
+                                                                                </div>
+                                                                                {isAttached && (
+                                                                                    <div className="text-xs text-green-600 mt-1 font-medium">
+                                                                                        ✓ Attached
+                                                                                    </div>
+                                                                                )}
+                                                                            </div>
+                                                                            {selectedItem && (
+                                                                                <Button
+                                                                                    variant={isAttached ? "outline" : "default"}
+                                                                                    size="sm"
+                                                                                    className="ml-2 h-8"
+                                                                                    onClick={() => {
+                                                                                        if (isAttached) {
+                                                                                            detachLeaderFromUnit(selectedItem.listItemId);
+                                                                                        } else {
+                                                                                            attachLeaderToUnit(selectedItem.listItemId, listItem.listItemId);
+                                                                                        }
+                                                                                    }}
+                                                                                >
+                                                                                    {isAttached ? "Detach" : "Attach"}
+                                                                                </Button>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                            })}
                                                         </div>
                                                     </div>
-                                                ))}
+                                                )}
+                                                
+                                                {/* Units Not in List */}
+                                                {unitsNotInList.length > 0 && (
+                                                    <div>
+                                                        <h4 className="font-medium text-xs text-[#767676] mb-2">
+                                                            Not in List ({unitsNotInList.length})
+                                                        </h4>
+                                                        <div className="space-y-2">
+                                                            {unitsNotInList.map((unit) => (
+                                                                <div
+                                                                    key={unit.id}
+                                                                    className="border border-[#e6e6e6] rounded-lg p-3 bg-white"
+                                                                >
+                                                                    <div className="font-medium text-sm">{unit.name}</div>
+                                                                    <div className="text-xs text-[#767676] mt-1">
+                                                                        {unit.roleLabel}
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
                                         ) : (
                                             <p className="text-sm text-[#767676]">

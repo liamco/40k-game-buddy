@@ -167,6 +167,232 @@ function convertPhaseValue(value) {
 }
 
 /**
+ * Extracts the count (number) from a modelCost description string
+ * Attempts to find the first number in the description and convert it to an integer
+ * Examples:
+ * - "5 models" -> 5
+ * - "1 model" -> 1
+ * - "5 Shadow Spectres" -> 5
+ * - "1 Spanner and 4 Burna Boyz" -> 1 (first number found)
+ * - "1 model (<ky>AGENTS OF THE IMPERIUM</ky> Detachment)" -> 1
+ * - "Attack Bike" -> null (no number found)
+ * 
+ * @param {string} description - The modelCost description string
+ * @returns {number|null} - The extracted count as an integer, or null if no number found
+ */
+function extractModelCount(description) {
+  if (typeof description !== 'string' || !description.trim()) {
+    return null;
+  }
+  
+  // Try to match a number at the start of the string (most common case)
+  const startMatch = description.trim().match(/^(\d+)/);
+  if (startMatch) {
+    return parseInt(startMatch[1], 10);
+  }
+  
+  // If no number at start, try to find any number in the string
+  const anyMatch = description.match(/(\d+)/);
+  if (anyMatch) {
+    return parseInt(anyMatch[1], 10);
+  }
+  
+  // No number found
+  return null;
+}
+
+/**
+ * Array to store invalid modelCost entries for logging
+ */
+let invalidModelCosts = [];
+
+/**
+ * Array to store invalid unitComposition entries for logging
+ */
+let invalidUnitCompositions = [];
+
+/**
+ * Extracts min and max values from a unitComposition description string
+ * Handles various formats:
+ * - "1 Gore Hound" -> { min: 1, max: 1 }
+ * - "4-9 Flesh Hounds" -> { min: 4, max: 9 }
+ * - "0-1 Chapter Ancient" -> { min: 0, max: 1 }
+ * - "9 Bloodletters" -> { min: 9, max: 9 }
+ * 
+ * @param {string} description - The unitComposition description string
+ * @returns {{min: number, max: number}|null} - Object with min and max values, or null if no numbers found
+ */
+function extractUnitCompositionRange(description) {
+  if (typeof description !== 'string' || !description.trim()) {
+    return null;
+  }
+  
+  const trimmed = description.trim();
+  
+  // Try to match a range pattern like "4-9" or "0-1" at the start
+  const rangeMatch = trimmed.match(/^(\d+)\s*-\s*(\d+)/);
+  if (rangeMatch) {
+    return {
+      min: parseInt(rangeMatch[1], 10),
+      max: parseInt(rangeMatch[2], 10)
+    };
+  }
+  
+  // Try to match a single number at the start (most common case)
+  const singleMatch = trimmed.match(/^(\d+)/);
+  if (singleMatch) {
+    const num = parseInt(singleMatch[1], 10);
+    return {
+      min: num,
+      max: num
+    };
+  }
+  
+  // No number found
+  return null;
+}
+
+/**
+ * Processes unitComposition array in a datasheet, adding min and max properties to each object
+ * @param {Array} unitComposition - Array of unitComposition objects
+ * @param {string} datasheetId - The datasheet ID
+ * @param {string} datasheetName - The datasheet name
+ * @param {string} filePath - Path to the datasheet file
+ * @returns {Array} - Processed unitComposition array with min and max properties
+ */
+function processUnitComposition(unitComposition, datasheetId, datasheetName, filePath) {
+  if (!Array.isArray(unitComposition)) {
+    return unitComposition;
+  }
+  
+  return unitComposition.map((item, index) => {
+    const processedItem = { ...item };
+    
+    if (item.description) {
+      const range = extractUnitCompositionRange(item.description);
+      
+      if (range !== null) {
+        processedItem.min = range.min;
+        processedItem.max = range.max;
+      } else {
+        // Log invalid entry
+        invalidUnitCompositions.push({
+          datasheetId: datasheetId,
+          datasheetName: datasheetName,
+          description: item.description,
+          line: index + 1,
+          file: filePath
+        });
+      }
+    }
+    
+    return processedItem;
+  });
+}
+
+/**
+ * Processes modelCosts array in a datasheet, adding count property to each modelCost
+ * @param {Array} modelCosts - Array of modelCost objects
+ * @param {string} datasheetId - The datasheet ID
+ * @param {string} datasheetName - The datasheet name
+ * @param {string} filePath - Path to the datasheet file
+ * @returns {Array} - Processed modelCosts array with count properties
+ */
+function processModelCosts(modelCosts, datasheetId, datasheetName, filePath) {
+  if (!Array.isArray(modelCosts)) {
+    return modelCosts;
+  }
+  
+  return modelCosts.map((cost, index) => {
+    const processedCost = { ...cost };
+    
+    if (cost.description) {
+      const count = extractModelCount(cost.description);
+      
+      if (count !== null) {
+        processedCost.count = count;
+      } else {
+        // Log invalid entry
+        invalidModelCosts.push({
+          datasheetId: datasheetId,
+          datasheetName: datasheetName,
+          description: cost.description,
+          line: index + 1,
+          file: filePath
+        });
+      }
+    }
+    
+    return processedCost;
+  });
+}
+
+/**
+ * Writes invalid modelCost and unitComposition entries to the audit log file
+ * @param {string} logsDir - Path to the logs directory
+ */
+function writeAuditLog(logsDir) {
+  const auditFilePath = path.join(logsDir, 'datasheet-audits.json');
+  
+  // Read existing audit log if it exists
+  let existingAudits = {
+    auditDate: new Date().toISOString(),
+    totalInvalidEntries: 0,
+    invalidEntries: []
+  };
+  
+  if (fs.existsSync(auditFilePath)) {
+    try {
+      const existingContent = fs.readFileSync(auditFilePath, 'utf-8');
+      if (existingContent.trim()) {
+        existingAudits = JSON.parse(existingContent);
+      }
+    } catch (error) {
+      console.warn(`Warning: Could not read existing audit log: ${error.message}`);
+    }
+  }
+  
+  // Merge new invalid entries with existing ones (avoid duplicates)
+  const existingEntries = new Set(
+    existingAudits.invalidEntries.map(e => 
+      `${e.datasheetId}-${e.line}-${e.description}`
+    )
+  );
+  
+  // Combine modelCosts and unitComposition invalid entries
+  const allNewEntries = [...invalidModelCosts, ...invalidUnitCompositions];
+  
+  const newEntries = allNewEntries.filter(entry => {
+    const key = `${entry.datasheetId}-${entry.line}-${entry.description}`;
+    return !existingEntries.has(key);
+  });
+  
+  existingAudits.invalidEntries.push(...newEntries);
+  existingAudits.totalInvalidEntries = existingAudits.invalidEntries.length;
+  existingAudits.auditDate = new Date().toISOString();
+  
+  // Ensure logs directory exists
+  if (!fs.existsSync(logsDir)) {
+    fs.mkdirSync(logsDir, { recursive: true });
+  }
+  
+  // Write updated audit log
+  fs.writeFileSync(auditFilePath, JSON.stringify(existingAudits, null, 2), 'utf-8');
+  
+  if (invalidModelCosts.length > 0 || invalidUnitCompositions.length > 0) {
+    const modelCostCount = invalidModelCosts.length;
+    const unitCompositionCount = invalidUnitCompositions.length;
+    if (modelCostCount > 0 && unitCompositionCount > 0) {
+      console.log(`📝 Logged ${modelCostCount} invalid modelCost and ${unitCompositionCount} invalid unitComposition entries to audit log`);
+    } else if (modelCostCount > 0) {
+      console.log(`📝 Logged ${modelCostCount} invalid modelCost entries to audit log`);
+    } else if (unitCompositionCount > 0) {
+      console.log(`📝 Logged ${unitCompositionCount} invalid unitComposition entries to audit log`);
+    }
+  }
+}
+
+/**
  * Recursively processes a JSON object to convert string numbers
  * Ignores 'id' properties to preserve them as strings
  */
@@ -350,6 +576,28 @@ async function processJsonFile(filePath, depotdataPath) {
       processedData = removeStratagemsFromDatasheet(processedData);
       processedData = removeDetachmentAbilitiesFromDatasheet(processedData);
       processedData = removeEnhancementsFromDatasheet(processedData);
+      
+      // Process modelCosts if present
+      if (processedData.modelCosts && Array.isArray(processedData.modelCosts)) {
+        const relativePath = path.relative(depotdataPath, filePath);
+        processedData.modelCosts = processModelCosts(
+          processedData.modelCosts,
+          processedData.id || 'unknown',
+          processedData.name || 'unknown',
+          relativePath
+        );
+      }
+      
+      // Process unitComposition if present
+      if (processedData.unitComposition && Array.isArray(processedData.unitComposition)) {
+        const relativePath = path.relative(depotdataPath, filePath);
+        processedData.unitComposition = processUnitComposition(
+          processedData.unitComposition,
+          processedData.id || 'unknown',
+          processedData.name || 'unknown',
+          relativePath
+        );
+      }
     }
     
     // Write back to file with proper formatting
@@ -372,6 +620,10 @@ async function main() {
     console.error(`Error: ${depotdataPath} does not exist`);
     process.exit(1);
   }
+  
+  // Reset invalid arrays for this run
+  invalidModelCosts = [];
+  invalidUnitCompositions = [];
   
   // Find all JSON files recursively
   const jsonFiles = [];
@@ -413,11 +665,23 @@ async function main() {
     }
   }
   
+  // Write audit log for invalid modelCost entries
+  const logsDir = path.join(__dirname, '..', 'logs');
+  writeAuditLog(logsDir);
+  
   console.log('═'.repeat(50));
   console.log(`📊 Processing Summary:`);
   console.log(`   ✅ Success: ${successCount}`);
   console.log(`   ❌ Errors: ${errorCount}`);
   console.log(`   📄 Total: ${jsonFiles.length}`);
+  if (invalidModelCosts.length > 0 || invalidUnitCompositions.length > 0) {
+    if (invalidModelCosts.length > 0) {
+      console.log(`   ⚠️  Invalid modelCost entries: ${invalidModelCosts.length}`);
+    }
+    if (invalidUnitCompositions.length > 0) {
+      console.log(`   ⚠️  Invalid unitComposition entries: ${invalidUnitCompositions.length}`);
+    }
+  }
   console.log('═'.repeat(50));
 }
 

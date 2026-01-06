@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Search } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 import { Button } from "./ui/button";
@@ -10,9 +10,10 @@ import {
     CommandItem,
     CommandList,
 } from "./ui/command";
-import type { Modifiers, ArmyList, Datasheet, Faction, Model, GamePhase, Ability } from "../types";
+import type { Modifiers, ArmyList, Datasheet, Faction, Model, GamePhase, Ability, ArmyListItem, WeaponProfile } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
 import { Switch } from "./ui/switch";
+import { Badge } from "./ui/badge";
 
 interface DefenderPanelProps {
     gamePhase: GamePhase;
@@ -23,6 +24,7 @@ interface DefenderPanelProps {
     modifiers: Modifiers;
     onModifiersChange: (modifiers: Modifiers) => void;
     selectedList: ArmyList | null;
+    selectedWeaponProfile: WeaponProfile | null;
 }
 
 export function DefenderPanel({
@@ -34,11 +36,13 @@ export function DefenderPanel({
     modifiers,
     onModifiersChange,
     selectedList,
+    selectedWeaponProfile,
 }: DefenderPanelProps) {
     const [factionData, setFactionData] = useState<Faction | null>(null);
     const [unitSearchOpen, setUnitSearchOpen] = useState(false);
     const [unitSearchValue, setUnitSearchValue] = useState("");
-
+    const lastProcessedUnitRef = useRef<string | null>(null);
+    
     // Load faction data when list changes
     useEffect(() => {
         if (selectedList) {
@@ -52,24 +56,205 @@ export function DefenderPanel({
         }
     }, [selectedList]);
 
-    // Get datasheets from the selected list
-    const availableDatasheets = useMemo(() => {
-        if (!factionData || !selectedList) return [];
-        const listDatasheetIds = new Set(selectedList.items.map((item) => item.id));
-        return factionData.datasheets.filter((ds) => listDatasheetIds.has(ds.id));
-    }, [factionData, selectedList]);
+    // Combine leaders with their attached units into single items
+    const combinedListItems = useMemo(() => {
+        if (!selectedList) return [];
+        
+        const items = selectedList.items;
+        const processed = new Set<string>();
+        const combined: Array<{ item: ArmyListItem; displayName: string; isCombined: boolean }> = [];
+        
+        // First pass: Process all leaders and their attached units
+        items.forEach(item => {
+            // Skip if already processed
+            if (processed.has(item.listItemId)) return;
+            
+            // If this is a leader with an attached unit
+            if (item.leading) {
+                // Find the attached unit (without checking processed, since we process leaders first)
+                const attachedUnit = items.find(u => 
+                    u.id === item.leading?.id && 
+                    u.name === item.leading?.name
+                );
+                
+                if (attachedUnit && !processed.has(attachedUnit.listItemId)) {
+                    // Combine leader and attached unit
+                    combined.push({
+                        item: item, // Use leader as the main item
+                        displayName: `${item.name} + ${attachedUnit.name}`,
+                        isCombined: true
+                    });
+                    processed.add(item.listItemId);
+                    processed.add(attachedUnit.listItemId);
+                } else {
+                    // Leader but attached unit not found or already processed, show leader alone
+                    combined.push({
+                        item: item,
+                        displayName: item.name,
+                        isCombined: false
+                    });
+                    processed.add(item.listItemId);
+                }
+            }
+        });
+        
+        // Second pass: Process remaining items (units being led, regular units)
+        items.forEach(item => {
+            // Skip if already processed
+            if (processed.has(item.listItemId)) return;
+            
+            // If this unit is being led, skip it (it should have been added with its leader in first pass)
+            if (item.leadBy) {
+                // Check if the leader exists
+                const leader = items.find(l => 
+                    l.id === item.leadBy?.id && 
+                    l.name === item.leadBy?.name
+                );
+                
+                if (!leader || !processed.has(leader.listItemId)) {
+                    // Leader not found or not processed, show this unit alone
+                    combined.push({
+                        item: item,
+                        displayName: item.name,
+                        isCombined: false
+                    });
+                    processed.add(item.listItemId);
+                } else {
+                    // Leader was processed, this unit should have been added with it
+                    // Mark as processed to skip it
+                    processed.add(item.listItemId);
+                }
+            }
+            // Regular unit, not a leader and not being led
+            else {
+                combined.push({
+                    item: item,
+                    displayName: item.name,
+                    isCombined: false
+                });
+                processed.add(item.listItemId);
+            }
+        });
+        
+        return combined;
+    }, [selectedList]);
 
-    // Filter datasheets based on search
-    const filteredDatasheets = useMemo(() => {
-        if (!unitSearchValue) return availableDatasheets;
+    // Filter combined items based on search
+    const filteredListItems = useMemo(() => {
+        if (!unitSearchValue) return combinedListItems;
         const search = unitSearchValue.toLowerCase();
-        return availableDatasheets.filter(
-            (ds) =>
-                ds.name.toLowerCase().includes(search) ||
-                ds.roleLabel.toLowerCase().includes(search)
+        return combinedListItems.filter(
+            (combined) =>
+                combined.displayName.toLowerCase().includes(search) ||
+                combined.item.roleLabel.toLowerCase().includes(search)
         );
-    }, [availableDatasheets, unitSearchValue]);
+    }, [combinedListItems, unitSearchValue]);
 
+    // Get display name for selected unit
+    const selectedUnitDisplayName = useMemo(() => {
+        if (!unit) return null;
+        
+        // Try to find by listItemId first (if unit is an ArmyListItem)
+        const listItemId = (unit as any).listItemId;
+        if (listItemId) {
+            const combinedItem = combinedListItems.find(c => c.item.listItemId === listItemId);
+            if (combinedItem) return combinedItem.displayName;
+        }
+        
+        // Fallback: try to find by id and name (for backwards compatibility)
+        const combinedItem = combinedListItems.find(c => 
+            c.item.id === unit.id && c.item.name === unit.name
+        );
+        
+        return combinedItem ? combinedItem.displayName : unit.name;
+    }, [unit, combinedListItems]);
+
+    // Get combined models from leader and attached unit if combined unit is selected
+    const availableModels = useMemo(() => {
+        if (!unit || !selectedList) return unit?.models || [];
+        
+        // Check if this is a combined unit (leader with attached unit)
+        const listItemId = (unit as any).listItemId;
+        const combinedItem = listItemId 
+            ? combinedListItems.find(c => c.item.listItemId === listItemId)
+            : combinedListItems.find(c => c.item.id === unit.id && c.item.name === unit.name);
+        
+        if (combinedItem?.isCombined && combinedItem.item.leading) {
+            // Find the attached unit
+            const attachedUnit = selectedList.items.find(u => 
+                u.id === combinedItem.item.leading?.id && 
+                u.name === combinedItem.item.leading?.name
+            );
+            
+            if (attachedUnit) {
+                // Combine models from both units with labels
+                const leaderModels = (combinedItem.item.models || []).map(model => ({
+                    ...model,
+                    sourceUnit: combinedItem.item.name,
+                    isLeader: true
+                }));
+                const attachedModels = (attachedUnit.models || []).map(model => ({
+                    ...model,
+                    sourceUnit: attachedUnit.name,
+                    isLeader: false
+                }));
+                return [...leaderModels, ...attachedModels];
+            }
+        }
+        
+        // Return leader's models or regular unit's models
+        return unit.models || [];
+    }, [unit, selectedList, combinedListItems]);
+
+    // Auto-select first non-leader model when combined unit is first selected
+    useEffect(() => {
+        if (!unit || !selectedList) {
+            lastProcessedUnitRef.current = null;
+            return;
+        }
+        
+        // Get unique identifier for this unit
+        const unitId = (unit as any).listItemId || unit.id;
+        
+        // Only process if this is a new unit (not already processed)
+        if (lastProcessedUnitRef.current === unitId) {
+            return;
+        }
+        
+        // Mark this unit as processed
+        lastProcessedUnitRef.current = unitId;
+        
+        // Check if this is a combined unit
+        const listItemId = (unit as any).listItemId;
+        const combinedItem = listItemId 
+            ? combinedListItems.find(c => c.item.listItemId === listItemId)
+            : combinedListItems.find(c => c.item.id === unit.id && c.item.name === unit.name);
+        
+        if (combinedItem?.isCombined && combinedItem.item.leading) {
+            // Find the attached unit
+            const attachedUnit = selectedList.items.find(u => 
+                u.id === combinedItem.item.leading?.id && 
+                u.name === combinedItem.item.leading?.name
+            );
+            
+            if (attachedUnit && attachedUnit.models && attachedUnit.models.length > 0) {
+                // Auto-select the first model from the attached unit (non-leader)
+                // This only happens when the unit first changes, not on subsequent model selections
+                onUnitModelChange(attachedUnit.models[0]);
+            }
+        }
+    }, [unit, selectedList, combinedListItems, onUnitModelChange]);
+
+    // Check if weapon has precision attribute
+    const hasPrecision = useMemo(() => {
+        if (!selectedWeaponProfile || !selectedWeaponProfile.attributes) {
+            return false;
+        }
+        
+        // Check for PRECISION in attributes array
+        return selectedWeaponProfile.attributes.includes("PRECISION");
+    }, [selectedWeaponProfile]);
+    
     return (
         <div className="bg-[#e6e6e6] rounded-[8px] p-6 space-y-4">
             <div className="space-y-2">
@@ -90,7 +275,7 @@ export function DefenderPanel({
                                 className="w-full justify-between bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 h-auto font-['Inter:Regular',sans-serif] text-[14px]"
                             >
                                 <span className="text-muted-foreground">
-                                    {unit ? unit.name : "Search for a unit..."}
+                                    {selectedUnitDisplayName || "Search for a unit..."}
                                 </span>
                                 <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
@@ -113,12 +298,12 @@ export function DefenderPanel({
                                 <CommandList>
                                     <CommandEmpty>No unit found.</CommandEmpty>
                                     <CommandGroup>
-                                        {filteredDatasheets.map((datasheet) => (
+                                        {filteredListItems.map((combined) => (
                                             <CommandItem
-                                                key={datasheet.id}
-                                                value={datasheet.name}
+                                                key={combined.item.listItemId}
+                                                value={combined.displayName}
                                                 onSelect={() => {
-                                                    onUnitChange(datasheet);
+                                                    onUnitChange(combined.item);
                                                     setUnitSearchOpen(false);
                                                     setUnitSearchValue("");
                                                 }}
@@ -126,10 +311,10 @@ export function DefenderPanel({
                                                 <div className="flex items-center justify-between w-full">
                                                     <div>
                                                         <div className="font-medium">
-                                                            {datasheet.name}
+                                                            {combined.displayName}
                                                         </div>
                                                         <div className="text-xs text-muted-foreground">
-                                                            {datasheet.roleLabel}
+                                                            {combined.item.roleLabel}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -155,22 +340,43 @@ export function DefenderPanel({
                 )
             }
 
-            {unit && unit.models?.map((model:Model)=>{
+            {unit && availableModels.length > 0 && availableModels.map((model:Model & { sourceUnit?: string; isLeader?: boolean })=>{
 
                 const isSelected = selectedUnitModel?.name === model.name;
+                const modelKey = model.sourceUnit ? `${model.sourceUnit}-${model.name}` : model.name;
+                const isLeaderModel = model.isLeader === true;
+                // Leader models are only disabled if precision is NOT present
+                const isDisabled = isLeaderModel && !hasPrecision;
 
                 return (
-                    <div key={model.name}
-                    className={`bg-[#ccc] rounded-[4px] p-2 space-y-2 cursor-pointer border-2 transition-colors ${
-                        isSelected ? "border-[#2b344c]" : "border-transparent"
+                    <div key={modelKey}
+                    className={`bg-[#ccc] rounded-[4px] p-2 space-y-2 border-2 transition-colors ${
+                        isDisabled 
+                            ? "opacity-50 cursor-not-allowed border-gray-300" 
+                            : isSelected 
+                                ? "border-[#2b344c] cursor-pointer" 
+                                : "border-transparent cursor-pointer"
                     }`}
-                    onClick={() => onUnitModelChange(isSelected ? null : model)}
+                    onClick={() => {
+                        if (!isDisabled) {
+                            onUnitModelChange(isSelected ? null : model);
+                        }
+                    }}
                     >
 
                         <div className="flex items-center justify-between">
-                            <p className=" font-bold text-[12px] ">
-                                {model.name}
-                            </p>
+                            
+                            <div className="flex items-center gap-2">
+                                <p className=" font-bold text-[12px] ">
+                                    {model.name}
+                                </p>
+                                {model.isLeader && (
+                                    <Badge variant="outline" className="text-[10px] bg-green-100 border-green-300 text-green-700">
+                                        Leader
+                                    </Badge>
+                                )}
+                            </div>
+                            
                             <div
                                 className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
                                     isSelected
