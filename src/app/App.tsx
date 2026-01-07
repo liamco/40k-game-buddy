@@ -6,13 +6,20 @@ const SESSION_STORAGE_KEY = "battle-cogitator-selected-lists";
 
 import { loadDatasheetData } from "./utils/depotDataLoader";
 
-import type { GamePhase, ArmyList, Datasheet, WeaponProfile, Model } from "./types";
+import type { GamePhase, ArmyList, Datasheet, WeaponProfile, Model, ArmyListItem } from "./types";
+import { createDefaultCombatStatus, type CombatStatus, type CombatStatusFlag } from "./game-engine";
 
 import AttackResolver from "./modules/AttackResolver/AttackResolver";
-import StratagemList from "./modules/Stratagems/StratagemList";
+import StratagemList from "./components/Stratagems/StratagemList";
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/ui/tabs";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "./components/ui/select";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/_ui/tabs";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "./components/_ui/select";
 
 import { GamePhaseSelector } from "./components/GamePhaseSelector";
 import { AttackerPanel } from "./components/AttackerPanel";
@@ -74,10 +81,16 @@ function CombatResolver() {
                     const parsedLists = JSON.parse(stored);
                     setLists(parsedLists);
                     // Clear selected lists if they no longer exist
-                    if (attackerListId && !parsedLists.find((l: ArmyList) => l.id === attackerListId)) {
+                    if (
+                        attackerListId &&
+                        !parsedLists.find((l: ArmyList) => l.id === attackerListId)
+                    ) {
                         setAttackerListId(null);
                     }
-                    if (defenderListId && !parsedLists.find((l: ArmyList) => l.id === defenderListId)) {
+                    if (
+                        defenderListId &&
+                        !parsedLists.find((l: ArmyList) => l.id === defenderListId)
+                    ) {
                         setDefenderListId(null);
                     }
                 } catch (error) {
@@ -104,15 +117,26 @@ function CombatResolver() {
     const availableDefenderLists = lists.filter((l) => l.id !== attackerListId);
 
     const [attackingUnit, setAttackingUnit] = useState<Datasheet | null>(null);
+    const [attackerAttachedUnit, setAttackerAttachedUnit] = useState<Datasheet | null>(null);
     const [defendingUnit, setDefendingUnit] = useState<Datasheet | null>(null);
+    const [defenderAttachedUnit, setDefenderAttachedUnit] = useState<Datasheet | null>(null);
     const [selectedWeaponProfile, setSelectedWeaponProfile] = useState<WeaponProfile | null>(null);
     const [selectedUnitModel, setSelectedUnitModel] = useState<Model | null>(null);
 
-    const [modifiers, setModifiers] = useState({
-        stationaryThisTurn: false,
-        inCover: false,
-        inRangeOfObjective: false,
-    });
+    const [attackerCombatStatus, setAttackerCombatStatus] = useState<CombatStatus>(
+        createDefaultCombatStatus()
+    );
+    const [defenderCombatStatus, setDefenderCombatStatus] = useState<CombatStatus>(
+        createDefaultCombatStatus()
+    );
+
+    const handleAttackerStatusChange = (name: CombatStatusFlag, value: boolean) => {
+        setAttackerCombatStatus((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleDefenderStatusChange = (name: CombatStatusFlag, value: boolean) => {
+        setDefenderCombatStatus((prev) => ({ ...prev, [name]: value }));
+    };
 
     const [activeAttackerStratagems, setActiveAttackerStratagems] = useState<string[]>([]);
     const [activeDefenderStratagems, setActiveDefenderStratagems] = useState<string[]>([]);
@@ -128,9 +152,21 @@ function CombatResolver() {
         setAttackingUnit(defendingUnit);
         setDefendingUnit(tempUnit);
 
+        // Swap attached units
+        const tempAttached = attackerAttachedUnit;
+        setAttackerAttachedUnit(defenderAttachedUnit);
+        setDefenderAttachedUnit(tempAttached);
+
+        // Swap combat statuses
+        const tempStatus = attackerCombatStatus;
+        setAttackerCombatStatus(defenderCombatStatus);
+        setDefenderCombatStatus(tempStatus);
+
         // Auto-select first weapon profile for new attacking unit
         if (defendingUnit) {
-            const firstRangedWeapon = defendingUnit.wargear.find((weapon) => weapon.type === "Ranged");
+            const firstRangedWeapon = defendingUnit.wargear.find(
+                (weapon) => weapon.type === "Ranged"
+            );
             if (firstRangedWeapon && firstRangedWeapon.profiles.length > 0) {
                 setSelectedWeaponProfile(firstRangedWeapon.profiles[0]);
             } else {
@@ -152,48 +188,90 @@ function CombatResolver() {
         }
     };
 
-    const changeAttackingUnit = (unit:Datasheet) => {
-        
+    const changeAttackingUnit = async (unit: Datasheet) => {
         if (unit) {
-            loadDatasheetData(unit.factionSlug,unit.id).then((data) => {
-                
-                if (data) {
-                    setAttackingUnit(data);
-                    // Auto-select the first weapon profile from the first ranged weapon
-                    const firstRangedWeapon = data.wargear.find((weapon) => weapon.type === "Ranged");
-                    if (firstRangedWeapon && firstRangedWeapon.profiles.length > 0) {
-                        setSelectedWeaponProfile(firstRangedWeapon.profiles[0]);
+            // Cast to ArmyListItem to check for leader attachment
+            const listItem = unit as ArmyListItem;
+
+            // Load the main unit data
+            const data = await loadDatasheetData(unit.factionSlug, unit.id);
+            if (data) {
+                setAttackingUnit(data);
+
+                // Check if this is a leader with an attached unit
+                if (listItem.leading && attackerList) {
+                    const attachedListItem = attackerList.items.find(
+                        (u) => u.id === listItem.leading?.id && u.name === listItem.leading?.name
+                    );
+                    if (attachedListItem) {
+                        const attachedData = await loadDatasheetData(
+                            attachedListItem.factionSlug,
+                            attachedListItem.id
+                        );
+                        setAttackerAttachedUnit(attachedData);
                     } else {
-                        setSelectedWeaponProfile(null);
+                        setAttackerAttachedUnit(null);
                     }
+                } else {
+                    setAttackerAttachedUnit(null);
                 }
-            });
+
+                // Auto-select the first weapon profile from the first ranged weapon
+                const firstRangedWeapon = data.wargear.find((weapon) => weapon.type === "Ranged");
+                if (firstRangedWeapon && firstRangedWeapon.profiles.length > 0) {
+                    setSelectedWeaponProfile(firstRangedWeapon.profiles[0]);
+                } else {
+                    setSelectedWeaponProfile(null);
+                }
+            }
         } else {
             setAttackingUnit(null);
+            setAttackerAttachedUnit(null);
             setSelectedWeaponProfile(null);
         }
-    }
+    };
 
-    const changeDefendingUnit = (unit:Datasheet) => {
-        
+    const changeDefendingUnit = async (unit: Datasheet) => {
         if (unit) {
-            loadDatasheetData(unit.factionSlug,unit.id).then((data) => {
-                
-                if (data) {
-                    setDefendingUnit(data);
-                    // Auto-select the first model option
-                    if (data.models && data.models.length > 0) {
-                        setSelectedUnitModel(data.models[0]);
+            // Cast to ArmyListItem to check for leader attachment
+            const listItem = unit as ArmyListItem;
+
+            // Load the main unit data
+            const data = await loadDatasheetData(unit.factionSlug, unit.id);
+            if (data) {
+                setDefendingUnit(data);
+
+                // Check if this is a leader with an attached unit
+                if (listItem.leading && defenderList) {
+                    const attachedListItem = defenderList.items.find(
+                        (u) => u.id === listItem.leading?.id && u.name === listItem.leading?.name
+                    );
+                    if (attachedListItem) {
+                        const attachedData = await loadDatasheetData(
+                            attachedListItem.factionSlug,
+                            attachedListItem.id
+                        );
+                        setDefenderAttachedUnit(attachedData);
                     } else {
-                        setSelectedUnitModel(null);
+                        setDefenderAttachedUnit(null);
                     }
+                } else {
+                    setDefenderAttachedUnit(null);
                 }
-            });
+
+                // Auto-select the first model option
+                if (data.models && data.models.length > 0) {
+                    setSelectedUnitModel(data.models[0]);
+                } else {
+                    setSelectedUnitModel(null);
+                }
+            }
         } else {
             setDefendingUnit(null);
+            setDefenderAttachedUnit(null);
             setSelectedUnitModel(null);
         }
-    }
+    };
 
     return (
         <Fragment>
@@ -203,7 +281,6 @@ function CombatResolver() {
                         <Select
                             value={attackerListId || undefined}
                             onValueChange={(value) => setAttackerListId(value || null)}
-                            
                         >
                             <SelectTrigger className="w-full bg-transparent p-0 text-white">
                                 <SelectValue placeholder="Select attacker list..." />
@@ -217,8 +294,12 @@ function CombatResolver() {
                                     availableAttackerLists.map((list) => (
                                         <SelectItem key={list.id} value={list.id}>
                                             <div className="flex flex-col items-start">
-                                                <span className="text-xs">{list.detachmentName}</span>
-                                                <span className="font-medium">{list.factionName}</span>
+                                                <span className="text-xs">
+                                                    {list.detachmentName}
+                                                </span>
+                                                <span className="font-medium">
+                                                    {list.factionName}
+                                                </span>
                                             </div>
                                         </SelectItem>
                                     ))
@@ -249,8 +330,12 @@ function CombatResolver() {
                                     availableDefenderLists.map((list) => (
                                         <SelectItem key={list.id} value={list.id}>
                                             <div className="flex flex-col items-start">
-                                            <span className="text-xs">{list.detachmentName}</span>
-                                            <span className="font-medium">{list.factionName}</span>
+                                                <span className="text-xs">
+                                                    {list.detachmentName}
+                                                </span>
+                                                <span className="font-medium">
+                                                    {list.factionName}
+                                                </span>
                                             </div>
                                         </SelectItem>
                                     ))
@@ -262,36 +347,40 @@ function CombatResolver() {
                 <GamePhaseSelector currentPhase={gamePhase} onPhaseChange={setGamePhase} />
             </nav>
             <main className="font-['Inter:Bold',sans-serif] min-h-screen bg-[#f5f5f5]">
- 
                 <div className="grid grid-cols-[3fr_3fr_3fr] gap-6 p-6">
                     <AttackerPanel
                         gamePhase={gamePhase}
                         unit={attackingUnit}
+                        attachedUnit={attackerAttachedUnit}
                         onUnitChange={changeAttackingUnit}
                         selectedWeaponProfile={selectedWeaponProfile}
                         onWeaponProfileChange={setSelectedWeaponProfile}
-                        modifiers={modifiers}
-                        onModifiersChange={setModifiers}
+                        combatStatus={attackerCombatStatus}
+                        onCombatStatusChange={handleAttackerStatusChange}
                         selectedList={attackerList}
                     />
                     <AttackResolver
                         gamePhase={gamePhase}
                         attackingUnit={attackingUnit}
+                        attackerAttachedUnit={attackerAttachedUnit}
                         defendingUnit={defendingUnit}
+                        defenderAttachedUnit={defenderAttachedUnit}
                         selectedWeaponProfile={selectedWeaponProfile}
                         selectedDefendingModel={selectedUnitModel}
-                        modifiers={modifiers}
+                        attackerCombatStatus={attackerCombatStatus}
+                        defenderCombatStatus={defenderCombatStatus}
                         activeAttackerStratagems={activeAttackerStratagems}
                         activeDefenderStratagems={activeDefenderStratagems}
                     />
                     <DefenderPanel
                         gamePhase={gamePhase}
                         unit={defendingUnit}
+                        attachedUnit={defenderAttachedUnit}
                         onUnitChange={changeDefendingUnit}
                         selectedUnitModel={selectedUnitModel}
                         onUnitModelChange={setSelectedUnitModel}
-                        modifiers={modifiers}
-                        onModifiersChange={setModifiers}
+                        combatStatus={defenderCombatStatus}
+                        onCombatStatusChange={handleDefenderStatusChange}
                         selectedList={defenderList}
                         selectedWeaponProfile={selectedWeaponProfile}
                     />
@@ -309,9 +398,8 @@ function CombatResolver() {
                         selectedList={defenderList}
                     />
                 </div>
-                
             </main>
-        </Fragment>    
+        </Fragment>
     );
 }
 
@@ -319,11 +407,10 @@ export default function App() {
     const [activeTab, setActiveTab] = useState("combat");
 
     return (
-
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <nav className="bg-[#2b344c] text-white flex justify-between items-center p-4">
                 <h1>Holodeck </h1>
-                <TabsList className="bg-transparent">  
+                <TabsList className="bg-transparent">
                     <TabsTrigger
                         value="combat"
                         className="data-[state=active]:bg-white data-[state=active]: data-[state=inactive]:text-[#767676] data-[state=inactive]:hover:text-[#999]"
@@ -344,7 +431,6 @@ export default function App() {
             <TabsContent value="lists" className="mt-0">
                 <ListManager />
             </TabsContent>
-        </Tabs>  
-            
+        </Tabs>
     );
 }

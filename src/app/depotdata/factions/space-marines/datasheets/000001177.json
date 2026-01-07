@@ -34,7 +34,15 @@
           "state": [
             "target"
           ],
-          "value": "until the start of your next Command phase"
+          "value": "until the start of your next Command phase",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attribute": "faction",
+              "value": "ADEPTUS ASTARTES",
+              "operator": "equals"
+            }
+          ]
         },
         {
           "entity": "thisModel",
@@ -44,9 +52,10 @@
           "conditions": [
             {
               "entity": "opposingUnit",
-              "state": [
-                "isOathOfMomentTarget"
+              "keywords": [
+                "OATH OF MOMENT"
               ],
+              "operator": "hasKeyword",
               "value": true
             }
           ]
@@ -59,8 +68,9 @@
           "conditions": [
             {
               "entity": "thisArmy",
-              "attributes": "Codex: Space Marines Detachment",
-              "value": true
+              "attributes": "detachment",
+              "value": "Codex: Space Marines",
+              "operator": "equals"
             },
             {
               "entity": "thisArmy",
@@ -98,20 +108,12 @@
               "attribute": "inRangeOfFriendlyObjective",
               "operator": "equals",
               "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "s",
-          "value": 1,
-          "conditions": [
+            },
             {
-              "entity": "thisModel",
-              "attribute": "inRangeOfFriendlyObjective",
+              "entity": "opposingModel",
+              "attribute": "d",
               "operator": "equals",
-              "value": true
+              "value": 1
             }
           ]
         }

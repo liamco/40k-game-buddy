@@ -2,7 +2,7 @@ export type GamePhase = "COMMAND" | "MOVEMENT" | "SHOOTING" | "CHARGE" | "FIGHT"
 export type GameTurn = "YOURS" | "OPPONENTS" | "EITHER";
 
 // Faction and Datasheet types for list management
-export type FactionIndex = Omit<Faction, "datasheets">
+export type FactionIndex = Omit<Faction, "datasheets">;
 
 export interface Faction {
     id: string;
@@ -42,6 +42,18 @@ export type ArmyListItem = Datasheet & {
     quantity?: number;
     pointsCost?: number;
     compositionCounts?: { [line: number]: number }; // Store counts for each unitComposition line
+    leading?: { id: string; name: string }; // Unit this leader is attached to
+    leadBy?: { id: string; name: string }; // Leader that is attached to this unit
+    enhancement?: { id: string; name: string; cost?: number }; // Enhancement attached to this leader
+    loadoutSelections?: { [optionLine: number]: number }; // Track loadout option selections (count per option)
+};
+
+// Parsed constraint from option description text
+export interface LoadoutConstraint {
+    type: "ratio" | "threshold" | "simple" | "addition";
+    ratio?: number; // For "every N models" patterns
+    threshold?: number; // For "if unit contains N models" patterns
+    maxSelections: number; // How many times this option can be selected
 }
 
 export interface Datasheet {
@@ -69,47 +81,47 @@ export interface Datasheet {
 }
 
 export interface Ability {
-    description:string;
-    id:string;
-    factionId:string;
-    legend:string;
-    name:string;
-    type:string;
-    parameter:number|string;
+    description: string;
+    id: string;
+    factionId: string;
+    legend: string;
+    name: string;
+    type: string;
+    parameter: number | string;
 }
 
 export interface Model {
-    datasheetId: string,
-    name: string,
-    m: number,
-    t: number,
-    sv: number,
-    invSv: number|null,
-    invSvDescr: string,
-    w: number,
-    ld: number,
-    oc: number,
-    baseSize: string,
-    baseSizeDescr: string
+    datasheetId: string;
+    name: string;
+    m: number;
+    t: number;
+    sv: number;
+    invSv: number | null;
+    invSvDescr: string;
+    w: number;
+    ld: number;
+    oc: number;
+    baseSize: string;
+    baseSizeDescr: string;
 }
 
 export interface Weapon {
     name: string;
-    datasheetId:string;
-    id:string;
-    type: "Ranged"|"Melee";
-    profiles:WeaponProfile[];
+    datasheetId: string;
+    id: string;
+    type: "Ranged" | "Melee";
+    profiles: WeaponProfile[];
 }
 
 export interface WeaponProfile {
-    name:string;
-    attributes:string[];
-    a:string | number;
-    ap:number;
-    bsWs:number|string;
-    d:string | number;
-    s:number;
-    range:number;
+    name: string;
+    attributes: string[];
+    a: string | number;
+    ap: number;
+    bsWs: number | string;
+    d: string | number;
+    s: number;
+    range: number;
 }
 
 export interface Stratagem {
@@ -117,8 +129,8 @@ export interface Stratagem {
     name: string;
     type: string;
     factionId?: string;
-    detachment?: string,
-    detachmentId?: string,
+    detachment?: string;
+    detachmentId?: string;
     cpCost: number;
     phase: GamePhase[] & "ANY";
     turn: GameTurn;
@@ -126,12 +138,6 @@ export interface Stratagem {
     conditions?: string[];
     keywords?: string[];
     faction?: string;
-}
-
-export interface Modifiers {
-    inCover: boolean;
-    inRangeOfObjective: boolean;
-    stationaryThisTurn: boolean;
 }
 
 export interface AttackResult {

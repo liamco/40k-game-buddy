@@ -31,7 +31,7 @@
           "abilities": [
             "DEEP STRIKE"
           ],
-          "value": true
+          "value": null
         },
         {
           "entity": "thisUnit",
@@ -39,7 +39,7 @@
           "abilities": [
             "STRATEGIC RESERVES"
           ],
-          "value": true
+          "value": null
         },
         {
           "entity": "thisUnit",
@@ -49,11 +49,11 @@
         },
         {
           "entity": "thisUnit",
-          "effect": "addsKeyword",
-          "keywords": [
-            "RESERVES"
+          "effect": "addsAbility",
+          "abilities": [
+            "SET UP IN RESERVES"
           ],
-          "value": true
+          "value": null
         }
       ]
     },
@@ -67,54 +67,30 @@
       "mechanics": [
         {
           "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
+          "effect": "addsKeyword",
+          "keywords": [
             "ATTACHED"
           ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": [
-                "hasLeader"
-              ],
-              "value": true
-            }
-          ]
+          "state": [
+            "hasLeader"
+          ],
+          "value": true
         },
         {
           "entity": "thisUnit",
           "effect": "staticNumber",
           "attribute": "toughness",
-          "value": "Bodyguard models' Toughness",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": [
-                "attacking"
-              ],
-              "value": true
-            }
-          ]
+          "value": "Bodyguard models' Toughness"
         },
         {
           "entity": "thisUnit",
           "effect": "rollPenalty",
-          "attribute": "w",
+          "attribute": "s",
           "value": 0,
           "conditions": [
             {
               "entity": "opposingUnit",
-              "state": [
-                "attacking"
-              ],
-              "value": true
-            },
-            {
-              "entity": "thisUnit",
-              "state": [
-                "hasLeader"
-              ],
+              "attribute": "isAttacking",
               "value": true
             }
           ]
@@ -125,16 +101,10 @@
           "abilities": [
             "CANNOT ALLOCATE ATTACKS TO CHARACTER MODELS"
           ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": [
-                "hasLeader"
-              ],
-              "value": true
-            }
-          ]
+          "state": [
+            "isAttached"
+          ],
+          "value": true
         },
         {
           "entity": "thisUnit",
@@ -142,50 +112,32 @@
           "abilities": [
             "BECOMES SEPARATE UNIT"
           ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": [
-                "lastBodyguardDestroyed"
-              ],
-              "value": true
-            }
-          ]
+          "state": [
+            "lastBodyguardModelDestroyed"
+          ],
+          "value": true
         },
         {
           "entity": "thisUnit",
           "effect": "addsAbility",
           "abilities": [
-            "NO LONGER ATTACHED"
+            "BECOMES SEPARATE UNIT"
           ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": [
-                "lastCharacterDestroyed"
-              ],
-              "value": true
-            }
-          ]
+          "state": [
+            "lastCharacterModelDestroyed"
+          ],
+          "value": true
         },
         {
           "entity": "thisUnit",
           "effect": "addsAbility",
           "abilities": [
-            "NO KEYWORDS FROM ATTACHED UNITS"
+            "DOES NOT HAVE KEYWORDS OF ATTACHED UNIT"
           ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": [
-                "destroyed"
-              ],
-              "value": true
-            }
-          ]
+          "state": [
+            "isDestroyed"
+          ],
+          "value": true
         }
       ]
     },
@@ -233,7 +185,7 @@
           ]
         },
         {
-          "entity": "thisModel",
+          "entity": "thisArmy",
           "effect": "rollBonus",
           "attribute": "w",
           "value": 1,
