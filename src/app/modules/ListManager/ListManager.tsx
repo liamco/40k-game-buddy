@@ -615,6 +615,82 @@ export function ListManager() {
             return total + calculateItemPoints(item);
         }, 0);
     }, [selectedList, calculateItemPoints]);
+
+    // Get enhancements for the selected detachment, filtered by unit eligibility
+    const detachmentEnhancements = useMemo(() => {
+        if (!selectedList?.detachmentSlug || !factionData?.detachments) {
+            return [];
+        }
+        
+        const detachment = factionData.detachments.find(
+            (d) => d.slug === selectedList.detachmentSlug
+        );
+        
+        const allEnhancements = detachment?.enhancements || [];
+        
+        // Only show enhancements if the selected unit is a leader
+        if (!selectedItem || !selectedItem.abilities?.some((ability) => ability.name === "Leader")) {
+            return [];
+        }
+        
+        // Get unit keywords for matching (normalize to uppercase, handle multi-word keywords)
+        const unitKeywords = (selectedItem.keywords || []).map(k => k.keyword.toUpperCase().trim());
+        
+        // Helper function to strip HTML tags and normalize text
+        const stripHtmlAndNormalize = (html: string): string => {
+            return html
+                .replace(/<[^>]*>/g, ' ') // Remove HTML tags
+                .replace(/\s+/g, ' ') // Normalize whitespace
+                .trim()
+                .toUpperCase();
+        };
+        
+        // Filter enhancements based on their description requirements
+        return allEnhancements.filter(enhancement => {
+            if (!enhancement.description) return true;
+            
+            // Strip HTML and normalize the description
+            const normalizedDescription = stripHtmlAndNormalize(enhancement.description);
+            
+            // Check for "model only" pattern - extract keywords before "model only"
+            const modelOnlyMatch = normalizedDescription.match(/(.+?)\s+MODEL\s+ONLY/i);
+            if (modelOnlyMatch) {
+                const requirementText = modelOnlyMatch[1].trim();
+                
+                // Handle "or" conditions (e.g., "WATCH MASTER or TECHMARINE")
+                if (requirementText.includes(' OR ')) {
+                    const keywords = requirementText.split(' OR ').map(k => k.trim());
+                    // Unit must have at least one of the keywords
+                    return keywords.some(keyword => {
+                        // Check for exact match or if keyword is part of unit keyword
+                        return unitKeywords.some(unitKeyword => {
+                            // Handle multi-word keywords like "WATCH MASTER" matching "WATCH MASTER"
+                            return unitKeyword === keyword || 
+                                   unitKeyword.includes(keyword) || 
+                                   keyword.includes(unitKeyword) ||
+                                   // Handle cases where keyword might be split (e.g., "ADEPTUS ASTARTES" vs "ADEPTUS" and "ASTARTES")
+                                   keyword.split(' ').every(word => unitKeyword.includes(word));
+                        });
+                    });
+                } else {
+                    // Single keyword requirement
+                    const requiredKeyword = requirementText.trim();
+                    // Check if any unit keyword matches
+                    return unitKeywords.some(unitKeyword => {
+                        // Exact match or contains match
+                        return unitKeyword === requiredKeyword ||
+                               unitKeyword.includes(requiredKeyword) ||
+                               requiredKeyword.includes(unitKeyword) ||
+                               // Handle multi-word requirements
+                               requiredKeyword.split(' ').every(word => unitKeyword.includes(word));
+                    });
+                }
+            }
+            
+            // If no "model only" restriction found, show the enhancement
+            return true;
+        });
+    }, [selectedList, factionData, selectedItem]);
     
     return (
         <div className="min-h-screen bg-[#f5f5f5] p-6">
@@ -1175,26 +1251,20 @@ export function ListManager() {
                                                         <div className="flex items-center justify-between">
                                                             <div className="font-medium text-sm mb-1" dangerouslySetInnerHTML={{ __html: composition.description }} />
                                                             <div className="ml-4">
-                                                                {
-                                                                    (max !== min)
-                                                                    ?
-                                                                    <Input
-                                                                        type="number"
-                                                                        min={min}
-                                                                        max={max}
-                                                                        value={currentCount}
-                                                                        onChange={(e) => {
-                                                                            const value = parseInt(e.target.value, 10);
-                                                                            if (!isNaN(value)) {
-                                                                                handleCountChange(value);
-                                                                            }
-                                                                        }}
-                                                                        className="w-20 text-center"
-                                                                    />
-                                                                    :
-                                                                    <span className="inline-block bg-slate-100 px-9 py-2 rounded-sm font-bold text-sm mr-1">{min}</span>
-                                                                }
-                                                                
+                                                                <Input
+                                                                    type="number"
+                                                                    min={min}
+                                                                    max={max}
+                                                                    value={currentCount}
+                                                                    disabled={max === min}
+                                                                    onChange={(e) => {
+                                                                        const value = parseInt(e.target.value, 10);
+                                                                        if (!isNaN(value)) {
+                                                                            handleCountChange(value);
+                                                                        }
+                                                                    }}
+                                                                    className="w-20 text-center"
+                                                                />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1253,6 +1323,20 @@ export function ListManager() {
                                                             ))}
                                                         </div>
                                                     )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Weapon Options */}
+                                {selectedItem.options && selectedItem.options.length > 0 && (
+                                    <div>
+                                        <h3 className="font-semibold text-sm mb-2">Weapon Options</h3>
+                                        <div className="space-y-3">
+                                            {selectedItem.options.map((option, idx) => (
+                                                <div key={option.line || idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
+                                                    <div className="text-sm" dangerouslySetInnerHTML={{ __html: option.description }} />
                                                 </div>
                                             ))}
                                         </div>
@@ -1359,11 +1443,13 @@ export function ListManager() {
                                 )}
 
                                 {/* Abilities */}
-                                {selectedItem.abilities && selectedItem.abilities.length > 0 && (
+                                {selectedItem.abilities && selectedItem.abilities.filter(ability => ability.name !== "Leader").length > 0 && (
                                     <div>
                                         <h3 className="font-semibold text-sm mb-2">Abilities</h3>
                                         <div className="space-y-3">
-                                            {selectedItem.abilities.map((ability, idx) => (
+                                            {selectedItem.abilities
+                                                .filter(ability => ability.name !== "Leader")
+                                                .map((ability, idx) => (
                                                 <div key={idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
                                                     <div className="flex items-start justify-between mb-1">
                                                         <div className="font-medium text-sm">{ability.name}</div>
@@ -1378,6 +1464,33 @@ export function ListManager() {
                                                     )}
                                                     {ability.description && (
                                                         <div className="text-sm" dangerouslySetInnerHTML={{ __html: ability.description }} />
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Enhancements */}
+                                {detachmentEnhancements.length > 0 && (
+                                    <div>
+                                        <h3 className="font-semibold text-sm mb-2">Enhancement Options</h3>
+                                        <div className="space-y-3">
+                                            {detachmentEnhancements.map((enhancement, idx) => (
+                                                <div key={enhancement.id || idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
+                                                    <div className="flex items-start justify-between mb-1">
+                                                        <div className="font-medium text-sm">{enhancement.name}</div>
+                                                        {enhancement.cost && (
+                                                            <Badge variant="outline" className="text-xs">
+                                                                {enhancement.cost} pts
+                                                            </Badge>
+                                                        )}
+                                                    </div>
+                                                    {enhancement.legend && (
+                                                        <p className="text-xs text-[#767676] italic mb-2" dangerouslySetInnerHTML={{ __html: enhancement.legend }} />
+                                                    )}
+                                                    {enhancement.description && (
+                                                        <div className="text-sm" dangerouslySetInnerHTML={{ __html: enhancement.description }} />
                                                     )}
                                                 </div>
                                             ))}

@@ -3,13 +3,11 @@
 - BUG: having two weapons named the same means both can be selected at once (Gauntlets of Ultramar)
 - BUG: There's tripled duplicates of NEW ORDERS stratagem and I don't know why
 - BUG: Defender abilities seem to be duping up (happens on turn swap)
-- BUG: Points per datasheet in lists is currently just the first points cost for the minimum number of models in the unit
+- BUG: If a leader has a weapon named the same as it's attached unit, both get selected at once
+- BUG: When in melee mode, the statsheet displays BS not WS
 
 FEATURES
-- Dynamically filter weapon options down by ones relevant to selected phase (currently it's hardcoded to SHOOTING)
-
 - PRIORITY: Attach enhancements to characters
-- PRIORITY: Attach characters to units
 - Modifiers to build in;
     - Heavy ✅
     - Torrent ✅
