@@ -142,77 +142,6 @@
       ]
     },
     {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "addsKeyword",
-          "keywords": [
-            "OATH OF MOMENT"
-          ],
-          "state": [
-            "target"
-          ],
-          "value": "until the start of your next Command phase",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "attribute": "faction",
-              "value": "ADEPTUS ASTARTES",
-              "operator": "equals"
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "keywords": [
-                "OATH OF MOMENT"
-              ],
-              "operator": "notEquals",
-              "value": null
-            }
-          ]
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "attribute": "detachment",
-              "value": "Codex: Space Marines",
-              "operator": "equals"
-            },
-            {
-              "entity": "thisArmy",
-              "keywords": [
-                "BLACK TEMPLARS",
-                "BLOOD ANGELS",
-                "DARK ANGELS",
-                "DEATHWATCH",
-                "SPACE WOLVES"
-              ],
-              "operator": "notEquals",
-              "value": null
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "",
       "name": "Litany of Hate",
       "legend": "",
@@ -462,5 +391,8 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008350"
+  ]
 }

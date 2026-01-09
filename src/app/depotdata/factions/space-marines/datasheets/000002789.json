@@ -24,15 +24,22 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D3"
-    },
-    {
-      "id": "000008526",
-      "name": "Templar Vows",
-      "legend": "On the eve of battle, the Black Templars gather to be led in prayer and contemplation by their champions. United in their hatred of the foe, they swear a mighty vow to uphold in the battle ahead.",
-      "factionId": "SM",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of the first battle round, select one of the following Vows to be active for <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army. While a Vow is active for a unit from your army, that unit has the associated ability shown below.<br><br><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Abhor the Witch, Destroy the Witch</p><p>Each time this unit <span class=\"tooltip00060\" data-tooltip-content=\"#tooltip_content00060\"><span class=\"tt kwbu\">declares</span> <span class=\"tt kwbu\">a</span> <span class=\"tt kwbu\">charge</span></span>, if one or more targets of that charge have the <span class=\"kwb\">PSYKER</span> keyword, you can re-roll the <span class=\"tooltip00060\" data-tooltip-content=\"#tooltip_content00060\"><span class=\"tt kwbu\">Charge</span> <span class=\"tt kwbu\">roll</span></span>. Melee weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00047\" data-tooltip-content=\"#tooltip_content00047\"><span class=\"tt kwbu\">[PRECISION]</span></span></span> ability while targeting <span class=\"kwb\">PSYKER</span> units.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Accept Any Challenge, No Matter the Odds</p><p>Each time a model in this unit makes a melee attack, if the Strength characteristic of that attack is less than or equal to the Toughness characteristic of the target, add 1 to the <span class=\"tooltip00037\" data-tooltip-content=\"#tooltip_content00037\"><span class=\"tt kwbu\">Wound</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Suffer Not the Unclean to Live</p><p>This unit is eligible to declare a charge in a turn in which it <span class=\"tooltip00041\" data-tooltip-content=\"#tooltip_content00041\"><span class=\"tt kwbu\">Fell</span> <span class=\"tt kwbu\">Back</span></span>, and each time a model in this unit makes a <span class=\"tooltip00234\" data-tooltip-content=\"#tooltip_content00234\"><span class=\"tt kwbu\">Pile-in</span></span> or <span class=\"tooltip00235\" data-tooltip-content=\"#tooltip_content00235\"><span class=\"tt kwbu\">Consolidation</span> <span class=\"tt kwbu\">move</span></span>, it does not need to end that move closer to the closest enemy model, provided it ends that move as close as possible to the closest enemy unit.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Uphold the Honour of the Emperor</p><p>If this unit has the <span class=\"tooltip00259\" data-tooltip-content=\"#tooltip_content00259\" data-tooltip-anchor=\"#tooltip_content00259\"><span class=\"kwb kwbu\">INFANTRY</span></span> keyword:<br><ul><li>At the end of your Command phase, if this unit is within range of an <span class=\"tooltip00042\" data-tooltip-content=\"#tooltip_content00042\"><span class=\"tt kwbu\">objective</span> <span class=\"tt kwbu\">marker</span></span> you control, that objective marker remains under your control until your opponent’s Level of Control over that objective marker is greater than yours at the end of a phase.</li><li>If the mission you are playing features Actions, this unit is eligible to start to perform an Action in a turn in which it <span class=\"tooltip00013\" data-tooltip-content=\"#tooltip_content00013\"><span class=\"tt kwbu\">Advanced</span></span>.</li></ul></p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
+      "parameter": "D3",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -41,7 +48,27 @@
       "factionId": "",
       "description": "This model’s twin heavy onslaught gatling cannon has the <span class=\"kwb2 bluefont\">[SUSTAINED HITS 2]</span> ability while targeting <span class=\"kwb\">INFANTRY</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "INFANTRY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -296,5 +323,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Black Templars",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008526"
+  ]
 }

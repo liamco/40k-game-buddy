@@ -2478,5 +2478,71 @@
   ],
   "dataVersion": "2026-01-02 20:33:24",
   "datasheetCount": 55,
-  "detachmentCount": 12
+  "detachmentCount": 12,
+  "factionAbilities": [
+    {
+      "id": "000000707",
+      "name": "Shadow in the Warp",
+      "type": "Faction",
+      "description": "If your Army Faction is <span class=\"kwb\">TYRANIDS</span>, once per battle, in either player’s Command phase, if one or more units from your army with this ability are on the battlefield, you can unleash the Shadow in the Warp. When you do, each enemy unit on the battlefield must take a Battle-shock test. Each time an enemy unit takes such a Battle-shock test, if it is within 6\" of one or more <span class=\"tooltip00223\" data-tooltip-content=\"#tooltip_content00223\" data-tooltip-anchor=\"#tooltip_content00223\"><span class=\"kwb\">SYNAPSE</span></span> units from your army, subtract 1 from that test.",
+      "legend": "Tyranids flood the battlefield with the psychic signature of the hive fleet - an icy, alien dread that gnaws at the minds of their prey and smothers even the most stalwart courage. When faced with such unfathomable horror, many are driven insane or suffer catastrophic neural damage.",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "isBattleShocked",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "isBattleShocked",
+              "value": false
+            },
+            {
+              "entity": "thisArmy",
+              "attribute": "hasKeyword",
+              "value": 1,
+              "operator": "greaterThanOrEqualTo"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "BATTLE-SHOCK TEST"
+          ],
+          "value": "once per battle"
+        }
+      ]
+    },
+    {
+      "id": "000000705",
+      "name": "Synapse",
+      "type": "Faction",
+      "description": "If your Army Faction is <span class=\"kwb\">TYRANIDS</span>, while a <span class=\"kwb\">TYRANIDS</span> unit from your army is within 6\" of one or more friendly <span class=\"tooltip00223\" data-tooltip-content=\"#tooltip_content00223\" data-tooltip-anchor=\"#tooltip_content00223\"><span class=\"kwb\">SYNAPSE</span></span> models, that <span class=\"kwb\">TYRANIDS</span> unit is said to be within Synapse Range of that model and of your army. While a <span class=\"kwb\">TYRANIDS</span> unit from your army is within Synapse Range of your army: <br><ul><li>Each time that unit takes a Battle-shock test, take that test on 3D6 instead of 2D6. </li><li>Each time a model in that unit makes a melee attack, add 1 to the Strength characteristic of that attack.</li></ul>",
+      "legend": "Some Tyranids serve as synaptic conduits or nodal relays through which a portion of the Hive Mind’s iron will flows, overriding the natural instincts of the swarm to direct the teeming warrior-beasts to function as a single, gestalt organism on the battlefield.",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "isBattleShocked",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "isBattleShocked",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 1
+        }
+      ]
+    }
+  ]
 }

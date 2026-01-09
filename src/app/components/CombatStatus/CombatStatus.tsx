@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    COMBAT_STATUS_FLAGS,
-    type CombatStatusFlag,
-    type CombatStatus as CombatStatusType,
-} from "../../game-engine";
+import { COMBAT_STATUS_FLAGS, type CombatStatusFlag, type CombatStatus as CombatStatusType } from "../../game-engine";
 import { Switch } from "../_ui/switch.tsx";
 
 /**
@@ -26,6 +22,8 @@ const STATUS_RELEVANCE: Record<CombatStatusFlag, "attacker" | "defender" | "both
     isBelowStartingStrength: "both",
     isBelowHalfStrength: "both",
     isDamaged: "both",
+    isLeadingUnit: "both",
+    isBeingLeg: "both",
 };
 
 /**
@@ -51,10 +49,7 @@ const CombatStatus = ({ side, combatStatus, onStatusChange }: Props) => {
         <section className="space-y-4">
             {relevantStatuses.map((status) => (
                 <div key={status.name} className="flex items-center justify-between gap-2">
-                    <label
-                        htmlFor={`${side}-${status.name}`}
-                        className="text-xs font-['Inter:Semi_Bold',sans-serif] font-semibold text-[#1e1e1e]"
-                    >
+                    <label htmlFor={`${side}-${status.name}`} className="text-xs  font-semibold text-[#1e1e1e]">
                         {status.label}
                     </label>
                     <Switch

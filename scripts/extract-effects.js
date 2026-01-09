@@ -3,6 +3,7 @@
  *
  * Uses OpenAI API to extract structured effects from Warhammer 40k game rule descriptions.
  * Processes all depotdata JSON files to extract effects from:
+ * - Faction abilities (in faction.json files - e.g., Oath of Moment)
  * - Detachment abilities (in faction.json files)
  * - Enhancements (in faction.json files)
  * - Stratagems (in faction.json files and core-stratagems.json)
@@ -19,9 +20,13 @@
  *   Process specific files (for testing):
  *     npm run extract-effects:openai "factions/tyranids/faction.json" "factions/space-marines/datasheets/000000060.json"
  *
- *   Or use environment variable:
+ *   Or use environment variable for files:
  *     FILES_TO_PROCESS='["factions/tyranids/faction.json"]' npm run extract-effects:openai
  *     FILES_TO_PROCESS="factions/tyranids/faction.json,factions/space-marines/faction.json" npm run extract-effects:openai
+ *
+ *   Process specific directories:
+ *     DIRECTORIES_TO_PROCESS='["factions/space-marines", "factions/tyranids"]' npm run extract-effects:openai
+ *     DIRECTORIES_TO_PROCESS="factions/space-marines,factions/tyranids" npm run extract-effects:openai
  *
  *   For single description test:
  *     npm run extract-effects:openai "<description>" [itemName]
@@ -39,13 +44,72 @@ const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
 dotenv.config();
 
+// Load core abilities registry
+const coreAbilitiesPath = path.join(
+    __dirname,
+    "..",
+    "src",
+    "app",
+    "depotdata",
+    "core-abilities.json"
+);
+let CORE_ABILITIES = {};
+if (fs.existsSync(coreAbilitiesPath)) {
+    const coreAbilitiesData = JSON.parse(fs.readFileSync(coreAbilitiesPath, "utf-8"));
+    CORE_ABILITIES = coreAbilitiesData.abilities || {};
+    console.log(`📚 Loaded ${Object.keys(CORE_ABILITIES).length} core abilities from registry`);
+}
+
+/**
+ * Gets pre-defined mechanics for a core ability if available.
+ * @param {string} abilityName - The ability name to look up
+ * @param {*} parameter - The ability's parameter value (for parameterized abilities)
+ * @returns {Array|null} - Array of mechanics or null if not a core ability
+ */
+function getCoreAbilityMechanics(abilityName, parameter) {
+    const normalizedName = abilityName?.toUpperCase()?.trim();
+    const coreAbility = CORE_ABILITIES[normalizedName];
+
+    if (!coreAbility) {
+        return null;
+    }
+
+    if (coreAbility.type === "static") {
+        // Static abilities use mechanics as-is
+        return JSON.parse(JSON.stringify(coreAbility.mechanics));
+    }
+
+    if (coreAbility.type === "parameterized") {
+        if (parameter === undefined || parameter === null || parameter === "none") {
+            // Parameterized ability without a parameter - skip
+            return null;
+        }
+
+        // Deep clone and substitute {parameter} placeholder
+        const mechanics = JSON.parse(JSON.stringify(coreAbility.mechanics));
+        for (const mechanic of mechanics) {
+            if (mechanic.value === "{parameter}") {
+                mechanic.value = parameter;
+            }
+        }
+        return mechanics;
+    }
+
+    return null;
+}
+
 /**
  * Extracts structured effects from a Warhammer 40k game rule description using OpenAI
  * @param {string} description - The description text to analyze
  * @param {string} itemName - Optional name/identifier of the item being processed (for logging)
+ * @param {Array} factionStateFlags - Optional faction-specific state flags to include in prompt
  * @returns {Promise<Array|null>} - Array of structured effects or null
  */
-export async function extractStructuredEffectsWithOpenAI(description, itemName = "Unknown") {
+export async function extractStructuredEffectsWithOpenAI(
+    description,
+    itemName = "Unknown",
+    factionStateFlags = []
+) {
     if (!description || typeof description !== "string") {
         return null;
     }
@@ -84,7 +148,8 @@ export async function extractStructuredEffectsWithOpenAI(description, itemName =
     const startTime = Date.now();
 
     // Build prompt from schema (single source of truth for valid values)
-    const prompt = buildMechanicsPrompt(cleanDescription);
+    // Include faction-specific state flags if provided
+    const prompt = buildMechanicsPrompt(cleanDescription, factionStateFlags);
     const fullPrompt = `You are a helpful assistant that extracts structured game rule effects from Warhammer 40k descriptions. Always return valid JSON only.\n\n${prompt}`;
 
     try {
@@ -233,21 +298,29 @@ function shouldExtractMechanics(obj) {
  * Recursively processes a JSON object to extract effects from abilities, enhancements, stratagems, and detachmentAbilities
  * @param {object} obj - The object to process
  * @param {boolean} skipExistingMechanics - Whether to skip items that already have effects
+ * @param {Array} factionStateFlags - Faction-specific state flags to include in OpenAI prompts
  * @returns {Promise<object>} - The processed object with effects added
  */
-async function processObjectForEffects(obj, skipExistingMechanics = true) {
+async function processObjectForEffects(obj, skipExistingMechanics = true, factionStateFlags = []) {
     if (Array.isArray(obj)) {
-        return Promise.all(obj.map((item) => processObjectForEffects(item, skipExistingMechanics)));
+        return Promise.all(
+            obj.map((item) =>
+                processObjectForEffects(item, skipExistingMechanics, factionStateFlags)
+            )
+        );
     } else if (obj !== null && typeof obj === "object") {
+        // If this object has factionStateFlags, use them for nested processing
+        const effectiveFactionFlags = obj.factionStateFlags || factionStateFlags;
         const processed = {};
 
         for (const key in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                // Special handling for abilities, enhancements, stratagems, and detachmentAbilities arrays
+                // Special handling for abilities, enhancements, stratagems, factionAbilities, and detachmentAbilities arrays
                 if (
                     (key === "abilities" ||
                         key === "enhancements" ||
                         key === "stratagems" ||
+                        key === "factionAbilities" ||
                         key === "detachmentAbilities") &&
                     Array.isArray(obj[key])
                 ) {
@@ -264,7 +337,8 @@ async function processObjectForEffects(obj, skipExistingMechanics = true) {
                             const itemName = item.name || item.id || `${itemType} ${index + 1}`;
                             const processedItem = await processObjectForEffects(
                                 item,
-                                skipExistingMechanics
+                                skipExistingMechanics,
+                                effectiveFactionFlags
                             );
 
                             // Extract effects from the description
@@ -280,14 +354,32 @@ async function processObjectForEffects(obj, skipExistingMechanics = true) {
                                         `[OpenAI] ⏭️  Skipping ${itemName} (already has ${processedItem.mechanics.length} effect(s))`
                                     );
                                 } else {
-                                    // Extract structured effects with OpenAI
-                                    const structuredEffects =
-                                        await extractStructuredEffectsWithOpenAI(
-                                            processedItem.description,
-                                            itemName
+                                    // First, check if this is a core ability with pre-defined mechanics
+                                    const coreMechanics = getCoreAbilityMechanics(
+                                        processedItem.name,
+                                        processedItem.parameter
+                                    );
+
+                                    if (coreMechanics) {
+                                        console.log(
+                                            `[Core] ✅ Using pre-defined mechanics for ${itemName}` +
+                                                (processedItem.parameter
+                                                    ? ` (${processedItem.parameter})`
+                                                    : "")
                                         );
-                                    if (structuredEffects && structuredEffects.length > 0) {
-                                        processedItem.mechanics = structuredEffects;
+                                        processedItem.mechanics = coreMechanics;
+                                    } else {
+                                        // Extract structured effects with OpenAI
+                                        // Pass faction state flags for faction-specific states
+                                        const structuredEffects =
+                                            await extractStructuredEffectsWithOpenAI(
+                                                processedItem.description,
+                                                itemName,
+                                                effectiveFactionFlags
+                                            );
+                                        if (structuredEffects && structuredEffects.length > 0) {
+                                            processedItem.mechanics = structuredEffects;
+                                        }
                                     }
                                 }
                             }
@@ -299,7 +391,8 @@ async function processObjectForEffects(obj, skipExistingMechanics = true) {
                     if (shouldExtractMechanics(obj[key]) && typeof obj[key] === "object") {
                         processed[key] = await processObjectForEffects(
                             obj[key],
-                            skipExistingMechanics
+                            skipExistingMechanics,
+                            effectiveFactionFlags
                         );
 
                         // Extract structured effects if this is a stratagem, ability, enhancement, or detachmentAbility
@@ -317,19 +410,37 @@ async function processObjectForEffects(obj, skipExistingMechanics = true) {
                                 );
                             } else if (!hasExistingEffects) {
                                 const itemName = obj[key].name || obj[key].id || "Unknown item";
-                                const structuredEffects = await extractStructuredEffectsWithOpenAI(
-                                    obj[key].description,
-                                    itemName
+
+                                // First, check if this is a core ability with pre-defined mechanics
+                                const coreMechanics = getCoreAbilityMechanics(
+                                    obj[key].name,
+                                    obj[key].parameter
                                 );
-                                if (structuredEffects && structuredEffects.length > 0) {
-                                    processed[key].mechanics = structuredEffects;
+
+                                if (coreMechanics) {
+                                    console.log(
+                                        `[Core] ✅ Using pre-defined mechanics for ${itemName}` +
+                                            (obj[key].parameter ? ` (${obj[key].parameter})` : "")
+                                    );
+                                    processed[key].mechanics = coreMechanics;
+                                } else {
+                                    const structuredEffects =
+                                        await extractStructuredEffectsWithOpenAI(
+                                            obj[key].description,
+                                            itemName,
+                                            effectiveFactionFlags
+                                        );
+                                    if (structuredEffects && structuredEffects.length > 0) {
+                                        processed[key].mechanics = structuredEffects;
+                                    }
                                 }
                             }
                         }
                     } else {
                         processed[key] = await processObjectForEffects(
                             obj[key],
-                            skipExistingMechanics
+                            skipExistingMechanics,
+                            effectiveFactionFlags
                         );
                     }
                 }
@@ -427,10 +538,63 @@ function filterFiles(allFiles, fileFilters, depotdataPath) {
 }
 
 /**
+ * Filters JSON files based on provided directory paths
+ * @param {string[]} allFiles - All found JSON files
+ * @param {string[]} directoryFilters - Array of directory paths to match
+ * @param {string} depotdataPath - Base path to depotdata directory
+ * @returns {string[]} - Filtered array of file paths
+ */
+function filterByDirectories(allFiles, directoryFilters, depotdataPath) {
+    if (!directoryFilters || directoryFilters.length === 0) {
+        return allFiles;
+    }
+
+    const normalizedDepotPath = depotdataPath.replace(/\\/g, "/");
+    const filtered = [];
+
+    for (const filePath of allFiles) {
+        const normalizedPath = filePath.replace(/\\/g, "/");
+        const relativePath = normalizedPath.replace(normalizedDepotPath + "/", "");
+
+        // Check if this file is within any of the specified directories
+        const matches = directoryFilters.some((dirFilter) => {
+            const normalizedFilter = dirFilter.replace(/\\/g, "/").replace(/\/$/, ""); // Remove trailing slash
+
+            // Check if relative path starts with the directory filter
+            if (relativePath.startsWith(normalizedFilter + "/")) {
+                return true;
+            }
+
+            // Check if relative path equals the directory filter (for files directly in that dir)
+            if (
+                relativePath.startsWith(normalizedFilter + "/") ||
+                relativePath === normalizedFilter
+            ) {
+                return true;
+            }
+
+            // Check absolute path
+            if (normalizedPath.includes("/" + normalizedFilter + "/")) {
+                return true;
+            }
+
+            return false;
+        });
+
+        if (matches) {
+            filtered.push(filePath);
+        }
+    }
+
+    return filtered;
+}
+
+/**
  * Main function to extract effects from all JSON files in depotdata
  * @param {string[]} fileFilters - Optional array of file paths/patterns to process (if empty, processes all)
+ * @param {string[]} directoryFilters - Optional array of directory paths to process
  */
-async function processAllFiles(fileFilters = []) {
+async function processAllFiles(fileFilters = [], directoryFilters = []) {
     const depotdataPath = path.join(__dirname, "..", "src", "app", "depotdata");
 
     if (!fs.existsSync(depotdataPath)) {
@@ -453,6 +617,10 @@ async function processAllFiles(fileFilters = []) {
     console.log("🤖 OpenAI Effects Extraction Script");
     console.log(`⏭️  Skip existing effects: ${skipExistingMechanics ? "enabled" : "disabled"}`);
     console.log(`🤖 OpenAI Model: ${process.env.OPENAI_MODEL || "gpt-4o-mini"}`);
+    if (directoryFilters.length > 0) {
+        console.log(`📂 Filtering to ${directoryFilters.length} directory(ies):`);
+        directoryFilters.forEach((filter) => console.log(`   - ${filter}`));
+    }
     if (fileFilters.length > 0) {
         console.log(`📌 Filtering to ${fileFilters.length} file(s):`);
         fileFilters.forEach((filter) => console.log(`   - ${filter}`));
@@ -478,10 +646,20 @@ async function processAllFiles(fileFilters = []) {
 
     findJsonFiles(depotdataPath);
 
-    // Filter files if filters provided
-    const jsonFiles = filterFiles(allJsonFiles, fileFilters, depotdataPath);
+    // Filter by directories first, then by files
+    let jsonFiles = allJsonFiles;
 
-    if (fileFilters.length > 0 && jsonFiles.length === 0) {
+    if (directoryFilters.length > 0) {
+        jsonFiles = filterByDirectories(jsonFiles, directoryFilters, depotdataPath);
+    }
+
+    if (fileFilters.length > 0) {
+        jsonFiles = filterFiles(jsonFiles, fileFilters, depotdataPath);
+    }
+
+    const hasFilters = fileFilters.length > 0 || directoryFilters.length > 0;
+
+    if (hasFilters && jsonFiles.length === 0) {
         console.error(`❌ No files found matching the provided filters`);
         console.error(`   Searched ${allJsonFiles.length} files`);
         process.exit(1);
@@ -521,6 +699,30 @@ async function processAllFiles(fileFilters = []) {
 }
 
 /**
+ * Parses an environment variable as an array (JSON or comma-separated)
+ * @param {string} envVar - The environment variable value
+ * @returns {string[]} - Parsed array of values
+ */
+function parseEnvArray(envVar) {
+    if (!envVar) return [];
+
+    try {
+        // Try parsing as JSON array first
+        const parsed = JSON.parse(envVar);
+        if (Array.isArray(parsed)) {
+            return parsed;
+        }
+        return [parsed];
+    } catch {
+        // If not JSON, treat as comma-separated list
+        return envVar
+            .split(",")
+            .map((f) => f.trim())
+            .filter((f) => f);
+    }
+}
+
+/**
  * CLI interface for running the function directly
  */
 async function main() {
@@ -528,21 +730,10 @@ async function main() {
     const args = process.argv.slice(2);
 
     // Check for file filters in environment variable
-    let fileFilters = [];
-    if (process.env.FILES_TO_PROCESS) {
-        try {
-            // Try parsing as JSON array first
-            fileFilters = JSON.parse(process.env.FILES_TO_PROCESS);
-            if (!Array.isArray(fileFilters)) {
-                fileFilters = [fileFilters];
-            }
-        } catch {
-            // If not JSON, treat as comma-separated list
-            fileFilters = process.env.FILES_TO_PROCESS.split(",")
-                .map((f) => f.trim())
-                .filter((f) => f);
-        }
-    }
+    let fileFilters = parseEnvArray(process.env.FILES_TO_PROCESS);
+
+    // Check for directory filters in environment variable
+    let directoryFilters = parseEnvArray(process.env.DIRECTORIES_TO_PROCESS);
 
     // Check if first argument looks like a description (starts with quote or is a short string)
     // vs a file path (contains slashes or ends with .json)
@@ -591,7 +782,7 @@ async function main() {
         }
 
         // Process files (all if no filters, filtered if filters provided)
-        await processAllFiles(fileFilters);
+        await processAllFiles(fileFilters, directoryFilters);
     }
 }
 

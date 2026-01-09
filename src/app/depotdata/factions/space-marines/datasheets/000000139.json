@@ -24,7 +24,22 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "D6+2"
+      "parameter": "D6+2",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "mortalWounds",
+          "value": "D6+2",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "000008342",
@@ -32,15 +47,17 @@
       "legend": "Some aircraft can use vectored thrusters or anti-grav technology to hover over the battlefield, the better to hunt their prey or deploy embarked troops.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some aircraft can use vectored thrusters or anti-grav technology to hover over the battlefield, the better to hunt their prey or deploy embarked troops.</p>Some <span class=\"kwb\">AIRCRAFT</span> models have ‘Hover’ listed in their abilities. When you are instructed to Declare Battle Formations, before doing anything else, you must first declare which models from your army with this ability will be in Hover mode.<br><br>If a model is in Hover mode, then until the end of the battle, its Move characteristic is changed to 20\", it loses the <span class=\"kwb\">AIRCRAFT</span> keyword and it loses all associated rules for being an <span class=\"kwb\">AIRCRAFT</span> model. Models in Hover mode do not start the battle in Reserves, but you can choose to place them into Strategic Reserves following the normal rules if you wish.</div>",
-      "type": "Core"
-    },
-    {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "HOVER"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "",
@@ -49,7 +66,41 @@
       "factionId": "",
       "description": "Each time the bearer ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 3+, that unit suffers 1 mortal wound.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            },
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -58,7 +109,33 @@
       "factionId": "",
       "description": "Each time a unit with the Deep Strike ability disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER DISBARKING"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasMovedNormally",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "operator": "includes",
+              "value": "DEEP STRIKE"
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -329,5 +406,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Space Marines (Forge World)",
   "isForgeWorld": true,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008350"
+  ]
 }

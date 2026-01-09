@@ -18,21 +18,28 @@
   "supplementKey": "black-templars",
   "abilities": [
     {
-      "id": "000008526",
-      "name": "Templar Vows",
-      "legend": "On the eve of battle, the Black Templars gather to be led in prayer and contemplation by their champions. United in their hatred of the foe, they swear a mighty vow to uphold in the battle ahead.",
-      "factionId": "SM",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of the first battle round, select one of the following Vows to be active for <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army. While a Vow is active for a unit from your army, that unit has the associated ability shown below.<br><br><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Abhor the Witch, Destroy the Witch</p><p>Each time this unit <span class=\"tooltip00060\" data-tooltip-content=\"#tooltip_content00060\"><span class=\"tt kwbu\">declares</span> <span class=\"tt kwbu\">a</span> <span class=\"tt kwbu\">charge</span></span>, if one or more targets of that charge have the <span class=\"kwb\">PSYKER</span> keyword, you can re-roll the <span class=\"tooltip00060\" data-tooltip-content=\"#tooltip_content00060\"><span class=\"tt kwbu\">Charge</span> <span class=\"tt kwbu\">roll</span></span>. Melee weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00047\" data-tooltip-content=\"#tooltip_content00047\"><span class=\"tt kwbu\">[PRECISION]</span></span></span> ability while targeting <span class=\"kwb\">PSYKER</span> units.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Accept Any Challenge, No Matter the Odds</p><p>Each time a model in this unit makes a melee attack, if the Strength characteristic of that attack is less than or equal to the Toughness characteristic of the target, add 1 to the <span class=\"tooltip00037\" data-tooltip-content=\"#tooltip_content00037\"><span class=\"tt kwbu\">Wound</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Suffer Not the Unclean to Live</p><p>This unit is eligible to declare a charge in a turn in which it <span class=\"tooltip00041\" data-tooltip-content=\"#tooltip_content00041\"><span class=\"tt kwbu\">Fell</span> <span class=\"tt kwbu\">Back</span></span>, and each time a model in this unit makes a <span class=\"tooltip00234\" data-tooltip-content=\"#tooltip_content00234\"><span class=\"tt kwbu\">Pile-in</span></span> or <span class=\"tooltip00235\" data-tooltip-content=\"#tooltip_content00235\"><span class=\"tt kwbu\">Consolidation</span> <span class=\"tt kwbu\">move</span></span>, it does not need to end that move closer to the closest enemy model, provided it ends that move as close as possible to the closest enemy unit.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Uphold the Honour of the Emperor</p><p>If this unit has the <span class=\"tooltip00259\" data-tooltip-content=\"#tooltip_content00259\" data-tooltip-anchor=\"#tooltip_content00259\"><span class=\"kwb kwbu\">INFANTRY</span></span> keyword:<br><ul><li>At the end of your Command phase, if this unit is within range of an <span class=\"tooltip00042\" data-tooltip-content=\"#tooltip_content00042\"><span class=\"tt kwbu\">objective</span> <span class=\"tt kwbu\">marker</span></span> you control, that objective marker remains under your control until your opponent’s Level of Control over that objective marker is greater than yours at the end of a phase.</li><li>If the mission you are playing features Actions, this unit is eligible to start to perform an Action in a turn in which it <span class=\"tooltip00013\" data-tooltip-content=\"#tooltip_content00013\"><span class=\"tt kwbu\">Advanced</span></span>.</li></ul></p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
-    },
-    {
       "id": "",
       "name": "Exploit Their Cowardice",
       "legend": "",
       "factionId": "",
       "description": "Each time an enemy unit within Engagement Range of this unit is selected to Fall Back, after it ends that Fall Back move, if this unit is not within Engagement Range of one or more enemy units, this unit can make a Normal move.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "makes a Normal move",
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -41,7 +48,33 @@
       "factionId": "",
       "description": "If a <span class=\"tooltip00031\" data-tooltip-content=\"#tooltip_content00031\" data-tooltip-anchor=\"#tooltip_content00031\"><span class=\"kwb\">CHARACTER</span></span> from your army with the Leader ability can be attached to an <span class=\"kwb kwbo\">INTERCESSOR</span> <span class=\"kwb kwbo\">SQUAD</span>, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Leader"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "INTERCESSOR SQUAD"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -397,5 +430,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Black Templars",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008526"
+  ]
 }

@@ -24,7 +24,22 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">From detonating ammo stores to corrosive innards or frenzied death throes, some targets are deadly even in defeat.</p>Some models have ‘Deadly Demise x’ listed in their abilities. When such a model is <span class=\"tooltip00001\" data-tooltip-content=\"#tooltip_content00001\"><span class=\"tt kwbu\">destroyed</span></span>, roll one D6 before removing it from play (if such a model is a <span class=\"kwb\">TRANSPORT</span>, roll before any embarked models <span class=\"tooltip00002\" data-tooltip-content=\"#tooltip_content00002\"><span class=\"tt kwbu\">disembark</span></span>). On a 6, each unit within 6\" of that model suffers a number of <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span> denoted by ‘x’ (if this is a random number, roll separately for each unit within 6\").<br><br><div class=\"redExample\"><b>Example:</b> A <span class=\"kwb\">TRANSPORT</span> model with the Deadly Demise D3 ability is destroyed. Before any models disembark and before removing it from play, its controlling player rolls one D6, getting a 6. There are three units within 6\" of that destroyed model, so its controlling player rolls one D3 for each of them, inflicting mortal wounds accordingly.</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Deadly Demise x:</b> When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers ‘x’ mortal wounds.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 1
+      "parameter": 1,
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "000008338",
@@ -33,23 +48,17 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors refuse to be laid low, even by what should be fatal wounds.</p>Some models have ‘Feel No Pain x+’ listed in their abilities. Each time a model with this ability suffers damage and so would lose a wound (including wounds lost due to <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span>), roll one D6: if the result is greater than or equal to the number denoted by ‘x’, that wound is ignored and is not lost. If a model has more than one Feel No Pain ability, you can only use one of those abilities each time that model suffers damage and so would lose a wound.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Feel No Pain x+:</b> Each time this model would lose a wound, roll one D6: if the result equals or exceeds ‘x’, that wound is not lost.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 6
-    },
-    {
-      "id": "000010256",
-      "name": "Curse of the Wulfen",
-      "legend": "Only while fighting at the side of their battle-brothers can the feral Wulfen control their frenzied aggression.",
-      "factionId": "SM",
-      "description": "While this unit is within 6\" of one or more friendly <span class=\"tooltip00278\" data-tooltip-content=\"#tooltip_content00278\" data-tooltip-anchor=\"#tooltip_content00278\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span> <span class=\"kwb\">CHARACTER</span></span> models (excluding <span class=\"tooltip00279\" data-tooltip-content=\"#tooltip_content00279\" data-tooltip-anchor=\"#tooltip_content00279\"><span class=\"kwb\">WULFEN</span></span> models) or within 12\" of one or more friendly <span class=\"tooltip00280\" data-tooltip-content=\"#tooltip_content00280\" data-tooltip-anchor=\"#tooltip_content00280\"><span class=\"kwb\">WOLF</span> <span class=\"kwb\">PRIEST</span></span> models, if it is not Battle-shocked, add 1 to the Objective Control characteristic of <span class=\"tooltip00259\" data-tooltip-content=\"#tooltip_content00259\" data-tooltip-anchor=\"#tooltip_content00259\"><span class=\"kwb\">INFANTRY</span></span> models in it and add 3 to the Objective Control characteristic of <span class=\"tooltipVehicle\" data-tooltip-content=\"#tooltip_contentVehicle\" data-tooltip-anchor=\"#tooltip_contentVehicle\"><span class=\"kwb\">VEHICLE</span></span> models in it.",
-      "type": "Faction"
-    },
-    {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
+      "parameter": 6,
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 6
+        }
+      ]
     },
     {
       "id": "",
@@ -58,7 +67,59 @@
       "factionId": "",
       "description": "In the Fight phase, each time an attack targets a friendly <span class=\"tooltip00279\" data-tooltip-content=\"#tooltip_content00279\" data-tooltip-anchor=\"#tooltip_content00279\"><span class=\"kwb\">WULFEN</span></span> unit within 6\" of this model, if a model in that unit is destroyed as a result of that attack, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetUnit",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER DEATH"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "equals",
+              "value": false
+            },
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -67,7 +128,21 @@
       "factionId": "",
       "description": "You can re-roll Advance and Charge rolls made for this model.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "m",
+          "value": "all"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "a",
+          "value": "all"
+        }
+      ]
     },
     {
       "id": "",
@@ -76,7 +151,17 @@
       "factionId": "",
       "description": "This model cannot be your <span class=\"kwb\">WARLORD</span>.",
       "type": "Fortification (левая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT BE WARLORD"
+          ],
+          "value": true
+        }
+      ]
     }
   ],
   "keywords": [
@@ -267,5 +352,9 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Wolves",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000010256",
+    "000008350"
+  ]
 }

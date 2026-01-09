@@ -130,6 +130,7 @@ export const COMBAT_STATUS_FLAGS = [
     { name: "isDamaged", label: "Damaged (Bracketed)" },
     { name: "isLeadingUnit", label: "Leading a Unit" },
     { name: "isBeingLed", label: "Being Led" },
+    // Faction-specific flags (like isOathOfMomentTarget) are defined in faction.json
 ] as const;
 
 export type CombatStatusItem = (typeof COMBAT_STATUS_FLAGS)[number];

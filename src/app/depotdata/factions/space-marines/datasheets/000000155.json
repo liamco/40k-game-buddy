@@ -24,7 +24,17 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors refuse to be laid low, even by what should be fatal wounds.</p>Some models have ‘Feel No Pain x+’ listed in their abilities. Each time a model with this ability suffers damage and so would lose a wound (including wounds lost due to <span class=\"tooltip00005\" data-tooltip-content=\"#tooltip_content00005\"><span class=\"tt kwbu\">mortal</span> <span class=\"tt kwbu\">wounds</span></span>), roll one D6: if the result is greater than or equal to the number denoted by ‘x’, that wound is ignored and is not lost. If a model has more than one Feel No Pain ability, you can only use one of those abilities each time that model suffers damage and so would lose a wound.<br><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Feel No Pain x+:</b> Each time this model would lose a wound, roll one D6: if the result equals or exceeds ‘x’, that wound is not lost.</li></ul></div></div>",
       "type": "Core",
-      "parameter": 4
+      "parameter": 4,
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ]
     },
     {
       "id": "000008340",
@@ -32,7 +42,17 @@
       "legend": "Some warriors attack with blinding speed, landing their blows before their foes can react.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors attack with blinding speed, landing their blows before their foes can react.</p>Units with this ability that are eligible to fight do so in the Fights First step, provided every model in the unit has this ability.</div>",
-      "type": "Core"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHTS FIRST"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "000008336",
@@ -40,15 +60,17 @@
       "legend": "Assassins and other covert agents are difficult to track and pinpoint in the swirling maelstrom of battle.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Assassins and other covert agents are difficult to track and pinpoint in the swirling maelstrom of battle.</p>Unless part of an Attached unit (see <span class=\"tooltip00225\" data-tooltip-content=\"#tooltip_content00225\"><span class=\"tt kwbu\">Leader</span></span>), this unit can only be selected as the target of a ranged attack if the attacking model is within 12\".</div>",
-      "type": "Core"
-    },
-    {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "",
@@ -57,7 +79,17 @@
       "factionId": "",
       "description": "This model is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER ADVANCING"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "",
@@ -66,7 +98,37 @@
       "factionId": "",
       "description": "While an enemy unit is within 6\" of this model, each time that unit is selected to Fall Back, it must take a Leadership test. If that test is failed, that unit must Remain Stationary this phase instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -314,5 +376,8 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Blood Angels",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008350"
+  ]
 }

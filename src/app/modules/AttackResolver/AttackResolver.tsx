@@ -1,12 +1,6 @@
 import React, { useMemo } from "react";
 import type { Datasheet, WeaponProfile, Model, GamePhase } from "../../types";
-import {
-    resolveCombat,
-    createDefaultCombatStatus,
-    type GameContext,
-    type CombatResult,
-    type CombatStatus,
-} from "../../game-engine";
+import { resolveCombat, createDefaultCombatStatus, type GameContext, type CombatResult, type CombatStatus } from "../../game-engine";
 
 interface AttackResolverProps {
     gamePhase: GamePhase;
@@ -31,17 +25,7 @@ interface AttackResolverProps {
  *
  * This allows the game engine to collect abilities from both units.
  */
-function buildGameContext(
-    gamePhase: GamePhase,
-    attackingUnit: Datasheet,
-    attackerAttachedUnit: Datasheet | null,
-    defendingUnit: Datasheet,
-    defenderAttachedUnit: Datasheet | null,
-    selectedWeaponProfile: WeaponProfile,
-    selectedDefendingModel: Model,
-    attackerCombatStatus: CombatStatus,
-    defenderCombatStatus: CombatStatus
-): GameContext {
+function buildGameContext(gamePhase: GamePhase, attackingUnit: Datasheet, attackerAttachedUnit: Datasheet | null, defendingUnit: Datasheet, defenderAttachedUnit: Datasheet | null, selectedWeaponProfile: WeaponProfile, selectedDefendingModel: Model, attackerCombatStatus: CombatStatus, defenderCombatStatus: CombatStatus): GameContext {
     return {
         phase: gamePhase,
         turn: "YOURS",
@@ -77,9 +61,7 @@ function buildGameContext(
 /**
  * Maps source to label for backward compatibility.
  */
-function mapSourceToLabel(
-    items: { source: string; value: number }[]
-): { label: string; value: number }[] {
+function mapSourceToLabel(items: { source: string; value: number }[]): { label: string; value: number }[] {
     return items.map((item) => ({ label: item.source, value: item.value }));
 }
 
@@ -125,21 +107,9 @@ function convertToLegacyResult(
     };
 }
 
-function ModifierBadge({
-    label,
-    value,
-    className,
-}: {
-    label: string;
-    value?: number;
-    className?: string;
-}) {
+function ModifierBadge({ label, value, className }: { label: string; value?: number; className?: string }) {
     const isPositive = value !== undefined && value > 0;
-    const bgColor = isPositive
-        ? "bg-green-200"
-        : value !== undefined && value < 0
-          ? "bg-red-200"
-          : "bg-[#b3b3b3]";
+    const bgColor = isPositive ? "bg-green-200" : value !== undefined && value < 0 ? "bg-red-200" : "bg-[#b3b3b3]";
 
     return (
         <div className={`${bgColor} px-1.5 py-0.5 rounded-[2px] ${className || ""}`} title={label}>
@@ -148,15 +118,7 @@ function ModifierBadge({
     );
 }
 
-function ResultBox({
-    label,
-    value,
-    modifiers,
-}: {
-    label?: string;
-    value: string;
-    modifiers?: { label: string; value: number }[];
-}) {
+function ResultBox({ label, value, modifiers }: { label?: string; value: string; modifiers?: { label: string; value: number }[] }) {
     return (
         <div className="flex flex-col items-center justify-center gap-1">
             {label && <p className="font-bold text-[10px]">{label}</p>}
@@ -174,66 +136,30 @@ function ResultBox({
     );
 }
 
-function FinalResultBox({ value }: { value: string }) {
+function FinalResultBox({ className = "bg-black", value }: { className: string; value: string }) {
     return (
-        <div className="bg-[#2b344c] rounded-[4px] p-4 flex items-center justify-center">
-            <p className=" font-bold text-[24px] text-white">{value}</p>
+        <div className={`${className} rounded-[4px] p-4 flex items-center justify-center`}>
+            <p className={`${className === "bg-amber-300" ? "text-black" : "text-white"} font-bold text-[24px]`}>{value}</p>
         </div>
     );
 }
 
-export function AttackResolver({
-    gamePhase,
-    attackingUnit,
-    attackerAttachedUnit,
-    defendingUnit,
-    defenderAttachedUnit,
-    selectedWeaponProfile,
-    selectedDefendingModel,
-    attackerCombatStatus,
-    defenderCombatStatus,
-    activeAttackerStratagems,
-    activeDefenderStratagems,
-}: AttackResolverProps) {
+export function AttackResolver({ gamePhase, attackingUnit, attackerAttachedUnit, defendingUnit, defenderAttachedUnit, selectedWeaponProfile, selectedDefendingModel, attackerCombatStatus, defenderCombatStatus, activeAttackerStratagems, activeDefenderStratagems }: AttackResolverProps) {
     // Use game engine for combat resolution
     const result = useMemo(() => {
         if (!attackingUnit || !defendingUnit || !selectedWeaponProfile || !selectedDefendingModel) {
             return null;
         }
 
-        const context = buildGameContext(
-            gamePhase,
-            attackingUnit,
-            attackerAttachedUnit,
-            defendingUnit,
-            defenderAttachedUnit,
-            selectedWeaponProfile,
-            selectedDefendingModel,
-            attackerCombatStatus,
-            defenderCombatStatus
-        );
-
+        const context = buildGameContext(gamePhase, attackingUnit, attackerAttachedUnit, defendingUnit, defenderAttachedUnit, selectedWeaponProfile, selectedDefendingModel, attackerCombatStatus, defenderCombatStatus);
         const combatResult = resolveCombat(context);
         return convertToLegacyResult(combatResult, selectedWeaponProfile);
-    }, [
-        gamePhase,
-        attackingUnit,
-        attackerAttachedUnit,
-        defendingUnit,
-        defenderAttachedUnit,
-        selectedWeaponProfile,
-        selectedDefendingModel,
-        attackerCombatStatus,
-        defenderCombatStatus,
-    ]);
+    }, [gamePhase, attackingUnit, attackerAttachedUnit, defendingUnit, defenderAttachedUnit, selectedWeaponProfile, selectedDefendingModel, attackerCombatStatus, defenderCombatStatus]);
 
     if (!result) {
         return (
             <div className="bg-white rounded-[8px] border-4 border-[#e6e6e6] p-6 flex items-center justify-center min-h-[300px]">
-                <p className="text-[#767676] text-center">
-                    Select an attacking unit with a weapon and a target unit to calculate attack
-                    resolution
-                </p>
+                <p className="text-[#767676] text-center">Select an attacking unit with a weapon and a target unit to calculate attack resolution</p>
             </div>
         );
     }
@@ -243,25 +169,16 @@ export function AttackResolver({
             <section>
                 <p className="font-bold text-[12px] pb-2 border-b border-[#e6e6e6]">To hit</p>
                 <div className="grid grid-cols-4 gap-2 pt-4">
-                    <ResultBox
-                        label="BS"
-                        value={result.autoHit ? "N/A" : `${selectedWeaponProfile?.bsWs}+`}
-                    />
+                    <ResultBox label="BS" value={result.autoHit ? "N/A" : `${selectedWeaponProfile?.bsWs}+`} />
                     {result.hitBonuses.length ? (
-                        <ResultBox
-                            value={`+${result.hitBonuses.reduce((sum, b) => sum + b.value, 0)}`}
-                            modifiers={result.hitBonuses}
-                        />
+                        <ResultBox value={`+${result.hitBonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={result.hitBonuses} />
                     ) : (
                         <div className="flex items-center justify-center">
                             <p className="font-bold text-[24px]">-</p>
                         </div>
                     )}
                     {result.hitPenalties.length ? (
-                        <ResultBox
-                            value={`${result.hitPenalties.reduce((sum, p) => sum + p.value, 0)}`}
-                            modifiers={result.hitPenalties}
-                        />
+                        <ResultBox value={`${result.hitPenalties.reduce((sum, p) => sum + p.value, 0)}`} modifiers={result.hitPenalties} />
                     ) : (
                         <div className="flex items-center justify-center">
                             <p className="font-bold text-[24px]">-</p>
@@ -278,20 +195,14 @@ export function AttackResolver({
                         <p className="font-bold text-[24px]">-</p>
                     </div>
                     {result.woundBonuses.length ? (
-                        <ResultBox
-                            value={`+${result.woundBonuses.reduce((sum, b) => sum + b.value, 0)}`}
-                            modifiers={result.woundBonuses}
-                        />
+                        <ResultBox value={`+${result.woundBonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={result.woundBonuses} />
                     ) : (
                         <div className="flex items-center justify-center">
                             <p className="font-bold text-[24px]">-</p>
                         </div>
                     )}
                     {result.woundPenalties.length ? (
-                        <ResultBox
-                            value={`${result.woundPenalties.reduce((sum, p) => sum + p.value, 0)}`}
-                            modifiers={result.woundPenalties}
-                        />
+                        <ResultBox value={`${result.woundPenalties.reduce((sum, p) => sum + p.value, 0)}`} modifiers={result.woundPenalties} />
                     ) : (
                         <div className="flex items-center justify-center">
                             <p className="font-bold text-[24px]">-</p>
@@ -306,32 +217,20 @@ export function AttackResolver({
                 <div className="grid grid-cols-4 gap-2 pt-4">
                     <ResultBox label="Save" value={`${selectedDefendingModel?.sv}+`} />
                     {result.saveBonuses.length ? (
-                        <ResultBox
-                            value={`+${result.saveBonuses.reduce((sum, b) => sum + b.value, 0)}`}
-                            modifiers={result.saveBonuses}
-                        />
+                        <ResultBox value={`+${result.saveBonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={result.saveBonuses} />
                     ) : (
                         <div className="flex items-center justify-center">
                             <p className="font-bold text-[24px]">-</p>
                         </div>
                     )}
                     {result.savePenalties.length ? (
-                        <ResultBox
-                            value={`${result.savePenalties.reduce((sum, p) => sum + p.value, 0)}`}
-                            modifiers={result.savePenalties}
-                        />
+                        <ResultBox value={`${result.savePenalties.reduce((sum, p) => sum + p.value, 0)}`} modifiers={result.savePenalties} />
                     ) : (
                         <div className="flex items-center justify-center">
                             <p className="font-bold text-[24px]">-</p>
                         </div>
                     )}
-                    <FinalResultBox
-                        value={
-                            result.toSave < 7
-                                ? `${result.toSave}+${result.invulnSave ? "+" : ""}`
-                                : `-`
-                        }
-                    />
+                    <FinalResultBox className={result.invulnSave ? "bg-amber-300" : "bg-black"} value={result.toSave < 7 ? `${result.toSave}+${result.invulnSave ? "+" : ""}` : `-`} />
                 </div>
             </section>
 

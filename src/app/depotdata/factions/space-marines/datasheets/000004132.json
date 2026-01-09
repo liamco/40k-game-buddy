@@ -18,29 +18,40 @@
   "supplementKey": "space-wolves",
   "abilities": [
     {
-      "id": "000010256",
-      "name": "Curse of the Wulfen",
-      "legend": "Only while fighting at the side of their battle-brothers can the feral Wulfen control their frenzied aggression.",
-      "factionId": "SM",
-      "description": "While this unit is within 6\" of one or more friendly <span class=\"tooltip00278\" data-tooltip-content=\"#tooltip_content00278\" data-tooltip-anchor=\"#tooltip_content00278\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span> <span class=\"kwb\">CHARACTER</span></span> models (excluding <span class=\"tooltip00279\" data-tooltip-content=\"#tooltip_content00279\" data-tooltip-anchor=\"#tooltip_content00279\"><span class=\"kwb\">WULFEN</span></span> models) or within 12\" of one or more friendly <span class=\"tooltip00280\" data-tooltip-content=\"#tooltip_content00280\" data-tooltip-anchor=\"#tooltip_content00280\"><span class=\"kwb\">WOLF</span> <span class=\"kwb\">PRIEST</span></span> models, if it is not Battle-shocked, add 1 to the Objective Control characteristic of <span class=\"tooltip00259\" data-tooltip-content=\"#tooltip_content00259\" data-tooltip-anchor=\"#tooltip_content00259\"><span class=\"kwb\">INFANTRY</span></span> models in it and add 3 to the Objective Control characteristic of <span class=\"tooltipVehicle\" data-tooltip-content=\"#tooltip_contentVehicle\" data-tooltip-anchor=\"#tooltip_contentVehicle\"><span class=\"kwb\">VEHICLE</span></span> models in it.",
-      "type": "Faction"
-    },
-    {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
-    },
-    {
       "id": "",
       "name": "Hammer Blow",
       "legend": "",
       "factionId": "",
       "description": "In the Fight phase, after this unit has fought, select one enemy <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit hit by one or more of those attacks. Until the end of the next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUPPRESSED"
+          ],
+          "value": "until the end of the next turn"
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "includes",
+              "value": "MONSTER or VEHICLE"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -49,7 +60,15 @@
       "factionId": "",
       "description": "Each time the bearer makes a melee attack, re-roll a Hit roll of 1.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones"
+        }
+      ]
     }
   ],
   "keywords": [
@@ -204,5 +223,9 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Space Wolves",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000010256",
+    "000008350"
+  ]
 }

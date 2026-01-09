@@ -18,21 +18,43 @@
   "supplementKey": "space-wolves",
   "abilities": [
     {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
-    },
-    {
       "id": "",
       "name": "Fire Discipline",
       "legend": "",
       "factionId": "",
       "description": "Each time this unit Remains Stationary, if it includes a Long Fang Pack Leader, you can select one enemy unit that is visible to that model. Until the end of the turn, each time a model in this unit makes a ranged attack that targets that enemy unit, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "Long Fang Pack Leader"
+              ],
+              "operator": "includes",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "visible",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -41,7 +63,39 @@
       "factionId": "",
       "description": "Once per battle, after making a Hit roll for a model in this unit, you can change that roll to an unmodified 6.<br><br><b>Designer’s Note:</b> Place an Armorium Cherub token next to the unit, removing it once this ability has been used.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "h",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "h",
+              "operator": "notEquals",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ARMORIUM CHERUB"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -50,7 +104,35 @@
       "factionId": "",
       "description": "If a <span class=\"tooltip00031\" data-tooltip-content=\"#tooltip_content00031\" data-tooltip-anchor=\"#tooltip_content00031\"><span class=\"kwb\">CHARACTER</span></span> unit from your army with the Leader ability can be attached to a <span class=\"kwb kwbo\">DEVASTATOR</span> <span class=\"kwb kwbo\">SQUAD</span>, it can instead be attached to this unit.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATOR SQUAD"
+          ],
+          "value": "attached"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATOR SQUAD"
+          ],
+          "value": "attached",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "LEADER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -743,5 +825,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
   "isForgeWorld": false,
-  "isLegends": true
+  "isLegends": true,
+  "factionAbilityIds": [
+    "000008350"
+  ]
 }

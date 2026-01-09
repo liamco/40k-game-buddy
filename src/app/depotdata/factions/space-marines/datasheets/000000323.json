@@ -18,21 +18,30 @@
   "supplementKey": "space-wolves",
   "abilities": [
     {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
-    },
-    {
       "id": "",
       "name": "Predatory Instinct",
       "legend": "",
       "factionId": "",
       "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this unit, it can make a Normal move of up to D6\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "m",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "lessThanOrEqualTo",
+              "value": 9
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -41,7 +50,31 @@
       "factionId": "",
       "description": "While this unit is within 6\" of one or more friendly <span class=\"tooltip00278\" data-tooltip-content=\"#tooltip_content00278\" data-tooltip-anchor=\"#tooltip_content00278\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span> <span class=\"kwb\">CHARACTER</span></span> models (excluding <span class=\"tooltip00279\" data-tooltip-content=\"#tooltip_content00279\" data-tooltip-anchor=\"#tooltip_content00279\"><span class=\"kwb\">WULFEN</span></span> models), if this unit is not Battle-shocked, models in it have an Objective Control characteristic of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBattleShocked",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "SPACE WOLVES CHARACTER"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -153,5 +186,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Space Wolves",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008350"
+  ]
 }

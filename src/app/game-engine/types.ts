@@ -5,36 +5,10 @@ import type { Datasheet, Model, WeaponProfile, Stratagem, GamePhase, GameTurn } 
 // ============================================
 
 // Import and re-export all schema types from the single source of truth
-export type {
-    Entity,
-    Effect,
-    RollAttribute,
-    UnitAttribute,
-    WeaponAttribute,
-    Attribute,
-    Operator,
-    CombatStatusItem,
-    CombatStatusFlag,
-    CombatStatus,
-    RerollType,
-    MechanicSourceType,
-} from "./mechanic-schema";
+export type { Entity, Effect, RollAttribute, UnitAttribute, WeaponAttribute, Attribute, Operator, CombatStatusItem, CombatStatusFlag, CombatStatus, RerollType, MechanicSourceType } from "./mechanic-schema";
 
 // Re-export const arrays for runtime use
-export {
-    ENTITIES,
-    EFFECTS,
-    ROLL_ATTRIBUTES,
-    UNIT_ATTRIBUTES,
-    WEAPON_ATTRIBUTES,
-    ATTRIBUTES,
-    OPERATORS,
-    COMBAT_STATUS_FLAGS,
-    REROLL_TYPES,
-    MECHANIC_SOURCE_TYPES,
-    MECHANIC_SCHEMA,
-    createDefaultCombatStatus,
-} from "./mechanic-schema";
+export { ENTITIES, EFFECTS, ROLL_ATTRIBUTES, UNIT_ATTRIBUTES, WEAPON_ATTRIBUTES, ATTRIBUTES, OPERATORS, COMBAT_STATUS_FLAGS, REROLL_TYPES, MECHANIC_SOURCE_TYPES, MECHANIC_SCHEMA, createDefaultCombatStatus } from "./mechanic-schema";
 
 // ============================================
 // CONDITION INTERFACE
@@ -177,6 +151,26 @@ export interface DetachmentAbility {
 }
 
 /**
+ * Faction ability definition.
+ */
+export interface FactionAbility {
+    id: string;
+    name: string;
+    type: "Faction";
+    description?: string;
+    legend?: string;
+    mechanics?: Mechanic[];
+}
+
+/**
+ * Faction-specific state flag definition.
+ */
+export interface FactionStateFlag {
+    name: string;
+    label: string;
+}
+
+/**
  * Army-level context.
  */
 export interface ArmyContext {
@@ -184,6 +178,8 @@ export interface ArmyContext {
     factionSlug: string;
     detachmentSlug?: string;
     detachmentAbilities?: DetachmentAbility[];
+    factionAbilities?: FactionAbility[];
+    factionStateFlags?: FactionStateFlag[];
     /** Unit ID if Oath of Moment (or similar) is targeting a specific unit */
     oathOfMomentTarget?: string;
 }
@@ -294,6 +290,13 @@ export interface ModifiedStats {
 
     /** Feel No Pain value (if any) */
     feelNoPain: number | null;
+
+    /**
+     * ANTI-X threshold (if applicable).
+     * When set, wound rolls of this value or higher are critical wounds (auto-wound).
+     * The effective wound target becomes min(S vs T target, antiThreshold).
+     */
+    antiThreshold: number | null;
 }
 
 // ============================================

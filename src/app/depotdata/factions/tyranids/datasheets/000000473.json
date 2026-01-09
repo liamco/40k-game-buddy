@@ -23,7 +23,17 @@
       "legend": "Some warriors attack with blinding speed, landing their blows before their foes can react.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors attack with blinding speed, landing their blows before their foes can react.</p>Units with this ability that are eligible to fight do so in the Fights First step, provided every model in the unit has this ability.</div>",
-      "type": "Core"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHTS FIRST"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "000008345",
@@ -31,7 +41,17 @@
       "legend": "Many armies employ reconnaissance units who can sit concealed, waiting for the right moment to strike.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Many armies employ reconnaissance units who can sit concealed, waiting for the right moment to strike.</p>During deployment, if every model in a unit has this ability, then when you set it up, it can be set up anywhere on the battlefield that is more than 9\" horizontally away from the enemy deployment zone and all enemy models.</div>",
-      "type": "Core"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "INFILTRATORS"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "000008336",
@@ -39,7 +59,17 @@
       "legend": "Assassins and other covert agents are difficult to track and pinpoint in the swirling maelstrom of battle.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Assassins and other covert agents are difficult to track and pinpoint in the swirling maelstrom of battle.</p>Unless part of an Attached unit (see <span class=\"tooltip00225\" data-tooltip-content=\"#tooltip_content00225\"><span class=\"tt kwbu\">Leader</span></span>), this unit can only be selected as the target of a ranged attack if the attacking model is within 12\".</div>",
-      "type": "Core"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "000008337",
@@ -47,15 +77,16 @@
       "legend": "Some warriors are masters of disguise and concealment.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some warriors are masters of disguise and concealment.</p>If every model in a unit has this ability, then each time a ranged attack is made against it, subtract 1 from that attack’s <span class=\"tooltip00014\" data-tooltip-content=\"#tooltip_content00014\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span>.</div>",
-      "type": "Core"
-    },
-    {
-      "id": "000000705",
-      "name": "Synapse",
-      "legend": "Some Tyranids serve as synaptic conduits or nodal relays through which a portion of the Hive Mind’s iron will flows, overriding the natural instincts of the swarm to direct the teeming warrior-beasts to function as a single, gestalt organism on the battlefield.",
-      "factionId": "TYR",
-      "description": "If your Army Faction is <span class=\"kwb\">TYRANIDS</span>, while a <span class=\"kwb\">TYRANIDS</span> unit from your army is within 6\" of one or more friendly <span class=\"tooltip00223\" data-tooltip-content=\"#tooltip_content00223\" data-tooltip-anchor=\"#tooltip_content00223\"><span class=\"kwb\">SYNAPSE</span></span> models, that <span class=\"kwb\">TYRANIDS</span> unit is said to be within Synapse Range of that model and of your army. While a <span class=\"kwb\">TYRANIDS</span> unit from your army is within Synapse Range of your army: <br><ul><li>Each time that unit takes a Battle-shock test, take that test on 3D6 instead of 2D6. </li><li>Each time a model in that unit makes a melee attack, add 1 to the Strength characteristic of that attack.</li></ul>",
-      "type": "Faction"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "opposingModel",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1,
+          "conditions": []
+        }
+      ]
     },
     {
       "id": "",
@@ -64,7 +95,8 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": []
     },
     {
       "id": "",
@@ -73,7 +105,8 @@
       "factionId": "",
       "description": "Once per battle round, you can target one model with this ability with the Rapid Ingress Stratagem for 0CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": []
     }
   ],
   "keywords": [
@@ -178,5 +211,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Tyranids",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000000705"
+  ]
 }

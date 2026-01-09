@@ -18,21 +18,31 @@
   "supplementKey": "codex",
   "abilities": [
     {
-      "id": "000000705",
-      "name": "Synapse",
-      "legend": "Some Tyranids serve as synaptic conduits or nodal relays through which a portion of the Hive Mind’s iron will flows, overriding the natural instincts of the swarm to direct the teeming warrior-beasts to function as a single, gestalt organism on the battlefield.",
-      "factionId": "TYR",
-      "description": "If your Army Faction is <span class=\"kwb\">TYRANIDS</span>, while a <span class=\"kwb\">TYRANIDS</span> unit from your army is within 6\" of one or more friendly <span class=\"tooltip00223\" data-tooltip-content=\"#tooltip_content00223\" data-tooltip-anchor=\"#tooltip_content00223\"><span class=\"kwb\">SYNAPSE</span></span> models, that <span class=\"kwb\">TYRANIDS</span> unit is said to be within Synapse Range of that model and of your army. While a <span class=\"kwb\">TYRANIDS</span> unit from your army is within Synapse Range of your army: <br><ul><li>Each time that unit takes a Battle-shock test, take that test on 3D6 instead of 2D6. </li><li>Each time a model in that unit makes a melee attack, add 1 to the Strength characteristic of that attack.</li></ul>",
-      "type": "Faction"
-    },
-    {
       "id": "",
       "name": "Guardian Organism",
       "legend": "",
       "factionId": "",
       "description": "While a <span class=\"tooltip00400\" data-tooltip-content=\"#tooltip_content00400\" data-tooltip-anchor=\"#tooltip_content00400\"><span class=\"kwb\">CHARACTER</span></span> model is leading this unit, that <span class=\"kwb\">CHARACTER</span> has the <span class=\"tooltip00113\" data-tooltip-content=\"#tooltip_content00113\"><span class=\"tt kwbu\">Feel</span> <span class=\"tt kwbu\">No</span> <span class=\"tt kwbu\">Pain</span> <span class=\"tt kwbu\">5+</span></span> ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": "5+",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -193,5 +203,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Tyranids",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000000705"
+  ]
 }

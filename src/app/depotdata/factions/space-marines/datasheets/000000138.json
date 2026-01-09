@@ -18,21 +18,24 @@
   "supplementKey": "codex",
   "abilities": [
     {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
-    },
-    {
       "id": "",
       "name": "Author of the Codex",
       "legend": "",
       "factionId": "",
       "description": "At the Start of your Command phase, select two Author of the Codex abilities (see left). Until the start of your next Command phase, this model has those abilities.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "Author of the Codex ability 1",
+            "Author of the Codex ability 2"
+          ],
+          "value": "until the start of your next Command phase"
+        }
+      ]
     },
     {
       "id": "",
@@ -41,7 +44,30 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly <span class=\"tooltip00194\" data-tooltip-content=\"#tooltip_content00194\" data-tooltip-anchor=\"#tooltip_content00194\"><span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> <span class=\"kwb\">INFANTRY</span></span> units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "lessThanOrEqualTo",
+              "value": 3
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -50,7 +76,51 @@
       "factionId": "",
       "description": "The first time this model is destroyed, roll one D6 at the end of the phase: on a 3+, set this model back up on the battlefield as close as possible to where it was destroyed and not within Engagement Range of any enemy models, with 6 wounds remaining.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "value": -3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "RESURRECTION"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -59,7 +129,17 @@
       "factionId": "",
       "description": "If this model is in your army, it must be your Warlord.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "Warlord"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "",
@@ -68,7 +148,35 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of this model, add 1 to the Objective Control characteristic of models in that unit and you can re-roll Battle-shock and Leadership tests taken for that unit.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "ld",
+          "value": "failed"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "ld",
+          "value": "failed"
+        }
+      ]
     },
     {
       "id": "",
@@ -77,7 +185,33 @@
       "factionId": "",
       "description": "At the start of your Command phase, after you have selected your <span class=\"tooltip00012\" data-tooltip-content=\"#tooltip_content00012\"><span class=\"tt kwbu\">Oath</span> <span class=\"tt kwbu\">of</span> <span class=\"tt kwbu\">Moment</span></span> target, select a second enemy unit. Until the start of your next Command phase, if your Oath of Moment target is destroyed, that second enemy unit becomes your Oath of Moment target until you select a new one.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "OATH OF MOMENT"
+          ],
+          "value": "second enemy unit"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "OATH OF MOMENT"
+          ],
+          "value": "new target",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": "Oath of Moment target"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -86,7 +220,25 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit within 12\" of that model is targeted with a Stratagem. If it does, reduce the CP cost of that usage of that Stratagem by 1CP.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "abilities": [
+                "ADEPTUS ASTARTES"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -263,5 +415,8 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008350"
+  ]
 }

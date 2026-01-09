@@ -2,33 +2,11 @@ import React, { useState, useEffect, useMemo, Fragment } from "react";
 import { Info, Search } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 import { Button } from "./_ui/button";
-import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-} from "./_ui/command";
-import type {
-    Weapon,
-    ArmyList,
-    Datasheet,
-    Faction,
-    WeaponProfile,
-    GamePhase,
-    ArmyListItem,
-} from "../types";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./_ui/command";
+import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
 import WeaponProfileCard from "./WeaponProfileCard/WeaponProfileCard";
-import {
-    collectUnitAbilities,
-    createDefaultCombatStatus,
-    type Mechanic,
-    type UnitContext,
-    type CombatStatus,
-    type CombatStatusFlag,
-} from "../game-engine";
+import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type UnitContext, type CombatStatus, type CombatStatusFlag } from "../game-engine";
 import CombatStatusComponent from "./CombatStatus/CombatStatus";
 
 // Parse loadout HTML to extract weapon names
@@ -46,17 +24,11 @@ function parseLoadoutWeapons(loadout: string): string[] {
 // Check if a weapon is in the loadout
 function isWeaponInLoadout(weaponName: string, loadoutWeapons: string[]): boolean {
     const normalizedName = weaponName.toLowerCase();
-    return loadoutWeapons.some(
-        (loadoutWeapon) =>
-            loadoutWeapon.includes(normalizedName) || normalizedName.includes(loadoutWeapon)
-    );
+    return loadoutWeapons.some((loadoutWeapon) => loadoutWeapon.includes(normalizedName) || normalizedName.includes(loadoutWeapon));
 }
 
 // Check if a weapon is selected in loadoutSelections
-function isWeaponSelected(
-    weaponId: string,
-    loadoutSelections?: { [key: string]: number }
-): boolean {
+function isWeaponSelected(weaponId: string, loadoutSelections?: { [key: string]: number }): boolean {
     if (!loadoutSelections) return false;
     return (loadoutSelections[weaponId] ?? 0) > 0;
 }
@@ -109,17 +81,7 @@ function extractCombatBonuses(mechanics: Mechanic[]): {
     return { hitBonuses, woundBonuses, otherBonuses };
 }
 
-export function AttackerPanel({
-    gamePhase,
-    unit,
-    attachedUnit,
-    onUnitChange,
-    selectedWeaponProfile,
-    onWeaponProfileChange,
-    combatStatus,
-    onCombatStatusChange,
-    selectedList,
-}: AttackerPanelProps) {
+export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, combatStatus, onCombatStatusChange, selectedList }: AttackerPanelProps) {
     const [factionData, setFactionData] = useState<Faction | null>(null);
     const [unitSearchOpen, setUnitSearchOpen] = useState(false);
     const [unitSearchValue, setUnitSearchValue] = useState("");
@@ -143,8 +105,7 @@ export function AttackerPanel({
 
         const items = selectedList.items;
         const processed = new Set<string>();
-        const combined: Array<{ item: ArmyListItem; displayName: string; isCombined: boolean }> =
-            [];
+        const combined: Array<{ item: ArmyListItem; displayName: string; isCombined: boolean }> = [];
 
         // First pass: Process all leaders and their attached units
         items.forEach((item) => {
@@ -154,9 +115,7 @@ export function AttackerPanel({
             // If this is a leader with an attached unit
             if (item.leading) {
                 // Find the attached unit (without checking processed, since we process leaders first)
-                const attachedUnit = items.find(
-                    (u) => u.id === item.leading?.id && u.name === item.leading?.name
-                );
+                const attachedUnit = items.find((u) => u.id === item.leading?.id && u.name === item.leading?.name);
 
                 if (attachedUnit && !processed.has(attachedUnit.listItemId)) {
                     // Combine leader and attached unit
@@ -187,9 +146,7 @@ export function AttackerPanel({
             // If this unit is being led, skip it (it should have been added with its leader in first pass)
             if (item.leadBy) {
                 // Check if the leader exists
-                const leader = items.find(
-                    (l) => l.id === item.leadBy?.id && l.name === item.leadBy?.name
-                );
+                const leader = items.find((l) => l.id === item.leadBy?.id && l.name === item.leadBy?.name);
 
                 if (!leader || !processed.has(leader.listItemId)) {
                     // Leader not found or not processed, show this unit alone
@@ -223,11 +180,7 @@ export function AttackerPanel({
     const filteredListItems = useMemo(() => {
         if (!unitSearchValue) return combinedListItems;
         const search = unitSearchValue.toLowerCase();
-        return combinedListItems.filter(
-            (combined) =>
-                combined.displayName.toLowerCase().includes(search) ||
-                combined.item.roleLabel.toLowerCase().includes(search)
-        );
+        return combinedListItems.filter((combined) => combined.displayName.toLowerCase().includes(search) || combined.item.roleLabel.toLowerCase().includes(search));
     }, [combinedListItems, unitSearchValue]);
 
     // Get display name for selected unit
@@ -242,9 +195,7 @@ export function AttackerPanel({
         }
 
         // Fallback: try to find by id and name (for backwards compatibility)
-        const combinedItem = combinedListItems.find(
-            (c) => c.item.id === unit.id && c.item.name === unit.name
-        );
+        const combinedItem = combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
         return combinedItem ? combinedItem.displayName : unit.name;
     }, [unit, combinedListItems]);
@@ -274,39 +225,26 @@ export function AttackerPanel({
         const listItemId = (unit as ArmyListItem).listItemId;
 
         // Always get the fresh item from selectedList to ensure we have latest loadoutSelections
-        const freshUnit = listItemId
-            ? selectedList.items.find((item) => item.listItemId === listItemId)
-            : null;
+        const freshUnit = listItemId ? selectedList.items.find((item) => item.listItemId === listItemId) : null;
 
         // Use fresh unit if found, otherwise fall back to unit prop
         const currentUnit = freshUnit || unit;
 
         // Check if this is a combined unit (leader with attached unit)
-        const combinedItem = listItemId
-            ? combinedListItems.find((c) => c.item.listItemId === listItemId)
-            : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
+        const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
         if (combinedItem?.isCombined && combinedItem.item.leading) {
             // Find the attached unit (fresh from selectedList)
-            const attachedUnit = selectedList.items.find(
-                (u) =>
-                    u.id === combinedItem.item.leading?.id &&
-                    u.name === combinedItem.item.leading?.name
-            );
+            const attachedUnit = selectedList.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
 
             // Get fresh leader from selectedList
-            const freshLeader = selectedList.items.find(
-                (item) => item.listItemId === combinedItem.item.listItemId
-            );
+            const freshLeader = selectedList.items.find((item) => item.listItemId === combinedItem.item.listItemId);
             const leaderUnit = freshLeader || combinedItem.item;
 
             if (attachedUnit) {
                 // Filter and combine wargear from both units with source unit labels
                 const leaderFiltered = filterUnitWargear(leaderUnit, leaderUnit.wargear || []);
-                const attachedFiltered = filterUnitWargear(
-                    attachedUnit,
-                    attachedUnit.wargear || []
-                );
+                const attachedFiltered = filterUnitWargear(attachedUnit, attachedUnit.wargear || []);
 
                 const leaderWargear = leaderFiltered.map((weapon) => ({
                     ...weapon,
@@ -345,13 +283,7 @@ export function AttackerPanel({
         // (mechanics with conditions about leading state)
         const leaderMechanics = mechanics.filter((m) => {
             // Check if this mechanic has a "leading" type condition
-            const hasLeadingCondition = m.conditions?.some(
-                (c) =>
-                    c.state === "isLeadingUnit" ||
-                    c.state === "leading" ||
-                    (Array.isArray(c.state) &&
-                        (c.state.includes("isLeadingUnit") || c.state.includes("leading")))
-            );
+            const hasLeadingCondition = m.conditions?.some((c) => c.state === "isLeadingUnit" || c.state === "leading" || (Array.isArray(c.state) && (c.state.includes("isLeadingUnit") || c.state.includes("leading"))));
             return hasLeadingCondition;
         });
 
@@ -361,25 +293,14 @@ export function AttackerPanel({
     return (
         <div className="bg-[#e6e6e6] rounded-[8px] p-6 space-y-4">
             <div className="space-y-2">
-                <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold text-[14px] text-[#1e1e1e]">
-                    Attacking unit
-                </p>
+                <p className=" font-semibold text-[14px] text-[#1e1e1e]">Attacking unit</p>
                 {!selectedList ? (
-                    <div className="w-full bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 font-['Inter:Regular',sans-serif] text-[14px] text-[#767676]">
-                        Select an attacker list above
-                    </div>
+                    <div className="w-full bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 text-[14px] text-[#767676]">Select an attacker list above</div>
                 ) : (
                     <Popover open={unitSearchOpen} onOpenChange={setUnitSearchOpen} modal={true}>
                         <PopoverTrigger className="w-full">
-                            <Button
-                                variant="outline"
-                                role="combobox"
-                                aria-expanded={unitSearchOpen}
-                                className="w-full justify-between bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 h-auto font-['Inter:Regular',sans-serif] text-[14px]"
-                            >
-                                <span className="text-muted-foreground">
-                                    {selectedUnitDisplayName || "Search for a unit..."}
-                                </span>
+                            <Button variant="outline" role="combobox" aria-expanded={unitSearchOpen} className="w-full justify-between bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 h-auto font-['Inter:Regular',sans-serif] text-[14px]">
+                                <span className="text-muted-foreground">{selectedUnitDisplayName || "Search for a unit..."}</span>
                                 <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                             </Button>
                         </PopoverTrigger>
@@ -393,11 +314,7 @@ export function AttackerPanel({
                             sideOffset={8}
                         >
                             <Command>
-                                <CommandInput
-                                    placeholder="Search units..."
-                                    value={unitSearchValue}
-                                    onValueChange={setUnitSearchValue}
-                                />
+                                <CommandInput placeholder="Search units..." value={unitSearchValue} onValueChange={setUnitSearchValue} />
                                 <CommandList>
                                     <CommandEmpty>No unit found.</CommandEmpty>
                                     <CommandGroup>
@@ -414,12 +331,8 @@ export function AttackerPanel({
                                             >
                                                 <div className="flex items-center justify-between w-full">
                                                     <div>
-                                                        <div className="font-medium">
-                                                            {combined.displayName}
-                                                        </div>
-                                                        <div className="text-xs text-muted-foreground">
-                                                            {combined.item.roleLabel}
-                                                        </div>
+                                                        <div className="font-medium">{combined.displayName}</div>
+                                                        <div className="text-xs text-muted-foreground">{combined.item.roleLabel}</div>
                                                     </div>
                                                 </div>
                                             </CommandItem>
@@ -433,77 +346,43 @@ export function AttackerPanel({
             </div>
 
             {/* Display leader combat bonuses when a combined unit is selected */}
-            {attachedUnit &&
-                (leaderCombatBonuses.hitBonuses.length > 0 ||
-                    leaderCombatBonuses.woundBonuses.length > 0 ||
-                    leaderCombatBonuses.otherBonuses.length > 0) && (
-                    <div className="bg-green-50 border border-green-200 rounded-[4px] p-3 space-y-2">
-                        <p className="text-[10px] font-bold text-green-800 uppercase">
-                            Leader Bonuses Active
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                            {leaderCombatBonuses.hitBonuses.map((bonus, idx) => (
-                                <span
-                                    key={`hit-${idx}`}
-                                    className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800"
-                                    title={bonus.source}
-                                >
-                                    +{bonus.value} to Hit
-                                </span>
-                            ))}
-                            {leaderCombatBonuses.woundBonuses.map((bonus, idx) => (
-                                <span
-                                    key={`wound-${idx}`}
-                                    className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800"
-                                    title={bonus.source}
-                                >
-                                    +{bonus.value} to Wound
-                                </span>
-                            ))}
-                            {leaderCombatBonuses.otherBonuses.map((bonus, idx) => (
-                                <span
-                                    key={`other-${idx}`}
-                                    className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800"
-                                    title={bonus.source}
-                                >
-                                    {bonus.description}
-                                </span>
-                            ))}
-                        </div>
-                        <p className="text-[9px] text-green-600 italic">
-                            From:{" "}
-                            {leaderCombatBonuses.hitBonuses[0]?.source ||
-                                leaderCombatBonuses.woundBonuses[0]?.source ||
-                                leaderCombatBonuses.otherBonuses[0]?.source}
-                        </p>
+            {attachedUnit && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
+                <div className="bg-green-50 border border-green-200 rounded-[4px] p-3 space-y-2">
+                    <p className="text-[10px] font-bold text-green-800 uppercase">Leader Bonuses Active</p>
+                    <div className="flex flex-wrap gap-2">
+                        {leaderCombatBonuses.hitBonuses.map((bonus, idx) => (
+                            <span key={`hit-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
+                                +{bonus.value} to Hit
+                            </span>
+                        ))}
+                        {leaderCombatBonuses.woundBonuses.map((bonus, idx) => (
+                            <span key={`wound-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
+                                +{bonus.value} to Wound
+                            </span>
+                        ))}
+                        {leaderCombatBonuses.otherBonuses.map((bonus, idx) => (
+                            <span key={`other-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
+                                {bonus.description}
+                            </span>
+                        ))}
                     </div>
-                )}
+                    <p className="text-[9px] text-green-600 italic">From: {leaderCombatBonuses.hitBonuses[0]?.source || leaderCombatBonuses.woundBonuses[0]?.source || leaderCombatBonuses.otherBonuses[0]?.source}</p>
+                </div>
+            )}
 
             {unit &&
                 availableWargear.length > 0 &&
                 (() => {
                     // Filter weapons by game phase
-                    const filteredWeapons = availableWargear.filter((weapon) =>
-                        gamePhase === "SHOOTING"
-                            ? weapon.type === "Ranged"
-                            : weapon.type === "Melee"
-                    ) as Array<Weapon & { sourceUnit?: string }>;
+                    const filteredWeapons = availableWargear.filter((weapon) => (gamePhase === "SHOOTING" ? weapon.type === "Ranged" : weapon.type === "Melee")) as Array<Weapon & { sourceUnit?: string }>;
 
                     // Check if this is a combined unit
                     const listItemId = (unit as any).listItemId;
-                    const combinedItem = listItemId
-                        ? combinedListItems.find((c) => c.item.listItemId === listItemId)
-                        : combinedListItems.find(
-                              (c) => c.item.id === unit.id && c.item.name === unit.name
-                          );
+                    const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
                     if (combinedItem?.isCombined && combinedItem.item.leading) {
                         // Find the attached unit to get its name
-                        const attachedUnit = selectedList?.items.find(
-                            (u) =>
-                                u.id === combinedItem.item.leading?.id &&
-                                u.name === combinedItem.item.leading?.name
-                        );
+                        const attachedUnit = selectedList?.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
 
                         if (attachedUnit) {
                             const leaderName = combinedItem.item.name;
@@ -523,41 +402,21 @@ export function AttackerPanel({
                             );
 
                             // Order: leader first, then attached unit
-                            const orderedSources = [leaderName, attachedName].filter(
-                                (source) =>
-                                    groupedWeapons[source] && groupedWeapons[source].length > 0
-                            );
+                            const orderedSources = [leaderName, attachedName].filter((source) => groupedWeapons[source] && groupedWeapons[source].length > 0);
 
                             return (
                                 <div className="space-y-2">
-                                    <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold text-[12px] text-[#1e1e1e]">
-                                        Select weapon
-                                    </p>
+                                    <p className=" font-semibold text-[12px] text-[#1e1e1e]">Select weapon</p>
                                     {orderedSources.map((source) => (
                                         <div key={source} className="space-y-2">
-                                            <p className="text-[10px] text-[#767676] italic font-medium">
-                                                from {source}
-                                            </p>
+                                            <p className="text-[10px] text-[#767676] italic font-medium">from {source}</p>
                                             {groupedWeapons[source].map((weapon) => (
                                                 <Fragment key={weapon.name}>
-                                                    {weapon.profiles.map(
-                                                        (profile: WeaponProfile) => {
-                                                            const isSelected =
-                                                                selectedWeaponProfile?.name ===
-                                                                profile.name;
-                                                            const profileKey = `${source}-${weapon.name}-${profile.name}`;
-                                                            return (
-                                                                <WeaponProfileCard
-                                                                    key={profileKey}
-                                                                    profile={profile}
-                                                                    isSelected={isSelected}
-                                                                    onWeaponProfileChange={
-                                                                        onWeaponProfileChange
-                                                                    }
-                                                                />
-                                                            );
-                                                        }
-                                                    )}
+                                                    {weapon.profiles.map((profile: WeaponProfile) => {
+                                                        const isSelected = selectedWeaponProfile?.name === profile.name;
+                                                        const profileKey = `${source}-${weapon.name}-${profile.name}`;
+                                                        return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                                    })}
                                                 </Fragment>
                                             ))}
                                         </div>
@@ -570,22 +429,12 @@ export function AttackerPanel({
                     // Regular unit: show weapons without grouping
                     return (
                         <div className="space-y-2">
-                            <p className="font-['Inter:Semi_Bold',sans-serif] font-semibold text-[12px] text-[#1e1e1e]">
-                                Select weapon
-                            </p>
+                            <p className=" font-semibold text-[12px] text-[#1e1e1e]">Select weapon</p>
                             {filteredWeapons.map((weapon) => (
                                 <Fragment key={weapon.name}>
                                     {weapon.profiles.map((profile: WeaponProfile) => {
-                                        const isSelected =
-                                            selectedWeaponProfile?.name === profile.name;
-                                        return (
-                                            <WeaponProfileCard
-                                                key={profile.name}
-                                                profile={profile}
-                                                isSelected={isSelected}
-                                                onWeaponProfileChange={onWeaponProfileChange}
-                                            />
-                                        );
+                                        const isSelected = selectedWeaponProfile?.name === profile.name;
+                                        return <WeaponProfileCard key={profile.name} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
                                     })}
                                 </Fragment>
                             ))}
@@ -595,11 +444,7 @@ export function AttackerPanel({
 
             <hr className="border-[#d9d9d9] border-1" />
 
-            <CombatStatusComponent
-                side="attacker"
-                combatStatus={combatStatus}
-                onStatusChange={onCombatStatusChange}
-            />
+            <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
         </div>
     );
 }

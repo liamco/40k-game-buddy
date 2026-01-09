@@ -23,7 +23,17 @@
       "legend": "Many armies employ reconnaissance units who can sit concealed, waiting for the right moment to strike.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Many armies employ reconnaissance units who can sit concealed, waiting for the right moment to strike.</p>During deployment, if every model in a unit has this ability, then when you set it up, it can be set up anywhere on the battlefield that is more than 9\" horizontally away from the enemy deployment zone and all enemy models.</div>",
-      "type": "Core"
+      "type": "Core",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "INFILTRATORS"
+          ],
+          "value": true
+        }
+      ]
     },
     {
       "id": "000008344",
@@ -32,23 +42,17 @@
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Scouts form the vanguard of many armies. Unnoticed by the enemy, they range ahead of the main force.</p>Some units have ‘Scouts x\"’ listed in their abilities. If every model in a unit has this ability, then at the start of the first battle round, before the first turn begins, it can make a Normal move of up to x\", with the exception that, while making that move, the distance moved by each model in that unit can be greater than that model's Move characteristic, as long as it is not greater than x\".<br><br><span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> models can make use of any Scouts x\" ability listed in their abilities, or a Scouts x\" ability that a unit that starts the battle embarked within that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> model has (provided only models with this ability are embarked within that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> model), regardless of how that embarked unit gained this ability (e.g. listed in their abilities, conferred by an Enhancement or by an <span class=\"tooltip00226\" data-tooltip-content=\"#tooltip_content00226\"><span class=\"tt kwbu\">attached</span></span> <span class=\"kwb\">CHARACTER</span>, etc.).<br><br>A unit that moves using this ability must end that move more than 9\" horizontally away from all enemy models. If both players have units that can do this, the player who is taking the first turn moves their units first.<br><br><div class=\"redExample\"><b>Example:</b> A unit has the Scouts 6\" ability. At the start of the first battle round, the controlling player can make a Normal move with that unit of up to 6\".</div><br><div class=\"BreakInsideAvoid frameLight Corner14\"><ul class=\"redSquare\"><li><b>Scouts x\":</b> Unit can make a Normal move of up to x\" before the first turn begins.</li><li>If embarked in a <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span>, that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> can make this move instead.</li><li>Must end this move more than 9\" horizontally away from all enemy models.</li></ul></div></div>",
       "type": "Core",
-      "parameter": "6\""
-    },
-    {
-      "id": "000008521",
-      "name": "Mission Tactics",
-      "legend": "Thousands of years of collated strategic data and hard-won combat experience have provided the Deathwatch with the ultimate battlefield tactics to combat almost any foe.",
-      "factionId": "SM",
-      "description": "At the start of your Command phase, you can select one of the Mission Tactics listed below. Until the start of your next Command phase, that Mission Tactic is active and its effects apply to all units from your army with this ability. Each Mission Tactic can only be selected once per battle.<div></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">FUROR TACTICS</p><p class=\"ShowFluff legend2\">When the enemy horde grows close, the Deathwatch will be tasked with the decimation of their core. Aiming not for clinical kills but for maximum destruction over a wide area, they tear the heart from the enemy army.</p><p>While this Mission Tactic is active, weapons equipped by <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00019\" data-tooltip-content=\"#tooltip_content00019\"><span class=\"tt kwbu\">[SUSTAINED</span> <span class=\"tt kwbu\">HITS</span> <span class=\"tt kwbu\">1]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">MALLEUS TACTICS</p><p class=\"ShowFluff legend2\">When the giants of war lumber forth, the Deathwatch will adopt Malleus tactics. Even the largest behemoth has a weak point, and the archives of the Deathwatch number them all.</p><p>While this Mission Tactic is active, weapons equipped by <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00030\" data-tooltip-content=\"#tooltip_content00030\"><span class=\"tt kwbu\">[LETHAL</span> <span class=\"tt kwbu\">HITS]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">PURGATUS TACTICS</p><p class=\"ShowFluff legend2\">By adopting Purgatus tactics, the Deathwatch focus their deadly ire upon the commanders of the enemy host, assassinating them one after another with pitiless head shots and killing thrusts of the blade.</p><p>While this Mission Tactic is active, each time an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit from your army makes an attack, if a <span class=\"tooltip00014\" data-tooltip-content=\"#tooltip_content00014\"><span class=\"tt kwbu\">Critical</span> <span class=\"tt kwbu\">Hit</span></span> is scored, that attack has the <span class=\"kwb2 bluefont\"><span class=\"tooltip00047\" data-tooltip-content=\"#tooltip_content00047\"><span class=\"tt kwbu\">[PRECISION]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div>",
-      "type": "Faction"
-    },
-    {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
+      "parameter": "6\"",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": "6\""
+        }
+      ]
     },
     {
       "id": "",
@@ -57,7 +61,37 @@
       "factionId": "",
       "description": "At the end of your opponent’s turn, if this unit is more than 6\" away from all enemy units, you can remove this unit from the battlefield and place it into Strategic Reserves.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STRATEGIC RESERVES"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opponentArmy",
+              "state": "isTurnEnd",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 6
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 6
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -66,7 +100,17 @@
       "factionId": "",
       "description": "Models in the bearer’s unit have the <span class=\"tooltip00113\" data-tooltip-content=\"#tooltip_content00113\"><span class=\"tt kwbu\">Feel</span> <span class=\"tt kwbu\">No</span> <span class=\"tt kwbu\">Pain</span> <span class=\"tt kwbu\">6+</span></span> ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 6
+        }
+      ]
     },
     {
       "id": "",
@@ -75,7 +119,36 @@
       "factionId": "",
       "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true,
+              "state": "isBeingLed"
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "rollBonus",
+          "attribute": "cp",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "greaterThanOrEqualTo",
+              "value": 5,
+              "attribute": "D6"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -84,7 +157,41 @@
       "factionId": "",
       "description": "In your Shooting phase, after the bearer’s unit has shot, the bearer’s unit can make a Normal move. If it does, until the end of the turn, the bearer’s unit is not eligible to declare a charge.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "NORMAL MOVE"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "NOT ELIGIBLE TO DECLARE A CHARGE"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -93,7 +200,26 @@
       "factionId": "",
       "description": "If a <span class=\"tooltip00031\" data-tooltip-content=\"#tooltip_content00031\" data-tooltip-anchor=\"#tooltip_content00031\"><span class=\"kwb\">CHARACTER</span></span> from your army with the Leader ability can be attached to an <span class=\"kwb kwbo\">INFILTRATOR</span> <span class=\"kwb kwbo\">SQUAD</span>, it can be attached to this unit instead.<br><br>If this unit has a Leader unit attached to it during the Declare Battle Formations step, that Leader unit gains the Infiltrators and Scouts 6\" abilities.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "INFILTRATORS",
+            "SCOUTS"
+          ],
+          "value": "6\"",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [
@@ -541,5 +667,9 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Deathwatch",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "factionAbilityIds": [
+    "000008521",
+    "000008350"
+  ]
 }

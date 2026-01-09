@@ -18,21 +18,21 @@
   "supplementKey": "codex",
   "abilities": [
     {
-      "id": "000008350",
-      "name": "Oath of Moment",
-      "legend": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied.",
-      "factionId": "WE",
-      "description": "If your Army Faction is <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span>, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:<br><ul><li>You can re-roll the Hit roll.</li><li>If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the <span class=\"tooltip00007\" data-tooltip-content=\"#tooltip_content00007\" data-tooltip-anchor=\"#tooltip_content00007\"><span class=\"kwb\">BLACK</span> <span class=\"kwb\">TEMPLARS</span></span>, <span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\" data-tooltip-anchor=\"#tooltip_content00008\"><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00009\" data-tooltip-content=\"#tooltip_content00009\" data-tooltip-anchor=\"#tooltip_content00009\"><span class=\"kwb\">DARK</span> <span class=\"kwb\">ANGELS</span></span>, <span class=\"tooltip00010\" data-tooltip-content=\"#tooltip_content00010\" data-tooltip-anchor=\"#tooltip_content00010\"><span class=\"kwb\">DEATHWATCH</span></span> or <span class=\"tooltip00011\" data-tooltip-content=\"#tooltip_content00011\" data-tooltip-anchor=\"#tooltip_content00011\"><span class=\"kwb\">SPACE</span> <span class=\"kwb\">WOLVES</span></span> keywords, add 1 to the Wound roll as well.</li></ul>",
-      "type": "Faction"
-    },
-    {
       "id": "",
       "name": "Storm Shield",
       "legend": "",
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ]
     },
     {
       "id": "",
@@ -41,7 +41,25 @@
       "factionId": "",
       "description": "Each time this unit ends a Charge move, until the end of the turn, melee weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\">[LETHAL HITS]</span> ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -50,7 +68,17 @@
       "factionId": "",
       "description": "If a <span class=\"tooltip00031\" data-tooltip-content=\"#tooltip_content00031\" data-tooltip-anchor=\"#tooltip_content00031\"><span class=\"kwb\">CHARACTER</span></span> model from your army with the Leader ability can be attached to a <span class=\"kwb kwbo\">BIKE</span> <span class=\"kwb kwbo\">SQUAD</span> (<span class=\"kwb kwbo\">OUTRIDER</span> <span class=\"kwb kwbo\">SQUAD</span>), it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "attached to BIKE SQUAD"
+          ],
+          "value": "this unit instead"
+        }
+      ]
     }
   ],
   "keywords": [
@@ -616,5 +644,8 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
   "isForgeWorld": false,
-  "isLegends": true
+  "isLegends": true,
+  "factionAbilityIds": [
+    "000008350"
+  ]
 }

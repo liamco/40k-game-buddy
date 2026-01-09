@@ -1,11 +1,4 @@
-import type {
-    Entity,
-    Attribute,
-    GameContext,
-    UnitContext,
-    CombatStatus,
-    CombatStatusFlag,
-} from "../types";
+import type { Entity, Attribute, GameContext, UnitContext, CombatStatus, CombatStatusFlag } from "../types";
 import type { Datasheet, Model, WeaponProfile } from "../../types";
 
 /**
@@ -23,11 +16,7 @@ export interface EntityState {
 /**
  * Resolves which UnitContext an entity reference points to.
  */
-function resolveEntityToUnit(
-    entity: Entity,
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): UnitContext | null {
+function resolveEntityToUnit(entity: Entity, context: GameContext, perspective: "attacker" | "defender"): UnitContext | null {
     switch (entity) {
         case "thisUnit":
         case "thisModel":
@@ -79,11 +68,7 @@ function extractAbilities(datasheet: Datasheet): string[] {
  * @param perspective - Which side we're evaluating from
  * @returns The entity's state
  */
-export function resolveEntityState(
-    entity: Entity,
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): EntityState {
+export function resolveEntityState(entity: Entity, context: GameContext, perspective: "attacker" | "defender"): EntityState {
     const unit = resolveEntityToUnit(entity, context, perspective);
 
     if (!unit) {
@@ -123,12 +108,7 @@ export function resolveEntityState(
  * @param perspective - Which side we're evaluating from
  * @returns The attribute value, or null if not found
  */
-export function getEntityAttributeValue(
-    entity: Entity,
-    attribute: Attribute,
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): number | string | boolean | null {
+export function getEntityAttributeValue(entity: Entity, attribute: Attribute, context: GameContext, perspective: "attacker" | "defender"): number | string | boolean | null {
     const state = resolveEntityState(entity, context, perspective);
 
     // Model attributes
@@ -155,40 +135,12 @@ export function getEntityAttributeValue(
  * @param perspective - Which side we're evaluating from
  * @returns Whether the state flag is true
  */
-export function checkEntityState(
-    entity: Entity,
-    stateName: string,
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): boolean {
-    const state = resolveEntityState(entity, context, perspective);
-
-    if (!state.combatStatus) {
-        return false;
-    }
-
-    // Map state names to CombatStatus properties
-    const stateMap: Record<string, CombatStatusFlag> = {
-        isStationary: "isStationary",
-        inCover: "inCover",
-        inEngagementRange: "inEngagementRange",
-        inRangeOfObjective: "inRangeOfObjective",
-        isBattleShocked: "isBattleShocked",
-        hasFiredThisPhase: "hasFiredThisPhase",
-        hasChargedThisTurn: "hasChargedThisTurn",
-        isBelowHalfStrength: "isBelowHalfStrength",
-        isBelowStartingStrength: "isBelowStartingStrength",
-    };
-
-    const mappedState = stateMap[stateName];
-    if (mappedState) {
-        return state.combatStatus[mappedState];
-    }
-
-    // Special state checks
+export function checkEntityState(entity: Entity, stateName: string, context: GameContext, perspective: "attacker" | "defender"): boolean {
+    // Handle special state checks first (these don't depend on combatStatus)
     switch (stateName) {
         case "hasLeader":
         case "isLeadingUnit":
+        case "leadingUnit":
         case "leading": {
             const unit = resolveEntityToUnit(entity, context, perspective);
             return unit?.attachedLeader != null;
@@ -199,20 +151,36 @@ export function checkEntityState(
             return unit?.attachedLeader != null;
         }
 
-        default:
+        case "isOathOfMomentTarget": {
+            // Oath of Moment: check if the target unit matches the attacker's OoM target
+            // This applies when checking targetUnit from attacker's perspective
+            if (entity === "targetUnit" || entity === "opposingUnit") {
+                const targetId = context.defender.datasheet.id;
+                return context.attackerArmy.oathOfMomentTarget === targetId;
+            }
             return false;
+        }
     }
+
+    // For other states, check combatStatus
+    const state = resolveEntityState(entity, context, perspective);
+
+    if (!state.combatStatus) {
+        return false;
+    }
+
+    // Check if stateName is a valid CombatStatusFlag directly
+    if (stateName in state.combatStatus) {
+        return state.combatStatus[stateName as CombatStatusFlag];
+    }
+
+    return false;
 }
 
 /**
  * Checks if an entity has a specific keyword.
  */
-export function entityHasKeyword(
-    entity: Entity,
-    keyword: string,
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): boolean {
+export function entityHasKeyword(entity: Entity, keyword: string, context: GameContext, perspective: "attacker" | "defender"): boolean {
     const state = resolveEntityState(entity, context, perspective);
     return state.keywords.includes(keyword.toUpperCase());
 }
@@ -220,12 +188,7 @@ export function entityHasKeyword(
 /**
  * Checks if an entity has any of the specified keywords.
  */
-export function entityHasAnyKeyword(
-    entity: Entity,
-    keywords: string[],
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): boolean {
+export function entityHasAnyKeyword(entity: Entity, keywords: string[], context: GameContext, perspective: "attacker" | "defender"): boolean {
     const state = resolveEntityState(entity, context, perspective);
     return keywords.some((k) => state.keywords.includes(k.toUpperCase()));
 }
@@ -233,12 +196,7 @@ export function entityHasAnyKeyword(
 /**
  * Checks if an entity has a specific ability.
  */
-export function entityHasAbility(
-    entity: Entity,
-    ability: string,
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): boolean {
+export function entityHasAbility(entity: Entity, ability: string, context: GameContext, perspective: "attacker" | "defender"): boolean {
     const state = resolveEntityState(entity, context, perspective);
     return state.abilities.includes(ability.toUpperCase());
 }
@@ -246,12 +204,7 @@ export function entityHasAbility(
 /**
  * Checks if an entity has any of the specified abilities.
  */
-export function entityHasAnyAbility(
-    entity: Entity,
-    abilities: string[],
-    context: GameContext,
-    perspective: "attacker" | "defender"
-): boolean {
+export function entityHasAnyAbility(entity: Entity, abilities: string[], context: GameContext, perspective: "attacker" | "defender"): boolean {
     const state = resolveEntityState(entity, context, perspective);
     return abilities.some((a) => state.abilities.includes(a.toUpperCase()));
 }

@@ -19,7 +19,7 @@ npm run extract-effects:openai # Extract game effects from ability descriptions 
 
 This is a Warhammer 40,000 game assistant React application built with Vite, using Tailwind CSS 4 and shadcn/ui components.
 
-### Core Modules (`src/app/modules/`)
+### Core Modules (`src/app/pages/`)
 
 - **AttackResolver** - Calculates combat outcomes (to-hit, to-wound, saves) based on attacker/defender stats and weapon profiles
 - **ListManager** - Army list builder with localStorage persistence. Handles faction/detachment selection, unit composition, leader attachment

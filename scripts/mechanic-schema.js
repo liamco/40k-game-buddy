@@ -12,14 +12,14 @@
 // ============================================
 
 export const ENTITIES = [
-    "thisArmy",      // The unit/model's army
-    "thisUnit",      // The unit itself
-    "thisModel",     // A specific model
-    "opponentArmy",  // The opponent's army
-    "opposingUnit",  // A unit from the opponent's army
+    "thisArmy", // The unit/model's army
+    "thisUnit", // The unit itself
+    "thisModel", // A specific model
+    "opponentArmy", // The opponent's army
+    "opposingUnit", // A unit from the opponent's army
     "opposingModel", // A model from the opponent's army
-    "targetUnit",    // The unit being targeted (attacked)
-    "targetModel",   // The model being targeted
+    "targetUnit", // The unit being targeted (attacked)
+    "targetModel", // The model being targeted
 ];
 
 // ============================================
@@ -27,13 +27,13 @@ export const ENTITIES = [
 // ============================================
 
 export const EFFECTS = [
-    "rollBonus",    // Add to a roll (positive modifier)
-    "rollPenalty",  // Subtract from a roll (negative modifier)
+    "rollBonus", // Add to a roll (positive modifier)
+    "rollPenalty", // Subtract from a roll (negative modifier)
     "staticNumber", // Set a characteristic to a fixed value
-    "addsKeyword",  // Grant keywords to an entity
-    "addsAbility",  // Grant abilities to an entity
-    "reroll",       // Allow re-rolling dice
-    "autoSuccess",  // Auto-succeed (e.g., auto-hit from TORRENT)
+    "addsKeyword", // Grant keywords to an entity
+    "addsAbility", // Grant abilities to an entity
+    "reroll", // Allow re-rolling dice
+    "autoSuccess", // Auto-succeed (e.g., auto-hit from TORRENT)
     "mortalWounds", // Deal mortal wounds
 ];
 
@@ -48,22 +48,22 @@ export const ROLL_ATTRIBUTES = [
 ];
 
 export const UNIT_ATTRIBUTES = [
-    "m",     // Movement
-    "t",     // Toughness
-    "sv",    // Save
+    "m", // Movement
+    "t", // Toughness
+    "sv", // Save
     "invSv", // Invulnerable Save
-    "w",     // Wounds
-    "ld",    // Leadership
-    "oc",    // Objective Control
+    "w", // Wounds
+    "ld", // Leadership
+    "oc", // Objective Control
 ];
 
 export const WEAPON_ATTRIBUTES = [
     "range", // Weapon range
-    "a",     // Attacks
-    "bsWs",  // Ballistic Skill / Weapon Skill
-    "s",     // Strength
-    "ap",    // Armour Penetration
-    "d",     // Damage
+    "a", // Attacks
+    "bsWs", // Ballistic Skill / Weapon Skill
+    "s", // Strength
+    "ap", // Armour Penetration
+    "d", // Damage
 ];
 
 export const ATTRIBUTES = [...ROLL_ATTRIBUTES, ...UNIT_ATTRIBUTES, ...WEAPON_ATTRIBUTES];
@@ -79,7 +79,7 @@ export const OPERATORS = [
     "greaterThanOrEqualTo",
     "lessThan",
     "lessThanOrEqualTo",
-    "includes",    // For array checks (keywords, abilities)
+    "includes", // For array checks (keywords, abilities)
     "notIncludes",
 ];
 
@@ -98,11 +98,12 @@ export const COMBAT_STATUS_FLAGS = [
     { name: "isBattleShocked", label: "Battle-shocked" },
     { name: "hasFiredThisPhase", label: "Fired This Phase" },
     { name: "hasChargedThisTurn", label: "Charged This Turn" },
-    { name: "isBelowHalfStrength", label: "Below Half Strength" },
     { name: "isBelowStartingStrength", label: "Below Starting Strength" },
+    { name: "isBelowHalfStrength", label: "Below Half Strength" },
     { name: "isDamaged", label: "Damaged (Bracketed)" },
     { name: "isLeadingUnit", label: "Leading a Unit" },
     { name: "isBeingLed", label: "Being Led" },
+    // Faction-specific flags (like isOathOfMomentTarget) are defined in faction.json
 ];
 
 // ============================================
@@ -124,7 +125,7 @@ export function generateEntityDocs() {
         targetModel: "the model being targeted",
     };
 
-    return ENTITIES.map(e => `  * "${e}" - ${entityDescriptions[e] || e}`).join('\n');
+    return ENTITIES.map((e) => `  * "${e}" - ${entityDescriptions[e] || e}`).join("\n");
 }
 
 /**
@@ -142,7 +143,7 @@ export function generateEffectDocs() {
         mortalWounds: "deals mortal wounds",
     };
 
-    return EFFECTS.map(e => `  * "${e}" - ${effectDescriptions[e] || e}`).join('\n');
+    return EFFECTS.map((e) => `  * "${e}" - ${effectDescriptions[e] || e}`).join("\n");
 }
 
 /**
@@ -166,27 +167,31 @@ export function generateAttributeDocs() {
         d: "Damage characteristic",
     };
 
-    return ATTRIBUTES.map(a => `  * "${a}" - ${attrDescriptions[a] || a}`).join('\n');
+    return ATTRIBUTES.map((a) => `  * "${a}" - ${attrDescriptions[a] || a}`).join("\n");
 }
 
 /**
  * Generates the state documentation for the OpenAI prompt.
+ * @param {Array} factionStateFlags - Optional faction-specific state flags to include
  */
-export function generateStateDocs() {
-    return COMBAT_STATUS_FLAGS.map(s => `  * "${s.name}" - ${s.label}`).join('\n');
+export function generateStateDocs(factionStateFlags = []) {
+    const allFlags = [...COMBAT_STATUS_FLAGS, ...factionStateFlags];
+    return allFlags.map((s) => `  * "${s.name}" - ${s.label}`).join("\n");
 }
 
 /**
  * Generates the operator documentation for the OpenAI prompt.
  */
 export function generateOperatorDocs() {
-    return OPERATORS.map(o => `"${o}"`).join(', ');
+    return OPERATORS.map((o) => `"${o}"`).join(", ");
 }
 
 /**
  * Builds the complete OpenAI prompt with schema values.
+ * @param {string} cleanDescription - The cleaned description text to analyze
+ * @param {Array} factionStateFlags - Optional faction-specific state flags to include
  */
-export function buildMechanicsPrompt(cleanDescription) {
+export function buildMechanicsPrompt(cleanDescription, factionStateFlags = []) {
     return `Analyze the following Warhammer 40k game rule description and extract structured mechanics in JSON format.
 
 Description: "${cleanDescription}"
@@ -226,7 +231,7 @@ ${generateEffectDocs()}
 ${generateAttributeDocs()}
 
 - "state" (for conditions) must be one of:
-${generateStateDocs()}
+${generateStateDocs(factionStateFlags)}
 
 - "keywords" is optional - only include if the mechanic adds a keyword to the entity
 - "keywords" should be an array of strings (e.g., ["INFANTRY", "CHARACTER"])

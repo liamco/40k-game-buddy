@@ -24,7 +24,23 @@
       "factionId": "",
       "description": "While a <span class=\"tooltip00384\" data-tooltip-content=\"#tooltip_content00384\" data-tooltip-anchor=\"#tooltip_content00384\"><span class=\"kwb\">TECHMARINE</span></span> model is leading this unit, improve the Ballistic Skill and Weapon Skill characteristics of ranged and melee weapons equipped by <span class=\"kwb\">ASTARTES</span> <span class=\"kwb\">SERVITOR</span> models in this unit by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "bsWs",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "",
@@ -33,7 +49,39 @@
       "factionId": "",
       "description": "At the start of the Declare Battle Formations step, this unit can join one other unit from your army that is being led by a <span class=\"tooltip00384\" data-tooltip-content=\"#tooltip_content00384\" data-tooltip-anchor=\"#tooltip_content00384\"><span class=\"kwb\">TECHMARINE</span></span>. If it does, until the end of the battle, every model in this unit counts as being part of that Bodyguard unit, and that Bodyguard unit’s Starting Strength is increased accordingly.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsKeyword",
+          "keywords": [
+            "BODYGUARD"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": "Starting Strength",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "keywords": [

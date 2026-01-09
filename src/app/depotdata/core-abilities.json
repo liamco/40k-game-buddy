@@ -1,0 +1,136 @@
+{
+    "version": "1.0",
+    "description": "Pre-defined mechanics for core Warhammer 40k abilities. These are standardized rules that appear across many datasheets.",
+    "abilities": {
+        "DEADLY DEMISE": {
+            "name": "Deadly Demise",
+            "type": "parameterized",
+            "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers mortal wounds equal to the Deadly Demise value.",
+            "mechanics": []
+        },
+        "LEADER": {
+            "name": "Leader",
+            "type": "static",
+            "description": "This model can be attached to a unit. While leading a unit, this model's abilities apply to the unit.",
+            "mechanics": []
+        },
+        "DEEP STRIKE": {
+            "name": "Deep Strike",
+            "type": "static",
+            "description": "This unit can be set up in Reserves instead of on the battlefield. It can arrive from Deep Strike in your Reinforcements step.",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "addsAbility",
+                    "abilities": ["DEEP STRIKE"],
+                    "value": true
+                }
+            ]
+        },
+        "FEEL NO PAIN": {
+            "name": "Feel No Pain",
+            "type": "parameterized",
+            "description": "Each time this model would lose a wound, roll one D6: if the result equals or exceeds the Feel No Pain value, that wound is not lost.",
+            "mechanics": [
+                {
+                    "entity": "thisModel",
+                    "effect": "addsAbility",
+                    "abilities": ["FEEL NO PAIN"],
+                    "value": "{parameter}"
+                }
+            ]
+        },
+        "SCOUTS": {
+            "name": "Scouts",
+            "type": "parameterized",
+            "description": "At the start of the first battle round, this unit can make a Normal move of up to the Scouts value.",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "addsAbility",
+                    "abilities": ["SCOUTS"],
+                    "value": "{parameter}"
+                }
+            ]
+        },
+        "STEALTH": {
+            "name": "Stealth",
+            "type": "static",
+            "description": "If every model in a unit has this ability, then each time a ranged attack is made against it, subtract 1 from the Hit roll.",
+            "mechanics": [
+                {
+                    "entity": "opposingModel",
+                    "effect": "rollPenalty",
+                    "attribute": "h",
+                    "value": 1,
+                    "conditions": []
+                }
+            ]
+        },
+        "INFILTRATORS": {
+            "name": "Infiltrators",
+            "type": "static",
+            "description": "During deployment, this unit can be set up anywhere on the battlefield that is more than 9\" horizontally away from the enemy deployment zone and all enemy models.",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "addsAbility",
+                    "abilities": ["INFILTRATORS"],
+                    "value": true
+                }
+            ]
+        },
+        "FIRING DECK": {
+            "name": "Firing Deck",
+            "type": "parameterized",
+            "description": "Each time this Transport shoots, select up to the Firing Deck value of models embarked within it whose units have not already shot this phase.",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "addsAbility",
+                    "abilities": ["FIRING DECK"],
+                    "value": "{parameter}"
+                }
+            ]
+        },
+        "HOVER": {
+            "name": "Hover",
+            "type": "static",
+            "description": "This model counts as having the Aircraft keyword for movement purposes but can also make Normal moves, Advance, and Remain Stationary.",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "addsAbility",
+                    "abilities": ["HOVER"],
+                    "value": true
+                }
+            ]
+        },
+        "LONE OPERATIVE": {
+            "name": "Lone Operative",
+            "type": "static",
+            "description": "Unless part of an Attached unit, this unit can only be selected as the target of a ranged attack if the attacking model is within 12\".",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "addsAbility",
+                    "abilities": ["LONE OPERATIVE"],
+                    "value": true
+                }
+            ]
+        },
+        "FIGHTS FIRST": {
+            "name": "Fights First",
+            "type": "static",
+            "description": "Units with this ability that are eligible to fight do so in the Fights First step, before all other units.",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "addsAbility",
+                    "abilities": ["FIGHTS FIRST"],
+                    "value": true
+                }
+            ]
+        }
+    }
+}
