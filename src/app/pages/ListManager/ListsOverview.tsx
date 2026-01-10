@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Plus, Trash2 } from "lucide-react";
 
 import { Button } from "../../components/_ui/button";
-import { Badge } from "../../components/_ui/Badge.tsx";
+import { Badge } from "../../components/_ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/_ui/card";
 
 import { useListManager } from "./ListManagerContext";
