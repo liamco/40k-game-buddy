@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo, Fragment } from "react";
-import { Info, Search } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
-import { Button } from "./_ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./_ui/command";
+import { Info } from "lucide-react";
+import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
 import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
 import WeaponProfileCard from "./WeaponProfileCard/WeaponProfileCard";
 import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type UnitContext, type CombatStatus, type CombatStatusFlag } from "../game-engine";
 import CombatStatusComponent from "./CombatStatus/CombatStatus";
+import SplitHeading from "./SplitHeading/SplitHeading";
+import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
 
 // Parse loadout HTML to extract weapon names
 function parseLoadoutWeapons(loadout: string): string[] {
@@ -83,8 +83,6 @@ function extractCombatBonuses(mechanics: Mechanic[]): {
 
 export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, combatStatus, onCombatStatusChange, selectedList }: AttackerPanelProps) {
     const [factionData, setFactionData] = useState<Faction | null>(null);
-    const [unitSearchOpen, setUnitSearchOpen] = useState(false);
-    const [unitSearchValue, setUnitSearchValue] = useState("");
 
     // Load faction data when list changes
     useEffect(() => {
@@ -176,12 +174,14 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return combined;
     }, [selectedList]);
 
-    // Filter combined items based on search
-    const filteredListItems = useMemo(() => {
-        if (!unitSearchValue) return combinedListItems;
-        const search = unitSearchValue.toLowerCase();
-        return combinedListItems.filter((combined) => combined.displayName.toLowerCase().includes(search) || combined.item.roleLabel.toLowerCase().includes(search));
-    }, [combinedListItems, unitSearchValue]);
+    // Convert combined items to dropdown options
+    const unitOptions = useMemo((): SearchableDropdownOption<{ item: ArmyListItem; displayName: string; isCombined: boolean }>[] => {
+        return combinedListItems.map((combined) => ({
+            id: combined.item.listItemId,
+            searchValue: `${combined.displayName} ${combined.item.roleLabel}`,
+            data: combined,
+        }));
+    }, [combinedListItems]);
 
     // Get display name for selected unit
     const selectedUnitDisplayName = useMemo(() => {
@@ -290,161 +290,140 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return extractCombatBonuses(leaderMechanics);
     }, [unit, attachedUnit]);
 
+    const handleUnitSelect = (combined: { item: ArmyListItem; displayName: string; isCombined: boolean }) => {
+        onUnitChange(combined.item);
+        onWeaponProfileChange(null);
+    };
+
     return (
-        <div className="bg-[#e6e6e6] rounded-[8px] p-6 space-y-4">
-            <div className="space-y-2">
-                <p className=" font-semibold text-[14px] text-[#1e1e1e]">Attacking unit</p>
-                {!selectedList ? (
-                    <div className="w-full bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 text-[14px] text-[#767676]">Select an attacker list above</div>
-                ) : (
-                    <Popover open={unitSearchOpen} onOpenChange={setUnitSearchOpen} modal={true}>
-                        <PopoverTrigger className="w-full">
-                            <Button variant="outline" role="combobox" aria-expanded={unitSearchOpen} className="w-full justify-between bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 h-auto font-['Inter:Regular',sans-serif] text-[14px]">
-                                <span className="text-muted-foreground">{selectedUnitDisplayName || "Search for a unit..."}</span>
-                                <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent
-                            className="w-full p-0 z-[100]"
-                            style={{
-                                width: "var(--radix-popover-trigger-width)",
-                            }}
-                            side="bottom"
-                            align="start"
-                            sideOffset={8}
-                        >
-                            <Command>
-                                <CommandInput placeholder="Search units..." value={unitSearchValue} onValueChange={setUnitSearchValue} />
-                                <CommandList>
-                                    <CommandEmpty>No unit found.</CommandEmpty>
-                                    <CommandGroup>
-                                        {filteredListItems.map((combined) => (
-                                            <CommandItem
-                                                key={combined.item.listItemId}
-                                                value={combined.displayName}
-                                                onSelect={() => {
-                                                    onUnitChange(combined.item);
-                                                    onWeaponProfileChange(null);
-                                                    setUnitSearchOpen(false);
-                                                    setUnitSearchValue("");
-                                                }}
-                                            >
-                                                <div className="flex items-center justify-between w-full">
-                                                    <div>
-                                                        <div className="font-medium">{combined.displayName}</div>
-                                                        <div className="text-xs text-muted-foreground">{combined.item.roleLabel}</div>
-                                                    </div>
-                                                </div>
-                                            </CommandItem>
-                                        ))}
-                                    </CommandGroup>
-                                </CommandList>
-                            </Command>
-                        </PopoverContent>
-                    </Popover>
-                )}
-            </div>
-
-            {/* Display leader combat bonuses when a combined unit is selected */}
-            {attachedUnit && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
-                <div className="bg-green-50 border border-green-200 rounded-[4px] p-3 space-y-2">
-                    <p className="text-[10px] font-bold text-green-800 uppercase">Leader Bonuses Active</p>
-                    <div className="flex flex-wrap gap-2">
-                        {leaderCombatBonuses.hitBonuses.map((bonus, idx) => (
-                            <span key={`hit-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
-                                +{bonus.value} to Hit
-                            </span>
-                        ))}
-                        {leaderCombatBonuses.woundBonuses.map((bonus, idx) => (
-                            <span key={`wound-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
-                                +{bonus.value} to Wound
-                            </span>
-                        ))}
-                        {leaderCombatBonuses.otherBonuses.map((bonus, idx) => (
-                            <span key={`other-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
-                                {bonus.description}
-                            </span>
-                        ))}
-                    </div>
-                    <p className="text-[9px] text-green-600 italic">From: {leaderCombatBonuses.hitBonuses[0]?.source || leaderCombatBonuses.woundBonuses[0]?.source || leaderCombatBonuses.otherBonuses[0]?.source}</p>
-                </div>
+        <section className="grid grid-cols-5 grid-rows-[auto_auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
+            <span className="col-span-5">Attacking unit</span>
+            {!selectedList ? (
+                <div className="w-full bg-deathWorldForest rounded px-4 py-3">Select an attacker list above</div>
+            ) : (
+                <SearchableDropdown
+                    options={unitOptions}
+                    selectedLabel={selectedUnitDisplayName}
+                    placeholder="Search for a unit..."
+                    searchPlaceholder="Search units..."
+                    emptyMessage="No unit found."
+                    onSelect={handleUnitSelect}
+                    renderOption={(combined) => (
+                        <div>
+                            <div className="font-medium">{combined.displayName}</div>
+                            <div className="text-xs text-muted-foreground">{combined.item.roleLabel}</div>
+                        </div>
+                    )}
+                    triggerClassName="col-span-5"
+                />
             )}
-
-            {unit &&
-                availableWargear.length > 0 &&
-                (() => {
-                    // Filter weapons by game phase
-                    const filteredWeapons = availableWargear.filter((weapon) => (gamePhase === "SHOOTING" ? weapon.type === "Ranged" : weapon.type === "Melee")) as Array<Weapon & { sourceUnit?: string }>;
-
-                    // Check if this is a combined unit
-                    const listItemId = (unit as any).listItemId;
-                    const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
-
-                    if (combinedItem?.isCombined && combinedItem.item.leading) {
-                        // Find the attached unit to get its name
-                        const attachedUnit = selectedList?.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
-
-                        if (attachedUnit) {
-                            const leaderName = combinedItem.item.name;
-                            const attachedName = attachedUnit.name;
-
-                            // Group weapons by source unit
-                            const groupedWeapons = filteredWeapons.reduce(
-                                (acc, weapon) => {
-                                    const source = weapon.sourceUnit || "default";
-                                    if (!acc[source]) {
-                                        acc[source] = [];
-                                    }
-                                    acc[source].push(weapon);
-                                    return acc;
-                                },
-                                {} as Record<string, Array<Weapon & { sourceUnit?: string }>>
-                            );
-
-                            // Order: leader first, then attached unit
-                            const orderedSources = [leaderName, attachedName].filter((source) => groupedWeapons[source] && groupedWeapons[source].length > 0);
-
-                            return (
-                                <div className="space-y-2">
-                                    <p className=" font-semibold text-[12px] text-[#1e1e1e]">Select weapon</p>
-                                    {orderedSources.map((source) => (
-                                        <div key={source} className="space-y-2">
-                                            <p className="text-[10px] text-[#767676] italic font-medium">from {source}</p>
-                                            {groupedWeapons[source].map((weapon) => (
-                                                <Fragment key={weapon.name}>
-                                                    {weapon.profiles.map((profile: WeaponProfile) => {
-                                                        const isSelected = selectedWeaponProfile?.name === profile.name;
-                                                        const profileKey = `${source}-${weapon.name}-${profile.name}`;
-                                                        return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
-                                                    })}
-                                                </Fragment>
-                                            ))}
-                                        </div>
+            {unit ? (
+                <Fragment>
+                    <div className="col-span-3 space-y-4">
+                        <SplitHeading label="Select unit armament" />
+                        {/* Display leader combat bonuses when a combined unit is selected */}
+                        {attachedUnit && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
+                            <div className="bg-green-50 border border-green-200 rounded-[4px] p-3 space-y-2">
+                                <p className="text-[10px] font-bold text-green-800 uppercase">Leader Bonuses Active</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {leaderCombatBonuses.hitBonuses.map((bonus, idx) => (
+                                        <span key={`hit-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
+                                            +{bonus.value} to Hit
+                                        </span>
+                                    ))}
+                                    {leaderCombatBonuses.woundBonuses.map((bonus, idx) => (
+                                        <span key={`wound-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
+                                            +{bonus.value} to Wound
+                                        </span>
+                                    ))}
+                                    {leaderCombatBonuses.otherBonuses.map((bonus, idx) => (
+                                        <span key={`other-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
+                                            {bonus.description}
+                                        </span>
                                     ))}
                                 </div>
-                            );
-                        }
-                    }
+                                <p className="text-[9px] text-green-600 italic">From: {leaderCombatBonuses.hitBonuses[0]?.source || leaderCombatBonuses.woundBonuses[0]?.source || leaderCombatBonuses.otherBonuses[0]?.source}</p>
+                            </div>
+                        )}
 
-                    // Regular unit: show weapons without grouping
-                    return (
-                        <div className="space-y-2">
-                            <p className=" font-semibold text-[12px] text-[#1e1e1e]">Select weapon</p>
-                            {filteredWeapons.map((weapon) => (
-                                <Fragment key={weapon.name}>
-                                    {weapon.profiles.map((profile: WeaponProfile) => {
-                                        const isSelected = selectedWeaponProfile?.name === profile.name;
-                                        return <WeaponProfileCard key={profile.name} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
-                                    })}
-                                </Fragment>
-                            ))}
-                        </div>
-                    );
-                })()}
+                        {unit &&
+                            availableWargear.length > 0 &&
+                            (() => {
+                                // Filter weapons by game phase
+                                const filteredWeapons = availableWargear.filter((weapon) => (gamePhase === "SHOOTING" ? weapon.type === "Ranged" : weapon.type === "Melee")) as Array<Weapon & { sourceUnit?: string }>;
 
-            <hr className="border-[#d9d9d9] border-1" />
+                                // Check if this is a combined unit
+                                const listItemId = (unit as any).listItemId;
+                                const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
-            <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
-        </div>
+                                if (combinedItem?.isCombined && combinedItem.item.leading) {
+                                    // Find the attached unit to get its name
+                                    const attachedUnit = selectedList?.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
+
+                                    if (attachedUnit) {
+                                        const leaderName = combinedItem.item.name;
+                                        const attachedName = attachedUnit.name;
+
+                                        // Group weapons by source unit
+                                        const groupedWeapons = filteredWeapons.reduce(
+                                            (acc, weapon) => {
+                                                const source = weapon.sourceUnit || "default";
+                                                if (!acc[source]) {
+                                                    acc[source] = [];
+                                                }
+                                                acc[source].push(weapon);
+                                                return acc;
+                                            },
+                                            {} as Record<string, Array<Weapon & { sourceUnit?: string }>>
+                                        );
+
+                                        // Order: leader first, then attached unit
+                                        const orderedSources = [leaderName, attachedName].filter((source) => groupedWeapons[source] && groupedWeapons[source].length > 0);
+
+                                        return (
+                                            <div className="space-y-2">
+                                                {orderedSources.map((source) => (
+                                                    <div key={source} className="space-y-2">
+                                                        <span>from {source}</span>
+                                                        {groupedWeapons[source].map((weapon) => (
+                                                            <Fragment key={weapon.name}>
+                                                                {weapon.profiles.map((profile: WeaponProfile) => {
+                                                                    const isSelected = selectedWeaponProfile?.name === profile.name;
+                                                                    const profileKey = `${source}-${weapon.name}-${profile.name}`;
+                                                                    return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                                                })}
+                                                            </Fragment>
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        );
+                                    }
+                                }
+
+                                // Regular unit: show weapons without grouping
+                                return (
+                                    <div className="space-y-2">
+                                        {filteredWeapons.map((weapon) => (
+                                            <Fragment key={weapon.name}>
+                                                {weapon.profiles.map((profile: WeaponProfile) => {
+                                                    const isSelected = selectedWeaponProfile?.name === profile.name;
+                                                    return <WeaponProfileCard key={profile.name} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                                })}
+                                            </Fragment>
+                                        ))}
+                                    </div>
+                                );
+                            })()}
+                    </div>
+                    <div className="col-span-2 space-y-4">
+                        <SplitHeading label="Combat status" />
+                        <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
+                    </div>
+                </Fragment>
+            ) : (
+                <CombatantPanelEmpty combatant="attacker" />
+            )}
+        </section>
     );
 }

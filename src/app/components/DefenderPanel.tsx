@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Search } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
-import { Button } from "./_ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "./_ui/command";
+import React, { useState, useEffect, useMemo, useRef, Fragment } from "react";
+import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
 import type { ArmyList, Datasheet, Faction, Model, GamePhase, Ability, ArmyListItem, WeaponProfile } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
 import { Badge } from "./_ui/badge";
 import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type UnitContext, type CombatStatus, type CombatStatusFlag } from "../game-engine";
 import CombatStatusComponent from "./CombatStatus/CombatStatus";
+import SplitHeading from "./SplitHeading/SplitHeading";
+import ModelProfileCard from "./ModelProfileCard/ModelProfileCard";
+import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
 
 interface DefenderPanelProps {
     gamePhase: GamePhase;
@@ -57,8 +57,6 @@ function extractDefensiveBonuses(mechanics: Mechanic[]): {
 
 export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedUnitModel, onUnitModelChange, combatStatus, onCombatStatusChange, selectedList, selectedWeaponProfile }: DefenderPanelProps) {
     const [factionData, setFactionData] = useState<Faction | null>(null);
-    const [unitSearchOpen, setUnitSearchOpen] = useState(false);
-    const [unitSearchValue, setUnitSearchValue] = useState("");
     const lastProcessedUnitRef = useRef<string | null>(null);
 
     // Load faction data when list changes
@@ -151,12 +149,14 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return combined;
     }, [selectedList]);
 
-    // Filter combined items based on search
-    const filteredListItems = useMemo(() => {
-        if (!unitSearchValue) return combinedListItems;
-        const search = unitSearchValue.toLowerCase();
-        return combinedListItems.filter((combined) => combined.displayName.toLowerCase().includes(search) || combined.item.roleLabel.toLowerCase().includes(search));
-    }, [combinedListItems, unitSearchValue]);
+    // Convert combined items to dropdown options
+    const unitOptions = useMemo((): SearchableDropdownOption<{ item: ArmyListItem; displayName: string; isCombined: boolean }>[] => {
+        return combinedListItems.map((combined) => ({
+            id: combined.item.listItemId,
+            searchValue: `${combined.displayName} ${combined.item.roleLabel}`,
+            data: combined,
+        }));
+    }, [combinedListItems]);
 
     // Get display name for selected unit
     const selectedUnitDisplayName = useMemo(() => {
@@ -277,156 +277,94 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return extractDefensiveBonuses(leaderMechanics);
     }, [unit, attachedUnit]);
 
+    const handleUnitSelect = (combined: { item: ArmyListItem; displayName: string; isCombined: boolean }) => {
+        onUnitChange(combined.item);
+    };
+
     return (
-        <div className="bg-[#e6e6e6] rounded-[8px] p-6 space-y-4">
-            <div className="space-y-2">
-                <p className=" font-semibold text-[14px] text-[#1e1e1e]">Target unit</p>
-                {!selectedList ? (
-                    <div className="w-full bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 text-[14px] text-[#767676]">Select a defender list above</div>
-                ) : (
-                    <Popover open={unitSearchOpen} onOpenChange={setUnitSearchOpen} modal={true}>
-                        <PopoverTrigger className="w-full">
-                            <Button variant="outline" role="combobox" aria-expanded={unitSearchOpen} className="w-full justify-between bg-white rounded-[8px] border border-[#d9d9d9] px-4 py-3 h-auto font-['Inter:Regular',sans-serif] text-[14px]">
-                                <span className="text-muted-foreground">{selectedUnitDisplayName || "Search for a unit..."}</span>
-                                <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                            </Button>
-                        </PopoverTrigger>
-                        <PopoverContent
-                            className="w-full p-0 z-[100]"
-                            style={{
-                                width: "var(--radix-popover-trigger-width)",
-                            }}
-                            side="bottom"
-                            align="start"
-                            sideOffset={8}
-                        >
-                            <Command>
-                                <CommandInput placeholder="Search units..." value={unitSearchValue} onValueChange={setUnitSearchValue} />
-                                <CommandList>
-                                    <CommandEmpty>No unit found.</CommandEmpty>
-                                    <CommandGroup>
-                                        {filteredListItems.map((combined) => (
-                                            <CommandItem
-                                                key={combined.item.listItemId}
-                                                value={combined.displayName}
-                                                onSelect={() => {
-                                                    onUnitChange(combined.item);
-                                                    setUnitSearchOpen(false);
-                                                    setUnitSearchValue("");
-                                                }}
-                                            >
-                                                <div className="flex items-center justify-between w-full">
-                                                    <div>
-                                                        <div className="font-medium">{combined.displayName}</div>
-                                                        <div className="text-xs text-muted-foreground">{combined.item.roleLabel}</div>
-                                                    </div>
-                                                </div>
-                                            </CommandItem>
-                                        ))}
-                                    </CommandGroup>
-                                </CommandList>
-                            </Command>
-                        </PopoverContent>
-                    </Popover>
-                )}
-            </div>
-
-            {unit && unit.abilities && unit?.abilities.length > 0 && (
-                <div className="flex items-start flex-wrap gap-2">
-                    {unit?.abilities.map((ability: Ability, index: number) => {
-                        return (
-                            <span key={ability.id || `${unit.id}-ability-${index}`} className="text-[10px] inline-block font-bold uppercase p-1 px-2 rounded-s bg-[#B3B3B3]">
-                                {ability.name}
-                                {ability.parameter ? ` ${ability.parameter}` : ""}
-                            </span>
-                        );
-                    })}
-                </div>
-            )}
-
-            {/* Display leader defensive bonuses when a combined unit is selected */}
-            {attachedUnit && (leaderDefensiveBonuses.saveBonuses.length > 0 || leaderDefensiveBonuses.feelNoPain || leaderDefensiveBonuses.otherBonuses.length > 0) && (
-                <div className="bg-blue-50 border border-blue-200 rounded-[4px] p-3 space-y-2">
-                    <p className="text-[10px] font-bold text-blue-800 uppercase">Leader Bonuses Active</p>
-                    <div className="flex flex-wrap gap-2">
-                        {leaderDefensiveBonuses.saveBonuses.map((bonus, idx) => (
-                            <span key={`save-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-blue-200 text-blue-800" title={bonus.source}>
-                                +{bonus.value} to Save
-                            </span>
-                        ))}
-                        {leaderDefensiveBonuses.feelNoPain && (
-                            <span className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-blue-200 text-blue-800" title={leaderDefensiveBonuses.feelNoPain.source}>
-                                FNP {leaderDefensiveBonuses.feelNoPain.value}+
-                            </span>
-                        )}
-                        {leaderDefensiveBonuses.otherBonuses.map((bonus, idx) => (
-                            <span key={`other-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-blue-200 text-blue-800" title={bonus.source}>
-                                {bonus.description}
-                            </span>
-                        ))}
-                    </div>
-                    <p className="text-[9px] text-blue-600 italic">From: {leaderDefensiveBonuses.saveBonuses[0]?.source || leaderDefensiveBonuses.feelNoPain?.source || leaderDefensiveBonuses.otherBonuses[0]?.source}</p>
-                </div>
-            )}
-
-            {unit &&
-                availableModels.length > 0 &&
-                availableModels.map((model: Model & { sourceUnit?: string; isLeader?: boolean }) => {
-                    const isSelected = selectedUnitModel?.name === model.name;
-                    const modelKey = model.sourceUnit ? `${model.sourceUnit}-${model.name}` : model.name;
-                    const isLeaderModel = model.isLeader === true;
-                    // Leader models are only disabled if precision is NOT present
-                    const isDisabled = isLeaderModel && !hasPrecision;
-
-                    return (
-                        <div
-                            key={modelKey}
-                            className={`bg-[#ccc] rounded-[4px] p-2 space-y-2 border-2 transition-colors ${isDisabled ? "opacity-50 cursor-not-allowed border-gray-300" : isSelected ? "border-[#2b344c] cursor-pointer" : "border-transparent cursor-pointer"}`}
-                            onClick={() => {
-                                if (!isDisabled) {
-                                    onUnitModelChange(isSelected ? null : model);
-                                }
-                            }}
-                        >
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                    <p className=" font-bold text-[12px] ">{model.name}</p>
-                                    {model.isLeader && (
-                                        <Badge variant="outline" className="text-[10px] bg-green-100 border-green-300 text-green-700">
-                                            Leader
-                                        </Badge>
-                                    )}
-                                </div>
-
-                                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${isSelected ? "border-[#2c2c2c] bg-[#e6e6e6]" : "border-[#757575] bg-white"}`}>{isSelected && <div className="w-2.5 h-2.5 rounded-full bg-[#1e1e1e]" />}</div>
-                            </div>
-
-                            <div className="grid grid-cols-6 gap-2 text-center">
-                                <p className=" font-bold text-[12px] ">M</p>
-                                <p className=" font-bold text-[12px] ">T</p>
-                                <p className=" font-bold text-[12px] ">Sv</p>
-                                <p className=" font-bold text-[12px] ">W</p>
-                                <p className=" font-bold text-[12px] ">Ld</p>
-                                <p className=" font-bold text-[12px] ">OC</p>
-                                <p className=" font-bold text-[12px] ">{model.m}</p>
-                                <p className=" font-bold text-[12px] ">{model.t}</p>
-                                <p className=" font-bold text-[12px] ">{model.sv}</p>
-                                <p className=" font-bold text-[12px] ">{model.w}</p>
-                                <p className=" font-bold text-[12px] ">{model.ld}</p>
-                                <p className=" font-bold text-[12px] ">{model.oc}</p>
-                                {model.invSv && (
-                                    <div className="col-start-3">
-                                        <p className="font-bold text-[12px] inline-block p-2 bg-amber-300 rounded-b-full">{model.invSv}</p>
-                                    </div>
-                                )}
-                            </div>
+        <section className="grid grid-cols-5 grid-rows-[auto_auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
+            <span className="col-span-5">Target unit</span>
+            {!selectedList ? (
+                <div className="w-full bg-deathWorldForest rounded px-4 py-3">Select an defender list above</div>
+            ) : (
+                <SearchableDropdown
+                    options={unitOptions}
+                    selectedLabel={selectedUnitDisplayName}
+                    placeholder="Search for a unit..."
+                    searchPlaceholder="Search units..."
+                    emptyMessage="No unit found."
+                    onSelect={handleUnitSelect}
+                    renderOption={(combined) => (
+                        <div>
+                            <div className="font-medium">{combined.displayName}</div>
+                            <div className="text-xs text-muted-foreground">{combined.item.roleLabel}</div>
                         </div>
-                    );
-                })}
+                    )}
+                    triggerClassName="col-span-5"
+                />
+            )}
+            {unit ? (
+                <Fragment>
+                    <div className="col-span-3 space-y-4">
+                        <SplitHeading label="Target composition" />
+                        {unit && unit.abilities && unit?.abilities.length > 0 && (
+                            <div className="flex items-start flex-wrap gap-2">
+                                {unit?.abilities.map((ability: Ability, index: number) => {
+                                    return (
+                                        <Badge key={ability.id || `${unit.id}-ability-${index}`}>
+                                            {ability.name}
+                                            {ability.parameter ? ` ${ability.parameter}` : ""}
+                                        </Badge>
+                                    );
+                                })}
+                            </div>
+                        )}
 
-            <hr className="border-[#d9d9d9] border-1" />
+                        {/* Display leader defensive bonuses when a combined unit is selected */}
+                        {attachedUnit && (leaderDefensiveBonuses.saveBonuses.length > 0 || leaderDefensiveBonuses.feelNoPain || leaderDefensiveBonuses.otherBonuses.length > 0) && (
+                            <div className="bg-blue-50 border border-blue-200 rounded-[4px] p-3 space-y-2">
+                                <p className="text-[10px] font-bold text-blue-800 uppercase">Leader Bonuses Active</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {leaderDefensiveBonuses.saveBonuses.map((bonus, idx) => (
+                                        <span key={`save-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-blue-200 text-blue-800" title={bonus.source}>
+                                            +{bonus.value} to Save
+                                        </span>
+                                    ))}
+                                    {leaderDefensiveBonuses.feelNoPain && (
+                                        <span className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-blue-200 text-blue-800" title={leaderDefensiveBonuses.feelNoPain.source}>
+                                            FNP {leaderDefensiveBonuses.feelNoPain.value}+
+                                        </span>
+                                    )}
+                                    {leaderDefensiveBonuses.otherBonuses.map((bonus, idx) => (
+                                        <span key={`other-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-blue-200 text-blue-800" title={bonus.source}>
+                                            {bonus.description}
+                                        </span>
+                                    ))}
+                                </div>
+                                <p className="text-[9px] text-blue-600 italic">From: {leaderDefensiveBonuses.saveBonuses[0]?.source || leaderDefensiveBonuses.feelNoPain?.source || leaderDefensiveBonuses.otherBonuses[0]?.source}</p>
+                            </div>
+                        )}
 
-            <CombatStatusComponent side="defender" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
-        </div>
+                        {unit &&
+                            availableModels.length > 0 &&
+                            availableModels.map((model: Model & { sourceUnit?: string; isLeader?: boolean }) => {
+                                const isSelected = selectedUnitModel?.name === model.name;
+                                const modelKey = model.sourceUnit ? `${model.sourceUnit}-${model.name}` : model.name;
+                                const isLeaderModel = model.isLeader === true;
+                                // Leader models are only disabled if precision is NOT present
+                                const isDisabled = isLeaderModel && !hasPrecision;
+
+                                return <ModelProfileCard key={modelKey} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onUnitModelChange} />;
+                            })}
+                    </div>
+                    <div className="col-span-2 space-y-4">
+                        <SplitHeading label="Combat status" />
+                        <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
+                    </div>
+                </Fragment>
+            ) : (
+                <CombatantPanelEmpty combatant="defender" />
+            )}
+        </section>
     );
 }

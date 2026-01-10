@@ -1,28 +1,26 @@
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, Plus, Trash2, X, Search, ChevronDown } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
+import { ArrowLeft, X, ChevronDown } from "lucide-react";
 
 import { Badge } from "../../components/_ui/badge";
 import { Button } from "../../components/_ui/button";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../../components/_ui/collapsible";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/_ui/card";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../components/_ui/command";
 import { Input } from "../../components/_ui/input";
 import { Label } from "../../components/_ui/label";
+import SearchableDropdown, { type SearchableDropdownOption } from "../../components/SearchableDropdown/SearchableDropdown";
 
 import { loadDatasheetData } from "../../utils/depotDataLoader";
 import type { ArmyList, ArmyListItem, Datasheet } from "../../types";
 
 import { useListManager } from "./ListManagerContext";
+import ListItem from "./ListItem";
 
 export function ListView() {
     const { listId } = useParams<{ listId: string }>();
     const navigate = useNavigate();
     const { lists, listsLoaded, getListById, factionData, loadFactionDataBySlug, addDatasheetToList, removeItemFromList, updateListItem, attachLeaderToUnit, detachLeaderFromUnit, attachEnhancementToLeader, calculateItemPoints, calculateTotalModels, parseLoadoutWeapons, parseOptionConstraint } = useListManager();
 
-    const [datasheetSearchOpen, setDatasheetSearchOpen] = useState(false);
-    const [datasheetSearchValue, setDatasheetSearchValue] = useState("");
     const [selectedItem, setSelectedItem] = useState<ArmyListItem | null>(null);
     const [bodyguardUnits, setBodyguardUnits] = useState<Datasheet[]>([]);
     const [loadingBodyguards, setLoadingBodyguards] = useState(false);
@@ -150,19 +148,19 @@ export function ListView() {
         return ordered;
     }, [selectedList]);
 
-    const filteredDatasheets = useMemo(() => {
-        if (!factionData || !datasheetSearchValue) {
-            return factionData?.datasheets || [];
-        }
-        const search = datasheetSearchValue.toLowerCase();
-        return factionData.datasheets.filter((d) => d.name.toLowerCase().includes(search) || d.roleLabel.toLowerCase().includes(search) || d.slug.toLowerCase().includes(search));
-    }, [factionData, datasheetSearchValue]);
+    // Convert datasheets to dropdown options
+    const datasheetOptions = useMemo((): SearchableDropdownOption<Datasheet>[] => {
+        if (!factionData?.datasheets) return [];
+        return factionData.datasheets.map((datasheet) => ({
+            id: datasheet.id,
+            searchValue: `${datasheet.name} ${datasheet.roleLabel} ${datasheet.slug}`,
+            data: datasheet,
+        }));
+    }, [factionData]);
 
     const handleAddDatasheet = async (datasheet: Datasheet) => {
         if (!selectedList) return;
         await addDatasheetToList(selectedList, datasheet);
-        setDatasheetSearchValue("");
-        setDatasheetSearchOpen(false);
     };
 
     const handleRemoveItem = (itemId: string) => {
@@ -354,7 +352,7 @@ export function ListView() {
             <Card>
                 <CardContent className="flex items-center justify-center h-64">
                     <div className="text-center">
-                        <p className="text-[#767676] mb-4">List not found</p>
+                        <p className=" mb-4">List not found</p>
                         <Link to="/lists">
                             <Button>Back to Lists</Button>
                         </Link>
@@ -367,132 +365,67 @@ export function ListView() {
     return (
         <div className="space-y-4">
             {/* Back button */}
-            <Link to="/lists" className="inline-flex items-center text-sm text-[#767676] hover:text-black">
+            <Link to="/lists" className="inline-flex items-center hover:shadow-glow-green">
                 <ArrowLeft className="h-4 w-4 mr-1" />
                 Back to Lists
             </Link>
 
+            <header>
+                <h1>{selectedList.name}</h1>
+                <p>
+                    {selectedList.factionName} | {selectedList.detachmentName}
+                </p>
+                {listTotalPoints > 0 && <Badge variant="outline">{listTotalPoints} pts</Badge>}
+            </header>
+
             <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
                 {/* Left Column - List Details */}
                 <div className="lg:col-span-3">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="flex justify-between">
-                                {selectedList.name}
-                                {listTotalPoints > 0 && (
-                                    <Badge variant="outline" className="text-xs text-slate-500">
-                                        {listTotalPoints} pts
-                                    </Badge>
-                                )}
-                            </CardTitle>
-                            <CardDescription className="mt-1">
-                                {selectedList.factionName} | {selectedList.detachmentName}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
+                    <Card className="p-4">
+                        <CardContent className="px-0">
                             <div className="space-y-4">
                                 {/* Add Datasheet */}
-                                <div>
+                                <div className="space-y-2">
                                     <Label>Add Unit</Label>
-                                    <Popover open={datasheetSearchOpen} onOpenChange={setDatasheetSearchOpen} modal={true}>
-                                        <PopoverTrigger className="w-full">
-                                            <Button variant="outline" role="combobox" aria-expanded={datasheetSearchOpen} className="w-full justify-between mt-1">
-                                                <span className="text-muted-foreground">Search for a unit to add...</span>
-                                                <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-full p-0 z-[100]" style={{ width: "var(--radix-popover-trigger-width)" }} side="bottom" align="start" sideOffset={8}>
-                                            <Command>
-                                                <CommandInput placeholder="Search datasheets..." value={datasheetSearchValue} onValueChange={setDatasheetSearchValue} />
-                                                <CommandList>
-                                                    <CommandEmpty>No datasheet found.</CommandEmpty>
-                                                    <CommandGroup>
-                                                        {filteredDatasheets.map((datasheet) => (
-                                                            <CommandItem key={datasheet.id} value={datasheet.name} onSelect={() => handleAddDatasheet(datasheet)}>
-                                                                <div className="flex items-center justify-between w-full">
-                                                                    <div>
-                                                                        <div className="font-medium">{datasheet.name}</div>
-                                                                        <div className="text-xs text-muted-foreground">{datasheet.roleLabel}</div>
-                                                                    </div>
-                                                                    {datasheet.isLegends && (
-                                                                        <Badge variant="outline" className="ml-2">
-                                                                            Legends
-                                                                        </Badge>
-                                                                    )}
-                                                                </div>
-                                                            </CommandItem>
-                                                        ))}
-                                                    </CommandGroup>
-                                                </CommandList>
-                                            </Command>
-                                        </PopoverContent>
-                                    </Popover>
+                                    <SearchableDropdown
+                                        options={datasheetOptions}
+                                        placeholder="Search for a unit to add..."
+                                        searchPlaceholder="Search datasheets..."
+                                        emptyMessage="No datasheet found."
+                                        onSelect={handleAddDatasheet}
+                                        renderOption={(datasheet) => (
+                                            <div className="flex items-center justify-between w-full">
+                                                <div>
+                                                    <div className="font-medium">{datasheet.name}</div>
+                                                    <div className="text-xs text-muted-foreground">{datasheet.roleLabel}</div>
+                                                </div>
+                                                {datasheet.isLegends && (
+                                                    <Badge variant="outline" className="ml-2">
+                                                        Legends
+                                                    </Badge>
+                                                )}
+                                            </div>
+                                        )}
+                                    />
                                 </div>
 
                                 {/* List Items */}
                                 <div>
                                     <Label>Units in List</Label>
                                     {selectedList.items.length === 0 ? (
-                                        <p className="text-sm text-[#767676] text-center p-8 border border-dashed rounded-lg mt-2">No units added yet. Use the search above to add units.</p>
+                                        <p className="text-sm  text-center p-8 border border-dashed rounded-lg mt-2">No units added yet. Use the search above to add units.</p>
                                     ) : (
                                         <div className="space-y-2 mt-2">
                                             {orderedListItems.map((item, index) => {
                                                 const isSelected = selectedItem?.listItemId === item.listItemId;
                                                 const isLeader = !!item.leading;
                                                 const isAttachedUnit = !!item.leadBy;
-
                                                 const prevItem = orderedListItems[index - 1];
                                                 const nextItem = orderedListItems[index + 1];
                                                 const isGroupedWithPrev = isAttachedUnit && prevItem?.leading?.id === item.id && prevItem?.leading?.name === item.name;
                                                 const isGroupedWithNext = isLeader && nextItem?.leadBy?.id === item.id && nextItem?.leadBy?.name === item.name;
 
-                                                return (
-                                                    <div key={item.listItemId} className={`space-y-4 p-3 border rounded-lg cursor-pointer transition-colors ${isSelected ? "bg-blue-50 border-blue-300" : "bg-white border-[#e6e6e6] hover:border-blue-200"} ${isGroupedWithNext ? "mb-0 rounded-b-none border-b-0" : ""} ${isGroupedWithPrev ? "rounded-t-none" : ""}`} onClick={() => setSelectedItem(item)}>
-                                                        <div className="flex justify-between items-center">
-                                                            <div>
-                                                                <span className="font-medium text-sm">{item.name}</span>
-                                                            </div>
-                                                            <div className="flex gap-2 items-center">
-                                                                <Badge variant="outline" className="text-xs">
-                                                                    {calculateItemPoints(item)} pts
-                                                                </Badge>
-                                                                <Button
-                                                                    variant="ghost"
-                                                                    size="sm"
-                                                                    className="h-8 w-8 p-0"
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        handleRemoveItem(item.listItemId);
-                                                                    }}
-                                                                >
-                                                                    <X className="h-4 w-4" />
-                                                                </Button>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex items-center gap-2 flex-wrap">
-                                                            {isLeader && (
-                                                                <Badge variant="outline" className="text-xs bg-green-100 border-green-300 text-green-700">
-                                                                    Leader
-                                                                </Badge>
-                                                            )}
-                                                            {isAttachedUnit && (
-                                                                <Badge variant="outline" className="text-xs bg-blue-100 border-blue-300 text-blue-700">
-                                                                    Attached
-                                                                </Badge>
-                                                            )}
-                                                            {item.enhancement && (
-                                                                <Badge variant="outline" className="text-xs bg-purple-100 border-purple-300 text-purple-700">
-                                                                    {item.enhancement.name} ({item.enhancement.cost} pts)
-                                                                </Badge>
-                                                            )}
-                                                            {item.loadoutSelections && Object.values(item.loadoutSelections).some((count) => count > 0) && (
-                                                                <Badge variant="outline" className="text-xs bg-orange-100 border-orange-300 text-orange-700">
-                                                                    Custom Loadout
-                                                                </Badge>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                );
+                                                return <ListItem item={item} isSelected={isSelected} isLeader={isLeader} isAttachedUnit={isAttachedUnit} isGroupedWithPrev={isGroupedWithPrev} isGroupedWithNext={isGroupedWithNext} calculateItemPoints={calculateItemPoints} handleRemoveItem={handleRemoveItem} setSelectedItem={setSelectedItem} />;
                                             })}
                                         </div>
                                     )}
@@ -819,12 +752,12 @@ export function ListView() {
                                         <div>
                                             <h3 className="font-semibold text-sm mb-2">Can Lead</h3>
                                             {loadingBodyguards ? (
-                                                <p className="text-sm text-[#767676]">Loading...</p>
+                                                <p className="text-sm ">Loading...</p>
                                             ) : bodyguardUnits.length > 0 ? (
                                                 <div className="space-y-4">
                                                     {unitsInList.length > 0 && (
                                                         <div>
-                                                            <h4 className="font-medium text-xs text-[#767676] mb-2">In Your List ({unitsInList.length})</h4>
+                                                            <h4 className="font-medium text-xs  mb-2">In Your List ({unitsInList.length})</h4>
                                                             <div className="space-y-2">
                                                                 {unitsInList.map((listItem) => {
                                                                     const isAttached = selectedItem?.leading?.id === listItem.id && selectedItem?.leading?.name === listItem.name;
@@ -833,7 +766,7 @@ export function ListView() {
                                                                             <div className="flex items-start justify-between">
                                                                                 <div className="flex-1">
                                                                                     <div className="font-medium text-sm">{listItem.name}</div>
-                                                                                    <div className="text-xs text-[#767676] mt-1">{listItem.roleLabel}</div>
+                                                                                    <div className="text-xs  mt-1">{listItem.roleLabel}</div>
                                                                                     {isAttached && <div className="text-xs text-green-600 mt-1 font-medium">Attached</div>}
                                                                                 </div>
                                                                                 <Button
@@ -861,15 +794,15 @@ export function ListView() {
                                                     {unitsNotInList.length > 0 && (
                                                         <Collapsible defaultOpen={false}>
                                                             <CollapsibleTrigger className="flex items-center justify-between w-full group">
-                                                                <h4 className="font-medium text-xs text-[#767676]">Not in List ({unitsNotInList.length})</h4>
-                                                                <ChevronDown className="h-4 w-4 text-[#767676] transition-transform group-data-[state=open]:rotate-180" />
+                                                                <h4 className="font-medium text-xs ">Not in List ({unitsNotInList.length})</h4>
+                                                                <ChevronDown className="h-4 w-4  transition-transform group-data-[state=open]:rotate-180" />
                                                             </CollapsibleTrigger>
                                                             <CollapsibleContent className="mt-2">
                                                                 <div className="space-y-2">
                                                                     {unitsNotInList.map((unit) => (
                                                                         <div key={unit.id} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
                                                                             <div className="font-medium text-sm">{unit.name}</div>
-                                                                            <div className="text-xs text-[#767676] mt-1">{unit.roleLabel}</div>
+                                                                            <div className="text-xs  mt-1">{unit.roleLabel}</div>
                                                                         </div>
                                                                     ))}
                                                                 </div>
@@ -878,7 +811,7 @@ export function ListView() {
                                                     )}
                                                 </div>
                                             ) : (
-                                                <p className="text-sm text-[#767676]">This unit cannot lead any units.</p>
+                                                <p className="text-sm ">This unit cannot lead any units.</p>
                                             )}
                                         </div>
                                     )}
@@ -929,13 +862,13 @@ export function ListView() {
                                                             </div>
                                                             {enhancement.legend && (
                                                                 <Collapsible defaultOpen={false}>
-                                                                    <CollapsibleTrigger className="flex items-center gap-1 text-xs text-[#767676] italic group">
+                                                                    <CollapsibleTrigger className="flex items-center gap-1 text-xs  italic group">
                                                                         <ChevronDown className="h-3 w-3 transition-transform group-data-[state=open]:rotate-180" />
                                                                         <span>Show lore</span>
                                                                     </CollapsibleTrigger>
                                                                     <CollapsibleContent>
                                                                         <p
-                                                                            className="text-xs text-[#767676] italic mt-1 mb-2"
+                                                                            className="text-xs  italic mt-1 mb-2"
                                                                             dangerouslySetInnerHTML={{
                                                                                 __html: enhancement.legend,
                                                                             }}
@@ -978,12 +911,12 @@ export function ListView() {
                                                             </div>
                                                             {ability.legend && (
                                                                 <Collapsible defaultOpen={false}>
-                                                                    <CollapsibleTrigger className="flex items-center gap-1 text-xs text-[#767676] italic group">
+                                                                    <CollapsibleTrigger className="flex items-center gap-1 text-xs  italic group">
                                                                         <ChevronDown className="h-3 w-3 transition-transform group-data-[state=open]:rotate-180" />
                                                                         <span>Show lore</span>
                                                                     </CollapsibleTrigger>
                                                                     <CollapsibleContent>
-                                                                        <p className="text-xs text-[#767676] italic mt-1 mb-2">{ability.legend}</p>
+                                                                        <p className="text-xs  italic mt-1 mb-2">{ability.legend}</p>
                                                                     </CollapsibleContent>
                                                                 </Collapsible>
                                                             )}
@@ -1007,7 +940,7 @@ export function ListView() {
                         <Card>
                             <CardContent className="flex items-center justify-center h-64">
                                 <div className="text-center">
-                                    <p className="text-[#767676] mb-2">Select a unit from the list to view details</p>
+                                    <p className=" mb-2">Select a unit from the list to view details</p>
                                 </div>
                             </CardContent>
                         </Card>

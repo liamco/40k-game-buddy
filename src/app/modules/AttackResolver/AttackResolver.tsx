@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import type { Datasheet, WeaponProfile, Model, GamePhase } from "../../types";
 import { resolveCombat, createDefaultCombatStatus, type GameContext, type CombatResult, type CombatStatus } from "../../game-engine";
 
+import AttackStep from "./components/AttackStep";
+
 interface AttackResolverProps {
     gamePhase: GamePhase;
     attackingUnit: Datasheet | null;
@@ -107,43 +109,6 @@ function convertToLegacyResult(
     };
 }
 
-function ModifierBadge({ label, value, className }: { label: string; value?: number; className?: string }) {
-    const isPositive = value !== undefined && value > 0;
-    const bgColor = isPositive ? "bg-green-200" : value !== undefined && value < 0 ? "bg-red-200" : "bg-[#b3b3b3]";
-
-    return (
-        <div className={`${bgColor} px-1.5 py-0.5 rounded-[2px] ${className || ""}`} title={label}>
-            <p className="font-bold text-[8px] uppercase">{label}</p>
-        </div>
-    );
-}
-
-function ResultBox({ label, value, modifiers }: { label?: string; value: string; modifiers?: { label: string; value: number }[] }) {
-    return (
-        <div className="flex flex-col items-center justify-center gap-1">
-            {label && <p className="font-bold text-[10px]">{label}</p>}
-            {modifiers && modifiers.length > 0 && modifiers.some((m) => m.value !== 0) && (
-                <div className="flex flex-wrap gap-1 justify-center">
-                    {modifiers
-                        .filter((m) => m.value !== 0)
-                        .map((mod, idx) => (
-                            <ModifierBadge key={idx} label={mod.label} value={mod.value} />
-                        ))}
-                </div>
-            )}
-            <p className="font-bold text-[24px]">{value}</p>
-        </div>
-    );
-}
-
-function FinalResultBox({ className = "bg-black", value }: { className: string; value: string }) {
-    return (
-        <div className={`${className} rounded-[4px] p-4 flex items-center justify-center`}>
-            <p className={`${className === "bg-amber-300" ? "text-black" : "text-white"} font-bold text-[24px]`}>{value}</p>
-        </div>
-    );
-}
-
 export function AttackResolver({ gamePhase, attackingUnit, attackerAttachedUnit, defendingUnit, defenderAttachedUnit, selectedWeaponProfile, selectedDefendingModel, attackerCombatStatus, defenderCombatStatus, activeAttackerStratagems, activeDefenderStratagems }: AttackResolverProps) {
     // Use game engine for combat resolution
     const result = useMemo(() => {
@@ -158,98 +123,22 @@ export function AttackResolver({ gamePhase, attackingUnit, attackerAttachedUnit,
 
     if (!result) {
         return (
-            <div className="bg-white rounded-[8px] border-4 border-[#e6e6e6] p-6 flex items-center justify-center min-h-[300px]">
-                <p className="text-[#767676] text-center">Select an attacking unit with a weapon and a target unit to calculate attack resolution</p>
+            <div className="col-span-2  rounded border-2  p-6 flex items-center justify-center">
+                <p className=" text-center">Select an attacking unit with a weapon and a target unit to calculate attack resolution</p>
             </div>
         );
     }
 
     return (
-        <div className="bg-white rounded-[8px] border-4 border-[#e6e6e6] p-6 space-y-6">
-            <section>
-                <p className="font-bold text-[12px] pb-2 border-b border-[#e6e6e6]">To hit</p>
-                <div className="grid grid-cols-4 gap-2 pt-4">
-                    <ResultBox label="BS" value={result.autoHit ? "N/A" : `${selectedWeaponProfile?.bsWs}+`} />
-                    {result.hitBonuses.length ? (
-                        <ResultBox value={`+${result.hitBonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={result.hitBonuses} />
-                    ) : (
-                        <div className="flex items-center justify-center">
-                            <p className="font-bold text-[24px]">-</p>
-                        </div>
-                    )}
-                    {result.hitPenalties.length ? (
-                        <ResultBox value={`${result.hitPenalties.reduce((sum, p) => sum + p.value, 0)}`} modifiers={result.hitPenalties} />
-                    ) : (
-                        <div className="flex items-center justify-center">
-                            <p className="font-bold text-[24px]">-</p>
-                        </div>
-                    )}
-                    <FinalResultBox value={result.autoHit ? "Auto" : `${result.toHit}+`} />
-                </div>
-            </section>
+        <section className="col-span-2 grid grid-cols-5 rounded border-2 border-skarsnikGreen">
+            <AttackStep label="To hit" statLabel="BS" statValue={result.autoHit ? "N/A" : `${selectedWeaponProfile?.bsWs}+`} bonuses={result.hitBonuses} penalties={result.hitPenalties} finalValue={result.autoHit ? "Auto" : `${result.toHit}+`} />
 
-            <section>
-                <p className="font-bold text-[12px] pb-2 border-b border-[#e6e6e6]">To wound</p>
-                <div className="grid grid-cols-4 gap-2 pt-4">
-                    <div className="flex items-center justify-center">
-                        <p className="font-bold text-[24px]">-</p>
-                    </div>
-                    {result.woundBonuses.length ? (
-                        <ResultBox value={`+${result.woundBonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={result.woundBonuses} />
-                    ) : (
-                        <div className="flex items-center justify-center">
-                            <p className="font-bold text-[24px]">-</p>
-                        </div>
-                    )}
-                    {result.woundPenalties.length ? (
-                        <ResultBox value={`${result.woundPenalties.reduce((sum, p) => sum + p.value, 0)}`} modifiers={result.woundPenalties} />
-                    ) : (
-                        <div className="flex items-center justify-center">
-                            <p className="font-bold text-[24px]">-</p>
-                        </div>
-                    )}
-                    <FinalResultBox value={`${result.toWound}+`} />
-                </div>
-            </section>
+            <AttackStep label="To wound" bonuses={result.woundBonuses} penalties={result.woundPenalties} finalValue={`${result.toWound}+`} />
 
-            <section>
-                <p className="font-bold text-[12px] pb-2 border-b border-[#e6e6e6]">To save</p>
-                <div className="grid grid-cols-4 gap-2 pt-4">
-                    <ResultBox label="Save" value={`${selectedDefendingModel?.sv}+`} />
-                    {result.saveBonuses.length ? (
-                        <ResultBox value={`+${result.saveBonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={result.saveBonuses} />
-                    ) : (
-                        <div className="flex items-center justify-center">
-                            <p className="font-bold text-[24px]">-</p>
-                        </div>
-                    )}
-                    {result.savePenalties.length ? (
-                        <ResultBox value={`${result.savePenalties.reduce((sum, p) => sum + p.value, 0)}`} modifiers={result.savePenalties} />
-                    ) : (
-                        <div className="flex items-center justify-center">
-                            <p className="font-bold text-[24px]">-</p>
-                        </div>
-                    )}
-                    <FinalResultBox className={result.invulnSave ? "bg-amber-300" : "bg-black"} value={result.toSave < 7 ? `${result.toSave}+${result.invulnSave ? "+" : ""}` : `-`} />
-                </div>
-            </section>
+            <AttackStep label="To save" statLabel="Save" statValue={`${selectedDefendingModel?.sv}+`} bonuses={result.saveBonuses} penalties={result.savePenalties} finalValue={result.toSave < 7 ? `${result.toSave}+${result.invulnSave ? "+" : ""}` : `-`} finalClassName={result.invulnSave ? "bg-amber-300" : "bg-black"} />
 
-            <section>
-                <p className="font-bold text-[12px] pb-2 border-b border-[#e6e6e6]">Feel no pain</p>
-                <div className="grid grid-cols-4 gap-2 pt-4">
-                    <div className="flex items-center justify-center">
-                        <p className="font-bold text-[24px]">-</p>
-                    </div>
-                    <div className="flex items-center justify-center">
-                        <p className="font-bold text-[24px]">-</p>
-                    </div>
-                    <div className="flex items-center justify-center">
-                        <p className="font-bold text-[24px]">-</p>
-                    </div>
-                    <FinalResultBox value={result.feelNoPain ? `${result.feelNoPain}+` : "-"} />
-                </div>
-            </section>
-        </div>
+            <AttackStep label="Feel no pain" bonuses={[]} penalties={[]} finalValue={result.feelNoPain ? `${result.feelNoPain}+` : "-"} />
+        </section>
     );
 }
 

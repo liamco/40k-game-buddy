@@ -11,7 +11,7 @@ import AttackResolver from "../../modules/AttackResolver/AttackResolver.tsx";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../components/_ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/_ui/select";
 
-import { GamePhaseSelector } from "../../components/GamePhaseSelector";
+import { GamePhaseSelector } from "../../components/GamePhaseSelector/GamePhaseSelector.tsx";
 import { AttackerPanel } from "../../components/AttackerPanel";
 import { DefenderPanel } from "../../components/DefenderPanel";
 import StratagemList from "../../components/Stratagems/StratagemList";
@@ -245,70 +245,63 @@ export const TheCage = () => {
     };
 
     return (
-        <Fragment>
-            <nav className="bg-[#2b344c] w-full flex justify-between items-end px-4">
-                <div className="pb-4">
-                    <div className="flex gap-4 border-slate-600 border-1 rounded-sm p-2">
-                        <Select value={attackerListId || undefined} onValueChange={(value) => setAttackerListId(value || null)}>
-                            <SelectTrigger className="w-full bg-transparent p-0 text-white">
-                                <SelectValue placeholder="Select attacker list..." />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {availableAttackerLists.length === 0 ? (
-                                    <SelectItem value="none" disabled>
-                                        No lists available
+        <main className="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-6 px-6 pb-6 h-[calc(100vh-88px)]">
+            <nav className="bg-mournfangBrown text-fireDragonBright shadow-glow-orange border-tuskorFur border-1 rounded w-full flex justify-between items-center p-3 col-span-2">
+                <div className="flex gap-4">
+                    <Select value={attackerListId || undefined} onValueChange={(value) => setAttackerListId(value || null)}>
+                        <SelectTrigger className="w-full bg-transparent p-0">
+                            <SelectValue placeholder="Select attacker list..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {availableAttackerLists.length === 0 ? (
+                                <SelectItem value="none" disabled>
+                                    No lists available
+                                </SelectItem>
+                            ) : (
+                                availableAttackerLists.map((list) => (
+                                    <SelectItem key={list.id} value={list.id}>
+                                        <div className="flex flex-col items-start">
+                                            <span className="text-xs">{list.detachmentName}</span>
+                                            <span className="font-medium">{list.factionName}</span>
+                                        </div>
                                     </SelectItem>
-                                ) : (
-                                    availableAttackerLists.map((list) => (
-                                        <SelectItem key={list.id} value={list.id}>
-                                            <div className="flex flex-col items-start">
-                                                <span className="text-xs">{list.detachmentName}</span>
-                                                <span className="font-medium">{list.factionName}</span>
-                                            </div>
-                                        </SelectItem>
-                                    ))
-                                )}
-                            </SelectContent>
-                        </Select>
-                        <button onClick={handleSwapSides} className="p-1 rounded-full hover:bg-[#e6e6e6] transition-colors" title="Swap attacker and defender" disabled={!attackerListId || !defenderListId}>
-                            <ArrowLeftRight className="size-6 text-[#767676]" />
-                        </button>
-                        <Select value={defenderListId || undefined} onValueChange={(value) => setDefenderListId(value || null)}>
-                            <SelectTrigger className="w-full bg-transparent p-0 text-white">
-                                <SelectValue placeholder="Select defender list..." />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {availableDefenderLists.length === 0 ? (
-                                    <SelectItem value="none" disabled>
-                                        No lists available
+                                ))
+                            )}
+                        </SelectContent>
+                    </Select>
+                    <button onClick={handleSwapSides} className="p-1 rounded-full hover:bg-[#e6e6e6] transition-colors" title="Swap attacker and defender" disabled={!attackerListId || !defenderListId}>
+                        <ArrowLeftRight className="size-6 " />
+                    </button>
+                    <Select value={defenderListId || undefined} onValueChange={(value) => setDefenderListId(value || null)}>
+                        <SelectTrigger className="w-full bg-transparent p-0 ">
+                            <SelectValue placeholder="Select defender list..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {availableDefenderLists.length === 0 ? (
+                                <SelectItem value="none" disabled>
+                                    No lists available
+                                </SelectItem>
+                            ) : (
+                                availableDefenderLists.map((list) => (
+                                    <SelectItem key={list.id} value={list.id}>
+                                        <div className="flex flex-col items-start">
+                                            <span className="text-xs">{list.detachmentName}</span>
+                                            <span className="font-medium">{list.factionName}</span>
+                                        </div>
                                     </SelectItem>
-                                ) : (
-                                    availableDefenderLists.map((list) => (
-                                        <SelectItem key={list.id} value={list.id}>
-                                            <div className="flex flex-col items-start">
-                                                <span className="text-xs">{list.detachmentName}</span>
-                                                <span className="font-medium">{list.factionName}</span>
-                                            </div>
-                                        </SelectItem>
-                                    ))
-                                )}
-                            </SelectContent>
-                        </Select>
-                    </div>
+                                ))
+                            )}
+                        </SelectContent>
+                    </Select>
                 </div>
                 <GamePhaseSelector currentPhase={gamePhase} onPhaseChange={setGamePhase} />
             </nav>
-            <main className=" min-h-screen bg-[#f5f5f5]">
-                <div className="grid grid-cols-[3fr_3fr_3fr] gap-6 p-6">
-                    <AttackerPanel gamePhase={gamePhase} unit={attackingUnit} attachedUnit={attackerAttachedUnit} onUnitChange={changeAttackingUnit} selectedWeaponProfile={selectedWeaponProfile} onWeaponProfileChange={setSelectedWeaponProfile} combatStatus={attackerCombatStatus} onCombatStatusChange={handleAttackerStatusChange} selectedList={attackerList} />
-                    <AttackResolver gamePhase={gamePhase} attackingUnit={attackingUnit} attackerAttachedUnit={attackerAttachedUnit} defendingUnit={defendingUnit} defenderAttachedUnit={defenderAttachedUnit} selectedWeaponProfile={selectedWeaponProfile} selectedDefendingModel={selectedUnitModel} attackerCombatStatus={attackerCombatStatus} defenderCombatStatus={defenderCombatStatus} activeAttackerStratagems={activeAttackerStratagems} activeDefenderStratagems={activeDefenderStratagems} />
-                    <DefenderPanel gamePhase={gamePhase} unit={defendingUnit} attachedUnit={defenderAttachedUnit} onUnitChange={changeDefendingUnit} selectedUnitModel={selectedUnitModel} onUnitModelChange={setSelectedUnitModel} combatStatus={defenderCombatStatus} onCombatStatusChange={handleDefenderStatusChange} selectedList={defenderList} selectedWeaponProfile={selectedWeaponProfile} />
-                    <StratagemList scope="Attacker" gamePhase={gamePhase} gameTurn="YOURS" selectedList={attackerList} />
-                    <div />
-                    <StratagemList scope="Defender" gamePhase={gamePhase} gameTurn="OPPONENTS" selectedList={defenderList} />
-                </div>
-            </main>
-        </Fragment>
+            <AttackerPanel gamePhase={gamePhase} unit={attackingUnit} attachedUnit={attackerAttachedUnit} onUnitChange={changeAttackingUnit} selectedWeaponProfile={selectedWeaponProfile} onWeaponProfileChange={setSelectedWeaponProfile} combatStatus={attackerCombatStatus} onCombatStatusChange={handleAttackerStatusChange} selectedList={attackerList} />
+            <DefenderPanel gamePhase={gamePhase} unit={defendingUnit} attachedUnit={defenderAttachedUnit} onUnitChange={changeDefendingUnit} selectedUnitModel={selectedUnitModel} onUnitModelChange={setSelectedUnitModel} combatStatus={defenderCombatStatus} onCombatStatusChange={handleDefenderStatusChange} selectedList={defenderList} selectedWeaponProfile={selectedWeaponProfile} />
+            <AttackResolver gamePhase={gamePhase} attackingUnit={attackingUnit} attackerAttachedUnit={attackerAttachedUnit} defendingUnit={defendingUnit} defenderAttachedUnit={defenderAttachedUnit} selectedWeaponProfile={selectedWeaponProfile} selectedDefendingModel={selectedUnitModel} attackerCombatStatus={attackerCombatStatus} defenderCombatStatus={defenderCombatStatus} activeAttackerStratagems={activeAttackerStratagems} activeDefenderStratagems={activeDefenderStratagems} />
+            {/*<StratagemList scope="Attacker" gamePhase={gamePhase} gameTurn="YOURS" selectedList={attackerList} />
+            <StratagemList scope="Defender" gamePhase={gamePhase} gameTurn="OPPONENTS" selectedList={defenderList} />*/}
+        </main>
     );
 };
 

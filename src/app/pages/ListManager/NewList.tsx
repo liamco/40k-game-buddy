@@ -1,14 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 
 import { Badge } from "../../components/_ui/badge";
 import { Button } from "../../components/_ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/_ui/card";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../components/_ui/command";
 import { Input } from "../../components/_ui/input";
 import { Label } from "../../components/_ui/label";
+import SearchableDropdown, { type SearchableDropdownOption } from "../../components/SearchableDropdown/SearchableDropdown";
 
 import { loadFactionData } from "../../utils/depotDataLoader";
 import type { Faction, FactionIndex, Detachment } from "../../types";
@@ -19,13 +17,9 @@ export function NewList() {
     const navigate = useNavigate();
     const { factions, createList } = useListManager();
 
-    const [factionSearchOpen, setFactionSearchOpen] = useState(false);
-    const [detachmentSearchOpen, setDetachmentSearchOpen] = useState(false);
     const [selectedFaction, setSelectedFaction] = useState<FactionIndex | null>(null);
     const [selectedDetachment, setSelectedDetachment] = useState<Detachment | null>(null);
     const [factionData, setFactionData] = useState<Faction | null>(null);
-    const [factionSearchValue, setFactionSearchValue] = useState("");
-    const [detachmentSearchValue, setDetachmentSearchValue] = useState("");
     const [newListName, setNewListName] = useState("");
 
     // Load faction data when a faction is selected
@@ -43,19 +37,24 @@ export function NewList() {
         }
     }, [selectedFaction]);
 
-    const filteredFactions = useMemo(() => {
-        if (!factionSearchValue) return factions;
-        const search = factionSearchValue.toLowerCase();
-        return factions.filter((f) => f.name.toLowerCase().includes(search) || f.slug.toLowerCase().includes(search));
-    }, [factions, factionSearchValue]);
+    // Convert factions to dropdown options
+    const factionOptions = useMemo((): SearchableDropdownOption<FactionIndex>[] => {
+        return factions.map((faction) => ({
+            id: faction.id,
+            searchValue: `${faction.name} ${faction.slug}`,
+            data: faction,
+        }));
+    }, [factions]);
 
-    const filteredDetachments = useMemo(() => {
-        if (!factionData?.detachments || !detachmentSearchValue) {
-            return factionData?.detachments || [];
-        }
-        const search = detachmentSearchValue.toLowerCase();
-        return factionData.detachments.filter((d) => d.name.toLowerCase().includes(search) || d.slug.toLowerCase().includes(search));
-    }, [factionData, detachmentSearchValue]);
+    // Convert detachments to dropdown options
+    const detachmentOptions = useMemo((): SearchableDropdownOption<Detachment>[] => {
+        if (!factionData?.detachments) return [];
+        return factionData.detachments.map((detachment) => ({
+            id: detachment.slug,
+            searchValue: `${detachment.name} ${detachment.slug}`,
+            data: detachment,
+        }));
+    }, [factionData]);
 
     const handleCreateList = () => {
         if (!selectedFaction || !newListName.trim()) return;
@@ -81,91 +80,32 @@ export function NewList() {
                     </div>
                     <div>
                         <Label>Select Faction</Label>
-                        <Popover open={factionSearchOpen} onOpenChange={setFactionSearchOpen}>
-                            <PopoverTrigger className="w-full">
-                                <Button variant="outline" role="combobox" aria-expanded={factionSearchOpen} className="w-full justify-between">
-                                    {selectedFaction ? selectedFaction.name : "Select faction..."}
-                                    <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                </Button>
-                            </PopoverTrigger>
-                            <PopoverContent
-                                className="w-full p-0 z-[100]"
-                                style={{
-                                    width: "var(--radix-popover-trigger-width)",
-                                }}
-                                side="bottom"
-                                align="start"
-                                sideOffset={8}
-                            >
-                                <Command>
-                                    <CommandInput placeholder="Search factions..." value={factionSearchValue} onValueChange={setFactionSearchValue} />
-                                    <CommandList>
-                                        <CommandEmpty>No faction found.</CommandEmpty>
-                                        <CommandGroup>
-                                            {filteredFactions.map((faction) => (
-                                                <CommandItem
-                                                    key={faction.id}
-                                                    value={faction.name}
-                                                    onSelect={() => {
-                                                        setSelectedFaction(faction);
-                                                        setFactionSearchOpen(false);
-                                                        setFactionSearchValue("");
-                                                    }}
-                                                >
-                                                    {faction.name}
-                                                    <Badge variant="secondary" className="ml-2">
-                                                        {faction.datasheetCount} units
-                                                    </Badge>
-                                                </CommandItem>
-                                            ))}
-                                        </CommandGroup>
-                                    </CommandList>
-                                </Command>
-                            </PopoverContent>
-                        </Popover>
+                        <div className="mt-1">
+                            <SearchableDropdown
+                                options={factionOptions}
+                                selectedLabel={selectedFaction?.name}
+                                placeholder="Select faction..."
+                                searchPlaceholder="Search factions..."
+                                emptyMessage="No faction found."
+                                onSelect={setSelectedFaction}
+                                variant="outline"
+                                renderOption={(faction) => (
+                                    <div className="flex items-center justify-between w-full">
+                                        {faction.name}
+                                        <Badge variant="secondary" className="ml-2">
+                                            {faction.datasheetCount} units
+                                        </Badge>
+                                    </div>
+                                )}
+                            />
+                        </div>
                     </div>
                     {selectedFaction && factionData?.detachments && factionData.detachments.length > 0 && (
                         <div>
                             <Label>Select Detachment</Label>
-                            <Popover open={detachmentSearchOpen} onOpenChange={setDetachmentSearchOpen}>
-                                <PopoverTrigger className="w-full">
-                                    <Button variant="outline" role="combobox" aria-expanded={detachmentSearchOpen} className="w-full justify-between">
-                                        {selectedDetachment ? selectedDetachment.name : "Select detachment..."}
-                                        <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent
-                                    className="w-full p-0 z-[100]"
-                                    style={{
-                                        width: "var(--radix-popover-trigger-width)",
-                                    }}
-                                    side="bottom"
-                                    align="start"
-                                    sideOffset={8}
-                                >
-                                    <Command>
-                                        <CommandInput placeholder="Search detachments..." value={detachmentSearchValue} onValueChange={setDetachmentSearchValue} />
-                                        <CommandList>
-                                            <CommandEmpty>No detachment found.</CommandEmpty>
-                                            <CommandGroup>
-                                                {filteredDetachments.map((detachment) => (
-                                                    <CommandItem
-                                                        key={detachment.slug}
-                                                        value={detachment.name}
-                                                        onSelect={() => {
-                                                            setSelectedDetachment(detachment);
-                                                            setDetachmentSearchOpen(false);
-                                                            setDetachmentSearchValue("");
-                                                        }}
-                                                    >
-                                                        {detachment.name}
-                                                    </CommandItem>
-                                                ))}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
+                            <div className="mt-1">
+                                <SearchableDropdown options={detachmentOptions} selectedLabel={selectedDetachment?.name} placeholder="Select detachment..." searchPlaceholder="Search detachments..." emptyMessage="No detachment found." onSelect={setSelectedDetachment} variant="outline" renderOption={(detachment) => detachment.name} />
+                            </div>
                         </div>
                     )}
                     <div className="flex gap-2 pt-4">

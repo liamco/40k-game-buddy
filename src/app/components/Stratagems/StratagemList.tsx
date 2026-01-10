@@ -33,7 +33,7 @@ export const StratagemList = ({ scope, gamePhase, gameTurn, selectedList }) => {
 
     return (
         <div className="bg-[#e6e6e6] rounded-[8px] p-6 space-y-4">
-            <h3 className=" font-semibold text-[14px] text-[#1e1e1e]">{scope}s stratagems</h3>
+            <h3 className=" font-semibold text-[14px] ">{scope}s stratagems</h3>
             {globalStratagemData
                 .filter((stratagem) => stratagem.phase.includes(gamePhase))
                 .filter((stratagem) => stratagem.type.includes("Core"))

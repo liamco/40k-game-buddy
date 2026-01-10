@@ -1,6 +1,6 @@
 import React from "react";
 import { COMBAT_STATUS_FLAGS, type CombatStatusFlag, type CombatStatus as CombatStatusType } from "../../game-engine";
-import { Switch } from "../_ui/switch.tsx";
+import { Checkbox } from "../_ui/checkbox.tsx";
 
 /**
  * Defines which combat status flags are relevant for each side.
@@ -8,22 +8,22 @@ import { Switch } from "../_ui/switch.tsx";
  * - defender: statuses that affect the defending unit
  * - both: statuses relevant to both sides
  */
-const STATUS_RELEVANCE: Record<CombatStatusFlag, "attacker" | "defender" | "both"> = {
+const STATUS_RELEVANCE: Record<CombatStatusFlag, "attacker" | "defender" | "both" | "neither"> = {
     isStationary: "attacker",
     inCover: "defender",
-    inEngagementRange: "both",
+    inEngagementRange: "neither",
     inRangeOfObjective: "both",
     inRangeOfContestedObjective: "both",
     inRangeOfFriendlyObjective: "both",
     inRangeOfEnemyObjective: "both",
     isBattleShocked: "both",
-    hasFiredThisPhase: "attacker",
+    hasFiredThisPhase: "neither",
     hasChargedThisTurn: "attacker",
     isBelowStartingStrength: "both",
     isBelowHalfStrength: "both",
     isDamaged: "both",
-    isLeadingUnit: "both",
-    isBeingLeg: "both",
+    isLeadingUnit: "neither",
+    isBeingLed: "neither",
 };
 
 /**
@@ -49,10 +49,10 @@ const CombatStatus = ({ side, combatStatus, onStatusChange }: Props) => {
         <section className="space-y-4">
             {relevantStatuses.map((status) => (
                 <div key={status.name} className="flex items-center justify-between gap-2">
-                    <label htmlFor={`${side}-${status.name}`} className="text-xs  font-semibold text-[#1e1e1e]">
+                    <label htmlFor={`${side}-${status.name}`} className="text-xs  font-semibold ">
                         {status.label}
                     </label>
-                    <Switch
+                    <Checkbox
                         id={`${side}-${status.name}`}
                         checked={combatStatus[status.name as CombatStatusFlag]}
                         onCheckedChange={(val) => {
