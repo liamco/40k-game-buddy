@@ -2,6 +2,38 @@ import React, { useState, useEffect, Fragment } from "react";
 import { ArrowLeftRight } from "lucide-react";
 
 import type { GamePhase, ArmyList, Datasheet, WeaponProfile, Model, ArmyListItem } from "./types";
+
+/**
+ * Calculate the total model count from an ArmyListItem's composition.
+ * For combined units (leader + attached), sums both.
+ */
+function calculateModelCount(item: ArmyListItem, attachedItem?: ArmyListItem | null): number {
+    let total = 0;
+
+    // Calculate from compositionCounts if available
+    if (item.compositionCounts) {
+        total += Object.values(item.compositionCounts).reduce((sum, count) => sum + count, 0);
+    } else if (item.unitComposition && item.unitComposition.length > 0) {
+        // Fall back to minimum values from unitComposition
+        total += item.unitComposition.reduce((sum, comp) => sum + (comp.min ?? 1), 0);
+    } else {
+        // Last resort: count from models array (assumes 1 of each)
+        total += item.models?.length ?? 1;
+    }
+
+    // Add attached unit's models if present
+    if (attachedItem) {
+        if (attachedItem.compositionCounts) {
+            total += Object.values(attachedItem.compositionCounts).reduce((sum, count) => sum + count, 0);
+        } else if (attachedItem.unitComposition && attachedItem.unitComposition.length > 0) {
+            total += attachedItem.unitComposition.reduce((sum, comp) => sum + (comp.min ?? 1), 0);
+        } else {
+            total += attachedItem.models?.length ?? 1;
+        }
+    }
+
+    return total;
+}
 import { createDefaultCombatStatus, type CombatStatus, type CombatStatusFlag } from "../../game-engine";
 
 import { loadDatasheetData } from "../../utils/depotDataLoader";
@@ -113,6 +145,10 @@ export const TheCage = () => {
     const [attackerCombatStatus, setAttackerCombatStatus] = useState<CombatStatus>(createDefaultCombatStatus());
     const [defenderCombatStatus, setDefenderCombatStatus] = useState<CombatStatus>(createDefaultCombatStatus());
 
+    // Track current model counts for attacker (for calculating total attacks and strength states)
+    const [attackerModelCount, setAttackerModelCount] = useState<number>(0);
+    const [attackerStartingStrength, setAttackerStartingStrength] = useState<number>(0);
+
     const handleAttackerStatusChange = (name: CombatStatusFlag, value: boolean) => {
         setAttackerCombatStatus((prev) => ({ ...prev, [name]: value }));
     };
@@ -120,6 +156,20 @@ export const TheCage = () => {
     const handleDefenderStatusChange = (name: CombatStatusFlag, value: boolean) => {
         setDefenderCombatStatus((prev) => ({ ...prev, [name]: value }));
     };
+
+    // Auto-calculate "below starting strength" and "below half strength" based on model count
+    useEffect(() => {
+        if (attackerStartingStrength === 0) return;
+
+        const isBelowStartingStrength = attackerModelCount < attackerStartingStrength;
+        const isBelowHalfStrength = attackerModelCount <= Math.floor(attackerStartingStrength / 2);
+
+        setAttackerCombatStatus((prev) => ({
+            ...prev,
+            isBelowStartingStrength,
+            isBelowHalfStrength,
+        }));
+    }, [attackerModelCount, attackerStartingStrength]);
 
     const [activeAttackerStratagems, setActiveAttackerStratagems] = useState<string[]>([]);
     const [activeDefenderStratagems, setActiveDefenderStratagems] = useState<string[]>([]);
@@ -180,8 +230,9 @@ export const TheCage = () => {
                 setAttackingUnit(data);
 
                 // Check if this is a leader with an attached unit
+                let attachedListItem: ArmyListItem | null = null;
                 if (listItem.leading && attackerList) {
-                    const attachedListItem = attackerList.items.find((u) => u.id === listItem.leading?.id && u.name === listItem.leading?.name);
+                    attachedListItem = attackerList.items.find((u) => u.id === listItem.leading?.id && u.name === listItem.leading?.name) || null;
                     if (attachedListItem) {
                         const attachedData = await loadDatasheetData(attachedListItem.factionSlug, attachedListItem.id);
                         setAttackerAttachedUnit(attachedData);
@@ -191,6 +242,11 @@ export const TheCage = () => {
                 } else {
                     setAttackerAttachedUnit(null);
                 }
+
+                // Calculate and set starting strength based on unit composition
+                const startingStrength = calculateModelCount(listItem, attachedListItem);
+                setAttackerStartingStrength(startingStrength);
+                setAttackerModelCount(startingStrength);
 
                 // Auto-select the first weapon profile from the first ranged weapon
                 const firstRangedWeapon = data.wargear.find((weapon) => weapon.type === "Ranged");
@@ -204,6 +260,8 @@ export const TheCage = () => {
             setAttackingUnit(null);
             setAttackerAttachedUnit(null);
             setSelectedWeaponProfile(null);
+            setAttackerStartingStrength(0);
+            setAttackerModelCount(0);
         }
     };
 
@@ -247,7 +305,7 @@ export const TheCage = () => {
     return (
         <main className="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-6 px-6 pb-6 h-[calc(100vh-88px)]">
             <nav className="bg-mournfangBrown text-fireDragonBright shadow-glow-orange border-tuskorFur border-1 rounded w-full flex justify-between items-center p-3 col-span-2">
-                <div className="flex gap-4">
+                <div className="flex gap-4 items-center">
                     <Select value={attackerListId || undefined} onValueChange={(value) => setAttackerListId(value || null)}>
                         <SelectTrigger className="w-full bg-transparent p-0">
                             <SelectValue placeholder="Select attacker list..." />
@@ -260,18 +318,17 @@ export const TheCage = () => {
                             ) : (
                                 availableAttackerLists.map((list) => (
                                     <SelectItem key={list.id} value={list.id}>
-                                        <div className="flex flex-col items-start">
-                                            <span className="text-xs">{list.detachmentName}</span>
-                                            <span className="font-medium">{list.factionName}</span>
-                                        </div>
+                                        <p className="leading-3 text-left">
+                                            <span className="text-blockcaps-m block">{list.name}</span>
+                                            <span className="text-blockcaps-xs">{list.factionName} - </span>
+                                            <span className="text-blockcaps-xs">{list.detachmentName}</span>
+                                        </p>
                                     </SelectItem>
                                 ))
                             )}
                         </SelectContent>
                     </Select>
-                    <button onClick={handleSwapSides} className="p-1 rounded-full hover:bg-[#e6e6e6] transition-colors" title="Swap attacker and defender" disabled={!attackerListId || !defenderListId}>
-                        <ArrowLeftRight className="size-6 " />
-                    </button>
+                    <span className="text-blockcaps-m">VS</span>
                     <Select value={defenderListId || undefined} onValueChange={(value) => setDefenderListId(value || null)}>
                         <SelectTrigger className="w-full bg-transparent p-0 ">
                             <SelectValue placeholder="Select defender list..." />
@@ -284,10 +341,11 @@ export const TheCage = () => {
                             ) : (
                                 availableDefenderLists.map((list) => (
                                     <SelectItem key={list.id} value={list.id}>
-                                        <div className="flex flex-col items-start">
-                                            <span className="text-xs">{list.detachmentName}</span>
-                                            <span className="font-medium">{list.factionName}</span>
-                                        </div>
+                                        <p className="leading-3 text-left">
+                                            <span className="text-blockcaps-m block">{list.name}</span>
+                                            <span className="text-blockcaps-xs">{list.factionName} - </span>
+                                            <span className="text-blockcaps-xs">{list.detachmentName}</span>
+                                        </p>
                                     </SelectItem>
                                 ))
                             )}
@@ -296,9 +354,9 @@ export const TheCage = () => {
                 </div>
                 <GamePhaseSelector currentPhase={gamePhase} onPhaseChange={setGamePhase} />
             </nav>
-            <AttackerPanel gamePhase={gamePhase} unit={attackingUnit} attachedUnit={attackerAttachedUnit} onUnitChange={changeAttackingUnit} selectedWeaponProfile={selectedWeaponProfile} onWeaponProfileChange={setSelectedWeaponProfile} combatStatus={attackerCombatStatus} onCombatStatusChange={handleAttackerStatusChange} selectedList={attackerList} />
+            <AttackerPanel gamePhase={gamePhase} unit={attackingUnit} attachedUnit={attackerAttachedUnit} onUnitChange={changeAttackingUnit} selectedWeaponProfile={selectedWeaponProfile} onWeaponProfileChange={setSelectedWeaponProfile} combatStatus={attackerCombatStatus} onCombatStatusChange={handleAttackerStatusChange} selectedList={attackerList} modelCount={attackerModelCount} startingStrength={attackerStartingStrength} onModelCountChange={setAttackerModelCount} />
             <DefenderPanel gamePhase={gamePhase} unit={defendingUnit} attachedUnit={defenderAttachedUnit} onUnitChange={changeDefendingUnit} selectedUnitModel={selectedUnitModel} onUnitModelChange={setSelectedUnitModel} combatStatus={defenderCombatStatus} onCombatStatusChange={handleDefenderStatusChange} selectedList={defenderList} selectedWeaponProfile={selectedWeaponProfile} />
-            <AttackResolver gamePhase={gamePhase} attackingUnit={attackingUnit} attackerAttachedUnit={attackerAttachedUnit} defendingUnit={defendingUnit} defenderAttachedUnit={defenderAttachedUnit} selectedWeaponProfile={selectedWeaponProfile} selectedDefendingModel={selectedUnitModel} attackerCombatStatus={attackerCombatStatus} defenderCombatStatus={defenderCombatStatus} activeAttackerStratagems={activeAttackerStratagems} activeDefenderStratagems={activeDefenderStratagems} />
+            <AttackResolver gamePhase={gamePhase} attackingUnit={attackingUnit} attackerAttachedUnit={attackerAttachedUnit} defendingUnit={defendingUnit} defenderAttachedUnit={defenderAttachedUnit} selectedWeaponProfile={selectedWeaponProfile} selectedDefendingModel={selectedUnitModel} attackerCombatStatus={attackerCombatStatus} defenderCombatStatus={defenderCombatStatus} activeAttackerStratagems={activeAttackerStratagems} activeDefenderStratagems={activeDefenderStratagems} attackerModelCount={attackerModelCount} />
             {/*<StratagemList scope="Attacker" gamePhase={gamePhase} gameTurn="YOURS" selectedList={attackerList} />
             <StratagemList scope="Defender" gamePhase={gamePhase} gameTurn="OPPONENTS" selectedList={defenderList} />*/}
         </main>

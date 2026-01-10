@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { Fragment, useMemo } from "react";
 import type { Datasheet, WeaponProfile, Model, GamePhase } from "../../types";
 import { resolveCombat, createDefaultCombatStatus, type GameContext, type CombatResult, type CombatStatus } from "../../game-engine";
 
@@ -16,6 +16,7 @@ interface AttackResolverProps {
     defenderCombatStatus: CombatStatus;
     activeAttackerStratagems: string[];
     activeDefenderStratagems: string[];
+    attackerModelCount: number;
 }
 
 /**
@@ -109,7 +110,7 @@ function convertToLegacyResult(
     };
 }
 
-export function AttackResolver({ gamePhase, attackingUnit, attackerAttachedUnit, defendingUnit, defenderAttachedUnit, selectedWeaponProfile, selectedDefendingModel, attackerCombatStatus, defenderCombatStatus, activeAttackerStratagems, activeDefenderStratagems }: AttackResolverProps) {
+export function AttackResolver({ gamePhase, attackingUnit, attackerAttachedUnit, defendingUnit, defenderAttachedUnit, selectedWeaponProfile, selectedDefendingModel, attackerCombatStatus, defenderCombatStatus, activeAttackerStratagems, activeDefenderStratagems, attackerModelCount }: AttackResolverProps) {
     // Use game engine for combat resolution
     const result = useMemo(() => {
         if (!attackingUnit || !defendingUnit || !selectedWeaponProfile || !selectedDefendingModel) {
@@ -121,23 +122,43 @@ export function AttackResolver({ gamePhase, attackingUnit, attackerAttachedUnit,
         return convertToLegacyResult(combatResult, selectedWeaponProfile);
     }, [gamePhase, attackingUnit, attackerAttachedUnit, defendingUnit, defenderAttachedUnit, selectedWeaponProfile, selectedDefendingModel, attackerCombatStatus, defenderCombatStatus]);
 
-    if (!result) {
-        return (
-            <div className="col-span-2  rounded border-2  p-6 flex items-center justify-center">
-                <p className=" text-center">Select an attacking unit with a weapon and a target unit to calculate attack resolution</p>
-            </div>
-        );
-    }
+    // Calculate total attacks based on weapon attacks × model count
+    const attacksDisplay = useMemo(() => {
+        if (!selectedWeaponProfile || attackerModelCount === 0) {
+            return { perModel: "-", total: "-" };
+        }
+
+        const attacksPerModel = selectedWeaponProfile.a;
+
+        // If attacks is a fixed number, multiply by model count
+        if (typeof attacksPerModel === "number") {
+            return {
+                perModel: String(attacksPerModel),
+                total: String(attacksPerModel * attackerModelCount),
+            };
+        }
+
+        // If attacks is a dice expression (e.g., "D6", "D3+1", "2D6")
+        // Show as "expression × models"
+        return {
+            perModel: String(attacksPerModel),
+            total: attackerModelCount > 1 ? `${attacksPerModel} ×${attackerModelCount}` : String(attacksPerModel),
+        };
+    }, [selectedWeaponProfile, attackerModelCount]);
 
     return (
-        <section className="col-span-2 grid grid-cols-5 rounded border-2 border-skarsnikGreen">
-            <AttackStep label="To hit" statLabel="BS" statValue={result.autoHit ? "N/A" : `${selectedWeaponProfile?.bsWs}+`} bonuses={result.hitBonuses} penalties={result.hitPenalties} finalValue={result.autoHit ? "Auto" : `${result.toHit}+`} />
-
-            <AttackStep label="To wound" bonuses={result.woundBonuses} penalties={result.woundPenalties} finalValue={`${result.toWound}+`} />
-
-            <AttackStep label="To save" statLabel="Save" statValue={`${selectedDefendingModel?.sv}+`} bonuses={result.saveBonuses} penalties={result.savePenalties} finalValue={result.toSave < 7 ? `${result.toSave}+${result.invulnSave ? "+" : ""}` : `-`} finalClassName={result.invulnSave ? "bg-amber-300" : "bg-black"} />
-
-            <AttackStep label="Feel no pain" bonuses={[]} penalties={[]} finalValue={result.feelNoPain ? `${result.feelNoPain}+` : "-"} />
+        <section className="col-span-2 grid grid-cols-5 rounded border-2 border-skarsnikGreen shadow-glow-green">
+            {result ? (
+                <Fragment>
+                    <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={attackerModelCount > 0 ? [{ label: "Models", value: attackerModelCount }] : []} penalties={[]} finalValue={attacksDisplay.total} />
+                    <AttackStep stepType="hitChance" label="To hit" statLabel="BS" statValue={result.autoHit ? "N/A" : `${selectedWeaponProfile?.bsWs}+`} bonuses={result.hitBonuses} penalties={result.hitPenalties} finalValue={result.autoHit ? "Auto" : `${result.toHit}+`} />
+                    <AttackStep stepType="woundChance" label="To wound" bonuses={result.woundBonuses} penalties={result.woundPenalties} finalValue={`${result.toWound}+`} />
+                    <AttackStep stepType="saveChance" label="To save" statLabel="Save" statValue={`${selectedDefendingModel?.sv}+`} bonuses={result.saveBonuses} penalties={result.savePenalties} finalValue={result.toSave < 7 ? `${result.toSave}+${result.invulnSave ? "+" : ""}` : `-`} finalClassName={result.invulnSave ? "bg-amber-300" : "bg-fireDragonBright"} />
+                    <AttackStep stepType="feelNoPain" label="Feel no pain" bonuses={[]} penalties={[]} finalValue={result.feelNoPain ? `${result.feelNoPain}+` : "-"} disabled={!result.feelNoPain} />
+                </Fragment>
+            ) : (
+                <span className="col-span-5 py-8 text-center w-full text-blockcaps-m">+++ Select attacker and target to calculate attack resolution +++</span>
+            )}
         </section>
     );
 }

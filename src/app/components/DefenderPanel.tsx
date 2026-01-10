@@ -282,27 +282,8 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     };
 
     return (
-        <section className="grid grid-cols-5 grid-rows-[auto_auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
-            <span className="col-span-5">Target unit</span>
-            {!selectedList ? (
-                <div className="w-full bg-deathWorldForest rounded px-4 py-3">Select an defender list above</div>
-            ) : (
-                <SearchableDropdown
-                    options={unitOptions}
-                    selectedLabel={selectedUnitDisplayName}
-                    placeholder="Search for a unit..."
-                    searchPlaceholder="Search units..."
-                    emptyMessage="No unit found."
-                    onSelect={handleUnitSelect}
-                    renderOption={(combined) => (
-                        <div>
-                            <div className="font-medium">{combined.displayName}</div>
-                            <div className="text-xs text-muted-foreground">{combined.item.roleLabel}</div>
-                        </div>
-                    )}
-                    triggerClassName="col-span-5"
-                />
-            )}
+        <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
+            <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="col-span-5" />
             {unit ? (
                 <Fragment>
                     <div className="col-span-3 space-y-4">
@@ -365,6 +346,7 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
             ) : (
                 <CombatantPanelEmpty combatant="defender" />
             )}
+            <div id="stratagems" />
         </section>
     );
 }

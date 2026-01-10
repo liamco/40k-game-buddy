@@ -8,6 +8,7 @@ import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type Un
 import CombatStatusComponent from "./CombatStatus/CombatStatus";
 import SplitHeading from "./SplitHeading/SplitHeading";
 import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
+import { Input } from "./_ui/input";
 
 // Parse loadout HTML to extract weapon names
 function parseLoadoutWeapons(loadout: string): string[] {
@@ -43,6 +44,9 @@ interface AttackerPanelProps {
     combatStatus: CombatStatus;
     onCombatStatusChange: (name: CombatStatusFlag, value: boolean) => void;
     selectedList: ArmyList | null;
+    modelCount: number;
+    startingStrength: number;
+    onModelCountChange: (count: number) => void;
 }
 
 /**
@@ -81,7 +85,7 @@ function extractCombatBonuses(mechanics: Mechanic[]): {
     return { hitBonuses, woundBonuses, otherBonuses };
 }
 
-export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, combatStatus, onCombatStatusChange, selectedList }: AttackerPanelProps) {
+export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, combatStatus, onCombatStatusChange, selectedList, modelCount, startingStrength, onModelCountChange }: AttackerPanelProps) {
     const [factionData, setFactionData] = useState<Faction | null>(null);
 
     // Load faction data when list changes
@@ -296,27 +300,8 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     };
 
     return (
-        <section className="grid grid-cols-5 grid-rows-[auto_auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
-            <span className="col-span-5">Attacking unit</span>
-            {!selectedList ? (
-                <div className="w-full bg-deathWorldForest rounded px-4 py-3">Select an attacker list above</div>
-            ) : (
-                <SearchableDropdown
-                    options={unitOptions}
-                    selectedLabel={selectedUnitDisplayName}
-                    placeholder="Search for a unit..."
-                    searchPlaceholder="Search units..."
-                    emptyMessage="No unit found."
-                    onSelect={handleUnitSelect}
-                    renderOption={(combined) => (
-                        <div>
-                            <div className="font-medium">{combined.displayName}</div>
-                            <div className="text-xs text-muted-foreground">{combined.item.roleLabel}</div>
-                        </div>
-                    )}
-                    triggerClassName="col-span-5"
-                />
-            )}
+        <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
+            <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="col-span-5" />
             {unit ? (
                 <Fragment>
                     <div className="col-span-3 space-y-4">
@@ -418,12 +403,37 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                     </div>
                     <div className="col-span-2 space-y-4">
                         <SplitHeading label="Combat status" />
+                        {startingStrength > 0 && (
+                            <div className="space-y-2">
+                                <div className="flex items-center justify-between gap-2">
+                                    <label htmlFor="attacker-model-count" className="text-xs font-semibold">
+                                        Models Remaining
+                                    </label>
+                                    <Input
+                                        id="attacker-model-count"
+                                        type="number"
+                                        min={1}
+                                        max={startingStrength}
+                                        value={modelCount}
+                                        onChange={(e) => {
+                                            const value = parseInt(e.target.value, 10);
+                                            if (!isNaN(value) && value >= 1 && value <= startingStrength) {
+                                                onModelCountChange(value);
+                                            }
+                                        }}
+                                        className="w-16 text-center"
+                                    />
+                                </div>
+                                <p className="text-[10px] text-muted-foreground">Starting strength: {startingStrength}</p>
+                            </div>
+                        )}
                         <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
                     </div>
                 </Fragment>
             ) : (
                 <CombatantPanelEmpty combatant="attacker" />
             )}
+            <div id="stratagems"></div>
         </section>
     );
 }

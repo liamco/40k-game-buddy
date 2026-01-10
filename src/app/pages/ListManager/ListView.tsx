@@ -442,9 +442,7 @@ export function ListView() {
                             <CardHeader className="space-y-2">
                                 <CardTitle className="flex justify-between">
                                     <h3>{selectedItem.name}</h3>
-                                    <Badge variant="outline" className="text-xs text-slate-500">
-                                        {calculatedPoints ?? selectedItem.modelCosts?.[0]?.cost ?? 0} pts
-                                    </Badge>
+                                    <Badge variant="outline">{calculatedPoints ?? selectedItem.modelCosts?.[0]?.cost ?? 0} pts</Badge>
                                 </CardTitle>
                                 <CardDescription>
                                     {/* Keywords */}
@@ -461,7 +459,7 @@ export function ListView() {
                                 <CardDescription>
                                     {selectedItem.legend && (
                                         <p
-                                            className="text-sm text-slate-500 italic"
+                                            className="italic"
                                             dangerouslySetInnerHTML={{
                                                 __html: selectedItem.legend,
                                             }}
