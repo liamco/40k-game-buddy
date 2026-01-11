@@ -3,7 +3,7 @@ import { Model } from "../../types";
 
 import { Badge } from "../_ui/badge.tsx";
 
-import strikethrough from "../../assets/strikethrough.svg";
+import strikethrough from "../../assets/Strikethrough.svg";
 
 interface Props {
     model: Model & { sourceUnit?: string; isLeader?: boolean };
