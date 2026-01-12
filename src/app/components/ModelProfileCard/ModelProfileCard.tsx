@@ -7,17 +7,17 @@ import strikethrough from "../../assets/Strikethrough.svg";
 
 interface Props {
     model: Model & { sourceUnit?: string; isLeader?: boolean };
-    isDisabled: boolean;
-    isSelected: boolean;
-    onUnitModelChange: (profile: Model | null) => void;
+    isDisabled?: boolean;
+    isSelected?: boolean;
+    onUnitModelChange?: (profile: Model | null) => void;
 }
 
 const ModelProfileCard = ({ model, isDisabled, isSelected, onUnitModelChange }: Props) => {
     return (
         <div
-            className={`relative rounded p-2 space-y-2 cursor-pointer border-1 transition-colors border-skarsnikGreen ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"}`}
+            className={`relative rounded p-2 space-y-2 border-1 transition-colors border-skarsnikGreen ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"} ${!isDisabled && onUnitModelChange ? "cursor-pointer " : ""}`}
             onClick={() => {
-                if (!isDisabled) {
+                if (!isDisabled && onUnitModelChange) {
                     onUnitModelChange(model);
                 }
             }}

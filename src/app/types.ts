@@ -35,8 +35,20 @@ export interface Detachment {
     slug: string;
     name: string;
     abilities?: any[];
-    enhancements?: any[];
+    enhancements?: Enhancement[];
     [key: string]: any;
+}
+
+export interface Enhancement {
+    id: string;
+    name: string;
+    description?: string;
+    legend?: string;
+    cost?: number;
+    factionId?: string;
+    detachment?: string;
+    detachmentId?: number;
+    mechanics?: any[];
 }
 
 export interface ArmyList {

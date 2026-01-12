@@ -2,6 +2,10 @@ import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft, X, ChevronDown } from "lucide-react";
 
+import type { ArmyList, ArmyListItem, Datasheet } from "../../types";
+
+import { loadDatasheetData } from "../../utils/depotDataLoader";
+
 import { Badge } from "../../components/_ui/badge";
 import { Button } from "../../components/_ui/button";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../../components/_ui/collapsible";
@@ -10,8 +14,8 @@ import { Input } from "../../components/_ui/input";
 import { Label } from "../../components/_ui/label";
 import SearchableDropdown, { type SearchableDropdownOption } from "../../components/SearchableDropdown/SearchableDropdown";
 
-import { loadDatasheetData } from "../../utils/depotDataLoader";
-import type { ArmyList, ArmyListItem, Datasheet } from "../../types";
+import ModelProfileCard from "../../components/ModelProfileCard/ModelProfileCard";
+import WeaponProfileCard from "../../components/WeaponProfileCard/WeaponProfileCard";
 
 import { useListManager } from "./ListManagerContext";
 import ListItem from "./ListItem";
@@ -467,13 +471,13 @@ export function ListView() {
                                     )}
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 pb-6">
                                 <div className="space-y-6">
                                     {/* Unit Composition */}
                                     {selectedItem.unitComposition && selectedItem.unitComposition.length > 0 && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">Unit Composition</h3>
-                                            <div className="space-y-3">
+                                        <div className="space-y-2">
+                                            <h3 className="text-blockcaps-l">Unit Composition</h3>
+                                            <div>
                                                 {selectedItem.unitComposition.map((composition, idx) => {
                                                     const line = composition.line || idx + 1;
                                                     const min = composition.min ?? 0;
@@ -481,31 +485,27 @@ export function ListView() {
                                                     const currentCount = selectedItem.compositionCounts?.[line] ?? min;
 
                                                     return (
-                                                        <div key={idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
-                                                            <div className="flex items-center justify-between">
-                                                                <div
-                                                                    className="font-medium text-sm mb-1"
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html: composition.description,
-                                                                    }}
-                                                                />
-                                                                <div className="ml-4">
-                                                                    <Input
-                                                                        type="number"
-                                                                        min={min}
-                                                                        max={max}
-                                                                        value={currentCount}
-                                                                        disabled={max === min}
-                                                                        onChange={(e) => {
-                                                                            const value = parseInt(e.target.value, 10);
-                                                                            if (!isNaN(value)) {
-                                                                                handleUpdateComposition(line, value, min, max);
-                                                                            }
-                                                                        }}
-                                                                        className="w-20 text-center"
-                                                                    />
-                                                                </div>
-                                                            </div>
+                                                        <div key={idx} className="first:border-t border-b border-skarsnikGreen py-2 flex items-center justify-between">
+                                                            <div
+                                                                className="font-medium text-sm mb-1"
+                                                                dangerouslySetInnerHTML={{
+                                                                    __html: composition.description,
+                                                                }}
+                                                            />
+                                                            <Input
+                                                                type="number"
+                                                                min={min}
+                                                                max={max}
+                                                                value={currentCount}
+                                                                disabled={max === min}
+                                                                onChange={(e) => {
+                                                                    const value = parseInt(e.target.value, 10);
+                                                                    if (!isNaN(value)) {
+                                                                        handleUpdateComposition(line, value, min, max);
+                                                                    }
+                                                                }}
+                                                                className="w-20 text-center"
+                                                            />
                                                         </div>
                                                     );
                                                 })}
@@ -517,57 +517,16 @@ export function ListView() {
                                     {selectedItem.models && selectedItem.models.length > 0 && (
                                         <div className="space-y-3">
                                             {selectedItem.models.map((model, idx) => (
-                                                <div key={idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
-                                                    <div className="font-medium text-sm mb-2">{model.name || "Model"}</div>
-                                                    <div className="grid grid-cols-6 gap-2 text-xs">
-                                                        <div>
-                                                            <div className="font-semibold">M</div>
-                                                            <div>{model.m}"</div>
-                                                        </div>
-                                                        <div>
-                                                            <div className="font-semibold">T</div>
-                                                            <div>{model.t}</div>
-                                                        </div>
-                                                        <div>
-                                                            <div className="font-semibold">Sv</div>
-                                                            <div>
-                                                                {model.sv}
-                                                                {typeof model.sv === "number" ? "+" : ""}
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div className="font-semibold">W</div>
-                                                            <div>{model.w}</div>
-                                                        </div>
-                                                        <div>
-                                                            <div className="font-semibold">Ld</div>
-                                                            <div>
-                                                                {model.ld}
-                                                                {typeof model.ld === "number" ? "+" : ""}
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div className="font-semibold">OC</div>
-                                                            <div>{model.oc}</div>
-                                                        </div>
-                                                    </div>
-                                                    {model.invSv && (
-                                                        <div className="mt-2 text-xs">
-                                                            <span className="font-semibold">Invulnerable Save: </span>
-                                                            <span>{model.invSv}+</span>
-                                                        </div>
-                                                    )}
-                                                </div>
+                                                <ModelProfileCard key={idx} model={model} />
                                             ))}
                                         </div>
                                     )}
 
                                     {/* Loadout */}
                                     {selectedItem.loadout && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">Loadout</h3>
+                                        <div className="space-y-2">
+                                            <h3 className="text-blockcaps-l">Loadout</h3>
                                             <p
-                                                className="text-sm"
                                                 dangerouslySetInnerHTML={{
                                                     __html: selectedItem.loadout,
                                                 }}
@@ -577,60 +536,18 @@ export function ListView() {
 
                                     {/* Default Wargear */}
                                     {categorizedWargear.defaultWeapons.length > 0 && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">Wargear</h3>
-                                            <div className="space-y-2">
-                                                {categorizedWargear.defaultWeapons.map((weapon, idx) => (
-                                                    <div key={idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
-                                                        <div className="font-medium text-sm mb-2">{weapon.name}</div>
-                                                        {weapon.profiles && weapon.profiles.length > 0 && (
-                                                            <div className="space-y-2">
-                                                                {weapon.profiles.map((profile, pIdx) => (
-                                                                    <div key={pIdx} className="text-xs">
-                                                                        <div className="grid grid-cols-6 gap-2 mb-1 font-semibold">
-                                                                            <div>Range</div>
-                                                                            <div>A</div>
-                                                                            <div>BS</div>
-                                                                            <div>S</div>
-                                                                            <div>AP</div>
-                                                                            <div>D</div>
-                                                                        </div>
-                                                                        <div className="grid grid-cols-6 gap-2">
-                                                                            <div>{profile.range > 0 ? `${profile.range}"` : "Melee"}</div>
-                                                                            <div>{profile.a}</div>
-                                                                            <div>
-                                                                                {profile.bsWs}
-                                                                                {profile.bsWs !== "N/A" ? "+" : ""}
-                                                                            </div>
-                                                                            <div>{profile.s}</div>
-                                                                            <div>{profile.ap}</div>
-                                                                            <div>{profile.d}</div>
-                                                                        </div>
-                                                                        {profile.attributes && profile.attributes.length > 0 && (
-                                                                            <div className="mt-1 flex flex-wrap gap-1">
-                                                                                {profile.attributes.map((attr, aIdx) => (
-                                                                                    <Badge key={aIdx} variant="outline" className="text-xs">
-                                                                                        {attr}
-                                                                                    </Badge>
-                                                                                ))}
-                                                                            </div>
-                                                                        )}
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                            </div>
+                                        <div className="space-y-2">
+                                            <h3 className="text-blockcaps-l">Wargear</h3>
+                                            <div className="space-y-2">{categorizedWargear.defaultWeapons.map((weapon, idx) => weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} />))}</div>
                                         </div>
                                     )}
 
                                     {/* Optional Wargear */}
                                     {categorizedWargear.optionalWeapons.length > 0 && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">
-                                                Optional Wargear{" "}
-                                                <span className="font-normal text-gray-500">
+                                        <div className="space-y-2">
+                                            <h3 className="flex justify-between">
+                                                <span className="text-blockcaps-l">Optional Wargear</span>
+                                                <span>
                                                     ({selectedOptionalCount}/{categorizedWargear.totalConstraint} selected)
                                                 </span>
                                             </h3>
@@ -639,70 +556,7 @@ export function ListView() {
                                                     const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
                                                     const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
 
-                                                    return (
-                                                        <div
-                                                            key={idx}
-                                                            className={`border rounded-lg p-3 cursor-pointer transition-colors ${isSelected ? "border-green-500 bg-green-50" : canSelect ? "border-[#e6e6e6] bg-white hover:border-green-300" : "border-[#e6e6e6] bg-gray-50 opacity-60"}`}
-                                                            onClick={() => {
-                                                                if (canSelect) {
-                                                                    toggleWeaponSelection(weapon.id);
-                                                                }
-                                                            }}
-                                                        >
-                                                            <div className="flex items-start justify-between mb-2">
-                                                                <div className="font-medium text-sm">{weapon.name}</div>
-                                                                <Button
-                                                                    variant={isSelected ? "default" : "outline"}
-                                                                    size="sm"
-                                                                    disabled={!canSelect}
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        if (canSelect) {
-                                                                            toggleWeaponSelection(weapon.id);
-                                                                        }
-                                                                    }}
-                                                                >
-                                                                    {isSelected ? "Selected" : "Select"}
-                                                                </Button>
-                                                            </div>
-                                                            {weapon.profiles && weapon.profiles.length > 0 && (
-                                                                <div className="space-y-2">
-                                                                    {weapon.profiles.map((profile, pIdx) => (
-                                                                        <div key={pIdx} className="text-xs">
-                                                                            <div className="grid grid-cols-6 gap-2 mb-1 font-semibold">
-                                                                                <div>Range</div>
-                                                                                <div>A</div>
-                                                                                <div>BS</div>
-                                                                                <div>S</div>
-                                                                                <div>AP</div>
-                                                                                <div>D</div>
-                                                                            </div>
-                                                                            <div className="grid grid-cols-6 gap-2">
-                                                                                <div>{profile.range > 0 ? `${profile.range}"` : "Melee"}</div>
-                                                                                <div>{profile.a}</div>
-                                                                                <div>
-                                                                                    {profile.bsWs}
-                                                                                    {profile.bsWs !== "N/A" ? "+" : ""}
-                                                                                </div>
-                                                                                <div>{profile.s}</div>
-                                                                                <div>{profile.ap}</div>
-                                                                                <div>{profile.d}</div>
-                                                                            </div>
-                                                                            {profile.attributes && profile.attributes.length > 0 && (
-                                                                                <div className="mt-1 flex flex-wrap gap-1">
-                                                                                    {profile.attributes.map((attr, aIdx) => (
-                                                                                        <Badge key={aIdx} variant="outline" className="text-xs">
-                                                                                            {attr}
-                                                                                        </Badge>
-                                                                                    ))}
-                                                                                </div>
-                                                                            )}
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    );
+                                                    return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
                                                 })}
                                             </div>
                                         </div>
@@ -712,15 +566,14 @@ export function ListView() {
                                     {selectedItem.options && selectedItem.options.length > 0 && (
                                         <Collapsible defaultOpen={false}>
                                             <CollapsibleTrigger className="flex items-center gap-2 group">
-                                                <ChevronDown className="h-4 w-4 text-gray-500 transition-transform group-data-[state=open]:rotate-180" />
-                                                <h3 className="font-semibold text-sm text-gray-500">Weapon Options Reference</h3>
+                                                <h3 className="text-blockcaps-l">Weapon Options Reference</h3>
+                                                <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
                                             </CollapsibleTrigger>
                                             <CollapsibleContent className="mt-2">
                                                 <div className="space-y-2">
                                                     {selectedItem.options.map((option, idx) => (
-                                                        <div key={option.line || idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-gray-50">
+                                                        <div key={option.line || idx} className="border border-skarsnikGreen rounded p-3">
                                                             <div
-                                                                className="text-sm text-gray-600"
                                                                 dangerouslySetInnerHTML={{
                                                                     __html: option.description,
                                                                 }}
@@ -734,8 +587,8 @@ export function ListView() {
 
                                     {/* Transport */}
                                     {selectedItem.transport && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">Transport</h3>
+                                        <div className="space-y-2">
+                                            <h3 className="text-blockcaps-l">Transport</h3>
                                             <p
                                                 className="text-sm"
                                                 dangerouslySetInnerHTML={{
@@ -747,8 +600,8 @@ export function ListView() {
 
                                     {/* Can Lead */}
                                     {selectedItem.abilities?.some((ability) => ability.name === "Leader") && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">Can Lead</h3>
+                                        <div className="space-y-2">
+                                            <h3 className="text-blockcaps-l">Can Lead</h3>
                                             {loadingBodyguards ? (
                                                 <p className="text-sm ">Loading...</p>
                                             ) : bodyguardUnits.length > 0 ? (
@@ -760,17 +613,15 @@ export function ListView() {
                                                                 {unitsInList.map((listItem) => {
                                                                     const isAttached = selectedItem?.leading?.id === listItem.id && selectedItem?.leading?.name === listItem.name;
                                                                     return (
-                                                                        <div key={listItem.listItemId} className={`border rounded-lg p-3 bg-white ${isAttached ? "border-green-500 bg-green-50" : "border-[#e6e6e6]"}`}>
-                                                                            <div className="flex items-start justify-between">
+                                                                        <div key={listItem.listItemId} className={`border-skarsnikGreen border-1 rounded p-3 ${isAttached ? "bg-deathWorldForest" : ""}`}>
+                                                                            <div className="flex items-center justify-between">
                                                                                 <div className="flex-1">
-                                                                                    <div className="font-medium text-sm">{listItem.name}</div>
-                                                                                    <div className="text-xs  mt-1">{listItem.roleLabel}</div>
+                                                                                    <span>{listItem.name}</span>
                                                                                     {isAttached && <div className="text-xs text-green-600 mt-1 font-medium">Attached</div>}
                                                                                 </div>
                                                                                 <Button
                                                                                     variant={isAttached ? "outline" : "default"}
                                                                                     size="sm"
-                                                                                    className="ml-2 h-8"
                                                                                     onClick={() => {
                                                                                         if (isAttached) {
                                                                                             handleDetachLeader();
@@ -892,13 +743,13 @@ export function ListView() {
                                 <div className="space-y-6">
                                     {/* Abilities */}
                                     {selectedItem.abilities && selectedItem.abilities.filter((ability) => ability.name !== "Leader").length > 0 && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">Abilities</h3>
+                                        <div className="space-y-2">
+                                            <h3 className="text-blockcaps-l">Abilities</h3>
                                             <div className="space-y-3">
                                                 {selectedItem.abilities
                                                     .filter((ability) => ability.name !== "Leader")
                                                     .map((ability, idx) => (
-                                                        <div key={idx} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
+                                                        <div key={idx} className="border border-skarsnikGreen rounded p-3">
                                                             <div className="flex items-start justify-between mb-1">
                                                                 <div className="font-medium text-sm">{ability.name}</div>
                                                                 {ability.type && (

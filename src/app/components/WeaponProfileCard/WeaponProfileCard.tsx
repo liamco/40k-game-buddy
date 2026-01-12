@@ -1,26 +1,151 @@
 import React from "react";
 import { WeaponProfile } from "../../types";
 import { Badge } from "../_ui/badge";
+import { Button } from "../_ui/button";
+
+import BaseIcon from "../icons/BaseIcon.tsx";
+import IconLaurels from "../icons/IconLaurels.tsx";
+
+export interface BonusAttribute {
+    name: string;
+    value?: string | number | null;
+    source?: string;
+}
+
+// Stat bonuses that modify weapon characteristics
+export interface StatBonus {
+    attribute: "a" | "s" | "ap" | "d" | "range" | "bsWs";
+    value: number;
+    source?: string;
+}
 
 interface Props {
     profile: WeaponProfile;
-    isSelected: boolean;
-    onWeaponProfileChange: (profile: WeaponProfile | null) => void;
+    isSelected?: boolean;
+    onWeaponProfileChange?: (profile: WeaponProfile | null) => void;
+    // Optional toggle mode for ListView optional weapons
+    showToggleButton?: boolean;
+    onToggle?: () => void;
+    canToggle?: boolean;
+    toggleLabel?: string;
+    // Bonus attributes from enhancements/abilities (e.g., SUSTAINED HITS)
+    bonusAttributes?: BonusAttribute[];
+    // Stat bonuses from enhancements/abilities (e.g., +1 Strength)
+    statBonuses?: StatBonus[];
 }
 
-const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange }: Props) => {
+const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showToggleButton, onToggle, canToggle = true, toggleLabel, bonusAttributes, statBonuses }: Props) => {
+    const handleClick = () => {
+        if (showToggleButton) {
+            if (canToggle && onToggle) {
+                onToggle();
+            }
+        } else if (onWeaponProfileChange) {
+            onWeaponProfileChange(profile);
+        }
+    };
+
+    const isDisabled = showToggleButton && !canToggle;
+
+    // Format bonus attribute for display (e.g., "SUSTAINED HITS" + value 1 = "SUSTAINED HITS 1")
+    const formatBonusAttribute = (bonus: BonusAttribute): string => {
+        if (bonus.value !== null && bonus.value !== undefined && bonus.value !== true) {
+            return `${bonus.name} ${bonus.value}`;
+        }
+        return bonus.name;
+    };
+
+    // Get total bonus for a specific stat
+    const getStatBonus = (attr: StatBonus["attribute"]): number => {
+        if (!statBonuses) return 0;
+        return statBonuses.filter((b) => b.attribute === attr).reduce((sum, b) => sum + b.value, 0);
+    };
+
+    // Get sources for a specific stat bonus (for tooltip)
+    const getStatBonusSources = (attr: StatBonus["attribute"]): string[] => {
+        if (!statBonuses) return [];
+        return statBonuses.filter((b) => b.attribute === attr && b.source).map((b) => b.source!);
+    };
+
+    // Render a stat value with optional bonus
+    const renderStat = (attr: StatBonus["attribute"], baseValue: string | number, suffix?: string) => {
+        const bonus = getStatBonus(attr);
+        const sources = getStatBonusSources(attr);
+        const hasBonus = bonus !== 0;
+
+        if (!hasBonus) {
+            return (
+                <span className="text-profile-attribute">
+                    {baseValue}
+                    {suffix}
+                </span>
+            );
+        }
+
+        // For numeric values, calculate the new value
+        const numericBase = typeof baseValue === "number" ? baseValue : parseInt(baseValue as string, 10);
+        const isNumeric = !isNaN(numericBase);
+
+        return (
+            <span className="text-profile-attribute flex items-center justify-center gap-0.5" title={sources.length > 0 ? `From: ${sources.join(", ")}` : undefined}>
+                {isNumeric ? (
+                    <>
+                        <span className="text-skarsnikGreen">{numericBase + bonus}</span>
+                        <span className="text-[9px] text-skarsnikGreen/70">
+                            ({bonus > 0 ? "+" : ""}
+                            {bonus})
+                        </span>
+                    </>
+                ) : (
+                    <>
+                        {baseValue}
+                        <span className="text-[9px] text-skarsnikGreen/70">
+                            ({bonus > 0 ? "+" : ""}
+                            {bonus})
+                        </span>
+                    </>
+                )}
+                {suffix}
+            </span>
+        );
+    };
+
     return (
-        <div key={profile.name} className={`rounded p-2 space-y-2 cursor-pointer border-1 transition-colors border-skarsnikGreen ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"}`} onClick={() => onWeaponProfileChange(profile)}>
+        <div key={profile.name} className={`rounded p-2 space-y-2 border-1 transition-colors border-skarsnikGreen ${isDisabled ? "opacity-60 cursor-not-allowed" : ""} ${showToggleButton || onWeaponProfileChange ? "cursor-pointer" : ""} ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"}`} onClick={handleClick}>
             <div className="flex items-center justify-between">
                 <span className="text-metadata-l">{profile.name}</span>
-                {isSelected && <span>Weapon armed</span>}
+                {showToggleButton ? (
+                    <Button
+                        variant={isSelected ? "secondary" : "default"}
+                        size="sm"
+                        disabled={!canToggle}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (canToggle && onToggle) {
+                                onToggle();
+                            }
+                        }}
+                    >
+                        {toggleLabel || (isSelected ? "Equipped" : "Equip")}
+                    </Button>
+                ) : (
+                    isSelected && <span>Weapon armed</span>
+                )}
             </div>
 
-            {profile.attributes && (
-                <div className="flex gap-2">
-                    {profile.attributes.map((attr: string) => (
+            {(profile.attributes || (bonusAttributes && bonusAttributes.length > 0)) && (
+                <div className="flex flex-wrap gap-2">
+                    {profile.attributes?.map((attr: string) => (
                         <Badge key={attr} variant={isSelected ? "secondary" : "default"}>
                             {attr}
+                        </Badge>
+                    ))}
+                    {bonusAttributes?.map((bonus, idx) => (
+                        <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} className={`flex items-center gap-1`} title={bonus.source ? `From: ${bonus.source}` : undefined}>
+                            <BaseIcon color={isSelected ? "default" : "deathWorldForest"}>
+                                <IconLaurels />
+                            </BaseIcon>
+                            {formatBonusAttribute(bonus)}
                         </Badge>
                     ))}
                 </div>
@@ -36,15 +161,12 @@ const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange }: Props
             </div>
 
             <div className="grid grid-cols-6 gap-1 text-center">
-                <span className="text-profile-attribute">{profile.range > 0 ? profile.range : "Melee"}</span>
-                <span className="text-profile-attribute">{profile.a}</span>
-                <span className="text-profile-attribute">
-                    {profile.bsWs}
-                    {profile.bsWs != "N/A" ? "+" : ""}
-                </span>
-                <span className="text-profile-attribute">{profile.s}</span>
-                <span className="text-profile-attribute">{profile.ap}</span>
-                <span className="text-profile-attribute">{profile.d}</span>
+                {renderStat("range", profile.range > 0 ? profile.range : "Melee")}
+                {renderStat("a", profile.a)}
+                {profile.bsWs === "N/A" ? <span className="text-profile-attribute">N/A</span> : renderStat("bsWs", profile.bsWs, "+")}
+                {renderStat("s", profile.s)}
+                {renderStat("ap", profile.ap)}
+                {renderStat("d", profile.d)}
             </div>
         </div>
     );

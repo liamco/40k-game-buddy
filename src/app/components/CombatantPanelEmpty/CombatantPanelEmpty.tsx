@@ -1,5 +1,7 @@
 import React from "react";
 import BaseIcon from "../icons/BaseIcon";
+import IconCrossedSwords from "../icons/IconCrossedSwords";
+import IconDefender from "../icons/IconDefender";
 import IconSkull from "../icons/IconSkull";
 
 interface Props {
@@ -12,10 +14,14 @@ const CombatantPanelEmpty = ({ combatant }: Props) => {
             <div>
                 <div className="flex gap-2 items-center mb-2">
                     <hr className="grow border-none h-[1px] bg-skarsnikGreen" />
-                    <h3 className="text-blockcaps-s">swords or shiled</h3>
+                    <BaseIcon>{combatant === "attacker" ? <IconCrossedSwords /> : <IconDefender />}</BaseIcon>
                     <hr className="grow border-none h-[1px] bg-skarsnikGreen" />
                 </div>
-                <span className="text-blockcaps-m">+++ {combatant === "attacker" ? "select attacking unit" : "select target unit"} +++</span>
+                <div className="flex items-center gap-4">
+                    <span>+++</span>
+                    <span className="text-blockcaps-m">{combatant === "attacker" ? "select attacking unit" : "select target unit"}</span>
+                    <span>+++</span>
+                </div>
                 <div className="flex gap-2 items-center mt-3">
                     <hr className="grow border-none h-[1px] bg-skarsnikGreen" />
                     <BaseIcon size="small">

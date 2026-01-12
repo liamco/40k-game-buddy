@@ -31,7 +31,7 @@ export function ListsOverview() {
                     </Link>
                 </div>
             </CardHeader>
-            <CardContent>
+            <CardContent className="px-6 pb-4">
                 {lists.length === 0 ? (
                     <p className="text-sm  text-center py-4">No lists yet. Create one to get started!</p>
                 ) : (

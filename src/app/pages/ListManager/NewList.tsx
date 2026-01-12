@@ -78,42 +78,37 @@ export function NewList() {
                         <Label htmlFor="list-name">List Name</Label>
                         <Input id="list-name" value={newListName} onChange={(e) => setNewListName(e.target.value)} placeholder="Enter list name" className="mt-1" />
                     </div>
-                    <div>
+                    <div className="space-y-1">
                         <Label>Select Faction</Label>
-                        <div className="mt-1">
-                            <SearchableDropdown
-                                options={factionOptions}
-                                selectedLabel={selectedFaction?.name}
-                                placeholder="Select faction..."
-                                searchPlaceholder="Search factions..."
-                                emptyMessage="No faction found."
-                                onSelect={setSelectedFaction}
-                                variant="outline"
-                                renderOption={(faction) => (
-                                    <div className="flex items-center justify-between w-full">
-                                        {faction.name}
-                                        <Badge variant="secondary" className="ml-2">
-                                            {faction.datasheetCount} units
-                                        </Badge>
-                                    </div>
-                                )}
-                            />
-                        </div>
+                        <SearchableDropdown
+                            options={factionOptions}
+                            selectedLabel={selectedFaction?.name}
+                            placeholder="Select faction..."
+                            searchPlaceholder="Search factions..."
+                            emptyMessage="No faction found."
+                            onSelect={setSelectedFaction}
+                            renderOption={(faction) => (
+                                <div className="flex items-center justify-between w-full">
+                                    {faction.name}
+                                    <Badge variant="secondary" className="ml-2">
+                                        {faction.datasheetCount} units
+                                    </Badge>
+                                </div>
+                            )}
+                        />
                     </div>
-                    {selectedFaction && factionData?.detachments && factionData.detachments.length > 0 && (
-                        <div>
-                            <Label>Select Detachment</Label>
-                            <div className="mt-1">
-                                <SearchableDropdown options={detachmentOptions} selectedLabel={selectedDetachment?.name} placeholder="Select detachment..." searchPlaceholder="Search detachments..." emptyMessage="No detachment found." onSelect={setSelectedDetachment} variant="outline" renderOption={(detachment) => detachment.name} />
-                            </div>
-                        </div>
-                    )}
+
+                    <div className="space-y-1">
+                        <Label>Select Detachment</Label>
+                        <SearchableDropdown options={detachmentOptions} selectedLabel={selectedDetachment?.name} placeholder="Select detachment..." searchPlaceholder="Search detachments..." emptyMessage="No detachment found." onSelect={setSelectedDetachment} renderOption={(detachment) => detachment.name} disabled={selectedFaction && factionData?.detachments && factionData.detachments.length ? false : true} />
+                    </div>
+
                     <div className="flex gap-2 pt-4">
+                        <Button variant="ghost" onClick={handleCancel}>
+                            Cancel
+                        </Button>
                         <Button onClick={handleCreateList} disabled={!selectedFaction || !selectedDetachment || !newListName.trim()} className="flex-1">
                             Create List
-                        </Button>
-                        <Button variant="outline" onClick={handleCancel}>
-                            Cancel
                         </Button>
                     </div>
                 </div>

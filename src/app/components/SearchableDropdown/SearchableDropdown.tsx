@@ -1,7 +1,6 @@
 import React, { useState, useMemo, ReactNode } from "react";
 import { Search } from "lucide-react";
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
-import { Button } from "../_ui/button";
+import { Popover, PopoverTrigger, PopoverContent } from "../_ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../_ui/command";
 
 export interface SearchableDropdownOption<T> {
@@ -32,11 +31,9 @@ interface SearchableDropdownProps<T> {
     triggerClassName?: string;
     /** Whether the dropdown is disabled */
     disabled?: boolean;
-    /** Use outline variant for trigger (default: false uses custom bg-deathWorldForest style) */
-    variant?: "default" | "outline";
 }
 
-export function SearchableDropdown<T>({ options, selectedLabel, placeholder = "Select...", searchPlaceholder = "Search...", emptyMessage = "No results found.", onSelect, renderOption, triggerClassName = "", disabled = false, variant = "default" }: SearchableDropdownProps<T>) {
+export function SearchableDropdown<T>({ options, selectedLabel, placeholder = "Select...", searchPlaceholder = "Search...", emptyMessage = "No results found.", onSelect, renderOption, triggerClassName = "", disabled = false }: SearchableDropdownProps<T>) {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState("");
 
@@ -52,28 +49,14 @@ export function SearchableDropdown<T>({ options, selectedLabel, placeholder = "S
         setSearchValue("");
     };
 
-    const triggerContent = (
-        <>
-            <span className={!selectedLabel ? "" : ""}>{selectedLabel || placeholder}</span>
-            <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </>
-    );
-
     return (
         <Popover open={open} onOpenChange={setOpen} modal={true}>
-            {variant === "outline" ? (
-                <PopoverTrigger asChild disabled={disabled}>
-                    <Button variant="outline" role="combobox" aria-expanded={open} className={`w-full justify-between ${triggerClassName}`} disabled={disabled}>
-                        {triggerContent}
-                    </Button>
-                </PopoverTrigger>
-            ) : (
-                <PopoverTrigger className={`w-full flex p-3 bg-deathWorldForest justify-between items-center rounded ${triggerClassName}`} disabled={disabled}>
-                    {triggerContent}
-                </PopoverTrigger>
-            )}
+            <PopoverTrigger className={`w-full flex p-3 bg-deathWorldForest justify-between items-center rounded ${triggerClassName} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`} disabled={disabled}>
+                <span>{selectedLabel || placeholder}</span>
+                <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </PopoverTrigger>
             <PopoverContent
-                className="w-full p-0 z-[100]"
+                className="p-0 border-0"
                 style={{
                     width: "var(--radix-popover-trigger-width)",
                 }}

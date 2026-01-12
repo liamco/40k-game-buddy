@@ -49,7 +49,7 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
         <section className="relative not-first:border-1 border-l-skarsnikGreen">
             <div className={`grid grid-cols-2 gap-2 p-4 ${disabled ? "opacity-25" : ""}`}>
                 <header className="col-span-2 border-1 border-skarsnikGreen p-2 flex items-center justify-between">
-                    <span className="text-blockcaps-s">{label}</span>
+                    <span className="text-blockcaps-m">{label}</span>
                     {Icon && (
                         <BaseIcon>
                             <Icon />

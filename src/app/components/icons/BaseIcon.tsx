@@ -3,12 +3,7 @@ import clx from "classnames";
 
 enum Colors {
     "default" = "fill-skarsnikGreen",
-    "tertiary-300" = "fill-tertiary-300",
-    "tertiary-400" = "fill-tertiary-400",
-    "tertiary-500" = "fill-tertiary-500",
-    "secondary-100" = "fill-secondary-100",
-    "secondary-500" = "fill-secondary-500",
-    "secondary-600" = "fill-secondary-600",
+    "deathWorldForest" = "fill-deathWorldForest",
 }
 
 enum Sizes {

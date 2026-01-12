@@ -150,14 +150,18 @@ export function AttackResolver({ gamePhase, attackingUnit, attackerAttachedUnit,
         <section className="col-span-2 grid grid-cols-5 rounded border-2 border-skarsnikGreen shadow-glow-green">
             {result ? (
                 <Fragment>
-                    <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={attackerModelCount > 0 ? [{ label: "Models", value: attackerModelCount }] : []} penalties={[]} finalValue={attacksDisplay.total} />
+                    <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue="-" bonuses={[]} penalties={[]} finalValue="-" disabled />
                     <AttackStep stepType="hitChance" label="To hit" statLabel="BS" statValue={result.autoHit ? "N/A" : `${selectedWeaponProfile?.bsWs}+`} bonuses={result.hitBonuses} penalties={result.hitPenalties} finalValue={result.autoHit ? "Auto" : `${result.toHit}+`} />
                     <AttackStep stepType="woundChance" label="To wound" bonuses={result.woundBonuses} penalties={result.woundPenalties} finalValue={`${result.toWound}+`} />
-                    <AttackStep stepType="saveChance" label="To save" statLabel="Save" statValue={`${selectedDefendingModel?.sv}+`} bonuses={result.saveBonuses} penalties={result.savePenalties} finalValue={result.toSave < 7 ? `${result.toSave}+${result.invulnSave ? "+" : ""}` : `-`} finalClassName={result.invulnSave ? "bg-amber-300" : "bg-fireDragonBright"} />
+                    <AttackStep stepType="saveChance" label="To save" statLabel="Save" statValue={`${selectedDefendingModel?.sv}+`} bonuses={result.saveBonuses} penalties={result.savePenalties} finalValue={result.toSave < 7 ? `${result.toSave}+${result.invulnSave ? "+" : ""}` : `-`} />
                     <AttackStep stepType="feelNoPain" label="Feel no pain" bonuses={[]} penalties={[]} finalValue={result.feelNoPain ? `${result.feelNoPain}+` : "-"} disabled={!result.feelNoPain} />
                 </Fragment>
             ) : (
-                <span className="col-span-5 py-8 text-center w-full text-blockcaps-m">+++ Select attacker and target to calculate attack resolution +++</span>
+                <div className="col-span-5 py-8 text-center w-full flex items-center justify-center gap-4">
+                    <span>+++</span>
+                    <span className="text-blockcaps-m">Select attacker and target to calculate attack resolution</span>
+                    <span>+++</span>
+                </div>
             )}
         </section>
     );

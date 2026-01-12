@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef, Fragment } from "react";
 import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
+import Dropdown, { type DropdownOption } from "./Dropdown/Dropdown";
 import type { ArmyList, Datasheet, Faction, Model, GamePhase, Ability, ArmyListItem, WeaponProfile } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
 import { Badge } from "./_ui/badge";
@@ -20,6 +21,12 @@ interface DefenderPanelProps {
     onCombatStatusChange: (name: CombatStatusFlag, value: boolean) => void;
     selectedList: ArmyList | null;
     selectedWeaponProfile: WeaponProfile | null;
+    modelCount: number;
+    startingStrength: number;
+    onModelCountChange: (count: number) => void;
+    // List selection props
+    availableLists: ArmyList[];
+    onListChange: (listId: string) => void;
 }
 
 /**
@@ -55,9 +62,18 @@ function extractDefensiveBonuses(mechanics: Mechanic[]): {
     return { saveBonuses, feelNoPain, otherBonuses };
 }
 
-export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedUnitModel, onUnitModelChange, combatStatus, onCombatStatusChange, selectedList, selectedWeaponProfile }: DefenderPanelProps) {
+export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedUnitModel, onUnitModelChange, combatStatus, onCombatStatusChange, selectedList, selectedWeaponProfile, modelCount, startingStrength, onModelCountChange, availableLists, onListChange }: DefenderPanelProps) {
     const [factionData, setFactionData] = useState<Faction | null>(null);
     const lastProcessedUnitRef = useRef<string | null>(null);
+
+    // Convert available lists to Dropdown options
+    const listOptions = useMemo((): DropdownOption<ArmyList>[] => {
+        return availableLists.map((list) => ({
+            id: list.id,
+            label: list.name,
+            data: list,
+        }));
+    }, [availableLists]);
 
     // Load faction data when list changes
     useEffect(() => {
@@ -283,7 +299,10 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
 
     return (
         <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
-            <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="col-span-5" />
+            <header className="col-span-5 flex">
+                <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
+                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
+            </header>
             {unit ? (
                 <Fragment>
                     <div className="col-span-3 space-y-4">
@@ -340,7 +359,7 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                     </div>
                     <div className="col-span-2 space-y-4">
                         <SplitHeading label="Combat status" />
-                        <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
+                        <CombatStatusComponent side="defender" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} unit={unit} gamePhase={gamePhase} />
                     </div>
                 </Fragment>
             ) : (

@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useMemo, Fragment } from "react";
-import { Info } from "lucide-react";
+import { Info, Sparkles } from "lucide-react";
 import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
-import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem } from "../types";
+import Dropdown, { type DropdownOption } from "./Dropdown/Dropdown";
+import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem, Detachment, Enhancement } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
-import WeaponProfileCard from "./WeaponProfileCard/WeaponProfileCard";
+import WeaponProfileCard, { type BonusAttribute, type StatBonus } from "./WeaponProfileCard/WeaponProfileCard";
 import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type UnitContext, type CombatStatus, type CombatStatusFlag } from "../game-engine";
 import CombatStatusComponent from "./CombatStatus/CombatStatus";
 import SplitHeading from "./SplitHeading/SplitHeading";
 import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
-import { Input } from "./_ui/input";
+import EnhancementCard from "./EnhancementCard/EnhancementCard";
+
+// Weapon attributes that can be added by enhancements/abilities
+const WEAPON_ABILITY_KEYWORDS = ["SUSTAINED HITS", "LETHAL HITS", "DEVASTATING WOUNDS", "ANTI-", "TORRENT", "BLAST", "HEAVY", "ASSAULT", "RAPID FIRE", "PISTOL", "MELTA", "LANCE", "TWIN-LINKED", "HAZARDOUS", "PRECISION", "IGNORES COVER"];
 
 // Parse loadout HTML to extract weapon names
 function parseLoadoutWeapons(loadout: string): string[] {
@@ -47,6 +51,9 @@ interface AttackerPanelProps {
     modelCount: number;
     startingStrength: number;
     onModelCountChange: (count: number) => void;
+    // List selection props
+    availableLists: ArmyList[];
+    onListChange: (listId: string) => void;
 }
 
 /**
@@ -85,8 +92,17 @@ function extractCombatBonuses(mechanics: Mechanic[]): {
     return { hitBonuses, woundBonuses, otherBonuses };
 }
 
-export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, combatStatus, onCombatStatusChange, selectedList, modelCount, startingStrength, onModelCountChange }: AttackerPanelProps) {
+export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, combatStatus, onCombatStatusChange, selectedList, modelCount, startingStrength, onModelCountChange, availableLists, onListChange }: AttackerPanelProps) {
     const [factionData, setFactionData] = useState<Faction | null>(null);
+
+    // Convert available lists to Dropdown options
+    const listOptions = useMemo((): DropdownOption<ArmyList>[] => {
+        return availableLists.map((list) => ({
+            id: list.id,
+            label: list.name,
+            data: list,
+        }));
+    }, [availableLists]);
 
     // Load faction data when list changes
     useEffect(() => {
@@ -294,6 +310,158 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return extractCombatBonuses(leaderMechanics);
     }, [unit, attachedUnit]);
 
+    // Get enhancement details from the leader
+    const leaderEnhancement = useMemo((): Enhancement | null => {
+        if (!selectedList || !factionData || !unit) return null;
+
+        // Find the leader in the selected list
+        // First try by listItemId if available
+        const listItemId = (unit as ArmyListItem)?.listItemId;
+        let leaderItem: ArmyListItem | undefined;
+
+        if (listItemId) {
+            leaderItem = selectedList.items.find((item) => item.listItemId === listItemId);
+        }
+
+        // Fallback: find by matching the combined unit display name pattern
+        if (!leaderItem) {
+            // Check combinedListItems to find the leader
+            const combinedItem = combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
+            if (combinedItem) {
+                leaderItem = combinedItem.item;
+            } else {
+                // Try to find any item with matching id that has an enhancement
+                leaderItem = selectedList.items.find((item) => item.id === unit.id && item.enhancement);
+            }
+        }
+
+        if (!leaderItem?.enhancement) return null;
+
+        // Find the detachment in faction data
+        const detachment = factionData.detachments?.find((d: Detachment) => d.slug === selectedList.detachmentSlug);
+        if (!detachment?.enhancements) return null;
+
+        // Find the full enhancement details
+        const fullEnhancement = detachment.enhancements.find((e: Enhancement) => e.id === leaderItem!.enhancement?.id);
+        if (!fullEnhancement) {
+            // Return basic info if we can't find full details
+            return {
+                id: leaderItem.enhancement.id,
+                name: leaderItem.enhancement.name,
+                cost: leaderItem.enhancement.cost,
+            };
+        }
+
+        return fullEnhancement;
+    }, [unit, selectedList, factionData, combinedListItems]);
+
+    // Extract weapon bonus attributes from enhancement mechanics AND leader abilities
+    const weaponBonusAttributes = useMemo((): BonusAttribute[] => {
+        const bonuses: BonusAttribute[] = [];
+
+        // Extract from enhancement mechanics
+        if (leaderEnhancement?.mechanics) {
+            for (const mechanic of leaderEnhancement.mechanics) {
+                // Only look at addsAbility effects that target thisUnit or thisModel
+                if (mechanic.effect !== "addsAbility" || !mechanic.abilities) continue;
+                if (mechanic.entity !== "thisUnit" && mechanic.entity !== "thisModel") continue;
+
+                // Check each ability to see if it's a weapon attribute
+                for (const ability of mechanic.abilities) {
+                    const upperAbility = ability.toUpperCase();
+                    const isWeaponAttribute = WEAPON_ABILITY_KEYWORDS.some((keyword) => upperAbility.startsWith(keyword) || upperAbility.includes(keyword));
+
+                    if (isWeaponAttribute) {
+                        bonuses.push({
+                            name: ability,
+                            value: mechanic.value,
+                            source: leaderEnhancement.name,
+                        });
+                    }
+                }
+            }
+        }
+
+        // Extract from leader abilities when a combined unit is selected
+        if (unit && attachedUnit) {
+            // Create a unit context to collect abilities
+            const unitContext: UnitContext = {
+                datasheet: unit,
+                selectedModel: unit.models?.[0],
+                state: createDefaultCombatStatus(),
+                attachedLeader: attachedUnit,
+            };
+
+            // Collect all mechanics from the unit and attached leader
+            const mechanics = collectUnitAbilities(unitContext, "attacker");
+
+            // Filter to only combat-relevant weapon attribute abilities that apply when leading
+            for (const mechanic of mechanics) {
+                if (mechanic.effect !== "addsAbility" || !mechanic.abilities) continue;
+                if (mechanic.entity !== "thisUnit" && mechanic.entity !== "thisModel") continue;
+
+                // Check if this mechanic has a "leading" type condition (applies when leading)
+                const hasLeadingCondition = mechanic.conditions?.some((c) => c.state === "isLeadingUnit" || c.state === "leading" || (Array.isArray(c.state) && (c.state.includes("isLeadingUnit") || c.state.includes("leading"))));
+
+                if (hasLeadingCondition) {
+                    for (const ability of mechanic.abilities) {
+                        const upperAbility = ability.toUpperCase();
+                        const isWeaponAttribute = WEAPON_ABILITY_KEYWORDS.some((keyword) => upperAbility.startsWith(keyword) || upperAbility.includes(keyword));
+
+                        if (isWeaponAttribute) {
+                            // Avoid duplicates
+                            const alreadyExists = bonuses.some((b) => b.name.toUpperCase() === upperAbility);
+                            if (!alreadyExists) {
+                                bonuses.push({
+                                    name: ability,
+                                    value: mechanic.value,
+                                    source: mechanic.source?.name || "Leader Ability",
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return bonuses;
+    }, [leaderEnhancement, unit, attachedUnit]);
+
+    // Extract weapon stat bonuses from enhancement mechanics (e.g., +1 Strength)
+    const weaponStatBonuses = useMemo((): StatBonus[] => {
+        if (!leaderEnhancement?.mechanics) return [];
+
+        const bonuses: StatBonus[] = [];
+
+        // Map mechanic attributes to weapon stat attributes
+        const weaponStatMap: Record<string, StatBonus["attribute"]> = {
+            s: "s",
+            a: "a",
+            ap: "ap",
+            d: "d",
+            range: "range",
+            bsWs: "bsWs",
+        };
+
+        for (const mechanic of leaderEnhancement.mechanics) {
+            // Look for rollBonus or staticNumber effects on weapon attributes
+            if (mechanic.effect !== "rollBonus" && mechanic.effect !== "staticNumber") continue;
+            if (mechanic.entity !== "thisUnit" && mechanic.entity !== "thisModel") continue;
+            if (!mechanic.attribute || typeof mechanic.value !== "number") continue;
+
+            const statAttr = weaponStatMap[mechanic.attribute];
+            if (statAttr) {
+                bonuses.push({
+                    attribute: statAttr,
+                    value: mechanic.value,
+                    source: leaderEnhancement.name,
+                });
+            }
+        }
+
+        return bonuses;
+    }, [leaderEnhancement]);
+
     const handleUnitSelect = (combined: { item: ArmyListItem; displayName: string; isCombined: boolean }) => {
         onUnitChange(combined.item);
         onWeaponProfileChange(null);
@@ -301,7 +469,10 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
 
     return (
         <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
-            <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="col-span-5" />
+            <header className="col-span-5 flex">
+                <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
+                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
+            </header>
             {unit ? (
                 <Fragment>
                     <div className="col-span-3 space-y-4">
@@ -330,6 +501,9 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                 <p className="text-[9px] text-green-600 italic">From: {leaderCombatBonuses.hitBonuses[0]?.source || leaderCombatBonuses.woundBonuses[0]?.source || leaderCombatBonuses.otherBonuses[0]?.source}</p>
                             </div>
                         )}
+
+                        {/* Display leader enhancement if present */}
+                        {leaderEnhancement && <EnhancementCard enhancement={leaderEnhancement} />}
 
                         {unit &&
                             availableWargear.length > 0 &&
@@ -375,7 +549,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                                                 {weapon.profiles.map((profile: WeaponProfile) => {
                                                                     const isSelected = selectedWeaponProfile?.name === profile.name;
                                                                     const profileKey = `${source}-${weapon.name}-${profile.name}`;
-                                                                    return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                                                    return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={weaponStatBonuses} />;
                                                                 })}
                                                             </Fragment>
                                                         ))}
@@ -393,7 +567,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                             <Fragment key={weapon.name}>
                                                 {weapon.profiles.map((profile: WeaponProfile) => {
                                                     const isSelected = selectedWeaponProfile?.name === profile.name;
-                                                    return <WeaponProfileCard key={profile.name} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                                    return <WeaponProfileCard key={profile.name} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={weaponStatBonuses} />;
                                                 })}
                                             </Fragment>
                                         ))}
@@ -403,31 +577,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                     </div>
                     <div className="col-span-2 space-y-4">
                         <SplitHeading label="Combat status" />
-                        {startingStrength > 0 && (
-                            <div className="space-y-2">
-                                <div className="flex items-center justify-between gap-2">
-                                    <label htmlFor="attacker-model-count" className="text-xs font-semibold">
-                                        Models Remaining
-                                    </label>
-                                    <Input
-                                        id="attacker-model-count"
-                                        type="number"
-                                        min={1}
-                                        max={startingStrength}
-                                        value={modelCount}
-                                        onChange={(e) => {
-                                            const value = parseInt(e.target.value, 10);
-                                            if (!isNaN(value) && value >= 1 && value <= startingStrength) {
-                                                onModelCountChange(value);
-                                            }
-                                        }}
-                                        className="w-16 text-center"
-                                    />
-                                </div>
-                                <p className="text-[10px] text-muted-foreground">Starting strength: {startingStrength}</p>
-                            </div>
-                        )}
-                        <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} />
+                        <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} unit={unit} gamePhase={gamePhase} />
                     </div>
                 </Fragment>
             ) : (

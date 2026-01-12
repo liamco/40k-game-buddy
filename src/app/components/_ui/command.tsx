@@ -36,7 +36,7 @@ function CommandDialog({
 function CommandInput({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Input>) {
     return (
         <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
-            <SearchIcon className="size-4 shrink-0 opacity-50" />
+            <SearchIcon className="stroke-skarsnikGreen size-4 shrink-0 opacity-50" />
             <CommandPrimitive.Input data-slot="command-input" className={cn("placeholder:text-skarsnikGreen flex h-10 w-full rounded bg-transparent py-3 outline-hidden disabled:cursor-not-allowed disabled:opacity-50", className)} {...props} />
         </div>
     );
@@ -59,7 +59,7 @@ function CommandSeparator({ className, ...props }: React.ComponentProps<typeof C
 }
 
 function CommandItem({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Item>) {
-    return <CommandPrimitive.Item data-slot="command-item" className={cn("data-[selected=true]:bg-skarsnikGreen rounded data-[selected=true]:text-deathWorldForest [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 p-2 outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4", className)} {...props} />;
+    return <CommandPrimitive.Item data-slot="command-item" className={cn("data-[selected=true]:bg-skarsnikGreen rounded text-skarsnikGreen data-[selected=true]:text-deathWorldForest [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 p-2 outline-hidden select-none data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4", className)} {...props} />;
 }
 
 function CommandShortcut({ className, ...props }: React.ComponentProps<"span">) {

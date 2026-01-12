@@ -18,18 +18,18 @@ export default function App() {
         <div className="w-full bg-nocturneGreen text-skarsnikGreen">
             <div style={bgStyle} className="fixed pointer-events-none w-full h-full top-0 bottom-0 left-0 right-0" />
             <nav className="flex justify-between items-center p-6">
-                <div className="flex grow-[999] gap-4 items-end">
+                <div className="flex w-[300px] gap-4 items-end">
                     <h1 className="text-blockcaps--xxl leading-0 text-shadow-glow-green">Parp Boy</h1>
-                    <span className="text-blockcaps-xs leading-0 text-shadow-glow-green">v1.027586</span>
+                    <span className="text-metadata-m leading-0 text-shadow-glow-green">v1.027586</span>
                 </div>
-                <div className="grow">
+                <div className="grow-999 flex justify-center">
                     <Logo />
                 </div>
-                <div className="flex grow-[999] gap-2 justify-end">
-                    <NavLink to="/" end className={({ isActive }) => (isActive ? buttonClasses.active : buttonClasses.default)}>
+                <div className="flex w-[300px] gap-2 justify-end">
+                    <NavLink to="/" end className={({ isActive }) => (isActive ? buttonClasses.secondary : buttonClasses.ghost)}>
                         {({ isActive }) => <span className={`text-blockcaps-m ${!isActive ? "text-shadow-glow-green" : ""}`}>Combat analysis</span>}
                     </NavLink>
-                    <NavLink to="/lists" className={({ isActive }) => (isActive ? buttonClasses.active : buttonClasses.default)}>
+                    <NavLink to="/lists" className={({ isActive }) => (isActive ? buttonClasses.secondary : buttonClasses.ghost)}>
                         {({ isActive }) => <span className={`text-blockcaps-m ${!isActive ? "text-shadow-glow-green" : ""}`}>Army roster</span>}
                     </NavLink>
                 </div>
