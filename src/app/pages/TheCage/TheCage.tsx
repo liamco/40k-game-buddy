@@ -269,7 +269,7 @@ export const TheCage = () => {
         if (attackerStartingStrength === 0) return;
 
         const isBelowStartingStrength = attackerModelCount < attackerStartingStrength;
-        const isBelowHalfStrength = attackerModelCount <= Math.floor(attackerStartingStrength / 2);
+        const isBelowHalfStrength = attackerModelCount < Math.ceil(attackerStartingStrength / 2);
 
         setAttackerCombatStatus((prev) => ({
             ...prev,
@@ -283,7 +283,7 @@ export const TheCage = () => {
         if (defenderStartingStrength === 0) return;
 
         const isBelowStartingStrength = defenderModelCount < defenderStartingStrength;
-        const isBelowHalfStrength = defenderModelCount <= Math.floor(defenderStartingStrength / 2);
+        const isBelowHalfStrength = defenderModelCount < Math.ceil(defenderStartingStrength / 2);
 
         setDefenderCombatStatus((prev) => ({
             ...prev,
