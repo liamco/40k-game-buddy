@@ -5,18 +5,23 @@ import { Button } from "../_ui/button";
 
 import BaseIcon from "../icons/BaseIcon.tsx";
 import IconLaurels from "../icons/IconLaurels.tsx";
+import IconLeader from "../icons/IconLeader.tsx";
+
+export type BonusSourceType = "leader" | "enhancement" | "detachment";
 
 export interface BonusAttribute {
     name: string;
     value?: string | number | null;
-    source?: string;
+    sourceName?: string;
+    sourceType?: BonusSourceType;
 }
 
 // Stat bonuses that modify weapon characteristics
 export interface StatBonus {
     attribute: "a" | "s" | "ap" | "d" | "range" | "bsWs";
     value: number;
-    source?: string;
+    sourceName?: string;
+    sourceType?: BonusSourceType;
 }
 
 interface Props {
@@ -64,7 +69,7 @@ const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showTog
     // Get sources for a specific stat bonus (for tooltip)
     const getStatBonusSources = (attr: StatBonus["attribute"]): string[] => {
         if (!statBonuses) return [];
-        return statBonuses.filter((b) => b.attribute === attr && b.source).map((b) => b.source!);
+        return statBonuses.filter((b) => b.attribute === attr && b.sourceName).map((b) => b.sourceName!);
     };
 
     // Render a stat value with optional bonus
@@ -140,17 +145,24 @@ const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showTog
                             {attr}
                         </Badge>
                     ))}
-                    {bonusAttributes?.map((bonus, idx) => (
-                        <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} className={`flex items-center gap-1`} title={bonus.source ? `From: ${bonus.source}` : undefined}>
-                            <BaseIcon color={isSelected ? "default" : "deathWorldForest"}>
-                                <IconLaurels />
-                            </BaseIcon>
-                            {formatBonusAttribute(bonus)}
-                        </Badge>
-                    ))}
+                    {bonusAttributes
+                        ?.filter((bonus) => {
+                            // Filter out bonuses that already exist in profile attributes
+                            if (!profile.attributes) return true;
+                            const bonusFormatted = formatBonusAttribute(bonus).toUpperCase();
+                            return !profile.attributes.some((attr) => attr.toUpperCase() === bonusFormatted);
+                        })
+                        .map((bonus, idx) => (
+                            <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} className={`flex items-center gap-1`} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
+                                <BaseIcon color={isSelected ? "default" : "deathWorldForest"}>
+                                    {bonus.sourceType === "leader" && <IconLeader />}
+                                    {bonus.sourceType === "enhancement" && <IconLaurels />}
+                                </BaseIcon>
+                                {formatBonusAttribute(bonus)}
+                            </Badge>
+                        ))}
                 </div>
             )}
-
             <div className="grid grid-cols-6 gap-1 text-center">
                 <span className="text-profile-attribute">Range</span>
                 <span className="text-profile-attribute">A</span>
@@ -159,7 +171,6 @@ const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showTog
                 <span className="text-profile-attribute">AP</span>
                 <span className="text-profile-attribute">D</span>
             </div>
-
             <div className="grid grid-cols-6 gap-1 text-center">
                 {renderStat("range", profile.range > 0 ? profile.range : "Melee")}
                 {renderStat("a", profile.a)}

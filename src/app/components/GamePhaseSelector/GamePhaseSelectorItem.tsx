@@ -18,8 +18,8 @@ const GamePhaseSelectorItem = ({ index, currentPhase, phase, onPhaseChange }: Pr
         ${currentPhase === phase.id ? "bg-fireDragonBright text-mournfangBrown" : "bg-transparent text-fireDragonBright"}
         `}
         >
-            <span className={`text-blockcaps-m inline-block py-1 px-2 ${currentPhase === phase.id ? "bg-mournfangBrown text-fireDragonBright" : "bg-fireDragonBright text-mournfangBrown"}`}>{index + 1}.</span>
-            <p className="text-blockcaps-m">{phase.label}</p>
+            <span className={`text-blockcaps-m inline-block px-1 py-0.5  ${currentPhase === phase.id ? "bg-mournfangBrown text-fireDragonBright" : "bg-fireDragonBright text-mournfangBrown"}`}>{index + 1}.</span>
+            <p className="text-blockcaps-m ">{phase.label}</p>
         </button>
     );
 };

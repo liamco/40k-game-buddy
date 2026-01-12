@@ -37,7 +37,7 @@ function CommandInput({ className, ...props }: React.ComponentProps<typeof Comma
     return (
         <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 border-b px-3">
             <SearchIcon className="stroke-skarsnikGreen size-4 shrink-0 opacity-50" />
-            <CommandPrimitive.Input data-slot="command-input" className={cn("placeholder:text-skarsnikGreen flex h-10 w-full rounded bg-transparent py-3 outline-hidden disabled:cursor-not-allowed disabled:opacity-50", className)} {...props} />
+            <CommandPrimitive.Input data-slot="command-input" className={cn("text-skarsnikGreen flex h-10 w-full rounded bg-transparent py-3 outline-hidden disabled:cursor-not-allowed disabled:opacity-50", className)} {...props} />
         </div>
     );
 }
@@ -46,8 +46,16 @@ function CommandList({ className, ...props }: React.ComponentProps<typeof Comman
     return <CommandPrimitive.List data-slot="command-list" className={cn("max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto", className)} {...props} />;
 }
 
-function CommandEmpty({ ...props }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
-    return <CommandPrimitive.Empty data-slot="command-empty" className="py-6 text-center text-sm" {...props} />;
+function CommandEmpty({ className, children, ...props }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
+    return (
+        <CommandPrimitive.Empty data-slot="command-empty" className={cn("py-6 text-skarsnikGreen text-center", className)} {...props}>
+            <div className="flex items-center justify-center gap-4">
+                <span>+++</span>
+                <span className="text-blockcaps-m">{children}</span>
+                <span>+++</span>
+            </div>
+        </CommandPrimitive.Empty>
+    );
 }
 
 function CommandGroup({ className, ...props }: React.ComponentProps<typeof CommandPrimitive.Group>) {

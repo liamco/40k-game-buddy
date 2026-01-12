@@ -53,7 +53,7 @@ export function SearchableDropdown<T>({ options, selectedLabel, placeholder = "S
         <Popover open={open} onOpenChange={setOpen} modal={true}>
             <PopoverTrigger className={`w-full flex p-3 bg-deathWorldForest justify-between items-center rounded ${triggerClassName} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`} disabled={disabled}>
                 <span>{selectedLabel || placeholder}</span>
-                <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                <Search className="strole-skarsnikGreen ml-2 h-4 w-4 shrink-0 opacity-50" />
             </PopoverTrigger>
             <PopoverContent
                 className="p-0 border-0"

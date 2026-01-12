@@ -17,7 +17,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DEPOT_DATA_PATH = path.join(__dirname, "..", "src", "app", "depotdata", "factions");
+const DEPOT_DATA_PATH = path.join(__dirname, "..", "..", "src", "app", "depotdata", "factions");
 
 const DRY_RUN = process.argv.includes("--dry-run");
 
@@ -105,6 +105,36 @@ function parseDamagedMechanics(description) {
             effect: "statPenalty",
             attribute: "a",
             value: parseInt(attacksPenaltyMatch[1], 10),
+        });
+    }
+
+    // Pattern: "the Attacks characteristics of all of its weapons are halved"
+    const attacksHalvedMatch = description.match(/Attacks\s+characteristics?\s+(?:of\s+)?(?:all\s+of\s+)?(?:its|this\s+model[\u0027\u2019]?s?)\s+weapons\s+(?:are|is)\s+halved/i);
+    if (attacksHalvedMatch) {
+        mechanics.push({
+            entity: "thisModel",
+            effect: "statMultiplier",
+            attribute: "a",
+            value: 0.5,
+        });
+    }
+
+    // Pattern: "add X to the Attacks characteristic of this model's [weapon name]"
+    // Note: Handle both regular apostrophe (U+0027) and right single quotation mark (U+2019)
+    const specificWeaponAttacksMatch = description.match(/add\s+(\d+)\s+to\s+the\s+Attacks\s+characteristic\s+of\s+this\s+model[\u0027\u2019]?s?\s+([^.]+)/i);
+    if (specificWeaponAttacksMatch && !specificWeaponAttacksMatch[2].toLowerCase().includes("melee weapons")) {
+        mechanics.push({
+            entity: "thisModel",
+            effect: "statBonus",
+            attribute: "a",
+            value: parseInt(specificWeaponAttacksMatch[1], 10),
+            conditions: [
+                {
+                    weapon: "name",
+                    operator: "includes",
+                    value: specificWeaponAttacksMatch[2].trim(),
+                },
+            ],
         });
     }
 

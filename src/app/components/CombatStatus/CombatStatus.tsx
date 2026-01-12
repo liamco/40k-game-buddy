@@ -151,8 +151,8 @@ const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, starting
             {startingStrength !== undefined && startingStrength > 0 && modelCount !== undefined && onModelCountChange && (
                 <div className="flex items-center justify-between">
                     <div>
-                        <span className="block leading-1">Combat readiness</span>
-                        <span className="leading-1 text-blockcaps-m">{printCombatReadiness()}</span>
+                        <span className="block">Combat readiness</span>
+                        <span className="text-blockcaps-m">{printCombatReadiness()}</span>
                     </div>
                     <div className="bg-deathWorldForest rounded flex pr-2 items-center">
                         <Input id={`${side}-model-count`} type="number" min={1} max={startingStrength} value={modelCount} onChange={handleModelCountChange} className="bg-transparent p-2" />

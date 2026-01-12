@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, Fragment } from "react";
 import { Info, Sparkles } from "lucide-react";
 import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
 import Dropdown, { type DropdownOption } from "./Dropdown/Dropdown";
-import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem, Detachment, Enhancement } from "../types";
+import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem, Detachment, Enhancement, DamagedMechanic } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
 import WeaponProfileCard, { type BonusAttribute, type StatBonus } from "./WeaponProfileCard/WeaponProfileCard";
 import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type UnitContext, type CombatStatus, type CombatStatusFlag } from "../game-engine";
@@ -119,6 +119,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
 
     // Combine leaders with their attached units into single items
     // Supports multiple leaders attached to a single bodyguard unit
+    // Sorted alphabetically by display name (combined units use their full combined name)
     const combinedListItems = useMemo(() => {
         if (!selectedList) return [];
 
@@ -136,6 +137,9 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                 const leaders = item.leadBy.map((ref) => items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processed.has(l.listItemId));
 
                 if (leaders.length > 0) {
+                    // Sort leaders alphabetically for consistent display
+                    leaders.sort((a, b) => a.name.localeCompare(b.name));
+
                     // Build display name with all leaders + bodyguard
                     const leaderNames = leaders.map((l) => l.name).join(" + ");
                     combined.push({
@@ -179,6 +183,9 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                 processed.add(item.listItemId);
             }
         });
+
+        // Sort all items alphabetically by display name
+        combined.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
         return combined;
     }, [selectedList]);
@@ -308,6 +315,31 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return extractCombatBonuses(leaderMechanics);
     }, [unit, attachedLeaders]);
 
+    // Get damaged profile penalties when isDamaged is checked
+    const damagedPenalties = useMemo(() => {
+        if (!unit || !combatStatus.isDamaged) {
+            return { hitPenalty: 0, otherPenalties: [] as { attribute: string; value: number }[] };
+        }
+
+        const damagedMechanics = (unit as Datasheet).damagedMechanics;
+        if (!damagedMechanics || damagedMechanics.length === 0) {
+            return { hitPenalty: 0, otherPenalties: [] };
+        }
+
+        let hitPenalty = 0;
+        const otherPenalties: { attribute: string; value: number }[] = [];
+
+        for (const mechanic of damagedMechanics) {
+            if (mechanic.effect === "rollPenalty" && mechanic.attribute === "h") {
+                hitPenalty += mechanic.value;
+            } else if (mechanic.effect === "statPenalty" || mechanic.effect === "statBonus") {
+                otherPenalties.push({ attribute: mechanic.attribute, value: mechanic.effect === "statPenalty" ? -mechanic.value : mechanic.value });
+            }
+        }
+
+        return { hitPenalty, otherPenalties };
+    }, [unit, combatStatus.isDamaged]);
+
     // Get enhancement details from all attached leaders
     const leaderEnhancements = useMemo((): Enhancement[] => {
         if (!selectedList || !factionData || !unit) return [];
@@ -384,7 +416,8 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                             bonuses.push({
                                 name: ability,
                                 value: mechanic.value,
-                                source: enhancement.name,
+                                sourceName: enhancement.name,
+                                sourceType: "enhancement",
                             });
                         }
                     }
@@ -425,7 +458,8 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                 bonuses.push({
                                     name: ability,
                                     value: mechanic.value,
-                                    source: mechanic.source?.name || "Leader Ability",
+                                    sourceName: mechanic.source?.name || "Leader Ability",
+                                    sourceType: "leader",
                                 });
                             }
                         }
@@ -465,7 +499,8 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                     bonuses.push({
                         attribute: statAttr,
                         value: mechanic.value,
-                        source: enhancement.name,
+                        sourceName: enhancement.name,
+                        sourceType: "enhancement",
                     });
                 }
             }
@@ -483,7 +518,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
             <header className="col-span-5 flex">
                 <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
-                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
+                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="Matching records missing or expunged" onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
             </header>
             {unit ? (
                 <Fragment>
@@ -492,7 +527,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                         {/* Display leader combat bonuses when a combined unit is selected */}
                         {attachedLeaders.length > 0 && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
                             <div className="bg-green-50 border border-green-200 rounded-[4px] p-3 space-y-2">
-                                <p className="text-[10px] font-bold text-green-800 uppercase">Leader Bonuses Active</p>
+                                <h3 className="text-[10px] font-bold text-green-800 uppercase">Leader Bonuses Active</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {leaderCombatBonuses.hitBonuses.map((bonus, idx) => (
                                         <span key={`hit-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
@@ -514,10 +549,32 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                             </div>
                         )}
 
+                        {/* Display damaged profile penalties when isDamaged is checked */}
+                        {combatStatus.isDamaged && (damagedPenalties.hitPenalty > 0 || damagedPenalties.otherPenalties.length > 0) && (
+                            <div className="bg-red-50 border border-red-200 rounded-[4px] p-3 space-y-2">
+                                <h3 className="text-[10px] font-bold text-red-800 uppercase">Damaged Profile Active</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {damagedPenalties.hitPenalty > 0 && <span className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-red-200 text-red-800">-{damagedPenalties.hitPenalty} to Hit</span>}
+                                    {damagedPenalties.otherPenalties.map((penalty, idx) => (
+                                        <span key={`penalty-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-red-200 text-red-800">
+                                            {penalty.value > 0 ? "+" : ""}
+                                            {penalty.value} {penalty.attribute.toUpperCase()}
+                                        </span>
+                                    ))}
+                                </div>
+                                <p className="text-[9px] text-red-600 italic">From: Damaged Profile</p>
+                            </div>
+                        )}
+
                         {/* Display all leader enhancements if present */}
-                        {leaderEnhancements.map((enhancement) => (
-                            <EnhancementCard key={enhancement.id} enhancement={enhancement} />
-                        ))}
+                        {leaderEnhancements && (
+                            <div className="space-y-2">
+                                <h3 className="inline-block">Equipped enhancements</h3>
+                                {leaderEnhancements.map((enhancement) => (
+                                    <EnhancementCard key={enhancement.id} enhancement={enhancement} />
+                                ))}
+                            </div>
+                        )}
 
                         {unit &&
                             availableWargear.length > 0 &&
@@ -549,10 +606,10 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                     const orderedSources = [...leaderNames, bodyguardName].filter((source) => groupedWeapons[source] && groupedWeapons[source].length > 0);
 
                                     return (
-                                        <div className="space-y-2">
+                                        <div className="space-y-6">
                                             {orderedSources.map((source) => (
                                                 <div key={source} className="space-y-2">
-                                                    <span>from {source}</span>
+                                                    <span className="inline-block">from {source}</span>
                                                     {groupedWeapons[source].map((weapon) => (
                                                         <Fragment key={weapon.name}>
                                                             {weapon.profiles.map((profile: WeaponProfile) => {

@@ -90,6 +90,7 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
 
     // Combine leaders with their attached units into single items
     // Supports multiple leaders attached to a single bodyguard unit
+    // Sorted alphabetically by display name (combined units use their full combined name)
     const combinedListItems = useMemo(() => {
         if (!selectedList) return [];
 
@@ -107,6 +108,9 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                 const leaders = item.leadBy.map((ref) => items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processed.has(l.listItemId));
 
                 if (leaders.length > 0) {
+                    // Sort leaders alphabetically for consistent display
+                    leaders.sort((a, b) => a.name.localeCompare(b.name));
+
                     // Build display name with all leaders + bodyguard
                     const leaderNames = leaders.map((l) => l.name).join(" + ");
                     combined.push({
@@ -150,6 +154,9 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                 processed.add(item.listItemId);
             }
         });
+
+        // Sort all items alphabetically by display name
+        combined.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
         return combined;
     }, [selectedList]);
@@ -307,7 +314,7 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
             <header className="col-span-5 flex">
                 <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
-                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="No unit found." onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
+                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="Matching records missing or expunged" onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
             </header>
             {unit ? (
                 <Fragment>

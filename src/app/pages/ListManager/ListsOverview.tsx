@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Plus, Trash2 } from "lucide-react";
 
 import { Button } from "../../components/_ui/button";
 import { Badge } from "../../components/_ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/_ui/card";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "../../components/_ui/alert-dialog";
 
 import { useListManager } from "./ListManagerContext";
 
 export function ListsOverview() {
     const { lists, deleteList, calculateItemPoints } = useListManager();
+    const [listToDelete, setListToDelete] = useState<{ id: string; name: string } | null>(null);
 
     const calculateListTotalPoints = (list: (typeof lists)[0]) => {
         return list.items.reduce((total, item) => {
@@ -24,7 +27,7 @@ export function ListsOverview() {
                 <div className="flex items-center justify-between">
                     <CardTitle>Your Lists</CardTitle>
                     <Link to="/lists/new">
-                        <Button size="sm" className="h-8">
+                        <Button size="sm">
                             <Plus className="h-4 w-4 mr-1" />
                             New
                         </Button>
@@ -55,7 +58,7 @@ export function ListsOverview() {
                                         onClick={(e) => {
                                             e.preventDefault();
                                             e.stopPropagation();
-                                            deleteList(list.id);
+                                            setListToDelete({ id: list.id, name: list.name });
                                         }}
                                     >
                                         <Trash2 className="h-3 w-3" />
@@ -66,6 +69,28 @@ export function ListsOverview() {
                     </div>
                 )}
             </CardContent>
+
+            <AlertDialog open={!!listToDelete} onOpenChange={(open) => !open && setListToDelete(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Delete List</AlertDialogTitle>
+                        <AlertDialogDescription>Are you sure you want to delete "{listToDelete?.name}"? This action cannot be undone.</AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                            onClick={() => {
+                                if (listToDelete) {
+                                    deleteList(listToDelete.id);
+                                    setListToDelete(null);
+                                }
+                            }}
+                        >
+                            Delete
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </Card>
     );
 }

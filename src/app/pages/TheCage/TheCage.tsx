@@ -449,7 +449,7 @@ export const TheCage = () => {
     };
 
     return (
-        <main className="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-6 px-6 pb-6 h-[calc(100vh-88px)]">
+        <main className="grid grid-cols-2 grid-rows-[auto_1fr_auto] gap-6 px-6 pb-6 h-[calc(100vh-80px)]">
             <nav className="bg-mournfangBrown text-fireDragonBright shadow-glow-orange border-tuskorFur border-1 rounded w-full flex justify-between items-center p-3 col-span-2">
                 <div className="flex gap-4 items-center">
                     <Dropdown
@@ -457,9 +457,9 @@ export const TheCage = () => {
                         selectedLabel={attackerList?.name}
                         placeholder="Select attacker list..."
                         onSelect={(list) => setAttackerListId(list.id)}
-                        triggerClassName="!w-[200px] bg-mournfangBrown"
+                        triggerClassName="!w-[200px] bg-mournfangBrown !p-0"
                         renderOption={(list) => (
-                            <p className="leading-3 text-left">
+                            <p className="text-left">
                                 <span className="text-blockcaps-m block">{list.name}</span>
                                 <span className="text-blockcaps-s">{list.factionName} - </span>
                                 <span className="text-blockcaps-s">{list.detachmentName}</span>
@@ -472,9 +472,9 @@ export const TheCage = () => {
                         selectedLabel={defenderList?.name}
                         placeholder="Select defender list..."
                         onSelect={(list) => setDefenderListId(list.id)}
-                        triggerClassName="!w-[200px] bg-mournfangBrown"
+                        triggerClassName="!w-[200px] bg-mournfangBrown !p-0"
                         renderOption={(list) => (
-                            <p className="leading-3 text-left">
+                            <p className="text-left">
                                 <span className="text-blockcaps-m block">{list.name}</span>
                                 <span className="text-blockcaps-s">{list.factionName} - </span>
                                 <span className="text-blockcaps-s">{list.detachmentName}</span>

@@ -105,15 +105,16 @@ export function ListView() {
         return { unitsInList: inList, unitsNotInList: notInList };
     }, [bodyguardUnits, selectedList]);
 
-    // Reorder list items to group leaders with their attached units
+    // Reorder list items alphabetically, grouping leaders with their attached units
+    // For attached units, sort by the alphabetically-first leader name
     const orderedListItems = useMemo(() => {
         if (!selectedList) return [];
 
         const items = [...selectedList.items];
         const processed = new Set<string>();
-        const ordered: ArmyListItem[] = [];
+        const groups: { sortKey: string; items: ArmyListItem[] }[] = [];
 
-        // First pass: Find bodyguard units with leaders attached and group them
+        // First pass: Create groups for bodyguard units with their leaders
         items.forEach((item) => {
             if (processed.has(item.listItemId)) return;
 
@@ -122,36 +123,53 @@ export function ListView() {
                 // Find all leaders for this unit
                 const leaders = item.leadBy.map((ref) => items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processed.has(l.listItemId));
 
-                // Add leaders first, then the bodyguard unit
-                leaders.forEach((leader) => {
-                    ordered.push(leader);
-                    processed.add(leader.listItemId);
-                });
-                ordered.push(item);
+                // Sort leaders alphabetically
+                leaders.sort((a, b) => a.name.localeCompare(b.name));
+
+                // The sort key for this group is the first leader's name (alphabetically)
+                const sortKey = leaders.length > 0 ? leaders[0].name : item.name;
+
+                // Mark all as processed
+                leaders.forEach((leader) => processed.add(leader.listItemId));
                 processed.add(item.listItemId);
+
+                // Add group with leaders first, then bodyguard unit
+                groups.push({
+                    sortKey,
+                    items: [...leaders, item],
+                });
             }
         });
 
-        // Second pass: Add leaders without matching bodyguard units
+        // Second pass: Add standalone leaders (attached but bodyguard not in list)
         items.forEach((item) => {
             if (processed.has(item.listItemId)) return;
 
             if (item.leading) {
-                // Leader is attached but bodyguard wasn't found in first pass
-                ordered.push(item);
+                groups.push({
+                    sortKey: item.name,
+                    items: [item],
+                });
                 processed.add(item.listItemId);
             }
         });
 
-        // Third pass: Add remaining unprocessed items
+        // Third pass: Add remaining unattached units
         items.forEach((item) => {
             if (!processed.has(item.listItemId)) {
-                ordered.push(item);
+                groups.push({
+                    sortKey: item.name,
+                    items: [item],
+                });
                 processed.add(item.listItemId);
             }
         });
 
-        return ordered;
+        // Sort groups alphabetically by sortKey
+        groups.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+
+        // Flatten groups into final ordered list
+        return groups.flatMap((group) => group.items);
     }, [selectedList]);
 
     // Convert datasheets to dropdown options

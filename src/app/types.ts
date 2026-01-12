@@ -64,6 +64,19 @@ export interface LeaderCondition {
     mustAttach?: boolean; // Leader must be attached (cannot be standalone)
 }
 
+// Damaged profile mechanic (parsed from damagedDescription)
+export interface DamagedMechanic {
+    entity: string; // e.g., "thisModel"
+    effect: string; // e.g., "rollPenalty", "statPenalty", "statBonus"
+    attribute: string; // e.g., "h" (hit), "oc", "a" (attacks)
+    value: number;
+    conditions?: {
+        weapon?: string;
+        operator?: string;
+        value?: string;
+    }[];
+}
+
 // Reference to a leader (used in leadBy array)
 export interface LeaderReference {
     id: string;
@@ -126,6 +139,10 @@ export interface Datasheet {
     isForgeWorld?: boolean;
     isLegends?: boolean;
     leaderConditions?: LeaderCondition; // Conditions for multi-leader attachment
+    damagedW?: string; // Wound range for damaged profile (e.g., "1-4")
+    damagedDescription?: string; // Text description of damaged effects
+    damagedThreshold?: number; // Upper bound of damagedW (e.g., 4)
+    damagedMechanics?: DamagedMechanic[]; // Parsed mechanics for damaged profile
     [key: string]: any; // Allow for additional properties
 }
 

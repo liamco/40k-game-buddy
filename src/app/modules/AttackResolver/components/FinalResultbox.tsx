@@ -8,7 +8,7 @@ interface Props {
 const FinalResultBox = ({ className = "bg-fireDragonBright text-mournfangBrown", value }: Props) => {
     return (
         <div className={`${className} bg-fireDragonBright text-mournfangBrown col-span-2 rounded px-4 flex items-center justify-center`}>
-            <figure className={`leading-none text-counter-l`}>{value}</figure>
+            <figure className={`text-counter-l`}>{value}</figure>
         </div>
     );
 };
