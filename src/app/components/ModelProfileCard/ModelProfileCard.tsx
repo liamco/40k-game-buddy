@@ -3,6 +3,9 @@ import { Model } from "../../types";
 
 import { Badge } from "../_ui/badge.tsx";
 
+import BaseIcon from "../icons/BaseIcon.tsx";
+import IconShield from "../icons/IconShield.tsx";
+
 import strikethrough from "../../assets/Strikethrough.svg";
 
 interface Props {
@@ -42,8 +45,11 @@ const ModelProfileCard = ({ model, isDisabled, isSelected, onUnitModelChange }: 
                     <p>{model.ld}</p>
                     <p>{model.oc}</p>
                     {model.invSv && (
-                        <div className="col-start-3">
-                            <p className="font-bold text-[12px] inline-block p-2 bg-amber-300 rounded-b-full">{model.invSv}</p>
+                        <div className="col-start-3 relative flex justify-center">
+                            <BaseIcon color="fireDragonBright" size="large">
+                                <IconShield />
+                            </BaseIcon>
+                            <span className="inline-block text-mournfangBrown absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">{model.invSv}</span>
                         </div>
                     )}
                 </div>

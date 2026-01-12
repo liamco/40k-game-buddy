@@ -45,14 +45,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 // Load core abilities registry
-const coreAbilitiesPath = path.join(
-    __dirname,
-    "..",
-    "src",
-    "app",
-    "depotdata",
-    "core-abilities.json"
-);
+const coreAbilitiesPath = path.join(__dirname, "..", "src", "app", "depotdata", "core-abilities.json");
 let CORE_ABILITIES = {};
 if (fs.existsSync(coreAbilitiesPath)) {
     const coreAbilitiesData = JSON.parse(fs.readFileSync(coreAbilitiesPath, "utf-8"));
@@ -105,11 +98,7 @@ function getCoreAbilityMechanics(abilityName, parameter) {
  * @param {Array} factionStateFlags - Optional faction-specific state flags to include in prompt
  * @returns {Promise<Array|null>} - Array of structured effects or null
  */
-export async function extractStructuredEffectsWithOpenAI(
-    description,
-    itemName = "Unknown",
-    factionStateFlags = []
-) {
+export async function extractStructuredEffectsWithOpenAI(description, itemName = "Unknown", factionStateFlags = []) {
     if (!description || typeof description !== "string") {
         return null;
     }
@@ -130,17 +119,12 @@ export async function extractStructuredEffectsWithOpenAI(
 
     if (!apiKey) {
         console.error(`[OpenAI] ❌ OPENAI_API_KEY not found in environment variables`);
-        console.error(
-            `[OpenAI]    Please set OPENAI_API_KEY in your .env file or as an environment variable`
-        );
+        console.error(`[OpenAI]    Please set OPENAI_API_KEY in your .env file or as an environment variable`);
         return null;
     }
 
     // Truncate description for logging (first 100 chars)
-    const descriptionPreview =
-        cleanDescription.length > 100
-            ? cleanDescription.substring(0, 100) + "..."
-            : cleanDescription;
+    const descriptionPreview = cleanDescription.length > 100 ? cleanDescription.substring(0, 100) + "..." : cleanDescription;
 
     console.log(`\n[OpenAI] Analyzing: ${itemName}`);
     console.log(`[OpenAI] Description: ${descriptionPreview}`);
@@ -177,8 +161,7 @@ export async function extractStructuredEffectsWithOpenAI(
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            const errorMessage =
-                errorData.error?.message || `HTTP ${response.status}: ${response.statusText}`;
+            const errorMessage = errorData.error?.message || `HTTP ${response.status}: ${response.statusText}`;
             throw new Error(`OpenAI API error: ${errorMessage}`);
         }
 
@@ -202,14 +185,9 @@ export async function extractStructuredEffectsWithOpenAI(
         const parsed = JSON.parse(jsonContent);
 
         if (parsed.mechanics && Array.isArray(parsed.mechanics) && parsed.mechanics.length > 0) {
-            console.log(
-                `[OpenAI] ✅ Extracted ${parsed.mechanics.length} mechanic(s) (${elapsed}s)`
-            );
+            console.log(`[OpenAI] ✅ Extracted ${parsed.mechanics.length} mechanic(s) (${elapsed}s)`);
             parsed.mechanics.forEach((mechanic, idx) => {
-                const conditions =
-                    mechanic.conditions && mechanic.conditions.length > 0
-                        ? ` [conditions: ${mechanic.conditions.length}]`
-                        : "";
+                const conditions = mechanic.conditions && mechanic.conditions.length > 0 ? ` [conditions: ${mechanic.conditions.length}]` : "";
 
                 // Build display string for the mechanic
                 let displayParts = [];
@@ -226,22 +204,12 @@ export async function extractStructuredEffectsWithOpenAI(
                 }
 
                 // Format value display based on effect type
-                if (
-                    mechanic.effect === "addsKeyword" &&
-                    mechanic.keywords &&
-                    Array.isArray(mechanic.keywords)
-                ) {
+                if (mechanic.effect === "addsKeyword" && mechanic.keywords && Array.isArray(mechanic.keywords)) {
                     displayParts.push(`keywords:[${mechanic.keywords.join(", ")}]`);
-                } else if (
-                    mechanic.effect === "addsAbility" &&
-                    mechanic.abilities &&
-                    Array.isArray(mechanic.abilities)
-                ) {
+                } else if (mechanic.effect === "addsAbility" && mechanic.abilities && Array.isArray(mechanic.abilities)) {
                     const abilitiesDisplay = mechanic.abilities.join(", ");
                     if (mechanic.value !== undefined && mechanic.value !== null) {
-                        displayParts.push(
-                            `abilities:[${abilitiesDisplay}] value:${mechanic.value}`
-                        );
+                        displayParts.push(`abilities:[${abilitiesDisplay}] value:${mechanic.value}`);
                     } else {
                         displayParts.push(`abilities:[${abilitiesDisplay}]`);
                     }
@@ -274,9 +242,7 @@ export async function extractStructuredEffectsWithOpenAI(
         console.error(`[OpenAI] ❌ Error extracting mechanics (${elapsed}s): ${errorMessage}`);
 
         if (errorMessage.includes("API key")) {
-            console.error(
-                `[OpenAI]    Check that OPENAI_API_KEY is set correctly in your .env file`
-            );
+            console.error(`[OpenAI]    Check that OPENAI_API_KEY is set correctly in your .env file`);
         } else if (errorMessage.includes("rate limit")) {
             console.error(`[OpenAI]    Rate limit exceeded. Please wait before retrying.`);
         } else if (errorMessage.includes("insufficient_quota")) {
@@ -295,6 +261,71 @@ function shouldExtractMechanics(obj) {
 }
 
 /**
+ * Extracts leader conditions from leaderFooter text.
+ * This handles special cases where multiple leaders can attach to a single bodyguard unit.
+ *
+ * @param {string} leaderFooter - The leaderFooter HTML text
+ * @returns {object|null} - LeaderCondition object or null if no special conditions
+ */
+function extractLeaderConditions(leaderFooter) {
+    if (!leaderFooter || typeof leaderFooter !== "string" || leaderFooter.trim() === "") {
+        return null;
+    }
+
+    // Remove HTML tags for cleaner analysis
+    const cleanText = leaderFooter
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+    if (!cleanText) {
+        return null;
+    }
+
+    const conditions = {};
+
+    // Check for "must attach" pattern
+    // Pattern: "You must attach this model to the above unit"
+    if (/you must attach this model/i.test(cleanText)) {
+        conditions.mustAttach = true;
+    }
+
+    // Check for "can attach even if X has already been attached" patterns
+    // This indicates which existing leaders this unit can join
+
+    // Pattern 1: "even if one CHARACTER model has already been attached"
+    // Pattern 2: "even if CANIS WOLFBORN has been attached" (no "one", and "been" instead of "already been")
+    const evenIfMatch = cleanText.match(/even if (?:one |a )?(.+?) (?:model |unit )?has (?:already )?been attached/i);
+
+    if (evenIfMatch) {
+        const keywordsPart = evenIfMatch[1];
+
+        // Extract keywords from the match - they can be comma or "or" separated
+        // Examples: "CHARACTER", "CAPTAIN, CHAPTER MASTER or LIEUTENANT", "CANIS WOLFBORN"
+        const keywords = keywordsPart
+            .split(/,\s*|\s+or\s+/i)
+            .map((k) => k.trim().toUpperCase())
+            .filter((k) => k.length > 0);
+
+        if (keywords.length > 0) {
+            // Check if it's a generic "CHARACTER" - this means any existing leader is allowed
+            if (keywords.length === 1 && keywords[0] === "CHARACTER") {
+                conditions.allowsAnyExistingLeader = true;
+            } else {
+                conditions.allowedExistingLeaderKeywords = keywords;
+            }
+        }
+    }
+
+    // Only return conditions if we found any
+    if (Object.keys(conditions).length > 0) {
+        return conditions;
+    }
+
+    return null;
+}
+
+/**
  * Recursively processes a JSON object to extract effects from abilities, enhancements, stratagems, and detachmentAbilities
  * @param {object} obj - The object to process
  * @param {boolean} skipExistingMechanics - Whether to skip items that already have effects
@@ -303,11 +334,7 @@ function shouldExtractMechanics(obj) {
  */
 async function processObjectForEffects(obj, skipExistingMechanics = true, factionStateFlags = []) {
     if (Array.isArray(obj)) {
-        return Promise.all(
-            obj.map((item) =>
-                processObjectForEffects(item, skipExistingMechanics, factionStateFlags)
-            )
-        );
+        return Promise.all(obj.map((item) => processObjectForEffects(item, skipExistingMechanics, factionStateFlags)));
     } else if (obj !== null && typeof obj === "object") {
         // If this object has factionStateFlags, use them for nested processing
         const effectiveFactionFlags = obj.factionStateFlags || factionStateFlags;
@@ -316,14 +343,7 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
         for (const key in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, key)) {
                 // Special handling for abilities, enhancements, stratagems, factionAbilities, and detachmentAbilities arrays
-                if (
-                    (key === "abilities" ||
-                        key === "enhancements" ||
-                        key === "stratagems" ||
-                        key === "factionAbilities" ||
-                        key === "detachmentAbilities") &&
-                    Array.isArray(obj[key])
-                ) {
+                if ((key === "abilities" || key === "enhancements" || key === "stratagems" || key === "factionAbilities" || key === "detachmentAbilities") && Array.isArray(obj[key])) {
                     const itemType =
                         key.charAt(0).toUpperCase() +
                         key
@@ -335,48 +355,26 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                     processed[key] = await Promise.all(
                         obj[key].map(async (item, index) => {
                             const itemName = item.name || item.id || `${itemType} ${index + 1}`;
-                            const processedItem = await processObjectForEffects(
-                                item,
-                                skipExistingMechanics,
-                                effectiveFactionFlags
-                            );
+                            const processedItem = await processObjectForEffects(item, skipExistingMechanics, effectiveFactionFlags);
 
                             // Extract effects from the description
                             if (processedItem.description) {
                                 // Skip if item already has effects and skipExistingMechanics is enabled
-                                const hasExistingEffects =
-                                    processedItem.mechanics &&
-                                    Array.isArray(processedItem.mechanics) &&
-                                    processedItem.mechanics.length > 0;
+                                const hasExistingEffects = processedItem.mechanics && Array.isArray(processedItem.mechanics) && processedItem.mechanics.length > 0;
 
                                 if (hasExistingEffects && skipExistingMechanics) {
-                                    console.log(
-                                        `[OpenAI] ⏭️  Skipping ${itemName} (already has ${processedItem.mechanics.length} effect(s))`
-                                    );
+                                    console.log(`[OpenAI] ⏭️  Skipping ${itemName} (already has ${processedItem.mechanics.length} effect(s))`);
                                 } else {
                                     // First, check if this is a core ability with pre-defined mechanics
-                                    const coreMechanics = getCoreAbilityMechanics(
-                                        processedItem.name,
-                                        processedItem.parameter
-                                    );
+                                    const coreMechanics = getCoreAbilityMechanics(processedItem.name, processedItem.parameter);
 
                                     if (coreMechanics) {
-                                        console.log(
-                                            `[Core] ✅ Using pre-defined mechanics for ${itemName}` +
-                                                (processedItem.parameter
-                                                    ? ` (${processedItem.parameter})`
-                                                    : "")
-                                        );
+                                        console.log(`[Core] ✅ Using pre-defined mechanics for ${itemName}` + (processedItem.parameter ? ` (${processedItem.parameter})` : ""));
                                         processedItem.mechanics = coreMechanics;
                                     } else {
                                         // Extract structured effects with OpenAI
                                         // Pass faction state flags for faction-specific states
-                                        const structuredEffects =
-                                            await extractStructuredEffectsWithOpenAI(
-                                                processedItem.description,
-                                                itemName,
-                                                effectiveFactionFlags
-                                            );
+                                        const structuredEffects = await extractStructuredEffectsWithOpenAI(processedItem.description, itemName, effectiveFactionFlags);
                                         if (structuredEffects && structuredEffects.length > 0) {
                                             processedItem.mechanics = structuredEffects;
                                         }
@@ -389,47 +387,27 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                 } else {
                     // Check if this object should have effects extracted
                     if (shouldExtractMechanics(obj[key]) && typeof obj[key] === "object") {
-                        processed[key] = await processObjectForEffects(
-                            obj[key],
-                            skipExistingMechanics,
-                            effectiveFactionFlags
-                        );
+                        processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics, effectiveFactionFlags);
 
                         // Extract structured effects if this is a stratagem, ability, enhancement, or detachmentAbility
                         if (obj[key].description) {
                             // Check if we should skip items that already have effects
-                            const hasExistingEffects =
-                                processed[key].mechanics &&
-                                Array.isArray(processed[key].mechanics) &&
-                                processed[key].mechanics.length > 0;
+                            const hasExistingEffects = processed[key].mechanics && Array.isArray(processed[key].mechanics) && processed[key].mechanics.length > 0;
 
                             if (hasExistingEffects && skipExistingMechanics) {
                                 const itemName = obj[key].name || obj[key].id || "Unknown item";
-                                console.log(
-                                    `[OpenAI] ⏭️  Skipping ${itemName} (already has ${processed[key].mechanics.length} effect(s))`
-                                );
+                                console.log(`[OpenAI] ⏭️  Skipping ${itemName} (already has ${processed[key].mechanics.length} effect(s))`);
                             } else if (!hasExistingEffects) {
                                 const itemName = obj[key].name || obj[key].id || "Unknown item";
 
                                 // First, check if this is a core ability with pre-defined mechanics
-                                const coreMechanics = getCoreAbilityMechanics(
-                                    obj[key].name,
-                                    obj[key].parameter
-                                );
+                                const coreMechanics = getCoreAbilityMechanics(obj[key].name, obj[key].parameter);
 
                                 if (coreMechanics) {
-                                    console.log(
-                                        `[Core] ✅ Using pre-defined mechanics for ${itemName}` +
-                                            (obj[key].parameter ? ` (${obj[key].parameter})` : "")
-                                    );
+                                    console.log(`[Core] ✅ Using pre-defined mechanics for ${itemName}` + (obj[key].parameter ? ` (${obj[key].parameter})` : ""));
                                     processed[key].mechanics = coreMechanics;
                                 } else {
-                                    const structuredEffects =
-                                        await extractStructuredEffectsWithOpenAI(
-                                            obj[key].description,
-                                            itemName,
-                                            effectiveFactionFlags
-                                        );
+                                    const structuredEffects = await extractStructuredEffectsWithOpenAI(obj[key].description, itemName, effectiveFactionFlags);
                                     if (structuredEffects && structuredEffects.length > 0) {
                                         processed[key].mechanics = structuredEffects;
                                     }
@@ -437,11 +415,7 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                             }
                         }
                     } else {
-                        processed[key] = await processObjectForEffects(
-                            obj[key],
-                            skipExistingMechanics,
-                            effectiveFactionFlags
-                        );
+                        processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics, effectiveFactionFlags);
                     }
                 }
             }
@@ -465,6 +439,25 @@ async function processJsonFileForEffects(filePath, skipExistingMechanics) {
 
         // Process the data
         const processedData = await processObjectForEffects(data, skipExistingMechanics);
+
+        // Check if this is a datasheet file with leaderFooter
+        // Datasheets have leaderFooter at the top level
+        if (processedData.leaderFooter && typeof processedData.leaderFooter === "string") {
+            const leaderConditions = extractLeaderConditions(processedData.leaderFooter);
+            if (leaderConditions) {
+                // Only set if we extracted conditions and either:
+                // 1. skipExistingMechanics is false, OR
+                // 2. there are no existing leaderConditions
+                const hasExistingConditions = processedData.leaderConditions && Object.keys(processedData.leaderConditions).length > 0;
+
+                if (!hasExistingConditions || !skipExistingMechanics) {
+                    processedData.leaderConditions = leaderConditions;
+                    console.log(`[LeaderFooter] ✅ Extracted leader conditions: ${JSON.stringify(leaderConditions)}`);
+                } else {
+                    console.log(`[LeaderFooter] ⏭️  Skipping (already has leaderConditions)`);
+                }
+            }
+        }
 
         // Write back to file with proper formatting
         fs.writeFileSync(filePath, JSON.stringify(processedData, null, 2), "utf-8");
@@ -500,10 +493,7 @@ function filterFiles(allFiles, fileFilters, depotdataPath) {
             const normalizedFilter = filter.replace(/\\/g, "/");
 
             // Exact match (relative path)
-            if (
-                relativePath === normalizedFilter ||
-                relativePath.endsWith("/" + normalizedFilter)
-            ) {
+            if (relativePath === normalizedFilter || relativePath.endsWith("/" + normalizedFilter)) {
                 return true;
             }
 
@@ -513,10 +503,7 @@ function filterFiles(allFiles, fileFilters, depotdataPath) {
             }
 
             // Absolute path match
-            if (
-                normalizedPath === normalizedFilter ||
-                normalizedPath.endsWith("/" + normalizedFilter)
-            ) {
+            if (normalizedPath === normalizedFilter || normalizedPath.endsWith("/" + normalizedFilter)) {
                 return true;
             }
 
@@ -566,10 +553,7 @@ function filterByDirectories(allFiles, directoryFilters, depotdataPath) {
             }
 
             // Check if relative path equals the directory filter (for files directly in that dir)
-            if (
-                relativePath.startsWith(normalizedFilter + "/") ||
-                relativePath === normalizedFilter
-            ) {
+            if (relativePath.startsWith(normalizedFilter + "/") || relativePath === normalizedFilter) {
                 return true;
             }
 
@@ -608,9 +592,7 @@ async function processAllFiles(fileFilters = [], directoryFilters = []) {
 
     if (!apiKey) {
         console.error("❌ OPENAI_API_KEY not found in environment variables");
-        console.error(
-            "   Please set OPENAI_API_KEY in your .env file or as an environment variable"
-        );
+        console.error("   Please set OPENAI_API_KEY in your .env file or as an environment variable");
         process.exit(1);
     }
 
@@ -665,9 +647,7 @@ async function processAllFiles(fileFilters = [], directoryFilters = []) {
         process.exit(1);
     }
 
-    console.log(
-        `📁 Found ${jsonFiles.length} JSON file(s) to process (out of ${allJsonFiles.length} total)...\n`
-    );
+    console.log(`📁 Found ${jsonFiles.length} JSON file(s) to process (out of ${allJsonFiles.length} total)...\n`);
 
     let successCount = 0;
     let errorCount = 0;
@@ -738,14 +718,7 @@ async function main() {
     // Check if first argument looks like a description (starts with quote or is a short string)
     // vs a file path (contains slashes or ends with .json)
     const firstArg = args[0];
-    const looksLikeDescription =
-        firstArg &&
-        (firstArg.startsWith('"') ||
-            firstArg.startsWith("'") ||
-            (!firstArg.includes("/") &&
-                !firstArg.includes("\\") &&
-                !firstArg.endsWith(".json") &&
-                firstArg.length < 200));
+    const looksLikeDescription = firstArg && (firstArg.startsWith('"') || firstArg.startsWith("'") || (!firstArg.includes("/") && !firstArg.includes("\\") && !firstArg.endsWith(".json") && firstArg.length < 200));
 
     // If arguments provided and looks like description, run single description test
     if (args.length > 0 && looksLikeDescription) {
@@ -754,9 +727,7 @@ async function main() {
 
         if (!description) {
             console.error("❌ Error: No description provided");
-            console.error(
-                "   Provide description as argument or set DESCRIPTION environment variable"
-            );
+            console.error("   Provide description as argument or set DESCRIPTION environment variable");
             process.exit(1);
         }
 
@@ -787,10 +758,7 @@ async function main() {
 }
 
 // Run if called directly (check if this file is being executed)
-const isMainModule =
-    process.argv[1] &&
-    (process.argv[1].endsWith("extract-effects.js") ||
-        process.argv[1].replace(/\\/g, "/").endsWith("extract-effects.js"));
+const isMainModule = process.argv[1] && (process.argv[1].endsWith("extract-effects.js") || process.argv[1].replace(/\\/g, "/").endsWith("extract-effects.js"));
 
 if (isMainModule) {
     main().catch((error) => {

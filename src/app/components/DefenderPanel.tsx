@@ -89,74 +89,63 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     }, [selectedList]);
 
     // Combine leaders with their attached units into single items
+    // Supports multiple leaders attached to a single bodyguard unit
     const combinedListItems = useMemo(() => {
         if (!selectedList) return [];
 
         const items = selectedList.items;
         const processed = new Set<string>();
-        const combined: Array<{ item: ArmyListItem; displayName: string; isCombined: boolean }> = [];
+        const combined: Array<{ item: ArmyListItem; displayName: string; isCombined: boolean; allLeaders: ArmyListItem[]; bodyguardUnit?: ArmyListItem }> = [];
 
-        // First pass: Process all leaders and their attached units
+        // First pass: Find bodyguard units with leaders attached
         items.forEach((item) => {
-            // Skip if already processed
             if (processed.has(item.listItemId)) return;
 
-            // If this is a leader with an attached unit
-            if (item.leading) {
-                // Find the attached unit (without checking processed, since we process leaders first)
-                const attachedUnit = items.find((u) => u.id === item.leading?.id && u.name === item.leading?.name);
+            // Check if this unit has leaders attached (leadBy array)
+            if (item.leadBy && item.leadBy.length > 0) {
+                // Find all leaders for this unit
+                const leaders = item.leadBy.map((ref) => items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processed.has(l.listItemId));
 
-                if (attachedUnit && !processed.has(attachedUnit.listItemId)) {
-                    // Combine leader and attached unit
+                if (leaders.length > 0) {
+                    // Build display name with all leaders + bodyguard
+                    const leaderNames = leaders.map((l) => l.name).join(" + ");
                     combined.push({
-                        item: item, // Use leader as the main item
-                        displayName: `${item.name} + ${attachedUnit.name}`,
+                        item: leaders[0], // Use first leader as the main item for selection
+                        displayName: `${leaderNames} + ${item.name}`,
                         isCombined: true,
+                        allLeaders: leaders,
+                        bodyguardUnit: item,
                     });
-                    processed.add(item.listItemId);
-                    processed.add(attachedUnit.listItemId);
-                } else {
-                    // Leader but attached unit not found or already processed, show leader alone
-                    combined.push({
-                        item: item,
-                        displayName: item.name,
-                        isCombined: false,
-                    });
+                    leaders.forEach((l) => processed.add(l.listItemId));
                     processed.add(item.listItemId);
                 }
             }
         });
 
-        // Second pass: Process remaining items (units being led, regular units)
+        // Second pass: Add leaders without matching bodyguard units
         items.forEach((item) => {
-            // Skip if already processed
             if (processed.has(item.listItemId)) return;
 
-            // If this unit is being led, skip it (it should have been added with its leader in first pass)
-            if (item.leadBy) {
-                // Check if the leader exists
-                const leader = items.find((l) => l.id === item.leadBy?.id && l.name === item.leadBy?.name);
-
-                if (!leader || !processed.has(leader.listItemId)) {
-                    // Leader not found or not processed, show this unit alone
-                    combined.push({
-                        item: item,
-                        displayName: item.name,
-                        isCombined: false,
-                    });
-                    processed.add(item.listItemId);
-                } else {
-                    // Leader was processed, this unit should have been added with it
-                    // Mark as processed to skip it
-                    processed.add(item.listItemId);
-                }
-            }
-            // Regular unit, not a leader and not being led
-            else {
+            if (item.leading) {
+                // Leader is attached but bodyguard wasn't found in first pass
                 combined.push({
                     item: item,
                     displayName: item.name,
                     isCombined: false,
+                    allLeaders: [],
+                });
+                processed.add(item.listItemId);
+            }
+        });
+
+        // Third pass: Add remaining unprocessed items (regular units)
+        items.forEach((item) => {
+            if (!processed.has(item.listItemId)) {
+                combined.push({
+                    item: item,
+                    displayName: item.name,
+                    isCombined: false,
+                    allLeaders: [],
                 });
                 processed.add(item.listItemId);
             }
@@ -166,7 +155,7 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     }, [selectedList]);
 
     // Convert combined items to dropdown options
-    const unitOptions = useMemo((): SearchableDropdownOption<{ item: ArmyListItem; displayName: string; isCombined: boolean }>[] => {
+    const unitOptions = useMemo((): SearchableDropdownOption<{ item: ArmyListItem; displayName: string; isCombined: boolean; allLeaders: ArmyListItem[]; bodyguardUnit?: ArmyListItem }>[] => {
         return combinedListItems.map((combined) => ({
             id: combined.item.listItemId,
             searchValue: `${combined.displayName} ${combined.item.roleLabel}`,
@@ -191,32 +180,34 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return combinedItem ? combinedItem.displayName : unit.name;
     }, [unit, combinedListItems]);
 
-    // Get combined models from leader and attached unit if combined unit is selected
+    // Get combined models from all leaders and bodyguard unit if combined unit is selected
     const availableModels = useMemo(() => {
         if (!unit || !selectedList) return unit?.models || [];
 
-        // Check if this is a combined unit (leader with attached unit)
+        // Check if this is a combined unit (leader(s) with bodyguard unit)
         const listItemId = (unit as any).listItemId;
         const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
-        if (combinedItem?.isCombined && combinedItem.item.leading) {
-            // Find the attached unit
-            const attachedUnit = selectedList.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
-
-            if (attachedUnit) {
-                // Combine models from both units with labels
-                const leaderModels = (combinedItem.item.models || []).map((model) => ({
+        if (combinedItem?.isCombined && combinedItem.bodyguardUnit) {
+            // Collect models from all leaders
+            const allLeaderModels: (Model & { sourceUnit: string; isLeader: boolean })[] = [];
+            for (const leader of combinedItem.allLeaders) {
+                const leaderModels = (leader.models || []).map((model) => ({
                     ...model,
-                    sourceUnit: combinedItem.item.name,
+                    sourceUnit: leader.name,
                     isLeader: true,
                 }));
-                const attachedModels = (attachedUnit.models || []).map((model) => ({
-                    ...model,
-                    sourceUnit: attachedUnit.name,
-                    isLeader: false,
-                }));
-                return [...leaderModels, ...attachedModels];
+                allLeaderModels.push(...leaderModels);
             }
+
+            // Add bodyguard unit models
+            const bodyguardModels = (combinedItem.bodyguardUnit.models || []).map((model) => ({
+                ...model,
+                sourceUnit: combinedItem.bodyguardUnit!.name,
+                isLeader: false,
+            }));
+
+            return [...allLeaderModels, ...bodyguardModels];
         }
 
         // Return leader's models or regular unit's models
@@ -245,14 +236,12 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         const listItemId = (unit as any).listItemId;
         const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
-        if (combinedItem?.isCombined && combinedItem.item.leading) {
-            // Find the attached unit
-            const attachedUnit = selectedList.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
-
-            if (attachedUnit && attachedUnit.models && attachedUnit.models.length > 0) {
-                // Auto-select the first model from the attached unit (non-leader)
-                // This only happens when the unit first changes, not on subsequent model selections
-                onUnitModelChange(attachedUnit.models[0]);
+        if (combinedItem?.isCombined && combinedItem.bodyguardUnit) {
+            // Auto-select the first model from the bodyguard unit (non-leader)
+            // This only happens when the unit first changes, not on subsequent model selections
+            const bodyguard = combinedItem.bodyguardUnit;
+            if (bodyguard.models && bodyguard.models.length > 0) {
+                onUnitModelChange(bodyguard.models[0]);
             }
         }
     }, [unit, selectedList, combinedListItems, onUnitModelChange]);
@@ -267,21 +256,38 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return selectedWeaponProfile.attributes.includes("PRECISION");
     }, [selectedWeaponProfile]);
 
-    // Collect defensive bonuses from leader abilities when a combined unit is selected
+    // Get all attached leaders as an array for the selected combined unit
+    const attachedLeaders = useMemo((): Datasheet[] => {
+        if (!unit || !selectedList) return attachedUnit ? [attachedUnit] : [];
+
+        const listItemId = (unit as any).listItemId;
+        const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
+
+        if (combinedItem?.isCombined && combinedItem.allLeaders.length > 0) {
+            return combinedItem.allLeaders;
+        }
+
+        // Fallback to legacy attachedUnit prop
+        return attachedUnit ? [attachedUnit] : [];
+    }, [unit, selectedList, combinedListItems, attachedUnit]);
+
+    // Collect defensive bonuses from all leader abilities when a combined unit is selected
     const leaderDefensiveBonuses = useMemo(() => {
-        if (!unit || !attachedUnit) {
+        if (!unit || attachedLeaders.length === 0) {
             return { saveBonuses: [], feelNoPain: null, otherBonuses: [] };
         }
 
-        // Create a unit context to collect abilities
+        // Create a unit context to collect abilities from all leaders
         const unitContext: UnitContext = {
             datasheet: unit,
             selectedModel: unit.models?.[0],
             state: createDefaultCombatStatus(),
-            attachedLeader: attachedUnit,
+            attachedLeaders: attachedLeaders,
+            // Keep deprecated field for backwards compatibility
+            attachedLeader: attachedLeaders[0],
         };
 
-        // Collect all mechanics from the unit and attached leader
+        // Collect all mechanics from the unit and attached leaders
         const mechanics = collectUnitAbilities(unitContext, "defender");
 
         // Filter to only mechanics that apply when leading
@@ -291,9 +297,9 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         });
 
         return extractDefensiveBonuses(leaderMechanics);
-    }, [unit, attachedUnit]);
+    }, [unit, attachedLeaders]);
 
-    const handleUnitSelect = (combined: { item: ArmyListItem; displayName: string; isCombined: boolean }) => {
+    const handleUnitSelect = (combined: { item: ArmyListItem; displayName: string; isCombined: boolean; allLeaders: ArmyListItem[]; bodyguardUnit?: ArmyListItem }) => {
         onUnitChange(combined.item);
     };
 
@@ -321,7 +327,7 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                         )}
 
                         {/* Display leader defensive bonuses when a combined unit is selected */}
-                        {attachedUnit && (leaderDefensiveBonuses.saveBonuses.length > 0 || leaderDefensiveBonuses.feelNoPain || leaderDefensiveBonuses.otherBonuses.length > 0) && (
+                        {attachedLeaders.length > 0 && (leaderDefensiveBonuses.saveBonuses.length > 0 || leaderDefensiveBonuses.feelNoPain || leaderDefensiveBonuses.otherBonuses.length > 0) && (
                             <div className="bg-blue-50 border border-blue-200 rounded-[4px] p-3 space-y-2">
                                 <p className="text-[10px] font-bold text-blue-800 uppercase">Leader Bonuses Active</p>
                                 <div className="flex flex-wrap gap-2">

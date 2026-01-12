@@ -17,13 +17,13 @@ import SearchableDropdown, { type SearchableDropdownOption } from "../../compone
 import ModelProfileCard from "../../components/ModelProfileCard/ModelProfileCard";
 import WeaponProfileCard from "../../components/WeaponProfileCard/WeaponProfileCard";
 
-import { useListManager } from "./ListManagerContext";
+import { useListManager, type MultiLeaderValidationResult } from "./ListManagerContext";
 import ListItem from "./ListItem";
 
 export function ListView() {
     const { listId } = useParams<{ listId: string }>();
     const navigate = useNavigate();
-    const { lists, listsLoaded, getListById, factionData, loadFactionDataBySlug, addDatasheetToList, removeItemFromList, updateListItem, attachLeaderToUnit, detachLeaderFromUnit, attachEnhancementToLeader, calculateItemPoints, calculateTotalModels, parseLoadoutWeapons, parseOptionConstraint } = useListManager();
+    const { lists, listsLoaded, getListById, factionData, loadFactionDataBySlug, addDatasheetToList, removeItemFromList, updateListItem, attachLeaderToUnit, detachLeaderFromUnit, attachEnhancementToLeader, canAttachLeaderToUnit, calculateItemPoints, calculateTotalModels, parseLoadoutWeapons, parseOptionConstraint } = useListManager();
 
     const [selectedItem, setSelectedItem] = useState<ArmyListItem | null>(null);
     const [bodyguardUnits, setBodyguardUnits] = useState<Datasheet[]>([]);
@@ -113,39 +113,41 @@ export function ListView() {
         const processed = new Set<string>();
         const ordered: ArmyListItem[] = [];
 
+        // First pass: Find bodyguard units with leaders attached and group them
+        items.forEach((item) => {
+            if (processed.has(item.listItemId)) return;
+
+            // Check if this unit has leaders attached (leadBy array)
+            if (item.leadBy && item.leadBy.length > 0) {
+                // Find all leaders for this unit
+                const leaders = item.leadBy.map((ref) => items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processed.has(l.listItemId));
+
+                // Add leaders first, then the bodyguard unit
+                leaders.forEach((leader) => {
+                    ordered.push(leader);
+                    processed.add(leader.listItemId);
+                });
+                ordered.push(item);
+                processed.add(item.listItemId);
+            }
+        });
+
+        // Second pass: Add leaders without matching bodyguard units
         items.forEach((item) => {
             if (processed.has(item.listItemId)) return;
 
             if (item.leading) {
-                const attachedUnit = items.find((u) => u.id === item.leading?.id && u.name === item.leading?.name && !processed.has(u.listItemId));
-
-                if (attachedUnit) {
-                    ordered.push(item);
-                    ordered.push(attachedUnit);
-                    processed.add(item.listItemId);
-                    processed.add(attachedUnit.listItemId);
-                } else {
-                    ordered.push(item);
-                    processed.add(item.listItemId);
-                }
+                // Leader is attached but bodyguard wasn't found in first pass
+                ordered.push(item);
+                processed.add(item.listItemId);
             }
         });
 
-        items.forEach((item) => {
-            if (processed.has(item.listItemId)) return;
-
-            if (item.leadBy) {
-                const leader = items.find((l) => l.id === item.leadBy?.id && l.name === item.leadBy?.name);
-                if (!leader || !processed.has(leader.listItemId)) {
-                    ordered.push(item);
-                    processed.add(item.listItemId);
-                }
-            }
-        });
-
+        // Third pass: Add remaining unprocessed items
         items.forEach((item) => {
             if (!processed.has(item.listItemId)) {
                 ordered.push(item);
+                processed.add(item.listItemId);
             }
         });
 
@@ -423,13 +425,33 @@ export function ListView() {
                                             {orderedListItems.map((item, index) => {
                                                 const isSelected = selectedItem?.listItemId === item.listItemId;
                                                 const isLeader = !!item.leading;
-                                                const isAttachedUnit = !!item.leadBy;
+                                                const isAttachedUnit = !!(item.leadBy && item.leadBy.length > 0);
+                                                const leaderCount = item.leadBy?.length || 0;
                                                 const prevItem = orderedListItems[index - 1];
                                                 const nextItem = orderedListItems[index + 1];
-                                                const isGroupedWithPrev = isAttachedUnit && prevItem?.leading?.id === item.id && prevItem?.leading?.name === item.name;
-                                                const isGroupedWithNext = isLeader && nextItem?.leadBy?.id === item.id && nextItem?.leadBy?.name === item.name;
 
-                                                return <ListItem item={item} isSelected={isSelected} isLeader={isLeader} isAttachedUnit={isAttachedUnit} isGroupedWithPrev={isGroupedWithPrev} isGroupedWithNext={isGroupedWithNext} calculateItemPoints={calculateItemPoints} handleRemoveItem={handleRemoveItem} setSelectedItem={setSelectedItem} />;
+                                                // Check if previous item is a leader attached to the same target as this item
+                                                // or if previous item is a leader attached to this unit (if this is the bodyguard)
+                                                const isGroupedWithPrev = !!(
+                                                    // This is a bodyguard unit and prev is one of its leaders
+                                                    (
+                                                        (isAttachedUnit && prevItem?.leading?.id === item.id && prevItem?.leading?.name === item.name) ||
+                                                        // This is a leader and prev is also a leader attached to the same target
+                                                        (isLeader && prevItem?.leading?.id === item.leading?.id && prevItem?.leading?.name === item.leading?.name)
+                                                    )
+                                                );
+
+                                                // Check if next item is grouped with this item
+                                                const isGroupedWithNext = !!(
+                                                    // This is a leader and next is also a leader attached to the same target
+                                                    (
+                                                        (isLeader && nextItem?.leading?.id === item.leading?.id && nextItem?.leading?.name === item.leading?.name) ||
+                                                        // This is a leader and next is the bodyguard unit we're attached to
+                                                        (isLeader && nextItem?.leadBy?.some((l) => l.id === item.id && l.name === item.name))
+                                                    )
+                                                );
+
+                                                return <ListItem key={item.listItemId} item={item} isSelected={isSelected} isLeader={isLeader} isAttachedUnit={isAttachedUnit} isGroupedWithPrev={isGroupedWithPrev} isGroupedWithNext={isGroupedWithNext} leaderCount={leaderCount} calculateItemPoints={calculateItemPoints} handleRemoveItem={handleRemoveItem} setSelectedItem={setSelectedItem} />;
                                             })}
                                         </div>
                                     )}
@@ -612,11 +634,32 @@ export function ListView() {
                                                             <div className="space-y-2">
                                                                 {unitsInList.map((listItem) => {
                                                                     const isAttached = selectedItem?.leading?.id === listItem.id && selectedItem?.leading?.name === listItem.name;
+                                                                    const existingLeaderRefs = listItem.leadBy || [];
+                                                                    const hasExistingLeaders = existingLeaderRefs.length > 0;
+
+                                                                    // Use the proper validation function to check if this leader can attach
+                                                                    const validation: MultiLeaderValidationResult = selectedList && selectedItem ? canAttachLeaderToUnit(selectedList, selectedItem.listItemId, listItem.listItemId) : { canAttach: true };
+
+                                                                    // Get existing leader names for display
+                                                                    const existingLeaderNames = existingLeaderRefs
+                                                                        .map((ref) => selectedList?.items.find((i) => i.id === ref.id && i.name === ref.name)?.name)
+                                                                        .filter(Boolean)
+                                                                        .join(", ");
+
                                                                     return (
                                                                         <div key={listItem.listItemId} className={`border-skarsnikGreen border-1 rounded p-3 ${isAttached ? "bg-deathWorldForest" : ""}`}>
                                                                             <div className="flex items-center justify-between">
                                                                                 <div className="flex-1">
                                                                                     <span>{listItem.name}</span>
+                                                                                    {hasExistingLeaders && !isAttached && (
+                                                                                        <div className="text-xs mt-1">
+                                                                                            <span className="text-yellow-600">
+                                                                                                {existingLeaderRefs.length} leader{existingLeaderRefs.length > 1 ? "s" : ""} attached
+                                                                                                {existingLeaderNames && <span className="text-gray-500"> ({existingLeaderNames})</span>}
+                                                                                            </span>
+                                                                                            {validation.canAttach ? <span className="text-green-600 ml-1">• Can join</span> : <span className="text-red-500 ml-1">• Will replace</span>}
+                                                                                        </div>
+                                                                                    )}
                                                                                     {isAttached && <div className="text-xs text-green-600 mt-1 font-medium">Attached</div>}
                                                                                 </div>
                                                                                 <Button
@@ -630,7 +673,7 @@ export function ListView() {
                                                                                         }
                                                                                     }}
                                                                                 >
-                                                                                    {isAttached ? "Detach" : "Attach"}
+                                                                                    {isAttached ? "Detach" : hasExistingLeaders ? (validation.canAttach ? "Join" : "Replace") : "Attach"}
                                                                                 </Button>
                                                                             </div>
                                                                         </div>

@@ -123,7 +123,12 @@ export interface UnitContext {
     /** Unit state flags */
     state: UnitState;
 
-    /** Attached leader (if any) */
+    /** Attached leaders (supports multiple leaders) */
+    attachedLeaders?: Datasheet[];
+
+    /**
+     * @deprecated Use attachedLeaders instead. Kept for backwards compatibility.
+     */
     attachedLeader?: Datasheet;
 
     /** Equipped enhancement (if any) */

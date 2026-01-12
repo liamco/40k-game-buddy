@@ -4,11 +4,13 @@ import clx from "classnames";
 enum Colors {
     "default" = "fill-skarsnikGreen",
     "deathWorldForest" = "fill-deathWorldForest",
+    "fireDragonBright" = "fill-fireDragonBright",
 }
 
 enum Sizes {
     "small" = "w-3 h-3",
     "medium" = "w-4 h-4",
+    "large" = "w-6 h-6",
 }
 
 interface Props {

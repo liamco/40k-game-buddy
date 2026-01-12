@@ -1,7 +1,96 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from "react";
 
 import { getAllFactions, loadFactionData, loadDatasheetData } from "../../utils/depotDataLoader";
-import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint } from "../../types";
+import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, LeaderReference, LeaderCondition } from "../../types";
+
+/**
+ * Result of multi-leader attachment validation
+ */
+export interface MultiLeaderValidationResult {
+    canAttach: boolean;
+    reason?: string;
+    wouldReplace?: boolean; // If true, attaching would replace the existing leader(s)
+}
+
+/**
+ * Validates whether a leader can attach to a unit that already has leaders attached.
+ * This checks the leader's leaderConditions against the existing leaders' keywords.
+ *
+ * @param newLeader - The leader attempting to attach
+ * @param existingLeaders - Leaders already attached to the target unit
+ * @returns Validation result with canAttach boolean and optional reason
+ */
+export function validateMultiLeaderAttachment(newLeader: ArmyListItem, existingLeaders: ArmyListItem[]): MultiLeaderValidationResult {
+    // If no existing leaders, always can attach
+    if (existingLeaders.length === 0) {
+        return { canAttach: true };
+    }
+
+    console.log("=== Multi-Leader Validation ===");
+    console.log("New leader:", newLeader.name);
+    console.log("New leader leaderConditions:", newLeader.leaderConditions);
+    console.log(
+        "Existing leaders:",
+        existingLeaders.map((l) => ({ name: l.name, keywords: l.keywords }))
+    );
+
+    const leaderConditions: LeaderCondition | undefined = newLeader.leaderConditions;
+
+    // If the new leader has no leaderConditions, it cannot join existing leaders
+    if (!leaderConditions) {
+        return {
+            canAttach: false,
+            wouldReplace: true,
+            reason: `${newLeader.name} cannot join a unit that already has a leader attached`,
+        };
+    }
+
+    // If allowsAnyExistingLeader is true, can always join
+    if (leaderConditions.allowsAnyExistingLeader) {
+        return { canAttach: true };
+    }
+
+    // Check if any existing leader has keywords matching allowedExistingLeaderKeywords
+    if (leaderConditions.allowedExistingLeaderKeywords && leaderConditions.allowedExistingLeaderKeywords.length > 0) {
+        const allowedKeywords = leaderConditions.allowedExistingLeaderKeywords.map((k) => k.toUpperCase());
+
+        // Check each existing leader
+        for (const existingLeader of existingLeaders) {
+            // Keywords can be either strings or objects with a 'keyword' property
+            const existingKeywords: string[] = (existingLeader.keywords || [])
+                .map((k: string | { keyword: string }) => {
+                    if (typeof k === "string") {
+                        return k.toUpperCase();
+                    } else if (k && typeof k === "object" && "keyword" in k) {
+                        return (k.keyword || "").toUpperCase();
+                    }
+                    return "";
+                })
+                .filter((k: string) => k.length > 0);
+
+            // Check if any of the existing leader's keywords match the allowed keywords
+            const hasMatchingKeyword = allowedKeywords.some((allowed) => existingKeywords.some((existing) => existing.includes(allowed) || allowed.includes(existing)));
+
+            if (hasMatchingKeyword) {
+                return { canAttach: true };
+            }
+        }
+
+        // No matching keywords found
+        return {
+            canAttach: false,
+            wouldReplace: true,
+            reason: `${newLeader.name} can only join if the existing leader has ${allowedKeywords.join(" or ")} keyword`,
+        };
+    }
+
+    // No conditions allow joining
+    return {
+        canAttach: false,
+        wouldReplace: true,
+        reason: `${newLeader.name} cannot join a unit that already has a leader attached`,
+    };
+}
 
 const STORAGE_KEY = "battle-cogitator-army-lists";
 
@@ -83,9 +172,10 @@ interface ListManagerContextType {
     updateListItem: (list: ArmyList, itemId: string, updates: Partial<ArmyListItem>) => ArmyList;
 
     // Attachment operations
-    attachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string) => ArmyList;
+    attachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace?: boolean) => ArmyList;
     detachLeaderFromUnit: (list: ArmyList, leaderItemId: string) => ArmyList;
     attachEnhancementToLeader: (list: ArmyList, leaderItemId: string, enhancement: { id: string; name: string; cost?: number }) => ArmyList;
+    canAttachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string) => MultiLeaderValidationResult;
 
     // Helper functions
     calculateItemPoints: (item: ArmyListItem) => number;
@@ -115,17 +205,53 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     const factions = useMemo(() => getAllFactions(), []);
 
-    // Load lists from localStorage on mount
+    // Load lists from localStorage on mount (with migrations)
     useEffect(() => {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            try {
-                setLists(JSON.parse(stored));
-            } catch (error) {
-                console.error("Error loading lists:", error);
+        async function loadAndMigrateLists() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                try {
+                    const parsedLists = JSON.parse(stored);
+
+                    // Migrate lists with async datasheet refresh
+                    const migratedLists = await Promise.all(
+                        parsedLists.map(async (list: ArmyList) => {
+                            const migratedItems = await Promise.all(
+                                list.items.map(async (item: ArmyListItem) => {
+                                    let migratedItem = { ...item };
+
+                                    // Migration 1: Convert leadBy from object to array format
+                                    if (migratedItem.leadBy && !Array.isArray(migratedItem.leadBy)) {
+                                        migratedItem.leadBy = [migratedItem.leadBy as unknown as LeaderReference];
+                                    }
+
+                                    // Always refresh leaderConditions from source datasheet
+                                    // This ensures data stays in sync if datasheet files are updated
+                                    try {
+                                        const freshDatasheet = await loadDatasheetData(list.factionSlug, migratedItem.id);
+                                        if (freshDatasheet) {
+                                            migratedItem.leaderConditions = freshDatasheet.leaderConditions;
+                                        }
+                                    } catch (err) {
+                                        console.warn(`Failed to refresh datasheet ${migratedItem.id}:`, err);
+                                    }
+
+                                    return migratedItem;
+                                })
+                            );
+                            return { ...list, items: migratedItems };
+                        })
+                    );
+
+                    setLists(migratedLists);
+                } catch (error) {
+                    console.error("Error loading lists:", error);
+                }
             }
+            setListsLoaded(true);
         }
-        setListsLoaded(true);
+
+        loadAndMigrateLists();
     }, []);
 
     // Save lists to localStorage whenever they change (only after initial load)
@@ -280,14 +406,21 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         if (!itemToRemove) return list;
 
         let updatedItems = list.items.map((item) => {
+            // If removed item was a leader, remove it from the target unit's leadBy array
             if (itemToRemove.leading) {
                 if (item.id === itemToRemove.leading.id && item.name === itemToRemove.leading.name) {
-                    const { leadBy, ...rest } = item;
-                    return rest;
+                    const newLeadBy = (item.leadBy || []).filter((l) => !(l.id === itemToRemove.id && l.name === itemToRemove.name));
+                    if (newLeadBy.length === 0) {
+                        const { leadBy, ...rest } = item;
+                        return rest;
+                    }
+                    return { ...item, leadBy: newLeadBy };
                 }
             }
-            if (itemToRemove.leadBy) {
-                if (item.id === itemToRemove.leadBy.id && item.name === itemToRemove.leadBy.name) {
+            // If removed item had leaders attached, remove leading from those leaders
+            if (itemToRemove.leadBy && itemToRemove.leadBy.length > 0) {
+                const isLeaderOfRemovedItem = itemToRemove.leadBy.some((l) => l.id === item.id && l.name === item.name);
+                if (isLeaderOfRemovedItem) {
                     const { leading, ...rest } = item;
                     return rest;
                 }
@@ -309,29 +442,84 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         return updatedList;
     }, []);
 
-    const attachLeaderToUnit = useCallback((list: ArmyList, leaderItemId: string, targetUnitItemId: string): ArmyList => {
+    // Validate if a leader can attach to a unit (considering existing leaders)
+    const canAttachLeaderToUnit = useCallback((list: ArmyList, leaderItemId: string, targetUnitItemId: string): MultiLeaderValidationResult => {
+        const leaderItem = list.items.find((item) => item.listItemId === leaderItemId);
+        const targetUnitItem = list.items.find((item) => item.listItemId === targetUnitItemId);
+
+        if (!leaderItem || !targetUnitItem) {
+            return { canAttach: false, reason: "Leader or target unit not found" };
+        }
+
+        // Get existing leaders attached to the target unit
+        const existingLeaderRefs = targetUnitItem.leadBy || [];
+        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.id === ref.id && item.name === ref.name)).filter((item): item is ArmyListItem => item !== undefined);
+
+        return validateMultiLeaderAttachment(leaderItem, existingLeaders);
+    }, []);
+
+    const attachLeaderToUnit = useCallback((list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace: boolean = false): ArmyList => {
         const leaderItem = list.items.find((item) => item.listItemId === leaderItemId);
         const targetUnitItem = list.items.find((item) => item.listItemId === targetUnitItemId);
         if (!leaderItem || !targetUnitItem) return list;
 
+        // Get existing leaders attached to the target unit
+        const existingLeaderRefs = targetUnitItem.leadBy || [];
+        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.id === ref.id && item.name === ref.name)).filter((item): item is ArmyListItem => item !== undefined);
+
+        // Validate multi-leader attachment
+        const validation = validateMultiLeaderAttachment(leaderItem, existingLeaders);
+
+        // If can't attach as additional leader, determine whether to replace or reject
+        const shouldReplace = !validation.canAttach && (forceReplace || validation.wouldReplace);
+
+        // Find previous target if this leader was already attached somewhere
         const previousTargetItem = leaderItem.leading ? list.items.find((item) => item.id === leaderItem.leading?.id && item.name === leaderItem.leading?.name) : null;
 
         const updatedItems = list.items.map((item) => {
+            // Update the leader with new target
             if (item.listItemId === leaderItemId) {
                 const { leading, ...rest } = item;
                 return { ...rest, leading: { id: targetUnitItem.id, name: targetUnitItem.name } };
             }
+            // Update target unit's leadBy array
             if (item.listItemId === targetUnitItemId) {
-                const { leadBy, ...rest } = item;
-                return { ...rest, leadBy: { id: leaderItem.id, name: leaderItem.name } };
+                // Check if this leader is already in the array (shouldn't happen, but safety check)
+                const alreadyAttached = existingLeaderRefs.some((l) => l.id === leaderItem.id && l.name === leaderItem.name);
+                if (alreadyAttached) {
+                    return item;
+                }
+
+                if (shouldReplace && existingLeaders.length > 0) {
+                    // Replace existing leaders - clear leadBy and add only the new leader
+                    return { ...item, leadBy: [{ id: leaderItem.id, name: leaderItem.name }] };
+                } else {
+                    // Add to existing leaders
+                    return { ...item, leadBy: [...existingLeaderRefs, { id: leaderItem.id, name: leaderItem.name }] };
+                }
             }
+            // Remove leader from previous target's leadBy array
             if (previousTargetItem && item.listItemId === previousTargetItem.listItemId) {
-                const { leadBy, ...rest } = item;
+                const newLeadBy = (item.leadBy || []).filter((l) => !(l.id === leaderItem.id && l.name === leaderItem.name));
+                if (newLeadBy.length === 0) {
+                    const { leadBy, ...rest } = item;
+                    return rest;
+                }
+                return { ...item, leadBy: newLeadBy };
+            }
+            // If replacing, remove leading from the old leaders that are being replaced
+            if (shouldReplace && existingLeaders.some((el) => el.listItemId === item.listItemId)) {
+                const { leading, ...rest } = item;
                 return rest;
             }
-            if (item.leadBy?.id === leaderItem.id && item.listItemId !== targetUnitItemId) {
-                const { leadBy, ...rest } = item;
-                return rest;
+            // Remove this leader from any other unit's leadBy array (shouldn't happen, but safety)
+            if (item.leadBy?.some((l) => l.id === leaderItem.id && l.name === leaderItem.name) && item.listItemId !== targetUnitItemId) {
+                const newLeadBy = item.leadBy.filter((l) => !(l.id === leaderItem.id && l.name === leaderItem.name));
+                if (newLeadBy.length === 0) {
+                    const { leadBy, ...rest } = item;
+                    return rest;
+                }
+                return { ...item, leadBy: newLeadBy };
             }
             return item;
         });
@@ -348,13 +536,19 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         const targetUnitItem = list.items.find((item) => item.id === leaderItem.leading?.id && item.name === leaderItem.leading?.name);
 
         const updatedItems = list.items.map((item) => {
+            // Remove leading from the leader
             if (item.listItemId === leaderItemId) {
                 const { leading, ...rest } = item;
                 return rest;
             }
+            // Remove this specific leader from the target unit's leadBy array
             if (targetUnitItem && item.listItemId === targetUnitItem.listItemId) {
-                const { leadBy, ...rest } = item;
-                return rest;
+                const newLeadBy = (item.leadBy || []).filter((l) => !(l.id === leaderItem.id && l.name === leaderItem.name));
+                if (newLeadBy.length === 0) {
+                    const { leadBy, ...rest } = item;
+                    return rest;
+                }
+                return { ...item, leadBy: newLeadBy };
             }
             return item;
         });
@@ -397,6 +591,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         attachLeaderToUnit,
         detachLeaderFromUnit,
         attachEnhancementToLeader,
+        canAttachLeaderToUnit,
         calculateItemPoints,
         calculateTotalModels,
         parseLoadoutWeapons,

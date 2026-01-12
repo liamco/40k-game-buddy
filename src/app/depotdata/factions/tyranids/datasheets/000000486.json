@@ -33,17 +33,7 @@
       "legend": "Some aircraft can use vectored thrusters or anti-grav technology to hover over the battlefield, the better to hunt their prey or deploy embarked troops.",
       "factionId": "",
       "description": "<div class=\"Corner33 abWrap BreakInsideAvoid\"><div class=\"abFlex\"><div class=\"abDiamondWrap\"><div class=\"abDiamond\"><div class=\"abIcon\"></div></div></div><div class=\"abLine\"></div><div class=\"abNameWrap\"></div></div><p class=\"ShowFluff stratLegend2\">Some aircraft can use vectored thrusters or anti-grav technology to hover over the battlefield, the better to hunt their prey or deploy embarked troops.</p>Some <span class=\"kwb\">AIRCRAFT</span> models have ‘Hover’ listed in their abilities. When you are instructed to Declare Battle Formations, before doing anything else, you must first declare which models from your army with this ability will be in Hover mode.<br><br>If a model is in Hover mode, then until the end of the battle, its Move characteristic is changed to 20\", it loses the <span class=\"kwb\">AIRCRAFT</span> keyword and it loses all associated rules for being an <span class=\"kwb\">AIRCRAFT</span> model. Models in Hover mode do not start the battle in Reserves, but you can choose to place them into Strategic Reserves following the normal rules if you wish.</div>",
-      "type": "Core",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "HOVER"
-          ],
-          "value": true
-        }
-      ]
+      "type": "Core"
     },
     {
       "id": "",
@@ -290,5 +280,14 @@
   "isLegends": false,
   "factionAbilityIds": [
     705
+  ],
+  "damagedThreshold": 4,
+  "damagedMechanics": [
+    {
+      "entity": "thisModel",
+      "effect": "rollPenalty",
+      "attribute": "h",
+      "value": 1
+    }
   ]
 }

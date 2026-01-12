@@ -1,14 +1,15 @@
 /**
- * Apply Core Abilities Script
+ * Clean Core Abilities Script
  *
- * Applies pre-defined mechanics from core-abilities.json to existing datasheets.
- * This allows updating datasheets with core ability mechanics without calling OpenAI.
+ * Removes embedded mechanics from abilities that are defined in core-abilities.json.
+ * Since the game engine now looks up core abilities at runtime, we don't need
+ * duplicated mechanics in every datasheet.
  *
  * Usage:
- *   npm run apply-core-abilities
+ *   node scripts/clean-core-abilities.js
  *
  *   Or with options:
- *     DRY_RUN=true npm run apply-core-abilities  # Preview changes without writing files
+ *     DRY_RUN=true node scripts/clean-core-abilities.js  # Preview changes without writing files
  */
 
 import fs from "fs";
@@ -39,45 +40,17 @@ if (fs.existsSync(coreAbilitiesPath)) {
 }
 
 /**
- * Gets pre-defined mechanics for a core ability if available.
- * @param {string} abilityName - The ability name to look up
- * @param {*} parameter - The ability's parameter value (for parameterized abilities)
- * @returns {Array|null} - Array of mechanics or null if not a core ability
+ * Checks if an ability is a core ability
+ * @param {string} abilityName - The ability name to check
+ * @returns {boolean} - True if this is a core ability
  */
-function getCoreAbilityMechanics(abilityName, parameter) {
+function isCoreAbility(abilityName) {
     const normalizedName = abilityName?.toUpperCase()?.trim();
-    const coreAbility = CORE_ABILITIES[normalizedName];
-
-    if (!coreAbility) {
-        return null;
-    }
-
-    if (coreAbility.type === "static") {
-        // Static abilities use mechanics as-is
-        return JSON.parse(JSON.stringify(coreAbility.mechanics));
-    }
-
-    if (coreAbility.type === "parameterized") {
-        if (parameter === undefined || parameter === null || parameter === "none") {
-            // Parameterized ability without a parameter - skip
-            return null;
-        }
-
-        // Deep clone and substitute {parameter} placeholder
-        const mechanics = JSON.parse(JSON.stringify(coreAbility.mechanics));
-        for (const mechanic of mechanics) {
-            if (mechanic.value === "{parameter}") {
-                mechanic.value = parameter;
-            }
-        }
-        return mechanics;
-    }
-
-    return null;
+    return normalizedName in CORE_ABILITIES;
 }
 
 /**
- * Processes abilities array and applies core ability mechanics
+ * Processes abilities array and removes mechanics from core abilities
  * @param {Array} abilities - Array of ability objects
  * @param {boolean} dryRun - If true, don't modify the abilities, just count
  * @returns {object} - Stats about what was processed
@@ -85,9 +58,9 @@ function getCoreAbilityMechanics(abilityName, parameter) {
 function processAbilities(abilities, dryRun = false) {
     const stats = {
         total: 0,
-        alreadyHasMechanics: 0,
-        appliedCore: 0,
-        notCore: 0,
+        removedMechanics: 0,
+        keptMechanics: 0,
+        noMechanics: 0,
     };
 
     if (!Array.isArray(abilities)) {
@@ -97,22 +70,20 @@ function processAbilities(abilities, dryRun = false) {
     for (const ability of abilities) {
         stats.total++;
 
-        // Skip if already has mechanics
-        if (ability.mechanics && Array.isArray(ability.mechanics) && ability.mechanics.length > 0) {
-            stats.alreadyHasMechanics++;
+        const hasMechanics = ability.mechanics && Array.isArray(ability.mechanics) && ability.mechanics.length > 0;
+
+        if (!hasMechanics) {
+            stats.noMechanics++;
             continue;
         }
 
-        // Try to get core ability mechanics
-        const coreMechanics = getCoreAbilityMechanics(ability.name, ability.parameter);
-
-        if (coreMechanics) {
-            stats.appliedCore++;
+        if (isCoreAbility(ability.name)) {
+            stats.removedMechanics++;
             if (!dryRun) {
-                ability.mechanics = coreMechanics;
+                delete ability.mechanics;
             }
         } else {
-            stats.notCore++;
+            stats.keptMechanics++;
         }
     }
 
@@ -127,7 +98,7 @@ function processAbilities(abilities, dryRun = false) {
  */
 function processJsonFile(filePath, dryRun = false) {
     const stats = {
-        abilities: { total: 0, alreadyHasMechanics: 0, appliedCore: 0, notCore: 0 },
+        abilities: { total: 0, removedMechanics: 0, keptMechanics: 0, noMechanics: 0 },
         modified: false,
     };
 
@@ -139,11 +110,11 @@ function processJsonFile(filePath, dryRun = false) {
         if (data.abilities && Array.isArray(data.abilities)) {
             const abilityStats = processAbilities(data.abilities, dryRun);
             stats.abilities.total += abilityStats.total;
-            stats.abilities.alreadyHasMechanics += abilityStats.alreadyHasMechanics;
-            stats.abilities.appliedCore += abilityStats.appliedCore;
-            stats.abilities.notCore += abilityStats.notCore;
+            stats.abilities.removedMechanics += abilityStats.removedMechanics;
+            stats.abilities.keptMechanics += abilityStats.keptMechanics;
+            stats.abilities.noMechanics += abilityStats.noMechanics;
 
-            if (abilityStats.appliedCore > 0) {
+            if (abilityStats.removedMechanics > 0) {
                 stats.modified = true;
             }
         }
@@ -173,7 +144,7 @@ async function main() {
 
     const dryRun = process.env.DRY_RUN === "true";
 
-    console.log("\n🔧 Apply Core Abilities Script");
+    console.log("\n🧹 Clean Core Abilities Script");
     console.log("═".repeat(50));
     console.log(`📁 Data path: ${depotdataPath}`);
     console.log(`🧪 Dry run: ${dryRun ? "YES (no files will be modified)" : "NO"}`);
@@ -207,10 +178,8 @@ async function main() {
     const totals = {
         files: jsonFiles.length,
         filesModified: 0,
-        abilities: { total: 0, alreadyHasMechanics: 0, appliedCore: 0, notCore: 0 },
+        abilities: { total: 0, removedMechanics: 0, keptMechanics: 0, noMechanics: 0 },
     };
-
-    const appliedByAbility = {};
 
     for (const jsonFile of jsonFiles) {
         const stats = processJsonFile(jsonFile, dryRun);
@@ -218,13 +187,13 @@ async function main() {
         if (stats.modified) {
             totals.filesModified++;
             const relativePath = path.relative(depotdataPath, jsonFile);
-            console.log(`✅ ${dryRun ? "[DRY RUN] Would update" : "Updated"}: ${relativePath}`);
+            console.log(`✅ ${dryRun ? "[DRY RUN] Would clean" : "Cleaned"}: ${relativePath}`);
         }
 
         totals.abilities.total += stats.abilities.total;
-        totals.abilities.alreadyHasMechanics += stats.abilities.alreadyHasMechanics;
-        totals.abilities.appliedCore += stats.abilities.appliedCore;
-        totals.abilities.notCore += stats.abilities.notCore;
+        totals.abilities.removedMechanics += stats.abilities.removedMechanics;
+        totals.abilities.keptMechanics += stats.abilities.keptMechanics;
+        totals.abilities.noMechanics += stats.abilities.noMechanics;
     }
 
     // Summary
@@ -234,9 +203,9 @@ async function main() {
     console.log(`   📝 Files ${dryRun ? "that would be" : ""} modified: ${totals.filesModified}`);
     console.log("");
     console.log(`   📋 Abilities processed: ${totals.abilities.total}`);
-    console.log(`   ⏭️  Already had mechanics: ${totals.abilities.alreadyHasMechanics}`);
-    console.log(`   ✅ Core mechanics applied: ${totals.abilities.appliedCore}`);
-    console.log(`   ❓ Not core abilities: ${totals.abilities.notCore}`);
+    console.log(`   🗑️  Core ability mechanics removed: ${totals.abilities.removedMechanics}`);
+    console.log(`   ✅ Non-core mechanics kept: ${totals.abilities.keptMechanics}`);
+    console.log(`   ➖ No mechanics to remove: ${totals.abilities.noMechanics}`);
     console.log("═".repeat(50));
 
     if (dryRun && totals.filesModified > 0) {

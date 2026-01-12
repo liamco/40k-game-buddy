@@ -118,74 +118,63 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     }, [selectedList]);
 
     // Combine leaders with their attached units into single items
+    // Supports multiple leaders attached to a single bodyguard unit
     const combinedListItems = useMemo(() => {
         if (!selectedList) return [];
 
         const items = selectedList.items;
         const processed = new Set<string>();
-        const combined: Array<{ item: ArmyListItem; displayName: string; isCombined: boolean }> = [];
+        const combined: Array<{ item: ArmyListItem; displayName: string; isCombined: boolean; allLeaders: ArmyListItem[]; bodyguardUnit?: ArmyListItem }> = [];
 
-        // First pass: Process all leaders and their attached units
+        // First pass: Find bodyguard units with leaders attached
         items.forEach((item) => {
-            // Skip if already processed
             if (processed.has(item.listItemId)) return;
 
-            // If this is a leader with an attached unit
-            if (item.leading) {
-                // Find the attached unit (without checking processed, since we process leaders first)
-                const attachedUnit = items.find((u) => u.id === item.leading?.id && u.name === item.leading?.name);
+            // Check if this unit has leaders attached (leadBy array)
+            if (item.leadBy && item.leadBy.length > 0) {
+                // Find all leaders for this unit
+                const leaders = item.leadBy.map((ref) => items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processed.has(l.listItemId));
 
-                if (attachedUnit && !processed.has(attachedUnit.listItemId)) {
-                    // Combine leader and attached unit
+                if (leaders.length > 0) {
+                    // Build display name with all leaders + bodyguard
+                    const leaderNames = leaders.map((l) => l.name).join(" + ");
                     combined.push({
-                        item: item, // Use leader as the main item
-                        displayName: `${item.name} + ${attachedUnit.name}`,
+                        item: leaders[0], // Use first leader as the main item for selection
+                        displayName: `${leaderNames} + ${item.name}`,
                         isCombined: true,
+                        allLeaders: leaders,
+                        bodyguardUnit: item,
                     });
-                    processed.add(item.listItemId);
-                    processed.add(attachedUnit.listItemId);
-                } else {
-                    // Leader but attached unit not found or already processed, show leader alone
-                    combined.push({
-                        item: item,
-                        displayName: item.name,
-                        isCombined: false,
-                    });
+                    leaders.forEach((l) => processed.add(l.listItemId));
                     processed.add(item.listItemId);
                 }
             }
         });
 
-        // Second pass: Process remaining items (units being led, regular units)
+        // Second pass: Add leaders without matching bodyguard units
         items.forEach((item) => {
-            // Skip if already processed
             if (processed.has(item.listItemId)) return;
 
-            // If this unit is being led, skip it (it should have been added with its leader in first pass)
-            if (item.leadBy) {
-                // Check if the leader exists
-                const leader = items.find((l) => l.id === item.leadBy?.id && l.name === item.leadBy?.name);
-
-                if (!leader || !processed.has(leader.listItemId)) {
-                    // Leader not found or not processed, show this unit alone
-                    combined.push({
-                        item: item,
-                        displayName: item.name,
-                        isCombined: false,
-                    });
-                    processed.add(item.listItemId);
-                } else {
-                    // Leader was processed, this unit should have been added with it
-                    // Mark as processed to skip it
-                    processed.add(item.listItemId);
-                }
-            }
-            // Regular unit, not a leader and not being led
-            else {
+            if (item.leading) {
+                // Leader is attached but bodyguard wasn't found in first pass
                 combined.push({
                     item: item,
                     displayName: item.name,
                     isCombined: false,
+                    allLeaders: [],
+                });
+                processed.add(item.listItemId);
+            }
+        });
+
+        // Third pass: Add remaining unprocessed items (regular units)
+        items.forEach((item) => {
+            if (!processed.has(item.listItemId)) {
+                combined.push({
+                    item: item,
+                    displayName: item.name,
+                    isCombined: false,
+                    allLeaders: [],
                 });
                 processed.add(item.listItemId);
             }
@@ -195,7 +184,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     }, [selectedList]);
 
     // Convert combined items to dropdown options
-    const unitOptions = useMemo((): SearchableDropdownOption<{ item: ArmyListItem; displayName: string; isCombined: boolean }>[] => {
+    const unitOptions = useMemo((): SearchableDropdownOption<{ item: ArmyListItem; displayName: string; isCombined: boolean; allLeaders: ArmyListItem[]; bodyguardUnit?: ArmyListItem }>[] => {
         return combinedListItems.map((combined) => ({
             id: combined.item.listItemId,
             searchValue: `${combined.displayName} ${combined.item.roleLabel}`,
@@ -237,7 +226,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         });
     };
 
-    // Get combined wargear from leader and attached unit if combined unit is selected
+    // Get combined wargear from all leaders and attached unit if combined unit is selected
     const availableWargear = useMemo(() => {
         if (!unit || !selectedList) return unit?.wargear || [];
 
@@ -250,53 +239,62 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         // Use fresh unit if found, otherwise fall back to unit prop
         const currentUnit = freshUnit || unit;
 
-        // Check if this is a combined unit (leader with attached unit)
+        // Check if this is a combined unit (leaders with attached bodyguard)
         const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
-        if (combinedItem?.isCombined && combinedItem.item.leading) {
-            // Find the attached unit (fresh from selectedList)
-            const attachedUnit = selectedList.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
+        if (combinedItem?.isCombined && combinedItem.allLeaders.length > 0 && combinedItem.bodyguardUnit) {
+            const allWargear: Array<Weapon & { sourceUnit?: string }> = [];
 
-            // Get fresh leader from selectedList
-            const freshLeader = selectedList.items.find((item) => item.listItemId === combinedItem.item.listItemId);
-            const leaderUnit = freshLeader || combinedItem.item;
-
-            if (attachedUnit) {
-                // Filter and combine wargear from both units with source unit labels
-                const leaderFiltered = filterUnitWargear(leaderUnit, leaderUnit.wargear || []);
-                const attachedFiltered = filterUnitWargear(attachedUnit, attachedUnit.wargear || []);
-
-                const leaderWargear = leaderFiltered.map((weapon) => ({
-                    ...weapon,
-                    sourceUnit: leaderUnit.name,
-                }));
-                const attachedWargear = attachedFiltered.map((weapon) => ({
-                    ...weapon,
-                    sourceUnit: attachedUnit.name,
-                }));
-                return [...leaderWargear, ...attachedWargear];
+            // Add wargear from all leaders
+            for (const leader of combinedItem.allLeaders) {
+                const freshLeader = selectedList.items.find((item) => item.listItemId === leader.listItemId) || leader;
+                const leaderFiltered = filterUnitWargear(freshLeader, freshLeader.wargear || []);
+                allWargear.push(...leaderFiltered.map((weapon) => ({ ...weapon, sourceUnit: freshLeader.name })));
             }
+
+            // Add wargear from bodyguard unit
+            const freshBodyguard = selectedList.items.find((item) => item.listItemId === combinedItem.bodyguardUnit!.listItemId) || combinedItem.bodyguardUnit;
+            const bodyguardFiltered = filterUnitWargear(freshBodyguard, freshBodyguard.wargear || []);
+            allWargear.push(...bodyguardFiltered.map((weapon) => ({ ...weapon, sourceUnit: freshBodyguard.name })));
+
+            return allWargear;
         }
 
         // Single unit: filter based on loadout and selections
         return filterUnitWargear(currentUnit as ArmyListItem, currentUnit.wargear || []);
     }, [unit, selectedList, combinedListItems]);
 
+    // Get all attached leaders as an array for the current combined unit
+    const attachedLeaders = useMemo((): Datasheet[] => {
+        if (!unit || !selectedList) return attachedUnit ? [attachedUnit] : [];
+
+        const listItemId = (unit as ArmyListItem).listItemId;
+        const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
+
+        if (combinedItem?.isCombined && combinedItem.allLeaders.length > 0) {
+            // Return all leader datasheets
+            return combinedItem.allLeaders.map((leader) => selectedList.items.find((item) => item.listItemId === leader.listItemId) || leader);
+        }
+
+        // Fallback to single attachedUnit for backwards compatibility
+        return attachedUnit ? [attachedUnit] : [];
+    }, [unit, attachedUnit, selectedList, combinedListItems]);
+
     // Collect combat bonuses from leader abilities when a combined unit is selected
     const leaderCombatBonuses = useMemo(() => {
-        if (!unit || !attachedUnit) {
+        if (!unit || attachedLeaders.length === 0) {
             return { hitBonuses: [], woundBonuses: [], otherBonuses: [] };
         }
 
-        // Create a unit context to collect abilities
+        // Create a unit context to collect abilities from all leaders
         const unitContext: UnitContext = {
             datasheet: unit,
             selectedModel: unit.models?.[0],
             state: createDefaultCombatStatus(),
-            attachedLeader: attachedUnit,
+            attachedLeaders: attachedLeaders,
         };
 
-        // Collect all mechanics from the unit and attached leader
+        // Collect all mechanics from the unit and all attached leaders
         const mechanics = collectUnitAbilities(unitContext, "attacker");
 
         // Filter to only combat-relevant roll bonuses that apply when leading
@@ -308,60 +306,68 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         });
 
         return extractCombatBonuses(leaderMechanics);
-    }, [unit, attachedUnit]);
+    }, [unit, attachedLeaders]);
 
-    // Get enhancement details from the leader
-    const leaderEnhancement = useMemo((): Enhancement | null => {
-        if (!selectedList || !factionData || !unit) return null;
+    // Get enhancement details from all attached leaders
+    const leaderEnhancements = useMemo((): Enhancement[] => {
+        if (!selectedList || !factionData || !unit) return [];
 
-        // Find the leader in the selected list
-        // First try by listItemId if available
         const listItemId = (unit as ArmyListItem)?.listItemId;
-        let leaderItem: ArmyListItem | undefined;
+        const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
-        if (listItemId) {
-            leaderItem = selectedList.items.find((item) => item.listItemId === listItemId);
-        }
+        // Get all leaders to check for enhancements
+        const leadersToCheck: ArmyListItem[] = [];
 
-        // Fallback: find by matching the combined unit display name pattern
-        if (!leaderItem) {
-            // Check combinedListItems to find the leader
-            const combinedItem = combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
-            if (combinedItem) {
-                leaderItem = combinedItem.item;
-            } else {
-                // Try to find any item with matching id that has an enhancement
-                leaderItem = selectedList.items.find((item) => item.id === unit.id && item.enhancement);
+        if (combinedItem?.isCombined && combinedItem.allLeaders.length > 0) {
+            // Multi-leader case: check all leaders
+            for (const leader of combinedItem.allLeaders) {
+                const freshLeader = selectedList.items.find((item) => item.listItemId === leader.listItemId);
+                if (freshLeader) {
+                    leadersToCheck.push(freshLeader);
+                }
+            }
+        } else {
+            // Single leader case: check the main item
+            const leaderItem = listItemId ? selectedList.items.find((item) => item.listItemId === listItemId) : selectedList.items.find((item) => item.id === unit.id && item.enhancement);
+            if (leaderItem) {
+                leadersToCheck.push(leaderItem);
             }
         }
 
-        if (!leaderItem?.enhancement) return null;
-
         // Find the detachment in faction data
         const detachment = factionData.detachments?.find((d: Detachment) => d.slug === selectedList.detachmentSlug);
-        if (!detachment?.enhancements) return null;
 
-        // Find the full enhancement details
-        const fullEnhancement = detachment.enhancements.find((e: Enhancement) => e.id === leaderItem!.enhancement?.id);
-        if (!fullEnhancement) {
-            // Return basic info if we can't find full details
-            return {
-                id: leaderItem.enhancement.id,
-                name: leaderItem.enhancement.name,
-                cost: leaderItem.enhancement.cost,
-            };
+        // Collect enhancements from all leaders
+        const enhancements: Enhancement[] = [];
+        for (const leaderItem of leadersToCheck) {
+            if (!leaderItem.enhancement) continue;
+
+            // Find the full enhancement details
+            const fullEnhancement = detachment?.enhancements?.find((e: Enhancement) => e.id === leaderItem.enhancement?.id);
+            if (fullEnhancement) {
+                enhancements.push(fullEnhancement);
+            } else {
+                // Return basic info if we can't find full details
+                enhancements.push({
+                    id: leaderItem.enhancement.id,
+                    name: leaderItem.enhancement.name,
+                    cost: leaderItem.enhancement.cost,
+                });
+            }
         }
 
-        return fullEnhancement;
+        return enhancements;
     }, [unit, selectedList, factionData, combinedListItems]);
 
     // Extract weapon bonus attributes from enhancement mechanics AND leader abilities
     const weaponBonusAttributes = useMemo((): BonusAttribute[] => {
         const bonuses: BonusAttribute[] = [];
 
-        // Extract from enhancement mechanics
-        if (leaderEnhancement?.mechanics) {
-            for (const mechanic of leaderEnhancement.mechanics) {
+        // Extract from all leader enhancement mechanics
+        for (const enhancement of leaderEnhancements) {
+            if (!enhancement.mechanics) continue;
+
+            for (const mechanic of enhancement.mechanics) {
                 // Only look at addsAbility effects that target thisUnit or thisModel
                 if (mechanic.effect !== "addsAbility" || !mechanic.abilities) continue;
                 if (mechanic.entity !== "thisUnit" && mechanic.entity !== "thisModel") continue;
@@ -372,27 +378,31 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                     const isWeaponAttribute = WEAPON_ABILITY_KEYWORDS.some((keyword) => upperAbility.startsWith(keyword) || upperAbility.includes(keyword));
 
                     if (isWeaponAttribute) {
-                        bonuses.push({
-                            name: ability,
-                            value: mechanic.value,
-                            source: leaderEnhancement.name,
-                        });
+                        // Avoid duplicates
+                        const alreadyExists = bonuses.some((b) => b.name.toUpperCase() === upperAbility);
+                        if (!alreadyExists) {
+                            bonuses.push({
+                                name: ability,
+                                value: mechanic.value,
+                                source: enhancement.name,
+                            });
+                        }
                     }
                 }
             }
         }
 
         // Extract from leader abilities when a combined unit is selected
-        if (unit && attachedUnit) {
-            // Create a unit context to collect abilities
+        if (unit && attachedLeaders.length > 0) {
+            // Create a unit context to collect abilities from all leaders
             const unitContext: UnitContext = {
                 datasheet: unit,
                 selectedModel: unit.models?.[0],
                 state: createDefaultCombatStatus(),
-                attachedLeader: attachedUnit,
+                attachedLeaders: attachedLeaders,
             };
 
-            // Collect all mechanics from the unit and attached leader
+            // Collect all mechanics from the unit and all attached leaders
             const mechanics = collectUnitAbilities(unitContext, "attacker");
 
             // Filter to only combat-relevant weapon attribute abilities that apply when leading
@@ -425,12 +435,10 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         }
 
         return bonuses;
-    }, [leaderEnhancement, unit, attachedUnit]);
+    }, [leaderEnhancements, unit, attachedLeaders]);
 
-    // Extract weapon stat bonuses from enhancement mechanics (e.g., +1 Strength)
+    // Extract weapon stat bonuses from all leader enhancement mechanics (e.g., +1 Strength)
     const weaponStatBonuses = useMemo((): StatBonus[] => {
-        if (!leaderEnhancement?.mechanics) return [];
-
         const bonuses: StatBonus[] = [];
 
         // Map mechanic attributes to weapon stat attributes
@@ -443,24 +451,28 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
             bsWs: "bsWs",
         };
 
-        for (const mechanic of leaderEnhancement.mechanics) {
-            // Look for rollBonus or staticNumber effects on weapon attributes
-            if (mechanic.effect !== "rollBonus" && mechanic.effect !== "staticNumber") continue;
-            if (mechanic.entity !== "thisUnit" && mechanic.entity !== "thisModel") continue;
-            if (!mechanic.attribute || typeof mechanic.value !== "number") continue;
+        for (const enhancement of leaderEnhancements) {
+            if (!enhancement.mechanics) continue;
 
-            const statAttr = weaponStatMap[mechanic.attribute];
-            if (statAttr) {
-                bonuses.push({
-                    attribute: statAttr,
-                    value: mechanic.value,
-                    source: leaderEnhancement.name,
-                });
+            for (const mechanic of enhancement.mechanics) {
+                // Look for rollBonus or staticNumber effects on weapon attributes
+                if (mechanic.effect !== "rollBonus" && mechanic.effect !== "staticNumber") continue;
+                if (mechanic.entity !== "thisUnit" && mechanic.entity !== "thisModel") continue;
+                if (!mechanic.attribute || typeof mechanic.value !== "number") continue;
+
+                const statAttr = weaponStatMap[mechanic.attribute];
+                if (statAttr) {
+                    bonuses.push({
+                        attribute: statAttr,
+                        value: mechanic.value,
+                        source: enhancement.name,
+                    });
+                }
             }
         }
 
         return bonuses;
-    }, [leaderEnhancement]);
+    }, [leaderEnhancements]);
 
     const handleUnitSelect = (combined: { item: ArmyListItem; displayName: string; isCombined: boolean }) => {
         onUnitChange(combined.item);
@@ -478,7 +490,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                     <div className="col-span-3 space-y-4">
                         <SplitHeading label="Select unit armament" />
                         {/* Display leader combat bonuses when a combined unit is selected */}
-                        {attachedUnit && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
+                        {attachedLeaders.length > 0 && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
                             <div className="bg-green-50 border border-green-200 rounded-[4px] p-3 space-y-2">
                                 <p className="text-[10px] font-bold text-green-800 uppercase">Leader Bonuses Active</p>
                                 <div className="flex flex-wrap gap-2">
@@ -502,8 +514,10 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                             </div>
                         )}
 
-                        {/* Display leader enhancement if present */}
-                        {leaderEnhancement && <EnhancementCard enhancement={leaderEnhancement} />}
+                        {/* Display all leader enhancements if present */}
+                        {leaderEnhancements.map((enhancement) => (
+                            <EnhancementCard key={enhancement.id} enhancement={enhancement} />
+                        ))}
 
                         {unit &&
                             availableWargear.length > 0 &&
@@ -515,49 +529,43 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                 const listItemId = (unit as any).listItemId;
                                 const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
 
-                                if (combinedItem?.isCombined && combinedItem.item.leading) {
-                                    // Find the attached unit to get its name
-                                    const attachedUnit = selectedList?.items.find((u) => u.id === combinedItem.item.leading?.id && u.name === combinedItem.item.leading?.name);
+                                if (combinedItem?.isCombined && combinedItem.allLeaders.length > 0 && combinedItem.bodyguardUnit) {
+                                    // Group weapons by source unit
+                                    const groupedWeapons = filteredWeapons.reduce(
+                                        (acc, weapon) => {
+                                            const source = weapon.sourceUnit || "default";
+                                            if (!acc[source]) {
+                                                acc[source] = [];
+                                            }
+                                            acc[source].push(weapon);
+                                            return acc;
+                                        },
+                                        {} as Record<string, Array<Weapon & { sourceUnit?: string }>>
+                                    );
 
-                                    if (attachedUnit) {
-                                        const leaderName = combinedItem.item.name;
-                                        const attachedName = attachedUnit.name;
+                                    // Order: all leaders first (in order), then bodyguard unit
+                                    const leaderNames = combinedItem.allLeaders.map((l) => l.name);
+                                    const bodyguardName = combinedItem.bodyguardUnit.name;
+                                    const orderedSources = [...leaderNames, bodyguardName].filter((source) => groupedWeapons[source] && groupedWeapons[source].length > 0);
 
-                                        // Group weapons by source unit
-                                        const groupedWeapons = filteredWeapons.reduce(
-                                            (acc, weapon) => {
-                                                const source = weapon.sourceUnit || "default";
-                                                if (!acc[source]) {
-                                                    acc[source] = [];
-                                                }
-                                                acc[source].push(weapon);
-                                                return acc;
-                                            },
-                                            {} as Record<string, Array<Weapon & { sourceUnit?: string }>>
-                                        );
-
-                                        // Order: leader first, then attached unit
-                                        const orderedSources = [leaderName, attachedName].filter((source) => groupedWeapons[source] && groupedWeapons[source].length > 0);
-
-                                        return (
-                                            <div className="space-y-2">
-                                                {orderedSources.map((source) => (
-                                                    <div key={source} className="space-y-2">
-                                                        <span>from {source}</span>
-                                                        {groupedWeapons[source].map((weapon) => (
-                                                            <Fragment key={weapon.name}>
-                                                                {weapon.profiles.map((profile: WeaponProfile) => {
-                                                                    const isSelected = selectedWeaponProfile?.name === profile.name;
-                                                                    const profileKey = `${source}-${weapon.name}-${profile.name}`;
-                                                                    return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={weaponStatBonuses} />;
-                                                                })}
-                                                            </Fragment>
-                                                        ))}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        );
-                                    }
+                                    return (
+                                        <div className="space-y-2">
+                                            {orderedSources.map((source) => (
+                                                <div key={source} className="space-y-2">
+                                                    <span>from {source}</span>
+                                                    {groupedWeapons[source].map((weapon) => (
+                                                        <Fragment key={weapon.name}>
+                                                            {weapon.profiles.map((profile: WeaponProfile) => {
+                                                                const isSelected = selectedWeaponProfile?.name === profile.name;
+                                                                const profileKey = `${source}-${weapon.name}-${profile.name}`;
+                                                                return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={weaponStatBonuses} />;
+                                                            })}
+                                                        </Fragment>
+                                                    ))}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    );
                                 }
 
                                 // Regular unit: show weapons without grouping

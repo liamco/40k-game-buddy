@@ -51,6 +51,25 @@ export interface Enhancement {
     mechanics?: any[];
 }
 
+// Leader attachment conditions extracted from leaderFooter text
+export interface LeaderCondition {
+    allowedExistingLeaderKeywords?: string[]; // Can attach if existing leader has one of these keywords
+    allowsAnyExistingLeader?: boolean; // Can attach alongside any existing leader
+    equipmentRequirements?: {
+        // Equipment restrictions for attaching to specific units
+        targetUnitKeywords: string[];
+        requiredEquipment: string;
+    }[];
+    maxOfThisType?: number; // Maximum count of this leader type per unit
+    mustAttach?: boolean; // Leader must be attached (cannot be standalone)
+}
+
+// Reference to a leader (used in leadBy array)
+export interface LeaderReference {
+    id: string;
+    name: string;
+}
+
 export interface ArmyList {
     id: string;
     name: string;
@@ -70,8 +89,8 @@ export type ArmyListItem = Datasheet & {
     quantity?: number;
     pointsCost?: number;
     compositionCounts?: { [line: number]: number }; // Store counts for each unitComposition line
-    leading?: { id: string; name: string }; // Unit this leader is attached to
-    leadBy?: { id: string; name: string }; // Leader that is attached to this unit
+    leading?: LeaderReference; // Unit this leader is attached to
+    leadBy?: LeaderReference[]; // Leaders attached to this unit (supports multiple)
     enhancement?: { id: string; name: string; cost?: number }; // Enhancement attached to this leader
     loadoutSelections?: { [optionLine: number]: number }; // Track loadout option selections (count per option)
 };
@@ -106,6 +125,7 @@ export interface Datasheet {
     path: string;
     isForgeWorld?: boolean;
     isLegends?: boolean;
+    leaderConditions?: LeaderCondition; // Conditions for multi-leader attachment
     [key: string]: any; // Allow for additional properties
 }
 

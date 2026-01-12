@@ -10,12 +10,13 @@ interface Props {
     isAttachedUnit: boolean;
     isGroupedWithPrev: boolean;
     isGroupedWithNext: boolean;
+    leaderCount?: number; // Number of leaders attached (if this is a bodyguard unit)
     calculateItemPoints: (item: ArmyListItem) => number;
     handleRemoveItem: (itemId: string) => void;
     setSelectedItem: (item: ArmyListItem) => void;
 }
 
-const ListItem = ({ calculateItemPoints, item, handleRemoveItem, setSelectedItem, isSelected, isGroupedWithPrev, isGroupedWithNext, isLeader, isAttachedUnit }: Props) => {
+const ListItem = ({ calculateItemPoints, item, handleRemoveItem, setSelectedItem, isSelected, isGroupedWithPrev, isGroupedWithNext, isLeader, isAttachedUnit, leaderCount }: Props) => {
     return (
         <div key={item.listItemId} className={`space-y-4 p-3 border rounded border-skarsnikGreen cursor-pointer transition-colors ${isSelected ? "bg-skarsnikGreen text-deathWorldForest" : " hover:bg-deathWorldForest"} ${isGroupedWithNext ? "mb-0 rounded-b-none border-b-0" : ""} ${isGroupedWithPrev ? "rounded-t-none" : ""}`} onClick={() => setSelectedItem(item)}>
             <div className="flex justify-between items-center">
@@ -45,7 +46,7 @@ const ListItem = ({ calculateItemPoints, item, handleRemoveItem, setSelectedItem
                 )}
                 {isAttachedUnit && (
                     <Badge variant="outline" className="text-xs bg-blue-100 border-blue-300 text-blue-700">
-                        Attached
+                        {leaderCount && leaderCount > 1 ? `${leaderCount} Leaders` : "Attached"}
                     </Badge>
                 )}
                 {item.enhancement && (
