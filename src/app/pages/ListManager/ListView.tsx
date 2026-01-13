@@ -20,6 +20,51 @@ import WeaponProfileCard from "../../components/WeaponProfileCard/WeaponProfileC
 import { useListManager, type MultiLeaderValidationResult } from "./ListManagerContext";
 import ListItem from "./ListItem";
 
+/**
+ * Parses option descriptions to extract linked weapon groups.
+ * E.g., "replaced with 1 auto boltstorm gauntlets and 1 fragstorm grenade launcher"
+ * Returns an array of weapon name arrays, where each inner array contains weapons that must be selected together.
+ */
+function parseLinkedWeapons(options: { description: string }[] | undefined): string[][] {
+    if (!options) return [];
+
+    const linkedGroups: string[][] = [];
+
+    for (const option of options) {
+        const text = option.description.replace(/<[^>]*>/g, " ").trim();
+
+        // Match patterns like "replaced with 1 X and 1 Y" or "replaced with X and Y"
+        const replacedWithMatch = text.match(/replaced with\s+(.+?)\.?$/i);
+        if (!replacedWithMatch) continue;
+
+        const replacementText = replacedWithMatch[1];
+
+        // Check if there's an "and" indicating multiple weapons
+        if (/ and /i.test(replacementText)) {
+            // Split by " and " to get individual weapons
+            const weaponParts = replacementText.split(/ and /i);
+
+            const weaponNames: string[] = [];
+            for (const part of weaponParts) {
+                // Remove quantity prefix like "1 " or "2 "
+                const cleanedName = part
+                    .replace(/^\d+\s+/, "")
+                    .trim()
+                    .toLowerCase();
+                if (cleanedName) {
+                    weaponNames.push(cleanedName);
+                }
+            }
+
+            if (weaponNames.length > 1) {
+                linkedGroups.push(weaponNames);
+            }
+        }
+    }
+
+    return linkedGroups;
+}
+
 export function ListView() {
     const { listId } = useParams<{ listId: string }>();
     const navigate = useNavigate();
@@ -346,11 +391,67 @@ export function ListView() {
         return { defaultWeapons, optionalWeapons, totalConstraint };
     }, [selectedItem, parseLoadoutWeapons, parseOptionConstraint, calculateTotalModels]);
 
-    // Calculate how many optional weapons are currently selected
+    // Create a mapping from weapon ID to its linked group (array of weapon IDs that must be selected together)
+    const linkedWeaponGroups = useMemo(() => {
+        if (!selectedItem?.options || !selectedItem?.wargear) {
+            return new Map<string, string[]>();
+        }
+
+        const linkedGroups = parseLinkedWeapons(selectedItem.options);
+        const weaponIdMap = new Map<string, string[]>();
+
+        for (const group of linkedGroups) {
+            // Find weapon IDs for each weapon name in the group
+            const groupWeaponIds: string[] = [];
+
+            for (const weaponName of group) {
+                const matchingWeapon = selectedItem.wargear.find((w) => {
+                    const wName = w.name.toLowerCase();
+                    return wName.includes(weaponName) || weaponName.includes(wName);
+                });
+                if (matchingWeapon) {
+                    groupWeaponIds.push(matchingWeapon.id);
+                }
+            }
+
+            // Only create linked group if we found multiple weapons
+            if (groupWeaponIds.length > 1) {
+                for (const weaponId of groupWeaponIds) {
+                    weaponIdMap.set(weaponId, groupWeaponIds);
+                }
+            }
+        }
+
+        return weaponIdMap;
+    }, [selectedItem?.options, selectedItem?.wargear]);
+
+    // Calculate how many optional weapon GROUPS are currently selected
+    // Linked weapons count as 1 selection, not multiple
     const selectedOptionalCount = useMemo(() => {
         if (!selectedItem?.loadoutSelections) return 0;
-        return Object.values(selectedItem.loadoutSelections).reduce((sum, count) => sum + count, 0);
-    }, [selectedItem]);
+
+        const countedGroups = new Set<string>();
+        let count = 0;
+
+        for (const [weaponId, selectionCount] of Object.entries(selectedItem.loadoutSelections)) {
+            if (selectionCount <= 0) continue;
+
+            const linkedGroup = linkedWeaponGroups.get(weaponId);
+            if (linkedGroup) {
+                // Create a unique key for this group (sorted IDs joined)
+                const groupKey = [...linkedGroup].sort().join(",");
+                if (!countedGroups.has(groupKey)) {
+                    countedGroups.add(groupKey);
+                    count += 1;
+                }
+            } else {
+                // Not part of a linked group, count individually
+                count += selectionCount;
+            }
+        }
+
+        return count;
+    }, [selectedItem?.loadoutSelections, linkedWeaponGroups]);
 
     const toggleWeaponSelection = (weaponId: string) => {
         if (!selectedList || !selectedItem) return;
@@ -359,16 +460,38 @@ export function ListView() {
         const currentCount = currentSelections[weaponId] || 0;
         const newCount = currentCount > 0 ? 0 : 1;
 
-        if (newCount > 0 && selectedOptionalCount >= categorizedWargear.totalConstraint) {
-            return;
-        }
+        // Check if this weapon is part of a linked group
+        const linkedGroup = linkedWeaponGroups.get(weaponId);
 
-        updateListItem(selectedList, selectedItem.listItemId, {
-            loadoutSelections: {
-                ...currentSelections,
-                [weaponId]: newCount,
-            },
-        });
+        if (linkedGroup) {
+            // Toggle all weapons in the linked group together
+            const newSelections = { ...currentSelections };
+
+            // Check if we're trying to select (not deselect)
+            if (newCount > 0 && selectedOptionalCount >= categorizedWargear.totalConstraint) {
+                return;
+            }
+
+            for (const linkedWeaponId of linkedGroup) {
+                newSelections[linkedWeaponId] = newCount;
+            }
+
+            updateListItem(selectedList, selectedItem.listItemId, {
+                loadoutSelections: newSelections,
+            });
+        } else {
+            // Original logic for non-linked weapons
+            if (newCount > 0 && selectedOptionalCount >= categorizedWargear.totalConstraint) {
+                return;
+            }
+
+            updateListItem(selectedList, selectedItem.listItemId, {
+                loadoutSelections: {
+                    ...currentSelections,
+                    [weaponId]: newCount,
+                },
+            });
+        }
     };
 
     if (!selectedList) {
@@ -797,12 +920,46 @@ export function ListView() {
                                                 </span>
                                             </h3>
                                             <div className="space-y-2">
-                                                {categorizedWargear.optionalWeapons.map((weapon, idx) => {
-                                                    const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
-                                                    const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+                                                {(() => {
+                                                    // Group weapons: linked weapons together, standalone weapons separate
+                                                    const processedGroups = new Set<string>();
+                                                    const weaponGroups: { weapons: typeof categorizedWargear.optionalWeapons; isLinked: boolean }[] = [];
 
-                                                    return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
-                                                })}
+                                                    for (const weapon of categorizedWargear.optionalWeapons) {
+                                                        const linkedGroup = linkedWeaponGroups.get(weapon.id);
+
+                                                        if (linkedGroup) {
+                                                            const groupKey = [...linkedGroup].sort().join(",");
+                                                            if (!processedGroups.has(groupKey)) {
+                                                                processedGroups.add(groupKey);
+                                                                // Find all weapons in this linked group
+                                                                const groupWeapons = categorizedWargear.optionalWeapons.filter((w) => linkedGroup.includes(w.id));
+                                                                weaponGroups.push({ weapons: groupWeapons, isLinked: true });
+                                                            }
+                                                        } else {
+                                                            weaponGroups.push({ weapons: [weapon], isLinked: false });
+                                                        }
+                                                    }
+
+                                                    return weaponGroups.map((group, groupIdx) => {
+                                                        const firstWeapon = group.weapons[0];
+                                                        const isSelected = (selectedItem?.loadoutSelections?.[firstWeapon.id] ?? 0) > 0;
+                                                        const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+
+                                                        if (group.isLinked) {
+                                                            // Render linked weapons in a grouped container
+                                                            return (
+                                                                <div key={`group-${groupIdx}`} className="border border-dashed border-skarsnikGreen rounded p-2 space-y-2">
+                                                                    <span className="text-xs text-muted-foreground">Linked loadout option</span>
+                                                                    {group.weapons.map((weapon, idx) => weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${groupIdx}-${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={idx === 0 && pIdx === 0} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />))}
+                                                                </div>
+                                                            );
+                                                        } else {
+                                                            // Render standalone weapon
+                                                            return firstWeapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${groupIdx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(firstWeapon.id)} canToggle={canSelect} />);
+                                                        }
+                                                    });
+                                                })()}
                                             </div>
                                         </div>
                                     )}

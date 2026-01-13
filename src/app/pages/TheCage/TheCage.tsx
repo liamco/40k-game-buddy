@@ -365,13 +365,15 @@ export const TheCage = () => {
 
     const changeAttackingUnit = async (unit: Datasheet) => {
         if (unit) {
-            // Cast to ArmyListItem to check for leader attachment
+            // Cast to ArmyListItem to check for leader attachment and loadout selections
             const listItem = unit as ArmyListItem;
 
             // Load the main unit data
             const data = await loadDatasheetData(unit.factionSlug, unit.id);
             if (data) {
-                setAttackingUnit(data);
+                // Preserve loadoutSelections from the list item so optional weapons are shown
+                const unitWithSelections = listItem.loadoutSelections ? { ...data, loadoutSelections: listItem.loadoutSelections, listItemId: listItem.listItemId } : { ...data, listItemId: listItem.listItemId };
+                setAttackingUnit(unitWithSelections);
 
                 // Check if this is a leader with an attached unit
                 let attachedListItem: ArmyListItem | null = null;
@@ -407,13 +409,15 @@ export const TheCage = () => {
 
     const changeDefendingUnit = async (unit: Datasheet) => {
         if (unit) {
-            // Cast to ArmyListItem to check for leader attachment
+            // Cast to ArmyListItem to check for leader attachment and loadout selections
             const listItem = unit as ArmyListItem;
 
             // Load the main unit data
             const data = await loadDatasheetData(unit.factionSlug, unit.id);
             if (data) {
-                setDefendingUnit(data);
+                // Preserve loadoutSelections from the list item so optional weapons are shown
+                const unitWithSelections = listItem.loadoutSelections ? { ...data, loadoutSelections: listItem.loadoutSelections, listItemId: listItem.listItemId } : { ...data, listItemId: listItem.listItemId };
+                setDefendingUnit(unitWithSelections);
 
                 // Check if this is a leader with an attached unit
                 let attachedListItem: ArmyListItem | null = null;
