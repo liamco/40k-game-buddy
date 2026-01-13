@@ -484,32 +484,30 @@ export function ListView() {
                     {selectedItem ? (
                         <Card>
                             <CardHeader className="space-y-2">
-                                <CardTitle className="flex justify-between">
+                                <header className="flex justify-between">
                                     <h3>{selectedItem.name}</h3>
                                     <Badge variant="outline">{calculatedPoints ?? selectedItem.modelCosts?.[0]?.cost ?? 0} pts</Badge>
-                                </CardTitle>
-                                <CardDescription>
-                                    {/* Keywords */}
-                                    {selectedItem.keywords && selectedItem.keywords.length > 0 && (
-                                        <div className="flex flex-wrap gap-2">
-                                            {selectedItem.keywords.map((keyword, idx) => (
-                                                <Badge key={idx} variant={keyword.isFactionKeyword === "true" ? "default" : "secondary"}>
-                                                    {keyword.keyword}
-                                                </Badge>
-                                            ))}
-                                        </div>
-                                    )}
-                                </CardDescription>
-                                <CardDescription>
-                                    {selectedItem.legend && (
-                                        <p
-                                            className="italic"
-                                            dangerouslySetInnerHTML={{
-                                                __html: selectedItem.legend,
-                                            }}
-                                        />
-                                    )}
-                                </CardDescription>
+                                </header>
+
+                                {/* Keywords */}
+                                {selectedItem.keywords && selectedItem.keywords.length > 0 && (
+                                    <div className="flex flex-wrap gap-2">
+                                        {selectedItem.keywords.map((keyword, idx) => (
+                                            <Badge key={idx} variant={keyword.isFactionKeyword === "true" ? "default" : "secondary"}>
+                                                {keyword.keyword}
+                                            </Badge>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {selectedItem.legend && (
+                                    <p
+                                        className="italic"
+                                        dangerouslySetInnerHTML={{
+                                            __html: selectedItem.legend,
+                                        }}
+                                    />
+                                )}
                             </CardHeader>
                             <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 pb-6">
                                 <div className="space-y-6">
@@ -560,69 +558,6 @@ export function ListView() {
                                                 <ModelProfileCard key={idx} model={model} />
                                             ))}
                                         </div>
-                                    )}
-
-                                    {/* Loadout */}
-                                    {selectedItem.loadout && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-blockcaps-l">Loadout</h3>
-                                            <p
-                                                dangerouslySetInnerHTML={{
-                                                    __html: selectedItem.loadout,
-                                                }}
-                                            />
-                                        </div>
-                                    )}
-
-                                    {/* Default Wargear */}
-                                    {categorizedWargear.defaultWeapons.length > 0 && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-blockcaps-l">Wargear</h3>
-                                            <div className="space-y-2">{categorizedWargear.defaultWeapons.map((weapon, idx) => weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} />))}</div>
-                                        </div>
-                                    )}
-
-                                    {/* Optional Wargear */}
-                                    {categorizedWargear.optionalWeapons.length > 0 && (
-                                        <div className="space-y-2">
-                                            <h3 className="flex justify-between">
-                                                <span className="text-blockcaps-l">Optional Wargear</span>
-                                                <span>
-                                                    ({selectedOptionalCount}/{categorizedWargear.totalConstraint} selected)
-                                                </span>
-                                            </h3>
-                                            <div className="space-y-2">
-                                                {categorizedWargear.optionalWeapons.map((weapon, idx) => {
-                                                    const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
-                                                    const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
-
-                                                    return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
-                                                })}
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {/* Weapon Options Reference */}
-                                    {selectedItem.options && selectedItem.options.length > 0 && (
-                                        <Collapsible defaultOpen={false}>
-                                            <CollapsibleTrigger className="flex items-center gap-2 group">
-                                                <h3 className="text-blockcaps-l">Weapon Options Reference</h3>
-                                                <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
-                                            </CollapsibleTrigger>
-                                            <CollapsibleContent className="mt-2">
-                                                <div className="space-y-2">
-                                                    {selectedItem.options.map((option, idx) => (
-                                                        <div key={option.line || idx} className="border border-skarsnikGreen rounded p-3">
-                                                            <div
-                                                                dangerouslySetInnerHTML={{
-                                                                    __html: option.description,
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </CollapsibleContent>
-                                        </Collapsible>
                                     )}
 
                                     {/* Transport */}
@@ -800,8 +735,7 @@ export function ListView() {
                                             </div>
                                         </div>
                                     )}
-                                </div>
-                                <div className="space-y-6">
+
                                     {/* Abilities */}
                                     {selectedItem.abilities && selectedItem.abilities.filter((ability) => ability.name !== "Leader").length > 0 && (
                                         <div className="space-y-2">
@@ -842,6 +776,58 @@ export function ListView() {
                                                     ))}
                                             </div>
                                         </div>
+                                    )}
+                                </div>
+                                <div className="space-y-6">
+                                    {/* Default Wargear */}
+                                    {categorizedWargear.defaultWeapons.length > 0 && (
+                                        <div className="space-y-2">
+                                            <h3 className="text-blockcaps-l">Standard Wargear</h3>
+                                            <div className="space-y-2">{categorizedWargear.defaultWeapons.map((weapon, idx) => weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} />))}</div>
+                                        </div>
+                                    )}
+
+                                    {/* Optional Wargear */}
+                                    {categorizedWargear.optionalWeapons.length > 0 && (
+                                        <div className="space-y-2">
+                                            <h3 className="flex justify-between">
+                                                <span className="text-blockcaps-l">Optional Wargear</span>
+                                                <span>
+                                                    ({selectedOptionalCount}/{categorizedWargear.totalConstraint} selected)
+                                                </span>
+                                            </h3>
+                                            <div className="space-y-2">
+                                                {categorizedWargear.optionalWeapons.map((weapon, idx) => {
+                                                    const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
+                                                    const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+
+                                                    return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Weapon Options Reference */}
+                                    {selectedItem.options && selectedItem.options.length > 0 && (
+                                        <Collapsible defaultOpen={false}>
+                                            <CollapsibleTrigger className="flex items-center gap-2 group">
+                                                <h3 className="text-blockcaps-l">Optional wargear reference</h3>
+                                                <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
+                                            </CollapsibleTrigger>
+                                            <CollapsibleContent className="mt-2">
+                                                <div className="space-y-2">
+                                                    {selectedItem.options.map((option, idx) => (
+                                                        <div key={option.line || idx} className="border border-skarsnikGreen rounded p-3">
+                                                            <div
+                                                                dangerouslySetInnerHTML={{
+                                                                    __html: option.description,
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </CollapsibleContent>
+                                        </Collapsible>
                                     )}
                                 </div>
                             </CardContent>

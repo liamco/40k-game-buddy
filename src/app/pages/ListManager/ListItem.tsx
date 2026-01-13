@@ -3,6 +3,9 @@ import { Badge } from "../../components/_ui/badge";
 import { Button } from "../../components/_ui/button";
 import { ArmyListItem } from "../../types";
 
+import BaseIcon from "../../components/icons/BaseIcon.tsx";
+import IconLaurels from "../../components/icons/IconLaurels.tsx";
+
 interface Props {
     item: ArmyListItem;
     isSelected: boolean;
@@ -50,8 +53,13 @@ const ListItem = ({ calculateItemPoints, item, handleRemoveItem, setSelectedItem
                     </Badge>
                 )}
                 {item.enhancement && (
-                    <Badge variant="outline" className="text-xs bg-purple-100 border-purple-300 text-purple-700">
-                        {item.enhancement.name} ({item.enhancement.cost} pts)
+                    <Badge variant="outline">
+                        <BaseIcon>
+                            <IconLaurels />
+                        </BaseIcon>
+                        <span>
+                            {item.enhancement.name} ({item.enhancement.cost} pts)
+                        </span>
                     </Badge>
                 )}
                 {item.loadoutSelections && Object.values(item.loadoutSelections).some((count) => count > 0) && (

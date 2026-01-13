@@ -18,14 +18,14 @@ interface Props {
 const ModelProfileCard = ({ model, isDisabled, isSelected, onUnitModelChange }: Props) => {
     return (
         <div
-            className={`relative rounded p-2 space-y-2 border-1 transition-colors border-skarsnikGreen ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"} ${!isDisabled && onUnitModelChange ? "cursor-pointer " : ""}`}
+            className={`relative rounded p-3 border-1 transition-colors border-skarsnikGreen ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"} ${!isDisabled && onUnitModelChange ? "cursor-pointer " : ""}`}
             onClick={() => {
                 if (!isDisabled && onUnitModelChange) {
                     onUnitModelChange(model);
                 }
             }}
         >
-            <div className={isDisabled ? "opacity-25" : ""}>
+            <div className={`space-y-3 ${isDisabled ? "opacity-25" : ""}`}>
                 <div className="flex items-center gap-2">
                     <p>{model.name}</p>
                     {model.isLeader && <Badge variant="outline">Leader</Badge>}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, Fragment } from "react";
 import { Info, Sparkles } from "lucide-react";
 import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
 import Dropdown, { type DropdownOption } from "./Dropdown/Dropdown";
+import { Badge } from "./_ui/badge";
 import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem, Detachment, Enhancement, DamagedMechanic } from "../types";
 import { loadFactionData } from "../utils/depotDataLoader";
 import WeaponProfileCard, { type BonusAttribute, type StatBonus } from "./WeaponProfileCard/WeaponProfileCard";
@@ -293,10 +294,18 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
             return { hitBonuses: [], woundBonuses: [], otherBonuses: [] };
         }
 
+        // For combined units, find the bodyguard unit to use as the datasheet
+        // This prevents leader abilities from being collected twice (once from datasheet, once from attachedLeaders)
+        const listItemId = (unit as ArmyListItem).listItemId;
+        const combinedItem = listItemId ? combinedListItems.find((c) => c.item.listItemId === listItemId) : combinedListItems.find((c) => c.item.id === unit.id && c.item.name === unit.name);
+
+        // Use bodyguard as the main datasheet if this is a combined unit, otherwise use the unit itself
+        const mainDatasheet = combinedItem?.isCombined && combinedItem.bodyguardUnit ? combinedItem.bodyguardUnit : unit;
+
         // Create a unit context to collect abilities from all leaders
         const unitContext: UnitContext = {
-            datasheet: unit,
-            selectedModel: unit.models?.[0],
+            datasheet: mainDatasheet,
+            selectedModel: mainDatasheet.models?.[0],
             state: createDefaultCombatStatus(),
             attachedLeaders: attachedLeaders,
         };
@@ -313,7 +322,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         });
 
         return extractCombatBonuses(leaderMechanics);
-    }, [unit, attachedLeaders]);
+    }, [unit, attachedLeaders, combinedListItems]);
 
     // Get damaged profile penalties when isDamaged is checked
     const damagedPenalties = useMemo(() => {
@@ -509,6 +518,35 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return bonuses;
     }, [leaderEnhancements]);
 
+    // Combine all stat bonuses including damaged penalties
+    const allStatBonuses = useMemo((): StatBonus[] => {
+        const bonuses = [...weaponStatBonuses];
+
+        // Add damaged stat penalties if damaged
+        if (combatStatus.isDamaged && damagedPenalties.otherPenalties.length > 0) {
+            const statAttrMap: Record<string, StatBonus["attribute"] | undefined> = {
+                a: "a",
+                s: "s",
+                ap: "ap",
+                d: "d",
+            };
+
+            for (const penalty of damagedPenalties.otherPenalties) {
+                const attr = statAttrMap[penalty.attribute];
+                if (attr) {
+                    bonuses.push({
+                        attribute: attr,
+                        value: penalty.value,
+                        sourceName: "Damaged",
+                        sourceType: "leader", // Using "leader" as closest match for unit ability
+                    });
+                }
+            }
+        }
+
+        return bonuses;
+    }, [weaponStatBonuses, combatStatus.isDamaged, damagedPenalties]);
+
     const handleUnitSelect = (combined: { item: ArmyListItem; displayName: string; isCombined: boolean }) => {
         onUnitChange(combined.item);
         onWeaponProfileChange(null);
@@ -526,55 +564,37 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                         <SplitHeading label="Select unit armament" />
                         {/* Display leader combat bonuses when a combined unit is selected */}
                         {attachedLeaders.length > 0 && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
-                            <div className="bg-green-50 border border-green-200 rounded-[4px] p-3 space-y-2">
-                                <h3 className="text-[10px] font-bold text-green-800 uppercase">Leader Bonuses Active</h3>
+                            <div className=" border-1 border-fireDragonBright bg-mournfangBrown text-fireDragonBright rounded p-3 space-y-2">
+                                <h3 className="text-blockcaps-m">Active Leader Effects</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {leaderCombatBonuses.hitBonuses.map((bonus, idx) => (
-                                        <span key={`hit-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
-                                            +{bonus.value} to Hit
-                                        </span>
+                                        <Badge key={`hit-${idx}`} variant="outlineAlt">
+                                            +{bonus.value} to Hit from {leaderCombatBonuses.hitBonuses[0]?.source}
+                                        </Badge>
                                     ))}
                                     {leaderCombatBonuses.woundBonuses.map((bonus, idx) => (
-                                        <span key={`wound-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
-                                            +{bonus.value} to Wound
-                                        </span>
+                                        <Badge key={`wound-${idx}`} variant="outlineAlt">
+                                            +{bonus.value} to Wound from {leaderCombatBonuses.woundBonuses[0]?.source}
+                                        </Badge>
                                     ))}
                                     {leaderCombatBonuses.otherBonuses.map((bonus, idx) => (
-                                        <span key={`other-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-green-200 text-green-800" title={bonus.source}>
+                                        <Badge key={`other-${idx}`} variant="outlineAlt">
                                             {bonus.description}
-                                        </span>
+                                        </Badge>
                                     ))}
                                 </div>
-                                <p className="text-[9px] text-green-600 italic">From: {leaderCombatBonuses.hitBonuses[0]?.source || leaderCombatBonuses.woundBonuses[0]?.source || leaderCombatBonuses.otherBonuses[0]?.source}</p>
-                            </div>
-                        )}
-
-                        {/* Display damaged profile penalties when isDamaged is checked */}
-                        {combatStatus.isDamaged && (damagedPenalties.hitPenalty > 0 || damagedPenalties.otherPenalties.length > 0) && (
-                            <div className="bg-red-50 border border-red-200 rounded-[4px] p-3 space-y-2">
-                                <h3 className="text-[10px] font-bold text-red-800 uppercase">Damaged Profile Active</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {damagedPenalties.hitPenalty > 0 && <span className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-red-200 text-red-800">-{damagedPenalties.hitPenalty} to Hit</span>}
-                                    {damagedPenalties.otherPenalties.map((penalty, idx) => (
-                                        <span key={`penalty-${idx}`} className="text-[10px] font-bold uppercase p-1 px-2 rounded bg-red-200 text-red-800">
-                                            {penalty.value > 0 ? "+" : ""}
-                                            {penalty.value} {penalty.attribute.toUpperCase()}
-                                        </span>
-                                    ))}
-                                </div>
-                                <p className="text-[9px] text-red-600 italic">From: Damaged Profile</p>
                             </div>
                         )}
 
                         {/* Display all leader enhancements if present */}
-                        {leaderEnhancements && (
+                        {leaderEnhancements.length ? (
                             <div className="space-y-2">
                                 <h3 className="inline-block">Equipped enhancements</h3>
                                 {leaderEnhancements.map((enhancement) => (
                                     <EnhancementCard key={enhancement.id} enhancement={enhancement} />
                                 ))}
                             </div>
-                        )}
+                        ) : null}
 
                         {unit &&
                             availableWargear.length > 0 &&
@@ -615,7 +635,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                                             {weapon.profiles.map((profile: WeaponProfile) => {
                                                                 const isSelected = selectedWeaponProfile?.name === profile.name;
                                                                 const profileKey = `${source}-${weapon.name}-${profile.name}`;
-                                                                return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={weaponStatBonuses} />;
+                                                                return <WeaponProfileCard key={profileKey} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={allStatBonuses} />;
                                                             })}
                                                         </Fragment>
                                                     ))}
@@ -632,7 +652,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                             <Fragment key={weapon.name}>
                                                 {weapon.profiles.map((profile: WeaponProfile) => {
                                                     const isSelected = selectedWeaponProfile?.name === profile.name;
-                                                    return <WeaponProfileCard key={profile.name} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={weaponStatBonuses} />;
+                                                    return <WeaponProfileCard key={profile.name} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} bonusAttributes={weaponBonusAttributes} statBonuses={allStatBonuses} />;
                                                 })}
                                             </Fragment>
                                         ))}

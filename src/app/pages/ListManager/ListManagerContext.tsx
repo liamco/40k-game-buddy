@@ -26,14 +26,6 @@ export function validateMultiLeaderAttachment(newLeader: ArmyListItem, existingL
         return { canAttach: true };
     }
 
-    console.log("=== Multi-Leader Validation ===");
-    console.log("New leader:", newLeader.name);
-    console.log("New leader leaderConditions:", newLeader.leaderConditions);
-    console.log(
-        "Existing leaders:",
-        existingLeaders.map((l) => ({ name: l.name, keywords: l.keywords }))
-    );
-
     const leaderConditions: LeaderCondition | undefined = newLeader.leaderConditions;
 
     // If the new leader has no leaderConditions, it cannot join existing leaders

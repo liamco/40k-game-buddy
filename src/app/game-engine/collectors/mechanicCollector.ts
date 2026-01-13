@@ -1,10 +1,41 @@
-import type { GameContext, CollectedMechanics, Mechanic } from "../types";
+import type { GameContext, CollectedMechanics, Mechanic, MechanicSource, UnitContext } from "../types";
+import type { Datasheet, DamagedMechanic } from "../../types";
 import { collectUnitAbilities } from "./unitAbilityCollector";
 import { collectWeaponAttributes } from "./weaponAttributeCollector";
 import { collectEnhancement } from "./enhancementCollector";
 import { collectDetachmentAbilities } from "./detachmentCollector";
 import { collectFactionAbilities } from "./factionAbilityCollector";
 import { collectStratagems } from "./stratagemCollector";
+
+/**
+ * Collects damaged profile mechanics when a unit is in damaged state.
+ * Converts DamagedMechanic to full Mechanic with source information.
+ */
+function collectDamagedMechanics(unit: UnitContext): Mechanic[] {
+    if (!unit.state.isDamaged) {
+        return [];
+    }
+
+    const datasheet = unit.datasheet as Datasheet & { damagedMechanics?: DamagedMechanic[] };
+    if (!datasheet.damagedMechanics || datasheet.damagedMechanics.length === 0) {
+        return [];
+    }
+
+    const source: MechanicSource = {
+        type: "ability",
+        name: "Damaged Profile",
+        unitName: datasheet.name,
+    };
+
+    return datasheet.damagedMechanics.map((dm) => ({
+        entity: dm.entity,
+        effect: dm.effect,
+        attribute: dm.attribute,
+        value: dm.value, // Keep positive - applicator handles sign for penalties
+        conditions: dm.conditions,
+        source,
+    }));
+}
 
 /**
  * Collects all mechanics from all sources for a given game context.
@@ -57,6 +88,10 @@ function collectAttackerMechanics(context: GameContext): Mechanic[] {
     const stratagemMechanics = collectStratagems(context.attackerStratagems, context);
     mechanics.push(...stratagemMechanics);
 
+    // 7. Damaged profile mechanics (for vehicles/monsters)
+    const damagedMechanics = collectDamagedMechanics(context.attacker);
+    mechanics.push(...damagedMechanics);
+
     return mechanics;
 }
 
@@ -86,6 +121,10 @@ function collectDefenderMechanics(context: GameContext): Mechanic[] {
     const stratagemMechanics = collectStratagems(context.defenderStratagems, context);
     mechanics.push(...stratagemMechanics);
 
+    // 6. Damaged profile mechanics (for vehicles/monsters)
+    const damagedMechanics = collectDamagedMechanics(context.defender);
+    mechanics.push(...damagedMechanics);
+
     // Note: Defenders don't have weapon attributes affecting their defense
     // (weapon attributes are offensive)
 
@@ -99,16 +138,10 @@ function collectDefenderMechanics(context: GameContext): Mechanic[] {
  * @param rollType - "h" for hit, "w" for wound, "s" for save
  * @returns Filtered mechanics
  */
-export function filterMechanicsByRollType(
-    mechanics: Mechanic[],
-    rollType: "h" | "w" | "s"
-): Mechanic[] {
+export function filterMechanicsByRollType(mechanics: Mechanic[], rollType: "h" | "w" | "s"): Mechanic[] {
     return mechanics.filter((mechanic) => {
         // Roll modifiers for this roll type
-        if (
-            (mechanic.effect === "rollBonus" || mechanic.effect === "rollPenalty") &&
-            mechanic.attribute === rollType
-        ) {
+        if ((mechanic.effect === "rollBonus" || mechanic.effect === "rollPenalty") && mechanic.attribute === rollType) {
             return true;
         }
 

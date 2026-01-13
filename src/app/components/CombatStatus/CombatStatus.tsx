@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
 
-import type { Datasheet, GamePhase } from "../../types";
+import type { Datasheet, DamagedMechanic, GamePhase } from "../../types";
 
 import { COMBAT_STATUS_FLAGS, type CombatStatusFlag, type CombatStatus as CombatStatusType } from "../../game-engine";
 
+import { Badge } from "../_ui/badge";
 import { Checkbox } from "../_ui/checkbox.tsx";
 import { Input } from "../_ui/input";
 import Dropdown, { type DropdownOption } from "../Dropdown/Dropdown";
@@ -92,12 +93,36 @@ const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, starting
         return !!(datasheet.damagedW && datasheet.damagedW.trim() !== "" && datasheet.damagedDescription && datasheet.damagedDescription.trim() !== "");
     }, [unit]);
 
+    // Get damaged penalties from unit's damagedMechanics
+    const damagedPenalties = useMemo(() => {
+        if (!unit) return { hitPenalty: 0, otherPenalties: [] as { attribute: string; value: number }[] };
+
+        const datasheet = unit as Datasheet & { damagedMechanics?: DamagedMechanic[] };
+        if (!datasheet.damagedMechanics || datasheet.damagedMechanics.length === 0) {
+            return { hitPenalty: 0, otherPenalties: [] };
+        }
+
+        let hitPenalty = 0;
+        const otherPenalties: { attribute: string; value: number }[] = [];
+
+        for (const mechanic of datasheet.damagedMechanics) {
+            if (mechanic.effect === "rollPenalty" && mechanic.attribute === "h") {
+                hitPenalty += mechanic.value;
+            } else if (mechanic.effect === "statPenalty" || mechanic.effect === "statBonus" || mechanic.effect === "statMultiplier") {
+                const value = mechanic.effect === "statPenalty" ? -mechanic.value : mechanic.value;
+                otherPenalties.push({ attribute: mechanic.attribute, value });
+            }
+        }
+
+        return { hitPenalty, otherPenalties };
+    }, [unit]);
+
     // Filter statuses based on side and conditional rules
     const relevantStatuses = useMemo(() => {
         return getStatusesForSide(side).filter((status) => {
-            // Only show "isDamaged" if unit has damaged profile
+            // Exclude isDamaged - it has its own dedicated section
             if (status.name === "isDamaged") {
-                return hasDamagedProfile;
+                return false;
             }
             // Only show "hasChargedThisTurn" in fight phase
             if (status.name === "hasChargedThisTurn") {
@@ -105,7 +130,7 @@ const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, starting
             }
             return true;
         });
-    }, [side, hasDamagedProfile, gamePhase]);
+    }, [side, gamePhase]);
 
     const handleObjectiveRangeChange = (value: ObjectiveRangeOption) => {
         // Clear all objective range flags first
@@ -144,7 +169,6 @@ const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, starting
             return "Full strength";
         }
     };
-
     return (
         <section className="space-y-4">
             {/* Models Remaining Section */}
@@ -170,7 +194,7 @@ const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, starting
             {/* Other Status Checkboxes */}
             {relevantStatuses.map((status) => (
                 <div key={status.name} className="flex items-center justify-between">
-                    <label htmlFor={`${side}-${status.name}`} className="text-xs font-semibold grow-999 cursor-pointer">
+                    <label htmlFor={`${side}-${status.name}`} className="block cursor-pointer">
                         {status.label}
                     </label>
                     <Checkbox
@@ -182,6 +206,36 @@ const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, starting
                     />
                 </div>
             ))}
+
+            {/* Damaged Profile Section */}
+            {hasDamagedProfile && (
+                <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                        <div className="space-y-2">
+                            <label htmlFor={`${side}-isDamaged`} className="block cursor-pointer">
+                                Damaged (Bracketed)
+                            </label>
+                            {combatStatus.isDamaged && (damagedPenalties.hitPenalty > 0 || damagedPenalties.otherPenalties.length > 0) && (
+                                <div className="flex flex-wrap gap-1">
+                                    {damagedPenalties.hitPenalty > 0 && <Badge variant="destructive">-{damagedPenalties.hitPenalty} to Hit</Badge>}
+                                    {damagedPenalties.otherPenalties.map((penalty, idx) => (
+                                        <Badge key={`penalty-${idx}`} variant="destructive">
+                                            {penalty.value === 0.5 ? "Half" : (penalty.value > 0 ? "+" : "") + penalty.value} {penalty.attribute.toUpperCase()}
+                                        </Badge>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        <Checkbox
+                            id={`${side}-isDamaged`}
+                            checked={combatStatus.isDamaged}
+                            onCheckedChange={(val) => {
+                                onStatusChange("isDamaged", val as boolean);
+                            }}
+                        />
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

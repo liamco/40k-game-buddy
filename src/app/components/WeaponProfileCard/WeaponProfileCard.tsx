@@ -116,7 +116,7 @@ const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showTog
     };
 
     return (
-        <div key={profile.name} className={`rounded p-2 space-y-2 border-1 transition-colors border-skarsnikGreen ${isDisabled ? "opacity-60 cursor-not-allowed" : ""} ${showToggleButton || onWeaponProfileChange ? "cursor-pointer" : ""} ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"}`} onClick={handleClick}>
+        <div key={profile.name} className={`rounded p-3 space-y-2 border-1 transition-colors border-skarsnikGreen ${isDisabled ? "opacity-60 cursor-not-allowed" : ""} ${showToggleButton || onWeaponProfileChange ? "cursor-pointer" : ""} ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"}`} onClick={handleClick}>
             <div className="flex items-center justify-between">
                 <span className="text-metadata-l">{profile.name}</span>
                 {showToggleButton ? (
