@@ -78,10 +78,11 @@ export interface DamagedMechanic {
     }[];
 }
 
-// Reference to a leader (used in leadBy array)
+// Reference to a leader or unit (used in leadBy and leading)
 export interface LeaderReference {
-    id: string;
-    name: string;
+    listItemId: string; // Unique list item ID - stable even when names change
+    id: string; // Datasheet ID
+    name: string; // Display name (may change if duplicates are added)
 }
 
 export interface ArmyList {

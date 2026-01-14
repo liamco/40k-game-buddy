@@ -2,7 +2,7 @@
  * Extract Effects Script - OpenAI Version
  *
  * Uses OpenAI API to extract structured effects from Warhammer 40k game rule descriptions.
- * Processes all depotdata JSON files to extract effects from:
+ * Processes all data/src JSON files to extract effects from:
  * - Faction abilities (in faction.json files - e.g., Oath of Moment)
  * - Detachment abilities (in faction.json files)
  * - Enhancements (in faction.json files)
@@ -13,6 +13,8 @@
  *   1. Set OPENAI_API_KEY in your .env file
  *   2. Optionally set OPENAI_MODEL (defaults to "gpt-4o-mini")
  *   3. Optionally set SKIP_EXISTING_EFFECTS (defaults to "true")
+ *   4. Optionally set API_DELAY_MS (defaults to 200) - delay between API calls to avoid rate limits
+ *   5. Optionally set API_RETRY_DELAY_MS (defaults to 60000) - delay when rate limited before retry
  *
  *   Process all files:
  *     npm run extract-effects:openai
@@ -44,8 +46,21 @@ const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
 dotenv.config();
 
+// Throttling configuration
+const API_DELAY_MS = parseInt(process.env.API_DELAY_MS || "200", 10);
+const API_RETRY_DELAY_MS = parseInt(process.env.API_RETRY_DELAY_MS || "60000", 10);
+const MAX_RETRIES = 3;
+
+/**
+ * Sleep for a specified number of milliseconds
+ * @param {number} ms - Milliseconds to sleep
+ */
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 // Load core abilities registry (from processed data directory)
-const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "core-abilities.json");
+const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist", "core-abilities.json");
 let CORE_ABILITIES = {};
 if (fs.existsSync(coreAbilitiesPath)) {
     const coreAbilitiesData = JSON.parse(fs.readFileSync(coreAbilitiesPath, "utf-8"));
@@ -139,33 +154,58 @@ export async function extractStructuredEffectsWithOpenAI(description, itemName =
     try {
         console.log(`[OpenAI] Calling OpenAI API (${model})...`);
 
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify({
-                model: model,
-                messages: [
-                    {
-                        role: "user",
-                        content: fullPrompt,
-                    },
-                ],
-                response_format: { type: "json_object" },
-                temperature: 0.1,
-                max_tokens: 2000,
-            }),
-        });
+        let response;
+        let data;
+        let retryCount = 0;
 
-        if (!response.ok) {
+        while (retryCount <= MAX_RETRIES) {
+            response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${apiKey}`,
+                },
+                body: JSON.stringify({
+                    model: model,
+                    messages: [
+                        {
+                            role: "user",
+                            content: fullPrompt,
+                        },
+                    ],
+                    response_format: { type: "json_object" },
+                    temperature: 0.1,
+                    max_tokens: 2000,
+                }),
+            });
+
+            if (response.ok) {
+                data = await response.json();
+                // Add delay after successful call to avoid rate limits
+                await sleep(API_DELAY_MS);
+                break;
+            }
+
             const errorData = await response.json().catch(() => ({}));
             const errorMessage = errorData.error?.message || `HTTP ${response.status}: ${response.statusText}`;
+
+            // Check if rate limited (429) or server error (5xx)
+            if (response.status === 429 || response.status >= 500) {
+                retryCount++;
+                if (retryCount <= MAX_RETRIES) {
+                    const retryDelay = response.status === 429 ? API_RETRY_DELAY_MS : API_DELAY_MS * 2;
+                    console.log(`[OpenAI] ⏳ Rate limited. Waiting ${retryDelay / 1000}s before retry ${retryCount}/${MAX_RETRIES}...`);
+                    await sleep(retryDelay);
+                    continue;
+                }
+            }
+
             throw new Error(`OpenAI API error: ${errorMessage}`);
         }
 
-        const data = await response.json();
+        if (!data) {
+            throw new Error("Failed to get response after retries");
+        }
         const content = data.choices?.[0]?.message?.content?.trim();
         const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
 
@@ -575,12 +615,12 @@ function filterByDirectories(allFiles, directoryFilters, depotdataPath) {
 
 /**
  * Main function to extract effects from all JSON files in processed data directory
- * Reads from and writes to src/app/data (the processed data directory)
+ * Reads from and writes to src/app/data/dist (the processed data directory)
  * @param {string[]} fileFilters - Optional array of file paths/patterns to process (if empty, processes all)
  * @param {string[]} directoryFilters - Optional array of directory paths to process
  */
 async function processAllFiles(fileFilters = [], directoryFilters = []) {
-    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data");
+    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist");
 
     if (!fs.existsSync(dataPath)) {
         console.error(`Error: ${dataPath} does not exist`);

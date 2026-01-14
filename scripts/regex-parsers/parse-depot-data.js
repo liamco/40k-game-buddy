@@ -1,7 +1,7 @@
 /**
  * Parse Depot Data Script
  *
- * Processes JSON files in the depotdata directory, converting string values to numbers,
+ * Processes JSON files in the data/src directory, converting string values to numbers,
  * transforming data formats, and extracting effects from ability descriptions.
  *
  * Usage:
@@ -560,6 +560,38 @@ function removeEnhancementsFromDatasheet(obj) {
 }
 
 /**
+ * Processes Core and Faction type abilities in a datasheet's abilities array.
+ * - Datasheet and Wargear abilities are kept as-is (full data)
+ * - Core and Faction abilities are converted to references (name, type, parameter only)
+ *   since their full definitions are in core-abilities.json or faction.factionAbilities
+ * @param {object} obj - The datasheet object to process
+ * @returns {object} - The datasheet with processed abilities
+ */
+function filterCoreAndFactionAbilitiesFromDatasheet(obj) {
+    if (obj && typeof obj === "object" && !Array.isArray(obj)) {
+        if (obj.abilities && Array.isArray(obj.abilities)) {
+            const cleaned = { ...obj };
+            cleaned.abilities = obj.abilities.map((ability) => {
+                const abilityType = ability.type?.toLowerCase();
+                // Keep Datasheet and Wargear abilities as-is
+                if (abilityType === "datasheet" || abilityType === "wargear") {
+                    return ability;
+                }
+                // Convert Core and Faction abilities to references
+                // Keep only the fields needed to look up the full definition
+                return {
+                    name: ability.name,
+                    type: ability.type,
+                    parameter: ability.parameter || undefined,
+                };
+            });
+            return cleaned;
+        }
+    }
+    return obj;
+}
+
+/**
  * Extracts the base weapon name from a profile name that may contain a mode suffix
  * Examples:
  * - "Plasma pistol – standard" -> "Plasma pistol"
@@ -688,21 +720,24 @@ function groupWeaponProfiles(wargear) {
 
 /**
  * Reads and parses a faction-config.json file if it exists
- * Looks in the output data directory (src/app/data) since config files are manually maintained there
+ * Looks in src/app/data/mappings/{faction-slug}/faction-config.json
  * @param {string} factionSlug - The faction slug (e.g., "space-marines")
- * @param {string} outputPath - Base path to the output data directory
+ * @param {boolean} logMissing - Whether to log a message if no config is found
  * @returns {object|null} - The parsed config or null if not found
  */
-function readFactionConfig(factionSlug, outputPath) {
-    const configPath = path.join(outputPath, "factions", factionSlug, "faction-config.json");
+function readFactionConfig(factionSlug, logMissing = false) {
+    const configPath = path.join(__dirname, "..", "..", "src", "app", "data", "mappings", factionSlug, "faction-config.json");
     if (fs.existsSync(configPath)) {
         try {
             const content = fs.readFileSync(configPath, "utf-8");
             return JSON.parse(content);
         } catch (error) {
-            console.warn(`Warning: Could not parse faction-config.json for ${factionSlug}: ${error.message}`);
+            console.warn(`   ⚠️  Could not parse faction-config.json for ${factionSlug}: ${error.message}`);
             return null;
         }
+    }
+    if (logMissing) {
+        console.log(`   ℹ️  No faction-config.json found for ${factionSlug}`);
     }
     return null;
 }
@@ -744,12 +779,13 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
         // Process the data
         let processedData = await processObject(data);
 
-        // Remove stratagems, detachmentAbilities, and enhancements from datasheet files (but keep them in faction files)
+        // Remove stratagems, detachmentAbilities, enhancements, and Core/Faction abilities from datasheet files (but keep them in faction files)
         const isDatasheet = isDatasheetFile(filePath, depotdataPath);
         if (isDatasheet) {
             processedData = removeStratagemsFromDatasheet(processedData);
             processedData = removeDetachmentAbilitiesFromDatasheet(processedData);
             processedData = removeEnhancementsFromDatasheet(processedData);
+            processedData = filterCoreAndFactionAbilitiesFromDatasheet(processedData);
 
             // Process modelCosts if present
             if (processedData.modelCosts && Array.isArray(processedData.modelCosts)) {
@@ -776,9 +812,9 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
 
             if (factionSlug) {
                 // Check cache first, otherwise read and cache the config
-                // Config files are in src/app/data (output directory), not depotdata
+                // Config files are in src/app/data/mappings/{faction-slug}/faction-config.json
                 if (!factionConfigCache.has(factionSlug)) {
-                    factionConfigCache.set(factionSlug, readFactionConfig(factionSlug, outputPath));
+                    factionConfigCache.set(factionSlug, readFactionConfig(factionSlug, true));
                 }
 
                 const factionConfig = factionConfigCache.get(factionSlug);
@@ -811,12 +847,12 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
 }
 
 /**
- * Main function to process all JSON files in depotdata
- * Reads from src/app/depotdata and outputs to src/app/data
+ * Main function to process all JSON files in data/src
+ * Reads from src/app/data/src and outputs to src/app/data/dist
  */
 async function main() {
-    const depotdataPath = path.join(__dirname, "..", "..", "src", "app", "depotdata");
-    const outputPath = path.join(__dirname, "..", "..", "src", "app", "data");
+    const depotdataPath = path.join(__dirname, "..", "..", "src", "app", "data", "src");
+    const outputPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist");
 
     if (!fs.existsSync(depotdataPath)) {
         console.error(`Error: ${depotdataPath} does not exist`);

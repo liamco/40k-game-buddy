@@ -1,6 +1,6 @@
 import type { Mechanic, MechanicSource, UnitContext } from "../types";
 import type { Datasheet } from "../../types";
-import coreAbilitiesData from "../../data/core-abilities.json";
+import coreAbilitiesData from "../../data/dist/core-abilities.json";
 
 /**
  * Core ability definition from core-abilities.json

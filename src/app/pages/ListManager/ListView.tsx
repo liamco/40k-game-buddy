@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Fragment } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft, X, ChevronDown } from "lucide-react";
 
@@ -19,6 +19,8 @@ import WeaponProfileCard from "../../components/WeaponProfileCard/WeaponProfileC
 
 import { useListManager, type MultiLeaderValidationResult } from "./ListManagerContext";
 import ListItem from "./ListItem";
+import EnhancementCard from "../../components/EnhancementCard/EnhancementCard";
+import SplitHeading from "../../components/SplitHeading/SplitHeading";
 
 /**
  * Extracts the base weapon name from a weapon that may have a mode suffix.
@@ -754,12 +756,14 @@ export function ListView() {
                 Back to Lists
             </Link>
 
-            <header>
-                <h1>{selectedList.name}</h1>
+            <header className="space-y-2">
+                <div className="flex gap-2 items-center">
+                    <h1>{selectedList.name}</h1>
+                    {listTotalPoints > 0 && <Badge variant="outline">{listTotalPoints} pts</Badge>}
+                </div>
                 <p>
                     {selectedList.factionName} | {selectedList.detachmentName}
                 </p>
-                {listTotalPoints > 0 && <Badge variant="outline">{listTotalPoints} pts</Badge>}
             </header>
 
             <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
@@ -799,7 +803,7 @@ export function ListView() {
                                     {selectedList.items.length === 0 ? (
                                         <p className="text-sm  text-center p-8 border border-dashed rounded-lg mt-2">No units added yet. Use the search above to add units.</p>
                                     ) : (
-                                        <div className="space-y-2 mt-2">
+                                        <div className="space-y-4 mt-2">
                                             {orderedListItems.map((item, index) => {
                                                 const isSelected = selectedItem?.listItemId === item.listItemId;
                                                 const isLeader = !!item.leading;
@@ -883,12 +887,12 @@ export function ListView() {
                                     />
                                 )}
                             </CardHeader>
-                            <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-6 pb-6">
+                            <CardContent className="grid grid-cols-1 lg:grid-cols-2 border-t-1 border-skarsnikGreen gap-6 p-6">
                                 <div className="space-y-6">
                                     {/* Unit Composition */}
                                     {selectedItem.unitComposition && selectedItem.unitComposition.length > 0 && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-blockcaps-l">Unit Composition</h3>
+                                        <div className="space-y-4">
+                                            <SplitHeading label="Unit composition" />
                                             <div>
                                                 {selectedItem.unitComposition.map((composition, idx) => {
                                                     const line = composition.line || idx + 1;
@@ -936,8 +940,8 @@ export function ListView() {
 
                                     {/* Transport */}
                                     {selectedItem.transport && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-blockcaps-l">Transport</h3>
+                                        <div className="space-y-4">
+                                            <SplitHeading label="Transport" />
                                             <p
                                                 className="text-sm"
                                                 dangerouslySetInnerHTML={{
@@ -1037,74 +1041,14 @@ export function ListView() {
 
                                     {/* Enhancements */}
                                     {detachmentEnhancements.length > 0 && (
-                                        <div>
-                                            <h3 className="font-semibold text-sm mb-2">Enhancement Options</h3>
+                                        <div className="space-y-4">
+                                            <SplitHeading label="Enhancement options" />
                                             <div className="space-y-3">
                                                 {detachmentEnhancements.map((enhancement, idx) => {
                                                     const isAttached = selectedItem?.enhancement?.id === enhancement.id;
                                                     const usedByLeader = usedEnhancements.get(enhancement.id);
                                                     const isUsedByOther = !!usedByLeader && !isAttached;
-                                                    return (
-                                                        <div key={enhancement.id || idx} className={`border rounded-lg p-3 ${isAttached ? "border-purple-500 bg-purple-50" : isUsedByOther ? "border-[#e6e6e6] bg-gray-50 opacity-60" : "border-[#e6e6e6] bg-white"}`}>
-                                                            <div className="flex items-start justify-between mb-1">
-                                                                <div className="flex-1">
-                                                                    <div className="font-medium text-sm">{enhancement.name}</div>
-                                                                    {isAttached && <div className="text-xs text-purple-600 mt-1 font-medium">Equipped</div>}
-                                                                    {isUsedByOther && (
-                                                                        <Badge variant="secondary" className="text-xs mt-1">
-                                                                            Used by {usedByLeader}
-                                                                        </Badge>
-                                                                    )}
-                                                                </div>
-                                                                <div className="flex items-center gap-2">
-                                                                    {enhancement.cost && (
-                                                                        <Badge variant="outline" className="text-xs">
-                                                                            {enhancement.cost} pts
-                                                                        </Badge>
-                                                                    )}
-                                                                    <Button
-                                                                        variant={isAttached ? "outline" : "default"}
-                                                                        size="sm"
-                                                                        className="h-8"
-                                                                        disabled={isUsedByOther}
-                                                                        onClick={() => {
-                                                                            handleAttachEnhancement({
-                                                                                id: enhancement.id,
-                                                                                name: enhancement.name,
-                                                                                cost: enhancement.cost,
-                                                                            });
-                                                                        }}
-                                                                    >
-                                                                        {isAttached ? "Remove" : "Equip"}
-                                                                    </Button>
-                                                                </div>
-                                                            </div>
-                                                            {enhancement.legend && (
-                                                                <Collapsible defaultOpen={false}>
-                                                                    <CollapsibleTrigger className="flex items-center gap-1 text-xs  italic group">
-                                                                        <ChevronDown className="h-3 w-3 transition-transform group-data-[state=open]:rotate-180" />
-                                                                        <span>Show lore</span>
-                                                                    </CollapsibleTrigger>
-                                                                    <CollapsibleContent>
-                                                                        <p
-                                                                            className="text-xs  italic mt-1 mb-2"
-                                                                            dangerouslySetInnerHTML={{
-                                                                                __html: enhancement.legend,
-                                                                            }}
-                                                                        />
-                                                                    </CollapsibleContent>
-                                                                </Collapsible>
-                                                            )}
-                                                            {enhancement.description && (
-                                                                <div
-                                                                    className="text-sm"
-                                                                    dangerouslySetInnerHTML={{
-                                                                        __html: enhancement.description,
-                                                                    }}
-                                                                />
-                                                            )}
-                                                        </div>
-                                                    );
+                                                    return <EnhancementCard key={enhancement.id || idx} enhancement={enhancement} showPoints showLegend isAttached={isAttached} isUsedByOther={isUsedByOther} usedBy={usedByLeader} handleAttachEnhancement={handleAttachEnhancement} />;
                                                 })}
                                             </div>
                                         </div>
@@ -1112,8 +1056,8 @@ export function ListView() {
 
                                     {/* Abilities */}
                                     {selectedItem.abilities && selectedItem.abilities.filter((ability) => ability.name !== "Leader").length > 0 && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-blockcaps-l">Abilities</h3>
+                                        <div className="space-y-4">
+                                            <SplitHeading label="Abilities" />
                                             <div className="space-y-3">
                                                 {selectedItem.abilities
                                                     .filter((ability) => ability.name !== "Leader")
@@ -1155,15 +1099,14 @@ export function ListView() {
                                 <div className="space-y-6">
                                     {/* Default Wargear */}
                                     {categorizedWargear.defaultWeapons.length > 0 && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-blockcaps-l">Standard Wargear</h3>
-                                            <div className="space-y-2">
-                                                {categorizedWargear.defaultWeapons.map((weapon, idx) => {
-                                                    const isRemoved = selectedItem?.removedWeapons?.[weapon.id] === true;
-                                                    console.log(isRemoved);
-                                                    return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isDisabled={isRemoved} showToggleButton={pIdx === 0} onToggle={() => toggleDefaultWeaponRemoval(weapon.id)} canToggle={true} />);
-                                                })}
-                                            </div>
+                                        <div className="space-y-4">
+                                            <SplitHeading label="Standard Wargear" />
+
+                                            {categorizedWargear.defaultWeapons.map((weapon, idx) => {
+                                                const isRemoved = selectedItem?.removedWeapons?.[weapon.id] === true;
+                                                console.log(isRemoved);
+                                                return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isDisabled={isRemoved} showToggleButton={pIdx === 0} onToggle={() => toggleDefaultWeaponRemoval(weapon.id)} canToggle={true} />);
+                                            })}
                                         </div>
                                     )}
 
@@ -1176,7 +1119,7 @@ export function ListView() {
                                                     ({selectedOptionalCount}/{categorizedWargear.totalConstraint} selected)
                                                 </span>
                                             </h3>
-                                            <div className="space-y-2">
+                                            <div className="space-y-4">
                                                 {(() => {
                                                     // If we have linked groups, render each group separately
                                                     if (linkedWeaponData.groups.length > 0) {

@@ -208,7 +208,8 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                     // Migrate lists with async datasheet refresh
                     const migratedLists = await Promise.all(
                         parsedLists.map(async (list: ArmyList) => {
-                            const migratedItems = await Promise.all(
+                            // First pass: basic migrations
+                            let migratedItems = await Promise.all(
                                 list.items.map(async (item: ArmyListItem) => {
                                     let migratedItem = { ...item };
 
@@ -217,12 +218,14 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                                         migratedItem.leadBy = [migratedItem.leadBy as unknown as LeaderReference];
                                     }
 
-                                    // Always refresh leaderConditions from source datasheet
+                                    // Always refresh key fields from source datasheet
                                     // This ensures data stays in sync if datasheet files are updated
                                     try {
                                         const freshDatasheet = await loadDatasheetData(list.factionSlug, migratedItem.id);
                                         if (freshDatasheet) {
                                             migratedItem.leaderConditions = freshDatasheet.leaderConditions;
+                                            migratedItem.abilities = freshDatasheet.abilities;
+                                            migratedItem.leaders = freshDatasheet.leaders;
                                         }
                                     } catch (err) {
                                         console.warn(`Failed to refresh datasheet ${migratedItem.id}:`, err);
@@ -231,6 +234,54 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                                     return migratedItem;
                                 })
                             );
+
+                            // Second pass: Migration 2 - Add listItemId to LeaderReference objects
+                            // This needs to happen after all items are loaded so we can look up listItemIds
+                            migratedItems = migratedItems.map((item) => {
+                                let migratedItem = { ...item };
+
+                                // Migrate leading reference
+                                if (migratedItem.leading && !migratedItem.leading.listItemId) {
+                                    const targetItem = migratedItems.find((i) => i.id === migratedItem.leading?.id && i.name === migratedItem.leading?.name);
+                                    if (targetItem) {
+                                        migratedItem.leading = {
+                                            listItemId: targetItem.listItemId,
+                                            id: migratedItem.leading.id,
+                                            name: migratedItem.leading.name,
+                                        };
+                                    } else {
+                                        // Target not found, clear the invalid reference
+                                        delete migratedItem.leading;
+                                    }
+                                }
+
+                                // Migrate leadBy references
+                                if (migratedItem.leadBy && migratedItem.leadBy.length > 0) {
+                                    const migratedLeadBy = migratedItem.leadBy
+                                        .map((ref) => {
+                                            if (ref.listItemId) return ref; // Already migrated
+                                            const leaderItem = migratedItems.find((i) => i.id === ref.id && i.name === ref.name);
+                                            if (leaderItem) {
+                                                return {
+                                                    listItemId: leaderItem.listItemId,
+                                                    id: ref.id,
+                                                    name: ref.name,
+                                                };
+                                            }
+                                            return null; // Leader not found, remove invalid reference
+                                        })
+                                        .filter((ref): ref is LeaderReference => ref !== null);
+
+                                    if (migratedLeadBy.length > 0) {
+                                        migratedItem.leadBy = migratedLeadBy;
+                                    } else {
+                                        delete migratedItem.leadBy;
+                                    }
+                                }
+
+                                return migratedItem;
+                            });
+
                             return { ...list, items: migratedItems };
                         })
                     );
@@ -342,15 +393,41 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         let updatedItems = [...list.items];
 
         if (duplicateItems.length > 0) {
+            // Build a map of listItemId -> new name for items being renamed
+            const renameMap = new Map<string, string>();
+            duplicateItems.forEach((dup, index) => {
+                const itemBaseName = getBaseName(dup.name);
+                renameMap.set(dup.listItemId, `${itemBaseName} ${getSuffixLetter(index)}`);
+            });
+
             updatedItems = updatedItems.map((item) => {
-                const itemBaseName = getBaseName(item.name);
-                if (itemBaseName === baseName) {
-                    const duplicateIndex = duplicateItems.findIndex((dup) => dup.listItemId === item.listItemId);
-                    if (duplicateIndex >= 0) {
-                        return { ...item, name: `${itemBaseName} ${getSuffixLetter(duplicateIndex)}` };
-                    }
+                let updatedItem = { ...item };
+
+                // Rename this item if it's a duplicate
+                const newName = renameMap.get(item.listItemId);
+                if (newName) {
+                    updatedItem.name = newName;
                 }
-                return item;
+
+                // Update leading reference if the target was renamed
+                if (updatedItem.leading && renameMap.has(updatedItem.leading.listItemId)) {
+                    updatedItem.leading = {
+                        ...updatedItem.leading,
+                        name: renameMap.get(updatedItem.leading.listItemId)!,
+                    };
+                }
+
+                // Update leadBy references if any leaders were renamed
+                if (updatedItem.leadBy && updatedItem.leadBy.length > 0) {
+                    updatedItem.leadBy = updatedItem.leadBy.map((ref) => {
+                        if (renameMap.has(ref.listItemId)) {
+                            return { ...ref, name: renameMap.get(ref.listItemId)! };
+                        }
+                        return ref;
+                    });
+                }
+
+                return updatedItem;
             });
 
             const newSuffixIndex = duplicateItems.length;
@@ -400,8 +477,8 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         let updatedItems = list.items.map((item) => {
             // If removed item was a leader, remove it from the target unit's leadBy array
             if (itemToRemove.leading) {
-                if (item.id === itemToRemove.leading.id && item.name === itemToRemove.leading.name) {
-                    const newLeadBy = (item.leadBy || []).filter((l) => !(l.id === itemToRemove.id && l.name === itemToRemove.name));
+                if (item.listItemId === itemToRemove.leading.listItemId) {
+                    const newLeadBy = (item.leadBy || []).filter((l) => l.listItemId !== itemToRemove.listItemId);
                     if (newLeadBy.length === 0) {
                         const { leadBy, ...rest } = item;
                         return rest;
@@ -411,7 +488,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             }
             // If removed item had leaders attached, remove leading from those leaders
             if (itemToRemove.leadBy && itemToRemove.leadBy.length > 0) {
-                const isLeaderOfRemovedItem = itemToRemove.leadBy.some((l) => l.id === item.id && l.name === item.name);
+                const isLeaderOfRemovedItem = itemToRemove.leadBy.some((l) => l.listItemId === item.listItemId);
                 if (isLeaderOfRemovedItem) {
                     const { leading, ...rest } = item;
                     return rest;
@@ -445,7 +522,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
         // Get existing leaders attached to the target unit
         const existingLeaderRefs = targetUnitItem.leadBy || [];
-        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.id === ref.id && item.name === ref.name)).filter((item): item is ArmyListItem => item !== undefined);
+        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.listItemId === ref.listItemId)).filter((item): item is ArmyListItem => item !== undefined);
 
         return validateMultiLeaderAttachment(leaderItem, existingLeaders);
     }, []);
@@ -457,7 +534,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
         // Get existing leaders attached to the target unit
         const existingLeaderRefs = targetUnitItem.leadBy || [];
-        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.id === ref.id && item.name === ref.name)).filter((item): item is ArmyListItem => item !== undefined);
+        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.listItemId === ref.listItemId)).filter((item): item is ArmyListItem => item !== undefined);
 
         // Validate multi-leader attachment
         const validation = validateMultiLeaderAttachment(leaderItem, existingLeaders);
@@ -466,33 +543,33 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         const shouldReplace = !validation.canAttach && (forceReplace || validation.wouldReplace);
 
         // Find previous target if this leader was already attached somewhere
-        const previousTargetItem = leaderItem.leading ? list.items.find((item) => item.id === leaderItem.leading?.id && item.name === leaderItem.leading?.name) : null;
+        const previousTargetItem = leaderItem.leading ? list.items.find((item) => item.listItemId === leaderItem.leading?.listItemId) : null;
 
         const updatedItems = list.items.map((item) => {
             // Update the leader with new target
             if (item.listItemId === leaderItemId) {
                 const { leading, ...rest } = item;
-                return { ...rest, leading: { id: targetUnitItem.id, name: targetUnitItem.name } };
+                return { ...rest, leading: { listItemId: targetUnitItem.listItemId, id: targetUnitItem.id, name: targetUnitItem.name } };
             }
             // Update target unit's leadBy array
             if (item.listItemId === targetUnitItemId) {
                 // Check if this leader is already in the array (shouldn't happen, but safety check)
-                const alreadyAttached = existingLeaderRefs.some((l) => l.id === leaderItem.id && l.name === leaderItem.name);
+                const alreadyAttached = existingLeaderRefs.some((l) => l.listItemId === leaderItem.listItemId);
                 if (alreadyAttached) {
                     return item;
                 }
 
                 if (shouldReplace && existingLeaders.length > 0) {
                     // Replace existing leaders - clear leadBy and add only the new leader
-                    return { ...item, leadBy: [{ id: leaderItem.id, name: leaderItem.name }] };
+                    return { ...item, leadBy: [{ listItemId: leaderItem.listItemId, id: leaderItem.id, name: leaderItem.name }] };
                 } else {
                     // Add to existing leaders
-                    return { ...item, leadBy: [...existingLeaderRefs, { id: leaderItem.id, name: leaderItem.name }] };
+                    return { ...item, leadBy: [...existingLeaderRefs, { listItemId: leaderItem.listItemId, id: leaderItem.id, name: leaderItem.name }] };
                 }
             }
             // Remove leader from previous target's leadBy array
             if (previousTargetItem && item.listItemId === previousTargetItem.listItemId) {
-                const newLeadBy = (item.leadBy || []).filter((l) => !(l.id === leaderItem.id && l.name === leaderItem.name));
+                const newLeadBy = (item.leadBy || []).filter((l) => l.listItemId !== leaderItem.listItemId);
                 if (newLeadBy.length === 0) {
                     const { leadBy, ...rest } = item;
                     return rest;
@@ -505,8 +582,8 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 return rest;
             }
             // Remove this leader from any other unit's leadBy array (shouldn't happen, but safety)
-            if (item.leadBy?.some((l) => l.id === leaderItem.id && l.name === leaderItem.name) && item.listItemId !== targetUnitItemId) {
-                const newLeadBy = item.leadBy.filter((l) => !(l.id === leaderItem.id && l.name === leaderItem.name));
+            if (item.leadBy?.some((l) => l.listItemId === leaderItem.listItemId) && item.listItemId !== targetUnitItemId) {
+                const newLeadBy = item.leadBy.filter((l) => l.listItemId !== leaderItem.listItemId);
                 if (newLeadBy.length === 0) {
                     const { leadBy, ...rest } = item;
                     return rest;
@@ -525,7 +602,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         const leaderItem = list.items.find((item) => item.listItemId === leaderItemId);
         if (!leaderItem?.leading) return list;
 
-        const targetUnitItem = list.items.find((item) => item.id === leaderItem.leading?.id && item.name === leaderItem.leading?.name);
+        const targetUnitItem = list.items.find((item) => item.listItemId === leaderItem.leading?.listItemId);
 
         const updatedItems = list.items.map((item) => {
             // Remove leading from the leader
@@ -535,7 +612,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             }
             // Remove this specific leader from the target unit's leadBy array
             if (targetUnitItem && item.listItemId === targetUnitItem.listItemId) {
-                const newLeadBy = (item.leadBy || []).filter((l) => !(l.id === leaderItem.id && l.name === leaderItem.name));
+                const newLeadBy = (item.leadBy || []).filter((l) => l.listItemId !== leaderItem.listItemId);
                 if (newLeadBy.length === 0) {
                     const { leadBy, ...rest } = item;
                     return rest;

@@ -10,10 +10,11 @@
         "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
         "lint:format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
         "parse-depot-data": "node scripts/regex-parsers/parse-depot-data.js",
-        "parse-damaged-profiles": "node scripts/regex-parsers/parse-damaged-profiles.js",
         "migrate-core-abilities": "node scripts/regex-parsers/migrate-core-abilities.js",
         "migrate-faction-abilities": "node scripts/regex-parsers/migrate-faction-abilities.js",
-        "extract-effects:openai": "node scripts/openai-extractors/extract-effects.js"
+        "parse-damaged-profiles": "node scripts/regex-parsers/parse-damaged-profiles.js",
+        "extract-effects:openai": "node scripts/openai-extractors/extract-effects.js",
+        "parse-data": "npm run parse-depot-data && migrate-core-abilities && migrate-faction-abilities && parse-damaged-profiles"
     },
     "dependencies": {
         "@emotion/react": "11.14.0",

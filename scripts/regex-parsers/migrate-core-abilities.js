@@ -20,7 +20,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load core abilities registry from processed data directory
-const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "core-abilities.json");
+const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist", "core-abilities.json");
 
 let CORE_ABILITIES = {};
 if (fs.existsSync(coreAbilitiesPath)) {
@@ -128,7 +128,7 @@ function processJsonFile(filePath, dryRun = false) {
  * Main function
  */
 async function main() {
-    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data");
+    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist");
 
     if (!fs.existsSync(dataPath)) {
         console.error(`Error: ${dataPath} does not exist`);

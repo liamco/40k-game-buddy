@@ -68,61 +68,63 @@ export function NewList() {
     };
 
     return (
-        <Card className="max-w-lg">
-            <CardHeader>
-                <CardTitle>Create New List</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div className="space-y-4">
-                    <div>
-                        <Label htmlFor="list-name">List Name</Label>
-                        <Input id="list-name" value={newListName} onChange={(e) => setNewListName(e.target.value)} placeholder="Enter list name" className="mt-1" />
-                    </div>
-                    <div className="space-y-1">
-                        <Label>Select Faction</Label>
-                        <SearchableDropdown
-                            options={factionOptions}
-                            selectedLabel={selectedFaction?.name}
-                            placeholder="Select faction..."
-                            searchPlaceholder="Search factions..."
-                            emptyMessage="No faction found."
-                            onSelect={setSelectedFaction}
-                            renderOption={(faction) => (
-                                <div className="flex items-center justify-between w-full">
-                                    {faction.name}
-                                    <Badge variant="secondary" className="ml-2">
-                                        {faction.datasheetCount} units
-                                    </Badge>
-                                </div>
-                            )}
-                        />
-                    </div>
+        <div className="w-full py-24">
+            <Card className="max-w-lg m-auto">
+                <CardHeader>
+                    <CardTitle>Create New List</CardTitle>
+                </CardHeader>
+                <CardContent className="px-6 pb-6">
+                    <div className="space-y-4">
+                        <div>
+                            <Label htmlFor="list-name">List Name</Label>
+                            <Input id="list-name" value={newListName} onChange={(e) => setNewListName(e.target.value)} placeholder="Enter list name" className="mt-1" />
+                        </div>
+                        <div className="space-y-1">
+                            <Label>Select Faction</Label>
+                            <SearchableDropdown
+                                options={factionOptions}
+                                selectedLabel={selectedFaction?.name}
+                                placeholder="Select faction..."
+                                searchPlaceholder="Search factions..."
+                                emptyMessage="No faction found."
+                                onSelect={setSelectedFaction}
+                                renderOption={(faction) => (
+                                    <div className="flex items-center justify-between w-full">
+                                        {faction.name}
+                                        <Badge variant="secondary" className="ml-2">
+                                            {faction.datasheetCount} units
+                                        </Badge>
+                                    </div>
+                                )}
+                            />
+                        </div>
 
-                    <div className="space-y-1">
-                        <Label>Select Detachment</Label>
-                        <SearchableDropdown
-                            options={detachmentOptions}
-                            selectedLabel={selectedDetachment?.name}
-                            placeholder="Select detachment..."
-                            searchPlaceholder="Search detachments..."
-                            emptyMessage="No detachment found."
-                            onSelect={setSelectedDetachment}
-                            renderOption={(detachment) => detachment.name}
-                            disabled={selectedFaction && factionData?.detachments && factionData.detachments.length ? false : true}
-                        />
-                    </div>
+                        <div className="space-y-1">
+                            <Label>Select Detachment</Label>
+                            <SearchableDropdown
+                                options={detachmentOptions}
+                                selectedLabel={selectedDetachment?.name}
+                                placeholder="Select detachment..."
+                                searchPlaceholder="Search detachments..."
+                                emptyMessage="No detachment found."
+                                onSelect={setSelectedDetachment}
+                                renderOption={(detachment) => detachment.name}
+                                disabled={selectedFaction && factionData?.detachments && factionData.detachments.length ? false : true}
+                            />
+                        </div>
 
-                    <div className="flex gap-2 pt-4">
-                        <Button variant="ghostSecondary" onClick={handleCancel}>
-                            Cancel
-                        </Button>
-                        <Button onClick={handleCreateList} disabled={!selectedFaction || !selectedDetachment || !newListName.trim()} className="flex-1">
-                            Create List
-                        </Button>
+                        <div className="flex gap-2 pt-4">
+                            <Button variant="ghostSecondary" onClick={handleCancel}>
+                                Cancel
+                            </Button>
+                            <Button onClick={handleCreateList} disabled={!selectedFaction || !selectedDetachment || !newListName.trim()} className="flex-1">
+                                Create List
+                            </Button>
+                        </div>
                     </div>
-                </div>
-            </CardContent>
-        </Card>
+                </CardContent>
+            </Card>
+        </div>
     );
 }
 
