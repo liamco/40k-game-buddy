@@ -52,7 +52,7 @@ export function ListsOverview() {
                                         </Badge>
                                     </div>
                                     <Button
-                                        variant="ghost"
+                                        variant="ghostSecondary"
                                         size="sm"
                                         className="h-6 w-6 p-0"
                                         onClick={(e) => {

@@ -17,7 +17,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DEPOT_DATA_PATH = path.join(__dirname, "..", "..", "src", "app", "depotdata", "factions");
+// Read from and write to the processed data directory
+const DATA_PATH = path.join(__dirname, "..", "..", "src", "app", "data", "factions");
 
 const DRY_RUN = process.argv.includes("--dry-run");
 
@@ -209,16 +210,16 @@ function main() {
     console.log("═".repeat(60));
     console.log("🔧 Parse Damaged Profiles Script");
     console.log("═".repeat(60));
-    console.log(`📁 Data path: ${DEPOT_DATA_PATH}`);
+    console.log(`📁 Data path: ${DATA_PATH}`);
     console.log(`🧪 Dry run: ${DRY_RUN ? "YES" : "NO"}`);
     console.log("");
 
-    if (!fs.existsSync(DEPOT_DATA_PATH)) {
-        console.error(`❌ Depot data path not found: ${DEPOT_DATA_PATH}`);
+    if (!fs.existsSync(DATA_PATH)) {
+        console.error(`❌ Depot data path not found: ${DATA_PATH}`);
         process.exit(1);
     }
 
-    const jsonFiles = findJsonFiles(DEPOT_DATA_PATH);
+    const jsonFiles = findJsonFiles(DATA_PATH);
     console.log(`📄 Found ${jsonFiles.length} datasheet files\n`);
 
     let stats = {

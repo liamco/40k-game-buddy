@@ -124,6 +124,10 @@ const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, starting
             if (status.name === "isDamaged") {
                 return false;
             }
+            // Only show "inCover" and "isStationary" in shooting phase
+            if (status.name === "inCover" || status.name === "isStationary") {
+                return gamePhase === "SHOOTING";
+            }
             // Only show "hasChargedThisTurn" in fight phase
             if (status.name === "hasChargedThisTurn") {
                 return gamePhase === "FIGHT";

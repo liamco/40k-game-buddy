@@ -217,17 +217,25 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         return combinedItem ? combinedItem.displayName : unit.name;
     }, [unit, combinedListItems]);
 
-    // Filter wargear for a single unit based on loadout and selections
+    // Filter wargear for a single unit based on loadout, selections, and removed weapons
     const filterUnitWargear = (unitItem: ArmyListItem, wargear: Weapon[]): Weapon[] => {
         const loadoutWeapons = parseLoadoutWeapons(unitItem.loadout || "");
 
         // If no loadout info at all, show all weapons (fallback for units without loadout data)
+        // Still filter out explicitly removed weapons
         if (loadoutWeapons.length === 0) {
-            return wargear;
+            return wargear.filter((weapon) => {
+                const isRemoved = unitItem.removedWeapons?.[weapon.id] === true;
+                return !isRemoved;
+            });
         }
 
         // Filter to only show weapons in default loadout OR explicitly selected
+        // Exclude weapons that have been explicitly removed
         return wargear.filter((weapon) => {
+            const isRemoved = unitItem.removedWeapons?.[weapon.id] === true;
+            if (isRemoved) return false;
+
             const inLoadout = isWeaponInLoadout(weapon.name, loadoutWeapons);
             const isSelected = isWeaponSelected(weapon.id, unitItem.loadoutSelections);
             return inLoadout || isSelected;
@@ -556,7 +564,16 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
             <header className="col-span-5 flex">
                 <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
-                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="Matching records missing or expunged" onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
+                <SearchableDropdown
+                    options={unitOptions}
+                    selectedLabel={selectedUnitDisplayName}
+                    placeholder="Search for a unit..."
+                    searchPlaceholder="Search units..."
+                    emptyMessage="Matching records missing or expunged"
+                    onSelect={handleUnitSelect}
+                    renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>}
+                    triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1"
+                />
             </header>
             {unit ? (
                 <Fragment>
@@ -629,7 +646,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                         <div className="space-y-6">
                                             {orderedSources.map((source) => (
                                                 <div key={source} className="space-y-2">
-                                                    <span className="inline-block">from {source}</span>
+                                                    <span className="inline-block">{source}</span>
                                                     {groupedWeapons[source].map((weapon) => (
                                                         <Fragment key={weapon.name}>
                                                             {weapon.profiles.map((profile: WeaponProfile) => {

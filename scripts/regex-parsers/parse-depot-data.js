@@ -687,11 +687,56 @@ function groupWeaponProfiles(wargear) {
 }
 
 /**
+ * Reads and parses a faction-config.json file if it exists
+ * Looks in the output data directory (src/app/data) since config files are manually maintained there
+ * @param {string} factionSlug - The faction slug (e.g., "space-marines")
+ * @param {string} outputPath - Base path to the output data directory
+ * @returns {object|null} - The parsed config or null if not found
+ */
+function readFactionConfig(factionSlug, outputPath) {
+    const configPath = path.join(outputPath, "factions", factionSlug, "faction-config.json");
+    if (fs.existsSync(configPath)) {
+        try {
+            const content = fs.readFileSync(configPath, "utf-8");
+            return JSON.parse(content);
+        } catch (error) {
+            console.warn(`Warning: Could not parse faction-config.json for ${factionSlug}: ${error.message}`);
+            return null;
+        }
+    }
+    return null;
+}
+
+/**
+ * Applies supplementSlug to detachments based on faction-config.json mappings
+ * @param {Array} detachments - Array of detachment objects
+ * @param {object} detachmentSupplements - Mapping of detachment slugs to supplement slugs
+ * @returns {Array} - Detachments with supplementSlug applied where applicable
+ */
+function applySupplementSlugsToDetachments(detachments, detachmentSupplements) {
+    if (!Array.isArray(detachments) || !detachmentSupplements) {
+        return detachments;
+    }
+
+    return detachments.map((detachment) => {
+        if (detachment.slug && detachmentSupplements[detachment.slug]) {
+            return {
+                ...detachment,
+                supplementSlug: detachmentSupplements[detachment.slug],
+            };
+        }
+        return detachment;
+    });
+}
+
+/**
  * Processes a single JSON file
  * @param {string} filePath - Path to the JSON file
- * @param {string} depotdataPath - Base path to depotdata directory
+ * @param {string} depotdataPath - Base path to depotdata directory (source)
+ * @param {string} outputPath - Base path to output directory (destination)
+ * @param {Map} factionConfigCache - Cache of faction configs by faction directory path
  */
-async function processJsonFile(filePath, depotdataPath) {
+async function processJsonFile(filePath, depotdataPath, outputPath, factionConfigCache = new Map()) {
     try {
         const content = fs.readFileSync(filePath, "utf-8");
         const data = JSON.parse(content);
@@ -722,10 +767,41 @@ async function processJsonFile(filePath, depotdataPath) {
             if (processedData.wargear && Array.isArray(processedData.wargear)) {
                 processedData.wargear = groupWeaponProfiles(processedData.wargear);
             }
+        } else {
+            // This is a faction.json file - check for faction-config.json and apply supplement slugs to detachments
+            // Extract faction slug from path (e.g., "factions/space-marines/faction.json" -> "space-marines")
+            const relativePath = path.relative(depotdataPath, filePath);
+            const pathParts = relativePath.split(path.sep);
+            const factionSlug = pathParts.length >= 2 ? pathParts[1] : null;
+
+            if (factionSlug) {
+                // Check cache first, otherwise read and cache the config
+                // Config files are in src/app/data (output directory), not depotdata
+                if (!factionConfigCache.has(factionSlug)) {
+                    factionConfigCache.set(factionSlug, readFactionConfig(factionSlug, outputPath));
+                }
+
+                const factionConfig = factionConfigCache.get(factionSlug);
+
+                if (factionConfig && factionConfig.detachmentSupplements && processedData.detachments) {
+                    processedData.detachments = applySupplementSlugsToDetachments(processedData.detachments, factionConfig.detachmentSupplements);
+                    console.log(`   📋 Applied supplement slugs to ${Object.keys(factionConfig.detachmentSupplements).length} detachments`);
+                }
+            }
         }
 
-        // Write back to file with proper formatting
-        fs.writeFileSync(filePath, JSON.stringify(processedData, null, 2), "utf-8");
+        // Calculate output file path (same relative path, but under outputPath)
+        const relativePath = path.relative(depotdataPath, filePath);
+        const outputFilePath = path.join(outputPath, relativePath);
+
+        // Ensure the output directory exists
+        const outputDir = path.dirname(outputFilePath);
+        if (!fs.existsSync(outputDir)) {
+            fs.mkdirSync(outputDir, { recursive: true });
+        }
+
+        // Write to output file with proper formatting
+        fs.writeFileSync(outputFilePath, JSON.stringify(processedData, null, 2), "utf-8");
 
         return true;
     } catch (error) {
@@ -736,13 +812,21 @@ async function processJsonFile(filePath, depotdataPath) {
 
 /**
  * Main function to process all JSON files in depotdata
+ * Reads from src/app/depotdata and outputs to src/app/data
  */
 async function main() {
-    const depotdataPath = path.join(__dirname, "..", "src", "app", "depotdata");
+    const depotdataPath = path.join(__dirname, "..", "..", "src", "app", "depotdata");
+    const outputPath = path.join(__dirname, "..", "..", "src", "app", "data");
 
     if (!fs.existsSync(depotdataPath)) {
         console.error(`Error: ${depotdataPath} does not exist`);
         process.exit(1);
+    }
+
+    // Create output directory if it doesn't exist
+    if (!fs.existsSync(outputPath)) {
+        fs.mkdirSync(outputPath, { recursive: true });
+        console.log(`📁 Created output directory: ${outputPath}`);
     }
 
     // Reset invalid arrays for this run
@@ -768,11 +852,32 @@ async function main() {
 
     findJsonFiles(depotdataPath);
 
-    console.log(`📁 Found ${jsonFiles.length} JSON files to process...\n`);
+    // Also copy top-level JSON files that don't need processing (index.json, core-*.json)
+    const topLevelFiles = fs
+        .readdirSync(depotdataPath)
+        .filter((f) => f.endsWith(".json"))
+        .map((f) => path.join(depotdataPath, f));
+
+    console.log(`📁 Found ${jsonFiles.length} JSON files to process...`);
+    console.log(`📁 Found ${topLevelFiles.length} top-level JSON files to copy...`);
+    console.log(`📂 Source: ${depotdataPath}`);
+    console.log(`📂 Output: ${outputPath}\n`);
+
+    // Copy top-level JSON files directly (no processing needed)
+    for (const topLevelFile of topLevelFiles) {
+        const fileName = path.basename(topLevelFile);
+        const outputFilePath = path.join(outputPath, fileName);
+        fs.copyFileSync(topLevelFile, outputFilePath);
+        console.log(`📋 Copied: ${fileName}`);
+    }
+    console.log("");
 
     let successCount = 0;
     let errorCount = 0;
     let fileIndex = 0;
+
+    // Cache for faction-config.json files to avoid re-reading them
+    const factionConfigCache = new Map();
 
     for (const jsonFile of jsonFiles) {
         fileIndex++;
@@ -780,7 +885,7 @@ async function main() {
 
         console.log(`[${fileIndex}/${jsonFiles.length}] Processing: ${relativePath}`);
 
-        if (await processJsonFile(jsonFile, depotdataPath)) {
+        if (await processJsonFile(jsonFile, depotdataPath, outputPath, factionConfigCache)) {
             successCount++;
             console.log(`✅ Completed: ${relativePath}\n`);
         } else {
@@ -790,7 +895,7 @@ async function main() {
     }
 
     // Write audit log for invalid modelCost entries
-    const logsDir = path.join(__dirname, "..", "logs");
+    const logsDir = path.join(__dirname, "..", "..", "logs");
     writeAuditLog(logsDir);
 
     console.log("═".repeat(50));

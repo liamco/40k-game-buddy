@@ -100,11 +100,20 @@ export function NewList() {
 
                     <div className="space-y-1">
                         <Label>Select Detachment</Label>
-                        <SearchableDropdown options={detachmentOptions} selectedLabel={selectedDetachment?.name} placeholder="Select detachment..." searchPlaceholder="Search detachments..." emptyMessage="No detachment found." onSelect={setSelectedDetachment} renderOption={(detachment) => detachment.name} disabled={selectedFaction && factionData?.detachments && factionData.detachments.length ? false : true} />
+                        <SearchableDropdown
+                            options={detachmentOptions}
+                            selectedLabel={selectedDetachment?.name}
+                            placeholder="Select detachment..."
+                            searchPlaceholder="Search detachments..."
+                            emptyMessage="No detachment found."
+                            onSelect={setSelectedDetachment}
+                            renderOption={(detachment) => detachment.name}
+                            disabled={selectedFaction && factionData?.detachments && factionData.detachments.length ? false : true}
+                        />
                     </div>
 
                     <div className="flex gap-2 pt-4">
-                        <Button variant="ghost" onClick={handleCancel}>
+                        <Button variant="ghostSecondary" onClick={handleCancel}>
                             Cancel
                         </Button>
                         <Button onClick={handleCreateList} disabled={!selectedFaction || !selectedDetachment || !newListName.trim()} className="flex-1">

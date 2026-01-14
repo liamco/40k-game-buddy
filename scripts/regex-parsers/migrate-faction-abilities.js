@@ -12,14 +12,15 @@
  *   node scripts/migrate-faction-abilities.js
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DEPOT_DATA_PATH = path.join(__dirname, '..', 'src', 'app', 'depotdata', 'factions');
+// Read from and write to the processed data directory
+const DATA_PATH = path.join(__dirname, "..", "..", "src", "app", "data", "factions");
 
 /**
  * Deep equality check for two objects
@@ -34,8 +35,8 @@ function deepEqual(obj1, obj2) {
  * @returns {object} - Stats about the migration
  */
 function processFaction(factionDir) {
-    const factionJsonPath = path.join(factionDir, 'faction.json');
-    const datasheetsDir = path.join(factionDir, 'datasheets');
+    const factionJsonPath = path.join(factionDir, "faction.json");
+    const datasheetsDir = path.join(factionDir, "datasheets");
 
     if (!fs.existsSync(factionJsonPath)) {
         console.log(`  ⚠️  No faction.json found, skipping`);
@@ -48,7 +49,7 @@ function processFaction(factionDir) {
     }
 
     // Load faction.json
-    const factionData = JSON.parse(fs.readFileSync(factionJsonPath, 'utf-8'));
+    const factionData = JSON.parse(fs.readFileSync(factionJsonPath, "utf-8"));
 
     // Map to store unique faction abilities by ID
     const factionAbilitiesMap = new Map();
@@ -61,14 +62,13 @@ function processFaction(factionDir) {
     }
 
     // Get all datasheet files
-    const datasheetFiles = fs.readdirSync(datasheetsDir)
-        .filter(f => f.endsWith('.json'));
+    const datasheetFiles = fs.readdirSync(datasheetsDir).filter((f) => f.endsWith(".json"));
 
     let referencesAdded = 0;
 
     for (const datasheetFile of datasheetFiles) {
         const datasheetPath = path.join(datasheetsDir, datasheetFile);
-        const datasheet = JSON.parse(fs.readFileSync(datasheetPath, 'utf-8'));
+        const datasheet = JSON.parse(fs.readFileSync(datasheetPath, "utf-8"));
 
         if (!datasheet.abilities || !Array.isArray(datasheet.abilities)) {
             continue;
@@ -78,17 +78,17 @@ function processFaction(factionDir) {
         const remainingAbilities = [];
 
         for (const ability of datasheet.abilities) {
-            if (ability.type === 'Faction' && ability.id) {
+            if (ability.type === "Faction" && ability.id) {
                 // This is a faction ability - extract it
                 if (!factionAbilitiesMap.has(ability.id)) {
                     // New faction ability - add to map
                     factionAbilitiesMap.set(ability.id, {
                         id: ability.id,
                         name: ability.name,
-                        type: 'Faction',
+                        type: "Faction",
                         description: ability.description,
-                        legend: ability.legend || '',
-                        mechanics: ability.mechanics || []
+                        legend: ability.legend || "",
+                        mechanics: ability.mechanics || [],
                     });
                 } else {
                     // Check if mechanics differ and update if current has mechanics
@@ -124,7 +124,7 @@ function processFaction(factionDir) {
             datasheet.abilities = remainingAbilities;
 
             // Write updated datasheet
-            fs.writeFileSync(datasheetPath, JSON.stringify(datasheet, null, 2), 'utf-8');
+            fs.writeFileSync(datasheetPath, JSON.stringify(datasheet, null, 2), "utf-8");
         }
     }
 
@@ -132,13 +132,13 @@ function processFaction(factionDir) {
     const factionAbilities = Array.from(factionAbilitiesMap.values());
     if (factionAbilities.length > 0) {
         factionData.factionAbilities = factionAbilities;
-        fs.writeFileSync(factionJsonPath, JSON.stringify(factionData, null, 2), 'utf-8');
+        fs.writeFileSync(factionJsonPath, JSON.stringify(factionData, null, 2), "utf-8");
     }
 
     return {
         datasheets: datasheetFiles.length,
         abilitiesExtracted: factionAbilities.length,
-        referencesAdded
+        referencesAdded,
     };
 }
 
@@ -146,20 +146,21 @@ function processFaction(factionDir) {
  * Main function
  */
 function main() {
-    console.log('═'.repeat(60));
-    console.log('🔄 Migrating Faction Abilities to faction.json');
-    console.log('═'.repeat(60));
-    console.log('');
+    console.log("═".repeat(60));
+    console.log("🔄 Migrating Faction Abilities to faction.json");
+    console.log("═".repeat(60));
+    console.log("");
 
-    if (!fs.existsSync(DEPOT_DATA_PATH)) {
-        console.error(`❌ Depot data path not found: ${DEPOT_DATA_PATH}`);
+    if (!fs.existsSync(DATA_PATH)) {
+        console.error(`❌ Depot data path not found: ${DATA_PATH}`);
         process.exit(1);
     }
 
     // Get all faction directories
-    const factionDirs = fs.readdirSync(DEPOT_DATA_PATH, { withFileTypes: true })
-        .filter(d => d.isDirectory())
-        .map(d => d.name);
+    const factionDirs = fs
+        .readdirSync(DATA_PATH, { withFileTypes: true })
+        .filter((d) => d.isDirectory())
+        .map((d) => d.name);
 
     console.log(`📁 Found ${factionDirs.length} faction directories\n`);
 
@@ -167,11 +168,11 @@ function main() {
         factions: 0,
         datasheets: 0,
         abilitiesExtracted: 0,
-        referencesAdded: 0
+        referencesAdded: 0,
     };
 
     for (const factionDir of factionDirs) {
-        const factionPath = path.join(DEPOT_DATA_PATH, factionDir);
+        const factionPath = path.join(DATA_PATH, factionDir);
         console.log(`📂 Processing: ${factionDir}`);
 
         const stats = processFaction(factionPath);
@@ -188,16 +189,16 @@ function main() {
         totalStats.abilitiesExtracted += stats.abilitiesExtracted;
         totalStats.referencesAdded += stats.referencesAdded;
 
-        console.log('');
+        console.log("");
     }
 
-    console.log('═'.repeat(60));
-    console.log('📊 Migration Summary:');
+    console.log("═".repeat(60));
+    console.log("📊 Migration Summary:");
     console.log(`   📁 Factions processed: ${totalStats.factions}`);
     console.log(`   📄 Datasheets processed: ${totalStats.datasheets}`);
     console.log(`   🎯 Unique faction abilities extracted: ${totalStats.abilitiesExtracted}`);
     console.log(`   🔗 References added to datasheets: ${totalStats.referencesAdded}`);
-    console.log('═'.repeat(60));
+    console.log("═".repeat(60));
 }
 
 main();

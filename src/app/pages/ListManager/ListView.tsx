@@ -21,8 +21,55 @@ import { useListManager, type MultiLeaderValidationResult } from "./ListManagerC
 import ListItem from "./ListItem";
 
 /**
+ * Extracts the base weapon name from a weapon that may have a mode suffix.
+ * E.g., "Plasma pistol – standard" -> "plasma pistol"
+ *       "Plasma pistol - supercharge" -> "plasma pistol"
+ *       "Calibanite greatsword - strike" -> "calibanite greatsword"
+ */
+function getBaseWeaponName(weaponName: string): string {
+    // Match patterns like "Name – mode" or "Name - mode" (both dash types)
+    const match = weaponName.match(/^(.+?)\s*[–-]\s*(standard|supercharge|overcharge|strike|sweep|focused|dispersed|frag|krak|flail|sword)$/i);
+    return match ? match[1].trim().toLowerCase() : weaponName.toLowerCase();
+}
+
+/**
+ * Checks if a weapon name appears to be a mode variant (has a mode suffix).
+ */
+function isWeaponModeVariant(weaponName: string): boolean {
+    return /\s*[–-]\s*(standard|supercharge|overcharge|strike|sweep|focused|dispersed|frag|krak|flail|sword)$/i.test(weaponName);
+}
+
+/**
+ * Parses a single weapon group text (e.g., "1 boltstorm gauntlet, 1 power fist and 1 relic chainsword")
+ * and extracts the weapon names as an array.
+ */
+function parseWeaponGroup(text: string): string[] {
+    const weaponNames: string[] = [];
+
+    // Split by comma and "and" to handle "X, Y and Z" patterns
+    // First replace " and " with comma for uniform splitting
+    const normalized = text.replace(/\s+and\s+/gi, ", ");
+    const parts = normalized.split(/,\s*/);
+
+    for (const part of parts) {
+        // Remove quantity prefix like "1 " or "2 "
+        const cleanedName = part
+            .replace(/^\d+\s+/, "")
+            .trim()
+            .toLowerCase();
+        if (cleanedName && cleanedName.length > 1) {
+            weaponNames.push(cleanedName);
+        }
+    }
+
+    return weaponNames;
+}
+
+/**
  * Parses option descriptions to extract linked weapon groups.
- * E.g., "replaced with 1 auto boltstorm gauntlets and 1 fragstorm grenade launcher"
+ * Handles multiple formats:
+ * - Simple: "replaced with 1 X and 1 Y"
+ * - List items: "<li>1 X, 1 Y and 1 Z</li><li>1 X, 1 Y and 1 W</li>"
  * Returns an array of weapon name arrays, where each inner array contains weapons that must be selected together.
  */
 function parseLinkedWeapons(options: { description: string }[] | undefined): string[][] {
@@ -31,33 +78,32 @@ function parseLinkedWeapons(options: { description: string }[] | undefined): str
     const linkedGroups: string[][] = [];
 
     for (const option of options) {
-        const text = option.description.replace(/<[^>]*>/g, " ").trim();
+        const description = option.description;
 
-        // Match patterns like "replaced with 1 X and 1 Y" or "replaced with X and Y"
-        const replacedWithMatch = text.match(/replaced with\s+(.+?)\.?$/i);
-        if (!replacedWithMatch) continue;
+        // Check if the option contains list items (<li>)
+        const liMatches = description.match(/<li>([^<]+)<\/li>/gi);
 
-        const replacementText = replacedWithMatch[1];
+        if (liMatches && liMatches.length > 0) {
+            // Parse each <li> as a separate linked group
+            for (const liMatch of liMatches) {
+                const liText = liMatch.replace(/<\/?li>/gi, "").trim();
+                const weaponNames = parseWeaponGroup(liText);
 
-        // Check if there's an "and" indicating multiple weapons
-        if (/ and /i.test(replacementText)) {
-            // Split by " and " to get individual weapons
-            const weaponParts = replacementText.split(/ and /i);
-
-            const weaponNames: string[] = [];
-            for (const part of weaponParts) {
-                // Remove quantity prefix like "1 " or "2 "
-                const cleanedName = part
-                    .replace(/^\d+\s+/, "")
-                    .trim()
-                    .toLowerCase();
-                if (cleanedName) {
-                    weaponNames.push(cleanedName);
+                if (weaponNames.length > 1) {
+                    linkedGroups.push(weaponNames);
                 }
             }
+        } else {
+            // Fall back to simple "replaced with X and Y" pattern
+            const text = description.replace(/<[^>]*>/g, " ").trim();
+            const replacedWithMatch = text.match(/replaced with\s+(.+?)\.?$/i);
 
-            if (weaponNames.length > 1) {
-                linkedGroups.push(weaponNames);
+            if (replacedWithMatch) {
+                const weaponNames = parseWeaponGroup(replacedWithMatch[1]);
+
+                if (weaponNames.length > 1) {
+                    linkedGroups.push(weaponNames);
+                }
             }
         }
     }
@@ -68,7 +114,24 @@ function parseLinkedWeapons(options: { description: string }[] | undefined): str
 export function ListView() {
     const { listId } = useParams<{ listId: string }>();
     const navigate = useNavigate();
-    const { lists, listsLoaded, getListById, factionData, loadFactionDataBySlug, addDatasheetToList, removeItemFromList, updateListItem, attachLeaderToUnit, detachLeaderFromUnit, attachEnhancementToLeader, canAttachLeaderToUnit, calculateItemPoints, calculateTotalModels, parseLoadoutWeapons, parseOptionConstraint } = useListManager();
+    const {
+        lists,
+        listsLoaded,
+        getListById,
+        factionData,
+        loadFactionDataBySlug,
+        addDatasheetToList,
+        removeItemFromList,
+        updateListItem,
+        attachLeaderToUnit,
+        detachLeaderFromUnit,
+        attachEnhancementToLeader,
+        canAttachLeaderToUnit,
+        calculateItemPoints,
+        calculateTotalModels,
+        parseLoadoutWeapons,
+        parseOptionConstraint,
+    } = useListManager();
 
     const [selectedItem, setSelectedItem] = useState<ArmyListItem | null>(null);
     const [bodyguardUnits, setBodyguardUnits] = useState<Datasheet[]>([]);
@@ -217,15 +280,48 @@ export function ListView() {
         return groups.flatMap((group) => group.items);
     }, [selectedList]);
 
-    // Convert datasheets to dropdown options
+    // Get the selected detachment for filtering datasheets
+    const selectedDetachment = useMemo(() => {
+        if (!selectedList?.detachmentSlug || !factionData?.detachments) return null;
+        return factionData.detachments.find((d) => d.slug === selectedList.detachmentSlug) || null;
+    }, [selectedList?.detachmentSlug, factionData?.detachments]);
+
+    // Convert datasheets to dropdown options, filtered by detachment supplement
     const datasheetOptions = useMemo((): SearchableDropdownOption<Datasheet>[] => {
         if (!factionData?.datasheets) return [];
-        return factionData.datasheets.map((datasheet) => ({
+
+        // Filter datasheets based on detachment supplement
+        // If detachment has no supplementSlug (or is null/undefined), show all non-supplement datasheets
+        // If detachment has a supplementSlug, show:
+        //   - datasheets with supplementSlug === "codex" (available to all detachments)
+        //   - datasheets with matching supplementSlug
+        //   - datasheets with no supplementSlug (legacy/default datasheets)
+        const detachmentSupplement = selectedDetachment?.supplementSlug;
+
+        const filteredDatasheets = factionData.datasheets.filter((datasheet) => {
+            const datasheetSupplement = datasheet.supplementSlug;
+
+            // If datasheet has no supplement or is "codex", it's available to all
+            if (!datasheetSupplement || datasheetSupplement === "codex") {
+                return true;
+            }
+
+            // If detachment has a supplement, only show matching supplement datasheets
+            if (detachmentSupplement) {
+                return datasheetSupplement === detachmentSupplement;
+            }
+
+            // Detachment has no supplement - only show codex/no-supplement datasheets
+            // (which we already handled above, so supplement-specific datasheets are excluded)
+            return false;
+        });
+
+        return filteredDatasheets.map((datasheet) => ({
             id: datasheet.id,
             searchValue: `${datasheet.name} ${datasheet.roleLabel} ${datasheet.slug}`,
             data: datasheet,
         }));
-    }, [factionData]);
+    }, [factionData, selectedDetachment]);
 
     const handleAddDatasheet = async (datasheet: Datasheet) => {
         if (!selectedList) return;
@@ -391,20 +487,57 @@ export function ListView() {
         return { defaultWeapons, optionalWeapons, totalConstraint };
     }, [selectedItem, parseLoadoutWeapons, parseOptionConstraint, calculateTotalModels]);
 
-    // Create a mapping from weapon ID to its linked group (array of weapon IDs that must be selected together)
-    const linkedWeaponGroups = useMemo(() => {
-        if (!selectedItem?.options || !selectedItem?.wargear) {
-            return new Map<string, string[]>();
+    // Group weapon mode variants (e.g., "Plasma pistol – standard" and "Plasma pistol – supercharge")
+    // These are separate wargear entries that should be treated as one weapon for selection
+    const weaponModeGroups = useMemo(() => {
+        if (!categorizedWargear.optionalWeapons.length) {
+            return { groups: new Map<string, string[]>(), weaponToGroup: new Map<string, string>() };
         }
 
-        const linkedGroups = parseLinkedWeapons(selectedItem.options);
-        const weaponIdMap = new Map<string, string[]>();
+        const groups = new Map<string, string[]>(); // baseWeaponName -> [weaponId1, weaponId2, ...]
+        const weaponToGroup = new Map<string, string>(); // weaponId -> baseWeaponName
 
-        for (const group of linkedGroups) {
+        // Find all mode variants and group them by base name
+        for (const weapon of categorizedWargear.optionalWeapons) {
+            if (isWeaponModeVariant(weapon.name)) {
+                const baseName = getBaseWeaponName(weapon.name);
+                const existing = groups.get(baseName) || [];
+                existing.push(weapon.id);
+                groups.set(baseName, existing);
+                weaponToGroup.set(weapon.id, baseName);
+            }
+        }
+
+        // Only keep groups with more than one weapon (actual variants)
+        for (const [baseName, weaponIds] of groups.entries()) {
+            if (weaponIds.length <= 1) {
+                groups.delete(baseName);
+                for (const id of weaponIds) {
+                    weaponToGroup.delete(id);
+                }
+            }
+        }
+
+        return { groups, weaponToGroup };
+    }, [categorizedWargear.optionalWeapons]);
+
+    // Create linked weapon groups data structure
+    // Each group is an array of weapon IDs that must be selected together
+    // Also track which groups each weapon belongs to (can be multiple for shared weapons)
+    const linkedWeaponData = useMemo(() => {
+        if (!selectedItem?.options || !selectedItem?.wargear) {
+            return { groups: [] as string[][], weaponToGroups: new Map<string, number[]>() };
+        }
+
+        const linkedGroupNames = parseLinkedWeapons(selectedItem.options);
+        const groups: string[][] = [];
+        const weaponToGroups = new Map<string, number[]>();
+
+        for (const groupNames of linkedGroupNames) {
             // Find weapon IDs for each weapon name in the group
             const groupWeaponIds: string[] = [];
 
-            for (const weaponName of group) {
+            for (const weaponName of groupNames) {
                 const matchingWeapon = selectedItem.wargear.find((w) => {
                     const wName = w.name.toLowerCase();
                     return wName.includes(weaponName) || weaponName.includes(wName);
@@ -416,17 +549,38 @@ export function ListView() {
 
             // Only create linked group if we found multiple weapons
             if (groupWeaponIds.length > 1) {
+                const groupIndex = groups.length;
+                groups.push(groupWeaponIds);
+
+                // Map each weapon to the groups it belongs to
                 for (const weaponId of groupWeaponIds) {
-                    weaponIdMap.set(weaponId, groupWeaponIds);
+                    const existingGroups = weaponToGroups.get(weaponId) || [];
+                    existingGroups.push(groupIndex);
+                    weaponToGroups.set(weaponId, existingGroups);
                 }
             }
         }
 
-        return weaponIdMap;
+        return { groups, weaponToGroups };
     }, [selectedItem?.options, selectedItem?.wargear]);
+
+    // For backwards compatibility: create a simple map from weapon ID to its primary group
+    const linkedWeaponGroups = useMemo(() => {
+        const weaponIdMap = new Map<string, string[]>();
+        for (const group of linkedWeaponData.groups) {
+            for (const weaponId of group) {
+                // If weapon is in multiple groups, map to the first one (will be handled specially in toggle)
+                if (!weaponIdMap.has(weaponId)) {
+                    weaponIdMap.set(weaponId, group);
+                }
+            }
+        }
+        return weaponIdMap;
+    }, [linkedWeaponData]);
 
     // Calculate how many optional weapon GROUPS are currently selected
     // Linked weapons count as 1 selection, not multiple
+    // Weapon mode variants (standard/supercharge) also count as 1 selection
     const selectedOptionalCount = useMemo(() => {
         if (!selectedItem?.loadoutSelections) return 0;
 
@@ -436,51 +590,119 @@ export function ListView() {
         for (const [weaponId, selectionCount] of Object.entries(selectedItem.loadoutSelections)) {
             if (selectionCount <= 0) continue;
 
+            // Check if this weapon is part of a linked weapon group (loadout options)
             const linkedGroup = linkedWeaponGroups.get(weaponId);
             if (linkedGroup) {
                 // Create a unique key for this group (sorted IDs joined)
-                const groupKey = [...linkedGroup].sort().join(",");
+                const groupKey = "linked:" + [...linkedGroup].sort().join(",");
                 if (!countedGroups.has(groupKey)) {
                     countedGroups.add(groupKey);
                     count += 1;
                 }
-            } else {
-                // Not part of a linked group, count individually
-                count += selectionCount;
+                continue;
             }
+
+            // Check if this weapon is part of a mode variant group (e.g., plasma pistol standard/supercharge)
+            const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weaponId);
+            if (modeGroupBaseName) {
+                const modeGroupIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+                const groupKey = "mode:" + [...modeGroupIds].sort().join(",");
+                if (!countedGroups.has(groupKey)) {
+                    countedGroups.add(groupKey);
+                    count += 1;
+                }
+                continue;
+            }
+
+            // Not part of any group, count individually
+            count += selectionCount;
         }
 
         return count;
-    }, [selectedItem?.loadoutSelections, linkedWeaponGroups]);
+    }, [selectedItem?.loadoutSelections, linkedWeaponGroups, weaponModeGroups]);
 
     const toggleWeaponSelection = (weaponId: string) => {
         if (!selectedList || !selectedItem) return;
 
         const currentSelections = selectedItem.loadoutSelections || {};
-        const currentCount = currentSelections[weaponId] || 0;
-        const newCount = currentCount > 0 ? 0 : 1;
 
-        // Check if this weapon is part of a linked group
-        const linkedGroup = linkedWeaponGroups.get(weaponId);
+        // Check which linked groups this weapon belongs to (for loadout options like "X and Y")
+        const weaponGroupIndices = linkedWeaponData.weaponToGroups.get(weaponId);
 
-        if (linkedGroup) {
-            // Toggle all weapons in the linked group together
+        // Check if this weapon is part of a mode variant group (e.g., plasma pistol standard/supercharge)
+        const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weaponId);
+
+        if (weaponGroupIndices && weaponGroupIndices.length > 0) {
+            // Handle linked weapon groups (loadout options)
             const newSelections = { ...currentSelections };
 
-            // Check if we're trying to select (not deselect)
-            if (newCount > 0 && selectedOptionalCount >= categorizedWargear.totalConstraint) {
-                return;
+            // Find the group that this weapon uniquely identifies (or first group if shared)
+            const targetGroupIndex = weaponGroupIndices.length === 1 ? weaponGroupIndices[0] : weaponGroupIndices[0];
+            const targetGroup = linkedWeaponData.groups[targetGroupIndex];
+
+            // Check if this specific group is currently fully selected
+            const isGroupCurrentlySelected = targetGroup.every((id) => (currentSelections[id] ?? 0) > 0);
+
+            if (isGroupCurrentlySelected) {
+                // Deselecting: turn off all weapons in this group
+                for (const linkedWeaponId of targetGroup) {
+                    newSelections[linkedWeaponId] = 0;
+                }
+            } else {
+                // Selecting: check constraint first
+                if (selectedOptionalCount >= categorizedWargear.totalConstraint) {
+                    return;
+                }
+
+                // First, deselect all weapons from ALL linked groups (mutual exclusivity)
+                for (const group of linkedWeaponData.groups) {
+                    for (const gWeaponId of group) {
+                        newSelections[gWeaponId] = 0;
+                    }
+                }
+
+                // Then select all weapons in the target group
+                for (const linkedWeaponId of targetGroup) {
+                    newSelections[linkedWeaponId] = 1;
+                }
             }
 
-            for (const linkedWeaponId of linkedGroup) {
-                newSelections[linkedWeaponId] = newCount;
+            updateListItem(selectedList, selectedItem.listItemId, {
+                loadoutSelections: newSelections,
+            });
+        } else if (modeGroupBaseName) {
+            // Handle weapon mode variants (e.g., plasma pistol standard + supercharge)
+            const modeVariantIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+            const newSelections = { ...currentSelections };
+
+            // Check if any variant is currently selected
+            const isAnyVariantSelected = modeVariantIds.some((id) => (currentSelections[id] ?? 0) > 0);
+
+            if (isAnyVariantSelected) {
+                // Deselecting: turn off all variants
+                for (const variantId of modeVariantIds) {
+                    newSelections[variantId] = 0;
+                }
+            } else {
+                // Selecting: check constraint first
+                if (selectedOptionalCount >= categorizedWargear.totalConstraint) {
+                    return;
+                }
+
+                // Select all variants together
+                for (const variantId of modeVariantIds) {
+                    newSelections[variantId] = 1;
+                }
             }
 
             updateListItem(selectedList, selectedItem.listItemId, {
                 loadoutSelections: newSelections,
             });
         } else {
-            // Original logic for non-linked weapons
+            // Original logic for non-linked, non-variant weapons
+            const currentCount = currentSelections[weaponId] || 0;
+            const newCount = currentCount > 0 ? 0 : 1;
+
             if (newCount > 0 && selectedOptionalCount >= categorizedWargear.totalConstraint) {
                 return;
             }
@@ -492,6 +714,21 @@ export function ListView() {
                 },
             });
         }
+    };
+
+    // Toggle removal of a default weapon (removes it from attack resolver)
+    const toggleDefaultWeaponRemoval = (weaponId: string) => {
+        if (!selectedList || !selectedItem) return;
+
+        const currentRemoved = selectedItem.removedWeapons || {};
+        const isCurrentlyRemoved = currentRemoved[weaponId] === true;
+
+        updateListItem(selectedList, selectedItem.listItemId, {
+            removedWeapons: {
+                ...currentRemoved,
+                [weaponId]: !isCurrentlyRemoved,
+            },
+        });
     };
 
     if (!selectedList) {
@@ -592,7 +829,21 @@ export function ListView() {
                                                     )
                                                 );
 
-                                                return <ListItem key={item.listItemId} item={item} isSelected={isSelected} isLeader={isLeader} isAttachedUnit={isAttachedUnit} isGroupedWithPrev={isGroupedWithPrev} isGroupedWithNext={isGroupedWithNext} leaderCount={leaderCount} calculateItemPoints={calculateItemPoints} handleRemoveItem={handleRemoveItem} setSelectedItem={setSelectedItem} />;
+                                                return (
+                                                    <ListItem
+                                                        key={item.listItemId}
+                                                        item={item}
+                                                        isSelected={isSelected}
+                                                        isLeader={isLeader}
+                                                        isAttachedUnit={isAttachedUnit}
+                                                        isGroupedWithPrev={isGroupedWithPrev}
+                                                        isGroupedWithNext={isGroupedWithNext}
+                                                        leaderCount={leaderCount}
+                                                        calculateItemPoints={calculateItemPoints}
+                                                        handleRemoveItem={handleRemoveItem}
+                                                        setSelectedItem={setSelectedItem}
+                                                    />
+                                                );
                                             })}
                                         </div>
                                     )}
@@ -906,7 +1157,13 @@ export function ListView() {
                                     {categorizedWargear.defaultWeapons.length > 0 && (
                                         <div className="space-y-2">
                                             <h3 className="text-blockcaps-l">Standard Wargear</h3>
-                                            <div className="space-y-2">{categorizedWargear.defaultWeapons.map((weapon, idx) => weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} />))}</div>
+                                            <div className="space-y-2">
+                                                {categorizedWargear.defaultWeapons.map((weapon, idx) => {
+                                                    const isRemoved = selectedItem?.removedWeapons?.[weapon.id] === true;
+                                                    console.log(isRemoved);
+                                                    return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isDisabled={isRemoved} showToggleButton={pIdx === 0} onToggle={() => toggleDefaultWeaponRemoval(weapon.id)} canToggle={true} />);
+                                                })}
+                                            </div>
                                         </div>
                                     )}
 
@@ -921,44 +1178,199 @@ export function ListView() {
                                             </h3>
                                             <div className="space-y-2">
                                                 {(() => {
-                                                    // Group weapons: linked weapons together, standalone weapons separate
-                                                    const processedGroups = new Set<string>();
-                                                    const weaponGroups: { weapons: typeof categorizedWargear.optionalWeapons; isLinked: boolean }[] = [];
-
-                                                    for (const weapon of categorizedWargear.optionalWeapons) {
-                                                        const linkedGroup = linkedWeaponGroups.get(weapon.id);
-
-                                                        if (linkedGroup) {
-                                                            const groupKey = [...linkedGroup].sort().join(",");
-                                                            if (!processedGroups.has(groupKey)) {
-                                                                processedGroups.add(groupKey);
-                                                                // Find all weapons in this linked group
-                                                                const groupWeapons = categorizedWargear.optionalWeapons.filter((w) => linkedGroup.includes(w.id));
-                                                                weaponGroups.push({ weapons: groupWeapons, isLinked: true });
+                                                    // If we have linked groups, render each group separately
+                                                    if (linkedWeaponData.groups.length > 0) {
+                                                        // Track which weapons are in linked groups
+                                                        const weaponsInLinkedGroups = new Set<string>();
+                                                        for (const group of linkedWeaponData.groups) {
+                                                            for (const weaponId of group) {
+                                                                weaponsInLinkedGroups.add(weaponId);
                                                             }
-                                                        } else {
-                                                            weaponGroups.push({ weapons: [weapon], isLinked: false });
                                                         }
+
+                                                        // Find standalone weapons (not in any linked group)
+                                                        const standaloneWeapons = categorizedWargear.optionalWeapons.filter((w) => !weaponsInLinkedGroups.has(w.id));
+
+                                                        return (
+                                                            <>
+                                                                {/* Render each linked group */}
+                                                                {linkedWeaponData.groups.map((groupWeaponIds, groupIdx) => {
+                                                                    // Get weapon objects for this group
+                                                                    const groupWeapons = groupWeaponIds.map((id) => categorizedWargear.optionalWeapons.find((w) => w.id === id)).filter((w): w is (typeof categorizedWargear.optionalWeapons)[0] => w !== undefined);
+
+                                                                    if (groupWeapons.length === 0) return null;
+
+                                                                    // Check if ALL weapons in this specific group are selected
+                                                                    const isGroupSelected = groupWeaponIds.every((id) => (selectedItem?.loadoutSelections?.[id] ?? 0) > 0);
+                                                                    const canSelect = isGroupSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+
+                                                                    // Find the "unique" weapon in this group (the one that differentiates it from others)
+                                                                    // This is the weapon that belongs to only this group
+                                                                    const uniqueWeapon = groupWeapons.find((w) => {
+                                                                        const groups = linkedWeaponData.weaponToGroups.get(w.id);
+                                                                        return groups && groups.length === 1;
+                                                                    });
+                                                                    const triggerWeaponId = uniqueWeapon?.id || groupWeapons[0].id;
+
+                                                                    return (
+                                                                        <div key={`group-${groupIdx}`} className="border border-dashed border-skarsnikGreen rounded p-2 space-y-2">
+                                                                            <span className="text-xs text-muted-foreground">Loadout option {groupIdx + 1}</span>
+                                                                            {groupWeapons.map((weapon, idx) =>
+                                                                                weapon.profiles?.map((profile, pIdx) => (
+                                                                                    <WeaponProfileCard
+                                                                                        key={`${groupIdx}-${idx}-${pIdx}`}
+                                                                                        profile={profile}
+                                                                                        isSelected={isGroupSelected}
+                                                                                        showToggleButton={weapon.id === triggerWeaponId && pIdx === 0}
+                                                                                        onToggle={() => toggleWeaponSelection(triggerWeaponId)}
+                                                                                        canToggle={canSelect}
+                                                                                    />
+                                                                                ))
+                                                                            )}
+                                                                        </div>
+                                                                    );
+                                                                })}
+
+                                                                {/* Render standalone weapons, grouping mode variants together */}
+                                                                {(() => {
+                                                                    // Track which weapons we've already rendered (as part of a mode variant group)
+                                                                    const renderedWeaponIds = new Set<string>();
+                                                                    const elements: React.ReactNode[] = [];
+
+                                                                    standaloneWeapons.forEach((weapon, idx) => {
+                                                                        if (renderedWeaponIds.has(weapon.id)) return;
+
+                                                                        // Check if this weapon is part of a mode variant group
+                                                                        const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weapon.id);
+
+                                                                        if (modeGroupBaseName) {
+                                                                            // This is a mode variant - render all variants in the group together
+                                                                            const modeGroupIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+                                                                            const groupWeapons = modeGroupIds.map((id) => standaloneWeapons.find((w) => w.id === id)).filter((w): w is (typeof standaloneWeapons)[0] => w !== undefined);
+
+                                                                            // Mark all variants as rendered
+                                                                            for (const gw of groupWeapons) {
+                                                                                renderedWeaponIds.add(gw.id);
+                                                                            }
+
+                                                                            // Check if any variant in the group is selected
+                                                                            const isGroupSelected = modeGroupIds.some((id) => (selectedItem?.loadoutSelections?.[id] ?? 0) > 0);
+                                                                            const canSelect = isGroupSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+                                                                            const triggerWeaponId = groupWeapons[0]?.id || weapon.id;
+
+                                                                            elements.push(
+                                                                                <div key={`mode-group-${modeGroupBaseName}`} className="space-y-1">
+                                                                                    {groupWeapons.map((gw, gIdx) =>
+                                                                                        gw.profiles?.map((profile, pIdx) => (
+                                                                                            <WeaponProfileCard
+                                                                                                key={`mode-${modeGroupBaseName}-${gIdx}-${pIdx}`}
+                                                                                                profile={profile}
+                                                                                                isSelected={isGroupSelected}
+                                                                                                showToggleButton={gIdx === 0 && pIdx === 0}
+                                                                                                onToggle={() => toggleWeaponSelection(triggerWeaponId)}
+                                                                                                canToggle={canSelect}
+                                                                                            />
+                                                                                        ))
+                                                                                    )}
+                                                                                </div>
+                                                                            );
+                                                                        } else {
+                                                                            // Regular standalone weapon (not a mode variant)
+                                                                            renderedWeaponIds.add(weapon.id);
+                                                                            const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
+                                                                            const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+                                                                            const hasMultipleProfiles = weapon.profiles && weapon.profiles.length > 1;
+
+                                                                            if (hasMultipleProfiles) {
+                                                                                elements.push(
+                                                                                    <div key={`standalone-${idx}`} className="space-y-1">
+                                                                                        {weapon.profiles?.map((profile, pIdx) => (
+                                                                                            <WeaponProfileCard key={`standalone-${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={pIdx === 0} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />
+                                                                                        ))}
+                                                                                    </div>
+                                                                                );
+                                                                            } else {
+                                                                                weapon.profiles?.forEach((profile, pIdx) => {
+                                                                                    elements.push(<WeaponProfileCard key={`standalone-${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+
+                                                                    return elements;
+                                                                })()}
+                                                            </>
+                                                        );
                                                     }
 
-                                                    return weaponGroups.map((group, groupIdx) => {
-                                                        const firstWeapon = group.weapons[0];
-                                                        const isSelected = (selectedItem?.loadoutSelections?.[firstWeapon.id] ?? 0) > 0;
-                                                        const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+                                                    // No linked groups - render all weapons individually
+                                                    // But still group mode variants together (e.g., plasma pistol standard/supercharge)
+                                                    const renderedWeaponIds = new Set<string>();
+                                                    const elements: React.ReactNode[] = [];
 
-                                                        if (group.isLinked) {
-                                                            // Render linked weapons in a grouped container
-                                                            return (
-                                                                <div key={`group-${groupIdx}`} className="border border-dashed border-skarsnikGreen rounded p-2 space-y-2">
-                                                                    <span className="text-xs text-muted-foreground">Linked loadout option</span>
-                                                                    {group.weapons.map((weapon, idx) => weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${groupIdx}-${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={idx === 0 && pIdx === 0} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />))}
+                                                    categorizedWargear.optionalWeapons.forEach((weapon, idx) => {
+                                                        if (renderedWeaponIds.has(weapon.id)) return;
+
+                                                        // Check if this weapon is part of a mode variant group
+                                                        const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weapon.id);
+
+                                                        if (modeGroupBaseName) {
+                                                            // This is a mode variant - render all variants in the group together
+                                                            const modeGroupIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+                                                            const groupWeapons = modeGroupIds.map((id) => categorizedWargear.optionalWeapons.find((w) => w.id === id)).filter((w): w is (typeof categorizedWargear.optionalWeapons)[0] => w !== undefined);
+
+                                                            // Mark all variants as rendered
+                                                            for (const gw of groupWeapons) {
+                                                                renderedWeaponIds.add(gw.id);
+                                                            }
+
+                                                            // Check if any variant in the group is selected
+                                                            const isGroupSelected = modeGroupIds.some((id) => (selectedItem?.loadoutSelections?.[id] ?? 0) > 0);
+                                                            const canSelect = isGroupSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+                                                            const triggerWeaponId = groupWeapons[0]?.id || weapon.id;
+
+                                                            elements.push(
+                                                                <div key={`mode-group-${modeGroupBaseName}`} className="space-y-1">
+                                                                    {groupWeapons.map((gw, gIdx) =>
+                                                                        gw.profiles?.map((profile, pIdx) => (
+                                                                            <WeaponProfileCard
+                                                                                key={`mode-${modeGroupBaseName}-${gIdx}-${pIdx}`}
+                                                                                profile={profile}
+                                                                                isSelected={isGroupSelected}
+                                                                                showToggleButton={gIdx === 0 && pIdx === 0}
+                                                                                onToggle={() => toggleWeaponSelection(triggerWeaponId)}
+                                                                                canToggle={canSelect}
+                                                                            />
+                                                                        ))
+                                                                    )}
                                                                 </div>
                                                             );
                                                         } else {
-                                                            // Render standalone weapon
-                                                            return firstWeapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${groupIdx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(firstWeapon.id)} canToggle={canSelect} />);
+                                                            // Regular weapon (not a mode variant)
+                                                            renderedWeaponIds.add(weapon.id);
+                                                            const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
+                                                            const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+                                                            const hasMultipleProfiles = weapon.profiles && weapon.profiles.length > 1;
+
+                                                            if (hasMultipleProfiles) {
+                                                                // Wrap multiple profiles in a container to group them visually
+                                                                elements.push(
+                                                                    <div key={`weapon-${idx}`} className="space-y-1">
+                                                                        {weapon.profiles?.map((profile, pIdx) => (
+                                                                            <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={pIdx === 0} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />
+                                                                        ))}
+                                                                    </div>
+                                                                );
+                                                            } else {
+                                                                // Single profile weapon
+                                                                weapon.profiles?.forEach((profile, pIdx) => {
+                                                                    elements.push(<WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
+                                                                });
+                                                            }
                                                         }
                                                     });
+
+                                                    return elements;
                                                 })()}
                                             </div>
                                         </div>

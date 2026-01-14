@@ -44,8 +44,8 @@ const __dirname = path.dirname(__filename);
 // Load environment variables from .env file
 dotenv.config();
 
-// Load core abilities registry
-const coreAbilitiesPath = path.join(__dirname, "..", "src", "app", "depotdata", "core-abilities.json");
+// Load core abilities registry (from processed data directory)
+const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "core-abilities.json");
 let CORE_ABILITIES = {};
 if (fs.existsSync(coreAbilitiesPath)) {
     const coreAbilitiesData = JSON.parse(fs.readFileSync(coreAbilitiesPath, "utf-8"));
@@ -574,15 +574,17 @@ function filterByDirectories(allFiles, directoryFilters, depotdataPath) {
 }
 
 /**
- * Main function to extract effects from all JSON files in depotdata
+ * Main function to extract effects from all JSON files in processed data directory
+ * Reads from and writes to src/app/data (the processed data directory)
  * @param {string[]} fileFilters - Optional array of file paths/patterns to process (if empty, processes all)
  * @param {string[]} directoryFilters - Optional array of directory paths to process
  */
 async function processAllFiles(fileFilters = [], directoryFilters = []) {
-    const depotdataPath = path.join(__dirname, "..", "src", "app", "depotdata");
+    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data");
 
-    if (!fs.existsSync(depotdataPath)) {
-        console.error(`Error: ${depotdataPath} does not exist`);
+    if (!fs.existsSync(dataPath)) {
+        console.error(`Error: ${dataPath} does not exist`);
+        console.error(`Please run 'npm run parse-depot-data' first to generate the processed data.`);
         process.exit(1);
     }
 
@@ -626,17 +628,17 @@ async function processAllFiles(fileFilters = [], directoryFilters = []) {
         }
     }
 
-    findJsonFiles(depotdataPath);
+    findJsonFiles(dataPath);
 
     // Filter by directories first, then by files
     let jsonFiles = allJsonFiles;
 
     if (directoryFilters.length > 0) {
-        jsonFiles = filterByDirectories(jsonFiles, directoryFilters, depotdataPath);
+        jsonFiles = filterByDirectories(jsonFiles, directoryFilters, dataPath);
     }
 
     if (fileFilters.length > 0) {
-        jsonFiles = filterFiles(jsonFiles, fileFilters, depotdataPath);
+        jsonFiles = filterFiles(jsonFiles, fileFilters, dataPath);
     }
 
     const hasFilters = fileFilters.length > 0 || directoryFilters.length > 0;
@@ -655,7 +657,7 @@ async function processAllFiles(fileFilters = [], directoryFilters = []) {
 
     for (const jsonFile of jsonFiles) {
         fileIndex++;
-        const relativePath = path.relative(depotdataPath, jsonFile);
+        const relativePath = path.relative(dataPath, jsonFile);
 
         console.log(`[${fileIndex}/${jsonFiles.length}] Processing: ${relativePath}`);
 

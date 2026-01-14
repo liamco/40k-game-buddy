@@ -19,15 +19,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load core abilities registry
-const coreAbilitiesPath = path.join(
-    __dirname,
-    "..",
-    "src",
-    "app",
-    "depotdata",
-    "core-abilities.json"
-);
+// Load core abilities registry from processed data directory
+const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "core-abilities.json");
 
 let CORE_ABILITIES = {};
 if (fs.existsSync(coreAbilitiesPath)) {
@@ -135,10 +128,11 @@ function processJsonFile(filePath, dryRun = false) {
  * Main function
  */
 async function main() {
-    const depotdataPath = path.join(__dirname, "..", "src", "app", "depotdata");
+    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data");
 
-    if (!fs.existsSync(depotdataPath)) {
-        console.error(`Error: ${depotdataPath} does not exist`);
+    if (!fs.existsSync(dataPath)) {
+        console.error(`Error: ${dataPath} does not exist`);
+        console.error(`Please run 'npm run parse-depot-data' first to generate the processed data.`);
         process.exit(1);
     }
 
@@ -146,7 +140,7 @@ async function main() {
 
     console.log("\n🧹 Clean Core Abilities Script");
     console.log("═".repeat(50));
-    console.log(`📁 Data path: ${depotdataPath}`);
+    console.log(`📁 Data path: ${dataPath}`);
     console.log(`🧪 Dry run: ${dryRun ? "YES (no files will be modified)" : "NO"}`);
     console.log("");
 
@@ -170,7 +164,7 @@ async function main() {
         }
     }
 
-    findDatasheetFiles(depotdataPath);
+    findDatasheetFiles(dataPath);
 
     console.log(`📄 Found ${jsonFiles.length} datasheet files\n`);
 
@@ -186,7 +180,7 @@ async function main() {
 
         if (stats.modified) {
             totals.filesModified++;
-            const relativePath = path.relative(depotdataPath, jsonFile);
+            const relativePath = path.relative(dataPath, jsonFile);
             console.log(`✅ ${dryRun ? "[DRY RUN] Would clean" : "Cleaned"}: ${relativePath}`);
         }
 

@@ -1,11 +1,15 @@
 import React from "react";
+
 import { WeaponProfile } from "../../types";
+
 import { Badge } from "../_ui/badge";
 import { Button } from "../_ui/button";
 
 import BaseIcon from "../icons/BaseIcon.tsx";
 import IconLaurels from "../icons/IconLaurels.tsx";
 import IconLeader from "../icons/IconLeader.tsx";
+
+import strikethrough from "../../assets/Strikethrough.svg";
 
 export type BonusSourceType = "leader" | "enhancement" | "detachment";
 
@@ -27,6 +31,8 @@ export interface StatBonus {
 interface Props {
     profile: WeaponProfile;
     isSelected?: boolean;
+    isLinked?: boolean;
+    isDisabled?: boolean;
     onWeaponProfileChange?: (profile: WeaponProfile | null) => void;
     // Optional toggle mode for ListView optional weapons
     showToggleButton?: boolean;
@@ -39,7 +45,7 @@ interface Props {
     statBonuses?: StatBonus[];
 }
 
-const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showToggleButton, onToggle, canToggle = true, toggleLabel, bonusAttributes, statBonuses }: Props) => {
+const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeaponProfileChange, showToggleButton, onToggle, canToggle = true, toggleLabel, bonusAttributes, statBonuses }: Props) => {
     const handleClick = () => {
         if (showToggleButton) {
             if (canToggle && onToggle) {
@@ -49,8 +55,6 @@ const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showTog
             onWeaponProfileChange(profile);
         }
     };
-
-    const isDisabled = showToggleButton && !canToggle;
 
     // Format bonus attribute for display (e.g., "SUSTAINED HITS" + value 1 = "SUSTAINED HITS 1")
     const formatBonusAttribute = (bonus: BonusAttribute): string => {
@@ -115,70 +119,80 @@ const WeaponProfileCard = ({ profile, isSelected, onWeaponProfileChange, showTog
         );
     };
 
+    const linkedClasses = "";
+    const selectedClasses = "bg-skarsnikGreen shadow-glow-green text-deathWorldForest";
+    console.log(isDisabled);
     return (
-        <div key={profile.name} className={`rounded p-3 space-y-2 border-1 transition-colors border-skarsnikGreen ${isDisabled ? "opacity-60 cursor-not-allowed" : ""} ${showToggleButton || onWeaponProfileChange ? "cursor-pointer" : ""} ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"}`} onClick={handleClick}>
-            <div className="flex items-center justify-between">
-                <span className="text-metadata-l">{profile.name}</span>
-                {showToggleButton ? (
-                    <Button
-                        variant={isSelected ? "secondary" : "default"}
-                        size="sm"
-                        disabled={!canToggle}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            if (canToggle && onToggle) {
-                                onToggle();
-                            }
-                        }}
-                    >
-                        {toggleLabel || (isSelected ? "Equipped" : "Equip")}
-                    </Button>
-                ) : (
-                    isSelected && <span>Weapon armed</span>
-                )}
-            </div>
+        <div
+            key={profile.name}
+            className={`relative rounded p-3 border-1 transition-colors border-skarsnikGreen ${isDisabled ? "cursor-not-allowed" : ""} ${showToggleButton || onWeaponProfileChange ? "cursor-pointer" : ""} ${isSelected ? selectedClasses : "text-skarsnikGreen"} ${isLinked ? linkedClasses : ""}`}
+            onClick={handleClick}
+        >
+            <div className={`${isDisabled ? "opacity-25" : ""} space-y-2`}>
+                <div className="flex items-center justify-between">
+                    <span className="text-metadata-l">{profile.name}</span>
+                    {showToggleButton ? (
+                        <Button
+                            variant={isSelected ? "secondary" : "default"}
+                            size="sm"
+                            disabled={!canToggle}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (canToggle && onToggle) {
+                                    onToggle();
+                                }
+                            }}
+                        >
+                            {toggleLabel || (isSelected ? "Equipped" : "Equip")}
+                        </Button>
+                    ) : (
+                        isSelected && <span>Weapon armed</span>
+                    )}
+                </div>
 
-            {(profile.attributes || (bonusAttributes && bonusAttributes.length > 0)) && (
-                <div className="flex flex-wrap gap-2">
-                    {profile.attributes?.map((attr: string) => (
-                        <Badge key={attr} variant={isSelected ? "secondary" : "default"}>
-                            {attr}
-                        </Badge>
-                    ))}
-                    {bonusAttributes
-                        ?.filter((bonus) => {
-                            // Filter out bonuses that already exist in profile attributes
-                            if (!profile.attributes) return true;
-                            const bonusFormatted = formatBonusAttribute(bonus).toUpperCase();
-                            return !profile.attributes.some((attr) => attr.toUpperCase() === bonusFormatted);
-                        })
-                        .map((bonus, idx) => (
-                            <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} className={`flex items-center gap-1`} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
-                                <BaseIcon color={isSelected ? "default" : "deathWorldForest"}>
-                                    {bonus.sourceType === "leader" && <IconLeader />}
-                                    {bonus.sourceType === "enhancement" && <IconLaurels />}
-                                </BaseIcon>
-                                {formatBonusAttribute(bonus)}
+                {(profile.attributes || (bonusAttributes && bonusAttributes.length > 0)) && (
+                    <div className="flex flex-wrap gap-2">
+                        {profile.attributes?.map((attr: string) => (
+                            <Badge key={attr} variant={isSelected ? "secondary" : "default"}>
+                                {attr}
                             </Badge>
                         ))}
+                        {bonusAttributes
+                            ?.filter((bonus) => {
+                                // Filter out bonuses that already exist in profile attributes
+                                if (!profile.attributes) return true;
+                                const bonusFormatted = formatBonusAttribute(bonus).toUpperCase();
+                                return !profile.attributes.some((attr) => attr.toUpperCase() === bonusFormatted);
+                            })
+                            .map((bonus, idx) => (
+                                <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} className={`flex items-center gap-1`} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
+                                    <BaseIcon color={isSelected ? "default" : "deathWorldForest"}>
+                                        {bonus.sourceType === "leader" && <IconLeader />}
+                                        {bonus.sourceType === "enhancement" && <IconLaurels />}
+                                    </BaseIcon>
+                                    {formatBonusAttribute(bonus)}
+                                </Badge>
+                            ))}
+                    </div>
+                )}
+                <div className="grid grid-cols-6 gap-1 text-center">
+                    <span className="text-profile-attribute">Range</span>
+                    <span className="text-profile-attribute">A</span>
+                    <span className="text-profile-attribute">{profile.type === "Ranged" ? "BS" : "WS"}</span>
+                    <span className="text-profile-attribute">S</span>
+                    <span className="text-profile-attribute">AP</span>
+                    <span className="text-profile-attribute">D</span>
                 </div>
-            )}
-            <div className="grid grid-cols-6 gap-1 text-center">
-                <span className="text-profile-attribute">Range</span>
-                <span className="text-profile-attribute">A</span>
-                <span className="text-profile-attribute">{profile.type === "Ranged" ? "BS" : "WS"}</span>
-                <span className="text-profile-attribute">S</span>
-                <span className="text-profile-attribute">AP</span>
-                <span className="text-profile-attribute">D</span>
+                <div className="grid grid-cols-6 gap-1 text-center">
+                    {renderStat("range", profile.range > 0 ? profile.range : "Melee")}
+                    {renderStat("a", profile.a)}
+                    {profile.bsWs === "N/A" ? <span className="text-profile-attribute">N/A</span> : renderStat("bsWs", profile.bsWs, "+")}
+                    {renderStat("s", profile.s)}
+                    {renderStat("ap", profile.ap)}
+                    {renderStat("d", profile.d)}
+                </div>
             </div>
-            <div className="grid grid-cols-6 gap-1 text-center">
-                {renderStat("range", profile.range > 0 ? profile.range : "Melee")}
-                {renderStat("a", profile.a)}
-                {profile.bsWs === "N/A" ? <span className="text-profile-attribute">N/A</span> : renderStat("bsWs", profile.bsWs, "+")}
-                {renderStat("s", profile.s)}
-                {renderStat("ap", profile.ap)}
-                {renderStat("d", profile.d)}
-            </div>
+            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />}
         </div>
     );
 };

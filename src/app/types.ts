@@ -36,6 +36,7 @@ export interface Detachment {
     name: string;
     abilities?: any[];
     enhancements?: Enhancement[];
+    supplementSlug?: string; // e.g., "black-templars", "blood-angels" - used to filter datasheets by supplement
     [key: string]: any;
 }
 
@@ -106,6 +107,7 @@ export type ArmyListItem = Datasheet & {
     leadBy?: LeaderReference[]; // Leaders attached to this unit (supports multiple)
     enhancement?: { id: string; name: string; cost?: number }; // Enhancement attached to this leader
     loadoutSelections?: { [optionLine: number]: number }; // Track loadout option selections (count per option)
+    removedWeapons?: { [weaponId: string]: boolean }; // Track removed default weapons (excluded from attack resolver)
 };
 
 // Parsed constraint from option description text
@@ -143,6 +145,7 @@ export interface Datasheet {
     damagedDescription?: string; // Text description of damaged effects
     damagedThreshold?: number; // Upper bound of damagedW (e.g., 4)
     damagedMechanics?: DamagedMechanic[]; // Parsed mechanics for damaged profile
+    supplementSlug?: string; // e.g., "codex", "black-templars" - used to filter by detachment supplement
     [key: string]: any; // Allow for additional properties
 }
 
