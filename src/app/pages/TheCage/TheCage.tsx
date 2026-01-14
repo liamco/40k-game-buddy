@@ -189,36 +189,50 @@ export const TheCage = () => {
 
     // Handler for attacker panel list change - auto-populate defender with the other list
     const handleAttackerPanelListChange = (listId: string) => {
+        const isSwappingLists = listId === defenderListId;
+
         setAttackerListId(listId);
         // Auto-populate defender with the other list
         const otherList = panelAvailableLists.find((l) => l.id !== listId);
         if (otherList && defenderListId !== otherList.id) {
             setDefenderListId(otherList.id);
         }
-        // Clear selected units when list changes
-        setDefendingUnit(null);
-        setDefenderAttachedUnit(null);
-        setSelectedUnitModel(null);
-        setAttackingUnit(null);
-        setAttackerAttachedUnit(null);
-        setSelectedWeaponProfile(null);
+
+        if (isSwappingLists) {
+            swapUnitSelections();
+        } else {
+            // Different list selected - clear all selections
+            setDefendingUnit(null);
+            setDefenderAttachedUnit(null);
+            setSelectedUnitModel(null);
+            setAttackingUnit(null);
+            setAttackerAttachedUnit(null);
+            setSelectedWeaponProfile(null);
+        }
     };
 
     // Handler for defender panel list change - auto-populate attacker with the other list
     const handleDefenderPanelListChange = (listId: string) => {
+        const isSwappingLists = listId === attackerListId;
+
         setDefenderListId(listId);
         // Auto-populate attacker with the other list
         const otherList = panelAvailableLists.find((l) => l.id !== listId);
         if (otherList && attackerListId !== otherList.id) {
             setAttackerListId(otherList.id);
         }
-        // Clear selected units when list changes
-        setDefendingUnit(null);
-        setDefenderAttachedUnit(null);
-        setSelectedUnitModel(null);
-        setAttackingUnit(null);
-        setAttackerAttachedUnit(null);
-        setSelectedWeaponProfile(null);
+
+        if (isSwappingLists) {
+            swapUnitSelections();
+        } else {
+            // Different list selected - clear all selections
+            setDefendingUnit(null);
+            setDefenderAttachedUnit(null);
+            setSelectedUnitModel(null);
+            setAttackingUnit(null);
+            setAttackerAttachedUnit(null);
+            setSelectedWeaponProfile(null);
+        }
     };
 
     // Convert lists to Dropdown options
@@ -332,34 +346,25 @@ export const TheCage = () => {
     const [activeAttackerStratagems, setActiveAttackerStratagems] = useState<string[]>([]);
     const [activeDefenderStratagems, setActiveDefenderStratagems] = useState<string[]>([]);
 
-    const handleSwapSides = () => {
-        // Swap lists
-        const tempListId = attackerListId;
-        setAttackerListId(defenderListId);
-        setDefenderListId(tempListId);
+    // Swap unit selections between attacker and defender panels
+    const swapUnitSelections = () => {
+        const prevDefendingUnit = defendingUnit;
+        const prevDefenderAttachedUnit = defenderAttachedUnit;
+        const prevAttackingUnit = attackingUnit;
+        const prevAttackerAttachedUnit = attackerAttachedUnit;
 
         // Swap units
-        const tempUnit = attackingUnit;
-        setAttackingUnit(defendingUnit);
-        setDefendingUnit(tempUnit);
+        setAttackingUnit(prevDefendingUnit);
+        setAttackerAttachedUnit(prevDefenderAttachedUnit);
+        setDefendingUnit(prevAttackingUnit);
+        setDefenderAttachedUnit(prevAttackerAttachedUnit);
 
-        // Swap attached units
-        const tempAttached = attackerAttachedUnit;
-        setAttackerAttachedUnit(defenderAttachedUnit);
-        setDefenderAttachedUnit(tempAttached);
-
-        // Swap combat statuses
-        const tempStatus = attackerCombatStatus;
-        setAttackerCombatStatus(defenderCombatStatus);
-        setDefenderCombatStatus(tempStatus);
-
-        // Auto-select first weapon profile for new attacking unit based on phase
-        const newWeaponProfile = defendingUnit ? getFirstWeaponProfileForPhase(defendingUnit.wargear, gamePhase) : null;
+        // Auto-select first weapon profile for new attacker based on phase
+        const newWeaponProfile = prevDefendingUnit ? getFirstWeaponProfileForPhase(prevDefendingUnit.wargear, gamePhase) : null;
         setSelectedWeaponProfile(newWeaponProfile);
 
-        // Auto-select first valid model for new defending unit (respecting precision)
-        // Note: after swap, attackingUnit becomes the defender, defenderAttachedUnit becomes attackerAttachedUnit
-        const newModel = getFirstValidModel(attackingUnit, defenderAttachedUnit, newWeaponProfile);
+        // Auto-select first valid model for new defender (respecting precision)
+        const newModel = getFirstValidModel(prevAttackingUnit, prevAttackerAttachedUnit, newWeaponProfile);
         setSelectedUnitModel(newModel);
     };
 
@@ -488,9 +493,53 @@ export const TheCage = () => {
                 </div>
                 <GamePhaseSelector currentPhase={gamePhase} onPhaseChange={setGamePhase} />
             </nav>
-            <AttackerPanel gamePhase={gamePhase} unit={attackingUnit} attachedUnit={attackerAttachedUnit} onUnitChange={changeAttackingUnit} selectedWeaponProfile={selectedWeaponProfile} onWeaponProfileChange={setSelectedWeaponProfile} combatStatus={attackerCombatStatus} onCombatStatusChange={handleAttackerStatusChange} selectedList={attackerList} modelCount={attackerModelCount} startingStrength={attackerStartingStrength} onModelCountChange={setAttackerModelCount} availableLists={panelAvailableLists} onListChange={handleAttackerPanelListChange} />
-            <DefenderPanel gamePhase={gamePhase} unit={defendingUnit} attachedUnit={defenderAttachedUnit} onUnitChange={changeDefendingUnit} selectedUnitModel={selectedUnitModel} onUnitModelChange={setSelectedUnitModel} combatStatus={defenderCombatStatus} onCombatStatusChange={handleDefenderStatusChange} selectedList={defenderList} selectedWeaponProfile={selectedWeaponProfile} modelCount={defenderModelCount} startingStrength={defenderStartingStrength} onModelCountChange={setDefenderModelCount} availableLists={panelAvailableLists} onListChange={handleDefenderPanelListChange} />
-            <AttackResolver gamePhase={gamePhase} attackingUnit={attackingUnit} attackerAttachedUnit={attackerAttachedUnit} defendingUnit={defendingUnit} defenderAttachedUnit={defenderAttachedUnit} selectedWeaponProfile={selectedWeaponProfile} selectedDefendingModel={selectedUnitModel} attackerCombatStatus={attackerCombatStatus} defenderCombatStatus={defenderCombatStatus} activeAttackerStratagems={activeAttackerStratagems} activeDefenderStratagems={activeDefenderStratagems} attackerModelCount={attackerModelCount} />
+            <AttackerPanel
+                gamePhase={gamePhase}
+                unit={attackingUnit}
+                attachedUnit={attackerAttachedUnit}
+                onUnitChange={changeAttackingUnit}
+                selectedWeaponProfile={selectedWeaponProfile}
+                onWeaponProfileChange={setSelectedWeaponProfile}
+                combatStatus={attackerCombatStatus}
+                onCombatStatusChange={handleAttackerStatusChange}
+                selectedList={attackerList}
+                modelCount={attackerModelCount}
+                startingStrength={attackerStartingStrength}
+                onModelCountChange={setAttackerModelCount}
+                availableLists={panelAvailableLists}
+                onListChange={handleAttackerPanelListChange}
+            />
+            <DefenderPanel
+                gamePhase={gamePhase}
+                unit={defendingUnit}
+                attachedUnit={defenderAttachedUnit}
+                onUnitChange={changeDefendingUnit}
+                selectedUnitModel={selectedUnitModel}
+                onUnitModelChange={setSelectedUnitModel}
+                combatStatus={defenderCombatStatus}
+                onCombatStatusChange={handleDefenderStatusChange}
+                selectedList={defenderList}
+                selectedWeaponProfile={selectedWeaponProfile}
+                modelCount={defenderModelCount}
+                startingStrength={defenderStartingStrength}
+                onModelCountChange={setDefenderModelCount}
+                availableLists={panelAvailableLists}
+                onListChange={handleDefenderPanelListChange}
+            />
+            <AttackResolver
+                gamePhase={gamePhase}
+                attackingUnit={attackingUnit}
+                attackerAttachedUnit={attackerAttachedUnit}
+                defendingUnit={defendingUnit}
+                defenderAttachedUnit={defenderAttachedUnit}
+                selectedWeaponProfile={selectedWeaponProfile}
+                selectedDefendingModel={selectedUnitModel}
+                attackerCombatStatus={attackerCombatStatus}
+                defenderCombatStatus={defenderCombatStatus}
+                activeAttackerStratagems={activeAttackerStratagems}
+                activeDefenderStratagems={activeDefenderStratagems}
+                attackerModelCount={attackerModelCount}
+            />
             {/*<StratagemList scope="Attacker" gamePhase={gamePhase} gameTurn="YOURS" selectedList={attackerList} />
             <StratagemList scope="Defender" gamePhase={gamePhase} gameTurn="OPPONENTS" selectedList={defenderList} />*/}
         </main>

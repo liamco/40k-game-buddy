@@ -29,12 +29,12 @@ const ListItem = ({ calculateItemPoints, item, handleRemoveItem, setSelectedItem
         >
             <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
+                    <span className="font-medium text-sm">{item.name}</span>
                     {isLeader && (
                         <BaseIcon color={isSelected ? "deathWorldForest" : "default"}>
                             <IconLeader />
                         </BaseIcon>
                     )}
-                    <span className="font-medium text-sm">{item.name}</span>
                 </div>
                 <div className="flex gap-2 items-center">
                     <Badge variant={isSelected ? "outlineDark" : "outline"}>{calculateItemPoints(item)} pts</Badge>
