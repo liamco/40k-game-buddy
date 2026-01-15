@@ -33,8 +33,8 @@ interface DialogContentProps extends React.ComponentProps<typeof DialogPrimitive
 }
 
 const themeStyles: Record<DialogTheme, string> = {
-    fireDragonBright: "bg-mournfangBrown text-fireDragonBright",
-    skarsnikGreen: "bg-deathWorldForest text-skarsnikGreen",
+    fireDragonBright: "bg-mournfangBrown text-fireDragonBright border-1 border-fireDragonBright",
+    skarsnikGreen: "bg-deathWorldForest text-skarsnikGreen border-1 border-skarsnikGreen",
 };
 
 function DialogContent({ className, children, theme = "fireDragonBright", ...props }: DialogContentProps) {
@@ -45,7 +45,7 @@ function DialogContent({ className, children, theme = "fireDragonBright", ...pro
                 data-slot="dialog-content"
                 className={cn(
                     themeStyles[theme],
-                    "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded border p-6 shadow-lg duration-200 sm:max-w-lg",
+                    "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded border p-6 shadow-lg duration-200",
                     className
                 )}
                 {...props}

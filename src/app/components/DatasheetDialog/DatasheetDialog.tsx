@@ -32,8 +32,8 @@ export function DatasheetDialog({ unit, trigger }: DatasheetDialogProps) {
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0" theme="skarsnikGreen">
-                <DialogHeader className="p-6 pb-0 space-y-2">
+            <DialogContent className="max-w-[90vw] max-h-[90vh] overflow-auto p-0" theme="skarsnikGreen">
+                <DialogHeader className="p-6 space-y-2 border-b-1 border-skarsnikGreen">
                     <div className="flex items-start justify-between gap-4 pr-8">
                         <DialogTitle className="text-xl">{unit.name}</DialogTitle>
                         {unit.modelCosts && unit.modelCosts.length > 0 && <Badge variant="outline">{unit.modelCosts[0].cost} pts</Badge>}
@@ -52,7 +52,7 @@ export function DatasheetDialog({ unit, trigger }: DatasheetDialogProps) {
 
                     {unit.legend && (
                         <p
-                            className="text-sm italic text-muted-foreground"
+                            className="italic"
                             dangerouslySetInnerHTML={{
                                 __html: unit.legend,
                             }}
