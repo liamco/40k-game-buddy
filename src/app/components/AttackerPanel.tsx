@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, Fragment } from "react";
-import { Info, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
 import Dropdown, { type DropdownOption } from "./Dropdown/Dropdown";
 import { Badge } from "./_ui/badge";
@@ -11,6 +11,7 @@ import CombatStatusComponent from "./CombatStatus/CombatStatus";
 import SplitHeading from "./SplitHeading/SplitHeading";
 import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
 import EnhancementCard from "./EnhancementCard/EnhancementCard";
+import DatasheetDialog from "./DatasheetDialog/DatasheetDialog";
 
 // Weapon attributes that can be added by enhancements/abilities
 const WEAPON_ABILITY_KEYWORDS = ["SUSTAINED HITS", "LETHAL HITS", "DEVASTATING WOUNDS", "ANTI-", "TORRENT", "BLAST", "HEAVY", "ASSAULT", "RAPID FIRE", "PISTOL", "MELTA", "LANCE", "TWIN-LINKED", "HAZARDOUS", "PRECISION", "IGNORES COVER"];
@@ -579,6 +580,13 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                 <Fragment>
                     <div className="col-span-3 space-y-4">
                         <SplitHeading label="Select unit armament" />
+
+                        {/* Unit name with datasheet info button */}
+                        <div className="flex items-center gap-2">
+                            <h3 className="text-blockcaps-l">{selectedUnitDisplayName}</h3>
+                            <DatasheetDialog unit={unit} />
+                        </div>
+
                         {/* Display leader combat bonuses when a combined unit is selected */}
                         {attachedLeaders.length > 0 && (leaderCombatBonuses.hitBonuses.length > 0 || leaderCombatBonuses.woundBonuses.length > 0 || leaderCombatBonuses.otherBonuses.length > 0) && (
                             <div className=" border-1 border-fireDragonBright bg-mournfangBrown text-fireDragonBright rounded p-3 space-y-2">
@@ -665,6 +673,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                                 // Regular unit: show weapons without grouping
                                 return (
                                     <div className="space-y-2">
+                                        <span className="inline-block">{unit.name}</span>
                                         {filteredWeapons.map((weapon) => (
                                             <Fragment key={weapon.name}>
                                                 {weapon.profiles.map((profile: WeaponProfile) => {

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from "react";
 
 import { getAllFactions, loadFactionData, loadDatasheetData } from "../../utils/depotDataLoader";
-import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, LeaderReference, LeaderCondition } from "../../types";
+import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, LeaderReference, LeaderCondition, UnitCombatState } from "../../types";
 
 /**
  * Result of multi-leader attachment validation
@@ -162,6 +162,7 @@ interface ListManagerContextType {
     addDatasheetToList: (list: ArmyList, datasheet: Datasheet) => Promise<ArmyList>;
     removeItemFromList: (list: ArmyList, itemId: string) => ArmyList;
     updateListItem: (list: ArmyList, itemId: string, updates: Partial<ArmyListItem>) => ArmyList;
+    updateItemCombatState: (listId: string, itemId: string, combatState: Partial<UnitCombatState>) => void;
 
     // Attachment operations
     attachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace?: boolean) => ArmyList;
@@ -511,6 +512,23 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         return updatedList;
     }, []);
 
+    const updateItemCombatState = useCallback((listId: string, itemId: string, combatStateUpdates: Partial<UnitCombatState>) => {
+        setLists((prev) =>
+            prev.map((list) => {
+                if (list.id !== listId) return list;
+                const updatedItems = list.items.map((item) => {
+                    if (item.listItemId !== itemId) return item;
+                    const existingCombatState = item.combatState || {};
+                    return {
+                        ...item,
+                        combatState: { ...existingCombatState, ...combatStateUpdates },
+                    };
+                });
+                return { ...list, items: updatedItems, updatedAt: Date.now() };
+            })
+        );
+    }, []);
+
     // Validate if a leader can attach to a unit (considering existing leaders)
     const canAttachLeaderToUnit = useCallback((list: ArmyList, leaderItemId: string, targetUnitItemId: string): MultiLeaderValidationResult => {
         const leaderItem = list.items.find((item) => item.listItemId === leaderItemId);
@@ -657,6 +675,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         addDatasheetToList,
         removeItemFromList,
         updateListItem,
+        updateItemCombatState,
         attachLeaderToUnit,
         detachLeaderFromUnit,
         attachEnhancementToLeader,

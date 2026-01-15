@@ -98,6 +98,12 @@ export interface ArmyList {
     updatedAt: number;
 }
 
+// Combat state stored per unit for session persistence
+export interface UnitCombatState {
+    modelCount?: number; // Current model count (for tracking casualties)
+    isDamaged?: boolean; // Whether the unit is damaged (bracketed)
+}
+
 // ArmyListItem extends Datasheet with list-specific metadata
 export type ArmyListItem = Datasheet & {
     listItemId: string; // Unique ID for this list entry (allows same unit multiple times)
@@ -109,6 +115,7 @@ export type ArmyListItem = Datasheet & {
     enhancement?: { id: string; name: string; cost?: number }; // Enhancement attached to this leader
     loadoutSelections?: { [optionLine: number]: number }; // Track loadout option selections (count per option)
     removedWeapons?: { [weaponId: string]: boolean }; // Track removed default weapons (excluded from attack resolver)
+    combatState?: UnitCombatState; // Persisted combat state (model count, damaged status)
 };
 
 // Parsed constraint from option description text

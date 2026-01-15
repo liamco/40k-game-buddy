@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, Fragment } from "react";
 import { ArrowLeftRight } from "lucide-react";
 
-import type { GamePhase, ArmyList, Datasheet, WeaponProfile, Model, ArmyListItem } from "./types";
+import type { GamePhase, ArmyList, Datasheet, WeaponProfile, Model, ArmyListItem, UnitCombatState, Weapon } from "../../types";
 
 /**
  * Calculate the total model count from an ArmyListItem's composition.
@@ -37,7 +37,6 @@ function calculateModelCount(item: ArmyListItem, attachedItem?: ArmyListItem | n
 import { createDefaultCombatStatus, type CombatStatus, type CombatStatusFlag } from "../../game-engine";
 
 import { loadDatasheetData } from "../../utils/depotDataLoader";
-import type { Weapon } from "../../types";
 
 /**
  * Get the first weapon profile matching the current game phase.
@@ -94,6 +93,36 @@ import StratagemList from "../../components/Stratagems/StratagemList";
 
 const STORAGE_KEY = "battle-cogitator-army-lists";
 const SESSION_STORAGE_KEY = "battle-cogitator-selected-lists";
+
+/**
+ * Update combat state for a specific unit in localStorage.
+ * This allows persisting combat state changes (model count, damaged status) across sessions.
+ */
+function updateCombatStateInStorage(listId: string, itemId: string, combatStateUpdates: Partial<UnitCombatState>) {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return;
+
+    try {
+        const lists: ArmyList[] = JSON.parse(stored);
+        const updatedLists = lists.map((list) => {
+            if (list.id !== listId) return list;
+            const updatedItems = list.items.map((item) => {
+                if (item.listItemId !== itemId) return item;
+                const existingCombatState = item.combatState || {};
+                return {
+                    ...item,
+                    combatState: { ...existingCombatState, ...combatStateUpdates },
+                };
+            });
+            return { ...list, items: updatedItems, updatedAt: Date.now() };
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedLists));
+        window.dispatchEvent(new Event("listsUpdated"));
+    } catch (error) {
+        console.error("Error updating combat state in storage:", error);
+    }
+}
 
 export const TheCage = () => {
     const [gamePhase, setGamePhase] = useState<GamePhase>("SHOOTING");
@@ -272,10 +301,50 @@ export const TheCage = () => {
 
     const handleAttackerStatusChange = (name: CombatStatusFlag, value: boolean) => {
         setAttackerCombatStatus((prev) => ({ ...prev, [name]: value }));
+
+        // Persist damaged status to localStorage
+        if (name === "isDamaged" && attackingUnit && attackerListId) {
+            const listItem = attackingUnit as ArmyListItem;
+            if (listItem.listItemId) {
+                updateCombatStateInStorage(attackerListId, listItem.listItemId, { isDamaged: value });
+            }
+        }
     };
 
     const handleDefenderStatusChange = (name: CombatStatusFlag, value: boolean) => {
         setDefenderCombatStatus((prev) => ({ ...prev, [name]: value }));
+
+        // Persist damaged status to localStorage
+        if (name === "isDamaged" && defendingUnit && defenderListId) {
+            const listItem = defendingUnit as ArmyListItem;
+            if (listItem.listItemId) {
+                updateCombatStateInStorage(defenderListId, listItem.listItemId, { isDamaged: value });
+            }
+        }
+    };
+
+    const handleAttackerModelCountChange = (count: number) => {
+        setAttackerModelCount(count);
+
+        // Persist model count to localStorage
+        if (attackingUnit && attackerListId) {
+            const listItem = attackingUnit as ArmyListItem;
+            if (listItem.listItemId) {
+                updateCombatStateInStorage(attackerListId, listItem.listItemId, { modelCount: count });
+            }
+        }
+    };
+
+    const handleDefenderModelCountChange = (count: number) => {
+        setDefenderModelCount(count);
+
+        // Persist model count to localStorage
+        if (defendingUnit && defenderListId) {
+            const listItem = defendingUnit as ArmyListItem;
+            if (listItem.listItemId) {
+                updateCombatStateInStorage(defenderListId, listItem.listItemId, { modelCount: count });
+            }
+        }
     };
 
     // Auto-calculate "below starting strength" and "below half strength" based on model count
@@ -394,10 +463,18 @@ export const TheCage = () => {
                     setAttackerAttachedUnit(null);
                 }
 
-                // Calculate and set starting strength based on unit composition
+                // Calculate starting strength based on unit composition
                 const startingStrength = calculateModelCount(listItem, attachedListItem);
                 setAttackerStartingStrength(startingStrength);
-                setAttackerModelCount(startingStrength);
+
+                // Load persisted model count from combat state, or use starting strength as default
+                const persistedModelCount = listItem.combatState?.modelCount;
+                setAttackerModelCount(persistedModelCount !== undefined ? persistedModelCount : startingStrength);
+
+                // Load persisted damaged status from combat state
+                if (listItem.combatState?.isDamaged !== undefined) {
+                    setAttackerCombatStatus((prev) => ({ ...prev, isDamaged: listItem.combatState!.isDamaged! }));
+                }
 
                 // Auto-select the first weapon profile based on current game phase
                 const newWeaponProfile = getFirstWeaponProfileForPhase(data.wargear, gamePhase);
@@ -439,10 +516,18 @@ export const TheCage = () => {
                     setDefenderAttachedUnit(null);
                 }
 
-                // Calculate and set starting strength based on unit composition
+                // Calculate starting strength based on unit composition
                 const startingStrength = calculateModelCount(listItem, attachedListItem);
                 setDefenderStartingStrength(startingStrength);
-                setDefenderModelCount(startingStrength);
+
+                // Load persisted model count from combat state, or use starting strength as default
+                const persistedModelCount = listItem.combatState?.modelCount;
+                setDefenderModelCount(persistedModelCount !== undefined ? persistedModelCount : startingStrength);
+
+                // Load persisted damaged status from combat state
+                if (listItem.combatState?.isDamaged !== undefined) {
+                    setDefenderCombatStatus((prev) => ({ ...prev, isDamaged: listItem.combatState!.isDamaged! }));
+                }
 
                 // Auto-select the first valid model (respecting precision rules)
                 const validModel = getFirstValidModel(data, attachedData, selectedWeaponProfile);
@@ -505,7 +590,7 @@ export const TheCage = () => {
                 selectedList={attackerList}
                 modelCount={attackerModelCount}
                 startingStrength={attackerStartingStrength}
-                onModelCountChange={setAttackerModelCount}
+                onModelCountChange={handleAttackerModelCountChange}
                 availableLists={panelAvailableLists}
                 onListChange={handleAttackerPanelListChange}
             />
@@ -522,7 +607,7 @@ export const TheCage = () => {
                 selectedWeaponProfile={selectedWeaponProfile}
                 modelCount={defenderModelCount}
                 startingStrength={defenderStartingStrength}
-                onModelCountChange={setDefenderModelCount}
+                onModelCountChange={handleDefenderModelCountChange}
                 availableLists={panelAvailableLists}
                 onListChange={handleDefenderPanelListChange}
             />
