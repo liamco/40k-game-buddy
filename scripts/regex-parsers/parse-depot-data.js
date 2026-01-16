@@ -848,11 +848,11 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
 
 /**
  * Main function to process all JSON files in data/src
- * Reads from src/app/data/src and outputs to src/app/data/dist
+ * Reads from src/app/data/src and outputs to src/app/data/output
  */
 async function main() {
     const depotdataPath = path.join(__dirname, "..", "..", "src", "app", "data", "src");
-    const outputPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist");
+    const outputPath = path.join(__dirname, "..", "..", "src", "app", "data", "output");
 
     if (!fs.existsSync(depotdataPath)) {
         console.error(`Error: ${depotdataPath} does not exist`);

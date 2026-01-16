@@ -60,7 +60,7 @@ function sleep(ms) {
 }
 
 // Load core abilities registry (from processed data directory)
-const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist", "core-abilities.json");
+const coreAbilitiesPath = path.join(__dirname, "..", "..", "src", "app", "data", "output", "core-abilities.json");
 let CORE_ABILITIES = {};
 if (fs.existsSync(coreAbilitiesPath)) {
     const coreAbilitiesData = JSON.parse(fs.readFileSync(coreAbilitiesPath, "utf-8"));
@@ -615,12 +615,12 @@ function filterByDirectories(allFiles, directoryFilters, depotdataPath) {
 
 /**
  * Main function to extract effects from all JSON files in processed data directory
- * Reads from and writes to src/app/data/dist (the processed data directory)
+ * Reads from and writes to src/app/data/output (the processed data directory)
  * @param {string[]} fileFilters - Optional array of file paths/patterns to process (if empty, processes all)
  * @param {string[]} directoryFilters - Optional array of directory paths to process
  */
 async function processAllFiles(fileFilters = [], directoryFilters = []) {
-    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data", "dist");
+    const dataPath = path.join(__dirname, "..", "..", "src", "app", "data", "output");
 
     if (!fs.existsSync(dataPath)) {
         console.error(`Error: ${dataPath} does not exist`);

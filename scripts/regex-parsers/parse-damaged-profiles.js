@@ -18,7 +18,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Read from and write to the processed data directory
-const DATA_PATH = path.join(__dirname, "..", "..", "src", "app", "data", "dist", "factions");
+const DATA_PATH = path.join(__dirname, "..", "..", "src", "app", "data", "output", "factions");
 
 const DRY_RUN = process.argv.includes("--dry-run");
 

@@ -1,20 +1,20 @@
-import factionsIndexData from "../data/dist/index.json";
+import factionsIndexData from "../data/output/index.json";
 import type { Faction, Datasheet, Faction, Stratagem, FactionIndex } from "../types";
 
 // Use Vite's import.meta.glob for dynamic imports
 // Note: The paths must match exactly, so we'll use a function to construct them
-// Data is loaded from src/app/data/dist (generated data directory)
-const factionModules = import.meta.glob("../data/dist/factions/*/faction.json", {
+// Data is loaded from src/app/data/output (generated data directory)
+const factionModules = import.meta.glob("../data/output/factions/*/faction.json", {
     eager: false,
     import: "default",
 });
 
-const datasheetModules = import.meta.glob("../data/dist/factions/*/datasheets/*.json", {
+const datasheetModules = import.meta.glob("../data/output/factions/*/datasheets/*.json", {
     eager: false,
     import: "default",
 });
 
-const globalStratagemModules = import.meta.glob("../data/dist/core-stratagems.json", {
+const globalStratagemModules = import.meta.glob("../data/output/core-stratagems.json", {
     eager: false,
     import: "default",
 });
