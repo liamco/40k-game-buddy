@@ -3,6 +3,8 @@ import { Scroll } from "lucide-react";
 
 import type { ArmyList, GamePhase, GameTurn, Stratagem } from "../../types";
 
+import styles from "./StratagemDialog.module.css";
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../_ui/dialog";
 import { Button } from "../_ui/button";
 import { ScrollArea } from "../_ui/scroll-area";
@@ -17,6 +19,7 @@ interface StratagemDialogProps {
     gamePhase: GamePhase;
     selectedList: ArmyList | null;
     trigger?: React.ReactNode;
+    disabled?: boolean;
 }
 
 // Map combat side to game turn for filtering
@@ -25,7 +28,7 @@ const sideToTurn: Record<CombatSide, GameTurn> = {
     defender: "OPPONENTS",
 };
 
-export function StratagemDialog({ side, gamePhase, selectedList, trigger }: StratagemDialogProps) {
+export function StratagemDialog({ side, gamePhase, selectedList, trigger, disabled = false }: StratagemDialogProps) {
     const [globalStratagemData, setGlobalStratagemData] = useState<Stratagem[]>([]);
     const [factionStratagemData, setFactionStratagemData] = useState<Stratagem[]>([]);
 
@@ -68,14 +71,10 @@ export function StratagemDialog({ side, gamePhase, selectedList, trigger }: Stra
 
     return (
         <Dialog>
-            <DialogTrigger asChild>
+            <DialogTrigger asChild disabled={disabled}>
                 {trigger || (
-                    <Button variant="default" className="w-full">
-                        <span className="flex items-center gap-4">
-                            <span>+++</span>
-                            <span className="text-blockcaps-m">available stratagems</span>
-                            <span>+++</span>
-                        </span>
+                    <Button variant="default" disabled={disabled}>
+                        Stratagems
                     </Button>
                 )}
             </DialogTrigger>

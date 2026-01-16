@@ -10,6 +10,8 @@ import SplitHeading from "./SplitHeading/SplitHeading";
 import ModelProfileCard from "./ModelProfileCard/ModelProfileCard";
 import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
 import StratagemDialog from "./StratagemDialog/StratagemDialog";
+import BaseIcon from "./icons/BaseIcon";
+import IconSkull from "./icons/IconSkull";
 
 interface DefenderPanelProps {
     gamePhase: GamePhase;
@@ -312,8 +314,8 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     };
 
     return (
-        <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
-            <header className="col-span-5 flex">
+        <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] border-1 border-skarsnikGreen rounded overflow-hidden">
+            <header className="col-span-5 flex px-4 pt-4">
                 <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
                 <SearchableDropdown
                     options={unitOptions}
@@ -327,7 +329,7 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                 />
             </header>
             {unit ? (
-                <Fragment>
+                <div className="px-4 pt-4 overflow-auto grid col-span-5 grid-cols-5 gap-4">
                     <div className="col-span-3 space-y-4">
                         <SplitHeading label="Target composition" />
                         {unit && unit.abilities && unit?.abilities.length > 0 && (
@@ -384,12 +386,19 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                         <SplitHeading label="Combat status" />
                         <CombatStatusComponent side="defender" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} unit={unit} gamePhase={gamePhase} />
                     </div>
-                </Fragment>
+                </div>
             ) : (
                 <CombatantPanelEmpty combatant="defender" />
             )}
-            <footer className="col-span-5">
-                <StratagemDialog side="defender" gamePhase={gamePhase} selectedList={selectedList} />
+            <footer className="col-span-5 flex justify-between w-full p-4 border-t-1 border-skarsnikGreen bg-[url(/assets/stripes.svg)]">
+                <span className="flex items-center gap-2">
+                    <BaseIcon>
+                        <IconSkull />
+                    </BaseIcon>
+                    <span className="text-blockcaps-m">defensive stratagems</span>
+                    <span>+++</span>
+                </span>
+                <StratagemDialog side="defender" gamePhase={gamePhase} selectedList={selectedList} disabled={combatStatus.isBattleShocked} />
             </footer>
         </section>
     );

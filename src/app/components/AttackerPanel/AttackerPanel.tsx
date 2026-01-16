@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useMemo, Fragment } from "react";
 import { Sparkles } from "lucide-react";
-import SearchableDropdown, { type SearchableDropdownOption } from "./SearchableDropdown/SearchableDropdown";
-import Dropdown, { type DropdownOption } from "./Dropdown/Dropdown";
-import { Badge } from "./_ui/badge";
-import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem, Detachment, Enhancement, DamagedMechanic } from "../types";
-import { loadFactionData } from "../utils/depotDataLoader";
-import WeaponProfileCard, { type BonusAttribute, type StatBonus } from "./WeaponProfileCard/WeaponProfileCard";
-import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type UnitContext, type CombatStatus, type CombatStatusFlag } from "../game-engine";
-import CombatStatusComponent from "./CombatStatus/CombatStatus";
-import SplitHeading from "./SplitHeading/SplitHeading";
-import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
-import EnhancementCard from "./EnhancementCard/EnhancementCard";
-import DatasheetDialog from "./DatasheetDialog/DatasheetDialog";
-import StratagemDialog from "./StratagemDialog/StratagemDialog";
+import SearchableDropdown, { type SearchableDropdownOption } from "../SearchableDropdown/SearchableDropdown";
+import Dropdown, { type DropdownOption } from "../Dropdown/Dropdown";
+import { Badge } from "../_ui/badge";
+import type { Weapon, ArmyList, Datasheet, Faction, WeaponProfile, GamePhase, ArmyListItem, Detachment, Enhancement, DamagedMechanic } from "../../types";
+import { loadFactionData } from "../../utils/depotDataLoader";
+import WeaponProfileCard, { type BonusAttribute, type StatBonus } from "../WeaponProfileCard/WeaponProfileCard";
+import { collectUnitAbilities, createDefaultCombatStatus, type Mechanic, type UnitContext, type CombatStatus, type CombatStatusFlag } from "../../game-engine";
+import CombatStatusComponent from "../CombatStatus/CombatStatus";
+import SplitHeading from "../SplitHeading/SplitHeading";
+import CombatantPanelEmpty from "../CombatantPanelEmpty/CombatantPanelEmpty";
+import EnhancementCard from "../EnhancementCard/EnhancementCard";
+import DatasheetDialog from "../DatasheetDialog/DatasheetDialog";
+import StratagemDialog from "../StratagemDialog/StratagemDialog";
+import BaseIcon from "../icons/BaseIcon";
+import IconSkull from "../icons/IconSkull";
 
 // Weapon attributes that can be added by enhancements/abilities
 const WEAPON_ABILITY_KEYWORDS = ["SUSTAINED HITS", "LETHAL HITS", "DEVASTATING WOUNDS", "ANTI-", "TORRENT", "BLAST", "HEAVY", "ASSAULT", "RAPID FIRE", "PISTOL", "MELTA", "LANCE", "TWIN-LINKED", "HAZARDOUS", "PRECISION", "IGNORES COVER"];
@@ -563,8 +565,8 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
     };
 
     return (
-        <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
-            <header className="col-span-5 flex">
+        <section className="relative grid grid-cols-5 grid-rows-[auto_1fr_auto] border-1 border-skarsnikGreen rounded overflow-hidden">
+            <header className="col-span-5 flex px-4 pt-4">
                 <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
                 <SearchableDropdown
                     options={unitOptions}
@@ -578,7 +580,7 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                 />
             </header>
             {unit ? (
-                <Fragment>
+                <div className="overflow-auto col-span-5 grid grid-cols-5 px-4 pt-4 gap-4">
                     <div className="col-span-3 space-y-4">
                         <SplitHeading label="Select unit armament" />
 
@@ -691,12 +693,19 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
                         <SplitHeading label="Combat status" />
                         <CombatStatusComponent side="attacker" combatStatus={combatStatus} onStatusChange={onCombatStatusChange} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} unit={unit} gamePhase={gamePhase} />
                     </div>
-                </Fragment>
+                </div>
             ) : (
                 <CombatantPanelEmpty combatant="attacker" />
             )}
-            <footer className="col-span-5">
-                <StratagemDialog side="attacker" gamePhase={gamePhase} selectedList={selectedList} />
+            <footer className="col-span-5 flex justify-between w-full p-4 border-t-1 border-skarsnikGreen bg-[url(/assets/stripes.svg)]">
+                <span className="flex items-center gap-2">
+                    <BaseIcon>
+                        <IconSkull />
+                    </BaseIcon>
+                    <span className="text-blockcaps-m">offensive stratagems</span>
+                    <span>+++</span>
+                </span>
+                <StratagemDialog side="attacker" gamePhase={gamePhase} selectedList={selectedList} disabled={combatStatus.isBattleShocked} />
             </footer>
         </section>
     );

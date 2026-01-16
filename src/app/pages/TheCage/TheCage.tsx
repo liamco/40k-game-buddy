@@ -87,7 +87,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../components/_ui/t
 import Dropdown, { type DropdownOption } from "../../components/Dropdown/Dropdown";
 
 import { GamePhaseSelector } from "../../components/GamePhaseSelector/GamePhaseSelector.tsx";
-import { AttackerPanel } from "../../components/AttackerPanel";
+import { AttackerPanel } from "../../components/AttackerPanel/AttackerPanel";
 import { DefenderPanel } from "../../components/DefenderPanel";
 import StratagemList from "../../components/Stratagems/StratagemList";
 
