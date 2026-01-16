@@ -120,8 +120,48 @@ export function StratagemDialog({ side, gamePhase, selectedList, trigger, disabl
     );
 }
 
+// Parse stratagem description HTML into structured sections
+function parseStratagemDescription(description: string): { when?: string; target?: string; effect?: string; restrictions?: string } {
+    const result: { when?: string; target?: string; effect?: string; restrictions?: string } = {};
+
+    // Remove HTML tags for cleaner text
+    const cleanHtml = (html: string) =>
+        html
+            .replace(/<br\s*\/?>/gi, "\n")
+            .replace(/<[^>]*>/g, "")
+            .trim();
+
+    // Extract WHEN section
+    const whenMatch = description.match(/<b>WHEN:<\/b>\s*([^<]*(?:<(?!b>)[^<]*)*?)(?=<b>|$)/i);
+    if (whenMatch) {
+        result.when = cleanHtml(whenMatch[1]);
+    }
+
+    // Extract TARGET section
+    const targetMatch = description.match(/<b>TARGET:<\/b>\s*([^<]*(?:<(?!b>)[^<]*)*?)(?=<b>|$)/i);
+    if (targetMatch) {
+        result.target = cleanHtml(targetMatch[1]);
+    }
+
+    // Extract EFFECT section
+    const effectMatch = description.match(/<b>EFFECT:<\/b>\s*([^<]*(?:<(?!b>)[^<]*)*?)(?=<b>|$)/i);
+    if (effectMatch) {
+        result.effect = cleanHtml(effectMatch[1]);
+    }
+
+    // Extract RESTRICTIONS section
+    const restrictionsMatch = description.match(/<b>RESTRICTIONS:<\/b>\s*([^<]*(?:<(?!b>)[^<]*)*?)(?=<b>|$)/i);
+    if (restrictionsMatch) {
+        result.restrictions = cleanHtml(restrictionsMatch[1]);
+    }
+
+    return result;
+}
+
 // Styled stratagem card for the dialog
 function StratagemCardStyled({ stratagem }: { stratagem: Stratagem }) {
+    const parsedDescription = stratagem.description ? parseStratagemDescription(stratagem.description) : null;
+
     return (
         <div className="border border-skarsnikGreen rounded p-3 space-y-2">
             <div className="flex items-start justify-between gap-2">
@@ -131,6 +171,33 @@ function StratagemCardStyled({ stratagem }: { stratagem: Stratagem }) {
                 </Badge>
             </div>
             {stratagem.legend && <p className="text-sm text-skarsnikGreen/80 italic">{stratagem.legend}</p>}
+
+            {/* Stratagem effects */}
+            {parsedDescription && (
+                <div className="text-sm space-y-1 pt-1">
+                    {parsedDescription.when && (
+                        <p>
+                            <span className="font-semibold">When:</span> {parsedDescription.when}
+                        </p>
+                    )}
+                    {parsedDescription.target && (
+                        <p>
+                            <span className="font-semibold">Target:</span> {parsedDescription.target}
+                        </p>
+                    )}
+                    {parsedDescription.effect && (
+                        <p>
+                            <span className="font-semibold">Effect:</span> {parsedDescription.effect}
+                        </p>
+                    )}
+                    {parsedDescription.restrictions && (
+                        <p className="text-skarsnikGreen/70">
+                            <span className="font-semibold">Restrictions:</span> {parsedDescription.restrictions}
+                        </p>
+                    )}
+                </div>
+            )}
+
             <div className="flex flex-wrap gap-1 text-xs">
                 {stratagem.phase && (
                     <Badge variant="secondary" className="text-xs">

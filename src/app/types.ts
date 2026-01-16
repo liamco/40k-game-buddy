@@ -212,6 +212,7 @@ export interface Stratagem {
     phase: GamePhase[] & "ANY";
     turn: GameTurn;
     legend: string;
+    description?: string;
     conditions?: string[];
     keywords?: string[];
     faction?: string;
