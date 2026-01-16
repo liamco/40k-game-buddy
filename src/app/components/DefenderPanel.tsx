@@ -9,6 +9,7 @@ import CombatStatusComponent from "./CombatStatus/CombatStatus";
 import SplitHeading from "./SplitHeading/SplitHeading";
 import ModelProfileCard from "./ModelProfileCard/ModelProfileCard";
 import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
+import StratagemDialog from "./StratagemDialog/StratagemDialog";
 
 interface DefenderPanelProps {
     gamePhase: GamePhase;
@@ -314,7 +315,16 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
         <section className="grid grid-cols-5 grid-rows-[auto_1fr_auto] gap-4 p-4 border-1 border-skarsnikGreen rounded overflow-auto">
             <header className="col-span-5 flex">
                 <Dropdown options={listOptions} selectedLabel={selectedList?.name} placeholder="Select list..." onSelect={(list) => onListChange(list.id)} triggerClassName="grow-1 max-w-[150px] rounded-tr-none rounded-br-none" />
-                <SearchableDropdown options={unitOptions} selectedLabel={selectedUnitDisplayName} placeholder="Search for a unit..." searchPlaceholder="Search units..." emptyMessage="Matching records missing or expunged" onSelect={handleUnitSelect} renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>} triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1" />
+                <SearchableDropdown
+                    options={unitOptions}
+                    selectedLabel={selectedUnitDisplayName}
+                    placeholder="Search for a unit..."
+                    searchPlaceholder="Search units..."
+                    emptyMessage="Matching records missing or expunged"
+                    onSelect={handleUnitSelect}
+                    renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>}
+                    triggerClassName="grow-999 rounded-tl-none rounded-bl-none border-nocturneGreen border-l-1"
+                />
             </header>
             {unit ? (
                 <Fragment>
@@ -378,7 +388,9 @@ export function DefenderPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
             ) : (
                 <CombatantPanelEmpty combatant="defender" />
             )}
-            <div id="stratagems" />
+            <footer className="col-span-5">
+                <StratagemDialog side="defender" gamePhase={gamePhase} selectedList={selectedList} />
+            </footer>
         </section>
     );
 }

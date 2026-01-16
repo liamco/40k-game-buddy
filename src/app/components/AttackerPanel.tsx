@@ -12,6 +12,7 @@ import SplitHeading from "./SplitHeading/SplitHeading";
 import CombatantPanelEmpty from "./CombatantPanelEmpty/CombatantPanelEmpty";
 import EnhancementCard from "./EnhancementCard/EnhancementCard";
 import DatasheetDialog from "./DatasheetDialog/DatasheetDialog";
+import StratagemDialog from "./StratagemDialog/StratagemDialog";
 
 // Weapon attributes that can be added by enhancements/abilities
 const WEAPON_ABILITY_KEYWORDS = ["SUSTAINED HITS", "LETHAL HITS", "DEVASTATING WOUNDS", "ANTI-", "TORRENT", "BLAST", "HEAVY", "ASSAULT", "RAPID FIRE", "PISTOL", "MELTA", "LANCE", "TWIN-LINKED", "HAZARDOUS", "PRECISION", "IGNORES COVER"];
@@ -694,7 +695,9 @@ export function AttackerPanel({ gamePhase, unit, attachedUnit, onUnitChange, sel
             ) : (
                 <CombatantPanelEmpty combatant="attacker" />
             )}
-            <div id="stratagems"></div>
+            <footer className="col-span-5">
+                <StratagemDialog side="attacker" gamePhase={gamePhase} selectedList={selectedList} />
+            </footer>
         </section>
     );
 }
