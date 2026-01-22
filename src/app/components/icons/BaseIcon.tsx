@@ -2,6 +2,7 @@ import React from "react";
 import clx from "classnames";
 
 enum Colors {
+    "inherit" = "fill-inherit",
     "default" = "fill-skarsnikGreen",
     "deathWorldForest" = "fill-deathWorldForest",
     "fireDragonBright" = "fill-fireDragonBright",

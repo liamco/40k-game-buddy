@@ -1,31 +1,32 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 
-import BaseIcon from "../../../app_old/components/icons/BaseIcon";
-import { buttonClasses } from "../../../app/components/_ui/button";
-
 import styles from "./SidebarNavigation.module.css";
-import IconCrossedSwords from "../../../app_old/components/icons/IconCrossedSwords";
+
+import BaseIcon from "#components/icons/BaseIcon.tsx";
+import IconCrossedSwords from "#components/icons/IconCrossedSwords.tsx";
+import IconList from "#components/icons/IconList.tsx";
+import IconSkull from "#components/icons/IconSkull.tsx";
 
 const SidebarNavigation = () => {
     return (
-        <Fragment>
-            <NavLink to="/" end className={`${styles.SidebarNavigation} ${({ isActive }) => (isActive ? buttonClasses.secondary : buttonClasses.ghost)}`}>
-                <BaseIcon>
+        <div className="flex flex-col">
+            <NavLink to="/engagements" className={({ isActive }) => `${styles.SidebarNavigationItem} ${isActive ? styles.SidebarNavigationItemActive : ""}`}>
+                <BaseIcon color="inherit">
                     <IconCrossedSwords />
                 </BaseIcon>
             </NavLink>
-            <NavLink to="/lists" className={`${styles.SidebarNavigation} ${({ isActive }) => (isActive ? buttonClasses.secondary : buttonClasses.ghost)}`}>
-                <BaseIcon>
-                    <IconCrossedSwords />
+            <NavLink to="/lists" className={({ isActive }) => `${styles.SidebarNavigationItem} ${isActive ? styles.SidebarNavigationItemActive : ""}`}>
+                <BaseIcon color="inherit">
+                    <IconList />
                 </BaseIcon>
             </NavLink>
-            <NavLink to="/lists" className={`${styles.SidebarNavigation} ${({ isActive }) => (isActive ? buttonClasses.secondary : buttonClasses.ghost)}`}>
-                <BaseIcon>
-                    <IconCrossedSwords />
+            <NavLink to="/" end className={({ isActive }) => `${styles.SidebarNavigationItem} mt-6 ${isActive ? styles.SidebarNavigationItemActive : ""}`}>
+                <BaseIcon color="inherit">
+                    <IconSkull />
                 </BaseIcon>
             </NavLink>
-        </Fragment>
+        </div>
     );
 };
 

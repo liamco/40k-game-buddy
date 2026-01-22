@@ -32,8 +32,9 @@ const buttonVariants = cva(
 );
 
 export const buttonClasses = {
-    ghost: "bg-transparent text-skarsnikGreen px-3 py-2 rounded text-shadow-glow-green hover:bg-deathWorldForest",
-    secondary: "bg-skarsnikGreen text-nocturneGreen px-3 py-2 rounded shadow-glow-green",
+    ghost: " inline-block bg-transparent text-skarsnikGreen px-3 py-2 rounded text-shadow-glow-green hover:bg-deathWorldForest",
+    primary: " inline-block bg-fireDragonBright text-mournfangBrown px-3 py-2 rounded shadow-glow-orange",
+    secondary: " inline-block bg-skarsnikGreen text-nocturneGreen px-3 py-2 rounded shadow-glow-green",
 };
 
 function Button({

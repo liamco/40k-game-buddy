@@ -1,9 +1,25 @@
-@reference "../../../styles/theme.css";
+@reference "tailwindcss";
 
 .SidebarNavigationItem {
-    @apply p-2 rounded fill-fireDragonBright;
+    @apply relative inline-block p-2 rounded;
+    fill: var(--color-fireDragonBright);
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 100%;
+        margin-right: -2px;
+        width: 100px;
+        height: 100%;
+    }
 }
 
 .SidebarNavigationItemActive {
-    @apply bg-fireDragonBright fill-mournfangBrown;
+    background-color: var(--color-fireDragonBright);
+    fill: var(--color-mournfangBrown);
+
+    &:before {
+        background-color: var(--color-fireDragonBright);
+    }
 }
