@@ -1,0 +1,130 @@
+{
+  "abilities": {
+    "LEADER": {
+      "type": "static",
+      "mechanics": []
+    },
+    "DEADLY DEMISE": {
+      "type": "parameterized",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "mortalWounds",
+          "value": "{parameter}",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    "DEEP STRIKE": {
+      "type": "static",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": ["DEEP STRIKE"]
+        }
+      ]
+    },
+    "FEEL NO PAIN": {
+      "type": "parameterized",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": ["FEEL NO PAIN"],
+          "value": "{parameter}"
+        }
+      ]
+    },
+    "HOVER": {
+      "type": "static",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": ["HOVER"]
+        }
+      ]
+    },
+    "SCOUTS": {
+      "type": "parameterized",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": ["SCOUTS"],
+          "value": "{parameter}"
+        }
+      ]
+    },
+    "INFILTRATORS": {
+      "type": "static",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": ["INFILTRATORS"]
+        }
+      ]
+    },
+    "STEALTH": {
+      "type": "static",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": ["STEALTH"]
+        }
+      ]
+    },
+    "LONE OPERATIVE": {
+      "type": "static",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": ["LONE OPERATIVE"]
+        }
+      ]
+    },
+    "FIRING DECK": {
+      "type": "parameterized",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": ["FIRING DECK"],
+          "value": "{parameter}"
+        }
+      ]
+    },
+    "FIGHTS FIRST": {
+      "type": "static",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": ["FIGHTS FIRST"]
+        }
+      ]
+    },
+    "INVULNERABLE SAVE": {
+      "type": "parameterized",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": "{parameter}"
+        }
+      ]
+    }
+  }
+}
