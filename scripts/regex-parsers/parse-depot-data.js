@@ -572,9 +572,10 @@ function filterCoreAndFactionAbilitiesFromDatasheet(obj) {
         if (obj.abilities && Array.isArray(obj.abilities)) {
             const cleaned = { ...obj };
             cleaned.abilities = obj.abilities.map((ability) => {
-                const abilityType = ability.type?.toLowerCase();
-                // Keep Datasheet and Wargear abilities as-is
-                if (abilityType === "datasheet" || abilityType === "wargear") {
+                const abilityType = ability.type?.toLowerCase() || "";
+                // Keep Datasheet, Wargear, Special, and Primarch abilities as-is (they contain unique rules text)
+                // Special abilities include things like "SUPREME COMMANDER", "LAST SURVIVOR", etc.
+                if (abilityType === "datasheet" || abilityType === "wargear" || abilityType.startsWith("special") || abilityType === "primarch") {
                     return ability;
                 }
                 // Convert Core and Faction abilities to references
@@ -800,8 +801,10 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
             }
 
             // Group weapon profiles (e.g., "Plasma pistol – standard" and "Plasma pistol – supercharge" become one weapon with two profiles)
+            // Rename wargear to availableWargear (wargear on EngagementForceItem is the resolved active weapons)
             if (processedData.wargear && Array.isArray(processedData.wargear)) {
-                processedData.wargear = groupWeaponProfiles(processedData.wargear);
+                processedData.availableWargear = groupWeaponProfiles(processedData.wargear);
+                delete processedData.wargear;
             }
         } else {
             // This is a faction.json file - check for faction-config.json and apply supplement slugs to detachments

@@ -6,12 +6,13 @@ import Logo from "./assets/Logo.tsx";
 import SidebarNavigation from "#components/SidebarNavigation/SidebarNavigation.tsx";
 import Scanlines from "#assets/Scanlines.tsx";
 
-import TheCage from "#modules/Engagements/Octagon.tsx";
-import ListsIndex from "#modules/Lists/ListsIndex.tsx";
-import ViewList from "#modules/Lists/ViewList.tsx";
-import CreateList from "#modules/Lists/CreateList.tsx";
-import EngagementIndex from "#modules/Engagements/EngagementIndex.tsx";
-import CreateEngagement from "#modules/Engagements/CreateEngagement.tsx";
+import ListIndex from "#modules/Lists/ListIndex";
+import ViewList from "#modules/Lists/ViewList";
+import CreateList from "#modules/Lists/CreateList";
+import EngagementIndex from "#modules/Engagements/EngagementIndex";
+import CreateEngagement from "#modules/Engagements/CreateEngagement";
+import ViewEngagement from "#modules/Engagements/ViewEngagement";
+import { EngagementManagerProvider } from "#modules/Engagements/EngagementManagerContext.tsx";
 
 const bgStyle = {
     opacity: "0.13",
@@ -29,20 +30,22 @@ export default function App() {
                 </NavLink>
                 <SidebarNavigation />
             </nav>
-            <main>
+
+            <EngagementManagerProvider>
                 <Routes>
-                    <Route path="/" element={<EngagementIndex />} />
                     <Route path="/engagements">
+                        <Route index element={<EngagementIndex />} />
                         <Route path="new" element={<CreateEngagement />} />
-                        {/*<Route path=":engagementId" element={<TheCage />} />*/}
+                        <Route path="view/:engagementId" element={<ViewEngagement />} />
                     </Route>
-                    {/*<Route path="/lists">
-                        <Route index element={<ListsIndex />} />
-                        <Route path=":listId" element={<ViewList />} />
+                    <Route path="/lists">
+                        <Route index element={<ListIndex />} />
                         <Route path="new" element={<CreateList />} />
-                    </Route>*/}
+                        <Route path="view/:listId" element={<ViewList />} />
+                    </Route>
                 </Routes>
-            </main>
+            </EngagementManagerProvider>
+
             <Scanlines />
         </div>
     );

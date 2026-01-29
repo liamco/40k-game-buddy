@@ -21,7 +21,7 @@ const SidebarNavigation = () => {
                     <IconList />
                 </BaseIcon>
             </NavLink>
-            <NavLink to="/" end className={({ isActive }) => `${styles.SidebarNavigationItem} mt-6 ${isActive ? styles.SidebarNavigationItemActive : ""}`}>
+            <NavLink to="/current-engagement" end className={({ isActive }) => `${styles.SidebarNavigationItem} mt-6 ${isActive ? styles.SidebarNavigationItemActive : ""}`}>
                 <BaseIcon color="inherit">
                     <IconSkull />
                 </BaseIcon>

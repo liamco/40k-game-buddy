@@ -10,6 +10,7 @@ import { Input } from "../_ui/input";
 import Dropdown, { type DropdownOption } from "../Dropdown/Dropdown";
 
 import styles from "./CombatStatus.module.css";
+import { EngagementForceItemCombatState } from "#types/Engagements.tsx";
 
 /**
  * Objective range options for the dropdown
@@ -62,19 +63,9 @@ export function getStatusesForSide(side: "attacker" | "defender") {
     });
 }
 
-/**
- * Get current objective range selection from combat status
- */
-function getObjectiveRangeValue(combatStatus: CombatStatusType): ObjectiveRangeOption {
-    if (combatStatus.inRangeOfContestedObjective) return "contested";
-    if (combatStatus.inRangeOfFriendlyObjective) return "friendly";
-    if (combatStatus.inRangeOfEnemyObjective) return "enemy";
-    return "none";
-}
-
 interface Props {
     side: "attacker" | "defender";
-    combatStatus: CombatStatusType;
+    combatStatus: EngagementForceItemCombatState;
     onStatusChange: (name: CombatStatusFlag, value: boolean) => void;
     modelCount?: number;
     startingStrength?: number;
@@ -84,7 +75,7 @@ interface Props {
 }
 
 const CombatStatus = ({ side, combatStatus, onStatusChange, modelCount, startingStrength, onModelCountChange, unit, gamePhase }: Props) => {
-    const objectiveRangeValue = getObjectiveRangeValue(combatStatus);
+    const objectiveRangeValue = combatStatus.isInObjectiveRange;
 
     // Check if unit has damaged profile (monsters/vehicles)
     const hasDamagedProfile = useMemo(() => {

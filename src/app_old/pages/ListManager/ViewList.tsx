@@ -1,0 +1,1195 @@
+-import { useState, useEffect, useMemo, Fragment } from "react";
+-import { useParams, useNavigate, Link } from "react-router-dom";
+-import { ArrowLeft, X, ChevronDown } from "lucide-react";
++import React from "react";
+
+-import type { ArmyList, ArmyListItem, Datasheet } from "../../types";
+-
+-import { loadDatasheetData } from "../../utils/depotDataLoader";
+-
+-import { Badge } from "../../components/_ui/badge";
+-import { Button } from "../../components/_ui/button";
+-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../../components/_ui/collapsible";
+-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/_ui/card";
+-import { Input } from "../../components/_ui/input";
+-import { Label } from "../../components/_ui/label";
+-import SearchableDropdown, { type SearchableDropdownOption } from "../../components/SearchableDropdown/SearchableDropdown";
+-
+-import ModelProfileCard from "../../../app/components/ModelProfileCard/ModelProfileCard";
+-import WeaponProfileCard from "../../../app/components/WeaponProfileCard/WeaponProfileCard";
+-
+-import { useListManager, type MultiLeaderValidationResult } from "./ListManagerContext";
+-import ListItem from "./ListItem";
+-import EnhancementCard from "../../components/EnhancementCard/EnhancementCard";
+-import SplitHeading from "../../components/SplitHeading/SplitHeading";
+-
+-/**
+- * Extracts the base weapon name from a weapon that may have a mode suffix.
+- * E.g., "Plasma pistol – standard" -> "plasma pistol"
+- *       "Plasma pistol - supercharge" -> "plasma pistol"
+- *       "Calibanite greatsword - strike" -> "calibanite greatsword"
+- */
+-function getBaseWeaponName(weaponName: string): string {
+-    // Match patterns like "Name – mode" or "Name - mode" (both dash types)
+-    const match = weaponName.match(/^(.+?)\s*[–-]\s*(standard|supercharge|overcharge|strike|sweep|focused|dispersed|frag|krak|flail|sword)$/i);
+-    return match ? match[1].trim().toLowerCase() : weaponName.toLowerCase();
+-}
+-
+-/**
+- * Checks if a weapon name appears to be a mode variant (has a mode suffix).
+- */
+-function isWeaponModeVariant(weaponName: string): boolean {
+-    return /\s*[–-]\s*(standard|supercharge|overcharge|strike|sweep|focused|dispersed|frag|krak|flail|sword)$/i.test(weaponName);
+-}
+-
+-/**
+- * Parses a single weapon group text (e.g., "1 boltstorm gauntlet, 1 power fist and 1 relic chainsword")
+- * and extracts the weapon names as an array.
+- */
+-function parseWeaponGroup(text: string): string[] {
+-    const weaponNames: string[] = [];
+-
+-    // Split by comma and "and" to handle "X, Y and Z" patterns
+-    // First replace " and " with comma for uniform splitting
+-    const normalized = text.replace(/\s+and\s+/gi, ", ");
+-    const parts = normalized.split(/,\s*/);
+-
+-    for (const part of parts) {
+-        // Remove quantity prefix like "1 " or "2 "
+-        const cleanedName = part
+-            .replace(/^\d+\s+/, "")
+-            .trim()
+-            .toLowerCase();
+-        if (cleanedName && cleanedName.length > 1) {
+-            weaponNames.push(cleanedName);
+-        }
+-    }
+-
+-    return weaponNames;
+-}
+-
+-/**
+- * Parses option descriptions to extract linked weapon groups.
+- * Handles multiple formats:
+- * - Simple: "replaced with 1 X and 1 Y"
+- * - List items: "<li>1 X, 1 Y and 1 Z</li><li>1 X, 1 Y and 1 W</li>"
+- * Returns an array of weapon name arrays, where each inner array contains weapons that must be selected together.
+- */
+-function parseLinkedWeapons(options: { description: string }[] | undefined): string[][] {
+-    if (!options) return [];
+-
+-    const linkedGroups: string[][] = [];
+-
+-    for (const option of options) {
+-        const description = option.description;
+-
+-        // Check if the option contains list items (<li>)
+-        const liMatches = description.match(/<li>([^<]+)<\/li>/gi);
+-
+-        if (liMatches && liMatches.length > 0) {
+-            // Parse each <li> as a separate linked group
+-            for (const liMatch of liMatches) {
+-                const liText = liMatch.replace(/<\/?li>/gi, "").trim();
+-                const weaponNames = parseWeaponGroup(liText);
+-
+-                if (weaponNames.length > 1) {
+-                    linkedGroups.push(weaponNames);
+-                }
+-            }
+-        } else {
+-            // Fall back to simple "replaced with X and Y" pattern
+-            const text = description.replace(/<[^>]*>/g, " ").trim();
+-            const replacedWithMatch = text.match(/replaced with\s+(.+?)\.?$/i);
+-
+-            if (replacedWithMatch) {
+-                const weaponNames = parseWeaponGroup(replacedWithMatch[1]);
+-
+-                if (weaponNames.length > 1) {
+-                    linkedGroups.push(weaponNames);
+-                }
+-            }
+-        }
+-    }
+-
+-    return linkedGroups;
+-}
+-
+-export function ListView() {
+-    const { listId } = useParams<{ listId: string }>();
+-    const navigate = useNavigate();
+-    const {
+-        lists,
+-        listsLoaded,
+-        getListById,
+-        factionData,
+-        loadFactionDataBySlug,
+-        addDatasheetToList,
+-        removeItemFromList,
+-        updateListItem,
+-        attachLeaderToUnit,
+-        detachLeaderFromUnit,
+-        attachEnhancementToLeader,
+-        canAttachLeaderToUnit,
+-        calculateItemPoints,
+-        calculateTotalModels,
+-        parseLoadoutWeapons,
+-        parseOptionConstraint,
+-    } = useListManager();
+-
+-    const [selectedItem, setSelectedItem] = useState<ArmyListItem | null>(null);
+-    const [bodyguardUnits, setBodyguardUnits] = useState<Datasheet[]>([]);
+-    const [loadingBodyguards, setLoadingBodyguards] = useState(false);
+-
+-    const selectedList = useMemo(() => (listId ? getListById(listId) : undefined), [listId, getListById, lists]);
+-
+-    // Load faction data when list changes
+-    useEffect(() => {
+-        if (selectedList) {
+-            loadFactionDataBySlug(selectedList.factionSlug);
+-        }
+-    }, [selectedList?.factionSlug, loadFactionDataBySlug]);
+-
+-    // Redirect if list not found (only after lists have loaded)
+-    useEffect(() => {
+-        if (listsLoaded && listId && !selectedList) {
+-            navigate("/lists");
+-        }
+-    }, [listId, selectedList, listsLoaded, navigate]);
+-
+-    // Update selectedItem when list changes
+-    useEffect(() => {
+-        if (selectedItem && selectedList) {
+-            const updatedItem = selectedList.items.find((item) => item.listItemId === selectedItem.listItemId);
+-            if (updatedItem) {
+-                setSelectedItem(updatedItem);
+-            } else {
+-                setSelectedItem(null);
+-            }
+-        }
+-    }, [selectedList, selectedItem?.listItemId]);
+-
+-    // Load bodyguard units when a leader is selected
+-    useEffect(() => {
+-        const loadBodyguardUnits = async () => {
+-            if (!selectedItem || !factionData || !selectedList) {
+-                setBodyguardUnits([]);
+-                return;
+-            }
+-
+-            if (!selectedItem.leaders?.length) {
+-                setBodyguardUnits([]);
+-                return;
+-            }
+-
+-            setLoadingBodyguards(true);
+-            const bodyguards: Datasheet[] = [];
+-
+-            for (const datasheetRef of selectedItem.leaders) {
+-                try {
+-                    const fullDatasheet = await loadDatasheetData(selectedList.factionSlug, datasheetRef.id);
+-                    if (fullDatasheet) {
+-                        bodyguards.push(fullDatasheet);
+-                    }
+-                } catch (error) {
+-                    console.error(`Error loading datasheet ${datasheetRef.id}:`, error);
+-                }
+-            }
+-
+-            setBodyguardUnits(bodyguards);
+-            setLoadingBodyguards(false);
+-        };
+-
+-        loadBodyguardUnits();
+-    }, [selectedItem, factionData, selectedList]);
+-
+-    // Split bodyguard units into those in the list and those not in the list
+-    const { unitsInList, unitsNotInList } = useMemo(() => {
+-        if (!selectedList || bodyguardUnits.length === 0) {
+-            return { unitsInList: [], unitsNotInList: [] };
+-        }
+-
+-        const leadableDatasheetIds = new Set(bodyguardUnits.map((unit) => unit.id));
+-        const inList: ArmyListItem[] = selectedList.items.filter((item) => leadableDatasheetIds.has(item.id));
+-        const listUnitIds = new Set(selectedList.items.map((item) => item.id));
+-        const notInList: Datasheet[] = bodyguardUnits.filter((unit) => !listUnitIds.has(unit.id));
+-
+-        return { unitsInList: inList, unitsNotInList: notInList };
+-    }, [bodyguardUnits, selectedList]);
+-
+-    // Reorder list items alphabetically, grouping leaders with their attached units
+-    // For attached units, sort by the alphabetically-first leader name
+-    const orderedListItems = useMemo(() => {
+-        if (!selectedList) return [];
+-
+-        const items = [...selectedList.items];
+-        const processed = new Set<string>();
+-        const groups: { sortKey: string; items: ArmyListItem[] }[] = [];
+-
+-        // First pass: Create groups for bodyguard units with their leaders
+-        items.forEach((item) => {
+-            if (processed.has(item.listItemId)) return;
+-
+-            // Check if this unit has leaders attached (leadBy array)
+-            if (item.leadBy && item.leadBy.length > 0) {
+-                // Find all leaders for this unit
+-                const leaders = item.leadBy.map((ref) => items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processed.has(l.listItemId));
+-
+-                // Sort leaders alphabetically
+-                leaders.sort((a, b) => a.name.localeCompare(b.name));
+-
+-                // The sort key for this group is the first leader's name (alphabetically)
+-                const sortKey = leaders.length > 0 ? leaders[0].name : item.name;
+-
+-                // Mark all as processed
+-                leaders.forEach((leader) => processed.add(leader.listItemId));
+-                processed.add(item.listItemId);
+-
+-                // Add group with leaders first, then bodyguard unit
+-                groups.push({
+-                    sortKey,
+-                    items: [...leaders, item],
+-                });
+-            }
+-        });
+-
+-        // Second pass: Add standalone leaders (attached but bodyguard not in list)
+-        items.forEach((item) => {
+-            if (processed.has(item.listItemId)) return;
+-
+-            if (item.leading) {
+-                groups.push({
+-                    sortKey: item.name,
+-                    items: [item],
+-                });
+-                processed.add(item.listItemId);
+-            }
+-        });
+-
+-        // Third pass: Add remaining unattached units
+-        items.forEach((item) => {
+-            if (!processed.has(item.listItemId)) {
+-                groups.push({
+-                    sortKey: item.name,
+-                    items: [item],
+-                });
+-                processed.add(item.listItemId);
+-            }
+-        });
+-
+-        // Sort groups alphabetically by sortKey
+-        groups.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+-
+-        // Flatten groups into final ordered list
+-        return groups.flatMap((group) => group.items);
+-    }, [selectedList]);
+-
+-    // Get the selected detachment for filtering datasheets
+-    const selectedDetachment = useMemo(() => {
+-        if (!selectedList?.detachmentSlug || !factionData?.detachments) return null;
+-        return factionData.detachments.find((d) => d.slug === selectedList.detachmentSlug) || null;
+-    }, [selectedList?.detachmentSlug, factionData?.detachments]);
+-
+-    // Convert datasheets to dropdown options, filtered by detachment supplement
+-    const datasheetOptions = useMemo((): SearchableDropdownOption<Datasheet>[] => {
+-        if (!factionData?.datasheets) return [];
+-
+-        // Filter datasheets based on detachment supplement
+-        // If detachment has no supplementSlug (or is null/undefined), show all non-supplement datasheets
+-        // If detachment has a supplementSlug, show:
+-        //   - datasheets with supplementSlug === "codex" (available to all detachments)
+-        //   - datasheets with matching supplementSlug
+-        //   - datasheets with no supplementSlug (legacy/default datasheets)
+-        const detachmentSupplement = selectedDetachment?.supplementSlug;
+-
+-        const filteredDatasheets = factionData.datasheets.filter((datasheet) => {
+-            const datasheetSupplement = datasheet.supplementSlug;
+-
+-            // If datasheet has no supplement or is "codex", it's available to all
+-            if (!datasheetSupplement || datasheetSupplement === "codex") {
+-                return true;
+-            }
+-
+-            // If detachment has a supplement, only show matching supplement datasheets
+-            if (detachmentSupplement) {
+-                return datasheetSupplement === detachmentSupplement;
+-            }
+-
+-            // Detachment has no supplement - only show codex/no-supplement datasheets
+-            // (which we already handled above, so supplement-specific datasheets are excluded)
+-            return false;
+-        });
+-
+-        return filteredDatasheets.map((datasheet) => ({
+-            id: datasheet.id,
+-            searchValue: `${datasheet.name} ${datasheet.roleLabel} ${datasheet.slug}`,
+-            data: datasheet,
+-        }));
+-    }, [factionData, selectedDetachment]);
+-
+-    const handleAddDatasheet = async (datasheet: Datasheet) => {
+-        if (!selectedList) return;
+-        await addDatasheetToList(selectedList, datasheet);
+-    };
+-
+-    const handleRemoveItem = (itemId: string) => {
+-        if (!selectedList) return;
+-        removeItemFromList(selectedList, itemId);
+-        if (selectedItem?.listItemId === itemId) {
+-            setSelectedItem(null);
+-        }
+-    };
+-
+-    const handleUpdateComposition = (line: number, newCount: number, min: number, max: number) => {
+-        if (!selectedList || !selectedItem) return;
+-
+-        const clampedCount = Math.max(min, Math.min(max, newCount));
+-        updateListItem(selectedList, selectedItem.listItemId, {
+-            compositionCounts: {
+-                ...selectedItem.compositionCounts,
+-                [line]: clampedCount,
+-            },
+-        });
+-    };
+-
+-    const handleAttachLeader = (targetUnitItemId: string) => {
+-        if (!selectedList || !selectedItem) return;
+-        attachLeaderToUnit(selectedList, selectedItem.listItemId, targetUnitItemId);
+-    };
+-
+-    const handleDetachLeader = () => {
+-        if (!selectedList || !selectedItem) return;
+-        detachLeaderFromUnit(selectedList, selectedItem.listItemId);
+-    };
+-
+-    const handleAttachEnhancement = (enhancement: { id: string; name: string; cost?: number }) => {
+-        if (!selectedList || !selectedItem) return;
+-        attachEnhancementToLeader(selectedList, selectedItem.listItemId, enhancement);
+-    };
+-
+-    // Calculate total points for the selected list
+-    const listTotalPoints = useMemo(() => {
+-        if (!selectedList) return 0;
+-        return selectedList.items.reduce((total, item) => {
+-            const unitPoints = calculateItemPoints(item);
+-            const enhancementPoints = item.enhancement?.cost ?? 0;
+-            return total + unitPoints + enhancementPoints;
+-        }, 0);
+-    }, [selectedList, calculateItemPoints]);
+-
+-    // Calculate points for selected item
+-    const calculatedPoints = useMemo(() => {
+-        if (!selectedItem) return null;
+-        return calculateItemPoints(selectedItem);
+-    }, [selectedItem, calculateItemPoints]);
+-
+-    // Get enhancements for the selected detachment, filtered by unit eligibility
+-    const detachmentEnhancements = useMemo(() => {
+-        if (!selectedList?.detachmentSlug || !factionData?.detachments || !selectedItem) {
+-            return [];
+-        }
+-
+-        const unitKeywords = (selectedItem.keywords || []).map((k) => k.keyword.toUpperCase().trim());
+-
+-        if (!selectedItem || !unitKeywords.includes("CHARACTER")) {
+-            return [];
+-        }
+-
+-        const detachment = factionData.detachments.find((d) => d.slug === selectedList.detachmentSlug);
+-        const allEnhancements = detachment?.enhancements || [];
+-
+-        const stripHtmlAndNormalize = (html: string): string => {
+-            return html
+-                .replace(/<[^>]*>/g, " ")
+-                .replace(/\s+/g, " ")
+-                .trim()
+-                .toUpperCase();
+-        };
+-
+-        return allEnhancements.filter((enhancement) => {
+-            if (!enhancement.description) return true;
+-
+-            const normalizedDescription = stripHtmlAndNormalize(enhancement.description);
+-            const modelOnlyMatch = normalizedDescription.match(/(.+?)\s+MODEL\s+ONLY/i);
+-
+-            if (modelOnlyMatch) {
+-                const requirementText = modelOnlyMatch[1].trim();
+-
+-                if (requirementText.includes(" OR ")) {
+-                    const keywords = requirementText.split(" OR ").map((k) => k.trim());
+-                    return keywords.some((keyword) => {
+-                        return unitKeywords.some((unitKeyword) => {
+-                            return unitKeyword === keyword || unitKeyword.includes(keyword) || keyword.includes(unitKeyword) || keyword.split(" ").every((word) => unitKeyword.includes(word));
+-                        });
+-                    });
+-                } else {
+-                    const requiredKeyword = requirementText.trim();
+-                    return unitKeywords.some((unitKeyword) => {
+-                        return unitKeyword === requiredKeyword || unitKeyword.includes(requiredKeyword) || requiredKeyword.includes(unitKeyword) || requiredKeyword.split(" ").every((word) => unitKeyword.includes(word));
+-                    });
+-                }
+-            }
+-
+-            return true;
+-        });
+-    }, [selectedList, factionData, selectedItem]);
+-
+-    // Track which enhancements are already used by other leaders
+-    const usedEnhancements = useMemo(() => {
+-        if (!selectedList || !selectedItem) return new Map<string, string>();
+-
+-        const usedMap = new Map<string, string>();
+-        selectedList.items.forEach((item) => {
+-            if (item.listItemId === selectedItem.listItemId) return;
+-            if (item.enhancement) {
+-                usedMap.set(item.enhancement.id, item.name);
+-            }
+-        });
+-
+-        return usedMap;
+-    }, [selectedList, selectedItem]);
+-
+-    // Categorize wargear into default (from loadout) and optional (selectable)
+-    const categorizedWargear = useMemo(() => {
+-        if (!selectedItem?.wargear || selectedItem.wargear.length === 0) {
+-            return { defaultWeapons: [], optionalWeapons: [], totalConstraint: 0 };
+-        }
+-
+-        const loadoutWeapons = parseLoadoutWeapons(selectedItem.loadout || "");
+-        const totalModels = calculateTotalModels(selectedItem);
+-
+-        let totalConstraint = 0;
+-        if (selectedItem.options) {
+-            selectedItem.options.forEach((option) => {
+-                const constraint = parseOptionConstraint(option.description, totalModels);
+-                totalConstraint += constraint.maxSelections;
+-            });
+-        }
+-
+-        const defaultWeapons: typeof selectedItem.wargear = [];
+-        const optionalWeapons: typeof selectedItem.wargear = [];
+-
+-        selectedItem.wargear.forEach((weapon) => {
+-            const weaponName = weapon.name.toLowerCase();
+-            const isInLoadout = loadoutWeapons.some((w) => weaponName.includes(w) || w.includes(weaponName));
+-
+-            if (isInLoadout) {
+-                defaultWeapons.push(weapon);
+-            } else {
+-                optionalWeapons.push(weapon);
+-            }
+-        });
+-
+-        defaultWeapons.sort((a, b) => {
+-            const aName = a.name.toLowerCase();
+-            const bName = b.name.toLowerCase();
+-            const aIndex = loadoutWeapons.findIndex((w) => aName.includes(w) || w.includes(aName));
+-            const bIndex = loadoutWeapons.findIndex((w) => bName.includes(w) || w.includes(bName));
+-            return aIndex - bIndex;
+-        });
+-
+-        return { defaultWeapons, optionalWeapons, totalConstraint };
+-    }, [selectedItem, parseLoadoutWeapons, parseOptionConstraint, calculateTotalModels]);
+-
+-    // Group weapon mode variants (e.g., "Plasma pistol – standard" and "Plasma pistol – supercharge")
+-    // These are separate wargear entries that should be treated as one weapon for selection
+-    const weaponModeGroups = useMemo(() => {
+-        if (!categorizedWargear.optionalWeapons.length) {
+-            return { groups: new Map<string, string[]>(), weaponToGroup: new Map<string, string>() };
+-        }
+-
+-        const groups = new Map<string, string[]>(); // baseWeaponName -> [weaponId1, weaponId2, ...]
+-        const weaponToGroup = new Map<string, string>(); // weaponId -> baseWeaponName
+-
+-        // Find all mode variants and group them by base name
+-        for (const weapon of categorizedWargear.optionalWeapons) {
+-            if (isWeaponModeVariant(weapon.name)) {
+-                const baseName = getBaseWeaponName(weapon.name);
+-                const existing = groups.get(baseName) || [];
+-                existing.push(weapon.id);
+-                groups.set(baseName, existing);
+-                weaponToGroup.set(weapon.id, baseName);
+-            }
+-        }
+-
+-        // Only keep groups with more than one weapon (actual variants)
+-        for (const [baseName, weaponIds] of groups.entries()) {
+-            if (weaponIds.length <= 1) {
+-                groups.delete(baseName);
+-                for (const id of weaponIds) {
+-                    weaponToGroup.delete(id);
+-                }
+-            }
+-        }
+-
+-        return { groups, weaponToGroup };
+-    }, [categorizedWargear.optionalWeapons]);
+-
+-    // Create linked weapon groups data structure
+-    // Each group is an array of weapon IDs that must be selected together
+-    // Also track which groups each weapon belongs to (can be multiple for shared weapons)
+-    const linkedWeaponData = useMemo(() => {
+-        if (!selectedItem?.options || !selectedItem?.wargear) {
+-            return { groups: [] as string[][], weaponToGroups: new Map<string, number[]>() };
+-        }
+-
+-        const linkedGroupNames = parseLinkedWeapons(selectedItem.options);
+-        const groups: string[][] = [];
+-        const weaponToGroups = new Map<string, number[]>();
+-
+-        for (const groupNames of linkedGroupNames) {
+-            // Find weapon IDs for each weapon name in the group
+-            const groupWeaponIds: string[] = [];
+-
+-            for (const weaponName of groupNames) {
+-                const matchingWeapon = selectedItem.wargear.find((w) => {
+-                    const wName = w.name.toLowerCase();
+-                    return wName.includes(weaponName) || weaponName.includes(wName);
+-                });
+-                if (matchingWeapon) {
+-                    groupWeaponIds.push(matchingWeapon.id);
+-                }
+-            }
+-
+-            // Only create linked group if we found multiple weapons
+-            if (groupWeaponIds.length > 1) {
+-                const groupIndex = groups.length;
+-                groups.push(groupWeaponIds);
+-
+-                // Map each weapon to the groups it belongs to
+-                for (const weaponId of groupWeaponIds) {
+-                    const existingGroups = weaponToGroups.get(weaponId) || [];
+-                    existingGroups.push(groupIndex);
+-                    weaponToGroups.set(weaponId, existingGroups);
+-                }
+-            }
+-        }
+-
+-        return { groups, weaponToGroups };
+-    }, [selectedItem?.options, selectedItem?.wargear]);
+-
+-    // For backwards compatibility: create a simple map from weapon ID to its primary group
+-    const linkedWeaponGroups = useMemo(() => {
+-        const weaponIdMap = new Map<string, string[]>();
+-        for (const group of linkedWeaponData.groups) {
+-            for (const weaponId of group) {
+-                // If weapon is in multiple groups, map to the first one (will be handled specially in toggle)
+-                if (!weaponIdMap.has(weaponId)) {
+-                    weaponIdMap.set(weaponId, group);
+-                }
+-            }
+-        }
+-        return weaponIdMap;
+-    }, [linkedWeaponData]);
+-
+-    // Calculate how many optional weapon GROUPS are currently selected
+-    // Linked weapons count as 1 selection, not multiple
+-    // Weapon mode variants (standard/supercharge) also count as 1 selection
+-    const selectedOptionalCount = useMemo(() => {
+-        if (!selectedItem?.loadoutSelections) return 0;
+-
+-        const countedGroups = new Set<string>();
+-        let count = 0;
+-
+-        for (const [weaponId, selectionCount] of Object.entries(selectedItem.loadoutSelections)) {
+-            if (selectionCount <= 0) continue;
+-
+-            // Check if this weapon is part of a linked weapon group (loadout options)
+-            const linkedGroup = linkedWeaponGroups.get(weaponId);
+-            if (linkedGroup) {
+-                // Create a unique key for this group (sorted IDs joined)
+-                const groupKey = "linked:" + [...linkedGroup].sort().join(",");
+-                if (!countedGroups.has(groupKey)) {
+-                    countedGroups.add(groupKey);
+-                    count += 1;
+-                }
+-                continue;
+-            }
+-
+-            // Check if this weapon is part of a mode variant group (e.g., plasma pistol standard/supercharge)
+-            const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weaponId);
+-            if (modeGroupBaseName) {
+-                const modeGroupIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+-                const groupKey = "mode:" + [...modeGroupIds].sort().join(",");
+-                if (!countedGroups.has(groupKey)) {
+-                    countedGroups.add(groupKey);
+-                    count += 1;
+-                }
+-                continue;
+-            }
+-
+-            // Not part of any group, count individually
+-            count += selectionCount;
+-        }
+-
+-        return count;
+-    }, [selectedItem?.loadoutSelections, linkedWeaponGroups, weaponModeGroups]);
+-
+-    const toggleWeaponSelection = (weaponId: string) => {
+-        if (!selectedList || !selectedItem) return;
+-
+-        const currentSelections = selectedItem.loadoutSelections || {};
+-
+-        // Check which linked groups this weapon belongs to (for loadout options like "X and Y")
+-        const weaponGroupIndices = linkedWeaponData.weaponToGroups.get(weaponId);
+-
+-        // Check if this weapon is part of a mode variant group (e.g., plasma pistol standard/supercharge)
+-        const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weaponId);
+-
+-        if (weaponGroupIndices && weaponGroupIndices.length > 0) {
+-            // Handle linked weapon groups (loadout options)
+-            const newSelections = { ...currentSelections };
+-
+-            // Find the group that this weapon uniquely identifies (or first group if shared)
+-            const targetGroupIndex = weaponGroupIndices.length === 1 ? weaponGroupIndices[0] : weaponGroupIndices[0];
+-            const targetGroup = linkedWeaponData.groups[targetGroupIndex];
+-
+-            // Check if this specific group is currently fully selected
+-            const isGroupCurrentlySelected = targetGroup.every((id) => (currentSelections[id] ?? 0) > 0);
+-
+-            if (isGroupCurrentlySelected) {
+-                // Deselecting: turn off all weapons in this group
+-                for (const linkedWeaponId of targetGroup) {
+-                    newSelections[linkedWeaponId] = 0;
+-                }
+-            } else {
+-                // Selecting: check constraint first
+-                if (selectedOptionalCount >= categorizedWargear.totalConstraint) {
+-                    return;
+-                }
+-
+-                // First, deselect all weapons from ALL linked groups (mutual exclusivity)
+-                for (const group of linkedWeaponData.groups) {
+-                    for (const gWeaponId of group) {
+-                        newSelections[gWeaponId] = 0;
+-                    }
+-                }
+-
+-                // Then select all weapons in the target group
+-                for (const linkedWeaponId of targetGroup) {
+-                    newSelections[linkedWeaponId] = 1;
+-                }
+-            }
+-
+-            updateListItem(selectedList, selectedItem.listItemId, {
+-                loadoutSelections: newSelections,
+-            });
+-        } else if (modeGroupBaseName) {
+-            // Handle weapon mode variants (e.g., plasma pistol standard + supercharge)
+-            const modeVariantIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+-            const newSelections = { ...currentSelections };
+-
+-            // Check if any variant is currently selected
+-            const isAnyVariantSelected = modeVariantIds.some((id) => (currentSelections[id] ?? 0) > 0);
+-
+-            if (isAnyVariantSelected) {
+-                // Deselecting: turn off all variants
+-                for (const variantId of modeVariantIds) {
+-                    newSelections[variantId] = 0;
+-                }
+-            } else {
+-                // Selecting: check constraint first
+-                if (selectedOptionalCount >= categorizedWargear.totalConstraint) {
+-                    return;
+-                }
+-
+-                // Select all variants together
+-                for (const variantId of modeVariantIds) {
+-                    newSelections[variantId] = 1;
+-                }
+-            }
+-
+-            updateListItem(selectedList, selectedItem.listItemId, {
+-                loadoutSelections: newSelections,
+-            });
+-        } else {
+-            // Original logic for non-linked, non-variant weapons
+-            const currentCount = currentSelections[weaponId] || 0;
+-            const newCount = currentCount > 0 ? 0 : 1;
+-
+-            if (newCount > 0 && selectedOptionalCount >= categorizedWargear.totalConstraint) {
+-                return;
+-            }
+-
+-            updateListItem(selectedList, selectedItem.listItemId, {
+-                loadoutSelections: {
+-                    ...currentSelections,
+-                    [weaponId]: newCount,
+-                },
+-            });
+-        }
+-    };
+-
+-    // Toggle removal of a default weapon (removes it from attack resolver)
+-    const toggleDefaultWeaponRemoval = (weaponId: string) => {
+-        if (!selectedList || !selectedItem) return;
+-
+-        const currentRemoved = selectedItem.removedWeapons || {};
+-        const isCurrentlyRemoved = currentRemoved[weaponId] === true;
+-
+-        updateListItem(selectedList, selectedItem.listItemId, {
+-            removedWeapons: {
+-                ...currentRemoved,
+-                [weaponId]: !isCurrentlyRemoved,
+-            },
+-        });
+-    };
+-
+-    if (!selectedList) {
+-        return (
+-            <Card>
+-                <CardContent className="flex items-center justify-center h-64">
+-                    <div className="text-center">
+-                        <p className=" mb-4">List not found</p>
+-                        <Link to="/lists">
+-                            <Button>Back to Lists</Button>
+-                        </Link>
+-                    </div>
+-                </CardContent>
+-            </Card>
+-        );
+-    }
++const ListView = () => {
++    const listThing = 8;
+
+     return (
+-        <div className="space-y-4">
+-            {/* Back button */}
+-            <Link to="/lists" className="inline-flex items-center hover:shadow-glow-green">
+-                <ArrowLeft className="h-4 w-4 mr-1" />
+-                Back to Lists
+-            </Link>
+-
+-            <header className="space-y-2">
+-                <div className="flex gap-2 items-center">
+-                    <h1>{selectedList.name}</h1>
+-                    {listTotalPoints > 0 && <Badge variant="outline">{listTotalPoints} pts</Badge>}
+-                </div>
+-                <p>
+-                    {selectedList.factionName} | {selectedList.detachmentName}
+-                </p>
+-            </header>
+-
+-            <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+-
+-                {/* Right Column - Unit Details */}
+-                <div className="lg:col-span-7">
+-                    {selectedItem ? (
+-                        <Card>
+-
+-                            <CardContent className="grid grid-cols-1 lg:grid-cols-2 border-t-1 border-skarsnikGreen gap-6 p-6">
+-                                <div className="space-y-6">
+-
+-
+-
+-                                    {/* Can Lead */}
+-                                    {selectedItem.abilities?.some((ability) => ability.name === "Leader") && (
+-                                        <div className="space-y-2">
+-                                            <h3 className="text-blockcaps-l">Can Lead</h3>
+-                                            {loadingBodyguards ? (
+-                                                <p className="text-sm ">Loading...</p>
+-                                            ) : bodyguardUnits.length > 0 ? (
+-                                                <div className="space-y-4">
+-                                                    {unitsInList.length > 0 && (
+-                                                        <div>
+-                                                            <h4 className="font-medium text-xs  mb-2">In Your List ({unitsInList.length})</h4>
+-                                                            <div className="space-y-2">
+-                                                                {unitsInList.map((listItem) => {
+-                                                                    const isAttached = selectedItem?.leading?.id === listItem.id && selectedItem?.leading?.name === listItem.name;
+-                                                                    const existingLeaderRefs = listItem.leadBy || [];
+-                                                                    const hasExistingLeaders = existingLeaderRefs.length > 0;
+-
+-                                                                    // Use the proper validation function to check if this leader can attach
+-                                                                    const validation: MultiLeaderValidationResult = selectedList && selectedItem ? canAttachLeaderToUnit(selectedList, selectedItem.listItemId, listItem.listItemId) : { canAttach: true };
+-
+-                                                                    // Get existing leader names for display
+-                                                                    const existingLeaderNames = existingLeaderRefs
+-                                                                        .map((ref) => selectedList?.items.find((i) => i.id === ref.id && i.name === ref.name)?.name)
+-                                                                        .filter(Boolean)
+-                                                                        .join(", ");
+-
+-                                                                    return (
+-                                                                        <div key={listItem.listItemId} className={`border-skarsnikGreen border-1 rounded p-3 ${isAttached ? "bg-deathWorldForest" : ""}`}>
+-                                                                            <div className="flex items-center justify-between">
+-                                                                                <div className="flex-1">
+-                                                                                    <span>{listItem.name}</span>
+-                                                                                    {hasExistingLeaders && !isAttached && (
+-                                                                                        <div className="text-xs mt-1">
+-                                                                                            <span className="text-yellow-600">
+-                                                                                                {existingLeaderRefs.length} leader{existingLeaderRefs.length > 1 ? "s" : ""} attached
+-                                                                                                {existingLeaderNames && <span className="text-gray-500"> ({existingLeaderNames})</span>}
+-                                                                                            </span>
+-                                                                                            {validation.canAttach ? <span className="text-green-600 ml-1">• Can join</span> : <span className="text-red-500 ml-1">• Will replace</span>}
+-                                                                                        </div>
+-                                                                                    )}
+-                                                                                    {isAttached && <div className="text-xs text-green-600 mt-1 font-medium">Attached</div>}
+-                                                                                </div>
+-                                                                                <Button
+-                                                                                    variant={isAttached ? "outline" : "default"}
+-                                                                                    size="sm"
+-                                                                                    onClick={() => {
+-                                                                                        if (isAttached) {
+-                                                                                            handleDetachLeader();
+-                                                                                        } else {
+-                                                                                            handleAttachLeader(listItem.listItemId);
+-                                                                                        }
+-                                                                                    }}
+-                                                                                >
+-                                                                                    {isAttached ? "Detach" : hasExistingLeaders ? (validation.canAttach ? "Join" : "Replace") : "Attach"}
+-                                                                                </Button>
+-                                                                            </div>
+-                                                                        </div>
+-                                                                    );
+-                                                                })}
+-                                                            </div>
+-                                                        </div>
+-                                                    )}
+-
+-                                                    {unitsNotInList.length > 0 && (
+-                                                        <Collapsible defaultOpen={false}>
+-                                                            <CollapsibleTrigger className="flex items-center justify-between w-full group">
+-                                                                <h4 className="font-medium text-xs ">Not in List ({unitsNotInList.length})</h4>
+-                                                                <ChevronDown className="h-4 w-4  transition-transform group-data-[state=open]:rotate-180" />
+-                                                            </CollapsibleTrigger>
+-                                                            <CollapsibleContent className="mt-2">
+-                                                                <div className="space-y-2">
+-                                                                    {unitsNotInList.map((unit) => (
+-                                                                        <div key={unit.id} className="border border-[#e6e6e6] rounded-lg p-3 bg-white">
+-                                                                            <div className="font-medium text-sm">{unit.name}</div>
+-                                                                            <div className="text-xs  mt-1">{unit.roleLabel}</div>
+-                                                                        </div>
+-                                                                    ))}
+-                                                                </div>
+-                                                            </CollapsibleContent>
+-                                                        </Collapsible>
+-                                                    )}
+-                                                </div>
+-                                            ) : (
+-                                                <p className="text-sm ">This unit cannot lead any units.</p>
+-                                            )}
+-                                        </div>
+-                                    )}
+-
+-                                    {/* Enhancements */}
+-                                    {detachmentEnhancements.length > 0 && (
+-                                        <div className="space-y-4">
+-                                            <SplitHeading label="Enhancement options" />
+-                                            <div className="space-y-3">
+-                                                {detachmentEnhancements.map((enhancement, idx) => {
+-                                                    const isAttached = selectedItem?.enhancement?.id === enhancement.id;
+-                                                    const usedByLeader = usedEnhancements.get(enhancement.id);
+-                                                    const isUsedByOther = !!usedByLeader && !isAttached;
+-                                                    return <EnhancementCard key={enhancement.id || idx} enhancement={enhancement} showPoints showLegend isAttached={isAttached} isUsedByOther={isUsedByOther} usedBy={usedByLeader} handleAttachEnhancement={handleAttachEnhancement} />;
+-                                                })}
+-                                            </div>
+-                                        </div>
+-                                    )}
+-
+-                                    {/* Abilities */}
+-                                    {selectedItem.abilities && selectedItem.abilities.filter((ability) => ability.name !== "Leader").length > 0 && (
+-                                        <div className="space-y-4">
+-                                            <SplitHeading label="Abilities" />
+-                                            <div className="space-y-3">
+-                                                {selectedItem.abilities
+-                                                    .filter((ability) => ability.name !== "Leader")
+-                                                    .map((ability, idx) => (
+-                                                        <div key={idx} className="border border-skarsnikGreen rounded p-3">
+-                                                            <div className="flex items-start justify-between mb-1">
+-                                                                <div className="font-medium text-sm">{ability.name}</div>
+-                                                                {ability.type && (
+-                                                                    <Badge variant="outline" className="text-xs">
+-                                                                        {ability.type}
+-                                                                    </Badge>
+-                                                                )}
+-                                                            </div>
+-                                                            {ability.legend && (
+-                                                                <Collapsible defaultOpen={false}>
+-                                                                    <CollapsibleTrigger className="flex items-center gap-1 text-xs  italic group">
+-                                                                        <ChevronDown className="h-3 w-3 transition-transform group-data-[state=open]:rotate-180" />
+-                                                                        <span>Show lore</span>
+-                                                                    </CollapsibleTrigger>
+-                                                                    <CollapsibleContent>
+-                                                                        <p className="text-xs  italic mt-1 mb-2">{ability.legend}</p>
+-                                                                    </CollapsibleContent>
+-                                                                </Collapsible>
+-                                                            )}
+-                                                            {ability.description && (
+-                                                                <div
+-                                                                    className="text-sm"
+-                                                                    dangerouslySetInnerHTML={{
+-                                                                        __html: ability.description,
+-                                                                    }}
+-                                                                />
+-                                                            )}
+-                                                        </div>
+-                                                    ))}
+-                                            </div>
+-                                        </div>
+-                                    )}
+-                                </div>
+-                                <div className="space-y-6">
+-                                    {/* Default Wargear */}
+-                                    {categorizedWargear.defaultWeapons.length > 0 && (
+-                                        <div className="space-y-4">
+-                                            <SplitHeading label="Standard Wargear" />
+-
+-                                            {categorizedWargear.defaultWeapons.map((weapon, idx) => {
+-                                                const isRemoved = selectedItem?.removedWeapons?.[weapon.id] === true;
+-                                                console.log(isRemoved);
+-                                                return weapon.profiles?.map((profile, pIdx) => <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isDisabled={isRemoved} showToggleButton={pIdx === 0} onToggle={() => toggleDefaultWeaponRemoval(weapon.id)} canToggle={true} />);
+-                                            })}
+-                                        </div>
+-                                    )}
+-
+-                                    {/* Optional Wargear */}
+-                                    {categorizedWargear.optionalWeapons.length > 0 && (
+-                                        <div className="space-y-2">
+-                                            <h3 className="flex justify-between">
+-                                                <span className="text-blockcaps-l">Optional Wargear</span>
+-                                                <span>
+-                                                    ({selectedOptionalCount}/{categorizedWargear.totalConstraint} selected)
+-                                                </span>
+-                                            </h3>
+-                                            <div className="space-y-4">
+-                                                {(() => {
+-                                                    // If we have linked groups, render each group separately
+-                                                    if (linkedWeaponData.groups.length > 0) {
+-                                                        // Track which weapons are in linked groups
+-                                                        const weaponsInLinkedGroups = new Set<string>();
+-                                                        for (const group of linkedWeaponData.groups) {
+-                                                            for (const weaponId of group) {
+-                                                                weaponsInLinkedGroups.add(weaponId);
+-                                                            }
+-                                                        }
+-
+-                                                        // Find standalone weapons (not in any linked group)
+-                                                        const standaloneWeapons = categorizedWargear.optionalWeapons.filter((w) => !weaponsInLinkedGroups.has(w.id));
+-
+-                                                        return (
+-                                                            <>
+-                                                                {/* Render each linked group */}
+-                                                                {linkedWeaponData.groups.map((groupWeaponIds, groupIdx) => {
+-                                                                    // Get weapon objects for this group
+-                                                                    const groupWeapons = groupWeaponIds.map((id) => categorizedWargear.optionalWeapons.find((w) => w.id === id)).filter((w): w is (typeof categorizedWargear.optionalWeapons)[0] => w !== undefined);
+-
+-                                                                    if (groupWeapons.length === 0) return null;
+-
+-                                                                    // Check if ALL weapons in this specific group are selected
+-                                                                    const isGroupSelected = groupWeaponIds.every((id) => (selectedItem?.loadoutSelections?.[id] ?? 0) > 0);
+-                                                                    const canSelect = isGroupSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+-
+-                                                                    // Find the "unique" weapon in this group (the one that differentiates it from others)
+-                                                                    // This is the weapon that belongs to only this group
+-                                                                    const uniqueWeapon = groupWeapons.find((w) => {
+-                                                                        const groups = linkedWeaponData.weaponToGroups.get(w.id);
+-                                                                        return groups && groups.length === 1;
+-                                                                    });
+-                                                                    const triggerWeaponId = uniqueWeapon?.id || groupWeapons[0].id;
+-
+-                                                                    return (
+-                                                                        <div key={`group-${groupIdx}`} className="border border-dashed border-skarsnikGreen rounded p-2 space-y-2">
+-                                                                            <span className="text-xs text-muted-foreground">Loadout option {groupIdx + 1}</span>
+-                                                                            {groupWeapons.map((weapon, idx) =>
+-                                                                                weapon.profiles?.map((profile, pIdx) => (
+-                                                                                    <WeaponProfileCard
+-                                                                                        key={`${groupIdx}-${idx}-${pIdx}`}
+-                                                                                        profile={profile}
+-                                                                                        isSelected={isGroupSelected}
+-                                                                                        showToggleButton={weapon.id === triggerWeaponId && pIdx === 0}
+-                                                                                        onToggle={() => toggleWeaponSelection(triggerWeaponId)}
+-                                                                                        canToggle={canSelect}
+-                                                                                    />
+-                                                                                ))
+-                                                                            )}
+-                                                                        </div>
+-                                                                    );
+-                                                                })}
+-
+-                                                                {/* Render standalone weapons, grouping mode variants together */}
+-                                                                {(() => {
+-                                                                    // Track which weapons we've already rendered (as part of a mode variant group)
+-                                                                    const renderedWeaponIds = new Set<string>();
+-                                                                    const elements: React.ReactNode[] = [];
+-
+-                                                                    standaloneWeapons.forEach((weapon, idx) => {
+-                                                                        if (renderedWeaponIds.has(weapon.id)) return;
+-
+-                                                                        // Check if this weapon is part of a mode variant group
+-                                                                        const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weapon.id);
+-
+-                                                                        if (modeGroupBaseName) {
+-                                                                            // This is a mode variant - render all variants in the group together
+-                                                                            const modeGroupIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+-                                                                            const groupWeapons = modeGroupIds.map((id) => standaloneWeapons.find((w) => w.id === id)).filter((w): w is (typeof standaloneWeapons)[0] => w !== undefined);
+-
+-                                                                            // Mark all variants as rendered
+-                                                                            for (const gw of groupWeapons) {
+-                                                                                renderedWeaponIds.add(gw.id);
+-                                                                            }
+-
+-                                                                            // Check if any variant in the group is selected
+-                                                                            const isGroupSelected = modeGroupIds.some((id) => (selectedItem?.loadoutSelections?.[id] ?? 0) > 0);
+-                                                                            const canSelect = isGroupSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+-                                                                            const triggerWeaponId = groupWeapons[0]?.id || weapon.id;
+-
+-                                                                            elements.push(
+-                                                                                <div key={`mode-group-${modeGroupBaseName}`} className="space-y-1">
+-                                                                                    {groupWeapons.map((gw, gIdx) =>
+-                                                                                        gw.profiles?.map((profile, pIdx) => (
+-                                                                                            <WeaponProfileCard
+-                                                                                                key={`mode-${modeGroupBaseName}-${gIdx}-${pIdx}`}
+-                                                                                                profile={profile}
+-                                                                                                isSelected={isGroupSelected}
+-                                                                                                showToggleButton={gIdx === 0 && pIdx === 0}
+-                                                                                                onToggle={() => toggleWeaponSelection(triggerWeaponId)}
+-                                                                                                canToggle={canSelect}
+-                                                                                            />
+-                                                                                        ))
+-                                                                                    )}
+-                                                                                </div>
+-                                                                            );
+-                                                                        } else {
+-                                                                            // Regular standalone weapon (not a mode variant)
+-                                                                            renderedWeaponIds.add(weapon.id);
+-                                                                            const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
+-                                                                            const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+-                                                                            const hasMultipleProfiles = weapon.profiles && weapon.profiles.length > 1;
+-
+-                                                                            if (hasMultipleProfiles) {
+-                                                                                elements.push(
+-                                                                                    <div key={`standalone-${idx}`} className="space-y-1">
+-                                                                                        {weapon.profiles?.map((profile, pIdx) => (
+-                                                                                            <WeaponProfileCard key={`standalone-${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={pIdx === 0} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />
+-                                                                                        ))}
+-                                                                                    </div>
+-                                                                                );
+-                                                                            } else {
+-                                                                                weapon.profiles?.forEach((profile, pIdx) => {
+-                                                                                    elements.push(<WeaponProfileCard key={`standalone-${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
+-                                                                                });
+-                                                                            }
+-                                                                        }
+-                                                                    });
+-
+-                                                                    return elements;
+-                                                                })()}
+-                                                            </>
+-                                                        );
+-                                                    }
+-
+-                                                    // No linked groups - render all weapons individually
+-                                                    // But still group mode variants together (e.g., plasma pistol standard/supercharge)
+-                                                    const renderedWeaponIds = new Set<string>();
+-                                                    const elements: React.ReactNode[] = [];
+-
+-                                                    categorizedWargear.optionalWeapons.forEach((weapon, idx) => {
+-                                                        if (renderedWeaponIds.has(weapon.id)) return;
+-
+-                                                        // Check if this weapon is part of a mode variant group
+-                                                        const modeGroupBaseName = weaponModeGroups.weaponToGroup.get(weapon.id);
+-
+-                                                        if (modeGroupBaseName) {
+-                                                            // This is a mode variant - render all variants in the group together
+-                                                            const modeGroupIds = weaponModeGroups.groups.get(modeGroupBaseName) || [];
+-                                                            const groupWeapons = modeGroupIds.map((id) => categorizedWargear.optionalWeapons.find((w) => w.id === id)).filter((w): w is (typeof categorizedWargear.optionalWeapons)[0] => w !== undefined);
+-
+-                                                            // Mark all variants as rendered
+-                                                            for (const gw of groupWeapons) {
+-                                                                renderedWeaponIds.add(gw.id);
+-                                                            }
+-
+-                                                            // Check if any variant in the group is selected
+-                                                            const isGroupSelected = modeGroupIds.some((id) => (selectedItem?.loadoutSelections?.[id] ?? 0) > 0);
+-                                                            const canSelect = isGroupSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+-                                                            const triggerWeaponId = groupWeapons[0]?.id || weapon.id;
+-
+-                                                            elements.push(
+-                                                                <div key={`mode-group-${modeGroupBaseName}`} className="space-y-1">
+-                                                                    {groupWeapons.map((gw, gIdx) =>
+-                                                                        gw.profiles?.map((profile, pIdx) => (
+-                                                                            <WeaponProfileCard
+-                                                                                key={`mode-${modeGroupBaseName}-${gIdx}-${pIdx}`}
+-                                                                                profile={profile}
+-                                                                                isSelected={isGroupSelected}
+-                                                                                showToggleButton={gIdx === 0 && pIdx === 0}
+-                                                                                onToggle={() => toggleWeaponSelection(triggerWeaponId)}
+-                                                                                canToggle={canSelect}
+-                                                                            />
+-                                                                        ))
+-                                                                    )}
++            <aside className="border-r-1 border-skarsnikGreen p-6">this is the list of units</aside>
++            <div className="p-6">this is the deets</div>
+         </div>
+     );
+-                                                        } else {
+-                                                            // Regular weapon (not a mode variant)
+-                                                            renderedWeaponIds.add(weapon.id);
+-                                                            const isSelected = (selectedItem?.loadoutSelections?.[weapon.id] ?? 0) > 0;
+-                                                            const canSelect = isSelected || selectedOptionalCount < categorizedWargear.totalConstraint;
+-                                                            const hasMultipleProfiles = weapon.profiles && weapon.profiles.length > 1;
+-
+-                                                            if (hasMultipleProfiles) {
+-                                                                // Wrap multiple profiles in a container to group them visually
+-                                                                elements.push(
+-                                                                    <div key={`weapon-${idx}`} className="space-y-1">
+-                                                                        {weapon.profiles?.map((profile, pIdx) => (
+-                                                                            <WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={pIdx === 0} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />
+-                                                                        ))}
+-                                                                    </div>
+-                                                                );
+-                                                            } else {
+-                                                                // Single profile weapon
+-                                                                weapon.profiles?.forEach((profile, pIdx) => {
+-                                                                    elements.push(<WeaponProfileCard key={`${idx}-${pIdx}`} profile={profile} isSelected={isSelected} showToggleButton={true} onToggle={() => toggleWeaponSelection(weapon.id)} canToggle={canSelect} />);
+-                                                                });
+-                                                            }
+-                                                        }
+-                                                    });
+-
+-                                                    return elements;
+-                                                })()}
+-                                            </div>
+-                                        </div>
+-                                    )}
+-
+-                                    {/* Weapon Options Reference */}
+-                                    {selectedItem.options && selectedItem.options.length > 0 && (
+-                                        <Collapsible defaultOpen={false}>
+-                                            <CollapsibleTrigger className="flex items-center gap-2 group">
+-                                                <h3 className="text-blockcaps-l">Optional wargear reference</h3>
+-                                                <ChevronDown className="h-4 w-4 transition-transform group-data-[state=open]:rotate-180" />
+-                                            </CollapsibleTrigger>
+-                                            <CollapsibleContent className="mt-2">
+-                                                <div className="space-y-2">
+-                                                    {selectedItem.options.map((option, idx) => (
+-                                                        <div key={option.line || idx} className="border border-skarsnikGreen rounded p-3">
+-                                                            <div
+-                                                                dangerouslySetInnerHTML={{
+-                                                                    __html: option.description,
+-                                                                }}
+-                                                            />
+-                                                        </div>
+-                                                    ))}
+-                                                </div>
+-                                            </CollapsibleContent>
+-                                        </Collapsible>
+-                                    )}
+-                                </div>
+-                            </CardContent>
+-                        </Card>
+-                    ) : (
+-                        <Card>
+-                            <CardContent className="flex items-center justify-center h-64">
+-                                <div className="text-center">
+-                                    <p className=" mb-2">Select a unit from the list to view details</p>
+-                                </div>
+-                            </CardContent>
+-                        </Card>
+-                    )}
+-                </div>
+-            </div>
+-        </div>
+-    );
+-}
++};
+
+ export default ListView;
