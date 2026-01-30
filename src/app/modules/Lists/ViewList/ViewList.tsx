@@ -50,10 +50,13 @@ const ViewList = () => {
         const filteredDatasheets = factionData.datasheets.filter((datasheet: Datasheet) => {
             const datasheetSupplement = datasheet.supplementSlug;
 
+            // detachment supp == codex should allow anything
+
+            // if there's no datasheet supplement, or if it is codex, return true
             if (!datasheetSupplement || datasheetSupplement === "codex") {
                 return true;
             }
-
+            // if there's a datasheet supplement, and it matches the detachment supplement, return true
             if (detachmentSupplement) {
                 return datasheetSupplement === detachmentSupplement;
             }
@@ -172,7 +175,7 @@ const ViewList = () => {
 
     return (
         <main className="w-full h-full grid grid-cols-[1fr_3fr] gap-6">
-            <aside className="grid grid-rows-[auto_auto_auto_auto_1fr] gap-6">
+            <aside className="grid grid-rows-[auto_auto_auto_auto_1fr] gap-6 h-[calc(100vh-54px)] overflow-auto">
                 <Link to="/lists" className="inline-flex items-center">
                     <ArrowLeft className="h-4 w-4 mr-1" />
                     <span className="text-blockcaps-m">Back to Lists</span>

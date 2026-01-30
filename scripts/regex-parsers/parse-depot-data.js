@@ -23,6 +23,33 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /**
+ * Normalizes text by replacing typographic characters with their ASCII equivalents.
+ * This ensures consistent regex matching throughout the application.
+ *
+ * Replacements:
+ * - Curly single quotes (', ') → straight apostrophe (')
+ * - Curly double quotes (", ") → straight double quote (")
+ * - En-dash (–) and em-dash (—) → hyphen (-)
+ *
+ * @param {string} text - The text to normalize
+ * @returns {string} - Normalized text with ASCII equivalents
+ */
+function normalizeText(text) {
+    if (typeof text !== "string") {
+        return text;
+    }
+    return (
+        text
+            // Curly single quotes to straight apostrophe
+            .replace(/[\u2018\u2019]/g, "'")
+            // Curly double quotes to straight double quote
+            .replace(/[\u201C\u201D]/g, '"')
+            // En-dash and em-dash to hyphen
+            .replace(/[\u2013\u2014]/g, "-")
+    );
+}
+
+/**
  * Converts a string value to a number if it's numeric or ends with "+"
  * Examples:
  * - "5" -> 5
@@ -46,6 +73,9 @@ function convertValue(value) {
         if (/^-?\d+$/.test(value)) {
             return parseInt(value, 10);
         }
+
+        // Normalize typographic characters in non-numeric strings
+        return normalizeText(value);
     }
 
     return value;

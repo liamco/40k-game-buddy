@@ -7,15 +7,18 @@ const STORAGE_KEY = "battle-cogitator-engagements";
 
 // Calculate total models for a unit
 function calculateTotalModels(item: ArmyListItem): number {
+    // Use modelInstances if available
+    if (item.modelInstances && item.modelInstances.length > 0) {
+        return item.modelInstances.length;
+    }
+    // Fallback to unitComposition
     if (!item.unitComposition || item.unitComposition.length === 0) {
         return 1;
     }
     let total = 0;
-    item.unitComposition.forEach((comp, idx) => {
+    item.unitComposition.forEach((comp) => {
         if (comp.description === "OR") return;
-        const line = comp.line || idx + 1;
-        const count = item.compositionCounts?.[line] ?? comp.min ?? 0;
-        total += count;
+        total += comp.min ?? 0;
     });
     return total;
 }

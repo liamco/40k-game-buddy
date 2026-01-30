@@ -50,11 +50,9 @@ interface Props {
     bonusAttributes?: BonusAttribute[];
     // Stat bonuses from enhancements/abilities (e.g., +1 Strength)
     statBonuses?: StatBonus[];
-    // Counter controls for ratio-based weapon selections
-    counterControls?: CounterControls;
 }
 
-const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses, counterControls }: Props) => {
+const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
     const handleClick = () => {
         if (canToggle && onToggle) {
             onToggle();
@@ -140,37 +138,6 @@ const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeapon
             <div className={`${isDisabled ? "opacity-25" : ""} space-y-2`}>
                 <div className="flex items-center justify-between">
                     <h4 className="text-metadata-l">{profile.name}</h4>
-                    {counterControls && (
-                        <div className="flex items-center gap-2">
-                            <span className="text-metadata-l">
-                                {counterControls.current}/{counterControls.max}
-                            </span>
-                            <div className="flex border border-current rounded overflow-hidden">
-                                <button
-                                    type="button"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        counterControls.onDecrement();
-                                    }}
-                                    disabled={counterControls.current <= 0}
-                                    className="px-2 py-0.5 hover:bg-current/20 disabled:opacity-30 disabled:cursor-not-allowed"
-                                >
-                                    −
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        counterControls.onIncrement();
-                                    }}
-                                    disabled={counterControls.current >= counterControls.max}
-                                    className="px-2 py-0.5 border-l border-current hover:bg-current/20 disabled:opacity-30 disabled:cursor-not-allowed"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-                    )}
                 </div>
                 {(profile.attributes || (bonusAttributes && bonusAttributes.length > 0)) && (
                     <div className="flex flex-wrap gap-2">

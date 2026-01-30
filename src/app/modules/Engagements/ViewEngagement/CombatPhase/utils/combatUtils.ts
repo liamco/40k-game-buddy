@@ -102,9 +102,9 @@ export function findCombinedUnitByItemId(combinedItems: CombinedUnitItem[], list
 export function calculateModelCount(item: EngagementForceItem, attachedItem?: EngagementForceItem | null): number {
     let total = 0;
 
-    // Calculate from compositionCounts if available
-    if (item.compositionCounts) {
-        total += Object.values(item.compositionCounts).reduce((sum, count) => sum + count, 0);
+    // Use modelInstances if available
+    if (item.modelInstances && item.modelInstances.length > 0) {
+        total += item.modelInstances.length;
     } else if (item.unitComposition && item.unitComposition.length > 0) {
         // Fall back to minimum values from unitComposition
         total += item.unitComposition.reduce((sum, comp) => sum + (comp.min ?? 1), 0);
@@ -115,8 +115,8 @@ export function calculateModelCount(item: EngagementForceItem, attachedItem?: En
 
     // Add attached unit's models if present
     if (attachedItem) {
-        if (attachedItem.compositionCounts) {
-            total += Object.values(attachedItem.compositionCounts).reduce((sum, count) => sum + count, 0);
+        if (attachedItem.modelInstances && attachedItem.modelInstances.length > 0) {
+            total += attachedItem.modelInstances.length;
         } else if (attachedItem.unitComposition && attachedItem.unitComposition.length > 0) {
             total += attachedItem.unitComposition.reduce((sum, comp) => sum + (comp.min ?? 1), 0);
         } else {

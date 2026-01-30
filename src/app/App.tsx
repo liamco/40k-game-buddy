@@ -22,7 +22,7 @@ const bgStyle = {
 
 export default function App() {
     return (
-        <div className="grid grid-cols-[auto_1fr] gap-6 h-[100vh] p-6">
+        <div className="grid grid-cols-[auto_1fr] gap-6 h-[100vh] overflow-hidden p-6">
             <div style={bgStyle} className="absolute top-0 left-0 w-full h-full pointer-events-none" />
             <nav className="flex flex-col gap-6">
                 <NavLink to="/">

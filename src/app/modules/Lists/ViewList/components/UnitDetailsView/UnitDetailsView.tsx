@@ -4,10 +4,10 @@ import { useListManager, getWarlordEligibility } from "../../../ListManagerConte
 import { Badge } from "#components/Badge/Badge.tsx";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "#components/Tabs/Tabs.tsx";
 
-import OverviewTab from "./OverviewTab";
-import WargearTab from "./WargearTab";
-import LeadersTab from "./LeadersTab";
-import EnhancementsTab from "./EnhancementsTab";
+import OverviewTab from "./OverviewTab/OverviewTab";
+import WargearTab from "./WargearTab/WargearTab";
+import LeadersTab from "./LeadersTab/LeadersTab";
+import EnhancementsTab from "./EnhancementsTab/EnhancementsTab";
 
 interface Props {
     unit: ArmyListItem;
@@ -45,8 +45,8 @@ const UnitDetailsView = ({ unit, list }: Props) => {
     const showEnhancementsTab = hasCharacterKeyword && !hasEpicHeroKeyword;
 
     return (
-        <div className="border-1 border-skarsnikGreen">
-            <header className="space-y-4 border-b-1 border-skarsnikGreen bg-deathWorldForest p-6">
+        <div className="border-1 border-skarsnikGreen grid-rows-[auto_1fr] h-[calc(100vh-54px)] grid overflow-auto">
+            <header className="space-y-4 bg-deathWorldForest p-6">
                 <div className="flex justify-between">
                     <h3 className="text-title-m">{unit.name}</h3>
                     <Badge variant="outline">{calculateItemPoints(unit)} pts</Badge>
@@ -72,40 +72,38 @@ const UnitDetailsView = ({ unit, list }: Props) => {
                 )}
             </header>
 
-            <main className="p-6">
-                <Tabs key={unit.listItemId} defaultValue="overview" className="space-y-6">
-                    <TabsList className="w-full grid grid-cols-4">
-                        <TabsTrigger value="overview">
-                            <span className="text-blockcaps-s">Stats & abilities</span>
-                        </TabsTrigger>
-                        <TabsTrigger value="wargear">
-                            <span className="text-blockcaps-s">Wargear & loadouts</span>
-                        </TabsTrigger>
-                        <TabsTrigger value="leaders" disabled={!showLeadersTab}>
-                            <span className={`text-blockcaps-s ${!showLeadersTab ? "line-through" : ""}`}>Leaders</span>
-                        </TabsTrigger>
-                        <TabsTrigger value="enhancements" disabled={!showEnhancementsTab}>
-                            <span className={`text-blockcaps-s ${!showEnhancementsTab ? "line-through" : ""}`}>Enhancements</span>
-                        </TabsTrigger>
-                    </TabsList>
+            <Tabs key={unit.listItemId} defaultValue="overview">
+                <TabsList className="w-full grid grid-cols-4 bg-deathWorldForest px-6">
+                    <TabsTrigger value="overview">
+                        <span className="text-blockcaps-s">Stats & abilities</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="wargear">
+                        <span className="text-blockcaps-s">Wargear & loadouts</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="leaders" disabled={!showLeadersTab}>
+                        <span className={`text-blockcaps-s ${!showLeadersTab ? "line-through" : ""}`}>Leaders</span>
+                    </TabsTrigger>
+                    <TabsTrigger value="enhancements" disabled={!showEnhancementsTab}>
+                        <span className={`text-blockcaps-s ${!showEnhancementsTab ? "line-through" : ""}`}>Enhancements</span>
+                    </TabsTrigger>
+                </TabsList>
 
-                    <TabsContent value="overview">
-                        <OverviewTab unit={unit} list={list} />
-                    </TabsContent>
+                <TabsContent value="overview">
+                    <OverviewTab unit={unit} list={list} />
+                </TabsContent>
 
-                    <TabsContent value="wargear">
-                        <WargearTab unit={unit} list={list} />
-                    </TabsContent>
+                <TabsContent value="wargear">
+                    <WargearTab unit={unit} list={list} />
+                </TabsContent>
 
-                    <TabsContent value="leaders">
-                        <LeadersTab unit={unit} list={list} />
-                    </TabsContent>
+                <TabsContent value="leaders">
+                    <LeadersTab unit={unit} list={list} />
+                </TabsContent>
 
-                    <TabsContent value="enhancements">
-                        <EnhancementsTab unit={unit} list={list} detachmentEnhancements={detachmentEnhancements} usedEnhancements={usedEnhancements} />
-                    </TabsContent>
-                </Tabs>
-            </main>
+                <TabsContent value="enhancements">
+                    <EnhancementsTab unit={unit} list={list} detachmentEnhancements={detachmentEnhancements} usedEnhancements={usedEnhancements} />
+                </TabsContent>
+            </Tabs>
         </div>
     );
 };

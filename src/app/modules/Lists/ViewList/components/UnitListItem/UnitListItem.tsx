@@ -66,7 +66,7 @@ const UnitListItem = ({ calculateItemPoints, item, handleRemoveItem, setSelected
                         </span>
                     </Badge>
                 )}
-                {item.loadoutSelections && Object.values(item.loadoutSelections).some((count) => count > 0) && <Badge variant={isSelected ? "outlineDark" : "outline"}>Custom Loadout</Badge>}
+                {item.modelInstances?.some((m) => JSON.stringify(m.loadout.slice().sort()) !== JSON.stringify(m.defaultLoadout?.slice().sort())) && <Badge variant={isSelected ? "outlineDark" : "outline"}>Custom Loadout</Badge>}
             </div>
         </div>
     );

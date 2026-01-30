@@ -16,18 +16,6 @@ export interface LoadoutConstraint {
     threshold?: number;
 }
 
-// Enriched loadout option with parsed constraint info
-export interface LoadoutOption {
-    line: number;
-    description: string;
-    button: string;
-    constraint: LoadoutConstraint;
-    currentSelections: number;
-    replacesWeapons?: string[]; // Weapon names that would be replaced
-    addsWeapons?: string[]; // Weapon names that would be added
-    isNote?: boolean; // True if this is just a note (e.g., button === "*")
-}
-
 // Unit weapons split by type
 export interface UnitWeapons {
     ranged: Weapon[];

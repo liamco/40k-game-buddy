@@ -31,6 +31,7 @@ export interface ModelInstance {
     modelType: string; // From unitComposition: "Tactical Sergeant", "Tactical Marine"
     modelTypeLine: number; // unitComposition line number (for stats lookup)
     loadout: string[]; // Array of weapon IDs from availableWargear
+    defaultLoadout: string[]; // Original loadout at creation (for detecting customization)
 }
 
 export type ArmyListItem = Datasheet & {
@@ -41,12 +42,6 @@ export type ArmyListItem = Datasheet & {
     leadBy?: LeaderReference[]; // Leaders attached to this unit (supports multiple)
     enhancement?: { id: string; name: string; cost?: number }; // Enhancement attached to this leader
 
-    // Per-model weapon tracking (new system)
+    // Per-model weapon tracking
     modelInstances?: ModelInstance[]; // Each model with its loadout
-
-    // DEPRECATED - kept for migration, will be removed
-    compositionCounts?: { [line: number]: number }; // Use modelInstances.length instead
-    loadoutSelections?: { [optionLine: number]: number }; // Use modelInstances[].loadout instead
-    loadoutWeaponChoices?: { [optionLine: number]: string[] }; // Use modelInstances[].loadout instead
-    removedWeapons?: { [weaponId: string]: boolean }; // Use modelInstances[].loadout instead
 };

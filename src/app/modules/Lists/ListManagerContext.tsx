@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from "react";
 
 import { getAllFactions, loadFactionData, loadFactionConfig, loadDatasheetData } from "../../utils/depotDataLoader";
-import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, LoadoutOption, UnitWeapons, LeaderReference, LeaderCondition, UnitCombatState, Enhancement, Weapon, WarlordEligibility, ModelInstance } from "../../types";
+import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, UnitWeapons, LeaderReference, LeaderCondition, UnitCombatState, Enhancement, Weapon, WarlordEligibility, ModelInstance } from "../../types";
 
 /**
  * Result of multi-leader attachment validation
@@ -129,12 +129,15 @@ function calculateItemPointsHelper(item: ArmyListItem): number {
         return item.modelCosts?.[0]?.cost ?? 0;
     }
 
+    // Use modelInstances if available, otherwise fall back to unitComposition min values
     let totalModels = 0;
-    item.unitComposition.forEach((comp, idx) => {
-        const line = comp.line || idx + 1;
-        const count = item.compositionCounts?.[line] ?? comp.min ?? 0;
-        totalModels += count;
-    });
+    if (item.modelInstances && item.modelInstances.length > 0) {
+        totalModels = item.modelInstances.length;
+    } else {
+        item.unitComposition.forEach((comp) => {
+            totalModels += comp.min ?? 0;
+        });
+    }
 
     if (item.modelCosts && Array.isArray(item.modelCosts)) {
         const validCosts = item.modelCosts.filter((cost) => cost.count !== undefined && cost.count >= totalModels);
@@ -360,6 +363,7 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
                 modelType,
                 modelTypeLine: line,
                 loadout: [...defaultLoadout],
+                defaultLoadout: [...defaultLoadout],
             });
         }
     }
@@ -368,7 +372,7 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
 }
 
 /**
- * Resolve the active wargear for a unit based on loadout, selections, and removals.
+ * Resolve the active wargear for a unit based on modelInstances.
  * Returns a flat array of Weapon objects that the unit currently has equipped.
  * This is used when creating EngagementForceItems to pre-compute the active weapons.
  */
@@ -377,43 +381,23 @@ export function resolveUnitWargear(unit: ArmyListItem): Weapon[] {
         return [];
     }
 
-    const defaultWeaponNames = parseLoadoutWeapons(unit.loadout || "").map((w) => w.toLowerCase());
-    const loadoutSelections = unit.loadoutSelections || {};
-    const removedWeapons = unit.removedWeapons || {};
+    // Use modelInstances if available
+    if (unit.modelInstances && unit.modelInstances.length > 0) {
+        const weaponIds = new Set<string>();
+        unit.modelInstances.forEach((m) => m.loadout.forEach((id) => weaponIds.add(id)));
 
-    // Start with default weapons from availableWargear that match the loadout string
-    let activeWeapons: Weapon[] = unit.availableWargear.filter((weapon) => {
-        const weaponNameLower = weapon.name.toLowerCase();
-        const isDefault = defaultWeaponNames.some((defaultName) => weaponNameLower.includes(defaultName) || defaultName.includes(weaponNameLower));
-
-        // Check if explicitly removed
-        if (removedWeapons[weapon.id]) {
-            return false;
-        }
-
-        return isDefault;
-    });
-
-    // Add weapons from loadout selections
-    if (unit.options) {
-        unit.options.forEach((option: any, idx: number) => {
-            const line = option.line || idx + 1;
-            const selectionCount = loadoutSelections[line] || 0;
-
-            if (selectionCount > 0 && option.description) {
-                const addedWeaponNames = parseWeaponsFromOption(option.description);
-
-                addedWeaponNames.forEach((weaponName) => {
-                    const matchingWeapon = unit.availableWargear!.find((w) => w.name.toLowerCase() === weaponName.toLowerCase());
-                    if (matchingWeapon && !activeWeapons.some((w) => w.id === matchingWeapon.id)) {
-                        activeWeapons.push(matchingWeapon);
-                    }
-                });
-            }
-        });
+        return Array.from(weaponIds)
+            .map((id) => unit.availableWargear!.find((w) => w.id === id))
+            .filter((w): w is Weapon => w !== undefined);
     }
 
-    return activeWeapons;
+    // Fallback: return default weapons from loadout string
+    const defaultWeaponNames = parseLoadoutWeapons(unit.loadout || "").map((w) => w.toLowerCase());
+
+    return unit.availableWargear.filter((weapon) => {
+        const weaponNameLower = weapon.name.toLowerCase();
+        return defaultWeaponNames.some((defaultName) => weaponNameLower.includes(defaultName) || defaultName.includes(weaponNameLower));
+    });
 }
 
 // Parse option description to extract constraint information
@@ -611,9 +595,6 @@ interface ListManagerContextType {
 
     // Wargear helpers
     getUnitWeapons: (unit: ArmyListItem) => UnitWeapons;
-    getLoadoutOptions: (unit: ArmyListItem) => LoadoutOption[];
-    updateLoadoutSelection: (list: ArmyList, unitId: string, optionLine: number, count: number) => ArmyList;
-    updateLoadoutWeaponChoice: (list: ArmyList, unitId: string, optionLine: number, slotIndex: number, weaponName: string | null) => ArmyList;
     getDefaultLoadout: (unit: ArmyListItem) => string[];
 
     // Warlord helpers
@@ -799,21 +780,19 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     }, []);
 
     const calculateTotalModels = useCallback((item: ArmyListItem): number => {
-        // NEW SYSTEM: Count from modelInstances
+        // Count from modelInstances
         if (item.modelInstances && item.modelInstances.length > 0) {
             return item.modelInstances.length;
         }
 
-        // LEGACY SYSTEM: Fall back to compositionCounts
+        // Fallback to unitComposition min values
         if (!item.unitComposition || item.unitComposition.length === 0) {
             return 1;
         }
         let total = 0;
-        item.unitComposition.forEach((comp, idx) => {
+        item.unitComposition.forEach((comp) => {
             if (comp.description === "OR") return;
-            const line = comp.line || idx + 1;
-            const count = item.compositionCounts?.[line] ?? comp.min ?? 0;
-            total += count;
+            total += comp.min ?? 0;
         });
         return total;
     }, []);
@@ -990,13 +969,13 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Get model count for a specific composition line
     const getModelCountForLine = useCallback((unit: ArmyListItem, line: number): number => {
-        // New system: count from modelInstances
+        // Count from modelInstances
         if (unit.modelInstances && unit.modelInstances.length > 0) {
             return unit.modelInstances.filter((m) => m.modelTypeLine === line).length;
         }
-        // Fallback to old compositionCounts system
+        // Fallback to unitComposition min values
         const comp = unit.unitComposition?.find((c) => (c.line || 1) === line);
-        return unit.compositionCounts?.[line] ?? comp?.min ?? 0;
+        return comp?.min ?? 0;
     }, []);
 
     // Add a model instance to a unit
@@ -1021,6 +1000,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 modelType,
                 modelTypeLine: compositionLine,
                 loadout: defaultLoadout,
+                defaultLoadout: [...defaultLoadout],
             };
 
             const updatedUnit: ArmyListItem = {
@@ -1309,7 +1289,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 return { ranged: [], melee: [] };
             }
 
-            // NEW SYSTEM: If unit has modelInstances, collect unique weapons from all models
+            // If unit has modelInstances, collect unique weapons from all models
             if (unit.modelInstances && unit.modelInstances.length > 0) {
                 const weaponIds = new Set<string>();
                 unit.modelInstances.forEach((m) => m.loadout.forEach((id) => weaponIds.add(id)));
@@ -1324,186 +1304,20 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 return { ranged, melee };
             }
 
-            // LEGACY SYSTEM: Fall back to old loadoutSelections approach
+            // Fallback: return default weapons from loadout string
             const defaultWeaponNames = getDefaultLoadout(unit).map((w) => w.toLowerCase());
-            const loadoutSelections = unit.loadoutSelections || {};
-            const loadoutWeaponChoices = unit.loadoutWeaponChoices || {};
-            const removedWeapons = unit.removedWeapons || {};
 
-            // Start with default weapons from availableWargear that match the loadout string
-            let activeWeapons: Weapon[] = unit.availableWargear.filter((weapon) => {
-                // Check if weapon is in default loadout
+            const activeWeapons: Weapon[] = unit.availableWargear.filter((weapon) => {
                 const weaponNameLower = weapon.name.toLowerCase();
-                const isDefault = defaultWeaponNames.some((defaultName) => weaponNameLower.includes(defaultName) || defaultName.includes(weaponNameLower));
-
-                // Check if explicitly removed
-                if (removedWeapons[weapon.id]) {
-                    return false;
-                }
-
-                return isDefault;
+                return defaultWeaponNames.some((defaultName) => weaponNameLower.includes(defaultName) || defaultName.includes(weaponNameLower));
             });
 
-            // Add weapons from loadout selections
-            if (unit.options) {
-                unit.options.forEach((option, idx) => {
-                    const line = option.line || idx + 1;
-                    const selectionCount = loadoutSelections[line] || 0;
-
-                    if (selectionCount > 0 && option.description) {
-                        // Check if this option has explicit weapon choices
-                        const weaponChoices = loadoutWeaponChoices[line];
-                        if (weaponChoices && weaponChoices.length > 0) {
-                            // Use the explicitly chosen weapons
-                            weaponChoices.forEach((weaponName) => {
-                                const matchingWeapon = unit.availableWargear?.find((w) => w.name.toLowerCase() === weaponName.toLowerCase());
-                                if (matchingWeapon && !activeWeapons.some((w) => w.id === matchingWeapon.id)) {
-                                    activeWeapons.push(matchingWeapon);
-                                }
-                            });
-                        } else {
-                            // Fall back to parsing option to find what weapons it adds (for single-choice options)
-                            const addedWeaponNames = parseWeaponsFromOption(option.description);
-
-                            // For single-choice options, add the first weapon
-                            if (addedWeaponNames.length === 1) {
-                                const matchingWeapon = unit.availableWargear?.find((w) => w.name.toLowerCase() === addedWeaponNames[0].toLowerCase());
-                                if (matchingWeapon && !activeWeapons.some((w) => w.id === matchingWeapon.id)) {
-                                    activeWeapons.push(matchingWeapon);
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Split by type
             const ranged = activeWeapons.filter((w) => w.type === "Ranged");
             const melee = activeWeapons.filter((w) => w.type === "Melee");
 
             return { ranged, melee };
         },
         [getDefaultLoadout]
-    );
-
-    // Get enriched loadout options with constraint info
-    const getLoadoutOptions = useCallback(
-        (unit: ArmyListItem): LoadoutOption[] => {
-            if (!unit.options || unit.options.length === 0) {
-                return [];
-            }
-
-            const totalModels = calculateTotalModels(unit);
-            const loadoutSelections = unit.loadoutSelections || {};
-
-            return unit.options.map((option, idx) => {
-                const line = option.line || idx + 1;
-                const constraint = parseOptionConstraint(option.description || "", totalModels);
-                const isNote = option.button === "*";
-
-                // Parse weapons that would be replaced/added
-                const { replacesWeapons, addsWeapons } = parseOptionWeaponChanges(option.description || "");
-
-                return {
-                    line,
-                    description: option.description || "",
-                    button: option.button || "•",
-                    constraint,
-                    currentSelections: loadoutSelections[line] || 0,
-                    replacesWeapons,
-                    addsWeapons,
-                    isNote,
-                };
-            });
-        },
-        [calculateTotalModels]
-    );
-
-    // Update loadout selection for a unit
-    const updateLoadoutSelection = useCallback(
-        (list: ArmyList, unitId: string, optionLine: number, count: number): ArmyList => {
-            const unit = list.items.find((item) => item.listItemId === unitId);
-            if (!unit) return list;
-
-            const option = unit.options?.find((o) => o.line === optionLine);
-            if (!option) return list;
-
-            const totalModels = calculateTotalModels(unit);
-            const constraint = parseOptionConstraint(option.description || "", totalModels);
-
-            // Clamp count to valid range
-            const clampedCount = Math.max(0, Math.min(count, constraint.maxSelections));
-
-            const currentSelections = unit.loadoutSelections || {};
-            const newSelections = { ...currentSelections, [optionLine]: clampedCount };
-
-            // Track removed weapons if this option replaces default weapons
-            const { replacesWeapons } = parseOptionWeaponChanges(option.description || "");
-            let newRemovedWeapons = { ...(unit.removedWeapons || {}) };
-
-            if (clampedCount > 0 && replacesWeapons.length > 0) {
-                // Mark replaced weapons as removed
-                replacesWeapons.forEach((weaponName) => {
-                    const weapon = unit.availableWargear?.find((w) => w.name.toLowerCase() === weaponName.toLowerCase());
-                    if (weapon) {
-                        newRemovedWeapons[weapon.id] = true;
-                    }
-                });
-            } else if (clampedCount === 0 && replacesWeapons.length > 0) {
-                // Restore replaced weapons
-                replacesWeapons.forEach((weaponName) => {
-                    const weapon = unit.availableWargear?.find((w) => w.name.toLowerCase() === weaponName.toLowerCase());
-                    if (weapon) {
-                        delete newRemovedWeapons[weapon.id];
-                    }
-                });
-            }
-
-            return updateListItem(list, unitId, {
-                loadoutSelections: newSelections,
-                removedWeapons: Object.keys(newRemovedWeapons).length > 0 ? newRemovedWeapons : undefined,
-            });
-        },
-        [calculateTotalModels, updateListItem]
-    );
-
-    // Update weapon choice for a specific slot in a multi-choice option
-    const updateLoadoutWeaponChoice = useCallback(
-        (list: ArmyList, unitId: string, optionLine: number, slotIndex: number, weaponName: string | null): ArmyList => {
-            const unit = list.items.find((item) => item.listItemId === unitId);
-            if (!unit) return list;
-
-            const currentChoices = unit.loadoutWeaponChoices || {};
-            const currentSlotChoices = [...(currentChoices[optionLine] || [])];
-
-            if (weaponName === null) {
-                // Remove the slot
-                currentSlotChoices.splice(slotIndex, 1);
-            } else if (slotIndex < currentSlotChoices.length) {
-                // Update existing slot
-                currentSlotChoices[slotIndex] = weaponName;
-            } else {
-                // Add new slot
-                currentSlotChoices.push(weaponName);
-            }
-
-            const newChoices = { ...currentChoices };
-            if (currentSlotChoices.length > 0) {
-                newChoices[optionLine] = currentSlotChoices;
-            } else {
-                delete newChoices[optionLine];
-            }
-
-            // Update loadoutSelections count to match number of choices
-            const currentSelections = unit.loadoutSelections || {};
-            const newSelections = { ...currentSelections, [optionLine]: currentSlotChoices.length };
-
-            return updateListItem(list, unitId, {
-                loadoutSelections: newSelections,
-                loadoutWeaponChoices: Object.keys(newChoices).length > 0 ? newChoices : undefined,
-            });
-        },
-        [updateListItem]
     );
 
     // Set or clear the warlord for a list
@@ -1561,9 +1375,6 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         getDetachmentEnhancements,
         getUsedEnhancements,
         getUnitWeapons,
-        getLoadoutOptions,
-        updateLoadoutSelection,
-        updateLoadoutWeaponChoice,
         getDefaultLoadout,
         setWarlord,
         getWarlord,
