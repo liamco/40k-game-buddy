@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from "react";
 
 import { getAllFactions, loadFactionData, loadFactionConfig, loadDatasheetData } from "../../utils/depotDataLoader";
-import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, LoadoutOption, UnitWeapons, LeaderReference, LeaderCondition, UnitCombatState, Enhancement, Weapon, WarlordEligibility } from "../../types";
+import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, LoadoutOption, UnitWeapons, LeaderReference, LeaderCondition, UnitCombatState, Enhancement, Weapon, WarlordEligibility, ModelInstance } from "../../types";
 
 /**
  * Result of multi-leader attachment validation
@@ -192,6 +192,179 @@ function parseLoadoutWeapons(loadout: string): string[] {
         .split(";")
         .map((w) => w.trim().toLowerCase())
         .filter((w) => w.length > 0);
+}
+
+/**
+ * Extract model type name from unitComposition description.
+ * Examples:
+ * - "1 Tactical Sergeant" -> "Tactical Sergeant"
+ * - "4-9 Tactical Marines" -> "Tactical Marine" (singularized)
+ * - "1 Relic Terminator Sergeant" -> "Relic Terminator Sergeant"
+ */
+function extractModelTypeFromDescription(description: string): string {
+    // Strip HTML tags
+    const text = description.replace(/<[^>]*>/g, "").trim();
+
+    // Remove leading number/range pattern: "1 ", "4-9 ", "0-1 ", etc.
+    const withoutCount = text.replace(/^\d+(-\d+)?\s+/, "");
+
+    // Singularize if ends with 's' and is plural form
+    // Common 40k patterns: Marines -> Marine, Terminators -> Terminator, Bikers -> Biker
+    let modelType = withoutCount;
+    if (modelType.endsWith("ies")) {
+        // e.g., "Uries" -> "Ury" (rare but handle it)
+        modelType = modelType.slice(0, -3) + "y";
+    } else if (modelType.endsWith("s") && !modelType.endsWith("ss")) {
+        // Remove trailing 's' for plurals, but not for words ending in 'ss' (e.g., "Lass")
+        modelType = modelType.slice(0, -1);
+    }
+
+    return modelType;
+}
+
+/**
+ * Create a URL-friendly slug from model type.
+ */
+function slugifyModelType(modelType: string): string {
+    return modelType
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
+/**
+ * Parse loadout string to extract default weapons per model type.
+ * Returns a Map where keys are model type names and values are arrays of weapon names.
+ *
+ * Handles patterns like:
+ * - "Every model is equipped with: bolt pistol; boltgun."
+ * - "The Sergeant is equipped with: plasma pistol. Every Marine is equipped with: boltgun."
+ * - "The Biker Sergeant and every Space Marine Biker is equipped with: bolt pistol."
+ */
+function parseLoadoutByModelType(loadout: string, unitComposition: any[]): Map<string, string[]> {
+    const result = new Map<string, string[]>();
+
+    if (!loadout || !unitComposition?.length) {
+        return result;
+    }
+
+    // Get all model types from unit composition
+    const modelTypes = unitComposition.map((comp) => extractModelTypeFromDescription(comp.description || ""));
+
+    // Split loadout by <br> to handle multiple sections
+    const sections = loadout.split(/<br\s*\/?>/i).filter((s) => s.trim());
+
+    for (const section of sections) {
+        // Strip HTML and extract the pattern
+        const text = section.replace(/<[^>]*>/g, " ").trim();
+
+        // Extract "equipped with:" weapons
+        const equipMatch = text.match(/equipped with:\s*(.+?)\.?$/i);
+        if (!equipMatch) continue;
+
+        const weapons = equipMatch[1]
+            .split(";")
+            .map((w) => w.trim().toLowerCase())
+            .filter((w) => w.length > 0);
+
+        // Determine which model types this applies to
+        const lowerText = text.toLowerCase();
+
+        if (lowerText.includes("every model") || lowerText.includes("this model")) {
+            // Applies to all model types
+            for (const modelType of modelTypes) {
+                result.set(modelType, [...(result.get(modelType) || []), ...weapons]);
+            }
+        } else {
+            // Check which model types are mentioned
+            for (const modelType of modelTypes) {
+                const lowerModelType = modelType.toLowerCase();
+                // Check for exact match or "and every X" pattern
+                if (lowerText.includes(lowerModelType) || lowerText.includes(`every ${lowerModelType}`)) {
+                    result.set(modelType, [...(result.get(modelType) || []), ...weapons]);
+                }
+            }
+
+            // If no specific match found but section starts with "The X", try to match first model type (usually sergeant)
+            if (result.size === 0 && lowerText.startsWith("the ")) {
+                const firstModelType = modelTypes[0];
+                if (firstModelType) {
+                    result.set(firstModelType, weapons);
+                }
+            }
+        }
+    }
+
+    // If we still have model types with no loadout, give them the default from first section
+    const defaultWeapons = parseLoadoutWeapons(loadout);
+    for (const modelType of modelTypes) {
+        if (!result.has(modelType) && defaultWeapons.length > 0) {
+            result.set(modelType, defaultWeapons);
+        }
+    }
+
+    return result;
+}
+
+/**
+ * Find weapon ID from availableWargear by name (case-insensitive, fuzzy).
+ */
+function findWeaponIdByName(availableWargear: Weapon[], weaponName: string): string | null {
+    const nameLower = weaponName.toLowerCase();
+    const weapon = availableWargear.find((w) => {
+        const wNameLower = w.name.toLowerCase();
+        return wNameLower === nameLower || wNameLower.includes(nameLower) || nameLower.includes(wNameLower);
+    });
+    return weapon?.id ?? null;
+}
+
+/**
+ * Generate default model instances for a unit based on its composition.
+ * Each model gets the appropriate default loadout for its type.
+ */
+function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): ModelInstance[] {
+    const instances: ModelInstance[] = [];
+
+    if (!unit.unitComposition || !unit.availableWargear) {
+        return instances;
+    }
+
+    // Parse default loadouts per model type
+    const loadoutByType = parseLoadoutByModelType(unit.loadout || "", unit.unitComposition);
+
+    // Generate instances for each composition line
+    for (const comp of unit.unitComposition) {
+        const line = comp.line || 1;
+        const modelType = extractModelTypeFromDescription(comp.description || "");
+        const modelTypeSlug = slugifyModelType(modelType);
+
+        // Get count - use min as default
+        const count = comp.min || 1;
+
+        // Get default weapon names for this model type
+        const defaultWeaponNames = loadoutByType.get(modelType) || [];
+
+        // Convert weapon names to IDs
+        const defaultLoadout: string[] = [];
+        for (const weaponName of defaultWeaponNames) {
+            const weaponId = findWeaponIdByName(unit.availableWargear, weaponName);
+            if (weaponId) {
+                defaultLoadout.push(weaponId);
+            }
+        }
+
+        // Create instances
+        for (let i = 0; i < count; i++) {
+            instances.push({
+                instanceId: `${listItemId}-${modelTypeSlug}-${i}`,
+                modelType,
+                modelTypeLine: line,
+                loadout: [...defaultLoadout],
+            });
+        }
+    }
+
+    return instances;
 }
 
 /**
@@ -413,6 +586,12 @@ interface ListManagerContextType {
     updateListItem: (list: ArmyList, itemId: string, updates: Partial<ArmyListItem>) => ArmyList;
     updateItemCombatState: (listId: string, itemId: string, combatState: Partial<UnitCombatState>) => void;
 
+    // Model instance operations
+    addModelInstance: (list: ArmyList, unitId: string, compositionLine: number) => ArmyList;
+    removeModelInstance: (list: ArmyList, unitId: string, compositionLine: number) => ArmyList;
+    getModelCountForLine: (unit: ArmyListItem, line: number) => number;
+    updateModelLoadout: (list: ArmyList, unitId: string, instanceId: string, newLoadout: string[]) => ArmyList;
+
     // Attachment operations
     attachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace?: boolean) => ArmyList;
     detachLeaderFromUnit: (list: ArmyList, leaderItemId: string) => ArmyList;
@@ -483,6 +662,11 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                                     // Migration 1: Convert leadBy from object to array format
                                     if (migratedItem.leadBy && !Array.isArray(migratedItem.leadBy)) {
                                         migratedItem.leadBy = [migratedItem.leadBy as unknown as LeaderReference];
+                                    }
+
+                                    // Migration 4: Generate modelInstances if missing
+                                    if (!migratedItem.modelInstances) {
+                                        migratedItem.modelInstances = generateDefaultModelInstances(migratedItem, migratedItem.listItemId);
                                     }
 
                                     // Always refresh key fields from source datasheet
@@ -615,6 +799,12 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     }, []);
 
     const calculateTotalModels = useCallback((item: ArmyListItem): number => {
+        // NEW SYSTEM: Count from modelInstances
+        if (item.modelInstances && item.modelInstances.length > 0) {
+            return item.modelInstances.length;
+        }
+
+        // LEGACY SYSTEM: Fall back to compositionCounts
         if (!item.unitComposition || item.unitComposition.length === 0) {
             return 1;
         }
@@ -688,36 +878,34 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             });
 
             const newSuffixIndex = duplicateItems.length;
-            const compositionCounts: { [line: number]: number } = {};
-            if (fullDatasheet.unitComposition && Array.isArray(fullDatasheet.unitComposition)) {
-                fullDatasheet.unitComposition.forEach((comp, idx) => {
-                    const line = comp.line || idx + 1;
-                    compositionCounts[line] = comp.min ?? 0;
-                });
-            }
+            const listItemId = `${datasheet.id}-${Date.now()}`;
 
-            const newItem: ArmyListItem = {
+            // Create a temporary item to generate model instances
+            const tempItem: ArmyListItem = {
                 ...fullDatasheet,
                 name: `${baseName} ${getSuffixLetter(newSuffixIndex)}`,
-                listItemId: `${datasheet.id}-${Date.now()}`,
+                listItemId,
                 pointsCost: datasheet.modelCosts,
-                compositionCounts: Object.keys(compositionCounts).length > 0 ? compositionCounts : undefined,
+            };
+
+            const newItem: ArmyListItem = {
+                ...tempItem,
+                modelInstances: generateDefaultModelInstances(tempItem, listItemId),
             };
             updatedItems.push(newItem);
         } else {
-            const compositionCounts: { [line: number]: number } = {};
-            if (fullDatasheet.unitComposition && Array.isArray(fullDatasheet.unitComposition)) {
-                fullDatasheet.unitComposition.forEach((comp, idx) => {
-                    const line = comp.line || idx + 1;
-                    compositionCounts[line] = comp.min ?? 0;
-                });
-            }
+            const listItemId = `${datasheet.id}-${Date.now()}`;
+
+            // Create a temporary item to generate model instances
+            const tempItem: ArmyListItem = {
+                ...fullDatasheet,
+                listItemId,
+                pointsCost: datasheet.modelCosts,
+            };
 
             const newItem: ArmyListItem = {
-                ...fullDatasheet,
-                listItemId: `${datasheet.id}-${Date.now()}`,
-                pointsCost: datasheet.modelCosts,
-                compositionCounts: Object.keys(compositionCounts).length > 0 ? compositionCounts : undefined,
+                ...tempItem,
+                modelInstances: generateDefaultModelInstances(tempItem, listItemId),
             };
             updatedItems.push(newItem);
         }
@@ -799,6 +987,116 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             })
         );
     }, []);
+
+    // Get model count for a specific composition line
+    const getModelCountForLine = useCallback((unit: ArmyListItem, line: number): number => {
+        // New system: count from modelInstances
+        if (unit.modelInstances && unit.modelInstances.length > 0) {
+            return unit.modelInstances.filter((m) => m.modelTypeLine === line).length;
+        }
+        // Fallback to old compositionCounts system
+        const comp = unit.unitComposition?.find((c) => (c.line || 1) === line);
+        return unit.compositionCounts?.[line] ?? comp?.min ?? 0;
+    }, []);
+
+    // Add a model instance to a unit
+    const addModelInstance = useCallback(
+        (list: ArmyList, unitId: string, compositionLine: number): ArmyList => {
+            const unit = list.items.find((item) => item.listItemId === unitId);
+            if (!unit) return list;
+
+            const comp = unit.unitComposition?.find((c) => (c.line || 1) === compositionLine);
+            if (!comp) return list;
+
+            const currentCount = getModelCountForLine(unit, compositionLine);
+            const max = comp.max ?? 999;
+            if (currentCount >= max) return list; // At max already
+
+            const modelType = extractModelTypeFromDescription(comp.description);
+            const defaultLoadout = getDefaultLoadoutForModelType(unit, modelType);
+            const index = currentCount;
+
+            const newInstance: ModelInstance = {
+                instanceId: `${unit.listItemId}-${slugifyModelType(modelType)}-${index}`,
+                modelType,
+                modelTypeLine: compositionLine,
+                loadout: defaultLoadout,
+            };
+
+            const updatedUnit: ArmyListItem = {
+                ...unit,
+                modelInstances: [...(unit.modelInstances ?? []), newInstance],
+            };
+
+            const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));
+            const updatedList = finalizeList(list, updatedItems);
+            setLists((prev) => prev.map((l) => (l.id === list.id ? updatedList : l)));
+            return updatedList;
+        },
+        [getModelCountForLine]
+    );
+
+    // Remove a model instance from a unit (removes last of that type)
+    const removeModelInstance = useCallback(
+        (list: ArmyList, unitId: string, compositionLine: number): ArmyList => {
+            const unit = list.items.find((item) => item.listItemId === unitId);
+            if (!unit || !unit.modelInstances) return list;
+
+            const comp = unit.unitComposition?.find((c) => (c.line || 1) === compositionLine);
+            if (!comp) return list;
+
+            const currentCount = getModelCountForLine(unit, compositionLine);
+            const min = comp.min ?? 0;
+            if (currentCount <= min) return list; // At min already
+
+            // Find and remove the last instance of this model type
+            const instances = [...unit.modelInstances];
+            const lastIndex = instances.findLastIndex((m) => m.modelTypeLine === compositionLine);
+
+            if (lastIndex === -1) return list;
+
+            instances.splice(lastIndex, 1);
+
+            const updatedUnit: ArmyListItem = {
+                ...unit,
+                modelInstances: instances,
+            };
+
+            const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));
+            const updatedList = finalizeList(list, updatedItems);
+            setLists((prev) => prev.map((l) => (l.id === list.id ? updatedList : l)));
+            return updatedList;
+        },
+        [getModelCountForLine]
+    );
+
+    // Update a specific model's loadout
+    const updateModelLoadout = useCallback((list: ArmyList, unitId: string, instanceId: string, newLoadout: string[]): ArmyList => {
+        const unit = list.items.find((item) => item.listItemId === unitId);
+        if (!unit || !unit.modelInstances) return list;
+
+        const updatedInstances = unit.modelInstances.map((instance) => (instance.instanceId === instanceId ? { ...instance, loadout: newLoadout } : instance));
+
+        const updatedUnit: ArmyListItem = {
+            ...unit,
+            modelInstances: updatedInstances,
+        };
+
+        const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));
+        const updatedList = finalizeList(list, updatedItems);
+        setLists((prev) => prev.map((l) => (l.id === list.id ? updatedList : l)));
+        return updatedList;
+    }, []);
+
+    // Helper to get default loadout for a model type
+    function getDefaultLoadoutForModelType(unit: ArmyListItem, modelType: string): string[] {
+        if (!unit.loadout || !unit.availableWargear) return [];
+
+        const loadoutByType = parseLoadoutByModelType(unit.loadout, unit.unitComposition || []);
+        const weaponNames = loadoutByType.get(modelType) || loadoutByType.get("Every model") || [];
+
+        return weaponNames.map((name) => findWeaponIdByName(unit.availableWargear!, name)).filter((id): id is string => id !== null);
+    }
 
     // Validate if a leader can attach to a unit (considering existing leaders)
     const canAttachLeaderToUnit = useCallback((list: ArmyList, leaderItemId: string, targetUnitItemId: string): MultiLeaderValidationResult => {
@@ -1011,6 +1309,22 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 return { ranged: [], melee: [] };
             }
 
+            // NEW SYSTEM: If unit has modelInstances, collect unique weapons from all models
+            if (unit.modelInstances && unit.modelInstances.length > 0) {
+                const weaponIds = new Set<string>();
+                unit.modelInstances.forEach((m) => m.loadout.forEach((id) => weaponIds.add(id)));
+
+                const activeWeapons = Array.from(weaponIds)
+                    .map((id) => unit.availableWargear!.find((w) => w.id === id))
+                    .filter((w): w is Weapon => w !== undefined);
+
+                const ranged = activeWeapons.filter((w) => w.type === "Ranged");
+                const melee = activeWeapons.filter((w) => w.type === "Melee");
+
+                return { ranged, melee };
+            }
+
+            // LEGACY SYSTEM: Fall back to old loadoutSelections approach
             const defaultWeaponNames = getDefaultLoadout(unit).map((w) => w.toLowerCase());
             const loadoutSelections = unit.loadoutSelections || {};
             const loadoutWeaponChoices = unit.loadoutWeaponChoices || {};
@@ -1231,6 +1545,10 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         removeItemFromList,
         updateListItem,
         updateItemCombatState,
+        addModelInstance,
+        removeModelInstance,
+        getModelCountForLine,
+        updateModelLoadout,
         attachLeaderToUnit,
         detachLeaderFromUnit,
         attachEnhancementToLeader,

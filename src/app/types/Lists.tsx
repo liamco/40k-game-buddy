@@ -22,15 +22,31 @@ export type WarlordEligibility = {
     reason?: string; // Why ineligible, if applicable
 };
 
+/**
+ * Represents a single model instance in an army list unit.
+ * Created when a unit is added to a list, stored on ArmyListItem.
+ */
+export interface ModelInstance {
+    instanceId: string; // Unique: "{listItemId}-{modelTypeSlug}-{index}"
+    modelType: string; // From unitComposition: "Tactical Sergeant", "Tactical Marine"
+    modelTypeLine: number; // unitComposition line number (for stats lookup)
+    loadout: string[]; // Array of weapon IDs from availableWargear
+}
+
 export type ArmyListItem = Datasheet & {
     listItemId: string; // Unique ID for this list entry (allows same unit multiple times)
     quantity?: number;
     pointsCost?: number;
-    compositionCounts?: { [line: number]: number }; // Store counts for each unitComposition line
     leading?: LeaderReference; // Unit this leader is attached to
     leadBy?: LeaderReference[]; // Leaders attached to this unit (supports multiple)
     enhancement?: { id: string; name: string; cost?: number }; // Enhancement attached to this leader
-    loadoutSelections?: { [optionLine: number]: number }; // Track loadout option selections (count per option)
-    loadoutWeaponChoices?: { [optionLine: number]: string[] }; // Track which weapon was chosen for each slot (for multi-choice options)
-    removedWeapons?: { [weaponId: string]: boolean }; // Track removed default weapons (excluded from attack resolver)
+
+    // Per-model weapon tracking (new system)
+    modelInstances?: ModelInstance[]; // Each model with its loadout
+
+    // DEPRECATED - kept for migration, will be removed
+    compositionCounts?: { [line: number]: number }; // Use modelInstances.length instead
+    loadoutSelections?: { [optionLine: number]: number }; // Use modelInstances[].loadout instead
+    loadoutWeaponChoices?: { [optionLine: number]: string[] }; // Use modelInstances[].loadout instead
+    removedWeapons?: { [weaponId: string]: boolean }; // Use modelInstances[].loadout instead
 };

@@ -15,7 +15,7 @@ interface Props {
 }
 
 const UnitDetailsView = ({ unit, list }: Props) => {
-    const { calculateItemPoints, updateListItem, getDetachmentEnhancements, getUsedEnhancements } = useListManager();
+    const { calculateItemPoints, getDetachmentEnhancements, getUsedEnhancements } = useListManager();
 
     const detachmentEnhancements = getDetachmentEnhancements(list, unit);
     const usedEnhancements = getUsedEnhancements(list, unit.listItemId);
@@ -43,16 +43,6 @@ const UnitDetailsView = ({ unit, list }: Props) => {
 
     // Enhancements tab is enabled for Characters that are NOT Epic Heroes
     const showEnhancementsTab = hasCharacterKeyword && !hasEpicHeroKeyword;
-
-    const handleUpdateComposition = (line: number, newCount: number, min: number, max: number) => {
-        const clampedCount = Math.max(min, Math.min(max, newCount));
-        updateListItem(list, unit.listItemId, {
-            compositionCounts: {
-                ...unit.compositionCounts,
-                [line]: clampedCount,
-            },
-        });
-    };
 
     return (
         <div className="border-1 border-skarsnikGreen">
@@ -100,7 +90,7 @@ const UnitDetailsView = ({ unit, list }: Props) => {
                     </TabsList>
 
                     <TabsContent value="overview">
-                        <OverviewTab unit={unit} list={list} onUpdateComposition={handleUpdateComposition} />
+                        <OverviewTab unit={unit} list={list} />
                     </TabsContent>
 
                     <TabsContent value="wargear">
