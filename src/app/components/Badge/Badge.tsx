@@ -11,6 +11,7 @@ const badgeVariants = cva(
             variant: {
                 default: "bg-skarsnikGreen text-deathWorldForest fill-deathWorldForest",
                 secondary: "bg-deathWorldForest text-skarsnikGreen fill-skarsnikGreen",
+                secondaryAlt: "bg-mournfangBrown text-fireDragonBright fill-fireDragonBright",
                 destructive: "border-wildRiderRed text-wildRiderRed fill-wildRiderRed ",
                 outline: "text-skarsnikGreen border-skarsnikGreen fill-skarsnikGreen",
                 outlineDark: "text-deathWorldForest border-deathWorldForest fill-deathWorldForest",

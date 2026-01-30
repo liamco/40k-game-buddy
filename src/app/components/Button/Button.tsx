@@ -15,9 +15,10 @@ const buttonVariants = cva(
                 cta: `px-6 py-4 bg-fireDragonBright text-rhinoxHide ${styles.Cta} `,
                 secondary: "bg-skarsnikGreen text-nocturneGreen px-3 py-2 shadow-glow-green hover:bg-deathWorldForest",
                 outline: "border bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-                destructive: "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+                destructive: "bg-wildRiderRed text-wordBearersRed hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
                 ghost: "bg-transparent text-fireDragonBright px-3 py-2 text-shadow-glow-green hover:bg-mournfangBrown",
                 ghostSecondary: "bg-transparent text-skarsnikGreen px-3 py-2 text-shadow-glow-orange hover:bg-deathWorldForest",
+                ghostDestructive: "bg-transparent text-wildRiderRed px-3 py-2 text-shadow-glow-orange hover:bg-mournfangBrown",
                 link: "text-primary underline-offset-4 hover:underline",
             },
             size: {

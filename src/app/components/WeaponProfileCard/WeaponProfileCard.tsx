@@ -107,7 +107,7 @@ const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeapon
                 {isNumeric ? (
                     <>
                         <span className="text-skarsnikGreen">{numericBase + bonus}</span>
-                        <span className="text-[9px] text-skarsnikGreen/70">
+                        <span className="text-skarsnikGreen/70">
                             ({bonus > 0 ? "+" : ""}
                             {bonus})
                         </span>
@@ -115,7 +115,7 @@ const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeapon
                 ) : (
                     <>
                         {baseValue}
-                        <span className="text-[9px] text-skarsnikGreen/70">
+                        <span className="text-skarsnikGreen/70">
                             ({bonus > 0 ? "+" : ""}
                             {bonus})
                         </span>

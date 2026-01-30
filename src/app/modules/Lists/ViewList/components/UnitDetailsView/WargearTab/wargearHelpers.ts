@@ -15,8 +15,9 @@ export interface ParsedOption {
 
     // Weapons involved
     replacesWeaponNames: string[];
-    addsWeaponNames: string[]; // If multiple, it's a choice or package
-    isPackageDeal: boolean; // e.g., "cyclone missile launcher and storm bolter"
+    addsWeaponNames: string[]; // Single weapon choices (e.g., ["assault cannon", "heavy flamer"])
+    addsWeaponPackages: string[][]; // Package deals where multiple weapons are added together (e.g., [["cyclone missile launcher", "storm bolter"]])
+    isPackageDeal: boolean; // Deprecated - use addsWeaponPackages.length > 0 instead
 
     // Constraint info
     constraint: OptionConstraint;
@@ -171,23 +172,41 @@ export function parseOptionTargeting(description: string): OptionTargeting {
 /**
  * Parse weapons from option description
  */
-export function parseWeaponsFromDescription(description: string): string[] {
+export interface ParsedWeapons {
+    weapons: string[]; // Single weapon choices
+    packages: string[][]; // Package deals (multiple weapons bundled together)
+}
+
+export function parseWeaponsFromDescription(description: string): ParsedWeapons {
     const weapons: string[] = [];
+    const packages: string[][] = [];
 
     // Check for <li> list items
     if (description.includes("<li>")) {
         const liMatches = description.matchAll(/<li>(.+?)<\/li>/gi);
         for (const match of liMatches) {
             const itemText = match[1].replace(/<[^>]*>/g, " ").trim();
-            // Extract weapon names (patterns like "1 assault cannon" or "assault cannon")
-            const weaponMatch = itemText.match(/^(\d+\s+)?(.+?)(?:\s*\*|\.|$)/i);
-            if (weaponMatch && weaponMatch[2]) {
-                weapons.push(weaponMatch[2].trim());
+
+            // Check if this is a package deal (contains " and " with a number, e.g., "X and 1 Y")
+            if (/ and \d+\s+/i.test(itemText)) {
+                // Split on " and " and extract weapon names
+                const parts = itemText.split(/ and /i);
+                const packageWeapons = parts.map((part) => {
+                    const weaponMatch = part.match(/^(\d+\s+)?(.+?)(?:\s*\*|\.|$)/i);
+                    return weaponMatch ? weaponMatch[2].trim() : part.trim();
+                });
+                packages.push(packageWeapons);
+            } else {
+                // Single weapon
+                const weaponMatch = itemText.match(/^(\d+\s+)?(.+?)(?:\s*\*|\.|$)/i);
+                if (weaponMatch && weaponMatch[2]) {
+                    weapons.push(weaponMatch[2].trim());
+                }
             }
         }
     }
 
-    if (weapons.length > 0) return weapons;
+    if (weapons.length > 0 || packages.length > 0) return { weapons, packages };
 
     // Fallback: look for "with X" pattern
     const withMatch = description.match(/(?:replaced with|equipped with)\s+(\d+\s+)?([^.<]+)/i);
@@ -195,7 +214,7 @@ export function parseWeaponsFromDescription(description: string): string[] {
         weapons.push(withMatch[2].trim());
     }
 
-    return weapons;
+    return { weapons, packages };
 }
 
 /**
@@ -229,8 +248,19 @@ export function parseOption(option: { line: number; button: string; description:
     // Parse replaced weapons
     const replacesWeaponNames: string[] = [];
     if (isReplace) {
-        const replaceMatch = normalized.match(/(.+?)\s+can be replaced/i);
-        if (replaceMatch) {
+        // Try multiple patterns to extract the replaced weapon
+        // Pattern 1: "X can be replaced with Y"
+        let replaceMatch = normalized.match(/(.+?)\s+can be replaced/i);
+
+        // Pattern 2: "can each have their X replaced with Y" (for "any number" options)
+        if (!replaceMatch) {
+            const theirPattern = normalized.match(/their\s+([a-z][a-z\s-]+?)\s+replaced with/i);
+            if (theirPattern) {
+                replacesWeaponNames.push(theirPattern[1].trim());
+            }
+        }
+
+        if (replaceMatch && replacesWeaponNames.length === 0) {
             let replacedPart = replaceMatch[1];
 
             // For ratio patterns like "For every 5 models..., 1 Heavy Intercessor's heavy bolt rifle"
@@ -238,10 +268,18 @@ export function parseOption(option: { line: number; button: string; description:
             const ratioModelMatch = replacedPart.match(/\d+\s+[a-z\s]+?'s\s+(.+)$/i);
             if (ratioModelMatch) {
                 replacesWeaponNames.push(ratioModelMatch[1].trim());
+            }
+            // For "any number of models can each have their X replaced" pattern
+            else if (/their\s+/i.test(replacedPart)) {
+                const theirMatch = replacedPart.match(/their\s+(.+)$/i);
+                if (theirMatch) {
+                    replacesWeaponNames.push(theirMatch[1].trim());
+                }
             } else {
                 // Strip "This model's" etc.
                 replacedPart = replacedPart.replace(/^(this\s+)?model\W?s?\s+/i, "");
-                replacedPart = replacedPart.replace(/^the\s+[a-z\s]+?'?s?\s+/i, "");
+                // Strip "The [Model Type]'s" pattern (e.g., "The Terminator Sergeant's")
+                replacedPart = replacedPart.replace(/^the\s+[a-z\s]+?'s\s+/i, "");
                 // Extract weapon name
                 const weaponMatch = replacedPart.match(/(\d+\s+)?([a-z][a-z\s-]+)/i);
                 if (weaponMatch && weaponMatch[2]) {
@@ -252,8 +290,10 @@ export function parseOption(option: { line: number; button: string; description:
     }
 
     // Parse added weapons
-    const addsWeaponNames = parseWeaponsFromDescription(desc);
-    const packageDeal = isPackageDeal(desc);
+    const parsedWeapons = parseWeaponsFromDescription(desc);
+    const addsWeaponNames = parsedWeapons.weapons;
+    const addsWeaponPackages = parsedWeapons.packages;
+    const packageDeal = addsWeaponPackages.length > 0;
 
     // Calculate constraint
     let maxPerUnit = 1;
@@ -296,6 +336,7 @@ export function parseOption(option: { line: number; button: string; description:
         action,
         replacesWeaponNames,
         addsWeaponNames,
+        addsWeaponPackages,
         isPackageDeal: packageDeal,
         constraint: {
             maxPerUnit,
@@ -361,11 +402,9 @@ function isModelEligibleForOption(instance: ModelInstance, instanceIndex: number
             return totalModels === 1;
 
         case "specific-model":
-            // Check if model type matches
+            // Check if model type matches using the full matching logic
             if (!targeting.modelType) return false;
-            const targetLower = targeting.modelType.toLowerCase();
-            const modelLower = instance.modelType.toLowerCase();
-            return modelLower.includes(targetLower) || targetLower.includes(modelLower);
+            return modelTypeMatches(instance.modelType, targeting.modelType);
 
         case "any-number":
             // Any model can take it
@@ -489,7 +528,14 @@ function modelTypeMatches(modelType: string, targetType: string): boolean {
     const targetHasLeaderSuffix = leaderSuffixes.some((suffix) => targetLower.includes(suffix));
 
     // If model is a leader type but target isn't looking for leaders, no match
+    // e.g., "Terminator Sergeant" should NOT match target "Terminator"
     if (modelHasLeaderSuffix && !targetHasLeaderSuffix) {
+        return false;
+    }
+
+    // If target specifies a leader type but model isn't that leader, no match
+    // e.g., "Terminator" should NOT match target "Terminator Sergeant"
+    if (targetHasLeaderSuffix && !modelHasLeaderSuffix) {
         return false;
     }
 
@@ -503,14 +549,17 @@ function modelTypeMatches(modelType: string, targetType: string): boolean {
 }
 
 /**
- * Check if a model instance has a weapon by name
+ * Check if a model instance has a weapon by name.
+ * Uses the same matching logic as findWeaponByName to avoid mismatches
+ * between similar names like "Onslaught gatling cannon" vs "Heavy onslaught gatling cannon"
  */
 function hasWeaponByName(instance: ModelInstance, weaponName: string, availableWargear: Weapon[]): boolean {
-    const nameLower = weaponName.toLowerCase();
-    return instance.loadout.some((weaponId) => {
-        const weapon = availableWargear.find((w) => w.id === weaponId);
-        return weapon && weapon.name.toLowerCase().includes(nameLower);
-    });
+    // Find the weapon we're looking for using the improved matching
+    const targetWeapon = findWeaponByName(availableWargear, weaponName);
+    if (!targetWeapon) return false;
+
+    // Check if the model's loadout contains this specific weapon
+    return instance.loadout.includes(targetWeapon.id);
 }
 
 /**
@@ -583,14 +632,36 @@ export function groupModelsForDisplay(modelOptionsInfos: ModelOptionsInfo[], uni
 }
 
 /**
- * Find a weapon by name in available wargear
+ * Find a weapon by name in available wargear.
+ * Prioritizes exact matches over partial matches to avoid confusion
+ * between similar names like "Onslaught gatling cannon" vs "Heavy onslaught gatling cannon"
  */
 export function findWeaponByName(availableWargear: Weapon[], name: string): Weapon | undefined {
-    const nameLower = name.toLowerCase();
-    return availableWargear.find((w) => {
+    const nameLower = name.toLowerCase().trim();
+
+    // First try exact match
+    const exactMatch = availableWargear.find((w) => w.name.toLowerCase() === nameLower);
+    if (exactMatch) return exactMatch;
+
+    // Then try partial match, but prefer shorter weapon names when the search term is contained
+    // This ensures "onslaught gatling cannon" matches the actual "Onslaught gatling cannon"
+    // rather than "Heavy onslaught gatling cannon"
+    const partialMatches = availableWargear.filter((w) => {
         const weaponLower = w.name.toLowerCase();
         return weaponLower.includes(nameLower) || nameLower.includes(weaponLower);
     });
+
+    if (partialMatches.length === 0) return undefined;
+    if (partialMatches.length === 1) return partialMatches[0];
+
+    // Multiple matches - prefer the one whose name length is closest to the search term
+    // This helps pick "Onslaught gatling cannon" over "Heavy onslaught gatling cannon"
+    // when searching for "onslaught gatling cannon"
+    return partialMatches.sort((a, b) => {
+        const aDiff = Math.abs(a.name.length - name.length);
+        const bDiff = Math.abs(b.name.length - name.length);
+        return aDiff - bDiff;
+    })[0];
 }
 
 /**

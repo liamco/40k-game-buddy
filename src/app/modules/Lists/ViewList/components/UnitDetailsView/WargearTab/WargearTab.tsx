@@ -1,11 +1,18 @@
 import { useMemo, useState, useCallback, Fragment } from "react";
-import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
-import WargearProfileCard from "./WargearProfileCard.tsx";
-import { useListManager } from "#modules/Lists/ListManagerContext.tsx";
+import { ChevronDown, ChevronRight, Plus } from "lucide-react";
+
 import { ArmyList, ArmyListItem, ModelInstance } from "#types/Lists.tsx";
 import { Weapon, WeaponProfile } from "#types/Weapons.tsx";
-import { ChevronDown, ChevronRight, Plus } from "lucide-react";
+
+import { useListManager } from "#modules/Lists/ListManagerContext.tsx";
+
 import { parseOption, getModelOptionsInfo, groupModelsForDisplay, ParsedOption, ModelOptionsInfo, AvailableOption, findWeaponByName, isGenericWeaponReference, resolveGenericWeaponReference } from "./wargearHelpers";
+
+import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
+
+import WargearProfileCard from "./WargearProfileCard.tsx";
+
+import styles from "./WargearProfileCard.module.css";
 
 interface Props {
     unit: ArmyListItem;
@@ -13,15 +20,18 @@ interface Props {
 }
 
 // Types for organizing weapons into swap groups and additions
+interface SwapOption {
+    weapon: Weapon; // Primary weapon to display
+    packageWeapons?: Weapon[]; // Additional weapons in a package deal (e.g., [cyclone, storm bolter])
+    isDefault: boolean;
+    isSelected: boolean;
+}
+
 interface WeaponSwapGroup {
     type: "swap";
     replacesWeaponId: string;
     replacesWeaponName: string;
-    options: {
-        weapon: Weapon;
-        isDefault: boolean;
-        isSelected: boolean;
-    }[];
+    options: SwapOption[];
     parsedOption: ParsedOption;
 }
 
@@ -132,21 +142,47 @@ const WargearTab = ({ unit, list }: Props) => {
                         // Check if we already have a swap group for this weapon
                         const existingGroup = groups.find((g) => g.type === "swap" && g.replacesWeaponId === replacedWeapon.id) as WeaponSwapGroup | undefined;
 
-                        // Get all replacement options from this option line
+                        // Get all single replacement options from this option line
                         const replacementWeapons = opt.addsWeaponNames.map((name) => findWeaponByName(unit.availableWargear || [], name)).filter((w): w is Weapon => w !== undefined);
+
+                        // Build swap options for single weapons
+                        const singleWeaponOptions: SwapOption[] = replacementWeapons.map((w) => ({
+                            weapon: w,
+                            isDefault: false,
+                            isSelected: modelInfo.instance.loadout.includes(w.id),
+                        }));
+
+                        // Build swap options for package deals (e.g., cyclone missile launcher + storm bolter)
+                        const packageOptions: SwapOption[] = (opt.addsWeaponPackages || [])
+                            .map((packageNames) => {
+                                const packageWeapons = packageNames.map((name) => findWeaponByName(unit.availableWargear || [], name)).filter((w): w is Weapon => w !== undefined);
+
+                                if (packageWeapons.length === 0) return null;
+
+                                // Primary weapon is the first one (e.g., cyclone missile launcher)
+                                const primaryWeapon = packageWeapons[0];
+                                // Check if selected by seeing if ALL package weapons are in loadout
+                                const isSelected = packageWeapons.every((w) => modelInfo.instance.loadout.includes(w.id));
+
+                                return {
+                                    weapon: primaryWeapon,
+                                    packageWeapons: packageWeapons,
+                                    isDefault: false,
+                                    isSelected,
+                                };
+                            })
+                            .filter((opt): opt is SwapOption => opt !== null);
+
+                        const allReplacementOptions = [...singleWeaponOptions, ...packageOptions];
 
                         // Check what's currently selected
                         const currentlyHasDefault = modelInfo.instance.loadout.includes(replacedWeapon.id);
 
                         if (existingGroup) {
                             // Add options to existing group
-                            replacementWeapons.forEach((w) => {
-                                if (!existingGroup.options.find((o) => o.weapon.id === w.id)) {
-                                    existingGroup.options.push({
-                                        weapon: w,
-                                        isDefault: false,
-                                        isSelected: modelInfo.instance.loadout.includes(w.id),
-                                    });
+                            allReplacementOptions.forEach((opt) => {
+                                if (!existingGroup.options.find((o) => o.weapon.id === opt.weapon.id)) {
+                                    existingGroup.options.push(opt);
                                 }
                             });
                         } else {
@@ -162,11 +198,7 @@ const WargearTab = ({ unit, list }: Props) => {
                                         isDefault: true,
                                         isSelected: currentlyHasDefault,
                                     },
-                                    ...replacementWeapons.map((w) => ({
-                                        weapon: w,
-                                        isDefault: false,
-                                        isSelected: modelInfo.instance.loadout.includes(w.id),
-                                    })),
+                                    ...allReplacementOptions,
                                 ],
                             };
                             groups.push(swapGroup);
@@ -197,11 +229,27 @@ const WargearTab = ({ unit, list }: Props) => {
 
     // Handle weapon selection in a swap group
     const handleSwapSelection = useCallback(
-        (instance: ModelInstance, swapGroup: WeaponSwapGroup, selectedWeaponId: string) => {
-            // Remove all weapons in this swap group from loadout, then add the selected one
-            const swapWeaponIds = swapGroup.options.map((o) => o.weapon.id);
-            const newLoadout = instance.loadout.filter((id) => !swapWeaponIds.includes(id));
-            newLoadout.push(selectedWeaponId);
+        (instance: ModelInstance, swapGroup: WeaponSwapGroup, selectedOption: SwapOption) => {
+            // Collect all weapon IDs that could be in this swap group (including package weapons)
+            const allSwapWeaponIds = new Set<string>();
+            swapGroup.options.forEach((opt) => {
+                allSwapWeaponIds.add(opt.weapon.id);
+                if (opt.packageWeapons) {
+                    opt.packageWeapons.forEach((w) => allSwapWeaponIds.add(w.id));
+                }
+            });
+
+            // Remove all swap group weapons from loadout
+            const newLoadout = instance.loadout.filter((id) => !allSwapWeaponIds.has(id));
+
+            // Add the selected weapon(s) - either single weapon or package
+            if (selectedOption.packageWeapons) {
+                // Package deal: add all weapons in the package
+                selectedOption.packageWeapons.forEach((w) => newLoadout.push(w.id));
+            } else {
+                // Single weapon
+                newLoadout.push(selectedOption.weapon.id);
+            }
 
             updateModelLoadout(list, unit.listItemId, instance.instanceId, newLoadout);
         },
@@ -232,8 +280,7 @@ const WargearTab = ({ unit, list }: Props) => {
         });
     };
 
-    // Render a single weapon profile card
-    const renderWeaponProfile = (profile: WeaponProfile, isSelected: boolean, isDisabled: boolean, onClick?: () => void) => <WargearProfileCard key={profile.name} profile={profile} isSelected={isSelected} isDisabled={isDisabled} onCardClick={onClick} />;
+    const renderWeaponProfile = (profile: WeaponProfile, isSelected: boolean, isDisabled: boolean, onClick?: () => void, isStacked?: boolean) => <WargearProfileCard key={profile.name} profile={profile} isSelected={isSelected} isDisabled={isDisabled} isStacked={isStacked} onCardClick={onClick} />;
 
     // Render a weapon swap group with visual indicators
     const renderSwapGroup = (swapGroup: WeaponSwapGroup, instance: ModelInstance, isDisabled: boolean) => {
@@ -243,45 +290,22 @@ const WargearTab = ({ unit, list }: Props) => {
 
         return (
             <div key={`swap-${swapGroup.replacesWeaponId}`} className="space-y-2">
-                {/* Swap group container with connecting line */}
-                <div className="relative">
-                    {/* Vertical connecting line */}
-                    <div className="absolute left-4 top-0 bottom-0 w-px bg-skarsnikGreen/40" />
+                {swapGroup.options.map((option, optIdx) => {
+                    const isSelected = option.isSelected;
+                    const weapon = option.weapon;
 
-                    <div className="space-y-2">
-                        {swapGroup.options.map((option, optIdx) => {
-                            const isSelected = option.isSelected;
-                            const weapon = option.weapon;
+                    // Option is only truly disabled if:
+                    // 1. The overall option is disabled (maxed out) AND
+                    // 2. This specific weapon is not selected AND
+                    // 3. The model hasn't already made a non-default selection in this group
+                    const isOptionDisabled = isDisabled && !isSelected && !hasNonDefaultSelection;
 
-                            // Option is only truly disabled if:
-                            // 1. The overall option is disabled (maxed out) AND
-                            // 2. This specific weapon is not selected AND
-                            // 3. The model hasn't already made a non-default selection in this group
-                            const isOptionDisabled = isDisabled && !isSelected && !hasNonDefaultSelection;
-
-                            return (
-                                <div key={weapon.id} className="relative pl-8">
-                                    {/* Horizontal connector line */}
-                                    <div className="absolute left-4 top-1/2 w-4 h-px bg-skarsnikGreen/40" />
-
-                                    {/* Connection dot */}
-                                    <div className={`absolute left-[14px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full border ${isSelected ? "bg-skarsnikGreen border-skarsnikGreen" : "bg-transparent border-skarsnikGreen/40"}`} />
-
-                                    {/* Weapon profiles - render all profiles for multi-profile weapons */}
-                                    <div className="space-y-1">
-                                        {weapon.profiles?.map((profile, pIdx) => (
-                                            <div key={`${weapon.id}-${pIdx}`} className="relative">
-                                                {/* Dashed line between profiles of same weapon */}
-                                                {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-skarsnikGreen/30" />}
-                                                {renderWeaponProfile(profile, isSelected, isOptionDisabled, isOptionDisabled ? undefined : () => handleSwapSelection(instance, swapGroup, weapon.id))}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
+                    return (
+                        <div key={weapon.id} className={styles.WargearProfileCardSwapItemWrapper}>
+                            {weapon.profiles?.map((profile, pIdx) => renderWeaponProfile(profile, isSelected, isOptionDisabled, isOptionDisabled ? undefined : () => handleSwapSelection(instance, swapGroup, option), weapon.profiles.length > 1 ? true : false))}
+                        </div>
+                    );
+                })}
             </div>
         );
     };
@@ -293,19 +317,14 @@ const WargearTab = ({ unit, list }: Props) => {
         return (
             <div key={`add-${weapon.id}`} className="relative pl-8">
                 {/* Plus icon */}
-                <div className={`absolute left-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5 rounded-full border ${addition.isSelected ? "bg-skarsnikGreen border-skarsnikGreen text-deathKorps" : "bg-transparent border-skarsnikGreen/40 text-skarsnikGreen/40"}`}>
-                    <Plus className="w-3 h-3" />
+                <div
+                    className={`absolute left-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5 rounded-full transition-colors border ${addition.isSelected ? "bg-fireDragonBright border-fireDragonBright text-deathWorldForest" : "bg-transparent border-fireDragonBright/40 text-fireDragonBright/40"}`}
+                >
+                    <Plus className={`w-3 h-3 transition-transform duration-[500ms] ${addition.isSelected ? "rotate-[180deg]" : ""}`} />
                 </div>
 
                 {/* Weapon profiles */}
-                <div className="space-y-1">
-                    {weapon.profiles?.map((profile, pIdx) => (
-                        <div key={`${weapon.id}-${pIdx}`} className="relative">
-                            {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-skarsnikGreen/30" />}
-                            {renderWeaponProfile(profile, addition.isSelected, isDisabled && !addition.isSelected, isDisabled && !addition.isSelected ? undefined : () => handleAdditionToggle(instance, weapon))}
-                        </div>
-                    ))}
-                </div>
+                <div className="space-y-1">{weapon.profiles?.map((profile) => renderWeaponProfile(profile, addition.isSelected, isDisabled && !addition.isSelected, isDisabled && !addition.isSelected ? undefined : () => handleAdditionToggle(instance, weapon)))}</div>
             </div>
         );
     };
@@ -323,7 +342,7 @@ const WargearTab = ({ unit, list }: Props) => {
                             <div key={weapon.id} className="space-y-1">
                                 {weapon.profiles?.map((profile, pIdx) => (
                                     <div key={`${weapon.id}-${pIdx}`} className="relative">
-                                        {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-skarsnikGreen/30" />}
+                                        {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-fireDragonBright/30" />}
                                         {renderWeaponProfile(profile, true, false)}
                                     </div>
                                 ))}
@@ -338,7 +357,7 @@ const WargearTab = ({ unit, list }: Props) => {
                             <div key={weapon.id} className="space-y-1">
                                 {weapon.profiles?.map((profile, pIdx) => (
                                     <div key={`${weapon.id}-${pIdx}`} className="relative">
-                                        {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-skarsnikGreen/30" />}
+                                        {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-fireDragonBright/30" />}
                                         {renderWeaponProfile(profile, true, false)}
                                     </div>
                                 ))}
@@ -356,10 +375,10 @@ const WargearTab = ({ unit, list }: Props) => {
 
         return (
             <div key={`collapsed-${group.startIndex}-${group.endIndex}`}>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-fireDragonBright">
                     <div className="flex items-center gap-2 mb-3">
                         <span className="text-metadata-l font-medium">{group.modelType}</span>
-                        <span className="text-skarsnikGreen/60 text-body-s">{label}</span>
+                        <span className="text-fireDragonBright/60 text-body-s">{label}</span>
                     </div>
 
                     <div className="grid grid-cols-6 gap-1 text-center w-[300px] mr-3">
@@ -409,10 +428,10 @@ const WargearTab = ({ unit, list }: Props) => {
 
         return (
             <div key={modelInfo.instance.instanceId}>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-fireDragonBright">
                     <div className="flex items-center gap-2 mb-4">
                         <span className="text-metadata-l font-medium">{modelInfo.modelType}</span>
-                        <span className="text-skarsnikGreen/60 text-body-s">#{displayIndex}</span>
+                        <span className="text-fireDragonBright/60 text-body-s">#{displayIndex}</span>
                     </div>
 
                     <div className="grid grid-cols-6 gap-1 text-center w-[300px] mr-3">
@@ -432,7 +451,7 @@ const WargearTab = ({ unit, list }: Props) => {
                                 <div key={weapon.id} className="space-y-1">
                                     {weapon.profiles?.map((profile, pIdx) => (
                                         <div key={`${weapon.id}-${pIdx}`} className="relative">
-                                            {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-skarsnikGreen/30" />}
+                                            {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-fireDragonBright/30" />}
                                             {renderWeaponProfile(profile, true, false)}
                                         </div>
                                     ))}
@@ -458,7 +477,7 @@ const WargearTab = ({ unit, list }: Props) => {
                                 <div key={weapon.id} className="space-y-1">
                                     {weapon.profiles?.map((profile, pIdx) => (
                                         <div key={`${weapon.id}-${pIdx}`} className="relative">
-                                            {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-skarsnikGreen/30" />}
+                                            {pIdx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-fireDragonBright/30" />}
                                             {renderWeaponProfile(profile, true, false)}
                                         </div>
                                     ))}

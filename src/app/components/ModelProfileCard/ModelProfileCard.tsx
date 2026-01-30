@@ -46,10 +46,10 @@ const ModelProfileCard = ({ model, isDisabled, isSelected, onUnitModelChange }: 
                     <p>{model.oc}</p>
                     {model.invSv && (
                         <div className="col-start-3 relative flex justify-center">
-                            <BaseIcon color="fireDragonBright" size="large">
+                            <BaseIcon color="deathWorldForest" size="large">
                                 <IconShield />
                             </BaseIcon>
-                            <span className="inline-block text-mournfangBrown absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">{model.invSv}</span>
+                            <span className="inline-block text-skarsnikGreen absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">{model.invSv}</span>
                         </div>
                     )}
                 </div>

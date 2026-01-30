@@ -5,6 +5,7 @@ import IconHoldPosition from "#components/icons/IconHoldPosition.tsx";
 import IconShock from "#components/icons/IconShock.tsx";
 import IconMove from "#components/icons/IconMove.tsx";
 import styles from "./CombatStatusToken.module.css";
+import IconDefender from "#components/icons/IconDefender.tsx";
 
 interface Props {
     variant?: keyof typeof Variant;
@@ -19,6 +20,7 @@ const tokenIcons: Record<string, typeof IconMove> = {
     fallBack: IconFallback,
     holdPosition: IconHoldPosition,
     shock: IconShock,
+    cover: IconDefender,
 };
 
 const Variant = {

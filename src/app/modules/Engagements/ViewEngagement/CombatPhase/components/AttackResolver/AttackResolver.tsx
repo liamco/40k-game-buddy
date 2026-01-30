@@ -115,7 +115,7 @@ export function AttackResolver({ gamePhase, attacker, defender }: AttackResolver
     }, [attacker.weaponProfile, attacker.modelCount]);
 
     return (
-        <section className="grid grid-rows-5 rounded border-2 border-skarsnikGreen shadow-glow-green">
+        <section className="grid grid-rows-5 rounded border-2 border-skarsnikGreen">
             {result ? (
                 <Fragment>
                     <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={[]} penalties={[]} finalValue={attacksDisplay.total} />

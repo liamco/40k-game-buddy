@@ -11,7 +11,7 @@ interface ResultBoxProps {
 function ResultBox({ label, value, modifiers, className }: ResultBoxProps) {
     return (
         <div className={`flex items-center justify-center gap-1 ${className}`}>
-            {label && <p className="font-bold text-[10px]">{label}</p>}
+            {label && <p>{label}</p>}
             {modifiers && modifiers.length > 0 && modifiers.some((m) => m.value !== 0) && (
                 <div className="flex flex-wrap gap-1 justify-center">
                     {modifiers
@@ -23,7 +23,7 @@ function ResultBox({ label, value, modifiers, className }: ResultBoxProps) {
                         ))}
                 </div>
             )}
-            <p className="font-bold text-[24px]">{value}</p>
+            <p>{value}</p>
         </div>
     );
 }

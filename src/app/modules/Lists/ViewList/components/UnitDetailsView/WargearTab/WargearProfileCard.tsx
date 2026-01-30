@@ -8,6 +8,8 @@ import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconLaurels from "#components/icons/IconLaurels.tsx";
 import IconLeader from "#components/icons/IconLeader.tsx";
 
+import styles from "./WargearProfileCard.module.css";
+
 import strikethrough from "#assets/Strikethrough.svg";
 
 export type BonusSourceType = "leader" | "enhancement" | "detachment";
@@ -37,9 +39,11 @@ export interface CounterControls {
 
 interface Props {
     profile: WeaponProfile;
+    className?: string;
     isSelected?: boolean;
     isLinked?: boolean;
     isDisabled?: boolean;
+    isStacked?: boolean;
     onWeaponProfileChange?: (profile: WeaponProfile | null) => void;
     onToggle?: () => void;
     canToggle?: boolean;
@@ -51,7 +55,7 @@ interface Props {
     statBonuses?: StatBonus[];
 }
 
-const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
+const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisabled, isStacked, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
     const handleClick = () => {
         if (canToggle && onToggle) {
             onToggle();
@@ -105,8 +109,8 @@ const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeapon
             <span className="text-profile-attribute flex items-center justify-center gap-0.5" title={sources.length > 0 ? `From: ${sources.join(", ")}` : undefined}>
                 {isNumeric ? (
                     <>
-                        <span className="text-skarsnikGreen">{numericBase + bonus}</span>
-                        <span className="text-[9px] text-skarsnikGreen/70">
+                        <span className="text-fireDragonBright">{numericBase + bonus}</span>
+                        <span className=" text-fireDragonBright/70">
                             ({bonus > 0 ? "+" : ""}
                             {bonus})
                         </span>
@@ -114,7 +118,7 @@ const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeapon
                 ) : (
                     <>
                         {baseValue}
-                        <span className="text-[9px] text-skarsnikGreen/70">
+                        <span className=" text-fireDragonBright/70">
                             ({bonus > 0 ? "+" : ""}
                             {bonus})
                         </span>
@@ -126,40 +130,24 @@ const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeapon
     };
 
     const linkedClasses = "";
-    const selectedClasses = "bg-skarsnikGreen shadow-glow-green text-deathWorldForest";
+    const selectedClasses = `${styles.WargearProfileCardSelected} bg-fireDragonBright shadow-glow-orange text-mournfangBrown`;
 
     return (
         <div
             key={profile.name}
-            className={`relative rounded p-3 border-1 transition-colors border-skarsnikGreen ${isDisabled ? "cursor-not-allowed" : ""} ${onWeaponProfileChange || onCardClick ? "cursor-pointer" : ""} ${isSelected ? selectedClasses : "text-skarsnikGreen"} ${isLinked ? linkedClasses : ""}`}
+            className={`relative rounded p-3 border-1 ${isStacked ? styles.WargearProfileCardStacked : ""} transition-colors border-fireDragonBright ${isDisabled ? "cursor-not-allowed" : ""} ${onWeaponProfileChange || onCardClick ? "cursor-pointer" : ""} ${isSelected ? selectedClasses : "text-fireDragonBright"} ${isLinked ? linkedClasses : ""}`}
             onClick={handleClick}
         >
             <div className={`${isDisabled ? "opacity-25" : ""} flex justify-between items-center min-h-[61px]`}>
                 <div className="space-y-2">
                     <h4 className="text-metadata-l">{profile.name}</h4>
-                    {(profile.attributes || (bonusAttributes && bonusAttributes.length > 0)) && (
+                    {profile.attributes && (
                         <div className="flex flex-wrap gap-2">
                             {profile.attributes?.map((attr: string) => (
-                                <Badge key={attr} variant={isSelected ? "secondary" : "default"}>
+                                <Badge key={attr} variant={isSelected ? "secondaryAlt" : "outlineAlt"}>
                                     {attr}
                                 </Badge>
                             ))}
-                            {bonusAttributes
-                                ?.filter((bonus) => {
-                                    // Filter out bonuses that already exist in profile attributes
-                                    if (!profile.attributes) return true;
-                                    const bonusFormatted = formatBonusAttribute(bonus).toUpperCase();
-                                    return !profile.attributes.some((attr) => attr.toUpperCase() === bonusFormatted);
-                                })
-                                .map((bonus, idx) => (
-                                    <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} className={`flex items-center gap-1`} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
-                                        <BaseIcon color={isSelected ? "default" : "deathWorldForest"}>
-                                            {bonus.sourceType === "leader" && <IconLeader />}
-                                            {bonus.sourceType === "enhancement" && <IconLaurels />}
-                                        </BaseIcon>
-                                        {formatBonusAttribute(bonus)}
-                                    </Badge>
-                                ))}
                         </div>
                     )}
                 </div>
