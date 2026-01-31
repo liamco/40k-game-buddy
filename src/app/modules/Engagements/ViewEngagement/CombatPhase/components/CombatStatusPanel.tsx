@@ -1,6 +1,16 @@
+import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
+
+import { Button } from "#components/Button/Button.tsx";
+import Dropdown from "#components/Dropdown/Dropdown.tsx";
 import type { EngagementForceItem, EngagementForceItemCombatState } from "#types/Engagements";
+import type { ModelInstance } from "#types/Lists.tsx";
+import { calculateUnitStrength, getUnitStrengthLabel } from "../../../EngagementManagerContext";
 
 import CombatStatusToken from "./CombatStatusToken/CombatStatusToken";
+import { CasualtyPanel } from "./CasualtyPanel";
+import BaseIcon from "#components/icons/BaseIcon.tsx";
+import IconSkull from "#components/icons/IconSkull.tsx";
 
 interface CombatStatusPanelProps {
     side: "attacker" | "defender";
@@ -12,7 +22,22 @@ interface CombatStatusPanelProps {
     unit: EngagementForceItem;
 }
 
-export function CombatStatusPanel({ side, combatState, onCombatStatusChange }: CombatStatusPanelProps) {
+type ObjectiveRangeValue = EngagementForceItemCombatState["isInObjectiveRange"];
+
+interface ObjectiveRangeOption {
+    value: ObjectiveRangeValue;
+}
+
+const objectiveRangeOptions: { id: string; label: string; data: ObjectiveRangeOption }[] = [
+    { id: "none", label: "None", data: { value: "none" } },
+    { id: "friendly", label: "Friendly Objective", data: { value: "friendly" } },
+    { id: "enemy", label: "Enemy Objective", data: { value: "enemy" } },
+    { id: "contested", label: "Contested Objective", data: { value: "contested" } },
+];
+
+export function CombatStatusPanel({ side, combatState, startingStrength, onModelCountChange, onCombatStatusChange, unit }: CombatStatusPanelProps) {
+    const [casualtyPanelOpen, setCasualtyPanelOpen] = useState(false);
+
     const handleBooleanToggle = (key: keyof EngagementForceItemCombatState) => (checked: boolean) => {
         onCombatStatusChange({ [key]: checked });
     };
@@ -21,11 +46,92 @@ export function CombatStatusPanel({ side, combatState, onCombatStatusChange }: C
         onCombatStatusChange({ movementBehaviour: value });
     };
 
+    const handleCasualtyChange = (deadModelIds: string[]) => {
+        const totalModels = unit.modelInstances?.length || 0;
+        const aliveCount = totalModels - deadModelIds.length;
+        const unitStrength = calculateUnitStrength(aliveCount, startingStrength);
+        onModelCountChange(aliveCount);
+        onCombatStatusChange({ deadModelIds, unitStrength });
+    };
+
+    const handleIncrement = () => {
+        const deadIds = combatState.deadModelIds || [];
+        if (deadIds.length === 0) return;
+        const newDeadIds = deadIds.slice(0, -1);
+        handleCasualtyChange(newDeadIds);
+    };
+
+    const handleDecrement = () => {
+        const instances = unit.modelInstances || [];
+        const deadIds = combatState.deadModelIds || [];
+        if (deadIds.length >= instances.length) return;
+        const aliveModels = instances.filter((m: ModelInstance) => !deadIds.includes(m.instanceId));
+        const lastAliveModel = aliveModels[aliveModels.length - 1];
+        if (lastAliveModel) {
+            handleCasualtyChange([...deadIds, lastAliveModel.instanceId]);
+        }
+    };
+
+    const handleObjectiveRangeChange = (option: ObjectiveRangeOption) => {
+        onCombatStatusChange({ isInObjectiveRange: option.value });
+    };
+
+    const currentObjectiveLabel = objectiveRangeOptions.find((o) => o.data.value === combatState.isInObjectiveRange)?.label || "None";
+
+    const isAllDead = combatState.modelCount <= 0;
+
+    const getUnitStrengthLabelColour = () => {
+        switch (combatState.unitStrength) {
+            case "full":
+                return "text-skarsnikGreen";
+            case "belowStarting":
+                return "text-fireDragonBright";
+            case "belowHalf":
+                return "text-wildRiderRed";
+        }
+    };
+
+    const calculateUnitGridCols = () => {
+        if (unit.modelInstances.length <= 5) return unit.modelInstances.length;
+
+        return Math.ceil(unit.modelInstances.length / 2);
+    };
+
     return (
         <section className="space-y-4">
             <div className="flex justify-between items-center">
-                <div></div>
+                <div className="space-y-1">
+                    <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
+                        <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{combatState.modelCount > 0 ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
+                    </Button>
+                    <div className="flex items-center gap-2">
+                        <button onClick={handleDecrement} disabled={isAllDead} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${isAllDead ? "bg-fireDragonBright/30 cursor-not-allowed" : ""}`}>
+                            <Minus className="w-4 h-4" />
+                        </button>
+                        <button onClick={handleIncrement} disabled={combatState.unitStrength === "full"} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.unitStrength === "full" ? "bg-fireDragonBright/30 cursor-not-allowed" : ""}`}>
+                            <Plus className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+
+                <ul className={`inline-grid gap-1`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))` }}>
+                    {unit.modelInstances.map((m: ModelInstance, idx: string) => (
+                        <li className={`${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
+                            <BaseIcon key={idx} size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
+                                <IconSkull />
+                            </BaseIcon>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div className="flex justify-between items-center">
+                <div className="relative grow max-w-[15rem]">
+                    <span className="text-blockcaps-s">In Obj Range</span>
+                    <Dropdown variant="minimal" triggerClassName="w-full" options={objectiveRangeOptions} selectedLabel={currentObjectiveLabel} placeholder="Select..." onSelect={handleObjectiveRangeChange} />
+                </div>
                 <div className="flex gap-2">
+                    <CombatStatusToken icon={combatState.movementBehaviour} active />
+
                     {side === "attacker" && <></>}
                     {side === "defender" && (
                         <>
@@ -35,15 +141,8 @@ export function CombatStatusPanel({ side, combatState, onCombatStatusChange }: C
                     <CombatStatusToken icon="shock" variant="destructive" active={combatState.isBattleShocked} onChange={handleBooleanToggle("isBattleShocked")} />
                 </div>
             </div>
-            <div className="flex justify-between items-center">
-                <div></div>
-                <div className="flex gap-1">
-                    <CombatStatusToken icon="fallBack" active={combatState.movementBehaviour === "fallBack"} onChange={handleMovementBehaviour("fallBack")} />
-                    <CombatStatusToken icon="holdPosition" active={combatState.movementBehaviour === "hold"} onChange={handleMovementBehaviour("hold")} />
-                    <CombatStatusToken icon="move" active={combatState.movementBehaviour === "move"} onChange={handleMovementBehaviour("move")} />
-                    <CombatStatusToken icon="advance" active={combatState.movementBehaviour === "advance"} onChange={handleMovementBehaviour("advance")} />
-                </div>
-            </div>
+
+            <CasualtyPanel open={casualtyPanelOpen} onOpenChange={setCasualtyPanelOpen} unit={unit} deadModelIds={combatState.deadModelIds || []} onCasualtyChange={handleCasualtyChange} />
         </section>
     );
 }

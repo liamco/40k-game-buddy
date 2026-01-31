@@ -60,7 +60,7 @@ const ViewEngagement = () => {
     );
 
     return (
-        <main className="w-full h-full grid grid-rows-[auto_1fr]">
+        <main className="w-full h-full grid grid-rows-[auto_1fr] ">
             <header className="space-y-2">
                 <div>
                     <h1 className="text-blockcaps-s block">{`Engagement ${engagement.id} / ${engagement.currentTurn}.1`}</h1>

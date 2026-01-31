@@ -150,7 +150,7 @@ const CreateEngagement = () => {
                 </div>
             </div>
             <div className="max-w-[720px] w-full m-auto border-2 border-fireDragonBright p-4 rounded">
-                <AlertDialog>
+                <AlertDialog variant="warning">
                     <AlertDialogTrigger asChild>
                         <Button variant="cta" className="w-full flex gap-4" disabled={!canCommence}>
                             <span>+++</span>

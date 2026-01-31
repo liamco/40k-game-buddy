@@ -10,7 +10,7 @@ import IconDefender from "#components/icons/IconDefender.tsx";
 interface Props {
     variant?: keyof typeof Variant;
     active?: boolean;
-    onChange: (checked: boolean) => void;
+    onChange?: (checked: boolean) => void;
     icon: string;
 }
 
@@ -18,7 +18,7 @@ const tokenIcons: Record<string, typeof IconMove> = {
     move: IconMove,
     advance: IconAdvance,
     fallBack: IconFallback,
-    holdPosition: IconHoldPosition,
+    hold: IconHoldPosition,
     shock: IconShock,
     cover: IconDefender,
 };
@@ -34,9 +34,9 @@ const CombatStatusToken = ({ variant = "default", active = false, onChange, icon
 
     return (
         <label className={styles.CombatStatusTokenWrapper}>
-            <input type="checkbox" checked={active} onChange={(e) => onChange(e.target.checked)} className={`${styles.CombatStatusToken} ${active ? styles.isActive : ""} ${Variant[variant]}`} />
+            <input type="checkbox" checked={active} onChange={(e) => (onChange ? onChange(e.target.checked) : null)} className={`${styles.CombatStatusToken} ${active ? styles.isActive : ""}  ${Variant[variant]}`} />
             {IconComponent && (
-                <span>
+                <span className={`${onChange != undefined ? "cursor-pointer" : ""}`}>
                     <BaseIcon size="medium" color="currentColor">
                         <IconComponent />
                     </BaseIcon>

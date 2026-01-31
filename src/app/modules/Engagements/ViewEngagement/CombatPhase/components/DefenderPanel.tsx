@@ -53,7 +53,7 @@ export function DefenderPanel({ gamePhase, force, combinedItems, selectedCombine
     const combatState = selectedCombined?.item.combatState;
 
     return (
-        <section className="grid p-6 space-y-6  grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded overflow-hidden">
+        <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded  overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
             <Dropdown
                 options={unitOptions}
                 selectedLabel={selectedCombined?.displayName}
@@ -69,29 +69,27 @@ export function DefenderPanel({ gamePhase, force, combinedItems, selectedCombine
             {combatState && <CombatStatusPanel side="defender" combatState={combatState} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} onCombatStatusChange={onCombatStatusChange} unit={selectedCombined.item} />}
 
             {selectedCombined ? (
-                <div className="overflow-auto">
-                    <div className="col-span-3 space-y-4">
-                        <SplitHeading label="Select target model" />
+                <div className="space-y-4">
+                    <SplitHeading label="Select target model" />
 
-                        <div className="space-y-2">
-                            {availableModels.map((model) => {
-                                const modelWithSource = model as Model & {
-                                    sourceUnit?: string;
-                                    isLeader?: boolean;
-                                };
-                                const isSelected = selectedModel?.name === model.name;
-                                const modelKey = modelWithSource.sourceUnit ? `${modelWithSource.sourceUnit}-${model.name}` : model.name;
+                    <div className="space-y-2">
+                        {availableModels.map((model) => {
+                            const modelWithSource = model as Model & {
+                                sourceUnit?: string;
+                                isLeader?: boolean;
+                            };
+                            const isSelected = selectedModel?.name === model.name;
+                            const modelKey = modelWithSource.sourceUnit ? `${modelWithSource.sourceUnit}-${model.name}` : model.name;
 
-                                // Leader models are disabled unless weapon has PRECISION
-                                const isLeaderModel = modelWithSource.isLeader === true;
-                                const isDisabled = isLeaderModel && !hasPrecision;
+                            // Leader models are disabled unless weapon has PRECISION
+                            const isLeaderModel = modelWithSource.isLeader === true;
+                            const isDisabled = isLeaderModel && !hasPrecision;
 
-                                return <ModelProfileCard key={modelKey} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
-                            })}
-                        </div>
-
-                        {availableModels.length === 0 && <p className="text-blockcaps-s opacity-50">No model profiles available</p>}
+                            return <ModelProfileCard key={modelKey} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
+                        })}
                     </div>
+
+                    {availableModels.length === 0 && <p className="text-blockcaps-s opacity-50">No model profiles available</p>}
                 </div>
             ) : (
                 <div className="flex items-center justify-center p-8">

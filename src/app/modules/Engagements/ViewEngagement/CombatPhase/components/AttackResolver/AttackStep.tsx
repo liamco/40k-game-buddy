@@ -10,7 +10,7 @@ import IconSwords from "#components/icons/IconSwords";
 import FinalResultBox from "./FinalResultbox";
 import ResultBox from "./ResultBox";
 
-import strikethrough from "#assets/Strikethrough.svg";
+import strikethrough from "#assets/StrikethroughGreen.svg";
 
 interface Modifier {
     label: string;

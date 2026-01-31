@@ -39,6 +39,8 @@ export function createDefaultCombatState(item: ArmyListItem): EngagementForceIte
     return {
         isDamaged: false,
         modelCount: calculateTotalModels(item),
+        unitStrength: "full",
+        deadModelIds: [],
         currentWounds: getStartingWounds(item),
         isBattleShocked: false,
         isDestroyed: false,
@@ -50,6 +52,25 @@ export function createDefaultCombatState(item: ArmyListItem): EngagementForceIte
         isInEngagementRange: false,
         isInObjectiveRange: "none",
     };
+}
+
+// Calculate unit strength based on current vs starting model count
+export function calculateUnitStrength(current: number, starting: number): EngagementForceItemCombatState["unitStrength"] {
+    if (current === starting) return "full";
+    if (current >= Math.ceil(starting / 2)) return "belowStarting";
+    return "belowHalf";
+}
+
+// Get display label for unit strength
+export function getUnitStrengthLabel(strength: EngagementForceItemCombatState["unitStrength"]): string {
+    switch (strength) {
+        case "full":
+            return "At Full Strength";
+        case "belowStarting":
+            return "Below Starting Strength";
+        case "belowHalf":
+            return "Below Half Strength";
+    }
 }
 
 // Convert an ArmyList to an EngagementForce (snapshot with combat state)

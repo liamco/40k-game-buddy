@@ -7,6 +7,8 @@ import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconLaurels from "#components/icons/IconLaurels.tsx";
 import IconLeader from "#components/icons/IconLeader.tsx";
 
+const LaurelsIcon = <IconLaurels />;
+
 import styles from "./UnitListItem.module.css";
 
 interface Props {
@@ -57,13 +59,8 @@ const UnitListItem = ({ calculateItemPoints, item, handleRemoveItem, setSelected
             </div>
             <div className="flex items-center gap-2 flex-wrap">
                 {item.enhancement && (
-                    <Badge variant={isSelected ? "outlineDark" : "outline"}>
-                        <BaseIcon color={isSelected ? "deathWorldForest" : "default"}>
-                            <IconLaurels />
-                        </BaseIcon>
-                        <span>
-                            {item.enhancement.name} ({item.enhancement.cost} pts)
-                        </span>
+                    <Badge variant={isSelected ? "outlineDark" : "outline"} icon={LaurelsIcon}>
+                        {item.enhancement.name} ({item.enhancement.cost} pts)
                     </Badge>
                 )}
                 {item.modelInstances?.some((m) => JSON.stringify(m.loadout.slice().sort()) !== JSON.stringify(m.defaultLoadout?.slice().sort())) && <Badge variant={isSelected ? "outlineDark" : "outline"}>Custom Loadout</Badge>}

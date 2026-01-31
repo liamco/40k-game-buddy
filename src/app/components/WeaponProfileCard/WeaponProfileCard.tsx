@@ -5,11 +5,13 @@ import { WeaponProfile } from "#types/Weapons.tsx";
 import { Badge } from "#components/Badge/Badge.tsx";
 import { Button } from "#components/Button/Button.tsx";
 
-import BaseIcon from "../icons/BaseIcon.tsx";
 import IconLaurels from "../icons/IconLaurels.tsx";
 import IconLeader from "../icons/IconLeader.tsx";
 
-import strikethrough from "#assets/Strikethrough.svg";
+const LeaderIcon = <IconLeader />;
+const LaurelsIcon = <IconLaurels />;
+
+import strikethrough from "#assets/StrikethroughGreen.svg";
 
 export type BonusSourceType = "leader" | "enhancement" | "detachment";
 
@@ -153,15 +155,14 @@ const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeapon
                                 const bonusFormatted = formatBonusAttribute(bonus).toUpperCase();
                                 return !profile.attributes.some((attr) => attr.toUpperCase() === bonusFormatted);
                             })
-                            .map((bonus, idx) => (
-                                <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} className={`flex items-center gap-1`} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
-                                    <BaseIcon color={isSelected ? "default" : "deathWorldForest"}>
-                                        {bonus.sourceType === "leader" && <IconLeader />}
-                                        {bonus.sourceType === "enhancement" && <IconLaurels />}
-                                    </BaseIcon>
-                                    {formatBonusAttribute(bonus)}
-                                </Badge>
-                            ))}
+                            .map((bonus, idx) => {
+                                const icon = bonus.sourceType === "leader" ? LeaderIcon : bonus.sourceType === "enhancement" ? LaurelsIcon : undefined;
+                                return (
+                                    <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} icon={icon} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
+                                        {formatBonusAttribute(bonus)}
+                                    </Badge>
+                                );
+                            })}
                     </div>
                 )}
                 <div className="grid grid-cols-6 gap-1 text-center">

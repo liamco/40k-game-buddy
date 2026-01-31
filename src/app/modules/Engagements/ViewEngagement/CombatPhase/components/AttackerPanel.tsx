@@ -3,7 +3,7 @@ import React, { useMemo, Fragment } from "react";
 import type { EngagementForce, EngagementForceItem, EngagementForceItemCombatState } from "#types/Engagements";
 import type { WeaponProfile, GamePhase, Weapon } from "#types/index";
 
-import { type CombinedUnitItem, getCombinedWargear } from "../utils/combatUtils";
+import { type CombinedUnitItem, getCombinedWargear, filterWargearByAliveModels } from "../utils/combatUtils";
 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown.tsx";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
@@ -36,11 +36,15 @@ export function AttackerPanel({ gamePhase, force, combinedItems, selectedCombine
         }));
     }, [combinedItems]);
 
-    // Get available wargear for the selected unit
+    const combatState = selectedCombined?.item.combatState;
+
+    // Get available wargear for the selected unit, filtered to alive models only
+    // Re-filters when deadModelIds change (via combatState dependency)
     const availableWargear = useMemo(() => {
         if (!selectedCombined) return [];
-        return getCombinedWargear(selectedCombined);
-    }, [selectedCombined]);
+        const allWargear = getCombinedWargear(selectedCombined);
+        return filterWargearByAliveModels(allWargear, selectedCombined);
+    }, [selectedCombined, combatState?.deadModelIds]);
 
     // Filter weapons by game phase
     const filteredWeapons = useMemo(() => {
@@ -79,10 +83,8 @@ export function AttackerPanel({ gamePhase, force, combinedItems, selectedCombine
         onWeaponProfileChange(null);
     };
 
-    const combatState = selectedCombined?.item.combatState;
-
     return (
-        <section className="grid p-6 space-y-6 grid-rows-[auto_auto_1fr_auto] border-1 border-skarsnikGreen rounded overflow-hidden">
+        <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr_auto] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
             <Dropdown
                 options={unitOptions}
                 selectedLabel={selectedCombined?.displayName}
@@ -98,43 +100,41 @@ export function AttackerPanel({ gamePhase, force, combinedItems, selectedCombine
             {combatState && <CombatStatusPanel side="attacker" combatState={combatState} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} onCombatStatusChange={onCombatStatusChange} unit={selectedCombined.item} />}
 
             {selectedCombined ? (
-                <div className="overflow-auto">
-                    <div className="space-y-4">
-                        <SplitHeading label="Select weapon" />
+                <div className="space-y-4">
+                    <SplitHeading label="Select weapon" />
 
-                        {groupedWeapons ? (
-                            // Combined unit: show weapons grouped by source
-                            <div className="space-y-6">
-                                {groupedWeapons.orderedSources.map((source) => (
-                                    <div key={source} className="space-y-2">
-                                        <span className="inline-block text-blockcaps-s opacity-75">{source}</span>
-                                        {groupedWeapons.grouped[source].map((weapon) => (
-                                            <Fragment key={weapon.id}>
-                                                {weapon.profiles.map((profile: WeaponProfile) => {
-                                                    const isSelected = selectedWeaponProfile?.datasheetId === profile.datasheetId && selectedWeaponProfile?.line === profile.line;
-                                                    return <WeaponProfileCard key={`${profile.datasheetId}-${profile.line}`} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
-                                                })}
-                                            </Fragment>
-                                        ))}
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            // Single unit: show weapons without grouping
-                            <div className="space-y-2">
-                                {filteredWeapons.map((weapon) => (
-                                    <Fragment key={weapon.id}>
-                                        {weapon.profiles.map((profile: WeaponProfile) => {
-                                            const isSelected = selectedWeaponProfile?.datasheetId === profile.datasheetId && selectedWeaponProfile?.line === profile.line;
-                                            return <WeaponProfileCard key={`${profile.datasheetId}-${profile.line}`} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
-                                        })}
-                                    </Fragment>
-                                ))}
-                            </div>
-                        )}
+                    {groupedWeapons ? (
+                        // Combined unit: show weapons grouped by source
+                        <div className="space-y-6">
+                            {groupedWeapons.orderedSources.map((source) => (
+                                <div key={source} className="space-y-2">
+                                    <span className="inline-block text-blockcaps-s opacity-75">{source}</span>
+                                    {groupedWeapons.grouped[source].map((weapon) => (
+                                        <Fragment key={weapon.id}>
+                                            {weapon.profiles.map((profile: WeaponProfile) => {
+                                                const isSelected = selectedWeaponProfile?.datasheetId === profile.datasheetId && selectedWeaponProfile?.line === profile.line;
+                                                return <WeaponProfileCard key={`${profile.datasheetId}-${profile.line}`} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                            })}
+                                        </Fragment>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        // Single unit: show weapons without grouping
+                        <div className="space-y-2">
+                            {filteredWeapons.map((weapon) => (
+                                <Fragment key={weapon.id}>
+                                    {weapon.profiles.map((profile: WeaponProfile) => {
+                                        const isSelected = selectedWeaponProfile?.datasheetId === profile.datasheetId && selectedWeaponProfile?.line === profile.line;
+                                        return <WeaponProfileCard key={`${profile.datasheetId}-${profile.line}`} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                    })}
+                                </Fragment>
+                            ))}
+                        </div>
+                    )}
 
-                        {filteredWeapons.length === 0 && <p className="text-blockcaps-s opacity-50">No {gamePhase === "shooting" ? "ranged" : "melee"} weapons available</p>}
-                    </div>
+                    {filteredWeapons.length === 0 && <p className="text-blockcaps-s opacity-50">No {gamePhase === "shooting" ? "ranged" : "melee"} weapons available</p>}
                 </div>
             ) : (
                 <div className="flex items-center justify-center p-8">

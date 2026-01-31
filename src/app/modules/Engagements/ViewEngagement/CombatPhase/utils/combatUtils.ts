@@ -1,5 +1,6 @@
 import type { EngagementForce, EngagementForceItem } from "#types/Engagements";
 import type { WeaponProfile, Model, Weapon } from "#types/index";
+import type { ModelInstance } from "#types/Lists";
 
 /**
  * Represents a combined unit entry (leader(s) + bodyguard or standalone unit)
@@ -232,4 +233,47 @@ export function getCombinedModels(combinedItem: CombinedUnitItem | undefined): A
 
     // Return single unit's models
     return combinedItem.item.models || [];
+}
+
+/**
+ * Filter weapons to only those carried by alive models.
+ * For combined units, checks both leader and bodyguard unit model instances.
+ * Each unit's combatState is accessed directly from the EngagementForceItem.
+ */
+export function filterWargearByAliveModels(wargear: Array<Weapon & { sourceUnit?: string }>, combinedItem: CombinedUnitItem | undefined): Array<Weapon & { sourceUnit?: string }> {
+    if (!combinedItem) return [];
+
+    // Collect alive weapon IDs from all relevant units
+    const aliveWeaponIds = new Set<string>();
+
+    const collectAliveWeapons = (unit: EngagementForceItem) => {
+        const deadModelIds = unit.combatState?.deadModelIds || [];
+        const instances = unit.modelInstances || [];
+
+        if (instances.length === 0) {
+            // No model instances - include all weapons from this unit as fallback
+            unit.wargear?.forEach((w) => aliveWeaponIds.add(w.id));
+            return;
+        }
+
+        // Filter to alive models and collect their weapon IDs
+        instances
+            .filter((m: ModelInstance) => !deadModelIds.includes(m.instanceId))
+            .forEach((m: ModelInstance) => {
+                m.loadout.forEach((weaponId) => aliveWeaponIds.add(weaponId));
+            });
+    };
+
+    if (combinedItem.isCombined && combinedItem.bodyguardUnit) {
+        // Process all leaders
+        combinedItem.allLeaders.forEach(collectAliveWeapons);
+        // Process bodyguard unit
+        collectAliveWeapons(combinedItem.bodyguardUnit);
+    } else {
+        // Single unit
+        collectAliveWeapons(combinedItem.item);
+    }
+
+    // Filter wargear to only weapons carried by alive models
+    return wargear.filter((w) => aliveWeaponIds.has(w.id));
 }

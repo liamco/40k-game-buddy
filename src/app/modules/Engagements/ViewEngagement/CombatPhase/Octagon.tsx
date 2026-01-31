@@ -173,7 +173,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
     }, [gamePhase]);
 
     return (
-        <div className="grid grid-cols-[4fr_4fr_3fr] gap-2 mt-6">
+        <main className="w-full h-full grid grid-cols-[4fr_4fr_3fr] gap-2 mt-6">
             <AttackerPanel
                 gamePhase={gamePhase}
                 force={attackingForce}
@@ -217,7 +217,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
                     model: selectedDefenderModel,
                 }}
             />
-        </div>
+        </main>
     );
 };
 

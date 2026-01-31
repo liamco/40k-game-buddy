@@ -42,6 +42,8 @@ export type EngagementForceItem = Omit<ArmyListItem, "availableWargear"> & {
 
 export interface EngagementForceItemCombatState {
     modelCount: number;
+    unitStrength: "full" | "belowStarting" | "belowHalf";
+    deadModelIds: string[];
     currentWounds: number;
     isDamaged: boolean;
     isDestroyed: boolean;

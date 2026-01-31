@@ -6,7 +6,7 @@ import { Badge } from "#components/Badge/Badge.tsx";
 import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconShield from "#components/icons/IconShield.tsx";
 
-import strikethrough from "#assets/Strikethrough.svg";
+import strikethrough from "#assets/StrikethroughGreen.svg";
 
 interface Props {
     model: Model & { sourceUnit?: string; isLeader?: boolean };

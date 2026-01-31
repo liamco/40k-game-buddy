@@ -10,7 +10,7 @@ import IconLeader from "#components/icons/IconLeader.tsx";
 
 import styles from "./WargearProfileCard.module.css";
 
-import strikethrough from "#assets/Strikethrough.svg";
+import strikethrough from "#assets/StrikethroughGreen.svg";
 
 export type BonusSourceType = "leader" | "enhancement" | "detachment";
 

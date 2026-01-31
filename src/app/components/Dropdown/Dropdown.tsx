@@ -11,6 +11,19 @@ export interface DropdownOption<T> {
     data: T;
 }
 
+type DropdownVariant = "default" | "minimal";
+
+const variantStyles: Record<DropdownVariant, { trigger: string; content: string }> = {
+    default: {
+        trigger: "p-3 bg-deathWorldForest",
+        content: "bg-deathWorldForest",
+    },
+    minimal: {
+        trigger: "p-0 bg-transparent",
+        content: "bg-deathWorldForest",
+    },
+};
+
 interface DropdownProps<T> {
     /** Array of options to display */
     options: DropdownOption<T>[];
@@ -32,9 +45,11 @@ interface DropdownProps<T> {
     searchPlaceholder?: string;
     /** Message shown when no results match the search */
     emptyMessage?: string;
+    /** Visual variant of the dropdown */
+    variant?: DropdownVariant;
 }
 
-export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...", onSelect, renderOption, triggerClassName = "", disabled = false, searchable = false, searchPlaceholder = "Search...", emptyMessage = "No results found." }: DropdownProps<T>) {
+export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...", onSelect, renderOption, triggerClassName = "", disabled = false, searchable = false, searchPlaceholder = "Search...", emptyMessage = "No results found.", variant = "default" }: DropdownProps<T>) {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState("");
 
@@ -59,9 +74,9 @@ export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...",
 
     return (
         <Popover open={open} onOpenChange={handleOpenChange} modal={true}>
-            <PopoverTrigger className={`w-full flex p-3 bg-deathWorldForest justify-between items-center rounded ${triggerClassName} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`} disabled={disabled}>
+            <PopoverTrigger className={`w-full flex justify-between items-center rounded ${variantStyles[variant].trigger} ${triggerClassName} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`} disabled={disabled}>
                 <span>{selectedLabel || placeholder}</span>
-                {searchable ? <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" /> : <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />}
+                {searchable ? <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" /> : <ChevronDown className={`ml-2 h-4 w-4 shrink-0 ${variant === "minimal" ? "opacity-[0%]" : "opacity-50"}`} />}
             </PopoverTrigger>
             <PopoverContent
                 className="p-0 border-0"
@@ -72,7 +87,7 @@ export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...",
                 align="start"
                 sideOffset={8}
             >
-                <div className="bg-deathWorldForest text-skarsnikGreen rounded overflow-hidden">
+                <div className={`${variantStyles[variant].content} text-skarsnikGreen rounded overflow-hidden`}>
                     {searchable && (
                         <div className="p-2 border-b border-skarsnikGreen/30">
                             <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder={searchPlaceholder} className="w-full bg-transparent outline-none placeholder:text-skarsnikGreen/50" autoFocus />
