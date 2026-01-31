@@ -3,6 +3,8 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import type { EngagementForce, EngagementForceItemCombatState } from "#types/Engagements";
 import type { WeaponProfile, Model, GamePhase } from "#types/index";
 
+import { useCombatResolution } from "#game-engine";
+
 import { buildUnitSelectItems, findUnitByItemId, getFirstWeaponProfileForPhase, getFirstValidDefenderModel, hasPrecisionAttribute, type UnitSelectItem } from "./utils/combatUtils";
 
 import AttackerPanel from "./components/AttackerPanel";
@@ -34,7 +36,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
     const [selectedDefenderItemId, setSelectedDefenderItemId] = useState<string | null>(null);
     const [selectedDefenderModel, setSelectedDefenderModel] = useState<Model | null>(null);
 
-    // Stratagems
+    // Stratagems (placeholder for future implementation)
     const [activeAttackerStratagems, setActiveAttackerStratagems] = useState<string[]>([]);
     const [activeDefenderStratagems, setActiveDefenderStratagems] = useState<string[]>([]);
 
@@ -42,6 +44,21 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
     const selectedAttackerUnit = useMemo(() => findUnitByItemId(attackerUnitItems, selectedAttackerItemId ?? undefined), [attackerUnitItems, selectedAttackerItemId]);
 
     const selectedDefenderUnit = useMemo(() => findUnitByItemId(defenderUnitItems, selectedDefenderItemId ?? undefined), [defenderUnitItems, selectedDefenderItemId]);
+
+    // Get model count from combat state
+    const attackerModelCount = selectedAttackerUnit?.item.combatState?.modelCount || 0;
+
+    // Combat resolution via game engine
+    const combatResolution = useCombatResolution({
+        phase: gamePhase,
+        attackerUnit: selectedAttackerUnit?.item ?? null,
+        attackerForce: attackingForce,
+        weaponProfile: selectedWeaponProfile,
+        modelCount: attackerModelCount,
+        defenderUnit: selectedDefenderUnit?.item ?? null,
+        defenderForce: defendingForce,
+        targetModel: selectedDefenderModel,
+    });
 
     // Handle attacker unit selection
     const handleAttackerUnitChange = useCallback(
@@ -131,10 +148,6 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
         }
     }, [gamePhase]);
 
-    // Get model count from combat state
-    const attackerModelCount = selectedAttackerUnit?.item.combatState?.modelCount || 0;
-    const defenderModelCount = selectedDefenderUnit?.item.combatState?.modelCount || 0;
-
     return (
         <main className="w-full h-full grid grid-cols-[4fr_4fr_3fr] gap-2 mt-6">
             <AttackerPanel
@@ -158,22 +171,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
                 selectedWeaponProfile={selectedWeaponProfile}
                 onCombatStatusChange={handleDefenderCombatStatusChange}
             />
-            <AttackResolver
-                gamePhase={gamePhase}
-                attacker={{
-                    unit: selectedAttackerUnit?.item ?? null,
-                    attachedLeaders: [],
-                    bodyguardUnit: undefined,
-                    weaponProfile: selectedWeaponProfile,
-                    modelCount: attackerModelCount,
-                }}
-                defender={{
-                    unit: selectedDefenderUnit?.item ?? null,
-                    attachedLeaders: [],
-                    bodyguardUnit: undefined,
-                    model: selectedDefenderModel,
-                }}
-            />
+            <AttackResolver resolution={combatResolution} modelCount={attackerModelCount} />
         </main>
     );
 };

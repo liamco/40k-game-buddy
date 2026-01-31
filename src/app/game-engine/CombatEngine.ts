@@ -1,0 +1,434 @@
+/**
+ * CombatEngine - Core combat resolution logic
+ *
+ * Evaluates all game mechanics and produces combat resolution with attributed modifiers.
+ */
+
+import type { CombatContext } from "./types/CombatContext";
+import type { Mechanic, Condition, Entity, Attribute } from "./types/Mechanic";
+import type { EffectSource } from "./types/EffectSource";
+import { createEffectSource } from "./types/EffectSource";
+import type { StepModifiers, CombatResolution, AttackStepType, AttributedModifier, SpecialEffect } from "./types/ModifierResult";
+import { createEmptyStepModifiers } from "./types/ModifierResult";
+import { extractWeaponMechanics } from "./weaponAttributes";
+
+/**
+ * A mechanic paired with its source for attribution
+ */
+interface SourcedMechanic {
+    mechanic: Mechanic;
+    source: EffectSource;
+}
+
+/**
+ * CombatEngine resolves combat by:
+ * 1. Collecting all applicable mechanics from various sources
+ * 2. Evaluating conditions against the combat context
+ * 3. Aggregating modifiers with proper capping
+ * 4. Returning a complete CombatResolution
+ */
+export class CombatEngine {
+    private context: CombatContext;
+    private collectedMechanics: SourcedMechanic[] = [];
+    private weaponEffects: SpecialEffect[] = [];
+
+    constructor(context: CombatContext) {
+        this.context = context;
+    }
+
+    /**
+     * Main entry point - resolve complete combat
+     */
+    resolve(): CombatResolution {
+        // 1. Collect all potentially applicable mechanics
+        this.collectAllMechanics();
+
+        // 2. Calculate base values
+        const baseValues = this.calculateBaseValues();
+
+        // 3. Evaluate modifiers for each step
+        const attacksMods = this.evaluateStep("attacks");
+        const hitMods = this.evaluateStep("hitRoll");
+        const woundMods = this.evaluateStep("woundRoll");
+        const saveMods = this.evaluateStep("saveRoll");
+        const fnpMods = this.evaluateStep("feelNoPain");
+        const damageMods = this.evaluateStep("damageRoll");
+
+        // 4. Compute final values
+        const finalToHit = this.computeFinalToHit(baseValues.toHit, hitMods);
+        const finalToWound = this.computeFinalToWound(baseValues.toWound, woundMods);
+        const { finalSave, useInvuln } = this.computeFinalSave(baseValues.armorSave, baseValues.invulnSave, baseValues.ap, saveMods);
+
+        return {
+            baseAttacks: baseValues.attacks,
+            baseToHit: baseValues.toHit,
+            baseToWound: baseValues.toWound,
+            baseSave: baseValues.armorSave,
+            baseInvuln: baseValues.invulnSave,
+            baseFnp: baseValues.fnp,
+            baseDamage: baseValues.damage,
+
+            weaponStrength: baseValues.strength,
+            weaponAp: baseValues.ap,
+            targetToughness: baseValues.toughness,
+
+            attacksModifiers: attacksMods,
+            hitModifiers: hitMods,
+            woundModifiers: woundMods,
+            saveModifiers: saveMods,
+            fnpModifiers: fnpMods,
+            damageModifiers: damageMods,
+
+            finalToHit,
+            finalToWound,
+            finalSave,
+            useInvuln,
+            finalFnp: baseValues.fnp,
+
+            weaponEffects: this.weaponEffects,
+        };
+    }
+
+    /**
+     * Calculate base values from weapon and target model
+     */
+    private calculateBaseValues() {
+        const weapon = this.context.attacker.weaponProfile;
+        const targetModel = this.context.defender.targetModel;
+
+        const strength = weapon.s;
+        const toughness = targetModel.t;
+
+        return {
+            attacks: weapon.a,
+            toHit: weapon.bsWs,
+            toWound: this.calculateToWound(strength, toughness),
+            armorSave: targetModel.sv,
+            invulnSave: targetModel.invSv ?? null,
+            ap: weapon.ap,
+            damage: weapon.d,
+            fnp: (targetModel as any).fnp ?? null,
+            strength,
+            toughness,
+        };
+    }
+
+    /**
+     * Calculate to-wound roll target based on strength vs toughness
+     */
+    private calculateToWound(strength: number, toughness: number): number {
+        if (strength >= toughness * 2) return 2;
+        if (strength > toughness) return 3;
+        if (strength === toughness) return 4;
+        if (strength * 2 <= toughness) return 6;
+        return 5;
+    }
+
+    /**
+     * Collect all mechanics from all sources
+     */
+    private collectAllMechanics(): void {
+        // Weapon attributes (HEAVY, TORRENT, etc.)
+        this.collectFromWeapon();
+
+        // Future: Unit abilities, leader abilities, stratagems, etc.
+        // this.collectFromUnitAbilities();
+        // this.collectFromLeaderAbilities();
+        // this.collectFromStratagems();
+    }
+
+    /**
+     * Collect mechanics from weapon attributes
+     */
+    private collectFromWeapon(): void {
+        const weapon = this.context.attacker.weaponProfile;
+        const attributes = weapon.attributes || [];
+
+        const { mechanics, specialEffects } = extractWeaponMechanics(attributes, weapon.name);
+
+        for (const mechanic of mechanics) {
+            this.collectedMechanics.push({
+                mechanic,
+                source: createEffectSource("weaponAttribute", weapon.name, {
+                    attribute: this.getAttributeForMechanic(mechanic, attributes),
+                }),
+            });
+        }
+
+        this.weaponEffects = specialEffects;
+    }
+
+    /**
+     * Get the attribute name that generated a mechanic
+     */
+    private getAttributeForMechanic(mechanic: Mechanic, attributes: string[]): string | undefined {
+        // Try to match the mechanic back to an attribute
+        if (mechanic.effect === "autoSuccess" && mechanic.attribute === "h") {
+            return attributes.find((a) => a.toUpperCase() === "TORRENT");
+        }
+        if (mechanic.effect === "rollBonus" && mechanic.attribute === "h" && mechanic.conditions?.some((c) => c.state === "isStationary")) {
+            return attributes.find((a) => a.toUpperCase() === "HEAVY");
+        }
+        if (mechanic.effect === "rollBonus" && mechanic.attribute === "w" && mechanic.conditions?.some((c) => c.state === "hasChargedThisTurn")) {
+            return attributes.find((a) => a.toUpperCase() === "LANCE");
+        }
+        return undefined;
+    }
+
+    /**
+     * Evaluate modifiers for a specific attack step
+     */
+    private evaluateStep(step: AttackStepType): StepModifiers {
+        const result = createEmptyStepModifiers(step);
+        const attribute = this.stepToAttribute(step);
+
+        for (const { mechanic, source } of this.collectedMechanics) {
+            // Check if mechanic applies to this step
+            if (!this.mechanicAppliesToStep(mechanic, step, attribute)) continue;
+
+            // Evaluate conditions
+            if (!this.evaluateConditions(mechanic.conditions)) continue;
+
+            // Apply the effect
+            if (mechanic.effect === "rollBonus" && typeof mechanic.value === "number") {
+                result.bonuses.push({
+                    value: mechanic.value,
+                    source,
+                    description: source.attribute || source.name,
+                });
+            } else if (mechanic.effect === "rollPenalty" && typeof mechanic.value === "number") {
+                result.penalties.push({
+                    value: mechanic.value,
+                    source,
+                    description: source.attribute || source.name,
+                });
+            }
+        }
+
+        // Calculate totals
+        const bonusTotal = result.bonuses.reduce((sum, b) => sum + b.value, 0);
+        const penaltyTotal = result.penalties.reduce((sum, p) => sum + p.value, 0);
+        result.rawTotal = bonusTotal - penaltyTotal;
+
+        // Apply capping for hit and wound rolls
+        const shouldCap = step === "hitRoll" || step === "woundRoll";
+        result.cappedTotal = shouldCap ? Math.max(-1, Math.min(1, result.rawTotal)) : result.rawTotal;
+        result.isCapped = shouldCap && result.rawTotal !== result.cappedTotal;
+
+        // Build display format
+        result.forDisplay = {
+            bonuses: result.bonuses.map((b) => ({
+                label: b.source.attribute || b.source.name,
+                value: b.value,
+            })),
+            penalties: result.penalties.map((p) => ({
+                label: p.source.attribute || p.source.name,
+                value: p.value,
+            })),
+        };
+
+        return result;
+    }
+
+    /**
+     * Convert attack step to attribute
+     */
+    private stepToAttribute(step: AttackStepType): string | null {
+        switch (step) {
+            case "attacks":
+                return "a";
+            case "hitRoll":
+                return "h";
+            case "woundRoll":
+                return "w";
+            case "saveRoll":
+                return "s";
+            case "feelNoPain":
+                return "fnp";
+            case "damageRoll":
+                return "d";
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Check if a mechanic applies to a specific step
+     */
+    private mechanicAppliesToStep(mechanic: Mechanic, step: AttackStepType, attribute: string | null): boolean {
+        if (!mechanic.attribute) return false;
+        return mechanic.attribute === attribute;
+    }
+
+    /**
+     * Evaluate all conditions for a mechanic
+     */
+    private evaluateConditions(conditions?: Condition[]): boolean {
+        if (!conditions || conditions.length === 0) return true;
+        return conditions.every((condition) => this.evaluateCondition(condition));
+    }
+
+    /**
+     * Evaluate a single condition against the current context
+     */
+    private evaluateCondition(condition: Condition): boolean {
+        const { entity, state, attribute, keywords, operator, value } = condition;
+
+        // State-based conditions
+        if (state) {
+            const stateValue = this.getStateValue(entity, state);
+            return this.compare(stateValue, operator, value);
+        }
+
+        // Keyword-based conditions
+        if (keywords && Array.isArray(keywords)) {
+            const unitKeywords = this.getUnitKeywords(entity);
+            if (operator === "includes") {
+                return keywords.some((k) => unitKeywords.includes(k.toUpperCase()));
+            }
+            if (operator === "notIncludes") {
+                return !keywords.some((k) => unitKeywords.includes(k.toUpperCase()));
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Get a state flag value for an entity
+     */
+    private getStateValue(entity: Entity, state: string): boolean {
+        const unit = this.resolveEntityToUnit(entity);
+        if (!unit) return false;
+
+        const combatState = unit.combatState;
+        if (!combatState) return false;
+
+        switch (state) {
+            case "isStationary":
+                return combatState.movementBehaviour === "hold";
+            case "isBattleShocked":
+                return combatState.isBattleShocked ?? false;
+            case "inCover":
+            case "isInCover":
+                return combatState.isInCover ?? false;
+            case "inEngagementRange":
+            case "isInEngagementRange":
+                return combatState.isInEngagementRange ?? false;
+            case "hasChargedThisTurn":
+            case "hasCharged":
+                return combatState.hasCharged ?? false;
+            case "hasFiredThisPhase":
+            case "hasShot":
+                return combatState.hasShot ?? false;
+            case "isBelowHalfStrength":
+                return combatState.unitStrength === "belowHalf";
+            case "isBelowStartingStrength":
+                return combatState.unitStrength === "belowStarting" || combatState.unitStrength === "belowHalf";
+            case "isDamaged":
+                return combatState.isDamaged ?? false;
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Resolve entity to the appropriate unit
+     */
+    private resolveEntityToUnit(entity: Entity) {
+        switch (entity) {
+            case "thisUnit":
+            case "thisModel":
+            case "thisArmy":
+                return this.context.attacker.unit;
+            case "targetUnit":
+            case "targetModel":
+            case "opposingUnit":
+            case "opposingModel":
+            case "opponentArmy":
+                return this.context.defender.unit;
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Get keywords for an entity
+     */
+    private getUnitKeywords(entity: Entity): string[] {
+        const unit = this.resolveEntityToUnit(entity);
+        if (!unit) return [];
+        return (unit.keywords || []).map((k: string) => k.toUpperCase());
+    }
+
+    /**
+     * Compare values using the specified operator
+     */
+    private compare(actual: any, operator: string, expected: any): boolean {
+        switch (operator) {
+            case "equals":
+                return actual === expected;
+            case "notEquals":
+                return actual !== expected;
+            case "greaterThan":
+                return actual > expected;
+            case "greaterThanOrEqualTo":
+                return actual >= expected;
+            case "lessThan":
+                return actual < expected;
+            case "lessThanOrEqualTo":
+                return actual <= expected;
+            case "includes":
+                return Array.isArray(actual) && actual.includes(expected);
+            case "notIncludes":
+                return Array.isArray(actual) && !actual.includes(expected);
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Compute final to-hit value
+     */
+    private computeFinalToHit(baseToHit: number | string, modifiers: StepModifiers): number | "auto" {
+        // Check for auto-hit (TORRENT)
+        const hasAutoHit = this.weaponEffects.some((e) => e.type === "autoSuccess");
+        if (hasAutoHit) return "auto";
+
+        if (typeof baseToHit === "string") {
+            // Variable BS/WS (rare, but handle it)
+            return baseToHit as any;
+        }
+
+        return Math.max(2, Math.min(6, baseToHit - modifiers.cappedTotal));
+    }
+
+    /**
+     * Compute final to-wound value
+     */
+    private computeFinalToWound(baseToWound: number, modifiers: StepModifiers): number {
+        return Math.max(2, Math.min(6, baseToWound - modifiers.cappedTotal));
+    }
+
+    /**
+     * Compute final save value
+     */
+    private computeFinalSave(armorSave: number, invulnSave: number | null, ap: number, modifiers: StepModifiers): { finalSave: number; useInvuln: boolean } {
+        // AP worsens save (AP is negative, so we subtract it which adds to the save number)
+        const modifiedArmor = armorSave - ap + modifiers.cappedTotal;
+
+        if (invulnSave && invulnSave < modifiedArmor) {
+            return { finalSave: invulnSave, useInvuln: true };
+        }
+
+        return { finalSave: modifiedArmor, useInvuln: false };
+    }
+}
+
+/**
+ * Convenience function to resolve combat
+ */
+export function resolveCombat(context: CombatContext): CombatResolution {
+    const engine = new CombatEngine(context);
+    return engine.resolve();
+}

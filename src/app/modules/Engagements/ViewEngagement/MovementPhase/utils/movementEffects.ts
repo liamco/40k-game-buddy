@@ -1,4 +1,4 @@
-import type { CombinedUnitItem } from "../../CombatPhase/utils/combatUtils";
+import type { UnitSelectItem } from "../../CombatPhase/utils/combatUtils";
 import type { Weapon, WeaponProfile } from "#types/Weapons";
 import type { EngagementForceItem } from "#types/Engagements";
 
@@ -43,7 +43,7 @@ const WEAPON_ATTRIBUTE_EFFECTS: Record<string, { description: string; relevantMo
         relevantMovement: ["hold"],
     },
     LANCE: {
-        description: "Gets +1 to strength after charging",
+        description: "Gets +1 to wound after charging",
         relevantMovement: ["charge"],
     },
 };
@@ -76,7 +76,7 @@ const ABILITY_MOVEMENT_EFFECTS: Record<string, { description: string; relevantMo
 };
 
 /**
- * Extract movement effects from a single unit's weapons and abilities
+ * Extract movement effects from a unit's weapons and abilities
  */
 function extractEffectsFromUnit(unit: EngagementForceItem): MovementEffect[] {
     const effects: MovementEffect[] = [];
@@ -190,39 +190,20 @@ function describeMechanicBonus(mechanic: any): string | null {
 }
 
 /**
- * Extract all movement effects from a combined unit (leaders + bodyguard)
+ * Extract all movement effects from a unit.
+ * Since units are now pre-merged at engagement creation, this simply extracts from the single unit.
  */
-export function getMovementEffects(combinedUnit: CombinedUnitItem): MovementEffect[] {
-    const effects: MovementEffect[] = [];
-
-    // Extract from the main unit (which is a leader if combined)
-    effects.push(...extractEffectsFromUnit(combinedUnit.item));
-
-    // If combined unit, also extract from all leaders and bodyguard
-    if (combinedUnit.isCombined) {
-        // Extract from additional leaders
-        for (const leader of combinedUnit.allLeaders) {
-            if (leader.listItemId !== combinedUnit.item.listItemId) {
-                effects.push(...extractEffectsFromUnit(leader));
-            }
-        }
-
-        // Extract from bodyguard unit
-        if (combinedUnit.bodyguardUnit) {
-            effects.push(...extractEffectsFromUnit(combinedUnit.bodyguardUnit));
-        }
-    }
-
-    return effects;
+export function getMovementEffects(unitItem: UnitSelectItem): MovementEffect[] {
+    return extractEffectsFromUnit(unitItem.item);
 }
 
 /**
- * Group movement effects by their attribute/source for collapsed display.
+ * Get unique badges for movement-relevant attributes/abilities.
  * Returns unique badges like "ASSAULT", "HEAVY", "BOUNDING LEAP"
  */
-export function getMovementRelevantBadges(combinedUnit: CombinedUnitItem): string[] {
+export function getMovementRelevantBadges(unitItem: UnitSelectItem): string[] {
     const badges = new Set<string>();
-    const effects = getMovementEffects(combinedUnit);
+    const effects = getMovementEffects(unitItem);
 
     for (const effect of effects) {
         if (effect.source.type === "weapon" && effect.source.attribute) {

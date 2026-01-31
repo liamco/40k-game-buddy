@@ -32,10 +32,12 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
         }));
     }, [unitItems]);
 
-    // Get available models for the selected unit
+    // Get available models for the selected unit, preserving original index for leader detection
     const availableModels = useMemo(() => {
         if (!selectedUnit) return [];
-        return selectedUnit.item.models || [];
+        const models = selectedUnit.item.models || [];
+        // Attach original index to each model for leader detection
+        return models.map((model, idx) => ({ model, originalIdx: idx }));
     }, [selectedUnit]);
 
     // Check if weapon has precision attribute
@@ -48,11 +50,35 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     const combatState = selectedUnit?.item.combatState;
     const startingStrength = selectedUnit?.item.modelInstances?.length || 0;
 
-    // Determine which models are leaders (for PRECISION targeting)
-    const leaderSourceNames = useMemo(() => {
-        if (!selectedUnit?.item.sourceUnits) return new Set<string>();
-        return new Set(selectedUnit.item.sourceUnits.filter((s) => s.isLeader).map((s) => s.name));
+    // For combined units, determine which model indices belong to leaders.
+    // Models are merged as: [...leaderModels, ...bodyguardModels]
+    // So we need to count how many models came from leaders to know the cutoff index.
+    const leaderModelCount = useMemo(() => {
+        if (!selectedUnit?.item.sourceUnits) return 0;
+        const leaderNames = new Set(selectedUnit.item.sourceUnits.filter((s) => s.isLeader).map((s) => s.name));
+        const instances = selectedUnit.item.modelInstances || [];
+        const leaderModelTypes = new Set<string>();
+        instances.forEach((m) => {
+            if (m.sourceUnitName && leaderNames.has(m.sourceUnitName)) {
+                leaderModelTypes.add(`${m.sourceUnitName}-${m.modelTypeLine}`);
+            }
+        });
+        return leaderModelTypes.size;
     }, [selectedUnit]);
+
+    // Sort models: bodyguard first, leaders last (for combined units)
+    const sortedModels = useMemo(() => {
+        if (!selectedUnit?.item.sourceUnits || selectedUnit.item.sourceUnits.length <= 1) {
+            return availableModels;
+        }
+        // Sort so non-leaders (originalIdx >= leaderModelCount) come first
+        return [...availableModels].sort((a, b) => {
+            const aIsLeader = a.originalIdx < leaderModelCount;
+            const bIsLeader = b.originalIdx < leaderModelCount;
+            if (aIsLeader === bIsLeader) return 0;
+            return aIsLeader ? 1 : -1; // Leaders go last
+        });
+    }, [availableModels, leaderModelCount, selectedUnit]);
 
     return (
         <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
@@ -75,20 +101,19 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                     <SplitHeading label="Select target model" />
 
                     <div className="space-y-2">
-                        {availableModels.map((model, idx) => {
+                        {sortedModels.map(({ model, originalIdx }) => {
                             const isSelected = selectedModel?.name === model.name;
 
-                            // For combined units, check if this model belongs to a leader unit
-                            // by checking if any modelInstance with this model's line is from a leader
-                            const modelInstance = selectedUnit.item.modelInstances?.find((m) => m.modelTypeLine === idx);
-                            const isLeaderModel = modelInstance?.sourceUnitName ? leaderSourceNames.has(modelInstance.sourceUnitName) : false;
+                            // For combined units, leader models come first in the original array.
+                            // Models at originalIdx < leaderModelCount are leaders and need PRECISION to target.
+                            const isLeaderModel = selectedUnit.item.sourceUnits && selectedUnit.item.sourceUnits.length > 1 && originalIdx < leaderModelCount;
                             const isDisabled = isLeaderModel && !hasPrecision;
 
-                            return <ModelProfileCard key={`${model.name}-${idx}`} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
+                            return <ModelProfileCard key={`${model.name}-${originalIdx}`} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
                         })}
                     </div>
 
-                    {availableModels.length === 0 && <p className="text-blockcaps-s opacity-50">No model profiles available</p>}
+                    {sortedModels.length === 0 && <p className="text-blockcaps-s opacity-50">No model profiles available</p>}
                 </div>
             ) : (
                 <div className="flex items-center justify-center p-8">

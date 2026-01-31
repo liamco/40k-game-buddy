@@ -1,0 +1,102 @@
+/**
+ * Combat context - the game state passed to the Combat Engine
+ */
+
+import type { EngagementForceItem, EngagementForce } from "#types/Engagements";
+import type { WeaponProfile, Model, GamePhase } from "#types/index";
+import type { Mechanic } from "./Mechanic";
+
+/**
+ * Which side of the combat interaction
+ */
+export type CombatRole = "attacker" | "defender";
+
+/**
+ * An activated stratagem affecting combat
+ */
+export interface ActiveStratagem {
+    id: string;
+    name: string;
+    mechanics: Mechanic[];
+    appliesTo: CombatRole;
+    targetUnitId?: string;
+}
+
+/**
+ * The complete game state for combat resolution.
+ * Passed to the CombatEngine for modifier evaluation.
+ */
+export interface CombatContext {
+    phase: GamePhase;
+    turn: number;
+    isPlayerTurn: boolean;
+
+    attacker: {
+        unit: EngagementForceItem;
+        force: EngagementForce;
+        weaponProfile: WeaponProfile;
+        modelCount: number;
+    };
+
+    defender: {
+        unit: EngagementForceItem;
+        force: EngagementForce;
+        targetModel: Model;
+    };
+
+    activeStratagems: ActiveStratagem[];
+}
+
+/**
+ * Build a CombatContext from component state.
+ * Returns null if required data is missing.
+ */
+export function buildCombatContext(params: {
+    phase: GamePhase;
+    turn?: number;
+    isPlayerTurn?: boolean;
+    attackerUnit: EngagementForceItem | null;
+    attackerForce: EngagementForce;
+    weaponProfile: WeaponProfile | null;
+    modelCount: number;
+    defenderUnit: EngagementForceItem | null;
+    defenderForce: EngagementForce;
+    targetModel: Model | null;
+    activeStratagems?: ActiveStratagem[];
+}): CombatContext | null {
+    const {
+        phase,
+        turn = 1,
+        isPlayerTurn = true,
+        attackerUnit,
+        attackerForce,
+        weaponProfile,
+        modelCount,
+        defenderUnit,
+        defenderForce,
+        targetModel,
+        activeStratagems = [],
+    } = params;
+
+    if (!attackerUnit || !weaponProfile || !defenderUnit || !targetModel) {
+        return null;
+    }
+
+    return {
+        phase,
+        turn,
+        isPlayerTurn,
+        attacker: {
+            unit: attackerUnit,
+            force: attackerForce,
+            weaponProfile,
+            modelCount,
+        },
+        defender: {
+            unit: defenderUnit,
+            force: defenderForce,
+            targetModel,
+        },
+        activeStratagems,
+    };
+}

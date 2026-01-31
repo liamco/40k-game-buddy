@@ -1,33 +1,29 @@
 import { useState, useMemo } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { EngagementForceItemCombatState } from "#types/Engagements.tsx";
-import { type CombinedUnitItem } from "../../CombatPhase/utils/combatUtils";
+import { type UnitSelectItem } from "../../CombatPhase/utils/combatUtils";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Badge } from "#components/Badge/Badge";
 import { getMovementEffects, getMovementRelevantBadges, groupMovementEffects, formatSourceAttribution, type GroupedMovementEffect } from "../utils/movementEffects";
 
 interface Props {
-    combinedUnit: CombinedUnitItem;
+    unitItem: UnitSelectItem;
     onCombatStatusChange: (unitId: string, updates: Partial<EngagementForceItemCombatState>) => void;
 }
 
-const UnitMovementCard = ({ combinedUnit, onCombatStatusChange }: Props) => {
-    const { item, displayName } = combinedUnit;
+const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
+    const { item, displayName } = unitItem;
     const [isExpanded, setIsExpanded] = useState(false);
 
     // Get movement value from first model
     const movementValue = useMemo(() => {
-        if (combinedUnit.isCombined && combinedUnit.bodyguardUnit?.models?.[0]) {
-            // For combined units, use bodyguard's movement
-            return combinedUnit.bodyguardUnit.models[0].m;
-        }
         return item.models?.[0]?.m ?? "?";
-    }, [combinedUnit, item.models]);
+    }, [item.models]);
 
     // Extract movement effects and badges
-    const movementEffects = useMemo(() => getMovementEffects(combinedUnit), [combinedUnit]);
+    const movementEffects = useMemo(() => getMovementEffects(unitItem), [unitItem]);
 
-    const badges = useMemo(() => getMovementRelevantBadges(combinedUnit), [combinedUnit]);
+    const badges = useMemo(() => getMovementRelevantBadges(unitItem), [unitItem]);
 
     const groupedEffects = useMemo(() => groupMovementEffects(movementEffects), [movementEffects]);
 
