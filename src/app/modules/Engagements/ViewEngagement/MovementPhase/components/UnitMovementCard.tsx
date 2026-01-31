@@ -59,13 +59,13 @@ const UnitMovementCard = ({ combinedUnit, onCombatStatusChange }: Props) => {
                         <button onClick={() => setIsExpanded(!isExpanded)} className="flex items-center gap-1 text-xs transition-colors">
                             {isExpanded ? (
                                 <>
+                                    <span className="text-blockcaps-xs">Collapse effects</span>
                                     <ChevronUp className="w-3 h-3" />
-                                    COLLAPSE EFFECTS
                                 </>
                             ) : (
                                 <>
+                                    <span className="text-blockcaps-xs">Expand effects</span>
                                     <ChevronDown className="w-3 h-3" />
-                                    EXPAND EFFECTS
                                 </>
                             )}
                         </button>
@@ -85,16 +85,16 @@ const UnitMovementCard = ({ combinedUnit, onCombatStatusChange }: Props) => {
             {/* Movement choice buttons */}
             <RadioGroupPrimitive.Root value={item.combatState.movementBehaviour} onValueChange={handleMovementChange} className="grid grid-cols-4 border-1 rounded border-skarsnikGreen" defaultValue="hold">
                 <RadioGroupPrimitive.Item value="hold" className="px-4 py-2 cursor-pointer data-[state=checked]:bg-skarsnikGreen data-[state=checked]:text-deathWorldForest">
-                    <span>Hold</span>
+                    <span className="text-blockcaps-xs">Hold</span>
                 </RadioGroupPrimitive.Item>
                 <RadioGroupPrimitive.Item value="move" className="px-4 py-2 border-l-1 border-skarsnikGreen cursor-pointer data-[state=checked]:bg-skarsnikGreen data-[state=checked]:text-deathWorldForest">
-                    <span>Move</span>
+                    <span className="text-blockcaps-xs">Move</span>
                 </RadioGroupPrimitive.Item>
                 <RadioGroupPrimitive.Item value="advance" className="px-4 py-2 border-l-1 border-skarsnikGreen cursor-pointer data-[state=checked]:bg-skarsnikGreen data-[state=checked]:text-deathWorldForest">
-                    <span>Advance</span>
+                    <span className="text-blockcaps-xs">Advance</span>
                 </RadioGroupPrimitive.Item>
                 <RadioGroupPrimitive.Item value="fallBack" className="px-4 py-2 border-l-1 border-skarsnikGreen cursor-pointer data-[state=checked]:bg-skarsnikGreen data-[state=checked]:text-deathWorldForest">
-                    <span>Fall back</span>
+                    <span className="text-blockcaps-xs">Fall back</span>
                 </RadioGroupPrimitive.Item>
             </RadioGroupPrimitive.Root>
         </div>

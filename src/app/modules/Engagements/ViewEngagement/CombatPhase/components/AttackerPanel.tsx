@@ -1,50 +1,44 @@
 import React, { useMemo, Fragment } from "react";
 
-import type { EngagementForce, EngagementForceItem, EngagementForceItemCombatState } from "#types/Engagements";
-import type { WeaponProfile, GamePhase, Weapon } from "#types/index";
+import type { EngagementForce, EngagementForceItemCombatState, EngagementWargear } from "#types/Engagements";
+import type { WeaponProfile, GamePhase } from "#types/index";
 
-import { type CombinedUnitItem, getCombinedWargear, filterWargearByAliveModels } from "../utils/combatUtils";
+import { type UnitSelectItem, filterWargearByAliveModels, groupWargearBySource } from "../utils/combatUtils";
 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown.tsx";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 import WeaponProfileCard from "#components/WeaponProfileCard/WeaponProfileCard.tsx";
 import CombatStatusPanel from "./CombatStatusPanel.tsx";
-import BaseIcon from "#components/icons/BaseIcon.tsx";
-import IconSkull from "#components/icons/IconSkull.tsx";
 
 interface AttackerPanelProps {
     gamePhase: GamePhase;
     force: EngagementForce;
-    combinedItems: CombinedUnitItem[];
-    selectedCombined: CombinedUnitItem | undefined;
-    onUnitChange: (combined: CombinedUnitItem) => void;
+    unitItems: UnitSelectItem[];
+    selectedUnit: UnitSelectItem | undefined;
+    onUnitChange: (unit: UnitSelectItem) => void;
     selectedWeaponProfile: WeaponProfile | null;
     onWeaponProfileChange: (profile: WeaponProfile | null) => void;
-    modelCount: number;
-    startingStrength: number;
-    onModelCountChange: (count: number) => void;
     onCombatStatusChange: (updates: Partial<EngagementForceItemCombatState>) => void;
 }
 
-export function AttackerPanel({ gamePhase, force, combinedItems, selectedCombined, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, modelCount, startingStrength, onModelCountChange, onCombatStatusChange }: AttackerPanelProps) {
-    // Convert combined items to dropdown options
-    const unitOptions = useMemo((): DropdownOption<CombinedUnitItem>[] => {
-        return combinedItems.map((combined) => ({
-            id: combined.item.listItemId,
-            label: combined.displayName,
-            data: combined,
+export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, onCombatStatusChange }: AttackerPanelProps) {
+    // Convert unit items to dropdown options
+    const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
+        return unitItems.map((unit) => ({
+            id: unit.item.listItemId,
+            label: unit.displayName,
+            data: unit,
         }));
-    }, [combinedItems]);
+    }, [unitItems]);
 
-    const combatState = selectedCombined?.item.combatState;
+    const combatState = selectedUnit?.item.combatState;
+    const startingStrength = selectedUnit?.item.modelInstances?.length || 0;
 
     // Get available wargear for the selected unit, filtered to alive models only
-    // Re-filters when deadModelIds change (via combatState dependency)
     const availableWargear = useMemo(() => {
-        if (!selectedCombined) return [];
-        const allWargear = getCombinedWargear(selectedCombined);
-        return filterWargearByAliveModels(allWargear, selectedCombined);
-    }, [selectedCombined, combatState?.deadModelIds]);
+        if (!selectedUnit) return [];
+        return filterWargearByAliveModels(selectedUnit.item);
+    }, [selectedUnit, combatState?.deadModelIds]);
 
     // Filter weapons by game phase
     const filteredWeapons = useMemo(() => {
@@ -52,34 +46,16 @@ export function AttackerPanel({ gamePhase, force, combinedItems, selectedCombine
         return availableWargear.filter((weapon) => weapon.type === weaponType);
     }, [availableWargear, gamePhase]);
 
-    // Group weapons by source unit for combined units
+    // Group weapons by source unit name (for combined units)
     const groupedWeapons = useMemo(() => {
-        if (!selectedCombined?.isCombined) {
-            return null; // Single unit, no grouping needed
-        }
+        const groups = groupWargearBySource(filteredWeapons);
+        const sourceNames = Object.keys(groups);
+        const isCombined = sourceNames.length > 1;
+        return { groups, sourceNames, isCombined };
+    }, [filteredWeapons]);
 
-        const grouped = filteredWeapons.reduce(
-            (acc, weapon) => {
-                const source = (weapon as Weapon & { sourceUnit?: string }).sourceUnit || "default";
-                if (!acc[source]) {
-                    acc[source] = [];
-                }
-                acc[source].push(weapon);
-                return acc;
-            },
-            {} as Record<string, typeof filteredWeapons>
-        );
-
-        // Order: all leaders first (in order), then bodyguard unit
-        const leaderNames = selectedCombined.allLeaders.map((l) => l.name);
-        const bodyguardName = selectedCombined.bodyguardUnit?.name || "";
-        const orderedSources = [...leaderNames, bodyguardName].filter((source) => grouped[source] && grouped[source].length > 0);
-
-        return { grouped, orderedSources };
-    }, [filteredWeapons, selectedCombined]);
-
-    const handleUnitSelect = (combined: CombinedUnitItem) => {
-        onUnitChange(combined);
+    const handleUnitSelect = (unit: UnitSelectItem) => {
+        onUnitChange(unit);
         onWeaponProfileChange(null);
     };
 
@@ -87,29 +63,29 @@ export function AttackerPanel({ gamePhase, force, combinedItems, selectedCombine
         <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr_auto] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
             <Dropdown
                 options={unitOptions}
-                selectedLabel={selectedCombined?.displayName}
+                selectedLabel={selectedUnit?.displayName}
                 placeholder="Select attacking unit..."
                 searchable
                 searchPlaceholder="Search units..."
                 emptyMessage="No units found"
                 onSelect={handleUnitSelect}
-                renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>}
+                renderOption={(unit) => <span className="text-blockcaps-m">{unit.displayName}</span>}
                 triggerClassName="grow-1 rounded-l-none border-l-0"
             />
 
-            {combatState && <CombatStatusPanel side="attacker" combatState={combatState} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} onCombatStatusChange={onCombatStatusChange} unit={selectedCombined.item} />}
+            {combatState && selectedUnit && <CombatStatusPanel side="attacker" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
 
-            {selectedCombined ? (
+            {selectedUnit ? (
                 <div className="space-y-4">
                     <SplitHeading label="Select weapon" />
 
-                    {groupedWeapons ? (
+                    {groupedWeapons.isCombined ? (
                         // Combined unit: show weapons grouped by source
                         <div className="space-y-6">
-                            {groupedWeapons.orderedSources.map((source) => (
+                            {groupedWeapons.sourceNames.map((source) => (
                                 <div key={source} className="space-y-2">
                                     <span className="inline-block text-blockcaps-s opacity-75">{source}</span>
-                                    {groupedWeapons.grouped[source].map((weapon) => (
+                                    {groupedWeapons.groups[source].map((weapon: EngagementWargear) => (
                                         <Fragment key={weapon.id}>
                                             {weapon.profiles.map((profile: WeaponProfile) => {
                                                 const isSelected = selectedWeaponProfile?.datasheetId === profile.datasheetId && selectedWeaponProfile?.line === profile.line;

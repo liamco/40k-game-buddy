@@ -1,8 +1,8 @@
+import { useMemo } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 
-import { EngagementForceItem } from "#types/Engagements.tsx";
-import { ModelInstance } from "#types/Lists.tsx";
+import { EngagementForceItem, EngagementModelInstance } from "#types/Engagements.tsx";
 
 import { Button } from "#components/Button/Button.tsx";
 
@@ -29,9 +29,25 @@ export function CasualtyPanel({ open, onOpenChange, unit, deadModelIds, onCasual
         }
     };
 
-    const getModelProfile = (instance: ModelInstance) => {
+    const getModelProfile = (instance: EngagementModelInstance) => {
         return unit.models[instance.modelTypeLine] || unit.models[0];
     };
+
+    // Group instances by source unit name for combined units
+    const groupedInstances = useMemo(() => {
+        const groups: Record<string, EngagementModelInstance[]> = {};
+        instances.forEach((instance) => {
+            const source = instance.sourceUnitName || unit.name;
+            if (!groups[source]) {
+                groups[source] = [];
+            }
+            groups[source].push(instance);
+        });
+        return groups;
+    }, [instances, unit.name]);
+
+    const sourceUnitNames = Object.keys(groupedInstances);
+    const isCombinedUnit = sourceUnitNames.length > 1;
 
     return (
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -52,12 +68,17 @@ export function CasualtyPanel({ open, onOpenChange, unit, deadModelIds, onCasual
                         </div>
                     </div>
 
-                    <div className="flex-1 overflow-auto p-4">
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                            {instances.map((instance: ModelInstance, idx: number) => (
-                                <CasualtyCard key={instance.instanceId} instance={instance} modelProfile={getModelProfile(instance)} wargear={unit.wargear} displayIndex={idx + 1} isDead={deadModelIds.includes(instance.instanceId)} onToggle={handleToggle} />
-                            ))}
-                        </div>
+                    <div className="flex-1 overflow-auto p-4 space-y-6">
+                        {sourceUnitNames.map((sourceName) => (
+                            <div key={sourceName}>
+                                {isCombinedUnit && <h3 className="text-blockcaps-s text-skarsnikGreen/70 mb-3">{sourceName}</h3>}
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+                                    {groupedInstances[sourceName].map((instance, idx) => (
+                                        <CasualtyCard key={instance.instanceId} instance={instance} modelProfile={getModelProfile(instance)} wargear={unit.wargear} displayIndex={idx + 1} isDead={deadModelIds.includes(instance.instanceId)} onToggle={handleToggle} />
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
                     </div>
 
                     <div className="p-4 border-t border-skarsnikGreen/30">

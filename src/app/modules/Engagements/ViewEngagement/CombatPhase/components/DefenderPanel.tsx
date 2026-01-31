@@ -1,91 +1,90 @@
 import React, { useMemo } from "react";
 
-import type { EngagementForce, EngagementForceItem, EngagementForceItemCombatState } from "#types/Engagements";
+import type { EngagementForce, EngagementForceItemCombatState } from "#types/Engagements";
 import type { WeaponProfile, Model, GamePhase } from "#types/index";
 
-import { type CombinedUnitItem, getCombinedModels, hasPrecisionAttribute } from "../utils/combatUtils";
+import { type UnitSelectItem, hasPrecisionAttribute } from "../utils/combatUtils";
 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown";
 import SplitHeading from "#components/SplitHeading/SplitHeading";
 import ModelProfileCard from "#components/ModelProfileCard/ModelProfileCard";
 import CombatStatusPanel from "./CombatStatusPanel";
-import BaseIcon from "#components/icons/BaseIcon";
-import IconSkull from "#components/icons/IconSkull";
 
 interface DefenderPanelProps {
     gamePhase: GamePhase;
     force: EngagementForce;
-    combinedItems: CombinedUnitItem[];
-    selectedCombined: CombinedUnitItem | undefined;
-    onUnitChange: (combined: CombinedUnitItem) => void;
+    unitItems: UnitSelectItem[];
+    selectedUnit: UnitSelectItem | undefined;
+    onUnitChange: (unit: UnitSelectItem) => void;
     selectedModel: Model | null;
     onModelChange: (model: Model | null) => void;
     selectedWeaponProfile: WeaponProfile | null;
-    modelCount: number;
-    startingStrength: number;
-    onModelCountChange: (count: number) => void;
     onCombatStatusChange: (updates: Partial<EngagementForceItemCombatState>) => void;
 }
 
-export function DefenderPanel({ gamePhase, force, combinedItems, selectedCombined, onUnitChange, selectedModel, onModelChange, selectedWeaponProfile, modelCount, startingStrength, onModelCountChange, onCombatStatusChange }: DefenderPanelProps) {
-    // Convert combined items to dropdown options
-    const unitOptions = useMemo((): DropdownOption<CombinedUnitItem>[] => {
-        return combinedItems.map((combined) => ({
-            id: combined.item.listItemId,
-            label: combined.displayName,
-            data: combined,
+export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedModel, onModelChange, selectedWeaponProfile, onCombatStatusChange }: DefenderPanelProps) {
+    // Convert unit items to dropdown options
+    const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
+        return unitItems.map((unit) => ({
+            id: unit.item.listItemId,
+            label: unit.displayName,
+            data: unit,
         }));
-    }, [combinedItems]);
+    }, [unitItems]);
 
     // Get available models for the selected unit
     const availableModels = useMemo(() => {
-        if (!selectedCombined) return [];
-        return getCombinedModels(selectedCombined);
-    }, [selectedCombined]);
+        if (!selectedUnit) return [];
+        return selectedUnit.item.models || [];
+    }, [selectedUnit]);
 
     // Check if weapon has precision attribute
     const hasPrecision = hasPrecisionAttribute(selectedWeaponProfile);
 
-    const handleUnitSelect = (combined: CombinedUnitItem) => {
-        onUnitChange(combined);
+    const handleUnitSelect = (unit: UnitSelectItem) => {
+        onUnitChange(unit);
     };
 
-    const combatState = selectedCombined?.item.combatState;
+    const combatState = selectedUnit?.item.combatState;
+    const startingStrength = selectedUnit?.item.modelInstances?.length || 0;
+
+    // Determine which models are leaders (for PRECISION targeting)
+    const leaderSourceNames = useMemo(() => {
+        if (!selectedUnit?.item.sourceUnits) return new Set<string>();
+        return new Set(selectedUnit.item.sourceUnits.filter((s) => s.isLeader).map((s) => s.name));
+    }, [selectedUnit]);
 
     return (
-        <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded  overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
+        <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
             <Dropdown
                 options={unitOptions}
-                selectedLabel={selectedCombined?.displayName}
+                selectedLabel={selectedUnit?.displayName}
                 placeholder="Select defending unit..."
                 searchable
                 searchPlaceholder="Search units..."
                 emptyMessage="No units found"
                 onSelect={handleUnitSelect}
-                renderOption={(combined) => <span className="text-blockcaps-m">{combined.displayName}</span>}
+                renderOption={(unit) => <span className="text-blockcaps-m">{unit.displayName}</span>}
                 triggerClassName="grow-1 rounded-l-none border-l-0"
             />
 
-            {combatState && <CombatStatusPanel side="defender" combatState={combatState} modelCount={modelCount} startingStrength={startingStrength} onModelCountChange={onModelCountChange} onCombatStatusChange={onCombatStatusChange} unit={selectedCombined.item} />}
+            {combatState && selectedUnit && <CombatStatusPanel side="defender" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
 
-            {selectedCombined ? (
+            {selectedUnit ? (
                 <div className="space-y-4">
                     <SplitHeading label="Select target model" />
 
                     <div className="space-y-2">
-                        {availableModels.map((model) => {
-                            const modelWithSource = model as Model & {
-                                sourceUnit?: string;
-                                isLeader?: boolean;
-                            };
+                        {availableModels.map((model, idx) => {
                             const isSelected = selectedModel?.name === model.name;
-                            const modelKey = modelWithSource.sourceUnit ? `${modelWithSource.sourceUnit}-${model.name}` : model.name;
 
-                            // Leader models are disabled unless weapon has PRECISION
-                            const isLeaderModel = modelWithSource.isLeader === true;
+                            // For combined units, check if this model belongs to a leader unit
+                            // by checking if any modelInstance with this model's line is from a leader
+                            const modelInstance = selectedUnit.item.modelInstances?.find((m) => m.modelTypeLine === idx);
+                            const isLeaderModel = modelInstance?.sourceUnitName ? leaderSourceNames.has(modelInstance.sourceUnitName) : false;
                             const isDisabled = isLeaderModel && !hasPrecision;
 
-                            return <ModelProfileCard key={modelKey} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
+                            return <ModelProfileCard key={`${model.name}-${idx}`} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
                         })}
                     </div>
 

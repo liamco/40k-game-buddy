@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 
-import type { Engagement, EngagementType, EngagementSize, EngagementPhase, EngagementForce, EngagementForceItem, EngagementForceItemCombatState, ArmyList, ArmyListItem } from "../../types";
+import type { Engagement, EngagementType, EngagementSize, EngagementPhase, EngagementForce, EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance, EngagementWargear, SourceUnit, ArmyList, ArmyListItem } from "../../types";
 import { resolveUnitWargear } from "../Lists/ListManagerContext";
 
 const STORAGE_KEY = "battle-cogitator-engagements";
@@ -73,17 +73,145 @@ export function getUnitStrengthLabel(strength: EngagementForceItemCombatState["u
     }
 }
 
+// Create a single (non-combined) engagement item
+function createSingleEngagementItem(item: ArmyListItem): EngagementForceItem {
+    const { availableWargear, modelInstances, ...rest } = item;
+
+    // Tag model instances with source unit name (for consistency)
+    const taggedInstances: EngagementModelInstance[] = (modelInstances || []).map((m) => ({
+        ...m,
+        sourceUnitName: item.name,
+    }));
+
+    // Tag wargear with source unit name
+    const taggedWargear: EngagementWargear[] = resolveUnitWargear(item).map((w) => ({
+        ...w,
+        sourceUnitName: item.name,
+    }));
+
+    return {
+        ...rest,
+        modelInstances: taggedInstances,
+        wargear: taggedWargear,
+        combatState: createDefaultCombatState(item),
+    };
+}
+
+// Merge leader(s) + bodyguard into a single engagement item
+function mergeUnitsForEngagement(leaders: ArmyListItem[], bodyguard: ArmyListItem): EngagementForceItem {
+    // Build sourceUnits array to track original units
+    const sourceUnits: SourceUnit[] = [
+        ...leaders.map((l) => ({
+            listItemId: l.listItemId,
+            datasheetId: l.id,
+            name: l.name,
+            isLeader: true,
+        })),
+        {
+            listItemId: bodyguard.listItemId,
+            datasheetId: bodyguard.id,
+            name: bodyguard.name,
+            isLeader: false,
+        },
+    ];
+
+    // Merge model instances with source tagging
+    const modelInstances: EngagementModelInstance[] = [
+        ...leaders.flatMap((l) =>
+            (l.modelInstances || []).map((m) => ({
+                ...m,
+                sourceUnitName: l.name,
+            }))
+        ),
+        ...(bodyguard.modelInstances || []).map((m) => ({
+            ...m,
+            sourceUnitName: bodyguard.name,
+        })),
+    ];
+
+    // Merge wargear with source tagging
+    const wargear: EngagementWargear[] = [
+        ...leaders.flatMap((l) =>
+            resolveUnitWargear(l).map((w) => ({
+                ...w,
+                sourceUnitName: l.name,
+            }))
+        ),
+        ...resolveUnitWargear(bodyguard).map((w) => ({
+            ...w,
+            sourceUnitName: bodyguard.name,
+        })),
+    ];
+
+    // Merge model profiles
+    const models = [...leaders.flatMap((l) => l.models || []), ...(bodyguard.models || [])];
+
+    // Build display name
+    const leaderNames = leaders.map((l) => l.name).join(" + ");
+    const displayName = `${leaderNames} + ${bodyguard.name}`;
+
+    // Use first leader as base, but override with merged data
+    const { availableWargear, modelInstances: _, ...baseItem } = leaders[0];
+
+    // Create a temporary item for combat state calculation
+    const tempItem = { ...baseItem, modelInstances } as ArmyListItem;
+
+    return {
+        ...baseItem,
+        name: displayName,
+        modelInstances,
+        models,
+        wargear,
+        sourceUnits,
+        combatState: createDefaultCombatState(tempItem),
+    };
+}
+
 // Convert an ArmyList to an EngagementForce (snapshot with combat state)
 function createEngagementForce(list: ArmyList): EngagementForce {
-    const items: EngagementForceItem[] = list.items.map((item) => {
-        // Destructure to remove availableWargear, keep everything else
-        const { availableWargear, ...rest } = item;
+    const items: EngagementForceItem[] = [];
+    const processedIds = new Set<string>();
 
-        return {
-            ...rest,
-            wargear: resolveUnitWargear(item),
-            combatState: createDefaultCombatState(item),
-        };
+    // First pass: Find bodyguard units with leaders and merge them
+    list.items.forEach((item) => {
+        if (processedIds.has(item.listItemId)) return;
+
+        // Check if this is a bodyguard unit with leaders attached
+        if (item.leadBy && item.leadBy.length > 0) {
+            // Find all leaders for this unit
+            const leaders = item.leadBy.map((ref) => list.items.find((l) => l.id === ref.id && l.name === ref.name)).filter((l): l is ArmyListItem => l !== undefined && !processedIds.has(l.listItemId));
+
+            if (leaders.length > 0) {
+                // Sort leaders alphabetically for consistent display
+                leaders.sort((a, b) => a.name.localeCompare(b.name));
+
+                // Merge into single item
+                items.push(mergeUnitsForEngagement(leaders, item));
+
+                // Mark all as processed
+                processedIds.add(item.listItemId);
+                leaders.forEach((l) => processedIds.add(l.listItemId));
+            }
+        }
+    });
+
+    // Second pass: Add unattached leaders
+    list.items.forEach((item) => {
+        if (processedIds.has(item.listItemId)) return;
+
+        if (item.leading) {
+            // Leader without bodyguard found in first pass
+            items.push(createSingleEngagementItem(item));
+            processedIds.add(item.listItemId);
+        }
+    });
+
+    // Third pass: Add remaining regular units
+    list.items.forEach((item) => {
+        if (processedIds.has(item.listItemId)) return;
+
+        items.push(createSingleEngagementItem(item));
+        processedIds.add(item.listItemId);
     });
 
     return {

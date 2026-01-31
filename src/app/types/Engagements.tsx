@@ -1,5 +1,29 @@
-import { ArmyListItem } from "./Lists";
+import { ArmyListItem, ModelInstance } from "./Lists";
 import { Weapon } from "./Weapons";
+
+/**
+ * Tracks the source unit for combined units (leader + bodyguard merged)
+ */
+export interface SourceUnit {
+    listItemId: string;
+    datasheetId: string;
+    name: string;
+    isLeader: boolean;
+}
+
+/**
+ * Extended model instance with source unit tagging for combined units
+ */
+export interface EngagementModelInstance extends ModelInstance {
+    sourceUnitName?: string;
+}
+
+/**
+ * Extended weapon with source unit tagging for combined units
+ */
+export type EngagementWargear = Weapon & {
+    sourceUnitName?: string;
+};
 
 export type EngagementType = "boarding-actions" | "wh-40k";
 export type EngagementSize = "combat-patrol" | "incursion" | "strike-force" | "onslaught";
@@ -35,9 +59,12 @@ export interface EngagementForce {
     items: EngagementForceItem[];
 }
 
-export type EngagementForceItem = Omit<ArmyListItem, "availableWargear"> & {
-    wargear: Weapon[];
+export type EngagementForceItem = Omit<ArmyListItem, "availableWargear" | "modelInstances"> & {
+    wargear: EngagementWargear[];
+    modelInstances?: EngagementModelInstance[];
     combatState: EngagementForceItemCombatState;
+    /** For combined units: tracks the original source units (leaders + bodyguard) */
+    sourceUnits?: SourceUnit[];
 };
 
 export interface EngagementForceItemCombatState {

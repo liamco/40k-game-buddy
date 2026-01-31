@@ -3,8 +3,7 @@ import { Plus, Minus } from "lucide-react";
 
 import { Button } from "#components/Button/Button.tsx";
 import Dropdown from "#components/Dropdown/Dropdown.tsx";
-import type { EngagementForceItem, EngagementForceItemCombatState } from "#types/Engagements";
-import type { ModelInstance } from "#types/Lists.tsx";
+import type { EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance } from "#types/Engagements";
 import { calculateUnitStrength, getUnitStrengthLabel } from "../../../EngagementManagerContext";
 
 import CombatStatusToken from "./CombatStatusToken/CombatStatusToken";
@@ -65,7 +64,7 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
         const instances = unit.modelInstances || [];
         const deadIds = combatState.deadModelIds || [];
         if (deadIds.length >= instances.length) return;
-        const aliveModels = instances.filter((m: ModelInstance) => !deadIds.includes(m.instanceId));
+        const aliveModels = instances.filter((m: EngagementModelInstance) => !deadIds.includes(m.instanceId));
         const lastAliveModel = aliveModels[aliveModels.length - 1];
         if (lastAliveModel) {
             handleCasualtyChange([...deadIds, lastAliveModel.instanceId]);
@@ -114,8 +113,8 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
                     </div>
                 </div>
 
-                <ul className={`inline-grid gap-1`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))` }}>
-                    {unit.modelInstances.map((m: ModelInstance, idx: string) => (
+                <ul className={`inline-grid gap-1`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
+                    {unit.modelInstances.map((m: EngagementModelInstance, idx: number) => (
                         <li className={`${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
                             <BaseIcon key={idx} size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
                                 <IconSkull />

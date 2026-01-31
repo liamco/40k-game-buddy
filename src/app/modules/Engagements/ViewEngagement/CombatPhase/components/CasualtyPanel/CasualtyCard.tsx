@@ -1,6 +1,5 @@
-import { ModelInstance } from "#types/Lists.tsx";
+import { EngagementModelInstance, EngagementWargear } from "#types/Engagements.tsx";
 import { Model } from "#types/Models.tsx";
-import { Weapon } from "#types/Weapons.tsx";
 
 import strikethrough from "#assets/StrikethroughRed.svg";
 import { Badge } from "#components/Badge/Badge.tsx";
@@ -9,16 +8,16 @@ import IconSkull from "#components/icons/IconSkull.tsx";
 import { Fragment } from "react/jsx-runtime";
 
 interface CasualtyCardProps {
-    instance: ModelInstance;
+    instance: EngagementModelInstance;
     modelProfile: Model;
-    wargear: Weapon[];
+    wargear: EngagementWargear[];
     displayIndex: number;
     isDead: boolean;
     onToggle: (instanceId: string) => void;
 }
 
 export function CasualtyCard({ instance, modelProfile, wargear, displayIndex, isDead, onToggle }: CasualtyCardProps) {
-    const weapons = instance.loadout.map((id) => wargear.find((w) => w.id === id)).filter((w): w is Weapon => w !== undefined);
+    const weapons = instance.loadout.map((id) => wargear.find((w) => w.id === id)).filter((w): w is EngagementWargear => w !== undefined);
 
     return (
         <div className={`relative rounded p-3 border-1 transition-colors cursor-pointer ${isDead ? "border-wildRiderRed/50 bg-wordBearersRed/20 text-wildRiderRed/50" : "border-skarsnikGreen bg-transparent text-skarsnikGreen"}`} onClick={() => onToggle(instance.instanceId)}>
