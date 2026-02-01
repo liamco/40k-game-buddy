@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Model } from "#types/Models.tsx";
+import type { Ability } from "#types/Units.tsx";
 
 import { Badge } from "#components/Badge/Badge.tsx";
 
@@ -12,13 +13,21 @@ import IconSkull from "#components/icons/IconSkull.tsx";
 
 interface Props {
     model: Model & { sourceUnit?: string; isLeader?: boolean };
+    abilities?: Ability[];
     isDisabled?: boolean;
     isDestroyed?: boolean;
     isSelected?: boolean;
     onUnitModelChange?: (profile: Model | null) => void;
 }
 
-const ModelProfileCard = ({ model, isDisabled, isSelected, isDestroyed, onUnitModelChange }: Props) => {
+const formatAbility = (ability: Ability): string => {
+    if (!ability.parameter) return ability.name;
+    // Add + suffix for numeric parameters (save-like values)
+    const isNumeric = /^\d+$/.test(ability.parameter);
+    return isNumeric ? `${ability.name} ${ability.parameter}+` : `${ability.name} ${ability.parameter}`;
+};
+
+const ModelProfileCard = ({ model, abilities, isDisabled, isSelected, isDestroyed, onUnitModelChange }: Props) => {
     const resolveStyles = () => {
         if (isDestroyed) {
             return "bg-wordBearersRed shadow-none border-wildRiderRed  text-wildRiderRed";
@@ -46,6 +55,18 @@ const ModelProfileCard = ({ model, isDisabled, isSelected, isDestroyed, onUnitMo
                     <p>{model.name}</p>
                     {model.isLeader && <Badge variant="outline">Leader</Badge>}
                 </div>
+
+                {abilities && abilities.filter((a) => (a.type === "Core" || a.type === "Datasheet") && a.name.toUpperCase() !== "LEADER").length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                        {abilities
+                            .filter((a) => (a.type === "Core" || a.type === "Datasheet") && a.name.toUpperCase() !== "LEADER")
+                            .map((ability) => (
+                                <Badge key={ability.name} variant={isSelected ? "secondaryAlt" : "outlineAlt"}>
+                                    {formatAbility(ability)}
+                                </Badge>
+                            ))}
+                    </div>
+                )}
 
                 <div className="grid grid-cols-6 gap-2 text-center">
                     <p>M</p>

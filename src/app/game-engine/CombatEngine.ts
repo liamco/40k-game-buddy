@@ -11,6 +11,7 @@ import { createEffectSource } from "./types/EffectSource";
 import type { StepModifiers, CombatResolution, AttackStepType, AttributedModifier, SpecialEffect } from "./types/ModifierResult";
 import { createEmptyStepModifiers } from "./types/ModifierResult";
 import { extractWeaponMechanics } from "./weaponAttributes";
+import { extractAbilityMechanics } from "./abilityMechanics";
 
 /**
  * A mechanic paired with its source for attribution
@@ -162,10 +163,38 @@ export class CombatEngine {
             }
         }
 
-        // Future: Unit abilities, leader abilities, stratagems, etc.
-        // this.collectFromUnitAbilities();
+        // Unit abilities (STEALTH, FEEL NO PAIN, etc.)
+        this.collectFromUnitAbilities();
+
+        // Future: Leader abilities, stratagems, etc.
         // this.collectFromLeaderAbilities();
         // this.collectFromStratagems();
+    }
+
+    /**
+     * Collect mechanics from attacker and defender unit abilities
+     */
+    private collectFromUnitAbilities(): void {
+        const attackerUnit = this.context.attacker.unit;
+        const defenderUnit = this.context.defender.unit;
+
+        // Attacker abilities (affect attacks made by this unit)
+        const attackerMechanics = extractAbilityMechanics(attackerUnit.abilities, attackerUnit.name, "unitAbility");
+
+        for (const { mechanic, source, appliesTo } of attackerMechanics) {
+            if (appliesTo === "attacksMade") {
+                this.collectedMechanics.push({ mechanic, source });
+            }
+        }
+
+        // Defender abilities (affect attacks received by this unit)
+        const defenderMechanics = extractAbilityMechanics(defenderUnit.abilities, defenderUnit.name, "unitAbility");
+
+        for (const { mechanic, source, appliesTo } of defenderMechanics) {
+            if (appliesTo === "attacksAgainst") {
+                this.collectedMechanics.push({ mechanic, source });
+            }
+        }
     }
 
     /**
@@ -361,6 +390,13 @@ export class CombatEngine {
                 return combatState.unitStrength === "belowStarting" || combatState.unitStrength === "belowHalf";
             case "isDamaged":
                 return combatState.isDamaged ?? false;
+            // Phase-based conditions (check context, not unit state)
+            case "isRangedPhase":
+            case "isShootingPhase":
+                return this.context.phase === "shooting";
+            case "isMeleePhase":
+            case "isFightPhase":
+                return this.context.phase === "fight";
             default:
                 return false;
         }

@@ -94,6 +94,15 @@ function resolveCombat(context) {
         hitModifierSources.push({ name: "HEAVY", value: 1 });
     }
 
+    // STEALTH penalty on defender (ranged attacks only)
+    const phase = context.phase || "shooting";
+    const defenderAbilities = defender.unit?.abilities || [];
+    const hasStealth = defenderAbilities.some((a) => a.name?.toUpperCase() === "STEALTH" && a.type === "Core");
+    if (hasStealth && phase === "shooting") {
+        hitModifier -= 1; // -1 to hit (penalty)
+        hitModifierSources.push({ name: "Stealth", value: -1 });
+    }
+
     // Save modifiers
     let saveModifier = 0;
     const saveModifierSources = [];
@@ -192,6 +201,7 @@ function createMockUnit(datasheet, options = {}) {
         id: datasheet.id,
         name: datasheet.name,
         keywords: datasheet.keywords,
+        abilities: options.abilities || datasheet.abilities || [],
         combatState: {
             movementBehaviour: options.movement || "hold",
             isInCover: options.inCover || false,
@@ -693,6 +703,99 @@ function runAllTests() {
             },
             {
                 finalToWound: 6,
+            }
+        );
+        test ? passed++ : failed++;
+    }
+
+    // -------------------------------------------------------------------------
+    // Test 13: STEALTH in shooting phase (-1 to hit)
+    // -------------------------------------------------------------------------
+    {
+        const weapon = { name: "Bolt Rifle", a: 2, bsWs: 3, s: 4, ap: -1, d: 1, attributes: [] };
+        const test = runTest(
+            "STEALTH in shooting phase (-1 to hit)",
+            {
+                phase: "shooting",
+                attacker: {
+                    unit: { name: "Space Marine", keywords: [], abilities: [], combatState: { movementBehaviour: "hold" } },
+                    weaponProfile: weapon,
+                },
+                defender: {
+                    unit: {
+                        name: "Stealth Unit",
+                        keywords: [],
+                        abilities: [{ name: "Stealth", type: "Core" }],
+                        combatState: {},
+                    },
+                    targetModel: { t: 4, sv: 4, invSv: null },
+                    modelCount: 5,
+                },
+            },
+            {
+                finalToHit: 4, // BS 3+ with -1 from Stealth = 4+
+            }
+        );
+        test ? passed++ : failed++;
+    }
+
+    // -------------------------------------------------------------------------
+    // Test 14: STEALTH in melee phase (no effect)
+    // -------------------------------------------------------------------------
+    {
+        const weapon = { name: "Chainsword", a: 4, bsWs: 3, s: 4, ap: 0, d: 1, attributes: [] };
+        const test = runTest(
+            "STEALTH in melee phase (no effect)",
+            {
+                phase: "fight",
+                attacker: {
+                    unit: { name: "Space Marine", keywords: [], abilities: [], combatState: { movementBehaviour: "hold" } },
+                    weaponProfile: weapon,
+                },
+                defender: {
+                    unit: {
+                        name: "Stealth Unit",
+                        keywords: [],
+                        abilities: [{ name: "Stealth", type: "Core" }],
+                        combatState: {},
+                    },
+                    targetModel: { t: 4, sv: 4, invSv: null },
+                    modelCount: 5,
+                },
+            },
+            {
+                finalToHit: 3, // WS 3+ (Stealth doesn't apply in melee)
+            }
+        );
+        test ? passed++ : failed++;
+    }
+
+    // -------------------------------------------------------------------------
+    // Test 15: STEALTH + HEAVY (both apply in shooting)
+    // -------------------------------------------------------------------------
+    {
+        const weapon = { name: "Heavy Bolter", a: 3, bsWs: 4, s: 5, ap: -1, d: 2, attributes: ["HEAVY"] };
+        const test = runTest(
+            "STEALTH + HEAVY combined (net 0 modifier)",
+            {
+                phase: "shooting",
+                attacker: {
+                    unit: { name: "Space Marine", keywords: [], abilities: [], combatState: { movementBehaviour: "hold" } },
+                    weaponProfile: weapon,
+                },
+                defender: {
+                    unit: {
+                        name: "Stealth Unit",
+                        keywords: [],
+                        abilities: [{ name: "Stealth", type: "Core" }],
+                        combatState: {},
+                    },
+                    targetModel: { t: 4, sv: 4, invSv: null },
+                    modelCount: 5,
+                },
+            },
+            {
+                finalToHit: 4, // BS 4+ with +1 HEAVY and -1 Stealth = 4+
             }
         );
         test ? passed++ : failed++;

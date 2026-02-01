@@ -58,7 +58,7 @@ const OverviewTab = ({ unit, list }: Props) => {
             {unit.models && unit.models.length > 0 && (
                 <div className="space-y-3">
                     {unit.models.map((model, idx) => (
-                        <ModelProfileCard key={idx} model={model} />
+                        <ModelProfileCard key={idx} model={model} abilities={unit.abilities} />
                     ))}
                 </div>
             )}
