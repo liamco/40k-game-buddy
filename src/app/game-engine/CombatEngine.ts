@@ -59,6 +59,10 @@ export class CombatEngine {
         const finalToWound = this.computeFinalToWound(baseValues.toWound, woundMods);
         const { finalSave, useInvuln } = this.computeFinalSave(baseValues.armorSave, baseValues.invulnSave, baseValues.ap, saveMods);
 
+        // 5. Compute critical thresholds
+        const { criticalHitThreshold } = this.computeCriticalHitThreshold();
+        const { criticalWoundThreshold, criticalWoundSource } = this.computeCriticalWoundThreshold();
+
         return {
             baseAttacks: baseValues.attacks,
             baseToHit: baseValues.toHit,
@@ -84,6 +88,10 @@ export class CombatEngine {
             finalSave,
             useInvuln,
             finalFnp: baseValues.fnp,
+
+            criticalHitThreshold,
+            criticalWoundThreshold,
+            criticalWoundSource,
 
             weaponEffects: this.weaponEffects,
         };
@@ -378,7 +386,14 @@ export class CombatEngine {
     private getUnitKeywords(entity: Entity): string[] {
         const unit = this.resolveEntityToUnit(entity);
         if (!unit) return [];
-        return (unit.keywords || []).map((k: string) => k.toUpperCase());
+
+        const keywords = unit.keywords || [];
+
+        // Keywords can be either strings or objects with a 'keyword' property
+        return keywords.map((k: string | { keyword: string }) => {
+            const keyword = typeof k === "string" ? k : k.keyword;
+            return keyword.toUpperCase();
+        });
     }
 
     /**
@@ -442,6 +457,51 @@ export class CombatEngine {
         }
 
         return { finalSave: modifiedArmor, useInvuln: false };
+    }
+
+    /**
+     * Compute critical hit threshold (normally 6)
+     * Can be lowered by abilities like "Critical Hit on 5+"
+     */
+    private computeCriticalHitThreshold(): { criticalHitThreshold: number } {
+        // Default critical hit threshold is 6
+        // Future: check for abilities that modify this
+        return { criticalHitThreshold: 6 };
+    }
+
+    /**
+     * Compute critical wound threshold (normally 6)
+     * Can be lowered by ANTI-X abilities when target has matching keyword
+     */
+    private computeCriticalWoundThreshold(): { criticalWoundThreshold: number; criticalWoundSource?: string } {
+        // Default critical wound threshold is 6
+        let threshold = 6;
+        let source: string | undefined;
+
+        // Check for ANTI-X effects
+        const defenderKeywords = this.getUnitKeywords("targetUnit");
+
+        for (const effect of this.weaponEffects) {
+            if (effect.type === "antiKeyword" && typeof effect.value === "string") {
+                // Parse "KEYWORD X+" format from value
+                const match = effect.value.match(/^(.+)\s+(\d)\+$/);
+                if (match) {
+                    const keyword = match[1].toUpperCase();
+                    const antiThreshold = parseInt(match[2], 10);
+
+                    // Check if defender has the keyword
+                    if (defenderKeywords.includes(keyword)) {
+                        // Use the lowest threshold if multiple ANTI-X apply
+                        if (antiThreshold < threshold) {
+                            threshold = antiThreshold;
+                            source = `ANTI-${keyword} ${antiThreshold}+`;
+                        }
+                    }
+                }
+            }
+        }
+
+        return { criticalWoundThreshold: threshold, criticalWoundSource: source };
     }
 }
 

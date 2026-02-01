@@ -136,6 +136,7 @@ interface CombatResolution {
 | TORRENT | Auto-hit detection, displays "Auto" |
 | PRECISION | Allows targeting of leaders in combined units |
 | IGNORES COVER | Parsed | Cover bonuses for defenders |
+| ANTI-X Y | Parsed | Critical wounds on Y when targeting units with keyword X |
 
 ### Groundwork Laid - Conditions Need to be Met
 

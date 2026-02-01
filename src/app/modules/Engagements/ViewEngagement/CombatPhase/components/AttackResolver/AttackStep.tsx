@@ -39,9 +39,10 @@ interface Props {
     finalValue: string;
     finalClassName?: string;
     disabled?: boolean;
+    isCritical?: boolean;
 }
 
-const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties, finalValue, finalClassName, disabled }: Props) => {
+const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties, finalValue, finalClassName, disabled, isCritical }: Props) => {
     const Icon = stepType ? stepIcons[stepType] : null;
 
     return (
@@ -80,7 +81,7 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
                             </div>
                         )}
                     </div>
-                    <FinalResultBox className={finalClassName} value={finalValue} />
+                    <FinalResultBox className={finalClassName} value={finalValue} isCritical={isCritical} />
                 </div>
             </div>
 

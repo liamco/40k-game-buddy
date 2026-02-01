@@ -63,6 +63,24 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
         return { finalValue: `${resolution.finalSave}+${invulnMarker}` };
     }, [resolution]);
 
+    // Format wound display with critical threshold
+    // If critical threshold is lower than the normal wound roll, display the critical value instead
+    const woundDisplay = useMemo(() => {
+        if (!resolution) return { finalValue: "-", isCritical: false };
+
+        const normalWound = resolution.finalToWound;
+        const criticalThreshold = resolution.criticalWoundThreshold;
+
+        // Use critical threshold if it's lower than the normal wound roll
+        const useCritical = criticalThreshold < normalWound;
+        const displayValue = useCritical ? criticalThreshold : normalWound;
+
+        return {
+            finalValue: `${displayValue}+`,
+            isCritical: useCritical,
+        };
+    }, [resolution]);
+
     return (
         <section className="grid grid-rows-5 rounded overflow-auto h-[calc(100vh-161.5px)]">
             {resolution ? (
@@ -76,7 +94,8 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
                         statValue=""
                         bonuses={resolution.woundModifiers.forDisplay.bonuses}
                         penalties={resolution.woundModifiers.forDisplay.penalties}
-                        finalValue={`${resolution.finalToWound}+`}
+                        finalValue={woundDisplay.finalValue}
+                        isCritical={woundDisplay.isCritical}
                     />
                     <AttackStep
                         stepType="saveChance"

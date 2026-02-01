@@ -1,14 +1,23 @@
 import React from "react";
 
+import BaseIcon from "#components/icons/BaseIcon";
+import IconSkull from "#components/icons/IconSkull";
+
 interface Props {
     className?: string;
     value: string;
+    isCritical?: boolean;
 }
 
-const FinalResultBox = ({ className = "bg-fireDragonBright text-mournfangBrown", value }: Props) => {
+const FinalResultBox = ({ className = "bg-fireDragonBright text-mournfangBrown", value, isCritical }: Props) => {
     return (
-        <div className={`${className} h-full bg-fireDragonBright text-mournfangBrown rounded px-4 flex items-center justify-center`}>
-            <figure className={`text-title-m`}>{value}</figure>
+        <div className={`${className} h-full bg-fireDragonBright text-mournfangBrown rounded px-4 flex items-center justify-center gap-1`}>
+            <figure className="text-title-l">{value}</figure>
+            {isCritical && (
+                <BaseIcon color="mournfangBrown" size="large">
+                    <IconSkull />
+                </BaseIcon>
+            )}
         </div>
     );
 };

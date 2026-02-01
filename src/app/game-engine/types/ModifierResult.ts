@@ -21,23 +21,7 @@ export interface AttributedModifier {
 /**
  * Special effects that aren't simple numeric modifiers
  */
-export type SpecialEffectType =
-    | "autoSuccess"
-    | "reroll"
-    | "lethalHits"
-    | "sustainedHits"
-    | "devastatingWounds"
-    | "ignoresCover"
-    | "precision"
-    | "lance"
-    | "assault"
-    | "heavy"
-    | "rapidFire"
-    | "melta"
-    | "hazardous"
-    | "blast"
-    | "indirect"
-    | "antiKeyword";
+export type SpecialEffectType = "autoSuccess" | "reroll" | "lethalHits" | "sustainedHits" | "devastatingWounds" | "ignoresCover" | "precision" | "lance" | "assault" | "heavy" | "rapidFire" | "melta" | "hazardous" | "blast" | "indirect" | "antiKeyword";
 
 export interface SpecialEffect {
     type: SpecialEffectType;
@@ -125,6 +109,11 @@ export interface CombatResolution {
     finalSave: number;
     useInvuln: boolean;
     finalFnp: number | null;
+
+    // Critical thresholds (normally 6, can be modified by abilities)
+    criticalHitThreshold: number;
+    criticalWoundThreshold: number;
+    criticalWoundSource?: string; // e.g., "ANTI-VEHICLE 4+"
 
     // All weapon special effects (for display)
     weaponEffects: SpecialEffect[];

@@ -7,6 +7,7 @@ enum Colors {
     "default" = "fill-skarsnikGreen",
     "deathWorldForest" = "fill-deathWorldForest",
     "fireDragonBright" = "fill-fireDragonBright",
+    "mournfangBrown" = "fill-mournfangBrown",
     "wildRiderRed" = "fill-wildRiderRed",
     "skarsnikGreen" = "fill-skarsnikGreen",
 }
