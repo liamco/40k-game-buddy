@@ -3,7 +3,7 @@
   "name": "Lieutenant In Phobos Armour",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Highly capable combat commanders, Lieutenants can lead independent reconnaissance, sabotage and assassination forces far beyond Imperial lines. They are deadly warriors, and the last sensation of countless foes has been the cold press of a Space Marine Lieutenant’s knife to their neck.",
+  "legend": "Highly capable combat commanders, Lieutenants can lead independent reconnaissance, sabotage and assassination forces far beyond Imperial lines. They are deadly warriors, and the last sensation of countless foes has been the cold press of a Space Marine Lieutenant's knife to their neck.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; master-crafted scoped bolt carbine; paired combat blades.",
   "transport": "",
@@ -45,16 +45,79 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Strategic Dispersal",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase, after this model’s unit has shot, if it is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\". If it does, until the end of the turn, that unit is not eligible to declare a charge.",
+      "description": "In your Shooting phase, after this model's unit has shot, if it is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\". If it does, until the end of the turn, that unit is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "NOT ELIGIBLE TO DECLARE A CHARGE"
+          ],
+          "value": "until the end of the turn",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -119,7 +182,55 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002530",
+      "line": 1,
+      "description": "1 Lieutenant in Phobos Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002530",
+      "line": 1,
+      "description": "1 model",
+      "cost": 55,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002806",
+      "slug": "hounds-of-morkai"
+    },
+    {
+      "id": "000002779",
+      "slug": "spectrus-kill-team-2"
+    },
+    {
+      "id": "000002718",
+      "slug": "reiver-squad"
+    },
+    {
+      "id": "000000128",
+      "slug": "infiltrator-squad"
+    },
+    {
+      "id": "000001159",
+      "slug": "incursor-squad"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002530:bolt-pistol",
       "datasheetId": "000002530",
@@ -197,54 +308,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002530",
-      "line": 1,
-      "description": "1 Lieutenant in Phobos Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002530",
-      "line": 1,
-      "description": "1 model",
-      "cost": 55,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002806",
-      "slug": "hounds-of-morkai"
-    },
-    {
-      "id": "000002779",
-      "slug": "spectrus-kill-team-2"
-    },
-    {
-      "id": "000002718",
-      "slug": "reiver-squad"
-    },
-    {
-      "id": "000000128",
-      "slug": "infiltrator-squad"
-    },
-    {
-      "id": "000001159",
-      "slug": "incursor-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
   "leaderConditions": {
     "allowedExistingLeaderKeywords": [
       "CAPTAIN",

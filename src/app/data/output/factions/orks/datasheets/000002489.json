@@ -3,7 +3,7 @@
   "name": "Beastboss",
   "factionId": "ORK",
   "sourceId": "000000046",
-  "legend": "It takes a ferocious and foul-tempered Ork to lead a stampede of Beast Snaggas. Beastbosses possess these qualities in abundance. Boasting cybork enhancements, wired-in targetin’ squigs and an array of brutal combat weaponry, these roaring monsters can bring down even the largest prey one-on-one.",
+  "legend": "It takes a ferocious and foul-tempered Ork to lead a stampede of Beast Snaggas. Beastbosses possess these qualities in abundance. Boasting cybork enhancements, wired-in targetin' squigs and an array of brutal combat weaponry, these roaring monsters can bring down even the largest prey one-on-one.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> shoota; beastchoppa; Beast Snagga klaw.",
   "transport": "",
@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -105,7 +114,37 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002489",
+      "line": 1,
+      "description": "1 Beastboss",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002489",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002494",
+      "slug": "beast-snagga-boyz"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002489:shoota",
       "datasheetId": "000002489",
@@ -186,35 +225,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002489",
-      "line": 1,
-      "description": "1 Beastboss",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002489",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002494",
-      "slug": "beast-snagga-boyz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

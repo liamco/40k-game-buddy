@@ -3,7 +3,7 @@
   "name": "Voss-pattern Lightning",
   "factionId": "AM",
   "sourceId": "000000374",
-  "legend": "Smaller and more agile than the iconic Thunderbolt, the Lightning is a high-speed suborbital fighter designed for interception, interdiction and surgical strikes. The Lightning’s hellstrike missiles, coupled with lascannons, ensure that few ground targets are safe from its swooping assaults.",
+  "legend": "Smaller and more agile than the iconic Thunderbolt, the Lightning is a high-speed suborbital fighter designed for interception, interdiction and surgical strikes. The Lightning's hellstrike missiles, coupled with lascannons, ensure that few ground targets are safe from its swooping assaults.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 lascannons; armoured hull.",
   "transport": "",
@@ -29,7 +29,16 @@
       "factionId": "",
       "description": "Each time an attack targets this model, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -95,7 +104,32 @@
       "description": "This model can be equipped with 1 Lightning hellstrike rack."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000781",
+      "line": 1,
+      "description": "1 Voss-pattern Lightning",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000781",
+      "line": 1,
+      "description": "1 model",
+      "cost": 130,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000781:lascannon",
       "datasheetId": "000000781",
@@ -169,40 +203,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000781",
-      "line": 1,
-      "description": "1 Voss-pattern Lightning",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000781",
-      "line": 1,
-      "description": "1 model",
-      "cost": 130,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

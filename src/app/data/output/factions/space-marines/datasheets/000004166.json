@@ -39,9 +39,60 @@
       "name": "Cold and Calculating",
       "legend": "",
       "factionId": "",
-      "description": "Each time a model in this model’s unit makes an attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, that attack has the [LETHAL HITS] ability. Each time a model in this model’s unit makes an attack that targets any other unit, that attack has the [SUSTAINED HITS 1] ability.",
+      "description": "Each time a model in this model's unit makes an attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, that attack has the [LETHAL HITS] ability. Each time a model in this model's unit makes an attack that targets any other unit, that attack has the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            },
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "VEHICLE"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS 1"
+          ],
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [],
+              "operator": "notIncludes",
+              "value": "MONSTER"
+            },
+            {
+              "entity": "targetUnit",
+              "keywords": [],
+              "operator": "notIncludes",
+              "value": "VEHICLE"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +101,18 @@
       "factionId": "",
       "description": "<ul><li>At the start of the Declare Battle Formations step, you can select one Adeptus Astartes Infantry unit from your army. Until the end of the battle, that unit gains the Scouts 6\" ability.</li><li>After both players have deployed their armies, you can select one <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit from your army and redeploy it. When doing so, you can set that unit up in Strategic Reserves if you wish, regardless of how many units are already in Strategic Reserves.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -127,78 +189,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000004166:storm-bolter",
-      "datasheetId": "000004166",
-      "line": 1,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004166",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004166:axiom",
-      "datasheetId": "000004166",
-      "line": 2,
-      "name": "Axiom",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004166",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Axiom – strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000004166",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Axiom – sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 10,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004166",
       "line": 1,
-      "description": "1 Caanok Var – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Caanok Var - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -253,5 +248,72 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000004166:storm-bolter",
+      "datasheetId": "000004166",
+      "line": 1,
+      "name": "Storm bolter",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000004166",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Storm bolter",
+          "attributes": [
+            "RAPID FIRE 2"
+          ],
+          "range": 24,
+          "type": "Ranged",
+          "a": 2,
+          "bsWs": 2,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000004166:axiom",
+      "datasheetId": "000004166",
+      "line": 2,
+      "name": "Axiom",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000004166",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Axiom - strike",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 5,
+          "bsWs": 2,
+          "s": 8,
+          "ap": -2,
+          "d": 2
+        },
+        {
+          "datasheetId": "000004166",
+          "line": 3,
+          "lineInWargear": 2,
+          "dice": "",
+          "name": "Axiom - sweep",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 10,
+          "bsWs": 2,
+          "s": 5,
+          "ap": -2,
+          "d": 1
+        }
+      ]
+    }
+  ]
 }

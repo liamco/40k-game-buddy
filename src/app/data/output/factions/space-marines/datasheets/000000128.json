@@ -32,25 +32,89 @@
       "factionId": "",
       "description": "Enemy units that are set up on the battlefield from Reserves cannot be set up within 12\" of this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opponentArmy",
+          "effect": "rollPenalty",
+          "attribute": "m",
+          "value": 12,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Helix Gauntlet",
       "legend": "",
       "factionId": "",
-      "description": "Models in the bearer’s unit have the Feel No Pain 6+ ability.",
+      "description": "Models in the bearer's unit have the Feel No Pain 6+ ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Infiltrator Comms Array",
       "legend": "",
       "factionId": "",
-      "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+      "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "equals",
+              "value": "Stratagem"
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "CP",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -134,7 +198,48 @@
       "description": "* These options cannot be taken on the same model."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000128",
+      "line": 1,
+      "description": "1 Infiltrator Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000128",
+      "line": 2,
+      "description": "4-9 Infiltrators",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000128",
+      "line": 1,
+      "description": "5 models",
+      "cost": 100,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000128",
+      "line": 2,
+      "description": "10 models",
+      "cost": 200,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000128:bolt-pistol",
       "datasheetId": "000000128",
@@ -211,46 +316,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000128",
-      "line": 1,
-      "description": "1 Infiltrator Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000128",
-      "line": 2,
-      "description": "4-9 Infiltrators",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000128",
-      "line": 1,
-      "description": "5 models",
-      "cost": 100,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000128",
-      "line": 2,
-      "description": "10 models",
-      "cost": 200,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -28,7 +28,30 @@
       "factionId": "",
       "description": "While this unit is within range of an objective marker you control, each time an attack with a Damage characteristic of 1 is allocated to a model in this unit, add 1 to any armour saving throw made against that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "sv",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "equals",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -97,10 +120,51 @@
       "datasheetId": "000001177",
       "line": 1,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Heavy Intercessor’s heavy bolt rifle can be replaced with 1 heavy bolter."
+      "description": "For every 5 models in this unit, 1 Heavy Intercessor's heavy bolt rifle can be replaced with 1 heavy bolter."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001177",
+      "line": 1,
+      "description": "1 Heavy Intercessor Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001177",
+      "line": 2,
+      "description": "4-9 Heavy Intercessors",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001177",
+      "line": 1,
+      "description": "5 models",
+      "cost": 100,
+      "count": 5
+    },
+    {
+      "datasheetId": "000001177",
+      "line": 2,
+      "description": "10 models",
+      "cost": 200,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001177:bolt-pistol",
       "datasheetId": "000001177",
@@ -206,46 +270,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001177",
-      "line": 1,
-      "description": "1 Heavy Intercessor Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001177",
-      "line": 2,
-      "description": "4-9 Heavy Intercessors",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001177",
-      "line": 1,
-      "description": "5 models",
-      "cost": 100,
-      "count": 5
-    },
-    {
-      "datasheetId": "000001177",
-      "line": 2,
-      "description": "10 models",
-      "cost": 200,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

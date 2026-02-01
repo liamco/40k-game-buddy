@@ -3,7 +3,7 @@
   "name": "Exocrine",
   "factionId": "TYR",
   "sourceId": "000000020",
-  "legend": "Huge, tough and very stupid, the Exocrine’s only task is to carry the dorsal cannon organism on its back into an optimal firing position. Once in place, the bio-plasmic cannon emits a terrible, high-pitched hiss before unleashing a searing blast of bio-plasma capable of reducing tanks and bunkers to glowing craters.",
+  "legend": "Huge, tough and very stupid, the Exocrine's only task is to carry the dorsal cannon organism on its back into an optimal firing position. Once in place, the bio-plasmic cannon emits a terrible, high-pitched hiss before unleashing a searing blast of bio-plasma capable of reducing tanks and bunkers to glowing craters.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> bio-plasmic cannon; powerful limbs.",
   "transport": "",
@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks. Until the end of the phase, each time a friendly <span class=\"kwb\">TYRANIDS</span> model makes an attack that targets that unit, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -80,7 +97,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000495",
+      "line": 1,
+      "description": "1 Exocrine",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000495",
+      "line": 1,
+      "description": "1 model",
+      "cost": 140,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000495:bio-plasmic-cannon",
       "datasheetId": "000000495",
@@ -131,40 +173,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000495",
-      "line": 1,
-      "description": "1 Exocrine",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000495",
-      "line": 1,
-      "description": "1 model",
-      "cost": 140,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

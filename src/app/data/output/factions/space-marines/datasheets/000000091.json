@@ -3,7 +3,7 @@
   "name": "Ballistus Dreadnought",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Ballistus Dreadnoughts are walking gun emplacements. Within a shielded sarcophagus at these combat walkers’ core lies the mortal remains of a fallen Chapter hero. Through webs of neural links, he pilots the war engine, targeting enemy armour or elite infantry with banks of devastating heavy weapons.",
+  "legend": "Ballistus Dreadnoughts are walking gun emplacements. Within a shielded sarcophagus at these combat walkers' core lies the mortal remains of a fallen Chapter hero. Through webs of neural links, he pilots the war engine, targeting enemy armour or elite infantry with banks of devastating heavy weapons.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> Ballistus missile launcher; Ballistus lascannon; twin storm bolter; armoured feet.",
   "transport": "",
@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that is not Below Half-strength, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBelowHalfStrength",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -98,7 +115,34 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000091",
+      "line": 1,
+      "description": "1 Ballistus Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000091",
+      "line": 1,
+      "description": "1 model",
+      "cost": 150,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000091:ballistus-missile-launcher",
       "datasheetId": "000000091",
@@ -111,7 +155,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Ballistus missile launcher – frag",
+          "name": "Ballistus missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -128,7 +172,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Ballistus missile launcher – krak",
+          "name": "Ballistus missile launcher - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -214,42 +258,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000091",
-      "line": 1,
-      "description": "1 Ballistus Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000091",
-      "line": 1,
-      "description": "1 model",
-      "cost": 150,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

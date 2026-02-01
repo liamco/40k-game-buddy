@@ -3,7 +3,7 @@
   "name": "Tarantula Sentry Battery",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "Tarantula Sentry Guns are automated weapon systems ideally suited to area denial and deterrent roles. Equipped with simple logic engines and fitted with either lascannons or heavy bolters, they can cut down enemy troops or stop armoured vehicles in their tracks, placing minimal demand on their operators’ attention.",
+  "legend": "Tarantula Sentry Guns are automated weapon systems ideally suited to area denial and deterrent roles. Equipped with simple logic engines and fitted with either lascannons or heavy bolters, they can cut down enemy troops or stop armoured vehicles in their tracks, placing minimal demand on their operators' attention.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> twin heavy bolter; armoured hull.",
   "transport": "",
@@ -28,7 +28,23 @@
       "factionId": "",
       "description": "Each time you select this unit for the Fire Overwatch Stratagem, hits are scored on unmodified Hit rolls of 4+ when resolving that Stratagem.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -85,10 +101,51 @@
       "datasheetId": "000000098",
       "line": 1,
       "button": "•",
-      "description": "This model’s twin heavy bolter replaced with 1 twin lascannon."
+      "description": "This model's twin heavy bolter replaced with 1 twin lascannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000098",
+      "line": 1,
+      "description": "1 Tarantula Sentry Battery",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000098",
+      "line": 1,
+      "description": "1 model",
+      "cost": 30,
+      "count": 1
+    },
+    {
+      "datasheetId": "000000098",
+      "line": 2,
+      "description": "2 models",
+      "cost": 60,
+      "count": 2
+    },
+    {
+      "datasheetId": "000000098",
+      "line": 3,
+      "description": "3 models",
+      "cost": 90,
+      "count": 3
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000098:twin-heavy-bolter",
       "datasheetId": "000000098",
@@ -165,46 +222,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000098",
-      "line": 1,
-      "description": "1 Tarantula Sentry Battery",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000098",
-      "line": 1,
-      "description": "1 model",
-      "cost": 30,
-      "count": 1
-    },
-    {
-      "datasheetId": "000000098",
-      "line": 2,
-      "description": "2 models",
-      "cost": 60,
-      "count": 2
-    },
-    {
-      "datasheetId": "000000098",
-      "line": 3,
-      "description": "3 models",
-      "cost": 90,
-      "count": 3
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "Company Heroes",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "A company’s most heroic battle-brothers fight alongside a Chapter’s high-ranking officers. These veterans and specialists serve as honour guards and provide vital support to a commander. Company Champions defend their Company’s honour with martial excellence, Ancients guard its inspirational banners and Company Veterans lay down hails o ffire from relic bolt weapons.",
+  "legend": "A company's most heroic battle-brothers fight alongside a Chapter's high-ranking officers. These veterans and specialists serve as honour guards and provide vital support to a commander. Company Champions defend their Company's honour with martial excellence, Ancients guard its inspirational banners and Company Veterans lay down hails o ffire from relic bolt weapons.",
   "role": "Other",
   "loadout": "<b>The Ancient is equipped with:</b> bolt pistol; bolt rifle; close combat weapon. <br><br><b>The Company Champion is equipped with:</b> bolt pistol; master-crafted power weapon. <br><br><b>One Company Veteran is equipped with:</b> bolt pistol; master-crafted heavy bolter; close combat weapon. <br><br><b>One Company Veteran is equipped with:</b> bolt pistol; master-crafted bolt rifle; close combat weapon.",
   "transport": "",
@@ -28,7 +28,26 @@
       "factionId": "",
       "description": "While this unit contains an Ancient, add 1 to the Objective Control characteristic of models in this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "ANCIENT"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -37,11 +56,49 @@
       "factionId": "",
       "description": "While a CHARACTER model is leading this unit, each time an attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "COMPANY HEROES",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "You must attach one CAPTAIN or CHAPTER MASTER model to this unit. If this is not possible, this unit does not take part in the battle and counts as having been destroyed.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DESTROYED"
+          ],
+          "value": "if no CAPTAIN or CHAPTER MASTER is attached"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "value": "0",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBeingLed",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -106,7 +163,48 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002772",
+      "line": 1,
+      "description": "1 Ancient",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002772",
+      "line": 2,
+      "description": "1 Company Champion",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002772",
+      "line": 3,
+      "description": "2 Company Veterans",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002772",
+      "line": 1,
+      "description": "4 models",
+      "cost": 105,
+      "count": 4
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002772:bolt-pistol",
       "datasheetId": "000002772",
@@ -261,46 +359,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002772",
-      "line": 1,
-      "description": "1 Ancient",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002772",
-      "line": 2,
-      "description": "1 Company Champion",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002772",
-      "line": 3,
-      "description": "2 Company Veterans",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002772",
-      "line": 1,
-      "description": "4 models",
-      "cost": 105,
-      "count": 4
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

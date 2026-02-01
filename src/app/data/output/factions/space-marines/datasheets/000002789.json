@@ -3,7 +3,7 @@
   "name": "Gladiator Reaper",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "When the cannons of the Gladiator Reaper spin to full pitch, the whining drone is likened to the sharpening of the Emperor’s just blade and a sensation which only truly discomforts the blasphemous. Within seconds, thousands of spent casings pour over the battle tank’s armoured hide as enemies are erased from existence by the storm offire.",
+  "legend": "When the cannons of the Gladiator Reaper spin to full pitch, the whining drone is likened to the sharpening of the Emperor's just blade and a sensation which only truly discomforts the blasphemous. Within seconds, thousands of spent casings pour over the battle tank's armoured hide as enemies are erased from existence by the storm offire.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 tempest bolters; twin heavy onslaught gatling cannon; armoured hull.",
   "transport": "",
@@ -31,9 +31,30 @@
       "name": "Reaping Tally",
       "legend": "",
       "factionId": "",
-      "description": "This model’s twin heavy onslaught gatling cannon has the [SUSTAINED HITS 2] ability while targeting <span class=\"kwb\">INFANTRY</span> units.",
+      "description": "This model's twin heavy onslaught gatling cannon has the [SUSTAINED HITS 2] ability while targeting <span class=\"kwb\">INFANTRY</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "INFANTRY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -105,7 +126,34 @@
       "description": "This model can be equipped with 1 Icarus rocket pod."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002789",
+      "line": 1,
+      "description": "1 Gladiator Reaper",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002789",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002789:icarus-rocket-pod",
       "datasheetId": "000002789",
@@ -260,42 +308,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002789",
-      "line": 1,
-      "description": "1 Gladiator Reaper",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002789",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

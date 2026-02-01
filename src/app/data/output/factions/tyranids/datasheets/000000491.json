@@ -33,7 +33,54 @@
       "factionId": "",
       "description": "Once per turn, in your Shooting phase, when selected to shoot, one unit with this ability can use it instead of making any attacks with its ranged weapons. If it does, you can add one new Spore Mines unit to your army and set it up anywhere on the battlefield that is wholly within 48\" of this unit and more than 9\" horizontally away from all enemy units. That <span class=\"kwb\">SPORE</span> <span class=\"kwb\">MINES</span> unit contains 1 model for each model in this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SPAWN SPORE MINES"
+          ],
+          "value": "once per turn"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 48,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 9,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "SPORE MINES"
+          ],
+          "value": "1 model for each model in this unit"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -80,7 +127,46 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000491",
+      "line": 1,
+      "description": "1-3 Biovores",
+      "min": 1,
+      "max": 3
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000491",
+      "line": 1,
+      "description": "1 model",
+      "cost": 50,
+      "count": 1
+    },
+    {
+      "datasheetId": "000000491",
+      "line": 2,
+      "description": "2 models",
+      "cost": 100,
+      "count": 2
+    },
+    {
+      "datasheetId": "000000491",
+      "line": 3,
+      "description": "3 models",
+      "cost": 150,
+      "count": 3
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000491:spore-mine-launcher",
       "datasheetId": "000000491",
@@ -134,44 +220,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000491",
-      "line": 1,
-      "description": "1-3 Biovores",
-      "min": 1,
-      "max": 3
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000491",
-      "line": 1,
-      "description": "1 model",
-      "cost": 50,
-      "count": 1
-    },
-    {
-      "datasheetId": "000000491",
-      "line": 2,
-      "description": "2 models",
-      "cost": 100,
-      "count": 2
-    },
-    {
-      "datasheetId": "000000491",
-      "line": 3,
-      "description": "3 models",
-      "cost": 150,
-      "count": 3
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

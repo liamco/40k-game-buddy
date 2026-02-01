@@ -3,7 +3,7 @@
   "name": "Blood Claws",
   "factionId": "SM",
   "sourceId": "000000036",
-  "legend": "Young and fiery warriors full of belligerent enthusiasm, Blood Claws hunger to prove themselves in savage battle. With relentless exuberance they plunge headlong into the foe, straddling the line between sheer heroism and recklessness. Many great sagas start with the Blood Claws’ glory hunts.",
+  "legend": "Young and fiery warriors full of belligerent enthusiasm, Blood Claws hunger to prove themselves in savage battle. With relentless exuberance they plunge headlong into the foe, straddling the line between sheer heroism and recklessness. Many great sagas start with the Blood Claws' glory hunts.",
   "role": "Battleline",
   "loadout": "<b>Every model is equipped with:</b> bolt pistol; Astartes chainsword.",
   "transport": "",
@@ -28,7 +28,18 @@
       "factionId": "",
       "description": "This unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER ADVANCING"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -103,16 +114,57 @@
       "datasheetId": "000000303",
       "line": 1,
       "button": "•",
-      "description": "The Blood Claw Pack Leader’s bolt pistol can be replaced with 1 plasma pistol."
+      "description": "The Blood Claw Pack Leader's bolt pistol can be replaced with 1 plasma pistol."
     },
     {
       "datasheetId": "000000303",
       "line": 2,
       "button": "•",
-      "description": "The Blood Claw Pack Leader’s Astartes chainsword can be replaced with 1 power weapon."
+      "description": "The Blood Claw Pack Leader's Astartes chainsword can be replaced with 1 power weapon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000303",
+      "line": 1,
+      "description": "1 Blood Claw Pack Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000303",
+      "line": 2,
+      "description": "9-19 Blood Claws",
+      "min": 9,
+      "max": 19
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000303",
+      "line": 1,
+      "description": "10 models",
+      "cost": 135,
+      "count": 10
+    },
+    {
+      "datasheetId": "000000303",
+      "line": 2,
+      "description": "20 models",
+      "cost": 285,
+      "count": 20
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000303:bolt-pistol",
       "datasheetId": "000000303",
@@ -151,7 +203,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -168,7 +220,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -231,46 +283,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000303",
-      "line": 1,
-      "description": "1 Blood Claw Pack Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000303",
-      "line": 2,
-      "description": "9-19 Blood Claws",
-      "min": 9,
-      "max": 19
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000303",
-      "line": 1,
-      "description": "10 models",
-      "cost": 135,
-      "count": 10
-    },
-    {
-      "datasheetId": "000000303",
-      "line": 2,
-      "description": "20 models",
-      "cost": 285,
-      "count": 20
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

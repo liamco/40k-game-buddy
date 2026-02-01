@@ -37,7 +37,18 @@
       "factionId": "",
       "description": "At the start of the first battle round, select one of the following:<br><ul><li>Select one enemy unit. Until the end of the battle, each time this model makes an attack that targets that unit, you can re-roll the Hit roll and you can re-roll the Wound roll.</li><li>Select one objective marker. Until the end of the battle, while this model is within range of that objective marker, it has the Feel No Pain 5+ ability and an Objective Control characteristic of 15.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -46,7 +57,18 @@
       "factionId": "",
       "description": "This model has the Feel No Pain 4+ ability against mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -105,7 +127,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002751",
+      "line": 1,
+      "description": "1 Norn Emissary",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002751",
+      "line": 1,
+      "description": "1 model",
+      "cost": 260,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002751:psychic-tendril",
       "datasheetId": "000002751",
@@ -118,7 +165,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Psychic Tendril – neuroparasite",
+          "name": "Psychic Tendril - neuroparasite",
           "attributes": [
             "PRECISION",
             "PSYCHIC"
@@ -136,7 +183,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Psychic Tendril – neuroblast",
+          "name": "Psychic Tendril - neuroblast",
           "attributes": [
             "BLAST",
             "PSYCHIC"
@@ -154,7 +201,7 @@
           "line": 3,
           "lineInWargear": 3,
           "dice": "",
-          "name": "Psychic Tendril – neurolance",
+          "name": "Psychic Tendril - neurolance",
           "attributes": [
             "MELTA 2",
             "PSYCHIC"
@@ -218,40 +265,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002751",
-      "line": 1,
-      "description": "1 Norn Emissary",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002751",
-      "line": 1,
-      "description": "1 model",
-      "cost": 260,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

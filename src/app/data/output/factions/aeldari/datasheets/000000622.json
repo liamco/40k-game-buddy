@@ -3,7 +3,7 @@
   "name": "Cobra",
   "factionId": "AE",
   "sourceId": "000000366",
-  "legend": "Cobras are huge skimmer tanks whose elegant hulls are dominated by a D-impaler – an enormous energy weapon against which not even powerful force fields are a reliable defence. So dangerous is this weapon that when a Cobra’s defence systems fail, a catastrophic D-rift will sometimes tear through reality, devouring the vehicle and any unfortunates nearby.",
+  "legend": "Cobras are huge skimmer tanks whose elegant hulls are dominated by a D-impaler - an enormous energy weapon against which not even powerful force fields are a reliable defence. So dangerous is this weapon that when a Cobra's defence systems fail, a catastrophic D-rift will sometimes tear through reality, devouring the vehicle and any unfortunates nearby.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> D-impaler; shuriken cannon; wraithbone hull.",
   "transport": "",
@@ -31,7 +31,7 @@
       "name": "D-rift",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase, just after selecting a target for this model’s D-impaler, roll one D6 for the target unit and every other unit within 3\" of that unit: on a 5+, the unit being rolled for is struck by a D-rift. After this model has finished making its attacks against that target unit this phase, each unit struck by a D-rift this phase suffers D3 mortal wounds.",
+      "description": "In your Shooting phase, just after selecting a target for this model's D-impaler, roll one D6 for the target unit and every other unit within 3\" of that unit: on a 5+, the unit being rolled for is struck by a D-rift. After this model has finished making its attacks against that target unit this phase, each unit struck by a D-rift this phase suffers D3 mortal wounds.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -102,10 +102,35 @@
       "datasheetId": "000000622",
       "line": 1,
       "button": "•",
-      "description": "This model’s shuriken cannon can be replaced with one of the following:<ul><li>1 Aeldari missile launcher</li><li>1 bright lance</li><li>1 scatter laser</li><li>1 starcannon</li></ul>"
+      "description": "This model's shuriken cannon can be replaced with one of the following:<ul><li>1 Aeldari missile launcher</li><li>1 bright lance</li><li>1 scatter laser</li><li>1 starcannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000622",
+      "line": 1,
+      "description": "1 Cobra",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000622",
+      "line": 1,
+      "description": "1 model",
+      "cost": 415,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000622:aeldari-missile-launcher",
       "datasheetId": "000000622",
@@ -118,7 +143,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Aeldari missile launcher – sunburst",
+          "name": "Aeldari missile launcher - sunburst",
           "attributes": [
             "BLAST"
           ],
@@ -135,7 +160,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Aeldari missile launcher – starshot",
+          "name": "Aeldari missile launcher - starshot",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -295,46 +320,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000622",
-      "line": 1,
-      "description": "1 Cobra",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000622",
-      "line": 1,
-      "description": "1 model",
-      "cost": 415,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 8,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

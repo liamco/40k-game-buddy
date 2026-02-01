@@ -3,7 +3,7 @@
   "name": "Archaeopter Stratoraptor",
   "factionId": "AdM",
   "sourceId": "000000015",
-  "legend": "The Stratoraptor takes advantage of the Archaeopter’s directional thrusters and adaptable wing profile to excel in the role of ground attack gunship. Its spread of heavy weapons – with a mixture of high strength and high rate of fire – ensures the Stratoraptor poses a lethal danger to dug-in infantry and heavily armoured vehicles alike.",
+  "legend": "The Stratoraptor takes advantage of the Archaeopter's directional thrusters and adaptable wing profile to excel in the role of ground attack gunship. Its spread of heavy weapons - with a mixture of high strength and high rate of fire - ensures the Stratoraptor poses a lethal danger to dug-in infantry and heavily armoured vehicles alike.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 cognis heavy stubbers; 2 heavy phosphor blasters; twin cognis lascannon; armoured hull; command uplink.",
   "transport": "",
@@ -44,7 +44,7 @@
       "name": "Command Uplink",
       "legend": "",
       "factionId": "",
-      "description": "Each time you select the bearer’s unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+      "description": "Each time you select the bearer's unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -55,7 +55,16 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets an enemy unit (excluding units that can <span class=\"kwb\">FLY</span>), add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -124,10 +133,35 @@
       "datasheetId": "000002086",
       "line": 1,
       "button": "•",
-      "description": "This model’s command uplink can be replaced with 1 chaff launcher."
+      "description": "This model's command uplink can be replaced with 1 chaff launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002086",
+      "line": 1,
+      "description": "1 Archaeopter Stratoraptor",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002086",
+      "line": 1,
+      "description": "1 model",
+      "cost": 185,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002086:cognis-heavy-stubber",
       "datasheetId": "000002086",
@@ -232,30 +266,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002086",
-      "line": 1,
-      "description": "1 Archaeopter Stratoraptor",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002086",
-      "line": 1,
-      "description": "1 model",
-      "cost": 185,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

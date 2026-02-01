@@ -3,7 +3,7 @@
   "name": "Big Mek In Mega Armour",
   "factionId": "ORK",
   "sourceId": "000000046",
-  "legend": "For all that its weight is akin to wearing half a tank, mega armour is incredibly resilient. Big Meks often build and wear it, adding unstable kustom weaponry, force field projectors, crushing klaws or even tellyport blastas that kill victims by beaming their component parts across a wide area, much to the Orks’ amusement.",
+  "legend": "For all that its weight is akin to wearing half a tank, mega armour is incredibly resilient. Big Meks often build and wear it, adding unstable kustom weaponry, force field projectors, crushing klaws or even tellyport blastas that kill victims by beaming their component parts across a wide area, much to the Orks' amusement.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> kustom-mega blaster; power klaw.",
   "transport": "",
@@ -50,14 +50,23 @@
       "factionId": "",
       "description": "While the bearer is leading a unit, models in that unit have a 4+ invulnerable save against ranged attacks.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Grot Oiler",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, at the end of your Movement phase, one model in the bearer’s unit regains D3 lost wounds.<br><br><b>Designer’s Note:</b> Place a Grot Oiler token next to the unit, removing it once this ability has been used.",
+      "description": "Once per battle, at the end of your Movement phase, one model in the bearer's unit regains D3 lost wounds.<br><br><b>Designer's Note:</b> Place a Grot Oiler token next to the unit, removing it once this ability has been used.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -122,7 +131,7 @@
       "datasheetId": "000000006",
       "line": 1,
       "button": "•",
-      "description": "This model’s kustom-mega blasta can be replaced with one of the following:<ul><li>1 killsaw</li><li>1 kombi-weapon</li><li>1 kustom shoota</li></ul>"
+      "description": "This model's kustom-mega blasta can be replaced with one of the following:<ul><li>1 killsaw</li><li>1 kombi-weapon</li><li>1 kustom shoota</li></ul>"
     },
     {
       "datasheetId": "000000006",
@@ -137,7 +146,37 @@
       "description": "This model can be equipped with 1 grot oiler."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000006",
+      "line": 1,
+      "description": "1 Big Mek in Mega Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000006",
+      "line": 1,
+      "description": "1 model",
+      "cost": 90,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000024",
+      "slug": "meganobz"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000006:kombi-weapon",
       "datasheetId": "000000006",
@@ -292,35 +331,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000006",
-      "line": 1,
-      "description": "1 Big Mek in Mega Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000006",
-      "line": 1,
-      "description": "1 model",
-      "cost": 90,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000024",
-      "slug": "meganobz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

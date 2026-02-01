@@ -32,7 +32,50 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack, re-roll a Hit roll of 1. If the target of that attack does not have the <span class=\"kwb\">IMPERIUM</span> or <span class=\"kwb\">CHAOS</span> keywords, you can re-roll the Hit roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "h",
+              "operator": "equals",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "IMPERIUM",
+                "CHAOS"
+              ],
+              "operator": "notIncludes",
+              "value": "IMPERIUM"
+            },
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "IMPERIUM",
+                "CHAOS"
+              ],
+              "operator": "notIncludes",
+              "value": "CHAOS"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,11 +84,52 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character from your army with the Leader ability can be attached to an Intercessor Squad, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "can be attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "LEADER"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "INTERCESSOR SQUAD"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -147,28 +231,102 @@
       "datasheetId": "000004175",
       "line": 1,
       "button": "•",
-      "description": "For every 5 models in the unit, up to 1 model’s infernus heavy bolter can be replaced with one of the following:<ul><li>1 frag cannon.</li><li>1 hellstorm bolt rifle and 1 Astartes grenade launcher.</li></ul>"
+      "description": "For every 5 models in the unit, up to 1 model's infernus heavy bolter can be replaced with one of the following:<ul><li>1 frag cannon.</li><li>1 hellstorm bolt rifle and 1 Astartes grenade launcher.</li></ul>"
     },
     {
       "datasheetId": "000004175",
       "line": 2,
       "button": "•",
-      "description": "For every 5 models in the unit, up to 1 model’s heavy thunder hammer can be replaced with 1 power weapon and 1 Astartes shield."
+      "description": "For every 5 models in the unit, up to 1 model's heavy thunder hammer can be replaced with 1 power weapon and 1 Astartes shield."
     },
     {
       "datasheetId": "000004175",
       "line": 3,
       "button": "•",
-      "description": "For every 5 models in the unit, up to 1 model’s stalker bolt rifle can be replaced with 1 plasma incinerator."
+      "description": "For every 5 models in the unit, up to 1 model's stalker bolt rifle can be replaced with 1 plasma incinerator."
     },
     {
       "datasheetId": "000004175",
       "line": 4,
       "button": "•",
-      "description": "For every 5 models in the unit, up to 1 model’s Deathwatch marksman bolt carbine can be replaced with 1 combat knife."
+      "description": "For every 5 models in the unit, up to 1 model's Deathwatch marksman bolt carbine can be replaced with 1 combat knife."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004175",
+      "line": 1,
+      "description": "1 Kill Team Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004175",
+      "line": 2,
+      "description": "1 Gravis Veteran",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004175",
+      "line": 3,
+      "description": "3 Deathwatch Veterans",
+      "min": 3,
+      "max": 3
+    },
+    {
+      "datasheetId": "000004175",
+      "line": 4,
+      "description": "OR"
+    },
+    {
+      "datasheetId": "000004175",
+      "line": 5,
+      "description": "1 Kill Team Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004175",
+      "line": 6,
+      "description": "2 Gravis Veterans",
+      "min": 2,
+      "max": 2
+    },
+    {
+      "datasheetId": "000004175",
+      "line": 7,
+      "description": "7 Deathwatch Veterans",
+      "min": 7,
+      "max": 7
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004175",
+      "line": 1,
+      "description": "5 models",
+      "cost": 100,
+      "count": 5
+    },
+    {
+      "datasheetId": "000004175",
+      "line": 2,
+      "description": "10 models",
+      "cost": 200,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "deathwatch",
+  "supplementName": "Deathwatch",
+  "supplementLabel": "Deathwatch",
+  "isSupplement": true,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004175:astartes-grenade-launcher",
       "datasheetId": "000004175",
@@ -181,7 +339,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Astartes grenade launcher – frag",
+          "name": "Astartes grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -198,7 +356,7 @@
           "line": 1,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Astartes grenade launcher – krak",
+          "name": "Astartes grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -333,7 +491,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Infernus heavy bolter – heavy bolter",
+          "name": "Infernus heavy bolter - heavy bolter",
           "attributes": [
             "SUSTAINED HITS 1"
           ],
@@ -350,7 +508,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Infernus heavy bolter – heavy flamer",
+          "name": "Infernus heavy bolter - heavy flamer",
           "attributes": [
             "IGNORES COVER",
             "TORRENT"
@@ -377,7 +535,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma incinerator – standard",
+          "name": "Plasma incinerator - standard",
           "attributes": [
             "ASSAULT",
             "HEAVY"
@@ -395,7 +553,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma incinerator – supercharge",
+          "name": "Plasma incinerator - supercharge",
           "attributes": [
             "ASSAULT",
             "HAZARDOUS",
@@ -641,79 +799,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004175",
-      "line": 1,
-      "description": "1 Kill Team Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004175",
-      "line": 2,
-      "description": "1 Gravis Veteran",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004175",
-      "line": 3,
-      "description": "3 Deathwatch Veterans",
-      "min": 3,
-      "max": 3
-    },
-    {
-      "datasheetId": "000004175",
-      "line": 4,
-      "description": "OR"
-    },
-    {
-      "datasheetId": "000004175",
-      "line": 5,
-      "description": "1 Kill Team Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004175",
-      "line": 6,
-      "description": "2 Gravis Veterans",
-      "min": 2,
-      "max": 2
-    },
-    {
-      "datasheetId": "000004175",
-      "line": 7,
-      "description": "7 Deathwatch Veterans",
-      "min": 7,
-      "max": 7
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004175",
-      "line": 1,
-      "description": "5 models",
-      "cost": 100,
-      "count": 5
-    },
-    {
-      "datasheetId": "000004175",
-      "line": 2,
-      "description": "10 models",
-      "cost": 200,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

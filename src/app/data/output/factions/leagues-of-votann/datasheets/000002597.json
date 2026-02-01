@@ -5,7 +5,7 @@
   "sourceId": "000000203",
   "legend": "Iron-masters are the most accomplished Brôkhyrs of their Kindred. In battle, they take on the duty of maintaining damaged Kin war engines, often aided by Ironkin and COG repair crews. These veteran Brôkhyrs also bring their most powerful personal creations to war, taking satisfaction in unleashing them upon the foe.",
   "role": "Characters",
-  "loadout": "* If this unit’s Brôkhyr Iron-master model is ever destroyed, all of this unit’s remaining E-COG models are also destroyed. While embarking within a Transport and while embarked within a <span class=\"kwb\">TRANSPORT</span>, each E-COG model takes up the space of 0 models.<br><br><b>The Brôkhyr Iron-master is equipped with:</b> graviton rifle; graviton hammer. <br><br><b>The Ironkin Assistant is equipped with:</b> las-beam cutter; close combat weapon. <br><br><b>One E-COG is equipped with:</b> Autoch-pattern bolt pistol; close combat weapon. <br><br><b>One other E-COG is equipped with:</b> plasma torch. <br><br><b>One other E-COG is equipped with:</b> manipulator arms.",
+  "loadout": "* If this unit's Brôkhyr Iron-master model is ever destroyed, all of this unit's remaining E-COG models are also destroyed. While embarking within a Transport and while embarked within a <span class=\"kwb\">TRANSPORT</span>, each E-COG model takes up the space of 0 models.<br><br><b>The Brôkhyr Iron-master is equipped with:</b> graviton rifle; graviton hammer. <br><br><b>The Ironkin Assistant is equipped with:</b> las-beam cutter; close combat weapon. <br><br><b>One E-COG is equipped with:</b> Autoch-pattern bolt pistol; close combat weapon. <br><br><b>One other E-COG is equipped with:</b> plasma torch. <br><br><b>One other E-COG is equipped with:</b> manipulator arms.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this unit is within 3\" of one or more friendly Leagues of Votann Vehicle or Ironkin Steeljacks units, if this unit is not an Attached unit, it has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -133,7 +144,55 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002597",
+      "line": 1,
+      "description": "1 Brôkhyr Iron-master",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002597",
+      "line": 2,
+      "description": "1 Ironkin Assistant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002597",
+      "line": 3,
+      "description": "3 E-COGs*",
+      "min": 3,
+      "max": 3
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002597",
+      "line": 1,
+      "description": "5 models",
+      "cost": 75,
+      "count": 5
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002598",
+      "slug": "hearthkyn-warriors"
+    },
+    {
+      "id": "000002603",
+      "slug": "brokhyr-thunderkyn"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002597:autoch-pattern-bolt-pistol",
       "datasheetId": "000002597",
@@ -308,53 +367,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002597",
-      "line": 1,
-      "description": "1 Brôkhyr Iron-master",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002597",
-      "line": 2,
-      "description": "1 Ironkin Assistant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002597",
-      "line": 3,
-      "description": "3 E-COGs*",
-      "min": 3,
-      "max": 3
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002597",
-      "line": 1,
-      "description": "5 models",
-      "cost": 75,
-      "count": 5
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002598",
-      "slug": "hearthkyn-warriors"
-    },
-    {
-      "id": "000002603",
-      "slug": "brokhyr-thunderkyn"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

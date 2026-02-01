@@ -33,7 +33,44 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit it scored one or more hits against this phase. Until the end of the phase, each time a friendly model that disembarked from this <span class=\"kwb\">TRANSPORT</span> this turn makes an attack that targets that enemy unit, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "h",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -106,7 +143,7 @@
       "datasheetId": "000002720",
       "line": 1,
       "button": "•",
-      "description": "This model’s twin heavy bolter can be replaced with one of the following:<ul><li>1 multi-melta</li><li>1 twin assault cannon</li><li>1 twin lascannon</li></ul>"
+      "description": "This model's twin heavy bolter can be replaced with one of the following:<ul><li>1 multi-melta</li><li>1 twin assault cannon</li><li>1 twin lascannon</li></ul>"
     },
     {
       "datasheetId": "000002720",
@@ -121,7 +158,34 @@
       "description": "This model can be equipped with 1 storm bolter."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002720",
+      "line": 1,
+      "description": "1 Relic Razorback",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002720",
+      "line": 1,
+      "description": "1 model",
+      "cost": 105,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002720:hunter-killer-missile",
       "datasheetId": "000002720",
@@ -304,32 +368,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002720",
-      "line": 1,
-      "description": "1 Relic Razorback",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002720",
-      "line": 1,
-      "description": "1 model",
-      "cost": 105,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

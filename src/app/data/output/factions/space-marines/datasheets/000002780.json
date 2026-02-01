@@ -3,7 +3,7 @@
   "name": "Fortis Kill Team",
   "factionId": "SM",
   "sourceId": "000000035",
-  "legend": "Further refined from Watch Master Mordelai’s original concept, Fortis Kill Teams exemplify the supreme adaptability of the Tacticus variant of Mk X power armour, seamlessly merging a variety of close support roles and deadly firepower.",
+  "legend": "Further refined from Watch Master Mordelai's original concept, Fortis Kill Teams exemplify the supreme adaptability of the Tacticus variant of Mk X power armour, seamlessly merging a variety of close support roles and deadly firepower.",
   "role": "Other",
   "loadout": "<b>The Kill Team Sergeant and every Kill Team Intercessor is equipped with:</b> bolt pistol; Deathwatch bolt rifle; close combat weapon.<br><br><b>Every Kill Team Intercessor with plasma incinerator is equipped with:</b> bolt pistol; plasma incinerator; close combat weapon.<br><br><b>Every Kill Team Intercessor with heavy bolt pistol is equipped with:</b> heavy bolt pistol; Astartes chainsword.<br><br><b>Every Kill Team Intercessor with pyreblaster is equipped with:</b> bolt pistol; pyreblaster; close combat weapon.<br><br><b>Every Kill Team Intercessor with superfrag rocket launcher is equipped with:</b> bolt pistol; castellan launcher; superfrag rocket launcher; close combat weapon.",
   "transport": "",
@@ -32,11 +32,50 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets a unit that is below its Starting Strength, add 1 to the Hit roll. If that attack targets a unit that is Below Half-strength, add 1 to the Hit roll and add 1 to the Wound roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character from your army with the Leader ability can be attached to an Intercessor Squad, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "can be attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Leader"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -144,7 +183,76 @@
       "description": "Any number of models can each replace their superfrag rocket launcher with 1 superkrak rocket launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002780",
+      "line": 1,
+      "description": "10 MODELS MAXIMUM",
+      "min": 10,
+      "max": 10
+    },
+    {
+      "datasheetId": "000002780",
+      "line": 2,
+      "description": "1 Kill Team Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002780",
+      "line": 3,
+      "description": "2-9 Kill Team Intercessors",
+      "min": 2,
+      "max": 9
+    },
+    {
+      "datasheetId": "000002780",
+      "line": 4,
+      "description": "0-4 Kill Team Intercessors with plasma incinerators",
+      "min": 0,
+      "max": 4
+    },
+    {
+      "datasheetId": "000002780",
+      "line": 5,
+      "description": "0-4 Kill Team Intercessors with heavy bolt pistols",
+      "min": 0,
+      "max": 4
+    },
+    {
+      "datasheetId": "000002780",
+      "line": 6,
+      "description": "0‑4 Kill Team Intercessors with pyreblasters",
+      "min": 0,
+      "max": 0
+    },
+    {
+      "datasheetId": "000002780",
+      "line": 7,
+      "description": "0‑2 Kill Team Intercessors with superfrag rocket launchers",
+      "min": 0,
+      "max": 0
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002780",
+      "line": 1,
+      "description": "10 models",
+      "cost": 180,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "deathwatch",
+  "supplementName": "Deathwatch",
+  "supplementLabel": "Deathwatch",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002780:astartes-grenade-launcher",
       "datasheetId": "000002780",
@@ -157,7 +265,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Astartes grenade launcher – frag",
+          "name": "Astartes grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -174,7 +282,7 @@
           "line": 1,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Astartes grenade launcher – krak",
+          "name": "Astartes grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -333,7 +441,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma incinerator – standard",
+          "name": "Plasma incinerator - standard",
           "attributes": [
             "ASSAULT",
             "HEAVY"
@@ -351,7 +459,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma incinerator – supercharge",
+          "name": "Plasma incinerator - supercharge",
           "attributes": [
             "ASSAULT",
             "HAZARDOUS",
@@ -642,74 +750,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002780",
-      "line": 1,
-      "description": "10 MODELS MAXIMUM",
-      "min": 10,
-      "max": 10
-    },
-    {
-      "datasheetId": "000002780",
-      "line": 2,
-      "description": "1 Kill Team Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002780",
-      "line": 3,
-      "description": "2-9 Kill Team Intercessors",
-      "min": 2,
-      "max": 9
-    },
-    {
-      "datasheetId": "000002780",
-      "line": 4,
-      "description": "0-4 Kill Team Intercessors with plasma incinerators",
-      "min": 0,
-      "max": 4
-    },
-    {
-      "datasheetId": "000002780",
-      "line": 5,
-      "description": "0-4 Kill Team Intercessors with heavy bolt pistols",
-      "min": 0,
-      "max": 4
-    },
-    {
-      "datasheetId": "000002780",
-      "line": 6,
-      "description": "0‑4 Kill Team Intercessors with pyreblasters",
-      "min": 0,
-      "max": 0
-    },
-    {
-      "datasheetId": "000002780",
-      "line": 7,
-      "description": "0‑2 Kill Team Intercessors with superfrag rocket launchers",
-      "min": 0,
-      "max": 0
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002780",
-      "line": 1,
-      "description": "10 models",
-      "cost": 180,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

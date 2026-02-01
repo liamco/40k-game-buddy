@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -99,7 +108,39 @@
       "description": "Any number of models can each have their shuriken cannon replaced with one of the following:<ul><li>1 missile launcher</li><li>1 bright lance</li><li>1 scatter laser</li><li>1 starcannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000605",
+      "line": 1,
+      "description": "1-2 Vypers",
+      "min": 1,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000605",
+      "line": 1,
+      "description": "1 model",
+      "cost": 65,
+      "count": 1
+    },
+    {
+      "datasheetId": "000000605",
+      "line": 2,
+      "description": "2 models",
+      "cost": 130,
+      "count": 2
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000605:bright-lance",
       "datasheetId": "000000605",
@@ -136,7 +177,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – starshot",
+          "name": "Missile launcher - starshot",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -151,7 +192,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – sunburst",
+          "name": "Missile launcher - sunburst",
           "attributes": [
             "BLAST"
           ],
@@ -292,37 +333,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000605",
-      "line": 1,
-      "description": "1-2 Vypers",
-      "min": 1,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000605",
-      "line": 1,
-      "description": "1 model",
-      "cost": 65,
-      "count": 1
-    },
-    {
-      "datasheetId": "000000605",
-      "line": 2,
-      "description": "2 models",
-      "cost": 130,
-      "count": 2
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

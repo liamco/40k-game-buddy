@@ -3,7 +3,7 @@
   "name": "Deathshroud Terminators",
   "factionId": "DG",
   "sourceId": "000000014",
-  "legend": "Deathshroud Terminators are swollen with the rotten powers of their diseased patron. With every swing of their giant scythes, they decapitate and disembowel their foes, their speed belied by their bloated mass. They fight in ominous silence, embodying the inevitable onset of their enemies’ death and the inescapable judgement of Mortarion himself.",
+  "legend": "Deathshroud Terminators are swollen with the rotten powers of their diseased patron. With every swing of their giant scythes, they decapitate and disembowel their foes, their speed belied by their bloated mass. They fight in ominous silence, embodying the inevitable onset of their enemies' death and the inescapable judgement of Mortarion himself.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> plaguespurt gauntlet; manreaper.",
   "transport": "",
@@ -22,7 +22,7 @@
       "type": "Core"
     },
     {
-      "name": "Nurgle’s Gift (Aura)",
+      "name": "Nurgle's Gift (Aura)",
       "type": "Faction"
     },
     {
@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While a Character model is leading this unit, that <span class=\"kwb\">CHARACTER</span> model has the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -128,7 +139,46 @@
       "description": "The Deathshroud Champion can be equipped with 1 icon of despair."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001371",
+      "line": 1,
+      "description": "1 Deathshroud Champion",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001371",
+      "line": 2,
+      "description": "2-5 Deathshroud Terminators",
+      "min": 2,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001371",
+      "line": 1,
+      "description": "3 models",
+      "cost": 160,
+      "count": 3
+    },
+    {
+      "datasheetId": "000001371",
+      "line": 2,
+      "description": "6 models",
+      "cost": 320,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001371:plaguespurt-gauntlet",
       "datasheetId": "000001371",
@@ -170,7 +220,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Manreaper – strike",
+          "name": "Manreaper - strike",
           "attributes": [
             "LETHAL HITS"
           ],
@@ -187,7 +237,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Manreaper – sweep",
+          "name": "Manreaper - sweep",
           "attributes": [
             "LETHAL HITS"
           ],
@@ -201,44 +251,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001371",
-      "line": 1,
-      "description": "1 Deathshroud Champion",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001371",
-      "line": 2,
-      "description": "2-5 Deathshroud Terminators",
-      "min": 2,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001371",
-      "line": 1,
-      "description": "3 models",
-      "cost": 160,
-      "count": 3
-    },
-    {
-      "datasheetId": "000001371",
-      "line": 2,
-      "description": "6 models",
-      "cost": 320,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

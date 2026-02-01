@@ -5,7 +5,7 @@
   "sourceId": "000000364",
   "legend": "Some servitors were once serfs, failed aspirants or former allies, now cyborgised with mechanical augmentation. Many have limbs replaced with servo-arms or heavy weapons, employed to defend or aid their Techmarine masters during repairs. The brutal mind-wiping process ensures none ever reveal what they have witnessed.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> Servitor’s servo-arm.",
+  "loadout": "<b>Every model is equipped with:</b> Servitor's servo-arm.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -33,11 +33,27 @@
       "factionId": "",
       "description": "While a Brotherhood Techmarine model is leading this unit, models in this unit have the Deep Strike and Teleport Assault abilities.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "SERVITOR RETINUE",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "At the start of the Declare Battle Formations step, this unit can join one other unit from your army that is being led by a Brotherhood Techmarine (a unit cannot have more than one <span class=\"kwb\">SERVITORS</span> unit joined to it). If it does, until the end of the battle, every model in this unit counts as being part of that Bodyguard unit, and that Bodyguard unit's Starting Strength is increased accordingly.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -88,10 +104,35 @@
       "datasheetId": "000000397",
       "line": 1,
       "button": "•",
-      "description": "Up to 2 models can each have their Servitor’s servo-arm replaced with one of the following:<ul><li>1 heavy bolter and 1 Servitor’s tools</li><li>1 multi-melta and 1 Servitor’s tools</li><li>1 plasma cannon and 1 Servitor’s tools</li></ul>"
+      "description": "Up to 2 models can each have their Servitor's servo-arm replaced with one of the following:<ul><li>1 heavy bolter and 1 Servitor's tools</li><li>1 multi-melta and 1 Servitor's tools</li><li>1 plasma cannon and 1 Servitor's tools</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000397",
+      "line": 1,
+      "description": "4 Servitors",
+      "min": 4,
+      "max": 4
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000397",
+      "line": 1,
+      "description": "4 models",
+      "cost": 50,
+      "count": 4
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Grey Knights (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000397:heavy-bolter",
       "datasheetId": "000000397",
@@ -158,7 +199,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma cannon – standard",
+          "name": "Plasma cannon - standard",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -176,7 +217,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma cannon – supercharge",
+          "name": "Plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS",
@@ -196,7 +237,7 @@
       "id": "000000397:servitor-s-servo-arm",
       "datasheetId": "000000397",
       "line": 5,
-      "name": "Servitor’s servo-arm",
+      "name": "Servitor's servo-arm",
       "type": "Melee",
       "profiles": [
         {
@@ -204,7 +245,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Servitor’s servo-arm",
+          "name": "Servitor's servo-arm",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -220,7 +261,7 @@
       "id": "000000397:servitor-s-tools",
       "datasheetId": "000000397",
       "line": 6,
-      "name": "Servitor’s tools",
+      "name": "Servitor's tools",
       "type": "Melee",
       "profiles": [
         {
@@ -228,7 +269,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Servitor’s tools",
+          "name": "Servitor's tools",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -240,30 +281,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000397",
-      "line": 1,
-      "description": "4 Servitors",
-      "min": 4,
-      "max": 4
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000397",
-      "line": 1,
-      "description": "4 models",
-      "cost": 50,
-      "count": 4
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Grey Knights (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

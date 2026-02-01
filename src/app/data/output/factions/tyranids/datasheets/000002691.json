@@ -32,7 +32,24 @@
       "factionId": "",
       "description": "At the start of the Fight phase, select one of the following:<br><ul><li><b>Aggression Imperative:</b> Until the end of the phase, each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li><li><b>Bioregeneration:</b> Until the end of the phase, each time a saving throw is made for a model in this unit, re-roll a saving throw of 1.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": []
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "s",
+          "value": "ones",
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -85,34 +102,6 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000002691:tyranid-warrior-claws-and-talons",
-      "datasheetId": "000002691",
-      "line": 1,
-      "name": "Tyranid Warrior claws and talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002691",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Tyranid Warrior claws and talons",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002691",
@@ -151,5 +140,33 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Tyranids",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000002691:tyranid-warrior-claws-and-talons",
+      "datasheetId": "000002691",
+      "line": 1,
+      "name": "Tyranid Warrior claws and talons",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000002691",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Tyranid Warrior claws and talons",
+          "attributes": [
+            "TWIN-LINKED"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 6,
+          "bsWs": 3,
+          "s": 5,
+          "ap": -2,
+          "d": 1
+        }
+      ]
+    }
+  ]
 }

@@ -31,12 +31,29 @@
     },
     {
       "id": "",
-      "name": "Angel’s Wrath",
+      "name": "Angel's Wrath",
       "legend": "",
       "factionId": "",
       "description": "While this model is leading a unit, each time that unit ends a Charge move, until the end of the turn, add 1 to the Strength characteristic of melee weapons equipped by models in that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -45,7 +62,26 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "Stratagem"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -54,7 +90,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 6.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -135,28 +180,84 @@
       "datasheetId": "000000083",
       "line": 1,
       "button": "•",
-      "description": "This model’s heavy bolt pistol can be replaced with one of the following: <br><ul><li>1 plasma pistol </li><li>1 hand flamer </li></ul>"
+      "description": "This model's heavy bolt pistol can be replaced with one of the following: <br><ul><li>1 plasma pistol </li><li>1 hand flamer </li></ul>"
     },
     {
       "datasheetId": "000000083",
       "line": 2,
       "button": "•",
-      "description": "This model’s Astartes chainsword can be replaced with one of the following: <br><ul><li>1 power fist </li><li>1 relic weapon</li></ul>"
+      "description": "This model's Astartes chainsword can be replaced with one of the following: <br><ul><li>1 power fist </li><li>1 relic weapon</li></ul>"
     },
     {
       "datasheetId": "000000083",
       "line": 3,
       "button": "•",
-      "description": "This model’s heavy bolt pistol and Astartes chainsword can be replaced with 1 thunder hammer and 1 relic shield."
+      "description": "This model's heavy bolt pistol and Astartes chainsword can be replaced with 1 thunder hammer and 1 relic shield."
     },
     {
       "datasheetId": "000000083",
       "line": 4,
       "button": "•",
-      "description": "If this model is equipped with a heavy bolt pistol and an Astartes chainsword, it can be equipped with 1 relic shield. This model’s heavy bolt pistol and Astartes chainsword cannot be replaced."
+      "description": "If this model is equipped with a heavy bolt pistol and an Astartes chainsword, it can be equipped with 1 relic shield. This model's heavy bolt pistol and Astartes chainsword cannot be replaced."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000083",
+      "line": 1,
+      "description": "1 Captain with Jump Pack",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000083",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000064",
+      "slug": "assault-squad-with-jump-packs"
+    },
+    {
+      "id": "000000165",
+      "slug": "sanguinary-guard"
+    },
+    {
+      "id": "000000147",
+      "slug": "vanguard-veteran-squad-with-jump-packs"
+    },
+    {
+      "id": "000002776",
+      "slug": "assault-intercessors-with-jump-packs"
+    },
+    {
+      "id": "000000324",
+      "slug": "skyclaws"
+    },
+    {
+      "id": "000003874",
+      "slug": "talonstrike-kill-team"
+    },
+    {
+      "id": "000000315",
+      "slug": "wolf-guard"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000083:hand-flamer",
       "datasheetId": "000000083",
@@ -223,7 +324,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -240,7 +341,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -353,61 +454,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000083",
-      "line": 1,
-      "description": "1 Captain with Jump Pack",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000083",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000064",
-      "slug": "assault-squad-with-jump-packs"
-    },
-    {
-      "id": "000000165",
-      "slug": "sanguinary-guard"
-    },
-    {
-      "id": "000000147",
-      "slug": "vanguard-veteran-squad-with-jump-packs"
-    },
-    {
-      "id": "000002776",
-      "slug": "assault-intercessors-with-jump-packs"
-    },
-    {
-      "id": "000000324",
-      "slug": "skyclaws"
-    },
-    {
-      "id": "000003874",
-      "slug": "talonstrike-kill-team"
-    },
-    {
-      "id": "000000315",
-      "slug": "wolf-guard"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

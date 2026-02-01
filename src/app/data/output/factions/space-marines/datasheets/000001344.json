@@ -3,7 +3,7 @@
   "name": "Librarian with Jump Pack",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "Librarians are skilled warriors possessed of esoteric powers, and will not hesitate to launch themselves into danger to root out empyric threats. With a jump pack, there are few secrets beyond a Librarian’s reach, and by drawing on the immaterium’s power he can grant his battle-brothers the strength to crush the foe wherever they hide.",
+  "legend": "Librarians are skilled warriors possessed of esoteric powers, and will not hesitate to launch themselves into danger to root out empyric threats. With a jump pack, there are few secrets beyond a Librarian's reach, and by drawing on the immaterium's power he can grant his battle-brothers the strength to crush the foe wherever they hide.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; Smite; force weapon.",
   "transport": "",
@@ -36,7 +36,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -45,7 +56,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, improve the Armour Penetration characteristic of melee weapons equipped by models in that unit by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -126,10 +154,54 @@
       "datasheetId": "000001344",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001344",
+      "line": 1,
+      "description": "1 Librarian with Jump Pack",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001344",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000147",
+      "slug": "vanguard-veteran-squad-with-jump-packs"
+    },
+    {
+      "id": "000000064",
+      "slug": "assault-squad-with-jump-packs"
+    },
+    {
+      "id": "000000324",
+      "slug": "skyclaws"
+    },
+    {
+      "id": "000000315",
+      "slug": "wolf-guard"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001344:bolt-pistol",
       "datasheetId": "000001344",
@@ -302,7 +374,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -319,7 +391,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -346,7 +418,7 @@
           "line": 9,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Smite – witchfire",
+          "name": "Smite - witchfire",
           "attributes": [
             "PSYCHIC"
           ],
@@ -363,7 +435,7 @@
           "line": 10,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Smite – focused witchfire",
+          "name": "Smite - focused witchfire",
           "attributes": [
             "DEVASTATING WOUNDS",
             "HAZARDOUS",
@@ -431,49 +503,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001344",
-      "line": 1,
-      "description": "1 Librarian with Jump Pack",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001344",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000147",
-      "slug": "vanguard-veteran-squad-with-jump-packs"
-    },
-    {
-      "id": "000000064",
-      "slug": "assault-squad-with-jump-packs"
-    },
-    {
-      "id": "000000324",
-      "slug": "skyclaws"
-    },
-    {
-      "id": "000000315",
-      "slug": "wolf-guard"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

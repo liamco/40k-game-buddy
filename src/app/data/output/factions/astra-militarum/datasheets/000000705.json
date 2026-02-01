@@ -3,7 +3,7 @@
   "name": "Doomhammer",
   "factionId": "AM",
   "sourceId": "000000016",
-  "legend": "Part mobile bastion and part close-range Titan-killer, the Doomhammer contains a sizeable troop compartment, enabling it to transport a number of battle-ready soldiers. At the front lines, the troops are deployed to engage light targets while the tank’s magma cannon melts monstrous chitin and armour to cinder and slag.",
+  "legend": "Part mobile bastion and part close-range Titan-killer, the Doomhammer contains a sizeable troop compartment, enabling it to transport a number of battle-ready soldiers. At the front lines, the troops are deployed to engage light targets while the tank's magma cannon melts monstrous chitin and armour to cinder and slag.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 lascannons; magma cannon; twin heavy bolter; 2 twin heavy flamers; armoured tracks.",
   "transport": "This model has a transport capacity of 26 Astra Militarum Infantry models. Each Ogryn model takes up the space of 3 models. It cannot transport Artillery models.",
@@ -32,7 +32,7 @@
       "name": "Close-range Titan Killer",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s magma cannon targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, that target is always considered to be within half range of that weapon.",
+      "description": "Each time this model's magma cannon targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, that target is always considered to be within half range of that weapon.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -103,7 +103,7 @@
       "datasheetId": "000000705",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 twin heavy flamers can be replaced with 2 twin heavy bolters."
+      "description": "This model's 2 twin heavy flamers can be replaced with 2 twin heavy bolters."
     },
     {
       "datasheetId": "000000705",
@@ -112,7 +112,32 @@
       "description": "This model can be equipped with one of the following:<ul><li>2 lascannons and 2 twin heavy bolters</li><li>2 lascannons and 2 twin heavy flamers</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000705",
+      "line": 1,
+      "description": "1 Doomhammer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000705",
+      "line": 1,
+      "description": "1 model",
+      "cost": 415,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000705:lascannon",
       "datasheetId": "000000705",
@@ -242,46 +267,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000705",
-      "line": 1,
-      "description": "1 Doomhammer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000705",
-      "line": 1,
-      "description": "1 model",
-      "cost": 415,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 8,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

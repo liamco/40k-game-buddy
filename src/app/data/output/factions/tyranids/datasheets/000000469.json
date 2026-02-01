@@ -28,7 +28,18 @@
       "factionId": "",
       "description": "This unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER ADVANCING"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -87,32 +98,6 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000000469:hormagaunt-talons",
-      "datasheetId": "000000469",
-      "line": 1,
-      "name": "Hormagaunt talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000469",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hormagaunt talons",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 3,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000469",
@@ -144,5 +129,31 @@
   "roleLabel": "Battleline",
   "sourceName": "Faction Pack: Tyranids",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000000469:hormagaunt-talons",
+      "datasheetId": "000000469",
+      "line": 1,
+      "name": "Hormagaunt talons",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000469",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Hormagaunt talons",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 3,
+          "bsWs": 4,
+          "s": 3,
+          "ap": -1,
+          "d": 1
+        }
+      ]
+    }
+  ]
 }

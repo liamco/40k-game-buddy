@@ -32,16 +32,70 @@
       "factionId": "",
       "description": "While this model is leading a unit, in your Command phase, you can return 1 destroyed model (excluding Character models) to that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RETURN DESTROYED MODEL"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Gene-seed Recovery",
       "legend": "",
       "factionId": "",
-      "description": "When this model’s Bodyguard unit is destroyed, roll one D6: on a 2+, you gain 1CP.",
+      "description": "When this model's Bodyguard unit is destroyed, roll one D6: on a 2+, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -113,7 +167,51 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000063",
+      "line": 1,
+      "description": "1 Apothecary on Bike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000063",
+      "line": 1,
+      "description": "1 model",
+      "cost": 65,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001166",
+      "slug": "company-veterans-on-bikes"
+    },
+    {
+      "id": "000002712",
+      "slug": "outrider-squad"
+    },
+    {
+      "id": "000000116",
+      "slug": "bike-squad"
+    },
+    {
+      "id": "000000241",
+      "slug": "ravenwing-black-knights"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000063:bolt-pistol",
       "datasheetId": "000000063",
@@ -190,49 +288,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000063",
-      "line": 1,
-      "description": "1 Apothecary on Bike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000063",
-      "line": 1,
-      "description": "1 model",
-      "cost": 65,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001166",
-      "slug": "company-veterans-on-bikes"
-    },
-    {
-      "id": "000002712",
-      "slug": "outrider-squad"
-    },
-    {
-      "id": "000000116",
-      "slug": "bike-squad"
-    },
-    {
-      "id": "000000241",
-      "slug": "ravenwing-black-knights"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

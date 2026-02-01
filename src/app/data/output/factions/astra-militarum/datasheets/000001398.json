@@ -3,7 +3,7 @@
   "name": "Ogryn Bodyguard",
   "factionId": "AM",
   "sourceId": "000000016",
-  "legend": "Ogryn Bodyguards are particularly capable warriors of their kind who have but one duty – to protect the officer to whom they are assigned. Whether by throwing themselves in the line of fire or slaughtering all enemies who come near their ward, they are invaluable retainers in the swirl of battlefield combat.",
+  "legend": "Ogryn Bodyguards are particularly capable warriors of their kind who have but one duty - to protect the officer to whom they are assigned. Whether by throwing themselves in the line of fire or slaughtering all enemies who come near their ward, they are invaluable retainers in the swirl of battlefield combat.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> ripper gun; close combat weapon; huge knife.",
   "transport": "",
@@ -29,7 +29,18 @@
       "factionId": "",
       "description": "While one or more Officer models are in the same unit as this model, those <span class=\"kwb\">OFFICER</span> models have the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -38,7 +49,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -126,16 +146,41 @@
       "datasheetId": "000001398",
       "line": 1,
       "button": "•",
-      "description": "This model’s ripper gun can be replaced with one of the following:<ul><li>1 grenadier gauntlet</li><li>1 Bullgryn maul</li></ul>"
+      "description": "This model's ripper gun can be replaced with one of the following:<ul><li>1 grenadier gauntlet</li><li>1 Bullgryn maul</li></ul>"
     },
     {
       "datasheetId": "000001398",
       "line": 2,
       "button": "•",
-      "description": "This model’s huge knife can be replaced with one of the following:<ul><li>1 brute shield</li><li>1 slabshield</li></ul>"
+      "description": "This model's huge knife can be replaced with one of the following:<ul><li>1 brute shield</li><li>1 slabshield</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001398",
+      "line": 1,
+      "description": "1 Ogryn Bodyguard",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001398",
+      "line": 1,
+      "description": "1 model",
+      "cost": 40,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001398:grenadier-gauntlet",
       "datasheetId": "000001398",
@@ -284,30 +329,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001398",
-      "line": 1,
-      "description": "1 Ogryn Bodyguard",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001398",
-      "line": 1,
-      "description": "1 model",
-      "cost": 40,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

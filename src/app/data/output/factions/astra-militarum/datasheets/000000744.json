@@ -27,9 +27,18 @@
       "name": "Suppression Bombardment",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase, after this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTER</span> and <span class=\"kwb\">VEHICLE</span> units) hit by one or more of those attacks made with this model’s Griffon heavy mortar. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+      "description": "In your Shooting phase, after this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTER</span> and <span class=\"kwb\">VEHICLE</span> units) hit by one or more of those attacks made with this model's Griffon heavy mortar. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -98,7 +107,7 @@
       "datasheetId": "000000744",
       "line": 1,
       "button": "•",
-      "description": "This model’s heavy bolter can be replaced with 1 heavy flamer."
+      "description": "This model's heavy bolter can be replaced with 1 heavy flamer."
     },
     {
       "datasheetId": "000000744",
@@ -107,7 +116,32 @@
       "description": "This model can each be equipped with one of the following:<ul><li>1 heavy stubber</li><li>1 storm bolter</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000744",
+      "line": 1,
+      "description": "1 Griffon Mortar Carrier",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000744",
+      "line": 1,
+      "description": "1 model",
+      "cost": 115,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000744:griffon-heavy-mortar",
       "datasheetId": "000000744",
@@ -264,30 +298,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000744",
-      "line": 1,
-      "description": "1 Griffon Mortar Carrier",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000744",
-      "line": 1,
-      "description": "1 model",
-      "cost": 115,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

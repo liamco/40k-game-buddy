@@ -37,7 +37,52 @@
       "factionId": "",
       "description": "This model must start the battle in Reserves, but neither it nor any units embarked within it are counted towards any limits placed on the maximum number of Reserves units you can start the battle with. This model can be set up in the Reinforcements step of your first, second or third Movement phase, regardless of any mission rules. Any units embarked within this model can disembark after it has been set up on the battlefield, and if they do they must be set up more than 9\" away from all enemy models.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "RESERVES"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "1st, 2nd or 3rd Movement phase"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "DISEMBARK"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "more than 9\""
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "m",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inReserves",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -100,10 +145,37 @@
       "datasheetId": "000001991",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 combi-bolters can be replaced with one of the following<ul><li>2 heavy flamers</li><li>2 twin volkite chargers</li></ul>"
+      "description": "This model's 2 combi-bolters can be replaced with one of the following<ul><li>2 heavy flamers</li><li>2 twin volkite chargers</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001991",
+      "line": 1,
+      "description": "1 Terrax-pattern Termite",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001991",
+      "line": 1,
+      "description": "1 model",
+      "cost": 200,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001991:combi-bolter",
       "datasheetId": "000001991",
@@ -235,42 +307,6 @@
           "d": "D3+3"
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001991",
-      "line": 1,
-      "description": "1 Terrax-pattern Termite",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001991",
-      "line": 1,
-      "description": "1 model",
-      "cost": 200,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

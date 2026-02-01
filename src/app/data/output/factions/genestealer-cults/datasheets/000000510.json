@@ -3,7 +3,7 @@
   "name": "Acolyte Iconward",
   "factionId": "GC",
   "sourceId": "000000053",
-  "legend": "It is a great honour to bear the cult’s sigil aloft, out in the open for all to see. These banners are hung with pseudo-sacred artefacts, some stemming from the secretions or body of the Patriarch itself. The effect of the Acolyte Iconward’s presence upon nearby cult warriors is electrifying, driving them to new heights of violence.",
+  "legend": "It is a great honour to bear the cult's sigil aloft, out in the open for all to see. These banners are hung with pseudo-sacred artefacts, some stemming from the secretions or body of the Patriarch itself. The effect of the Acolyte Iconward's presence upon nearby cult warriors is electrifying, driving them to new heights of violence.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> autopistol; cult claws.",
   "transport": "",
@@ -37,7 +37,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability. If that unit has the Hybrid Metamorphs keyword, models in that unit have the Feel No Pain 4+ ability instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -105,7 +116,49 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000510",
+      "line": 1,
+      "description": "1 Acolyte Iconward",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000510",
+      "line": 1,
+      "description": "1 model",
+      "cost": 50,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003716",
+      "slug": "acolyte-hybrids-with-hand-flamers"
+    },
+    {
+      "id": "000000511",
+      "slug": "acolyte-hybrids-with-autopistols"
+    },
+    {
+      "id": "000000512",
+      "slug": "neophyte-hybrids"
+    },
+    {
+      "id": "000000513",
+      "slug": "hybrid-metamorphs"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Genestealer Cults",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000510:autopistol",
       "datasheetId": "000000510",
@@ -156,47 +209,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000510",
-      "line": 1,
-      "description": "1 Acolyte Iconward",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000510",
-      "line": 1,
-      "description": "1 model",
-      "cost": 50,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003716",
-      "slug": "acolyte-hybrids-with-hand-flamers"
-    },
-    {
-      "id": "000000511",
-      "slug": "acolyte-hybrids-with-autopistols"
-    },
-    {
-      "id": "000000512",
-      "slug": "neophyte-hybrids"
-    },
-    {
-      "id": "000000513",
-      "slug": "hybrid-metamorphs"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Genestealer Cults",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

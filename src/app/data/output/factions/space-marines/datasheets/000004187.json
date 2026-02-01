@@ -35,9 +35,20 @@
       "name": "Press the Attack",
       "legend": "",
       "factionId": "",
-      "description": "Weapons equipped by models in this model’s unit have the [SUSTAINED HITS 1] ability.",
+      "description": "Weapons equipped by models in this model's unit have the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +57,58 @@
       "factionId": "",
       "description": "If this model is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 2+, do not remove it from play. This model can fight after the attacking unit has finished making its attacks. If one or more enemy models are destroyed as a result of those attacks, this model regains D3 lost wounds and is not destroyed; otherwise, it is removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "d",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "d",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "d",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "d",
+              "operator": "equals",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "DEMETRIAN TITUS",
@@ -133,92 +195,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000004187:bolt-pistol",
-      "datasheetId": "000004187",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004187",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004187:master-crafted-bolter",
-      "datasheetId": "000004187",
-      "line": 2,
-      "name": "Master-crafted bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004187",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted bolter",
-          "attributes": [
-            "ASSAULT",
-            "HEAVY"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004187:master-crafted-chainsword",
-      "datasheetId": "000004187",
-      "line": 3,
-      "name": "Master-crafted chainsword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004187",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted chainsword",
-          "attributes": [
-            "ANTI-INFANTRY 2+"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004187",
       "line": 1,
-      "description": "1 Captain Titus – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Captain Titus - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -321,5 +302,86 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000004187:bolt-pistol",
+      "datasheetId": "000004187",
+      "line": 1,
+      "name": "Bolt pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000004187",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Bolt pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 3,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000004187:master-crafted-bolter",
+      "datasheetId": "000004187",
+      "line": 2,
+      "name": "Master-crafted bolter",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000004187",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Master-crafted bolter",
+          "attributes": [
+            "ASSAULT",
+            "HEAVY"
+          ],
+          "range": 24,
+          "type": "Ranged",
+          "a": 2,
+          "bsWs": 2,
+          "s": 4,
+          "ap": -1,
+          "d": 2
+        }
+      ]
+    },
+    {
+      "id": "000004187:master-crafted-chainsword",
+      "datasheetId": "000004187",
+      "line": 3,
+      "name": "Master-crafted chainsword",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000004187",
+          "line": 3,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Master-crafted chainsword",
+          "attributes": [
+            "ANTI-INFANTRY 2+"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 8,
+          "bsWs": 2,
+          "s": 5,
+          "ap": -1,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

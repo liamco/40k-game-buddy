@@ -30,9 +30,28 @@
       "name": "Death From Below",
       "legend": "",
       "factionId": "",
-      "description": "At the end of your opponent’s turn, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
+      "description": "At the end of your opponent's turn, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STRATEGIC RESERVES"
+          ],
+          "value": "true",
+          "conditions": [
+            {
+              "entity": "opponentArmy",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -98,7 +117,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000482",
+      "line": 1,
+      "description": "5 Raveners",
+      "min": 5,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000482",
+      "line": 1,
+      "description": "5 models",
+      "cost": 125,
+      "count": 5
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000482:ravener-claws-and-talons",
       "datasheetId": "000000482",
@@ -125,30 +169,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000482",
-      "line": 1,
-      "description": "5 Raveners",
-      "min": 5,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000482",
-      "line": 1,
-      "description": "5 models",
-      "cost": 125,
-      "count": 5
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

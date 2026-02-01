@@ -3,7 +3,7 @@
   "name": "Crusade Ancient",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "Carrying their crusade’s icons and sacred standards, these veteran wardens are honoured warriors of exceptional resolve and determination. They raise high the tapestries depicting the crusade’s victories and the God-Emperor’s glory, exhorting their fellow Black Templars to greater heights of weaponised hate.",
+  "legend": "Carrying their crusade's icons and sacred standards, these veteran wardens are honoured warriors of exceptional resolve and determination. They raise high the tapestries depicting the crusade's victories and the God-Emperor's glory, exhorting their fellow Black Templars to greater heights of weaponised hate.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; master-crafted power weapon.",
   "transport": "",
@@ -32,16 +32,62 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 4+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER BEING DESTROYED"
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Martial Honour",
       "legend": "",
       "factionId": "",
-      "description": "The first time a model in this model’s unit makes a melee attack that destroys one or more enemy units, until the end of the battle, while this model’s unit is not Battle-shocked, add 5 to this model’s Objective Control characteristic.",
+      "description": "The first time a model in this model's unit makes a melee attack that destroys one or more enemy units, until the end of the battle, while this model's unit is not Battle-shocked, add 5 to this model's Objective Control characteristic.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 5,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBattleShocked",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "a",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -118,7 +164,47 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004136",
+      "line": 1,
+      "description": "1 Crusade Ancient",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004136",
+      "line": 1,
+      "description": "1 model",
+      "cost": 55,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004154",
+      "slug": "crusader-squad-legendary"
+    },
+    {
+      "id": "000002799",
+      "slug": "crusader-squad"
+    },
+    {
+      "id": "000002798",
+      "slug": "sword-brethren-squad"
+    }
+  ],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004136:bolt-pistol",
       "datasheetId": "000004136",
@@ -172,46 +258,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004136",
-      "line": 1,
-      "description": "1 Crusade Ancient",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004136",
-      "line": 1,
-      "description": "1 model",
-      "cost": 55,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004154",
-      "slug": "crusader-squad-legendary"
-    },
-    {
-      "id": "000002799",
-      "slug": "crusader-squad"
-    },
-    {
-      "id": "000002798",
-      "slug": "sword-brethren-squad"
-    }
-  ],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false,
   "leaderConditions": {
     "allowedExistingLeaderKeywords": [
       "CAPTAIN",

@@ -3,7 +3,7 @@
   "name": "Eldrad Ulthran",
   "factionId": "AE",
   "sourceId": "000000186",
-  "legend": "One of the most potent Aeldari psykers ever to have lived, when Eldrad Ulthran takes to the field his enemies’ plans are already known to him. Such is Eldrad’s psychic might that he can break Titans and banish the mightiest of daemons, and over the millennia he has slain kings and champions beyond number.",
+  "legend": "One of the most potent Aeldari psykers ever to have lived, when Eldrad Ulthran takes to the field his enemies' plans are already known to him. Such is Eldrad's psychic might that he can break Titans and banish the mightiest of daemons, and over the millennia he has slain kings and champions beyond number.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> Mind War; shuriken pistol; Staff of Ulthamar and witchblade.",
   "transport": "",
@@ -41,7 +41,16 @@
       "factionId": "",
       "description": "At the end of your Movement phase, select one enemy unit within 18\" of and visible to this model. Until the start of your next Command phase, each time a friendly <span class=\"kwb\">AELDARI</span> model makes an attack that targets that enemy unit, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -118,7 +127,45 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000568",
+      "line": 1,
+      "description": "1 Eldrad Ulthran - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000568",
+      "line": 1,
+      "description": "1 model",
+      "cost": 120,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000584",
+      "slug": "warlock-conclave"
+    },
+    {
+      "id": "000000590",
+      "slug": "storm-guardians"
+    },
+    {
+      "id": "000000589",
+      "slug": "guardian-defenders"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000568:mind-war",
       "datasheetId": "000000568",
@@ -201,48 +248,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000568",
-      "line": 1,
-      "description": "1 Eldrad Ulthran – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000568",
-      "line": 1,
-      "description": "1 model",
-      "cost": 120,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000584",
-      "slug": "warlock-conclave"
-    },
-    {
-      "id": "000000590",
-      "slug": "storm-guardians"
-    },
-    {
-      "id": "000000589",
-      "slug": "guardian-defenders"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "leaderConditions": {
-    "allowedExistingLeaderKeywords": [
-      "WARLOCKS"
-    ]
-  }
+  ]
 }

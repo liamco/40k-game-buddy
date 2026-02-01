@@ -3,7 +3,7 @@
   "name": "Hekaton Land Fortress",
   "factionId": "LoV",
   "sourceId": "000000203",
-  "legend": "The iconic battle tank and armoured transport of the Leagues of Votann, the Hekaton Land Fortress is as venerable and well-respected as it is powerful. With a fearsome arsenal of heavy weaponry and tremendously resilient armour – and with the ability to bear bands of Kin soldiery into battle – it is a versatile military asset.",
+  "legend": "The iconic battle tank and armoured transport of the Leagues of Votann, the Hekaton Land Fortress is as venerable and well-respected as it is powerful. With a fearsome arsenal of heavy weaponry and tremendously resilient armour - and with the ability to bear bands of Kin soldiery into battle - it is a versatile military asset.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> cyclic ion cannon; MATR autocannon; 2 twin bolt cannons; armoured wheels; pan spectral scanner.",
   "transport": "This model has a transport capacity of 14 Leagues of Votann Infantry models. Each Exoarmour, Exoframe or Ironkin Steeljacks model takes up the space of 2 models. It cannot transport Artillery models.",
@@ -31,7 +31,7 @@
       "name": "MultiCOG Targeting",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model makes a ranged attack, you can ignore any or all modifiers to the following: that attack’s Ballistic Skill characteristic; the Hit roll.",
+      "description": "Each time this model makes a ranged attack, you can ignore any or all modifiers to the following: that attack's Ballistic Skill characteristic; the Hit roll.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -40,7 +40,7 @@
       "name": "Panspectral Scanner",
       "legend": "",
       "factionId": "",
-      "description": "Each time a model in the bearer’s unit makes a ranged attack, re-roll a Hit roll of 1.",
+      "description": "Each time a model in the bearer's unit makes a ranged attack, re-roll a Hit roll of 1.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -101,22 +101,47 @@
       "datasheetId": "000002604",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 twin bolt cannons can be replaced with one of the following:<ul><li>1 twin bolt cannon and 1 twin ion beamer</li><li>2 twin ion beamers</li></ul>"
+      "description": "This model's 2 twin bolt cannons can be replaced with one of the following:<ul><li>1 twin bolt cannon and 1 twin ion beamer</li><li>2 twin ion beamers</li></ul>"
     },
     {
       "datasheetId": "000002604",
       "line": 2,
       "button": "•",
-      "description": "This model’s cyclic ion cannon can be replaced with one of the following:<ul><li>1 SP heavy conversion beamer</li><li>1 heavy magna-rail cannon</li></ul>"
+      "description": "This model's cyclic ion cannon can be replaced with one of the following:<ul><li>1 SP heavy conversion beamer</li><li>1 heavy magna-rail cannon</li></ul>"
     },
     {
       "datasheetId": "000002604",
       "line": 3,
       "button": "•",
-      "description": "This model’s panspectral scanner can be replaced with 1 Hekaton warhead."
+      "description": "This model's panspectral scanner can be replaced with 1 Hekaton warhead."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002604",
+      "line": 1,
+      "description": "1 Hekaton Land Fortress",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002604",
+      "line": 1,
+      "description": "1 model",
+      "cost": 240,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002604:cyclic-ion-cannon",
       "datasheetId": "000002604",
@@ -328,40 +353,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002604",
-      "line": 1,
-      "description": "1 Hekaton Land Fortress",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002604",
-      "line": 1,
-      "description": "1 model",
-      "cost": 240,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

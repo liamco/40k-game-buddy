@@ -32,16 +32,50 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "Stratagem"
+              ],
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Speed of the Hunter",
       "legend": "",
       "factionId": "",
-      "description": "Add 1 to Advance and Charge rolls made for this model’s unit.",
+      "description": "Add 1 to Advance and Charge rolls made for this model's unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +84,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 7.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 7
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -125,22 +168,54 @@
       "datasheetId": "000000284",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 combi-weapon</li><li>1 master-crafted boltgun</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 power fist</li><li>1 relic weapon</li><li>1 thunder hammer</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 combi-weapon</li><li>1 master-crafted boltgun</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 power fist</li><li>1 relic weapon</li><li>1 thunder hammer</li></ul>"
     },
     {
       "datasheetId": "000000284",
       "line": 2,
       "button": "•",
-      "description": "This model’s relic weapon can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 power fist</li><li>1 thunder hammer</li><li>1 relic shield and 1 close combat weapon</li></ul>"
+      "description": "This model's relic weapon can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 power fist</li><li>1 thunder hammer</li><li>1 relic shield and 1 close combat weapon</li></ul>"
     },
     {
       "datasheetId": "000000284",
       "line": 3,
       "button": "•",
-      "description": "This model’s bolt pistol and relic weapon can be replaced with 1 twin lightning claws."
+      "description": "This model's bolt pistol and relic weapon can be replaced with 1 twin lightning claws."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000284",
+      "line": 1,
+      "description": "1 Wolf Lord on Thunderwolf",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000284",
+      "line": 1,
+      "description": "1 model",
+      "cost": 100,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000322",
+      "slug": "thunderwolf-cavalry"
+    }
+  ],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves (Legends)",
+  "supplementLabel": "Space Wolves (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000284:bolt-pistol",
       "datasheetId": "000000284",
@@ -231,7 +306,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -248,7 +323,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -439,37 +514,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000284",
-      "line": 1,
-      "description": "1 Wolf Lord on Thunderwolf",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000284",
-      "line": 1,
-      "description": "1 model",
-      "cost": 100,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000322",
-      "slug": "thunderwolf-cavalry"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves (Legends)",
-  "supplementLabel": "Space Wolves (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

@@ -41,7 +41,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability against mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -560,22 +571,56 @@
       "datasheetId": "000004039",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 combi-bolter</li><li>1 combi-weapon</li><li>1 accursed weapon</li><li>1 power fist</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 combi-bolter</li><li>1 combi-weapon</li><li>1 accursed weapon</li><li>1 power fist</li></ul>"
     },
     {
       "datasheetId": "000004039",
       "line": 2,
       "button": "•",
-      "description": "This model’s Astartes chainsword can be replaced with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li><li>1 accursed weapon</li><li>1 power fist</li></ul>"
+      "description": "This model's Astartes chainsword can be replaced with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li><li>1 accursed weapon</li><li>1 power fist</li></ul>"
     },
     {
       "datasheetId": "000004039",
       "line": 3,
       "button": "•",
-      "description": "This model’s bolt pistol and Astartes chainsword can be replaced with 1 paired accursed weapons."
+      "description": "This model's bolt pistol and Astartes chainsword can be replaced with 1 paired accursed weapons."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004039",
+      "line": 1,
+      "description": "1 Chaos Lord on Disc of Tzeentch",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004039",
+      "line": 1,
+      "description": "1 model",
+      "cost": 100,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004064",
+      "slug": "legionaries"
+    },
+    {
+      "id": "000004044",
+      "slug": "chosen"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000004039:paired-accursed-weapons",
       "datasheetId": "000004039",
@@ -790,7 +835,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -807,7 +852,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -822,39 +867,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004039",
-      "line": 1,
-      "description": "1 Chaos Lord on Disc of Tzeentch",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004039",
-      "line": 1,
-      "description": "1 model",
-      "cost": 100,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004064",
-      "slug": "legionaries"
-    },
-    {
-      "id": "000004044",
-      "slug": "chosen"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

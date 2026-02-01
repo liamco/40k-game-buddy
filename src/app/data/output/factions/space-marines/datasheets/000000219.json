@@ -3,7 +3,7 @@
   "name": "Belial",
   "factionId": "SM",
   "sourceId": "000000023",
-  "legend": "Belial is a warrior born – a killer whose skill in battle has always stood out, even amongst his post-human brethren. For all his ability he is a staunch perfectionist, chastising himself for every perceived weakness. In battle he wields the Sword of Silence, an obsidian Chapter relic that seems to swallow nearby sound.",
+  "legend": "Belial is a warrior born - a killer whose skill in battle has always stood out, even amongst his post-human brethren. For all his ability he is a staunch perfectionist, chastising himself for every perceived weakness. In battle he wields the Sword of Silence, an obsidian Chapter relic that seems to swallow nearby sound.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> master-crafted storm bolter; the Sword of Silence.",
   "transport": "",
@@ -36,16 +36,62 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, if a Critical Hit is scored, that attack has the [PRECISION] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "PRECISION"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "h",
+              "operator": "greaterThanOrEqualTo",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Strikes of Retribution",
       "legend": "",
       "factionId": "",
-      "description": "Each time a melee attack is allocated to this model, after the attacking model’s unit has finished making its attacks, roll one D6 (to a maximum of six D6 per attacking unit): for each 4+, the attacking unit suffers 1 mortal wound.",
+      "description": "Each time a melee attack is allocated to this model, after the attacking model's unit has finished making its attacks, roll one D6 (to a maximum of six D6 per attacking unit): for each 4+, the attacking unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "operator": "greaterThanOrEqualTo",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -128,66 +174,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000000219:master-crafted-storm-bolter",
-      "datasheetId": "000000219",
-      "line": 1,
-      "name": "Master-crafted storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000219",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted storm bolter",
-          "attributes": [
-            "PRECISION",
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000219:the-sword-of-silence",
-      "datasheetId": "000000219",
-      "line": 2,
-      "name": "The Sword of Silence",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000219",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "The Sword of Silence",
-          "attributes": [
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000219",
       "line": 1,
-      "description": "1 Belial – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Belial - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -242,5 +233,60 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Dark Angels",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000000219:master-crafted-storm-bolter",
+      "datasheetId": "000000219",
+      "line": 1,
+      "name": "Master-crafted storm bolter",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000219",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Master-crafted storm bolter",
+          "attributes": [
+            "PRECISION",
+            "RAPID FIRE 2"
+          ],
+          "range": 24,
+          "type": "Ranged",
+          "a": 2,
+          "bsWs": 2,
+          "s": 4,
+          "ap": 0,
+          "d": 2
+        }
+      ]
+    },
+    {
+      "id": "000000219:the-sword-of-silence",
+      "datasheetId": "000000219",
+      "line": 2,
+      "name": "The Sword of Silence",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000219",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "The Sword of Silence",
+          "attributes": [
+            "PRECISION"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 6,
+          "bsWs": 2,
+          "s": 6,
+          "ap": -2,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

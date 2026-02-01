@@ -3,9 +3,9 @@
   "name": "Sergeant Chronus",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "The roar of engines and the thunder of heavy weaponry herald Sergeant Chronus’ arrival on the battlefield. Enemy gunners watch aghast as Chronus’ tank shrugs off damage that should have seen it destroyed several times over, before it swings its turret round to blast them apart with unerring volleys.",
+  "legend": "The roar of engines and the thunder of heavy weaponry herald Sergeant Chronus' arrival on the battlefield. Enemy gunners watch aghast as Chronus' tank shrugs off damage that should have seen it destroyed several times over, before it swings its turret round to blast them apart with unerring volleys.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; Chronus’ servo-arm.",
+  "loadout": "<b>This model is equipped with:</b> bolt pistol; Chronus' servo-arm.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -28,7 +28,30 @@
       "factionId": "",
       "description": "While this model is commanding a <span class=\"kwb\">VEHICLE</span> model (see below): <br><ul><li>Ranged weapons equipped by that <span class=\"kwb\">VEHICLE</span> model have a Ballistic Skill characteristic of 2+. </li><li>Each time that <span class=\"kwb\">VEHICLE</span> model is selected to shoot, you can re-roll one Wound roll when resolving those attacks.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "bsWs",
+          "value": "2+"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -37,11 +60,88 @@
       "factionId": "",
       "description": "When this model disembarks from a <span class=\"kwb\">VEHICLE</span> model it was commanding, it has the Lone Operative ability until the end of the battle.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "TANK COMMANDER",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If your army includes one or more of the <span class=\"kwb\">VEHICLE</span> models listed below, Sergeant Chronus must start the battle embarked within one of those models as if it were a Transport. Sergeant Chronus can only disembark from that <span class=\"kwb\">VEHICLE</span> if it is destroyed. While embarked in this way, Sergeant Chronus is said to be commanding that <span class=\"kwb\">VEHICLE</span>. <br><ul><li>Hunter                        </li><li>Predator Annihilator </li><li>Land Raider                   </li><li>Predator Destructor </li><li>Land Raider Crusader          </li><li>Stalker </li><li>Land Raider Redeemer          </li><li>Vindicator </li><li>Whirlwind</li></ul>",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "COMMANDING VEHICLE"
+          ],
+          "value": "true"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "embarked"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isBelowHalfStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsKeyword",
+          "keywords": [
+            "VEHICLE"
+          ],
+          "value": "true"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "DISENGAGE ON DESTRUCTION"
+          ],
+          "value": "true"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -113,7 +213,34 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001524",
+      "line": 1,
+      "description": "1 Sergeant Chronus - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001524",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001524:bolt-pistol",
       "datasheetId": "000001524",
@@ -144,7 +271,7 @@
       "id": "000001524:chronus-servo-arm",
       "datasheetId": "000001524",
       "line": 2,
-      "name": "Chronus’ servo-arm",
+      "name": "Chronus' servo-arm",
       "type": "Melee",
       "profiles": [
         {
@@ -152,7 +279,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Chronus’ servo-arm",
+          "name": "Chronus' servo-arm",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -164,32 +291,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001524",
-      "line": 1,
-      "description": "1 Sergeant Chronus – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001524",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

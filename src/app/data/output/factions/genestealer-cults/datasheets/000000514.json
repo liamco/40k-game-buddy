@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "While a Character is leading this unit, each time an attack targets this unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -84,32 +93,6 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000000514:aberrant-weapons",
-      "datasheetId": "000000514",
-      "line": 1,
-      "name": "Aberrant weapons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000514",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Aberrant weapons",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000514",
@@ -148,5 +131,31 @@
   "roleLabel": "Other",
   "sourceName": "Faction Pack: Genestealer Cults",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000000514:aberrant-weapons",
+      "datasheetId": "000000514",
+      "line": 1,
+      "name": "Aberrant weapons",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000514",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Aberrant weapons",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 3,
+          "bsWs": 3,
+          "s": 7,
+          "ap": -2,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "While an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is within 6\" of this unit, each time a model in that unit makes a melee attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -285,7 +294,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004056",
+      "line": 1,
+      "description": "16 Mutoid Vermin",
+      "min": 16,
+      "max": 16
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004056",
+      "line": 1,
+      "description": "16 models",
+      "cost": 85,
+      "count": 16
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000004056:diseased-claws-and-fangs",
       "datasheetId": "000004056",
@@ -312,30 +346,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004056",
-      "line": 1,
-      "description": "16 Mutoid Vermin",
-      "min": 16,
-      "max": 16
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004056",
-      "line": 1,
-      "description": "16 models",
-      "cost": 85,
-      "count": 16
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

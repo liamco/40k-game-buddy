@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time an attack targets that unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -364,7 +373,41 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004068",
+      "line": 1,
+      "description": "1 Sorcerer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004068",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004044",
+      "slug": "chosen"
+    },
+    {
+      "id": "000004064",
+      "slug": "legionaries"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004068:bolt-pistol",
       "datasheetId": "000004068",
@@ -429,7 +472,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Infernal Gaze – witchfire",
+          "name": "Infernal Gaze - witchfire",
           "attributes": [
             "PSYCHIC"
           ],
@@ -446,7 +489,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Infernal Gaze – focused witchfire",
+          "name": "Infernal Gaze - focused witchfire",
           "attributes": [
             "DEVASTATING WOUNDS",
             "HAZARDOUS",
@@ -462,39 +505,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004068",
-      "line": 1,
-      "description": "1 Sorcerer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004068",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004044",
-      "slug": "chosen"
-    },
-    {
-      "id": "000004064",
-      "slug": "legionaries"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

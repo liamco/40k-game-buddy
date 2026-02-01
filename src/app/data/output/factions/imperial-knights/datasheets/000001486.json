@@ -3,7 +3,7 @@
   "name": "Knight Valiant",
   "factionId": "QI",
   "sourceId": "000000034",
-  "legend": "This looming Knight defeats the Imperium’s enemies through overwhelming firepower at close range. Amidst its barrage of cannon fire and missile strikes, it unleashes an inescapable firestorm that can annihilate incoming hordes or smash through opposing battle lines, while with its crackling harpoon, it can destroy far larger behemoths with impunity.",
+  "legend": "This looming Knight defeats the Imperium's enemies through overwhelming firepower at close range. Amidst its barrage of cannon fire and missile strikes, it unleashes an inescapable firestorm that can annihilate incoming hordes or smash through opposing battle lines, while with its crackling harpoon, it can destroy far larger behemoths with impunity.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> conflagration cannon; 2 shieldbreaker missile launchers; thundercoil harpoon; 2 twin meltaguns; twin siegebreaker cannon; titanic feet.",
   "transport": "",
@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-10",
-  "damagedDescription": "While this model has 1‑10 wounds remaining, subtract 5 from this model’s Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1‑10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/imperial-knights/Knight-Valiant",
   "slug": "knight-valiant",
   "factionSlug": "imperial-knights",
@@ -44,7 +44,7 @@
       "name": "Thundershock",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase, each time you select a target for this model’s thundercoil harpoon, roll one D6 for the target unit and one D6 for each other enemy unit within 6\" of the target unit. On a 4+, the unit being rolled for is struck by arcing energies; after resolving all of this model’s attacks against the target unit, each unit struck by arcing energies suffers D3 mortal wounds.",
+      "description": "In your Shooting phase, each time you select a target for this model's thundercoil harpoon, roll one D6 for the target unit and one D6 for each other enemy unit within 6\" of the target unit. On a 4+, the unit being rolled for is struck by arcing energies; after resolving all of this model's attacks against the target unit, each unit struck by arcing energies suffers D3 mortal wounds.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -127,10 +127,35 @@
       "datasheetId": "000001486",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 shieldbreaker missile launchers and twin siegebreaker cannon can be replaced with 1 shieldbreaker missile launcher and 2 twin siegebreaker cannons."
+      "description": "This model's 2 shieldbreaker missile launchers and twin siegebreaker cannon can be replaced with 1 shieldbreaker missile launcher and 2 twin siegebreaker cannons."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001486",
+      "line": 1,
+      "description": "1 Knight Valiant",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001486",
+      "line": 1,
+      "description": "1 model",
+      "cost": 410,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Imperial Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001486:conflagration-cannon",
       "datasheetId": "000001486",
@@ -289,46 +314,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001486",
-      "line": 1,
-      "description": "1 Knight Valiant",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001486",
-      "line": 1,
-      "description": "1 model",
-      "cost": 410,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Imperial Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 10,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 5
     }
   ]
 }

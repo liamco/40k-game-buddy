@@ -3,7 +3,7 @@
   "name": "Dark Apostle",
   "factionId": "CSM",
   "sourceId": "000000012",
-  "legend": "Dark Apostles are the high priests of the Dark Gods. They preach catechisms from blasphemous texts, issuing prayers that call down the Ruinous Powers’ wrath. As they crush skulls with blows from their accursed crozius, they roar profane blessings using their deadliest weapon: their voice.",
+  "legend": "Dark Apostles are the high priests of the Dark Gods. They preach catechisms from blasphemous texts, issuing prayers that call down the Ruinous Powers' wrath. As they crush skulls with blows from their accursed crozius, they roar profane blessings using their deadliest weapon: their voice.",
   "role": "Characters",
   "loadout": "<b>The Dark Apostle is equipped with:</b> bolt pistol; accursed crozius. <br><br><b>Every Dark Disciple is equipped with:</b> close combat weapon.",
   "transport": "",
@@ -32,14 +32,23 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a <span class=\"kwb\">DARK</span> <span class=\"kwb\">APOSTLE</span> model, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Demagogue",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, at the start of any phase, you can select one friendly <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span> unit that is Battle-shocked and within 12\" of this unit’s <span class=\"kwb\">DARK</span> <span class=\"kwb\">APOSTLE</span> model. That unit is no longer Battle-shocked.",
+      "description": "Once per battle, at the start of any phase, you can select one friendly <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span> unit that is Battle-shocked and within 12\" of this unit's <span class=\"kwb\">DARK</span> <span class=\"kwb\">APOSTLE</span> model. That unit is no longer Battle-shocked.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -124,7 +133,60 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000936",
+      "line": 1,
+      "description": "1 Dark Apostle",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000936",
+      "line": 2,
+      "description": "2 Dark Disciples",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000936",
+      "line": 1,
+      "description": "3 models",
+      "cost": 65,
+      "count": 3
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000952",
+      "slug": "chosen-2"
+    },
+    {
+      "id": "000000946",
+      "slug": "cultist-mob-2"
+    },
+    {
+      "id": "000002571",
+      "slug": "accursed-cultists-2"
+    },
+    {
+      "id": "000002570",
+      "slug": "legionaries-2"
+    },
+    {
+      "id": "000003876",
+      "slug": "nemesis-claw"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000936:bolt-pistol",
       "datasheetId": "000000936",
@@ -199,58 +261,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000936",
-      "line": 1,
-      "description": "1 Dark Apostle",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000936",
-      "line": 2,
-      "description": "2 Dark Disciples",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000936",
-      "line": 1,
-      "description": "3 models",
-      "cost": 65,
-      "count": 3
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000952",
-      "slug": "chosen-2"
-    },
-    {
-      "id": "000000946",
-      "slug": "cultist-mob-2"
-    },
-    {
-      "id": "000002571",
-      "slug": "accursed-cultists-2"
-    },
-    {
-      "id": "000002570",
-      "slug": "legionaries-2"
-    },
-    {
-      "id": "000003876",
-      "slug": "nemesis-claw"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

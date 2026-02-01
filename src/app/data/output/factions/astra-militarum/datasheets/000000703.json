@@ -3,7 +3,7 @@
   "name": "Banehammer",
   "factionId": "AM",
   "sourceId": "000000016",
-  "legend": "Where the Banehammer excels is as a defensive anchor in the Imperial Guard’s formations. Those enemies not blasted apart by its tremor cannon’s shells are brought to a crawl as the ground splits beneath them. The stunned foe is then forced to push slowly forward beneath a further barrage, or else retreat in disarray.",
+  "legend": "Where the Banehammer excels is as a defensive anchor in the Imperial Guard's formations. Those enemies not blasted apart by its tremor cannon's shells are brought to a crawl as the ground splits beneath them. The stunned foe is then forced to push slowly forward beneath a further barrage, or else retreat in disarray.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 lascannons; tremor cannon; twin heavy bolter; 2 twin heavy flamers; armoured tracks.",
   "transport": "This model has a transport capacity of 26 Astra Militarum Infantry models. Each Ogryn model takes up the space of 3 models. It cannot transport Artillery models.",
@@ -32,7 +32,7 @@
       "name": "Tremor Quake",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase, just after selecting a target for this model’s tremor cannon, the target unit and every other enemy <span class=\"kwb\">INFANTRY</span> unit within 3\" of that unit must take a Battle-shock test.",
+      "description": "In your Shooting phase, just after selecting a target for this model's tremor cannon, the target unit and every other enemy <span class=\"kwb\">INFANTRY</span> unit within 3\" of that unit must take a Battle-shock test.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -103,7 +103,7 @@
       "datasheetId": "000000703",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 twin heavy flamers can be replaced with 2 twin heavy bolters."
+      "description": "This model's 2 twin heavy flamers can be replaced with 2 twin heavy bolters."
     },
     {
       "datasheetId": "000000703",
@@ -112,7 +112,32 @@
       "description": "This model can be equipped with one of the following:<ul><li>2 lascannons and 2 twin heavy bolters</li><li>2 lascannons and 2 twin heavy flamers</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000703",
+      "line": 1,
+      "description": "1 Banehammer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000703",
+      "line": 1,
+      "description": "1 model",
+      "cost": 420,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000703:lascannon",
       "datasheetId": "000000703",
@@ -241,46 +266,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000703",
-      "line": 1,
-      "description": "1 Banehammer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000703",
-      "line": 1,
-      "description": "1 model",
-      "cost": 420,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 8,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

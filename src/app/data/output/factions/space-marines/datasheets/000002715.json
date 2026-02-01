@@ -33,7 +33,26 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets an <span class=\"kwb\">INFANTRY</span> unit, improve the Armour Penetration characteristic of that attack by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "INFANTRY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -109,7 +128,34 @@
       "description": "This model can be equipped with 1 storm bolter."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002715",
+      "line": 1,
+      "description": "1 Predator Destructor",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002715",
+      "line": 1,
+      "description": "1 model",
+      "cost": 140,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002715:heavy-bolter",
       "datasheetId": "000002715",
@@ -261,42 +307,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002715",
-      "line": 1,
-      "description": "1 Predator Destructor",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002715",
-      "line": 1,
-      "description": "1 model",
-      "cost": 140,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

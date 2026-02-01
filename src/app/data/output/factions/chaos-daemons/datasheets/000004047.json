@@ -41,7 +41,18 @@
       "factionId": "",
       "description": "While this unit contains a Traitor Ogryn model, <span class=\"kwb\">CHARACTER</span> models in this unit have the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -386,7 +397,44 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004047",
+      "line": 1,
+      "description": "1 Traitor Enforcer",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004047",
+      "line": 2,
+      "description": "1 Traitor Ogryn",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004047",
+      "line": 1,
+      "description": "2 models",
+      "cost": 55,
+      "count": 2
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004054",
+      "slug": "traitor-guardsmen-squad"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004047:ogryn-weapons",
       "datasheetId": "000004047",
@@ -461,42 +509,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004047",
-      "line": 1,
-      "description": "1 Traitor Enforcer",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004047",
-      "line": 2,
-      "description": "1 Traitor Ogryn",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004047",
-      "line": 1,
-      "description": "2 models",
-      "cost": 55,
-      "count": 2
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004054",
-      "slug": "traitor-guardsmen-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

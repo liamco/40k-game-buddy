@@ -32,7 +32,26 @@
       "factionId": "",
       "description": "Each time this unit ends a Charge move, until the end of the turn, melee weapons equipped by models in this unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +60,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -125,7 +153,48 @@
       "description": "Any number of models can each have their bolt pistol replaced one of the following:<ul><li>1 storm shield</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000147",
+      "line": 1,
+      "description": "1 Vanguard Veteran Sergeant with Jump Pack",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000147",
+      "line": 2,
+      "description": "4-9 Vanguard Veterans with Jump Packs",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000147",
+      "line": 1,
+      "description": "5 models",
+      "cost": 100,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000147",
+      "line": 2,
+      "description": "10 models",
+      "cost": 200,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000147:bolt-pistol",
       "datasheetId": "000000147",
@@ -246,7 +315,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -263,7 +332,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -302,46 +371,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000147",
-      "line": 1,
-      "description": "1 Vanguard Veteran Sergeant with Jump Pack",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000147",
-      "line": 2,
-      "description": "4-9 Vanguard Veterans with Jump Packs",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000147",
-      "line": 1,
-      "description": "5 models",
-      "cost": 100,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000147",
-      "line": 2,
-      "description": "10 models",
-      "cost": 200,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

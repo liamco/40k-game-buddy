@@ -3,9 +3,9 @@
   "name": "Command Squad",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "Command Squads accompany a Chapter’s high-ranking officers. These veterans and specialists serve as honour guards and provide vital support to a commander. Champions defend their Company with martial excellence, Ancients guard its inspirational relic banners and Apothecaries tend to injuries or preserve the gene-seed of the fallen.",
+  "legend": "Command Squads accompany a Chapter's high-ranking officers. These veterans and specialists serve as honour guards and provide vital support to a commander. Champions defend their Company with martial excellence, Ancients guard its inspirational relic banners and Apothecaries tend to injuries or preserve the gene-seed of the fallen.",
   "role": "Other",
-  "loadout": "<b>The Apothecary is equipped with: </b>bolt pistol; Astartes chainsword. <br><br><b>The Company Ancient is equipped with:</b> bolt pistol; close combat weapon. <br><br><b>The Company Champion is equipped with:</b> bolt pistol; Champion’s blade; Astartes shield. <br><br><b>Each Company Veteran is equipped with:</b> bolt pistol; boltgun, close combat weapon.",
+  "loadout": "<b>The Apothecary is equipped with: </b>bolt pistol; Astartes chainsword. <br><br><b>The Company Ancient is equipped with:</b> bolt pistol; close combat weapon. <br><br><b>The Company Champion is equipped with:</b> bolt pistol; Champion's blade; Astartes shield. <br><br><b>Each Company Veteran is equipped with:</b> bolt pistol; boltgun, close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -28,7 +28,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -37,7 +46,34 @@
       "factionId": "",
       "description": "While this unit contains an <span class=\"kwb\">APOTHECARY</span>, in your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTER</span> models) to this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RETURN MODEL"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "APOTHECARY"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +82,26 @@
       "factionId": "",
       "description": "While this unit contains a Company Ancient, add 1 to the Objective Control characteristic of models in this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "COMPANY ANCIENT"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -55,11 +110,39 @@
       "factionId": "",
       "description": "While this unit contains a Company Champion, add 1 to Advance and Charge rolls made for this unit and you can target this unit with the Heroic Intervention Stratagem for 0CP, even if you have already used that Stratagem on a different unit this phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "HEROIC INTERVENTION"
+          ],
+          "value": "0CP"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNITS",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character unit from your army with the Leader ability can be attached to a Company Heroes unit, it can also be attached to this unit.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -134,7 +217,7 @@
       "datasheetId": "000002103",
       "line": 4,
       "button": "•",
-      "description": "The Company Ancient’s bolt pistol can be replaced  with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li></ul>"
+      "description": "The Company Ancient's bolt pistol can be replaced  with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li></ul>"
     },
     {
       "datasheetId": "000002103",
@@ -143,7 +226,55 @@
       "description": "Any number of Company Veterans can each have their boltgun replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 Astartes shield</li><li>1 combi-weapon</li><li>1 flamer</li><li>1 heavy bolter</li><li>1 heavy flamer</li><li>1 grav-cannon</li><li>1 grav-gun</li><li>1 lascannon</li><li>1 meltagun</li><li>1 missile launcher</li><li>1 multi-melta</li><li>1 plasma cannon</li><li>1 plasma gun</li><li>1 storm bolter</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002103",
+      "line": 1,
+      "description": "1 Apothecary",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002103",
+      "line": 2,
+      "description": "1 Company Ancient",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002103",
+      "line": 3,
+      "description": "1 Company Champion",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002103",
+      "line": 4,
+      "description": "2 Company Veterans",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002103",
+      "line": 1,
+      "description": "5 models",
+      "cost": 165,
+      "count": 5
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002103:bolt-pistol",
       "datasheetId": "000002103",
@@ -501,7 +632,7 @@
           "line": 14,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – frag",
+          "name": "Missile launcher - frag",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -519,7 +650,7 @@
           "line": 15,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – krak",
+          "name": "Missile launcher - krak",
           "attributes": [
             "HEAVY"
           ],
@@ -572,7 +703,7 @@
           "line": 17,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma cannon – standard",
+          "name": "Plasma cannon - standard",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -590,7 +721,7 @@
           "line": 18,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma cannon – supercharge",
+          "name": "Plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS",
@@ -618,7 +749,7 @@
           "line": 19,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -635,7 +766,7 @@
           "line": 20,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -662,7 +793,7 @@
           "line": 21,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -679,7 +810,7 @@
           "line": 22,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -772,7 +903,7 @@
       "id": "000002103:champion-s-blade",
       "datasheetId": "000002103",
       "line": 26,
-      "name": "Champion’s blade",
+      "name": "Champion's blade",
       "type": "Melee",
       "profiles": [
         {
@@ -780,7 +911,7 @@
           "line": 26,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Champion’s blade",
+          "name": "Champion's blade",
           "attributes": [
             "PRECISION"
           ],
@@ -894,53 +1025,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002103",
-      "line": 1,
-      "description": "1 Apothecary",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002103",
-      "line": 2,
-      "description": "1 Company Ancient",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002103",
-      "line": 3,
-      "description": "1 Company Champion",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002103",
-      "line": 4,
-      "description": "2 Company Veterans",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002103",
-      "line": 1,
-      "description": "5 models",
-      "cost": 165,
-      "count": 5
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

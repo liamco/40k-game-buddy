@@ -2,15 +2,21 @@ import React from "react";
 import clx from "classnames";
 
 enum Colors {
+    "inherit" = "fill-inherit",
+    "currentColor" = "fill-[currentColor]",
     "default" = "fill-skarsnikGreen",
     "deathWorldForest" = "fill-deathWorldForest",
     "fireDragonBright" = "fill-fireDragonBright",
+    "mournfangBrown" = "fill-mournfangBrown",
+    "wildRiderRed" = "fill-wildRiderRed",
+    "skarsnikGreen" = "fill-skarsnikGreen",
 }
 
 enum Sizes {
     "small" = "w-3 h-3",
     "medium" = "w-4 h-4",
     "large" = "w-6 h-6",
+    "xlarge" = "w-8 h-8",
 }
 
 interface Props {
@@ -24,7 +30,7 @@ interface Props {
 }
 
 const BaseIcon = ({ children, size = "medium", width, height, viewBox = "0 0 24 24", color = "default", className }: Props) => {
-    const classNames = clx("pointer-events-none", className, Sizes[size], Colors[color]);
+    const classNames = clx("inline-block pointer-events-none", className, Sizes[size], Colors[color]);
     return (
         <svg viewBox={viewBox} className={classNames} width={width} height={height}>
             {children}

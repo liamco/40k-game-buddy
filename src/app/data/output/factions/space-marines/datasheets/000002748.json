@@ -3,7 +3,7 @@
   "name": "Ravenwing Command Squad",
   "factionId": "SM",
   "sourceId": "000000023",
-  "legend": "Ravenwing Command Squads speed into battle at the very head of the hunt. With their champion ready to duel for the honour of the Company, the Ancient’s banner fluttering in the wind like a knightly pennant, and the Apothecary on hand to heal the most grievous injuries, these formidable warriors aid their comrades in running down even the most dangerous quarry.",
+  "legend": "Ravenwing Command Squads speed into battle at the very head of the hunt. With their champion ready to duel for the honour of the Company, the Ancient's banner fluttering in the wind like a knightly pennant, and the Apothecary on hand to heal the most grievous injuries, these formidable warriors aid their comrades in running down even the most dangerous quarry.",
   "role": "Characters",
   "loadout": "<b>The Ravenwing Champion is equipped with:</b> bolt pistol; plasma talon; master-crafted power weapon.<br><br><b>Every other model is equipped with:</b> bolt pistol; plasma talon; Black Knight combat weapon.",
   "transport": "",
@@ -32,7 +32,26 @@
       "factionId": "",
       "description": "While this unit contains a Ravenwing Apothecary, in your Command phase, you can return 1 destroyed model (excluding Character and Invader ATV models) to this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RETURN MODEL"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +60,27 @@
       "factionId": "",
       "description": "While this unit contains an Ravenwing Ancient, add 1 to the Objective Control characteristic of models in this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attributes": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "equals",
+              "value": "Ravenwing Ancient"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +89,30 @@
       "factionId": "",
       "description": "While this unit contains a Ravenwing Champion, add 1 to Advance and Charge rolls made for this unit and you can target this unit with the Heroic Intervention Stratagem for 0CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "HEROIC INTERVENTION"
+          ],
+          "value": "0CP"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -125,10 +187,68 @@
       "datasheetId": "000002748",
       "line": 1,
       "button": "•",
-      "description": "For every 3 models in this unit, 1 model’s plasma talon can be replaced with 1 Astartes grenade launcher."
+      "description": "For every 3 models in this unit, 1 model's plasma talon can be replaced with 1 Astartes grenade launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002748",
+      "line": 1,
+      "description": "1 Ravenwing Champion",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002748",
+      "line": 2,
+      "description": "1 Ravenwing Apothecary",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002748",
+      "line": 3,
+      "description": "1 Ravenwing Ancient",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002748",
+      "line": 1,
+      "description": "3 models",
+      "cost": 120,
+      "count": 3
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002712",
+      "slug": "outrider-squad"
+    },
+    {
+      "id": "000000241",
+      "slug": "ravenwing-black-knights"
+    },
+    {
+      "id": "000000116",
+      "slug": "bike-squad"
+    },
+    {
+      "id": "000001166",
+      "slug": "company-veterans-on-bikes"
+    }
+  ],
+  "supplementSlug": "dark-angels",
+  "supplementName": "Dark Angels",
+  "supplementLabel": "Dark Angels",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002748:astartes-grenade-launcher",
       "datasheetId": "000002748",
@@ -141,7 +261,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Astartes grenade launcher – frag",
+          "name": "Astartes grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -158,7 +278,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Astartes grenade launcher – krak",
+          "name": "Astartes grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -208,7 +328,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma talon – standard",
+          "name": "Plasma talon - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -225,7 +345,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma talon – supercharge",
+          "name": "Plasma talon - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -290,63 +410,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002748",
-      "line": 1,
-      "description": "1 Ravenwing Champion",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002748",
-      "line": 2,
-      "description": "1 Ravenwing Apothecary",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002748",
-      "line": 3,
-      "description": "1 Ravenwing Ancient",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002748",
-      "line": 1,
-      "description": "3 models",
-      "cost": 120,
-      "count": 3
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002712",
-      "slug": "outrider-squad"
-    },
-    {
-      "id": "000000241",
-      "slug": "ravenwing-black-knights"
-    },
-    {
-      "id": "000000116",
-      "slug": "bike-squad"
-    },
-    {
-      "id": "000001166",
-      "slug": "company-veterans-on-bikes"
-    }
-  ],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

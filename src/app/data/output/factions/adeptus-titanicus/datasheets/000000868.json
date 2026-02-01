@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-20",
-  "damagedDescription": "While this model has 1-20 wounds remaining, subtract 10 from this model’s Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1-20 wounds remaining, subtract 10 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-titanicus/Reaver-Titan",
   "slug": "reaver-titan",
   "factionSlug": "adeptus-titanicus",
@@ -31,7 +31,7 @@
       "name": "Striding Colossus",
       "legend": "",
       "factionId": "",
-      "description": "Each time you target this model with a Stratagem, you must spend three times that Stratagem’s stated CP cost to do so.",
+      "description": "Each time you target this model with a Stratagem, you must spend three times that Stratagem's stated CP cost to do so.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -111,16 +111,41 @@
       "datasheetId": "000000868",
       "line": 1,
       "button": "•",
-      "description": "This model’s Reaver gatling blaster can be replaced with one of the following:<ul><li>1 Reaver laser blaster</li><li>1 Reaver melta cannon</li><li>1 Reaver volcano cannon</li><li>1 Reaver power fist</li></ul>"
+      "description": "This model's Reaver gatling blaster can be replaced with one of the following:<ul><li>1 Reaver laser blaster</li><li>1 Reaver melta cannon</li><li>1 Reaver volcano cannon</li><li>1 Reaver power fist</li></ul>"
     },
     {
       "datasheetId": "000000868",
       "line": 2,
       "button": "•",
-      "description": "This model’s Reaver laser blaster can be replaced with one of the following:<ul><li>1 Reaver gatling blaster</li><li>1 Reaver melta cannon</li><li>1 Reaver volcano cannon</li></ul>"
+      "description": "This model's Reaver laser blaster can be replaced with one of the following:<ul><li>1 Reaver gatling blaster</li><li>1 Reaver melta cannon</li><li>1 Reaver volcano cannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000868",
+      "line": 1,
+      "description": "1 Reaver Titan",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000868",
+      "line": 1,
+      "description": "1 model",
+      "cost": 2200,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Titanicus (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000868:reaver-apocalypse-launcher",
       "datasheetId": "000000868",
@@ -290,7 +315,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Reaver power fist – strike",
+          "name": "Reaver power fist - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -305,7 +330,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Reaver power fist – sweep",
+          "name": "Reaver power fist - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -316,46 +341,6 @@
           "d": 6
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000868",
-      "line": 1,
-      "description": "1 Reaver Titan",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000868",
-      "line": 1,
-      "description": "1 model",
-      "cost": 2200,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Titanicus (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "damagedThreshold": 20,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 10
     }
   ]
 }

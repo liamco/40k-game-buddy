@@ -36,14 +36,23 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time an attack targets that unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Hammer Aflame (Psychic)",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s unit is selected to fight, you can select one enemy unit within Engagement Range of this model’s unit and roll one D6: on a 2-3, that enemy unit suffers 1 mortal wound; on a 4-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
+      "description": "Each time this model's unit is selected to fight, you can select one enemy unit within Engagement Range of this model's unit and roll one D6: on a 2-3, that enemy unit suffers 1 mortal wound; on a 4-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -116,7 +125,41 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000374",
+      "line": 1,
+      "description": "1 Grand Master Voldus - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000374",
+      "line": 1,
+      "description": "1 model",
+      "cost": 110,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000384",
+      "slug": "paladin-squad"
+    },
+    {
+      "id": "000000382",
+      "slug": "brotherhood-terminator-squad"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Grey Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000374:searing-purity",
       "datasheetId": "000000374",
@@ -196,39 +239,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000374",
-      "line": 1,
-      "description": "1 Grand Master Voldus – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000374",
-      "line": 1,
-      "description": "1 model",
-      "cost": 110,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000384",
-      "slug": "paladin-squad"
-    },
-    {
-      "id": "000000382",
-      "slug": "brotherhood-terminator-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Grey Knights",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Once per battle, when an attack is allocated to this model, you can change the Damage characteristic of that attack to 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "d",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "notEquals",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -84,10 +101,35 @@
       "datasheetId": "000000496",
       "line": 1,
       "button": "•",
-      "description": "This model’s fleshborer hive can be replaced with one of the following:<ul><li>1 acid spray</li><li>1 rupture cannon</li></ul>"
+      "description": "This model's fleshborer hive can be replaced with one of the following:<ul><li>1 acid spray</li><li>1 rupture cannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000496",
+      "line": 1,
+      "description": "1 Tyrannofex",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000496",
+      "line": 1,
+      "description": "1 model",
+      "cost": 200,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000496:acid-spray",
       "datasheetId": "000000496",
@@ -215,40 +257,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000496",
-      "line": 1,
-      "description": "1 Tyrannofex",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000496",
-      "line": 1,
-      "description": "1 model",
-      "cost": 200,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

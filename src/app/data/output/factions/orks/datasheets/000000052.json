@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "At the end of your Movement phase, you can select one friendly Orks Vehicle model within 3\" of this model. That <span class=\"kwb\">VEHICLE</span> model regains up to D3 lost wounds, and, until the start of your next Movement phase, each time that <span class=\"kwb\">VEHICLE</span> model makes an attack, add 1 to the Hit roll. Each model can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -93,16 +102,41 @@
       "datasheetId": "000000052",
       "line": 1,
       "button": "•",
-      "description": "This model’s killkannon can be replaced with one of the following:<ul><li>1 dread killsaw</li><li>1 dread rippa klaw</li></ul>"
+      "description": "This model's killkannon can be replaced with one of the following:<ul><li>1 dread killsaw</li><li>1 dread rippa klaw</li></ul>"
     },
     {
       "datasheetId": "000000052",
       "line": 2,
       "button": "•",
-      "description": "This model’s dread rippa klaw can be replaced with one of the following:<ul><li>1 dread killsaw</li><li>1 killkannon</li></ul>"
+      "description": "This model's dread rippa klaw can be replaced with one of the following:<ul><li>1 dread killsaw</li><li>1 killkannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000052",
+      "line": 1,
+      "description": "1 Meka-Dread",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000052",
+      "line": 1,
+      "description": "1 model",
+      "cost": 210,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000052:killkannon",
       "datasheetId": "000000052",
@@ -198,40 +232,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000052",
-      "line": 1,
-      "description": "1 Meka-Dread",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000052",
-      "line": 1,
-      "description": "1 model",
-      "cost": 210,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

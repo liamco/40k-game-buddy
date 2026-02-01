@@ -32,7 +32,32 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [SUSTAINED HITS 1] ability and, each time a model in that unit makes an attack that targets an enemy unit within 6\", re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "attribute": "range",
+              "value": 6,
+              "operator": "lessThanOrEqualTo"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +66,45 @@
       "factionId": "",
       "description": "If this model is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 2+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "h",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER BEING DESTROYED"
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +113,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 6.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -131,10 +203,50 @@
       "datasheetId": "000004130",
       "line": 2,
       "button": "•",
-      "description": "This model’s storm shield can be replaced with one of the following:<ul><li>1 master-crafted bolt carbine</li><li>1 master-crafted heavy bolt pistol</li><li>1 plasma pistol</li></ul>"
+      "description": "This model's storm shield can be replaced with one of the following:<ul><li>1 master-crafted bolt carbine</li><li>1 master-crafted heavy bolt pistol</li><li>1 plasma pistol</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004130",
+      "line": 1,
+      "description": "1 Wolf Guard Battle Leader",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004130",
+      "line": 1,
+      "description": "1 model",
+      "cost": 65,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000303",
+      "slug": "blood-claws"
+    },
+    {
+      "id": "000000305",
+      "slug": "grey-hunters"
+    },
+    {
+      "id": "000004131",
+      "slug": "wolf-guard-headtakers"
+    }
+  ],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004130:master-crafted-bolt-carbine",
       "datasheetId": "000004130",
@@ -197,7 +309,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -214,7 +326,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -279,45 +391,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004130",
-      "line": 1,
-      "description": "1 Wolf Guard Battle Leader",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004130",
-      "line": 1,
-      "description": "1 model",
-      "cost": 65,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000303",
-      "slug": "blood-claws"
-    },
-    {
-      "id": "000000305",
-      "slug": "grey-hunters"
-    },
-    {
-      "id": "000004131",
-      "slug": "wolf-guard-headtakers"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

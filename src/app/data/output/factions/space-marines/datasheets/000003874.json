@@ -36,7 +36,32 @@
       "factionId": "",
       "description": "Each time this unit is set up on the battlefield, until the end of the turn:<br><ul><li>Improve the Armour Penetration characteristic of weapons equipped by models in this unit by 1.</li><li>Melee weapons equipped by models in this unit have the [LANCE] ability.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": []
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LANCE"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "ATTACHED UNIT",
@@ -157,7 +182,55 @@
       "description": "Any number of models can each have their assault bolters replaced with 1 plasma exterminators."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003874",
+      "line": 1,
+      "description": "10 MODELS MAXIMUM",
+      "min": 10,
+      "max": 10
+    },
+    {
+      "datasheetId": "000003874",
+      "line": 2,
+      "description": "1 Kill Team Sergeant with Jump Pack",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000003874",
+      "line": 3,
+      "description": "2‑9 Kill Team Intercessors with Jump Packs",
+      "min": 2,
+      "max": 2
+    },
+    {
+      "datasheetId": "000003874",
+      "line": 4,
+      "description": "0‑5 Kill Team Heavy Intercessors with Jump Packs",
+      "min": 0,
+      "max": 0
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003874",
+      "line": 1,
+      "description": "10 models",
+      "cost": 275,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "deathwatch",
+  "supplementName": "Deathwatch",
+  "supplementLabel": "Deathwatch",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003874:assault-bolters",
       "datasheetId": "000003874",
@@ -253,7 +326,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma exterminators – standard",
+          "name": "Plasma exterminators - standard",
           "attributes": [
             "ASSAULT",
             "PISTOL",
@@ -272,7 +345,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma exterminators – supercharge",
+          "name": "Plasma exterminators - supercharge",
           "attributes": [
             "ASSAULT",
             "HAZARDOUS",
@@ -431,53 +504,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003874",
-      "line": 1,
-      "description": "10 MODELS MAXIMUM",
-      "min": 10,
-      "max": 10
-    },
-    {
-      "datasheetId": "000003874",
-      "line": 2,
-      "description": "1 Kill Team Sergeant with Jump Pack",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000003874",
-      "line": 3,
-      "description": "2‑9 Kill Team Intercessors with Jump Packs",
-      "min": 2,
-      "max": 2
-    },
-    {
-      "datasheetId": "000003874",
-      "line": 4,
-      "description": "0‑5 Kill Team Heavy Intercessors with Jump Packs",
-      "min": 0,
-      "max": 0
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003874",
-      "line": 1,
-      "description": "10 models",
-      "cost": 275,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

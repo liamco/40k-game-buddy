@@ -31,7 +31,7 @@
       "name": "Lanced Obliteration",
       "legend": "",
       "factionId": "",
-      "description": "Each time an attack made with this model’s twin Scorpion pulsar destroys an enemy model that has the Deadly Demise ability, that model’s Deadly Demise ability inflicts mortal wounds on a D6 roll of 4+ instead of on a 6.",
+      "description": "Each time an attack made with this model's twin Scorpion pulsar destroys an enemy model that has the Deadly Demise ability, that model's Deadly Demise ability inflicts mortal wounds on a D6 roll of 4+ instead of on a 6.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -102,10 +102,35 @@
       "datasheetId": "000000621",
       "line": 1,
       "button": "•",
-      "description": "This model’s shuriken cannon can be replaced with one of the following:<ul><li>1 Aeldari missile launcher</li><li>1 bright lance</li><li>1 scatter laser</li><li>1 starcannon</li></ul>"
+      "description": "This model's shuriken cannon can be replaced with one of the following:<ul><li>1 Aeldari missile launcher</li><li>1 bright lance</li><li>1 scatter laser</li><li>1 starcannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000621",
+      "line": 1,
+      "description": "1 Scorpion",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000621",
+      "line": 1,
+      "description": "1 model",
+      "cost": 410,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000621:aeldari-missile-launcher",
       "datasheetId": "000000621",
@@ -118,7 +143,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Aeldari missile launcher – sunburst",
+          "name": "Aeldari missile launcher - sunburst",
           "attributes": [
             "BLAST"
           ],
@@ -135,7 +160,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Aeldari missile launcher – starshot",
+          "name": "Aeldari missile launcher - starshot",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -294,46 +319,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000621",
-      "line": 1,
-      "description": "1 Scorpion",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000621",
-      "line": 1,
-      "description": "1 model",
-      "cost": 410,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 8,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

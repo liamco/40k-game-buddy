@@ -5,7 +5,7 @@
   "sourceId": "000000028",
   "legend": "Nothing so huge should be able to slip unnoticed across the battlefield, yet between its stealth field and its electronic warfare suite the Ghostkeel Battlesuit does just that. Once in position its pilot unleashes ferocious volleys of firepower, ambushing, overwhelming and scattering the terrified foe in a matter of moments.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> fusion collider; twin T’au flamer; Ghostkeel fists.",
+  "loadout": "<b>This model is equipped with:</b> fusion collider; twin T'au flamer; Ghostkeel fists.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -52,7 +52,7 @@
       "name": "Stealth Drones",
       "legend": "",
       "factionId": "",
-      "description": "Twice per battle, after an attack has been allocated to this model, you can change the Damage characteristic of that attack to 0. <br><br><b>Designer’s Note:</b> Place two Stealth Drone tokens next to the unit, removing one each time this ability has been used.",
+      "description": "Twice per battle, after an attack has been allocated to this model, you can change the Damage characteristic of that attack to 0. <br><br><b>Designer's Note:</b> Place two Stealth Drone tokens next to the unit, removing one each time this ability has been used.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -60,7 +60,7 @@
   "keywords": [
     {
       "datasheetId": "000000420",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -123,13 +123,13 @@
       "datasheetId": "000000420",
       "line": 1,
       "button": "•",
-      "description": "This model’s fusion collider can be replaced with 1 cyclic ion raker."
+      "description": "This model's fusion collider can be replaced with 1 cyclic ion raker."
     },
     {
       "datasheetId": "000000420",
       "line": 2,
       "button": "•",
-      "description": "This model’s twin T’au flamer can be replaced with one of the following:<ul><li>1 twin fusion blaster</li><li>1 twin burst cannon</li></ul>"
+      "description": "This model's twin T'au flamer can be replaced with one of the following:<ul><li>1 twin fusion blaster</li><li>1 twin burst cannon</li></ul>"
     },
     {
       "datasheetId": "000000420",
@@ -138,7 +138,32 @@
       "description": "This model can be equipped with one battlesuit support system."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000420",
+      "line": 1,
+      "description": "1 Ghostkeel Battlesuit",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000420",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000420:cyclic-ion-raker",
       "datasheetId": "000000420",
@@ -151,7 +176,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Cyclic ion raker – standard",
+          "name": "Cyclic ion raker - standard",
           "attributes": [],
           "range": 36,
           "type": "Ranged",
@@ -166,7 +191,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Cyclic ion raker – overcharge",
+          "name": "Cyclic ion raker - overcharge",
           "attributes": [
             "HAZARDOUS"
           ],
@@ -263,7 +288,7 @@
       "id": "000000420:twin-t-au-flamer",
       "datasheetId": "000000420",
       "line": 6,
-      "name": "Twin T’au flamer",
+      "name": "Twin T'au flamer",
       "type": "Ranged",
       "profiles": [
         {
@@ -271,7 +296,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Twin T’au flamer",
+          "name": "Twin T'au flamer",
           "attributes": [
             "IGNORES COVER",
             "TORRENT",
@@ -310,40 +335,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000420",
-      "line": 1,
-      "description": "1 Ghostkeel Battlesuit",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000420",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: T’au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

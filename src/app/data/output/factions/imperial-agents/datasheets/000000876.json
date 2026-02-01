@@ -41,7 +41,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 6+ invulnerable save, and a 4+ invulnerable save against Psychic Attacks and attacks made by <span class=\"kwb\">DAEMON</span> models.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -57,7 +66,7 @@
       "name": "Glovodan Psyber-eagle",
       "legend": "",
       "factionId": "",
-      "description": "In your Command phase, you can select one enemy unit within 18\" of the bearer. Until the start of your next Command phase, that unit cannot have the Benefit of Cover.<br><br><b>Designer’s Note:</b> Place a Glovodan Psyber-eagle token next to the selected unit to remind you.",
+      "description": "In your Command phase, you can select one enemy unit within 18\" of the bearer. Until the start of your next Command phase, that unit cannot have the Benefit of Cover.<br><br><b>Designer's Note:</b> Place a Glovodan Psyber-eagle token next to the selected unit to remind you.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -136,94 +145,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000000876:bolt-pistol",
-      "datasheetId": "000000876",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000876",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000876:psychic-blast",
-      "datasheetId": "000000876",
-      "line": 2,
-      "name": "Psychic Blast",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000876",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Psychic Blast",
-          "attributes": [
-            "ANTI-DAEMON 4+",
-            "ANTI-INFANTRY 5+",
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 3,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000876:nemesis-daemon-hammer",
-      "datasheetId": "000000876",
-      "line": 3,
-      "name": "Nemesis daemon hammer",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000876",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Nemesis daemon hammer",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000876",
       "line": 1,
-      "description": "1 Inquisitor Coteaz – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Inquisitor Coteaz - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -403,5 +329,88 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Imperial Agents",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000000876:bolt-pistol",
+      "datasheetId": "000000876",
+      "line": 1,
+      "name": "Bolt pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000876",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Bolt pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 3,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000000876:psychic-blast",
+      "datasheetId": "000000876",
+      "line": 2,
+      "name": "Psychic Blast",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000876",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Psychic Blast",
+          "attributes": [
+            "ANTI-DAEMON 4+",
+            "ANTI-INFANTRY 5+",
+            "DEVASTATING WOUNDS",
+            "PSYCHIC"
+          ],
+          "range": 18,
+          "type": "Ranged",
+          "a": "D6",
+          "bsWs": 3,
+          "s": 3,
+          "ap": -1,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000000876:nemesis-daemon-hammer",
+      "datasheetId": "000000876",
+      "line": 3,
+      "name": "Nemesis daemon hammer",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000876",
+          "line": 3,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Nemesis daemon hammer",
+          "attributes": [
+            "PSYCHIC"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 3,
+          "bsWs": 3,
+          "s": 9,
+          "ap": -3,
+          "d": 3
+        }
+      ]
+    }
+  ]
 }

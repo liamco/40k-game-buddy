@@ -28,7 +28,30 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a ranged attack, re-roll a Hit roll of 1. If the target of that attack is an enemy unit within range of an objective marker, you can re-roll the Hit roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -94,7 +117,48 @@
       "description": "Any number of models can each have their grav-cannon replaced with one of the following:<ul><li>1 twin heavy bolter</li><li>1 twin lascannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001193",
+      "line": 1,
+      "description": "1 Devastator Centurion Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001193",
+      "line": 2,
+      "description": "2-5 Devastator Centurions",
+      "min": 2,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001193",
+      "line": 1,
+      "description": "3 models",
+      "cost": 175,
+      "count": 3
+    },
+    {
+      "datasheetId": "000001193",
+      "line": 2,
+      "description": "6 models",
+      "cost": 350,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001193:centurion-bolters",
       "datasheetId": "000001193",
@@ -251,46 +315,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001193",
-      "line": 1,
-      "description": "1 Devastator Centurion Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001193",
-      "line": 2,
-      "description": "2-5 Devastator Centurions",
-      "min": 2,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001193",
-      "line": 1,
-      "description": "3 models",
-      "cost": 175,
-      "count": 3
-    },
-    {
-      "datasheetId": "000001193",
-      "line": 2,
-      "description": "6 models",
-      "cost": 350,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

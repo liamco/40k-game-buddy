@@ -31,9 +31,59 @@
       "name": "Black Rage",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model’s unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
+      "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model's unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT FALL BACK"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfContestedObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -42,11 +92,64 @@
       "factionId": "",
       "description": "Once per turn, you can target this unit with the Fire Overwatch or the Heroic Intervention Stratagem for 0CP. While resolving that Stratagem, each time a model in this unit makes a ranged attack you can re-roll the Hit roll, or you can re-roll the Charge roll made for this unit (whichever applies).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "a",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Chaplain model from your army with the Leader ability can be attached to an Intercessor Squad unit, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "LEADER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -121,7 +224,7 @@
       "datasheetId": "000002285",
       "line": 1,
       "button": "•",
-      "description": "1 model’s bolt rifle can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>"
+      "description": "1 model's bolt rifle can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>"
     },
     {
       "datasheetId": "000002285",
@@ -139,10 +242,44 @@
       "datasheetId": "000002285",
       "line": 4,
       "button": "•",
-      "description": "1 model’s close combat weapon can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
+      "description": "1 model's close combat weapon can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002285",
+      "line": 1,
+      "description": "5-10 Death Company Marines with Bolt Rifles",
+      "min": 5,
+      "max": 10
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002285",
+      "line": 1,
+      "description": "5 models",
+      "cost": 85,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002285",
+      "line": 2,
+      "description": "10 models",
+      "cost": 160,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "blood-angels",
+  "supplementName": "Blood Angels",
+  "supplementLabel": "Blood Angels",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Blood Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002285:astartes-grenade-launcher",
       "datasheetId": "000002285",
@@ -306,7 +443,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -323,7 +460,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -486,39 +623,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002285",
-      "line": 1,
-      "description": "5-10 Death Company Marines with Bolt Rifles",
-      "min": 5,
-      "max": 10
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002285",
-      "line": 1,
-      "description": "5 models",
-      "cost": 85,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002285",
-      "line": 2,
-      "description": "10 models",
-      "cost": 160,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "blood-angels",
-  "supplementName": "Blood Angels",
-  "supplementLabel": "Blood Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Blood Angels",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

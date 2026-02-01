@@ -32,7 +32,32 @@
       "factionId": "",
       "description": "In your Movement phase, when this model is set up on the battlefield using the Deep Strike ability, it can use a subterranean tunnel. If it does, this model can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but until the end of the turn, it is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "anywhere on the battlefield that is more than 6\" horizontally away from all enemy units"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "NOT ELIGIBLE TO DECLARE A CHARGE"
+          ],
+          "value": "until the end of the turn"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -91,7 +116,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000493",
+      "line": 1,
+      "description": "1 Trygon",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000493",
+      "line": 1,
+      "description": "1 model",
+      "cost": 140,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000493:bio-electric-pulse",
       "datasheetId": "000000493",
@@ -141,40 +191,6 @@
           "d": 3
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000493",
-      "line": 1,
-      "description": "1 Trygon",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000493",
-      "line": 1,
-      "description": "1 model",
-      "cost": 140,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

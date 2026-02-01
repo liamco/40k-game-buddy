@@ -23,7 +23,7 @@
       "parameter": "D3"
     },
     {
-      "name": "Martial Ka’tah",
+      "name": "Martial Ka'tah",
       "type": "Faction"
     },
     {
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "In your Shooting phase, each time this model makes an attack that targets an enemy unit that is Below Half-strength, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -93,7 +102,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001562",
+      "line": 1,
+      "description": "1 Pallas Grav-attack",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001562",
+      "line": 1,
+      "description": "1 model",
+      "cost": 105,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001562:twin-arachnus-blaze-cannon",
       "datasheetId": "000001562",
@@ -145,30 +179,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001562",
-      "line": 1,
-      "description": "1 Pallas Grav-attack",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001562",
-      "line": 1,
-      "description": "1 model",
-      "cost": 105,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false
+  ]
 }

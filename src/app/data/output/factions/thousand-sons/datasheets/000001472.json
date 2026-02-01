@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -130,7 +139,45 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001472",
+      "line": 1,
+      "description": "1 Tzaangor Shaman",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001472",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001034",
+      "slug": "tzaangors"
+    },
+    {
+      "id": "000004122",
+      "slug": "tzaangor-enlightened-with-fatecaster-greatbows"
+    },
+    {
+      "id": "000001474",
+      "slug": "tzaangor-enlightened"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001472:baleful-devolution",
       "datasheetId": "000001472",
@@ -185,43 +232,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001472",
-      "line": 1,
-      "description": "1 Tzaangor Shaman",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001472",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001034",
-      "slug": "tzaangors"
-    },
-    {
-      "id": "000004122",
-      "slug": "tzaangor-enlightened-with-fatecaster-greatbows"
-    },
-    {
-      "id": "000001474",
-      "slug": "tzaangor-enlightened"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

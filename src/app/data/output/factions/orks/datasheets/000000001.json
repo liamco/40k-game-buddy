@@ -32,14 +32,23 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Da Biggest and da Best",
       "legend": "",
       "factionId": "",
-      "description": "While the Waaagh! is active for your army, add 4 to the Attacks characteristic of this model’s melee weapons.",
+      "description": "While the Waaagh! is active for your army, add 4 to the Attacks characteristic of this model's melee weapons.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -98,7 +107,7 @@
       "datasheetId": "000000001",
       "line": 1,
       "button": "•",
-      "description": "This model’s big choppa can be replaced with 1 power klaw."
+      "description": "This model's big choppa can be replaced with 1 power klaw."
     },
     {
       "datasheetId": "000000001",
@@ -107,7 +116,45 @@
       "description": "This model can be equipped with 1 attack squig."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000001",
+      "line": 1,
+      "description": "1 Warboss",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000001",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003861",
+      "slug": "breaka-boyz"
+    },
+    {
+      "id": "000000021",
+      "slug": "nobz"
+    },
+    {
+      "id": "000000016",
+      "slug": "boyz"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000001:kombi-weapon",
       "datasheetId": "000000001",
@@ -237,43 +284,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000001",
-      "line": 1,
-      "description": "1 Warboss",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000001",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003861",
-      "slug": "breaka-boyz"
-    },
-    {
-      "id": "000000021",
-      "slug": "nobz"
-    },
-    {
-      "id": "000000016",
-      "slug": "boyz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -1,0 +1,53 @@
+.Cta {
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 50%;
+        left: 0;
+        background-image: url("/assets/stripes-forward.svg");
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 50%;
+        right: 0;
+        background-image: url("/assets/stripes-back.svg");
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    &:not(:disabled) {
+        &:before {
+            animation-name: bg-pan-right;
+        }
+        &:after {
+            animation-name: bg-pan-left;
+        }
+    }
+}
+
+@keyframes bg-pan-left {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+@keyframes bg-pan-right {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}

@@ -3,7 +3,7 @@
   "name": "Tyranid Warriors With Ranged Bio-weapons",
   "factionId": "TYR",
   "sourceId": "000000020",
-  "legend": "Strong, swift, independently intelligent and amongst the Hive Mind’s most adaptable bioforms, Tyranid Warriors are the backbone of many Tyranid invasions. Their synaptic link imbues them with advanced martial abilities, and also allows them to serve as synaptic linchpins within the wider swarms during battle.",
+  "legend": "Strong, swift, independently intelligent and amongst the Hive Mind's most adaptable bioforms, Tyranid Warriors are the backbone of many Tyranid invasions. Their synaptic link imbues them with advanced martial abilities, and also allows them to serve as synaptic linchpins within the wider swarms during battle.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> devourer; Tyranid Warrior claws and talons.",
   "transport": "",
@@ -32,7 +32,46 @@
       "factionId": "",
       "description": "This unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FELL BACK"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -95,16 +134,55 @@
       "datasheetId": "000002692",
       "line": 2,
       "button": "•",
-      "description": "For every 3 models in this unit, 1 model’s devourer can be replaced with 1 barbed strangler."
+      "description": "For every 3 models in this unit, 1 model's devourer can be replaced with 1 barbed strangler."
     },
     {
       "datasheetId": "000002692",
       "line": 3,
       "button": "•",
-      "description": "For every 3 models in this unit, 1 model’s devourer can be replaced with 1 venom cannon."
+      "description": "For every 3 models in this unit, 1 model's devourer can be replaced with 1 venom cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002692",
+      "line": 1,
+      "description": "1 Tyranid Prime",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002692",
+      "line": 2,
+      "description": "2-5 Tyranid Warriors",
+      "min": 2,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002692",
+      "line": 1,
+      "description": "3 models",
+      "cost": 65,
+      "count": 3
+    },
+    {
+      "datasheetId": "000002692",
+      "line": 2,
+      "description": "6 models",
+      "cost": 130,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002692:barbed-strangler",
       "datasheetId": "000002692",
@@ -257,44 +335,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002692",
-      "line": 1,
-      "description": "1 Tyranid Prime",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002692",
-      "line": 2,
-      "description": "2-5 Tyranid Warriors",
-      "min": 2,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002692",
-      "line": 1,
-      "description": "3 models",
-      "cost": 65,
-      "count": 3
-    },
-    {
-      "datasheetId": "000002692",
-      "line": 2,
-      "description": "6 models",
-      "cost": 130,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

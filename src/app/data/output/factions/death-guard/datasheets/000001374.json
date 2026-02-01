@@ -3,7 +3,7 @@
   "name": "Myphitic Blight-hauler",
   "factionId": "DG",
   "sourceId": "000000014",
-  "legend": "Belching stinking gases that hang thick in the air, Myphitic Blight-haulers use their all-terrain mobility and heavy armaments to hunt down the enemy’s tanks and provide fire support even in the most dangerous environments. Should the enemy get too close, these Daemon Engines pounce with fanged maws and sprays of bile.",
+  "legend": "Belching stinking gases that hang thick in the air, Myphitic Blight-haulers use their all-terrain mobility and heavy armaments to hunt down the enemy's tanks and provide fire support even in the most dangerous environments. Should the enemy get too close, these Daemon Engines pounce with fanged maws and sprays of bile.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> bile spurt; missile launcher; multi-melta; gnashing maw.",
   "transport": "",
@@ -23,7 +23,7 @@
       "parameter": "D3"
     },
     {
-      "name": "Nurgle’s Gift (Aura)",
+      "name": "Nurgle's Gift (Aura)",
       "type": "Faction"
     },
     {
@@ -33,7 +33,22 @@
       "factionId": "",
       "description": "In your Shooting phase, each time a model in this unit makes an attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -104,7 +119,39 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001374",
+      "line": 1,
+      "description": "1-2 Myphitic Blight-hulers",
+      "min": 1,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001374",
+      "line": 1,
+      "description": "1 model",
+      "cost": 100,
+      "count": 1
+    },
+    {
+      "datasheetId": "000001374",
+      "line": 2,
+      "description": "2 models",
+      "cost": 200,
+      "count": 2
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001374:bile-spurt",
       "datasheetId": "000001374",
@@ -143,7 +190,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – frag",
+          "name": "Missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -160,7 +207,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – krak",
+          "name": "Missile launcher - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -225,37 +272,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001374",
-      "line": 1,
-      "description": "1-2 Myphitic Blight-hulers",
-      "min": 1,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001374",
-      "line": 1,
-      "description": "1 model",
-      "cost": 100,
-      "count": 1
-    },
-    {
-      "datasheetId": "000001374",
-      "line": 2,
-      "description": "2 models",
-      "cost": 200,
-      "count": 2
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

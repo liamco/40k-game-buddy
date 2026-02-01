@@ -3,9 +3,9 @@
   "name": "Grimnyr",
   "factionId": "LoV",
   "sourceId": "000000203",
-  "legend": "The Grimnyr – or Living Ancestors – are privy to the wisdom of the Votann, and as close as to priests as the secular Kin get. Equipped with barrier tech such as ward staves and energy-focusing CORVs, they are able to rouse the fury of the immaterium against their foes.",
+  "legend": "The Grimnyr - or Living Ancestors - are privy to the wisdom of the Votann, and as close as to priests as the secular Kin get. Equipped with barrier tech such as ward staves and energy-focusing CORVs, they are able to rouse the fury of the immaterium against their foes.",
   "role": "Characters",
-  "loadout": "* If this unit’s Grimnyr model is ever destroyed, all of this unit’s remaining CORV models are also destroyed. While embarking within a Transport and while embarked within a <span class=\"kwb\">TRANSPORT</span>, each CORV model takes up the space of 0 models.<br><br><b>The Grimnyr is equipped with:</b> Ancestral Wrath; ancestral ward stave. <br><br><b>Every CORV is equipped with:</b> Autoch-pattern bolter; close combat weapon.",
+  "loadout": "* If this unit's Grimnyr model is ever destroyed, all of this unit's remaining CORV models are also destroyed. While embarking within a Transport and while embarked within a <span class=\"kwb\">TRANSPORT</span>, each CORV model takes up the space of 0 models.<br><br><b>The Grimnyr is equipped with:</b> Ancestral Wrath; ancestral ward stave. <br><br><b>Every CORV is equipped with:</b> Autoch-pattern bolter; close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -32,14 +32,25 @@
       "factionId": "",
       "description": "While this unit is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
-      "name": "Grimnyr’s Regard",
+      "name": "Grimnyr's Regard",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, at the start of any phase, you can select one friendly Leagues of Votann unit that is Battle-shocked and within 12\" of this unit’s <span class=\"kwb\">GRIMNYR</span> model. That unit is no longer Battle-shocked.",
+      "description": "Once per battle, at the start of any phase, you can select one friendly Leagues of Votann unit that is Battle-shocked and within 12\" of this unit's <span class=\"kwb\">GRIMNYR</span> model. That unit is no longer Battle-shocked.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -109,7 +120,44 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002596",
+      "line": 1,
+      "description": "1 Grimnyr",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002596",
+      "line": 2,
+      "description": "2 CORVs*",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002596",
+      "line": 1,
+      "description": "3 models",
+      "cost": 65,
+      "count": 3
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002598",
+      "slug": "hearthkyn-warriors"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002596:ancestral-wrath",
       "datasheetId": "000002596",
@@ -122,7 +170,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Ancestral Wrath – witchfire",
+          "name": "Ancestral Wrath - witchfire",
           "attributes": [
             "PSYCHIC"
           ],
@@ -139,7 +187,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Ancestral Wrath – focused witchfire",
+          "name": "Ancestral Wrath - focused witchfire",
           "attributes": [
             "HAZARDOUS",
             "PSYCHIC"
@@ -228,42 +276,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002596",
-      "line": 1,
-      "description": "1 Grimnyr",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002596",
-      "line": 2,
-      "description": "2 CORVs*",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002596",
-      "line": 1,
-      "description": "3 models",
-      "cost": 65,
-      "count": 3
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002598",
-      "slug": "hearthkyn-warriors"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

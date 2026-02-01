@@ -3,7 +3,7 @@
   "name": "Heretic Astartes Daemon Prince",
   "factionId": "CSM",
   "sourceId": "000000012",
-  "legend": "Infernal beasts whose Path to Glory has elevated them to daemonhood, Daemon Princes are paragons of evil. Warped and corrupted by Chaos, they lead their warbands in devastating assaults, striding through their mortal enemies’ attacks and unleashing monstrous blows and blasts of sorcery against all before them.",
+  "legend": "Infernal beasts whose Path to Glory has elevated them to daemonhood, Daemon Princes are paragons of evil. Warped and corrupted by Chaos, they lead their warbands in devastating assaults, striding through their mortal enemies' attacks and unleashing monstrous blows and blasts of sorcery against all before them.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> infernal cannon; hellforged weapons.",
   "transport": "",
@@ -51,27 +51,63 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Heretic Astartes Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
+    },
+    {
+      "id": "",
+      "name": "Daemonic Allegiance",
+      "legend": "",
+      "factionId": "",
+      "description": "When you select this model to include in your army, you must select one of the keywords below. Until the end of the battle, this model has that keyword and the characteristic modifier stated for that keyword below.",
+      "type": "Primarch",
       "parameter": ""
     },
     {
-      "name": "Daemonic Allegiance",
-      "type": "Primarch"
-    },
-    {
+      "id": "",
       "name": "Khorne",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Add 2 to the Strength characteristic of this model's hellforged weapons.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Tzeentch",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Add 3 to the Attacks characteristic of its infernal cannon.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Nurgle",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Add 1 to its Toughness characteristic.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Slaanesh",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Add 2\" to its Move characteristic.",
+      "type": "Primarch",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -130,7 +166,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000937",
+      "line": 1,
+      "description": "1 Heretic Astartes Daemon Prince",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000937",
+      "line": 1,
+      "description": "1 model",
+      "cost": 165,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000937:infernal-cannon",
       "datasheetId": "000000937",
@@ -167,7 +228,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Hellforged weapons – strike",
+          "name": "Hellforged weapons - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -182,7 +243,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Hellforged weapons – sweep",
+          "name": "Hellforged weapons - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -194,30 +255,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000937",
-      "line": 1,
-      "description": "1 Heretic Astartes Daemon Prince",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000937",
-      "line": 1,
-      "description": "1 model",
-      "cost": 165,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

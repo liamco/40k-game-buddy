@@ -1,31 +1,33 @@
 import React, { Fragment } from "react";
-import type { GamePhase } from "../../types";
+import type { EngagementPhase } from "#types/Engagements.tsx";
 import GamePhaseSelectorItem from "./GamePhaseSelectorItem";
 
 export interface GamePhaseSelectorProps {
-    currentPhase: GamePhase;
-    onPhaseChange: (phase: GamePhase) => void;
+    currentPhase: EngagementPhase;
+    onPhaseChange: (phase: EngagementPhase) => void;
 }
 
 export type Phase = {
-    id: GamePhase;
+    id: EngagementPhase;
     label: string;
 };
 
 const PHASES: Phase[] = [
-    { id: "COMMAND", label: "Command" },
-    { id: "MOVEMENT", label: "Movement" },
-    { id: "SHOOTING", label: "Shooting" },
-    { id: "CHARGE", label: "Charge" },
-    { id: "FIGHT", label: "Fight" },
+    { id: "command", label: "Command" },
+    { id: "movement", label: "Movement" },
+    { id: "shooting", label: "Shooting" },
+    { id: "charge", label: "Charge" },
+    { id: "fight", label: "Fight" },
 ];
 
-export function GamePhaseSelector({ currentPhase, onPhaseChange }: GamePhaseSelectorProps) {
+const GamePhaseSelector = ({ currentPhase, onPhaseChange }: GamePhaseSelectorProps) => {
     return (
-        <div className="flex grow max-w-[700px] border-1 border-fireDragonBright rounded">
+        <div className={`grid grid-cols-5 grow max-w-[810px] border-1 border-fireDragonBright rounded`}>
             {PHASES.map((phase, index) => (
                 <GamePhaseSelectorItem key={phase.id} index={index} currentPhase={currentPhase} phase={phase} onPhaseChange={onPhaseChange} />
             ))}
         </div>
     );
-}
+};
+
+export default GamePhaseSelector;

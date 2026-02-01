@@ -3,9 +3,9 @@
   "name": "Brother Corbulo",
   "factionId": "SM",
   "sourceId": "000000376",
-  "legend": "The Sanguinary High Priest, Brother Corbulo, is held in high regard for his commitment to the Chapter, his nobility and his gift of foresight – an ability many believe Sanguinius shared. On the battlefield he races to wounded brothers, hacking down any foes in his path with powerful sweeps of Heaven’s Teeth.",
+  "legend": "The Sanguinary High Priest, Brother Corbulo, is held in high regard for his commitment to the Chapter, his nobility and his gift of foresight - an ability many believe Sanguinius shared. On the battlefield he races to wounded brothers, hacking down any foes in his path with powerful sweeps of Heaven's Teeth.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; Heaven’s Teeth.",
+  "loadout": "<b>This model is equipped with:</b> bolt pistol; Heaven's Teeth.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,7 +52,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, add 1 to the Attacks characteristic of melee weapons equipped by models in that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -125,65 +153,11 @@
       "description": "None"
     }
   ],
-  "wargear": [
-    {
-      "id": "000000160:bolt-pistol",
-      "datasheetId": "000000160",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000160",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000160:heaven-s-teeth",
-      "datasheetId": "000000160",
-      "line": 2,
-      "name": "Heaven’s Teeth",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000160",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heaven’s Teeth",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000160",
       "line": 1,
-      "description": "1 Brother Corbulo – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Brother Corbulo - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -290,5 +264,59 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Blood Angels (Warhammer Legends)",
   "isForgeWorld": false,
-  "isLegends": true
+  "isLegends": true,
+  "availableWargear": [
+    {
+      "id": "000000160:bolt-pistol",
+      "datasheetId": "000000160",
+      "line": 1,
+      "name": "Bolt pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000160",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Bolt pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 2,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000000160:heaven-s-teeth",
+      "datasheetId": "000000160",
+      "line": 2,
+      "name": "Heaven's Teeth",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000160",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Heaven's Teeth",
+          "attributes": [
+            "SUSTAINED HITS 1"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 6,
+          "bsWs": 2,
+          "s": 5,
+          "ap": -1,
+          "d": 1
+        }
+      ]
+    }
+  ]
 }

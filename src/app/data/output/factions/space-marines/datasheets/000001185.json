@@ -3,7 +3,7 @@
   "name": "Sicaran Battle Tank",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "The Sicaran is one of the rarest relic tanks seen on the battlefields of the 41st Millennium. Its unique design dates back to the Great Crusade. The most potent of the Sicaran’s distinctive systems is the twin accelerator cannon, whose accuracy and rate of fire are far in excess of other weapons of its class.",
+  "legend": "The Sicaran is one of the rarest relic tanks seen on the battlefields of the 41st Millennium. Its unique design dates back to the Great Crusade. The most potent of the Sicaran's distinctive systems is the twin accelerator cannon, whose accuracy and rate of fire are far in excess of other weapons of its class.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> heavy bolter; Herakles-pattern autocannon; armoured tracks.",
   "transport": "",
@@ -33,7 +33,38 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets an enemy unit, re-roll a Hit roll of 1 and, if that unit is within range of an objective marker you do not control, you can re-roll the Hit roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -109,7 +140,34 @@
       "description": "This model can be equipped with 1 storm bolter."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001185",
+      "line": 1,
+      "description": "1 Sicaran Battle Tank",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001185",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001185:heavy-bolter",
       "datasheetId": "000001185",
@@ -261,42 +319,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001185",
-      "line": 1,
-      "description": "1 Sicaran Battle Tank",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001185",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

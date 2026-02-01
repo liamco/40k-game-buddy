@@ -3,7 +3,7 @@
   "name": "Deathwatch Veterans",
   "factionId": "SM",
   "sourceId": "000000035",
-  "legend": "Deathwatch Veterans’ skills have been honed in their former Chapter for decades, sometimes centuries. Throughout their long vigil against the manifold xenos threats, each Veteran learns to arm himself so as to best contribute to the mission at hand, and squads carry an array of weapons to fell any foe.",
+  "legend": "Deathwatch Veterans' skills have been honed in their former Chapter for decades, sometimes centuries. Throughout their long vigil against the manifold xenos threats, each Veteran learns to arm himself so as to best contribute to the mission at hand, and squads carry an array of weapons to fell any foe.",
   "role": "Battleline",
   "loadout": "<b>Every model is equipped with:</b> boltgun; power weapon.",
   "transport": "",
@@ -32,7 +32,32 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack, re-roll a Hit roll of 1. If the target of that attack does not have the <span class=\"kwb\">IMPERIUM</span> or <span class=\"kwb\">CHAOS</span> keywords, you can re-roll the Hit roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "IMPERIUM",
+                "CHAOS"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,11 +66,44 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character from your army with the Leader ability can be attached to a Sternguard Veteran Squad, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "can be attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Leader"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -156,22 +214,63 @@
       "datasheetId": "000002783",
       "line": 7,
       "button": "•",
-      "description": "1 model’s boltgun and power weapon can be replaced with 1 Black Shield blades."
+      "description": "1 model's boltgun and power weapon can be replaced with 1 Black Shield blades."
     },
     {
       "datasheetId": "000002783",
       "line": 8,
       "button": "•",
-      "description": "The Watch Sergeant’s power weapon can be replaced with 1 xenophase blade."
+      "description": "The Watch Sergeant's power weapon can be replaced with 1 xenophase blade."
     },
     {
       "datasheetId": "000002783",
       "line": 9,
       "button": "•",
-      "description": "The Watch Sergeant’s boltgun can be replaced with 1 combi-weapon."
+      "description": "The Watch Sergeant's boltgun can be replaced with 1 combi-weapon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002783",
+      "line": 1,
+      "description": "1 Watch Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002783",
+      "line": 2,
+      "description": "4-9 Deathwatch Veterans",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002783",
+      "line": 1,
+      "description": "5 models",
+      "cost": 100,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002783",
+      "line": 2,
+      "description": "10 models",
+      "cost": 190,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "deathwatch",
+  "supplementName": "Deathwatch",
+  "supplementLabel": "Deathwatch",
+  "isSupplement": true,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002783:boltgun",
       "datasheetId": "000002783",
@@ -290,7 +389,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Infernus heavy bolter – heavy bolter",
+          "name": "Infernus heavy bolter - heavy bolter",
           "attributes": [
             "HEAVY",
             "SUSTAINED HITS 1"
@@ -308,7 +407,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Infernus heavy bolter – heavy flamer",
+          "name": "Infernus heavy bolter - heavy flamer",
           "attributes": [
             "IGNORES COVER",
             "TORRENT"
@@ -476,46 +575,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002783",
-      "line": 1,
-      "description": "1 Watch Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002783",
-      "line": 2,
-      "description": "4-9 Deathwatch Veterans",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002783",
-      "line": 1,
-      "description": "5 models",
-      "cost": 100,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002783",
-      "line": 2,
-      "description": "10 models",
-      "cost": 190,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

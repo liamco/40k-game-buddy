@@ -3,7 +3,7 @@
   "name": "Wolf Guard Pack Leader In Terminator Armour",
   "factionId": "SM",
   "sourceId": "000000360",
-  "legend": "Those Wolf Guard granted the raw power afforded by Terminator armour bestride the battlefield as nigh-invulnerable champions. Amongst the packs they lead, they serve as indomitable anvils, anchoring their battle-brothers’ lines with their intimidating bulk and unleashing the power of their ornate weapons to destructive effect.",
+  "legend": "Those Wolf Guard granted the raw power afforded by Terminator armour bestride the battlefield as nigh-invulnerable champions. Amongst the packs they lead, they serve as indomitable anvils, anchoring their battle-brothers' lines with their intimidating bulk and unleashing the power of their ornate weapons to destructive effect.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> storm bolter; power weapon.",
   "transport": "",
@@ -36,7 +36,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 4.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -45,7 +54,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, once per battle, when a Battle-shock test is taken for that unit, you can re-roll that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "ld",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -54,7 +80,19 @@
       "factionId": "",
       "description": "This model cannot be your Warlord and cannot be given Enhancements.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT BE WARLORD",
+            "CANNOT BE GIVEN ENHANCEMENTS"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -135,19 +173,19 @@
       "datasheetId": "000002803",
       "line": 1,
       "button": "•",
-      "description": "This model’s storm bolter and power weapon can be replaced with 1 twin lightning claws."
+      "description": "This model's storm bolter and power weapon can be replaced with 1 twin lightning claws."
     },
     {
       "datasheetId": "000002803",
       "line": 2,
       "button": "•",
-      "description": "This model’s storm bolter and power weapon can be replaced with two different options from the following list:*<ul><li>1 assault cannon</li><li>1 heavy flamer</li><li>1 cyclone missile launcher and 1 storm bolter</li><li>1 storm bolter</li><li>1 chainfist</li><li>1 power fist</li><li>1 thunder hammer</li><li>1 storm shield</li></ul>"
+      "description": "This model's storm bolter and power weapon can be replaced with two different options from the following list:*<ul><li>1 assault cannon</li><li>1 heavy flamer</li><li>1 cyclone missile launcher and 1 storm bolter</li><li>1 storm bolter</li><li>1 chainfist</li><li>1 power fist</li><li>1 thunder hammer</li><li>1 storm shield</li></ul>"
     },
     {
       "datasheetId": "000002803",
       "line": 3,
       "button": "•",
-      "description": "This model’s storm bolter can be replaced with 1 combi-weapon."
+      "description": "This model's storm bolter can be replaced with 1 combi-weapon."
     },
     {
       "datasheetId": "000002803",
@@ -156,7 +194,47 @@
       "description": "* This model can only be equipped with two ranged weapons if one of them is a cyclone missile launcher and the other is either a storm bolter or a combi-weapon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002803",
+      "line": 1,
+      "description": "1 Wolf Guard Pack Leader in Terminator Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002803",
+      "line": 1,
+      "description": "1 model",
+      "cost": 40,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000303",
+      "slug": "blood-claws"
+    },
+    {
+      "id": "000000305",
+      "slug": "grey-hunters"
+    },
+    {
+      "id": "000000326",
+      "slug": "long-fangs"
+    }
+  ],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves (Legends)",
+  "supplementLabel": "Space Wolves (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002803:assault-cannon",
       "datasheetId": "000002803",
@@ -223,7 +301,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Cyclone missile launcher – frag",
+          "name": "Cyclone missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -240,7 +318,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Cyclone missile launcher – krak",
+          "name": "Cyclone missile launcher - krak",
           "attributes": [],
           "range": 36,
           "type": "Ranged",
@@ -432,46 +510,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002803",
-      "line": 1,
-      "description": "1 Wolf Guard Pack Leader in Terminator Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002803",
-      "line": 1,
-      "description": "1 model",
-      "cost": 40,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000303",
-      "slug": "blood-claws"
-    },
-    {
-      "id": "000000305",
-      "slug": "grey-hunters"
-    },
-    {
-      "id": "000000326",
-      "slug": "long-fangs"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves (Legends)",
-  "supplementLabel": "Space Wolves (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
   "leaderConditions": {
     "mustAttach": true
   }

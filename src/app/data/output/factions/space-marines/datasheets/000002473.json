@@ -3,7 +3,7 @@
   "name": "Tor Garadon",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Shot after shot bounces from the indomitable plate of Tor Garadon’s Gravis armour as he advances across the battlefield. Sharp-minded and possessing a knack for improvised warfare, Garadon directs the lethal fire of his warriors through a combination of natural skill and the advanced targeting data fed to him by his signum array.",
+  "legend": "Shot after shot bounces from the indomitable plate of Tor Garadon's Gravis armour as he advances across the battlefield. Sharp-minded and possessing a knack for improvised warfare, Garadon directs the lethal fire of his warriors through a combination of natural skill and the advanced targeting data fed to him by his signum array.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> artificer grav-gun; Hand of Defiance.",
   "transport": "",
@@ -32,7 +32,25 @@
       "factionId": "",
       "description": "While this model is leading a unit, ranged weapons equipped by models in that unit have the [IGNORES COVER] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "IGNORES COVER"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +59,64 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets a <span class=\"kwb\">MONSTER</span>, <span class=\"kwb\">VEHICLE</span>, or <span class=\"kwb\">FORTIFICATION</span> unit, improve the Strength, Armour Penetration and Damage characteristics of that attack by 2.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -118,7 +193,51 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002473",
+      "line": 1,
+      "description": "1 Tor Garadon - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002473",
+      "line": 1,
+      "description": "1 model",
+      "cost": 90,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000103",
+      "slug": "eradicator-squad"
+    },
+    {
+      "id": "000002781",
+      "slug": "indomitor-kill-team-2"
+    },
+    {
+      "id": "000002099",
+      "slug": "aggressor-squad"
+    },
+    {
+      "id": "000001177",
+      "slug": "heavy-intercessor-squad"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002473:artificer-grav-gun",
       "datasheetId": "000002473",
@@ -169,49 +288,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002473",
-      "line": 1,
-      "description": "1 Tor Garadon – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002473",
-      "line": 1,
-      "description": "1 model",
-      "cost": 90,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000103",
-      "slug": "eradicator-squad"
-    },
-    {
-      "id": "000002781",
-      "slug": "indomitor-kill-team-2"
-    },
-    {
-      "id": "000002099",
-      "slug": "aggressor-squad"
-    },
-    {
-      "id": "000001177",
-      "slug": "heavy-intercessor-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Adeptus Astartes Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,16 +52,54 @@
       "factionId": "",
       "description": "In your Command phase, you can select one friendly Adeptus Astartes Vehicle model within 3\" of this model. That model regains up to D3 lost wounds and, until the start of your next Command phase, each time that Vehicle model makes an attack, add 1 to the Hit roll. Each model can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Vengeance of the Omnissiah",
       "legend": "",
       "factionId": "",
-      "description": "If a friendly Adeptus Astartes Vehicle model is destroyed within 12\" of this model, until the end of the battle, this model’s Omnissian power axe has an Attacks characteristic of 7.",
+      "description": "If a friendly Adeptus Astartes Vehicle model is destroyed within 12\" of this model, until the end of the battle, this model's Omnissian power axe has an Attacks characteristic of 7.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 7,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attribute": "a",
+              "operator": "greaterThan",
+              "value": 0
+            },
+            {
+              "entity": "opposingModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingModel",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -115,7 +164,87 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000140",
+      "line": 1,
+      "description": "1 Techmarine",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000140",
+      "line": 1,
+      "description": "1 model",
+      "cost": 55,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004154",
+      "slug": "crusader-squad-legendary"
+    },
+    {
+      "id": "000001157",
+      "slug": "intercessor-squad"
+    },
+    {
+      "id": "000002202",
+      "slug": "devastator-squad"
+    },
+    {
+      "id": "000000326",
+      "slug": "long-fangs"
+    },
+    {
+      "id": "000000070",
+      "slug": "tactical-squad"
+    },
+    {
+      "id": "000000061",
+      "slug": "assault-squad"
+    },
+    {
+      "id": "000001606",
+      "slug": "assault-intercessor-squad"
+    },
+    {
+      "id": "000002270",
+      "slug": "desolation-squad"
+    },
+    {
+      "id": "000002799",
+      "slug": "crusader-squad"
+    },
+    {
+      "id": "000002798",
+      "slug": "sword-brethren-squad"
+    },
+    {
+      "id": "000004175",
+      "slug": "decimus-kill-team"
+    },
+    {
+      "id": "000001154",
+      "slug": "vanguard-veteran-squad"
+    },
+    {
+      "id": "000002780",
+      "slug": "fortis-kill-team-2"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000140:forge-bolter",
       "datasheetId": "000000140",
@@ -217,85 +346,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000140",
-      "line": 1,
-      "description": "1 Techmarine",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000140",
-      "line": 1,
-      "description": "1 model",
-      "cost": 55,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004154",
-      "slug": "crusader-squad-legendary"
-    },
-    {
-      "id": "000001157",
-      "slug": "intercessor-squad"
-    },
-    {
-      "id": "000002202",
-      "slug": "devastator-squad"
-    },
-    {
-      "id": "000000326",
-      "slug": "long-fangs"
-    },
-    {
-      "id": "000000070",
-      "slug": "tactical-squad"
-    },
-    {
-      "id": "000000061",
-      "slug": "assault-squad"
-    },
-    {
-      "id": "000001606",
-      "slug": "assault-intercessor-squad"
-    },
-    {
-      "id": "000002270",
-      "slug": "desolation-squad"
-    },
-    {
-      "id": "000002799",
-      "slug": "crusader-squad"
-    },
-    {
-      "id": "000002798",
-      "slug": "sword-brethren-squad"
-    },
-    {
-      "id": "000004175",
-      "slug": "decimus-kill-team"
-    },
-    {
-      "id": "000001154",
-      "slug": "vanguard-veteran-squad"
-    },
-    {
-      "id": "000002780",
-      "slug": "fortis-kill-team-2"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

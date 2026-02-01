@@ -1,9 +1,9 @@
 {
   "id": "000002726",
-  "name": "Vulkan He’stan",
+  "name": "Vulkan He'stan",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Striding into battle with the weapons of his Primarch in his hands, the Forgefather lays low all who oppose him. Seeker of the lost relics of Vulkan, He’stan is relentless in his quest, willing to fight through any foe and face down any danger in order to see his oaths fulfilled.",
+  "legend": "Striding into battle with the weapons of his Primarch in his hands, the Forgefather lays low all who oppose him. Seeker of the lost relics of Vulkan, He'stan is relentless in his quest, willing to fight through any foe and face down any danger in order to see his oaths fulfilled.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> 1 bolt pistol; 1 Gauntlet of the Forge; 1 Spear of Vulkan.",
   "transport": "",
@@ -37,7 +37,30 @@
       "factionId": "",
       "description": "In your Shooting phase, select one enemy unit within 24\" of and visible to this model. Until the end of the phase, each time a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model makes a ranged attack with a Torrent or Melta weapon that targets that enemy unit, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": [
+                "TORRENT",
+                "MELTA"
+              ],
+              "state": null,
+              "keywords": null,
+              "operator": "includes",
+              "value": "ADEPTUS ASTARTES"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +69,18 @@
       "factionId": "",
       "description": "The first time this model is set up on the battlefield, select one objective marker on the battlefield. While this model is within range of that objective marker, this model has an Objective Control characteristic of 10, a Leadership characteristic of 5+ and the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -100,7 +134,7 @@
     },
     {
       "datasheetId": "000002726",
-      "keyword": "Vulkan He’stan",
+      "keyword": "Vulkan He'stan",
       "model": "",
       "isFactionKeyword": "false"
     },
@@ -115,7 +149,7 @@
     {
       "datasheetId": "000002726",
       "line": 1,
-      "name": "Vulkan He’stan",
+      "name": "Vulkan He'stan",
       "m": 6,
       "t": 4,
       "sv": 2,
@@ -129,7 +163,71 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002726",
+      "line": 1,
+      "description": "1 Vulkan He'stan - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002726",
+      "line": 1,
+      "description": "1 model",
+      "cost": 100,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001606",
+      "slug": "assault-intercessor-squad"
+    },
+    {
+      "id": "000004185",
+      "slug": "victrix-honour-guard"
+    },
+    {
+      "id": "000002772",
+      "slug": "company-heroes"
+    },
+    {
+      "id": "000000126",
+      "slug": "infernus-squad"
+    },
+    {
+      "id": "000004154",
+      "slug": "crusader-squad-legendary"
+    },
+    {
+      "id": "000002103",
+      "slug": "command-squad"
+    },
+    {
+      "id": "000000061",
+      "slug": "assault-squad"
+    },
+    {
+      "id": "000000070",
+      "slug": "tactical-squad"
+    },
+    {
+      "id": "000001154",
+      "slug": "vanguard-veteran-squad"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002726:bolt-pistol",
       "datasheetId": "000002726",
@@ -210,69 +308,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002726",
-      "line": 1,
-      "description": "1 Vulkan He’stan – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002726",
-      "line": 1,
-      "description": "1 model",
-      "cost": 100,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001606",
-      "slug": "assault-intercessor-squad"
-    },
-    {
-      "id": "000004185",
-      "slug": "victrix-honour-guard"
-    },
-    {
-      "id": "000002772",
-      "slug": "company-heroes"
-    },
-    {
-      "id": "000000126",
-      "slug": "infernus-squad"
-    },
-    {
-      "id": "000004154",
-      "slug": "crusader-squad-legendary"
-    },
-    {
-      "id": "000002103",
-      "slug": "command-squad"
-    },
-    {
-      "id": "000000061",
-      "slug": "assault-squad"
-    },
-    {
-      "id": "000000070",
-      "slug": "tactical-squad"
-    },
-    {
-      "id": "000001154",
-      "slug": "vanguard-veteran-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

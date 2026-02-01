@@ -3,9 +3,9 @@
   "name": "Iron Father Feirros",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Malkaan Feirros is amongst the oldest and wisest of the Iron Fathers. Yet his radical beliefs and wry humour leaven his arcane technological pronouncements. He is the Iron Hands Master of the Forge, guiding the Chapter’s battle-brothers and the machine spirits of its war engines to unleash precise destruction.",
+  "legend": "Malkaan Feirros is amongst the oldest and wisest of the Iron Fathers. Yet his radical beliefs and wry humour leaven his arcane technological pronouncements. He is the Iron Hands Master of the Forge, guiding the Chapter's battle-brothers and the machine spirits of its war engines to unleash precise destruction.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; Gorgon’s Wrath; Harrowhand; Medusan manipuli.",
+  "loadout": "<b>This model is equipped with:</b> bolt pistol; Gorgon's Wrath; Harrowhand; Medusan manipuli.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,7 +52,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Adeptus Astartes Vehicle units, it has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -50,7 +72,16 @@
       "factionId": "",
       "description": "In your Command phase, select one friendly ADEPTUS ASTARTES VEHICLE model within 3\" of this model. That model regains up to 3 lost wounds and, until the start of your next Command phase, each time that <span class=\"kwb\">VEHICLE</span> model makes an attack, add 1 to the Hit roll. You cannot select a unit for this ability that has already been selected for the Blessing of the Omnissiah ability this phase, and vice versa.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "INSPIRING COMMANDER",
@@ -125,7 +156,51 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000127",
+      "line": 1,
+      "description": "1 Iron Father Feirros - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000127",
+      "line": 1,
+      "description": "1 model",
+      "cost": 95,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002781",
+      "slug": "indomitor-kill-team-2"
+    },
+    {
+      "id": "000001177",
+      "slug": "heavy-intercessor-squad"
+    },
+    {
+      "id": "000000103",
+      "slug": "eradicator-squad"
+    },
+    {
+      "id": "000002099",
+      "slug": "aggressor-squad"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000127:bolt-pistol",
       "datasheetId": "000000127",
@@ -156,7 +231,7 @@
       "id": "000000127:gorgon-s-wrath",
       "datasheetId": "000000127",
       "line": 2,
-      "name": "Gorgon’s Wrath",
+      "name": "Gorgon's Wrath",
       "type": "Ranged",
       "profiles": [
         {
@@ -164,7 +239,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Gorgon’s Wrath",
+          "name": "Gorgon's Wrath",
           "attributes": [
             "SUSTAINED HITS 2"
           ],
@@ -228,49 +303,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000127",
-      "line": 1,
-      "description": "1 Iron Father Feirros – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000127",
-      "line": 1,
-      "description": "1 model",
-      "cost": 95,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002781",
-      "slug": "indomitor-kill-team-2"
-    },
-    {
-      "id": "000001177",
-      "slug": "heavy-intercessor-squad"
-    },
-    {
-      "id": "000000103",
-      "slug": "eradicator-squad"
-    },
-    {
-      "id": "000002099",
-      "slug": "aggressor-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

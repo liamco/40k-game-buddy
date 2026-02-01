@@ -3,7 +3,7 @@
   "name": "Inceptor Squad",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Equipped with heavy jump packs, Inceptor Squads are superb spearhead troops that deliver overwhelming blows to the enemy. Plummeting to the surface from the very edge of a world’s atmosphere, they strike with devastating force, unleashing a hurricane of fire that turns whole squads of enemy infantry to bloody mist.",
+  "legend": "Equipped with heavy jump packs, Inceptor Squads are superb spearhead troops that deliver overwhelming blows to the enemy. Plummeting to the surface from the very edge of a world's atmosphere, they strike with devastating force, unleashing a hurricane of fire that turns whole squads of enemy infantry to bloody mist.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> assault bolters; close combat weapon.",
   "transport": "",
@@ -32,7 +32,48 @@
       "factionId": "",
       "description": "In your Movement phase, when this unit is set up on the battlefield using the Deep Strike ability, it can perform a meteoric descent. If it does, this unit can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but until the end of the turn, it is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "anywhere on the battlefield that is more than 6\" horizontally away from all enemy units"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "METEORIC DESCENT"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "NOT ELIGIBLE TO DECLARE A CHARGE"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -104,7 +145,48 @@
       "description": "All models in this unit can each have their assault bolters replaced with 1 plasma exterminators."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000125",
+      "line": 1,
+      "description": "1 Inceptor Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000125",
+      "line": 2,
+      "description": "2-5 Inceptors",
+      "min": 2,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000125",
+      "line": 1,
+      "description": "3 models",
+      "cost": 120,
+      "count": 3
+    },
+    {
+      "datasheetId": "000000125",
+      "line": 2,
+      "description": "6 models",
+      "cost": 240,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000125:assault-bolters",
       "datasheetId": "000000125",
@@ -146,7 +228,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma exterminators – standard",
+          "name": "Plasma exterminators - standard",
           "attributes": [
             "ASSAULT",
             "PISTOL",
@@ -165,7 +247,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma exterminators – supercharge",
+          "name": "Plasma exterminators - supercharge",
           "attributes": [
             "ASSAULT",
             "PISTOL",
@@ -206,46 +288,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000125",
-      "line": 1,
-      "description": "1 Inceptor Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000125",
-      "line": 2,
-      "description": "2-5 Inceptors",
-      "min": 2,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000125",
-      "line": 1,
-      "description": "3 models",
-      "cost": 120,
-      "count": 3
-    },
-    {
-      "datasheetId": "000000125",
-      "line": 2,
-      "description": "6 models",
-      "cost": 240,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

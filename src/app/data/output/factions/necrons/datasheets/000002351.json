@@ -32,14 +32,25 @@
       "factionId": "",
       "description": "The bearer has the Feel No Pain 5+ ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Resurrection Orb",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, while the bearer is leading a unit, at the end of any phase, it can resurrect that unit if it is on the battlefield. When you do, that unit’s Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
+      "description": "Once per battle, while the bearer is leading a unit, at the end of any phase, it can resurrect that unit if it is on the battlefield. When you do, that unit's Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -122,7 +133,7 @@
       "datasheetId": "000002351",
       "line": 1,
       "button": "•",
-      "description": "This model’s staff of light can be replaced with 1 Lord’s blade."
+      "description": "This model's staff of light can be replaced with 1 Lord's blade."
     },
     {
       "datasheetId": "000002351",
@@ -131,7 +142,41 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 nanoscarab amulet</li><li>1 resurrection orb</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002351",
+      "line": 1,
+      "description": "1 Lokhust Lord",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002351",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002359",
+      "slug": "lokhust-destroyers"
+    },
+    {
+      "id": "000002116",
+      "slug": "lokhust-heavy-destroyers"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002351:staff-of-light",
       "datasheetId": "000002351",
@@ -160,7 +205,7 @@
       "id": "000002351:lord-s-blade",
       "datasheetId": "000002351",
       "line": 2,
-      "name": "Lord’s blade",
+      "name": "Lord's blade",
       "type": "Melee",
       "profiles": [
         {
@@ -168,7 +213,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Lord’s blade",
+          "name": "Lord's blade",
           "attributes": [
             "DEVASTATING WOUNDS"
           ],
@@ -206,39 +251,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002351",
-      "line": 1,
-      "description": "1 Lokhust Lord",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002351",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002359",
-      "slug": "lokhust-destroyers"
-    },
-    {
-      "id": "000002116",
-      "slug": "lokhust-heavy-destroyers"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

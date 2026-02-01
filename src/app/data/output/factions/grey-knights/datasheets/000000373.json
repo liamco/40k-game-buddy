@@ -36,20 +36,36 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "One With the Warp (Psychic)",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, when this model’s unit declares a charge in the same turn it was set up on the battlefield using the Deep Strike or Teleport Assault ability, add 3 to the Charge roll.",
+      "description": "Once per battle, when this model's unit declares a charge in the same turn it was set up on the battlefield using the Deep Strike or Teleport Assault ability, add 3 to the Charge roll.",
       "type": "Datasheet",
       "parameter": ""
     },
     {
+      "id": "",
       "name": "SUPREME COMMANDER",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If this model is in your army, it must be your <span class=\"kwb\">WARLORD</span>.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -133,7 +149,41 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000373",
+      "line": 1,
+      "description": "1 Kaldor Draigo - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000373",
+      "line": 1,
+      "description": "1 model",
+      "cost": 125,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000382",
+      "slug": "brotherhood-terminator-squad"
+    },
+    {
+      "id": "000000384",
+      "slug": "paladin-squad"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Grey Knights (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000373:scourging",
       "datasheetId": "000000373",
@@ -215,39 +265,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000373",
-      "line": 1,
-      "description": "1 Kaldor Draigo – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000373",
-      "line": 1,
-      "description": "1 model",
-      "cost": 125,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000382",
-      "slug": "brotherhood-terminator-squad"
-    },
-    {
-      "id": "000000384",
-      "slug": "paladin-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Grey Knights (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

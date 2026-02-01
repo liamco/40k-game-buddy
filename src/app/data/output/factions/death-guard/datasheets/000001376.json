@@ -23,7 +23,7 @@
       "parameter": "D3"
     },
     {
-      "name": "Nurgle’s Gift (Aura)",
+      "name": "Nurgle's Gift (Aura)",
       "type": "Faction"
     },
     {
@@ -31,7 +31,7 @@
       "name": "Spore-laced Shock Waves",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase, each time you select a target for this model’s Plagueburst mortar, roll one D6 for the target unit and every other enemy unit within 3\" of the target unit, adding 1 to that roll if the unit being rolled for is Afflicted. On a 6+, the unit being rolled for is struck by spores; after resolving all of this model’s attacks against the target unit, each unit struck by spores suffers D3 mortal wounds.",
+      "description": "In your Shooting phase, each time you select a target for this model's Plagueburst mortar, roll one D6 for the target unit and every other enemy unit within 3\" of the target unit, adding 1 to that roll if the unit being rolled for is Afflicted. On a 6+, the unit being rolled for is struck by spores; after resolving all of this model's attacks against the target unit, each unit struck by spores suffers D3 mortal wounds.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -102,16 +102,41 @@
       "datasheetId": "000001376",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 entropy cannons can be replaced with 2 plaguespitters."
+      "description": "This model's 2 entropy cannons can be replaced with 2 plaguespitters."
     },
     {
       "datasheetId": "000001376",
       "line": 2,
       "button": "•",
-      "description": "This model’s heavy slugger can be replaced with 1 rothail volley gun."
+      "description": "This model's heavy slugger can be replaced with 1 rothail volley gun."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001376",
+      "line": 1,
+      "description": "1 Plagueburst Crawler",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001376",
+      "line": 1,
+      "description": "1 model",
+      "cost": 210,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001376:entropy-cannon",
       "datasheetId": "000001376",
@@ -270,40 +295,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001376",
-      "line": 1,
-      "description": "1 Plagueburst Crawler",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001376",
-      "line": 1,
-      "description": "1 model",
-      "cost": 210,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

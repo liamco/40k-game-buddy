@@ -411,12 +411,14 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                                     if (coreMechanics) {
                                         console.log(`[Core] ✅ Using pre-defined mechanics for ${itemName}` + (processedItem.parameter ? ` (${processedItem.parameter})` : ""));
                                         processedItem.mechanics = coreMechanics;
+                                        processedItem.mechanicsSource = "core";
                                     } else {
                                         // Extract structured effects with OpenAI
                                         // Pass faction state flags for faction-specific states
                                         const structuredEffects = await extractStructuredEffectsWithOpenAI(processedItem.description, itemName, effectiveFactionFlags);
                                         if (structuredEffects && structuredEffects.length > 0) {
                                             processedItem.mechanics = structuredEffects;
+                                            processedItem.mechanicsSource = "openai";
                                         }
                                     }
                                 }
@@ -446,10 +448,12 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                                 if (coreMechanics) {
                                     console.log(`[Core] ✅ Using pre-defined mechanics for ${itemName}` + (obj[key].parameter ? ` (${obj[key].parameter})` : ""));
                                     processed[key].mechanics = coreMechanics;
+                                    processed[key].mechanicsSource = "core";
                                 } else {
                                     const structuredEffects = await extractStructuredEffectsWithOpenAI(obj[key].description, itemName, effectiveFactionFlags);
                                     if (structuredEffects && structuredEffects.length > 0) {
                                         processed[key].mechanics = structuredEffects;
+                                        processed[key].mechanicsSource = "openai";
                                     }
                                 }
                             }

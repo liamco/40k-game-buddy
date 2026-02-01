@@ -3,7 +3,7 @@
   "name": "Darkstrider",
   "factionId": "TAU",
   "sourceId": "000000028",
-  "legend": "As much a maverick as he is a master of covert operations, Sub-commander El’Myamoto is a formidable leader of stealth and sabotage missions. His structural analyser allows him to pinpoint the weak spots of even the most indomitable enemies. Meanwhile, his expertise in guerrilla warfare renders his forces all the more deadly.",
+  "legend": "As much a maverick as he is a master of covert operations, Sub-commander El'Myamoto is a formidable leader of stealth and sabotage missions. His structural analyser allows him to pinpoint the weak spots of even the most indomitable enemies. Meanwhile, his expertise in guerrilla warfare renders his forces all the more deadly.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> Shade; close combat weapon.",
   "transport": "",
@@ -41,7 +41,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a ranged attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -56,7 +65,7 @@
   "keywords": [
     {
       "datasheetId": "000000410",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -109,7 +118,37 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000410",
+      "line": 1,
+      "description": "1 Darkstrider - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000410",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000422",
+      "slug": "pathfinder-team"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000410:shade",
       "datasheetId": "000000410",
@@ -160,35 +199,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000410",
-      "line": 1,
-      "description": "1 Darkstrider – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000410",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000422",
-      "slug": "pathfinder-team"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T’au Empire",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

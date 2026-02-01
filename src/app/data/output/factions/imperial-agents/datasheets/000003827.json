@@ -39,7 +39,7 @@
       "name": "Spectrus Doctrines",
       "legend": "",
       "factionId": "",
-      "description": "At the end of your opponent’s turn, if this unit is more than 6\" away from all enemy units, you can remove this unit from the battlefield and place it into Strategic Reserves.",
+      "description": "At the end of your opponent's turn, if this unit is more than 6\" away from all enemy units, you can remove this unit from the battlefield and place it into Strategic Reserves.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -48,16 +48,27 @@
       "name": "Helix Gauntlet",
       "legend": "",
       "factionId": "",
-      "description": "Models in the bearer’s unit have the Feel No Pain 6+ ability.",
+      "description": "Models in the bearer's unit have the Feel No Pain 6+ ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Infiltrator Comms Array",
       "legend": "",
       "factionId": "",
-      "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+      "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -196,7 +207,74 @@
       "description": "* These options cannot be taken on the same model."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003827",
+      "line": 1,
+      "description": "10 MODELS MAXIMUM",
+      "min": 10,
+      "max": 10
+    },
+    {
+      "datasheetId": "000003827",
+      "line": 2,
+      "description": "5-10 Kill Team Infiltrators",
+      "min": 5,
+      "max": 10
+    },
+    {
+      "datasheetId": "000003827",
+      "line": 3,
+      "description": "0-2 Kill Team Infiltrators with bolt sniper rifles",
+      "min": 0,
+      "max": 2
+    },
+    {
+      "datasheetId": "000003827",
+      "line": 4,
+      "description": "0-2 Kill Team Infiltrators with jump packs",
+      "min": 0,
+      "max": 2
+    },
+    {
+      "datasheetId": "000003827",
+      "line": 5,
+      "description": "0-4 Kill Team Infiltrators with occulus bolt carbines",
+      "min": 0,
+      "max": 4
+    },
+    {
+      "datasheetId": "000003827",
+      "line": 6,
+      "description": "0-4 Kill Team Infiltrators with combat knives",
+      "min": 0,
+      "max": 4
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003827",
+      "line": 1,
+      "description": "5 models",
+      "cost": 90,
+      "count": 5
+    },
+    {
+      "datasheetId": "000003827",
+      "line": 2,
+      "description": "10 models",
+      "cost": 180,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Imperial Agents (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000003827:accelerator-autocannon",
       "datasheetId": "000003827",
@@ -484,72 +562,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003827",
-      "line": 1,
-      "description": "10 MODELS MAXIMUM",
-      "min": 10,
-      "max": 10
-    },
-    {
-      "datasheetId": "000003827",
-      "line": 2,
-      "description": "5-10 Kill Team Infiltrators",
-      "min": 5,
-      "max": 10
-    },
-    {
-      "datasheetId": "000003827",
-      "line": 3,
-      "description": "0-2 Kill Team Infiltrators with bolt sniper rifles",
-      "min": 0,
-      "max": 2
-    },
-    {
-      "datasheetId": "000003827",
-      "line": 4,
-      "description": "0-2 Kill Team Infiltrators with jump packs",
-      "min": 0,
-      "max": 2
-    },
-    {
-      "datasheetId": "000003827",
-      "line": 5,
-      "description": "0-4 Kill Team Infiltrators with occulus bolt carbines",
-      "min": 0,
-      "max": 4
-    },
-    {
-      "datasheetId": "000003827",
-      "line": 6,
-      "description": "0-4 Kill Team Infiltrators with combat knives",
-      "min": 0,
-      "max": 4
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003827",
-      "line": 1,
-      "description": "5 models",
-      "cost": 90,
-      "count": 5
-    },
-    {
-      "datasheetId": "000003827",
-      "line": 2,
-      "description": "10 models",
-      "cost": 180,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Imperial Agents (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

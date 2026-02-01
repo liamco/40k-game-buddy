@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that is not Below Half-strength, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBelowHalfStrength",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -102,10 +119,37 @@
       "datasheetId": "000000111",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 twin heavy bolters can be replaced with one of the following:<ul><li>2 assault cannons</li><li>2 Dreadnought inferno cannons</li><li>2 heavy plasma cannons</li><li>2 missile launchers</li><li>2 multi-meltas</li><li>2 twin autocannons</li><li>2 twin lascannons</li></ul>"
+      "description": "This model's 2 twin heavy bolters can be replaced with one of the following:<ul><li>2 assault cannons</li><li>2 Dreadnought inferno cannons</li><li>2 heavy plasma cannons</li><li>2 missile launchers</li><li>2 multi-meltas</li><li>2 twin autocannons</li><li>2 twin lascannons</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000111",
+      "line": 1,
+      "description": "1 Mortis Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000111",
+      "line": 1,
+      "description": "1 model",
+      "cost": 130,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000111:assault-cannon",
       "datasheetId": "000000111",
@@ -171,7 +215,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Heavy plasma cannon – standard",
+          "name": "Heavy plasma cannon - standard",
           "attributes": [
             "BLAST"
           ],
@@ -188,7 +232,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Heavy plasma cannon – supercharge",
+          "name": "Heavy plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -215,7 +259,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – frag",
+          "name": "Missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -232,7 +276,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – krak",
+          "name": "Missile launcher - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -373,32 +417,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000111",
-      "line": 1,
-      "description": "1 Mortis Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000111",
-      "line": 1,
-      "description": "1 model",
-      "cost": 130,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

@@ -3,9 +3,9 @@
   "name": "Belisarius Cawl",
   "factionId": "AdM",
   "sourceId": "000000015",
-  "legend": "Belisarius Cawl’s war form is a multi-limbed, biomechanical hybrid. Advanced bionics grant him immense strength and resilience, while snaking tendrils rapidly repair his cybernetic body. For ten thousand years, Cawl has eradicated the Imperium’s enemies, and he leads the Machine God’s devotees in holy acquisition still.",
+  "legend": "Belisarius Cawl's war form is a multi-limbed, biomechanical hybrid. Advanced bionics grant him immense strength and resilience, while snaking tendrils rapidly repair his cybernetic body. For ten thousand years, Cawl has eradicated the Imperium's enemies, and he leads the Machine God's devotees in holy acquisition still.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> solar atomiser; arc scourge; Cawl’s Omnissian axe; mechadendrite hive.",
+  "loadout": "<b>This model is equipped with:</b> solar atomiser; arc scourge; Cawl's Omnissian axe; mechadendrite hive.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -37,7 +37,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more other friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -49,20 +60,51 @@
       "parameter": ""
     },
     {
+      "id": "",
       "name": "SUPREME COMMANDER",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If this model is in your army, it must be your Warlord.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Invocation of Machine Vengeance",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "At the start of your Command phase, select one unit from your opponent's army. Until the start of your next Command phase, that enemy unit is your Machine Vengeance target. Each time a model in a friendly Adeptus Mechanicus unit makes an attack that targets your Machine Vengeance target, you can re-roll the Hit roll.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Mantra of Discipline",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "This model has the <span class=\"kwb\">BATTLELINE</span> keyword and has the following ability: <br><ul><li><b>Binharic Courage (Aura):</b> While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit is within 6\" of this model, add 1 to the Objective Control characteristic of models in that unit and each time you take a Battle-shock or Leadership test for that unit, add 1 to that test.</li></ul>",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Shroudpsalm (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit is within 6\" of this model, that unit has the Stealth ability.",
+      "type": "Primarch",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STEALTH"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -133,7 +175,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000838",
+      "line": 1,
+      "description": "1 Belisarius Cawl - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000838",
+      "line": 1,
+      "description": "1 model",
+      "cost": 210,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000838:solar-atomiser",
       "datasheetId": "000000838",
@@ -192,7 +259,7 @@
       "id": "000000838:cawl-s-omnissian-axe",
       "datasheetId": "000000838",
       "line": 3,
-      "name": "Cawl’s Omnissian axe",
+      "name": "Cawl's Omnissian axe",
       "type": "Melee",
       "profiles": [
         {
@@ -200,7 +267,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Cawl’s Omnissian axe",
+          "name": "Cawl's Omnissian axe",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -238,30 +305,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000838",
-      "line": 1,
-      "description": "1 Belisarius Cawl – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000838",
-      "line": 1,
-      "description": "1 model",
-      "cost": 210,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

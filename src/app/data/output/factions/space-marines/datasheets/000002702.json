@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 7.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 7
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +50,25 @@
       "factionId": "",
       "description": "While this model is leading a unit, ranged weapons equipped by models in that unit have the [ASSAULT] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +77,26 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "STRATAGEM"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -119,19 +165,19 @@
       "datasheetId": "000002702",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 combi-weapon</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 master-crafted boltgun</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 relic shield*</li><li>1 relic weapon</li><li>1 power fist</li><li>1 thunder hammer</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 combi-weapon</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 master-crafted boltgun</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 relic shield*</li><li>1 relic weapon</li><li>1 power fist</li><li>1 thunder hammer</li></ul>"
     },
     {
       "datasheetId": "000002702",
       "line": 2,
       "button": "•",
-      "description": "This model’s Astartes chainsword can be replaced with one of the following:<ul><li>1 close combat weapon and 1 relic shield*</li><li>1 power fist</li><li>1 relic weapon</li></ul>"
+      "description": "This model's Astartes chainsword can be replaced with one of the following:<ul><li>1 close combat weapon and 1 relic shield*</li><li>1 power fist</li><li>1 relic weapon</li></ul>"
     },
     {
       "datasheetId": "000002702",
       "line": 3,
       "button": "•",
-      "description": "This model’s bolt pistol and Astartes chainsword can be replaced with 1 twin lightning claws."
+      "description": "This model's bolt pistol and Astartes chainsword can be replaced with 1 twin lightning claws."
     },
     {
       "datasheetId": "000002702",
@@ -140,7 +186,51 @@
       "description": "* Maximum one per model."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002702",
+      "line": 1,
+      "description": "1 Captain on Bike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002702",
+      "line": 1,
+      "description": "1 model",
+      "cost": 95,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000241",
+      "slug": "ravenwing-black-knights"
+    },
+    {
+      "id": "000002712",
+      "slug": "outrider-squad"
+    },
+    {
+      "id": "000000116",
+      "slug": "bike-squad"
+    },
+    {
+      "id": "000001166",
+      "slug": "company-veterans-on-bikes"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002702:bolt-pistol",
       "datasheetId": "000002702",
@@ -313,7 +403,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -330,7 +420,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -545,49 +635,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002702",
-      "line": 1,
-      "description": "1 Captain on Bike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002702",
-      "line": 1,
-      "description": "1 model",
-      "cost": 95,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000241",
-      "slug": "ravenwing-black-knights"
-    },
-    {
-      "id": "000002712",
-      "slug": "outrider-squad"
-    },
-    {
-      "id": "000000116",
-      "slug": "bike-squad"
-    },
-    {
-      "id": "000001166",
-      "slug": "company-veterans-on-bikes"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

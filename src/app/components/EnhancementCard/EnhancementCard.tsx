@@ -1,12 +1,12 @@
 import React from "react";
 
-import type { Enhancement } from "../../types";
-import BaseIcon from "../icons/BaseIcon";
-import IconLaurels from "../icons/IconLaurels";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../_ui/collapsible";
+import type { Enhancement } from "#types/Enhancements.tsx";
+import BaseIcon from "#components/icons/BaseIcon.tsx";
+import IconLaurels from "#components/icons/IconLaurels.tsx";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "#components/Collapsible/Collapsible.tsx";
 import { ChevronDown } from "lucide-react";
-import { Badge } from "../_ui/badge";
-import { Button } from "../_ui/button";
+import { Badge } from "#components/Badge/Badge.tsx";
+import { Button } from "#components/Button/Button.tsx";
 
 interface Props {
     enhancement: Enhancement;

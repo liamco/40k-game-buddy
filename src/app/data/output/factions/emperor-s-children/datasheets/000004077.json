@@ -35,7 +35,7 @@
       "name": "Daemonic Poisons",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase and the Fight phase, after this model has finished making its attacks, select one enemy unit hit by one or more of those attacks. Until the end of the battle, that enemy unit is poisoned. At the start of each player’s Command phase, roll one D6 for each poisoned enemy unit on the battlefield: on a 4+,that enemy unit suffers D3 mortal wounds.",
+      "description": "In your Shooting phase and the Fight phase, after this model has finished making its attacks, select one enemy unit hit by one or more of those attacks. Until the end of the battle, that enemy unit is poisoned. At the start of each player's Command phase, roll one D6 for each poisoned enemy unit on the battlefield: on a 4+,that enemy unit suffers D3 mortal wounds.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -44,7 +44,7 @@
       "name": "Daemon Primarch of Slaanesh",
       "legend": "",
       "factionId": "",
-      "description": "At the start of your opponent’s Command phase, select one of the abilities in the Daemon Primarch of Slaanesh section. Until the start of your opponent’s next Command phase, this model has that ability.",
+      "description": "At the start of your opponent's Command phase, select one of the abilities in the Daemon Primarch of Slaanesh section. Until the start of your opponent's next Command phase, this model has that ability.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -58,16 +58,40 @@
       "parameter": ""
     },
     {
+      "id": "",
       "name": "Beguiling Form",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Each time a model makes an attack that targets this model, subtract 1 from the Hit roll.",
+      "type": "Primarch",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "Daemonic Speed",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "This model has the Fights First ability.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Enthralling Hypnosis (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While an enemy unit is within 6\" of this model, each time that unit is selected to Fall Back, it must take a Leadership test. If that test is failed, that unit must Remain Stationary this phase instead.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
       "name": "SUPREME COMMANDER",
@@ -83,7 +107,7 @@
     },
     {
       "datasheetId": "000004077",
-      "keyword": "Emperor’s Children",
+      "keyword": "Emperor's Children",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -160,7 +184,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004077",
+      "line": 1,
+      "description": "1 Fulgrim - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004077",
+      "line": 1,
+      "description": "1 model",
+      "cost": 340,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Emperor's Children",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004077:malefic-lash",
       "datasheetId": "000004077",
@@ -199,7 +248,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Daemonic blades – strike",
+          "name": "Daemonic blades - strike",
           "attributes": [
             "SUSTAINED HITS 1"
           ],
@@ -216,7 +265,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Daemonic blades – sweep",
+          "name": "Daemonic blades - sweep",
           "attributes": [
             "SUSTAINED HITS 1"
           ],
@@ -255,40 +304,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004077",
-      "line": 1,
-      "description": "1 Fulgrim – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004077",
-      "line": 1,
-      "description": "1 model",
-      "cost": 340,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Emperor’s Children",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

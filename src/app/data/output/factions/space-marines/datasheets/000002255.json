@@ -3,7 +3,7 @@
   "name": "Sternguard Veteran Squad",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Sternguard Veterans are possessed of an unshakeable calm, and are renowned amongst their brothers for their exemplary marksmanship in the fiercest battles. Proficient in all of the Chapter’s ranged weaponry, they can always be found where their pinpoint volleys will best shatter the foe.",
+  "legend": "Sternguard Veterans are possessed of an unshakeable calm, and are renowned amongst their brothers for their exemplary marksmanship in the fiercest battles. Proficient in all of the Chapter's ranged weaponry, they can always be found where their pinpoint volleys will best shatter the foe.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> Sternguard bolt pistol; Sternguard bolt rifle; close combat weapon.",
   "transport": "",
@@ -28,7 +28,26 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets your Oath of Moment target, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "abilities": [
+                "OATH OF MOMENT"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -97,7 +116,7 @@
       "datasheetId": "000002255",
       "line": 1,
       "button": "•",
-      "description": "The Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 Astartes chainsword </li><li>1 combi-weapon </li><li>1 power weapon </li><li>1 power fist </li><li>1 Astartes chainsword and 1 Sternguard bolt rifle* </li><li>1 power weapon and 1 Sternguard bolt rifle* </li><li>1 power fist and 1 Sternguard bolt rifle*</li></ul>"
+      "description": "The Sternguard Veteran Sergeant's Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 Astartes chainsword </li><li>1 combi-weapon </li><li>1 power weapon </li><li>1 power fist </li><li>1 Astartes chainsword and 1 Sternguard bolt rifle* </li><li>1 power weapon and 1 Sternguard bolt rifle* </li><li>1 power fist and 1 Sternguard bolt rifle*</li></ul>"
     },
     {
       "datasheetId": "000002255",
@@ -109,7 +128,7 @@
       "datasheetId": "000002255",
       "line": 3,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Sternguard Veteran’s Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 pyrecannon </li><li>1 Sternguard heavy bolter</li></ul>"
+      "description": "For every 5 models in this unit, 1 Sternguard Veteran's Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 pyrecannon </li><li>1 Sternguard heavy bolter</li></ul>"
     },
     {
       "datasheetId": "000002255",
@@ -118,7 +137,48 @@
       "description": "* This model's Sternguard bolt rifle cannot be replaced."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002255",
+      "line": 1,
+      "description": "1 Sternguard Veteran Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002255",
+      "line": 2,
+      "description": "4-9 Sternguard Veterans",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002255",
+      "line": 1,
+      "description": "5 models",
+      "cost": 100,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002255",
+      "line": 2,
+      "description": "10 models",
+      "cost": 200,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002255:combi-weapon",
       "datasheetId": "000002255",
@@ -354,46 +414,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002255",
-      "line": 1,
-      "description": "1 Sternguard Veteran Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002255",
-      "line": 2,
-      "description": "4-9 Sternguard Veterans",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002255",
-      "line": 1,
-      "description": "5 models",
-      "cost": 100,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002255",
-      "line": 2,
-      "description": "10 models",
-      "cost": 200,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

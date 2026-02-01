@@ -3,7 +3,7 @@
   "name": "Barracuda",
   "factionId": "TAU",
   "sourceId": "000000381",
-  "legend": "The Barracuda was developed to arm the T’au Empire with a multirole fighter capable of combating the increasingly diverse threats to the Greater Good. Armed with an ion cannon and drone-controlled burst cannons, the Barracuda’s versatility and damage output place it at the forefront of T’au aerial warfare.",
+  "legend": "The Barracuda was developed to arm the T'au Empire with a multirole fighter capable of combating the increasingly diverse threats to the Greater Good. Armed with an ion cannon and drone-controlled burst cannons, the Barracuda's versatility and damage output place it at the forefront of T'au aerial warfare.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 long-barrelled burst cannons; swiftstrike burst cannon; 2 missile pods; armoured hull.",
   "transport": "",
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time an attack targets this model, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "One Shot",
@@ -43,7 +52,7 @@
   "keywords": [
     {
       "datasheetId": "000000453",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -94,13 +103,13 @@
       "datasheetId": "000000453",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 long-barrelled burst cannons can be replaced with 2 cyclic ion blasters."
+      "description": "This model's 2 long-barrelled burst cannons can be replaced with 2 cyclic ion blasters."
     },
     {
       "datasheetId": "000000453",
       "line": 2,
       "button": "•",
-      "description": "This model’s swiftstrike burst cannon can be replaced with one of the following:<ul><li>1 ion cannon</li><li>1 swiftstrike railgun</li></ul>"
+      "description": "This model's swiftstrike burst cannon can be replaced with one of the following:<ul><li>1 ion cannon</li><li>1 swiftstrike railgun</li></ul>"
     },
     {
       "datasheetId": "000000453",
@@ -109,7 +118,32 @@
       "description": "This model can be equipped with up to 4 seeker missiles."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000453",
+      "line": 1,
+      "description": "1 Barracuda",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000453",
+      "line": 1,
+      "description": "1 model",
+      "cost": 220,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: T'au Empire (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000453:cyclic-ion-blaster",
       "datasheetId": "000000453",
@@ -122,7 +156,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Cyclic ion blaster – standard",
+          "name": "Cyclic ion blaster - standard",
           "attributes": [],
           "range": 18,
           "type": "Ranged",
@@ -137,7 +171,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Cyclic ion blaster – overcharge",
+          "name": "Cyclic ion blaster - overcharge",
           "attributes": [
             "HAZARDOUS"
           ],
@@ -163,7 +197,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Ion cannon – standard",
+          "name": "Ion cannon - standard",
           "attributes": [
             "BLAST"
           ],
@@ -180,7 +214,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Ion cannon – overcharge",
+          "name": "Ion cannon - overcharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -342,40 +376,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000453",
-      "line": 1,
-      "description": "1 Barracuda",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000453",
-      "line": 1,
-      "description": "1 model",
-      "cost": 220,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: T’au Empire (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

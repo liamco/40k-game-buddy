@@ -33,7 +33,45 @@
       "factionId": "",
       "description": "When making ranged attacks, this model can target enemy units within Engagement Range of it with Blast weapons (provided no other friendly units are also within Engagement Range of that enemy unit). In addition, when making ranged attacks, this model does not suffer the penalty to its Hit rolls for being within Engagement Range of one or more enemy units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "BLAST"
+          ],
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -94,19 +132,19 @@
       "datasheetId": "000001175",
       "line": 1,
       "button": "•",
-      "description": "This model’s Kratos battle cannon can be replaced with one of the following:<ul><li>1 melta blast-gun</li><li>1 volkite cardanelle</li></ul>"
+      "description": "This model's Kratos battle cannon can be replaced with one of the following:<ul><li>1 melta blast-gun</li><li>1 volkite cardanelle</li></ul>"
     },
     {
       "datasheetId": "000001175",
       "line": 2,
       "button": "•",
-      "description": "2 of this model’s heavy bolters can be replaced with one of the following:<ul><li>2 autocannons</li><li>2 lascannons</li><li>2 volkite calivers</li></ul>"
+      "description": "2 of this model's heavy bolters can be replaced with one of the following:<ul><li>2 autocannons</li><li>2 lascannons</li><li>2 volkite calivers</li></ul>"
     },
     {
       "datasheetId": "000001175",
       "line": 3,
       "button": "•",
-      "description": "2 of this model’s heavy bolters can be replaced with one of the following:<ul><li>2 heavy flamers</li><li>2 lascannons</li><li>2 volkite culverins </li></ul>"
+      "description": "2 of this model's heavy bolters can be replaced with one of the following:<ul><li>2 heavy flamers</li><li>2 lascannons</li><li>2 volkite culverins </li></ul>"
     },
     {
       "datasheetId": "000001175",
@@ -121,7 +159,34 @@
       "description": "This model can be equipped with 1 hunter killer missile"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001175",
+      "line": 1,
+      "description": "1 Kratos",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001175",
+      "line": 1,
+      "description": "1 model",
+      "cost": 240,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001175:autocannon",
       "datasheetId": "000001175",
@@ -291,7 +356,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Kratos battle cannon – AP",
+          "name": "Kratos battle cannon - AP",
           "attributes": [
             "HEAVY"
           ],
@@ -308,7 +373,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Kratos battle cannon – HE",
+          "name": "Kratos battle cannon - HE",
           "attributes": [
             "BLAST"
           ],
@@ -525,42 +590,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001175",
-      "line": 1,
-      "description": "1 Kratos",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001175",
-      "line": 1,
-      "description": "1 model",
-      "cost": 240,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

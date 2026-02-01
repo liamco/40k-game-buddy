@@ -37,7 +37,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Legiones Daemonica Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -46,7 +57,18 @@
       "factionId": "",
       "description": "While a friendly Legiones Daemonica unit is within 6\" of this model, models in that unit have the Stealth ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STEALTH"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -55,27 +77,61 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, this model has a 3+ invulnerable save.",
       "type": "Datasheet",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 3
+        }
+      ],
+      "mechanicsSource": "regex"
+    },
+    {
+      "id": "",
+      "name": "DAEMONIC ALLEGIANCE",
+      "legend": "",
+      "factionId": "",
+      "description": "When you select this model to include in your army, you must select one of the following keywords for it to gain: <br><ul><li><span class=\"kwb\">KHORNE</span> </li><li><span class=\"kwb\">TZEENTCH</span> </li><li><span class=\"kwb\">NURGLE</span> </li><li><span class=\"kwb\">SLAANESH</span> </li></ul>The keyword you select will also affect some of this model's characteristics, as stated overleaf.",
+      "type": "Special (правая колонка)",
       "parameter": ""
     },
     {
-      "name": "DAEMONIC ALLEGIANCE",
-      "type": "Special (правая колонка)"
-    },
-    {
+      "id": "",
       "name": "Daemon Prince of Khorne",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "If this model has the <span class=\"kwb\">KHORNE</span> keyword, add 2 to the Strength characteristic of this model's hellforged weapons.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Daemon Prince of Tzeentch",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "If this model has the <span class=\"kwb\">TZEENTCH</span> keyword, add 3 to the Attacks characteristic of this model's infernal cannon.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Daemon Prince of Nurgle",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "If this model has the <span class=\"kwb\">NURGLE</span> keyword, add 1 to this model's Toughness characteristic.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Daemon Prince of Slaanesh",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "If this model has the <span class=\"kwb\">SLAANESH</span> keyword, add 2\" to this model's Move characteristic.",
+      "type": "Primarch",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -147,7 +203,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001149",
+      "line": 1,
+      "description": "1 Daemon Prince of Chaos",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001149",
+      "line": 1,
+      "description": "1 model",
+      "cost": 190,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001149:infernal-cannon",
       "datasheetId": "000001149",
@@ -184,7 +265,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Hellforged weapons – strike",
+          "name": "Hellforged weapons - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -199,7 +280,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Hellforged weapons – sweep",
+          "name": "Hellforged weapons - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -211,30 +292,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001149",
-      "line": 1,
-      "description": "1 Daemon Prince of Chaos",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001149",
-      "line": 1,
-      "description": "1 model",
-      "cost": 190,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

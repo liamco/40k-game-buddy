@@ -34,7 +34,18 @@
       "factionId": "",
       "description": "This model has the Feel No Pain 3+ ability against Psychic Attacks and mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 3
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -125,7 +136,32 @@
       "description": "This model can be equipped with 1 hunter-killer missile."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002524",
+      "line": 1,
+      "description": "1 Anathema Psykana Rhino",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002524",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Adeptus Custodes",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002524:hunter-killer-missile",
       "datasheetId": "000002524",
@@ -202,30 +238,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002524",
-      "line": 1,
-      "description": "1 Anathema Psykana Rhino",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002524",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Adeptus Custodes",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

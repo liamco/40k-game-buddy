@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks made with an accelerator autocannon. Until the start of your next turn, while this unit is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -103,7 +112,41 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000068",
+      "line": 1,
+      "description": "1 Suppressor Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000068",
+      "line": 2,
+      "description": "2 Suppressors",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000068",
+      "line": 1,
+      "description": "3 models",
+      "cost": 75,
+      "count": 3
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000068:accelerator-autocannon",
       "datasheetId": "000000068",
@@ -180,39 +223,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000068",
-      "line": 1,
-      "description": "1 Suppressor Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000068",
-      "line": 2,
-      "description": "2 Suppressors",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000068",
-      "line": 1,
-      "description": "3 models",
-      "cost": 75,
-      "count": 3
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

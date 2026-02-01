@@ -1,0 +1,168 @@
+import React from "react";
+
+import { WeaponProfile } from "#types/Weapons.tsx";
+
+import { Badge } from "#components/Badge/Badge.tsx";
+
+import BaseIcon from "#components/icons/BaseIcon.tsx";
+import IconLaurels from "#components/icons/IconLaurels.tsx";
+import IconLeader from "#components/icons/IconLeader.tsx";
+
+import styles from "./WargearProfileCard.module.css";
+
+import strikethrough from "#assets/StrikethroughGreen.svg";
+
+export type BonusSourceType = "leader" | "enhancement" | "detachment";
+
+export interface BonusAttribute {
+    name: string;
+    value?: string | number | null;
+    sourceName?: string;
+    sourceType?: BonusSourceType;
+}
+
+// Stat bonuses that modify weapon characteristics
+export interface StatBonus {
+    attribute: "a" | "s" | "ap" | "d" | "range" | "bsWs";
+    value: number;
+    sourceName?: string;
+    sourceType?: BonusSourceType;
+}
+
+// Counter controls for ratio-based selections
+export interface CounterControls {
+    current: number;
+    max: number;
+    onIncrement: () => void;
+    onDecrement: () => void;
+}
+
+interface Props {
+    profile: WeaponProfile;
+    className?: string;
+    isSelected?: boolean;
+    isLinked?: boolean;
+    isDisabled?: boolean;
+    isStacked?: boolean;
+    onWeaponProfileChange?: (profile: WeaponProfile | null) => void;
+    onToggle?: () => void;
+    canToggle?: boolean;
+    // Click handler for the whole card (used when no button is shown)
+    onCardClick?: () => void;
+    // Bonus attributes from enhancements/abilities (e.g., SUSTAINED HITS)
+    bonusAttributes?: BonusAttribute[];
+    // Stat bonuses from enhancements/abilities (e.g., +1 Strength)
+    statBonuses?: StatBonus[];
+}
+
+const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisabled, isStacked, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
+    const handleClick = () => {
+        if (canToggle && onToggle) {
+            onToggle();
+        } else if (onCardClick) {
+            onCardClick();
+        } else if (onWeaponProfileChange) {
+            onWeaponProfileChange(profile);
+        }
+    };
+
+    // Format bonus attribute for display (e.g., "SUSTAINED HITS" + value 1 = "SUSTAINED HITS 1")
+    const formatBonusAttribute = (bonus: BonusAttribute): string => {
+        if (bonus.value !== null && bonus.value !== undefined && bonus.value !== true) {
+            return `${bonus.name} ${bonus.value}`;
+        }
+        return bonus.name;
+    };
+
+    // Get total bonus for a specific stat
+    const getStatBonus = (attr: StatBonus["attribute"]): number => {
+        if (!statBonuses) return 0;
+        return statBonuses.filter((b) => b.attribute === attr).reduce((sum, b) => sum + b.value, 0);
+    };
+
+    // Get sources for a specific stat bonus (for tooltip)
+    const getStatBonusSources = (attr: StatBonus["attribute"]): string[] => {
+        if (!statBonuses) return [];
+        return statBonuses.filter((b) => b.attribute === attr && b.sourceName).map((b) => b.sourceName!);
+    };
+
+    // Render a stat value with optional bonus
+    const renderStat = (attr: StatBonus["attribute"], baseValue: string | number, suffix?: string) => {
+        const bonus = getStatBonus(attr);
+        const sources = getStatBonusSources(attr);
+        const hasBonus = bonus !== 0;
+
+        if (!hasBonus) {
+            return (
+                <span className="text-profile-attribute">
+                    {baseValue}
+                    {suffix}
+                </span>
+            );
+        }
+
+        // For numeric values, calculate the new value
+        const numericBase = typeof baseValue === "number" ? baseValue : parseInt(baseValue as string, 10);
+        const isNumeric = !isNaN(numericBase);
+
+        return (
+            <span className="text-profile-attribute flex items-center justify-center gap-0.5" title={sources.length > 0 ? `From: ${sources.join(", ")}` : undefined}>
+                {isNumeric ? (
+                    <>
+                        <span className="text-fireDragonBright">{numericBase + bonus}</span>
+                        <span className=" text-fireDragonBright/70">
+                            ({bonus > 0 ? "+" : ""}
+                            {bonus})
+                        </span>
+                    </>
+                ) : (
+                    <>
+                        {baseValue}
+                        <span className=" text-fireDragonBright/70">
+                            ({bonus > 0 ? "+" : ""}
+                            {bonus})
+                        </span>
+                    </>
+                )}
+                {suffix}
+            </span>
+        );
+    };
+
+    const linkedClasses = "";
+    const selectedClasses = `${styles.WargearProfileCardSelected} bg-fireDragonBright shadow-glow-orange text-mournfangBrown`;
+
+    return (
+        <div
+            key={profile.name}
+            className={`relative rounded p-3 border-1 ${isStacked ? styles.WargearProfileCardStacked : ""} transition-colors border-fireDragonBright ${isDisabled ? "cursor-not-allowed" : ""} ${onWeaponProfileChange || onCardClick ? "cursor-pointer" : ""} ${isSelected ? selectedClasses : "text-fireDragonBright"} ${isLinked ? linkedClasses : ""}`}
+            onClick={handleClick}
+        >
+            <div className={`${isDisabled ? "opacity-25" : ""} flex justify-between items-center min-h-[61px]`}>
+                <div className="space-y-2">
+                    <h4 className="text-metadata-l">{profile.name}</h4>
+                    {profile.attributes && (
+                        <div className="flex flex-wrap gap-2">
+                            {profile.attributes?.map((attr: string) => (
+                                <Badge key={attr} variant={isSelected ? "secondaryAlt" : "outlineAlt"}>
+                                    {attr}
+                                </Badge>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                <div className="grid grid-cols-6 gap-1 text-center w-[300px]">
+                    {renderStat("range", profile.range > 0 ? profile.range : "Melee")}
+                    {renderStat("a", profile.a)}
+                    {profile.bsWs === "N/A" ? <span className="text-profile-attribute">N/A</span> : renderStat("bsWs", profile.bsWs, "+")}
+                    {renderStat("s", profile.s)}
+                    {renderStat("ap", profile.ap)}
+                    {renderStat("d", profile.d)}
+                </div>
+            </div>
+            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />}
+        </div>
+    );
+};
+
+export default WeaponProfileCard;

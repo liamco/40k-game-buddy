@@ -3,7 +3,7 @@
   "name": "Veteran Bike Squad",
   "factionId": "AoI",
   "sourceId": "000000363",
-  "legend": "Matching their speed, strength and firepower against the swiftest xenos, Veteran Bikers are expert hunters. Undertaking extended missions in dangerous territory, they assess their enemy’s every weakness, close off escape routes and use their velocity to enact sudden strikes from unexpected angles.",
+  "legend": "Matching their speed, strength and firepower against the swiftest xenos, Veteran Bikers are expert hunters. Undertaking extended missions in dangerous territory, they assess their enemy's every weakness, close off escape routes and use their velocity to enact sudden strikes from unexpected angles.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> bolt pistol; close combat weapon; twin boltgun.",
   "transport": "",
@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -121,7 +130,46 @@
       "description": "Any number of Veteran Biker models can each be equipped with 1 Long Vigil melee weapon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003823",
+      "line": 1,
+      "description": "1 Veteran Biker Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000003823",
+      "line": 2,
+      "description": "2-5 Veteran Bikers",
+      "min": 2,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003823",
+      "line": 1,
+      "description": "3 models",
+      "cost": 70,
+      "count": 3
+    },
+    {
+      "datasheetId": "000003823",
+      "line": 2,
+      "description": "6 models",
+      "cost": 140,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Imperial Agents (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000003823:bolt-pistol",
       "datasheetId": "000003823",
@@ -276,44 +324,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003823",
-      "line": 1,
-      "description": "1 Veteran Biker Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000003823",
-      "line": 2,
-      "description": "2-5 Veteran Bikers",
-      "min": 2,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003823",
-      "line": 1,
-      "description": "3 models",
-      "cost": 70,
-      "count": 3
-    },
-    {
-      "datasheetId": "000003823",
-      "line": 2,
-      "description": "6 models",
-      "cost": 140,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Imperial Agents (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

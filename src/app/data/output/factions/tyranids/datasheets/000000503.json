@@ -3,7 +3,7 @@
   "name": "Barbed Hierodule",
   "factionId": "TYR",
   "sourceId": "000000379",
-  "legend": "First recorded during the invasion of Hamman’s World, these looming monstrosities are protected by thick armour plates that allow them to shrug off all but the most devastating of attacks, while their bio-cannons are able to hold off the foe as they charge forward to finish the prey at close quarters.",
+  "legend": "First recorded during the invasion of Hamman's World, these looming monstrosities are protected by thick armour plates that allow them to shrug off all but the most devastating of attacks, while their bio-cannons are able to hold off the foe as they charge forward to finish the prey at close quarters.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 bio-cannons; Hierodule scything talons.",
   "transport": "",
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit (excluding <span class=\"kwb\">TITANIC</span> units) that was hit by one or more of those attacks. Until the start of your next turn, while this model is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -87,7 +96,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000503",
+      "line": 1,
+      "description": "1 Barbed Hierodule",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000503",
+      "line": 1,
+      "description": "1 model",
+      "cost": 340,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000503:bio-cannon",
       "datasheetId": "000000503",
@@ -137,40 +171,6 @@
           "d": "D3+3"
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000503",
-      "line": 1,
-      "description": "1 Barbed Hierodule",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000503",
-      "line": 1,
-      "description": "1 model",
-      "cost": 340,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

@@ -37,16 +37,51 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Deadly Terror",
       "legend": "",
       "factionId": "",
-      "description": "While this model is leading a unit, increase the range of that unit’s Terror Troops ability by 3\".",
+      "description": "While this model is leading a unit, increase the range of that unit's Terror Troops ability by 3\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -123,7 +158,43 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001345",
+      "line": 1,
+      "description": "1 Lieutenant in Reiver Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001345",
+      "line": 1,
+      "description": "1 model",
+      "cost": 55,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002718",
+      "slug": "reiver-squad"
+    },
+    {
+      "id": "000002806",
+      "slug": "hounds-of-morkai"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001345:master-crafted-special-issue-bolt-pistol",
       "datasheetId": "000001345",
@@ -178,42 +249,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001345",
-      "line": 1,
-      "description": "1 Lieutenant in Reiver Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001345",
-      "line": 1,
-      "description": "1 model",
-      "cost": 55,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002718",
-      "slug": "reiver-squad"
-    },
-    {
-      "id": "000002806",
-      "slug": "hounds-of-morkai"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
   "leaderConditions": {
     "allowedExistingLeaderKeywords": [
       "CAPTAIN",

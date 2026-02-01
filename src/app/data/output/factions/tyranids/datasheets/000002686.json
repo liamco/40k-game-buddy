@@ -26,9 +26,68 @@
       "name": "Disruption Bombardment",
       "legend": "",
       "factionId": "",
-      "description": "In your Shooting phase, after this unit has shot, select one enemy <span class=\"kwb\">INFANTRY</span> unit hit by one or more of those attacks. Until the end of your opponent’s next turn, that enemy unit is disrupted. While a unit is disrupted, subtract 2 from its Move characteristic and subtract 2 from Advance and Charge rolls made for it.",
+      "description": "In your Shooting phase, after this unit has shot, select one enemy <span class=\"kwb\">INFANTRY</span> unit hit by one or more of those attacks. Until the end of your opponent's next turn, that enemy unit is disrupted. While a unit is disrupted, subtract 2 from its Move characteristic and subtract 2 from Advance and Charge rolls made for it.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "m",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDisrupted",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "m",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDisrupted",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "a",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDisrupted",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "a",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDisrupted",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -75,7 +134,39 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002686",
+      "line": 1,
+      "description": "5-10 Barbgaunts",
+      "min": 5,
+      "max": 10
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002686",
+      "line": 1,
+      "description": "5 models",
+      "cost": 55,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002686",
+      "line": 2,
+      "description": "10 models",
+      "cost": 110,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002686:barblauncher",
       "datasheetId": "000002686",
@@ -127,37 +218,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002686",
-      "line": 1,
-      "description": "5-10 Barbgaunts",
-      "min": 5,
-      "max": 10
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002686",
-      "line": 1,
-      "description": "5 models",
-      "cost": 55,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002686",
-      "line": 2,
-      "description": "10 models",
-      "cost": 110,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "Lieutenant With Combi-weapon",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Some Lieutenants in Phobos armour are tasked with operating behind enemy lines, acting as skilled assassins and intelligence gatherers. By the time the main Space Marine task force has arrived they have cast the enemy into disarray and collected incredible tactical data that will all but guarantee the assault’s success.",
+  "legend": "Some Lieutenants in Phobos armour are tasked with operating behind enemy lines, acting as skilled assassins and intelligence gatherers. By the time the main Space Marine task force has arrived they have cast the enemy into disarray and collected incredible tactical data that will all but guarantee the assault's success.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> combi-weapon; paired combat blades.",
   "transport": "",
@@ -45,7 +45,32 @@
       "factionId": "",
       "description": "At the start of the first battle round, if your army includes one or more models with this ability, you can select one objective marker on the battlefield. Until the end of the battle, while one or more models with this ability are on the battlefield, each time a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model makes an attack that targets an enemy unit that is within range of that objective marker, re-roll a Wound roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "OBJECTIVE MARKER SELECTION"
+          ],
+          "value": "one objective marker"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -54,11 +79,52 @@
       "factionId": "",
       "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this unit, if this unit is not within Engagement Range of one or more enemy units, it can make a Normal move.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "NORMAL MOVE"
+          ],
+          "value": "once per turn",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "LAST SURVIVOR",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "This model cannot be selected as your Warlord.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT BE WARLORD"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -129,7 +195,34 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000076",
+      "line": 1,
+      "description": "1 Lieutenant with Combi-weapon",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000076",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000076:combi-weapon",
       "datasheetId": "000000076",
@@ -185,32 +278,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000076",
-      "line": 1,
-      "description": "1 Lieutenant with Combi-weapon",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000076",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

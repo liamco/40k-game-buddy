@@ -3,7 +3,7 @@
   "name": "Cyberwolf",
   "factionId": "SM",
   "sourceId": "000000360",
-  "legend": "If critically injured, the largest and most ferocious Fenrisian Wolves are rebuilt, mechanically augmented by the Chapter’s Iron Priests. These Cyberwolves may return to their old pack, to lead their kin and hunt with bionically enhanced muscles and steel fangs. Exhibiting such strength, flesh-and-blood wolves instinctively follow them.",
+  "legend": "If critically injured, the largest and most ferocious Fenrisian Wolves are rebuilt, mechanically augmented by the Chapter's Iron Priests. These Cyberwolves may return to their old pack, to lead their kin and hunt with bionically enhanced muscles and steel fangs. Exhibiting such strength, flesh-and-blood wolves instinctively follow them.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> teeth and claws.",
   "transport": "",
@@ -32,7 +32,22 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets an enemy unit that is Below Half-strength, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,11 +56,46 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Scouts 6\" ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "WOLFKIN",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "This model cannot be your Warlord and cannot be given Enhancements.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT BE WARLORD"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT BE GIVEN ENHANCEMENTS"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -111,32 +161,6 @@
       "description": "None"
     }
   ],
-  "wargear": [
-    {
-      "id": "000002805:teeth-and-claws",
-      "datasheetId": "000002805",
-      "line": 1,
-      "name": "Teeth and claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002805",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Teeth and claws",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002805",
@@ -169,7 +193,36 @@
   "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
   "isForgeWorld": false,
   "isLegends": true,
+  "availableWargear": [
+    {
+      "id": "000002805:teeth-and-claws",
+      "datasheetId": "000002805",
+      "line": 1,
+      "name": "Teeth and claws",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000002805",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Teeth and claws",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 4,
+          "bsWs": 4,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    }
+  ],
   "leaderConditions": {
-    "mustAttach": true
+    "mustAttach": true,
+    "allowedExistingLeaderKeywords": [
+      "CANIS WOLFBORN"
+    ]
   }
 }

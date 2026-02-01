@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,7 +52,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, improve the Armour Penetration characteristic of melee weapons equipped by models in that unit by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -110,16 +138,60 @@
       "datasheetId": "000000159",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li></ul>"
     },
     {
       "datasheetId": "000000159",
       "line": 2,
       "button": "•",
-      "description": "This model’s Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
+      "description": "This model's Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000159",
+      "line": 1,
+      "description": "1 Sanguinary Priest on Bike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000159",
+      "line": 1,
+      "description": "1 model",
+      "cost": 135,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002712",
+      "slug": "outrider-squad"
+    },
+    {
+      "id": "000000116",
+      "slug": "bike-squad"
+    },
+    {
+      "id": "000001166",
+      "slug": "company-veterans-on-bikes"
+    },
+    {
+      "id": "000000241",
+      "slug": "ravenwing-black-knights"
+    }
+  ],
+  "supplementSlug": "blood-angels",
+  "supplementName": "Blood Angels (Legends)",
+  "supplementLabel": "Blood Angels (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Blood Angels (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000159:bolt-pistol",
       "datasheetId": "000000159",
@@ -292,7 +364,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -309,7 +381,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -474,49 +546,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000159",
-      "line": 1,
-      "description": "1 Sanguinary Priest on Bike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000159",
-      "line": 1,
-      "description": "1 model",
-      "cost": 135,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002712",
-      "slug": "outrider-squad"
-    },
-    {
-      "id": "000000116",
-      "slug": "bike-squad"
-    },
-    {
-      "id": "000001166",
-      "slug": "company-veterans-on-bikes"
-    },
-    {
-      "id": "000000241",
-      "slug": "ravenwing-black-knights"
-    }
-  ],
-  "supplementSlug": "blood-angels",
-  "supplementName": "Blood Angels (Legends)",
-  "supplementLabel": "Blood Angels (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Blood Angels (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

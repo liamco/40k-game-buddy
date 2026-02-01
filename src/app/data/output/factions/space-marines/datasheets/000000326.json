@@ -3,7 +3,7 @@
   "name": "Long Fangs",
   "factionId": "SM",
   "sourceId": "000000360",
-  "legend": "Dour and grizzled veterans, Long Fangs are steady of hand and temperament, hoary with wisdom and literally long of fang. To these patient warriors are granted some of the Great Company’s most devastating ranged weapons. Keen of eye, Long Fangs hunt the monstrous beasts and battle tanks of the foe.",
+  "legend": "Dour and grizzled veterans, Long Fangs are steady of hand and temperament, hoary with wisdom and literally long of fang. To these patient warriors are granted some of the Great Company's most devastating ranged weapons. Keen of eye, Long Fangs hunt the monstrous beasts and battle tanks of the foe.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> boltgun; bolt pistol; close combat weapon.",
   "transport": "",
@@ -28,20 +28,107 @@
       "factionId": "",
       "description": "Each time this unit Remains Stationary, if it includes a Long Fang Pack Leader, you can select one enemy unit that is visible to that model. Until the end of the turn, each time a model in this unit makes a ranged attack that targets that enemy unit, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "Long Fang Pack Leader"
+              ],
+              "operator": "includes",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "visible",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Armorium Cherub",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, after making a Hit roll for a model in this unit, you can change that roll to an unmodified 6.<br><br><b>Designer’s Note:</b> Place an Armorium Cherub token next to the unit, removing it once this ability has been used.",
+      "description": "Once per battle, after making a Hit roll for a model in this unit, you can change that roll to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Armorium Cherub token next to the unit, removing it once this ability has been used.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "h",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": "once per battle"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ARMORIUM CHERUB"
+          ],
+          "value": "token placed"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character unit from your army with the Leader ability can be attached to a Devastator Squad, it can instead be attached to this unit.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "attached to this unit",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Leader"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "Devastator Squad"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -110,16 +197,57 @@
       "datasheetId": "000000326",
       "line": 2,
       "button": "•",
-      "description": "The Long Fang Pack Leader’s boltgun can be replace with one of the following<ul><li>1 flamer</li><li>1 grav-gun</li><li>1 meltagun</li><li>1 plasma gun</li><li>1 plasma pistol</li></ul>"
+      "description": "The Long Fang Pack Leader's boltgun can be replace with one of the following<ul><li>1 flamer</li><li>1 grav-gun</li><li>1 meltagun</li><li>1 plasma gun</li><li>1 plasma pistol</li></ul>"
     },
     {
       "datasheetId": "000000326",
       "line": 3,
       "button": "•",
-      "description": "The Long Fang Pack Leader’s close combat weapon can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li></ul>"
+      "description": "The Long Fang Pack Leader's close combat weapon can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000326",
+      "line": 1,
+      "description": "1 Long Fang Pack Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000326",
+      "line": 2,
+      "description": "4-5 Long Fangs",
+      "min": 4,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000326",
+      "line": 1,
+      "description": "5 models",
+      "cost": 120,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000326",
+      "line": 2,
+      "description": "6 models",
+      "cost": 145,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves (Legends)",
+  "supplementLabel": "Space Wolves (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000326:bolt-pistol",
       "datasheetId": "000000326",
@@ -342,7 +470,7 @@
           "line": 9,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – frag",
+          "name": "Missile launcher - frag",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -360,7 +488,7 @@
           "line": 10,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – krak",
+          "name": "Missile launcher - krak",
           "attributes": [
             "HEAVY"
           ],
@@ -439,7 +567,7 @@
           "line": 13,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma cannon – standard",
+          "name": "Plasma cannon - standard",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -457,7 +585,7 @@
           "line": 14,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma cannon – supercharge",
+          "name": "Plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS",
@@ -485,7 +613,7 @@
           "line": 15,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -502,7 +630,7 @@
           "line": 15,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -529,7 +657,7 @@
           "line": 16,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -546,7 +674,7 @@
           "line": 16,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -657,46 +785,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000326",
-      "line": 1,
-      "description": "1 Long Fang Pack Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000326",
-      "line": 2,
-      "description": "4-5 Long Fangs",
-      "min": 4,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000326",
-      "line": 1,
-      "description": "5 models",
-      "cost": 120,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000326",
-      "line": 2,
-      "description": "6 models",
-      "cost": 145,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves (Legends)",
-  "supplementLabel": "Space Wolves (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

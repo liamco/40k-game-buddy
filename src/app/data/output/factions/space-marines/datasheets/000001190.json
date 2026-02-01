@@ -3,7 +3,7 @@
   "name": "Stormtalon Gunship",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Fast and manoeuvrable, the Stormtalon is an aerial interceptor optimised for escorting Stormraven Gunships. While fast enough to engage in aerial combat, its pilot can switch on the Stormtalon’s repulsor systems, making it agile enough to closely support infantry in defence or on the attack.",
+  "legend": "Fast and manoeuvrable, the Stormtalon is an aerial interceptor optimised for escorting Stormraven Gunships. While fast enough to engage in aerial combat, its pilot can switch on the Stormtalon's repulsor systems, making it agile enough to closely support infantry in defence or on the attack.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> skyhammer missile launcher; twin assault cannon; armoured hull.",
   "transport": "",
@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that cannot Fly, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -106,10 +115,37 @@
       "datasheetId": "000001190",
       "line": 1,
       "button": "•",
-      "description": "This model’s skyhammer missile launcher can be replaced with one of the following:<ul><li>1 twin heavy bolter</li><li>1 twin lascannon</li><li>1 typhoon missile launcher</li></ul>"
+      "description": "This model's skyhammer missile launcher can be replaced with one of the following:<ul><li>1 twin heavy bolter</li><li>1 twin lascannon</li><li>1 typhoon missile launcher</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001190",
+      "line": 1,
+      "description": "1 Stormtalon Gunship",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001190",
+      "line": 1,
+      "description": "1 model",
+      "cost": 165,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001190:skyhammer-missile-launcher",
       "datasheetId": "000001190",
@@ -229,7 +265,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Typhoon missile launcher – frag",
+          "name": "Typhoon missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -246,7 +282,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Typhoon missile launcher – krak",
+          "name": "Typhoon missile launcher - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -282,32 +318,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001190",
-      "line": 1,
-      "description": "1 Stormtalon Gunship",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001190",
-      "line": 1,
-      "description": "1 model",
-      "cost": 165,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

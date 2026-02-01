@@ -30,7 +30,7 @@
       "name": "Grot Helper",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, the bearer can overcharge its kustom force field one additional time.<br><br><b>Designer’s Note:</b> Place a Grot Helper token next to the bearer, removing it once this ability has been used.",
+      "description": "Once per battle, the bearer can overcharge its kustom force field one additional time.<br><br><b>Designer's Note:</b> Place a Grot Helper token next to the bearer, removing it once this ability has been used.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -50,7 +50,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 5+ invulnerable save against ranged attacks. Once per battle, at the start of any phase, this model can overcharge its kustom force field. If it does, until the end of the phase, this invulnerable save is improved to 4+.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -122,7 +131,57 @@
       "description": "This model can be equipped with 1 grot helper."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002080",
+      "line": 1,
+      "description": "1 Big Mek with Kustom Force Field",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002080",
+      "line": 1,
+      "description": "1 model",
+      "cost": 55,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003861",
+      "slug": "breaka-boyz"
+    },
+    {
+      "id": "000000016",
+      "slug": "boyz"
+    },
+    {
+      "id": "000000020",
+      "slug": "tankbustas"
+    },
+    {
+      "id": "000000044",
+      "slug": "lootas"
+    },
+    {
+      "id": "000000019",
+      "slug": "burna-boyz"
+    },
+    {
+      "id": "000000021",
+      "slug": "nobz"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002080:slugga",
       "datasheetId": "000002080",
@@ -173,55 +232,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002080",
-      "line": 1,
-      "description": "1 Big Mek with Kustom Force Field",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002080",
-      "line": 1,
-      "description": "1 model",
-      "cost": 55,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003861",
-      "slug": "breaka-boyz"
-    },
-    {
-      "id": "000000016",
-      "slug": "boyz"
-    },
-    {
-      "id": "000000020",
-      "slug": "tankbustas"
-    },
-    {
-      "id": "000000044",
-      "slug": "lootas"
-    },
-    {
-      "id": "000000019",
-      "slug": "burna-boyz"
-    },
-    {
-      "id": "000000021",
-      "slug": "nobz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

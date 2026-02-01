@@ -32,16 +32,36 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Psychic Barrier (Psychic)",
       "legend": "",
       "factionId": "",
-      "description": "At the start of your opponent’s Shooting phase, you can roll one D6: on a 1, this <span class=\"kwb\">PSYKER</span>’s unit suffers D3 mortal wounds; on a 2+, until the end of the phase, models in this <span class=\"kwb\">PSYKER</span>’s unit have a 4+ invulnerable save.",
+      "description": "At the start of your opponent's Shooting phase, you can roll one D6: on a 1, this <span class=\"kwb\">PSYKER</span>'s unit suffers D3 mortal wounds; on a 2+, until the end of the phase, models in this <span class=\"kwb\">PSYKER</span>'s unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -119,7 +139,45 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003848",
+      "line": 1,
+      "description": "1 Rogue Psyker",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003848",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003851",
+      "slug": "accursed-cultists-3"
+    },
+    {
+      "id": "000003856",
+      "slug": "negavolt-cultists-3"
+    },
+    {
+      "id": "000003849",
+      "slug": "cultist-mob-3"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000003848:laspistol",
       "datasheetId": "000003848",
@@ -184,7 +242,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Psychic Strike – witchfire",
+          "name": "Psychic Strike - witchfire",
           "attributes": [
             "BLAST",
             "DEVASTATING WOUNDS",
@@ -203,7 +261,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Psychic Strike – focused witchfire",
+          "name": "Psychic Strike - focused witchfire",
           "attributes": [
             "BLAST",
             "DEVASTATING WOUNDS",
@@ -220,43 +278,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003848",
-      "line": 1,
-      "description": "1 Rogue Psyker",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003848",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003851",
-      "slug": "accursed-cultists-3"
-    },
-    {
-      "id": "000003856",
-      "slug": "negavolt-cultists-3"
-    },
-    {
-      "id": "000003849",
-      "slug": "cultist-mob-3"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

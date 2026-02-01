@@ -5,7 +5,7 @@
   "sourceId": "000000162",
   "legend": "High Chaplain Grimaldus is a beacon of Imperial faith. His fortitude is such that many of his brothers believe him invincible. His will is singular, his zeal coldly furious, and his martial skill attested by the trail of broken foes laid at his heels. His Cenobyte Servitors lurch to war at his side, bearing with them holy relics of the faith.",
   "role": "Characters",
-  "loadout": "* If this unit’s Chaplain Grimaldus model is ever destroyed, all of this unit’s remaining Cenobyte Servitor models are also destroyed. While embarking within a Transport and while embarked within a <span class=\"kwb\">TRANSPORT</span>, each Cenobyte Servitor model in this unit takes up the space of 0 models.<br><br><b>Chaplain Grimaldus is equipped with:</b> plasma pistol; artificer crozius. <br><br><b>Every Cenobyte Servitor is equipped with:</b> close combat weapon.",
+  "loadout": "* If this unit's Chaplain Grimaldus model is ever destroyed, all of this unit's remaining Cenobyte Servitor models are also destroyed. While embarking within a Transport and while embarked within a <span class=\"kwb\">TRANSPORT</span>, each Cenobyte Servitor model in this unit takes up the space of 0 models.<br><br><b>Chaplain Grimaldus is equipped with:</b> plasma pistol; artificer crozius. <br><br><b>Every Cenobyte Servitor is equipped with:</b> close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -37,28 +37,125 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a Chaplain Grimaldus model, each time a model in that unit makes a melee attack, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "CHAPLAIN GRIMALDUS"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Temple Relics",
       "legend": "",
       "factionId": "",
-      "description": "In your Command phase, if this unit contains one or more Cenobyte Servitor models, select one Temple Relics ability (see left). Until the start of your next Command phase, this unit’s Chaplain Grimaldus model has that ability.",
+      "description": "In your Command phase, if this unit contains one or more Cenobyte Servitor models, select one Temple Relics ability (see left). Until the start of your next Command phase, this unit's Chaplain Grimaldus model has that ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "Temple Relics ability"
+          ],
+          "value": "until the start of your next Command phase",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": null,
+              "abilities": [
+                "Cenobyte Servitor"
+              ],
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "Banner of the Emperor Victorious",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Add 1 to Advance and Charge rolls made for this unit.",
+      "type": "Primarch",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "Column from the Major Altar",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Add 1 to the Toughness characteristic of models in this unit.",
+      "type": "Primarch",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "t",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "Water from the Stoup of Elucidation",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "Improve the Armour Penetration characteristic of melee weapons equipped by models in this unit by 1.",
+      "type": "Primarch",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -150,105 +247,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000002792:plasma-pistol",
-      "datasheetId": "000002792",
-      "line": 1,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002792",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol – standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000002792",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol – supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002792:artificer-crozius",
-      "datasheetId": "000002792",
-      "line": 3,
-      "name": "Artificer crozius",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002792",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Artificer crozius",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002792:close-combat-weapon",
-      "datasheetId": "000002792",
-      "line": 4,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002792",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002792",
       "line": 1,
-      "description": "1 Chaplain Grimaldus – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Chaplain Grimaldus - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     },
@@ -318,5 +321,99 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Black Templars",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000002792:plasma-pistol",
+      "datasheetId": "000002792",
+      "line": 1,
+      "name": "Plasma pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000002792",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Plasma pistol - standard",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 2,
+          "s": 7,
+          "ap": -2,
+          "d": 1
+        },
+        {
+          "datasheetId": "000002792",
+          "line": 2,
+          "lineInWargear": 2,
+          "dice": "",
+          "name": "Plasma pistol - supercharge",
+          "attributes": [
+            "HAZARDOUS",
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 2,
+          "s": 8,
+          "ap": -3,
+          "d": 2
+        }
+      ]
+    },
+    {
+      "id": "000002792:artificer-crozius",
+      "datasheetId": "000002792",
+      "line": 3,
+      "name": "Artificer crozius",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000002792",
+          "line": 3,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Artificer crozius",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 6,
+          "bsWs": 2,
+          "s": 6,
+          "ap": -2,
+          "d": 2
+        }
+      ]
+    },
+    {
+      "id": "000002792:close-combat-weapon",
+      "datasheetId": "000002792",
+      "line": 4,
+      "name": "Close combat weapon",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000002792",
+          "line": 4,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Close combat weapon",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 1,
+          "bsWs": 4,
+          "s": 3,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    }
+  ]
 }

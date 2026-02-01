@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While the bearer is leading a unit, models in that unit have a 4+ invulnerable save against ranged attacks.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -50,7 +59,16 @@
       "factionId": "",
       "description": "At the end of your Movement phase, you can select one friendly Orks Vehicle model within 3\" of this model. That <span class=\"kwb\">VEHICLE</span> model regains up to D3 lost wounds, and, until the start of your next Movement phase, each time that <span class=\"kwb\">VEHICLE</span> model makes an attack, add 1 to the Hit roll. Each model can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -119,16 +137,46 @@
       "datasheetId": "000000007",
       "line": 1,
       "button": "•",
-      "description": "This model’s slugga can be replaced with one of the following:<ul><li>1 shokk attack gun</li><li>1 kustom force field</li><li>1 kombi-weapon</li><li>1 kustom mega-blasta</li><li>1 kustom mega-slugga</li><li>1 rokkit launcha</li><li>1 big choppa</li><li>1 power klaw</li></ul>"
+      "description": "This model's slugga can be replaced with one of the following:<ul><li>1 shokk attack gun</li><li>1 kustom force field</li><li>1 kombi-weapon</li><li>1 kustom mega-blasta</li><li>1 kustom mega-slugga</li><li>1 rokkit launcha</li><li>1 big choppa</li><li>1 power klaw</li></ul>"
     },
     {
       "datasheetId": "000000007",
       "line": 2,
       "button": "•",
-      "description": "This model’s choppa can be replaced with one of the following:<ul><li>1 kombi-weapon</li><li>1 kustom mega-blasta</li><li>1 kustom mega-slugga</li><li>1 rokkit launcha</li><li>1 big choppa</li><li>1 killsaw</li><li>1 power klaw</li></ul>"
+      "description": "This model's choppa can be replaced with one of the following:<ul><li>1 kombi-weapon</li><li>1 kustom mega-blasta</li><li>1 kustom mega-slugga</li><li>1 rokkit launcha</li><li>1 big choppa</li><li>1 killsaw</li><li>1 power klaw</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000007",
+      "line": 1,
+      "description": "1 Big Mek on Warbike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000007",
+      "line": 1,
+      "description": "1 model",
+      "cost": 105,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000033",
+      "slug": "warbikers"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000007:kombi-weapon",
       "datasheetId": "000000007",
@@ -437,35 +485,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000007",
-      "line": 1,
-      "description": "1 Big Mek on Warbike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000007",
-      "line": 1,
-      "description": "1 model",
-      "cost": 105,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000033",
-      "slug": "warbikers"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

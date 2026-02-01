@@ -3,7 +3,7 @@
   "name": "Wave Serpent",
   "factionId": "AE",
   "sourceId": "000000186",
-  "legend": "The leading troop carriers in a craftworld’s arsenal, Wave Serpents transport warriors to any part of the battlefield at immense speeds. These troops are protected by a powerful energy field and receive covering fire from the vehicle’s powerful array of heavy weapons.",
+  "legend": "The leading troop carriers in a craftworld's arsenal, Wave Serpents transport warriors to any part of the battlefield at immense speeds. These troops are protected by a powerful energy field and receive covering fire from the vehicle's powerful array of heavy weapons.",
   "role": "Dedicated Transports",
   "loadout": "<b>This model is equipped with:</b> twin shuriken cannon; twin shuriken catapult; wraithbone hull.",
   "transport": "This model has a transport capacity of 12 Aeldari Infantry models. Each Wraith Construct model takes the space of 2 models. It cannot transport Jump Pack models or Ynnari models (excluding Asuryani, Yvraine and The Visarch models).",
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time a ranged attack targets this model, if the Strength characteristic of that attack is greater than the Toughness characteristic of this model, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -108,16 +117,41 @@
       "datasheetId": "000000599",
       "line": 1,
       "button": "•",
-      "description": "This model’s twin shuriken cannon can be replaced with one of the following:<ul><li>1 twin missile launcher</li><li>1 twin bright lance</li><li>1 twin scatter laser</li><li>1 twin starcannon</li></ul>"
+      "description": "This model's twin shuriken cannon can be replaced with one of the following:<ul><li>1 twin missile launcher</li><li>1 twin bright lance</li><li>1 twin scatter laser</li><li>1 twin starcannon</li></ul>"
     },
     {
       "datasheetId": "000000599",
       "line": 2,
       "button": "•",
-      "description": "This model’s twin shuriken catapult can be replaced with 1 shuriken cannon."
+      "description": "This model's twin shuriken catapult can be replaced with 1 shuriken cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000599",
+      "line": 1,
+      "description": "1 Wave Serpent",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000599",
+      "line": 1,
+      "description": "1 model",
+      "cost": 125,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000599:shuriken-cannon",
       "datasheetId": "000000599",
@@ -156,7 +190,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Twin missile launcher – starshot",
+          "name": "Twin missile launcher - starshot",
           "attributes": [
             "TWIN-LINKED"
           ],
@@ -173,7 +207,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Twin missile launcher – sunburst",
+          "name": "Twin missile launcher - sunburst",
           "attributes": [
             "BLAST",
             "TWIN-LINKED"
@@ -344,40 +378,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000599",
-      "line": 1,
-      "description": "1 Wave Serpent",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000599",
-      "line": 1,
-      "description": "1 model",
-      "cost": 125,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

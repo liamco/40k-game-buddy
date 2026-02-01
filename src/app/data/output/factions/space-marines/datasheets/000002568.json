@@ -3,7 +3,7 @@
   "name": "Impulsor",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Equipped with vectored thrusters that make it faster than any other gravitic tank in the Space Marines’ armouries, the Impulsor is a highly adaptable transport used by all Primaris Space Marines for rapid insertion and flanking manoeuvres. It is particularly favoured by Vanguard forces.",
+  "legend": "Equipped with vectored thrusters that make it faster than any other gravitic tank in the Space Marines' armouries, the Impulsor is a highly adaptable transport used by all Primaris Space Marines for rapid insertion and flanking manoeuvres. It is particularly favoured by Vanguard forces.",
   "role": "Dedicated Transports",
   "loadout": "<b>This model is equipped with:</b> 2 storm bolters; armoured hull.",
   "transport": "This model has a transport capacity of 7 Tacticus or Phobos Infantry models. It cannot transport Jump Pack models.",
@@ -38,7 +38,32 @@
       "factionId": "",
       "description": "Units can disembark from this <span class=\"kwb\">TRANSPORT</span> after it has Advanced. Units that do so count as having made a Normal move, and cannot declare a charge that turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DISembark AFTER ADVANCE"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "Normal move"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT DECLARE CHARGE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -47,7 +72,50 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "attribute": "targetedByStratagem",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "attribute": "distance",
+              "operator": "lessThanOrEqualTo",
+              "value": 6
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -56,7 +124,16 @@
       "factionId": "",
       "description": "The bearer has a 5+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -125,7 +202,7 @@
       "datasheetId": "000002568",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
+      "description": "This model's 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
     },
     {
       "datasheetId": "000002568",
@@ -134,7 +211,34 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 bellicatus missile array</li><li>1 ironhail skytalon array</li><li>1 orbital comms array</li><li>1 shield dome</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002568",
+      "line": 1,
+      "description": "1 Impulsor",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002568",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002568:bellicatus-missile-array",
       "datasheetId": "000002568",
@@ -147,7 +251,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Bellicatus missile array – frag",
+          "name": "Bellicatus missile array - frag",
           "attributes": [
             "BLAST"
           ],
@@ -164,7 +268,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Bellicatus missile array – Icarus",
+          "name": "Bellicatus missile array - Icarus",
           "attributes": [
             "ANTI-FLY 2+"
           ],
@@ -181,7 +285,7 @@
           "line": 3,
           "lineInWargear": 3,
           "dice": "",
-          "name": "Bellicatus missile array – krak",
+          "name": "Bellicatus missile array - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -322,32 +426,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002568",
-      "line": 1,
-      "description": "1 Impulsor",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002568",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -5,7 +5,7 @@
   "sourceId": "000000377",
   "legend": "",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> shokk rifle; snazzhammer; Princess’ jaws.",
+  "loadout": "<b>This model is equipped with:</b> shokk rifle; snazzhammer; Princess' jaws.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Deep Strike ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -113,7 +124,45 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003709",
+      "line": 1,
+      "description": "1 Ufthak Blackhawk - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003709",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003861",
+      "slug": "breaka-boyz"
+    },
+    {
+      "id": "000000021",
+      "slug": "nobz"
+    },
+    {
+      "id": "000000016",
+      "slug": "boyz"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000003709:shokk-rifle",
       "datasheetId": "000003709",
@@ -146,7 +195,7 @@
       "id": "000003709:princess-jaws",
       "datasheetId": "000003709",
       "line": 2,
-      "name": "Princess’ jaws",
+      "name": "Princess' jaws",
       "type": "Melee",
       "profiles": [
         {
@@ -154,7 +203,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Princess’ jaws",
+          "name": "Princess' jaws",
           "attributes": [
             "EXTRA ATTACKS"
           ],
@@ -194,43 +243,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003709",
-      "line": 1,
-      "description": "1 Ufthak Blackhawk - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003709",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003861",
-      "slug": "breaka-boyz"
-    },
-    {
-      "id": "000000021",
-      "slug": "nobz"
-    },
-    {
-      "id": "000000016",
-      "slug": "boyz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

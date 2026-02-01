@@ -1,0 +1,60 @@
+@reference 'tailwindcss';
+
+.WargearProfileCardStacked {
+    border-radius: 0;
+    border-bottom: none;
+    border-top-style: dashed;
+
+    &:first-child {
+        border-radius: var(--radius) var(--radius) 0 0;
+        border-top-style: solid;
+    }
+
+    &:last-child {
+        border-bottom: 1px solid var(--color-fireDragonBright);
+        border-radius: 0 0 var(--radius) var(--radius);
+    }
+}
+
+.WargearProfileCardSelected {
+    border-top: 1px dashed var(--color-deathWorldForest);
+
+    &:first-child {
+        border-top: none;
+    }
+}
+
+.WargearProfileCardSwapItemWrapper {
+    position: relative;
+    @apply pl-8;
+
+    &:before,
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 1rem;
+
+        border-left: 1px solid var(--color-fireDragonBright);
+        left: 1rem;
+    }
+
+    &:before {
+        top: 0;
+        height: 50%;
+    }
+
+    &:after {
+        top: 50%;
+        height: calc(50% + 12px);
+        border-top: 1px solid var(--color-fireDragonBright);
+    }
+
+    &:first-child:before {
+        content: none;
+    }
+
+    &:last-child:after {
+        border-left: none;
+    }
+}

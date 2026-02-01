@@ -3,7 +3,7 @@
   "name": "Leman Russ Executioner",
   "factionId": "AM",
   "sourceId": "000000016",
-  "legend": "The Executioner’s plasma cannon fires with the fury of a miniature sun, incinerating tightly packed infantry and burning through vehicle armour with ease. Though extended engagements threaten containment breach of the main weapon, its gung-ho crews are known to risk death to kill ever more of the foe.",
+  "legend": "The Executioner's plasma cannon fires with the fury of a miniature sun, incinerating tightly packed infantry and burning through vehicle armour with ease. Though extended engagements threaten containment breach of the main weapon, its gung-ho crews are known to risk death to kill ever more of the foe.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> executioner plasma cannon; lascannon; armoured tracks.",
   "transport": "",
@@ -29,7 +29,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack with its executioner plasma cannon that targets a unit that is Below Half-strength, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "One Shot",
@@ -96,7 +105,7 @@
       "datasheetId": "000002742",
       "line": 1,
       "button": "•",
-      "description": "This model’s lascannon can be replaced with one of the following:<ul><li>1 heavy bolter</li><li>1 heavy flamer</li></ul>"
+      "description": "This model's lascannon can be replaced with one of the following:<ul><li>1 heavy bolter</li><li>1 heavy flamer</li></ul>"
     },
     {
       "datasheetId": "000002742",
@@ -117,7 +126,32 @@
       "description": "This model can be equipped with 1 hunter-killer missile."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002742",
+      "line": 1,
+      "description": "1 Leman Russ Executioner",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002742",
+      "line": 1,
+      "description": "1 model",
+      "cost": 170,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002742:executioner-plasma-cannon",
       "datasheetId": "000002742",
@@ -130,7 +164,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Executioner plasma cannon – standard",
+          "name": "Executioner plasma cannon - standard",
           "attributes": [
             "BLAST"
           ],
@@ -147,7 +181,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Executioner plasma cannon – supercharge",
+          "name": "Executioner plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -329,7 +363,7 @@
           "line": 9,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma cannon – standard",
+          "name": "Plasma cannon - standard",
           "attributes": [
             "BLAST"
           ],
@@ -346,7 +380,7 @@
           "line": 10,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma cannon – supercharge",
+          "name": "Plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -410,40 +444,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002742",
-      "line": 1,
-      "description": "1 Leman Russ Executioner",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002742",
-      "line": 1,
-      "description": "1 model",
-      "cost": 170,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

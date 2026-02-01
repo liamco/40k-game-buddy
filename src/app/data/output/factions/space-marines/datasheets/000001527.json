@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Adeptus Astartes Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,16 +52,54 @@
       "factionId": "",
       "description": "In your Command phase, you can select one friendly Adeptus Astartes Vehicle model within 3\" of this model. That model regains up to D3 lost wounds and, until the start of your next Command phase, each time that <span class=\"kwb\">VEHICLE</span> model makes an attack, add 1 to the Hit roll. Each model can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Vengeance of the Omnissiah",
       "legend": "",
       "factionId": "",
-      "description": "If a friendly Adeptus Astartes Vehicle model is destroyed within 12\" of this model, until the end of the battle, this model’s Omnissian power axe has an Attacks characteristic of 7.",
+      "description": "If a friendly Adeptus Astartes Vehicle model is destroyed within 12\" of this model, until the end of the battle, this model's Omnissian power axe has an Attacks characteristic of 7.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 7,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attribute": "a",
+              "operator": "greaterThan",
+              "value": 0
+            },
+            {
+              "entity": "opposingModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "Conversion",
@@ -123,13 +172,13 @@
       "datasheetId": "000001527",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li></ul>"
     },
     {
       "datasheetId": "000001527",
       "line": 2,
       "button": "•",
-      "description": "This model’s Omnissian power axe can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 thunder hammer</li></ul>"
+      "description": "This model's Omnissian power axe can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 thunder hammer</li></ul>"
     },
     {
       "datasheetId": "000001527",
@@ -138,7 +187,51 @@
       "description": "This model must be equipped with one of the following:<ul><li>1 servo arm</li><li>1 conversion beamer</li><li>1 flamer, 1 plasma cutter and 2 servo-arms</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001527",
+      "line": 1,
+      "description": "1 Techmarine on Bike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001527",
+      "line": 1,
+      "description": "1 model",
+      "cost": 110,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001166",
+      "slug": "company-veterans-on-bikes"
+    },
+    {
+      "id": "000002712",
+      "slug": "outrider-squad"
+    },
+    {
+      "id": "000000116",
+      "slug": "bike-squad"
+    },
+    {
+      "id": "000000241",
+      "slug": "ravenwing-black-knights"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001527:bolt-pistol",
       "datasheetId": "000001527",
@@ -310,7 +403,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -327,7 +420,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -544,49 +637,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001527",
-      "line": 1,
-      "description": "1 Techmarine on Bike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001527",
-      "line": 1,
-      "description": "1 model",
-      "cost": 110,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001166",
-      "slug": "company-veterans-on-bikes"
-    },
-    {
-      "id": "000002712",
-      "slug": "outrider-squad"
-    },
-    {
-      "id": "000000116",
-      "slug": "bike-squad"
-    },
-    {
-      "id": "000000241",
-      "slug": "ravenwing-black-knights"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

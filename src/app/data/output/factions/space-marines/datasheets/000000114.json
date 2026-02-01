@@ -3,7 +3,7 @@
   "name": "Storm Speeder Hammerstrike",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "The Hammerstrike excels at rooting out enemies from trench and bunker networks. Sweeping low over the battlefield, it employs searing melta blasts and volleys of rockets to crack the foe’s defence lines wide open.",
+  "legend": "The Hammerstrike excels at rooting out enemies from trench and bunker networks. Sweeping low over the battlefield, it employs searing melta blasts and volleys of rockets to crack the foe's defence lines wide open.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> Hammerstrike missile launcher; 2 krakstorm grenade launchers; melta destroyer; close combat weapon.",
   "transport": "",
@@ -37,7 +37,32 @@
       "factionId": "",
       "description": "Each time this model has shot, select one enemy unit that was hit by one or more attacks made by this model this phase. Until the end of the phase, that enemy unit cannot have the Benefit of Cover.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "COVER"
+          ],
+          "value": false,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "hit",
+              "operator": "notEquals",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -96,7 +121,34 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000114",
+      "line": 1,
+      "description": "1 Storm Speeder Hammerstrike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000114",
+      "line": 1,
+      "description": "1 model",
+      "cost": 125,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000114:hammerstrike-missile-launcher",
       "datasheetId": "000000114",
@@ -195,32 +247,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000114",
-      "line": 1,
-      "description": "1 Storm Speeder Hammerstrike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000114",
-      "line": 1,
-      "description": "1 model",
-      "cost": 125,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

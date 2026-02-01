@@ -3,7 +3,7 @@
   "name": "Death Company Captain",
   "factionId": "SM",
   "sourceId": "000000021",
-  "legend": "None of Sanguinius’sone are immune to the effects of the Black Rage. Should a Captain succumb to the Flaw, he will don the black and be outfitted with relic weapons for one final battle. Empowered by the depths of their madness, Death Company Captains slaughter their foes with violent fury as they seek absolution in death.",
+  "legend": "None of Sanguinius'sone are immune to the effects of the Black Rage. Should a Captain succumb to the Flaw, he will don the black and be outfitted with relic weapons for one final battle. Empowered by the depths of their madness, Death Company Captains slaughter their foes with violent fury as they seek absolution in death.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> heavy bolt pistol; master-crafted chainsword.",
   "transport": "",
@@ -37,16 +37,76 @@
       "factionId": "",
       "description": "While this model is leading a unit, unless that unit starts the battle embarked within a Transport, models in that unit have the Scouts 6\" ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Black Rage",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model’s unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
+      "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model's unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -55,7 +115,90 @@
       "factionId": "",
       "description": "If this model is destroyed by a melee attack, after the attacking unit has finished making its attacks, you can roll one D6, adding 2 to the result if the attacking unit contains the enemy <span class=\"kwb\">WARLORD</span>: on a 2-3, that enemy unit suffers D3 mortal wounds; on a 4-5, that enemy unit suffers 3 mortal wounds; on a 6+, that enemy unit suffers D3+3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "containsWarlord",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "afterAttacks",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "value": 2,
+              "operator": "addToRoll"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "containsWarlord",
+              "operator": "equals",
+              "value": false
+            },
+            {
+              "entity": "thisModel",
+              "state": "afterAttacks",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3+3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "afterAttacks",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "containsWarlord",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -136,16 +279,52 @@
       "datasheetId": "000003832",
       "line": 1,
       "button": "•",
-      "description": "This model’s heavy bolt pistol can be replaced with 1 inferno pistol."
+      "description": "This model's heavy bolt pistol can be replaced with 1 inferno pistol."
     },
     {
       "datasheetId": "000003832",
       "line": 2,
       "button": "•",
-      "description": "This model’s master-crafted chainsword can be replaced with one of the following: <br><ul><li>1 relic weapon</li><li>1 power fist</li></ul>"
+      "description": "This model's master-crafted chainsword can be replaced with one of the following: <br><ul><li>1 relic weapon</li><li>1 power fist</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003832",
+      "line": 1,
+      "description": "1 Death Company Captain",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003832",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001997",
+      "slug": "death-company-marines"
+    },
+    {
+      "id": "000002285",
+      "slug": "death-company-marines-with-bolt-rifles"
+    }
+  ],
+  "supplementSlug": "blood-angels",
+  "supplementName": "Blood Angels",
+  "supplementLabel": "Blood Angels",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Blood Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003832:heavy-bolt-pistol",
       "datasheetId": "000003832",
@@ -271,41 +450,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003832",
-      "line": 1,
-      "description": "1 Death Company Captain",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003832",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001997",
-      "slug": "death-company-marines"
-    },
-    {
-      "id": "000002285",
-      "slug": "death-company-marines-with-bolt-rifles"
-    }
-  ],
-  "supplementSlug": "blood-angels",
-  "supplementName": "Blood Angels",
-  "supplementLabel": "Blood Angels",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Blood Angels",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

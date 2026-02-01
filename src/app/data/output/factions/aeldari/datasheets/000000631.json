@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-16",
-  "damagedDescription": "While this model has 1-16 wounds remaining, subtract 10 from this model’s Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1-16 wounds remaining, subtract 10 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/aeldari/Phantom-Titan",
   "slug": "phantom-titan",
   "factionSlug": "aeldari",
@@ -40,7 +40,7 @@
       "name": "Towering Wraith Construct",
       "legend": "",
       "factionId": "",
-      "description": "Each time you target this model with a Stratagem, you must spend three times that Stratagem’s stated CP cost to do so.",
+      "description": "Each time you target this model with a Stratagem, you must spend three times that Stratagem's stated CP cost to do so.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -132,22 +132,47 @@
       "datasheetId": "000000631",
       "line": 1,
       "button": "•",
-      "description": "This model’s D-bombard can be replaced with one of the following:<ul><li>2 Phantom starcannons and 1 wraith glaive</li><li>1 Phantom starcannon, 1 pulse laser and 1 wraith glaive</li><li>2 pulse lasers and 1 wraith glaive</li><li>1 Phantom pulsar</li></ul>"
+      "description": "This model's D-bombard can be replaced with one of the following:<ul><li>2 Phantom starcannons and 1 wraith glaive</li><li>1 Phantom starcannon, 1 pulse laser and 1 wraith glaive</li><li>2 pulse lasers and 1 wraith glaive</li><li>1 Phantom pulsar</li></ul>"
     },
     {
       "datasheetId": "000000631",
       "line": 2,
       "button": "•",
-      "description": "This model’s Phantom pulsar can be replaced with one of the following:<ul><li>1 D-bombard</li><li>2 Phantom starcannons and 1 wraith glaive</li><li>1 Phantom starcannon, 1 pulse laser and 1 wraith glaive</li><li>2 pulse lasers and 1 wraith glaive</li></ul>"
+      "description": "This model's Phantom pulsar can be replaced with one of the following:<ul><li>1 D-bombard</li><li>2 Phantom starcannons and 1 wraith glaive</li><li>1 Phantom starcannon, 1 pulse laser and 1 wraith glaive</li><li>2 pulse lasers and 1 wraith glaive</li></ul>"
     },
     {
       "datasheetId": "000000631",
       "line": 3,
       "button": "•",
-      "description": "This model’s Phantom starcannon can be replaced with 1 pulse laser."
+      "description": "This model's Phantom starcannon can be replaced with 1 pulse laser."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000631",
+      "line": 1,
+      "description": "1 Phantom Titan",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000631",
+      "line": 1,
+      "description": "1 model",
+      "cost": 2100,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000631:d-bombard",
       "datasheetId": "000000631",
@@ -307,7 +332,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Wraith glaive – strike",
+          "name": "Wraith glaive - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -322,7 +347,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Wraith glaive – sweep",
+          "name": "Wraith glaive - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -333,46 +358,6 @@
           "d": 4
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000631",
-      "line": 1,
-      "description": "1 Phantom Titan",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000631",
-      "line": 1,
-      "description": "1 model",
-      "cost": 2100,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "damagedThreshold": 16,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 10
     }
   ]
 }

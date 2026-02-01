@@ -3,7 +3,7 @@
   "name": "Farseer Skyrunner",
   "factionId": "AE",
   "sourceId": "000000186",
-  "legend": "Farseers are expert combatants as well as battle seers. Their semi-sentient witchblades and singing spears are embedded with crystals that transmit the destructive potential of their bearer’s psyche. In battle, they flow around weapon blasts and blade thrusts with a natural grace that makes their foes seem predictable and slow.",
+  "legend": "Farseers are expert combatants as well as battle seers. Their semi-sentient witchblades and singing spears are embedded with crystals that transmit the destructive potential of their bearer's psyche. In battle, they flow around weapon blasts and blade thrusts with a natural grace that makes their foes seem predictable and slow.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> Eldritch Storm; shuriken pistol; twin shuriken catapult; witchblade.",
   "transport": "",
@@ -41,7 +41,16 @@
       "factionId": "",
       "description": "At the end of your Movement phase, select one enemy unit within 18\" of and visible to this model. Until the start of your next Command phase, each time a model in that unit makes an attack, subtract 1 from the Wound roll. Each unit can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -122,10 +131,40 @@
       "datasheetId": "000000583",
       "line": 1,
       "button": "•",
-      "description": "This model’s witchblade can be replaced with 1 singing spear."
+      "description": "This model's witchblade can be replaced with 1 singing spear."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000583",
+      "line": 1,
+      "description": "1 Farseer Skyrunner",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000583",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000591",
+      "slug": "windriders"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000583:eldritch-storm",
       "datasheetId": "000000583",
@@ -287,35 +326,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000583",
-      "line": 1,
-      "description": "1 Farseer Skyrunner",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000583",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000591",
-      "slug": "windriders"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

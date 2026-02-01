@@ -33,14 +33,23 @@
       "factionId": "",
       "description": "While an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is within 3\" of this unit, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Accelerator Mandible",
       "legend": "",
       "factionId": "",
-      "description": "At the start of the Fight phase, select one friendly Canoptek unit within 3\" of the bearer’s unit. Until the end of the phase, improve the Weapon Skill characteristic of weapons equipped by models in that unit by 1.",
+      "description": "At the start of the Fight phase, select one friendly Canoptek unit within 3\" of the bearer's unit. Until the end of the phase, improve the Weapon Skill characteristic of weapons equipped by models in that unit by 1.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -114,16 +123,41 @@
       "datasheetId": "000004176",
       "line": 2,
       "button": "•",
-      "description": "1 model’s gauss scalpel or tesla caster can be replaced with 1 atomiser beam and 1 nanoscarab projector."
+      "description": "1 model's gauss scalpel or tesla caster can be replaced with 1 atomiser beam and 1 nanoscarab projector."
     },
     {
       "datasheetId": "000004176",
       "line": 3,
       "button": "•",
-      "description": "1 model’s gauss scalpel or tesla caster can be replaced with 1 accelerator mandible."
+      "description": "1 model's gauss scalpel or tesla caster can be replaced with 1 accelerator mandible."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004176",
+      "line": 1,
+      "description": "5 Canoptek Macrocytes",
+      "min": 5,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004176",
+      "line": 1,
+      "description": "5 models",
+      "cost": 85,
+      "count": 5
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004176:atomiser-beam",
       "datasheetId": "000004176",
@@ -225,30 +259,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004176",
-      "line": 1,
-      "description": "5 Canoptek Macrocytes",
-      "min": 5,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004176",
-      "line": 1,
-      "description": "5 models",
-      "cost": 85,
-      "count": 5
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "Exalted Champion",
   "factionId": "CSM",
   "sourceId": "000000355",
-  "legend": "These murderous champions of the Dark Gods exhort their fellow traitors by example. The fell deeds they commit and the violent bloodbaths they unleash – ostensibly supporting their overlord’s strategies – are often wrought solely to further the Exalted Champion’s own goals as they aspire to even greater glory.",
+  "legend": "These murderous champions of the Dark Gods exhort their fellow traitors by example. The fell deeds they commit and the violent bloodbaths they unleash - ostensibly supporting their overlord's strategies - are often wrought solely to further the Exalted Champion's own goals as they aspire to even greater glory.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; combi-weapon; exalted weapon.",
   "transport": "",
@@ -32,14 +32,23 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Aspire to Glory",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s unit makes a Dark Pact, until the end of the phase, add D3 to the Strength characteristic of weapons equipped by this model.",
+      "description": "Each time this model's unit makes a Dark Pact, until the end of the phase, add D3 to the Strength characteristic of weapons equipped by this model.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -107,7 +116,45 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001355",
+      "line": 1,
+      "description": "1 Exalted Champion",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001355",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002570",
+      "slug": "legionaries-2"
+    },
+    {
+      "id": "000003876",
+      "slug": "nemesis-claw"
+    },
+    {
+      "id": "000000952",
+      "slug": "chosen-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001355:bolt-pistol",
       "datasheetId": "000001355",
@@ -186,46 +233,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001355",
-      "line": 1,
-      "description": "1 Exalted Champion",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001355",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002570",
-      "slug": "legionaries-2"
-    },
-    {
-      "id": "000003876",
-      "slug": "nemesis-claw"
-    },
-    {
-      "id": "000000952",
-      "slug": "chosen-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "leaderConditions": {
-    "allowsAnyExistingLeader": true
-  }
+  ]
 }

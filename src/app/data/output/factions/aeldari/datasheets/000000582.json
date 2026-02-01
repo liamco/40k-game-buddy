@@ -3,7 +3,7 @@
   "name": "Farseer",
   "factionId": "AE",
   "sourceId": "000000186",
-  "legend": "The Asuryani look to their Farseers for leadership in battle. These psykers can uncover the foe’s intentions and calculate the effects of attacks. Their minds are their true weapons; with a thought, they can obliterate the memories of enemy commanders, hurl battle tanks into the air or summon terrifying storms of coruscating eldritch energy.",
+  "legend": "The Asuryani look to their Farseers for leadership in battle. These psykers can uncover the foe's intentions and calculate the effects of attacks. Their minds are their true weapons; with a thought, they can obliterate the memories of enemy commanders, hurl battle tanks into the air or summon terrifying storms of coruscating eldritch energy.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> Eldritch Storm; shuriken pistol; witchblade.",
   "transport": "",
@@ -41,7 +41,16 @@
       "factionId": "",
       "description": "At the end of your Movement phase, select one enemy unit within 18\" of and visible to this model. Until the start of your next Command phase, each time a friendly <span class=\"kwb\">AELDARI</span> model makes an attack that targets that enemy unit, add 1 to the Hit roll. Each unit can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -110,10 +119,48 @@
       "datasheetId": "000000582",
       "line": 1,
       "button": "•",
-      "description": "This model’s witchblade can be replaced with 1 singing spear."
+      "description": "This model's witchblade can be replaced with 1 singing spear."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000582",
+      "line": 1,
+      "description": "1 Farseer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000582",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000584",
+      "slug": "warlock-conclave"
+    },
+    {
+      "id": "000000590",
+      "slug": "storm-guardians"
+    },
+    {
+      "id": "000000589",
+      "slug": "guardian-defenders"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000582:eldritch-storm",
       "datasheetId": "000000582",
@@ -248,43 +295,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000582",
-      "line": 1,
-      "description": "1 Farseer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000582",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000584",
-      "slug": "warlock-conclave"
-    },
-    {
-      "id": "000000590",
-      "slug": "storm-guardians"
-    },
-    {
-      "id": "000000589",
-      "slug": "guardian-defenders"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

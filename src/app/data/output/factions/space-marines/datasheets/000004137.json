@@ -3,7 +3,7 @@
   "name": "Sternguard Veteran Squad",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "A crusade’s Stemguard Veterans possess an unshakeable calm and are renowned for their unflinching marksmanship under extreme threat. Granted the use of a wide range of specialist ammunition and ranged relic weaponry, they unleash the God-Emperor's judgement in pinpoint volleys that unerringly exploit the blasphemous enemies' weaknesses.",
+  "legend": "A crusade's Stemguard Veterans possess an unshakeable calm and are renowned for their unflinching marksmanship under extreme threat. Granted the use of a wide range of specialist ammunition and ranged relic weaponry, they unleash the God-Emperor's judgement in pinpoint volleys that unerringly exploit the blasphemous enemies' weaknesses.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> Sternguard bolt pistol; Sternguard bolt rifle; close combat weapon.",
   "transport": "",
@@ -28,7 +28,24 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets the closest eligible target, re-roll a Wound roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "isClosestEligibleTarget",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -97,7 +114,7 @@
       "datasheetId": "000004137",
       "line": 1,
       "button": "•",
-      "description": "The Sternguard Veteran Squad Leader’s Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 Astartes chainsword </li><li>1 combi-weapon </li><li>1 power fist </li><li>1 power weapon </li><li>1 Astartes chainsword and 1 Sternguard bolt rifle*</li><li>1 power fist and 1 Sternguard bolt rifle*</li><li>1 power weapon and 1 Sternguard bolt rifle*</li></ul>"
+      "description": "The Sternguard Veteran Squad Leader's Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 Astartes chainsword </li><li>1 combi-weapon </li><li>1 power fist </li><li>1 power weapon </li><li>1 Astartes chainsword and 1 Sternguard bolt rifle*</li><li>1 power fist and 1 Sternguard bolt rifle*</li><li>1 power weapon and 1 Sternguard bolt rifle*</li></ul>"
     },
     {
       "datasheetId": "000004137",
@@ -109,7 +126,7 @@
       "datasheetId": "000004137",
       "line": 3,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Sternguard Veteran’s Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 pyrecannon</li><li>1 Sternguard heavy bolter</li></ul>"
+      "description": "For every 5 models in this unit, 1 Sternguard Veteran's Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 pyrecannon</li><li>1 Sternguard heavy bolter</li></ul>"
     },
     {
       "datasheetId": "000004137",
@@ -118,7 +135,48 @@
       "description": "* This model's Sternguard bolt rifle cannot be replaced."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004137",
+      "line": 1,
+      "description": "1 Sternguard Veteran Squad Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004137",
+      "line": 2,
+      "description": "4-9 Sternguard Veterans",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004137",
+      "line": 1,
+      "description": "5 models",
+      "cost": 85,
+      "count": 5
+    },
+    {
+      "datasheetId": "000004137",
+      "line": 2,
+      "description": "10 models",
+      "cost": 170,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004137:combi-weapon",
       "datasheetId": "000004137",
@@ -354,46 +412,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004137",
-      "line": 1,
-      "description": "1 Sternguard Veteran Squad Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004137",
-      "line": 2,
-      "description": "4-9 Sternguard Veterans",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004137",
-      "line": 1,
-      "description": "5 models",
-      "cost": 85,
-      "count": 5
-    },
-    {
-      "datasheetId": "000004137",
-      "line": 2,
-      "description": "10 models",
-      "cost": 170,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

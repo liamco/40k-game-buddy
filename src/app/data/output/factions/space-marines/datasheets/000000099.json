@@ -29,7 +29,46 @@
       "factionId": "",
       "description": "You can target this model with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted a different unit with that Stratagem this turn. This model can only be targeted with that Stratagem once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIRE OVERWATCH"
+          ],
+          "value": 0
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -83,7 +122,34 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000099",
+      "line": 1,
+      "description": "1 Tarantula Air Defence Battery",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000099",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000099:tarantula-air-defence-missiles",
       "datasheetId": "000000099",
@@ -135,32 +201,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000099",
-      "line": 1,
-      "description": "1 Tarantula Air Defence Battery",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000099",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

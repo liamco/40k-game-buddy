@@ -3,7 +3,7 @@
   "name": "Arkanyst Evaluator",
   "factionId": "LoV",
   "sourceId": "000000203",
-  "legend": "Clad in heavy-duty hauberks to shield them from the worst of their weapons’ emissions, Arkanyst Evaluators unleash deadly experimental energies into the foe. Their transmatter inverters painfully rupture cellular tissue or trigger lethal atomic transformations, all to provide the Evaluator with the field data needed to hone their weapon further.",
+  "legend": "Clad in heavy-duty hauberks to shield them from the worst of their weapons' emissions, Arkanyst Evaluators unleash deadly experimental energies into the foe. Their transmatter inverters painfully rupture cellular tissue or trigger lethal atomic transformations, all to provide the Evaluator with the field data needed to hone their weapon further.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> transmatter inverter; close combat weapon.",
   "transport": "",
@@ -33,7 +33,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more other friendly Leagues of Votann Infantry units (excluding units with the Lone Operative ability), this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -93,7 +104,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004142",
+      "line": 1,
+      "description": "1 Arkanyst Evaluator",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004142",
+      "line": 1,
+      "description": "1 model",
+      "cost": 65,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004142:transmatter-inverter",
       "datasheetId": "000004142",
@@ -106,7 +142,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Transmatter inverter – half charge",
+          "name": "Transmatter inverter - half charge",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -123,7 +159,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Transmatter inverter – full charge",
+          "name": "Transmatter inverter - full charge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 2"
@@ -141,7 +177,7 @@
           "line": 3,
           "lineInWargear": 3,
           "dice": "",
-          "name": "Transmatter inverter – overcharge",
+          "name": "Transmatter inverter - overcharge",
           "attributes": [
             "HAZARDOUS",
             "OVERCHARGE",
@@ -181,30 +217,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004142",
-      "line": 1,
-      "description": "1 Arkanyst Evaluator",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004142",
-      "line": 1,
-      "description": "1 model",
-      "cost": 65,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -42,10 +42,10 @@
     },
     {
       "id": "",
-      "name": "’Ard Case",
+      "name": "'Ard Case",
       "legend": "",
       "factionId": "",
-      "description": "Add 2 to the bearer’s Toughness characteristic, but it no longer has the Firing Deck ability.",
+      "description": "Add 2 to the bearer's Toughness characteristic, but it no longer has the Firing Deck ability.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -116,16 +116,41 @@
       "datasheetId": "000000039",
       "line": 4,
       "button": "•",
-      "description": "This model’s tracks and wheels can be replaced with 1 deff rolla."
+      "description": "This model's tracks and wheels can be replaced with 1 deff rolla."
     },
     {
       "datasheetId": "000000039",
       "line": 5,
       "button": "•",
-      "description": "This model can be equipped with any of the following:<ul><li>1 ’ard case</li><li>1 grabbin’ klaw</li><li>1 wreckin’ ball</li></ul>"
+      "description": "This model can be equipped with any of the following:<ul><li>1 'ard case</li><li>1 grabbin' klaw</li><li>1 wreckin' ball</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000039",
+      "line": 1,
+      "description": "1 Battlewagon",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000039",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000039:big-shoota",
       "datasheetId": "000000039",
@@ -164,7 +189,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Kannon – frag",
+          "name": "Kannon - frag",
           "attributes": [
             "BLAST"
           ],
@@ -181,7 +206,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Kannon – shell",
+          "name": "Kannon - shell",
           "attributes": [],
           "range": 36,
           "type": "Ranged",
@@ -298,7 +323,7 @@
       "id": "000000039:grabbin-klaw",
       "datasheetId": "000000039",
       "line": 8,
-      "name": "Grabbin’ klaw",
+      "name": "Grabbin' klaw",
       "type": "Melee",
       "profiles": [
         {
@@ -306,7 +331,7 @@
           "line": 8,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grabbin’ klaw",
+          "name": "Grabbin' klaw",
           "attributes": [
             "EXTRA ATTACKS"
           ],
@@ -348,7 +373,7 @@
       "id": "000000039:wreckin-ball",
       "datasheetId": "000000039",
       "line": 10,
-      "name": "Wreckin’ ball",
+      "name": "Wreckin' ball",
       "type": "Melee",
       "profiles": [
         {
@@ -356,7 +381,7 @@
           "line": 10,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Wreckin’ ball",
+          "name": "Wreckin' ball",
           "attributes": [
             "EXTRA ATTACKS"
           ],
@@ -369,40 +394,6 @@
           "d": "D6"
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000039",
-      "line": 1,
-      "description": "1 Battlewagon",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000039",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

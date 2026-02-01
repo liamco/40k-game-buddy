@@ -36,16 +36,44 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "Stratagem"
+              ],
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
-      "name": "The Imperium’s Sword",
+      "name": "The Imperium's Sword",
       "legend": "",
       "factionId": "",
-      "description": "You can re-roll Charge rolls made for this model’s unit.",
+      "description": "You can re-roll Charge rolls made for this model's unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "charge",
+          "value": "all"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -114,16 +142,76 @@
       "datasheetId": "000000135",
       "line": 1,
       "button": "•",
-      "description": "This model’s storm bolter can be replaced with 1 combi-weapon"
+      "description": "This model's storm bolter can be replaced with 1 combi-weapon"
     },
     {
       "datasheetId": "000000135",
       "line": 2,
       "button": "•",
-      "description": "This model’s relic weapon can be replaced with 1 relic fist"
+      "description": "This model's relic weapon can be replaced with 1 relic fist"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000135",
+      "line": 1,
+      "description": "1 Captain in Terminator Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000135",
+      "line": 1,
+      "description": "1 model",
+      "cost": 95,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004138",
+      "slug": "terminator-squad-2"
+    },
+    {
+      "id": "000000230",
+      "slug": "deathwing-terminator-squad"
+    },
+    {
+      "id": "000000104",
+      "slug": "relic-terminator-squad"
+    },
+    {
+      "id": "000001183",
+      "slug": "terminator-squad"
+    },
+    {
+      "id": "000003873",
+      "slug": "deathwatch-terminator-squad-2"
+    },
+    {
+      "id": "000000118",
+      "slug": "terminator-assault-squad"
+    },
+    {
+      "id": "000000231",
+      "slug": "deathwing-knights"
+    },
+    {
+      "id": "000002302",
+      "slug": "deathwing-command-squad"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000135:storm-bolter",
       "datasheetId": "000000135",
@@ -226,65 +314,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000135",
-      "line": 1,
-      "description": "1 Captain in Terminator Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000135",
-      "line": 1,
-      "description": "1 model",
-      "cost": 95,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004138",
-      "slug": "terminator-squad-2"
-    },
-    {
-      "id": "000000230",
-      "slug": "deathwing-terminator-squad"
-    },
-    {
-      "id": "000000104",
-      "slug": "relic-terminator-squad"
-    },
-    {
-      "id": "000001183",
-      "slug": "terminator-squad"
-    },
-    {
-      "id": "000003873",
-      "slug": "deathwatch-terminator-squad-2"
-    },
-    {
-      "id": "000000118",
-      "slug": "terminator-assault-squad"
-    },
-    {
-      "id": "000000231",
-      "slug": "deathwing-knights"
-    },
-    {
-      "id": "000002302",
-      "slug": "deathwing-command-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

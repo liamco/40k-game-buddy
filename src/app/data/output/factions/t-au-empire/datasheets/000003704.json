@@ -3,7 +3,7 @@
   "name": "Kroot Flesh Shaper",
   "factionId": "TAU",
   "sourceId": "000000028",
-  "legend": "All Shapers bear some responsibility for the gradual guidance of their fellows’ genetic makeup through ingestion of selected preg. The Flesh Shapers take this art to a more immediate and visceral extreme through the use of gruesome flesh-fetishes and ritualised butchery whose psychosomatic impact upon the Kroot is remarkable.",
+  "legend": "All Shapers bear some responsibility for the gradual guidance of their fellows' genetic makeup through ingestion of selected preg. The Flesh Shapers take this art to a more immediate and visceral extreme through the use of gruesome flesh-fetishes and ritualised butchery whose psychosomatic impact upon the Kroot is remarkable.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> Kroot scattergun; twin ritualistic blades.",
   "transport": "",
@@ -50,13 +50,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 6+ ability. If that unit destroys one or more enemy units in the Fight phase, until the end of the battle, models in that unit have the Feel No Pain 5+ ability instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
     {
       "datasheetId": "000003704",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -109,7 +120,41 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003704",
+      "line": 1,
+      "description": "1 Kroot Flesh Shaper",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003704",
+      "line": 1,
+      "description": "1 model",
+      "cost": 45,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002588",
+      "slug": "kroot-farstalkers"
+    },
+    {
+      "id": "000000413",
+      "slug": "kroot-carnivores"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003704:kroot-scattergun",
       "datasheetId": "000003704",
@@ -162,39 +207,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003704",
-      "line": 1,
-      "description": "1 Kroot Flesh Shaper",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003704",
-      "line": 1,
-      "description": "1 model",
-      "cost": 45,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002588",
-      "slug": "kroot-farstalkers"
-    },
-    {
-      "id": "000000413",
-      "slug": "kroot-carnivores"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T’au Empire",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

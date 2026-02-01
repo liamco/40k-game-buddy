@@ -3,7 +3,7 @@
   "name": "Commander In Crisis Battlesuit",
   "factionId": "TAU",
   "sourceId": "000000381",
-  "legend": "A deadly blend of strategic mastery, courage and technological might, each T’au Commander pilots their battlesuit and directs their armies with great skill. It is their honour to wield some of the most cutting-edge weapons the empire can provide, enabling them to fight all the harder for the Greater Good.",
+  "legend": "A deadly blend of strategic mastery, courage and technological might, each T'au Commander pilots their battlesuit and directs their armies with great skill. It is their honour to wield some of the most cutting-edge weapons the empire can provide, enabling them to fight all the harder for the Greater Good.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> burst cannon; battlesuit fists.",
   "transport": "",
@@ -43,7 +43,7 @@
       "name": "Battlesuit Support System",
       "legend": "",
       "factionId": "",
-      "description": "The bearer’s unit is eligible to shoot in a turn in which it Fell Back, but when doing so only models equipped with this wargear can make ranged attacks.",
+      "description": "The bearer's unit is eligible to shoot in a turn in which it Fell Back, but when doing so only models equipped with this wargear can make ranged attacks.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -54,7 +54,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -69,7 +78,7 @@
   "keywords": [
     {
       "datasheetId": "000001477",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -132,7 +141,7 @@
       "datasheetId": "000001477",
       "line": 1,
       "button": "•",
-      "description": "This model’s burst cannon can be replaced with one of the following:<ul><li>1 airbursting fragmentation projector*</li><li>1 battlesuit support system*</li><li>1 cyclic ion blaster</li><li>1 fusion blaster</li><li>1 missile pod</li><li>1 plasma rifle</li><li>1 shield generator*</li><li>1 T’au flamer</li><li>1 weapon support system*</li></ul>"
+      "description": "This model's burst cannon can be replaced with one of the following:<ul><li>1 airbursting fragmentation projector*</li><li>1 battlesuit support system*</li><li>1 cyclic ion blaster</li><li>1 fusion blaster</li><li>1 missile pod</li><li>1 plasma rifle</li><li>1 shield generator*</li><li>1 T'au flamer</li><li>1 weapon support system*</li></ul>"
     },
     {
       "datasheetId": "000001477",
@@ -144,7 +153,7 @@
       "datasheetId": "000001477",
       "line": 3,
       "button": "•",
-      "description": "This model can be equipped with up to three of the following, and can take duplicates:<ul><li>1 airbursting fragmentation projector*</li><li>1 battlesuit support system*</li><li>1 burst cannon</li><li>1 cyclic ion blaster</li><li>1 fusion blaster</li><li>1 missile pod</li><li>1 plasma rifle</li><li>1 shield generator*</li><li>1 T’au flamer</li><li>1 weapon support system*</li></ul>"
+      "description": "This model can be equipped with up to three of the following, and can take duplicates:<ul><li>1 airbursting fragmentation projector*</li><li>1 battlesuit support system*</li><li>1 burst cannon</li><li>1 cyclic ion blaster</li><li>1 fusion blaster</li><li>1 missile pod</li><li>1 plasma rifle</li><li>1 shield generator*</li><li>1 T'au flamer</li><li>1 weapon support system*</li></ul>"
     },
     {
       "datasheetId": "000001477",
@@ -153,7 +162,49 @@
       "description": "* This model cannot have duplicates of these pieces of wargear."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001477",
+      "line": 1,
+      "description": "1 Commander in Crisis Battlesuit",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001477",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000418",
+      "slug": "crisis-battlesuits"
+    },
+    {
+      "id": "000003699",
+      "slug": "crisis-sunforge-battlesuits"
+    },
+    {
+      "id": "000003701",
+      "slug": "crisis-starscythe-battlesuits"
+    },
+    {
+      "id": "000003700",
+      "slug": "crisis-fireknife-battlesuits"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001477:airbursting-fragmentation-projector",
       "datasheetId": "000001477",
@@ -217,7 +268,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Cyclic ion blaster – standard",
+          "name": "Cyclic ion blaster - standard",
           "attributes": [],
           "range": 18,
           "type": "Ranged",
@@ -232,7 +283,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Cyclic ion blaster – overcharge",
+          "name": "Cyclic ion blaster - overcharge",
           "attributes": [
             "HAZARDOUS"
           ],
@@ -324,7 +375,7 @@
       "id": "000001477:t-au-flamer",
       "datasheetId": "000001477",
       "line": 8,
-      "name": "T’au flamer",
+      "name": "T'au flamer",
       "type": "Ranged",
       "profiles": [
         {
@@ -332,7 +383,7 @@
           "line": 8,
           "lineInWargear": 1,
           "dice": "",
-          "name": "T’au flamer",
+          "name": "T'au flamer",
           "attributes": [
             "IGNORES COVER",
             "TORRENT"
@@ -371,47 +422,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001477",
-      "line": 1,
-      "description": "1 Commander in Crisis Battlesuit",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001477",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000418",
-      "slug": "crisis-battlesuits"
-    },
-    {
-      "id": "000003699",
-      "slug": "crisis-sunforge-battlesuits"
-    },
-    {
-      "id": "000003701",
-      "slug": "crisis-starscythe-battlesuits"
-    },
-    {
-      "id": "000003700",
-      "slug": "crisis-fireknife-battlesuits"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T’au Empire (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

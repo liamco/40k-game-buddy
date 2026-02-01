@@ -3,7 +3,7 @@
   "name": "Skyclaws",
   "factionId": "SM",
   "sourceId": "000000360",
-  "legend": "Especially headstrong Blood Claws are reassigned to jump pack wearing Skyclaw packs. Rebellious and free-spirited, Skyclaws seize any opportunity to push their luck. They rocket forward fearlessly in great loping bounds, chainswords roaring as they slay, plunging into the enemy’s heart with reckless fury.",
+  "legend": "Especially headstrong Blood Claws are reassigned to jump pack wearing Skyclaw packs. Rebellious and free-spirited, Skyclaws seize any opportunity to push their luck. They rocket forward fearlessly in great loping bounds, chainswords roaring as they slay, plunging into the enemy's heart with reckless fury.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> bolt pistol; Astartes chainsword.",
   "transport": "",
@@ -32,11 +32,64 @@
       "factionId": "",
       "description": "You can re-roll Charge rolls made for this unit. Each time this unit makes a Charge move, until the end of the turn, each time a model in this unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character unit from your army with the Leader ability can be attached to Assault Intercessors with Jump Packs or an Assault Squad with Jump Packs, it can instead be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "ATTACH TO ASSAULT INTERCESSORS WITH JUMP PACKS"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "LEADER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "ATTACH TO ASSAULT SQUAD WITH JUMP PACKS"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "LEADER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -111,13 +164,13 @@
       "datasheetId": "000000324",
       "line": 1,
       "button": "•",
-      "description": "The Skyclaw Pack Leader’s Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li></ul>"
+      "description": "The Skyclaw Pack Leader's Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li></ul>"
     },
     {
       "datasheetId": "000000324",
       "line": 2,
       "button": "•",
-      "description": "The Skyclaw Pack Leader’s bolt pistol can be replaced with 1 plasma pistol."
+      "description": "The Skyclaw Pack Leader's bolt pistol can be replaced with 1 plasma pistol."
     },
     {
       "datasheetId": "000000324",
@@ -126,7 +179,55 @@
       "description": "Up to 2 Skyclaws can each have their bolt pistol and Astartes chainsword replaced with one of the following:<ul><li>1 plasma pistol and 1 Astartes chainsword</li><li>1 flamer and 1 close combat weapon</li><li>1 grav-gun and 1 close combat weapon</li><li>1 meltagun and 1 close combat weapon</li><li>1 plasma gun and 1 close combat weapon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000324",
+      "line": 1,
+      "description": "1 Skyclaw Pack Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000324",
+      "line": 2,
+      "description": "4-14 Skyclaws",
+      "min": 4,
+      "max": 14
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000324",
+      "line": 1,
+      "description": "5 models",
+      "cost": 90,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000324",
+      "line": 2,
+      "description": "10 models",
+      "cost": 165,
+      "count": 10
+    },
+    {
+      "datasheetId": "000000324",
+      "line": 3,
+      "description": "15 models",
+      "cost": 240,
+      "count": 15
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves (Legends)",
+  "supplementLabel": "Space Wolves (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000324:bolt-pistol",
       "datasheetId": "000000324",
@@ -244,7 +345,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -261,7 +362,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -288,7 +389,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -305,7 +406,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -416,53 +517,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000324",
-      "line": 1,
-      "description": "1 Skyclaw Pack Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000324",
-      "line": 2,
-      "description": "4-14 Skyclaws",
-      "min": 4,
-      "max": 14
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000324",
-      "line": 1,
-      "description": "5 models",
-      "cost": 90,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000324",
-      "line": 2,
-      "description": "10 models",
-      "cost": 165,
-      "count": 10
-    },
-    {
-      "datasheetId": "000000324",
-      "line": 3,
-      "description": "15 models",
-      "cost": 240,
-      "count": 15
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves (Legends)",
-  "supplementLabel": "Space Wolves (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

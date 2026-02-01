@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "At the start of the Fight phase, each enemy unit within Engagement Range of one or more units with this ability must take a Battle-shock test, subtracting 1 from that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -42,16 +59,51 @@
       "factionId": "",
       "description": "While an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is within 3\" of one or more units with this ability, subtract 1 from the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "MONSTERS",
+                "VEHICLES"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Grapnel Launcher",
       "legend": "",
       "factionId": "",
-      "description": "Each time the bearer’s unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
+      "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "ignore vertical distance"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -60,7 +112,18 @@
       "factionId": "",
       "description": "The bearer has the Deep Strike ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -150,7 +213,48 @@
       "description": "All models in this unit can each be equipped with 1 grapnel launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002718",
+      "line": 1,
+      "description": "1 Reiver Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002718",
+      "line": 2,
+      "description": "4-9 Reivers",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002718",
+      "line": 1,
+      "description": "5 models",
+      "cost": 80,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002718",
+      "line": 2,
+      "description": "10 models",
+      "cost": 160,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002718:bolt-carbine",
       "datasheetId": "000002718",
@@ -254,46 +358,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002718",
-      "line": 1,
-      "description": "1 Reiver Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002718",
-      "line": 2,
-      "description": "4-9 Reivers",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002718",
-      "line": 1,
-      "description": "5 models",
-      "cost": 80,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002718",
-      "line": 2,
-      "description": "10 models",
-      "cost": 160,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

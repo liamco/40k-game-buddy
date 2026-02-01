@@ -3,7 +3,7 @@
   "name": "Kapricus Carrier",
   "factionId": "LoV",
   "sourceId": "000000203",
-  "legend": "A variant of the adaptable Kapricus design, the Carrier provides elite teams of Hernkyn Yaegirs with the means to penetrate enemy lines at speed. The transport’s quad magna-coils grant it the manoeuvrability to traverse almost any frontier terrain. At the same time, its banks of scanner uplinks enable it to lay down withering hails of accurate, suppressive fire to purge claim sites.",
+  "legend": "A variant of the adaptable Kapricus design, the Carrier provides elite teams of Hernkyn Yaegirs with the means to penetrate enemy lines at speed. The transport's quad magna-coils grant it the manoeuvrability to traverse almost any frontier terrain. At the same time, its banks of scanner uplinks enable it to lay down withering hails of accurate, suppressive fire to purge claim sites.",
   "role": "Dedicated Transports",
   "loadout": "<b>This model is equipped with:</b> magna-coil autocannon; twin magna-coil autocannon; armoured hull.",
   "transport": "This model has a transport capacity of 5 Hernkyn Yaegir models.<br><br>At the start of the Declare Battle Formations step, you can select one <span class=\"kwb\">HERNKYN</span> <span class=\"kwb\">YAEGIR</span> unit from your army that has not been split. If you do, that unit is split into two units, each containing as equal a number of models as possible (when splitting a unit in this way, make a note of which models form each of the two new units). One of these units must start the battle embarked within this <span class=\"kwb\">TRANSPORT</span>; the other can start the battle embarked within another <span class=\"kwb\">TRANSPORT</span>, or it can be deployed as a separate unit.",
@@ -43,7 +43,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -130,7 +139,32 @@
       "description": "This model can be equipped with 1 smoke launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004147",
+      "line": 1,
+      "description": "1 Kapricus Carrier",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004147",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004147:magna-coil-autocannon",
       "datasheetId": "000004147",
@@ -205,30 +239,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004147",
-      "line": 1,
-      "description": "1 Kapricus Carrier",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004147",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

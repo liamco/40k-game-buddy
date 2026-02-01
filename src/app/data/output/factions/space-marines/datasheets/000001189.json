@@ -3,7 +3,7 @@
   "name": "Mastodon",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "The Mastodon is one of the heaviest assault transports ever fielded by the Space Marines, reserved for use against the most heavily fortified positions. Several times the size of a Land Raider, the Mastodon’s primary role is to deliver armoured warriors directly into the breach created with the siege melta array mounted on the vehicle’s armoured prow.",
+  "legend": "The Mastodon is one of the heaviest assault transports ever fielded by the Space Marines, reserved for use against the most heavily fortified positions. Several times the size of a Land Raider, the Mastodon's primary role is to deliver armoured warriors directly into the breach created with the siege melta array mounted on the vehicle's armoured prow.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 heavy flamers; 2 lascannons; siege melta array; skyreaper battery; armoured tracks.",
   "transport": "This model has a transport capacity of 45 Adeptus Astartes Infantry models. Each Jump Pack, Wulfen, Gravis, Possessed or Terminator model takes up the space of 2 models and each Centurion or Obliterator model takes up the space of 3 models. This model can also transport up to 2 Dreadnought or Helbrute models (these models take up the space of a number of models equal to their Wounds characteristic e.g. A <span class=\"kwb\">DREADNOUGHT</span> with a Wounds characteristic of 8 would take up the space of 8 models).",
@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 6 from this model’s Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 6 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Mastodon",
   "slug": "mastodon-3",
   "factionSlug": "space-marines",
@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Once per battle round, when an attack is allocated to this model, you can change the Damage characteristic of that attack to 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "d",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "notEquals",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -102,16 +119,43 @@
       "datasheetId": "000001189",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 heavy flamers can be replaced with one of the following<ul><li>2 heavy bolters</li><li>2 lascannons</li><li>2 volkite culverins</li></ul>"
+      "description": "This model's 2 heavy flamers can be replaced with one of the following<ul><li>2 heavy bolters</li><li>2 lascannons</li><li>2 volkite culverins</li></ul>"
     },
     {
       "datasheetId": "000001189",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 lascannons can be replaced with on of the following:<ul><li>2 heavy bolters</li><li>2 heavy flamers</li><li>2 volkite culverins</li></ul>"
+      "description": "This model's 2 lascannons can be replaced with on of the following:<ul><li>2 heavy bolters</li><li>2 heavy flamers</li><li>2 volkite culverins</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001189",
+      "line": 1,
+      "description": "1 Mastodon",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001189",
+      "line": 1,
+      "description": "1 model",
+      "cost": 540,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001189:heavy-bolter",
       "datasheetId": "000001189",
@@ -290,48 +334,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001189",
-      "line": 1,
-      "description": "1 Mastodon",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001189",
-      "line": 1,
-      "description": "1 model",
-      "cost": 540,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 10,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 6
     }
   ]
 }

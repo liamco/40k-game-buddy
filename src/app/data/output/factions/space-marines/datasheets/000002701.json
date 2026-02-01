@@ -40,7 +40,26 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "abilities": [
+                "STRATAGEM"
+              ],
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -49,7 +68,32 @@
       "factionId": "",
       "description": "After both players have deployed their armies, if your army includes one or more models with this ability, you can select up to three friendly Adeptus Astartes Infantry units and redeploy all of those units. When doing so, any of those units can be placed into Strategic Reserves, regardless of how many units are already in Strategic Reserves.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "REDEPLOY"
+          ],
+          "value": "up to three friendly Adeptus Astartes Infantry units"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "STRATEGIC RESERVES"
+          ],
+          "value": "any of those units can be placed into Strategic Reserves"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "regardless of how many units are already in Strategic Reserves"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -114,7 +158,67 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002701",
+      "line": 1,
+      "description": "1 Captain in Phobos Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002701",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000128",
+      "slug": "infiltrator-squad"
+    },
+    {
+      "id": "000002718",
+      "slug": "reiver-squad"
+    },
+    {
+      "id": "000001159",
+      "slug": "incursor-squad"
+    },
+    {
+      "id": "000001160",
+      "slug": "scout-squad"
+    },
+    {
+      "id": "000000310",
+      "slug": "wolf-scouts"
+    },
+    {
+      "id": "000001668",
+      "slug": "eliminator-squad"
+    },
+    {
+      "id": "000002779",
+      "slug": "spectrus-kill-team-2"
+    },
+    {
+      "id": "000002806",
+      "slug": "hounds-of-morkai"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002701:bolt-pistol",
       "datasheetId": "000002701",
@@ -191,65 +295,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002701",
-      "line": 1,
-      "description": "1 Captain in Phobos Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002701",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000128",
-      "slug": "infiltrator-squad"
-    },
-    {
-      "id": "000002718",
-      "slug": "reiver-squad"
-    },
-    {
-      "id": "000001159",
-      "slug": "incursor-squad"
-    },
-    {
-      "id": "000001160",
-      "slug": "scout-squad"
-    },
-    {
-      "id": "000000310",
-      "slug": "wolf-scouts"
-    },
-    {
-      "id": "000001668",
-      "slug": "eliminator-squad"
-    },
-    {
-      "id": "000002779",
-      "slug": "spectrus-kill-team-2"
-    },
-    {
-      "id": "000002806",
-      "slug": "hounds-of-morkai"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

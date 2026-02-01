@@ -3,7 +3,7 @@
   "name": "Sergeant Telion",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "Delivering death from afar is Sergeant Telion’s gift. His talents for reading atmospherics, gravitic disturbance and the movement patterns of his foes allow him to place perfect kill-shots at a range far beyond that officially recognised for the Stalker-pattern boltgun he wields in battle.",
+  "legend": "Delivering death from afar is Sergeant Telion's gift. His talents for reading atmospherics, gravitic disturbance and the movement patterns of his foes allow him to place perfect kill-shots at a range far beyond that officially recognised for the Stalker-pattern boltgun he wields in battle.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; Quietus; combat knife.",
   "transport": "",
@@ -45,7 +45,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, improve the Objective Control characteristic of models in that unit by 1 and each time a model in that unit makes an attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -54,7 +63,34 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time that unit is selected to shoot or fight, select one of the following abilities to apply to weapons equipped by models in that unit until the end of the phase: <br><ul><li>[LETHAL HITS] </li><li>[PRECISION] </li><li>[SUSTAINED HITS 1]</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "PRECISION"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -126,7 +162,47 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001162",
+      "line": 1,
+      "description": "1 Sergeant Telion - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001162",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001160",
+      "slug": "scout-squad"
+    },
+    {
+      "id": "000001523",
+      "slug": "scout-sniper-squad"
+    },
+    {
+      "id": "000000310",
+      "slug": "wolf-scouts"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001162:bolt-pistol",
       "datasheetId": "000001162",
@@ -203,45 +279,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001162",
-      "line": 1,
-      "description": "1 Sergeant Telion – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001162",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001160",
-      "slug": "scout-squad"
-    },
-    {
-      "id": "000001523",
-      "slug": "scout-sniper-squad"
-    },
-    {
-      "id": "000000310",
-      "slug": "wolf-scouts"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

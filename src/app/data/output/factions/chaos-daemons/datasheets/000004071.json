@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -458,10 +467,35 @@
       "datasheetId": "000004071",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 combi-bolter</li><li>1 combi-weapon</li><li>1 accursed weapon</li><li>1 Astartes chainsword</li><li>1 power fist</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 combi-bolter</li><li>1 combi-weapon</li><li>1 accursed weapon</li><li>1 Astartes chainsword</li><li>1 power fist</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004071",
+      "line": 1,
+      "description": "1 Sorcerer on Steed of Slaanesh",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004071",
+      "line": 1,
+      "description": "1 model",
+      "cost": 85,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000004071:combi-bolter",
       "datasheetId": "000004071",
@@ -679,7 +713,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Infernal Gaze – focused witchfire",
+          "name": "Infernal Gaze - focused witchfire",
           "attributes": [
             "DEVASTATING WOUNDS",
             "HAZARDOUS",
@@ -698,7 +732,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Infernal Gaze – witchfire",
+          "name": "Infernal Gaze - witchfire",
           "attributes": [
             "PSYCHIC"
           ],
@@ -724,7 +758,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -742,7 +776,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -756,30 +790,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004071",
-      "line": 1,
-      "description": "1 Sorcerer on Steed of Slaanesh",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004071",
-      "line": 1,
-      "description": "1 model",
-      "cost": 85,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

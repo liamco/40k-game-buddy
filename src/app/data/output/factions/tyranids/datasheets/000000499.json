@@ -38,9 +38,26 @@
       "name": "Enhanced Toxic Miasma",
       "legend": "",
       "factionId": "",
-      "description": "While this model is leading a unit, the range of that unit’s Foul Spores Aura ability is increased to 9\".",
+      "description": "While this model is leading a unit, the range of that unit's Foul Spores Aura ability is increased to 9\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": 9,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -49,7 +66,34 @@
       "factionId": "",
       "description": "Each time this model's unit is selected to fight, select one of the following abilities to apply to all melee weapons equipped by models in that unit until the end of the phase:<br><ul><li>[SUSTAINED HITS 1] </li><li>[LANCE] </li><li>[LETHAL HITS]</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LANCE"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": null
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -121,32 +165,6 @@
       "description": "None"
     }
   ],
-  "wargear": [
-    {
-      "id": "000000499:grasping-tail",
-      "datasheetId": "000000499",
-      "line": 1,
-      "name": "Grasping tail",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000499",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Grasping tail",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000499",
@@ -176,5 +194,31 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Tyranids (Warhammer Legends)",
   "isForgeWorld": false,
-  "isLegends": true
+  "isLegends": true,
+  "availableWargear": [
+    {
+      "id": "000000499:grasping-tail",
+      "datasheetId": "000000499",
+      "line": 1,
+      "name": "Grasping tail",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000499",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Grasping tail",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 4,
+          "bsWs": 4,
+          "s": 5,
+          "ap": 0,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

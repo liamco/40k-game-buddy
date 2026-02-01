@@ -1,7 +1,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --font-size: 16px;
+    --font-size: 18px;
     --background: #ffffff;
     --foreground: oklch(0.145 0 0);
     --card: #ffffff;
@@ -78,7 +78,7 @@
     --sidebar-ring: oklch(0.439 0 0);
 }
 
-@theme inline {
+@theme {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-card: var(--card);
@@ -105,6 +105,7 @@
     --color-chart-3: var(--chart-3);
     --color-chart-4: var(--chart-4);
     --color-chart-5: var(--chart-5);
+    --radius: 0.125rem;
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
@@ -129,30 +130,18 @@
     --color-fireDragonBright: #d98548;
     --color-wordBearersRed: #3d2d2b;
     --color-wildRiderRed: #bf5b5b;
+    --color-badMoonYellow: #ffe100;
 
     /* Glows */
     --shadow-glow-green: 0 1px 10px 0 #a4d065;
     --shadow-glow-orange: 0 1px 10px 0 #d98548;
+    --shadow-glow-red: 0 1px 10px 0 #bf5b5b;
     --text-shadow-glow-green: 0 1px 10px 0 #a4d065;
     --text-shadow-glow-orange: 0 1px 10px 0 #d98548;
+    --text-shadow-glow-red: 0 1px 10px 0 #bf5b5b;
 
     /* Custom fonts */
     --font-jersey: "Jersey 15", sans-serif;
-}
-
-@layer utilities {
-    .text-shadow-glow-green {
-        text-shadow: 0 1px 7px #a4d065;
-    }
-    .text-shadow-glow-orange {
-        text-shadow: 0 1px 7px #d98548;
-    }
-    .shadow-glow-green {
-        box-shadow: 0 1px 7px 0 #a4d065;
-    }
-    .shadow-glow-orange {
-        box-shadow: 0 1px 7px 0 #d98548;
-    }
 }
 
 @layer base {
@@ -161,9 +150,11 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        background-color: var(--color-nocturneGreen);
+        color: var(--color-skarsnikGreen);
         scrollbar-color: var(--color-skarsnikGreen) transparent;
         scrollbar-width: thin;
+        background-image: "radial-gradient(102.98% 52.72% at 1.84% 2.02%, #A4D065 0%, rgba(10, 26, 19, 0.00) 100%), radial-gradient(38.7% 24.73% at 3.1% 96.61%, #A4D065 0%, rgba(10, 26, 19, 0.00) 100%), radial-gradient(119.5% 64.31% at 98.62% 95.18%, #A4D065 0%, rgba(10, 26, 19, 0.00) 100%), radial-gradient(46.92% 30.92% at 97.19% 3.78%, #A4D065 0%, rgba(10, 26, 19, 0.00) 100%)";
         line-height: 1;
     }
 

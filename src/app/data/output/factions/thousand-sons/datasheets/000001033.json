@@ -3,7 +3,7 @@
   "name": "Exalted Sorcerer",
   "factionId": "TS",
   "sourceId": "000000027",
-  "legend": "Greatest amongst Magnus’ lieutenants, each Exalted Sorcerer embodies forbidden power and monstrous ambition. From the soul-burning detonations of their pistols’ cursed shells to the unfettered might of their sorcery and the shimmering shields cast by their corrupt sigils of Tzeentch, they are terrifyingly powerful warriors.",
+  "legend": "Greatest amongst Magnus' lieutenants, each Exalted Sorcerer embodies forbidden power and monstrous ambition. From the soul-burning detonations of their pistols' cursed shells to the unfettered might of their sorcery and the shimmering shields cast by their corrupt sigils of Tzeentch, they are terrifyingly powerful warriors.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> Astral Blast; inferno bolt pistol; force weapon.",
   "transport": "",
@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -125,7 +134,37 @@
       "description": "This model can be equipped with 1 Prosperine khopesh."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001033",
+      "line": 1,
+      "description": "1 Exalted Sorcerer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001033",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001020",
+      "slug": "rubric-marines-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001033:astral-blast",
       "datasheetId": "000001033",
@@ -230,35 +269,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001033",
-      "line": 1,
-      "description": "1 Exalted Sorcerer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001033",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001020",
-      "slug": "rubric-marines-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

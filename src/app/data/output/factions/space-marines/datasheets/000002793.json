@@ -3,7 +3,7 @@
   "name": "Castellan",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "A Castellan leads each of a crusade’s fighting companies and acts as a conduit for their Marshal’s will. Charged with the physical and spiritual purity of active Chapter Keeps, they have honed a patient wisdom that they draw upon in battle, alongside their tactical precision and close-quarters ferocity.",
+  "legend": "A Castellan leads each of a crusade's fighting companies and acts as a conduit for their Marshal's will. Charged with the physical and spiritual purity of active Chapter Keeps, they have honed a patient wisdom that they draw upon in battle, alongside their tactical precision and close-quarters ferocity.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> combi-weapon; master-crafted power weapon.",
   "transport": "",
@@ -32,16 +32,92 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time that unit is selected to fight, take a Leadership test for that unit: if passed, until the end of the phase, each time a model in that unit makes an attack, you can re-roll the Hit roll; if failed, until the end of the phase, each time a model in that unit makes an attack, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "ld",
+              "operator": "greaterThanOrEqualTo",
+              "value": "Leadership test passed"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "ld",
+              "operator": "lessThan",
+              "value": "Leadership test failed"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Prioritised Eradication",
       "legend": "",
       "factionId": "",
-      "description": "Each time a model in this model’s unit makes a melee attack that destroys one or more enemy units, roll one D6: on a 4+, you gain 1CP.",
+      "description": "Each time a model in this model's unit makes a melee attack that destroys one or more enemy units, roll one D6: on a 4+, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "meleeAttack",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -122,16 +198,104 @@
       "datasheetId": "000002793",
       "line": 1,
       "button": "•",
-      "description": "This model’s combi-weapon can be replaced with 1 heavy bolt pistol."
+      "description": "This model's combi-weapon can be replaced with 1 heavy bolt pistol."
     },
     {
       "datasheetId": "000002793",
       "line": 2,
       "button": "•",
-      "description": "This model’s master-crafted power weapon can be replaced with 1 Astartes chainsword."
+      "description": "This model's master-crafted power weapon can be replaced with 1 Astartes chainsword."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002793",
+      "line": 1,
+      "description": "1 Castellan",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002793",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000061",
+      "slug": "assault-squad"
+    },
+    {
+      "id": "000000126",
+      "slug": "infernus-squad"
+    },
+    {
+      "id": "000002783",
+      "slug": "deathwatch-veterans"
+    },
+    {
+      "id": "000002799",
+      "slug": "crusader-squad"
+    },
+    {
+      "id": "000001606",
+      "slug": "assault-intercessor-squad"
+    },
+    {
+      "id": "000002798",
+      "slug": "sword-brethren-squad"
+    },
+    {
+      "id": "000001157",
+      "slug": "intercessor-squad"
+    },
+    {
+      "id": "000004137",
+      "slug": "sternguard-veteran-squad-2"
+    },
+    {
+      "id": "000004154",
+      "slug": "crusader-squad-legendary"
+    },
+    {
+      "id": "000002255",
+      "slug": "sternguard-veteran-squad"
+    },
+    {
+      "id": "000003698",
+      "slug": "inner-circle-companions"
+    },
+    {
+      "id": "000001154",
+      "slug": "vanguard-veteran-squad"
+    },
+    {
+      "id": "000002780",
+      "slug": "fortis-kill-team-2"
+    },
+    {
+      "id": "000004175",
+      "slug": "decimus-kill-team"
+    },
+    {
+      "id": "000000315",
+      "slug": "wolf-guard"
+    }
+  ],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002793:combi-weapon",
       "datasheetId": "000002793",
@@ -239,94 +403,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002793",
-      "line": 1,
-      "description": "1 Castellan",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002793",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000061",
-      "slug": "assault-squad"
-    },
-    {
-      "id": "000000126",
-      "slug": "infernus-squad"
-    },
-    {
-      "id": "000002783",
-      "slug": "deathwatch-veterans"
-    },
-    {
-      "id": "000002799",
-      "slug": "crusader-squad"
-    },
-    {
-      "id": "000001606",
-      "slug": "assault-intercessor-squad"
-    },
-    {
-      "id": "000002798",
-      "slug": "sword-brethren-squad"
-    },
-    {
-      "id": "000001157",
-      "slug": "intercessor-squad"
-    },
-    {
-      "id": "000004137",
-      "slug": "sternguard-veteran-squad-2"
-    },
-    {
-      "id": "000004154",
-      "slug": "crusader-squad-legendary"
-    },
-    {
-      "id": "000002255",
-      "slug": "sternguard-veteran-squad"
-    },
-    {
-      "id": "000003698",
-      "slug": "inner-circle-companions"
-    },
-    {
-      "id": "000001154",
-      "slug": "vanguard-veteran-squad"
-    },
-    {
-      "id": "000002780",
-      "slug": "fortis-kill-team-2"
-    },
-    {
-      "id": "000004175",
-      "slug": "decimus-kill-team"
-    },
-    {
-      "id": "000000315",
-      "slug": "wolf-guard"
-    }
-  ],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false,
   "leaderConditions": {
     "allowedExistingLeaderKeywords": [
       "CAPTAIN",

@@ -3,7 +3,7 @@
   "name": "Librarian In Phobos Armour",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Many Librarians learn the arcane arts of obscuration and illusion as part of their long and dangerous training. Donning Phobos armour, they take to the field and use these skills to fog the minds of their enemies, prise vital battle plans from their foes’ minds and turn the enemy’s shadows against them.",
+  "legend": "Many Librarians learn the arcane arts of obscuration and illusion as part of their long and dangerous training. Donning Phobos armour, they take to the field and use these skills to fog the minds of their enemies, prise vital battle plans from their foes' minds and turn the enemy's shadows against them.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; Smite; force weapon.",
   "transport": "",
@@ -36,7 +36,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -45,7 +56,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Stealth ability and that unit cannot be targeted by ranged attacks unless the attacking model is within 12\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STEALTH"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -116,105 +138,6 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000000119:bolt-pistol",
-      "datasheetId": "000000119",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000119",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000119:smite",
-      "datasheetId": "000000119",
-      "line": 2,
-      "name": "Smite",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000119",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Smite – witchfire",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": "D3"
-        },
-        {
-          "datasheetId": "000000119",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Smite – focused witchfire",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "HAZARDOUS",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000000119:force-weapon",
-      "datasheetId": "000000119",
-      "line": 4,
-      "name": "Force weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000119",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Force weapon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000119",
@@ -266,5 +189,104 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000000119:bolt-pistol",
+      "datasheetId": "000000119",
+      "line": 1,
+      "name": "Bolt pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000119",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Bolt pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 3,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000000119:smite",
+      "datasheetId": "000000119",
+      "line": 2,
+      "name": "Smite",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000119",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Smite - witchfire",
+          "attributes": [
+            "PSYCHIC"
+          ],
+          "range": 24,
+          "type": "Ranged",
+          "a": "D6",
+          "bsWs": 3,
+          "s": 5,
+          "ap": -1,
+          "d": "D3"
+        },
+        {
+          "datasheetId": "000000119",
+          "line": 3,
+          "lineInWargear": 2,
+          "dice": "",
+          "name": "Smite - focused witchfire",
+          "attributes": [
+            "DEVASTATING WOUNDS",
+            "HAZARDOUS",
+            "PSYCHIC"
+          ],
+          "range": 24,
+          "type": "Ranged",
+          "a": "D6",
+          "bsWs": 3,
+          "s": 6,
+          "ap": -2,
+          "d": "D3"
+        }
+      ]
+    },
+    {
+      "id": "000000119:force-weapon",
+      "datasheetId": "000000119",
+      "line": 4,
+      "name": "Force weapon",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000119",
+          "line": 4,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Force weapon",
+          "attributes": [
+            "PSYCHIC"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 4,
+          "bsWs": 3,
+          "s": 6,
+          "ap": -1,
+          "d": "D3"
+        }
+      ]
+    }
+  ]
 }

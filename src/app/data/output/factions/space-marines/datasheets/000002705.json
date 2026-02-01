@@ -33,7 +33,28 @@
       "factionId": "",
       "description": "Each time this model is selected to shoot, you can re-roll one Hit roll, you can re-roll one Wound roll and you can re-roll one Damage roll when resolving those attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "failed"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "failed"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -90,7 +111,7 @@
       "datasheetId": "000002705",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
+      "description": "This model's 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
     },
     {
       "datasheetId": "000002705",
@@ -105,7 +126,34 @@
       "description": "This model can be equipped with 1 Icarus rocket pod."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002705",
+      "line": 1,
+      "description": "1 Gladiator Lancer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002705",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002705:fragstorm-grenade-launcher",
       "datasheetId": "000002705",
@@ -259,42 +307,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002705",
-      "line": 1,
-      "description": "1 Gladiator Lancer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002705",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

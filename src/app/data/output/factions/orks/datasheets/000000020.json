@@ -3,7 +3,7 @@
   "name": "Tankbustas",
   "factionId": "ORK",
   "sourceId": "000000046",
-  "legend": "Tankbustas fixate on blasting enemy vehicles into scrap using barrages of rokkits that detonate in deafening explosions. They wield varied, cobbled-together launchas, and are laden with an arsenal of explosive projectiles, whose dubious reliability is made up for by the Tankbustas’ enthusiasm.",
+  "legend": "Tankbustas fixate on blasting enemy vehicles into scrap using barrages of rokkits that detonate in deafening explosions. They wield varied, cobbled-together launchas, and are laden with an arsenal of explosive projectiles, whose dubious reliability is made up for by the Tankbustas' enthusiasm.",
   "role": "Other",
   "loadout": "<b>The Boss Nob is equipped with:</b> 2 rokkit pistols; choppa.<br><br><b>Each Tankbusta is equipped with:</b> rokkit launcha; close combat weapon.",
   "transport": "",
@@ -28,14 +28,29 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a ranged attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Bomb Squigs",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer’s Note:</b> Place two Bomb Squig tokens next to the unit, removing one each time this unit uses this ability.",
+      "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer's Note:</b> Place two Bomb Squig tokens next to the unit, removing one each time this unit uses this ability.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -44,7 +59,7 @@
       "name": "Pulsa Rokkit",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, when the bearer’s unit is selected to shoot in your Shooting phase, the bearer can use its pulsa rokkit. If it does, until the end of the phase, improve the Strength and Armour Penetration characteristics of ranged weapons equipped by models in the bearer’s unit by 1.",
+      "description": "Once per battle, when the bearer's unit is selected to shoot in your Shooting phase, the bearer can use its pulsa rokkit. If it does, until the end of the phase, improve the Strength and Armour Penetration characteristics of ranged weapons equipped by models in the bearer's unit by 1.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -101,7 +116,7 @@
       "datasheetId": "000000020",
       "line": 1,
       "button": "•",
-      "description": "1 of the Boss Nob’s rokkit pistols can be replaced with 1 smash hammer."
+      "description": "1 of the Boss Nob's rokkit pistols can be replaced with 1 smash hammer."
     },
     {
       "datasheetId": "000000020",
@@ -110,7 +125,39 @@
       "description": "One Tankbusta can be equipped with one of the following:<ul><li>1 pulsa rokkit</li><li>1 additional rokkit launcha</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000020",
+      "line": 1,
+      "description": "1 Boss Nob",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000020",
+      "line": 2,
+      "description": "5 Tankbustas",
+      "min": 5,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000020",
+      "line": 1,
+      "description": "6 models",
+      "cost": 140,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000020:rokkit-launcha",
       "datasheetId": "000000020",
@@ -238,37 +285,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000020",
-      "line": 1,
-      "description": "1 Boss Nob",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000020",
-      "line": 2,
-      "description": "5 Tankbustas",
-      "min": 5,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000020",
-      "line": 1,
-      "description": "6 models",
-      "cost": 140,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

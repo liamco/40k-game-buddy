@@ -35,7 +35,7 @@
       "name": "Master Vox",
       "legend": "",
       "factionId": "",
-      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer’s unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
+      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -44,16 +44,27 @@
       "name": "Alchemyk Counteragents",
       "legend": "",
       "factionId": "",
-      "description": "The bearer’s unit has the Feel No Pain 6+ ability against mortal wounds.",
+      "description": "The bearer's unit has the Feel No Pain 6+ ability against mortal wounds.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Regimental Standard",
       "legend": "",
       "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer’s unit.",
+      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -62,13 +73,18 @@
       "name": "Servo-scribes",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, when issuing an Order, the Lord Commissar can issue one additional Order.<br><br><b>Designer’s Note:</b> Place a Servo-scribes token next to the unit, removing it when this ability has been used.",
+      "description": "Once per battle, when issuing an Order, the Lord Commissar can issue one additional Order.<br><br><b>Designer's Note:</b> Place a Servo-scribes token next to the unit, removing it when this ability has been used.",
       "type": "Wargear",
       "parameter": ""
     },
     {
+      "id": "",
       "name": "ORDERS",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "This unit's <span class=\"kwb\">OFFICER</span> can issue 1 Order to a Regiment unit.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -170,7 +186,7 @@
       "datasheetId": "000003941",
       "line": 1,
       "button": "•",
-      "description": "1 Veteran Guardsman’s boltgun can be replaced with one of the following:<ul><li>1 flamer</li><li>1 grenade launcher</li><li>1 meltagun</li><li>1 plasma gun</li></ul>"
+      "description": "1 Veteran Guardsman's boltgun can be replaced with one of the following:<ul><li>1 flamer</li><li>1 grenade launcher</li><li>1 meltagun</li><li>1 plasma gun</li></ul>"
     },
     {
       "datasheetId": "000003941",
@@ -188,7 +204,7 @@
       "datasheetId": "000003941",
       "line": 4,
       "button": "•",
-      "description": "1 Veteran Guardsman’s chainsword can be replaced with one of the following:<ul><li>1 trench club</li><li>1 power weapon</li></ul>"
+      "description": "1 Veteran Guardsman's chainsword can be replaced with one of the following:<ul><li>1 trench club</li><li>1 power weapon</li></ul>"
     },
     {
       "datasheetId": "000003941",
@@ -197,7 +213,48 @@
       "description": "1 Veteran Guardsman not equipped with alchemyk counteragents can replace its laspistol with one of the following:<br><ul><li>1 bolt pistol</li><li>1 plasma pistol</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003941",
+      "line": 1,
+      "description": "1 Lord Commissar",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000003941",
+      "line": 2,
+      "description": "5 Veteran Guardsmen",
+      "min": 5,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003941",
+      "line": 1,
+      "description": "6 models",
+      "cost": 65,
+      "count": 6
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003950",
+      "slug": "death-korps-of-krieg-2"
+    },
+    {
+      "id": "000003977",
+      "slug": "krieg-combat-engineers-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003941:meltagun",
       "datasheetId": "000003941",
@@ -533,7 +590,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -550,7 +607,7 @@
           "line": 1,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -577,7 +634,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – frag",
+          "name": "Grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -594,7 +651,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – krak",
+          "name": "Grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -644,7 +701,7 @@
           "line": 11,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -661,7 +718,7 @@
           "line": 11,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -676,46 +733,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003941",
-      "line": 1,
-      "description": "1 Lord Commissar",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000003941",
-      "line": 2,
-      "description": "5 Veteran Guardsmen",
-      "min": 5,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003941",
-      "line": 1,
-      "description": "6 models",
-      "cost": 65,
-      "count": 6
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003950",
-      "slug": "death-korps-of-krieg-2"
-    },
-    {
-      "id": "000003977",
-      "slug": "krieg-combat-engineers-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

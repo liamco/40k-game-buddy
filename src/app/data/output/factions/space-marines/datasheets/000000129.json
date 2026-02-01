@@ -3,7 +3,7 @@
   "name": "Razorback",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "The Razorback replaces some of the Rhino’s transport capacity with a heavy weapon turret, and provides fire support for armoured infantry assaults while delivering its own cargo of warriors to battle. Such is its success that for many Chapters it performs additional functions, notably as a mobile command centre.",
+  "legend": "The Razorback replaces some of the Rhino's transport capacity with a heavy weapon turret, and provides fire support for armoured infantry assaults while delivering its own cargo of warriors to battle. Such is its success that for many Chapters it performs additional functions, notably as a mobile command centre.",
   "role": "Dedicated Transports",
   "loadout": "<b>This model is equipped with:</b> twin heavy bolter; armoured tracks.",
   "transport": "This model has a transport capacity of 6 ADEPTUS ASTARTES INFANTRY models. It cannot transport JUMP PACK, WULFEN, PHOBOS, GRAVIS, CENTURION, TERMINATOR or TACTicus models (excluding TACTICUS CHARACTER models that began the battle attached to a non-<span class=\"kwb\">TACTICUS</span> unit).",
@@ -33,7 +33,30 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks, Until the end of the phase, each time a friendly model that disembarked from this Transport this turn makes an attack that targets that enemy unit, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "state": "hasDisembarkedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -106,7 +129,7 @@
       "datasheetId": "000000129",
       "line": 1,
       "button": "•",
-      "description": "This model’s twin heavy bolter can be replaced with 1 twin lascannon."
+      "description": "This model's twin heavy bolter can be replaced with 1 twin lascannon."
     },
     {
       "datasheetId": "000000129",
@@ -121,7 +144,34 @@
       "description": "This model can be equipped with 1 storm bolter."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000129",
+      "line": 1,
+      "description": "1 Razorback",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000129",
+      "line": 1,
+      "description": "1 model",
+      "cost": 95,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000129:hunter-killer-missile",
       "datasheetId": "000000129",
@@ -251,32 +301,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000129",
-      "line": 1,
-      "description": "1 Razorback",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000129",
-      "line": 1,
-      "description": "1 model",
-      "cost": 95,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

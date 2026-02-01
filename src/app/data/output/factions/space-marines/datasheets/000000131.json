@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -112,13 +129,13 @@
       "datasheetId": "000000131",
       "line": 1,
       "button": "•",
-      "description": "Each of this model’s grav-flux bombards can be replaced with one of the following<ul><li>1 cyclonic melta lance</li><li>1 storm cannon</li><li>1 meltagun and 1 Leviathan siege claw</li><li>1 meltagun and 1 Leviathan siege drill</li></ul>"
+      "description": "Each of this model's grav-flux bombards can be replaced with one of the following<ul><li>1 cyclonic melta lance</li><li>1 storm cannon</li><li>1 meltagun and 1 Leviathan siege claw</li><li>1 meltagun and 1 Leviathan siege drill</li></ul>"
     },
     {
       "datasheetId": "000000131",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 heavy flamers can be replaced with 2 twin volkite calivers."
+      "description": "This model's 2 heavy flamers can be replaced with 2 twin volkite calivers."
     },
     {
       "datasheetId": "000000131",
@@ -127,7 +144,34 @@
       "description": "This model can be equipped with 3 hunter-killer missiles."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000131",
+      "line": 1,
+      "description": "1 Leviathan Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000131",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000131:cyclonic-melta-lance",
       "datasheetId": "000000131",
@@ -386,42 +430,6 @@
           "d": 3
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000131",
-      "line": 1,
-      "description": "1 Leviathan Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000131",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

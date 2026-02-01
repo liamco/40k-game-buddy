@@ -32,16 +32,44 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Scouts 6\" ability and ranged weapons equipped by models in that unit have the [ASSAULT] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Lightning Assault",
       "legend": "",
       "factionId": "",
-      "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this model, if this model’s unit is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\".",
+      "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this model, if this model's unit is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -118,65 +146,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000000081:artisan-plasma-pistol",
-      "datasheetId": "000000081",
-      "line": 1,
-      "name": "Artisan plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000081",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Artisan plasma pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000081:talassarian-tempest-blade",
-      "datasheetId": "000000081",
-      "line": 2,
-      "name": "Talassarian Tempest Blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000081",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Talassarian Tempest Blade",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000081",
       "line": 1,
-      "description": "1 Captain Sicarius – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Captain Sicarius - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -255,5 +229,59 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000000081:artisan-plasma-pistol",
+      "datasheetId": "000000081",
+      "line": 1,
+      "name": "Artisan plasma pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000081",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Artisan plasma pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 2,
+          "s": 8,
+          "ap": -3,
+          "d": 2
+        }
+      ]
+    },
+    {
+      "id": "000000081:talassarian-tempest-blade",
+      "datasheetId": "000000081",
+      "line": 2,
+      "name": "Talassarian Tempest Blade",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000081",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Talassarian Tempest Blade",
+          "attributes": [
+            "LETHAL HITS"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 6,
+          "bsWs": 2,
+          "s": 5,
+          "ap": -2,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

@@ -35,9 +35,18 @@
       "name": "Deadly Stalkers",
       "legend": "",
       "factionId": "",
-      "description": "Each time a model in this unit makes an attack that targets an enemy unit, if there are no other units from your opponent’s army within 6\" of that target, add 1 to the Wound roll.",
+      "description": "Each time a model in this unit makes an attack that targets an enemy unit, if there are no other units from your opponent's army within 6\" of that target, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -46,7 +55,32 @@
       "factionId": "",
       "description": "While this unit is within 6\" of one or more friendly Space Wolves Character models (excluding Wulfen models), if this unit is not Battle-shocked, Hunting Wolves models in this unit have an Objective Control characteristic of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": false
+            },
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "SPACE WOLVES CHARACTER"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -55,7 +89,56 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, you can select one enemy unit within 3\" of the bearer and roll one D6: on a 2+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a <span class=\"kwb\">VEHICLE</span> unit.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isVehicle",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "2D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isVehicle",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": 3
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "atStartOfAnyPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -145,28 +228,102 @@
       "datasheetId": "000004182",
       "line": 1,
       "button": "•",
-      "description": "1 Wolf Scout’s plasma pistol can be replaced with 1 plasma gun."
+      "description": "1 Wolf Scout's plasma pistol can be replaced with 1 plasma gun."
     },
     {
       "datasheetId": "000004182",
       "line": 2,
       "button": "•",
-      "description": "1 Wolf Scout equipped with a plasma pistol can be equipped with 1 haywire mine (That model’s plasma pistol cannot be replaced)."
+      "description": "1 Wolf Scout equipped with a plasma pistol can be equipped with 1 haywire mine (That model's plasma pistol cannot be replaced)."
     },
     {
       "datasheetId": "000004182",
       "line": 3,
       "button": "•",
-      "description": "1 Wolf Scout’s plasma pistol and combat blade can be replaced with 1 bolt pistol, 1 Thunderclap and 1 runic stave."
+      "description": "1 Wolf Scout's plasma pistol and combat blade can be replaced with 1 bolt pistol, 1 Thunderclap and 1 runic stave."
     },
     {
       "datasheetId": "000004182",
       "line": 4,
       "button": "•",
-      "description": "If this unit contains 12 models, 1 Wolf Scout’s plasma pistol can be replaced with 1 instigator bolt carbine."
+      "description": "If this unit contains 12 models, 1 Wolf Scout's plasma pistol can be replaced with 1 instigator bolt carbine."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004182",
+      "line": 1,
+      "description": "1 Wolf Scout Pack Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004182",
+      "line": 2,
+      "description": "4 Wolf Scouts",
+      "min": 4,
+      "max": 4
+    },
+    {
+      "datasheetId": "000004182",
+      "line": 3,
+      "description": "1 Hunting Wolf",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004182",
+      "line": 4,
+      "description": "OR"
+    },
+    {
+      "datasheetId": "000004182",
+      "line": 5,
+      "description": "1 Wolf Scout Pack Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004182",
+      "line": 6,
+      "description": "9 Wolf Scouts",
+      "min": 9,
+      "max": 9
+    },
+    {
+      "datasheetId": "000004182",
+      "line": 7,
+      "description": "2 Hunting Wolves",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004182",
+      "line": 1,
+      "description": "6 models",
+      "cost": 105,
+      "count": 6
+    },
+    {
+      "datasheetId": "000004182",
+      "line": 2,
+      "description": "12 models",
+      "cost": 210,
+      "count": 12
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004182:bolt-pistol",
       "datasheetId": "000004182",
@@ -231,7 +388,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -248,7 +405,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -275,7 +432,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -292,7 +449,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -432,79 +589,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004182",
-      "line": 1,
-      "description": "1 Wolf Scout Pack Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004182",
-      "line": 2,
-      "description": "4 Wolf Scouts",
-      "min": 4,
-      "max": 4
-    },
-    {
-      "datasheetId": "000004182",
-      "line": 3,
-      "description": "1 Hunting Wolf",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004182",
-      "line": 4,
-      "description": "OR"
-    },
-    {
-      "datasheetId": "000004182",
-      "line": 5,
-      "description": "1 Wolf Scout Pack Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004182",
-      "line": 6,
-      "description": "9 Wolf Scouts",
-      "min": 9,
-      "max": 9
-    },
-    {
-      "datasheetId": "000004182",
-      "line": 7,
-      "description": "2 Hunting Wolves",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004182",
-      "line": 1,
-      "description": "6 models",
-      "cost": 105,
-      "count": 6
-    },
-    {
-      "datasheetId": "000004182",
-      "line": 2,
-      "description": "12 models",
-      "cost": 210,
-      "count": 12
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

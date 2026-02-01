@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that is not Below Half-strength, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBelowHalfStrength",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -108,13 +125,13 @@
       "datasheetId": "000002269",
       "line": 1,
       "button": "•",
-      "description": "This model’s anvilus autocannon battery can be replaced with one of the following<ul><li>1 arachnus heavy lascannon battery</li><li>1 hellfire plasma carronade</li><li>1 volkite falconet battery</li></ul>"
+      "description": "This model's anvilus autocannon battery can be replaced with one of the following<ul><li>1 arachnus heavy lascannon battery</li><li>1 hellfire plasma carronade</li><li>1 volkite falconet battery</li></ul>"
     },
     {
       "datasheetId": "000002269",
       "line": 2,
       "button": "•",
-      "description": "This model’s twin heavy bolter can be replaced with 1 twin heavy flamer."
+      "description": "This model's twin heavy bolter can be replaced with 1 twin heavy flamer."
     },
     {
       "datasheetId": "000002269",
@@ -123,7 +140,34 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 aiolos missile launcher</li><li>1 boreas air defence missiles</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002269",
+      "line": 1,
+      "description": "1 Deredeo Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002269",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002269:aiolos-missile-launcher",
       "datasheetId": "000002269",
@@ -238,7 +282,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Hellfire plasma cannonade – standard",
+          "name": "Hellfire plasma cannonade - standard",
           "attributes": [],
           "range": 36,
           "type": "Ranged",
@@ -253,7 +297,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Hellfire plasma cannonade – supercharge",
+          "name": "Hellfire plasma cannonade - supercharge",
           "attributes": [
             "HAZARDOUS"
           ],
@@ -371,42 +415,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002269",
-      "line": 1,
-      "description": "1 Deredeo Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002269",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

@@ -31,7 +31,7 @@
       "name": "Vox-caster",
       "legend": "",
       "factionId": "",
-      "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly Officer models within 6\": on a 5+, you gain 1CP.",
+      "description": "Each time you target the bearer's unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly Officer models within 6\": on a 5+, you gain 1CP.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -40,7 +40,7 @@
       "name": "Death Korps Medi-pack",
       "legend": "",
       "factionId": "",
-      "description": "At the start of your Command phase, if the bearer’s unit is below its Starting Strength, you can return up to D3 destroyed Death Korps Troopers to this unit (if this unit contains two models equipped with a Death Korps medi-pack, return up to D3+1 destroyed Death Korps Troopers to this unit instead).",
+      "description": "At the start of your Command phase, if the bearer's unit is below its Starting Strength, you can return up to D3 destroyed Death Korps Troopers to this unit (if this unit contains two models equipped with a Death Korps medi-pack, return up to D3+1 destroyed Death Korps Troopers to this unit instead).",
       "type": "Wargear",
       "parameter": ""
     }
@@ -129,13 +129,13 @@
       "datasheetId": "000003950",
       "line": 2,
       "button": "•",
-      "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 Death Korps medi-pack (that model’s lasgun cannot be replaced)**."
+      "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 Death Korps medi-pack (that model's lasgun cannot be replaced)**."
     },
     {
       "datasheetId": "000003950",
       "line": 3,
       "button": "•",
-      "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 vox-caster (that model’s lasgun cannot be replaced).**"
+      "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 vox-caster (that model's lasgun cannot be replaced).**"
     },
     {
       "datasheetId": "000003950",
@@ -168,7 +168,51 @@
       "description": "** A model can only take one of these options."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003950",
+      "line": 1,
+      "description": "1 Death Korps Watchmaster and 9 Death Korps Troopers",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000003950",
+      "line": 2,
+      "description": "OR"
+    },
+    {
+      "datasheetId": "000003950",
+      "line": 3,
+      "description": "2 Death Korps Watchmasters and 18 Death Korps Troopers",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003950",
+      "line": 1,
+      "description": "10 models",
+      "cost": 65,
+      "count": 10
+    },
+    {
+      "datasheetId": "000003950",
+      "line": 2,
+      "description": "20 models",
+      "cost": 145,
+      "count": 20
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003950:wargear-1",
       "datasheetId": "000003950",
@@ -483,7 +527,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – frag",
+          "name": "Grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -500,7 +544,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – krak",
+          "name": "Grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -524,7 +568,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -541,7 +585,7 @@
           "line": 1,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -594,7 +638,7 @@
           "line": 12,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -611,7 +655,7 @@
           "line": 12,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -626,49 +670,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003950",
-      "line": 1,
-      "description": "1 Death Korps Watchmaster and 9 Death Korps Troopers",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000003950",
-      "line": 2,
-      "description": "OR"
-    },
-    {
-      "datasheetId": "000003950",
-      "line": 3,
-      "description": "2 Death Korps Watchmasters and 18 Death Korps Troopers",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003950",
-      "line": 1,
-      "description": "10 models",
-      "cost": 65,
-      "count": 10
-    },
-    {
-      "datasheetId": "000003950",
-      "line": 2,
-      "description": "20 models",
-      "cost": 145,
-      "count": 20
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

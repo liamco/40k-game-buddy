@@ -45,7 +45,16 @@
       "factionId": "",
       "description": "At the start of your Shooting phase, select one enemy unit that is visible to this <span class=\"kwb\">PSYKER</span> model. Until the end of the phase, each time a model in this unit makes an attack that targets that enemy unit, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -126,10 +135,40 @@
       "datasheetId": "000001017",
       "line": 1,
       "button": "•",
-      "description": "This model’s inferno combi-bolter can be replaced with 1 inferno combi-weapon."
+      "description": "This model's inferno combi-bolter can be replaced with 1 inferno combi-weapon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001017",
+      "line": 1,
+      "description": "1 Sorcerer In Terminator Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001017",
+      "line": 1,
+      "description": "1 model",
+      "cost": 85,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001035",
+      "slug": "scarab-occult-terminators"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001017:gaze-of-hate",
       "datasheetId": "000001017",
@@ -239,35 +278,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001017",
-      "line": 1,
-      "description": "1 Sorcerer In Terminator Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001017",
-      "line": 1,
-      "description": "1 model",
-      "cost": 85,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001035",
-      "slug": "scarab-occult-terminators"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

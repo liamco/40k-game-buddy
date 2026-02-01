@@ -3,7 +3,7 @@
   "name": "The Blue Scribes",
   "factionId": "CD",
   "sourceId": "000000025",
-  "legend": "These quarrelsome daemons flit through time and space upon their skimming Disc, seeking scattered shards of the sorcerous wisdom of Tzeentch. P’tarix leeches away the secrets and power of enemy sorcerers, even as Xirat’p unleashes storms of sorcerous destruction drawn from their arcane stash of lore.",
+  "legend": "These quarrelsome daemons flit through time and space upon their skimming Disc, seeking scattered shards of the sorcerous wisdom of Tzeentch. P'tarix leeches away the secrets and power of enemy sorcerers, even as Xirat'p unleashes storms of sorcerous destruction drawn from their arcane stash of lore.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> sharp quills.",
   "transport": "",
@@ -31,16 +31,25 @@
     },
     {
       "id": "",
-      "name": "P’tarix’s Sorcerous Syphon (Aura)",
+      "name": "P'tarix's Sorcerous Syphon (Aura)",
       "legend": "",
       "factionId": "",
       "description": "While an enemy unit is within 12\" of this model, each time a model in that unit makes a Psychic Attack, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
-      "name": "Xirat’p’s Sorcerous Barrages (Psychic)",
+      "name": "Xirat'p's Sorcerous Barrages (Psychic)",
       "legend": "",
       "factionId": "",
       "description": "At the end of your Movement phase, roll one D6 for each enemy unit within 6\" of this model: on a 2-3, that unit suffers 1 mortal wound; on a 4-5, that unit suffers D3 mortal wounds; on a 6, that unit suffers D6 mortal wounds.",
@@ -129,7 +138,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001119",
+      "line": 1,
+      "description": "1 The Blue Scribes - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001119",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001119:sharp-quills",
       "datasheetId": "000001119",
@@ -156,30 +190,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001119",
-      "line": 1,
-      "description": "1 The Blue Scribes – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001119",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

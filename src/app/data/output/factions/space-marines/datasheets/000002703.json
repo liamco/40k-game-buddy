@@ -28,7 +28,70 @@
       "factionId": "",
       "description": "Melee weapons equipped by models in this unit have the [SUSTAINED HITS 2] ability when targeting <span class=\"kwb\">MONSTER</span>, <span class=\"kwb\">VEHICLE</span> or <span class=\"kwb\">FORTIFICATION</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "VEHICLE"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "FORTIFICATION"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -37,7 +100,18 @@
       "factionId": "",
       "description": "The bearer has the Grenades keyword.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsKeyword",
+          "keywords": [
+            "Grenades"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -103,7 +177,48 @@
       "description": "Any number of models can each have their Centurion bolters replaced with 1 Centurion assault launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002703",
+      "line": 1,
+      "description": "1 Assault Centurion Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002703",
+      "line": 2,
+      "description": "2-5 Assault Centurions",
+      "min": 2,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002703",
+      "line": 1,
+      "description": "3 models",
+      "cost": 150,
+      "count": 3
+    },
+    {
+      "datasheetId": "000002703",
+      "line": 2,
+      "description": "6 models",
+      "cost": 300,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002703:centurion-bolters",
       "datasheetId": "000002703",
@@ -212,46 +327,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002703",
-      "line": 1,
-      "description": "1 Assault Centurion Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002703",
-      "line": 2,
-      "description": "2-5 Assault Centurions",
-      "min": 2,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002703",
-      "line": 1,
-      "description": "3 models",
-      "cost": 150,
-      "count": 3
-    },
-    {
-      "datasheetId": "000002703",
-      "line": 2,
-      "description": "6 models",
-      "cost": 300,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

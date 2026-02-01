@@ -3,7 +3,7 @@
   "name": "Hammerfall Bunker",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Hammerfall Bunkers are launched from Space Marine warships in the same manner as Drop Pods. Automated area-denial assets crewed by hard-wired servitors, they have all kinds of battlefield roles, including securing beachheads, hampering enemy assaults and wreaking havoc behind the foe’s lines.",
+  "legend": "Hammerfall Bunkers are launched from Space Marine warships in the same manner as Drop Pods. Automated area-denial assets crewed by hard-wired servitors, they have all kinds of battlefield roles, including securing beachheads, hampering enemy assaults and wreaking havoc behind the foe's lines.",
   "role": "Fortifications",
   "loadout": "<b>This model is equipped with:</b> Hammerfall heavy bolter array; Hammerfall missile launcher.",
   "transport": "",
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "While an enemy unit is only within Engagement Range of one or more <span class=\"kwb\">FORTIFICATIONS</span> from your army: <br><ul><li>That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. </li><li>Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -42,7 +51,25 @@
       "factionId": "",
       "description": "Each time a ranged attack is allocated to a model, if that model is not fully visible to every model in the attacking unit because of this <span class=\"kwb\">FORTIFICATION</span>, that model has the Benefit of Cover against that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "BENEFIT OF COVER"
+          ],
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isFullyVisible",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -51,7 +78,32 @@
       "factionId": "",
       "description": "You can target this <span class=\"kwb\">FORTIFICATION</span> with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted another unit with that Stratagem this turn. This <span class=\"kwb\">FORTIFICATION</span> can only be targeted with that Stratagem once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIRE OVERWATCH"
+          ],
+          "value": 0
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "targetedWithStratagem",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "targetedWithStratagem",
+              "operator": "lessThanOrEqualTo",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -108,10 +160,37 @@
       "datasheetId": "000000097",
       "line": 1,
       "button": "•",
-      "description": "This model’s Hammerfall heavy bolter array can be replaced with 1 Hammerfall heavy flamer array."
+      "description": "This model's Hammerfall heavy bolter array can be replaced with 1 Hammerfall heavy flamer array."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000097",
+      "line": 1,
+      "description": "1 Hammerfall Bunker",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000097",
+      "line": 1,
+      "description": "1 model",
+      "cost": 175,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Fortifications",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000097:hammerfall-heavy-bolter-array",
       "datasheetId": "000000097",
@@ -179,7 +258,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Hammerfall missile launcher – superfrag",
+          "name": "Hammerfall missile launcher - superfrag",
           "attributes": [
             "BLAST"
           ],
@@ -196,7 +275,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Hammerfall missile launcher – superkrak",
+          "name": "Hammerfall missile launcher - superkrak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -207,42 +286,6 @@
           "d": "D6+1"
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000097",
-      "line": 1,
-      "description": "1 Hammerfall Bunker",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000097",
-      "line": 1,
-      "description": "1 model",
-      "cost": 175,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Fortifications",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

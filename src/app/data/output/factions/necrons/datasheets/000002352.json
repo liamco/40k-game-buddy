@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -100,7 +111,45 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002352",
+      "line": 1,
+      "description": "1 Technomancer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002352",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000534",
+      "slug": "necron-warriors"
+    },
+    {
+      "id": "000000535",
+      "slug": "immortals"
+    },
+    {
+      "id": "000000546",
+      "slug": "canoptek-wraiths"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002352:staff-of-light",
       "datasheetId": "000002352",
@@ -149,49 +198,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002352",
-      "line": 1,
-      "description": "1 Technomancer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002352",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000534",
-      "slug": "necron-warriors"
-    },
-    {
-      "id": "000000535",
-      "slug": "immortals"
-    },
-    {
-      "id": "000000546",
-      "slug": "canoptek-wraiths"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "leaderConditions": {
-    "allowedExistingLeaderKeywords": [
-      "ROYAL WARDEN",
-      "NOBLE"
-    ]
-  }
+  ]
 }

@@ -33,7 +33,26 @@
       "factionId": "",
       "description": "Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DECLARE CHARGE"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -96,13 +115,13 @@
       "datasheetId": "000002252",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 quad lascannons can be replaced with 2 laser destroyers."
+      "description": "This model's 2 quad lascannons can be replaced with 2 laser destroyers."
     },
     {
       "datasheetId": "000002252",
       "line": 2,
       "button": "•",
-      "description": "This model’s twin heavy bolter can be replaced with 1 twin heavy flamer"
+      "description": "This model's twin heavy bolter can be replaced with 1 twin heavy flamer"
     },
     {
       "datasheetId": "000002252",
@@ -111,7 +130,34 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 heavy bolter</li><li>1 heavy flamer</li><li>1 multi-melta</li><li>1 storm bolter</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002252",
+      "line": 1,
+      "description": "1 Spartan",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002252",
+      "line": 1,
+      "description": "1 model",
+      "cost": 300,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002252:heavy-bolter",
       "datasheetId": "000002252",
@@ -345,42 +391,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002252",
-      "line": 1,
-      "description": "1 Spartan",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002252",
-      "line": 1,
-      "description": "1 model",
-      "cost": 300,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

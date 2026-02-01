@@ -3,7 +3,7 @@
   "name": "Chaplain With Jump Pack",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Ever are the roared litanies of the Chaplains needed all over the battlefield, to stir the hearts of battle-brothers and drive fear into the enemy. With a jump pack a Chaplain can thunder to wherever he is most needed, or spearhead furious assaults into the enemy’s positions himself.",
+  "legend": "Ever are the roared litanies of the Chaplains needed all over the battlefield, to stir the hearts of battle-brothers and drive fear into the enemy. With a jump pack a Chaplain can thunder to wherever he is most needed, or spearhead furious assaults into the enemy's positions himself.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; crozius arcanum.",
   "transport": "",
@@ -36,16 +36,72 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Exhortation of Rage",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s unit is selected to fight, you can select one enemy unit within Engagement Range of this model’s unit and roll one D6: on a 4-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers 3 mortal wounds.",
+      "description": "Each time this model's unit is selected to fight, you can select one enemy unit within Engagement Range of this model's unit and roll one D6: on a 4-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers 3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "D6",
+              "operator": "greaterThanOrEqualTo",
+              "value": 4
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "D6",
+              "operator": "lessThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "D6",
+              "operator": "equals",
+              "value": 6
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -114,10 +170,70 @@
       "datasheetId": "000000112",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 power fist</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 power fist</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000112",
+      "line": 1,
+      "description": "1 Chaplain with Jump Pack",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000112",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000315",
+      "slug": "wolf-guard"
+    },
+    {
+      "id": "000000324",
+      "slug": "skyclaws"
+    },
+    {
+      "id": "000000064",
+      "slug": "assault-squad-with-jump-packs"
+    },
+    {
+      "id": "000000147",
+      "slug": "vanguard-veteran-squad-with-jump-packs"
+    },
+    {
+      "id": "000002776",
+      "slug": "assault-intercessors-with-jump-packs"
+    },
+    {
+      "id": "000003874",
+      "slug": "talonstrike-kill-team"
+    },
+    {
+      "id": "000002737",
+      "slug": "death-company-marines-with-jump-packs"
+    },
+    {
+      "id": "000003837",
+      "slug": "death-company-marines-with-boltguns-and-jump-packs"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000112:bolt-pistol",
       "datasheetId": "000000112",
@@ -290,7 +406,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -307,7 +423,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -396,65 +512,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000112",
-      "line": 1,
-      "description": "1 Chaplain with Jump Pack",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000112",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000315",
-      "slug": "wolf-guard"
-    },
-    {
-      "id": "000000324",
-      "slug": "skyclaws"
-    },
-    {
-      "id": "000000064",
-      "slug": "assault-squad-with-jump-packs"
-    },
-    {
-      "id": "000000147",
-      "slug": "vanguard-veteran-squad-with-jump-packs"
-    },
-    {
-      "id": "000002776",
-      "slug": "assault-intercessors-with-jump-packs"
-    },
-    {
-      "id": "000003874",
-      "slug": "talonstrike-kill-team"
-    },
-    {
-      "id": "000002737",
-      "slug": "death-company-marines-with-jump-packs"
-    },
-    {
-      "id": "000003837",
-      "slug": "death-company-marines-with-boltguns-and-jump-packs"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

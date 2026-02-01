@@ -3,7 +3,7 @@
   "name": "Bloodthirster",
   "factionId": "CD",
   "sourceId": "000000025",
-  "legend": "Bloodthirsters are supreme warriors, ferocious embodiments of the Blood God’s rage and murderlust. Commanders and champions of the Khornate daemon legions, Bloodthirsters are possessed of supreme martial skill. They wield baroque weapons of appalling power, and slaughter all in their paths.",
+  "legend": "Bloodthirsters are supreme warriors, ferocious embodiments of the Blood God's rage and murderlust. Commanders and champions of the Khornate daemon legions, Bloodthirsters are possessed of supreme martial skill. They wield baroque weapons of appalling power, and slaughter all in their paths.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> hellfire breath; great axe of Khorne",
   "transport": "",
@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "While a friendly Khorne Legiones Daemonica unit is within 6\" of this model, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -53,7 +62,7 @@
       "name": "Greater Daemon of Khorne (Aura)",
       "legend": "",
       "factionId": "",
-      "description": "While a friendly Khorne Legiones Daemonica unit is within 6\" of this model, that unit is within your army’s Shadow of Chaos.",
+      "description": "While a friendly Khorne Legiones Daemonica unit is within 6\" of this model, that unit is within your army's Shadow of Chaos.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -136,10 +145,35 @@
       "datasheetId": "000002582",
       "line": 1,
       "button": "•",
-      "description": "This model’s great axe of Khorne can be replaced with 1 axe of Khorne and one of the following:<ul><li>1 bloodflail</li><li>1 lash of Khorne</li></ul>"
+      "description": "This model's great axe of Khorne can be replaced with 1 axe of Khorne and one of the following:<ul><li>1 bloodflail</li><li>1 lash of Khorne</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002582",
+      "line": 1,
+      "description": "1 Bloodthirster",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002582",
+      "line": 1,
+      "description": "1 model",
+      "cost": 305,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002582:bloodflail",
       "datasheetId": "000002582",
@@ -229,7 +263,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Axe of Khorne – strike",
+          "name": "Axe of Khorne - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -244,7 +278,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Axe of Khorne – sweep",
+          "name": "Axe of Khorne - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -268,7 +302,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Great axe of Khorne – strike",
+          "name": "Great axe of Khorne - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -283,7 +317,7 @@
           "line": 7,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Great axe of Khorne – sweep",
+          "name": "Great axe of Khorne - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -294,40 +328,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002582",
-      "line": 1,
-      "description": "1 Bloodthirster",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002582",
-      "line": 1,
-      "description": "1 model",
-      "cost": 305,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

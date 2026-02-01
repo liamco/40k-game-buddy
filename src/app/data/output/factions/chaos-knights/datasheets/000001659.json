@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 5 from this model’s Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/Knight-Tyrant",
   "slug": "knight-tyrant",
   "factionSlug": "chaos-knights",
@@ -121,16 +121,41 @@
       "datasheetId": "000001659",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 gheiststrike missile launchers and twin Desecrator cannon can be replaced with 1 gheiststrike missile launcher and 2 twin Desecrator cannons."
+      "description": "This model's 2 gheiststrike missile launchers and twin Desecrator cannon can be replaced with 1 gheiststrike missile launcher and 2 twin Desecrator cannons."
     },
     {
       "datasheetId": "000001659",
       "line": 2,
       "button": "•",
-      "description": "This model’s brimstone volcano lance and ectoplasma decimator can be replaced with 1 darkflame cannon and 1 warpshock harpoon."
+      "description": "This model's brimstone volcano lance and ectoplasma decimator can be replaced with 1 darkflame cannon and 1 warpshock harpoon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001659",
+      "line": 1,
+      "description": "1 Knight Tyrant",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001659",
+      "line": 1,
+      "description": "1 model",
+      "cost": 410,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001659:brimstone-volcano-lance",
       "datasheetId": "000001659",
@@ -196,7 +221,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Ectoplasma decimator – standard",
+          "name": "Ectoplasma decimator - standard",
           "attributes": [
             "BLAST"
           ],
@@ -213,7 +238,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Ectoplasma decimator – supercharge",
+          "name": "Ectoplasma decimator - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -359,46 +384,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001659",
-      "line": 1,
-      "description": "1 Knight Tyrant",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001659",
-      "line": 1,
-      "description": "1 model",
-      "cost": 410,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 10,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 5
     }
   ]
 }

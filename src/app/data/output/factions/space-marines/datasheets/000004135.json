@@ -3,7 +3,7 @@
   "name": "Execrator",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "Execrators are living exemplars of their battle-brothers’ oaths, ferocious warrior priests who lead the Black Templars in lethal rampages. They teach that waris the most worthy chapel for warriors, every bludgeoning blow of their crozius arcanum punctuated with zealous invective and roared sermons.",
+  "legend": "Execrators are living exemplars of their battle-brothers' oaths, ferocious warrior priests who lead the Black Templars in lethal rampages. They teach that waris the most worthy chapel for warriors, every bludgeoning blow of their crozius arcanum punctuated with zealous invective and roared sermons.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> absolvor bolt pistol; crozius arcanum.",
   "transport": "",
@@ -32,16 +32,58 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER ADVANCING"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Condemnatory Annihilation",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s unit has fought, if one or more enemy units were destroyed as a result of those attacks, each enemy unit within 6\" of this model must take a Battle-shock test.",
+      "description": "Each time this model's unit has fought, if one or more enemy units were destroyed as a result of those attacks, each enemy unit within 6\" of this model must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "ld",
+          "value": "Battle-shock test",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -122,16 +164,56 @@
       "datasheetId": "000004135",
       "line": 1,
       "button": "•",
-      "description": "This model’s absolvor bolt pistol can be replaced with 1 pyre pistol."
+      "description": "This model's absolvor bolt pistol can be replaced with 1 pyre pistol."
     },
     {
       "datasheetId": "000004135",
       "line": 2,
       "button": "•",
-      "description": "If this model is equipped with an absolvor bolt pistol, it can be equipped with 1 master-crafted power weapon (this model’s absolvor bolt pistol cannot be replaced)."
+      "description": "If this model is equipped with an absolvor bolt pistol, it can be equipped with 1 master-crafted power weapon (this model's absolvor bolt pistol cannot be replaced)."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004135",
+      "line": 1,
+      "description": "1 Execrator",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004135",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004154",
+      "slug": "crusader-squad-legendary"
+    },
+    {
+      "id": "000002799",
+      "slug": "crusader-squad"
+    },
+    {
+      "id": "000002798",
+      "slug": "sword-brethren-squad"
+    }
+  ],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004135:absolvor-bolt-pistol",
       "datasheetId": "000004135",
@@ -237,45 +319,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004135",
-      "line": 1,
-      "description": "1 Execrator",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004135",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004154",
-      "slug": "crusader-squad-legendary"
-    },
-    {
-      "id": "000002799",
-      "slug": "crusader-squad"
-    },
-    {
-      "id": "000002798",
-      "slug": "sword-brethren-squad"
-    }
-  ],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

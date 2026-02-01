@@ -3,7 +3,7 @@
   "name": "Rapier Carrier",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "The Rapier Armoured Carrier is a bulky, tracked device that traces its origin to the dawn of Mankind’s stellar empire. Compatible with various heavy weapons, the Rapier is most commonly fitted with a powerful quad lascannon known as a laser destroyer, making it a compact but potent anti-armour asset.",
+  "legend": "The Rapier Armoured Carrier is a bulky, tracked device that traces its origin to the dawn of Mankind's stellar empire. Compatible with various heavy weapons, the Rapier is most commonly fitted with a powerful quad lascannon known as a laser destroyer, making it a compact but potent anti-armour asset.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> boltgun; quad heavy bolter; close combat weapon.",
   "transport": "",
@@ -28,7 +28,25 @@
       "factionId": "",
       "description": "Each time this model shoots in your Shooting phase, provided it Remained Stationary this turn, all [HEAVY] weapons equipped by models in this unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -85,10 +103,37 @@
       "datasheetId": "000000110",
       "line": 1,
       "button": "•",
-      "description": "This model’s quad heavy bolter can be replaced with one of the following<ul><li>1 graviton cannon</li><li>1 laser destroyer</li><li>1 quad launcher</li></ul>"
+      "description": "This model's quad heavy bolter can be replaced with one of the following<ul><li>1 graviton cannon</li><li>1 laser destroyer</li><li>1 quad launcher</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000110",
+      "line": 1,
+      "description": "1 Rapier Carrier",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000110",
+      "line": 1,
+      "description": "1 model",
+      "cost": 90,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000110:boltgun",
       "datasheetId": "000000110",
@@ -207,7 +252,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Quad launcher – shatter shells",
+          "name": "Quad launcher - shatter shells",
           "attributes": [
             "HEAVY"
           ],
@@ -224,7 +269,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Quad launcher – thunderfire shells",
+          "name": "Quad launcher - thunderfire shells",
           "attributes": [
             "BLAST",
             "HEAVY",
@@ -264,32 +309,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000110",
-      "line": 1,
-      "description": "1 Rapier Carrier",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000110",
-      "line": 1,
-      "description": "1 model",
-      "cost": 90,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

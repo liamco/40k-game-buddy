@@ -5,7 +5,7 @@
   "sourceId": "000000186",
   "legend": "",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> shuriken pistol; Harlequin’s blade, flip belt.",
+  "loadout": "<b>Every model is equipped with:</b> shuriken pistol; Harlequin's blade, flip belt.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -30,16 +30,31 @@
       "name": "Dance of Death",
       "legend": "",
       "factionId": "",
-      "description": "At the start of the Fight phase, select one of the following abilities for this unit to gain until the end of the phase:<br><ul><li><b>Hero’s Prowess:</b> Each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li><li><b>Villain’s Doom:</b> Each time a model in this unit makes an attack, add 1 to the Wound roll.</li><li><b>Trickster’s Grace:</b> Each time an attack targets this unit, subtract 1 from the Hit roll.</li></ul>",
+      "description": "At the start of the Fight phase, select one of the following abilities for this unit to gain until the end of the phase:<br><ul><li><b>Hero's Prowess:</b> Each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li><li><b>Villain's Doom:</b> Each time a model in this unit makes an attack, add 1 to the Wound roll.</li><li><b>Trickster's Grace:</b> Each time an attack targets this unit, subtract 1 from the Hit roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Flip Belt",
       "legend": "",
       "factionId": "",
-      "description": "Each time the bearer’s unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
+      "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -104,13 +119,13 @@
       "datasheetId": "000004164",
       "line": 1,
       "button": "•",
-      "description": "Any number of models can each have their Harlequin’s blade replaced with 1 Harlequin’s special weapon."
+      "description": "Any number of models can each have their Harlequin's blade replaced with 1 Harlequin's special weapon."
     },
     {
       "datasheetId": "000004164",
       "line": 2,
       "button": "•",
-      "description": "The Lead Player’s Harlequin’s blade can be replaced with 1 power sword."
+      "description": "The Lead Player's Harlequin's blade can be replaced with 1 power sword."
     },
     {
       "datasheetId": "000004164",
@@ -125,12 +140,65 @@
       "description": "If this unit contains 10 or more models:<ul><li>Up to 4 models can each have their shuriken pistol replaced with 1 neuro disruptor</li><li>Up to 4 models can each have their shuriken pistol replaced with 1 fusion pistol</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004164",
+      "line": 1,
+      "description": "1 Lead Player",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004164",
+      "line": 2,
+      "description": "4-11 Players",
+      "min": 4,
+      "max": 11
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004164",
+      "line": 1,
+      "description": "5 models",
+      "cost": 85,
+      "count": 5
+    },
+    {
+      "datasheetId": "000004164",
+      "line": 2,
+      "description": "6 models",
+      "cost": 100,
+      "count": 6
+    },
+    {
+      "datasheetId": "000004164",
+      "line": 3,
+      "description": "11 models",
+      "cost": 190,
+      "count": 11
+    },
+    {
+      "datasheetId": "000004164",
+      "line": 4,
+      "description": "12 models",
+      "cost": 205,
+      "count": 12
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004164:harlequin-s-blade",
       "datasheetId": "000004164",
       "line": 1,
-      "name": "Harlequin’s blade",
+      "name": "Harlequin's blade",
       "type": "Melee",
       "profiles": [
         {
@@ -138,7 +206,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Harlequin’s blade",
+          "name": "Harlequin's blade",
           "attributes": [
             "DEVASTATING WOUNDS"
           ],
@@ -211,7 +279,7 @@
       "id": "000004164:harlequin-s-special-weapon",
       "datasheetId": "000004164",
       "line": 1,
-      "name": "Harlequin’s special weapon",
+      "name": "Harlequin's special weapon",
       "type": "Melee",
       "profiles": [
         {
@@ -219,7 +287,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Harlequin’s special weapon",
+          "name": "Harlequin's special weapon",
           "attributes": [
             "DEVASTATING WOUNDS"
           ],
@@ -287,58 +355,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004164",
-      "line": 1,
-      "description": "1 Lead Player",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004164",
-      "line": 2,
-      "description": "4-11 Players",
-      "min": 4,
-      "max": 11
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004164",
-      "line": 1,
-      "description": "5 models",
-      "cost": 85,
-      "count": 5
-    },
-    {
-      "datasheetId": "000004164",
-      "line": 2,
-      "description": "6 models",
-      "cost": 100,
-      "count": 6
-    },
-    {
-      "datasheetId": "000004164",
-      "line": 3,
-      "description": "11 models",
-      "cost": 190,
-      "count": 11
-    },
-    {
-      "datasheetId": "000004164",
-      "line": 4,
-      "description": "12 models",
-      "cost": 205,
-      "count": 12
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

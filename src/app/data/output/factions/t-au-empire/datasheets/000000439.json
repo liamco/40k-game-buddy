@@ -1,6 +1,6 @@
 {
   "id": "000000439",
-  "name": "Shas’o R’alai",
+  "name": "Shas'o R'alai",
   "factionId": "TAU",
   "sourceId": "000000381",
   "legend": "",
@@ -34,7 +34,7 @@
       "name": "Blacklight Marker Drones",
       "legend": "",
       "factionId": "",
-      "description": "Twice per battle, when this unit is an Observer unit, until the end of the phase, each time a ranged attack is made by a model in their Guided unit that targets their Spotted unit, re-roll a Wound roll of 1.  <br><br><b>Designer’s Note:</b> Place two Blacklight Marker Drone tokens next to this model, removing one each time this ability has been used.",
+      "description": "Twice per battle, when this unit is an Observer unit, until the end of the phase, each time a ranged attack is made by a model in their Guided unit that targets their Spotted unit, re-roll a Wound roll of 1.  <br><br><b>Designer's Note:</b> Place two Blacklight Marker Drone tokens next to this model, removing one each time this ability has been used.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -45,7 +45,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 5+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -60,7 +69,7 @@
   "keywords": [
     {
       "datasheetId": "000000439",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -138,7 +147,37 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000439",
+      "line": 1,
+      "description": "1 Shas'o R'alai - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000439",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000443",
+      "slug": "xv9-hazard-battlesuits"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000439:experimental-pulse-submunitions-rifle",
       "datasheetId": "000000439",
@@ -151,7 +190,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Experimental pulse submunitions rifle – EMP",
+          "name": "Experimental pulse submunitions rifle - EMP",
           "attributes": [
             "ANTI-VEHICLE 3+",
             "DEVASTATING WOUNDS"
@@ -169,7 +208,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Experimental pulse submunitions rifle – ionic",
+          "name": "Experimental pulse submunitions rifle - ionic",
           "attributes": [
             "BLAST"
           ],
@@ -207,35 +246,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000439",
-      "line": 1,
-      "description": "1 Shas'o R'alai – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000439",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000443",
-      "slug": "xv9-hazard-battlesuits"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T’au Empire (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

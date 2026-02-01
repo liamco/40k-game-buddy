@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more attacks made with its twin macro-accelerator cannon this phase. Until the start of your next turn, while this model is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -90,13 +99,13 @@
       "datasheetId": "000002700",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 Astraeus las-rippers can be replaced with 2 plasma eradicators."
+      "description": "This model's 2 Astraeus las-rippers can be replaced with 2 plasma eradicators."
     },
     {
       "datasheetId": "000002700",
       "line": 2,
       "button": "•",
-      "description": "This model’s twin heavy bolter can be replaced with 1 twin lascannon."
+      "description": "This model's twin heavy bolter can be replaced with 1 twin lascannon."
     },
     {
       "datasheetId": "000002700",
@@ -105,7 +114,34 @@
       "description": "This model can be equipped with 1 ironhail heavy stubber."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002700",
+      "line": 1,
+      "description": "1 Astraeus",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002700",
+      "line": 1,
+      "description": "1 model",
+      "cost": 525,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002700:astraeus-las-ripper",
       "datasheetId": "000002700",
@@ -168,7 +204,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma eradicator – standard",
+          "name": "Plasma eradicator - standard",
           "attributes": [
             "BLAST"
           ],
@@ -185,7 +221,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma eradicator – supercharge",
+          "name": "Plasma eradicator - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -329,48 +365,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002700",
-      "line": 1,
-      "description": "1 Astraeus",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002700",
-      "line": 1,
-      "description": "1 model",
-      "cost": 525,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "damagedThreshold": 8,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

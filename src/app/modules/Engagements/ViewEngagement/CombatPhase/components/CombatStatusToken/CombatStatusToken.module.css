@@ -1,0 +1,73 @@
+@reference 'tailwindcss';
+
+.CombatStatusTokenWrapper {
+    input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        visibility: hidden;
+    }
+}
+
+.CombatStatusToken {
+    & + span {
+        @apply p-2 opacity-25 block;
+    }
+    &:checked + span {
+        @apply opacity-100;
+        animation-name: token-blink;
+        animation-duration: 0.15s;
+        animation-iteration-count: 1;
+    }
+}
+
+.CombatStatusTokenDefault {
+    & + span {
+        background-color: var(--color-deathWorldForest);
+        color: var(--color-skarsnikGreen);
+    }
+    &:checked + span {
+        background-color: var(--color-skarsnikGreen);
+        color: var(--color-deathWorldForest);
+        /*box-shadow: var(--shadow-glow-green);*/
+    }
+}
+
+.CombatStatusTokenHighlight {
+    & + span {
+        background-color: var(--color-mournfangBrown);
+        color: var(--color-fireDragonBright);
+    }
+    &:checked + span {
+        background-color: var(--color-fireDragonBright);
+        color: var(--color-mournfangBrown);
+        /*box-shadow: var(--shadow-glow-orange);*/
+    }
+}
+
+.CombatStatusTokenDestructive {
+    & + span {
+        background-color: var(--color-wordBearersRed);
+        color: var(--color-wildRiderRed);
+    }
+    &:checked + span {
+        background-color: var(--color-wildRiderRed);
+        color: var(--color-wordBearersRed);
+        box-shadow: var(--shadow-glow-red);
+    }
+}
+
+@keyframes token-blink {
+    0% {
+        opacity: 25%;
+    }
+    33% {
+        opacity: 100%;
+    }
+    66% {
+        opacity: 25%;
+    }
+    100% {
+        opacity: 100%;
+    }
+}

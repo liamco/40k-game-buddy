@@ -3,7 +3,7 @@
   "name": "Haruspex",
   "factionId": "TYR",
   "sourceId": "000000020",
-  "legend": "The infinite hunger of the Haruspex can see it consume an entire platoon of prey organisms in moments. Nothing escapes its yawning gullet and lashing tongue for long; its victims meet a horrible end as they are swallowed down to be gradually dissolved into raw biomass within the monster’s churning innards.",
+  "legend": "The infinite hunger of the Haruspex can see it consume an entire platoon of prey organisms in moments. Nothing escapes its yawning gullet and lashing tongue for long; its victims meet a horrible end as they are swallowed down to be gradually dissolved into raw biomass within the monster's churning innards.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> grasping tongue; ravenous maw; shovelling claws.",
   "transport": "",
@@ -33,7 +33,36 @@
       "factionId": "",
       "description": "Each time this model is selected to fight, after resolving its attacks, if one or more enemy units were destroyed by those attacks, each enemy unit within 6\" of this model must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "ld",
+          "value": "Battle-shock test",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "w",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -86,7 +115,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000478",
+      "line": 1,
+      "description": "1 Haruspex",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000478",
+      "line": 1,
+      "description": "1 model",
+      "cost": 125,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000478:grasping-tongue",
       "datasheetId": "000000478",
@@ -162,40 +216,6 @@
           "d": "D6+1"
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000478",
-      "line": 1,
-      "description": "1 Haruspex",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000478",
-      "line": 1,
-      "description": "1 model",
-      "cost": 125,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

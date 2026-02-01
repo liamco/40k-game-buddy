@@ -23,7 +23,7 @@
       "parameter": 1
     },
     {
-      "name": "Martial Ka’tah",
+      "name": "Martial Ka'tah",
       "type": "Faction"
     },
     {
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time a melee attack targets this model, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -93,7 +102,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001557",
+      "line": 1,
+      "description": "1 Contemptor-Galatus Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001557",
+      "line": 1,
+      "description": "1 model",
+      "cost": 165,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001557:galatus-warblade",
       "datasheetId": "000001557",
@@ -146,30 +180,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001557",
-      "line": 1,
-      "description": "1 Contemptor-Galatus Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001557",
-      "line": 1,
-      "description": "1 model",
-      "cost": 165,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false
+  ]
 }

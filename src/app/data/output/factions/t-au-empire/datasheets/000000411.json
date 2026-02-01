@@ -28,14 +28,23 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, select one enemy <span class=\"kwb\">INFANTRY</span> unit hit by one or more of those attacks. Until the start of your next turn, while this unit is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "DS8 Support Turret",
       "legend": "",
       "factionId": "",
-      "description": "In your Movement phase, if this unit Remains Stationary, until the start of your next Movement phase, its Fire Warrior Shas’ui model is equipped with the support turret missile system weapon. <br><br><b>Designer’s Note:</b> Place a Support Turret token next to this unit to remind you.",
+      "description": "In your Movement phase, if this unit Remains Stationary, until the start of your next Movement phase, its Fire Warrior Shas'ui model is equipped with the support turret missile system weapon. <br><br><b>Designer's Note:</b> Place a Support Turret token next to this unit to remind you.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -43,7 +52,7 @@
   "keywords": [
     {
       "datasheetId": "000000411",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -106,7 +115,7 @@
       "datasheetId": "000000411",
       "line": 1,
       "button": "•",
-      "description": "The Fire Warrior Shas’ui can be equipped with up to two of the following, and can take duplicates:<ul><li>1 guardian drone (it cannot take duplicates of this piece of wargear)</li><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
+      "description": "The Fire Warrior Shas'ui can be equipped with up to two of the following, and can take duplicates:<ul><li>1 guardian drone (it cannot take duplicates of this piece of wargear)</li><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
     },
     {
       "datasheetId": "000000411",
@@ -115,7 +124,39 @@
       "description": "Any number of Fire Warrior models can each have their pulse rifle replaced with 1 pulse carbine."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000411",
+      "line": 1,
+      "description": "1 Fire Warrior Shas'ui",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000411",
+      "line": 2,
+      "description": "9 Fire Warriors",
+      "min": 9,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000411",
+      "line": 1,
+      "description": "10 models",
+      "cost": 70,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000411:pulse-carbine",
       "datasheetId": "000000411",
@@ -243,37 +284,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000411",
-      "line": 1,
-      "description": "1 Fire Warrior Shas’ui",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000411",
-      "line": 2,
-      "description": "9 Fire Warriors",
-      "min": 9,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000411",
-      "line": 1,
-      "description": "10 models",
-      "cost": 70,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: T’au Empire",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

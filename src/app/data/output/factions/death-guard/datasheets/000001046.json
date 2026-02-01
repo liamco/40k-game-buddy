@@ -3,7 +3,7 @@
   "name": "Helbrute",
   "factionId": "DG",
   "sourceId": "000000014",
-  "legend": "The most terribly wounded of Nurgle’s champions are interred within the armoured sarcophagus of a Helbrute. Plague Surgeons take deep pleasure in sealing rivals and superiors inside these madness-inducing and agony-inflicting shells. In battle, they are living, enraged, battering rams, flushed with the blessings of Nurgle.",
+  "legend": "The most terribly wounded of Nurgle's champions are interred within the armoured sarcophagus of a Helbrute. Plague Surgeons take deep pleasure in sealing rivals and superiors inside these madness-inducing and agony-inflicting shells. In battle, they are living, enraged, battering rams, flushed with the blessings of Nurgle.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> multi-melta; Helbrute fist; close combat weapon.",
   "transport": "",
@@ -23,7 +23,7 @@
       "parameter": 1
     },
     {
-      "name": "Nurgle’s Gift (Aura)",
+      "name": "Nurgle's Gift (Aura)",
       "type": "Faction"
     },
     {
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets an Afflicted unit, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -111,19 +120,19 @@
       "datasheetId": "000001046",
       "line": 1,
       "button": "•",
-      "description": "This model’s multi-melta can be replaced with one of the following:<ul><li>1 plasma cannon</li><li>1 twin autocannon</li><li>1 twin lascannon</li><li>1 twin heavy bolter</li><li>1 additional Helbrute fist</li></ul>"
+      "description": "This model's multi-melta can be replaced with one of the following:<ul><li>1 plasma cannon</li><li>1 twin autocannon</li><li>1 twin lascannon</li><li>1 twin heavy bolter</li><li>1 additional Helbrute fist</li></ul>"
     },
     {
       "datasheetId": "000001046",
       "line": 2,
       "button": "•",
-      "description": "1 of this model’s Helbrute fists can be replaced with 1 missile launcher"
+      "description": "1 of this model's Helbrute fists can be replaced with 1 missile launcher"
     },
     {
       "datasheetId": "000001046",
       "line": 3,
       "button": "•",
-      "description": "1 of this model’s Helbrute fists can be replaced with one of the following:<ul><li>1 Helbrute hammer</li><li>1 power scourge</li></ul>"
+      "description": "1 of this model's Helbrute fists can be replaced with one of the following:<ul><li>1 Helbrute hammer</li><li>1 power scourge</li></ul>"
     },
     {
       "datasheetId": "000001046",
@@ -138,7 +147,32 @@
       "description": "* That Helbrute fist cannot then be replaced."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001046",
+      "line": 1,
+      "description": "1 Helbrute",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001046",
+      "line": 1,
+      "description": "1 model",
+      "cost": 115,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001046:combi-bolter",
       "datasheetId": "000001046",
@@ -205,7 +239,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – frag",
+          "name": "Missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -222,7 +256,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – krak",
+          "name": "Missile launcher - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -466,30 +500,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001046",
-      "line": 1,
-      "description": "1 Helbrute",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001046",
-      "line": 1,
-      "description": "1 model",
-      "cost": 115,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

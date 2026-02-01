@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, you can select one friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit that is Battle-shocked and within 12\" of this model. That unit is no longer Battle-shocked.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "no longer Battle-shocked",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -102,16 +119,43 @@
       "datasheetId": "000001192",
       "line": 1,
       "button": "•",
-      "description": "This model’s storm bolter and Dreadnought combat weapon can be replaced with one of the following:<ul><li>1 heavy flamer and 1 Dreadnought combat weapon</li><li>1 assault cannon</li><li>1 Dreadnought inferno cannon</li><li>1 heavy plasma cannon</li><li>1 multi-melta</li><li>1 twin lascannon</li></ul>"
+      "description": "This model's storm bolter and Dreadnought combat weapon can be replaced with one of the following:<ul><li>1 heavy flamer and 1 Dreadnought combat weapon</li><li>1 assault cannon</li><li>1 Dreadnought inferno cannon</li><li>1 heavy plasma cannon</li><li>1 multi-melta</li><li>1 twin lascannon</li></ul>"
     },
     {
       "datasheetId": "000001192",
       "line": 2,
       "button": "•",
-      "description": "This model’s assault cannon can be replaced with one of the following:<ul><li>1 Dreadnought inferno cannon</li><li>1 heavy plasma cannon</li><li>1 multi-melta</li><li>1 storm bolter and 1 Dreadnought combat weapon</li><li>1 heavy flamer and 1 Dreadnought combat weapon</li><li>1 twin lascannon</li></ul>"
+      "description": "This model's assault cannon can be replaced with one of the following:<ul><li>1 Dreadnought inferno cannon</li><li>1 heavy plasma cannon</li><li>1 multi-melta</li><li>1 storm bolter and 1 Dreadnought combat weapon</li><li>1 heavy flamer and 1 Dreadnought combat weapon</li><li>1 twin lascannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001192",
+      "line": 1,
+      "description": "1 Chaplain Venerable Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001192",
+      "line": 1,
+      "description": "1 model",
+      "cost": 150,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001192:assault-cannon",
       "datasheetId": "000001192",
@@ -204,7 +248,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Heavy plasma cannon – standard",
+          "name": "Heavy plasma cannon - standard",
           "attributes": [
             "BLAST"
           ],
@@ -221,7 +265,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Heavy plasma cannon – supercharge",
+          "name": "Heavy plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -362,32 +406,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001192",
-      "line": 1,
-      "description": "1 Chaplain Venerable Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001192",
-      "line": 1,
-      "description": "1 model",
-      "cost": 150,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

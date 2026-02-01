@@ -41,7 +41,18 @@
       "factionId": "",
       "description": "This model is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER ADVANCING"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +61,38 @@
       "factionId": "",
       "description": "While an enemy unit is within 6\" of this model, each time that unit is selected to Fall Back, it must take a Leadership test. If that test is failed, that unit must Remain Stationary this phase instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "Remain Stationary",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "ld",
+              "operator": "lessThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -133,7 +175,34 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000155",
+      "line": 1,
+      "description": "1 Chief Librarian Mephiston - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000155",
+      "line": 1,
+      "description": "1 model",
+      "cost": 120,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "blood-angels",
+  "supplementName": "Blood Angels",
+  "supplementLabel": "Blood Angels",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Blood Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000155:fury-of-the-ancients",
       "datasheetId": "000000155",
@@ -146,7 +215,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Fury of the Ancients – witchfire",
+          "name": "Fury of the Ancients - witchfire",
           "attributes": [
             "PISTOL",
             "PSYCHIC",
@@ -165,7 +234,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Fury of the Ancients – focused witchfire",
+          "name": "Fury of the Ancients - focused witchfire",
           "attributes": [
             "HAZARDOUS",
             "PISTOL",
@@ -194,7 +263,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -211,7 +280,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -253,32 +322,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000155",
-      "line": 1,
-      "description": "1 Chief Librarian Mephiston – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000155",
-      "line": 1,
-      "description": "1 model",
-      "cost": 120,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "blood-angels",
-  "supplementName": "Blood Angels",
-  "supplementLabel": "Blood Angels",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Blood Angels",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

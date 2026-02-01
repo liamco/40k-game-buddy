@@ -3,7 +3,7 @@
   "name": "Hive Tyrant",
   "factionId": "TYR",
   "sourceId": "000000020",
-  "legend": "Hive Tyrants command the swarm on the Hive Mind’s behalf. Not only are they powerful warrior organisms in their own right, but they are also possessed of a depth of sentient autonomy and strategic cunning that makes them truly deadly foes. Where the Hive Tyrants bestride the battlefield, death comes for the prey.",
+  "legend": "Hive Tyrants command the swarm on the Hive Mind's behalf. Not only are they powerful warrior organisms in their own right, but they are also possessed of a depth of sentient autonomy and strategic cunning that makes them truly deadly foes. Where the Hive Tyrants bestride the battlefield, death comes for the prey.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> monstrous bonesword and lash whip; monstrous scything talons.",
   "transport": "",
@@ -41,7 +41,40 @@
       "factionId": "",
       "description": "Once per battle round, one model from your army with this ability can use it when a friendly <span class=\"kwb\">TYRANIDS</span> unit within 12\" of that model is targeted with a Stratagem. If it does, reduce the CP cost of that usage of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "USE STRATAGEM"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "targetUnit",
+          "effect": "rollPenalty",
+          "attribute": "cp",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +83,40 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 6\" of this model, ranged weapons equipped by models in that unit have the [ASSAULT] and [LETHAL HITS] abilities.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -119,13 +185,13 @@
       "datasheetId": "000000460",
       "line": 1,
       "button": "•",
-      "description": "This model’s monstrous bonesword and lash whip can be replaced with one of the following:<ul><li>1 heavy venom cannon</li><li>1 stranglethorn cannon</li><li>1 monstrous scything talons</li></ul>"
+      "description": "This model's monstrous bonesword and lash whip can be replaced with one of the following:<ul><li>1 heavy venom cannon</li><li>1 stranglethorn cannon</li><li>1 monstrous scything talons</li></ul>"
     },
     {
       "datasheetId": "000000460",
       "line": 2,
       "button": "•",
-      "description": "This model’s monstrous scything talons can be replaced with one of the following:<ul><li>1 heavy venom cannon*</li><li>1 stranglethorn cannon*</li></ul>"
+      "description": "This model's monstrous scything talons can be replaced with one of the following:<ul><li>1 heavy venom cannon*</li><li>1 stranglethorn cannon*</li></ul>"
     },
     {
       "datasheetId": "000000460",
@@ -134,7 +200,37 @@
       "description": "*This model cannot be equipped with both a stranglethorn cannon and a heavy venom cannon. This model cannot be equipped with more than 1 heavy venom cannon, and it cannot be equipped with more than 1 stranglethorn cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000460",
+      "line": 1,
+      "description": "1 Hive Tyrant",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000460",
+      "line": 1,
+      "description": "1 model",
+      "cost": 195,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000471",
+      "slug": "tyrant-guard"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000460:heavy-venom-cannon",
       "datasheetId": "000000460",
@@ -239,35 +335,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000460",
-      "line": 1,
-      "description": "1 Hive Tyrant",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000460",
-      "line": 1,
-      "description": "1 model",
-      "cost": 195,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000471",
-      "slug": "tyrant-guard"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

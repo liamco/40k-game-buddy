@@ -3,7 +3,7 @@
   "name": "Fortis Kill Team",
   "factionId": "AoI",
   "sourceId": "000000363",
-  "legend": "Further refined from Watch Master Mordelai’s original concept, Fortis Kill Teams exemplify the supreme adaptability of the Tacticus variant of Mk X power armour, seamlessly merging a variety of close support roles and deadly firepower.",
+  "legend": "Further refined from Watch Master Mordelai's original concept, Fortis Kill Teams exemplify the supreme adaptability of the Tacticus variant of Mk X power armour, seamlessly merging a variety of close support roles and deadly firepower.",
   "role": "Other",
   "loadout": "<b>Every Kill Team Intercessor is equipped with:</b> bolt pistol; bolt rifle; close combat weapon.<br><br><b>Every Kill Team Intercessor with plasma incinerator is equipped with:</b> bolt pistol; plasma incinerator; close combat weapon.<br><br><b>Every Kill Team Intercessor with heavy bolt pistol is equipped with:</b> heavy bolt pistol; Astartes chainsword.<br><br><b>Every Kill Team Outrider is equipped with:</b> bolt pistol; twin bolt rifle; Astartes chainsword.",
   "transport": "",
@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets a unit that is Below Half-strength, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "ATTACHED UNIT",
@@ -136,7 +145,7 @@
       "datasheetId": "000003825",
       "line": 1,
       "button": "•",
-      "description": "1 Kill Team Intercessor’s bolt rifle can be replaced with one of the following:<ul><li>1 hand flamer</li><li>1 plasma pistol</li><li>1 Astartes chainsword</li><li>1 Long Vigil melee weapon</li></ul>"
+      "description": "1 Kill Team Intercessor's bolt rifle can be replaced with one of the following:<ul><li>1 hand flamer</li><li>1 plasma pistol</li><li>1 Astartes chainsword</li><li>1 Long Vigil melee weapon</li></ul>"
     },
     {
       "datasheetId": "000003825",
@@ -148,7 +157,7 @@
       "datasheetId": "000003825",
       "line": 3,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 model’s bolt rifle can be replaced with 1 Long Vigil ranged weapon."
+      "description": "For every 5 models in this unit, 1 model's bolt rifle can be replaced with 1 Long Vigil ranged weapon."
     },
     {
       "datasheetId": "000003825",
@@ -157,7 +166,67 @@
       "description": "Any number of Kill Team Intercessors with plasma incinerators can each have their bolt pistol replaced with 1 plasma pistol."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003825",
+      "line": 1,
+      "description": "10 MODELS MAXIMUM",
+      "min": 10,
+      "max": 10
+    },
+    {
+      "datasheetId": "000003825",
+      "line": 2,
+      "description": "5-10 Kill Team Intercessors",
+      "min": 5,
+      "max": 10
+    },
+    {
+      "datasheetId": "000003825",
+      "line": 3,
+      "description": "0-4 Kill Team Intercessors with plasma incinerators",
+      "min": 0,
+      "max": 4
+    },
+    {
+      "datasheetId": "000003825",
+      "line": 4,
+      "description": "0-4 Kill Team Intercessors with heavy bolt pistols",
+      "min": 0,
+      "max": 4
+    },
+    {
+      "datasheetId": "000003825",
+      "line": 5,
+      "description": "0-2 Kill Team Outriders",
+      "min": 0,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003825",
+      "line": 1,
+      "description": "5 models",
+      "cost": 100,
+      "count": 5
+    },
+    {
+      "datasheetId": "000003825",
+      "line": 2,
+      "description": "10 models",
+      "cost": 200,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Imperial Agents (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000003825:bolt-pistol",
       "datasheetId": "000003825",
@@ -305,7 +374,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -322,7 +391,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -349,7 +418,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma incinerator – standard",
+          "name": "Plasma incinerator - standard",
           "attributes": [
             "ASSAULT",
             "HEAVY"
@@ -367,7 +436,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma incinerator – supercharge",
+          "name": "Plasma incinerator - supercharge",
           "attributes": [
             "ASSAULT",
             "HAZARDOUS",
@@ -481,65 +550,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003825",
-      "line": 1,
-      "description": "10 MODELS MAXIMUM",
-      "min": 10,
-      "max": 10
-    },
-    {
-      "datasheetId": "000003825",
-      "line": 2,
-      "description": "5-10 Kill Team Intercessors",
-      "min": 5,
-      "max": 10
-    },
-    {
-      "datasheetId": "000003825",
-      "line": 3,
-      "description": "0-4 Kill Team Intercessors with plasma incinerators",
-      "min": 0,
-      "max": 4
-    },
-    {
-      "datasheetId": "000003825",
-      "line": 4,
-      "description": "0-4 Kill Team Intercessors with heavy bolt pistols",
-      "min": 0,
-      "max": 4
-    },
-    {
-      "datasheetId": "000003825",
-      "line": 5,
-      "description": "0-2 Kill Team Outriders",
-      "min": 0,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003825",
-      "line": 1,
-      "description": "5 models",
-      "cost": 100,
-      "count": 5
-    },
-    {
-      "datasheetId": "000003825",
-      "line": 2,
-      "description": "10 models",
-      "cost": 200,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Imperial Agents (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

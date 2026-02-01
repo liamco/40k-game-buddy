@@ -43,7 +43,7 @@
       "name": "Medi-pack",
       "legend": "",
       "factionId": "",
-      "description": "At the start of your Command phase, if the bearer’s unit is below its Starting Strength, you can return up to D3 destroyed Tempestus Scions models to this unit.",
+      "description": "At the start of your Command phase, if the bearer's unit is below its Starting Strength, you can return up to D3 destroyed Tempestus Scions models to this unit.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -52,7 +52,7 @@
       "name": "Regimental Standard",
       "legend": "",
       "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer’s unit.",
+      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -70,13 +70,18 @@
       "name": "Master Vox",
       "legend": "",
       "factionId": "",
-      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer’s unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
+      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
       "type": "Wargear",
       "parameter": ""
     },
     {
+      "id": "",
       "name": "ORDERS",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "This unit's <span class=\"kwb\">OFFICER</span> can issue 1 Order to a Regiment unit.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -172,25 +177,25 @@
       "datasheetId": "000000719",
       "line": 2,
       "button": "•",
-      "description": "1 Tempestus Scion equipped with a hot-shot lasgun can be equipped with 1 regimental standard (that model’s hot-shot lasgun cannot be replaced)."
+      "description": "1 Tempestus Scion equipped with a hot-shot lasgun can be equipped with 1 regimental standard (that model's hot-shot lasgun cannot be replaced)."
     },
     {
       "datasheetId": "000000719",
       "line": 3,
       "button": "•",
-      "description": "1 Tempestus Scion’s hot-shot lasgun can be replaced with 1 hot-shot laspistol and 1 master vox."
+      "description": "1 Tempestus Scion's hot-shot lasgun can be replaced with 1 hot-shot laspistol and 1 master vox."
     },
     {
       "datasheetId": "000000719",
       "line": 4,
       "button": "•",
-      "description": "1 Tempestus Scion’s hot-shot lasgun can be replaced with one of the following:<ul><li>1 hot-shot laspistol and 1 medi-pack</li><li>1 hot-shot lasgun, 1 hot-shot laspistol and 1 medi-pack [that model's hot-shot lasgun cannot be replaced]</li></ul>"
+      "description": "1 Tempestus Scion's hot-shot lasgun can be replaced with one of the following:<ul><li>1 hot-shot laspistol and 1 medi-pack</li><li>1 hot-shot lasgun, 1 hot-shot laspistol and 1 medi-pack [that model's hot-shot lasgun cannot be replaced]</li></ul>"
     },
     {
       "datasheetId": "000000719",
       "line": 5,
       "button": "•",
-      "description": "The Tempestor Prime’s bolt pistol can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 command rod</li></ul>"
+      "description": "The Tempestor Prime's bolt pistol can be replaced with one of the following:<ul><li>1 plasma pistol</li><li>1 command rod</li></ul>"
     },
     {
       "datasheetId": "000000719",
@@ -199,7 +204,44 @@
       "description": "* You cannot select the same weapon from this list more than once per unit."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000719",
+      "line": 1,
+      "description": "1 Tempestor Prime",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000719",
+      "line": 2,
+      "description": "4 Tempestus Scions",
+      "min": 4,
+      "max": 4
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000719",
+      "line": 1,
+      "description": "5 models",
+      "cost": 85,
+      "count": 5
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002746",
+      "slug": "tempestus-scions"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000719:bolt-pistol",
       "datasheetId": "000000719",
@@ -265,7 +307,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – frag",
+          "name": "Grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -282,7 +324,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Grenade launcher – krak",
+          "name": "Grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -410,7 +452,7 @@
           "line": 9,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -427,7 +469,7 @@
           "line": 10,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -454,7 +496,7 @@
           "line": 11,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -471,7 +513,7 @@
           "line": 12,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -534,42 +576,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000719",
-      "line": 1,
-      "description": "1 Tempestor Prime",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000719",
-      "line": 2,
-      "description": "4 Tempestus Scions",
-      "min": 4,
-      "max": 4
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000719",
-      "line": 1,
-      "description": "5 models",
-      "cost": 85,
-      "count": 5
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002746",
-      "slug": "tempestus-scions"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

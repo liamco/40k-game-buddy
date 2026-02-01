@@ -3,7 +3,7 @@
   "name": "Nekrosor Ammentar",
   "factionId": "NEC",
   "sourceId": "000000029",
-  "legend": "Death made manifest, Nekrosor Ammentar is a figure of horror even to other Necrons. Destroyer madness radiates from the Nekrosor like religious fervour, driving its legions to murderous ferocity. Yet none kill with the sheer relentless fury of the Nekrosor, whose Unmaker Gauntlet and enmitic disintegrators leave ruin in the monster’s wake.",
+  "legend": "Death made manifest, Nekrosor Ammentar is a figure of horror even to other Necrons. Destroyer madness radiates from the Nekrosor like religious fervour, driving its legions to murderous ferocity. Yet none kill with the sheer relentless fury of the Nekrosor, whose Unmaker Gauntlet and enmitic disintegrators leave ruin in the monster's wake.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> enmitic disintegrators; Unmaker Gauntlet; blade tail and whip coils; nullstone field generator.",
   "transport": "",
@@ -36,7 +36,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more other friendly Destroyer Cult units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -63,7 +74,18 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">NECRONS</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 5+ ability against mortal wounds and Psychic Attacks.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -122,7 +144,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004186",
+      "line": 1,
+      "description": "1 Nekrosor Ammentar - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004186",
+      "line": 1,
+      "description": "1 model",
+      "cost": 165,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004186:enmitic-disintegrators",
       "datasheetId": "000004186",
@@ -201,30 +248,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004186",
-      "line": 1,
-      "description": "1 Nekrosor Ammentar – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004186",
-      "line": 1,
-      "description": "1 model",
-      "cost": 165,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

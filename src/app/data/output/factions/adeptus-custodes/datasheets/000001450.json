@@ -22,7 +22,7 @@
       "type": "Core"
     },
     {
-      "name": "Martial Ka’tah",
+      "name": "Martial Ka'tah",
       "type": "Faction"
     },
     {
@@ -30,7 +30,7 @@
       "name": "Vexilla",
       "legend": "",
       "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer’s unit.",
+      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -41,7 +41,16 @@
       "factionId": "",
       "description": "While a <span class=\"kwb\">CHARACTER</span> is leading this unit, each time an attack targets this unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -50,7 +59,18 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this unit can use this ability. If it does, until the end of the phase, models in this unit have the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -110,7 +130,39 @@
       "description": "1 model can be equipped with 1 vexilla."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001450",
+      "line": 1,
+      "description": "4-5 Custodian Wardens",
+      "min": 4,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001450",
+      "line": 1,
+      "description": "4 models",
+      "cost": 210,
+      "count": 4
+    },
+    {
+      "datasheetId": "000001450",
+      "line": 2,
+      "description": "5 models",
+      "cost": 260,
+      "count": 5
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001450:castellan-axe",
       "datasheetId": "000001450",
@@ -211,37 +263,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001450",
-      "line": 1,
-      "description": "4-5 Custodian Wardens",
-      "min": 4,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001450",
-      "line": 1,
-      "description": "4 models",
-      "cost": 210,
-      "count": 4
-    },
-    {
-      "datasheetId": "000001450",
-      "line": 2,
-      "description": "5 models",
-      "cost": 260,
-      "count": 5
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

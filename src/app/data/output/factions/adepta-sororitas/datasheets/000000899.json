@@ -36,28 +36,48 @@
     },
     {
       "id": "",
-      "name": "The Emperor’s Grace",
+      "name": "The Emperor's Grace",
       "legend": "",
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, this model has a 2+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Null Rod",
       "legend": "",
       "factionId": "",
-      "description": "Models in the bearer’s unit have the Feel No Pain 4+ ability against mortal wounds and Psychic Attacks.",
+      "description": "Models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds and Psychic Attacks.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Rod of Office",
       "legend": "",
       "factionId": "",
-      "description": "Each time a model in the bearer’s unit makes an attack, re-roll a Hit roll of 1.",
+      "description": "Each time a model in the bearer's unit makes an attack, re-roll a Hit roll of 1.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -126,13 +146,13 @@
       "datasheetId": "000000899",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with one of the following:<ul><li>1 condemnor boltgun</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>"
+      "description": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 condemnor boltgun</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>"
     },
     {
       "datasheetId": "000000899",
       "line": 2,
       "button": "•",
-      "description": "This model’s hallowed chainsword can be replaced with one of the following:<ul><li>1 blessed blade</li><li>1 power weapon</li></ul>"
+      "description": "This model's hallowed chainsword can be replaced with one of the following:<ul><li>1 blessed blade</li><li>1 power weapon</li></ul>"
     },
     {
       "datasheetId": "000000899",
@@ -147,7 +167,61 @@
       "description": "If this model is equipped with a plasma pistol and a power weapon, it can be equipped with:<ul><li>1 rod of office</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000899",
+      "line": 1,
+      "description": "1 Canoness",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000899",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000908",
+      "slug": "retributor-squad"
+    },
+    {
+      "id": "000000894",
+      "slug": "crusaders"
+    },
+    {
+      "id": "000002481",
+      "slug": "celestian-sacresants"
+    },
+    {
+      "id": "000000903",
+      "slug": "battle-sisters-squad"
+    },
+    {
+      "id": "000004189",
+      "slug": "celestian-insidiants"
+    },
+    {
+      "id": "000000909",
+      "slug": "dominion-squad"
+    },
+    {
+      "id": "000002507",
+      "slug": "sisters-novitiate-squad"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000899:bolt-pistol",
       "datasheetId": "000000899",
@@ -270,7 +344,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -287,7 +361,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -376,59 +450,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000899",
-      "line": 1,
-      "description": "1 Canoness",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000899",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000908",
-      "slug": "retributor-squad"
-    },
-    {
-      "id": "000000894",
-      "slug": "crusaders"
-    },
-    {
-      "id": "000002481",
-      "slug": "celestian-sacresants"
-    },
-    {
-      "id": "000000903",
-      "slug": "battle-sisters-squad"
-    },
-    {
-      "id": "000004189",
-      "slug": "celestian-insidiants"
-    },
-    {
-      "id": "000000909",
-      "slug": "dominion-squad"
-    },
-    {
-      "id": "000002507",
-      "slug": "sisters-novitiate-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

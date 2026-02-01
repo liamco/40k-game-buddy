@@ -3,7 +3,7 @@
   "name": "Kustom Boosta-blasta",
   "factionId": "ORK",
   "sourceId": "000000046",
-  "legend": "Meks who build Kustom Boosta-blastas have the alarming habit of wiring themselves into the vehicles’ rivet kannons as though into very fast and shooty Deff Dreads. They then speed to war, aiming hails of arm-length metal rivets at the enemy while scorching them with the Boosta-blasta’s flame-jetting exhausts.",
+  "legend": "Meks who build Kustom Boosta-blastas have the alarming habit of wiring themselves into the vehicles' rivet kannons as though into very fast and shooty Deff Dreads. They then speed to war, aiming hails of arm-length metal rivets at the enemy while scorching them with the Boosta-blasta's flame-jetting exhausts.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> burna exhausts; grot blasta; rivet kannon; spiked ram..",
   "transport": "",
@@ -28,12 +28,21 @@
     },
     {
       "id": "",
-      "name": "Rivetin’ Dakka",
+      "name": "Rivetin' Dakka",
       "legend": "",
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks made with a rivet kannon. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes a ranged attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -86,7 +95,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001538",
+      "line": 1,
+      "description": "1 Kustom Boosta-blasta",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001538",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001538:burna-exhausts",
       "datasheetId": "000001538",
@@ -192,30 +226,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001538",
-      "line": 1,
-      "description": "1 Kustom Boosta-blasta",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001538",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

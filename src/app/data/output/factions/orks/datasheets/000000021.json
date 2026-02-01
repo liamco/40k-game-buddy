@@ -23,19 +23,28 @@
     },
     {
       "id": "",
-      "name": "Da Boss’ Ladz",
+      "name": "Da Boss' Ladz",
       "legend": "",
       "factionId": "",
       "description": "While a Warboss model is leading this unit, each time an attack targets this unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Ammo Runt",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle for each ammo runt this unit has, when this unit is selected to shoot, it can use this ability. If it does, until the end of the phase, ranged weapons equipped by models in this unit have the [LETHAL HITS] ability.<br><br><b>Designer’s Note:</b> Place the relevant number of Ammo Runt tokens next to the unit, removing one each time the unit uses this ability.",
+      "description": "Once per battle for each ammo runt this unit has, when this unit is selected to shoot, it can use this ability. If it does, until the end of the phase, ranged weapons equipped by models in this unit have the [LETHAL HITS] ability.<br><br><b>Designer's Note:</b> Place the relevant number of Ammo Runt tokens next to the unit, removing one each time the unit uses this ability.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -103,7 +112,46 @@
       "description": "For every 5 models in this unit, this unit can be equipped with 1 ammo runt."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000021",
+      "line": 1,
+      "description": "1 Boss Nob",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000021",
+      "line": 2,
+      "description": "4-9 Nobz",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000021",
+      "line": 1,
+      "description": "5 models",
+      "cost": 105,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000021",
+      "line": 2,
+      "description": "10 models",
+      "cost": 210,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000021:kombi-weapon",
       "datasheetId": "000000021",
@@ -230,44 +278,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000021",
-      "line": 1,
-      "description": "1 Boss Nob",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000021",
-      "line": 2,
-      "description": "4-9 Nobz",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000021",
-      "line": 1,
-      "description": "5 models",
-      "cost": 105,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000021",
-      "line": 2,
-      "description": "10 models",
-      "cost": 210,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

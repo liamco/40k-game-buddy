@@ -3,7 +3,7 @@
   "name": "Stalker",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "The Stalker’s phenomenal anti-air kill rate is achieved by a pair of independently targeting repeating cannons. These are tethered to a servo-mind conclave that cogitates reams of trajectory data to ensure the Stalker’s weapons fire exactly where they should, enabling it to cleanse skies darkened by enemy flyers.",
+  "legend": "The Stalker's phenomenal anti-air kill rate is achieved by a pair of independently targeting repeating cannons. These are tethered to a servo-mind conclave that cogitates reams of trajectory data to ensure the Stalker's weapons fire exactly where they should, enabling it to cleanse skies darkened by enemy flyers.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 Icarus stormcannons; armoured tracks.",
   "transport": "",
@@ -33,7 +33,62 @@
       "factionId": "",
       "description": "Each time you target this model with the Overwatch Stratagem just after an enemy unit that can Fly starts or ends a Normal, Advance or Fall Back move, when resolving that Stratagem, in addition to shooting that enemy unit, you can select up to three additional enemy units within 24\" of this model that can <span class=\"kwb\">FLY</span>; this model can also shoot at each of those units with its Icarus stormcannons (provided each one is an eligible target), but when doing so, an unmodified Hit roll of 6 is required to score a hit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "OVERWATCH"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "h",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isMoving",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": 24
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "ICARUS STORMCANNONS"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "h",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "FLY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -103,7 +158,34 @@
       "description": "This model can be equipped with 1 storm bolter."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002258",
+      "line": 1,
+      "description": "1 Stalker",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002258",
+      "line": 1,
+      "description": "1 model",
+      "cost": 140,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002258:hunter-killer-missile",
       "datasheetId": "000002258",
@@ -205,42 +287,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002258",
-      "line": 1,
-      "description": "1 Stalker",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002258",
-      "line": 1,
-      "description": "1 model",
-      "cost": 140,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

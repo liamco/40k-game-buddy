@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that cannot Fly, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -250,16 +259,41 @@
       "datasheetId": "000003618",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 twin hellstrike missile launchers can be replaced with 2 twin lascannons"
+      "description": "This model's 2 twin hellstrike missile launchers can be replaced with 2 twin lascannons"
     },
     {
       "datasheetId": "000003618",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 twin autocannons can be replaced with 2 quad heavy bolters."
+      "description": "This model's 2 twin autocannons can be replaced with 2 quad heavy bolters."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003618",
+      "line": 1,
+      "description": "1 Fire Raptor Gunship",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003618",
+      "line": 1,
+      "description": "1 model",
+      "cost": 290,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000003618:twin-hellstrike-launcher",
       "datasheetId": "000003618",
@@ -416,30 +450,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003618",
-      "line": 1,
-      "description": "1 Fire Raptor Gunship",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003618",
-      "line": 1,
-      "description": "1 model",
-      "cost": 290,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

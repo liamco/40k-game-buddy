@@ -1,9 +1,9 @@
 {
   "id": "000002499",
-  "name": "Big’ed Bossbunka",
+  "name": "Big'ed Bossbunka",
   "factionId": "ORK",
   "sourceId": "000000046",
-  "legend": "Having a Gargant’s severed head serve as a boss’ hut is not only a status symbol, but also provides a base of operations equipped with a remarkable array of Orky features – from the potent Gaze of Gork built into one eye to the kommanda’s shoutin’ pole that carries the boss’ bellowed commands far and wide.",
+  "legend": "Having a Gargant's severed head serve as a boss' hut is not only a status symbol, but also provides a base of operations equipped with a remarkable array of Orky features - from the potent Gaze of Gork built into one eye to the kommanda's shoutin' pole that carries the boss' bellowed commands far and wide.",
   "role": "Fortifications",
   "loadout": "<b>This model is equipped with:</b> big shoota; Gaze of Gork.",
   "transport": "This model has a transport capacity of 11 Orks Infantry models (excluding Ghazghkull Thraka). Each Mega Armour or Jump Pack model takes up the space of 2 models.",
@@ -42,7 +42,7 @@
     },
     {
       "id": "",
-      "name": "Shoutin’ Pole (Aura)",
+      "name": "Shoutin' Pole (Aura)",
       "legend": "",
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ORKS</span> unit is within 6\" of this <span class=\"kwb\">FORTIFICATION</span>, improve the Leadership characteristic of models in that unit by 1.",
@@ -56,7 +56,16 @@
       "factionId": "",
       "description": "While an enemy unit is only within Engagement Range of one or more Fortifications from your army: <br><ul><li>That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll.</li><li>Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -86,7 +95,7 @@
     },
     {
       "datasheetId": "000002499",
-      "keyword": "Big’ed Bossbunka",
+      "keyword": "Big'ed Bossbunka",
       "model": "",
       "isFactionKeyword": "false"
     }
@@ -95,7 +104,7 @@
     {
       "datasheetId": "000002499",
       "line": 1,
-      "name": "Big’ed Bossbunka",
+      "name": "Big'ed Bossbunka",
       "m": "-",
       "t": 10,
       "sv": 3,
@@ -116,7 +125,32 @@
       "description": "This model can be equipped with up to 3 additional big shootas."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002499",
+      "line": 1,
+      "description": "1 Big'ed Bossbunka",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002499",
+      "line": 1,
+      "description": "1 model",
+      "cost": 135,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Fortifications",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002499:big-shoota",
       "datasheetId": "000002499",
@@ -155,7 +189,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Gaze of Gork – glare",
+          "name": "Gaze of Gork - glare",
           "attributes": [
             "BLAST",
             "SUSTAINED HITS D3"
@@ -173,7 +207,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Gaze of Gork – squint",
+          "name": "Gaze of Gork - squint",
           "attributes": [
             "SUSTAINED HITS D3"
           ],
@@ -187,30 +221,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002499",
-      "line": 1,
-      "description": "1 Big’ed Bossbunka",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002499",
-      "line": 1,
-      "description": "1 model",
-      "cost": 135,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Fortifications",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

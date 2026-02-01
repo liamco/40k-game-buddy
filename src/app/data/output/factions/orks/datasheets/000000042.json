@@ -3,7 +3,7 @@
   "name": "Morkanaut",
   "factionId": "ORK",
   "sourceId": "000000046",
-  "legend": "Usually piloted by the exiled Badmek who built it, a Morkanaut is a hulking combat walker with a dash of Mork-esque know-wotz applied. Packed with all manner of glowy gubbinz, Morkanauts unleash their arsenals of bizarre and deadly weapons in what their pilots think of as displays of pure kunnin’ worthy of Mork.",
+  "legend": "Usually piloted by the exiled Badmek who built it, a Morkanaut is a hulking combat walker with a dash of Mork-esque know-wotz applied. Packed with all manner of glowy gubbinz, Morkanauts unleash their arsenals of bizarre and deadly weapons in what their pilots think of as displays of pure kunnin' worthy of Mork.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> kustom mega-blasta; kustom mega-zappa; 2 rokkit launchas; 2 twin big shootas; klaw of Mork.",
   "transport": "This model has a transport capacity of 12 Orks Infantry models (excluding Ghazghkull Thraka). Each Mega Armour or Jump Pack model takes up the space of 2 models.",
@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-7",
-  "damagedDescription": "While this model has 1-7 wounds remaining, subtract 4 from this model’s Objective Control characteristic, and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1-7 wounds remaining, subtract 4 from this model's Objective Control characteristic, and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Morkanaut",
   "slug": "morkanaut",
   "factionSlug": "orks",
@@ -28,7 +28,7 @@
     },
     {
       "id": "",
-      "name": "Clankin’ Forward",
+      "name": "Clankin' Forward",
       "legend": "",
       "factionId": "",
       "description": "Each time this model makes a Normal, Advance or Fall Back move, it can move over enemy models (excluding <span class=\"kwb\">MONSTER</span> and <span class=\"kwb\">VEHICLE</span> models) and terrain features that are 4\" or less in height as if they were not there.",
@@ -37,12 +37,21 @@
     },
     {
       "id": "",
-      "name": "Big an’ Shooty",
+      "name": "Big an' Shooty",
       "legend": "",
       "factionId": "",
       "description": "Each time this model makes a ranged attack, if the Waaagh! is active for your army, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -107,7 +116,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000042",
+      "line": 1,
+      "description": "1 Morkanaut",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000042",
+      "line": 1,
+      "description": "1 model",
+      "cost": 280,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000042:kustom-mega-blasta",
       "datasheetId": "000000042",
@@ -226,7 +260,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Klaw of Mork – strike",
+          "name": "Klaw of Mork - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -241,7 +275,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Klaw of Mork – sweep",
+          "name": "Klaw of Mork - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -252,46 +286,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000042",
-      "line": 1,
-      "description": "1 Morkanaut",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000042",
-      "line": 1,
-      "description": "1 model",
-      "cost": 280,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 7,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

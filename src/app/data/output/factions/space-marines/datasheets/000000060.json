@@ -32,16 +32,65 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Vivispectrum",
       "legend": "",
       "factionId": "",
-      "description": "If this model’s unit destroys an enemy unit as the result of a melee attack, until the end of the battle, this model has an Objective Control characteristic of 9.",
+      "description": "If this model's unit destroys an enemy unit as the result of a melee attack, until the end of the battle, this model has an Objective Control characteristic of 9.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 9,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isInMelee",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -106,7 +155,51 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000060",
+      "line": 1,
+      "description": "1 Apothecary Biologis",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000060",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002781",
+      "slug": "indomitor-kill-team-2"
+    },
+    {
+      "id": "000001177",
+      "slug": "heavy-intercessor-squad"
+    },
+    {
+      "id": "000000103",
+      "slug": "eradicator-squad"
+    },
+    {
+      "id": "000002099",
+      "slug": "aggressor-squad"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000060:absolvor-bolt-pistol",
       "datasheetId": "000000060",
@@ -158,50 +251,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000060",
-      "line": 1,
-      "description": "1 Apothecary Biologis",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000060",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002781",
-      "slug": "indomitor-kill-team-2"
-    },
-    {
-      "id": "000001177",
-      "slug": "heavy-intercessor-squad"
-    },
-    {
-      "id": "000000103",
-      "slug": "eradicator-squad"
-    },
-    {
-      "id": "000002099",
-      "slug": "aggressor-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
   "leaderConditions": {
     "allowedExistingLeaderKeywords": [
       "CAPTAIN",

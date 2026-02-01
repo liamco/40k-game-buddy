@@ -3,7 +3,7 @@
   "name": "Dark Commune",
   "factionId": "CSM",
   "sourceId": "000000012",
-  "legend": "A pooling of evil at the head of a Chaos Cult, Dark Communes are led by Cult Demagogues who preach mantras of hate laced with promises of power. They command Mindwitches, whose psychic powers are bought at terrible cost, and Iconarchs, who carry foul sigils that spread the Dark Gods’ malefic influence.",
+  "legend": "A pooling of evil at the head of a Chaos Cult, Dark Communes are led by Cult Demagogues who preach mantras of hate laced with promises of power. They command Mindwitches, whose psychic powers are bought at terrible cost, and Iconarchs, who carry foul sigils that spread the Dark Gods' malefic influence.",
   "role": "Characters",
   "loadout": "<b>The Cult Demagogue is equipped with:</b> autopistol; Commune stave. <br><br><b>The Mindwitch is equipped with:</b> Warp Curse; close combat weapon. <br><br><b>The Iconarch is equipped with:</b> autopistol; close combat weapon; Chaos icon. <br><br><b>Every Blessed Blade is equipped with:</b> Commune blade.",
   "transport": "",
@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a <span class=\"kwb\">CULT</span> <span class=\"kwb\">DEMAGOGUE</span> model, models in that unit have a 5+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,14 +50,29 @@
       "factionId": "",
       "description": "Once per battle, in your Command phase, if this unit contains a <span class=\"kwb\">CULT</span> <span class=\"kwb\">DEMAGOGUE</span> model, it can use this ability. If it does, until the end of the turn, this unit can declare a charge in a turn in which it Advanced and each time a model in this unit makes an attack, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Chaos Icon",
       "legend": "",
       "factionId": "",
-      "description": "Each time the bearer’s unit takes a Leadership test for the Dark Pacts ability, you can re-roll that test.",
+      "description": "Each time the bearer's unit takes a Leadership test for the Dark Pacts ability, you can re-roll that test.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -142,7 +166,62 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002569",
+      "line": 1,
+      "description": "1 Cult Demagogue",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002569",
+      "line": 2,
+      "description": "1 Mindwitch",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002569",
+      "line": 3,
+      "description": "1 Iconarch",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002569",
+      "line": 4,
+      "description": "2 Blessed Blades",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002569",
+      "line": 1,
+      "description": "5 models",
+      "cost": 90,
+      "count": 5
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002571",
+      "slug": "accursed-cultists-2"
+    },
+    {
+      "id": "000000946",
+      "slug": "cultist-mob-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002569:autopistol",
       "datasheetId": "000002569",
@@ -181,7 +260,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Warp Curse – witchfire",
+          "name": "Warp Curse - witchfire",
           "attributes": [
             "PSYCHIC"
           ],
@@ -198,7 +277,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Warp Curse – focused witchfire",
+          "name": "Warp Curse - focused witchfire",
           "attributes": [
             "HAZARDOUS",
             "PSYCHIC",
@@ -288,60 +367,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002569",
-      "line": 1,
-      "description": "1 Cult Demagogue",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002569",
-      "line": 2,
-      "description": "1 Mindwitch",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002569",
-      "line": 3,
-      "description": "1 Iconarch",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002569",
-      "line": 4,
-      "description": "2 Blessed Blades",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002569",
-      "line": 1,
-      "description": "5 models",
-      "cost": 90,
-      "count": 5
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002571",
-      "slug": "accursed-cultists-2"
-    },
-    {
-      "id": "000000946",
-      "slug": "cultist-mob-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

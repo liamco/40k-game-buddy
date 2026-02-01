@@ -3,7 +3,7 @@
   "name": "Furioso Dreadnought",
   "factionId": "SM",
   "sourceId": "000000376",
-  "legend": "Unique to the Chapter, Furiosos are frequently fitted with armaments only the Blood Angels have, from the infantry-shredding heavy frag cannon to the magna-grapple. The latter weapon’s bolts, attached to adamantine chains, pierce armour, enabling Furiosos to drag enemies into their reach.",
+  "legend": "Unique to the Chapter, Furiosos are frequently fitted with armaments only the Blood Angels have, from the infantry-shredding heavy frag cannon to the magna-grapple. The latter weapon's bolts, attached to adamantine chains, pierce armour, enabling Furiosos to drag enemies into their reach.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> heavy frag cannon; Furioso fist; storm bolter.",
   "transport": "",
@@ -33,7 +33,59 @@
       "factionId": "",
       "description": "Each time this model is selected to fight, you can select one enemy unit within Engagement Range of it and roll one D6, adding 2 to the result if this model made a Charge move this turn: on a 4-5, that enemy unit suffers D3 mortal wounds; on a 6+, that enemy unit suffers 3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 4
+            },
+            {
+              "entity": "thisModel",
+              "operator": "lessThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -42,7 +94,52 @@
       "factionId": "",
       "description": "The bearer loses the <span class=\"kwb\">SMOKE</span> keyword, but add 2 to Charge rolls made for the bearer if one or more of the targets of that charge is a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "keywords": [
+                "SMOKE"
+              ],
+              "operator": "includes",
+              "value": "SMOKE"
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "VEHICLE"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -111,19 +208,19 @@
       "datasheetId": "000000167",
       "line": 1,
       "button": "•",
-      "description": "This model’s heavy frag cannon and Furioso fist can be replaced with one of the following:<ul><li>1 Blood Talons and 1 meltagun</li><li>1 twin Furioso fist and 1 meltagun</li></ul>"
+      "description": "This model's heavy frag cannon and Furioso fist can be replaced with one of the following:<ul><li>1 Blood Talons and 1 meltagun</li><li>1 twin Furioso fist and 1 meltagun</li></ul>"
     },
     {
       "datasheetId": "000000167",
       "line": 2,
       "button": "•",
-      "description": "This model’s storm bolter can be replaced with 1 heavy flamer."
+      "description": "This model's storm bolter can be replaced with 1 heavy flamer."
     },
     {
       "datasheetId": "000000167",
       "line": 3,
       "button": "•",
-      "description": "This model’s meltagun can be replaced with 1 heavy flamer."
+      "description": "This model's meltagun can be replaced with 1 heavy flamer."
     },
     {
       "datasheetId": "000000167",
@@ -132,7 +229,34 @@
       "description": "This model can be equipped with 1 magna-grapple."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000167",
+      "line": 1,
+      "description": "1 Furioso Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000167",
+      "line": 1,
+      "description": "1 model",
+      "cost": 150,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "blood-angels",
+  "supplementName": "Blood Angels (Legends)",
+  "supplementLabel": "Blood Angels (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Blood Angels (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000167:heavy-flamer",
       "datasheetId": "000000167",
@@ -315,32 +439,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000167",
-      "line": 1,
-      "description": "1 Furioso Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000167",
-      "line": 1,
-      "description": "1 model",
-      "cost": 150,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "blood-angels",
-  "supplementName": "Blood Angels (Legends)",
-  "supplementLabel": "Blood Angels (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Blood Angels (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

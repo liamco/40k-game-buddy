@@ -3,7 +3,7 @@
   "name": "Ulrik The Slayer",
   "factionId": "SM",
   "sourceId": "000000036",
-  "legend": "A paragon of wisdom and experience, Ulrik the Slayer has mentored many of the Space Wolves’ greatest champions. He is the Wolf High Priest, inspiring all who fight alongside him with his aggression and martial prowess. Turning his fearsome gaze upon mighty foes, Ulrik swears weighty oaths to cut them down.",
+  "legend": "A paragon of wisdom and experience, Ulrik the Slayer has mentored many of the Space Wolves' greatest champions. He is the Wolf High Priest, inspiring all who fight alongside him with his aggression and martial prowess. Turning his fearsome gaze upon mighty foes, Ulrik swears weighty oaths to cut them down.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> plasma pistol; artificer crozius arcanum.",
   "transport": "",
@@ -32,19 +32,60 @@
     },
     {
       "id": "",
-      "name": "Slayer’s Oath",
+      "name": "Slayer's Oath",
       "legend": "",
       "factionId": "",
-      "description": "At the start of the battle, select one of the following keywords to be this model’s Slayer’s Oath: <span class=\"kwb\">CHARACTER</span>; <span class=\"kwb\">MONSTER</span>; <span class=\"kwb\">VEHICLE</span>. The first time this model’s unit destroys a unit with this model’s Slayer’s Oath keyword, if your Detachment rule has a Saga, until the end of the battle, this model’s unit receives the benefits of that Detachment rule as if that Saga had been completed.",
+      "description": "At the start of the battle, select one of the following keywords to be this model's Slayer's Oath: <span class=\"kwb\">CHARACTER</span>; <span class=\"kwb\">MONSTER</span>; <span class=\"kwb\">VEHICLE</span>. The first time this model's unit destroys a unit with this model's Slayer's Oath keyword, if your Detachment rule has a Saga, until the end of the battle, this model's unit receives the benefits of that Detachment rule as if that Saga had been completed.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsKeyword",
+          "keywords": [
+            "CHARACTER",
+            "MONSTER",
+            "VEHICLE"
+          ],
+          "value": "selected"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SAGA BENEFITS"
+          ],
+          "value": "until the end of the battle",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "SAGA"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "CHARACTER",
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "thisModel's Slayer's Oath keyword"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Oathbound",
       "legend": "",
       "factionId": "",
-      "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll. If that attack targets a unit that has this model’s Slayer’s Oath keyword (see above), add 1 to the Wound roll as well.",
+      "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll. If that attack targets a unit that has this model's Slayer's Oath keyword (see above), add 1 to the Wound roll as well.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -123,7 +164,47 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000297",
+      "line": 1,
+      "description": "1 Ulrik the Slayer - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000297",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000303",
+      "slug": "blood-claws"
+    },
+    {
+      "id": "000000305",
+      "slug": "grey-hunters"
+    },
+    {
+      "id": "000004131",
+      "slug": "wolf-guard-headtakers"
+    }
+  ],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000297:plasma-pistol",
       "datasheetId": "000000297",
@@ -136,7 +217,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -153,7 +234,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -195,45 +276,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000297",
-      "line": 1,
-      "description": "1 Ulrik the Slayer – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000297",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000303",
-      "slug": "blood-claws"
-    },
-    {
-      "id": "000000305",
-      "slug": "grey-hunters"
-    },
-    {
-      "id": "000004131",
-      "slug": "wolf-guard-headtakers"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

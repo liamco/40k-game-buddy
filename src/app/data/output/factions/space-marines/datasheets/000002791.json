@@ -3,7 +3,7 @@
   "name": "Repulsor",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "Clad in advanced armour plating etched with the vows of its crew and armed for any battlefield situation, the Repulsor transports its vow-sworn occupants safely and provides deadly fire support. The tank’s ventral plates channel gravitic energies that crush obstacles and anchor its position, providing a stable disembarkation for those inside, even amidst heavy fire.",
+  "legend": "Clad in advanced armour plating etched with the vows of its crew and armed for any battlefield situation, the Repulsor transports its vow-sworn occupants safely and provides deadly fire support. The tank's ventral plates channel gravitic energies that crush obstacles and anchor its position, providing a stable disembarkation for those inside, even amidst heavy fire.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; hunter-slayer missile; Repulsor defensive array; twin heavy bolter; armoured hull.",
   "transport": "This model has a transport capacity of 14 Adeptus Astartes Infantry models. Each Jump Pack, Gravis or Terminator model takes up the space of 2 models and each Centurion model takes up the space of 3 models.",
@@ -31,9 +31,48 @@
       "name": "Stabilised Disembarkation",
       "legend": "",
       "factionId": "",
-      "description": "In your opponent’s Shooting phase, each time an enemy unit is selected to shoot, after that unit has shot, if any of those attacks targeted this <span class=\"kwb\">TRANSPORT</span>, it can use this ability. If it does, any units embarked within it can disembark. When doing so, models in those units can be set up anywhere on the battlefield wholly within 6\" of this <span class=\"kwb\">TRANSPORT</span> and not within Engagement Range of one or more enemy units.",
+      "description": "In your opponent's Shooting phase, each time an enemy unit is selected to shoot, after that unit has shot, if any of those attacks targeted this <span class=\"kwb\">TRANSPORT</span>, it can use this ability. If it does, any units embarked within it can disembark. When doing so, models in those units can be set up anywhere on the battlefield wholly within 6\" of this <span class=\"kwb\">TRANSPORT</span> and not within Engagement Range of one or more enemy units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DISENGAGE"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",
@@ -106,13 +145,13 @@
       "datasheetId": "000002791",
       "line": 1,
       "button": "•",
-      "description": "This model’s twin heavy bolter can be replaced with 1 twin lascannon."
+      "description": "This model's twin heavy bolter can be replaced with 1 twin lascannon."
     },
     {
       "datasheetId": "000002791",
       "line": 2,
       "button": "•",
-      "description": "This model’s heavy onslaught gatling cannon can be replaced with 1 las-talon."
+      "description": "This model's heavy onslaught gatling cannon can be replaced with 1 las-talon."
     },
     {
       "datasheetId": "000002791",
@@ -121,7 +160,34 @@
       "description": "This model can be equipped with 1 multi-melta."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002791",
+      "line": 1,
+      "description": "1 Repulsor",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002791",
+      "line": 1,
+      "description": "1 model",
+      "cost": 180,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002791:heavy-onslaught-gatling-cannon",
       "datasheetId": "000002791",
@@ -325,42 +391,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002791",
-      "line": 1,
-      "description": "1 Repulsor",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002791",
-      "line": 1,
-      "description": "1 model",
-      "cost": 180,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

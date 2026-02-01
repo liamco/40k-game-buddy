@@ -42,7 +42,18 @@
       "factionId": "",
       "description": "The bearer has the Stealth ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STEALTH"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -126,7 +137,39 @@
       "description": "Any number of models can each be equipped with one of the following:<ul><li>1 nebuloscope</li><li>1 shadowloom</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000548",
+      "line": 1,
+      "description": "3-6 Tomb Blades",
+      "min": 3,
+      "max": 6
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000548",
+      "line": 1,
+      "description": "3 models",
+      "cost": 75,
+      "count": 3
+    },
+    {
+      "datasheetId": "000000548",
+      "line": 2,
+      "description": "6 models",
+      "cost": 150,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000548:particle-beamer",
       "datasheetId": "000000548",
@@ -233,37 +276,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000548",
-      "line": 1,
-      "description": "3-6 Tomb Blades",
-      "min": 3,
-      "max": 6
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000548",
-      "line": 1,
-      "description": "3 models",
-      "cost": 75,
-      "count": 3
-    },
-    {
-      "datasheetId": "000000548",
-      "line": 2,
-      "description": "6 models",
-      "cost": 150,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

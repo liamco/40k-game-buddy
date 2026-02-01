@@ -3,9 +3,9 @@
   "name": "Ministorum Priest",
   "factionId": "AS",
   "sourceId": "000000112",
-  "legend": "It is the role of Ministorum Priests to harness the faith of Imperial warriors in battle. Often they join Wars of Faith – though it is not unheard of for a Preacher to lead one. They are filled with a fearsome religious fervour that incites the faithful as they bellow catechisms of hatred.",
+  "legend": "It is the role of Ministorum Priests to harness the faith of Imperial warriors in battle. Often they join Wars of Faith - though it is not unheard of for a Preacher to lead one. They are filled with a fearsome religious fervour that incites the faithful as they bellow catechisms of hatred.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> zealot’s vindictor.",
+  "loadout": "<b>This model is equipped with:</b> zealot's vindictor.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -44,8 +53,32 @@
       "parameter": ""
     },
     {
+      "id": "",
       "name": "Holy Mission",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If this model is attached to a DOMINION SQUAD during the Declare Battle Formations step, it gains the Scouts 6\" ability. If this model is attached to a SISTERS NOVITIATE SQUAD during the Declare Battle Formations step, it gains the Infiltrators ability.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 6
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "INFILTRATORS"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -108,110 +141,7 @@
       "datasheetId": "000001553",
       "line": 1,
       "button": "•",
-      "description": "This model’s zealot’s vindictor can be replaced with 1 holy pistol and 1 power weapon."
-    }
-  ],
-  "wargear": [
-    {
-      "id": "000001553:holy-pistol",
-      "datasheetId": "000001553",
-      "line": 1,
-      "name": "Holy pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001553",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Holy pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001553:zealot-s-vindictor",
-      "datasheetId": "000001553",
-      "line": 2,
-      "name": "Zealot’s vindictor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001553",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Zealot’s vindictor",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001553:power-weapon",
-      "datasheetId": "000001553",
-      "line": 3,
-      "name": "Power Weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001553",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power Weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001553:zealot-s-vindictor-2",
-      "datasheetId": "000001553",
-      "line": 4,
-      "name": "Zealot’s vindictor",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001553",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Zealot’s vindictor",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
+      "description": "This model's zealot's vindictor can be replaced with 1 holy pistol and 1 power weapon."
     }
   ],
   "unitComposition": [
@@ -267,5 +197,108 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Adepta Sororitas",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000001553:holy-pistol",
+      "datasheetId": "000001553",
+      "line": 1,
+      "name": "Holy pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000001553",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Holy pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 3,
+          "bsWs": 4,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000001553:zealot-s-vindictor",
+      "datasheetId": "000001553",
+      "line": 2,
+      "name": "Zealot's vindictor",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000001553",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Zealot's vindictor",
+          "attributes": [
+            "IGNORES COVER",
+            "TORRENT"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": "D6",
+          "bsWs": "N/A",
+          "s": 5,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000001553:power-weapon",
+      "datasheetId": "000001553",
+      "line": 3,
+      "name": "Power Weapon",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000001553",
+          "line": 3,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Power Weapon",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 3,
+          "bsWs": 3,
+          "s": 4,
+          "ap": -2,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000001553:zealot-s-vindictor-2",
+      "datasheetId": "000001553",
+      "line": 4,
+      "name": "Zealot's vindictor",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000001553",
+          "line": 4,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Zealot's vindictor",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 3,
+          "bsWs": 4,
+          "s": 5,
+          "ap": -1,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

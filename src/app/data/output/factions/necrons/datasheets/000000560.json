@@ -3,7 +3,7 @@
   "name": "Canoptek Tomb Sentinel",
   "factionId": "NEC",
   "sourceId": "000000358",
-  "legend": "Both guardian and aggressor, the Tomb Sentinel is a heavily modified variant of the Tomb Stalker, which forgoes that device’s close-combat ability in favour of an exile cannon. This ancient weapon casts its target into other dimensional realms beyond the material universe, removing trespassers and upstarts as though they never existed.",
+  "legend": "Both guardian and aggressor, the Tomb Sentinel is a heavily modified variant of the Tomb Stalker, which forgoes that device's close-combat ability in favour of an exile cannon. This ancient weapon casts its target into other dimensional realms beyond the material universe, removing trespassers and upstarts as though they never existed.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> exile cannon; Tomb Sentinel claws; gloom prism.",
   "transport": "",
@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">NECRONS</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -95,7 +106,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000560",
+      "line": 1,
+      "description": "1 Canoptek Tomb Sentinel",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000560",
+      "line": 1,
+      "description": "1 model",
+      "cost": 115,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000560:exile-cannon",
       "datasheetId": "000000560",
@@ -146,30 +182,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000560",
-      "line": 1,
-      "description": "1 Canoptek Tomb Sentinel",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000560",
-      "line": 1,
-      "description": "1 model",
-      "cost": 115,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

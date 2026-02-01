@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -108,22 +125,49 @@
       "datasheetId": "000002717",
       "line": 2,
       "button": "•",
-      "description": "This model’s heavy flamer can be replaced with 1 onslaught gatling cannon."
+      "description": "This model's heavy flamer can be replaced with 1 onslaught gatling cannon."
     },
     {
       "datasheetId": "000002717",
       "line": 3,
       "button": "•",
-      "description": "This model’s heavy onslaught gatling cannon can be replaced with 1 macro plasma incinerator."
+      "description": "This model's heavy onslaught gatling cannon can be replaced with 1 macro plasma incinerator."
     },
     {
       "datasheetId": "000002717",
       "line": 4,
       "button": "•",
-      "description": "This model’s twin fragstorm grenade launcher can be replaced with 1 twin storm bolter."
+      "description": "This model's twin fragstorm grenade launcher can be replaced with 1 twin storm bolter."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002717",
+      "line": 1,
+      "description": "1 Redemptor Dreadnought",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002717",
+      "line": 1,
+      "description": "1 model",
+      "cost": 195,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002717:heavy-flamer",
       "datasheetId": "000002717",
@@ -215,7 +259,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Macro plasma incinerator – standard",
+          "name": "Macro plasma incinerator - standard",
           "attributes": [
             "BLAST"
           ],
@@ -232,7 +276,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Macro plasma incinerator – supercharge",
+          "name": "Macro plasma incinerator - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -350,42 +394,6 @@
           "d": 3
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002717",
-      "line": 1,
-      "description": "1 Redemptor Dreadnought",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002717",
-      "line": 1,
-      "description": "1 model",
-      "cost": 195,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

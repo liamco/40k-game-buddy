@@ -31,9 +31,76 @@
       "name": "Storm of Vengeance",
       "legend": "",
       "factionId": "",
-      "description": "Once per turn, in your opponent’s Shooting phase, when a friendly <b>Adeptus Astartes</b> unit within 6\" of this model is destroyed, this model can use this ability (it cannot use this ability when it is itself destroyed). If it does, after the attacking unit has finished making its attacks, this model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
+      "description": "Once per turn, in your opponent's Shooting phase, when a friendly <b>Adeptus Astartes</b> unit within 6\" of this model is destroyed, this model can use this ability (it cannot use this ability when it is itself destroyed). If it does, after the attacking unit has finished making its attacks, this model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SHOOT AFTER BEING DESTROYED"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "autoSuccess",
+          "attribute": "h",
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": "as if it were your Shooting phase",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CAN ONLY TARGET DESTROYING UNIT"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -102,10 +169,37 @@
       "datasheetId": "000000242",
       "line": 1,
       "button": "•",
-      "description": "This model’s heavy bolter can be replaced with 1 assault cannon."
+      "description": "This model's heavy bolter can be replaced with 1 assault cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000242",
+      "line": 1,
+      "description": "1 Land Speeder Vengeance",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000242",
+      "line": 1,
+      "description": "1 model",
+      "cost": 120,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "dark-angels",
+  "supplementName": "Dark Angels",
+  "supplementLabel": "Dark Angels",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000242:assault-cannon",
       "datasheetId": "000000242",
@@ -170,7 +264,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma storm battery – standard",
+          "name": "Plasma storm battery - standard",
           "attributes": [
             "BLAST",
             "TWIN-LINKED"
@@ -188,7 +282,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma storm battery – supercharge",
+          "name": "Plasma storm battery - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS",
@@ -228,32 +322,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000242",
-      "line": 1,
-      "description": "1 Land Speeder Vengeance",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000242",
-      "line": 1,
-      "description": "1 model",
-      "cost": 120,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

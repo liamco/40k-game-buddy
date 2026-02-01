@@ -5,7 +5,7 @@
   "sourceId": "000000374",
   "legend": "Lobotomised and augmented, Servitors attend the Departmento Munitorum in countless menial ways. These cybernetic living tools often form servile retinues for Enginseers, using their industrial servo- arms to repair hulking tanks, but unhesitatingly turning them on the foe should they draw too near.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> Servitor’s servo-arm.",
+  "loadout": "<b>Every model is equipped with:</b> Servitor's servo-arm.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -27,8 +27,13 @@
       "parameter": ""
     },
     {
+      "id": "",
       "name": "SERVITOR RETINUE",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "At the start of the Declare Battle Formations step, this unit can join one other unit from your army that is being led by a Regimental Enginseer (a unit cannot have more than one <span class=\"kwb\">MUNITORUM</span> <span class=\"kwb\">SERVITORS</span> unit joined to it). If it does, until the end of the battle, every model in this unit counts as being part of that Bodyguard unit, and that Bodyguard unit's Starting Strength is increased accordingly.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -79,10 +84,35 @@
       "datasheetId": "000001397",
       "line": 1,
       "button": "•",
-      "description": "Up to 2 models can each have their Servitor’s servo-arm replaced with one of the following:<ul><li>1 heavy bolter</li><li>1 multi-melta</li><li>1 plasma cannon</li></ul>"
+      "description": "Up to 2 models can each have their Servitor's servo-arm replaced with one of the following:<ul><li>1 heavy bolter</li><li>1 multi-melta</li><li>1 plasma cannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001397",
+      "line": 1,
+      "description": "4 Munitorum Servitors",
+      "min": 4,
+      "max": 4
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001397",
+      "line": 1,
+      "description": "4 models",
+      "cost": 35,
+      "count": 4
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001397:heavy-bolter",
       "datasheetId": "000001397",
@@ -149,7 +179,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma cannon – standard",
+          "name": "Plasma cannon - standard",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -167,7 +197,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma cannon – supercharge",
+          "name": "Plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS",
@@ -211,7 +241,7 @@
       "id": "000001397:servitor-s-servo-arm",
       "datasheetId": "000001397",
       "line": 6,
-      "name": "Servitor’s servo-arm",
+      "name": "Servitor's servo-arm",
       "type": "Melee",
       "profiles": [
         {
@@ -219,7 +249,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Servitor’s servo-arm",
+          "name": "Servitor's servo-arm",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -231,30 +261,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001397",
-      "line": 1,
-      "description": "4 Munitorum Servitors",
-      "min": 4,
-      "max": 4
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001397",
-      "line": 1,
-      "description": "4 models",
-      "cost": 35,
-      "count": 4
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

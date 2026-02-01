@@ -26,7 +26,7 @@
       "name": "Airborne Agility",
       "legend": "",
       "factionId": "",
-      "description": "At the end of your opponent’s turn, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
+      "description": "At the end of your opponent's turn, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -35,7 +35,7 @@
       "name": "Oversight Drone",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, when the bearer’s unit is selected to shoot, until the end of the phase, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability. <br><br><b>Designer’s Note:</b> Place an Oversight Drone token next to the bearer, removing it once this ability has been used.",
+      "description": "Once per battle, when the bearer's unit is selected to shoot, until the end of the phase, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability. <br><br><b>Designer's Note:</b> Place an Oversight Drone token next to the bearer, removing it once this ability has been used.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -43,7 +43,7 @@
   "keywords": [
     {
       "datasheetId": "000000427",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -88,10 +88,49 @@
       "datasheetId": "000000427",
       "line": 1,
       "button": "•",
-      "description": "If this unit contains 10 models:<ul><li>The Vespid Strain Leader can be equipped with 1 Oversight Drone.</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 T’au flamer</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron grenade launcher</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron rail rifle.</li></ul>"
+      "description": "If this unit contains 10 models:<ul><li>The Vespid Strain Leader can be equipped with 1 Oversight Drone.</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 T'au flamer</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron grenade launcher</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron rail rifle.</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000427",
+      "line": 1,
+      "description": "1 Vespid Strain Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000427",
+      "line": 2,
+      "description": "4-9 Vespid Stingwings",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000427",
+      "line": 1,
+      "description": "5 models",
+      "cost": 65,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000427",
+      "line": 2,
+      "description": "10 models",
+      "cost": 130,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000427:neutron-blaster",
       "datasheetId": "000000427",
@@ -175,7 +214,7 @@
       "id": "000000427:t-au-flamer",
       "datasheetId": "000000427",
       "line": 4,
-      "name": "T’au flamer",
+      "name": "T'au flamer",
       "type": "Ranged",
       "profiles": [
         {
@@ -183,7 +222,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "T’au flamer",
+          "name": "T'au flamer",
           "attributes": [
             "IGNORES COVER",
             "TORRENT"
@@ -222,44 +261,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000427",
-      "line": 1,
-      "description": "1 Vespid Strain Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000427",
-      "line": 2,
-      "description": "4-9 Vespid Stingwings",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000427",
-      "line": 1,
-      "description": "5 models",
-      "cost": 65,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000427",
-      "line": 2,
-      "description": "10 models",
-      "cost": 130,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: T’au Empire",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

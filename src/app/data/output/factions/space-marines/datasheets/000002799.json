@@ -26,13 +26,123 @@
       "name": "Righteous Zeal",
       "legend": "",
       "factionId": "",
-      "description": "In your opponent’s Shooting phase, each time an enemy unit has shot, if any models in this unit were destroyed as a result of those attacks, this unit can make a Righteous Zeal move. To do so, roll one D6 and add 2 to the result: models in this unit move a number of inches up to this result, but this unit must end that move as close as possible to the closest enemy unit (excluding <span class=\"kwb\">AIRCRAFT</span>). When doing so, those models can be moved within Engagement Range of that enemy unit. This unit cannot make a Righteous Zeal move while it is Battle-shocked or within Engagement Range of one or more enemy units, and can only make one Righteous Zeal move per phase.",
+      "description": "In your opponent's Shooting phase, each time an enemy unit has shot, if any models in this unit were destroyed as a result of those attacks, this unit can make a Righteous Zeal move. To do so, roll one D6 and add 2 to the result: models in this unit move a number of inches up to this result, but this unit must end that move as close as possible to the closest enemy unit (excluding <span class=\"kwb\">AIRCRAFT</span>). When doing so, those models can be moved within Engagement Range of that enemy unit. This unit cannot make a Righteous Zeal move while it is Battle-shocked or within Engagement Range of one or more enemy units, and can only make one Righteous Zeal move per phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": "D6 + 2",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RIGHTEOUS ZEAL"
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "must end as close as possible to the closest enemy unit",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "can move within Engagement Range of that enemy unit",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character from your army with the Leader ability can be attached to an Intercessor Squad, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "can be attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Leader"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -122,7 +232,7 @@
       "datasheetId": "000002799",
       "line": 1,
       "button": "•",
-      "description": "The Sword Brother’s heavy bolt pistol can be replaced with 1 pyre pistol."
+      "description": "The Sword Brother's heavy bolt pistol can be replaced with 1 pyre pistol."
     },
     {
       "datasheetId": "000002799",
@@ -143,7 +253,55 @@
       "description": "For every 10 models in this unit, up to 2 Initiates can each have their bolt rifle replaced with one of the following:<br><ul><li>1 heavy bolt pistol and 1 power fist</li><li>1 pyreblaster</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002799",
+      "line": 1,
+      "description": "1 Sword Brother",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002799",
+      "line": 2,
+      "description": "5-11 Initiates",
+      "min": 5,
+      "max": 11
+    },
+    {
+      "datasheetId": "000002799",
+      "line": 3,
+      "description": "4-8 Neophytes",
+      "min": 4,
+      "max": 8
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002799",
+      "line": 1,
+      "description": "1 Sword Brother, 5 Initiates and 4 Neophytes",
+      "cost": 150,
+      "count": 1
+    },
+    {
+      "datasheetId": "000002799",
+      "line": 2,
+      "description": "1 Sword Brother, 11 Initiates and 8 Neophytes",
+      "cost": 310,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002799:bolt-pistol",
       "datasheetId": "000002799",
@@ -404,53 +562,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002799",
-      "line": 1,
-      "description": "1 Sword Brother",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002799",
-      "line": 2,
-      "description": "5-11 Initiates",
-      "min": 5,
-      "max": 11
-    },
-    {
-      "datasheetId": "000002799",
-      "line": 3,
-      "description": "4-8 Neophytes",
-      "min": 4,
-      "max": 8
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002799",
-      "line": 1,
-      "description": "1 Sword Brother, 5 Initiates and 4 Neophytes",
-      "cost": 150,
-      "count": 1
-    },
-    {
-      "datasheetId": "000002799",
-      "line": 2,
-      "description": "1 Sword Brother, 11 Initiates and 8 Neophytes",
-      "cost": 310,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

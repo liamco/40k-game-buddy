@@ -3,7 +3,7 @@
   "name": "Voidraven Bomber",
   "factionId": "DRU",
   "sourceId": "000000031",
-  "legend": "Mounting some of the most powerful guns in the Drukhari arsenal, the Voidraven Bomber’s dark scythes and void lances can crack heavily armoured targets. Yet they pale against the silent aircraft’s primary weapon - the void mine. Once this arcane payload is deployed, the resulting darklight implosion erases all caught within its blast.",
+  "legend": "Mounting some of the most powerful guns in the Drukhari arsenal, the Voidraven Bomber's dark scythes and void lances can crack heavily armoured targets. Yet they pale against the silent aircraft's primary weapon - the void mine. Once this arcane payload is deployed, the resulting darklight implosion erases all caught within its blast.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 void lances; bladed wings.",
   "transport": "",
@@ -115,10 +115,35 @@
       "datasheetId": "000000661",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 void lances can be replaced with 2 dark scythes."
+      "description": "This model's 2 void lances can be replaced with 2 dark scythes."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000661",
+      "line": 1,
+      "description": "1 Voidraven Bomber",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000661",
+      "line": 1,
+      "description": "1 model",
+      "cost": 245,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Drukhari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000661:dark-scythe",
       "datasheetId": "000000661",
@@ -179,7 +204,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Voidraven missiles – implosion missiles",
+          "name": "Voidraven missiles - implosion missiles",
           "attributes": [
             "BLAST"
           ],
@@ -196,7 +221,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Voidraven missiles – shatterfield missiles",
+          "name": "Voidraven missiles - shatterfield missiles",
           "attributes": [
             "BLAST"
           ],
@@ -233,40 +258,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000661",
-      "line": 1,
-      "description": "1 Voidraven Bomber",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000661",
-      "line": 1,
-      "description": "1 model",
-      "cost": 245,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Drukhari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

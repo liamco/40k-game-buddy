@@ -3,7 +3,7 @@
   "name": "Valdor",
   "factionId": "AM",
   "sourceId": "000000374",
-  "legend": "The Valdor is an arcane variant of the Malcador tank chassis, its entire frame dominated by a technological relic known as the neutron laser projector. This powerful energy weapon fires a beam of superenergised particles that can penetrate the thickest armour and send a crippling electromagnetic pulse through vehicles’ inner workings.",
+  "legend": "The Valdor is an arcane variant of the Malcador tank chassis, its entire frame dominated by a technological relic known as the neutron laser projector. This powerful energy weapon fires a beam of superenergised particles that can penetrate the thickest armour and send a crippling electromagnetic pulse through vehicles' inner workings.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> autocannon; Valdor neutron laser; armoured tracks.",
   "transport": "",
@@ -96,7 +96,7 @@
       "datasheetId": "000000777",
       "line": 1,
       "button": "•",
-      "description": "This model’s autocannon can be replaced with one of the following:<ul><li>1 heavy bolter</li><li>1 heavy flamer</li><li>1 lascannon</li></ul>"
+      "description": "This model's autocannon can be replaced with one of the following:<ul><li>1 heavy bolter</li><li>1 heavy flamer</li><li>1 lascannon</li></ul>"
     },
     {
       "datasheetId": "000000777",
@@ -111,7 +111,32 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 heavy stubber</li><li>1 storm bolter</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000777",
+      "line": 1,
+      "description": "1 Valdor",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000777",
+      "line": 1,
+      "description": "1 model",
+      "cost": 285,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000777:autocannon",
       "datasheetId": "000000777",
@@ -340,46 +365,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000777",
-      "line": 1,
-      "description": "1 Valdor",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000777",
-      "line": 1,
-      "description": "1 model",
-      "cost": 285,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 7,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

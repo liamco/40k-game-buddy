@@ -42,7 +42,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack with a belleros energy cannon that targets an <span class=\"kwb\">INFANTRY</span> unit, add 1 to the Hit roll. Each time this model makes an attack with a ferrumite cannon that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -105,10 +114,35 @@
       "datasheetId": "000001651",
       "line": 1,
       "button": "•",
-      "description": "This model’s belleros energy cannon can be replaced with 1 ferrumite cannon."
+      "description": "This model's belleros energy cannon can be replaced with 1 ferrumite cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001651",
+      "line": 1,
+      "description": "1 Skorpius Disintegrator",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001651",
+      "line": 1,
+      "description": "1 model",
+      "cost": 165,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001651:belleros-energy-cannon",
       "datasheetId": "000001651",
@@ -236,40 +270,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001651",
-      "line": 1,
-      "description": "1 Skorpius Disintegrator",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001651",
-      "line": 1,
-      "description": "1 model",
-      "cost": 165,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

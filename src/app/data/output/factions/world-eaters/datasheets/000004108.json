@@ -3,7 +3,7 @@
   "name": "Flesh Hounds",
   "factionId": "WE",
   "sourceId": "000000210",
-  "legend": "Khorne’s hunting hounds track their prey’s terror spoor across interstellar gulfs. The brass collars about their necks ward away even the most potent sorceries of their desperate prey before the slavering Flesh Hounds launch themselves onto their victims, swinging vicious talons and sinking foot-long fangs deep.",
+  "legend": "Khorne's hunting hounds track their prey's terror spoor across interstellar gulfs. The brass collars about their necks ward away even the most potent sorceries of their desperate prey before the slavering Flesh Hounds launch themselves onto their victims, swinging vicious talons and sinking foot-long fangs deep.",
   "role": "Other",
   "loadout": "<b>The Gore Hound is equipped with:</b> burning roar; gore-drenched fangs; collar of Khorne. <br><br><b>Every Flesh Hound is equipped with:</b> gore-drenched fangs; collar of Khorne.",
   "transport": "",
@@ -30,7 +30,7 @@
       "name": "Hunters from the Warp",
       "legend": "",
       "factionId": "",
-      "description": "At the end of your opponent’s turn, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
+      "description": "At the end of your opponent's turn, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -41,7 +41,18 @@
       "factionId": "",
       "description": "The bearer has the Feel No Pain 3+ ability against Psychic Attacks.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 3
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -119,7 +130,46 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004108",
+      "line": 1,
+      "description": "1 Gore Hound",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004108",
+      "line": 2,
+      "description": "4-9 Flesh Hounds",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004108",
+      "line": 1,
+      "description": "5 models",
+      "cost": 75,
+      "count": 5
+    },
+    {
+      "datasheetId": "000004108",
+      "line": 2,
+      "description": "10 models",
+      "cost": 150,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: World Eaters",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004108:burning-roar",
       "datasheetId": "000004108",
@@ -171,44 +221,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004108",
-      "line": 1,
-      "description": "1 Gore Hound",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004108",
-      "line": 2,
-      "description": "4-9 Flesh Hounds",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004108",
-      "line": 1,
-      "description": "5 models",
-      "cost": 75,
-      "count": 5
-    },
-    {
-      "datasheetId": "000004108",
-      "line": 2,
-      "description": "10 models",
-      "cost": 150,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: World Eaters",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

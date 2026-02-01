@@ -42,7 +42,16 @@
       "factionId": "",
       "description": "While an ASTRA MILITARUM INFANTRY model has the Benefit of Cover as a result of this terrain feature (see above), that model has a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -51,11 +60,25 @@
       "factionId": "",
       "description": "While an enemy unit is only within Engagement Range of one or more FORTIFICATIONS from your army: <br><ul><li>That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. </li><li>Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "DEPLOYMENT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "When this model is set up, it will consist of 1 platform section, up to 5 shield sections, up to 2 broken shield sections, and up to 2 end sections. All sections must be connected to each other to form a continuous defence line; the two broken shield sections can be placed either at the end of the defence line, or in the middle of it such that both are within l/2\" of each other (in this case, these two sections count as being connected to each other). All the sections that have been set up are then treated as a single model for all rules purposes.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -109,32 +132,6 @@
       "description": "None"
     }
   ],
-  "wargear": [
-    {
-      "id": "000002619:wargear-1",
-      "datasheetId": "000002619",
-      "line": 1,
-      "name": "Wargear 1",
-      "type": "",
-      "profiles": [
-        {
-          "datasheetId": "000002619",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "",
-          "attributes": [],
-          "range": "",
-          "type": "",
-          "a": 0,
-          "bsWs": "-",
-          "s": "-",
-          "ap": 0,
-          "d": "-"
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002619",
@@ -159,5 +156,31 @@
   "roleLabel": "Fortifications",
   "sourceName": "Faction Pack: Astra Militarum",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000002619:wargear-1",
+      "datasheetId": "000002619",
+      "line": 1,
+      "name": "Wargear 1",
+      "type": "",
+      "profiles": [
+        {
+          "datasheetId": "000002619",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "",
+          "attributes": [],
+          "range": "",
+          "type": "",
+          "a": 0,
+          "bsWs": "-",
+          "s": "-",
+          "ap": 0,
+          "d": "-"
+        }
+      ]
+    }
+  ]
 }

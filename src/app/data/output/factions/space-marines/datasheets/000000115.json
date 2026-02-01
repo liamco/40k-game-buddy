@@ -36,7 +36,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -45,7 +54,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -54,7 +74,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 6.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -123,59 +152,7 @@
       "datasheetId": "000000115",
       "line": 1,
       "button": "•",
-      "description": "This model’s storm bolter can be replaced with 1 relic shield."
-    }
-  ],
-  "wargear": [
-    {
-      "id": "000000115:storm-bolter",
-      "datasheetId": "000000115",
-      "line": 1,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000115",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000115:crozius-arcanum",
-      "datasheetId": "000000115",
-      "line": 2,
-      "name": "Crozius arcanum",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000115",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Crozius arcanum",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
+      "description": "This model's storm bolter can be replaced with 1 relic shield."
     }
   ],
   "unitComposition": [
@@ -237,5 +214,57 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000000115:storm-bolter",
+      "datasheetId": "000000115",
+      "line": 1,
+      "name": "Storm bolter",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000000115",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Storm bolter",
+          "attributes": [
+            "RAPID FIRE 2"
+          ],
+          "range": 24,
+          "type": "Ranged",
+          "a": 2,
+          "bsWs": 3,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000000115:crozius-arcanum",
+      "datasheetId": "000000115",
+      "line": 2,
+      "name": "Crozius arcanum",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000115",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Crozius arcanum",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 5,
+          "bsWs": 2,
+          "s": 6,
+          "ap": -1,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

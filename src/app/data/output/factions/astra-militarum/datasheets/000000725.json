@@ -3,7 +3,7 @@
   "name": "Nork Deddog",
   "factionId": "AM",
   "sourceId": "000000016",
-  "legend": "Nork Deddog’s loyalty and his skills as a bodyguard are beyond question. The hulking Ogryn would rather sustain terrible wounds than permit a single scratch on those he protects. Dozens of victories have been achieved thanks to his unthinking heroism as he shoots, eviscerates or head-butts any threat to his charges.",
+  "legend": "Nork Deddog's loyalty and his skills as a bodyguard are beyond question. The hulking Ogryn would rather sustain terrible wounds than permit a single scratch on those he protects. Dozens of victories have been achieved thanks to his unthinking heroism as he shoots, eviscerates or head-butts any threat to his charges.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> ripper gun; huge knife.",
   "transport": "",
@@ -29,14 +29,25 @@
       "factionId": "",
       "description": "While one or more Officer models are in the same unit as this model, those <span class=\"kwb\">OFFICER</span> models have the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Thunderous Head-butt",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s unit is selected to fight, you can select one enemy unit within Engagement Range of this model and roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
+      "description": "Each time this model's unit is selected to fight, you can select one enemy unit within Engagement Range of this model and roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -119,7 +130,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000725",
+      "line": 1,
+      "description": "1 Nork Deddog - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000725",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000725:ripper-gun",
       "datasheetId": "000000725",
@@ -172,30 +208,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000725",
-      "line": 1,
-      "description": "1 Nork Deddog – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000725",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

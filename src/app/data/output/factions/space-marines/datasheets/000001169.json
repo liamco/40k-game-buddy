@@ -37,7 +37,43 @@
       "factionId": "",
       "description": "Each time this model ends a Normal move, you can select one enemy unit (excluding <span class=\"kwb\">MONSTER</span> and <span class=\"kwb\">VEHICLE</span> units) that it moved over during that move, then roll six D6: for each 4+, that enemy unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isStationary",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -100,16 +136,43 @@
       "datasheetId": "000001169",
       "line": 1,
       "button": "•",
-      "description": "This model’s heavy bolter can be replaced with 1 multi-melta."
+      "description": "This model's heavy bolter can be replaced with 1 multi-melta."
     },
     {
       "datasheetId": "000001169",
       "line": 2,
       "button": "•",
-      "description": "This model’s assault cannon can be replaced with 1 heavy flamer."
+      "description": "This model's assault cannon can be replaced with 1 heavy flamer."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001169",
+      "line": 1,
+      "description": "1 Land Speeder Tornado",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001169",
+      "line": 1,
+      "description": "1 model",
+      "cost": 95,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001169:assault-cannon",
       "datasheetId": "000001169",
@@ -239,32 +302,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001169",
-      "line": 1,
-      "description": "1 Land Speeder Tornado",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001169",
-      "line": 1,
-      "description": "1 model",
-      "cost": 95,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

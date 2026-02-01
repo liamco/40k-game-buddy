@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-6",
-  "damagedDescription": "While this model has 1-6 wounds remaining, subtract 5 from this model’s Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1-6 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/aeldari/Wraithknight",
   "slug": "wraithknight",
   "factionSlug": "aeldari",
@@ -40,7 +40,7 @@
       "name": "Point-blank Devastation",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s heavy wraithcannon or suncannon targets a unit within half range, you can re-roll the dice to determine the number of attacks made.",
+      "description": "Each time this model's heavy wraithcannon or suncannon targets a unit within half range, you can re-roll the dice to determine the number of attacks made.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -51,7 +51,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save and each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -138,7 +147,7 @@
       "datasheetId": "000000614",
       "line": 2,
       "button": "•",
-      "description": "This model’s scattershield can be replaced with 1 heavy wraithcannon."
+      "description": "This model's scattershield can be replaced with 1 heavy wraithcannon."
     },
     {
       "datasheetId": "000000614",
@@ -147,7 +156,32 @@
       "description": "This model can be equipped with up to two of the following:<ul><li>1 scatter laser</li><li>1 shuriken cannon</li><li>1 starcannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000614",
+      "line": 1,
+      "description": "1 Wraithknight",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000614",
+      "line": 1,
+      "description": "1 model",
+      "cost": 435,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000614:heavy-wraithcannon",
       "datasheetId": "000000614",
@@ -299,46 +333,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000614",
-      "line": 1,
-      "description": "1 Wraithknight",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000614",
-      "line": 1,
-      "description": "1 model",
-      "cost": 435,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 5
     }
   ]
 }

@@ -3,7 +3,7 @@
   "name": "Tech-priest Dominus",
   "factionId": "AdM",
   "sourceId": "000000015",
-  "legend": "Tech-Priests Dominus are the theocratic generals of a forge world’s armies. They lead congregations of warriors in binharic prayer and direct those beneath them with precision strategies. They are masters of machines, as capable of healing damage to their creations as they are at destroying the enemy’s corrupted engines.",
+  "legend": "Tech-Priests Dominus are the theocratic generals of a forge world's armies. They lead congregations of warriors in binharic prayer and direct those beneath them with precision strategies. They are masters of machines, as capable of healing damage to their creations as they are at destroying the enemy's corrupted engines.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> macrostubber; volkite blaster; Omnissian axe.",
   "transport": "",
@@ -32,14 +32,25 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability. If that unit has the Electro-Priests keyword, models in that unit have the Feel No Pain 4+ ability instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Data-spike",
       "legend": "",
       "factionId": "",
-      "description": "At the start of the Fight phase, you can select one enemy <span class=\"kwb\">VEHICLE</span> unit within Engagement Range of this model’s unit and roll one D6: on a 4+, that enemy unit suffers D6 mortal wounds and, until the end of the phase, the Weapon Skill characteristic of melee weapons equipped by that enemy unit is worsened by 1.",
+      "description": "At the start of the Fight phase, you can select one enemy <span class=\"kwb\">VEHICLE</span> unit within Engagement Range of this model's unit and roll one D6: on a 4+, that enemy unit suffers D6 mortal wounds and, until the end of the phase, the Weapon Skill characteristic of melee weapons equipped by that enemy unit is worsened by 1.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -110,16 +121,70 @@
       "datasheetId": "000000839",
       "line": 1,
       "button": "•",
-      "description": "This model’s macrostubber can be replaced with 1 phosphor serpenta."
+      "description": "This model's macrostubber can be replaced with 1 phosphor serpenta."
     },
     {
       "datasheetId": "000000839",
       "line": 2,
       "button": "•",
-      "description": "This model’s volkite blaster can be replaced with 1 eradication ray."
+      "description": "This model's volkite blaster can be replaced with 1 eradication ray."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000839",
+      "line": 1,
+      "description": "1 Tech-Priest Dominus",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000839",
+      "line": 1,
+      "description": "1 model",
+      "cost": 65,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004119",
+      "slug": "servitor-battleclade"
+    },
+    {
+      "id": "000000849",
+      "slug": "skitarii-vanguard"
+    },
+    {
+      "id": "000000848",
+      "slug": "skitarii-rangers"
+    },
+    {
+      "id": "000000842",
+      "slug": "kataphron-destroyers"
+    },
+    {
+      "id": "000000841",
+      "slug": "kataphron-breachers"
+    },
+    {
+      "id": "000000843",
+      "slug": "fulgurite-electro-priests"
+    },
+    {
+      "id": "000000844",
+      "slug": "corpuscarii-electro-priests"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000839:eradication-ray",
       "datasheetId": "000000839",
@@ -132,7 +197,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Eradication ray – dissipated",
+          "name": "Eradication ray - dissipated",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -147,7 +212,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Eradication ray – focused",
+          "name": "Eradication ray - focused",
           "attributes": [],
           "range": 12,
           "type": "Ranged",
@@ -262,59 +327,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000839",
-      "line": 1,
-      "description": "1 Tech-Priest Dominus",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000839",
-      "line": 1,
-      "description": "1 model",
-      "cost": 65,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004119",
-      "slug": "servitor-battleclade"
-    },
-    {
-      "id": "000000849",
-      "slug": "skitarii-vanguard"
-    },
-    {
-      "id": "000000848",
-      "slug": "skitarii-rangers"
-    },
-    {
-      "id": "000000842",
-      "slug": "kataphron-destroyers"
-    },
-    {
-      "id": "000000841",
-      "slug": "kataphron-breachers"
-    },
-    {
-      "id": "000000843",
-      "slug": "fulgurite-electro-priests"
-    },
-    {
-      "id": "000000844",
-      "slug": "corpuscarii-electro-priests"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

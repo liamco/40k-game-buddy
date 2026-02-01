@@ -3,7 +3,7 @@
   "name": "Celestian Sacresants",
   "factionId": "AS",
   "sourceId": "000000112",
-  "legend": "Part of the Celestian elite of the Orders Militant, Celestian Sacresants are close-combat specialists who – rather than serve as bodyguards – are charged with a holy quest. Whether that be to secure sacred relics or purge sites of the unclean, the Sacresants are relentless in their pursuit of victory.",
+  "legend": "Part of the Celestian elite of the Orders Militant, Celestian Sacresants are close-combat specialists who - rather than serve as bodyguards - are charged with a holy quest. Whether that be to secure sacred relics or purge sites of the unclean, the Sacresants are relentless in their pursuit of victory.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> bolt pistol; hallowed mace.",
   "transport": "",
@@ -28,7 +28,16 @@
       "factionId": "",
       "description": "While an ADEPTA SORORITAS CHARACTER is leading this unit, each time an attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -91,16 +100,55 @@
       "datasheetId": "000002481",
       "line": 2,
       "button": "•",
-      "description": "The Sacresant Superior’s bolt pistol can be replaced with one of the following:<ul><li>1 inferno pistol</li><li>1 Ministorum hand flamer</li><li>1 plasma pistol</li></ul>"
+      "description": "The Sacresant Superior's bolt pistol can be replaced with one of the following:<ul><li>1 inferno pistol</li><li>1 Ministorum hand flamer</li><li>1 plasma pistol</li></ul>"
     },
     {
       "datasheetId": "000002481",
       "line": 3,
       "button": "•",
-      "description": "The Sacresant Superior’s hallowed mace can be replaced with 1 spear of the faithful."
+      "description": "The Sacresant Superior's hallowed mace can be replaced with 1 spear of the faithful."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002481",
+      "line": 1,
+      "description": "1 Sacresant Superior",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002481",
+      "line": 2,
+      "description": "4-9 Celestian Sacresants",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002481",
+      "line": 1,
+      "description": "5 models",
+      "cost": 70,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002481",
+      "line": 2,
+      "description": "10 models",
+      "cost": 140,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002481:bolt-pistol",
       "datasheetId": "000002481",
@@ -194,7 +242,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -211,7 +259,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -302,44 +350,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002481",
-      "line": 1,
-      "description": "1 Sacresant Superior",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002481",
-      "line": 2,
-      "description": "4-9 Celestian Sacresants",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002481",
-      "line": 1,
-      "description": "5 models",
-      "cost": 70,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002481",
-      "line": 2,
-      "description": "10 models",
-      "cost": 140,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

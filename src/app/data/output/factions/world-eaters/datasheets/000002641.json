@@ -3,7 +3,7 @@
   "name": "Heldrake",
   "factionId": "WE",
   "sourceId": "000000210",
-  "legend": "Like immense predators of myth, Heldrakes sweep suddenly out of the sky. These airborne Daemon Engines excel at intercepting the enemy’s aerial assets, tearing them from the air and incinerating their crew. World Eaters Heldrakes are ever eager to swoop down into the thick of the fighting, tearing and ripping with razor-sharp talons to sate the bloodlust of their possessing daemons.",
+  "legend": "Like immense predators of myth, Heldrakes sweep suddenly out of the sky. These airborne Daemon Engines excel at intercepting the enemy's aerial assets, tearing them from the air and incinerating their crew. World Eaters Heldrakes are ever eager to swoop down into the thick of the fighting, tearing and ripping with razor-sharp talons to sate the bloodlust of their possessing daemons.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> Hades autocannon; Heldrake claws.",
   "transport": "",
@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets a unit that can <span class=\"kwb\">FLY</span>, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -118,10 +127,35 @@
       "datasheetId": "000002641",
       "line": 1,
       "button": "•",
-      "description": "This model’s Hades autocannon can be replaced with 1 baleflamer."
+      "description": "This model's Hades autocannon can be replaced with 1 baleflamer."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002641",
+      "line": 1,
+      "description": "1 Heldrake",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002641",
+      "line": 1,
+      "description": "1 model",
+      "cost": 200,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: World Eaters",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002641:baleflamer",
       "datasheetId": "000002641",
@@ -201,40 +235,6 @@
           "d": 2
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002641",
-      "line": 1,
-      "description": "1 Heldrake",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002641",
-      "line": 1,
-      "description": "1 model",
-      "cost": 200,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: World Eaters",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

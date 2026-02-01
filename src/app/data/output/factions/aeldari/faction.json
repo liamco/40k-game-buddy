@@ -1502,7 +1502,7 @@
           "id": "000009768",
           "factionId": "AE",
           "name": "Skilled Crews",
-          "legend": "Asuryani vehicle crews are amongst the galaxy’s most naturally gifted pilots and gunners. They can coax every last iota of performance from the formidable machines and weapon systems under their control.",
+          "legend": "Asuryani vehicle crews are amongst the galaxy's most naturally gifted pilots and gunners. They can coax every last iota of performance from the formidable machines and weapon systems under their control.",
           "description": "Ranged weapons equipped by Aeldari Vehicle models from your army have the [ASSAULT] ability and you can re-roll Advance rolls made for Aeldari Vehicle Fly units from your army.",
           "detachment": "Armoured Warhost",
           "detachmentId": 990
@@ -1516,8 +1516,17 @@
           "cost": 25,
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
-          "legend": "This seer is closely attuned to their craftworld’s vehicles. Communicating with the souls inhabiting hull-mounted spirit stones can sharpen the tactical awareness of spirits and crew.",
-          "description": "Aeldari Psyker model only. At the start of your Shooting phase, select one friendly Aeldari Vehicle model within 9\" of the bearer. Until the end of the phase, each time that model makes an attack, add 1 to the Hit roll."
+          "legend": "This seer is closely attuned to their craftworld's vehicles. Communicating with the souls inhabiting hull-mounted spirit stones can sharpen the tactical awareness of spirits and crew.",
+          "description": "Aeldari Psyker model only. At the start of your Shooting phase, select one friendly Aeldari Vehicle model within 9\" of the bearer. Until the end of the phase, each time that model makes an attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -1536,8 +1545,19 @@
           "cost": 20,
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
-          "legend": "This spirit stone contains the essence of the Bonesinger Raelyth. Those Asuryani psykers who bear this item to battle can draw upon the fallen artisan’s talents.",
-          "description": "Aeldari Psyker model only. While the bearer is within 3\" of one or more friendly Aeldari Vehicle units, the bearer has the Lone Operative ability. In your Command phase, you can select one friendly <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> model within 3\" of the bearer. That model regains up to D3 lost wounds."
+          "legend": "This spirit stone contains the essence of the Bonesinger Raelyth. Those Asuryani psykers who bear this item to battle can draw upon the fallen artisan's talents.",
+          "description": "Aeldari Psyker model only. While the bearer is within 3\" of one or more friendly Aeldari Vehicle units, the bearer has the Lone Operative ability. In your Command phase, you can select one friendly <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> model within 3\" of the bearer. That model regains up to D3 lost wounds.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -1555,7 +1575,7 @@
           "factionId": "AE",
           "name": "VECTORED ENGINES",
           "id": "000009770004",
-          "type": "Armoured Warhost – Strategic Ploy Stratagem",
+          "type": "Armoured Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The result of exquisite and ingenious Aeldari engineering, vectored engines enable grav vehicles to evade their enemies while maintaining accurate fire.",
           "turn": "YOURS",
@@ -1570,7 +1590,7 @@
           "factionId": "AE",
           "name": "CLOUDSTRIKE",
           "id": "000009770005",
-          "type": "Armoured Warhost – Strategic Ploy Stratagem",
+          "type": "Armoured Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The Asuryani often deploy their anti-grav vehicles in the lower atmosphere rather than on the ground. At a signal, they strike before the enemy can react.",
           "turn": "YOURS",
@@ -1579,15 +1599,26 @@
           ],
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
-          "description": "<b>WHEN:</b> Start of the Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Aeldari Vehicle unit from your army that can Fly and is in Strategic Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Deep Strike ability. When your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but if it does, until the end of the turn, it is not eligible to declare a charge. In addition, if your unit is a Transport, each unit that disembarks from it this turn must be set up more than 6\" horizontally from all enemy units and until the end of the turn, is not eligible to declare a charge."
+          "description": "<b>WHEN:</b> Start of the Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Aeldari Vehicle unit from your army that can Fly and is in Strategic Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Deep Strike ability. When your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but if it does, until the end of the turn, it is not eligible to declare a charge. In addition, if your unit is a Transport, each unit that disembarks from it this turn must be set up more than 6\" horizontally from all enemy units and until the end of the turn, is not eligible to declare a charge.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "SOULSIGHT",
           "id": "000009770006",
-          "type": "Armoured Warhost – Strategic Ploy Stratagem",
+          "type": "Armoured Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
-          "legend": "Spirit stones containing the souls of gifted seers have been embedded into this vehicle’s targeting matrices. The essences within lend guidance even in death.",
+          "legend": "Spirit stones containing the souls of gifted seers have been embedded into this vehicle's targeting matrices. The essences within lend guidance even in death.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
@@ -1600,22 +1631,22 @@
           "factionId": "AE",
           "name": "ANTI‑GRAV REPULSION",
           "id": "000009770007",
-          "type": "Armoured Warhost – Strategic Ploy Stratagem",
+          "type": "Armoured Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
-          "legend": "Skilled Aeldari pilots angle their vehicle’s anti-grav fields to repulse the enemy.",
+          "legend": "Skilled Aeldari pilots angle their vehicle's anti-grav fields to repulse the enemy.",
           "turn": "OPPONENTS",
           "phase": [
             "CHARGE"
           ],
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
-          "description": "<b>WHEN:</b> Your opponent’s Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One Aeldari Vehicle unit from your army that can Fly and was selected as a target of that charge.<br><br><b>EFFECT:</b> Until the end of the phase, subtract 2 from Charge rolls made for that enemy unit."
+          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One Aeldari Vehicle unit from your army that can Fly and was selected as a target of that charge.<br><br><b>EFFECT:</b> Until the end of the phase, subtract 2 from Charge rolls made for that enemy unit."
         },
         {
           "factionId": "AE",
           "name": "SWIFT DEPLOYMENT",
           "id": "000009770003",
-          "type": "Armoured Warhost – Strategic Ploy Stratagem",
+          "type": "Armoured Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "With consummate skill, Guardian crews guide their agile armoured transports across the battlefield before swooping low to unload their cargo of warriors.",
           "turn": "YOURS",
@@ -1630,7 +1661,7 @@
           "factionId": "AE",
           "name": "LAYERED WARDS",
           "id": "000009770002",
-          "type": "Armoured Warhost – Strategic Ploy Stratagem",
+          "type": "Armoured Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The wraithbone superstructure of this vehicle has been interlaced with warding runes, enabling its hull to resist incoming fire.",
           "turn": "EITHER",
@@ -1639,7 +1670,18 @@
           ],
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
-          "description": "<b>WHEN:</b> Any phase, just after a mortal wound is allocated to an <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> unit from your army.<br><br><b>TARGET:</b> That Aeldari Vehicle unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds."
+          "description": "<b>WHEN:</b> Any phase, just after a mortal wound is allocated to an <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> unit from your army.<br><br><b>TARGET:</b> That Aeldari Vehicle unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1708,7 +1750,7 @@
           ],
           "detachment": "Army Rules",
           "detachmentId": 783,
-          "description": "<div class=\"redDiamondLeft\"><div class=\"bluCircle2\"><div class=\"aeShooting\"></div></div></div><span class=\"aeText\">TRIGGER:</span> In your opponent’s Shooting phase, just after an enemy unit has shot.<br><br><span class=\"aeText\">EFFECT:</span> One eligible unit from your army (excluding Titanic units) that was hit by one or more of those attacks can make a Normal move of up to D6+1\"."
+          "description": "<div class=\"redDiamondLeft\"><div class=\"bluCircle2\"><div class=\"aeShooting\"></div></div></div><span class=\"aeText\">TRIGGER:</span> In your opponent's Shooting phase, just after an enemy unit has shot.<br><br><span class=\"aeText\">EFFECT:</span> One eligible unit from your army (excluding Titanic units) that was hit by one or more of those attacks can make a Normal move of up to D6+1\"."
         },
         {
           "factionId": "AE",
@@ -1750,7 +1792,7 @@
           "id": "000009926",
           "factionId": "AE",
           "name": "Path of the Warrior",
-          "legend": "The teachings of Khaine’s martial aspects are diverse and highly specialised, each completely lethal in its own nuanced fashion.",
+          "legend": "The teachings of Khaine's martial aspects are diverse and highly specialised, each completely lethal in its own nuanced fashion.",
           "description": "Each time an Aspect Warriors or Avatar of Khaine unit from your army is selected to shoot or fight, select one of the following abilities for it to gain until the end of the phase:<br><ul><li>Each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li><li>Each time a model in this unit makes an attack, re-roll a Wound roll of 1.</li></ul>",
           "detachment": "Aspect Host",
           "detachmentId": 1024
@@ -1785,7 +1827,16 @@
           "detachment": "Aspect Host",
           "detachmentId": 1024,
           "legend": "This simple and elegant gem conceals complex technology based on Dire Avenger shimmershields, its protective aegis extending across the bearer and those who fight at their side.",
-          "description": "Autarch or Autarch Wayleaper model only. While the bearer is leading an Aspect Warriors unit, each time a ranged attack targets that unit, subtract 1 from the Wound roll."
+          "description": "Autarch or Autarch Wayleaper model only. While the bearer is leading an Aspect Warriors unit, each time a ranged attack targets that unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -1803,7 +1854,7 @@
           "factionId": "AE",
           "name": "WARRIOR FOCUS",
           "id": "000009928002",
-          "type": "Aspect Host – Battle Tactic Stratagem",
+          "type": "Aspect Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "So absolute is the focus of these warriors in battle that nothing can distract them or stay their blows.",
           "turn": "EITHER",
@@ -1813,13 +1864,13 @@
           ],
           "detachment": "Aspect Host",
           "detachmentId": 1024,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Aspect Warriors or Avatar of Khaine unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, you can ignore any or all modifiers to that attack’s Ballistic Skill, Weapon skill, Strength, Armour Penetration and Damage characteristics and/or any or all modifiers to the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Aspect Warriors or Avatar of Khaine unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, you can ignore any or all modifiers to that attack's Ballistic Skill, Weapon skill, Strength, Armour Penetration and Damage characteristics and/or any or all modifiers to the Hit roll."
         },
         {
           "factionId": "AE",
           "name": "PRETERNATURAL PRECISION",
           "id": "000009928006",
-          "type": "Aspect Host – Battle Tactic Stratagem",
+          "type": "Aspect Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Analysing their targets' weaknesses with incredible skill, the Aeldari fire for lethal effect.",
           "turn": "YOURS",
@@ -1834,7 +1885,7 @@
           "factionId": "AE",
           "name": "DOOM INESCAPABLE",
           "id": "000009928005",
-          "type": "Aspect Host – Battle Tactic Stratagem",
+          "type": "Aspect Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Cast with the force of a thunderbolt, the Avatar's weapon strikes the foe with meteoric force.",
           "turn": "YOURS",
@@ -1843,13 +1894,13 @@
           ],
           "detachment": "Aspect Host",
           "detachmentId": 1024,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Avatar of Khaine model from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, your model’s Wailing Doom ranged weapon has a Range characteristic of 18\" and a Damage characteristic of 8."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Avatar of Khaine model from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, your model's Wailing Doom ranged weapon has a Range characteristic of 18\" and a Damage characteristic of 8."
         },
         {
           "factionId": "AE",
           "name": "TO THEIR FINAL BREATH",
           "id": "000009928003",
-          "type": "Aspect Host – Strategic Ploy Stratagem",
+          "type": "Aspect Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "As champions and defenders of a dying race, these warriors fight furiously to the very end.",
           "turn": "EITHER",
@@ -1858,13 +1909,13 @@
           ],
           "detachment": "Aspect Host",
           "detachmentId": 1024,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Aspect Warriors or Avatar of Khaine unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Each time you use this Stratagem, you can remove one Aspect Shrine token your unit has (see datasheets). Then, until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6, adding 1 to the result if you removed an Aspect Shrine token during this usage of this Stratagem. On a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Aspect Warriors or Avatar of Khaine unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Each time you use this Stratagem, you can remove one Aspect Shrine token your unit has (see datasheets). Then, until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6, adding 1 to the result if you removed an Aspect Shrine token during this usage of this Stratagem. On a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
         },
         {
           "factionId": "AE",
-          "name": "KHAINE’S VENGEANCE",
+          "name": "KHAINE'S VENGEANCE",
           "id": "000009928007",
-          "type": "Aspect Host – Strategic Ploy Stratagem",
+          "type": "Aspect Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Embodying the rage of Khaine himself, these warriors press home their attack and strike down those cowards who seek to flee their fury.",
           "turn": "OPPONENTS",
@@ -1873,13 +1924,13 @@
           ],
           "detachment": "Aspect Host",
           "detachmentId": 1024,
-          "description": "<b>WHEN:</b> Your opponent’s Movement phase, just after an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is selected to Fall Back.<br><br><b>TARGET:</b> One Aspect Warriors or Avatar of Khaine unit from your army that is within Engagement Range of that enemy unit.<br><br><b>EFFECT:</b> All models in that enemy unit must take a Desperate Escape test. When doing so, if that enemy unit is Battle-shocked, subtract 1 from each of those tests."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is selected to Fall Back.<br><br><b>TARGET:</b> One Aspect Warriors or Avatar of Khaine unit from your army that is within Engagement Range of that enemy unit.<br><br><b>EFFECT:</b> All models in that enemy unit must take a Desperate Escape test. When doing so, if that enemy unit is Battle-shocked, subtract 1 from each of those tests."
         },
         {
           "factionId": "AE",
           "name": "SKYBORNE SANCTUARY",
           "id": "000009928004",
-          "type": "Aspect Host – Strategic Ploy Stratagem",
+          "type": "Aspect Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The Aeldari excel in striking swiftly then leaping back into the safety of their skimming transports.",
           "turn": "EITHER",
@@ -1901,7 +1952,7 @@
           "factionId": "AE",
           "name": "Strength from Death",
           "legend": "Surrounded by the slaughter on the battlefield, the Ynnari channel the sinister supernatural gifts of Ynnead to great effect.",
-          "description": "You can use the following rules:<br><br><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Lethal Intent</p><p>At the end of your opponent’s Shooting phase, if one or more <span class=\"tooltip00044\" data-tooltip-content=\"#tooltip_content00044\" data-tooltip-anchor=\"#tooltip_content00044\"><span class=\"kwb kwbu\">YNNARI</span></span> units from your army were destroyed this phase, select one <span class=\"tooltip00045\" data-tooltip-content=\"#tooltip_content00045\" data-tooltip-anchor=\"#tooltip_content00045\"><span class=\"kwb kwbu\">YNNARI</span> <span class=\"kwb kwbu\">INFANTRY</span></span> or <span class=\"kwb kwbo\">YNNARI</span> <span class=\"kwb kwbo\">MOUNTED</span> unit from your army that was within 6\" of your destroyed unit. That unit can make a <span class=\"tooltip00079\" data-tooltip-content=\"#tooltip_content00079\"><span class=\"tt kwbu\">Normal</span> <span class=\"tt kwbu\">move</span></span> of up to D6+1\".</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Lethal Surge</p><p>Once per turn, when a <span class=\"tooltip00044\" data-tooltip-content=\"#tooltip_content00044\" data-tooltip-anchor=\"#tooltip_content00044\"><span class=\"kwb kwbu\">YNNARI</span></span> unit from your army performs the <span class=\"tooltip00088\" data-tooltip-content=\"#tooltip_content00088\"><span class=\"tt kwbu\">Fade</span> <span class=\"tt kwbu\">Back</span></span> Agile Manoeuvre, it can make a Lethal Surge move instead of a <span class=\"tooltip00079\" data-tooltip-content=\"#tooltip_content00079\"><span class=\"tt kwbu\">Normal</span> <span class=\"tt kwbu\">move</span></span>. If it does, roll one D6 and add 1 to the result: that unit can be moved a number of inches up to the total. When doing so, those models can be moved within <span class=\"tooltip00020\" data-tooltip-content=\"#tooltip_content00020\"><span class=\"tt kwbu\">Engagement</span> <span class=\"tt kwbu\">Range</span></span> of the enemy unit that just triggered that Agile Manoeuvre.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Lethal Reprisal</p><p>At the start of the Fight phase, select one <span class=\"tooltip00044\" data-tooltip-content=\"#tooltip_content00044\" data-tooltip-anchor=\"#tooltip_content00044\"><span class=\"kwb kwbu\">YNNARI</span></span> unit from your army (excluding <span class=\"kwb\">TITANIC</span> units) that is below its <span class=\"tooltip00083\" data-tooltip-content=\"#tooltip_content00083\"><span class=\"tt kwbu\">Starting</span> <span class=\"tt kwbu\">Strength</span></span>. Until the end of the phase, that unit has the <span class=\"tooltip00089\" data-tooltip-content=\"#tooltip_content00089\"><span class=\"tt kwbu\">Fights</span> <span class=\"tt kwbu\">First</span></span> ability.</p></td></tr></tbody></tbody></table></div><br><span class=\"hi_custom\">SERVANTS OF THE WHISPERING GOD</span><br><ul><li>You can include Ynnari units in your army, even though they do not have the <span class=\"kwb\">ASURYANI</span> Faction keyword.</li><li>Asuryani units (excluding Epic Heroes) from your army gain the <span class=\"kwb\">YNNARI</span> keyword.</li><li>You must include Yvraine and/or The Yncarne in your army, and one of those models must be your <span class=\"kwb\">WARLORD</span>.</li></ul>",
+          "description": "You can use the following rules:<br><br><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Lethal Intent</p><p>At the end of your opponent's Shooting phase, if one or more <span class=\"tooltip00044\" data-tooltip-content=\"#tooltip_content00044\" data-tooltip-anchor=\"#tooltip_content00044\"><span class=\"kwb kwbu\">YNNARI</span></span> units from your army were destroyed this phase, select one <span class=\"tooltip00045\" data-tooltip-content=\"#tooltip_content00045\" data-tooltip-anchor=\"#tooltip_content00045\"><span class=\"kwb kwbu\">YNNARI</span> <span class=\"kwb kwbu\">INFANTRY</span></span> or <span class=\"kwb kwbo\">YNNARI</span> <span class=\"kwb kwbo\">MOUNTED</span> unit from your army that was within 6\" of your destroyed unit. That unit can make a <span class=\"tooltip00079\" data-tooltip-content=\"#tooltip_content00079\"><span class=\"tt kwbu\">Normal</span> <span class=\"tt kwbu\">move</span></span> of up to D6+1\".</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Lethal Surge</p><p>Once per turn, when a <span class=\"tooltip00044\" data-tooltip-content=\"#tooltip_content00044\" data-tooltip-anchor=\"#tooltip_content00044\"><span class=\"kwb kwbu\">YNNARI</span></span> unit from your army performs the <span class=\"tooltip00088\" data-tooltip-content=\"#tooltip_content00088\"><span class=\"tt kwbu\">Fade</span> <span class=\"tt kwbu\">Back</span></span> Agile Manoeuvre, it can make a Lethal Surge move instead of a <span class=\"tooltip00079\" data-tooltip-content=\"#tooltip_content00079\"><span class=\"tt kwbu\">Normal</span> <span class=\"tt kwbu\">move</span></span>. If it does, roll one D6 and add 1 to the result: that unit can be moved a number of inches up to the total. When doing so, those models can be moved within <span class=\"tooltip00020\" data-tooltip-content=\"#tooltip_content00020\"><span class=\"tt kwbu\">Engagement</span> <span class=\"tt kwbu\">Range</span></span> of the enemy unit that just triggered that Agile Manoeuvre.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Lethal Reprisal</p><p>At the start of the Fight phase, select one <span class=\"tooltip00044\" data-tooltip-content=\"#tooltip_content00044\" data-tooltip-anchor=\"#tooltip_content00044\"><span class=\"kwb kwbu\">YNNARI</span></span> unit from your army (excluding <span class=\"kwb\">TITANIC</span> units) that is below its <span class=\"tooltip00083\" data-tooltip-content=\"#tooltip_content00083\"><span class=\"tt kwbu\">Starting</span> <span class=\"tt kwbu\">Strength</span></span>. Until the end of the phase, that unit has the <span class=\"tooltip00089\" data-tooltip-content=\"#tooltip_content00089\"><span class=\"tt kwbu\">Fights</span> <span class=\"tt kwbu\">First</span></span> ability.</p></td></tr></tbody></tbody></table></div><br><span class=\"hi_custom\">SERVANTS OF THE WHISPERING GOD</span><br><ul><li>You can include Ynnari units in your army, even though they do not have the <span class=\"kwb\">ASURYANI</span> Faction keyword.</li><li>Asuryani units (excluding Epic Heroes) from your army gain the <span class=\"kwb\">YNNARI</span> keyword.</li><li>You must include Yvraine and/or The Yncarne in your army, and one of those models must be your <span class=\"kwb\">WARLORD</span>.</li></ul>",
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022
         }
@@ -1915,7 +1966,7 @@
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
           "legend": "This psychic executioner projects the extinguishing will of the Aeldari death god into the minds of the fc reducing them to ashen grey husks in moments.",
-          "description": "Farseer model only. The bearer’s Eldritch Storm weapon has the [devastating wounds] ability."
+          "description": "Farseer model only. The bearer's Eldritch Storm weapon has the [devastating wounds] ability."
         },
         {
           "factionId": "AE",
@@ -1934,8 +1985,8 @@
           "cost": 10,
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
-          "legend": "This cruel warrior steals a portion of animus from each vanquished foe, keeping a little of Ynnead’s due to empower themselves and slay more foes in his name.",
-          "description": "Archon model only. Add 2 to the Attacks characteristic of the bearer’s melee weapons."
+          "legend": "This cruel warrior steals a portion of animus from each vanquished foe, keeping a little of Ynnead's due to empower themselves and slay more foes in his name.",
+          "description": "Archon model only. Add 2 to the Attacks characteristic of the bearer's melee weapons."
         },
         {
           "factionId": "AE",
@@ -1953,7 +2004,7 @@
           "factionId": "AE",
           "name": "MACABRE RESILIENCE",
           "id": "000009920003",
-          "type": "Devoted of Ynnead – Battle Tactic Stratagem",
+          "type": "Devoted of Ynnead - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Such is the conviction and power of the Ynnari that sometimes even mortal wounds cannot slow them.",
           "turn": "EITHER",
@@ -1963,13 +2014,22 @@
           ],
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Ynnari Infantry or Ynnari Mounted unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Ynnari Infantry or Ynnari Mounted unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "SOULSIGHT",
           "id": "000009920006",
-          "type": "Devoted of Ynnead – Battle Tactic Stratagem",
+          "type": "Devoted of Ynnead - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Perceiving the flickering soulstuff of their foes, the Ynnari strike with ruthless precision.",
           "turn": "YOURS",
@@ -1984,9 +2044,9 @@
           "factionId": "AE",
           "name": "EMISSARIES OF YNNEAD",
           "id": "000009920004",
-          "type": "Devoted of Ynnead – Battle Tactic Stratagem",
+          "type": "Devoted of Ynnead - Battle Tactic Stratagem",
           "cpCost": 1,
-          "legend": "Immersed in murder and gripped by holy purpose, these warriors bring Ynnead’s fatal message and his final gift to all who face them.",
+          "legend": "Immersed in murder and gripped by holy purpose, these warriors bring Ynnead's fatal message and his final gift to all who face them.",
           "turn": "EITHER",
           "phase": [
             "FIGHT"
@@ -1999,7 +2059,7 @@
           "factionId": "AE",
           "name": "DEATH ANSWERS DEATH",
           "id": "000009920007",
-          "type": "Devoted of Ynnead – Strategic Ploy Stratagem",
+          "type": "Devoted of Ynnead - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "As the foe slays their warriors, a terrible vigour grips the Ynnari and compels them to repay the slaughter in kind.",
           "turn": "OPPONENTS",
@@ -2008,13 +2068,13 @@
           ],
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
-          "description": "<b>WHEN:</b> End of your opponent’s Shooting phase.<br><br><b>TARGET:</b> One Ynnari unit from your army (excluding Wraith Construct units), if one or more models in that unit were destroyed this phase.<br><br><b>EFFECT:</b> Your unit can shoot as if it were your Shooting phase."
+          "description": "<b>WHEN:</b> End of your opponent's Shooting phase.<br><br><b>TARGET:</b> One Ynnari unit from your army (excluding Wraith Construct units), if one or more models in that unit were destroyed this phase.<br><br><b>EFFECT:</b> Your unit can shoot as if it were your Shooting phase."
         },
         {
           "factionId": "AE",
           "name": "PALL OF DREAD",
           "id": "000009920002",
-          "type": "Devoted of Ynnead – Strategic Ploy Stratagem",
+          "type": "Devoted of Ynnead - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Even after they fall, the most fervent Ynnari leave a sinister sense of watchfulness in their wake like some invisible death shroud.",
           "turn": "EITHER",
@@ -2023,13 +2083,13 @@
           ],
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
-          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Ynnari unit from your army that was just destroyed while it was within range of one or more objective markers you controlled at the end of the previous phase. You can use this Stratagem on that unit even though it was just destroyed.<br><br><b>EFFECT:</b> Select one of those objective markers. That objective marker remains under your control until your opponent’s Level of Control over that objective marker is greater than yours at the end of a phase."
+          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Ynnari unit from your army that was just destroyed while it was within range of one or more objective markers you controlled at the end of the previous phase. You can use this Stratagem on that unit even though it was just destroyed.<br><br><b>EFFECT:</b> Select one of those objective markers. That objective marker remains under your control until your opponent's Level of Control over that objective marker is greater than yours at the end of a phase."
         },
         {
           "factionId": "AE",
           "name": "PARTING THE VEIL",
           "id": "000009920005",
-          "type": "Devoted of Ynnead – Strategic Ploy Stratagem",
+          "type": "Devoted of Ynnead - Strategic Ploy Stratagem",
           "cpCost": 2,
           "legend": "In the moment of transcendent glory, before the Ynnari give their essence to their god, they fight harder than ever to take the foe with them to death.",
           "turn": "EITHER",
@@ -2038,7 +2098,7 @@
           ],
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Ynnari unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Ynnari unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play."
         }
       ]
     },
@@ -2060,12 +2120,12 @@
         {
           "factionId": "AE",
           "id": "000009915002",
-          "name": "Cegorach’s Coil",
+          "name": "Cegorach's Coil",
           "cost": 25,
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "legend": "This vicious monofilament lariat unspools from its wielder’s gauntlet in a heartbeat, lashing through the foe before retracting as they tumble into bloody chunks.",
-          "description": "Troupe Master model only. Each time the bearer’s unit ends a Charge move, select one enemy unit within Engagement Range of the bearer’s unit, then roll one D6 for each model in the bearer’s unit that is within Engagement Range of that enemy unit: for each 4+, that enemy unit suffers 1 mortal wound (to a maximum of 6 mortal wounds)."
+          "legend": "This vicious monofilament lariat unspools from its wielder's gauntlet in a heartbeat, lashing through the foe before retracting as they tumble into bloody chunks.",
+          "description": "Troupe Master model only. Each time the bearer's unit ends a Charge move, select one enemy unit within Engagement Range of the bearer's unit, then roll one D6 for each model in the bearer's unit that is within Engagement Range of that enemy unit: for each 4+, that enemy unit suffers 1 mortal wound (to a maximum of 6 mortal wounds)."
         },
         {
           "factionId": "AE",
@@ -2074,17 +2134,17 @@
           "cost": 15,
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "legend": "So terrifying and yet so captivating are the shifting aspects of this Harlequin’s psychoreactive mask that they can hypnotise foes or stop their hearts with fear.",
-          "description": "Harlequins model only. Each time an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) within Engagement Range of the bearer’s unit Falls Back, all models in that enemy unit must take a Desperate Escape test. When doing so, if that enemy unit is Battle-shocked, subtract 1 from each of those tests."
+          "legend": "So terrifying and yet so captivating are the shifting aspects of this Harlequin's psychoreactive mask that they can hypnotise foes or stop their hearts with fear.",
+          "description": "Harlequins model only. Each time an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) within Engagement Range of the bearer's unit Falls Back, all models in that enemy unit must take a Desperate Escape test. When doing so, if that enemy unit is Battle-shocked, subtract 1 from each of those tests."
         },
         {
           "factionId": "AE",
           "id": "000009915004",
-          "name": "Murder’s Jest",
+          "name": "Murder's Jest",
           "cost": 20,
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "legend": "This malevolent shrieker cannon catalyses its victims’ fear impulses into exaggerated bioelectric shocks, forcing them to scare themselves to death.",
+          "legend": "This malevolent shrieker cannon catalyses its victims' fear impulses into exaggerated bioelectric shocks, forcing them to scare themselves to death.",
           "description": "Death Jester model only. Each time the bearer makes an attack that targets a unit that is Below Half-strength, each successful Hit roll scores a Critical Hit."
         },
         {
@@ -2094,8 +2154,19 @@
           "cost": 15,
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "legend": "Employing their psychic powers of illusion and obfuscation, this Shadowseer can cause their comrades to vanish from the foe’s perceptions.",
-          "description": "Shadowseer model only. While the bearer is leading a unit, models in that unit have the Infiltrators ability."
+          "legend": "Employing their psychic powers of illusion and obfuscation, this Shadowseer can cause their comrades to vanish from the foe's perceptions.",
+          "description": "Shadowseer model only. While the bearer is leading a unit, models in that unit have the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2103,7 +2174,7 @@
           "factionId": "AE",
           "name": "EXIT THE STAGE",
           "id": "000009916007",
-          "type": "Ghosts of the Webway – Strategic Ploy Stratagem",
+          "type": "Ghosts of the Webway - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Players know when to fade back from the stage of war, ready to strike again when their moment comes.",
           "turn": "OPPONENTS",
@@ -2112,13 +2183,13 @@
           ],
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "description": "<b>WHEN:</b> End of your opponent’s Fight phase.<br><br><b>TARGET:</b> One Harlequins unit from your army that is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Remove your unit from the battlefield and place it into Strategic Reserves."
+          "description": "<b>WHEN:</b> End of your opponent's Fight phase.<br><br><b>TARGET:</b> One Harlequins unit from your army that is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Remove your unit from the battlefield and place it into Strategic Reserves."
         },
         {
           "factionId": "AE",
           "name": "BLOODY DANCE",
           "id": "000009916006",
-          "type": "Ghosts of the Webway – Strategic Ploy Stratagem",
+          "type": "Ghosts of the Webway - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Enemies goaded into following the steps of the saedath come unwittingly on cue to their executions.",
           "turn": "OPPONENTS",
@@ -2127,13 +2198,13 @@
           ],
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "description": "<b>WHEN:</b> End of your opponent’s Charge phase.<br><br><b>TARGET:</b> One Harlequins Infantry or Harlequins Mounted unit from your army that is within 6\" of one or more enemy units and would be eligible to declare a charge against one or more of those enemy units if it were your Charge phase.<br><br><b>EFFECT:</b> Your unit now declares a charge that only targets one or more of those enemy units, and you resolve that charge.<br><br><b>RESTRICTIONS:</b> Note that even if this charge is successful, your unit does not receive any Charge bonus this turn."
+          "description": "<b>WHEN:</b> End of your opponent's Charge phase.<br><br><b>TARGET:</b> One Harlequins Infantry or Harlequins Mounted unit from your army that is within 6\" of one or more enemy units and would be eligible to declare a charge against one or more of those enemy units if it were your Charge phase.<br><br><b>EFFECT:</b> Your unit now declares a charge that only targets one or more of those enemy units, and you resolve that charge.<br><br><b>RESTRICTIONS:</b> Note that even if this charge is successful, your unit does not receive any Charge bonus this turn."
         },
         {
           "factionId": "AE",
           "name": "MOCKING FLIGHT",
           "id": "000009916004",
-          "type": "Ghosts of the Webway – Strategic Ploy Stratagem",
+          "type": "Ghosts of the Webway - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The Harlequins tumble away in mock terror and panic before spinning back into the fight with cruel laughter and redoubled fury.",
           "turn": "YOURS",
@@ -2146,9 +2217,9 @@
         },
         {
           "factionId": "AE",
-          "name": "HEROES’ FALL",
+          "name": "HEROES' FALL",
           "id": "000009916003",
-          "type": "Ghosts of the Webway – Strategic Ploy Stratagem",
+          "type": "Ghosts of the Webway - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Though they may be slain, this step of the saedath calls on the players to act out the demise of tragic heroes who take their enemies with them to death.",
           "turn": "EITHER",
@@ -2157,13 +2228,13 @@
           ],
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Harlequins unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. On a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Harlequins unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. On a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
         },
         {
           "factionId": "AE",
-          "name": "TRICKSTERS’ RETORT",
+          "name": "TRICKSTERS' RETORT",
           "id": "000009916005",
-          "type": "Ghosts of the Webway – Strategic Ploy Stratagem",
+          "type": "Ghosts of the Webway - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "To the Harlequins, the foe are simply unwitting dance partners, their every move matched with graceful aplomb.",
           "turn": "OPPONENTS",
@@ -2172,13 +2243,13 @@
           ],
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
-          "description": "<b>WHEN:</b> Your opponent’s Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> One Troupe unit from your army that is within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Your unit can make a Normal move of up to 6\"."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> One Troupe unit from your army that is within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Your unit can make a Normal move of up to 6\"."
         },
         {
           "factionId": "AE",
           "name": "STAGED DEATH",
           "id": "000009916002",
-          "type": "Ghosts of the Webway – Strategic Ploy Stratagem",
+          "type": "Ghosts of the Webway - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "A feigned death and sudden, shocking return are as impactful as dismaying to the foe.",
           "turn": "EITHER",
@@ -2200,16 +2271,25 @@
           "factionId": "AE",
           "name": "Defend at All Costs",
           "legend": "Battlehosts often deploy to protect arterial Webway gates, the world shrines of vulnerable Exodite worlds or the domes and galleries of their home craft world; this lends their warriors an especially keen determination to protect their holdings from foes.",
-          "description": "Each time a Dire Avenger, Guardian, Support Weapon or War Walker model from your army makes an attack, if that model’s unit and/or the target unit are within range of one or more objective markers, add 1 to the Hit roll.",
+          "description": "Each time a Dire Avenger, Guardian, Support Weapon or War Walker model from your army makes an attack, if that model's unit and/or the target unit are within range of one or more objective markers, add 1 to the Hit roll.",
           "detachment": "Guardian Battlehost",
-          "detachmentId": 1020
+          "detachmentId": 1020,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
         {
           "factionId": "AE",
           "id": "000009911002",
-          "name": "Craftworld’s Champion",
+          "name": "Craftworld's Champion",
           "cost": 25,
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
@@ -2224,7 +2304,18 @@
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
           "legend": "Knowing secret paths through the Webway, the bearer can direct warriors to outmanoeuvre the foe.",
-          "description": "Asuryani model only. In the Deploy Armies step, select up to two Guardians units from your army. Models in the selected units have the Infiltrators ability."
+          "description": "Asuryani model only. In the Deploy Armies step, select up to two Guardians units from your army. Models in the selected units have the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2233,8 +2324,8 @@
           "cost": 20,
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
-          "legend": "This warrior’s knowledge of the home ground on which they fight allows them to expertly position their forces to bracket the routes of the enemy’s approach with fire.",
-          "description": "Asuryani model only. While the bearer is leading a Dire Avengers or Guardians unit, once per battle round, you can target the bearer’s unit with the Fire Overwatch Stratagem for 0CP, and while resolving that Stratagem, hits are scored on unmodified Hit rolls of 5+, or unmodified Hit rolls of 4+ instead if the bearer’s unit is within range of an objective marker you control."
+          "legend": "This warrior's knowledge of the home ground on which they fight allows them to expertly position their forces to bracket the routes of the enemy's approach with fire.",
+          "description": "Asuryani model only. While the bearer is leading a Dire Avengers or Guardians unit, once per battle round, you can target the bearer's unit with the Fire Overwatch Stratagem for 0CP, and while resolving that Stratagem, hits are scored on unmodified Hit rolls of 5+, or unmodified Hit rolls of 4+ instead if the bearer's unit is within range of an objective marker you control."
         },
         {
           "factionId": "AE",
@@ -2243,7 +2334,7 @@
           "cost": 10,
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
-          "legend": "An ancient relic of Aeldari technology, this device enhances the lethality of those weapons said to channel the killing heal ofVaul’s blazing forges.",
+          "legend": "An ancient relic of Aeldari technology, this device enhances the lethality of those weapons said to channel the killing heal ofVaul's blazing forges.",
           "description": "Asuryani model only. While the bearer is leading a Storm Guardians unit, each time you roll to determine the number of attacks made with a flamer equipped by a model in that unit, you can re-roll the result, and each time you make a Damage roll for a model equipped with a fusion gun in that unit, you can re-roll the result."
         }
       ],
@@ -2252,7 +2343,7 @@
           "factionId": "AE",
           "name": "WARDING SALVOES",
           "id": "000009912002",
-          "type": "Guardian Battlehost – Battle Tactic Stratagem",
+          "type": "Guardian Battlehost - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Woe betide the foe that seeks to claim the holdings of armed and determined Asuryani.",
           "turn": "EITHER",
@@ -2268,7 +2359,7 @@
           "factionId": "AE",
           "name": "BLADES OF ASURYAN",
           "id": "000009912006",
-          "type": "Guardian Battlehost – Battle Tactic Stratagem",
+          "type": "Guardian Battlehost - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Asuryani martial teachings enable those wielding ranged weapons to employ them as close-quarter implements of death as well.",
           "turn": "YOURS",
@@ -2283,7 +2374,7 @@
           "factionId": "AE",
           "name": "SHIELD NODES",
           "id": "000009912003",
-          "type": "Guardian Battlehost – Battle Tactic Stratagem",
+          "type": "Guardian Battlehost - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Exploiting a spar of old Aeldari technology, these warriors engage the flickering ghosts of ancient defensive force fields.",
           "turn": "EITHER",
@@ -2293,13 +2384,22 @@
           ],
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Dire Avengers or Guardians unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> If your unit is within range of one or more objective markers, until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Dire Avengers or Guardians unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> If your unit is within range of one or more objective markers, until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
-          "name": "VAUL’S VENGEANCE",
+          "name": "VAUL'S VENGEANCE",
           "id": "000009912004",
-          "type": "Guardian Battlehost – Battle Tactic Stratagem",
+          "type": "Guardian Battlehost - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Swift and terrible vengeance comes for those who dare strike down the warriors of the Aeldari in the form of searing heavy weapons fire.",
           "turn": "EITHER",
@@ -2309,13 +2409,13 @@
           ],
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit destroys a Dire Avengers or Guardians unit from your army.<br><br><b>TARGET:</b> One War Walkers unit from your army.<br><br><b>EFFECT:</b> After that enemy unit has finished making its attacks, your unit can shoot as if it were your Shooting phase, but when resolving those attacks, it can only target that enemy unit (and only if it is an eligible target).<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once per battle round."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit destroys a Dire Avengers or Guardians unit from your army.<br><br><b>TARGET:</b> One War Walkers unit from your army.<br><br><b>EFFECT:</b> After that enemy unit has finished making its attacks, your unit can shoot as if it were your Shooting phase, but when resolving those attacks, it can only target that enemy unit (and only if it is an eligible target).<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once per battle round."
         },
         {
           "factionId": "AE",
           "name": "TIME TO STRIKE",
           "id": "000009912005",
-          "type": "Guardian Battlehost – Strategic Ploy Stratagem",
+          "type": "Guardian Battlehost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Storm Guardians train to recognise where and when their selfless aggression can best benefit their craftworld and never to miss such opportunities.",
           "turn": "YOURS",
@@ -2330,7 +2430,7 @@
           "factionId": "AE",
           "name": "COST OF VICTORY",
           "id": "000009912007",
-          "type": "Guardian Battlehost – Strategic Ploy Stratagem",
+          "type": "Guardian Battlehost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "In so desperate and vital a fight, the Aeldari must accept casualties they would normally avoid and even send fresh warriors in to bolster the flagging ranks if it means victory.",
           "turn": "OPPONENTS",
@@ -2339,21 +2439,21 @@
           ],
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
-          "description": "<b>WHEN:</b> End of your opponent’s Fight phase.<br><br><b>TARGET:</b> One Guardians unit from your army.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, remove it from the battlefield and place it into Strategic Reserves. When doing so, return every destroyed <span class=\"kwb\">GUARDIANS</span> model to your unit."
+          "description": "<b>WHEN:</b> End of your opponent's Fight phase.<br><br><b>TARGET:</b> One Guardians unit from your army.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, remove it from the battlefield and place it into Strategic Reserves. When doing so, return every destroyed <span class=\"kwb\">GUARDIANS</span> model to your unit."
         }
       ]
     },
     {
       "slug": "khaine-s-arrow",
-      "name": "Khaine’s Arrow",
+      "name": "Khaine's Arrow",
       "abilities": [
         {
           "id": "000009324",
           "factionId": "AE",
           "name": "Unerring Strike",
-          "legend": "Once loosed at their target, the warriors who make up the Arrow of Khaine focus all of their attentions upon their singular target, ’[hey move with all the balletic speed of their people, and let nothing slow their attack.",
+          "legend": "Once loosed at their target, the warriors who make up the Arrow of Khaine focus all of their attentions upon their singular target, '[hey move with all the balletic speed of their people, and let nothing slow their attack.",
           "description": "In your Movement phase, each time an <span class=\"kwb\">AELDARI</span> unit from your army makes a Normal move, while making that move it can attempt to operate a closed Hatchway that is within 1\" of it at any point during that move, provided there are no enemy units within 1\" of that Hatchway. If that <span class=\"kwb\">AELDARI</span> unit does attempt to operate that Hatchway, reduce the distance each model in that unit can move this phase by 2\" (if this makes it impossible for that unit to gel within 1\" of that Hatchway it wishes to operate, then it cannot attempt to do so), and it cannot operate a Hatchway again this turn.",
-          "detachment": "Khaine’s Arrow",
+          "detachment": "Khaine's Arrow",
           "detachmentId": 919
         }
       ],
@@ -2363,7 +2463,7 @@
           "id": "000009325002",
           "name": "Runes of Sanctuary (Psychic)",
           "cost": 0,
-          "detachment": "Khaine’s Arrow",
+          "detachment": "Khaine's Arrow",
           "detachmentId": 919,
           "legend": "Before battle was even joined the runes were cast, and this forces safest and truest passage through their foes predicted then committed to heart.",
           "description": "PSYKER model only. Once per turn, in your opponents Shooting phase, when a friendly <span class=\"kwb\">AELDARI</span> unit within 9\" of and visible to the bearer is selected as the target of a ranged attack, the bearer can use this Enhancement. If it does, until the end of the phase, each time an attack targets that friendly <span class=\"kwb\">AELDARI</span> unit, worsen the Armour Penetration characteristic of that attack by 1."
@@ -2373,7 +2473,7 @@
           "id": "000009325003",
           "name": "Shieldmaster",
           "cost": 0,
-          "detachment": "Khaine’s Arrow",
+          "detachment": "Khaine's Arrow",
           "detachmentId": 919,
           "legend": "This warrior exploits every detail of their environment to stave off pursuing or encircling foes.",
           "description": "Once per turn, in your Movement phase, after the bearer has moved, you can close one open Hatchway it moved through this phase (this can be done in addition to operating a Hatchway using the Unerring Strike Detachment rule)."
@@ -2384,7 +2484,7 @@
           "factionId": "AE",
           "name": "VOID GHOSTS",
           "id": "000009326002",
-          "type": "Khaine’s Arrow – Battle Tactic Stratagem",
+          "type": "Khaine's Arrow - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Exploiting the fluctuating gravity of voidship fighting and flowing with the nigh-imperceptible movements of the vessel around them, the Aeldari acrobatically evade the blasts and blades of their foes.",
           "turn": "EITHER",
@@ -2392,22 +2492,31 @@
             "SHOOTING",
             "FIGHT"
           ],
-          "detachment": "Khaine’s Arrow",
+          "detachment": "Khaine's Arrow",
           "detachmentId": 919,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "BLADEFOCUS",
           "id": "000009326003",
-          "type": "Khaine’s Arrow – Battle Tactic Stratagem",
+          "type": "Khaine's Arrow - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Those Aspect Warriors best versed in close-quarters combat fight all the harder, knowing they must act as the piercing tip of their host's strike.",
           "turn": "EITHER",
           "phase": [
             "FIGHT"
           ],
-          "detachment": "Khaine’s Arrow",
+          "detachment": "Khaine's Arrow",
           "detachmentId": 919,
           "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One HOwLING BANSHEES or STRIKING ScORPIONS unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, if it made a Charge move this turn, you can re-roll the Hit roll."
         },
@@ -2415,29 +2524,38 @@
           "factionId": "AE",
           "name": "AURIC STORM",
           "id": "000009326005",
-          "type": "Khaine’s Arrow – Battle Tactic Stratagem",
+          "type": "Khaine's Arrow - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "The fiery passage of Khaine's Arrow scours the enemy away, leaving them nowhere to hide.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
           ],
-          "detachment": "Khaine’s Arrow",
+          "detachment": "Khaine's Arrow",
           "detachmentId": 919,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One DIRE AvENGERS, FIRE DRAGONS, SwOOPING HAwKS or WARP SPIDERS unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One DIRE AvENGERS, FIRE DRAGONS, SwOOPING HAwKS or WARP SPIDERS unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "ARTIFICER ROUNDS",
           "id": "000009326004",
-          "type": "Khaine’s Arrow – Strategic Ploy Stratagem",
+          "type": "Khaine's Arrow - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "These warriors know precisely which strategic sites must be secured, and in what order.",
           "turn": "YOURS",
           "phase": [
             "COMMAND"
           ],
-          "detachment": "Khaine’s Arrow",
+          "detachment": "Khaine's Arrow",
           "detachmentId": 919,
           "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army (excluding CHARAcTER units).<br><br><b>EFFECT:</b> Until the start of your next Command phase, add 1 to the Objective Control characteristic of models in your unit. In addition, at the end of your turn, select one objective marker you control that your unit is within range of. That objective marker is Secured by your army."
         }
@@ -2484,7 +2602,7 @@
           "factionId": "AE",
           "name": "VOID GHOSTS",
           "id": "000009335002",
-          "type": "Protector Host – Battle Tactic Stratagem",
+          "type": "Protector Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Exploiting the fluctuating gravity of voidship fighting and flowing with the nigh-imperceptible movements of the vessel around them, the Aeldari acrobatically evade the blasts and blades of their foes.",
           "turn": "EITHER",
@@ -2494,13 +2612,22 @@
           ],
           "detachment": "Protector Host",
           "detachmentId": 920,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "SHURIKEN STORM",
           "id": "000009335003",
-          "type": "Protector Host – Battle Tactic Stratagem",
+          "type": "Protector Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Shuriken weaponry fill corridors and chambers with inescapable hails of monomolecular discs and reduce enemy boarding parties to bloodied ruin.",
           "turn": "YOURS",
@@ -2515,7 +2642,7 @@
           "factionId": "AE",
           "name": "SHIELD OF BLADES",
           "id": "000009335004",
-          "type": "Protector Host – Strategic Ploy Stratagem",
+          "type": "Protector Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "A discipline refined for shipboard battle, this feat of marksmanship sees the Aeldari overlap annihilating hails of defensive fire.",
           "turn": "OPPONENTS",
@@ -2525,13 +2652,13 @@
           ],
           "detachment": "Protector Host",
           "detachmentId": 920,
-          "description": "<b>WHEN:</b> Your opponent’s Movement or Charge phase.<br><br><b>TARGET:</b> One DIRE AvENGERS or GUARDIAN DEfENDERS unit from your army that has not fired Overwatch this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack while firing Overwatch, an unmodified Hit roll of 5+ is required to score a hit, instead of an unmodified 6."
+          "description": "<b>WHEN:</b> Your opponent's Movement or Charge phase.<br><br><b>TARGET:</b> One DIRE AvENGERS or GUARDIAN DEfENDERS unit from your army that has not fired Overwatch this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack while firing Overwatch, an unmodified Hit roll of 5+ is required to score a hit, instead of an unmodified 6."
         },
         {
           "factionId": "AE",
           "name": "RAPID AMBUSH",
           "id": "000009335005",
-          "type": "Protector Host – Strategic Ploy Stratagem",
+          "type": "Protector Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Reacting with a speed most mortal beings could not dream of, the Aeldari engulf emerging foes in a sudden hail of gunfire.",
           "turn": "OPPONENTS",
@@ -2540,7 +2667,7 @@
           ],
           "detachment": "Protector Host",
           "detachmentId": 920,
-          "description": "<b>WHEN:</b> Your opponent’s Movement phase, just after an enemy unit opens a Hatchway.<br><br><b>TARGET:</b> One DIRE AvENGERS or GUARDIANS unit from your army that has not fired Overwatch this phase and is wholly on the opposite side of that Hatchway from that enemy unit.<br><br><b>EFFECT:</b> If that enemy unit is within 9\" of and visible to your unit, roll one D6: on a 2-5, that enemy unit suffers 1 mortal wound; on a 6, that enemy unit suffers 2 mortal wounds. If that enemy unit suffers one or more mortal wounds in this way, your unit can then make a Normal move of up to D6”.<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit cannot fire Overwatch."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit opens a Hatchway.<br><br><b>TARGET:</b> One DIRE AvENGERS or GUARDIANS unit from your army that has not fired Overwatch this phase and is wholly on the opposite side of that Hatchway from that enemy unit.<br><br><b>EFFECT:</b> If that enemy unit is within 9\" of and visible to your unit, roll one D6: on a 2-5, that enemy unit suffers 1 mortal wound; on a 6, that enemy unit suffers 2 mortal wounds. If that enemy unit suffers one or more mortal wounds in this way, your unit can then make a Normal move of up to D6\".<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit cannot fire Overwatch."
         }
       ]
     },
@@ -2553,7 +2680,7 @@
           "factionId": "AE",
           "name": "Strands of Fate",
           "legend": "Though future sight is not a precise art, the Aeldari seers excel in its craft. Having read the strands of fate that twine and branch through the upcoming battle, they direct events down their favoured paths at the most opportune moments.",
-          "description": "At the start of the first battle round, you generate Fate dice by rolling a number of D6 based on the battle size, as shown below. Keep your Fate dice to one side - this is your Fate dice pool.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>BATTLE SIZE</b></td><td><b>NUMBER OF D6</b></td></tr><tr><td>Incursion</td><td><b>3</b></td></tr><tr><td>Strike Force</td><td><b>6</b></td></tr><tr><td>Onslaught</td><td><b>9</b></td></tr></tbody></table></td></tr></tbody></table></div><br>Each time you use one of the Stratagems below, if your Fate dice pool contains one or more Fate dice showing the corresponding value in the table below, you can discard one of those corresponding Fate dice. If you do, reduce the CP cost of that usage of that Stratagem by 1CP.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>STRATAGEM</b></td><td><b>FATE DICE VALUE</b></td></tr><tr><td><span class=\"tooltip00049\" data-tooltip-content=\"#tooltip_content00049\"><span class=\"tt kwbu\">Presentiment</span> <span class=\"tt kwbu\">of</span> <span class=\"tt kwbu\">Dread</span></span></td><td><b>1</b></td></tr><tr><td><span class=\"tooltip00052\" data-tooltip-content=\"#tooltip_content00052\"><span class=\"tt kwbu\">Forewarned</span></span></td><td><b>2</b></td></tr><tr><td><span class=\"tooltip00053\" data-tooltip-content=\"#tooltip_content00053\"><span class=\"tt kwbu\">Unshrouded</span> <span class=\"tt kwbu\">Truth</span></span></td><td><b>3</b></td></tr><tr><td><span class=\"tooltip00091\" data-tooltip-content=\"#tooltip_content00091\"><span class=\"tt kwbu\">Fate</span> <span class=\"tt kwbu\">Inescapable</span></span></td><td><b>4</b></td></tr><tr><td><span class=\"tooltip00092\" data-tooltip-content=\"#tooltip_content00092\"><span class=\"tt kwbu\">Isha’s</span> <span class=\"tt kwbu\">Fury</span></span></td><td><b>5</b></td></tr><tr><td><span class=\"tooltip00057\" data-tooltip-content=\"#tooltip_content00057\"><span class=\"tt kwbu\">Psychic</span> <span class=\"tt kwbu\">Shield</span></span></td><td><b>6</b></td></tr></tbody></table></td></tr></tbody></table></div>",
+          "description": "At the start of the first battle round, you generate Fate dice by rolling a number of D6 based on the battle size, as shown below. Keep your Fate dice to one side - this is your Fate dice pool.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>BATTLE SIZE</b></td><td><b>NUMBER OF D6</b></td></tr><tr><td>Incursion</td><td><b>3</b></td></tr><tr><td>Strike Force</td><td><b>6</b></td></tr><tr><td>Onslaught</td><td><b>9</b></td></tr></tbody></table></td></tr></tbody></table></div><br>Each time you use one of the Stratagems below, if your Fate dice pool contains one or more Fate dice showing the corresponding value in the table below, you can discard one of those corresponding Fate dice. If you do, reduce the CP cost of that usage of that Stratagem by 1CP.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>STRATAGEM</b></td><td><b>FATE DICE VALUE</b></td></tr><tr><td><span class=\"tooltip00049\" data-tooltip-content=\"#tooltip_content00049\"><span class=\"tt kwbu\">Presentiment</span> <span class=\"tt kwbu\">of</span> <span class=\"tt kwbu\">Dread</span></span></td><td><b>1</b></td></tr><tr><td><span class=\"tooltip00052\" data-tooltip-content=\"#tooltip_content00052\"><span class=\"tt kwbu\">Forewarned</span></span></td><td><b>2</b></td></tr><tr><td><span class=\"tooltip00053\" data-tooltip-content=\"#tooltip_content00053\"><span class=\"tt kwbu\">Unshrouded</span> <span class=\"tt kwbu\">Truth</span></span></td><td><b>3</b></td></tr><tr><td><span class=\"tooltip00091\" data-tooltip-content=\"#tooltip_content00091\"><span class=\"tt kwbu\">Fate</span> <span class=\"tt kwbu\">Inescapable</span></span></td><td><b>4</b></td></tr><tr><td><span class=\"tooltip00092\" data-tooltip-content=\"#tooltip_content00092\"><span class=\"tt kwbu\">Isha's</span> <span class=\"tt kwbu\">Fury</span></span></td><td><b>5</b></td></tr><tr><td><span class=\"tooltip00057\" data-tooltip-content=\"#tooltip_content00057\"><span class=\"tt kwbu\">Psychic</span> <span class=\"tt kwbu\">Shield</span></span></td><td><b>6</b></td></tr></tbody></table></td></tr></tbody></table></div>",
           "detachment": "Seer Council",
           "detachmentId": 1023
         }
@@ -2576,8 +2703,19 @@
           "cost": 25,
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "legend": "These precisely crafted runic wards hold harmful empyric energies and predatory entities at hay, protecting the bearer’s mind and soul.",
-          "description": "Asuryani Psyker model only. Models in the bearer’s unit have the Feel No Pain 4+ ability against mortal wounds, Psychic Attacks and Critical Wounds caused by attacks with the [devastating wounds] ability."
+          "legend": "These precisely crafted runic wards hold harmful empyric energies and predatory entities at hay, protecting the bearer's mind and soul.",
+          "description": "Asuryani Psyker model only. Models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds, Psychic Attacks and Critical Wounds caused by attacks with the [devastating wounds] ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2586,7 +2724,7 @@
           "cost": 15,
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "legend": "This ancient gem was recovered from the crone world of Lleghaine and is said to resonate with the rage of that dead world’s ghosts. It acts as a magnifying lens for destructive psychic powers.",
+          "legend": "This ancient gem was recovered from the crone world of Lleghaine and is said to resonate with the rage of that dead world's ghosts. It acts as a magnifying lens for destructive psychic powers.",
           "description": "Asuryani Psyker model only. Add 12\" to the Range characteristic of ranged Psychic weapons equipped by the bearer."
         },
         {
@@ -2596,7 +2734,7 @@
           "cost": 20,
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "legend": "Waves of malevolent energies roll from this article of warrior jewellery. Though they leave Aeldari systems and minds untouched, they cloud the enemy’s thoughts with doubt, lace their communications with mournful wails and scatter confusing sensor ghosts across their instruments.",
+          "legend": "Waves of malevolent energies roll from this article of warrior jewellery. Though they leave Aeldari systems and minds untouched, they cloud the enemy's thoughts with doubt, lace their communications with mournful wails and scatter confusing sensor ghosts across their instruments.",
           "description": "Asuryani Psyker model only. Once per turn, when your opponent targets a unit from their army within 12\" of the bearer with a Stratagem, the bearer can use this Enhancement. If it does, increase the CP cost of that usage of that Stratagem by 1CP."
         }
       ],
@@ -2605,7 +2743,7 @@
           "factionId": "AE",
           "name": "FATE INESCAPABLE",
           "id": "000009924005",
-          "type": "Seer Council – Battle Tactic Stratagem",
+          "type": "Seer Council - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "The Aeldari have already seen how best to lay low this enemy and strike in the sure knowledge the foe cannot evade their terrible fate.",
           "turn": "YOURS",
@@ -2618,24 +2756,24 @@
         },
         {
           "factionId": "AE",
-          "name": "ISHA’S FURY",
+          "name": "ISHA'S FURY",
           "id": "000009924006",
-          "type": "Seer Council – Epic Deed Stratagem",
+          "type": "Seer Council - Epic Deed Stratagem",
           "cpCost": 1,
-          "legend": "Leaping from the seer’s outstretched hand, this blast of empyric energy is a raw expression of the sorrow and bitterness suffered by the Aeldari people.",
+          "legend": "Leaping from the seer's outstretched hand, this blast of empyric energy is a raw expression of the sorrow and bitterness suffered by the Aeldari people.",
           "turn": "OPPONENTS",
           "phase": [
             "MOVEMENT"
           ],
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "description": "<b>WHEN:</b> Your opponent’s Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> One Asuryani Psyker model from your army within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Roll six D6: for each 3+, that enemy unit suffers 1 mortal wound."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> One Asuryani Psyker model from your army within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Roll six D6: for each 3+, that enemy unit suffers 1 mortal wound."
         },
         {
           "factionId": "AE",
           "name": "PSYCHIC SHIELD",
           "id": "000009924007",
-          "type": "Seer Council – Strategic Ploy Stratagem",
+          "type": "Seer Council - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "A twist of the seer's psychic powers raises a whirling shield of empyric energy and psychokinetic debris to screen the Aeldari from enemy fire.",
           "turn": "OPPONENTS",
@@ -2644,13 +2782,13 @@
           ],
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit’s attacks and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, your unit can only be selected as the target of a ranged attack if the attacking model is within 18\"."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, your unit can only be selected as the target of a ranged attack if the attacking model is within 18\"."
         },
         {
           "factionId": "AE",
           "name": "FOREWARNED",
           "id": "000009924003",
-          "type": "Seer Council – Strategic Ploy Stratagem",
+          "type": "Seer Council - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Having foreseen already how this fight will play out, the seer projects their insights and warnings into the minds of the Aeldari who must fight it.",
           "turn": "EITHER",
@@ -2659,13 +2797,28 @@
           ],
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit’s attacks and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "PRESENTIMENT OF DREAD",
           "id": "000009924002",
-          "type": "Seer Council – Strategic Ploy Stratagem",
+          "type": "Seer Council - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The seer plucks fate to find the foe suffering a horrible death, then projects it into their minds.",
           "turn": "EITHER",
@@ -2680,7 +2833,7 @@
           "factionId": "AE",
           "name": "UNSHROUDED TRUTH",
           "id": "000009924004",
-          "type": "Seer Council – Strategic Ploy Stratagem",
+          "type": "Seer Council - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Dispelling the psychosomatic mirage that has so far beguiled and assailed the foe, the seer reveals the true location of the warriors it was masquerading as.",
           "turn": "YOURS",
@@ -2695,15 +2848,15 @@
     },
     {
       "slug": "serpent-s-brood",
-      "name": "Serpent’s Brood",
+      "name": "Serpent's Brood",
       "abilities": [
         {
           "id": "000010648",
           "factionId": "AE",
           "name": "Boons of the Brood",
-          "legend": "Playing their roles to perfection, the Harlequins embody the swift-striking fangs and deadly venoms of the Cosmic Serpent’s brood, dominating the stage of the battlefield with their swift and vicious performances.",
-          "description": "Weapons equipped by Harlequins Mounted and Harlequins Vehicle models from your army have the [SUSTAINED HITS 1] ability.<br><br>Each time a Harlequins unit from your army disembarks from a Transport, until the end of the turn, that unit’s weapons have the [SUSTAINED HITS 1] ability.<br><br><span class=\"hi_custom\">TRAVELLING PLAYERS</span><br><ul><li>Troupe units from your army gain the <span class=\"kwb\">BATTLELINE</span> keyword, and <span class=\"kwb\">TROUPE</span> models in those units have an Objective Control characteristic of 2.</li><li>You can include up to three of each of the following models in your army: Death Jester, Shadowseer, Troupe Master.</li></ul>",
-          "detachment": "Serpent’s Brood",
+          "legend": "Playing their roles to perfection, the Harlequins embody the swift-striking fangs and deadly venoms of the Cosmic Serpent's brood, dominating the stage of the battlefield with their swift and vicious performances.",
+          "description": "Weapons equipped by Harlequins Mounted and Harlequins Vehicle models from your army have the [SUSTAINED HITS 1] ability.<br><br>Each time a Harlequins unit from your army disembarks from a Transport, until the end of the turn, that unit's weapons have the [SUSTAINED HITS 1] ability.<br><br><span class=\"hi_custom\">TRAVELLING PLAYERS</span><br><ul><li>Troupe units from your army gain the <span class=\"kwb\">BATTLELINE</span> keyword, and <span class=\"kwb\">TROUPE</span> models in those units have an Objective Control characteristic of 2.</li><li>You can include up to three of each of the following models in your army: Death Jester, Shadowseer, Troupe Master.</li></ul>",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124
         }
       ],
@@ -2713,39 +2866,50 @@
           "id": "000010649002",
           "name": "Key of Ghosts",
           "cost": 20,
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
-          "legend": "This mystic wraithbone implement allows the bearer to slip onto the stage from the Webway even before the curtain’s rise, beginning their performance in full and furious flow.",
-          "description": "Harlequins model only (excluding Solitaire models). Models in the bearer’s unit have the Scouts 6\" ability."
+          "legend": "This mystic wraithbone implement allows the bearer to slip onto the stage from the Webway even before the curtain's rise, beginning their performance in full and furious flow.",
+          "description": "Harlequins model only (excluding Solitaire models). Models in the bearer's unit have the Scouts 6\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "id": "000010649003",
-          "name": "Weavers’ Wail",
+          "name": "Weavers' Wail",
           "cost": 20,
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
-          "legend": "A cruel weapon more often kept locked away, this ill-omened implement is said to resonate with the Cosmic Serpent’s own dismay at the suffering of its brood during the Fall.",
-          "description": "Troupe Master model only. Add 3 to the Strength and add 1 to the Attacks characteristics of the bearer’s melee weapons."
+          "legend": "A cruel weapon more often kept locked away, this ill-omened implement is said to resonate with the Cosmic Serpent's own dismay at the suffering of its brood during the Fall.",
+          "description": "Troupe Master model only. Add 3 to the Strength and add 1 to the Attacks characteristics of the bearer's melee weapons."
         },
         {
           "factionId": "AE",
           "id": "000010649004",
           "name": "Fanged Leer",
           "cost": 10,
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
-          "legend": "This cruel mask is worn when performing the Serpent’s Brood, and lends its wearer a supernatural degree of venom and spite.",
-          "description": "Death Jester model only. When using the bearer’s Cruel Amusement ability, you can select two of the abilities for its shrieker cannon to gain, instead of one."
+          "legend": "This cruel mask is worn when performing the Serpent's Brood, and lends its wearer a supernatural degree of venom and spite.",
+          "description": "Death Jester model only. When using the bearer's Cruel Amusement ability, you can select two of the abilities for its shrieker cannon to gain, instead of one."
         },
         {
           "factionId": "AE",
           "id": "000010649005",
           "name": "Shedskin Raiment",
           "cost": 25,
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
-          "legend": "This glittering cloak projects a grand illusion that falls away as its wearer sheds it like a discarded serpent’s hide, revealing a still-more dismaying reality beneath.",
+          "legend": "This glittering cloak projects a grand illusion that falls away as its wearer sheds it like a discarded serpent's hide, revealing a still-more dismaying reality beneath.",
           "description": "Shadowseer model only. After both players have deployed their armies, select up to three Harlequins units from your army and redeploy them. When doing so, you can set those units up in Strategic Reserves, regardless of how many units are already in Strategic Reserves."
         }
       ],
@@ -2754,59 +2918,59 @@
           "factionId": "AE",
           "name": "WEAVING STRIDE",
           "id": "000010650006",
-          "type": "Serpent’s Brood – Stratagem",
+          "type": "Serpent's Brood - Stratagem",
           "cpCost": 1,
-          "legend": "Maintaining their blistering pace, these warriors respond to their foes’ steps in the saedath with their own gravity-defying motions.",
+          "legend": "Maintaining their blistering pace, these warriors respond to their foes' steps in the saedath with their own gravity-defying motions.",
           "turn": "OPPONENTS",
           "phase": [
             "MOVEMENT"
           ],
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
-          "description": "<b>WHEN:</b> Your opponent’s Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> One Harlequins Infantry unit from your army that is within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Your unit can make a Normal move of up to 6\"."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> One Harlequins Infantry unit from your army that is within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Your unit can make a Normal move of up to 6\"."
         },
         {
           "factionId": "AE",
           "name": "SKYWARD LUNGE",
           "id": "000010650007",
-          "type": "Serpent’s Brood – Stratagem",
+          "type": "Serpent's Brood - Stratagem",
           "cpCost": 1,
           "legend": "Like a serpent rearing back to strike at its prey anew, the Harlequins sweep high and appear to quit the field, ready to descend in fury a moment later.",
           "turn": "OPPONENTS",
           "phase": [
             "FIGHT"
           ],
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
-          "description": "<b>WHEN:</b> End of your opponent’s Fight phase.<br><br><b>TARGET:</b> One Harlequins Vehicle or Harlequins Mounted unit from your army.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves."
+          "description": "<b>WHEN:</b> End of your opponent's Fight phase.<br><br><b>TARGET:</b> One Harlequins Vehicle or Harlequins Mounted unit from your army.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves."
         },
         {
           "factionId": "AE",
           "name": "FANGS OF THE BROOD",
           "id": "000010650002",
-          "type": "Serpent’s Brood – Stratagem",
+          "type": "Serpent's Brood - Stratagem",
           "cpCost": 1,
-          "legend": "Many are the heads of the brood, and many their fangs. As they spring and tumble over their foes, the Harlequins’ weapons echo the multiplicity of strikes unleashed by that mythic nest of snakes.",
+          "legend": "Many are the heads of the brood, and many their fangs. As they spring and tumble over their foes, the Harlequins' weapons echo the multiplicity of strikes unleashed by that mythic nest of snakes.",
           "turn": "EITHER",
           "phase": [
             "FIGHT"
           ],
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
-          "description": "<b>WHEN:</b> Start of the Fight phase.<br><br><b>TARGET:</b> One Troupe unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, when using your unit’s Dance of Death ability, you can select three of the abilities for your unit to gain, instead of one."
+          "description": "<b>WHEN:</b> Start of the Fight phase.<br><br><b>TARGET:</b> One Troupe unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, when using your unit's Dance of Death ability, you can select three of the abilities for your unit to gain, instead of one."
         },
         {
           "factionId": "AE",
           "name": "VENOMOUS WRATH",
           "id": "000010650003",
-          "type": "Serpent’s Brood – Stratagem",
+          "type": "Serpent's Brood - Stratagem",
           "cpCost": 1,
           "legend": "Embodying the serpent that strikes with blinding swiftness, this grav-skimmer lunges suddenly into range and unleashes its full fury on the foe.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
           ],
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
           "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Harlequins Vehicle unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> After your unit has shot, if it is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\". Until the end of the turn, your unit is not eligible to declare a charge."
         },
@@ -2814,29 +2978,29 @@
           "factionId": "AE",
           "name": "STRIKING STRIDE",
           "id": "000010650004",
-          "type": "Serpent’s Brood – Stratagem",
+          "type": "Serpent's Brood - Stratagem",
           "cpCost": 1,
           "legend": "Springing between pillars and rubble, bounding forwards as though running on thin air, the Harlequins acrobatically hurl themselves into battle.",
           "turn": "YOURS",
           "phase": [
             "CHARGE"
           ],
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
           "description": "<b>WHEN:</b> Your Charge phase.<br><br><b>TARGET:</b> One Harlequins unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, your unit is eligible to declare a charge in a turn in which it Advanced."
         },
         {
           "factionId": "AE",
-          "name": "WEAVERS’ COILS",
+          "name": "WEAVERS' COILS",
           "id": "000010650005",
-          "type": "Serpent’s Brood – Stratagem",
+          "type": "Serpent's Brood - Stratagem",
           "cpCost": 1,
           "legend": "Inescapable yet impossible to catch, this unit personifies the ever-winding and incorporeal coils of the Skyweavers of myth.",
           "turn": "YOURS",
           "phase": [
             "FIGHT"
           ],
-          "detachment": "Serpent’s Brood",
+          "detachment": "Serpent's Brood",
           "detachmentId": 1124,
           "description": "<b>WHEN:</b> End of your Fight phase.<br><br><b>TARGET:</b> One Harlequins Mounted unit from your army that was eligible to fight this phase.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, it can make a Normal move. Otherwise, your unit can make a Fall Back move of up to 6\"."
         }
@@ -2853,7 +3017,22 @@
           "legend": "When guided by a Spirit Conclave, the ghost warriors gain a clarity and prowess they would otherwise lack. Moreover, should the foe slay any of their precious spirit guides, the dead will surely have their vengeance.",
           "description": "Each time an Asuryani Psyker model from your army is destroyed by an enemy unit, that enemy unit gains a Vengeful Dead token. Each time a Wraith Construct model from your army makes an attack that targets a unit with one or more Vengeful Dead tokens, add 1 to the Hit roll and add 1 to the Wound roll.<br><br><span class=\"kwb\">ASURYANI</span> <span class=\"kwb\">PSYKER</span> models from your army have the following ability:<br><br><b>Spirit Guides (Aura):</b> While a Wraithblades, Wraithguard or Wraithlord unit from your army is within 12\" of this model, that unit has the Battle Focus ability.<br><br><span class=\"hi_custom\">KEYWORDS</span><br><span class=\"kwb\">WRAITHBLADES</span> and <span class=\"kwb\">WRAITHGUARD</span> units from your army gain the <span class=\"kwb\">BATTLELINE</span> keyword.",
           "detachment": "Spirit Conclave",
-          "detachmentId": 1019
+          "detachmentId": 1019,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2874,7 +3053,7 @@
           "cost": 15,
           "detachment": "Spirit Conclave",
           "detachmentId": 1019,
-          "legend": "Wound about with finely inscribed myths of Kurnous, the Hunter, this wraithbone staff imbues ghost warriors with an echo of the slain god’s keen-eyed skill.",
+          "legend": "Wound about with finely inscribed myths of Kurnous, the Hunter, this wraithbone staff imbues ghost warriors with an echo of the slain god's keen-eyed skill.",
           "description": "Spiritseer model only. In your Command phase, select one friendly Wraith Construct unit within 12\" of the bearer (excluding <span class=\"kwb\">TITANIC</span> units). Until the start of your next Command phase, each time a model in that unit makes an attack, on a Critical Wound, that attack has the [precision] ability."
         },
         {
@@ -2884,7 +3063,7 @@
           "cost": 10,
           "detachment": "Spirit Conclave",
           "detachmentId": 1019,
-          "legend": "This rare psychic rune binds occluding psychic energies about nearby wraith constructs to baffle the foe’s senses.",
+          "legend": "This rare psychic rune binds occluding psychic energies about nearby wraith constructs to baffle the foe's senses.",
           "description": "Spiritseer model only. In your Command phase, select one friendly Wraith Construct unit within 12\" of the bearer. Until the start of your next Command phase, each time a ranged attack targets that unit, unless the attacking model is within 18\", models in that unit have the Benefit of Cover against that attack."
         },
         {
@@ -2895,7 +3074,7 @@
           "detachment": "Spirit Conclave",
           "detachmentId": 1019,
           "legend": "Knowing their crucial role in guiding the ghost warriors, this seer chooses duty over personal glory.",
-          "description": "Spiritseer model only. Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of the bearer, the bearer’s unit can make a Normal move of up to 6\"."
+          "description": "Spiritseer model only. Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of the bearer, the bearer's unit can make a Normal move of up to 6\"."
         }
       ],
       "stratagems": [
@@ -2903,9 +3082,9 @@
           "factionId": "AE",
           "name": "WRAITHBONE ARMOUR",
           "id": "000009908003",
-          "type": "Spirit Conclave – Battle Tactic Stratagem",
+          "type": "Spirit Conclave - Battle Tactic Stratagem",
           "cpCost": 1,
-          "legend": "The apparent fragility of wraith constructs’ lithe bodies be/ies their incredible resilience.",
+          "legend": "The apparent fragility of wraith constructs' lithe bodies be/ies their incredible resilience.",
           "turn": "EITHER",
           "phase": [
             "SHOOTING",
@@ -2913,13 +3092,13 @@
           ],
           "detachment": "Spirit Conclave",
           "detachmentId": 1019,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Wraith Construct unit from your army (excluding TiTANic units] that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack is allocated to a model in your unit, subtract 1 from the Damage characteristic of that attack."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Wraith Construct unit from your army (excluding TiTANic units] that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack is allocated to a model in your unit, subtract 1 from the Damage characteristic of that attack."
         },
         {
           "factionId": "AE",
-          "name": "SEER’S EYE",
+          "name": "SEER'S EYE",
           "id": "000009908002",
-          "type": "Spirit Conclave – Battle Tactic Stratagem",
+          "type": "Spirit Conclave - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Seeing their prey as much through the eyes of their guiding seer as with any sense of their own, the wraith constructs strike swift and true.",
           "turn": "EITHER",
@@ -2935,7 +3114,7 @@
           "factionId": "AE",
           "name": "CRUSHING STRIDES",
           "id": "000009908007",
-          "type": "Spirit Conclave – Battle Tactic Stratagem",
+          "type": "Spirit Conclave - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Elegant they may be, but the weight and implacable strength of wraith constructs on the charge can smash enemies to the ground bloody and broken.",
           "turn": "YOURS",
@@ -2950,7 +3129,7 @@
           "factionId": "AE",
           "name": "BLADES FROM BEYOND",
           "id": "000009908004",
-          "type": "Spirit Conclave – Battle Tactic Stratagem",
+          "type": "Spirit Conclave - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Sometimes, the twinned perceptions of ghost warriors allow them to perceive - and strike at - the souls of their foes.",
           "turn": "EITHER",
@@ -2965,7 +3144,7 @@
           "factionId": "AE",
           "name": "SPIRIT TOKEN",
           "id": "000009908006",
-          "type": "Spirit Conclave – Strategic Ploy Stratagem",
+          "type": "Spirit Conclave - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "By leaving psycho-resonant wraithbone markers upon the battlefield, these warriors wreathe vital strategic locations in an aura of dread not easily overcome.",
           "turn": "YOURS",
@@ -2974,13 +3153,13 @@
           ],
           "detachment": "Spirit Conclave",
           "detachmentId": 1019,
-          "description": "<b>WHEN:</b> Start of your Movement phase.<br><br><b>TARGET:</b> One Wraithblades or Wraithguard unit from your army.<br><br><b>EFFECT:</b> Select one objective marker you control that your unit is within range of. That objective marker remains under your control until your opponent’s Level of Control over that objective marker is greater than yours at the end of a phase."
+          "description": "<b>WHEN:</b> Start of your Movement phase.<br><br><b>TARGET:</b> One Wraithblades or Wraithguard unit from your army.<br><br><b>EFFECT:</b> Select one objective marker you control that your unit is within range of. That objective marker remains under your control until your opponent's Level of Control over that objective marker is greater than yours at the end of a phase."
         },
         {
           "factionId": "AE",
           "name": "SOUL BRIDGE",
           "id": "000009908005",
-          "type": "Spirit Conclave – Strategic Ploy Stratagem",
+          "type": "Spirit Conclave - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "It is risky for a Spiritseer to cast their awareness so far, but aiding the dead is sometimes necessary.",
           "turn": "YOURS",
@@ -3000,9 +3179,9 @@
         {
           "id": "000009350",
           "factionId": "AE",
-          "name": "Faolchú’s Last Flight",
+          "name": "Faolchú's Last Flight",
           "legend": "Even should they be struck down by the foe, the players remain in character, embodying in their final steps the doomed but deadly fall of winged Faolchii.",
-          "description": "Each time an <span class=\"kwb\">AELDARI</span> model from your army is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 3+, do not remove it from play. The destroyed model can fight after the attacking model’s unit has finished making its attacks, and is then removed from play.",
+          "description": "Each time an <span class=\"kwb\">AELDARI</span> model from your army is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 3+, do not remove it from play. The destroyed model can fight after the attacking model's unit has finished making its attacks, and is then removed from play.",
           "detachment": "Star-dancer Masque",
           "detachmentId": 922
         }
@@ -3015,7 +3194,7 @@
           "cost": 0,
           "detachment": "Star-dancer Masque",
           "detachmentId": 922,
-          "legend": "In the close confines of shipboard war, the bewildering effect of this Harlequin’s domino field is redoubled.",
+          "legend": "In the close confines of shipboard war, the bewildering effect of this Harlequin's domino field is redoubled.",
           "description": "Enemy units cannot fire Overwatch at the bearer."
         },
         {
@@ -3034,7 +3213,7 @@
           "factionId": "AE",
           "name": "VOID GHOSTS",
           "id": "000009352002",
-          "type": "Star-dancer Masque – Battle Tactic Stratagem",
+          "type": "Star-dancer Masque - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Exploiting the fluctuating gravity of voidship fighting and flowing with the nigh-imperceptible movements of the vessel around them, the Aeldari acrobatically evade the blasts and blades of their foes.",
           "turn": "EITHER",
@@ -3044,13 +3223,22 @@
           ],
           "detachment": "Star-dancer Masque",
           "detachmentId": 922,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "DARTING STRIKES",
           "id": "000009352003",
-          "type": "Star-dancer Masque – Battle Tactic Stratagem",
+          "type": "Star-dancer Masque - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Shuriken weaponry fill corridors and chambers with inescapable hails of monomolecular discs and reduce enemy boarding parties to bloodied ruin.",
           "turn": "EITHER",
@@ -3065,7 +3253,7 @@
           "factionId": "AE",
           "name": "ACROBATIC LEAPS",
           "id": "000009352005",
-          "type": "Star-dancer Masque – Strategic Ploy Stratagem",
+          "type": "Star-dancer Masque - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Reacting with a speed most mortal beings could not dream of, the Aeldari engulf emerging foes in a sudden hail of gunfire.",
           "turn": "OPPONENTS",
@@ -3080,7 +3268,7 @@
           "factionId": "AE",
           "name": "SERPENT STRIKE",
           "id": "000009352004",
-          "type": "Star-dancer Masque – Strategic Ploy Stratagem",
+          "type": "Star-dancer Masque - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "A discipline refined for shipboard battle, this feat of marksmanship sees the Aeldari overlap annihilating hails of defensive fire.",
           "turn": "EITHER",
@@ -3136,7 +3324,7 @@
           "detachment": "Warhost",
           "detachmentId": 1017,
           "legend": "It is far easier to avoid fatal battlefield errors if one has already foreseen when they will occur and how to prevent them.",
-          "description": "Asuryani model only. Once per battle round, you can target the bearer’s unit with the Command Re-roll Stratagem for 0CP."
+          "description": "Asuryani model only. Once per battle round, you can target the bearer's unit with the Command Re-roll Stratagem for 0CP."
         },
         {
           "factionId": "AE",
@@ -3154,7 +3342,7 @@
           "factionId": "AE",
           "name": "BLITZING FIREPOWER",
           "id": "000009900005",
-          "type": "Warhost – Battle Tactic Stratagem",
+          "type": "Warhost - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "When unleashed in a close-ranged storm, Aeldari weapons fire can completely eradicate all life within the target zone.",
           "turn": "YOURS",
@@ -3169,7 +3357,7 @@
           "factionId": "AE",
           "name": "LIGHTNING-FAST REACTIONS",
           "id": "000009900002",
-          "type": "Warhost – Battle Tactic Stratagem",
+          "type": "Warhost - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Processing events at incredible speed, these warriors easily evade attacks that would have slain any less celeritous combatants.",
           "turn": "EITHER",
@@ -3179,13 +3367,22 @@
           ],
           "detachment": "Warhost",
           "detachmentId": 1017,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "FEIGNED RETREAT",
           "id": "000009900004",
-          "type": "Warhost – Strategic Ploy Stratagem",
+          "type": "Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "What appears to be a full retreat one moment is revealed as the deceptive prelude to a devastating attack the next.",
           "turn": "YOURS",
@@ -3200,7 +3397,7 @@
           "factionId": "AE",
           "name": "SKYBORNE SANCTUARY",
           "id": "000009900003",
-          "type": "Warhost – Strategic Ploy Stratagem",
+          "type": "Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The Aeldari excel in striking swiftly, then leaping back into the safety of their skimming transports.",
           "turn": "EITHER",
@@ -3215,7 +3412,7 @@
           "factionId": "AE",
           "name": "WEBWAY TUNNEL",
           "id": "000009900007",
-          "type": "Warhost – Strategic Ploy Stratagem",
+          "type": "Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "By slipping away into the ethereal confines of the Webway, Aeldari warriors can circumnavigate the foe and strike from new and unexpected quarters.",
           "turn": "OPPONENTS",
@@ -3224,13 +3421,13 @@
           ],
           "detachment": "Warhost",
           "detachmentId": 1017,
-          "description": "<b>WHEN:</b> End of your opponent’s Fight phase.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army that is wholly within 9\" of one or more battlefield edges.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, remove it from the battlefield and place it into Strategic Reserves."
+          "description": "<b>WHEN:</b> End of your opponent's Fight phase.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army that is wholly within 9\" of one or more battlefield edges.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, remove it from the battlefield and place it into Strategic Reserves."
         },
         {
           "factionId": "AE",
           "name": "FIRE AND FADE",
           "id": "000009900006",
-          "type": "Warhost – Strategic Ploy Stratagem",
+          "type": "Warhost - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The Aeldari are masters of hit-and-run tactics, engaging a target with a flurry of shots before swiftly ducking back out of harm's way.",
           "turn": "YOURS",
@@ -3252,7 +3449,7 @@
           "factionId": "AE",
           "name": "Ride the Wind",
           "legend": "These hosts strike from many quarters, employing their incredible speed and agility to evade and ambush the foe at every turn.",
-          "description": "In the Declare Battle Formations step you can set up Asuryani Mounted and Vyper units from your army in Reserves. During the battle, such units can be set up on the battlefield as if they were arriving from Strategic Reserves. For the purposes of setting up <span class=\"kwb\">ASURYANI</span> <span class=\"kwb\">MOUNTED</span> or <span class=\"kwb\">VYPER</span> units from your army on the battlefield, treat the current battle round number as being one higher than it actually is.<br><br>In addition, at the end of your opponent’s turn, you can select a number of <span class=\"kwb\">ASURYANI</span> <span class=\"kwb\">MOUNTED</span> or <span class=\"kwb\">VYPER</span> units from your army (excluding units within Engagement Range of one or more enemy units), then remove those units from the battlefield and place them into Strategic Reserves. The maximum number of units you can select depends on the battle size, as shown below.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>BATTLE SIZE</b></td><td><b>NUMBER OF UNITS</b></td></tr><tr><td>Incursion</td><td><b>1</b></td></tr><tr><td>Strike Force</td><td><b>2</b></td></tr><tr><td>Onslaught</td><td><b>3</b></td></tr></tbody></table></td></tr></tbody></table></div><br><span class=\"hi_custom\">KEYWORDS</span><br>Windriders units from your army gain the <span class=\"kwb\">BATTLELINE</span> keyword.",
+          "description": "In the Declare Battle Formations step you can set up Asuryani Mounted and Vyper units from your army in Reserves. During the battle, such units can be set up on the battlefield as if they were arriving from Strategic Reserves. For the purposes of setting up <span class=\"kwb\">ASURYANI</span> <span class=\"kwb\">MOUNTED</span> or <span class=\"kwb\">VYPER</span> units from your army on the battlefield, treat the current battle round number as being one higher than it actually is.<br><br>In addition, at the end of your opponent's turn, you can select a number of <span class=\"kwb\">ASURYANI</span> <span class=\"kwb\">MOUNTED</span> or <span class=\"kwb\">VYPER</span> units from your army (excluding units within Engagement Range of one or more enemy units), then remove those units from the battlefield and place them into Strategic Reserves. The maximum number of units you can select depends on the battle size, as shown below.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>BATTLE SIZE</b></td><td><b>NUMBER OF UNITS</b></td></tr><tr><td>Incursion</td><td><b>1</b></td></tr><tr><td>Strike Force</td><td><b>2</b></td></tr><tr><td>Onslaught</td><td><b>3</b></td></tr></tbody></table></td></tr></tbody></table></div><br><span class=\"hi_custom\">KEYWORDS</span><br>Windriders units from your army gain the <span class=\"kwb\">BATTLELINE</span> keyword.",
           "detachment": "Windrider Host",
           "detachmentId": 1018
         }
@@ -3266,7 +3463,18 @@
           "detachment": "Windrider Host",
           "detachmentId": 1018,
           "legend": "Those who lead the Windrider Hosts do so from the front, embodying the first of the Swords of Vaul drawn in wrath.",
-          "description": "Asuryani Mounted model only. Models in the bearer’s unit have the Scouts 9\" ability."
+          "description": "Asuryani Mounted model only. Models in the bearer's unit have the Scouts 9\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 9
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3276,7 +3484,16 @@
           "detachment": "Windrider Host",
           "detachmentId": 1018,
           "legend": "This field generator surrounds its bearer with contradictory sensor ghosts and split-second illusions that make them incredibly challenging to target, particularly when moving at speed.",
-          "description": "Asuryani Mounted model only. Each time an attack targets the bearer’s unit, subtract 1 from the Hit roll."
+          "description": "Asuryani Mounted model only. Each time an attack targets the bearer's unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3296,7 +3513,7 @@
           "detachment": "Windrider Host",
           "detachmentId": 1018,
           "legend": "Riding out to battle upon their skimming steed, this charismatic commander is reminiscent of the great Aeldari hero come again. The mere sight of them swooping down upon their foes inspires their warriors to remarkable feats of heroism in their turn.",
-          "description": "Asuryani Mounted model only. In your Command phase, roll one D6, adding 1 to the result if the bearer is not within your deployment zone, and adding an additional 1 to the result if the bearer is within your opponent’s deployment zone: on a 5+, you gain 1CP."
+          "description": "Asuryani Mounted model only. In your Command phase, roll one D6, adding 1 to the result if the bearer is not within your deployment zone, and adding an additional 1 to the result if the bearer is within your opponent's deployment zone: on a 5+, you gain 1CP."
         }
       ],
       "stratagems": [
@@ -3304,7 +3521,7 @@
           "factionId": "AE",
           "name": "FOCUSED FIREPOWER",
           "id": "000009904006",
-          "type": "Windrider Host – Battle Tactic Stratagem",
+          "type": "Windrider Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Able to analyse and assess target data at incredible speeds, these Aeldari isolate the foe's weak spot and pour all their fire into it as they hurtle past.",
           "turn": "YOURS",
@@ -3319,7 +3536,7 @@
           "factionId": "AE",
           "name": "DEATH FROM ON HIGH",
           "id": "000009904002",
-          "type": "Windrider Host – Battle Tactic Stratagem",
+          "type": "Windrider Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Streaking suddenly down from on high, the Aeldari strike like the fall of an executioner's blade.",
           "turn": "EITHER",
@@ -3335,7 +3552,7 @@
           "factionId": "AE",
           "name": "SPIRALLING EVASION",
           "id": "000009904007",
-          "type": "Windrider Host – Battle Tactic Stratagem",
+          "type": "Windrider Host - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "None but the Aeldari could risk such breakneck and seemingly suicidal evasive manoeuvres to jink around incoming enemy fire.",
           "turn": "OPPONENTS",
@@ -3344,13 +3561,22 @@
           ],
           "detachment": "Windrider Host",
           "detachmentId": 1018,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Mounted or VYPER unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Mounted or VYPER unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "WIND OF BLADES",
           "id": "000009904004",
-          "type": "Windrider Host – Strategic Ploy Stratagem",
+          "type": "Windrider Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Warriors such as these cannot be pinned down or held back. They hit and run at will, hammering the foe with constant fire and slashing blows.",
           "turn": "YOURS",
@@ -3365,7 +3591,7 @@
           "factionId": "AE",
           "name": "OVERFLIGHT",
           "id": "000009904003",
-          "type": "Windrider Host – Strategic Ploy Stratagem",
+          "type": "Windrider Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "These airborne warriors arc up and away from the ruin of their foes, already seeking fresh prey.",
           "turn": "EITHER",
@@ -3381,7 +3607,7 @@
           "factionId": "AE",
           "name": "DARING RIDERS",
           "id": "000009904005",
-          "type": "Windrider Host – Strategic Ploy Stratagem",
+          "type": "Windrider Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Some of the Windrider Hosts are especially aggressive, unable to restrain the fierce joy of racing perilously close to the foe while strafing them with fire.",
           "turn": "YOURS",
@@ -3402,7 +3628,7 @@
           "id": "000009341",
           "factionId": "AE",
           "name": "Wraith-Marked",
-          "legend": "By harnessing and binding ethereal energies to strategically significant sites, this force is able to create spiritual waypoints that shine like beacons to the ghost warriors’ perceptions.",
+          "legend": "By harnessing and binding ethereal energies to strategically significant sites, this force is able to create spiritual waypoints that shine like beacons to the ghost warriors' perceptions.",
           "description": "In your Command phase, you can select one <span class=\"kwb\">AELDARI</span> unit from your army within range of an objective marker you control. That unit must take a Leadership test, subtracting 2 from the result if it has the WRAiTH CONSTRUCT keyword: if passed, that objective marker is Secured by your army.",
           "detachment": "Wraiths of the Void",
           "detachmentId": 921
@@ -3435,7 +3661,7 @@
           "factionId": "AE",
           "name": "WRAITHSIGHT",
           "id": "000009343003",
-          "type": "Wraiths of the Void – Battle Tactic Stratagem",
+          "type": "Wraiths of the Void - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "There are advantages to perceiving the foe as glimmering souls without the obstruction of intervening walls and bulkheads.",
           "turn": "YOURS",
@@ -3450,7 +3676,7 @@
           "factionId": "AE",
           "name": "GUARDIAN CONSTRUCTS",
           "id": "000009343002",
-          "type": "Wraiths of the Void – Battle Tactic Stratagem",
+          "type": "Wraiths of the Void - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Like graven sentinels the wraith constructs stand immovable, barring the enemy's path.",
           "turn": "EITHER",
@@ -3459,13 +3685,22 @@
           ],
           "detachment": "Wraiths of the Void",
           "detachmentId": 921,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the attacking model is wholly on the opposite side of a Hatchway from your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the attacking model is wholly on the opposite side of a Hatchway from your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "D-STRIKE",
           "id": "000009343004",
-          "type": "Wraiths of the Void – Strategic Ploy Stratagem",
+          "type": "Wraiths of the Void - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Recognising the importance of liminal boundaries in void warfare, the ghost warriors unleash their fury upon such a space to the shock of their foes.",
           "turn": "YOURS",
@@ -3474,13 +3709,22 @@
           ],
           "detachment": "Wraiths of the Void",
           "detachmentId": 921,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Select one closed Hatchway that is visible to and within range of one or more of the ranged weapons equipped by models in your unit. Open that Hatchway and, until the end of the battle, that Hatchway cannot be closed. For each enemy unit within 3\" of that Hatchway and wholly on the opposite side of it from your unit, until the start of your next Shooting phase, that enemy unit is stunned. While a unit is stunned, each time a model in that unit makes an attack, subtract 1 from the Hit roll.<br><br><b>RESTRICTIONS:</b> Until the end of the phase, your unit is not eligible to shoot."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Select one closed Hatchway that is visible to and within range of one or more of the ranged weapons equipped by models in your unit. Open that Hatchway and, until the end of the battle, that Hatchway cannot be closed. For each enemy unit within 3\" of that Hatchway and wholly on the opposite side of it from your unit, until the start of your next Shooting phase, that enemy unit is stunned. While a unit is stunned, each time a model in that unit makes an attack, subtract 1 from the Hit roll.<br><br><b>RESTRICTIONS:</b> Until the end of the phase, your unit is not eligible to shoot.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
           "name": "UNFLINCHING FIRE",
           "id": "000009343005",
-          "type": "Wraiths of the Void – Strategic Ploy Stratagem",
+          "type": "Wraiths of the Void - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "None can match the calm, patient precision of those who have already known death and do not fear it.",
           "turn": "OPPONENTS",

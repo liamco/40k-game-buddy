@@ -36,7 +36,19 @@
       "factionId": "",
       "description": "This unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SHOOT AFTER ADVANCING",
+            "CHARGE AFTER FELL BACK"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -45,7 +57,30 @@
       "factionId": "",
       "description": "At the start of your Command phase, if this model is your <span class=\"kwb\">WARLORD</span> and is on the battlefield, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "CP",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isWarlord",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "onBattlefield",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "LORD CALGAR",
@@ -126,66 +161,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000004183:gauntlets-of-ultramar",
-      "datasheetId": "000004183",
-      "line": 1,
-      "name": "Gauntlets of Ultramar",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004183",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauntlets of Ultramar",
-          "attributes": [
-            "PISTOL",
-            "TWIN-LINKED"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004183:gauntlets-of-ultramar-2",
-      "datasheetId": "000004183",
-      "line": 2,
-      "name": "Gauntlets of Ultramar",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004183",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauntlets of Ultramar",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004183",
       "line": 1,
-      "description": "1 Marneus Calgar in Armour of Antilochus – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Marneus Calgar in Armour of Antilochus - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -336,5 +316,60 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000004183:gauntlets-of-ultramar",
+      "datasheetId": "000004183",
+      "line": 1,
+      "name": "Gauntlets of Ultramar",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000004183",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Gauntlets of Ultramar",
+          "attributes": [
+            "PISTOL",
+            "TWIN-LINKED"
+          ],
+          "range": 18,
+          "type": "Ranged",
+          "a": 4,
+          "bsWs": 2,
+          "s": 4,
+          "ap": -1,
+          "d": 2
+        }
+      ]
+    },
+    {
+      "id": "000004183:gauntlets-of-ultramar-2",
+      "datasheetId": "000004183",
+      "line": 2,
+      "name": "Gauntlets of Ultramar",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000004183",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Gauntlets of Ultramar",
+          "attributes": [
+            "TWIN-LINKED"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 6,
+          "bsWs": 2,
+          "s": 8,
+          "ap": -3,
+          "d": 3
+        }
+      ]
+    }
+  ]
 }

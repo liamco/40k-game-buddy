@@ -5,7 +5,7 @@
   "sourceId": "000000046",
   "legend": "Any good Ork hunter knows the safest way to deal with a rampaging Warboss is to hit them with tank-busting artillery from as far away as possible. By donning a piston-driven suit of incredibly durable mega armour, the Warboss makes a mockery of such underhanded enemy tactics, much to the terror of his foes.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> big shoota; ’uge choppa.",
+  "loadout": "<b>This model is equipped with:</b> big shoota; 'uge choppa.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -32,14 +32,23 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Dead Brutal",
       "legend": "",
       "factionId": "",
-      "description": "While the Waaagh! is active for your army, this model’s ’uge choppa has a Damage characteristic of 3.",
+      "description": "While the Waaagh! is active for your army, this model's 'uge choppa has a Damage characteristic of 3.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -100,7 +109,37 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000002",
+      "line": 1,
+      "description": "1 Warboss in Mega Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000002",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000024",
+      "slug": "meganobz"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000002:big-shoota",
       "datasheetId": "000000002",
@@ -131,7 +170,7 @@
       "id": "000000002:uge-choppa",
       "datasheetId": "000000002",
       "line": 2,
-      "name": "’Uge choppa",
+      "name": "'Uge choppa",
       "type": "Melee",
       "profiles": [
         {
@@ -139,7 +178,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "’Uge choppa",
+          "name": "'Uge choppa",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -151,35 +190,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000002",
-      "line": 1,
-      "description": "1 Warboss in Mega Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000002",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000024",
-      "slug": "meganobz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "Autarch Wayleaper",
   "factionId": "AE",
   "sourceId": "000000186",
-  "legend": "With wargear such as a winged pack or warp jump generator, an Autarch becomes an incredibly manoeuvrable war leader. So equipped, they can appear wherever their war host needs them in the blink of an eye, bringing graceful weaponry and consummate strategy to bear before vanishing out of the foe’s reach.",
+  "legend": "With wargear such as a winged pack or warp jump generator, an Autarch becomes an incredibly manoeuvrable war leader. So equipped, they can appear wherever their war host needs them in the blink of an eye, bringing graceful weaponry and consummate strategy to bear before vanishing out of the foe's reach.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> shuriken pistol; star glaive.",
   "transport": "",
@@ -126,16 +126,50 @@
       "datasheetId": "000002759",
       "line": 1,
       "button": "•",
-      "description": "This model’s shuriken pistol can be replaced with one of the following:<ul><li>1 death spinner</li><li>1 Dragon fusion gun</li><li>1 Dragon fusion pistol</li><li>1 Reaper launcher</li></ul>"
+      "description": "This model's shuriken pistol can be replaced with one of the following:<ul><li>1 death spinner</li><li>1 Dragon fusion gun</li><li>1 Dragon fusion pistol</li><li>1 Reaper launcher</li></ul>"
     },
     {
       "datasheetId": "000002759",
       "line": 2,
       "button": "•",
-      "description": "This model’s star glaive can be replaced with one of the following:<ul><li>1 Banshee blade</li><li>1 Scorpion chainsword</li></ul>"
+      "description": "This model's star glaive can be replaced with one of the following:<ul><li>1 Banshee blade</li><li>1 Scorpion chainsword</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002759",
+      "line": 1,
+      "description": "1 Autarch Wayleaper",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002759",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000601",
+      "slug": "warp-spiders"
+    },
+    {
+      "id": "000000600",
+      "slug": "swooping-hawks"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002759:death-spinner",
       "datasheetId": "000002759",
@@ -230,7 +264,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Reaper launcher – starshot",
+          "name": "Reaper launcher - starshot",
           "attributes": [
             "HEAVY",
             "IGNORES COVER"
@@ -248,7 +282,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Reaper launcher – starswarm",
+          "name": "Reaper launcher - starswarm",
           "attributes": [
             "HEAVY",
             "IGNORES COVER"
@@ -366,39 +400,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002759",
-      "line": 1,
-      "description": "1 Autarch Wayleaper",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002759",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000601",
-      "slug": "warp-spiders"
-    },
-    {
-      "id": "000000600",
-      "slug": "swooping-hawks"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

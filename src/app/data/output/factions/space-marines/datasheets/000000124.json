@@ -37,7 +37,48 @@
       "factionId": "",
       "description": "Each time this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks. Until the end of the phase, each time a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit makes a ranged attack that targets that enemy unit, improve the Armour Penetration characteristic of that attack by 1. The same enemy unit can only be affected by this ability once per phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ARMOUR PENETRATION"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "MONSTERS",
+                "VEHICLES"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "operator": "equals",
+              "value": "selected enemy unit"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -96,7 +137,34 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000124",
+      "line": 1,
+      "description": "1 Storm Speeder Hailstrike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000124",
+      "line": 1,
+      "description": "1 model",
+      "cost": 115,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000124:fragstorm-grenade-launcher",
       "datasheetId": "000000124",
@@ -200,32 +268,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000124",
-      "line": 1,
-      "description": "1 Storm Speeder Hailstrike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000124",
-      "line": 1,
-      "description": "1 model",
-      "cost": 115,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

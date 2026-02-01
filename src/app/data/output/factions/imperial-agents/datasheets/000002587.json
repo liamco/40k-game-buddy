@@ -3,7 +3,7 @@
   "name": "Imperial Navy Breachers",
   "factionId": "AoI",
   "sourceId": "000000259",
-  "legend": "Experienced in hazardous boarding actions, these elite Armsmen are aggressive and blunt instruments of their warship’s commander. They wear fully enclosed void armour and wield robust weapons optimised for close-confines fighting, while some carry more specialised gear for cracking enemy bulkheads.",
+  "legend": "Experienced in hazardous boarding actions, these elite Armsmen are aggressive and blunt instruments of their warship's commander. They wear fully enclosed void armour and wield robust weapons optimised for close-confines fighting, while some carry more specialised gear for cracking enemy bulkheads.",
   "role": "Battleline",
   "loadout": "<b>The Navis Sergeant-at-Arms is equipped with:</b> Navis shotgun; close combat weapon.<br><br><b>One Navis Armsman is equipped with:</b> Navis las-volley; close combat weapon.<br><br><b>One other Navis Armsman is equipped with:</b> Navis heavy shotgun; close combat weapon; endurant shield.<br><br><b>Every other model is equipped with:</b> Navis shotgun; close combat weapon.",
   "transport": "",
@@ -44,7 +44,7 @@
       "name": "CAT Unit",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, when this unit is selected to shoot, until the end of the phase, ranged weapons equipped by models in this unit gain the [IGNORES COVER] ability.<br><br><b>Designer’s Note:</b> Place one Gheistskull and one CAT Unit token next to this unit, removing each token once the relevant ability has been used.",
+      "description": "Once per battle, when this unit is selected to shoot, until the end of the phase, ranged weapons equipped by models in this unit gain the [IGNORES COVER] ability.<br><br><b>Designer's Note:</b> Place one Gheistskull and one CAT Unit token next to this unit, removing each token once the relevant ability has been used.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -55,7 +55,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "One Shot",
@@ -140,13 +149,13 @@
       "datasheetId": "000002587",
       "line": 1,
       "button": "•",
-      "description": "The Navis Sergeant-at-Arms’ Navis shotgun can be replaced with one of the following:<ul><li>1 autopistol and 1 chainsword</li><li>1 bolt pistol and 1 power weapon</li></ul>"
+      "description": "The Navis Sergeant-at-Arms' Navis shotgun can be replaced with one of the following:<ul><li>1 autopistol and 1 chainsword</li><li>1 bolt pistol and 1 power weapon</li></ul>"
     },
     {
       "datasheetId": "000002587",
       "line": 2,
       "button": "•",
-      "description": "1 Navis Armsman’s Navis las-volley can be replaced with one of the following:<ul><li>1 meltagun</li><li>1 plasma gun</li></ul>"
+      "description": "1 Navis Armsman's Navis las-volley can be replaced with one of the following:<ul><li>1 meltagun</li><li>1 plasma gun</li></ul>"
     },
     {
       "datasheetId": "000002587",
@@ -158,7 +167,7 @@
       "datasheetId": "000002587",
       "line": 4,
       "button": "•",
-      "description": "1 Navis Armsman’s Navis shotgun can be replaced with 1 autopistol and 1 chainfist."
+      "description": "1 Navis Armsman's Navis shotgun can be replaced with 1 autopistol and 1 chainfist."
     },
     {
       "datasheetId": "000002587",
@@ -167,7 +176,39 @@
       "description": "1 Navis Armsman can be equipped with 1 demolition charge."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002587",
+      "line": 1,
+      "description": "1 Navis Sergeant-at-Arms",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002587",
+      "line": 2,
+      "description": "9 Navis Armsmen",
+      "min": 9,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002587",
+      "line": 1,
+      "description": "10 models",
+      "cost": 90,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Imperial Agents",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002587:autopistol",
       "datasheetId": "000002587",
@@ -363,7 +404,7 @@
           "line": 8,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -380,7 +421,7 @@
           "line": 9,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -493,37 +534,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002587",
-      "line": 1,
-      "description": "1 Navis Sergeant-at-Arms",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002587",
-      "line": 2,
-      "description": "9 Navis Armsmen",
-      "min": 9,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002587",
-      "line": 1,
-      "description": "10 models",
-      "cost": 90,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Imperial Agents",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

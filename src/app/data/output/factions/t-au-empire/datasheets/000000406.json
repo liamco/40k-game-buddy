@@ -3,7 +3,7 @@
   "name": "Commander Farsight",
   "factionId": "TAU",
   "sourceId": "000000028",
-  "legend": "Aggressive and rebellious, Commander O’Shova is the master of the Mont’ka, the Killing Blow. Piloting his crimson battlesuit he carves a bloody path into the enemy, leading his separatist Fire Caste forces and wielding the enigmatic Dawn Blade with such strength and skill that no foe can stand against him.",
+  "legend": "Aggressive and rebellious, Commander O'Shova is the master of the Mont'ka, the Killing Blow. Piloting his crimson battlesuit he carves a bloody path into the enemy, leading his separatist Fire Caste forces and wielding the enigmatic Dawn Blade with such strength and skill that no foe can stand against him.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> high-intensity plasma rifle; Dawn Blade.",
   "transport": "",
@@ -36,26 +36,40 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack that targets an enemy unit within 9\", add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Puretide's Teachings",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle round, you can target this model’s unit with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
+      "description": "Once per battle round, you can target this model's unit with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
       "parameter": ""
     },
     {
+      "id": "",
       "name": "INDEPENDENT POWER",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If your army includes <span class=\"kwb\">COMMANDER</span> <span class=\"kwb\">FARSIGHT</span>, it cannot include any Ethereal units. If your army includes any <span class=\"kwb\">ETHEREAL</span> units, it cannot include <span class=\"kwb\">COMMANDER</span> <span class=\"kwb\">FARSIGHT</span>.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
     {
       "datasheetId": "000000406",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -120,7 +134,45 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000406",
+      "line": 1,
+      "description": "1 Commander Farsight - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000406",
+      "line": 1,
+      "description": "1 model",
+      "cost": 85,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003699",
+      "slug": "crisis-sunforge-battlesuits"
+    },
+    {
+      "id": "000003700",
+      "slug": "crisis-fireknife-battlesuits"
+    },
+    {
+      "id": "000003701",
+      "slug": "crisis-starscythe-battlesuits"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000406:high-intensity-plasma-rifle",
       "datasheetId": "000000406",
@@ -157,7 +209,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Dawn Blade – strike",
+          "name": "Dawn Blade - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -172,7 +224,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Dawn Blade – sweep",
+          "name": "Dawn Blade - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -184,43 +236,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000406",
-      "line": 1,
-      "description": "1 Commander Farsight – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000406",
-      "line": 1,
-      "description": "1 model",
-      "cost": 85,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003699",
-      "slug": "crisis-sunforge-battlesuits"
-    },
-    {
-      "id": "000003700",
-      "slug": "crisis-fireknife-battlesuits"
-    },
-    {
-      "id": "000003701",
-      "slug": "crisis-starscythe-battlesuits"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T’au Empire",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

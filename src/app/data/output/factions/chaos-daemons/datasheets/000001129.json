@@ -3,7 +3,7 @@
   "name": "Epidemius",
   "factionId": "CD",
   "sourceId": "000000025",
-  "legend": "Borne upon his throne by a scrabbling mound of Nurglings, Epidemius endlessly catalogues the infinite plagues and maladies released upon realspace by the followers of Nurgle. The higher Epidemius’ tally rises upon any given battlefield, the more favourably the Plague God smiles upon his servants in the vicinity.",
+  "legend": "Borne upon his throne by a scrabbling mound of Nurglings, Epidemius endlessly catalogues the infinite plagues and maladies released upon realspace by the followers of Nurgle. The higher Epidemius' tally rises upon any given battlefield, the more favourably the Plague God smiles upon his servants in the vicinity.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> balesword and Nurgling attendants.",
   "transport": "",
@@ -36,7 +36,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -123,7 +132,37 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001129",
+      "line": 1,
+      "description": "1 Epidemius - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001129",
+      "line": 1,
+      "description": "1 model",
+      "cost": 80,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001132",
+      "slug": "plaguebearers"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001129:balesword-and-nurgling-attendants",
       "datasheetId": "000001129",
@@ -150,35 +189,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001129",
-      "line": 1,
-      "description": "1 Epidemius – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001129",
-      "line": 1,
-      "description": "1 model",
-      "cost": 80,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001132",
-      "slug": "plaguebearers"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

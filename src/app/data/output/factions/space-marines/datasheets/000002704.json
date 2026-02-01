@@ -11,7 +11,7 @@
   "leaderHead": "",
   "leaderFooter": "",
   "damagedW": "1-8",
-  "damagedDescription": "While this model has 1-8 wounds remaining, subtract 4 from this model’s Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+  "damagedDescription": "While this model has 1-8 wounds remaining, subtract 4 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Fellblade",
   "slug": "fellblade-3",
   "factionSlug": "space-marines",
@@ -33,7 +33,31 @@
       "factionId": "",
       "description": "Each time a ranged attack is allocated to a model from your army, if that model is not fully visible to every model in the attacking unit because of this Fellblade model, that model has the Benefit of Cover against that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "BENEFIT OF COVER"
+          ],
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isFullyVisible",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "isBlockingVisibility",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -96,13 +120,13 @@
       "datasheetId": "000002704",
       "line": 1,
       "button": "•",
-      "description": "This model’s 2 quad lascannons can be replaced with 2 laser destroyers."
+      "description": "This model's 2 quad lascannons can be replaced with 2 laser destroyers."
     },
     {
       "datasheetId": "000002704",
       "line": 2,
       "button": "•",
-      "description": "This model’s twin heavy bolter can be replaced with 1 twin heavy flamer"
+      "description": "This model's twin heavy bolter can be replaced with 1 twin heavy flamer"
     },
     {
       "datasheetId": "000002704",
@@ -111,7 +135,34 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 heavy bolter</li><li>1 heavy flamer</li><li>1 multi-melta</li><li>1 storm bolter</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002704",
+      "line": 1,
+      "description": "1 Fellblade",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002704",
+      "line": 1,
+      "description": "1 model",
+      "cost": 480,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002704:demolisher-cannon",
       "datasheetId": "000002704",
@@ -150,7 +201,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Fellblade accelerator cannon – AP shells",
+          "name": "Fellblade accelerator cannon - AP shells",
           "attributes": [],
           "range": 72,
           "type": "Ranged",
@@ -165,7 +216,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Fellblade accelerator cannon – HE shells",
+          "name": "Fellblade accelerator cannon - HE shells",
           "attributes": [
             "BLAST"
           ],
@@ -412,48 +463,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002704",
-      "line": 1,
-      "description": "1 Fellblade",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002704",
-      "line": 1,
-      "description": "1 model",
-      "cost": 480,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 8,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
-    },
-    {
-      "entity": "thisModel",
-      "effect": "statPenalty",
-      "attribute": "oc",
-      "value": 4
     }
   ]
 }

@@ -39,9 +39,18 @@
       "name": "Defend the Divine Work",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, all models in this model’s unit have a 4+ invulnerable save.",
+      "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, all models in this model's unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -116,10 +125,44 @@
       "datasheetId": "000003840",
       "line": 1,
       "button": "•",
-      "description": "This model’s magnarail lance can be replaced with 1 transonic cannon."
+      "description": "This model's magnarail lance can be replaced with 1 transonic cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003840",
+      "line": 1,
+      "description": "1 Tech-Priest Manipulus",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003840",
+      "line": 1,
+      "description": "1 model",
+      "cost": 60,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003842",
+      "slug": "skitarii-rangers-2"
+    },
+    {
+      "id": "000003843",
+      "slug": "skitarii-vanguard-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003840:transonic-cannon",
       "datasheetId": "000003840",
@@ -197,39 +240,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003840",
-      "line": 1,
-      "description": "1 Tech-Priest Manipulus",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003840",
-      "line": 1,
-      "description": "1 model",
-      "cost": 60,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003842",
-      "slug": "skitarii-rangers-2"
-    },
-    {
-      "id": "000003843",
-      "slug": "skitarii-vanguard-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

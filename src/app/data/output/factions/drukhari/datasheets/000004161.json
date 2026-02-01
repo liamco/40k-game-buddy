@@ -5,7 +5,7 @@
   "sourceId": "000000186",
   "legend": "",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> shuriken pistol; Troupe Master’s blade; flip belt.",
+  "loadout": "<b>This model is equipped with:</b> shuriken pistol; Troupe Master's blade; flip belt.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -40,12 +40,21 @@
     },
     {
       "id": "",
-      "name": "Cegorach’s Favour",
+      "name": "Cegorach's Favour",
       "legend": "",
       "factionId": "",
       "description": "Each time this model makes a melee attack, you can re-roll a Hit roll of 1 and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "TRAVELLING PLAYERS",
@@ -56,7 +65,7 @@
       "name": "Flip Belt",
       "legend": "",
       "factionId": "",
-      "description": "Each time the bearer’s unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
+      "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -127,7 +136,7 @@
       "datasheetId": "000004161",
       "line": 1,
       "button": "•",
-      "description": "This model’s shuriken pistol can be replaced with one of the following:<ul><li>1 fusion pistol</li><li>1 neuro disruptor</li></ul>"
+      "description": "This model's shuriken pistol can be replaced with one of the following:<ul><li>1 fusion pistol</li><li>1 neuro disruptor</li></ul>"
     },
     {
       "datasheetId": "000004161",
@@ -136,12 +145,42 @@
       "description": "This model's Troupe Master's blade can be replaced with 1 Harlequin's special weapon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004161",
+      "line": 1,
+      "description": "1 Troupe Master",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004161",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004164",
+      "slug": "troupe-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004161:troupe-master-s-blade",
       "datasheetId": "000004161",
       "line": 1,
-      "name": "Troupe Master’s blade",
+      "name": "Troupe Master's blade",
       "type": "Melee",
       "profiles": [
         {
@@ -149,7 +188,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Troupe Master’s blade",
+          "name": "Troupe Master's blade",
           "attributes": [
             "DEVASTATING WOUNDS"
           ],
@@ -167,7 +206,7 @@
       "id": "000004161:harlequin-s-special-weapon",
       "datasheetId": "000004161",
       "line": 1,
-      "name": "Harlequin’s special weapon",
+      "name": "Harlequin's special weapon",
       "type": "Melee",
       "profiles": [
         {
@@ -175,7 +214,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Harlequin’s special weapon",
+          "name": "Harlequin's special weapon",
           "attributes": [
             "DEVASTATING WOUNDS"
           ],
@@ -272,35 +311,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004161",
-      "line": 1,
-      "description": "1 Troupe Master",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004161",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004164",
-      "slug": "troupe-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

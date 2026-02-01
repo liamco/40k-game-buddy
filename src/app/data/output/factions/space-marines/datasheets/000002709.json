@@ -1,9 +1,9 @@
 {
   "id": "000002709",
-  "name": "Kor’sarro Khan",
+  "name": "Kor'sarro Khan",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "As Captain of the White Scars’ 3rd Company and Master of the Hunt, Kor’sarro Khan pursues and executes the Chapter’s greatest living foes. He is an indefatigable huntsman, tracking his quarry across the stars before running them to ground and taking their head with a masterful sweep of his deadly blade, Moonfang.",
+  "legend": "As Captain of the White Scars' 3rd Company and Master of the Hunt, Kor'sarro Khan pursues and executes the Chapter's greatest living foes. He is an indefatigable huntsman, tracking his quarry across the stars before running them to ground and taking their head with a masterful sweep of his deadly blade, Moonfang.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; Moonfang.",
   "transport": "",
@@ -32,7 +32,40 @@
       "factionId": "",
       "description": "While this model is leading a unit, ranged weapons equipped by models in that unit have the [ASSAULT] ability and melee weapons equipped by models in that unit have the [LANCE] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LANCE"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +74,23 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isCharacter",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "INSPIRING COMMANDER",
@@ -81,7 +130,7 @@
     },
     {
       "datasheetId": "000002709",
-      "keyword": "Kor’sarro Khan",
+      "keyword": "Kor'sarro Khan",
       "model": "",
       "isFactionKeyword": "false"
     },
@@ -108,7 +157,7 @@
     {
       "datasheetId": "000002709",
       "line": 1,
-      "name": "Kor’sarro Khan",
+      "name": "Kor'sarro Khan",
       "m": 6,
       "t": 4,
       "sv": 3,
@@ -122,66 +171,11 @@
     }
   ],
   "options": [],
-  "wargear": [
-    {
-      "id": "000002709:bolt-pistol",
-      "datasheetId": "000002709",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002709",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002709:moonfang",
-      "datasheetId": "000002709",
-      "line": 2,
-      "name": "Moonfang",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002709",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Moonfang",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002709",
       "line": 1,
-      "description": "1 Kor’sarro Khan – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "description": "1 Kor'sarro Khan - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
       "min": 1,
       "max": 1
     }
@@ -280,5 +274,60 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Space Marines",
   "isForgeWorld": false,
-  "isLegends": false
+  "isLegends": false,
+  "availableWargear": [
+    {
+      "id": "000002709:bolt-pistol",
+      "datasheetId": "000002709",
+      "line": 1,
+      "name": "Bolt pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000002709",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Bolt pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 2,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000002709:moonfang",
+      "datasheetId": "000002709",
+      "line": 2,
+      "name": "Moonfang",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000002709",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Moonfang",
+          "attributes": [
+            "DEVASTATING WOUNDS",
+            "PRECISION"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 6,
+          "bsWs": 2,
+          "s": 5,
+          "ap": -2,
+          "d": 2
+        }
+      ]
+    }
+  ]
 }

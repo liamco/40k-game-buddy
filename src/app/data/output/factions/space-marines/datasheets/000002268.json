@@ -33,7 +33,38 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets an enemy unit, re-roll a Hit roll of 1 and, if that unit is within range of an objective marker you do not control, you can re-roll the Hit roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "Conversion",
@@ -98,7 +129,7 @@
       "datasheetId": "000002268",
       "line": 1,
       "button": "•",
-      "description": "This model’s plasma destroyer can be replaced with one of the following:<ul><li>1 conversion beam cannon</li><li>1 infernus cannon</li><li>1 magna-melta cannon</li></ul>"
+      "description": "This model's plasma destroyer can be replaced with one of the following:<ul><li>1 conversion beam cannon</li><li>1 infernus cannon</li><li>1 magna-melta cannon</li></ul>"
     },
     {
       "datasheetId": "000002268",
@@ -119,7 +150,34 @@
       "description": "This model can be equipped with 1 hunter-killer missile."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002268",
+      "line": 1,
+      "description": "1 Deimos Predator",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002268",
+      "line": 1,
+      "description": "1 model",
+      "cost": 115,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002268:conversion-beam-cannon",
       "datasheetId": "000002268",
@@ -315,7 +373,7 @@
           "line": 8,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma destroyer – standard",
+          "name": "Plasma destroyer - standard",
           "attributes": [
             "BLAST"
           ],
@@ -332,7 +390,7 @@
           "line": 9,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma destroyer – supercharge",
+          "name": "Plasma destroyer - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -396,42 +454,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002268",
-      "line": 1,
-      "description": "1 Deimos Predator",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002268",
-      "line": 1,
-      "description": "1 model",
-      "cost": 115,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

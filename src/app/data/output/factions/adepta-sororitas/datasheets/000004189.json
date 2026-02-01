@@ -28,14 +28,25 @@
       "factionId": "",
       "description": "Models in this unit have the Feel No Pain 4+ ability against Psychic Attacks and mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Virtue of Intolerance",
       "legend": "",
       "factionId": "",
-      "description": "At the start of the battle, select one unit from your opponent’s army to be this unit’s quarry. Each time a model in this unit makes an attack that targets its quarry, that attack has the [PRECISION] ability and you can re-roll the Hit roll.",
+      "description": "At the start of the battle, select one unit from your opponent's army to be this unit's quarry. Each time a model in this unit makes an attack that targets its quarry, that attack has the [PRECISION] ability and you can re-roll the Hit roll.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -53,7 +64,7 @@
       "name": "Denuncia Oratory",
       "legend": "",
       "factionId": "",
-      "description": "Each time the bearer’s unit’s quarry is destroyed, you can select a new unit from your opponent’s army to be its quarry.",
+      "description": "Each time the bearer's unit's quarry is destroyed, you can select a new unit from your opponent's army to be its quarry.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -116,7 +127,7 @@
       "datasheetId": "000004189",
       "line": 1,
       "button": "•",
-      "description": "The Celestian Insidiant Superior’s condemnor bolt pistol can be replaced with 1 inferno pistol."
+      "description": "The Celestian Insidiant Superior's condemnor bolt pistol can be replaced with 1 inferno pistol."
     },
     {
       "datasheetId": "000004189",
@@ -134,22 +145,54 @@
       "datasheetId": "000004189",
       "line": 4,
       "button": "•",
-      "description": "One Celestian Insidiant’s condemnor bolt pistol and null mace can be replaced with 1 virge of admonition."
+      "description": "One Celestian Insidiant's condemnor bolt pistol and null mace can be replaced with 1 virge of admonition."
     },
     {
       "datasheetId": "000004189",
       "line": 5,
       "button": "•",
-      "description": "One Celestian Insidiant’s condemnor bolt pistol can be replaced with 1 denuncia oratory."
+      "description": "One Celestian Insidiant's condemnor bolt pistol can be replaced with 1 denuncia oratory."
     },
     {
       "datasheetId": "000004189",
       "line": 6,
       "button": "•",
-      "description": "One Celestian Insidiant equipped with 1 condemnor bolt pistol can be equipped with 1 simulacrum imperialis (that model’s condemnor bolt pistol cannot be replaced)."
+      "description": "One Celestian Insidiant equipped with 1 condemnor bolt pistol can be equipped with 1 simulacrum imperialis (that model's condemnor bolt pistol cannot be replaced)."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004189",
+      "line": 1,
+      "description": "1 Celestian Insidiant Superior",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004189",
+      "line": 2,
+      "description": "9 Celestian Insidiants",
+      "min": 9,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004189",
+      "line": 1,
+      "description": "10 models",
+      "cost": 120,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004189:condemnor-bolt-pistol",
       "datasheetId": "000004189",
@@ -313,37 +356,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004189",
-      "line": 1,
-      "description": "1 Celestian Insidiant Superior",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004189",
-      "line": 2,
-      "description": "9 Celestian Insidiants",
-      "min": 9,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004189",
-      "line": 1,
-      "description": "10 models",
-      "cost": 120,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -32,14 +32,23 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "High-octane Fuel",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model’s unit Advances, do not make an Advance roll for it. Instead, until the end of the phase, add 6\" to the Move characteristic of models in this model’s unit.",
+      "description": "Each time this model's unit Advances, do not make an Advance roll for it. Instead, until the end of the phase, add 6\" to the Move characteristic of models in this model's unit.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -104,10 +113,44 @@
       "datasheetId": "000000003",
       "line": 1,
       "button": "•",
-      "description": "This model’s killsaw can be replaced with one of the following:<ul><li>1 big choppa</li><li>1 power klaw</li></ul>"
+      "description": "This model's killsaw can be replaced with one of the following:<ul><li>1 big choppa</li><li>1 power klaw</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000003",
+      "line": 1,
+      "description": "1 Warboss on Warbike",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000003",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000023",
+      "slug": "nobz-on-warbikes"
+    },
+    {
+      "id": "000000033",
+      "slug": "warbikers"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000003:twin-dakkagun",
       "datasheetId": "000000003",
@@ -208,39 +251,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000003",
-      "line": 1,
-      "description": "1 Warboss on Warbike",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000003",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000023",
-      "slug": "nobz-on-warbikes"
-    },
-    {
-      "id": "000000033",
-      "slug": "warbikers"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

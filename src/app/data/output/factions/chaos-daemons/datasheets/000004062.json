@@ -32,14 +32,23 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a <span class=\"kwb\">DARK</span> <span class=\"kwb\">APOSTLE</span> model, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Demagogue",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, at the start of any phase, you can select one friendly <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span> unit that is Battle-shocked and within 12\" of this unit’s <span class=\"kwb\">DARK</span> <span class=\"kwb\">APOSTLE</span> model. That unit is no longer Battle-shocked.",
+      "description": "Once per battle, at the start of any phase, you can select one friendly <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span> unit that is Battle-shocked and within 12\" of this unit's <span class=\"kwb\">DARK</span> <span class=\"kwb\">APOSTLE</span> model. That unit is no longer Battle-shocked.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -310,7 +319,56 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004062",
+      "line": 1,
+      "description": "1 Dark Apostle",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004062",
+      "line": 2,
+      "description": "2 Dark Disciples",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004062",
+      "line": 1,
+      "description": "3 models",
+      "cost": 65,
+      "count": 3
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004044",
+      "slug": "chosen"
+    },
+    {
+      "id": "000004050",
+      "slug": "cultist-mob"
+    },
+    {
+      "id": "000004052",
+      "slug": "accursed-cultists"
+    },
+    {
+      "id": "000004064",
+      "slug": "legionaries"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004062:accursed-crozius",
       "datasheetId": "000004062",
@@ -385,54 +443,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004062",
-      "line": 1,
-      "description": "1 Dark Apostle",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004062",
-      "line": 2,
-      "description": "2 Dark Disciples",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004062",
-      "line": 1,
-      "description": "3 models",
-      "cost": 65,
-      "count": 3
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004044",
-      "slug": "chosen"
-    },
-    {
-      "id": "000004050",
-      "slug": "cultist-mob"
-    },
-    {
-      "id": "000004052",
-      "slug": "accursed-cultists"
-    },
-    {
-      "id": "000004064",
-      "slug": "legionaries"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

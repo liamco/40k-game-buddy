@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "If your army contains one or more units with this ability, during the Declare Battle Formations step, select one of those units. While the selected unit is leading a unit, models in that unit have the Infiltrators ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "INFILTRATORS"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -48,7 +59,7 @@
       "name": "Healing Serum",
       "legend": "",
       "factionId": "",
-      "description": "At the start of your Command phase, if the bearer’s unit is below its Starting Strength, you can return up to D3 destroyed models (excluding CHARACTERS) to the bearer’s unit.",
+      "description": "At the start of your Command phase, if the bearer's unit is below its Starting Strength, you can return up to D3 destroyed models (excluding CHARACTERS) to the bearer's unit.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -130,7 +141,69 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002762",
+      "line": 1,
+      "description": "1 Rogue Trader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002762",
+      "line": 2,
+      "description": "1 Death Cult Assassin",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002762",
+      "line": 3,
+      "description": "1 Lectro-Maester",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002762",
+      "line": 4,
+      "description": "1 Rejuvenat Adept",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002762",
+      "line": 1,
+      "description": "4 models (<ky>AGENTS OF THE IMPERIUM</ky> Detachment)",
+      "cost": 75,
+      "count": 4
+    },
+    {
+      "datasheetId": "000002762",
+      "line": 2,
+      "description": "4 models (Assigned Agent)",
+      "cost": 105,
+      "count": 4
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002509",
+      "slug": "voidsmen-at-arms"
+    },
+    {
+      "id": "000002587",
+      "slug": "imperial-navy-breachers"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Imperial Agents",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002762:dartmask",
       "datasheetId": "000002762",
@@ -313,67 +386,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002762",
-      "line": 1,
-      "description": "1 Rogue Trader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002762",
-      "line": 2,
-      "description": "1 Death Cult Assassin",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002762",
-      "line": 3,
-      "description": "1 Lectro-Maester",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002762",
-      "line": 4,
-      "description": "1 Rejuvenat Adept",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002762",
-      "line": 1,
-      "description": "4 models (<ky>AGENTS OF THE IMPERIUM</ky> Detachment)",
-      "cost": 75,
-      "count": 4
-    },
-    {
-      "datasheetId": "000002762",
-      "line": 2,
-      "description": "4 models (Assigned Agent)",
-      "cost": 105,
-      "count": 4
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002509",
-      "slug": "voidsmen-at-arms"
-    },
-    {
-      "id": "000002587",
-      "slug": "imperial-navy-breachers"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Imperial Agents",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -36,7 +36,24 @@
       "factionId": "",
       "description": "This unit can only be selected as the target of a ranged attack if the attacking model is within 12\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetUnit",
+          "effect": "rollPenalty",
+          "attribute": "range",
+          "value": 12,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -99,10 +116,51 @@
       "datasheetId": "000001523",
       "line": 1,
       "button": "•",
-      "description": "1 Scout Sniper’s scout sniper rifle can be replaced with 1 missile launcher."
+      "description": "1 Scout Sniper's scout sniper rifle can be replaced with 1 missile launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001523",
+      "line": 1,
+      "description": "1 Scout Sniper Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001523",
+      "line": 2,
+      "description": "4-9 Scout Snipers",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001523",
+      "line": 1,
+      "description": "5 models",
+      "cost": 75,
+      "count": 5
+    },
+    {
+      "datasheetId": "000001523",
+      "line": 2,
+      "description": "10 models",
+      "cost": 150,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001523:bolt-pistol",
       "datasheetId": "000001523",
@@ -141,7 +199,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – frag",
+          "name": "Missile launcher - frag",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -159,7 +217,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – krak",
+          "name": "Missile launcher - krak",
           "attributes": [
             "HEAVY"
           ],
@@ -224,46 +282,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001523",
-      "line": 1,
-      "description": "1 Scout Sniper Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001523",
-      "line": 2,
-      "description": "4-9 Scout Snipers",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001523",
-      "line": 1,
-      "description": "5 models",
-      "cost": 75,
-      "count": 5
-    },
-    {
-      "datasheetId": "000001523",
-      "line": 2,
-      "description": "10 models",
-      "cost": 150,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

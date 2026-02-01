@@ -3,7 +3,7 @@
   "name": "Longstrike",
   "factionId": "TAU",
   "sourceId": "000000381",
-  "legend": "Renowned throughout the T’au Empire as its foremost tank ace, Shas’la T’au Sha’ng possesses a sublime talent for armoured warfare. His XV02 Pilot Battlesuit allows him to integrate seamlessly with the artificial intelligence of his chosen gunship, augmenting its targeting systems and ensuring that its every shot strikes home.",
+  "legend": "Renowned throughout the T'au Empire as its foremost tank ace, Shas'la T'au Sha'ng possesses a sublime talent for armoured warfare. His XV02 Pilot Battlesuit allows him to integrate seamlessly with the artificial intelligence of his chosen gunship, augmenting its targeting systems and ensuring that its every shot strikes home.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> 2 twin pulse carbines; railgun; armoured hull.",
   "transport": "",
@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span>, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -61,7 +70,7 @@
   "keywords": [
     {
       "datasheetId": "000000431",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -118,13 +127,13 @@
       "datasheetId": "000000431",
       "line": 1,
       "button": "•",
-      "description": "This model’s railgun can be replaced with 1 ion cannon."
+      "description": "This model's railgun can be replaced with 1 ion cannon."
     },
     {
       "datasheetId": "000000431",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 twin pulse carbines can be replaced with one of the following:<ul><li>2 accelerator burst cannons</li><li>2 twin smart missile systems</li></ul>"
+      "description": "This model's 2 twin pulse carbines can be replaced with one of the following:<ul><li>2 accelerator burst cannons</li><li>2 twin smart missile systems</li></ul>"
     },
     {
       "datasheetId": "000000431",
@@ -133,7 +142,32 @@
       "description": "This model can be equipped with up to 2 seeker missiles."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000431",
+      "line": 1,
+      "description": "1 Longstrike - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000431",
+      "line": 1,
+      "description": "1 model",
+      "cost": 140,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000431:accelerator-burst-cannon",
       "datasheetId": "000000431",
@@ -170,7 +204,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Ion cannon – standard",
+          "name": "Ion cannon - standard",
           "attributes": [
             "BLAST"
           ],
@@ -187,7 +221,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Ion cannon – overcharge",
+          "name": "Ion cannon - overcharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -332,40 +366,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000431",
-      "line": 1,
-      "description": "1 Longstrike – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000431",
-      "line": 1,
-      "description": "1 model",
-      "cost": 140,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T’au Empire (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

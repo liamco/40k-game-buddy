@@ -5,7 +5,7 @@
   "sourceId": "000000186",
   "legend": "Storm Guardians often support Aspect Warriors in close combat, wielding their pistols and blades with all the grace and skill of their kind. Other Storm Guardians bring special weapons to bear, burning foes out of cover with bursts from their flamers or melting through armoured bunkers with their fusion guns.",
   "role": "Battleline",
-  "loadout": "<b>Every Storm Guardian is equipped with:</b> shuriken pistol; close combat weapon.<br><br><b>The Serpent’s Scale Platform is equipped with:</b> close combat weapon; Serpent shield.",
+  "loadout": "<b>Every Storm Guardian is equipped with:</b> shuriken pistol; close combat weapon.<br><br><b>The Serpent's Scale Platform is equipped with:</b> close combat weapon; Serpent shield.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -26,7 +26,7 @@
       "name": "Stormblades",
       "legend": "",
       "factionId": "",
-      "description": "At the end of your Command phase, if this unit is within range of an objective marker you control, that objective marker remains under your control until your opponent’s Level of Control over that objective marker is greater than yours at the end of a phase.",
+      "description": "At the end of your Command phase, if this unit is within range of an objective marker you control, that objective marker remains under your control until your opponent's Level of Control over that objective marker is greater than yours at the end of a phase.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -35,7 +35,7 @@
       "name": "Crewed Platform",
       "legend": "",
       "factionId": "",
-      "description": "When the last Storm Guardian model in this unit is destroyed, any remaining Serpent’s Scale Platform models in this unit are also destroyed.",
+      "description": "When the last Storm Guardian model in this unit is destroyed, any remaining Serpent's Scale Platform models in this unit are also destroyed.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -44,9 +44,18 @@
       "name": "Serpent Shield",
       "legend": "",
       "factionId": "",
-      "description": "Models in the bearer’s unit have a 5+ invulnerable save.",
+      "description": "Models in the bearer's unit have a 5+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -118,7 +127,7 @@
     {
       "datasheetId": "000000590",
       "line": 2,
-      "name": "SERPENT’S SCALE PLATFORM",
+      "name": "SERPENT'S SCALE PLATFORM",
       "m": 7,
       "t": 3,
       "sv": 4,
@@ -151,7 +160,39 @@
       "description": "Up to 2 Storm Guardians can each have their close combat weapon replaced with 1 power sword."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000590",
+      "line": 1,
+      "description": "10 Storm Guardians",
+      "min": 10,
+      "max": 10
+    },
+    {
+      "datasheetId": "000000590",
+      "line": 2,
+      "description": "1 Serpent's Scale Platform",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000590",
+      "line": 1,
+      "description": "11 models",
+      "cost": 110,
+      "count": 11
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000590:flamer",
       "datasheetId": "000000590",
@@ -282,37 +323,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000590",
-      "line": 1,
-      "description": "10 Storm Guardians",
-      "min": 10,
-      "max": 10
-    },
-    {
-      "datasheetId": "000000590",
-      "line": 2,
-      "description": "1 Serpent’s Scale Platform",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000590",
-      "line": 1,
-      "description": "11 models",
-      "cost": 110,
-      "count": 11
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

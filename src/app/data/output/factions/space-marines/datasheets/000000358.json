@@ -45,7 +45,51 @@
       "factionId": "",
       "description": "Each time this model ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 5+, that unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -54,7 +98,18 @@
       "factionId": "",
       "description": "Ranged weapons equipped by the bearer have the [IGNORES COVER] ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "IGNORES COVER"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -63,7 +118,18 @@
       "factionId": "",
       "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsKeyword",
+          "keywords": [
+            "SMOKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -138,13 +204,13 @@
       "datasheetId": "000000358",
       "line": 1,
       "button": "•",
-      "description": "This model’s twin assault cannon can be replaced with 1 twin lascannon."
+      "description": "This model's twin assault cannon can be replaced with 1 twin lascannon."
     },
     {
       "datasheetId": "000000358",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 Blackstar rocket launchers can be replaced with 2 stormstrike missile launchers."
+      "description": "This model's 2 Blackstar rocket launchers can be replaced with 2 stormstrike missile launchers."
     },
     {
       "datasheetId": "000000358",
@@ -159,7 +225,34 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 auspex array</li><li>1 infernum halo-launcher</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000358",
+      "line": 1,
+      "description": "1 Corvus Blackstar",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000358",
+      "line": 1,
+      "description": "1 model",
+      "cost": 180,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "deathwatch",
+  "supplementName": "Deathwatch",
+  "supplementLabel": "Deathwatch",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000358:blackstar-rocket-launcher",
       "datasheetId": "000000358",
@@ -313,42 +406,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000358",
-      "line": 1,
-      "description": "1 Corvus Blackstar",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000358",
-      "line": 1,
-      "description": "1 model",
-      "cost": 180,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

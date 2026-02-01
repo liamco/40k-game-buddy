@@ -3,7 +3,7 @@
   "name": "Karanak",
   "factionId": "CD",
   "sourceId": "000000025",
-  "legend": "Karanak hunts those who give insult to Khorne. Scenting its prey across time and space, it is an inescapable predator. Karanak’s incorporeal howls summon the Blood Hunt of Khorne to join it in the chase, a cavalcade of ferocious daemons set on mayhem and slaughter.",
+  "legend": "Karanak hunts those who give insult to Khorne. Scenting its prey across time and space, it is an inescapable predator. Karanak's incorporeal howls summon the Blood Hunt of Khorne to join it in the chase, a cavalcade of ferocious daemons set on mayhem and slaughter.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> scalding roar; soul-rending fangs; Brass Collar of Bloody Vengeance.",
   "transport": "",
@@ -43,7 +43,7 @@
       "name": "Prey of the Blood God",
       "legend": "",
       "factionId": "",
-      "description": "At the start of the first battle round, select one enemy unit to be this model’s prey. Each time a model in this model’s unit makes a melee attack that targets its prey, you can re-roll the Wound roll. Each time this model’s prey is destroyed, select one new enemy unit to be this model’s prey.",
+      "description": "At the start of the first battle round, select one enemy unit to be this model's prey. Each time a model in this model's unit makes a melee attack that targets its prey, you can re-roll the Wound roll. Each time this model's prey is destroyed, select one new enemy unit to be this model's prey.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -54,7 +54,18 @@
       "factionId": "",
       "description": "The bearer has the Feel No Pain 3+ ability against Psychic Attacks and mortal wounds.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 3
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -132,7 +143,37 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001104",
+      "line": 1,
+      "description": "1 Karanak - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001104",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001112",
+      "slug": "flesh-hounds"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001104:scalding-roar",
       "datasheetId": "000001104",
@@ -187,35 +228,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001104",
-      "line": 1,
-      "description": "1 Karanak – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001104",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001112",
-      "slug": "flesh-hounds"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

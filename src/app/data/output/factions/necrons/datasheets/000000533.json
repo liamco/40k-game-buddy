@@ -3,7 +3,7 @@
   "name": "Catacomb Command Barge",
   "factionId": "NEC",
   "sourceId": "000000029",
-  "legend": "Some Necron nobles ride to battle enthroned on Catacomb Command Barges. These armoured skimmers beam out carrier waves that bear a noble’s orders directly to the dynasty’s legions, while also providing them with quantum shielding, heavy gauss firepower and a fast-moving platform from which to fight.",
+  "legend": "Some Necron nobles ride to battle enthroned on Catacomb Command Barges. These armoured skimmers beam out carrier waves that bear a noble's orders directly to the dynasty's legions, while also providing them with quantum shielding, heavy gauss firepower and a fast-moving platform from which to fight.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> gauss cannon; staff of light.",
   "transport": "",
@@ -31,7 +31,7 @@
       "name": "Resurrection Orb",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, at the end of any phase, select one friendly NECRONS INFANTRY or NECRONS MOUNTED unit within 6\" of the bearer and resurrect that unit. When you do, that unit’s Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
+      "description": "Once per battle, at the end of any phase, select one friendly NECRONS INFANTRY or NECRONS MOUNTED unit within 6\" of the bearer and resurrect that unit. When you do, that unit's Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -49,9 +49,18 @@
       "name": "Advanced Quantum Shielding",
       "legend": "",
       "factionId": "",
-      "description": "Each time an attack targets this model, if the Strength characteristic of that attack is greater than this model’s Toughness characteristic, subtract 1 from the Wound roll.",
+      "description": "Each time an attack targets this model, if the Strength characteristic of that attack is greater than this model's Toughness characteristic, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -108,13 +117,13 @@
       "datasheetId": "000000533",
       "line": 1,
       "button": "•",
-      "description": "This model’s gauss cannon can be replaced with 1 tesla cannon."
+      "description": "This model's gauss cannon can be replaced with 1 tesla cannon."
     },
     {
       "datasheetId": "000000533",
       "line": 2,
       "button": "•",
-      "description": "This model’s staff of light can be replaced with 1 Overlord’s blade."
+      "description": "This model's staff of light can be replaced with 1 Overlord's blade."
     },
     {
       "datasheetId": "000000533",
@@ -123,7 +132,32 @@
       "description": "This model can be equipped with 1 resurrection orb."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000533",
+      "line": 1,
+      "description": "1 Catacomb Command Barge",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000533",
+      "line": 1,
+      "description": "1 model",
+      "cost": 120,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000533:gauss-cannon",
       "datasheetId": "000000533",
@@ -204,7 +238,7 @@
       "id": "000000533:overlord-s-blade",
       "datasheetId": "000000533",
       "line": 4,
-      "name": "Overlord’s blade",
+      "name": "Overlord's blade",
       "type": "Melee",
       "profiles": [
         {
@@ -212,7 +246,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Overlord’s blade",
+          "name": "Overlord's blade",
           "attributes": [
             "DEVASTATING WOUNDS"
           ],
@@ -250,30 +284,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000533",
-      "line": 1,
-      "description": "1 Catacomb Command Barge",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000533",
-      "line": 1,
-      "description": "1 model",
-      "cost": 120,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

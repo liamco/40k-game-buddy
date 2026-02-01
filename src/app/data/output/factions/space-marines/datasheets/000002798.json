@@ -3,7 +3,7 @@
   "name": "Sword Brethren Squad",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "Every Sword Brother has earned their place amongst the Marshal’s household through acts of unswerving faith and spectacular violence. On the battlefield, they are reaping whirlwinds, unstoppable, uncompromising, and armed with a lethal assortment of weapons, and they turn upon the enemy in the Emperor’s name.",
+  "legend": "Every Sword Brother has earned their place amongst the Marshal's household through acts of unswerving faith and spectacular violence. On the battlefield, they are reaping whirlwinds, unstoppable, uncompromising, and armed with a lethal assortment of weapons, and they turn upon the enemy in the Emperor's name.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> heavy bolt pistol; Astartes chainsword.",
   "transport": "",
@@ -28,11 +28,65 @@
       "factionId": "",
       "description": "Each time an enemy unit within Engagement Range of this unit is selected to Fall Back, after it ends that Fall Back move, if this unit is not within Engagement Range of one or more enemy units, this unit can make a Normal move.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "makes a Normal move",
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character from your army with the Leader ability can be attached to an Intercessor Squad, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "can be attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Leader"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "Intercessor Squad"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -107,13 +161,13 @@
       "datasheetId": "000002798",
       "line": 2,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Sword Brother’s Astartes chainsword can be replaced with 1 thunder hammer."
+      "description": "For every 5 models in this unit, 1 Sword Brother's Astartes chainsword can be replaced with 1 thunder hammer."
     },
     {
       "datasheetId": "000002798",
       "line": 3,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Sword Brother’s heavy bolt pistol can be replaced with 1 plasma pistol."
+      "description": "For every 5 models in this unit, 1 Sword Brother's heavy bolt pistol can be replaced with 1 plasma pistol."
     },
     {
       "datasheetId": "000002798",
@@ -125,10 +179,58 @@
       "datasheetId": "000002798",
       "line": 5,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Sword Brother’s heavy bolt pistol and Astartes chainsword can be replaced with 1 twin lightning claws."
+      "description": "For every 5 models in this unit, 1 Sword Brother's heavy bolt pistol and Astartes chainsword can be replaced with 1 twin lightning claws."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002798",
+      "line": 1,
+      "description": "4-10 Sword Brothers",
+      "min": 4,
+      "max": 10
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002798",
+      "line": 1,
+      "description": "4 models",
+      "cost": 105,
+      "count": 4
+    },
+    {
+      "datasheetId": "000002798",
+      "line": 2,
+      "description": "5 models",
+      "cost": 130,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002798",
+      "line": 3,
+      "description": "9 models",
+      "cost": 235,
+      "count": 9
+    },
+    {
+      "datasheetId": "000002798",
+      "line": 4,
+      "description": "10 models",
+      "cost": 260,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002798:heavy-bolt-pistol",
       "datasheetId": "000002798",
@@ -167,7 +269,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -184,7 +286,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -331,53 +433,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002798",
-      "line": 1,
-      "description": "4-10 Sword Brothers",
-      "min": 4,
-      "max": 10
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002798",
-      "line": 1,
-      "description": "4 models",
-      "cost": 105,
-      "count": 4
-    },
-    {
-      "datasheetId": "000002798",
-      "line": 2,
-      "description": "5 models",
-      "cost": 130,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002798",
-      "line": 3,
-      "description": "9 models",
-      "cost": 235,
-      "count": 9
-    },
-    {
-      "datasheetId": "000002798",
-      "line": 4,
-      "description": "10 models",
-      "cost": 260,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "Secutarii Peltasts",
   "factionId": "AdM",
   "sourceId": "000000371",
-  "legend": "Secutarii Peltasts are specialised Adeptus Mechanicus ground troops principally employed to saturate targets with concentrated firepower from their galvanic casters, neutralising any threats to valuable Mechanicus assets. Like the Skitarii infantry they resemble, Peltasts are adaptable and mobile soldiers, and are often deployed to reach, encircle and defend their masters’ fallen god-engines.",
+  "legend": "Secutarii Peltasts are specialised Adeptus Mechanicus ground troops principally employed to saturate targets with concentrated firepower from their galvanic casters, neutralising any threats to valuable Mechanicus assets. Like the Skitarii infantry they resemble, Peltasts are adaptable and mobile soldiers, and are often deployed to reach, encircle and defend their masters' fallen god-engines.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> galvanic caster; close combat weapon.",
   "transport": "",
@@ -26,7 +26,7 @@
       "name": "Enhanced data-tether",
       "legend": "",
       "factionId": "",
-      "description": "Each time you select the bearer’s unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP",
+      "description": "Each time you select the bearer's unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP",
       "type": "Wargear",
       "parameter": ""
     },
@@ -35,7 +35,7 @@
       "name": "Omnispex",
       "legend": "",
       "factionId": "",
-      "description": "Ranged weapons equipped by models in the bearer’s unit have the [IGNORES COVER] ability.",
+      "description": "Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -46,11 +46,25 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, select one enemy <span class=\"kwb\">INFANTRY</span> unit hit by one or more of those attacks. Until the start of your next turn, while this unit is on the battlefield, that enemy unit is blinded. While a unit is blinded, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "SECUTARII",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a model from your army with the Leader ability can be attached to a Skitarii Vanguard unit, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -107,7 +121,7 @@
       "datasheetId": "000001526",
       "line": 1,
       "button": "•",
-      "description": "The Peltast Alpha’s arc lance can be replaced with 1 Archeotech pistol."
+      "description": "The Peltast Alpha's arc lance can be replaced with 1 Archeotech pistol."
     },
     {
       "datasheetId": "000001526",
@@ -122,7 +136,46 @@
       "description": "1 Secutarii Peltast can be equipped with one of the following:<ul><li>1 enhanced data-tether</li><li>1 omnispex</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001526",
+      "line": 1,
+      "description": "1 Peltast Alpha",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001526",
+      "line": 2,
+      "description": "4-9 Secutarii Peltasts",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001526",
+      "line": 1,
+      "description": "5 models",
+      "cost": 50,
+      "count": 5
+    },
+    {
+      "datasheetId": "000001526",
+      "line": 2,
+      "description": "10 models",
+      "cost": 100,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Mechanicus (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001526:archeotech-pistol",
       "datasheetId": "000001526",
@@ -162,7 +215,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Galvanic caster – flechette",
+          "name": "Galvanic caster - flechette",
           "attributes": [
             "ASSAULT"
           ],
@@ -179,7 +232,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Galvanic caster – hammershot",
+          "name": "Galvanic caster - hammershot",
           "attributes": [
             "HEAVY"
           ],
@@ -241,44 +294,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001526",
-      "line": 1,
-      "description": "1 Peltast Alpha",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001526",
-      "line": 2,
-      "description": "4-9 Secutarii Peltasts",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001526",
-      "line": 1,
-      "description": "5 models",
-      "cost": 50,
-      "count": 5
-    },
-    {
-      "datasheetId": "000001526",
-      "line": 2,
-      "description": "10 models",
-      "cost": 100,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Mechanicus (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

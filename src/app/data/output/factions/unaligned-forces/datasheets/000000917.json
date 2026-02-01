@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets the closest enemy unit: <br><ul><li>If that attack is made with a Punisher gatling cannon and the target is not a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span>, add 1 to the Hit roll. </li><li>If that attack is made with a battle cannon and the target is a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span>, add 1 to the Hit roll. </li><li>If that attack is made with a quad-lascannon and the target can Fly, add 1 to the Hit roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -109,10 +118,35 @@
       "datasheetId": "000000917",
       "line": 1,
       "button": "•",
-      "description": "This model’s battle cannon can be replaced with one of the following:<ul><li>1 Punisher gatling cannon</li><li>1 quad-lascannon</li></ul>"
+      "description": "This model's battle cannon can be replaced with one of the following:<ul><li>1 Punisher gatling cannon</li><li>1 quad-lascannon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000917",
+      "line": 1,
+      "description": "1 Vengeance Weapon Battery",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000917",
+      "line": 1,
+      "description": "1 model",
+      "cost": 140,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Fortifications",
+  "sourceName": "Datasheet: Legends: Unaligned Forces",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000917:battle-cannon",
       "datasheetId": "000000917",
@@ -190,30 +224,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000917",
-      "line": 1,
-      "description": "1 Vengeance Weapon Battery",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000917",
-      "line": 1,
-      "description": "1 model",
-      "cost": 140,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Fortifications",
-  "sourceName": "Datasheet: Legends: Unaligned Forces",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

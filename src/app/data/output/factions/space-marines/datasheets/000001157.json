@@ -28,14 +28,57 @@
       "factionId": "",
       "description": "If you control an objective marker at the end of your Command phase and this unit is within range of that objective marker, that objective marker remains under your control, even if you have no models within range of it, until your opponent controls it at the start or end of any turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": "remains under control",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "state": "hasNoModelsWithinRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opponentArmy",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": "controlled by opponent",
+          "conditions": [
+            {
+              "entity": "opponentArmy",
+              "state": "controlsObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "state": "isAtStartOrEndOfTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Target Elimination",
       "legend": "",
       "factionId": "",
-      "description": "Each time this unit is selected to shoot, it can use this ability. If it does, until the end of the phase, add 2 to the Attacks characteristic of bolt rifles equipped by models in this unit and you can only select one enemy unit as the target of all of this unit’s attacks.",
+      "description": "Each time this unit is selected to shoot, it can use this ability. If it does, until the end of the phase, add 2 to the Attacks characteristic of bolt rifles equipped by models in this unit and you can only select one enemy unit as the target of all of this unit's attacks.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -106,13 +149,13 @@
       "datasheetId": "000001157",
       "line": 1,
       "button": "•",
-      "description": "The Intercessor Sergeant’s bolt rifle can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 hand flamer</li><li>1 plasma pistol</li><li>1 power weapon</li></ul>"
+      "description": "The Intercessor Sergeant's bolt rifle can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 hand flamer</li><li>1 plasma pistol</li><li>1 power weapon</li></ul>"
     },
     {
       "datasheetId": "000001157",
       "line": 2,
       "button": "•",
-      "description": "The Intercessor Sergeant’s close combat weapon can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
+      "description": "The Intercessor Sergeant's close combat weapon can be replaced with one of the following:<ul><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
     },
     {
       "datasheetId": "000001157",
@@ -121,7 +164,48 @@
       "description": "For every 5 models in this unit, 1 model equipped with a bolt rifle can be equipped with 1 Astartes grenade launcher."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001157",
+      "line": 1,
+      "description": "1 Intercessor Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001157",
+      "line": 2,
+      "description": "4-9 Intercessors",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001157",
+      "line": 1,
+      "description": "5 models",
+      "cost": 80,
+      "count": 5
+    },
+    {
+      "datasheetId": "000001157",
+      "line": 2,
+      "description": "10 models",
+      "cost": 160,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001157:astartes-grenade-launcher",
       "datasheetId": "000001157",
@@ -134,7 +218,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Astartes grenade launcher – frag",
+          "name": "Astartes grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -151,7 +235,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Astartes grenade launcher – krak",
+          "name": "Astartes grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -256,7 +340,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -273,7 +357,7 @@
           "line": 7,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -410,46 +494,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001157",
-      "line": 1,
-      "description": "1 Intercessor Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001157",
-      "line": 2,
-      "description": "4-9 Intercessors",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001157",
-      "line": 1,
-      "description": "5 models",
-      "cost": 80,
-      "count": 5
-    },
-    {
-      "datasheetId": "000001157",
-      "line": 2,
-      "description": "10 models",
-      "cost": 160,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

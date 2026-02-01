@@ -40,7 +40,7 @@
       "name": "Master Vox",
       "legend": "",
       "factionId": "",
-      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer’s unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
+      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -49,7 +49,7 @@
       "name": "Medi-pack",
       "legend": "",
       "factionId": "",
-      "description": "At the start of your Command phase, if the bearer’s unit is below its Starting Strength, you can return up to D3 destroyed <span class=\"kwb\">PLATOON</span> models (excluding <span class=\"kwb\">CHARACTERS</span>) to this unit.",
+      "description": "At the start of your Command phase, if the bearer's unit is below its Starting Strength, you can return up to D3 destroyed <span class=\"kwb\">PLATOON</span> models (excluding <span class=\"kwb\">CHARACTERS</span>) to this unit.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -58,13 +58,18 @@
       "name": "Regimental Standard",
       "legend": "",
       "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer’s unit.",
+      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
       "type": "Wargear",
       "parameter": ""
     },
     {
+      "id": "",
       "name": "ORDERS",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "This unit's <span class=\"kwb\">OFFICER</span> can issue 1 Order to a Regiment unit.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -202,7 +207,7 @@
       "datasheetId": "000003940",
       "line": 7,
       "button": "•",
-      "description": "The Catachan Commander’s laspistol can be replaced with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li></ul>"
+      "description": "The Catachan Commander's laspistol can be replaced with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li></ul>"
     },
     {
       "datasheetId": "000003940",
@@ -211,7 +216,44 @@
       "description": "The Catachan Commander can be equipped with one of the following:<ul><li>1 boltgun</li><li>1 chainsword</li><li>1 power fist</li><li>1 power weapon</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003940",
+      "line": 1,
+      "description": "1 Catachan Commander",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000003940",
+      "line": 2,
+      "description": "4 Veteran Guardsmen",
+      "min": 4,
+      "max": 4
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003940",
+      "line": 1,
+      "description": "5 models",
+      "cost": 65,
+      "count": 5
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003949",
+      "slug": "catachan-jungle-fighters-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003940:wargear-3",
       "datasheetId": "000003940",
@@ -574,7 +616,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -591,7 +633,7 @@
           "line": 1,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -618,7 +660,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – frag",
+          "name": "Grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -635,7 +677,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – krak",
+          "name": "Grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -685,7 +727,7 @@
           "line": 12,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -702,7 +744,7 @@
           "line": 12,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -744,42 +786,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003940",
-      "line": 1,
-      "description": "1 Catachan Commander",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000003940",
-      "line": 2,
-      "description": "4 Veteran Guardsmen",
-      "min": 4,
-      "max": 4
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003940",
-      "line": 1,
-      "description": "5 models",
-      "cost": 65,
-      "count": 5
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003949",
-      "slug": "catachan-jungle-fighters-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

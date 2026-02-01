@@ -3,7 +3,7 @@
   "name": "Sanguinary Priest With Jump Pack",
   "factionId": "SM",
   "sourceId": "000000376",
-  "legend": "The Sanguinary Priests are the Blood Angels’ Apothecaries, and hold responsibility for the Chapter’s soul as well as its body. Through their ministrations and ceremonies do they call upon the Blood Angels to embrace the Red Thirst, control it and unleash their rage upon the enemy.",
+  "legend": "The Sanguinary Priests are the Blood Angels' Apothecaries, and hold responsibility for the Chapter's soul as well as its body. Through their ministrations and ceremonies do they call upon the Blood Angels to embrace the Red Thirst, control it and unleash their rage upon the enemy.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; Astartes chainsword.",
   "transport": "",
@@ -36,7 +36,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -45,7 +56,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, improve the Armour Penetration characteristic of melee weapons equipped by models in that unit by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -129,58 +157,6 @@
       "description": "None"
     }
   ],
-  "wargear": [
-    {
-      "id": "000002738:bolt-pistol",
-      "datasheetId": "000002738",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002738",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002738:astartes-chainsword",
-      "datasheetId": "000002738",
-      "line": 2,
-      "name": "Astartes chainsword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002738",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Astartes chainsword",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002738",
@@ -233,6 +209,58 @@
   "sourceName": "Faction Pack: Blood Angels (Warhammer Legends)",
   "isForgeWorld": false,
   "isLegends": true,
+  "availableWargear": [
+    {
+      "id": "000002738:bolt-pistol",
+      "datasheetId": "000002738",
+      "line": 1,
+      "name": "Bolt pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000002738",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Bolt pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 2,
+          "s": 4,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000002738:astartes-chainsword",
+      "datasheetId": "000002738",
+      "line": 2,
+      "name": "Astartes chainsword",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000002738",
+          "line": 2,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Astartes chainsword",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 5,
+          "bsWs": 2,
+          "s": 4,
+          "ap": -1,
+          "d": 1
+        }
+      ]
+    }
+  ],
   "leaderConditions": {
     "allowedExistingLeaderKeywords": [
       "CAPTAIN",

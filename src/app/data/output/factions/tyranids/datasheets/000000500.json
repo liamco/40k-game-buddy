@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Each time this model fights, after it has resolved its attacks, if one or more enemy models (excluding <span class=\"kwb\">VEHICLE</span> models) were destroyed as the result of those attacks, this model regains up to D3 wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isDestroyed",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -87,34 +104,6 @@
       "description": "None"
     }
   ],
-  "wargear": [
-    {
-      "id": "000000500:massive-scything-sickle-talons",
-      "datasheetId": "000000500",
-      "line": 1,
-      "name": "Massive scything sickle-talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000500",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Massive scything sickle-talons",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 10,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000500",
@@ -140,13 +129,32 @@
   "sourceName": "Faction Pack: Tyranids (Warhammer Legends)",
   "isForgeWorld": false,
   "isLegends": true,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
+  "availableWargear": [
     {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
+      "id": "000000500:massive-scything-sickle-talons",
+      "datasheetId": "000000500",
+      "line": 1,
+      "name": "Massive scything sickle-talons",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000000500",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Massive scything sickle-talons",
+          "attributes": [
+            "TWIN-LINKED"
+          ],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 10,
+          "bsWs": 3,
+          "s": 9,
+          "ap": -2,
+          "d": 3
+        }
+      ]
     }
   ]
 }

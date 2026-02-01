@@ -37,14 +37,23 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Aspect Shrine Token",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer’s Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
+      "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
       "type": "Wargear",
       "parameter": ""
     }
@@ -130,19 +139,19 @@
       "datasheetId": "000000593",
       "line": 1,
       "button": "•",
-      "description": "The Dire Avenger Exarch’s Avenger shuriken catapult can be replaced with 1 shuriken pistol and one of the following:<ul><li>1 diresword</li><li>1 power glaive</li></ul>"
+      "description": "The Dire Avenger Exarch's Avenger shuriken catapult can be replaced with 1 shuriken pistol and one of the following:<ul><li>1 diresword</li><li>1 power glaive</li></ul>"
     },
     {
       "datasheetId": "000000593",
       "line": 2,
       "button": "•",
-      "description": "If this unit’s Dire Avenger Exarch is equipped with 1 Avenger shuriken catapult, it can be equipped with 1 additional Avenger shuriken catapult."
+      "description": "If this unit's Dire Avenger Exarch is equipped with 1 Avenger shuriken catapult, it can be equipped with 1 additional Avenger shuriken catapult."
     },
     {
       "datasheetId": "000000593",
       "line": 3,
       "button": "•",
-      "description": "The Dire Avenger Exarch’s shuriken pistol can be replaced with 1 shimmershield."
+      "description": "The Dire Avenger Exarch's shuriken pistol can be replaced with 1 shimmershield."
     },
     {
       "datasheetId": "000000593",
@@ -151,7 +160,46 @@
       "description": "For every 5 models in this unit, it can have 1 Aspect Shrine token."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000593",
+      "line": 1,
+      "description": "1 Dire Avenger Exarch",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000593",
+      "line": 2,
+      "description": "4-9 Dire Avengers",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000593",
+      "line": 1,
+      "description": "5 models",
+      "cost": 75,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000593",
+      "line": 2,
+      "description": "10 models",
+      "cost": 150,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000593:avenger-shuriken-catapult",
       "datasheetId": "000000593",
@@ -277,44 +325,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000593",
-      "line": 1,
-      "description": "1 Dire Avenger Exarch",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000593",
-      "line": 2,
-      "description": "4-9 Dire Avengers",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000593",
-      "line": 1,
-      "description": "5 models",
-      "cost": 75,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000593",
-      "line": 2,
-      "description": "10 models",
-      "cost": 150,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

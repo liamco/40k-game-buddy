@@ -3,7 +3,7 @@
   "name": "Impulsor",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "Equipped with vectored thrusters that grant it high speed, the Impulsor is a highly adaptable transport ideal for rapid insertion and flanking manoeuvres. The zealous vanguard forces of the Black Templars particularly favour it. The tank’s array of offensive and defensive systems enables it to support fiery purges, aggressive reconnaissance and oathsworn spearheads.",
+  "legend": "Equipped with vectored thrusters that grant it high speed, the Impulsor is a highly adaptable transport ideal for rapid insertion and flanking manoeuvres. The zealous vanguard forces of the Black Templars particularly favour it. The tank's array of offensive and defensive systems enables it to support fiery purges, aggressive reconnaissance and oathsworn spearheads.",
   "role": "Dedicated Transports",
   "loadout": "<b>This model is equipped with:</b> 2 storm bolters; armoured hull.",
   "transport": "This model has a transport capacity of 7 Tacticus or Phobos Infantry models. It cannot transport Jump Pack models.",
@@ -38,7 +38,32 @@
       "factionId": "",
       "description": "Units can disembark from this <span class=\"kwb\">TRANSPORT</span> after it has Advanced. Units that do so count as having made a Normal move, and cannot declare a charge that turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DISembark AFTER ADVANCE"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "Normal move"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT DECLARE CHARGE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -47,7 +72,36 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -56,7 +110,16 @@
       "factionId": "",
       "description": "The bearer has a 5+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -131,7 +194,7 @@
       "datasheetId": "000002786",
       "line": 2,
       "button": "•",
-      "description": "This model’s 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
+      "description": "This model's 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
     },
     {
       "datasheetId": "000002786",
@@ -140,7 +203,34 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 bellicatus missile array</li><li>1 ironhail skytalon array</li><li>1 orbital comms array</li><li>1 shield dome</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002786",
+      "line": 1,
+      "description": "1 Impulsor",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002786",
+      "line": 1,
+      "description": "1 model",
+      "cost": 85,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002786:bellicatus-missile-array",
       "datasheetId": "000002786",
@@ -153,7 +243,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Bellicatus missile array – frag",
+          "name": "Bellicatus missile array - frag",
           "attributes": [
             "BLAST"
           ],
@@ -170,7 +260,7 @@
           "line": 2,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Bellicatus missile array – Icarus",
+          "name": "Bellicatus missile array - Icarus",
           "attributes": [
             "ANTI-FLY 2+"
           ],
@@ -187,7 +277,7 @@
           "line": 3,
           "lineInWargear": 3,
           "dice": "",
-          "name": "Bellicatus missile array – krak",
+          "name": "Bellicatus missile array - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -354,32 +444,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002786",
-      "line": 1,
-      "description": "1 Impulsor",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002786",
-      "line": 1,
-      "description": "1 model",
-      "cost": 85,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -36,7 +36,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -45,7 +54,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, once per battle, when a Battle-shock test is taken for that unit, you can re-roll that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "ld",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -54,7 +80,19 @@
       "factionId": "",
       "description": "This model cannot be your Warlord and cannot be given Enhancements.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT BE WARLORD",
+            "CANNOT BE GIVEN ENHANCEMENTS"
+          ],
+          "value": null
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -141,13 +179,13 @@
       "datasheetId": "000002802",
       "line": 1,
       "button": "•",
-      "description": "This model’s bolt pistol and Astartes chainsword can be replaced with 1 twin lightning claws."
+      "description": "This model's bolt pistol and Astartes chainsword can be replaced with 1 twin lightning claws."
     },
     {
       "datasheetId": "000002802",
       "line": 2,
       "button": "•",
-      "description": "This model’s bolt pistol and Astartes chainsword can be replaced with two different weapons from the following list:*<ul><li>1 bolt pistol</li><li>1 combi-weapon</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li><li>1 storm shield</li></ul>"
+      "description": "This model's bolt pistol and Astartes chainsword can be replaced with two different weapons from the following list:*<ul><li>1 bolt pistol</li><li>1 combi-weapon</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li><li>1 storm shield</li></ul>"
     },
     {
       "datasheetId": "000002802",
@@ -156,7 +194,39 @@
       "description": "* This model can only be equipped with two ranged weapons if one of them is a Pistol (and it can only have one Pistol)."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002802",
+      "line": 1,
+      "description": "1 Wolf Guard Pack Leader with Jump Pack",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002802",
+      "line": 1,
+      "description": "1 model",
+      "cost": 35,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000324",
+      "slug": "skyclaws"
+    }
+  ],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves (Legends)",
+  "supplementLabel": "Space Wolves (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002802:bolt-pistol",
       "datasheetId": "000002802",
@@ -223,7 +293,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -240,7 +310,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -406,38 +476,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002802",
-      "line": 1,
-      "description": "1 Wolf Guard Pack Leader with Jump Pack",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002802",
-      "line": 1,
-      "description": "1 model",
-      "cost": 35,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000324",
-      "slug": "skyclaws"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves (Legends)",
-  "supplementLabel": "Space Wolves (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
   "leaderConditions": {
     "mustAttach": true
   }

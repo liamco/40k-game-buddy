@@ -3,7 +3,7 @@
   "name": "Onager Dunecrawler",
   "factionId": "AdM",
   "sourceId": "000000015",
-  "legend": "The Onager Dunecrawler’s flexible armaments can blast apart squadrons of aircraft or atomise elite infantry in beams of blinding energy. They are versatile heavy weapons platforms, well-shielded and easily able to advance alongside Skitarii as their multiple limbs propel them over treacherous obstacles.",
+  "legend": "The Onager Dunecrawler's flexible armaments can blast apart squadrons of aircraft or atomise elite infantry in beams of blinding energy. They are versatile heavy weapons platforms, well-shielded and easily able to advance alongside Skitarii as their multiple limbs propel them over treacherous obstacles.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> eradication beamer; Dunecrawler legs.",
   "transport": "",
@@ -42,7 +42,16 @@
       "factionId": "",
       "description": "While a friendly ADEPTUS MECHANICUS BATTLELINE model is wholly within 6\" of this model, that <span class=\"kwb\">BATTLELINE</span> model has a 4+ invulnerable save against ranged attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -120,7 +129,7 @@
       "datasheetId": "000000854",
       "line": 1,
       "button": "•",
-      "description": "This model’s eradication beamer can be replaced with one of the following:<ul><li>1 daedalus missile launcher and 1 Icarus array</li><li>1 neutron laser and 1 cognis heavy stubber</li><li>1 twin Onager heavy phosphor blaster</li></ul>"
+      "description": "This model's eradication beamer can be replaced with one of the following:<ul><li>1 daedalus missile launcher and 1 Icarus array</li><li>1 neutron laser and 1 cognis heavy stubber</li><li>1 twin Onager heavy phosphor blaster</li></ul>"
     },
     {
       "datasheetId": "000000854",
@@ -135,7 +144,32 @@
       "description": "This model can be equipped with 1 broad spectrum data-tether."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000854",
+      "line": 1,
+      "description": "1 Onager Dunecrawler",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000854",
+      "line": 1,
+      "description": "1 model",
+      "cost": 155,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000854:cognis-heavy-stubber",
       "datasheetId": "000000854",
@@ -201,7 +235,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Eradication beamer – dissipated",
+          "name": "Eradication beamer - dissipated",
           "attributes": [
             "BLAST",
             "SUSTAINED HITS 1"
@@ -219,7 +253,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Eradication beamer – focused",
+          "name": "Eradication beamer - focused",
           "attributes": [
             "BLAST",
             "SUSTAINED HITS 1"
@@ -337,40 +371,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000854",
-      "line": 1,
-      "description": "1 Onager Dunecrawler",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000854",
-      "line": 1,
-      "description": "1 model",
-      "cost": 155,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

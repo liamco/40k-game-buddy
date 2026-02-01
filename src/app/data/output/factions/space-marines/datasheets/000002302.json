@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 4.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +50,26 @@
       "factionId": "",
       "description": "While this unit contains an Apothecary, in your Command phase, you can return 1 destroyed model (excluding Character models) to this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "APOTHECARY"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +78,27 @@
       "factionId": "",
       "description": "While this unit contains an Ancient, add 1 to the Objective Control characteristic of its models.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attributes": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "equals",
+              "value": "Ancient"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -59,11 +107,66 @@
       "factionId": "",
       "description": "While this unit contains a Company Champion, add 1 to Advance and Charge rolls made for this unit and you can target this unit with the Heroic Intervention Stratagem for 0CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "HEROIC INTERVENTION"
+          ],
+          "value": "0CP"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character unit from your army with the Leader ability can be attached to a Terminator Squad, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "can be attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Leader"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "Terminator Squad"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -144,13 +247,13 @@
       "datasheetId": "000002302",
       "line": 3,
       "button": "•",
-      "description": "1 Deathwing Command Terminator’s power fist can be replaced with 1 power weapon."
+      "description": "1 Deathwing Command Terminator's power fist can be replaced with 1 power weapon."
     },
     {
       "datasheetId": "000002302",
       "line": 4,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Deathwing Command Terminator can replace its storm bolter with one of the following:<ul><li>1 assault cannon</li><li>1 heavy flamer</li><li>1 plasma cannon</li><li>1 storm bolter and 1 cyclone missile launcher (this model’s storm bolter cannot be replaced)</li></ul>"
+      "description": "For every 5 models in this unit, 1 Deathwing Command Terminator can replace its storm bolter with one of the following:<ul><li>1 assault cannon</li><li>1 heavy flamer</li><li>1 plasma cannon</li><li>1 storm bolter and 1 cyclone missile launcher (this model's storm bolter cannot be replaced)</li></ul>"
     },
     {
       "datasheetId": "000002302",
@@ -165,7 +268,62 @@
       "description": "* The rules for a Watcher in the Dark can be found on the Deathwing Knights datasheet."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002302",
+      "line": 1,
+      "description": "1 Deathwing Ancient",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002302",
+      "line": 2,
+      "description": "1 Deathwing Apothecary",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002302",
+      "line": 3,
+      "description": "1 Deathwing Champion",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002302",
+      "line": 4,
+      "description": "2-7 Deathwing Command Terminators",
+      "min": 2,
+      "max": 7
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002302",
+      "line": 1,
+      "description": "5 models",
+      "cost": 200,
+      "count": 5
+    },
+    {
+      "datasheetId": "000002302",
+      "line": 2,
+      "description": "10 models",
+      "cost": 400,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "dark-angels",
+  "supplementName": "Dark Angels (Legends)",
+  "supplementLabel": "Dark Angels (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002302:assault-cannon",
       "datasheetId": "000002302",
@@ -204,7 +362,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Cyclone missile launcher – frag",
+          "name": "Cyclone missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -221,7 +379,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Cyclone missile launcher – krak",
+          "name": "Cyclone missile launcher - krak",
           "attributes": [],
           "range": 36,
           "type": "Ranged",
@@ -272,7 +430,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma cannon – standard",
+          "name": "Plasma cannon - standard",
           "attributes": [
             "BLAST"
           ],
@@ -289,7 +447,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma cannon – supercharge",
+          "name": "Plasma cannon - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -482,60 +640,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002302",
-      "line": 1,
-      "description": "1 Deathwing Ancient",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002302",
-      "line": 2,
-      "description": "1 Deathwing Apothecary",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002302",
-      "line": 3,
-      "description": "1 Deathwing Champion",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002302",
-      "line": 4,
-      "description": "2-7 Deathwing Command Terminators",
-      "min": 2,
-      "max": 7
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002302",
-      "line": 1,
-      "description": "5 models",
-      "cost": 200,
-      "count": 5
-    },
-    {
-      "datasheetId": "000002302",
-      "line": 2,
-      "description": "10 models",
-      "cost": 400,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels (Legends)",
-  "supplementLabel": "Dark Angels (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

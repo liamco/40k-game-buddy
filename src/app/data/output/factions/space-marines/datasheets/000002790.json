@@ -3,7 +3,7 @@
   "name": "Repulsor Executioner",
   "factionId": "SM",
   "sourceId": "000000162",
-  "legend": "The Repulsor Executioner sacrifices some transport capacity to carry far more powerful weaponry. Armed with a blessed heavy laser destroyer, it can cripple enemy tanks, while the macro plasma incinerator can incinerate infantry formations. The Executioner’s crew are skilled in close-range support, combating threats to the rest of their fighting company with pinpoint interception strikes.",
+  "legend": "The Repulsor Executioner sacrifices some transport capacity to carry far more powerful weaponry. Armed with a blessed heavy laser destroyer, it can cripple enemy tanks, while the macro plasma incinerator can incinerate infantry formations. The Executioner's crew are skilled in close-range support, combating threats to the rest of their fighting company with pinpoint interception strikes.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; macro plasma incinerator; Repulsor Executioner defensive array; twin heavy bolter; twin Icarus ironhail heavy stubber; armoured hull.",
   "transport": "This model has a transport capacity of 7 Adeptus Astartes Infantry models. Each Jump Pack, Gravis or Terminator model takes up the space of 2 models and each Centurion model takes up the space of 3 models.",
@@ -33,7 +33,32 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets an enemy unit within 12\" of one or more <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "ADEPTUS ASTARTES"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -102,7 +127,7 @@
       "datasheetId": "000002790",
       "line": 1,
       "button": "•",
-      "description": "This model’s macro plasma incinerator can be replaced with 1 heavy laser destroyer."
+      "description": "This model's macro plasma incinerator can be replaced with 1 heavy laser destroyer."
     },
     {
       "datasheetId": "000002790",
@@ -117,7 +142,34 @@
       "description": "This model can be equipped with 1 Icarus rocket pod."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002790",
+      "line": 1,
+      "description": "1 Repulsor Executioner",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002790",
+      "line": 1,
+      "description": "1 model",
+      "cost": 220,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002790:heavy-laser-destroyer",
       "datasheetId": "000002790",
@@ -234,7 +286,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Macro plasma incinerator – standard",
+          "name": "Macro plasma incinerator - standard",
           "attributes": [
             "BLAST"
           ],
@@ -251,7 +303,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Macro plasma incinerator – supercharge",
+          "name": "Macro plasma incinerator - supercharge",
           "attributes": [
             "BLAST",
             "HAZARDOUS"
@@ -394,42 +446,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002790",
-      "line": 1,
-      "description": "1 Repulsor Executioner",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002790",
-      "line": 1,
-      "description": "1 model",
-      "cost": 220,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 5,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

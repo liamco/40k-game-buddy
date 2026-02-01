@@ -19,6 +19,16 @@ const globalStratagemModules = import.meta.glob("../data/output/core-stratagems.
     import: "default",
 });
 
+const factionConfigModules = import.meta.glob("../data/mappings/*/faction-config.json", {
+    eager: false,
+    import: "default",
+});
+
+export interface FactionConfig {
+    factionIcon?: string;
+    detachmentSupplements?: Record<string, string>;
+}
+
 // Load faction data from JSON
 export async function loadFactionData(slug: string): Promise<Faction | null> {
     try {
@@ -130,6 +140,29 @@ export async function loadFactionStratagemData(factionSlug: string, detachmentSl
         return detachment.stratagems || [];
     } catch (error) {
         console.error(`Error loading faction ${factionSlug}:`, error);
+        return null;
+    }
+}
+
+// Load faction config from mappings folder
+export async function loadFactionConfig(slug: string): Promise<FactionConfig | null> {
+    try {
+        const moduleKey = Object.keys(factionConfigModules).find((key) => key.includes(`/${slug}/faction-config.json`));
+
+        if (!moduleKey) {
+            // Config file doesn't exist for this faction - that's okay
+            return null;
+        }
+
+        const module = factionConfigModules[moduleKey];
+        if (!module) {
+            return null;
+        }
+
+        const data = (await module()) as FactionConfig;
+        return data;
+    } catch (error) {
+        console.error(`Error loading faction config for ${slug}:`, error);
         return null;
     }
 }

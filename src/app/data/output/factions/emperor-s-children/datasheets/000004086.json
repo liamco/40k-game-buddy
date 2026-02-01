@@ -33,7 +33,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Slaanesh Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -57,7 +68,7 @@
   "keywords": [
     {
       "datasheetId": "000004086",
-      "keyword": "Emperor’s Children",
+      "keyword": "Emperor's Children",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -122,7 +133,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004086",
+      "line": 1,
+      "description": "1 Daemon Prince of Slaanesh",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004086",
+      "line": 1,
+      "description": "1 model",
+      "cost": 180,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Emperor's Children",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004086:infernal-cannon",
       "datasheetId": "000004086",
@@ -159,7 +195,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Hellforged weapons – strike",
+          "name": "Hellforged weapons - strike",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -174,7 +210,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Hellforged weapons – sweep",
+          "name": "Hellforged weapons - sweep",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -186,30 +222,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004086",
-      "line": 1,
-      "description": "1 Daemon Prince of Slaanesh",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004086",
-      "line": 1,
-      "description": "1 model",
-      "cost": 180,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Emperor’s Children",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

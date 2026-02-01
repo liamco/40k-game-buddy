@@ -5,7 +5,7 @@
   "sourceId": "000000374",
   "legend": "",
   "role": "Other",
-  "loadout": "<b>The Grenadier Sergeant is equipped with:</b> sergeant’s pistol; sergeant’s close combat weapon. <br><br><b>Every Grenadier model is equipped with:</b> hot-shot lasgun; close combat weapon. <br><br><b>The Heavy Weapons Team is equipped with:</b> heavy flamer; close combat weapon.",
+  "loadout": "<b>The Grenadier Sergeant is equipped with:</b> sergeant's pistol; sergeant's close combat weapon. <br><br><b>Every Grenadier model is equipped with:</b> hot-shot lasgun; close combat weapon. <br><br><b>The Heavy Weapons Team is equipped with:</b> heavy flamer; close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -22,7 +22,7 @@
       "name": "Vox-caster",
       "legend": "",
       "factionId": "",
-      "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly Officer models within 6\": on a 5+, you gain 1CP.",
+      "description": "Each time you target the bearer's unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly Officer models within 6\": on a 5+, you gain 1CP.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -36,8 +36,13 @@
       "parameter": ""
     },
     {
+      "id": "",
       "name": "GRENADIER SQUAD",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a model from your army with the Leader ability can be attached to a Death Korps of Krieg unit, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -124,7 +129,44 @@
       "description": "Up to 2 Grenadier models can each have their hot-shot lasgun replaced with one of the following:<ul><li>1 flamer</li><li>1 grenade launcher</li><li>1 heavy stubber</li><li>1 meltagun</li><li>1 plasma gun</li><li>1 sniper rifle</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002374",
+      "line": 1,
+      "description": "One of the following:"
+    },
+    {
+      "datasheetId": "000002374",
+      "line": 2,
+      "description": "1 Grenadier Sergeant and 9 Grenadiers",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002374",
+      "line": 3,
+      "description": "1 Grenadier Sergeant, 7 Grenadiers and 1 Heavy Weapons Team",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002374",
+      "line": 1,
+      "description": "10 models",
+      "cost": 110,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002374:flamer",
       "datasheetId": "000002374",
@@ -164,7 +206,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Grenade launcher – frag",
+          "name": "Grenade launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -181,7 +223,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Grenade launcher – krak",
+          "name": "Grenade launcher - krak",
           "attributes": [],
           "range": 24,
           "type": "Ranged",
@@ -311,7 +353,7 @@
           "line": 8,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -328,7 +370,7 @@
           "line": 9,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -347,7 +389,7 @@
       "id": "000002374:sergeant-s-pistol",
       "datasheetId": "000002374",
       "line": 10,
-      "name": "Sergeant’s pistol",
+      "name": "Sergeant's pistol",
       "type": "Ranged",
       "profiles": [
         {
@@ -355,7 +397,7 @@
           "line": 10,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Sergeant’s pistol",
+          "name": "Sergeant's pistol",
           "attributes": [
             "PISTOL"
           ],
@@ -424,7 +466,7 @@
       "id": "000002374:sergeant-s-close-combat-weapon",
       "datasheetId": "000002374",
       "line": 13,
-      "name": "Sergeant’s close combat weapon",
+      "name": "Sergeant's close combat weapon",
       "type": "Melee",
       "profiles": [
         {
@@ -432,7 +474,7 @@
           "line": 13,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Sergeant’s close combat weapon",
+          "name": "Sergeant's close combat weapon",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -444,42 +486,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002374",
-      "line": 1,
-      "description": "One of the following:"
-    },
-    {
-      "datasheetId": "000002374",
-      "line": 2,
-      "description": "1 Grenadier Sergeant and 9 Grenadiers",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002374",
-      "line": 3,
-      "description": "1 Grenadier Sergeant, 7 Grenadiers and 1 Heavy Weapons Team",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002374",
-      "line": 1,
-      "description": "10 models",
-      "cost": 110,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

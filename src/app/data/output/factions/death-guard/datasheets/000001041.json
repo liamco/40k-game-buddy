@@ -26,7 +26,7 @@
       "type": "Core"
     },
     {
-      "name": "Nurgle’s Gift (Aura)",
+      "name": "Nurgle's Gift (Aura)",
       "type": "Faction"
     },
     {
@@ -34,7 +34,7 @@
       "name": "Putrescent Vitality (Psychic)",
       "legend": "",
       "factionId": "",
-      "description": "At the start of the Fight phase, you can roll one D6: on a 1, this <span class=\"kwb\">PSYKER</span>’s unit suffers D3 mortal wounds; on a 2+, until the end of the phase, each time an attack is allocated to a model in this <span class=\"kwb\">PSYKER</span>’s unit, subtract 1 from the Damage characteristic of that attack.",
+      "description": "At the start of the Fight phase, you can roll one D6: on a 1, this <span class=\"kwb\">PSYKER</span>'s unit suffers D3 mortal wounds; on a 2+, until the end of the phase, each time an attack is allocated to a model in this <span class=\"kwb\">PSYKER</span>'s unit, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
       "parameter": ""
     },
@@ -43,7 +43,7 @@
       "name": "Pestilent Familiar (Psychic)",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, after selecting targets for a Psychic weapon equipped by this model, until the end of the phase, improve the Strength and Damage characteristics of that weapon by 2. <br><br><b>Designer’s Note:</b> Place a Pestilent Familiar token next to this model, removing it once this ability has been used.",
+      "description": "Once per battle, after selecting targets for a Psychic weapon equipped by this model, until the end of the phase, improve the Strength and Damage characteristics of that weapon by 2. <br><br><b>Designer's Note:</b> Place a Pestilent Familiar token next to this model, removing it once this ability has been used.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -120,22 +120,56 @@
       "datasheetId": "000001041",
       "line": 1,
       "button": "•",
-      "description": "This model’s plague combi-bolter can be replaced with one of the following:<ul><li>1 combi-weapon</li><li>1 plague-encrusted exalted weapon</li></ul>"
+      "description": "This model's plague combi-bolter can be replaced with one of the following:<ul><li>1 combi-weapon</li><li>1 plague-encrusted exalted weapon</li></ul>"
     },
     {
       "datasheetId": "000001041",
       "line": 2,
       "button": "•",
-      "description": "This model’s force weapon can be replaced with one of the following:<ul><li>1 chainfist</li><li>1 plague fist</li><li>1 plague-encrusted exalted weapon</li></ul>"
+      "description": "This model's force weapon can be replaced with one of the following:<ul><li>1 chainfist</li><li>1 plague fist</li><li>1 plague-encrusted exalted weapon</li></ul>"
     },
     {
       "datasheetId": "000001041",
       "line": 3,
       "button": "•",
-      "description": "This model’s plague combi-bolter and force weapon can be replaced with 1 twin lighting claws."
+      "description": "This model's plague combi-bolter and force weapon can be replaced with 1 twin lighting claws."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001041",
+      "line": 1,
+      "description": "1 Death Guard Sorcerer in Terminator Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001041",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000001372",
+      "slug": "blightlord-terminators"
+    },
+    {
+      "id": "000001371",
+      "slug": "deathshroud-terminators"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Death Guard (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000001041:combi-weapon",
       "datasheetId": "000001041",
@@ -176,7 +210,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Curse of the Leper – witchfire",
+          "name": "Curse of the Leper - witchfire",
           "attributes": [
             "PSYCHIC"
           ],
@@ -193,7 +227,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Curse of the Leper – focused witchfire",
+          "name": "Curse of the Leper - focused witchfire",
           "attributes": [
             "HAZARDOUS",
             "PSYCHIC"
@@ -365,39 +399,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001041",
-      "line": 1,
-      "description": "1 Death Guard Sorcerer in Terminator Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001041",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000001372",
-      "slug": "blightlord-terminators"
-    },
-    {
-      "id": "000001371",
-      "slug": "deathshroud-terminators"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Death Guard (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

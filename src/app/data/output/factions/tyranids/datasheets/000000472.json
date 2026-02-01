@@ -3,7 +3,7 @@
   "name": "Hive Guard",
   "factionId": "TYR",
   "sourceId": "000000020",
-  "legend": "Hive Guard are spawned to protect Tyranid bio-architecture and vital spore-seeding sites. They carry a monstrous arsenal of grafted bio-weapons and are instinctively driven – or sometimes synaptically impelled – to lay down heavy hails of firepower against those prey organisms the Hive Mind wishes to see eradicated.",
+  "legend": "Hive Guard are spawned to protect Tyranid bio-architecture and vital spore-seeding sites. They carry a monstrous arsenal of grafted bio-weapons and are instinctively driven - or sometimes synaptically impelled - to lay down heavy hails of firepower against those prey organisms the Hive Mind wishes to see eradicated.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> shockcannon; chitinous claws and teeth.",
   "transport": "",
@@ -28,7 +28,38 @@
       "factionId": "",
       "description": "Each time you target this unit with the Fire Overwatch Stratagem, while resolving that Stratagem, hits are scored on unmodified Hit rolls of 5+, or unmodified Hit rolls of 4+ instead if this unit is within range of an objective marker.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -82,7 +113,39 @@
       "description": "Any number of models can each have their shockcannon replaced with 1 impaler cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000472",
+      "line": 1,
+      "description": "3-6 Hive Guard",
+      "min": 3,
+      "max": 6
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000472",
+      "line": 1,
+      "description": "3 models",
+      "cost": 90,
+      "count": 3
+    },
+    {
+      "datasheetId": "000000472",
+      "line": 2,
+      "description": "6 models",
+      "cost": 180,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000472:impaler-cannon",
       "datasheetId": "000000472",
@@ -160,37 +223,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000472",
-      "line": 1,
-      "description": "3-6 Hive Guard",
-      "min": 3,
-      "max": 6
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000472",
-      "line": 1,
-      "description": "3 models",
-      "cost": 90,
-      "count": 3
-    },
-    {
-      "datasheetId": "000000472",
-      "line": 2,
-      "description": "6 models",
-      "cost": 180,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

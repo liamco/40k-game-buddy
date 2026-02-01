@@ -1151,7 +1151,7 @@
           "factionId": "DG",
           "name": "Inescapable Corruption",
           "legend": "The combined plague blessings of so many champions of the Plague God is universally contagious, a dreadful omnirot that infests flesh, metal and even the minds and souls of its victims.",
-          "description": "Each time an enemy unit is selected to perform a Tactical Manoeuvre, if that unit is within Contagion Range of one or more units from your army, that enemy unit must take a Leadership test. If that test is failed, that Tactical Manoeuvre has no effect (that enemy unit is still eligible to shoot and declare a charge this turn as normal).<br><br>In addition, in your Command phase, roll one D6 for each objective marker that is within Contagion Range of one or more units from your army and is Secured by your opponent’s army: on a 5+, that objective marker is no longer Secured by your opponent’s army.",
+          "description": "Each time an enemy unit is selected to perform a Tactical Manoeuvre, if that unit is within Contagion Range of one or more units from your army, that enemy unit must take a Leadership test. If that test is failed, that Tactical Manoeuvre has no effect (that enemy unit is still eligible to shoot and declare a charge this turn as normal).<br><br>In addition, in your Command phase, roll one D6 for each objective marker that is within Contagion Range of one or more units from your army and is Secured by your opponent's army: on a 5+, that objective marker is no longer Secured by your opponent's army.",
           "detachment": "Arch-Contaminators",
           "detachmentId": 932
         }
@@ -1174,7 +1174,7 @@
           "cost": 0,
           "detachment": "Arch-Contaminators",
           "detachmentId": 932,
-          "legend": "Grotesque maws and stabbing probosces burst from this champion’s bloated form to consume and corrupt the very life essence of their victims.",
+          "legend": "Grotesque maws and stabbing probosces burst from this champion's bloated form to consume and corrupt the very life essence of their victims.",
           "description": "Each time the bearer destroys an enemy model with a melee attack, roll one D6: on a 5+, the bearer regains one lost wound (to a maximum of two lost wounds per phase)."
         }
       ],
@@ -1183,7 +1183,7 @@
           "factionId": "DG",
           "name": "CLOUD OF FLIES",
           "id": "000009417005",
-          "type": "Arch-Contaminators – Battle Tactic Stratagem",
+          "type": "Arch-Contaminators - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Plague flies engulf these warriors in a storm of buzzing wings and pustulent bodies, soaking up incoming enemy fire and obscuring the Death Guard elite from the foe.",
           "turn": "OPPONENTS",
@@ -1192,13 +1192,22 @@
           ],
           "detachment": "Arch-Contaminators",
           "detachmentId": 932,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the turn, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the turn, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DG",
           "name": "ALLIES OF ENTROPY",
           "id": "000009417002",
-          "type": "Arch-Contaminators – Strategic Ploy Stratagem",
+          "type": "Arch-Contaminators - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The foul vitality that flows through these warriors is slow to depart, even in extremis.",
           "turn": "EITHER",
@@ -1207,13 +1216,13 @@
           ],
           "detachment": "Arch-Contaminators",
           "detachmentId": 932,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
         },
         {
           "factionId": "DG",
           "name": "CORROSIVE CURSE",
           "id": "000009417004",
-          "type": "Arch-Contaminators – Strategic Ploy Stratagem",
+          "type": "Arch-Contaminators - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Mere proximity to these repulsive plague champions is enough to see vital systems rust and crumble as the taint of Chaos consumes them.",
           "turn": "YOURS",
@@ -1228,7 +1237,7 @@
           "factionId": "DG",
           "name": "SEED OF CORRUPTION",
           "id": "000009417003",
-          "type": "Arch-Contaminators – Strategic Ploy Stratagem",
+          "type": "Arch-Contaminators - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Like infectious spores contaminating their victim, the warriors of the Death Guard teleport into battle then dig in as their foulness slowly spreads around them.",
           "turn": "YOURS",
@@ -1249,8 +1258,8 @@
           "id": "000010130",
           "factionId": "DG",
           "name": "Manifold Maladies",
-          "legend": "A spirit of competition infects Nurgle’s champions when they fight alongside one another. With each vying to outdo the others in virulence, the foes are subjected to a riotous string of nightmarish outbreaks amongst their ranks.",
-          "description": "At the start of the battle round, you can select one of the Plagues listed in Nurgle’s Gift. Until the end of the battle, that is your chosen Plague instead of any previously chosen Plague.",
+          "legend": "A spirit of competition infects Nurgle's champions when they fight alongside one another. With each vying to outdo the others in virulence, the foes are subjected to a riotous string of nightmarish outbreaks amongst their ranks.",
+          "description": "At the start of the battle round, you can select one of the Plagues listed in Nurgle's Gift. Until the end of the battle, that is your chosen Plague instead of any previously chosen Plague.",
           "detachment": "Champions of Contagion",
           "detachmentId": 1051
         }
@@ -1263,7 +1272,7 @@
           "cost": 20,
           "detachment": "Champions of Contagion",
           "detachmentId": 1051,
-          "legend": "Be it the eye of a Kroot or a Space Marine’s hearts, ground Ork tusk, or something unnameable wrenched from within a Tyranid’s corpse, this champion needs just one more ingredient to perfect a powerful new plague.",
+          "legend": "Be it the eye of a Kroot or a Space Marine's hearts, ground Ork tusk, or something unnameable wrenched from within a Tyranid's corpse, this champion needs just one more ingredient to perfect a powerful new plague.",
           "description": "Biologus Putrifier only. Once per battle, after the bearers unit has fought, if one or more <span class=\"kwb\">CHARACTER</span> models were destroyed as a result of those attacks, select one Plague. Until the end of the battle, while an enemy unit is Afflicted, that unit has the effect of the selected Plague in addition to any other."
         },
         {
@@ -1273,8 +1282,8 @@
           "cost": 15,
           "detachment": "Champions of Contagion",
           "detachmentId": 1051,
-          "legend": "The touch of this sorcerer’s mind upon another triggers feverish visions of abundant foulness that erupt into physical manifestations as they reach their crescendo.",
-          "description": "Malignant Plaguecaster only. While an enemy unit is enfeebled by the bearer’s Pestilent Fallout ability, that unit is also Afflicted."
+          "legend": "The touch of this sorcerer's mind upon another triggers feverish visions of abundant foulness that erupt into physical manifestations as they reach their crescendo.",
+          "description": "Malignant Plaguecaster only. While an enemy unit is enfeebled by the bearer's Pestilent Fallout ability, that unit is also Afflicted."
         },
         {
           "factionId": "DG",
@@ -1283,8 +1292,8 @@
           "cost": 25,
           "detachment": "Champions of Contagion",
           "detachmentId": 1051,
-          "legend": "This plague-saturated narthecium delivers generous doses of infernal maladies that restore life to even the most hideously mangled of Mortarion’s sons.",
-          "description": "Plague Surgeon only. Each time the bearer uses its Tainted Narthecium ability, you can return up to D3 destroyed models to the bearer’s unit (instead of 1)."
+          "legend": "This plague-saturated narthecium delivers generous doses of infernal maladies that restore life to even the most hideously mangled of Mortarion's sons.",
+          "description": "Plague Surgeon only. Each time the bearer uses its Tainted Narthecium ability, you can return up to D3 destroyed models to the bearer's unit (instead of 1)."
         },
         {
           "factionId": "DG",
@@ -1302,7 +1311,7 @@
           "factionId": "DG",
           "name": "BLESSINGS OF FILTH",
           "id": "000010132002",
-          "type": "Champions of Contagion – Battle Tactic Stratagem",
+          "type": "Champions of Contagion - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Employing their unique gifts, this champion enhances the weapons of their comrades with even greater levels of infectious malevolence.",
           "turn": "EITHER",
@@ -1318,7 +1327,7 @@
           "factionId": "DG",
           "name": "MALIGNANCE MAGNIFIED",
           "id": "000010132003",
-          "type": "Champions of Contagion – Battle Tactic Stratagem",
+          "type": "Champions of Contagion - Battle Tactic Stratagem",
           "cpCost": 2,
           "legend": "The vile talents of such plague specialists act like a filth-smeared lens, focusing and intensifying the infectious gifts of Nurgle.",
           "turn": "EITHER",
@@ -1334,7 +1343,7 @@
           "factionId": "DG",
           "name": "GROTESQUE FORTITUDE",
           "id": "000010132004",
-          "type": "Champions of Contagion – Battle Tactic Stratagem",
+          "type": "Champions of Contagion - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "After their champion calls down the blessings of Nurgle, these warriors can fight on no matter the catastrophic, often gruesome, damage done to them by the foe.",
           "turn": "EITHER",
@@ -1344,13 +1353,13 @@
           ],
           "detachment": "Champions of Contagion",
           "detachmentId": 1051,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard Attached unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, add 2 to the Toughness characteristic of models in your unit."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard Attached unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, add 2 to the Toughness characteristic of models in your unit."
         },
         {
           "factionId": "DG",
           "name": "MOBILE VECTOR",
           "id": "000010132006",
-          "type": "Champions of Contagion – Strategic Ploy Stratagem",
+          "type": "Champions of Contagion - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Nurgle's champions move through the Death Guard ranks like squirming parasites.",
           "turn": "YOURS",
@@ -1359,13 +1368,13 @@
           ],
           "detachment": "Champions of Contagion",
           "detachmentId": 1051,
-          "description": "<b>WHEN:</b> Your Movement phase, before the Reinforcements step.<br><br><b>TARGET:</b> One Death Guard Character unit from your army that is not leading a unit.<br><br><b>EFFECT:</b> Select one other friendly Death Guard unit (excluding Battle-shocked units and Attached units that already have two Leader units or one of your <span class=\"kwb\">CHARACTER</span> units leading it] within 2\" horizontally and 5\" vertically of your unit that your unit can lead (as described in the Leader section of its datasheet]. Your unit attaches to that unit as a Leader. Change that unit’s Starting Strength accordingly."
+          "description": "<b>WHEN:</b> Your Movement phase, before the Reinforcements step.<br><br><b>TARGET:</b> One Death Guard Character unit from your army that is not leading a unit.<br><br><b>EFFECT:</b> Select one other friendly Death Guard unit (excluding Battle-shocked units and Attached units that already have two Leader units or one of your <span class=\"kwb\">CHARACTER</span> units leading it] within 2\" horizontally and 5\" vertically of your unit that your unit can lead (as described in the Leader section of its datasheet]. Your unit attaches to that unit as a Leader. Change that unit's Starting Strength accordingly."
         },
         {
           "factionId": "DG",
           "name": "RABID INFUSION",
           "id": "000010132005",
-          "type": "Champions of Contagion – Strategic Ploy Stratagem",
+          "type": "Champions of Contagion - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The combined talents of these Death Guard champions drive their followers into a foam-jawed fury, be it through injection with a curdled cocktail of stimms or immersion in a fug of infectious agents.",
           "turn": "EITHER",
@@ -1378,9 +1387,9 @@
         },
         {
           "factionId": "DG",
-          "name": "DEATH’S HEADS",
+          "name": "DEATH'S HEADS",
           "id": "000010132007",
-          "type": "Champions of Contagion – Wargear Stratagem",
+          "type": "Champions of Contagion - Wargear Stratagem",
           "cpCost": 1,
           "legend": "It takes much effort and sacrifice to fashion the disgusting explosives known as death's heads, but the results are spectacularly horrible.",
           "turn": "YOURS",
@@ -1389,21 +1398,21 @@
           ],
           "detachment": "Champions of Contagion",
           "detachmentId": 1051,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Biologus Putrifier unit from your army that is not within Engagement Range of one or more enemy units and has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Select one enemy unit (excluding <span class=\"kwb\">VEHICLES</span>) that is within 8\" of and visible to your unit. Until the start of your next turn, that unit has the effect of all Plagues (see Nurgle’s Gift)."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Biologus Putrifier unit from your army that is not within Engagement Range of one or more enemy units and has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Select one enemy unit (excluding <span class=\"kwb\">VEHICLES</span>) that is within 8\" of and visible to your unit. Until the start of your next turn, that unit has the effect of all Plagues (see Nurgle's Gift)."
         }
       ]
     },
     {
       "slug": "death-lord-s-chosen",
-      "name": "Death Lord’s Chosen",
+      "name": "Death Lord's Chosen",
       "abilities": [
         {
           "id": "000010142",
           "factionId": "DG",
           "name": "Deadly Vectors",
           "legend": "The plagues and parasites to which these elite warriors play host are amongst the most lethal in the galaxy. Moment by moment, even the most resilient foes sicken and wither in their presence until all that remains is rotted matter deliquescing sloppily from mouldering bones.",
-          "description": "In your opponent’s Command phase, roll 2D6 for each Afflicted enemy unit, subtracting 1 from the result if that unit is Below Half-strength. If the result is 6 or less, that enemy unit suffers D3 mortal wounds.",
-          "detachment": "Death Lord’s Chosen",
+          "description": "In your opponent's Command phase, roll 2D6 for each Afflicted enemy unit, subtracting 1 from the result if that unit is Below Half-strength. If the result is 6 or less, that enemy unit suffers D3 mortal wounds.",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054
         }
       ],
@@ -1413,19 +1422,19 @@
           "id": "000010143002",
           "name": "Face of Death",
           "cost": 10,
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
-          "legend": "So grotesque and monstrous is this champion’s aspect that it fills the enemy with unreasoning dread simply to look upon him.",
-          "description": "Terminator model only. At the start of the Fight phase, each enemy unit within Engagement Range of the bearer’s unit must take a Battle-shock test."
+          "legend": "So grotesque and monstrous is this champion's aspect that it fills the enemy with unreasoning dread simply to look upon him.",
+          "description": "Terminator model only. At the start of the Fight phase, each enemy unit within Engagement Range of the bearer's unit must take a Battle-shock test."
         },
         {
           "factionId": "DG",
           "id": "000010143003",
           "name": "Vile Vigour",
           "cost": 15,
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
-          "legend": "A fanatical worshipper of Nurgle and a talented orator, this champion can infect their followers with the urgent need to forge into battle and spread the Plague God’s blessings to all.",
+          "legend": "A fanatical worshipper of Nurgle and a talented orator, this champion can infect their followers with the urgent need to forge into battle and spread the Plague God's blessings to all.",
           "description": "Terminator model only. While the bearer is leading a unit, add 1\" to the Movement characteristic of models in that unit and you can re-roll Advance rolls made for that unit."
         },
         {
@@ -1433,17 +1442,17 @@
           "id": "000010143004",
           "name": "Warprot Talisman",
           "cost": 30,
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
           "legend": "By invoking the power of this ancient talisman, the bearer can rot a sagging rent in reality and step through the Warp to burst forth elsewhere amidst a gushing sluice of foul fluids.",
-          "description": "Terminator model only. Once per battle, at the end of your opponent’s turn, if the bearer’s unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves."
+          "description": "Terminator model only. Once per battle, at the end of your opponent's turn, if the bearer's unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves."
         },
         {
           "factionId": "DG",
           "id": "000010143005",
           "name": "Helm of the Fly King",
           "cost": 20,
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
           "legend": "This armoured helm was crafted by the Daemon Prince Vermifulgus the Pestilent and carries his squirming enchantments. It manifests its wearer's will as roaring swarms of plump flies that whirl about their creator like an occluding shroud or descend on the foe to blind eyes, clog sensors and spread revolted panic.",
           "description": "Terminator model only. While the bearer is leading a unit, models in that unit cannot be targeted by ranged attacks unless the attacking model is within 18\"."
@@ -1454,14 +1463,14 @@
           "factionId": "DG",
           "name": "GRIM REAPERS",
           "id": "000010144003",
-          "type": "Death Lord’s Chosen – Battle Tactic Stratagem",
+          "type": "Death Lord's Chosen - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Swollen with bitter arrogance, these warriors carve a path through their perceived lessers and leave them as worm food.",
           "turn": "EITHER",
           "phase": [
             "FIGHT"
           ],
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
           "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Terminator unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack that targets an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) you can re-roll the Hit roll."
         },
@@ -1469,14 +1478,14 @@
           "factionId": "DG",
           "name": "SIGNAL POX",
           "id": "000010144005",
-          "type": "Death Lord’s Chosen – Epic Deed Stratagem",
+          "type": "Death Lord's Chosen - Epic Deed Stratagem",
           "cpCost": 1,
           "legend": "Guided in by rasping jets of fumes sent up by this Lord of Virulence, plague-ridden artillery fire and airbursting spore-shells saturate the target zone.",
           "turn": "YOURS",
           "phase": [
             "COMMAND"
           ],
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
           "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One Lord of Virulence model from your army.<br><br><b>EFFECT:</b> Select one objective marker within 30\" of and visible to your model. Until the start of your next turn, while an enemy unit is within range of that objective marker, that unit is Afflicted."
         },
@@ -1484,14 +1493,14 @@
           "factionId": "DG",
           "name": "BLOOMING PESTILENCE",
           "id": "000010144002",
-          "type": "Death Lord’s Chosen – Epic Deed Stratagem",
+          "type": "Death Lord's Chosen - Epic Deed Stratagem",
           "cpCost": 1,
           "legend": "Death Guard warriors know to chant the sevenfold prayers to unleash Nurgle's bounty on the foe.",
           "turn": "EITHER",
           "phase": [
             "ANY PHASE"
           ],
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
           "description": "<b>WHEN:</b> Start of any phase.<br><br><b>TARGET:</b> One Terminator unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, add 3\" to the Contagion Range of models in your unit."
         },
@@ -1499,29 +1508,29 @@
           "factionId": "DG",
           "name": "UNDYING SPITE",
           "id": "000010144004",
-          "type": "Death Lord’s Chosen – Strategic Ploy Stratagem",
+          "type": "Death Lord's Chosen - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Driven by bitterness and the putrid vitality of Nurgle's gifts, these warriors fight on for several moments, even after death.",
           "turn": "EITHER",
           "phase": [
             "FIGHT"
           ],
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Terminator unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. On a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Terminator unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. On a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
         },
         {
           "factionId": "DG",
           "name": "MORTARION'S TEACHINGS",
           "id": "000010144006",
-          "type": "Death Lord’s Chosen – Strategic Ploy Stratagem",
+          "type": "Death Lord's Chosen - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Exemplifying the Daemon Primarch's doctrines on versatile heavy infantry tactics, these warriors position themselves and let fly.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
           ],
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
           "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Terminator unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [ASSAULT] and [HEAVY] abilities."
         },
@@ -1529,14 +1538,14 @@
           "factionId": "DG",
           "name": "SICKENING IMPACT",
           "id": "000010144007",
-          "type": "Death Lord’s Chosen – Strategic Ploy Stratagem",
+          "type": "Death Lord's Chosen - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Employing their crushing bulk and contagious gifts, these Terminators slam into their victims and grind them into putrefying mulch.",
           "turn": "YOURS",
           "phase": [
             "CHARGE"
           ],
-          "detachment": "Death Lord’s Chosen",
+          "detachment": "Death Lord's Chosen",
           "detachmentId": 1054,
           "description": "<b>WHEN:</b> Your Charge phase, just after a Terminator unit from your army ends a Charge move.<br><br><b>TARGET:</b> That <span class=\"kwb\">TERMINATOR</span> unit.<br><br><b>EFFECT:</b> Select one enemy unit within Engagement Range of your unit, then roll one D6 for each model in your unit that is within Engagement Range of that enemy unit: for each 2+, that enemy unit suffers 1 mortal wound (to a maximum of 6 mortal wounds)."
         }
@@ -1550,10 +1559,21 @@
           "id": "000009728",
           "factionId": "DG",
           "name": "Verminous Haze",
-          "legend": "A cloud of winged insects descends over Mortarion’s pathogenic sons, obscuring their malodorous ranks and shielding them from the eyes and augurs of the enemy. Beneath thrumming storms of fat-bodied flies, Plague Marines stride towards their wavering foes until they are close enough to unleash punishing volleys of killing fire.",
+          "legend": "A cloud of winged insects descends over Mortarion's pathogenic sons, obscuring their malodorous ranks and shielding them from the eyes and augurs of the enemy. Beneath thrumming storms of fat-bodied flies, Plague Marines stride towards their wavering foes until they are close enough to unleash punishing volleys of killing fire.",
           "description": "Death Guard Infantry units (excluding Poxwalkers units) from your army that are not embarked within a Transport have the Scouts 5\" and Stealth abilities.",
           "detachment": "Flyblown Host",
-          "detachmentId": 980
+          "detachmentId": 980,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1564,8 +1584,8 @@
           "cost": 15,
           "detachment": "Flyblown Host",
           "detachmentId": 980,
-          "legend": "Festering swarms follow this champion to battle, and the drone of a billion flies invigorates his warriors’ rotting bodies, lending them fresh focus.",
-          "description": "Death Guard Infantry model only. Ranged weapons equipped by models in the bearer’s unit have the [ASSAULT] ability."
+          "legend": "Festering swarms follow this champion to battle, and the drone of a billion flies invigorates his warriors' rotting bodies, lending them fresh focus.",
+          "description": "Death Guard Infantry model only. Ranged weapons equipped by models in the bearer's unit have the [ASSAULT] ability."
         },
         {
           "factionId": "DG",
@@ -1574,8 +1594,8 @@
           "cost": 20,
           "detachment": "Flyblown Host",
           "detachmentId": 980,
-          "legend": "The buzzing swarms respond to this champion’s will, sweeping down upon his chosen target, their crawling, biting and droning enfeebling the horrified foe.",
-          "description": "Death Guard Infantry model only. Each time a model in the bearer’s unit makes an attack that targets a unit that is within Contagion Range of one or more <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> units from your army, re-roll a Wound roll of 1."
+          "legend": "The buzzing swarms respond to this champion's will, sweeping down upon his chosen target, their crawling, biting and droning enfeebling the horrified foe.",
+          "description": "Death Guard Infantry model only. Each time a model in the bearer's unit makes an attack that targets a unit that is within Contagion Range of one or more <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> units from your army, re-roll a Wound roll of 1."
         },
         {
           "factionId": "DG",
@@ -1594,8 +1614,8 @@
           "cost": 25,
           "detachment": "Flyblown Host",
           "detachmentId": 980,
-          "legend": "When this diseased pilgrim marches to sites of festering putrescence, Nurgle’s blessings manifest in a buzzing clot of darkness that falls like an enshrouding fog over them and their disciples.",
-          "description": "Death Guard Infantry model only. While the bearer’s unit is within range of one or more objective markers that you control, that unit can only be selected as the target of a ranged attack if the attacking model is within 18\"."
+          "legend": "When this diseased pilgrim marches to sites of festering putrescence, Nurgle's blessings manifest in a buzzing clot of darkness that falls like an enshrouding fog over them and their disciples.",
+          "description": "Death Guard Infantry model only. While the bearer's unit is within range of one or more objective markers that you control, that unit can only be selected as the target of a ranged attack if the attacking model is within 18\"."
         }
       ],
       "stratagems": [
@@ -1603,24 +1623,33 @@
           "factionId": "DG",
           "name": "MYPHITIC INVIGORATION",
           "id": "000009730007",
-          "type": "Flyblown Host – Battle Tactic Stratagem",
+          "type": "Flyblown Host - Battle Tactic Stratagem",
           "cpCost": 1,
-          "legend": "Daemon flies are drawn to and invigorated by the foul miasmas surrounding Myphitic Blight‑haulers. In the vicinity of these malodorous constructs, the swarms gather in densities great enough to form a living barrier to the foe’s attacks.",
+          "legend": "Daemon flies are drawn to and invigorated by the foul miasmas surrounding Myphitic Blight‑haulers. In the vicinity of these malodorous constructs, the swarms gather in densities great enough to form a living barrier to the foe's attacks.",
           "turn": "OPPONENTS",
           "phase": [
             "SHOOTING"
           ],
           "detachment": "Flyblown Host",
           "detachmentId": 980,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard Infantry unit from your army that is within 6\" of one or more friendly Myphitic Blight-hauler units and that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of this unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard Infantry unit from your army that is within 6\" of one or more friendly Myphitic Blight-hauler units and that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of this unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DG",
           "name": "VERMIN CLOUD",
           "id": "000009730003",
-          "type": "Flyblown Host – Battle Tactic Stratagem",
+          "type": "Flyblown Host - Battle Tactic Stratagem",
           "cpCost": 1,
-          "legend": "The storm of insectile contagion sweeps forward, dragging the Death Guard in its wake. None will escape the Plague God’s embrace.",
+          "legend": "The storm of insectile contagion sweeps forward, dragging the Death Guard in its wake. None will escape the Plague God's embrace.",
           "turn": "EITHER",
           "phase": [
             "FIGHT"
@@ -1633,9 +1662,9 @@
           "factionId": "DG",
           "name": "DRONING HORROR",
           "id": "000009730005",
-          "type": "Flyblown Host – Battle Tactic Stratagem",
+          "type": "Flyblown Host - Battle Tactic Stratagem",
           "cpCost": 1,
-          "legend": "Clouds of droning daemon flies sweep across the battlefield to envelop the enemies of the Death Guard. As their victims claw and scratch at the seething swarms, Mortarion’s sons pick off their targets at leisure.",
+          "legend": "Clouds of droning daemon flies sweep across the battlefield to envelop the enemies of the Death Guard. As their victims claw and scratch at the seething swarms, Mortarion's sons pick off their targets at leisure.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
@@ -1648,9 +1677,9 @@
           "factionId": "DG",
           "name": "ENERVATING ONSLAUGHT",
           "id": "000009730006",
-          "type": "Flyblown Host – Strategic Ploy Stratagem",
+          "type": "Flyblown Host - Strategic Ploy Stratagem",
           "cpCost": 1,
-          "legend": "Swathed in a buzzing cloak of pathogenic decay, Nurgle’s chosen crash into the foe, disease dealing death as surely as fist, maul and blade.",
+          "legend": "Swathed in a buzzing cloak of pathogenic decay, Nurgle's chosen crash into the foe, disease dealing death as surely as fist, maul and blade.",
           "turn": "YOURS",
           "phase": [
             "CHARGE"
@@ -1663,7 +1692,7 @@
           "factionId": "DG",
           "name": "EYE OF THE SWARM",
           "id": "000009730004",
-          "type": "Flyblown Host – Strategic Ploy Stratagem",
+          "type": "Flyblown Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The vermin swarms intensify as the Death Guard close in upon the enemy. As their foes clutch and tear their crawling skin, pitiless Plague Marines unleash volleys of point‑blank fire into their tormented foes.",
           "turn": "YOURS",
@@ -1678,7 +1707,7 @@
           "factionId": "DG",
           "name": "NAUSEATING PAROXYSMS",
           "id": "000009730002",
-          "type": "Flyblown Host – Strategic Ploy Stratagem",
+          "type": "Flyblown Host - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The contagion borne by the Death Guard and their attendant swarms of winged vermin triggers bouts of sickness and convulsion in those they encounter.",
           "turn": "EITHER",
@@ -1693,7 +1722,7 @@
     },
     {
       "slug": "mortarion-s-hammer",
-      "name": "Mortarion’s Hammer",
+      "name": "Mortarion's Hammer",
       "abilities": [
         {
           "id": "000010126",
@@ -1701,7 +1730,7 @@
           "name": "Miasmic Bombardment",
           "legend": "In the wake of preparatory bombardment by artillery weapons both forbidden and foul, the surviving foe are left reeling amidst clouds of plague smog. With their flesh running like tallow and their weapons rusting in their hands, they will be hard-pressed to fight back.",
           "description": "At the start of the battle round, select a number of enemy units more than 12\" away from every model from your army that is on the battlefield. Until the end of the battle round, those enemy units are Afflicted. The maximum number of units you can select in this way depends on the battle size, as shown below.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>BATTLE SIZE</b></td><td><b>UNITS</b></td></tr><tr><td>Incursion</td><td><b>1</b></td></tr><tr><td>Strike Force</td><td><b>2</b></td></tr><tr><td>Onslaught</td><td><b>3</b></td></tr></tbody></table></td></tr></tbody></table></div>",
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050
         }
       ],
@@ -1711,40 +1740,51 @@
           "id": "000010127002",
           "name": "Eye of Affliction",
           "cost": 20,
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
           "legend": "Peering at the world through this bloated yellow orb, the bearer of this vile gift sees the souls of the sickened burning bright as targeting flares no matter how their victims try to hide.",
-          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Ranged weapons equipped by models in the bearer’s unit have the [ignores cover] ability while targeting an Afflicted enemy unit."
+          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Ranged weapons equipped by models in the bearer's unit have the [ignores cover] ability while targeting an Afflicted enemy unit."
         },
         {
           "factionId": "DG",
           "id": "000010127003",
           "name": "Bilemaw Blight",
           "cost": 10,
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
           "legend": "This foul sorcerer has been blessed with a unique affliction that allows them to inflate their body like a repulsive bellows before vomiting forth a pressurised torrent of filth that would do any Great Unclean One proud.",
-          "description": "Malignant Plaguecaster only. At the start of your Shooting phase, until the end of the phase, add 12\" to the Range characteristics of the bearer’s Plague Wind weapon."
+          "description": "Malignant Plaguecaster only. At the start of your Shooting phase, until the end of the phase, add 12\" to the Range characteristics of the bearer's Plague Wind weapon."
         },
         {
           "factionId": "DG",
           "id": "000010127004",
           "name": "Shriekworm Familiar",
           "cost": 15,
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
-          "legend": "This daemonic familiar lives in the champion’s flesh and watches with bitter paranoia for enemy threats. Should it spot a counterattack from the foe, it bursts forth to scream its shrill warning.",
-          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Once per battle round, you can target the bearer’s unit with the Fire Overwatch Stratagem for 0CP."
+          "legend": "This daemonic familiar lives in the champion's flesh and watches with bitter paranoia for enemy threats. Should it spot a counterattack from the foe, it bursts forth to scream its shrill warning.",
+          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Once per battle round, you can target the bearer's unit with the Fire Overwatch Stratagem for 0CP."
         },
         {
           "factionId": "DG",
           "id": "000010127005",
           "name": "Tendrilous Emissions",
           "cost": 30,
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
           "legend": "This warrior has gained greater control of the vile fumes that billow from their armour, willing them forward like coiling tentacles to wreathe targets and guide in the fire of allied war engines.",
-          "description": "Lord of Virulence only. While the bearer is within 3\" of one or more friendly Death Guard Vehicle units, the bearer has the Lone Operative ability, and each time one of those <span class=\"kwb\">VEHICLE</span> units makes a ranged attack that targets an enemy unit visible to the bearer, re-roll a Wound roll of 1."
+          "description": "Lord of Virulence only. While the bearer is within 3\" of one or more friendly Death Guard Vehicle units, the bearer has the Lone Operative ability, and each time one of those <span class=\"kwb\">VEHICLE</span> units makes a ranged attack that targets an enemy unit visible to the bearer, re-roll a Wound roll of 1.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1752,22 +1792,22 @@
           "factionId": "DG",
           "name": "DRAWN TO DESPAIR",
           "id": "000010128004",
-          "type": "Mortarion’s Hammer – Battle Tactic Stratagem",
+          "type": "Mortarion's Hammer - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Those who languish in misery or cower in terror make themselves easy targets for the Death Guard.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
           ],
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Death Guard unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack that targets a visible enemy unit (excluding <span class=\"kwb\">AIRCRAFT</span>) within your opponent’s deployment zone, you can re-roll the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Death Guard unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack that targets a visible enemy unit (excluding <span class=\"kwb\">AIRCRAFT</span>) within your opponent's deployment zone, you can re-roll the Hit roll."
         },
         {
           "factionId": "DG",
           "name": "RELENTLESS GRIND",
           "id": "000010128003",
-          "type": "Mortarion’s Hammer – Strategic Ploy Stratagem",
+          "type": "Mortarion's Hammer - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "When the armoured vehicles of the Death Guard advance, they plough through - or straight over- anything that stands in their way.",
           "turn": "YOURS",
@@ -1775,7 +1815,7 @@
             "MOVEMENT",
             "CHARGE"
           ],
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
           "description": "<b>WHEN:</b> Your Movement phase or your Charge phase.<br><br><b>TARGET:</b> One Death Guard Vehicle unit from your army that has not been selected to move or charge this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time your unit makes a Normal, Advance or Charge move, it can move horizontally through terrain features."
         },
@@ -1783,14 +1823,14 @@
           "factionId": "DG",
           "name": "FONT OF FILTH",
           "id": "000010128005",
-          "type": "Mortarion’s Hammer – Strategic Ploy Stratagem",
+          "type": "Mortarion's Hammer - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "As though afflicted with some awful vomiting sickness, this vehicle's weapons retch an endless stream of fire at the enemy, heaving themselves empty even as it storms into the enemy lines.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
           ],
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
           "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Death Guard Vehicle unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [ASSAULT] ability."
         },
@@ -1798,44 +1838,44 @@
           "factionId": "DG",
           "name": "EYESTINGER STORM",
           "id": "000010128006",
-          "type": "Mortarion’s Hammer – Strategic Ploy Stratagem",
+          "type": "Mortarion's Hammer - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Swarms of these revolting insects burrow hives into the hulls of Death Guard vehicles. Drawn to sickened prey, they boil forth in buzzing masses and descend on the foe, spreading panic and horror.",
           "turn": "OPPONENTS",
           "phase": [
             "COMMAND"
           ],
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
-          "description": "<b>WHEN:</b> Your opponent’s Command phase.<br><br><b>TARGET:</b> One Death Guard Vehicle unit from your army.<br><br><b>EFFECT:</b> Select one objective marker visible to one or more models in your unit. Each Afflicted enemy unit within range of that objective marker must take a Battle-shock test. Enemy units affected by this Stratagem do not need to take any other Battle-shock tests in the same phase."
+          "description": "<b>WHEN:</b> Your opponent's Command phase.<br><br><b>TARGET:</b> One Death Guard Vehicle unit from your army.<br><br><b>EFFECT:</b> Select one objective marker visible to one or more models in your unit. Each Afflicted enemy unit within range of that objective marker must take a Battle-shock test. Enemy units affected by this Stratagem do not need to take any other Battle-shock tests in the same phase."
         },
         {
           "factionId": "DG",
           "name": "STINKING MIRE",
           "id": "000010128007",
-          "type": "Mortarion’s Hammer – Strategic Ploy Stratagem",
+          "type": "Mortarion's Hammer - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Attempting to counterattack Death Guard can leave foes floundering amidst bubbling filth.",
           "turn": "OPPONENTS",
           "phase": [
             "CHARGE"
           ],
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
-          "description": "<b>WHEN:</b> Start of your opponent’s Charge phase.<br><br><b>TARGET:</b> One Death Guard Vehicle unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, each time an enemy unit selects your unit as the target of a charge, subtract 2 from the Charge roll (this is not cumulative with any other negative modifiers to that Charge roll)."
+          "description": "<b>WHEN:</b> Start of your opponent's Charge phase.<br><br><b>TARGET:</b> One Death Guard Vehicle unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, each time an enemy unit selects your unit as the target of a charge, subtract 2 from the Charge roll (this is not cumulative with any other negative modifiers to that Charge roll)."
         },
         {
           "factionId": "DG",
           "name": "BLIGHTED LAND",
           "id": "000010128002",
-          "type": "Mortarion’s Hammer – Strategic Ploy Stratagem",
+          "type": "Mortarion's Hammer - Strategic Ploy Stratagem",
           "cpCost": 2,
           "legend": "Firing diseased submunitions or belching swarms of daemonic parasites from its hull, this war engine befouls the battlefield as it advances.",
           "turn": "YOURS",
           "phase": [
             "MOVEMENT"
           ],
-          "detachment": "Mortarion’s Hammer",
+          "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
           "description": "<b>WHEN:</b> End of your Movement phase.<br><br><b>TARGET:</b> One Death Guard Vehicle unit from your army.<br><br><b>EFFECT:</b> Select one terrain feature within 24\" of and visible to your unit. Until the start of your next turn, enemy units are Afflicted while they are within 3\" of that terrain feature."
         }
@@ -1884,7 +1924,7 @@
           "detachment": "Shamblerot Vectorium",
           "detachmentId": 1053,
           "legend": "Parasitising the miserable scraps of soul within nearby Poxwalkers allows this sorcerer to belch even more malignant clouds of murderous foulness.",
-          "description": "Malignant Plaguecaster only. While the bearer is leading a Poxwalkers unit, add 1 to the Damage characteristic of the bearer’s Plague Wind weapon. Each time the bearer makes one or more attacks with a Plague Wind weapon, after the bearer’s unit has resolved its attacks, D3 Bodyguard models from the bearer’s unit are destroyed."
+          "description": "Malignant Plaguecaster only. While the bearer is leading a Poxwalkers unit, add 1 to the Damage characteristic of the bearer's Plague Wind weapon. Each time the bearer makes one or more attacks with a Plague Wind weapon, after the bearer's unit has resolved its attacks, D3 Bodyguard models from the bearer's unit are destroyed."
         },
         {
           "factionId": "DG",
@@ -1893,7 +1933,7 @@
           "cost": 25,
           "detachment": "Shamblerot Vectorium",
           "detachmentId": 1053,
-          "legend": "This mould-furred talisman is studded with teeth torn from Poxwalkers’ jaws. It bolsters the creatures’ putrid vitality, forcing them to stagger and fight even through grotesque wounds.",
+          "legend": "This mould-furred talisman is studded with teeth torn from Poxwalkers' jaws. It bolsters the creatures' putrid vitality, forcing them to stagger and fight even through grotesque wounds.",
           "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. While the bearer is leading a unit, add 1 to the Toughness characteristic of Poxwalkers models in that unit."
         }
       ],
@@ -1902,7 +1942,7 @@
           "factionId": "DG",
           "name": "GNAWING HUNGER",
           "id": "000010140004",
-          "type": "Shamblerot Vectorium – Battle Tactic Stratagem",
+          "type": "Shamblerot Vectorium - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Gripped by a sudden, monstrous hunger, the Poxwalkers surge forward in a ravenous mass.",
           "turn": "YOURS",
@@ -1917,7 +1957,7 @@
           "factionId": "DG",
           "name": "GRIP OF THE WALKING POX",
           "id": "000010140002",
-          "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
+          "type": "Shamblerot Vectorium - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Those infected by walking pox may fall as though fatally wounded, but they soon rise again.",
           "turn": "EITHER",
@@ -1926,28 +1966,39 @@
           ],
           "detachment": "Shamblerot Vectorium",
           "detachmentId": 1053,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Poxwalkers unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> After the attacking unit has fought, roll one D6 for each model from your unit that was destroyed as a result of those attacks: on a 6, the attacking unit suffers 1 mortal wound. If your unit is not destroyed after the attacking unit has fought, enemy models destroyed as a result of this Stratagem count as enemy models destroyed by an attack made by a model in your unit for the purposes of the Curse of the Walking Pox ability."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Poxwalkers unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> After the attacking unit has fought, roll one D6 for each model from your unit that was destroyed as a result of those attacks: on a 6, the attacking unit suffers 1 mortal wound. If your unit is not destroyed after the attacking unit has fought, enemy models destroyed as a result of this Stratagem count as enemy models destroyed by an attack made by a model in your unit for the purposes of the Curse of the Walking Pox ability."
         },
         {
           "factionId": "DG",
           "name": "HIDDEN AMONGST THE DEAD",
           "id": "000010140005",
-          "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
+          "type": "Shamblerot Vectorium - Strategic Ploy Stratagem",
           "cpCost": 1,
-          "legend": "Another wave of Poxwalkers rises from the battlefield’s carrion heaps.",
+          "legend": "Another wave of Poxwalkers rises from the battlefield's carrion heaps.",
           "turn": "YOURS",
           "phase": [
             "MOVEMENT"
           ],
           "detachment": "Shamblerot Vectorium",
           "detachmentId": 1053,
-          "description": "<b>WHEN:</b> The Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Poxwalkers unit from your army that is in Strategic Reserves and that is not an Attached unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in that unit have the Deep Strike ability."
+          "description": "<b>WHEN:</b> The Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Poxwalkers unit from your army that is in Strategic Reserves and that is not an Attached unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in that unit have the Deep Strike ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DG",
           "name": "SHAMBLING WALL",
           "id": "000010140007",
-          "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
+          "type": "Shamblerot Vectorium - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Lacking even basic self-preservation instincts, Poxwalkers make excellent walking shields.",
           "turn": "OPPONENTS",
@@ -1956,13 +2007,13 @@
           ],
           "detachment": "Shamblerot Vectorium",
           "detachmentId": 1053,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard unit from your army that was selected as the target of one or more of the attacking unit’s attacks, and one friendly Poxwalkers unit within 3\" of your unit and visible to both your unit and the attacking unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time you would allocate an attack to a model in your <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> unit, if your <span class=\"kwb\">POXWALKERS</span> unit is visible to the attacking model and is an eligible target for that attack, no saving throw is made for that attack; instead a number of <span class=\"kwb\">POXWALKERS</span> from your <span class=\"kwb\">POXWALKERS</span> unit equal to the Damage characteristic of that attack are destroyed."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard unit from your army that was selected as the target of one or more of the attacking unit's attacks, and one friendly Poxwalkers unit within 3\" of your unit and visible to both your unit and the attacking unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time you would allocate an attack to a model in your <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> unit, if your <span class=\"kwb\">POXWALKERS</span> unit is visible to the attacking model and is an eligible target for that attack, no saving throw is made for that attack; instead a number of <span class=\"kwb\">POXWALKERS</span> from your <span class=\"kwb\">POXWALKERS</span> unit equal to the Damage characteristic of that attack are destroyed."
         },
         {
           "factionId": "DG",
           "name": "SMEARED WITH FILTH",
           "id": "000010140003",
-          "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
+          "type": "Shamblerot Vectorium - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Hacking a path through a horde of Poxwalkers leaves aggressors coated in infectious matter.",
           "turn": "EITHER",
@@ -1977,7 +2028,7 @@
           "factionId": "DG",
           "name": "SHOCK AND HORROR",
           "id": "000010140006",
-          "type": "Shamblerot Vectorium – Strategic Ploy Stratagem",
+          "type": "Shamblerot Vectorium - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Already dismayed by this living nightmare, the enemy falters before another sudden onslaught.",
           "turn": "YOURS",
@@ -1998,8 +2049,8 @@
           "id": "000010134",
           "factionId": "DG",
           "name": "Reverberant Rancidity",
-          "legend": "Reality rings like a struck bell as it rebels against the sheer wrongness of Nurgle’s daemons. Borne upon these jarring waves of metaphysical disease, magnified and redoubled with every dolorous peal, the Plague God’s myriad infections spread and multiply all the faster.",
-          "description": "While a Plague Legions unit from your army is within 7\" of one or more <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> units from your army, that <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">LEGIONS</span> unit has the Nurgle’s Gift ability.<br><br>While a Death Guard unit from your army is within 7\" of one or more <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">LEGIONS</span> units from your army, add 3\" to that <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> units Contagion Range.<br><br><span class=\"hi_custom\">PLAGUE LEGIONS</span><br>You can include Plague Legions units in your army, even though they do not have the <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> Faction keyword. The combined points cost of such units you can include in your army is:<br><ul><li><b>Incursion:</b> Up to 500 pts</li><li><b>Strike Force:</b> Up to 1000 pts</li><li><b>Onslaught:</b> Up to 1500 pts</li></ul><br>No <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">LEGIONS</span> models from your army can be your <span class=\"kwb\">WARLORD</span>.",
+          "legend": "Reality rings like a struck bell as it rebels against the sheer wrongness of Nurgle's daemons. Borne upon these jarring waves of metaphysical disease, magnified and redoubled with every dolorous peal, the Plague God's myriad infections spread and multiply all the faster.",
+          "description": "While a Plague Legions unit from your army is within 7\" of one or more <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> units from your army, that <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">LEGIONS</span> unit has the Nurgle's Gift ability.<br><br>While a Death Guard unit from your army is within 7\" of one or more <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">LEGIONS</span> units from your army, add 3\" to that <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> units Contagion Range.<br><br><span class=\"hi_custom\">PLAGUE LEGIONS</span><br>You can include Plague Legions units in your army, even though they do not have the <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> Faction keyword. The combined points cost of such units you can include in your army is:<br><ul><li><b>Incursion:</b> Up to 500 pts</li><li><b>Strike Force:</b> Up to 1000 pts</li><li><b>Onslaught:</b> Up to 1500 pts</li></ul><br>No <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">LEGIONS</span> models from your army can be your <span class=\"kwb\">WARLORD</span>.",
           "detachment": "Tallyband Summoners",
           "detachmentId": 1052
         }
@@ -2023,7 +2074,7 @@
           "detachment": "Tallyband Summoners",
           "detachmentId": 1052,
           "legend": "This repugnant daemon weapon extrudes swaying tendrils with lamprey maws to strike at the foe.",
-          "description": "Death Guard model only. Add 2 to the Attacks characteristic of the bearer’s melee weapons."
+          "description": "Death Guard model only. Add 2 to the Attacks characteristic of the bearer's melee weapons."
         },
         {
           "factionId": "DG",
@@ -2032,8 +2083,8 @@
           "cost": 15,
           "detachment": "Tallyband Summoners",
           "detachmentId": 1052,
-          "legend": "Every booming peal of this cursed bell spreads rot, lesions and buboes across the foes’ bodies, sending them fleeing in terror and disgust.",
-          "description": "Great Unclean One only. In the Battle-shock step of your opponent’s Command phase, each enemy unit within 6\" of the bearer that is below its Starting Strength must take a Battle-shock test, subtracting 1 from that test."
+          "legend": "Every booming peal of this cursed bell spreads rot, lesions and buboes across the foes' bodies, sending them fleeing in terror and disgust.",
+          "description": "Great Unclean One only. In the Battle-shock step of your opponent's Command phase, each enemy unit within 6\" of the bearer that is below its Starting Strength must take a Battle-shock test, subtracting 1 from that test."
         },
         {
           "factionId": "DG",
@@ -2042,7 +2093,7 @@
           "cost": 20,
           "detachment": "Tallyband Summoners",
           "detachmentId": 1052,
-          "legend": "The slurred and vomit-wet incantations from this malodorous tome bolster Nurgle’s daemons.",
+          "legend": "The slurred and vomit-wet incantations from this malodorous tome bolster Nurgle's daemons.",
           "description": "Malignant Plaguecaster only. Each time a Plague Legions unit within 12\" of the bearer takes a Battle-shock test, add 1 to that test and, if that test is passed, one model in that unit regains up to D3 lost wounds (if that unit is a Battleline unit and that test is passed, up to D3 destroyed models can be returned to that unit instead)."
         }
       ],
@@ -2051,7 +2102,7 @@
           "factionId": "DG",
           "name": "CLUTCHING CORRUPTION",
           "id": "000010136003",
-          "type": "Tallyband Summoners – Battle Tactic Stratagem",
+          "type": "Tallyband Summoners - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "The daemons of Nurgle grasp their victims tightly with rotting talons and coiling tentacles, their clutch as inescapable as entropy itself.",
           "turn": "EITHER",
@@ -2066,7 +2117,7 @@
           "factionId": "DG",
           "name": "FLESHY AVALANCHE",
           "id": "000010136005",
-          "type": "Tallyband Summoners – Strategic Ploy Stratagem",
+          "type": "Tallyband Summoners - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The ephemeral structures of realspace have no power to halt the onset of Nurgle's Great Unclean Ones; they crumble, rot and burst apart before their unholy bulk.",
           "turn": "YOURS",
@@ -2082,7 +2133,7 @@
           "factionId": "DG",
           "name": "AVATARS OF DECAY",
           "id": "000010136006",
-          "type": "Tallyband Summoners – Strategic Ploy Stratagem",
+          "type": "Tallyband Summoners - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Countless diseases blossom in the unreal flesh of Nurgle's daemon childer, manifestations of his blessings to be spread to all.",
           "turn": "YOURS",
@@ -2097,22 +2148,22 @@
           "factionId": "DG",
           "name": "MIRESLICK",
           "id": "000010136007",
-          "type": "Tallyband Summoners – Strategic Ploy Stratagem",
+          "type": "Tallyband Summoners - Strategic Ploy Stratagem",
           "cpCost": 1,
-          "legend": "Beneath the tread of Nurgle’s daemons, even ferrocrete or plasteel soon turns to a quagmire of rotting matter, in which their unlucky enemies begin to sink and become trapped.",
+          "legend": "Beneath the tread of Nurgle's daemons, even ferrocrete or plasteel soon turns to a quagmire of rotting matter, in which their unlucky enemies begin to sink and become trapped.",
           "turn": "OPPONENTS",
           "phase": [
             "MOVEMENT"
           ],
           "detachment": "Tallyband Summoners",
           "detachmentId": 1052,
-          "description": "<b>WHEN:</b> Your opponent’s Movement phase, when an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is selected to Fall Back.<br><br><b>TARGET:</b> One Plague Legions unit from your army that is within Engagement Range of that enemy unit.<br><br><b>EFFECT:</b> Until the end of the phase, while an enemy unit is within Engagement Range of your unit, each time that unit is selected to Fall Back, it must take a Leadership test. If that test is failed, that unit must Remain Stationary this phase instead."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, when an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is selected to Fall Back.<br><br><b>TARGET:</b> One Plague Legions unit from your army that is within Engagement Range of that enemy unit.<br><br><b>EFFECT:</b> Until the end of the phase, while an enemy unit is within Engagement Range of your unit, each time that unit is selected to Fall Back, it must take a Leadership test. If that test is failed, that unit must Remain Stationary this phase instead."
         },
         {
           "factionId": "DG",
           "name": "PERSISTENT PESTS",
           "id": "000010136002",
-          "type": "Tallyband Summoners – Strategic Ploy Stratagem",
+          "type": "Tallyband Summoners - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "There is no simple way to wholly cleanse a Nurgling infestation once it has taken root.",
           "turn": "EITHER",
@@ -2127,16 +2178,16 @@
           "factionId": "DG",
           "name": "ALL IS ROT",
           "id": "000010136004",
-          "type": "Tallyband Summoners – Strategic Ploy Stratagem",
+          "type": "Tallyband Summoners - Strategic Ploy Stratagem",
           "cpCost": 1,
-          "legend": "Death Guard warriors open fire into foes already embattled by Nurgle’s daemons, knowing that no matter who they hit, all will wither and rot.",
+          "legend": "Death Guard warriors open fire into foes already embattled by Nurgle's daemons, knowing that no matter who they hit, all will wither and rot.",
           "turn": "YOURS",
           "phase": [
             "SHOOTING"
           ],
           "detachment": "Tallyband Summoners",
           "detachmentId": 1052,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Plague Legions unit from your army that is within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Until the end of the phase, enemy units are not considered to be within Engagement Range of your unit for the purposes of selecting targets of ranged weapons. Until the end of the phase, each time an enemy model loses a wound, while that model’s unit is within Engagement Range of your unit, roll one D6: on a 5+, your unit suffers 1 mortal wound after the attacking unit has finished making its attacks."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Plague Legions unit from your army that is within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Until the end of the phase, enemy units are not considered to be within Engagement Range of your unit for the purposes of selecting targets of ranged weapons. Until the end of the phase, each time an enemy model loses a wound, while that model's unit is within Engagement Range of your unit, roll one D6: on a 5+, your unit suffers 1 mortal wound after the attacking unit has finished making its attacks."
         }
       ]
     },
@@ -2148,7 +2199,7 @@
           "id": "000009407",
           "factionId": "DG",
           "name": "Relentless Spread",
-          "legend": "Like a virus seeking fresh hosts, the unclean worshippers of the Plague God spill through the ship’s corridors on the hunt for untainted souls.",
+          "legend": "Like a virus seeking fresh hosts, the unclean worshippers of the Plague God spill through the ship's corridors on the hunt for untainted souls.",
           "description": "Each time a <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> unit from your army makes a Consolidation move:<br><ul><li>It can move up to D3+3\" instead of up to 3\".</li><li>If it cannot end that move within Engagement Range of one or more enemy units that are visible to it (and in Unit Coherency), it can still make that Consolidation move, and when doing so can move in any direction.</li></ul>",
           "detachment": "Unclean Uprising",
           "detachmentId": 931
@@ -2181,7 +2232,7 @@
           "factionId": "DG",
           "name": "POX FLARE",
           "id": "000009409002",
-          "type": "Unclean Uprising – Battle Tactic Stratagem",
+          "type": "Unclean Uprising - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Like fever heat bursting into unclean flame, the diseases infesting these Poxwalkers flare with sudden infectious vitality.",
           "turn": "EITHER",
@@ -2196,7 +2247,7 @@
           "factionId": "DG",
           "name": "SHAMBLING ONSLAUGHT",
           "id": "000009409005",
-          "type": "Unclean Uprising – Strategic Ploy Stratagem",
+          "type": "Unclean Uprising - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Relentless, untiring, the plague-rotted hordes press forward in a tide of grasping hands, stinking bodies and gnashing, splintered teeth.",
           "turn": "OPPONENTS",
@@ -2211,7 +2262,7 @@
           "factionId": "DG",
           "name": "PATH OF PESTILENCE",
           "id": "000009409003",
-          "type": "Unclean Uprising – Strategic Ploy Stratagem",
+          "type": "Unclean Uprising - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Long have lurking cultists planned the uprising and prepared the route for their plague-blessed masters to process to victory.",
           "turn": "YOURS",
@@ -2220,13 +2271,13 @@
           ],
           "detachment": "Unclean Uprising",
           "detachmentId": 931,
-          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One DEATH GUARD CULTISTS unit from your army that has not been selected to move this phase and is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Select one closed Hatchway within 1” of your unit. Your unit can attempt to operate that Hatchway.<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit cannot attempt to operate a Hatchway again."
+          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One DEATH GUARD CULTISTS unit from your army that has not been selected to move this phase and is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Select one closed Hatchway within 1\" of your unit. Your unit can attempt to operate that Hatchway.<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit cannot attempt to operate a Hatchway again."
         },
         {
           "factionId": "DG",
           "name": "THE DEAD RISE",
           "id": "000009409004",
-          "type": "Vectors of Decay – Strategic Ploy Stratagem",
+          "type": "Vectors of Decay - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "What appeared moments before to be a mere carrion heap suddenly lurches into foul and grinning unlife.",
           "turn": "YOURS",
@@ -2235,7 +2286,18 @@
           ],
           "detachment": "Unclean Uprising",
           "detachmentId": 931,
-          "description": "<b>WHEN:</b> Your Movement phase, at the start of the Reinforcements step.<br><br><b>TARGET:</b> One POXwALKERS unit from your army that is in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Deep Strike ability.<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once."
+          "description": "<b>WHEN:</b> Your Movement phase, at the start of the Reinforcements step.<br><br><b>TARGET:</b> One POXwALKERS unit from your army that is in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Deep Strike ability.<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -2261,7 +2323,7 @@
           "cost": 0,
           "detachment": "Vectors of Decay",
           "detachmentId": 930,
-          "legend": "Rancid with might, feverish with unclean power, this warrior’s diseased body is as unnaturally resilient as it is unfeeling of pain.",
+          "legend": "Rancid with might, feverish with unclean power, this warrior's diseased body is as unnaturally resilient as it is unfeeling of pain.",
           "description": "Each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack."
         },
         {
@@ -2271,7 +2333,7 @@
           "cost": 0,
           "detachment": "Vectors of Decay",
           "detachmentId": 930,
-          "legend": "Bloated fit to burst with noxious corruption, this champion’s straining body is like an overfilled pressure vessel ready to explode like a diseased warhead.",
+          "legend": "Bloated fit to burst with noxious corruption, this champion's straining body is like an overfilled pressure vessel ready to explode like a diseased warhead.",
           "description": "When the bearer is destroyed, before removing it from the battlefield, select one enemy unit within Engagement Range of the bearer and roll one D6: on a 2-3, that enemy unit suffers 1 mortal wound; on a 4-5, that enemy unit suffers 2 mortal wounds; on a 6, that enemy unit suffers 3 mortal wounds."
         }
       ],
@@ -2280,7 +2342,7 @@
           "factionId": "DG",
           "name": "INFESTATION",
           "id": "000009399004",
-          "type": "Embarked Regiment – Strategic Ploy Stratagem",
+          "type": "Embarked Regiment - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "The taint left by the servants of Nurgle is not easily scoured from the stuff of realspace.",
           "turn": "EITHER",
@@ -2295,7 +2357,7 @@
           "factionId": "DG",
           "name": "CHINKS IN THE ARMOUR",
           "id": "000009399002",
-          "type": "Vectors of Decay – Battle Tactic Stratagem",
+          "type": "Vectors of Decay - Battle Tactic Stratagem",
           "cpCost": 1,
           "legend": "Even the slightest weakness is enough for the foulness of the Death Guard to find a way in.",
           "turn": "EITHER",
@@ -2311,7 +2373,7 @@
           "factionId": "DG",
           "name": "SEEPING CORROSION",
           "id": "000009399005",
-          "type": "Vectors of Decay – Strategic Ploy Stratagem",
+          "type": "Vectors of Decay - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Crawling tendrils of foulness spread through the voidship at the touch of the Death Guard, poisoning and rotting luckless foes.",
           "turn": "YOURS",
@@ -2326,7 +2388,7 @@
           "factionId": "DG",
           "name": "GROTESQUE DEMISE",
           "id": "000009399003",
-          "type": "Vectors of Decay – Strategic Ploy Stratagem",
+          "type": "Vectors of Decay - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Many of the plague weapons and revolting diseases unleashed by the Death Guard inflict endings so hideous that the mere sight of them is enough to send unharmed enemies fleeing in horror.",
           "turn": "EITHER",
@@ -2349,7 +2411,7 @@
           "factionId": "DG",
           "name": "Worldblight",
           "legend": "As the foul tendrils of the Death Guard quest further across the battlefield, they infest even the most secure, holy and heavily warded sites with supernatural disease. To fight amidst such foulness is a virtual death sentence to the foe, win or lose.",
-          "description": "If you control an objective marker at the end of your Command phase and a Death Guard unit from your army (excluding Battle-shocked units) is within range of that objective marker, that objective marker remains under your control until your opponent’s Level of Control over that objective marker is greater than yours at the end of a phase. In addition, until you lose control of that objective marker, it has the Nurgle’s Gift ability as if it were a <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model from your army.",
+          "description": "If you control an objective marker at the end of your Command phase and a Death Guard unit from your army (excluding Battle-shocked units) is within range of that objective marker, that objective marker remains under your control until your opponent's Level of Control over that objective marker is greater than yours at the end of a phase. In addition, until you lose control of that objective marker, it has the Nurgle's Gift ability as if it were a <span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model from your army.",
           "detachment": "Virulent Vectorium",
           "detachmentId": 1049
         }
@@ -2372,8 +2434,8 @@
           "cost": 25,
           "detachment": "Virulent Vectorium",
           "detachmentId": 1049,
-          "legend": "This champion’s body blazes with fever as a cornucopia of supernatural diseases churn and roil within. Mere proximity to them is enough to trigger an infectious outbreak of daemonic viruses.",
-          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Add 1 to the Strength and Attacks characteristics of the bearers melee weapons, and the bearer’s melee weapons have the [DEVASTATING WOUNDS] ability."
+          "legend": "This champion's body blazes with fever as a cornucopia of supernatural diseases churn and roil within. Mere proximity to them is enough to trigger an infectious outbreak of daemonic viruses.",
+          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Add 1 to the Strength and Attacks characteristics of the bearers melee weapons, and the bearer's melee weapons have the [DEVASTATING WOUNDS] ability."
         },
         {
           "factionId": "DG",
@@ -2382,8 +2444,8 @@
           "cost": 25,
           "detachment": "Virulent Vectorium",
           "detachmentId": 1049,
-          "legend": "The unfettered energies of Nurgle’s realm gush from the Warp like foulness from a punctured boil, earthing themselves in the fabric of realspace through this champions repulsive body.",
-          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. While the bearer’s unit is within range of an objective marker you control, each time a model in the bearer’s unit makes an attack, you can re-roll the Wound roll."
+          "legend": "The unfettered energies of Nurgle's realm gush from the Warp like foulness from a punctured boil, earthing themselves in the fabric of realspace through this champions repulsive body.",
+          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. While the bearer's unit is within range of an objective marker you control, each time a model in the bearer's unit makes an attack, you can re-roll the Wound roll."
         },
         {
           "factionId": "DG",
@@ -2392,8 +2454,19 @@
           "cost": 20,
           "detachment": "Virulent Vectorium",
           "detachmentId": 1049,
-          "legend": "The more wounds blasted and gouged into this champion’s flesh, the more clotted matter, squirming vermin and gangrenous slime spurt forth to coagulate and seal the most grievous hurts.",
-          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. The bearer has the Feel No Pain 5+ ability."
+          "legend": "The more wounds blasted and gouged into this champion's flesh, the more clotted matter, squirming vermin and gangrenous slime spurt forth to coagulate and seal the most grievous hurts.",
+          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. The bearer has the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2401,7 +2474,7 @@
           "factionId": "DG",
           "name": "DISGUSTINGLY RESILIENT",
           "id": "000010124003",
-          "type": "Virulent Vectorium – Battle Tactic Stratagem",
+          "type": "Virulent Vectorium - Battle Tactic Stratagem",
           "cpCost": 2,
           "legend": "Those favoured by Nurgle are inured to pain, their rotting bodies shrugging off all but the most traumatic damage with ease.",
           "turn": "EITHER",
@@ -2411,13 +2484,13 @@
           ],
           "detachment": "Virulent Vectorium",
           "detachmentId": 1049,
-          "description": "<b>WHEN:</b> Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard unit from your army that was selected as the target of one or more of the attacking unit’s attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack is allocated to a model in your unit, subtract 1 from the Damage characteristic of that attack."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Death Guard unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack is allocated to a model in your unit, subtract 1 from the Damage characteristic of that attack."
         },
         {
           "factionId": "DG",
           "name": "PLAGUESURGE",
           "id": "000010124004",
-          "type": "Virulent Vectorium – Epic Deed Stratagem",
+          "type": "Virulent Vectorium - Epic Deed Stratagem",
           "cpCost": 2,
           "legend": "The foul miasma around the Death Guard swells and thickens, boiling outward like putrid smog.",
           "turn": "YOURS",
@@ -2432,7 +2505,7 @@
           "factionId": "DG",
           "name": "LEECHSPORE ERUPTION",
           "id": "000010124005",
-          "type": "Virulent Vectorium – Epic Deed Stratagem",
+          "type": "Virulent Vectorium - Epic Deed Stratagem",
           "cpCost": 1,
           "legend": "Billowing from this warrior's wounds come clouds of parasitic spores that settle on the foe and drain their vitality, stealing it for the one who spawned them.",
           "turn": "YOURS",
@@ -2447,7 +2520,7 @@
           "factionId": "DG",
           "name": "PUTRID DETONATION",
           "id": "000010124002",
-          "type": "Virulent Vectorium – Strategic Ploy Stratagem",
+          "type": "Virulent Vectorium - Strategic Ploy Stratagem",
           "cpCost": 1,
           "legend": "Bloated with putrefaction and swilling with infectious poisons, the demise of this hulking entity is as revolting as it is explosively hazardous.",
           "turn": "EITHER",
@@ -2456,13 +2529,13 @@
           ],
           "detachment": "Virulent Vectorium",
           "detachmentId": 1049,
-          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Death Guard Vehicle or Death Guard Monster model from your army with the Deadly Demise ability that was just destroyed. You can use this Stratagem on that model even though it was just destroyed.<br><br><b>EFFECT:</b> Do not roll one D6 to determine whether mortal wounds are inflicted by your model’s Deadly Demise ability. Instead, mortal wounds are automatically inflicted. In addition, any enemy units that suffer mortal wounds as a result of this Stratagem are Afflicted until the start of your next turn."
+          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Death Guard Vehicle or Death Guard Monster model from your army with the Deadly Demise ability that was just destroyed. You can use this Stratagem on that model even though it was just destroyed.<br><br><b>EFFECT:</b> Do not roll one D6 to determine whether mortal wounds are inflicted by your model's Deadly Demise ability. Instead, mortal wounds are automatically inflicted. In addition, any enemy units that suffer mortal wounds as a result of this Stratagem are Afflicted until the start of your next turn."
         },
         {
           "factionId": "DG",
           "name": "OVERWHELMING GENEROSITY",
           "id": "000010124006",
-          "type": "Virulent Vectorium – Wargear Stratagem",
+          "type": "Virulent Vectorium - Wargear Stratagem",
           "cpCost": 1,
           "legend": "Unholy filth gushes from Nurgle's faithful into their guns until the armaments threaten to burst like bloated corpses.",
           "turn": "YOURS",
@@ -2477,7 +2550,7 @@
           "factionId": "DG",
           "name": "CREEPING BLIGHT",
           "id": "000010124007",
-          "type": "Virulent Vectorium – Wargear Stratagem",
+          "type": "Virulent Vectorium - Wargear Stratagem",
           "cpCost": 1,
           "legend": "Those in the grip of Nurgle's unholy plagues become weaker by the moment, barely able to lift their weapons, let alone defend themselves from the attacking Death Guard.",
           "turn": "YOURS",

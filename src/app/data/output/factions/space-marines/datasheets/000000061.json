@@ -28,7 +28,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -37,11 +46,64 @@
       "factionId": "",
       "description": "Each time this unit is selected to fight, select one of the following abilities to apply to all Astartes chainswords equipped by models in this unit until the end of the phase: <br><ul><li>[SUSTAINED HITS 1] </li><li>[LETHAL HITS] </li><li>[LANCE]</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": null
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LANCE"
+          ],
+          "value": null
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNITS",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character unit from your army with the Leader ability can be attached to an Assault Intercessor Squad, it can also be attached to this unit.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT INTERCESSOR SQUAD"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "LEADER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -98,13 +160,13 @@
       "datasheetId": "000000061",
       "line": 1,
       "button": "•",
-      "description": "The Assault Sergeant’s bolt pistol can be replaced with one of the following:<ul><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>"
+      "description": "The Assault Sergeant's bolt pistol can be replaced with one of the following:<ul><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>"
     },
     {
       "datasheetId": "000000061",
       "line": 2,
       "button": "•",
-      "description": "The Assault Sergeant’s Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
+      "description": "The Assault Sergeant's Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
     },
     {
       "datasheetId": "000000061",
@@ -122,10 +184,51 @@
       "datasheetId": "000000061",
       "line": 5,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 model’s Astartes chainsword can be replaced with 1 eviscerator."
+      "description": "For every 5 models in this unit, 1 model's Astartes chainsword can be replaced with 1 eviscerator."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000061",
+      "line": 1,
+      "description": "1 Assault Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000061",
+      "line": 2,
+      "description": "4-9 Assault Marines",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000061",
+      "line": 1,
+      "description": "5 models",
+      "cost": 95,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000061",
+      "line": 2,
+      "description": "10 models",
+      "cost": 190,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000061:bolt-pistol",
       "datasheetId": "000000061",
@@ -299,7 +402,7 @@
           "line": 7,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -316,7 +419,7 @@
           "line": 8,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -343,7 +446,7 @@
           "line": 9,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -360,7 +463,7 @@
           "line": 10,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -549,46 +652,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000061",
-      "line": 1,
-      "description": "1 Assault Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000061",
-      "line": 2,
-      "description": "4-9 Assault Marines",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000061",
-      "line": 1,
-      "description": "5 models",
-      "cost": 95,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000061",
-      "line": 2,
-      "description": "10 models",
-      "cost": 190,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

@@ -33,7 +33,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Thousand Sons Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -51,7 +62,18 @@
       "factionId": "",
       "description": "While a friendly Thousand Sons Infantry unit is within 6\" of this model, models in that unit have the Stealth ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STEALTH"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -128,7 +150,32 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001036",
+      "line": 1,
+      "description": "1 Daemon Prince of Tzeentch",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001036",
+      "line": 1,
+      "description": "1 model",
+      "cost": 180,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001036:dark-blessing",
       "datasheetId": "000001036",
@@ -193,7 +240,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Hellforged weapons – strike",
+          "name": "Hellforged weapons - strike",
           "attributes": [
             "DEVASTATING WOUNDS",
             "PSYCHIC"
@@ -211,7 +258,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Hellforged weapons – sweep",
+          "name": "Hellforged weapons - sweep",
           "attributes": [
             "DEVASTATING WOUNDS",
             "PSYCHIC"
@@ -226,30 +273,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001036",
-      "line": 1,
-      "description": "1 Daemon Prince of Tzeentch",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001036",
-      "line": 1,
-      "description": "1 model",
-      "cost": 180,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

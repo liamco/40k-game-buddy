@@ -28,23 +28,43 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Astra Militarum Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
-      "name": "Omnissiah’s Blessing",
+      "name": "Omnissiah's Blessing",
       "legend": "",
       "factionId": "",
       "description": "In your Command phase, select one friendly Astra Militarum Vehicle model within 3\" of this model. That <span class=\"kwb\">VEHICLE</span> model regains up to D3 lost wounds and, until the start of your next Command phase, that <span class=\"kwb\">VEHICLE</span> model has a 4+ invulnerable save. Each model can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Vengeance for the Omnissiah",
       "legend": "",
       "factionId": "",
-      "description": "If a friendly Astra Militarum Vehicle model is destroyed within 12\" of this model, until the end of the battle, this model’s Enginseer axe has an Attacks characteristic of 6.",
+      "description": "If a friendly Astra Militarum Vehicle model is destroyed within 12\" of this model, until the end of the battle, this model's Enginseer axe has an Attacks characteristic of 6.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -106,7 +126,53 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001396",
+      "line": 1,
+      "description": "1 Tech-Priest Enginseer",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001396",
+      "line": 1,
+      "description": "1 model",
+      "cost": 45,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000003893",
+      "slug": "krieg-combat-engineers"
+    },
+    {
+      "id": "000002615",
+      "slug": "kasrkin"
+    },
+    {
+      "id": "000002613",
+      "slug": "death-korps-of-krieg"
+    },
+    {
+      "id": "000002614",
+      "slug": "catachan-jungle-fighters"
+    },
+    {
+      "id": "000002612",
+      "slug": "cadian-shock-troops"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001396:mechanicus-pistol",
       "datasheetId": "000001396",
@@ -184,51 +250,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001396",
-      "line": 1,
-      "description": "1 Tech-Priest Enginseer",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001396",
-      "line": 1,
-      "description": "1 model",
-      "cost": 45,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000003893",
-      "slug": "krieg-combat-engineers"
-    },
-    {
-      "id": "000002615",
-      "slug": "kasrkin"
-    },
-    {
-      "id": "000002613",
-      "slug": "death-korps-of-krieg"
-    },
-    {
-      "id": "000002614",
-      "slug": "catachan-jungle-fighters"
-    },
-    {
-      "id": "000002612",
-      "slug": "cadian-shock-troops"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "Warpsmith",
   "factionId": "CSM",
   "sourceId": "000000012",
-  "legend": "With outlawed knowledge of the deeper mysteries of the machine, Warpsmiths maintain their warband’s arsenal of armoured vehicles, and violate enemy war engines with utterances of corrupted code. Fused with a writhing nest of semi-sentient mechatendrils, they seek not only to employ technology, but to subjugate it.",
+  "legend": "With outlawed knowledge of the deeper mysteries of the machine, Warpsmiths maintain their warband's arsenal of armoured vehicles, and violate enemy war engines with utterances of corrupted code. Fused with a writhing nest of semi-sentient mechatendrils, they seek not only to employ technology, but to subjugate it.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> flamer tendril; melta tendril; plasma pistol; forge weapon.",
   "transport": "",
@@ -32,7 +32,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Heretic Astartes Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,7 +52,16 @@
       "factionId": "",
       "description": "In your Command phase, select one friendly Heretic Astartes Vehicle model within 3\" of this model. That <span class=\"kwb\">VEHICLE</span> model regains up to D3 lost wounds and, until the start of your next Command phase, each time that <span class=\"kwb\">VEHICLE</span> makes an attack, add 1 to the Hit roll. Each model can only be selected for this ability once per Command phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -109,7 +129,49 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000944",
+      "line": 1,
+      "description": "1 Warpsmith",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000944",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000966",
+      "slug": "havocs-2"
+    },
+    {
+      "id": "000003876",
+      "slug": "nemesis-claw"
+    },
+    {
+      "id": "000002570",
+      "slug": "legionaries-2"
+    },
+    {
+      "id": "000000952",
+      "slug": "chosen-2"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000944:flamer-tendril",
       "datasheetId": "000000944",
@@ -177,7 +239,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -194,7 +256,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "PISTOL",
             "HAZARDOUS"
@@ -235,47 +297,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000944",
-      "line": 1,
-      "description": "1 Warpsmith",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000944",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000966",
-      "slug": "havocs-2"
-    },
-    {
-      "id": "000003876",
-      "slug": "nemesis-claw"
-    },
-    {
-      "id": "000002570",
-      "slug": "legionaries-2"
-    },
-    {
-      "id": "000000952",
-      "slug": "chosen-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

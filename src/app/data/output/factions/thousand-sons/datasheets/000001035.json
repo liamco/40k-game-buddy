@@ -3,7 +3,7 @@
   "name": "Scarab Occult Terminators",
   "factionId": "TS",
   "sourceId": "000000027",
-  "legend": "The Scarab Occult fight with all the merciless skill they did when they were Magnus’ living bodyguards, often striking into the heart of the foe via sorcerous teleportation. Wielding vicious ritual blades based on the ancient Prosperine khopesh, they cleave through those victims not laid low by their salvoes of lethal firepower.",
+  "legend": "The Scarab Occult fight with all the merciless skill they did when they were Magnus' living bodyguards, often striking into the heart of the foe via sorcerous teleportation. Wielding vicious ritual blades based on the ancient Prosperine khopesh, they cleave through those victims not laid low by their salvoes of lethal firepower.",
   "role": "Other",
   "loadout": "<b>The Scarab Occult Sorcerer is equipped with:</b> inferno combi-bolter; Malefic Curse; force weapon.<br><br><b>Every Scarab Occult Terminator is equipped with:</b> inferno combi-bolter; Prosperine khopesh.",
   "transport": "",
@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "While this unit contains one or more <span class=\"kwb\">PSYKER</span> models, each time an attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -128,13 +137,13 @@
       "datasheetId": "000001035",
       "line": 1,
       "button": "•",
-      "description": "The Scarab Occult Sorcerer’s inferno combi-bolter can be replaced with 1 Prosperine khopesh."
+      "description": "The Scarab Occult Sorcerer's inferno combi-bolter can be replaced with 1 Prosperine khopesh."
     },
     {
       "datasheetId": "000001035",
       "line": 2,
       "button": "•",
-      "description": "For every 5 models in this unit, 1 Scarab Occult Terminator’s inferno combi-bolter can be replaced with one of the following:<ul><li>1 heavy warpflamer</li><li>1 soulreaper cannon</li></ul>"
+      "description": "For every 5 models in this unit, 1 Scarab Occult Terminator's inferno combi-bolter can be replaced with one of the following:<ul><li>1 heavy warpflamer</li><li>1 soulreaper cannon</li></ul>"
     },
     {
       "datasheetId": "000001035",
@@ -143,7 +152,46 @@
       "description": "For every 5 models in this unit, 1 Scarab Occult Terminator can be equipped with 1 hellfyre missile rack."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001035",
+      "line": 1,
+      "description": "1 Scarab Occult Sorcerer",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001035",
+      "line": 2,
+      "description": "4-9 Scarab Occult Terminators",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001035",
+      "line": 1,
+      "description": "5 models",
+      "cost": 180,
+      "count": 5
+    },
+    {
+      "datasheetId": "000001035",
+      "line": 2,
+      "description": "10 models",
+      "cost": 360,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001035:heavy-warpflamer",
       "datasheetId": "000001035",
@@ -325,44 +373,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001035",
-      "line": 1,
-      "description": "1 Scarab Occult Sorcerer",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001035",
-      "line": 2,
-      "description": "4-9 Scarab Occult Terminators",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001035",
-      "line": 1,
-      "description": "5 models",
-      "cost": 180,
-      "count": 5
-    },
-    {
-      "datasheetId": "000001035",
-      "line": 2,
-      "description": "10 models",
-      "cost": 360,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

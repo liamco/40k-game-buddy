@@ -6,7 +6,7 @@
   "legend": "",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 2 long-barrelled burst cannons; missile pod; armoured hull.",
-  "transport": "This model has a transport capacity of 48 T’au Empire Infantry models. This model can also transport up to 6 Battlesuit models (these models take up the space of a number of models equal to their Wounds characteristic, e.g. a Battlesuit with a Wounds characteristic of 8 would take up the space of 8 models). This model cannot transport Kroot or Vespid Stingwings models.",
+  "transport": "This model has a transport capacity of 48 T'au Empire Infantry models. This model can also transport up to 6 Battlesuit models (these models take up the space of a number of models equal to their Wounds characteristic, e.g. a Battlesuit with a Wounds characteristic of 8 would take up the space of 8 models). This model cannot transport Kroot or Vespid Stingwings models.",
   "virtual": false,
   "leaderHead": "",
   "leaderFooter": "",
@@ -35,15 +35,26 @@
       "name": "Jet Pack Insertion",
       "legend": "",
       "factionId": "",
-      "description": "At the end of your opponent’s Movement phase, one or more units embarked within this <span class=\"kwb\">TRANSPORT</span> can disembark from it, provided every model in each of those disembarking units has the Deep Strike ability.",
+      "description": "At the end of your opponent's Movement phase, one or more units embarked within this <span class=\"kwb\">TRANSPORT</span> can disembark from it, provided every model in each of those disembarking units has the Deep Strike ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
     {
       "datasheetId": "000000456",
-      "keyword": "T’au Empire",
+      "keyword": "T'au Empire",
       "model": "",
       "isFactionKeyword": "true"
     },
@@ -109,7 +120,32 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000456",
+      "line": 1,
+      "description": "1 Orca Dropship",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000456",
+      "line": 1,
+      "description": "1 model",
+      "cost": 275,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: T'au Empire (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000456:long-barrelled-burst-cannon",
       "datasheetId": "000000456",
@@ -181,40 +217,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000456",
-      "line": 1,
-      "description": "1 Orca Dropship",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000456",
-      "line": 1,
-      "description": "1 model",
-      "cost": 275,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: T’au Empire (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true,
-  "damagedThreshold": 9,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

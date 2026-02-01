@@ -3,7 +3,7 @@
   "name": "Breaka Boyz",
   "factionId": "ORK",
   "sourceId": "000000046",
-  "legend": "Breaka Boyz dismantle the foe’s war engines and defences with well-placed krumpings from their smash hammers. Some use a pair of brutal knucklebustas, while the more addled opt for a tankhammer: a rokkit strapped to a big metal stick that offers a satisfyingly explosive means of up-close annihilation.",
+  "legend": "Breaka Boyz dismantle the foe's war engines and defences with well-placed krumpings from their smash hammers. Some use a pair of brutal knucklebustas, while the more addled opt for a tankhammer: a rokkit strapped to a big metal stick that offers a satisfyingly explosive means of up-close annihilation.",
   "role": "Other",
   "loadout": "<b>The Boss Nob is equipped with:</b> rokkit pistol; smash hammer; choppa.<br><br><b>Each Breaka Boy is equipped with:</b> smash hammer.",
   "transport": "",
@@ -35,13 +35,18 @@
       "name": "Bomb Squigs",
       "legend": "",
       "factionId": "",
-      "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer’s Note:</b> Place two Bomb Squig tokens next to the unit, removing one each time this unit uses this ability.",
+      "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer's Note:</b> Place two Bomb Squig tokens next to the unit, removing one each time this unit uses this ability.",
       "type": "Datasheet",
       "parameter": ""
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Character unit from your army with the Leader ability can be attached to a Boyz unit, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -92,22 +97,54 @@
       "datasheetId": "000003861",
       "line": 1,
       "button": "•",
-      "description": "The Boss Nob’s smash hammer can be replaced with 1 rokkit pistol."
+      "description": "The Boss Nob's smash hammer can be replaced with 1 rokkit pistol."
     },
     {
       "datasheetId": "000003861",
       "line": 2,
       "button": "•",
-      "description": "One Breaka Boy’s smash hammer can be replaced with 1 knucklebustas."
+      "description": "One Breaka Boy's smash hammer can be replaced with 1 knucklebustas."
     },
     {
       "datasheetId": "000003861",
       "line": 3,
       "button": "•",
-      "description": "One Breaka Boy’s smash hammer can be replaced with 1 tankhammer."
+      "description": "One Breaka Boy's smash hammer can be replaced with 1 tankhammer."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003861",
+      "line": 1,
+      "description": "1 Boss Nob",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000003861",
+      "line": 2,
+      "description": "5 Breaka Boyz",
+      "min": 5,
+      "max": 5
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003861",
+      "line": 1,
+      "description": "6 models",
+      "cost": 140,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003861:rokkit-pistol",
       "datasheetId": "000003861",
@@ -242,37 +279,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003861",
-      "line": 1,
-      "description": "1 Boss Nob",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000003861",
-      "line": 2,
-      "description": "5 Breaka Boyz",
-      "min": 5,
-      "max": 5
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003861",
-      "line": 1,
-      "description": "6 models",
-      "cost": 140,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

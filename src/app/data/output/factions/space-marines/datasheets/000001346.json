@@ -3,7 +3,7 @@
   "name": "Lieutenant",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Lieutenants, in addition to being extremely able tacticians and strategists, are highly skilled warriors. Experts in all the lethal weaponry of the battle-brothers they so often command and fight alongside, they bellow orders and coordinate their brothers’ attacks even as they strike at the foe with their own arsenal of powerful weapons.",
+  "legend": "Lieutenants, in addition to being extremely able tacticians and strategists, are highly skilled warriors. Experts in all the lethal weaponry of the battle-brothers they so often command and fight alongside, they bellow orders and coordinate their brothers' attacks even as they strike at the foe with their own arsenal of powerful weapons.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistol; master-crafted bolter; close combat weapon.",
   "transport": "",
@@ -32,16 +32,53 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
       "name": "Target Priority",
       "legend": "",
       "factionId": "",
-      "description": "This model’s unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
+      "description": "This model's unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FELL BACK"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +87,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -119,28 +165,136 @@
       "datasheetId": "000001346",
       "line": 1,
       "button": "•",
-      "description": "This model’s master-crafted bolter can be replaced with one of the following: <br><ul><li>1 plasma pistol </li><li>1 master-crafted power weapon </li><li>1 power fist</li></ul>"
+      "description": "This model's master-crafted bolter can be replaced with one of the following: <br><ul><li>1 plasma pistol </li><li>1 master-crafted power weapon </li><li>1 power fist</li></ul>"
     },
     {
       "datasheetId": "000001346",
       "line": 2,
       "button": "•",
-      "description": "This model’s bolt pistol, master-crafted bolter and close combat weapon can be replaced with 1 neo volkite pistol, 1 master-crafted power weapon and 1 storm shield."
+      "description": "This model's bolt pistol, master-crafted bolter and close combat weapon can be replaced with 1 neo volkite pistol, 1 master-crafted power weapon and 1 storm shield."
     },
     {
       "datasheetId": "000001346",
       "line": 3,
       "button": "•",
-      "description": "This model’s bolt pistol can be replaced with 1 heavy bolt pistol."
+      "description": "This model's bolt pistol can be replaced with 1 heavy bolt pistol."
     },
     {
       "datasheetId": "000001346",
       "line": 4,
       "button": "•",
-      "description": "This model’s close combat weapon can be replaced with one of the following:<br><ul><li>1 master-crafted power weapon</li><li>1 power fist</li></ul>"
+      "description": "This model's close combat weapon can be replaced with one of the following:<br><ul><li>1 master-crafted power weapon</li><li>1 power fist</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001346",
+      "line": 1,
+      "description": "1 Lieutenant",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001346",
+      "line": 1,
+      "description": "1 model",
+      "cost": 55,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002772",
+      "slug": "company-heroes"
+    },
+    {
+      "id": "000000315",
+      "slug": "wolf-guard"
+    },
+    {
+      "id": "000000061",
+      "slug": "assault-squad"
+    },
+    {
+      "id": "000002798",
+      "slug": "sword-brethren-squad"
+    },
+    {
+      "id": "000002780",
+      "slug": "fortis-kill-team-2"
+    },
+    {
+      "id": "000002103",
+      "slug": "command-squad"
+    },
+    {
+      "id": "000000071",
+      "slug": "bladeguard-veteran-squad"
+    },
+    {
+      "id": "000001157",
+      "slug": "intercessor-squad"
+    },
+    {
+      "id": "000002255",
+      "slug": "sternguard-veteran-squad"
+    },
+    {
+      "id": "000000126",
+      "slug": "infernus-squad"
+    },
+    {
+      "id": "000001154",
+      "slug": "vanguard-veteran-squad"
+    },
+    {
+      "id": "000004137",
+      "slug": "sternguard-veteran-squad-2"
+    },
+    {
+      "id": "000002783",
+      "slug": "deathwatch-veterans"
+    },
+    {
+      "id": "000000070",
+      "slug": "tactical-squad"
+    },
+    {
+      "id": "000004154",
+      "slug": "crusader-squad-legendary"
+    },
+    {
+      "id": "000001606",
+      "slug": "assault-intercessor-squad"
+    },
+    {
+      "id": "000003698",
+      "slug": "inner-circle-companions"
+    },
+    {
+      "id": "000002098",
+      "slug": "hellblaster-squad"
+    },
+    {
+      "id": "000002799",
+      "slug": "crusader-squad"
+    },
+    {
+      "id": "000004175",
+      "slug": "decimus-kill-team"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001346:bolt-pistol",
       "datasheetId": "000001346",
@@ -256,7 +410,7 @@
           "line": 5,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -273,7 +427,7 @@
           "line": 6,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -361,114 +515,6 @@
       ]
     }
   ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001346",
-      "line": 1,
-      "description": "1 Lieutenant",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001346",
-      "line": 1,
-      "description": "1 model",
-      "cost": 55,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002772",
-      "slug": "company-heroes"
-    },
-    {
-      "id": "000000315",
-      "slug": "wolf-guard"
-    },
-    {
-      "id": "000000061",
-      "slug": "assault-squad"
-    },
-    {
-      "id": "000002798",
-      "slug": "sword-brethren-squad"
-    },
-    {
-      "id": "000002780",
-      "slug": "fortis-kill-team-2"
-    },
-    {
-      "id": "000002103",
-      "slug": "command-squad"
-    },
-    {
-      "id": "000000071",
-      "slug": "bladeguard-veteran-squad"
-    },
-    {
-      "id": "000001157",
-      "slug": "intercessor-squad"
-    },
-    {
-      "id": "000002255",
-      "slug": "sternguard-veteran-squad"
-    },
-    {
-      "id": "000000126",
-      "slug": "infernus-squad"
-    },
-    {
-      "id": "000001154",
-      "slug": "vanguard-veteran-squad"
-    },
-    {
-      "id": "000004137",
-      "slug": "sternguard-veteran-squad-2"
-    },
-    {
-      "id": "000002783",
-      "slug": "deathwatch-veterans"
-    },
-    {
-      "id": "000000070",
-      "slug": "tactical-squad"
-    },
-    {
-      "id": "000004154",
-      "slug": "crusader-squad-legendary"
-    },
-    {
-      "id": "000001606",
-      "slug": "assault-intercessor-squad"
-    },
-    {
-      "id": "000003698",
-      "slug": "inner-circle-companions"
-    },
-    {
-      "id": "000002098",
-      "slug": "hellblaster-squad"
-    },
-    {
-      "id": "000002799",
-      "slug": "crusader-squad"
-    },
-    {
-      "id": "000004175",
-      "slug": "decimus-kill-team"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
   "leaderConditions": {
     "allowedExistingLeaderKeywords": [
       "CAPTAIN",

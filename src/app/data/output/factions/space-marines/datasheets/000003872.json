@@ -41,7 +41,25 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +68,46 @@
       "factionId": "",
       "description": "The first time this model is destroyed, roll one D6 at the end of the phase. On a 2+, set this model back up on the battlefield, as close as possible to where it was destroyed and not within Engagement Range of any enemy units, with 1 wound remaining.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "RESURRECTION"
+          ],
+          "value": null
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -134,7 +191,43 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003872",
+      "line": 1,
+      "description": "1 Watch Captain Artemis",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003872",
+      "line": 1,
+      "description": "1 model",
+      "cost": 65,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002783",
+      "slug": "deathwatch-veterans"
+    },
+    {
+      "id": "000002780",
+      "slug": "fortis-kill-team-2"
+    }
+  ],
+  "supplementSlug": "deathwatch",
+  "supplementName": "Deathwatch",
+  "supplementLabel": "Deathwatch",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003872:hellfire-extremis",
       "datasheetId": "000003872",
@@ -188,41 +281,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003872",
-      "line": 1,
-      "description": "1 Watch Captain Artemis",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003872",
-      "line": 1,
-      "description": "1 model",
-      "cost": 65,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002783",
-      "slug": "deathwatch-veterans"
-    },
-    {
-      "id": "000002780",
-      "slug": "fortis-kill-team-2"
-    }
-  ],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

@@ -36,7 +36,45 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, if it contains an Eliminator Sergeant equipped with an instigator bolt carbine, this unit can make a Normal move. If it does so, until the end of the turn, this unit is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "NORMAL MOVE"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "ELIMINATOR SERGEANT"
+              ],
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "NOT ELIGIBLE TO DECLARE A CHARGE"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -45,7 +83,27 @@
       "factionId": "",
       "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [DEVASTATING WOUNDS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATING WOUNDS"
+          ],
+          "state": "isStationary",
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -108,7 +166,7 @@
       "datasheetId": "000001668",
       "line": 1,
       "button": "•",
-      "description": "The Eliminator Sergeant’s bolt sniper rifle can be replaced with one of the following:<ul><li>1 instigator bolt carbine</li><li>1 las fusil</li></ul>"
+      "description": "The Eliminator Sergeant's bolt sniper rifle can be replaced with one of the following:<ul><li>1 instigator bolt carbine</li><li>1 las fusil</li></ul>"
     },
     {
       "datasheetId": "000001668",
@@ -117,7 +175,41 @@
       "description": "All Eliminators in this unit can each have their bolt sniper rifle replaced with 1 las fusil."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001668",
+      "line": 1,
+      "description": "1 Eliminator Sergeant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000001668",
+      "line": 2,
+      "description": "2 Eliminators",
+      "min": 2,
+      "max": 2
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001668",
+      "line": 1,
+      "description": "3 models",
+      "cost": 85,
+      "count": 3
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001668:bolt-pistol",
       "datasheetId": "000001668",
@@ -247,39 +339,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001668",
-      "line": 1,
-      "description": "1 Eliminator Sergeant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000001668",
-      "line": 2,
-      "description": "2 Eliminators",
-      "min": 2,
-      "max": 2
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001668",
-      "line": 1,
-      "description": "3 models",
-      "cost": 85,
-      "count": 3
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

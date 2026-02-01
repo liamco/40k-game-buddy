@@ -3,7 +3,7 @@
   "name": "Land Speeder Typhoon",
   "factionId": "SM",
   "sourceId": "000000356",
-  "legend": "Mounting a formidable multi-missile launcher, the Land Speeder Typhoon launches flurries of projectiles at its targets. Such a barrage shatters order in infantry assaults as formations are broken up. Nor is enemy armour safe, for the Typhoon’s armour-piercing warheads allow it to pick off battle tanks and transports.",
+  "legend": "Mounting a formidable multi-missile launcher, the Land Speeder Typhoon launches flurries of projectiles at its targets. Such a barrage shatters order in infantry assaults as formations are broken up. Nor is enemy armour safe, for the Typhoon's armour-piercing warheads allow it to pick off battle tanks and transports.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> heavy bolter; Typhoon missile launcher; close combat weapon.",
   "transport": "",
@@ -37,7 +37,46 @@
       "factionId": "",
       "description": "In your Shooting phase, each time this model has shot, if it is not within Engagement Range of any enemy units, it can make a Normal move of up to D6\". If it does, until the end of the turn, this model is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "NOT ELIGIBLE TO DECLARE A CHARGE"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -100,10 +139,37 @@
       "datasheetId": "000002102",
       "line": 1,
       "button": "•",
-      "description": "This model’s heavy bolter can be replaced with 1 multi-melta."
+      "description": "This model's heavy bolter can be replaced with 1 multi-melta."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002102",
+      "line": 1,
+      "description": "1 Land Speeder Typhoon",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002102",
+      "line": 1,
+      "description": "1 model",
+      "cost": 100,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex (Legends)",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002102:heavy-bolter",
       "datasheetId": "000002102",
@@ -168,7 +234,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Typhoon missile launcher – frag",
+          "name": "Typhoon missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -185,7 +251,7 @@
           "line": 4,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Typhoon missile launcher – krak",
+          "name": "Typhoon missile launcher - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -221,32 +287,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002102",
-      "line": 1,
-      "description": "1 Land Speeder Typhoon",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002102",
-      "line": 1,
-      "description": "1 model",
-      "cost": 100,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex (Legends)",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

@@ -3,7 +3,7 @@
   "name": "Ravager",
   "factionId": "DRU",
   "sourceId": "000000031",
-  "legend": "Ravager gunships fulfil the role of armoured fire support during Drukhari raids, leveraging their speed and agility to outmanoeuvre the more heavily armoured war engines with which they typically duel. They are mobile assassins, mounting enough firepower to gut enemy tanks and eradicate the foe’s elite warriors before swiftly relocating to new hunting grounds.",
+  "legend": "Ravager gunships fulfil the role of armoured fire support during Drukhari raids, leveraging their speed and agility to outmanoeuvre the more heavily armoured war engines with which they typically duel. They are mobile assassins, mounting enough firepower to gut enemy tanks and eradicate the foe's elite warriors before swiftly relocating to new hunting grounds.",
   "role": "Other",
   "loadout": "<b>This model is equipped with:</b> 3 dark lances; bladevanes.",
   "transport": "",
@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "In your Shooting phase, when you select this model to shoot, you can spend 1 Pain token to Empower this model. While Empowered, after this model has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -109,10 +118,35 @@
       "datasheetId": "000000665",
       "line": 1,
       "button": "•",
-      "description": "Any number of this model’s dark lances can each be replaced with 1 disintegrator cannon."
+      "description": "Any number of this model's dark lances can each be replaced with 1 disintegrator cannon."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000665",
+      "line": 1,
+      "description": "1 Ravager",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000665",
+      "line": 1,
+      "description": "1 model",
+      "cost": 110,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Drukhari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000665:dark-lance",
       "datasheetId": "000000665",
@@ -184,40 +218,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000665",
-      "line": 1,
-      "description": "1 Ravager",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000665",
-      "line": 1,
-      "description": "1 model",
-      "cost": 110,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Drukhari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 4,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

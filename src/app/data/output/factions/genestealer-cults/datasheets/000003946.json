@@ -5,7 +5,7 @@
   "sourceId": "000000374",
   "legend": "",
   "role": "Characters",
-  "loadout": "<b>The Quartermaster Revenant is equipped with:</b> Quartermaster’s pistol; Quartermaster’s close combat weapon.<br><br><b>Every Medicae Servitor is equipped with:</b> medical scalpels",
+  "loadout": "<b>The Quartermaster Revenant is equipped with:</b> Quartermaster's pistol; Quartermaster's close combat weapon.<br><br><b>Every Medicae Servitor is equipped with:</b> medical scalpels",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -28,14 +28,25 @@
       "factionId": "",
       "description": "Whilst this unit contains one or more Medicae Servitors, models in this unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Mindlock",
       "legend": "",
       "factionId": "",
-      "description": "While this unit contains a Quartermaster Revenant model, improve the Weapon Skill characteristic of this unit’s Medical scalpels by 1.",
+      "description": "While this unit contains a Quartermaster Revenant model, improve the Weapon Skill characteristic of this unit's Medical scalpels by 1.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -130,82 +141,6 @@
       "description": "None"
     }
   ],
-  "wargear": [
-    {
-      "id": "000003946:quartermaster-s-close-combat-weapon",
-      "datasheetId": "000003946",
-      "line": 1,
-      "name": "Quartermaster’s close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003946",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Quartermaster’s close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003946:medical-scalpels",
-      "datasheetId": "000003946",
-      "line": 1,
-      "name": "Medical scalpels",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003946",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Medical scalpels",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 5,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003946:quartermaster-s-pistol",
-      "datasheetId": "000003946",
-      "line": 1,
-      "name": "Quartermaster’s pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003946",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Quartermaster’s pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 3,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003946",
@@ -246,5 +181,81 @@
   "roleLabel": "Characters",
   "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
   "isForgeWorld": false,
-  "isLegends": true
+  "isLegends": true,
+  "availableWargear": [
+    {
+      "id": "000003946:quartermaster-s-close-combat-weapon",
+      "datasheetId": "000003946",
+      "line": 1,
+      "name": "Quartermaster's close combat weapon",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000003946",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Quartermaster's close combat weapon",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 2,
+          "bsWs": 3,
+          "s": 4,
+          "ap": -2,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000003946:medical-scalpels",
+      "datasheetId": "000003946",
+      "line": 1,
+      "name": "Medical scalpels",
+      "type": "Melee",
+      "profiles": [
+        {
+          "datasheetId": "000003946",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Medical scalpels",
+          "attributes": [],
+          "range": "Melee",
+          "type": "Melee",
+          "a": 1,
+          "bsWs": 5,
+          "s": 3,
+          "ap": 0,
+          "d": 1
+        }
+      ]
+    },
+    {
+      "id": "000003946:quartermaster-s-pistol",
+      "datasheetId": "000003946",
+      "line": 1,
+      "name": "Quartermaster's pistol",
+      "type": "Ranged",
+      "profiles": [
+        {
+          "datasheetId": "000003946",
+          "line": 1,
+          "lineInWargear": 1,
+          "dice": "",
+          "name": "Quartermaster's pistol",
+          "attributes": [
+            "PISTOL"
+          ],
+          "range": 12,
+          "type": "Ranged",
+          "a": 1,
+          "bsWs": 3,
+          "s": 3,
+          "ap": -1,
+          "d": 1
+        }
+      ]
+    }
+  ]
 }

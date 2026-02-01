@@ -31,9 +31,58 @@
       "name": "Black Rage",
       "legend": "",
       "factionId": "",
-      "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model’s unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
+      "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model's unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -42,11 +91,51 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack, that attack has the [SUSTAINED HITS 1] ability if this unit is below its Starting Strength, or the [SUSTAINED HITS 2] ability if this unit is Below Half-strength.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBelowHalfStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
+      "id": "",
       "name": "ATTACHED UNIT",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If a Chaplain model from your army with the Leader ability can be attached to an Assault Intercessor Squad unit, it can be attached to this unit instead.",
+      "type": "Special (правая колонка)",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -133,10 +222,44 @@
       "datasheetId": "000001997",
       "line": 3,
       "button": "•",
-      "description": "1 model’s Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
+      "description": "1 model's Astartes chainsword can be replaced with one of the following:<ul><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001997",
+      "line": 1,
+      "description": "5-10 Death Company Marines",
+      "min": 5,
+      "max": 10
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001997",
+      "line": 1,
+      "description": "5 models",
+      "cost": 85,
+      "count": 5
+    },
+    {
+      "datasheetId": "000001997",
+      "line": 2,
+      "description": "10 models",
+      "cost": 160,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "blood-angels",
+  "supplementName": "Blood Angels",
+  "supplementLabel": "Blood Angels",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Blood Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001997:hand-flamer",
       "datasheetId": "000001997",
@@ -230,7 +353,7 @@
           "line": 4,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -247,7 +370,7 @@
           "line": 5,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -386,39 +509,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001997",
-      "line": 1,
-      "description": "5-10 Death Company Marines",
-      "min": 5,
-      "max": 10
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001997",
-      "line": 1,
-      "description": "5 models",
-      "cost": 85,
-      "count": 5
-    },
-    {
-      "datasheetId": "000001997",
-      "line": 2,
-      "description": "10 models",
-      "cost": 160,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "blood-angels",
-  "supplementName": "Blood Angels",
-  "supplementLabel": "Blood Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Blood Angels",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

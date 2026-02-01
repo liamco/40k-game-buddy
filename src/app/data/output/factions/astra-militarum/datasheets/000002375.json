@@ -5,7 +5,7 @@
   "sourceId": "000000374",
   "legend": "",
   "role": "Characters",
-  "loadout": "<b>The Quartermaster Revenant is equipped with:</b> Quartermaster’s pistol; Quartermaster’s close combat weapon.<br><br><b>Every Medicae Servitor is equipped with:</b> medical scalpels",
+  "loadout": "<b>The Quartermaster Revenant is equipped with:</b> Quartermaster's pistol; Quartermaster's close combat weapon.<br><br><b>Every Medicae Servitor is equipped with:</b> medical scalpels",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
@@ -28,14 +28,25 @@
       "factionId": "",
       "description": "Whilst this unit contains one or more Medicae Servitors, models in this unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Mindlock",
       "legend": "",
       "factionId": "",
-      "description": "While this unit contains a Quartermaster Revenant model, improve the Weapon Skill characteristic of this unit’s Medical scalpels by 1.",
+      "description": "While this unit contains a Quartermaster Revenant model, improve the Weapon Skill characteristic of this unit's Medical scalpels by 1.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -124,12 +135,53 @@
       "description": "None"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002375",
+      "line": 1,
+      "description": "1 Quartermaster Revenant",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000002375",
+      "line": 2,
+      "description": "4 Medicae Servitors",
+      "min": 4,
+      "max": 4
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002375",
+      "line": 1,
+      "description": "5 models",
+      "cost": 45,
+      "count": 5
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002374",
+      "slug": "death-korps-grenadier-squad"
+    },
+    {
+      "id": "000002613",
+      "slug": "death-korps-of-krieg"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000002375:quartermaster-s-pistol",
       "datasheetId": "000002375",
       "line": 1,
-      "name": "Quartermaster’s pistol",
+      "name": "Quartermaster's pistol",
       "type": "Ranged",
       "profiles": [
         {
@@ -137,7 +189,7 @@
           "line": 1,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Quartermaster’s pistol",
+          "name": "Quartermaster's pistol",
           "attributes": [
             "PISTOL"
           ],
@@ -179,7 +231,7 @@
       "id": "000002375:quartermaster-s-close-combat-weapon",
       "datasheetId": "000002375",
       "line": 3,
-      "name": "Quartermaster’s close combat weapon",
+      "name": "Quartermaster's close combat weapon",
       "type": "Melee",
       "profiles": [
         {
@@ -187,7 +239,7 @@
           "line": 3,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Quartermaster’s close combat weapon",
+          "name": "Quartermaster's close combat weapon",
           "attributes": [],
           "range": "Melee",
           "type": "Melee",
@@ -199,46 +251,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002375",
-      "line": 1,
-      "description": "1 Quartermaster Revenant",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000002375",
-      "line": 2,
-      "description": "4 Medicae Servitors",
-      "min": 4,
-      "max": 4
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002375",
-      "line": 1,
-      "description": "5 models",
-      "cost": 45,
-      "count": 5
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002374",
-      "slug": "death-korps-grenadier-squad"
-    },
-    {
-      "id": "000002613",
-      "slug": "death-korps-of-krieg"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

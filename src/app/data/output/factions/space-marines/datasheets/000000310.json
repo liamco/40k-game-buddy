@@ -3,7 +3,7 @@
   "name": "Wolf Scouts",
   "factionId": "SM",
   "sourceId": "000000360",
-  "legend": "Wolf Scouts are brooding stalkers and taciturn killers, at ease prowling behind enemy lines or at a battle’s edges. Commonly experienced battle-brothers rather than neophytes, Wolf Scouts employ patience and guile in their roles as reconnaissance experts and forward hunters, sniffing out isolated foes and falling upon them with fury.",
+  "legend": "Wolf Scouts are brooding stalkers and taciturn killers, at ease prowling behind enemy lines or at a battle's edges. Commonly experienced battle-brothers rather than neophytes, Wolf Scouts employ patience and guile in their roles as reconnaissance experts and forward hunters, sniffing out isolated foes and falling upon them with fury.",
   "role": "Other",
   "loadout": "<b>Every model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
   "transport": "",
@@ -35,9 +35,40 @@
       "name": "Guerrilla Tactics",
       "legend": "",
       "factionId": "",
-      "description": "At the end of your opponent’s turn, if this unit is more than 6\" away from all enemy models, you can remove this unit from the battlefield and place it into Strategic Reserves.",
+      "description": "At the end of your opponent's turn, if this unit is more than 6\" away from all enemy models, you can remove this unit from the battlefield and place it into Strategic Reserves.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STRATEGIC RESERVES"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opponentArmy",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "attribute": "m",
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThan",
+              "value": 6
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -112,13 +143,13 @@
       "datasheetId": "000000310",
       "line": 1,
       "button": "•",
-      "description": "1 Wolf Scout’s boltgun and bolt pistol can be  replaced with one of the following:<ul><li>1 bolt pistol and 1 power weapon</li><li>1 plasma pistol and 1 boltgun</li></ul>"
+      "description": "1 Wolf Scout's boltgun and bolt pistol can be  replaced with one of the following:<ul><li>1 bolt pistol and 1 power weapon</li><li>1 plasma pistol and 1 boltgun</li></ul>"
     },
     {
       "datasheetId": "000000310",
       "line": 2,
       "button": "•",
-      "description": "1 Wolf Scout’s boltgun can be replaced with one of the following:<ul><li>1 flamer</li><li>1 grav-gun</li><li>1 heavy bolter</li><li>1 meltagun</li><li>1 missile launcher</li><li>1 plasma gun</li></ul>"
+      "description": "1 Wolf Scout's boltgun can be replaced with one of the following:<ul><li>1 flamer</li><li>1 grav-gun</li><li>1 heavy bolter</li><li>1 meltagun</li><li>1 missile launcher</li><li>1 plasma gun</li></ul>"
     },
     {
       "datasheetId": "000000310",
@@ -130,7 +161,7 @@
       "datasheetId": "000000310",
       "line": 4,
       "button": "•",
-      "description": "The Wolf Scout Pack Leader’s bolt pistol and boltgun can be replaced with with 1 twin lightning claws, or two different weapons from the following list:*<ul><li>1 bolt pistol</li><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer.</li></ul>"
+      "description": "The Wolf Scout Pack Leader's bolt pistol and boltgun can be replaced with with 1 twin lightning claws, or two different weapons from the following list:*<ul><li>1 bolt pistol</li><li>1 boltgun</li><li>1 combi-weapon</li><li>1 grav-pistol</li><li>1 hand flamer</li><li>1 inferno pistol</li><li>1 plasma pistol</li><li>1 storm bolter</li><li>1 Astartes chainsword</li><li>1 power fist</li><li>1 power weapon</li><li>1 thunder hammer.</li></ul>"
     },
     {
       "datasheetId": "000000310",
@@ -139,7 +170,48 @@
       "description": "* This model can only be equipped with two ranged weapons if one of them is a Pistol (and it can only have one Pistol)"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000310",
+      "line": 1,
+      "description": "1 Wolf Scout Pack Leader",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000000310",
+      "line": 2,
+      "description": "4-9 Wolf Scouts",
+      "min": 4,
+      "max": 9
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000310",
+      "line": 1,
+      "description": "5 models",
+      "cost": 80,
+      "count": 5
+    },
+    {
+      "datasheetId": "000000310",
+      "line": 2,
+      "description": "10 models",
+      "cost": 160,
+      "count": 10
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves (Legends)",
+  "supplementLabel": "Space Wolves (Legends)",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
+  "isForgeWorld": false,
+  "isLegends": true,
+  "availableWargear": [
     {
       "id": "000000310:astartes-shotgun",
       "datasheetId": "000000310",
@@ -444,7 +516,7 @@
           "line": 12,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Missile launcher – frag",
+          "name": "Missile launcher - frag",
           "attributes": [
             "BLAST",
             "HEAVY"
@@ -462,7 +534,7 @@
           "line": 13,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Missile launcher – krak",
+          "name": "Missile launcher - krak",
           "attributes": [
             "HEAVY"
           ],
@@ -488,7 +560,7 @@
           "line": 14,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma pistol – standard",
+          "name": "Plasma pistol - standard",
           "attributes": [
             "PISTOL"
           ],
@@ -505,7 +577,7 @@
           "line": 15,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma pistol – supercharge",
+          "name": "Plasma pistol - supercharge",
           "attributes": [
             "HAZARDOUS",
             "PISTOL"
@@ -532,7 +604,7 @@
           "line": 16,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Plasma gun – standard",
+          "name": "Plasma gun - standard",
           "attributes": [
             "RAPID FIRE 1"
           ],
@@ -549,7 +621,7 @@
           "line": 16,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Plasma gun – supercharge",
+          "name": "Plasma gun - supercharge",
           "attributes": [
             "HAZARDOUS",
             "RAPID FIRE 1"
@@ -762,46 +834,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000310",
-      "line": 1,
-      "description": "1 Wolf Scout Pack Leader",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000000310",
-      "line": 2,
-      "description": "4-9 Wolf Scouts",
-      "min": 4,
-      "max": 9
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000310",
-      "line": 1,
-      "description": "5 models",
-      "cost": 80,
-      "count": 5
-    },
-    {
-      "datasheetId": "000000310",
-      "line": 2,
-      "description": "10 models",
-      "cost": 160,
-      "count": 10
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves (Legends)",
-  "supplementLabel": "Space Wolves (Legends)",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Wolves (Warhammer Legends)",
-  "isForgeWorld": false,
-  "isLegends": true
+  ]
 }

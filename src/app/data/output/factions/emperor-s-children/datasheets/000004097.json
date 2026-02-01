@@ -46,7 +46,16 @@
       "factionId": "",
       "description": "Each time an attack targets this model, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -145,7 +154,32 @@
       "description": "This model can be equipped with one of the following:<ul><li>living whip</li><li>ritual knife</li><li>shining aegis</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004097",
+      "line": 1,
+      "description": "1 Keeper of Secrets",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004097",
+      "line": 1,
+      "description": "1 model",
+      "cost": 240,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Emperor's Children",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004097:living-whip",
       "datasheetId": "000004097",
@@ -184,7 +218,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Phantasmagoria – witchfire",
+          "name": "Phantasmagoria - witchfire",
           "attributes": [
             "DEVASTATING WOUNDS",
             "PSYCHIC"
@@ -202,7 +236,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Phantasmagoria – focused witchfire",
+          "name": "Phantasmagoria - focused witchfire",
           "attributes": [
             "DEVASTATING WOUNDS",
             "HAZARDOUS",
@@ -294,40 +328,6 @@
           "d": 3
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004097",
-      "line": 1,
-      "description": "1 Keeper of Secrets",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004097",
-      "line": 1,
-      "description": "1 model",
-      "cost": 240,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Emperor’s Children",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "rollPenalty",
-      "attribute": "h",
-      "value": 1
     }
   ]
 }

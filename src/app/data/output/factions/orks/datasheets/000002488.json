@@ -37,14 +37,43 @@
       "factionId": "",
       "description": "While this model is leading a unit: <br><ul><li>Models in that unit have the Scouts 9\" ability. </li><li>Each time a model in that unit makes an attack, add 1 to the Hit roll and add 1 to the Wound roll. </li><li>Each time an attack targets that unit, subtract 1 from the Wound roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 9
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
       "name": "Special Dose",
       "legend": "",
       "factionId": "",
-      "description": "While the Waaagh! is active for your army, add 6\" to the Move characteristic of models in this model’s unit.",
+      "description": "While the Waaagh! is active for your army, add 6\" to the Move characteristic of models in this model's unit.",
       "type": "Datasheet",
       "parameter": ""
     }
@@ -99,7 +128,37 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002488",
+      "line": 1,
+      "description": "1 Zodgrod Wortsnagga - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002488",
+      "line": 1,
+      "description": "1 model",
+      "cost": 90,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000017",
+      "slug": "gretchin"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002488:slugga",
       "datasheetId": "000002488",
@@ -151,35 +210,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002488",
-      "line": 1,
-      "description": "1 Zodgrod Wortsnagga – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002488",
-      "line": 1,
-      "description": "1 model",
-      "cost": 90,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000017",
-      "slug": "gretchin"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

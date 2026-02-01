@@ -36,10 +36,10 @@
     },
     {
       "id": "",
-      "name": "Ancient’s Banner",
+      "name": "Ancient's Banner",
       "legend": "",
       "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer’s unit.",
+      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
       "type": "Wargear",
       "parameter": ""
     },
@@ -48,13 +48,29 @@
       "name": "Narthecium",
       "legend": "",
       "factionId": "",
-      "description": "In your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTERS</span>) to the bearer’s unit.",
+      "description": "In your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTERS</span>) to the bearer's unit.",
       "type": "Wargear",
       "parameter": ""
     },
     {
+      "id": "",
       "name": "Rites of Teleportation",
-      "type": "Special (правая колонка)"
+      "legend": "",
+      "factionId": "",
+      "description": "If one or more INQUISITOR units are attached to this unit during the Declare Battle formations step, models in those units have the Deep Strike ability.",
+      "type": "Special (правая колонка)",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -141,7 +157,7 @@
       "datasheetId": "000003813",
       "line": 2,
       "button": "•",
-      "description": "1 Grey Knights Terminator equipped with a storm bolter can be equipped with 1 Ancient’s banner.*"
+      "description": "1 Grey Knights Terminator equipped with a storm bolter can be equipped with 1 Ancient's banner.*"
     },
     {
       "datasheetId": "000003813",
@@ -156,7 +172,46 @@
       "description": "* You cannot select both of these options for the same model."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000003813",
+      "line": 1,
+      "description": "1 Terminator Justicar",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000003813",
+      "line": 2,
+      "description": "4 Grey Knights Terminators",
+      "min": 4,
+      "max": 4
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000003813",
+      "line": 1,
+      "description": "5 models (<ky>AGENTS OF THE IMPERIUM</ky> Detachment)",
+      "cost": 190,
+      "count": 5
+    },
+    {
+      "datasheetId": "000003813",
+      "line": 2,
+      "description": "5 models (Assigned Agent)",
+      "cost": 210,
+      "count": 5
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Imperial Agents",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000003813:incinerator",
       "datasheetId": "000003813",
@@ -289,44 +344,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000003813",
-      "line": 1,
-      "description": "1 Terminator Justicar",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000003813",
-      "line": 2,
-      "description": "4 Grey Knights Terminators",
-      "min": 4,
-      "max": 4
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000003813",
-      "line": 1,
-      "description": "5 models (<ky>AGENTS OF THE IMPERIUM</ky> Detachment)",
-      "cost": 190,
-      "count": 5
-    },
-    {
-      "datasheetId": "000003813",
-      "line": 2,
-      "description": "5 models (Assigned Agent)",
-      "cost": 210,
-      "count": 5
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Imperial Agents",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

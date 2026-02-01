@@ -1,0 +1,148 @@
+import React, { Fragment, useMemo } from "react";
+
+import type { CombatResolution } from "#game-engine";
+
+import { getCriticalEffectForStep } from "../../utils/combatUtils";
+
+import AttackStep from "./AttackStep";
+
+interface AttackResolverProps {
+    resolution: CombatResolution | null;
+    modelCount: number;
+}
+
+/**
+ * AttackResolver - Display component for combat resolution
+ *
+ * Receives pre-calculated CombatResolution from the game engine and renders
+ * each attack step with attributed modifiers.
+ */
+export function AttackResolver({ resolution, modelCount }: AttackResolverProps) {
+    // Calculate total attacks display (including BLAST bonus)
+    const attacksDisplay = useMemo(() => {
+        if (!resolution || modelCount === 0) {
+            return { perModel: "-", total: "-" };
+        }
+
+        const baseAttacks = resolution.baseAttacks;
+        const blastBonus = resolution.blastBonusPerModel;
+
+        if (typeof baseAttacks === "number") {
+            // Apply BLAST bonus per model
+            const attacksPerModel = blastBonus !== null ? baseAttacks + blastBonus : baseAttacks;
+
+            return {
+                perModel: String(attacksPerModel),
+                total: String(attacksPerModel * modelCount),
+            };
+        }
+
+        // Dice expression (e.g., "D6", "D3+1") - BLAST adds flat bonus
+        let perModelDisplay = String(baseAttacks);
+        if (blastBonus !== null && blastBonus > 0) {
+            perModelDisplay = `${baseAttacks}+${blastBonus}`;
+        }
+
+        return {
+            perModel: perModelDisplay,
+            total: modelCount > 1 ? `(${perModelDisplay}) x${modelCount}` : perModelDisplay,
+        };
+    }, [resolution, modelCount]);
+
+    // Format to-hit display
+    const toHitDisplay = useMemo(() => {
+        if (!resolution) return { statValue: "-", finalValue: "-" };
+
+        const isAutoHit = resolution.finalToHit === "auto";
+        const baseValue = typeof resolution.baseToHit === "number" ? `${resolution.baseToHit}+` : String(resolution.baseToHit);
+
+        return {
+            statValue: isAutoHit ? "N/A" : baseValue,
+            finalValue: isAutoHit ? "Auto" : `${resolution.finalToHit}+`,
+        };
+    }, [resolution]);
+
+    // Format save display
+    const saveDisplay = useMemo(() => {
+        if (!resolution) return { finalValue: "-" };
+
+        if (resolution.finalSave >= 7) {
+            return { finalValue: "-" };
+        }
+
+        const invulnMarker = resolution.useInvuln ? "+" : "";
+        return { finalValue: `${resolution.finalSave}+${invulnMarker}` };
+    }, [resolution]);
+
+    // Format wound display with critical threshold
+    // If critical threshold is lower than the normal wound roll, display the critical value instead
+    const woundDisplay = useMemo(() => {
+        if (!resolution) return { finalValue: "-", isCritical: false };
+
+        const normalWound = resolution.finalToWound;
+        const criticalThreshold = resolution.criticalWoundThreshold;
+
+        // Use critical threshold if it's lower than the normal wound roll
+        const useCritical = criticalThreshold < normalWound;
+        const displayValue = useCritical ? criticalThreshold : normalWound;
+
+        return {
+            finalValue: `${displayValue}+`,
+            isCritical: useCritical,
+        };
+    }, [resolution]);
+
+    // Get critical effects for hit and wound steps
+    const hitCriticalEffect = useMemo(() => (resolution ? getCriticalEffectForStep(resolution.weaponEffects, "hitRoll") : null), [resolution]);
+
+    const woundCriticalEffect = useMemo(() => (resolution ? getCriticalEffectForStep(resolution.weaponEffects, "woundRoll") : null), [resolution]);
+
+    return (
+        <section className="grid grid-rows-5 rounded overflow-auto h-[calc(100vh-161.5px)]">
+            {resolution ? (
+                <Fragment>
+                    <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={resolution.attacksModifiers.forDisplay.bonuses} penalties={resolution.attacksModifiers.forDisplay.penalties} finalValue={attacksDisplay.total} />
+                    <AttackStep
+                        stepType="hitChance"
+                        label="To hit"
+                        statLabel="BS/WS"
+                        statValue={toHitDisplay.statValue}
+                        bonuses={resolution.hitModifiers.forDisplay.bonuses}
+                        penalties={resolution.hitModifiers.forDisplay.penalties}
+                        finalValue={toHitDisplay.finalValue}
+                        criticalEffect={hitCriticalEffect}
+                    />
+                    <AttackStep
+                        stepType="woundChance"
+                        label="To wound"
+                        statLabel={`S${resolution.weaponStrength} vs T${resolution.targetToughness}`}
+                        statValue=""
+                        bonuses={resolution.woundModifiers.forDisplay.bonuses}
+                        penalties={resolution.woundModifiers.forDisplay.penalties}
+                        finalValue={woundDisplay.finalValue}
+                        isCritical={woundDisplay.isCritical}
+                        criticalEffect={woundCriticalEffect}
+                    />
+                    <AttackStep
+                        stepType="saveChance"
+                        label="To save"
+                        statLabel="Save"
+                        statValue={`${resolution.baseSave}+`}
+                        bonuses={resolution.saveModifiers.forDisplay.bonuses}
+                        penalties={resolution.weaponAp !== 0 ? [{ label: "AP", value: resolution.weaponAp }] : []}
+                        finalValue={saveDisplay.finalValue}
+                    />
+                    <AttackStep stepType="feelNoPain" label="Feel no pain" bonuses={resolution.fnpModifiers.forDisplay.bonuses} penalties={resolution.fnpModifiers.forDisplay.penalties} finalValue={resolution.finalFnp ? `${resolution.finalFnp}+` : "-"} disabled={!resolution.finalFnp} />
+                </Fragment>
+            ) : (
+                <div className="col-span-5 py-8 text-center w-full flex items-center justify-center gap-4">
+                    <span>+++</span>
+                    <span className="text-blockcaps-m">Select attacker and target to calculate attack resolution</span>
+                    <span>+++</span>
+                </div>
+            )}
+        </section>
+    );
+}
+
+export default AttackResolver;

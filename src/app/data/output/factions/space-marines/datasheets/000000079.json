@@ -3,7 +3,7 @@
   "name": "Librarian In Terminator Armour",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "The powers of a Chapter’s Librarians lend a lethal psychic edge to its elite infantry spearheads. Whether it be gruelling boarding actions, ferocious urban combat or on the front line against overwhelming enemy numbers, Librarians in Terminator armour blast at the foe with their powerful psychic energies.",
+  "legend": "The powers of a Chapter's Librarians lend a lethal psychic edge to its elite infantry spearheads. Whether it be gruelling boarding actions, ferocious urban combat or on the front line against overwhelming enemy numbers, Librarians in Terminator armour blast at the foe with their powerful psychic energies.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> Smite; force weapon.",
   "transport": "",
@@ -36,7 +36,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -45,7 +56,26 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -123,7 +153,67 @@
       "description": "This model can be equipped with one of the following:<ul><li>1 combi-weapon</li><li>1 storm bolter</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000000079",
+      "line": 1,
+      "description": "1 Librarian in Terminator Armour",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000000079",
+      "line": 1,
+      "description": "1 model",
+      "cost": 75,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000004138",
+      "slug": "terminator-squad-2"
+    },
+    {
+      "id": "000000231",
+      "slug": "deathwing-knights"
+    },
+    {
+      "id": "000001183",
+      "slug": "terminator-squad"
+    },
+    {
+      "id": "000000104",
+      "slug": "relic-terminator-squad"
+    },
+    {
+      "id": "000003873",
+      "slug": "deathwatch-terminator-squad-2"
+    },
+    {
+      "id": "000000118",
+      "slug": "terminator-assault-squad"
+    },
+    {
+      "id": "000000230",
+      "slug": "deathwing-terminator-squad"
+    },
+    {
+      "id": "000002302",
+      "slug": "deathwing-command-squad"
+    }
+  ],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000000079:combi-weapon",
       "datasheetId": "000000079",
@@ -164,7 +254,7 @@
           "line": 2,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Smite – witchfire",
+          "name": "Smite - witchfire",
           "attributes": [
             "PSYCHIC"
           ],
@@ -181,7 +271,7 @@
           "line": 3,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Smite – focused witchfire",
+          "name": "Smite - focused witchfire",
           "attributes": [
             "DEVASTATING WOUNDS",
             "HAZARDOUS",
@@ -249,65 +339,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000079",
-      "line": 1,
-      "description": "1 Librarian in Terminator Armour",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000079",
-      "line": 1,
-      "description": "1 model",
-      "cost": 75,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000004138",
-      "slug": "terminator-squad-2"
-    },
-    {
-      "id": "000000231",
-      "slug": "deathwing-knights"
-    },
-    {
-      "id": "000001183",
-      "slug": "terminator-squad"
-    },
-    {
-      "id": "000000104",
-      "slug": "relic-terminator-squad"
-    },
-    {
-      "id": "000003873",
-      "slug": "deathwatch-terminator-squad-2"
-    },
-    {
-      "id": "000000118",
-      "slug": "terminator-assault-squad"
-    },
-    {
-      "id": "000000230",
-      "slug": "deathwing-terminator-squad"
-    },
-    {
-      "id": "000002302",
-      "slug": "deathwing-command-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

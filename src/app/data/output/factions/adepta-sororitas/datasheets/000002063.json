@@ -3,7 +3,7 @@
   "name": "Triumph Of Saint Katherine",
   "factionId": "AS",
   "sourceId": "000000112",
-  "legend": "At the centre of the Triumph is the blessed bier upon which lie the mortal remains of Saint Katherine, beneath the sconce containing her fiery heart. Wherever the Triumph goes, the Emperor’s radiance goes with it. The glory of the martyred Matriarch is spread and Battle Sisters are filled with conviction to purge the foes of Mankind.",
+  "legend": "At the centre of the Triumph is the blessed bier upon which lie the mortal remains of Saint Katherine, beneath the sconce containing her fiery heart. Wherever the Triumph goes, the Emperor's radiance goes with it. The glory of the martyred Matriarch is spread and Battle Sisters are filled with conviction to purge the foes of Mankind.",
   "role": "Characters",
   "loadout": "<b>This model is equipped with:</b> bolt pistols; relic weapons.",
   "transport": "",
@@ -44,28 +44,69 @@
       "parameter": ""
     },
     {
+      "id": "",
       "name": "The Fiery Heart (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is within 6\" of this model, add 2\" to that unit's Move characteristic and add 1 to Advance and Charge rolls made for that unit.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Censer of the Sacred Rose (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is within 6\" of this model, you can re-roll Battle-shock tests taken for that unit.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Simulacrum of the Ebon Chalice (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is within 6\" of this model, that unit can perform up to two Acts of Faith per phase, instead of only one.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Simulacrum of the Argent Shroud (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is within 6\" of this model, each time a model in that unit makes a ranged attack, re-roll a Wound roll of 1.",
+      "type": "Primarch",
+      "parameter": ""
     },
     {
+      "id": "",
       "name": "Icon of the Valorous Heart (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is within 6\" of this model, models in that unit have the Feel No Pain 6+ ability.",
+      "type": "Primarch",
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
+      "id": "",
       "name": "Petals of the Bloody Rose (Aura)",
-      "type": "Primarch"
+      "legend": "",
+      "factionId": "",
+      "description": "While a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is within 6\" of this model, improve the Armour Penetration characteristic of melee weapons equipped by models in that unit by 1.",
+      "type": "Primarch",
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -130,7 +171,41 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002063",
+      "line": 1,
+      "description": "1 Triumph of Saint Katherine - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002063",
+      "line": 1,
+      "description": "1 model",
+      "cost": 235,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000000894",
+      "slug": "crusaders"
+    },
+    {
+      "id": "000000903",
+      "slug": "battle-sisters-squad"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002063:bolt-pistols",
       "datasheetId": "000002063",
@@ -180,49 +255,6 @@
           "d": 1
         }
       ]
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002063",
-      "line": 1,
-      "description": "1 Triumph of Saint Katherine – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002063",
-      "line": 1,
-      "description": "1 model",
-      "cost": 235,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000000894",
-      "slug": "crusaders"
-    },
-    {
-      "id": "000000903",
-      "slug": "battle-sisters-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "damagedThreshold": 6,
-  "damagedMechanics": [
-    {
-      "entity": "thisModel",
-      "effect": "statMultiplier",
-      "attribute": "a",
-      "value": 0.5
     }
   ]
 }

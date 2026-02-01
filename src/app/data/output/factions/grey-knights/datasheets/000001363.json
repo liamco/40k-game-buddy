@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that can <span class=\"kwb\">FLY</span>, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -102,16 +111,41 @@
       "datasheetId": "000001363",
       "line": 1,
       "button": "•",
-      "description": "This model’s las-talon can be replaced with 1 icarus stormcannon."
+      "description": "This model's las-talon can be replaced with 1 icarus stormcannon."
     },
     {
       "datasheetId": "000001363",
       "line": 2,
       "button": "•",
-      "description": "This model’s skyhammer missile launcher can be replaced with one of the following:<ul><li>1 twin heavy bolter</li><li>1 typhoon missile launcher</li></ul>"
+      "description": "This model's skyhammer missile launcher can be replaced with one of the following:<ul><li>1 twin heavy bolter</li><li>1 typhoon missile launcher</li></ul>"
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000001363",
+      "line": 1,
+      "description": "1 Stormhawk Interceptor",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000001363",
+      "line": 1,
+      "description": "1 model",
+      "cost": 160,
+      "count": 1
+    }
+  ],
+  "leaders": [],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Grey Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000001363:icarus-stormcannon",
       "datasheetId": "000001363",
@@ -254,7 +288,7 @@
           "line": 6,
           "lineInWargear": 1,
           "dice": "",
-          "name": "Typhoon missile launcher – frag",
+          "name": "Typhoon missile launcher - frag",
           "attributes": [
             "BLAST"
           ],
@@ -271,7 +305,7 @@
           "line": 7,
           "lineInWargear": 2,
           "dice": "",
-          "name": "Typhoon missile launcher – krak",
+          "name": "Typhoon missile launcher - krak",
           "attributes": [],
           "range": 48,
           "type": "Ranged",
@@ -307,30 +341,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000001363",
-      "line": 1,
-      "description": "1 Stormhawk Interceptor",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000001363",
-      "line": 1,
-      "description": "1 model",
-      "cost": 160,
-      "count": 1
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Grey Knights",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

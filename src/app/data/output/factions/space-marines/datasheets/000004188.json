@@ -3,7 +3,7 @@
   "name": "Wardens of Ultramar",
   "factionId": "SM",
   "sourceId": "000000139",
-  "legend": "Though usually seeded through the leadership strata of Captain Titus’ armies, his closest counsellors and comrades fight by his side as one when the situation demands. At such times they combine transhuman might, inspirational magnificence, martial excellence, psychic might and sheer cunning in a potent alloy greater than the sum of its parts.",
+  "legend": "Though usually seeded through the leadership strata of Captain Titus' armies, his closest counsellors and comrades fight by his side as one when the situation demands. At such times they combine transhuman might, inspirational magnificence, martial excellence, psychic might and sheer cunning in a potent alloy greater than the sum of its parts.",
   "role": "Other",
   "loadout": "<b>Ancient Gadriel is equipped with:</b> bolt rifle; close combat weapon.<br><br><b>Veteran Sergeant Metaurus is equipped with:</b> heavy bolt pistol; master-crafted power weapon; storm shield.<br><br><b>Gaius Silva is equipped with:</b> archeotech laspistol; power weapon; refractor field.<br><br><b>Aemelia Minervas is equipped with:</b> archeotech laspistol; power weapon.<br><br><b>Dainal Kornelius is equipped with:</b> Astropathic Blast; force stave.<br><br><b>Lucia Vestha is equipped with:</b> archeotech laspistol; close combat weapon.",
   "transport": "",
@@ -28,7 +28,43 @@
       "factionId": "",
       "description": "While this unit contains Ancient Gadriel, add 1 to the Objective Control characteristic of models in this unit. While this unit contains Ancient Gadriel and Captain Titus, improve the Leadership characteristic of models in this unit by 1 as well.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "ANCIENT GADRIEL"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "ANCIENT GADRIEL",
+                "CAPTAIN TITUS"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -37,7 +73,26 @@
       "factionId": "",
       "description": "After both players have deployed their armies, if this unit is on the battlefield (or any Transport it is embarked within is on the battlefield), select up to three <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army and redeploy them. When doing so, you can set those units up in Strategic Reserves, regardless of how many units are already in Strategic Reserves.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "REDEPLOY"
+          ],
+          "value": "up to three ADEPTUS ASTARTES units"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "STRATEGIC RESERVES"
+          ],
+          "value": "regardless of how many units are already in Strategic Reserves"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +101,16 @@
       "factionId": "",
       "description": "The bearer has a 5+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -55,7 +119,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "HEROES OF ULTRAMAR",
@@ -151,7 +224,69 @@
     }
   ],
   "options": [],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000004188",
+      "line": 1,
+      "description": "1 Ancient Gadriel - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004188",
+      "line": 2,
+      "description": "1 Veteran Sergeant Metaurus - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004188",
+      "line": 3,
+      "description": "1 Gaius Silva - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004188",
+      "line": 4,
+      "description": "1 Aemelia Minervas - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004188",
+      "line": 5,
+      "description": "1 Dainal Kornelius - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    },
+    {
+      "datasheetId": "000004188",
+      "line": 6,
+      "description": "1 Lucia Vestha - <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000004188",
+      "line": 1,
+      "description": "6 models",
+      "cost": 90,
+      "count": 6
+    }
+  ],
+  "leaders": [],
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000004188:archeotech-laspistol",
       "datasheetId": "000004188",
@@ -356,67 +491,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000004188",
-      "line": 1,
-      "description": "1 Ancient Gadriel – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004188",
-      "line": 2,
-      "description": "1 Veteran Sergeant Metaurus – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004188",
-      "line": 3,
-      "description": "1 Gaius Silva – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004188",
-      "line": 4,
-      "description": "1 Aemelia Minervas – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004188",
-      "line": 5,
-      "description": "1 Dainal Kornelius – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    },
-    {
-      "datasheetId": "000004188",
-      "line": 6,
-      "description": "1 Lucia Vestha – <span class=\"kwb\">EPIC</span> <span class=\"kwb\">HERO</span>",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000004188",
-      "line": 1,
-      "description": "6 models",
-      "cost": 90,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

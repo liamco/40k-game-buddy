@@ -50,7 +50,18 @@
       "factionId": "",
       "description": "While the bearer is leading a unit, models in that unit have the Deep Strike ability.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -59,7 +70,16 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [
@@ -116,16 +136,46 @@
       "datasheetId": "000002595",
       "line": 1,
       "button": "•",
-      "description": "This model’s mass hammer can be replaced with 1 darkstar axe."
+      "description": "This model's mass hammer can be replaced with 1 darkstar axe."
     },
     {
       "datasheetId": "000002595",
       "line": 2,
       "button": "•",
-      "description": "This model’s weavefield crest can be replaced with 1 teleport crest."
+      "description": "This model's weavefield crest can be replaced with 1 teleport crest."
     }
   ],
-  "wargear": [
+  "unitComposition": [
+    {
+      "datasheetId": "000002595",
+      "line": 1,
+      "description": "1 Einhyr Champion",
+      "min": 1,
+      "max": 1
+    }
+  ],
+  "modelCosts": [
+    {
+      "datasheetId": "000002595",
+      "line": 1,
+      "description": "1 model",
+      "cost": 70,
+      "count": 1
+    }
+  ],
+  "leaders": [
+    {
+      "id": "000002599",
+      "slug": "einhyr-hearthguard"
+    }
+  ],
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "availableWargear": [
     {
       "id": "000002595:autoch-pattern-combi-bolter",
       "datasheetId": "000002595",
@@ -198,35 +248,5 @@
         }
       ]
     }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000002595",
-      "line": 1,
-      "description": "1 Einhyr Champion",
-      "min": 1,
-      "max": 1
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000002595",
-      "line": 1,
-      "description": "1 model",
-      "cost": 70,
-      "count": 1
-    }
-  ],
-  "leaders": [
-    {
-      "id": "000002599",
-      "slug": "einhyr-hearthguard"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false
+  ]
 }

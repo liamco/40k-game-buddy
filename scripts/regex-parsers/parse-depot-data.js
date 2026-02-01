@@ -23,6 +23,33 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /**
+ * Normalizes text by replacing typographic characters with their ASCII equivalents.
+ * This ensures consistent regex matching throughout the application.
+ *
+ * Replacements:
+ * - Curly single quotes (', ') → straight apostrophe (')
+ * - Curly double quotes (", ") → straight double quote (")
+ * - En-dash (–) and em-dash (—) → hyphen (-)
+ *
+ * @param {string} text - The text to normalize
+ * @returns {string} - Normalized text with ASCII equivalents
+ */
+function normalizeText(text) {
+    if (typeof text !== "string") {
+        return text;
+    }
+    return (
+        text
+            // Curly single quotes to straight apostrophe
+            .replace(/[\u2018\u2019]/g, "'")
+            // Curly double quotes to straight double quote
+            .replace(/[\u201C\u201D]/g, '"')
+            // En-dash and em-dash to hyphen
+            .replace(/[\u2013\u2014]/g, "-")
+    );
+}
+
+/**
  * Converts a string value to a number if it's numeric or ends with "+"
  * Examples:
  * - "5" -> 5
@@ -46,6 +73,9 @@ function convertValue(value) {
         if (/^-?\d+$/.test(value)) {
             return parseInt(value, 10);
         }
+
+        // Normalize typographic characters in non-numeric strings
+        return normalizeText(value);
     }
 
     return value;
@@ -572,9 +602,10 @@ function filterCoreAndFactionAbilitiesFromDatasheet(obj) {
         if (obj.abilities && Array.isArray(obj.abilities)) {
             const cleaned = { ...obj };
             cleaned.abilities = obj.abilities.map((ability) => {
-                const abilityType = ability.type?.toLowerCase();
-                // Keep Datasheet and Wargear abilities as-is
-                if (abilityType === "datasheet" || abilityType === "wargear") {
+                const abilityType = ability.type?.toLowerCase() || "";
+                // Keep Datasheet, Wargear, Special, and Primarch abilities as-is (they contain unique rules text)
+                // Special abilities include things like "SUPREME COMMANDER", "LAST SURVIVOR", etc.
+                if (abilityType === "datasheet" || abilityType === "wargear" || abilityType.startsWith("special") || abilityType === "primarch") {
                     return ability;
                 }
                 // Convert Core and Faction abilities to references
@@ -800,8 +831,10 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
             }
 
             // Group weapon profiles (e.g., "Plasma pistol – standard" and "Plasma pistol – supercharge" become one weapon with two profiles)
+            // Rename wargear to availableWargear (wargear on EngagementForceItem is the resolved active weapons)
             if (processedData.wargear && Array.isArray(processedData.wargear)) {
-                processedData.wargear = groupWeaponProfiles(processedData.wargear);
+                processedData.availableWargear = groupWeaponProfiles(processedData.wargear);
+                delete processedData.wargear;
             }
         } else {
             // This is a faction.json file - check for faction-config.json and apply supplement slugs to detachments
@@ -857,6 +890,60 @@ async function main() {
     if (!fs.existsSync(depotdataPath)) {
         console.error(`Error: ${depotdataPath} does not exist`);
         process.exit(1);
+    }
+
+    // Warning: Check if output directory has extracted mechanics that would be overwritten
+    if (fs.existsSync(outputPath)) {
+        // Check a sample file for mechanics
+        const factionDirs = path.join(outputPath, "factions");
+        if (fs.existsSync(factionDirs)) {
+            const sampleFiles = [];
+            const factions = fs.readdirSync(factionDirs, { withFileTypes: true }).filter((d) => d.isDirectory());
+            for (const faction of factions.slice(0, 3)) {
+                const datasheetDir = path.join(factionDirs, faction.name, "datasheets");
+                if (fs.existsSync(datasheetDir)) {
+                    const files = fs
+                        .readdirSync(datasheetDir)
+                        .filter((f) => f.endsWith(".json"))
+                        .slice(0, 5);
+                    sampleFiles.push(...files.map((f) => path.join(datasheetDir, f)));
+                }
+            }
+
+            let hasMechanics = false;
+            for (const file of sampleFiles) {
+                try {
+                    const content = JSON.parse(fs.readFileSync(file, "utf-8"));
+                    if (content.abilities?.some((a) => a.mechanics && a.mechanics.length > 0)) {
+                        hasMechanics = true;
+                        break;
+                    }
+                } catch {
+                    // Ignore parsing errors
+                }
+            }
+
+            if (hasMechanics) {
+                console.warn("═".repeat(60));
+                console.warn("⚠️  WARNING: Existing output files contain extracted mechanics!");
+                console.warn("   Running this script will OVERWRITE them with data from src/");
+                console.warn("   which does NOT contain the extracted mechanics.");
+                console.warn("");
+                console.warn("   If you have already run extract-effects:regex or extract-effects:openai,");
+                console.warn("   those extracted mechanics will be LOST.");
+                console.warn("");
+                console.warn("   To proceed anyway, set FORCE=true:");
+                console.warn("   FORCE=true npm run parse-depot-data");
+                console.warn("═".repeat(60));
+
+                if (process.env.FORCE !== "true") {
+                    console.error("\n❌ Aborting to prevent data loss. Use FORCE=true to override.\n");
+                    process.exit(1);
+                } else {
+                    console.warn("\n⚠️  FORCE=true set. Proceeding with overwrite...\n");
+                }
+            }
+        }
     }
 
     // Create output directory if it doesn't exist
