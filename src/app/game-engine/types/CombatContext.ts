@@ -42,9 +42,23 @@ export interface CombatContext {
         unit: EngagementForceItem;
         force: EngagementForce;
         targetModel: Model;
+        modelCount: number;
     };
 
     activeStratagems: ActiveStratagem[];
+}
+
+/**
+ * Calculate the number of alive models in a unit
+ */
+function calculateAliveModelCount(unit: EngagementForceItem): number {
+    const combatState = unit.combatState;
+    if (!combatState) return 1;
+
+    const totalModels = combatState.modelCount || 1;
+    const deadCount = combatState.deadModelIds?.length || 0;
+
+    return Math.max(0, totalModels - deadCount);
 }
 
 /**
@@ -61,22 +75,11 @@ export function buildCombatContext(params: {
     modelCount: number;
     defenderUnit: EngagementForceItem | null;
     defenderForce: EngagementForce;
+    defenderModelCount?: number;
     targetModel: Model | null;
     activeStratagems?: ActiveStratagem[];
 }): CombatContext | null {
-    const {
-        phase,
-        turn = 1,
-        isPlayerTurn = true,
-        attackerUnit,
-        attackerForce,
-        weaponProfile,
-        modelCount,
-        defenderUnit,
-        defenderForce,
-        targetModel,
-        activeStratagems = [],
-    } = params;
+    const { phase, turn = 1, isPlayerTurn = true, attackerUnit, attackerForce, weaponProfile, modelCount, defenderUnit, defenderForce, defenderModelCount, targetModel, activeStratagems = [] } = params;
 
     if (!attackerUnit || !weaponProfile || !defenderUnit || !targetModel) {
         return null;
@@ -96,6 +99,7 @@ export function buildCombatContext(params: {
             unit: defenderUnit,
             force: defenderForce,
             targetModel,
+            modelCount: defenderModelCount ?? calculateAliveModelCount(defenderUnit),
         },
         activeStratagems,
     };

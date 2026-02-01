@@ -30,6 +30,15 @@ export interface SpecialEffect {
 }
 
 /**
+ * Critical effect to display on attack steps (LETHAL HITS, SUSTAINED HITS, DEVASTATING WOUNDS)
+ */
+export interface CriticalEffect {
+    name: string; // Display name: "LETHAL HITS", "SUSTAINED HITS 2", etc.
+    type: SpecialEffectType;
+    value?: number; // For parameterized effects like SUSTAINED HITS 2
+}
+
+/**
  * Display-ready modifier format for AttackStep component
  */
 export interface DisplayModifier {
@@ -114,6 +123,10 @@ export interface CombatResolution {
     criticalHitThreshold: number;
     criticalWoundThreshold: number;
     criticalWoundSource?: string; // e.g., "ANTI-VEHICLE 4+"
+
+    // BLAST bonus attacks (per model)
+    blastBonusPerModel: number | null; // +X attacks from BLAST per model
+    defenderModelCount: number; // Number of alive models in target unit
 
     // All weapon special effects (for display)
     weaponEffects: SpecialEffect[];

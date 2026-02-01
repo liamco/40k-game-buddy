@@ -1,5 +1,7 @@
 import React from "react";
 
+import type { CriticalEffect } from "#game-engine/types/ModifierResult";
+
 import BaseIcon from "#components/icons/BaseIcon";
 import IconCrosshair from "#components/icons/IconCrosshair";
 import IconDroplets from "#components/icons/IconDroplets";
@@ -41,9 +43,10 @@ interface Props {
     finalClassName?: string;
     disabled?: boolean;
     isCritical?: boolean;
+    criticalEffect?: CriticalEffect | null;
 }
 
-const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties, finalValue, finalClassName, disabled, isCritical }: Props) => {
+const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties, finalValue, finalClassName, disabled, isCritical, criticalEffect }: Props) => {
     const Icon = stepType ? stepIcons[stepType] : null;
 
     return (
@@ -51,11 +54,14 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
             <div className={`grid h-full grid-rows-[auto_1fr] ${disabled ? "opacity-25" : ""}`}>
                 <header className="border-b-1 border-skarsnikGreen bg-deathWorldForest p-2 flex items-center justify-between">
                     <span className="text-blockcaps-s">{label}</span>
-                    {Icon && (
-                        <BaseIcon>
-                            <Icon />
-                        </BaseIcon>
-                    )}
+                    <div className="flex items-center gap-2">
+                        {criticalEffect && <span className="text-blockcaps-s text-fireDragonBright">{criticalEffect.name}</span>}
+                        {Icon && (
+                            <BaseIcon>
+                                <Icon />
+                            </BaseIcon>
+                        )}
+                    </div>
                 </header>
 
                 <div className="grid-cols-8 p-3 grid w-full">

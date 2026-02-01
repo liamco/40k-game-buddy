@@ -135,22 +135,20 @@ interface CombatResolution {
 | HEAVY | +1 to hit when unit's `movementBehaviour` is "hold" |
 | TORRENT | Auto-hit detection, displays "Auto" |
 | PRECISION | Allows targeting of leaders in combined units |
-| IGNORES COVER | Parsed | Cover bonuses for defenders |
-| ANTI-X Y | Parsed | Critical wounds on Y when targeting units with keyword X |
-| ASSAULT | Parsed | Allows a weapon to be fired after a unit advances |
+| IGNORES COVER | Cover bonuses for defenders |
+| ANTI-X Y | Critical wounds on Y when targeting units with keyword X |
+| ASSAULT | Allows a weapon to be fired after a unit advances |
+| LETHAL HITS | Displays on the relevant AttackStep when present |
+| SUSTAINED HITS | Displays on the relevant AttackStep when present |
+| DEVASTATING WOUNDS | Displays on the relevant AttackStep when present |
+| BLAST | min 3 attacks. +1 attack for every 5 models in target unit |
 
 ### Groundwork Laid - Conditions Need to be Met
 
 | Mechanic | Status | What's Needed |
 |----------|--------|---------------|
 | LANCE | Condition evaluation in place | `hasCharged === true` to trigger +1 wound |
-| LETHAL HITS | Parsed as SpecialEffect | Dice rolling implementation |
-| SUSTAINED HITS | Parsed with value | Dice rolling implementation |
-| DEVASTATING WOUNDS | Parsed as SpecialEffect | Dice rolling implementation |
-| RAPID FIRE | Parsed with value | "In half range" state tracking |
-| MELTA | Parsed with value | "In half range" state tracking |
 
-| HAZARDOUS, BLAST, INDIRECT | Parsed as SpecialEffect | Display only currently |
 
 ### Future Phases
 
@@ -158,12 +156,22 @@ interface CombatResolution {
 |----------|-------------------|
 | Unit abilities | Datasheet `mechanics[]` not populated |
 | Leader abilities | Needs mechanics data on datasheets |
-| Stratagems | UI and mechanics data needed |
+| Enhancements | Not collected by engine yet |
 | Detachment rules | Not collected by engine yet |
 | Faction abilities | Not collected by engine yet |
-| Enhancements | Not collected by engine yet |
+| Stratagems | UI and mechanics data needed |
 | Feel No Pain | Model type lacks `fnp` property |
-| Rerolls | Type exists but no implementation |
+
+
+### Out of scope or unfeasible
+
+| Mechanic | Reason for exclusion |
+|----------|-------------------|
+| RAPID FIRE | Would require some sort of range finder mechanic |
+| MELTA | Would require some sort of range finder mechanic |
+| HAZARDOUS | Out of scope |
+| INDIRECT | Would require some sort of LoS check |
+| Rerolls | Out of scope |
 
 ## Extending the Engine
 

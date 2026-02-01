@@ -1,5 +1,6 @@
 import type { EngagementForce, EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance, EngagementWargear } from "#types/Engagements";
 import type { WeaponProfile, Model, Weapon } from "#types/index";
+import type { SpecialEffect, CriticalEffect } from "#game-engine/types/ModifierResult";
 
 /**
  * Wrapper for an EngagementForceItem for UI selection purposes.
@@ -55,6 +56,53 @@ export function getFirstWeaponProfileForPhase(wargear: EngagementWargear[], phas
     if (weapon && weapon.profiles.length > 0) {
         return weapon.profiles[0];
     }
+    return null;
+}
+
+/**
+ * Get the critical effect that applies to a specific attack step.
+ *
+ * Critical effects by step:
+ * - hitRoll: LETHAL HITS, SUSTAINED HITS, or both combined
+ * - woundRoll: DEVASTATING WOUNDS
+ *
+ * @param weaponEffects Array of special effects from the weapon
+ * @param step The attack step to check
+ */
+export function getCriticalEffectForStep(weaponEffects: SpecialEffect[], step: "hitRoll" | "woundRoll"): CriticalEffect | null {
+    if (!weaponEffects || weaponEffects.length === 0) return null;
+
+    // Hit roll: LETHAL HITS, SUSTAINED HITS, or both
+    if (step === "hitRoll") {
+        const lethal = weaponEffects.find((e) => e.type === "lethalHits");
+        const sustained = weaponEffects.find((e) => e.type === "sustainedHits");
+
+        // Both present: combine them
+        if (lethal && sustained) {
+            const value = typeof sustained.value === "number" ? sustained.value : 1;
+            return { name: `LETHAL, SUSTAINED HITS ${value}`, type: "lethalHits", value };
+        }
+
+        // Only lethal
+        if (lethal) {
+            return { name: "LETHAL HITS", type: "lethalHits" };
+        }
+
+        // Only sustained
+        if (sustained) {
+            const value = typeof sustained.value === "number" ? sustained.value : 1;
+            return { name: `SUSTAINED HITS ${value}`, type: "sustainedHits", value };
+        }
+    }
+
+    // Wound roll: DEVASTATING WOUNDS
+    if (step === "woundRoll") {
+        const devastating = weaponEffects.find((e) => e.type === "devastatingWounds");
+        if (devastating) {
+            return { name: "DEVASTATING WOUNDS", type: "devastatingWounds" };
+        }
+    }
+
     return null;
 }
 

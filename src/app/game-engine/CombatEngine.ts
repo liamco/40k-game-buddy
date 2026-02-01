@@ -63,6 +63,9 @@ export class CombatEngine {
         const { criticalHitThreshold } = this.computeCriticalHitThreshold();
         const { criticalWoundThreshold, criticalWoundSource } = this.computeCriticalWoundThreshold();
 
+        // 6. Compute BLAST bonus
+        const blastEffect = this.computeBlastEffect();
+
         return {
             baseAttacks: baseValues.attacks,
             baseToHit: baseValues.toHit,
@@ -92,6 +95,9 @@ export class CombatEngine {
             criticalHitThreshold,
             criticalWoundThreshold,
             criticalWoundSource,
+
+            blastBonusPerModel: blastEffect?.bonusPerModel ?? null,
+            defenderModelCount: this.context.defender.modelCount,
 
             weaponEffects: this.weaponEffects,
         };
@@ -502,6 +508,20 @@ export class CombatEngine {
         }
 
         return { criticalWoundThreshold: threshold, criticalWoundSource: source };
+    }
+
+    /**
+     * Compute BLAST bonus attacks per model
+     * BLAST: +1 attack per 5 models in target unit
+     */
+    private computeBlastEffect(): { bonusPerModel: number } | null {
+        const hasBlast = this.weaponEffects.some((e) => e.type === "blast");
+        if (!hasBlast) return null;
+
+        const defenderModelCount = this.context.defender.modelCount;
+        const bonusPerModel = Math.floor(defenderModelCount / 5);
+
+        return { bonusPerModel };
     }
 }
 

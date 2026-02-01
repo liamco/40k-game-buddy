@@ -2,6 +2,8 @@ import React, { Fragment, useMemo } from "react";
 
 import type { CombatResolution } from "#game-engine";
 
+import { getCriticalEffectForStep } from "../../utils/combatUtils";
+
 import AttackStep from "./AttackStep";
 
 interface AttackResolverProps {
@@ -16,25 +18,34 @@ interface AttackResolverProps {
  * each attack step with attributed modifiers.
  */
 export function AttackResolver({ resolution, modelCount }: AttackResolverProps) {
-    // Calculate total attacks display
+    // Calculate total attacks display (including BLAST bonus)
     const attacksDisplay = useMemo(() => {
         if (!resolution || modelCount === 0) {
             return { perModel: "-", total: "-" };
         }
 
-        const attacksPerModel = resolution.baseAttacks;
+        const baseAttacks = resolution.baseAttacks;
+        const blastBonus = resolution.blastBonusPerModel;
 
-        if (typeof attacksPerModel === "number") {
+        if (typeof baseAttacks === "number") {
+            // Apply BLAST bonus per model
+            const attacksPerModel = blastBonus !== null ? baseAttacks + blastBonus : baseAttacks;
+
             return {
                 perModel: String(attacksPerModel),
                 total: String(attacksPerModel * modelCount),
             };
         }
 
-        // Dice expression (e.g., "D6", "D3+1")
+        // Dice expression (e.g., "D6", "D3+1") - BLAST adds flat bonus
+        let perModelDisplay = String(baseAttacks);
+        if (blastBonus !== null && blastBonus > 0) {
+            perModelDisplay = `${baseAttacks}+${blastBonus}`;
+        }
+
         return {
-            perModel: String(attacksPerModel),
-            total: modelCount > 1 ? `${attacksPerModel} x${modelCount}` : String(attacksPerModel),
+            perModel: perModelDisplay,
+            total: modelCount > 1 ? `(${perModelDisplay}) x${modelCount}` : perModelDisplay,
         };
     }, [resolution, modelCount]);
 
@@ -81,12 +92,26 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
         };
     }, [resolution]);
 
+    // Get critical effects for hit and wound steps
+    const hitCriticalEffect = useMemo(() => (resolution ? getCriticalEffectForStep(resolution.weaponEffects, "hitRoll") : null), [resolution]);
+
+    const woundCriticalEffect = useMemo(() => (resolution ? getCriticalEffectForStep(resolution.weaponEffects, "woundRoll") : null), [resolution]);
+
     return (
         <section className="grid grid-rows-5 rounded overflow-auto h-[calc(100vh-161.5px)]">
             {resolution ? (
                 <Fragment>
                     <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={resolution.attacksModifiers.forDisplay.bonuses} penalties={resolution.attacksModifiers.forDisplay.penalties} finalValue={attacksDisplay.total} />
-                    <AttackStep stepType="hitChance" label="To hit" statLabel="BS/WS" statValue={toHitDisplay.statValue} bonuses={resolution.hitModifiers.forDisplay.bonuses} penalties={resolution.hitModifiers.forDisplay.penalties} finalValue={toHitDisplay.finalValue} />
+                    <AttackStep
+                        stepType="hitChance"
+                        label="To hit"
+                        statLabel="BS/WS"
+                        statValue={toHitDisplay.statValue}
+                        bonuses={resolution.hitModifiers.forDisplay.bonuses}
+                        penalties={resolution.hitModifiers.forDisplay.penalties}
+                        finalValue={toHitDisplay.finalValue}
+                        criticalEffect={hitCriticalEffect}
+                    />
                     <AttackStep
                         stepType="woundChance"
                         label="To wound"
@@ -96,6 +121,7 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
                         penalties={resolution.woundModifiers.forDisplay.penalties}
                         finalValue={woundDisplay.finalValue}
                         isCritical={woundDisplay.isCritical}
+                        criticalEffect={woundCriticalEffect}
                     />
                     <AttackStep
                         stepType="saveChance"

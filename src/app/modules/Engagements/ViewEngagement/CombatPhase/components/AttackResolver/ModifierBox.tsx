@@ -43,7 +43,7 @@ function ModifierBox({ bonuses = [], penalties = [] }: ModifierBoxProps) {
 
             {/* Penalties */}
             {hasPenalties ? (
-                <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-1">
                     <div className="flex flex-wrap gap-1 justify-center">
                         {activePenalties.map((mod, idx) => (
                             <Badge key={idx} variant="destructive">
