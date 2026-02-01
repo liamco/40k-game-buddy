@@ -32,7 +32,38 @@
       "factionId": "",
       "description": "While an enemy unit is within 6\" of this unit, if this unit contains a Neurothrope, each time that enemy unit fails a Battle-shock test, it suffers D3 mortal wounds and one model in this unit regains up to D3 lost wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "ld",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +72,16 @@
       "factionId": "",
       "description": "While a friendly Tyranids unit is within 6\" of this unit, models in that unit have a 6+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

@@ -40,7 +40,38 @@
       "factionId": "",
       "description": "In your Command phase, you can select one unit from your opponent's army. Until the start of your next Command phase, each time an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit from your army declares a charge while it is within 12\" of that enemy unit, you can re-roll the Charge roll, but it must declare that enemy unit as a target of that charge (if possible).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -49,7 +80,19 @@
       "factionId": "",
       "description": "You can target this model's unit with the Rapid Ingress and Heroic Intervention Stratagems for 0CP, even if you have already used that Stratagem on a different unit this phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RAPID INGRESS",
+            "HEROIC INTERVENTION"
+          ],
+          "value": "0CP"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "CHAPTER MASTER OF THE RAVEN GUARD",

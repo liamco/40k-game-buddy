@@ -1101,7 +1101,16 @@
           ],
           "detachment": "Annihilation Legion",
           "detachmentId": 815,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One DESTROYER CULT or FLAYED ONES unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One DESTROYER CULT or FLAYED ONES unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1192,7 +1201,16 @@
           "legend": "The Necron nobility and their high-ranking courtiers make war in a codified and relentless fashion. Their command protocols crackle out across multi-dimensional spectra from carrier-wave projectors, compelling their semi-sentient soldiery into battle one overriding directive at a time",
           "description": "While a Necrons Character model is leading this unit, each time a model in this unit makes an attack, add 1 to the Hit roll.",
           "detachment": "Awakened Dynasty",
-          "detachmentId": 756
+          "detachmentId": 756,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1214,7 +1232,18 @@
           "detachment": "Awakened Dynasty",
           "detachmentId": 756,
           "legend": "Clouds of hyper-dense particles billow from this small artefact, to obscure and shield the bearer from the foe.",
-          "description": "<span class=\"kwb\">NECRONS</span> model only. While the bearer is leading a unit, models in that unit have the Stealth ability."
+          "description": "<span class=\"kwb\">NECRONS</span> model only. While the bearer is leading a unit, models in that unit have the Stealth ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1224,7 +1253,16 @@
           "detachment": "Awakened Dynasty",
           "detachmentId": 756,
           "legend": "This engraved sigil-circuitry transforms the fierce will of the bearer into a surging lash across every phasal state.",
-          "description": "<span class=\"kwb\">NECRONS</span> model only. While a friendly <span class=\"kwb\">NECRONS</span> unit (excluding CHARACTER units) is within 6\" of the bearer, each time a model in that unit makes an attack, add 1 to the Hit roll."
+          "description": "<span class=\"kwb\">NECRONS</span> model only. While a friendly <span class=\"kwb\">NECRONS</span> unit (excluding CHARACTER units) is within 6\" of the bearer, each time a model in that unit makes an attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1234,7 +1272,18 @@
           "detachment": "Awakened Dynasty",
           "detachmentId": 756,
           "legend": "The bearers living metal mantle is bonded to mirror versions of itself across many dimensional thresholds.",
-          "description": "<span class=\"kwb\">NECRONS</span> model only. The bearer has the Feel No Pain 4+ ability."
+          "description": "<span class=\"kwb\">NECRONS</span> model only. The bearer has the Feel No Pain 4+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1354,7 +1403,18 @@
           "detachment": "Canoptek Court",
           "detachmentId": 816,
           "legend": "This Cryptek has had a personal dimensional pocket reality crafted for them, from which they can emerge into battle at will.",
-          "description": "CRYPTEK model only. Models in the bearer's unit have the Infiltrators ability."
+          "description": "CRYPTEK model only. Models in the bearer's unit have the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1402,7 +1462,22 @@
           ],
           "detachment": "Canoptek Court",
           "detachmentId": 816,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has shot or fought.<br><br><b>TARGET:</b> One CRYPTEK model from your army that was destroyed by one of the attacking unit's attacks. <br>You can use this Stratagem on that model even though it was just destroyed.<br><br><b>EFFECT:</b> Until the end of the battle, each time a friendly CANOPTEK model makes an attack that targets the attacking unit, add 1 to the Hit roll and add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has shot or fought.<br><br><b>TARGET:</b> One CRYPTEK model from your army that was destroyed by one of the attacking unit's attacks. <br>You can use this Stratagem on that model even though it was just destroyed.<br><br><b>EFFECT:</b> Until the end of the battle, each time a friendly CANOPTEK model makes an attack that targets the attacking unit, add 1 to the Hit roll and add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1579,7 +1654,16 @@
           ],
           "detachment": "Canoptek Harvesters",
           "detachmentId": 961,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One CRYPTEK model from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your model has a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One CRYPTEK model from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your model has a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1731,7 +1815,16 @@
           ],
           "detachment": "Cryptek Conclave",
           "detachmentId": 1127,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Cryptek Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> If your unit has the Necron Warriors keyword, until the end of the phase, models in your unit have a 5+ invulnerable save. If your unit has the Immortals keyword, until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Cryptek Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> If your unit has the Necron Warriors keyword, until the end of the phase, models in your unit have a 5+ invulnerable save. If your unit has the Immortals keyword, until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1778,7 +1871,16 @@
           "detachment": "Cursed Legion",
           "detachmentId": 1128,
           "legend": "The malevolent madness of Ammentar itself burns in the minds of this warrior and their comrades.",
-          "description": "Destroyer Cult model only. Each time a model in the bearer's unit makes an attack, add 1 to the Hit roll."
+          "description": "Destroyer Cult model only. Each time a model in the bearer's unit makes an attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1821,7 +1923,16 @@
           ],
           "detachment": "Cursed Legion",
           "detachmentId": 1128,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Destroyer Cult unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Destroyer Cult unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1899,7 +2010,16 @@
           "legend": "The murderous onslaughts of the Destroyer Cults and the hideous skin-wearing Flayed Ones are utterly terrifying to their living victims. To witness their bloody advance is an experience that can break the will of even the most hardened veteran.",
           "description": "Each time a <span class=\"kwb\">NECRONS</span> unit from your army declares a charge, each enemy unit that is a target of that charge must take a Leadership test: if failed, until the end of the turn, each time a model in that enemy unit makes an attack, subtract 1 from the Hit roll.",
           "detachment": "Deranged Outcasts",
-          "detachmentId": 960
+          "detachmentId": 960,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1911,7 +2031,18 @@
           "detachment": "Deranged Outcasts",
           "detachmentId": 960,
           "legend": "Those who lead the Destroyer Cults will brook no impediment to slaughter. Thus, many of their number bid the Crypteks remove all protective systems, allowing the Destroyer to fight until the very moment their broken form is phased back to their stasis-tomb.",
-          "description": "The bearer has the Feel No Pain 6+ ability. Once the bearer has destroyed one or more enemy units, it has the Feel No Pain 5+ ability instead."
+          "description": "The bearer has the Feel No Pain 6+ ability. Once the bearer has destroyed one or more enemy units, it has the Feel No Pain 5+ ability instead.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -1938,7 +2069,18 @@
           ],
           "detachment": "Deranged Outcasts",
           "detachmentId": 960,
-          "description": "<b>WHEN:</b> Your Movement phase, at the start of the Reinforcements step.<br><br><b>TARGET:</b> One FLAYED ONES unit from your army that is in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Deep Strike ability.<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once."
+          "description": "<b>WHEN:</b> Your Movement phase, at the start of the Reinforcements step.<br><br><b>TARGET:</b> One FLAYED ONES unit from your army that is in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Deep Strike ability.<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -2040,7 +2182,18 @@
           "detachment": "Hypercrypt Legion",
           "detachmentId": 818,
           "legend": "This hypermaterial key unlocks portals between transpatial dimensions embedded into a tomb's architecture. Through such limitless doorways, the Necrons can pursue their quarry wherever they hide.",
-          "description": "<span class=\"kwb\">NECRONS</span> model only. Models in the bearer's unit have the Deep Strike ability."
+          "description": "<span class=\"kwb\">NECRONS</span> model only. Models in the bearer's unit have the Deep Strike ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2134,7 +2287,16 @@
           ],
           "detachment": "Hypercrypt Legion",
           "detachmentId": 818,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One NECRONS VEHICLE unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One NECRONS VEHICLE unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -2149,7 +2311,16 @@
           "legend": "With a command transmitted by regal carrier wave, signalled by a glowing glyph or via a haughty gesture with their blade, the ruling nobles mark their chosen enemy. With this declaration are the Triarchal Codes observed, and the ignorant foe doomed. The nobles' powerful servants and the Triarch's guardians of tradition march to war obediently, driven to best the mightiest of foes on the battlefield as a demonstration of the dynasty's honour and a warning to the rest of their enemies' foolish kind.",
           "description": "In your Command phase, select one enemy unit. Until the start of your next Command phase, each time a Noble, Lychguard or Triarch unit from your army makes an attack that targets that unit, add 1 to the Wound roll.",
           "detachment": "Obeisance Phalanx",
-          "detachmentId": 817
+          "detachmentId": 817,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2181,7 +2352,16 @@
           "detachment": "Obeisance Phalanx",
           "detachmentId": 817,
           "legend": "This dynastic scion is an expert in the arts of martial excellence, and their living metal form has been enhanced by their Crypteks. With effortless arrogance, they and their guardians parry or contemptuously swat aside the strikes of those they see as their lessers.",
-          "description": "OVERLORD model only. Each time a melee attack targets the bearer's unit, subtract 1 from the Hit roll."
+          "description": "OVERLORD model only. Each time a melee attack targets the bearer's unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -2451,7 +2631,16 @@
           "legend": "The Necrons possess countless terrifying engines of war. When mustered in great number, these instruments of annihilation sweep across the battlefield, seeking to reclaim lost realms and obliterate any foolish enough to trespass upon the territories of their ancient dynasty.",
           "description": "Each time a <span class=\"kwb\">NECRONS</span> model from your army makes an attack that targets a unit within range of one or more objective markers, add 1 to the Hit roll. In addition, ranged weapons equipped by Necrons Vehicle and Necrons Mounted models (excluding Titanic models) from your army have the [ASSAULT] ability.",
           "detachment": "Starshatter Arsenal",
-          "detachmentId": 985
+          "detachmentId": 985,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2511,7 +2700,16 @@
           ],
           "detachment": "Starshatter Arsenal",
           "detachmentId": 985,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Necrons Vehicle or Necrons Mounted unit (excluding Titanic units) from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets a model in your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of that unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Necrons Vehicle or Necrons Mounted unit (excluding Titanic units) from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets a model in your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of that unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",
@@ -2527,7 +2725,16 @@
           ],
           "detachment": "Starshatter Arsenal",
           "detachmentId": 985,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">NECRONS</span> unit (excluding Titanic units) from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, if the target of that attack is within range of one or more objective markers, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">NECRONS</span> unit (excluding Titanic units) from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, if the target of that attack is within range of one or more objective markers, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "NEC",

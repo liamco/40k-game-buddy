@@ -37,7 +37,26 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER ADVANCING"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +65,57 @@
       "factionId": "",
       "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model's unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT FALL BACK"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfContestedObjective",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -55,7 +124,99 @@
       "factionId": "",
       "description": "If this model is destroyed by a melee attack, after the attacking unit has finished making its attacks, you can roll one D6, adding 2 to the result if the attacking unit contains the enemy <span class=\"kwb\">WARLORD</span>: on a 2-3, that enemy unit suffers 3 mortal wounds; on a 4-5, that enemy unit suffers D3+3 mortal wounds; on a 6+, that enemy unit suffers D6+3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "hasWarlord",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "afterAttacks",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "value": 2,
+              "operator": "greaterThanOrEqualTo"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3+3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "hasWarlord",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "afterAttacks",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "value": 4,
+              "operator": "greaterThanOrEqualTo"
+            },
+            {
+              "entity": "thisModel",
+              "value": 5,
+              "operator": "lessThanOrEqualTo"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D6+3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "afterAttacks",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "value": 6,
+              "operator": "greaterThanOrEqualTo"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -64,7 +225,15 @@
       "factionId": "",
       "description": "Your army cannot contain both Captain Tycho and <span class=\"kwb\">TYCHO</span> <span class=\"kwb2\">THE</span> <span class=\"kwb\">LOST</span>.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "value": "cannot contain both Captain Tycho and TYCHO THE LOST"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -33,7 +33,37 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack with its twin Falchion volcano cannon that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, that attack has the [DEVASTATING WOUNDS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATING WOUNDS"
+          ],
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            },
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "VEHICLE"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

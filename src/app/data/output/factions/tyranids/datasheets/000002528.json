@@ -41,7 +41,40 @@
       "factionId": "",
       "description": "Once per battle round, one model from your army with this ability can use it when a friendly <span class=\"kwb\">TYRANIDS</span> unit within 12\" of that model is targeted with a Stratagem. If it does, reduce the CP cost of that usage of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "USE STRATAGEM"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "targetUnit",
+          "effect": "rollPenalty",
+          "attribute": "cp",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +83,55 @@
       "factionId": "",
       "description": "At the start of the Fight phase, you can select one enemy unit within 12\" of and visible to this model and roll one D6: on a 1, this <span class=\"kwb\">PSYKER</span> suffers D3 mortal wounds; on a 2+, until the end of the phase, subtract 1 from the Attacks characteristic of weapons equipped by models in that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isVisible",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "entity": "opposingModel",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isVisible",
+              "operator": "equals",
+              "value": false
+            },
+            {
+              "entity": "thisModel",
+              "state": "isVisible",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

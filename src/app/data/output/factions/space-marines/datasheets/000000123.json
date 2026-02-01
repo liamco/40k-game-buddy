@@ -33,7 +33,28 @@
       "factionId": "",
       "description": "This model's Punisher rotary cannon has the [SUSTAINED HITS 1] ability when targeting <span class=\"kwb\">INFANTRY</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "INFANTRY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

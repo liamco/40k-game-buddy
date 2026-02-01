@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, you can select one friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit that is Battle-shocked and within 12\" of this model. That unit is no longer Battle-shocked.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "no longer Battle-shocked",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

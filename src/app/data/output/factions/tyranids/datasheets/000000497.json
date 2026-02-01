@@ -33,7 +33,44 @@
       "factionId": "",
       "description": "Each time an enemy unit (excluding <span class=\"kwb\">TITANIC</span> units) within Engagement Range of one or more units from your army with this ability is selected to Fall Back, you can roll one D6: on a 3+, that enemy unit must Remain Stationary instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollBonus",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "ability with this effect"
+              ],
+              "operator": "notEquals",
+              "value": "TITANIC"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "value": "Remain Stationary",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "D6",
+              "operator": "greaterThanOrEqualTo",
+              "value": 3
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -42,7 +79,76 @@
       "factionId": "",
       "description": "At the end of your Movement phase, roll one D6 for each enemy unit within 6\" of this model: on a 2-3, that unit suffers 1 mortal wound; on a 4-5, that unit suffers D3 mortal wounds; on a 6, that unit suffers D6 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 2
+            },
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "lessThanOrEqualTo",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 4
+            },
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "lessThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "equals",
+              "value": 6
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

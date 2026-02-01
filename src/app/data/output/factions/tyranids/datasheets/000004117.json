@@ -40,7 +40,18 @@
       "factionId": "",
       "description": "Weapons equipped by models in this unit have the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -49,7 +60,24 @@
       "factionId": "",
       "description": "Once per battle round, you can target this unit with the Rapid Ingress or Heroic Intervention Stratagem for 0CP, and can do so even if you have already targeted a different unit with that Stratagem this turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RAPID INGRESS",
+            "HEROIC INTERVENTION"
+          ],
+          "value": "0CP"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "value": "can do so even if you have already targeted a different unit with that Stratagem this turn"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

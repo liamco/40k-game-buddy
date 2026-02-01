@@ -37,7 +37,38 @@
       "factionId": "",
       "description": "This model must start the battle in Reserves, but it is not counted towards any limits placed on the maximum number of Reserves units you can start the battle with. This model can be set up in the Reinforcements step of your first, second or third Movement phase, regardless of any mission rules.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "RESERVES"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "1st, 2nd or 3rd Movement phase"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inReserves",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

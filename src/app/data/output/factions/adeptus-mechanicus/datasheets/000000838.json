@@ -37,7 +37,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more other friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -82,7 +93,18 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit is within 6\" of this model, that unit has the Stealth ability.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "STEALTH"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

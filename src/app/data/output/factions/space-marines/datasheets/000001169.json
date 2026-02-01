@@ -37,7 +37,43 @@
       "factionId": "",
       "description": "Each time this model ends a Normal move, you can select one enemy unit (excluding <span class=\"kwb\">MONSTER</span> and <span class=\"kwb\">VEHICLE</span> units) that it moved over during that move, then roll six D6: for each 4+, that enemy unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isStationary",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -1764,7 +1764,18 @@
           "detachment": "Blood Legion",
           "detachmentId": 999,
           "legend": "Concealed within this daemon's form is a portal into the depths of Khorne's realm. Anointed with gore and thrown wide by the daemon's corporeal demise, it expands like a bloody singularity to drag everything in reach into the screaming maelstrom of the Warp.",
-          "description": "Legiones Daemonica Khorne Monster model only. The bearer's Deadly Demise ability inflicts mortal wounds on a D6 roll of 2+ instead of on a 6. In addition, if the bearer has destroyed one or more enemy units this battle, the bearer has the Deadly Demise D3+3 ability, instead of any other Deadly Demise ability on its datasheet."
+          "description": "Legiones Daemonica Khorne Monster model only. The bearer's Deadly Demise ability inflicts mortal wounds on a D6 roll of 2+ instead of on a 6. In addition, if the bearer has destroyed one or more enemy units this battle, the bearer has the Deadly Demise D3+3 ability, instead of any other Deadly Demise ability on its datasheet.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEADLY DEMISE"
+              ],
+              "value": "D3"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1933,7 +1944,18 @@
           "detachment": "Daemonic Incursion",
           "detachmentId": 779,
           "legend": "Only the most accomplished plague daemons are granted the Endless Gift. A disease of unutterable malignancy and repulsive beneficence, it changes form constantly from plague to infestation to malaise. The one constant is its ability to reknit its sufferer's corporeal form from even the most catastrophic of wounds. One moment, infernal bacteria may multiply like wildfire until their gelid mass fills a fleshy rent with fresh daemon-flesh. The next, pestilential vapours may billow from the daemon's yawning maw, veiling its ravaged bulk before tattering away to reveal a form healed of its recent hurts.",
-          "description": "Nurgle Legiones Daemonica model only. The bearer has the Feel No Pain 5+ ability."
+          "description": "Nurgle Legiones Daemonica model only. The bearer has the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -1960,7 +1982,16 @@
           ],
           "detachment": "Daemonic Incursion",
           "detachmentId": 953,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2150,7 +2181,16 @@
           ],
           "detachment": "Dread Carnival",
           "detachmentId": 956,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One SLAANESH LEGIONES DAEMONIcA unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One SLAANESH LEGIONES DAEMONIcA unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2330,7 +2370,16 @@
           "detachment": "Legion of Excess",
           "detachmentId": 997,
           "legend": "Dripping poisonous finery and stalking across the battlefield with regal arrogance, this daemon evokes in its fellows the jealous need to outshine its magnificence.",
-          "description": "Legiones Daemonica Slaanesh model only. While a friendly <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> <span class=\"kwb\">SLAANESH</span> unit (excluding Monsters) is within 6\" of the bearer, each time a model in that unit makes a melee attack, add 1 to the Wound roll."
+          "description": "Legiones Daemonica Slaanesh model only. While a friendly <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> <span class=\"kwb\">SLAANESH</span> unit (excluding Monsters) is within 6\" of the bearer, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2340,7 +2389,16 @@
           "detachment": "Legion of Excess",
           "detachmentId": 997,
           "legend": "This gilded circlet fills mortal minds with waking dreams potent enough to intoxicate and distract even the most disciplined or alien combatants, leaving them easy prey for the daemons of Slaanesh.",
-          "description": "Legiones Daemonica Slaanesh model only. While a friendly <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> <span class=\"kwb\">SLAANESH</span> unit (excluding Monsters) is within 6\" of the bearer, each time a model in that unit makes a melee attack, add 1 to the Hit roll."
+          "description": "Legiones Daemonica Slaanesh model only. While a friendly <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> <span class=\"kwb\">SLAANESH</span> unit (excluding Monsters) is within 6\" of the bearer, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2392,7 +2450,16 @@
           ],
           "detachment": "Legion of Excess",
           "detachmentId": 997,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Legiones Daemonica Slaanesh Monster unit or up to two Legiones Daemonica Slaanesh units (excluding Monsters) from your army that have not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in one of those units makes an attack, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Legiones Daemonica Slaanesh Monster unit or up to two Legiones Daemonica Slaanesh units (excluding Monsters) from your army that have not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in one of those units makes an attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2408,7 +2475,16 @@
           ],
           "detachment": "Legion of Excess",
           "detachmentId": 997,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Legiones Daemonica Slaanesh unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Legiones Daemonica Slaanesh unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2481,7 +2557,16 @@
           "detachment": "Pandaemoniac Inferno",
           "detachmentId": 957,
           "legend": "Warplight dances and glares around this entity, flares of blinding brightness thrown off its warped form as though from the facets of a crooked crystal.",
-          "description": "Each time an attack targets the bearer, subtract 1 from the Hit roll."
+          "description": "Each time an attack targets the bearer, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2491,7 +2576,16 @@
           "detachment": "Pandaemoniac Inferno",
           "detachmentId": 957,
           "legend": "The warpflame of Tzeentch is fuelled by sanity and soulstuff, and cannot be easily extinguished. Worse, it does not merely burn its victims, but instead distorts and mutates them in ever more hideous ways.",
-          "description": "In your Shooting phase, after the bearer has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next Shooting phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "In your Shooting phase, after the bearer has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next Shooting phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2644,7 +2738,16 @@
           ],
           "detachment": "Plague Legion",
           "detachmentId": 1000,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Legiones Daemonica Nurgle unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Hit roll. After your unit has finished making its attacks, select one enemy unit hit by one or more of those attacks; that enemy unit must take a Battle-shock test."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Legiones Daemonica Nurgle unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Hit roll. After your unit has finished making its attacks, select one enemy unit hit by one or more of those attacks; that enemy unit must take a Battle-shock test.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2760,7 +2863,18 @@
           ],
           "detachment": "Rotten and Rusted",
           "detachmentId": 955,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One NURGLE LEGIONES DAEMONIcA unit from your army (excluding NURGLINGS units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One NURGLE LEGIONES DAEMONIcA unit from your army (excluding NURGLINGS units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2854,7 +2968,16 @@
           "detachment": "Scintillating Legion",
           "detachmentId": 998,
           "legend": "Shifting its shape tirelessly from sword to staff to glaive, this bizarre daemon weapon makes a mockery of even the most determined defence.",
-          "description": "Legiones Daemonica Tzeentch Monster model only. Improve the Strength characteristic of melee weapons equipped by the bearer by 2, improve the Attacks and Armour Penetration characteristics of melee weapons equipped by the bearer by 1, and each time the bearer makes a melee attack, add 1 to the Hit roll."
+          "description": "Legiones Daemonica Tzeentch Monster model only. Improve the Strength characteristic of melee weapons equipped by the bearer by 2, improve the Attacks and Armour Penetration characteristics of melee weapons equipped by the bearer by 1, and each time the bearer makes a melee attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",
@@ -2864,7 +2987,18 @@
           "detachment": "Scintillating Legion",
           "detachmentId": 998,
           "legend": "Complex convolutions of ever-more unlikely fate wind about this entity, confounding the mightiest and most esoteric attacks.",
-          "description": "Legiones Daemonica Tzeentch model only. While a friendly <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> <span class=\"kwb\">TZEENTCH</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks and mortal wounds."
+          "description": "Legiones Daemonica Tzeentch model only. While a friendly <span class=\"kwb\">LEGIONES</span> <span class=\"kwb\">DAEMONICA</span> <span class=\"kwb\">TZEENTCH</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks and mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2982,7 +3116,30 @@
           "legend": "Elevated to the status of Daemon Prince by the combined might of the four Dark Gods of Chaos, Be'lakor exudes unimaginable power.",
           "description": "Units from your army have the relevant abilities presented below.<br><br><div class=\"Columns2\"><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody class=\"clFl ALAL ALKH LDLD LDDI LDSH LDLE LDSC LDBL LDPL LDDA LDIO LDRR LDDC LDPI\"><tr><td class=\"td_w\"><p class=\"impact18\">MURDERER'S COWL</p><p class=\"ShowFluff legend2\">The most murderous seek not to hide in the Dark Master's pall. The shadows extend before them, offering a rapid route to slaughter.</p><p><span class=\"tooltip00062\" data-tooltip-content=\"#tooltip_content00062\" data-tooltip-anchor=\"#tooltip_content00062\"><span class=\"kwb kwbu\">SHADOW</span> <span class=\"kwb kwbu\">LEGION</span> <span class=\"kwb kwbu\">KHORNE</span></span> units only. This unit is eligible to shoot and declare a charge in a turn in which it <span class=\"tooltip00082\" data-tooltip-content=\"#tooltip_content00082\"><span class=\"tt kwbu\">Advanced</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody class=\"clFl ALAL ALTZ LDLD LDDI LDSH LDLE LDSC LDBL LDPL LDDA LDIO LDRR LDDC LDPI\"><tr><td class=\"td_w\"><p class=\"impact18\">PENUMBRAL PUPPETRY</p><p class=\"ShowFluff legend2\">Mutative agents of change, touched by the Dark Master's umbral aura, summon illusory magicks to confound and confuse their desperate foes.</p><p><span class=\"tooltip00063\" data-tooltip-content=\"#tooltip_content00063\" data-tooltip-anchor=\"#tooltip_content00063\"><span class=\"kwb kwbu\">SHADOW</span> <span class=\"kwb kwbu\">LEGION</span> <span class=\"kwb kwbu\">TZEENTCH</span></span> units only. Each time an attack targets this unit, subtract 1 from the <span class=\"tooltip00006\" data-tooltip-content=\"#tooltip_content00006\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody class=\"clFl ALAL ALNU LDLD LDDI LDSH LDLE LDSC LDBL LDPL LDDA LDIO LDRR LDDC LDPI\"><tr><td class=\"td_w\"><p class=\"impact18\">GLOAM ROT</p><p class=\"ShowFluff legend2\">Borne upon the gloaming wisp of Be'lakor's shadow, this debilitating curse atrophies muscle and withers flesh, greatly weakening its victims.</p><p><span class=\"tooltip00064\" data-tooltip-content=\"#tooltip_content00064\" data-tooltip-anchor=\"#tooltip_content00064\"><span class=\"kwb kwbu\">SHADOW</span> <span class=\"kwb kwbu\">LEGION</span> <span class=\"kwb kwbu\">NURGLE</span></span> units only. Each time an attack targets this unit, if the Strength characteristic of that attack is greater than this unit's Toughness characteristic, subtract 1 from the <span class=\"tooltip00032\" data-tooltip-content=\"#tooltip_content00032\"><span class=\"tt kwbu\">Wound</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody class=\"clFl ALAL ALSL LDLD LDDI LDSH LDLE LDSC LDBL LDPL LDDA LDIO LDRR LDDC LDPI\"><tr><td class=\"td_w\"><p class=\"impact18\">SHADOW'S CARESS</p><p class=\"ShowFluff legend2\">The Dark Master's shadow falls across his thralls, masking their approach.</p><p><span class=\"tooltip00065\" data-tooltip-content=\"#tooltip_content00065\" data-tooltip-anchor=\"#tooltip_content00065\"><span class=\"kwb kwbu\">SHADOW</span> <span class=\"kwb kwbu\">LEGION</span> <span class=\"kwb kwbu\">SLAANESH</span></span> units only. Enemy units cannot use the <span class=\"tooltip00087\" data-tooltip-content=\"#tooltip_content00087\"><span class=\"tt kwbu\">Fire</span> <span class=\"tt kwbu\">Overwatch</span></span> Stratagem to shoot at this unit.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">DISCIPLES OF BE'LAKOR</p><p class=\"ShowFluff legend2\">Be'lakor's immortal ego draws into his orbit those as yet unclaimed by any one Chaos God. Their hate-filled pacts are made to the entire fell pantheon, and the dangerous boons they receive see them plunged along paths of perpetual night straight into the enemy's midst.</p><p><span class=\"tooltip00066\" data-tooltip-content=\"#tooltip_content00066\" data-tooltip-anchor=\"#tooltip_content00066\"><span class=\"kwb kwbu\">SHADOW</span> <span class=\"kwb kwbu\">LEGION</span> <span class=\"kwb kwbu\">UNDIVIDED</span></span> units only.<br><ul><li>This unit has the <span class=\"tooltip00067\" data-tooltip-content=\"#tooltip_content00067\"><span class=\"tt kwbu\">Dark</span> <span class=\"tt kwbu\">Pacts</span></span> army rule, and can use it as described in Codex: Chaos Space Marines, even though your Army Faction is not <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span>. If this unit is <span class=\"kwb kwbo\">BE'LAKOR</span>, it automatically passes the <span class=\"tooltip00093\" data-tooltip-content=\"#tooltip_content00093\"><span class=\"tt kwbu\">Leadership</span> <span class=\"tt kwbu\">test</span></span> required for Dark Pacts.</li><li><span class=\"tooltip00069\" data-tooltip-content=\"#tooltip_content00069\" data-tooltip-anchor=\"#tooltip_content00069\"><span class=\"kwb kwbu\">SHADOW</span> <span class=\"kwb kwbu\">LEGION</span> <span class=\"kwb kwbu\">HERETIC</span> <span class=\"kwb kwbu\">ASTARTES</span></span> models in this unit have the <span class=\"tooltip00070\" data-tooltip-content=\"#tooltip_content00070\"><span class=\"tt kwbu\">Deep</span> <span class=\"tt kwbu\">Strike</span></span> ability.</li></ul></p></td></tr></tbody></tbody></table></div></div>",
           "detachment": "Shadow Legion",
-          "detachmentId": 1027
+          "detachmentId": 1027,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2994,7 +3151,18 @@
           "detachment": "Shadow Legion",
           "detachmentId": 1027,
           "legend": "Seen only in flashes, this warrior traverses the darkness with supernatural speed and stealth, emerging where least expected.",
-          "description": "Shadow Legion model only. Models in the bearer's unit have the Scouts 9\" ability."
+          "description": "Shadow Legion model only. Models in the bearer's unit have the Scouts 9\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 9
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",

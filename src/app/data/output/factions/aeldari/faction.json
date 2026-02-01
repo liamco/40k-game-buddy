@@ -1517,7 +1517,16 @@
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
           "legend": "This seer is closely attuned to their craftworld's vehicles. Communicating with the souls inhabiting hull-mounted spirit stones can sharpen the tactical awareness of spirits and crew.",
-          "description": "Aeldari Psyker model only. At the start of your Shooting phase, select one friendly Aeldari Vehicle model within 9\" of the bearer. Until the end of the phase, each time that model makes an attack, add 1 to the Hit roll."
+          "description": "Aeldari Psyker model only. At the start of your Shooting phase, select one friendly Aeldari Vehicle model within 9\" of the bearer. Until the end of the phase, each time that model makes an attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -1537,7 +1546,18 @@
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
           "legend": "This spirit stone contains the essence of the Bonesinger Raelyth. Those Asuryani psykers who bear this item to battle can draw upon the fallen artisan's talents.",
-          "description": "Aeldari Psyker model only. While the bearer is within 3\" of one or more friendly Aeldari Vehicle units, the bearer has the Lone Operative ability. In your Command phase, you can select one friendly <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> model within 3\" of the bearer. That model regains up to D3 lost wounds."
+          "description": "Aeldari Psyker model only. While the bearer is within 3\" of one or more friendly Aeldari Vehicle units, the bearer has the Lone Operative ability. In your Command phase, you can select one friendly <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> model within 3\" of the bearer. That model regains up to D3 lost wounds.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -1579,7 +1599,18 @@
           ],
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
-          "description": "<b>WHEN:</b> Start of the Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Aeldari Vehicle unit from your army that can Fly and is in Strategic Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Deep Strike ability. When your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but if it does, until the end of the turn, it is not eligible to declare a charge. In addition, if your unit is a Transport, each unit that disembarks from it this turn must be set up more than 6\" horizontally from all enemy units and until the end of the turn, is not eligible to declare a charge."
+          "description": "<b>WHEN:</b> Start of the Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Aeldari Vehicle unit from your army that can Fly and is in Strategic Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Deep Strike ability. When your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but if it does, until the end of the turn, it is not eligible to declare a charge. In addition, if your unit is a Transport, each unit that disembarks from it this turn must be set up more than 6\" horizontally from all enemy units and until the end of the turn, is not eligible to declare a charge.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -1639,7 +1670,18 @@
           ],
           "detachment": "Armoured Warhost",
           "detachmentId": 990,
-          "description": "<b>WHEN:</b> Any phase, just after a mortal wound is allocated to an <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> unit from your army.<br><br><b>TARGET:</b> That Aeldari Vehicle unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds."
+          "description": "<b>WHEN:</b> Any phase, just after a mortal wound is allocated to an <span class=\"kwb\">AELDARI</span> <span class=\"kwb\">VEHICLE</span> unit from your army.<br><br><b>TARGET:</b> That Aeldari Vehicle unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1785,7 +1827,16 @@
           "detachment": "Aspect Host",
           "detachmentId": 1024,
           "legend": "This simple and elegant gem conceals complex technology based on Dire Avenger shimmershields, its protective aegis extending across the bearer and those who fight at their side.",
-          "description": "Autarch or Autarch Wayleaper model only. While the bearer is leading an Aspect Warriors unit, each time a ranged attack targets that unit, subtract 1 from the Wound roll."
+          "description": "Autarch or Autarch Wayleaper model only. While the bearer is leading an Aspect Warriors unit, each time a ranged attack targets that unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -1963,7 +2014,16 @@
           ],
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Ynnari Infantry or Ynnari Mounted unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Ynnari Infantry or Ynnari Mounted unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2095,7 +2155,18 @@
           "detachment": "Ghosts of the Webway",
           "detachmentId": 1021,
           "legend": "Employing their psychic powers of illusion and obfuscation, this Shadowseer can cause their comrades to vanish from the foe's perceptions.",
-          "description": "Shadowseer model only. While the bearer is leading a unit, models in that unit have the Infiltrators ability."
+          "description": "Shadowseer model only. While the bearer is leading a unit, models in that unit have the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2202,7 +2273,16 @@
           "legend": "Battlehosts often deploy to protect arterial Webway gates, the world shrines of vulnerable Exodite worlds or the domes and galleries of their home craft world; this lends their warriors an especially keen determination to protect their holdings from foes.",
           "description": "Each time a Dire Avenger, Guardian, Support Weapon or War Walker model from your army makes an attack, if that model's unit and/or the target unit are within range of one or more objective markers, add 1 to the Hit roll.",
           "detachment": "Guardian Battlehost",
-          "detachmentId": 1020
+          "detachmentId": 1020,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2224,7 +2304,18 @@
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
           "legend": "Knowing secret paths through the Webway, the bearer can direct warriors to outmanoeuvre the foe.",
-          "description": "Asuryani model only. In the Deploy Armies step, select up to two Guardians units from your army. Models in the selected units have the Infiltrators ability."
+          "description": "Asuryani model only. In the Deploy Armies step, select up to two Guardians units from your army. Models in the selected units have the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2293,7 +2384,16 @@
           ],
           "detachment": "Guardian Battlehost",
           "detachmentId": 1020,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Dire Avengers or Guardians unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> If your unit is within range of one or more objective markers, until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Dire Avengers or Guardians unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> If your unit is within range of one or more objective markers, until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2394,7 +2494,16 @@
           ],
           "detachment": "Khaine's Arrow",
           "detachmentId": 919,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2424,7 +2533,16 @@
           ],
           "detachment": "Khaine's Arrow",
           "detachmentId": 919,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One DIRE AvENGERS, FIRE DRAGONS, SwOOPING HAwKS or WARP SPIDERS unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One DIRE AvENGERS, FIRE DRAGONS, SwOOPING HAwKS or WARP SPIDERS unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2494,7 +2612,16 @@
           ],
           "detachment": "Protector Host",
           "detachmentId": 920,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2577,7 +2704,18 @@
           "detachment": "Seer Council",
           "detachmentId": 1023,
           "legend": "These precisely crafted runic wards hold harmful empyric energies and predatory entities at hay, protecting the bearer's mind and soul.",
-          "description": "Asuryani Psyker model only. Models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds, Psychic Attacks and Critical Wounds caused by attacks with the [devastating wounds] ability."
+          "description": "Asuryani Psyker model only. Models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds, Psychic Attacks and Critical Wounds caused by attacks with the [devastating wounds] ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2659,7 +2797,22 @@
           ],
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2716,7 +2869,18 @@
           "detachment": "Serpent's Brood",
           "detachmentId": 1124,
           "legend": "This mystic wraithbone implement allows the bearer to slip onto the stage from the Webway even before the curtain's rise, beginning their performance in full and furious flow.",
-          "description": "Harlequins model only (excluding Solitaire models). Models in the bearer's unit have the Scouts 6\" ability."
+          "description": "Harlequins model only (excluding Solitaire models). Models in the bearer's unit have the Scouts 6\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2853,7 +3017,22 @@
           "legend": "When guided by a Spirit Conclave, the ghost warriors gain a clarity and prowess they would otherwise lack. Moreover, should the foe slay any of their precious spirit guides, the dead will surely have their vengeance.",
           "description": "Each time an Asuryani Psyker model from your army is destroyed by an enemy unit, that enemy unit gains a Vengeful Dead token. Each time a Wraith Construct model from your army makes an attack that targets a unit with one or more Vengeful Dead tokens, add 1 to the Hit roll and add 1 to the Wound roll.<br><br><span class=\"kwb\">ASURYANI</span> <span class=\"kwb\">PSYKER</span> models from your army have the following ability:<br><br><b>Spirit Guides (Aura):</b> While a Wraithblades, Wraithguard or Wraithlord unit from your army is within 12\" of this model, that unit has the Battle Focus ability.<br><br><span class=\"hi_custom\">KEYWORDS</span><br><span class=\"kwb\">WRAITHBLADES</span> and <span class=\"kwb\">WRAITHGUARD</span> units from your army gain the <span class=\"kwb\">BATTLELINE</span> keyword.",
           "detachment": "Spirit Conclave",
-          "detachmentId": 1019
+          "detachmentId": 1019,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -3044,7 +3223,16 @@
           ],
           "detachment": "Star-dancer Masque",
           "detachmentId": 922,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3179,7 +3367,16 @@
           ],
           "detachment": "Warhost",
           "detachmentId": 1017,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani unit from your army (excluding Wraith Construct units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3266,7 +3463,18 @@
           "detachment": "Windrider Host",
           "detachmentId": 1018,
           "legend": "Those who lead the Windrider Hosts do so from the front, embodying the first of the Swords of Vaul drawn in wrath.",
-          "description": "Asuryani Mounted model only. Models in the bearer's unit have the Scouts 9\" ability."
+          "description": "Asuryani Mounted model only. Models in the bearer's unit have the Scouts 9\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 9
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3276,7 +3484,16 @@
           "detachment": "Windrider Host",
           "detachmentId": 1018,
           "legend": "This field generator surrounds its bearer with contradictory sensor ghosts and split-second illusions that make them incredibly challenging to target, particularly when moving at speed.",
-          "description": "Asuryani Mounted model only. Each time an attack targets the bearer's unit, subtract 1 from the Hit roll."
+          "description": "Asuryani Mounted model only. Each time an attack targets the bearer's unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3344,7 +3561,16 @@
           ],
           "detachment": "Windrider Host",
           "detachmentId": 1018,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Mounted or VYPER unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Asuryani Mounted or VYPER unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3459,7 +3685,16 @@
           ],
           "detachment": "Wraiths of the Void",
           "detachmentId": 921,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the attacking model is wholly on the opposite side of a Hatchway from your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the attacking model is wholly on the opposite side of a Hatchway from your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3474,7 +3709,16 @@
           ],
           "detachment": "Wraiths of the Void",
           "detachmentId": 921,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Select one closed Hatchway that is visible to and within range of one or more of the ranged weapons equipped by models in your unit. Open that Hatchway and, until the end of the battle, that Hatchway cannot be closed. For each enemy unit within 3\" of that Hatchway and wholly on the opposite side of it from your unit, until the start of your next Shooting phase, that enemy unit is stunned. While a unit is stunned, each time a model in that unit makes an attack, subtract 1 from the Hit roll.<br><br><b>RESTRICTIONS:</b> Until the end of the phase, your unit is not eligible to shoot."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One WRAITH CONSTRUcT unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Select one closed Hatchway that is visible to and within range of one or more of the ranged weapons equipped by models in your unit. Open that Hatchway and, until the end of the battle, that Hatchway cannot be closed. For each enemy unit within 3\" of that Hatchway and wholly on the opposite side of it from your unit, until the start of your next Shooting phase, that enemy unit is stunned. While a unit is stunned, each time a model in that unit makes an attack, subtract 1 from the Hit roll.<br><br><b>RESTRICTIONS:</b> Until the end of the phase, your unit is not eligible to shoot.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",

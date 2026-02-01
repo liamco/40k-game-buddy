@@ -28,7 +28,62 @@
       "factionId": "",
       "description": "Once per turn, in your opponent's Shooting phase, when a friendly Adeptus Astartes Mounted unit within 6\" of this unit is selected as the target of an attack, this unit can use this ability. If it does, after that enemy unit has finished making its attacks, this unit can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SHOOT AFTER BEING TARGETED"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": false
+            },
+            {
+              "entity": "targetUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": "6\"",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "TARGET ONLY OPPOSING UNIT"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBeingLed",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

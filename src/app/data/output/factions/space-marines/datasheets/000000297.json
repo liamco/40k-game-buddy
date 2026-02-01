@@ -37,7 +37,48 @@
       "factionId": "",
       "description": "At the start of the battle, select one of the following keywords to be this model's Slayer's Oath: <span class=\"kwb\">CHARACTER</span>; <span class=\"kwb\">MONSTER</span>; <span class=\"kwb\">VEHICLE</span>. The first time this model's unit destroys a unit with this model's Slayer's Oath keyword, if your Detachment rule has a Saga, until the end of the battle, this model's unit receives the benefits of that Detachment rule as if that Saga had been completed.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsKeyword",
+          "keywords": [
+            "CHARACTER",
+            "MONSTER",
+            "VEHICLE"
+          ],
+          "value": "selected"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SAGA BENEFITS"
+          ],
+          "value": "until the end of the battle",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "SAGA"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "CHARACTER",
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "thisModel's Slayer's Oath keyword"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

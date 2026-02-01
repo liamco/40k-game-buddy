@@ -32,7 +32,34 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time that unit is selected to shoot, select one of the following abilities to apply to ranged weapons equipped by models in that unit until the end of the phase: <br><ul><li>[ASSAULT] </li><li>[HEAVY] </li><li>[RAPID FIRE 1]</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "value": "until the end of the phase"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "HEAVY"
+          ],
+          "value": "until the end of the phase"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RAPID FIRE 1"
+          ],
+          "value": "until the end of the phase"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +68,27 @@
       "factionId": "",
       "description": "The first time an attack is allocated to this model, after the attacking unit has finished making its attacks, until the end of the battle, change the Attacks characteristic of this model's Dead Man's Hand to 12.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 12,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -50,7 +97,15 @@
       "factionId": "",
       "description": "Your army cannot contain both <span class=\"kwb\">CAPTAIN</span> <span class=\"kwb\">TYCHO</span> and Tycho the Lost.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "value": "cannot contain both CAPTAIN TYCHO and Tycho the Lost"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

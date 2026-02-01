@@ -28,7 +28,35 @@
       "factionId": "",
       "description": "While this unit is within Synapse Range of a friendly <span class=\"kwb\">TYRANIDS</span> unit (excluding <span class=\"kwb\">NEUROGAUNT</span> units), it has the Synapse keyword.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsKeyword",
+          "keywords": [
+            "SYNAPSE"
+          ],
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "TYRANIDS"
+              ],
+              "operator": "includes",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "NEUROGAUNT"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

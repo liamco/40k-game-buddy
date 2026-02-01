@@ -28,7 +28,70 @@
       "factionId": "",
       "description": "Melee weapons equipped by models in this unit have the [SUSTAINED HITS 2] ability when targeting <span class=\"kwb\">MONSTER</span>, <span class=\"kwb\">VEHICLE</span> or <span class=\"kwb\">FORTIFICATION</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "VEHICLE"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": "FORTIFICATION"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -37,7 +100,18 @@
       "factionId": "",
       "description": "The bearer has the Grenades keyword.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsKeyword",
+          "keywords": [
+            "Grenades"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

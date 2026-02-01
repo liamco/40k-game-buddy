@@ -6,31 +6,12 @@
 /**
  * Entity that a mechanic targets or references
  */
-export type Entity =
-    | "thisArmy"
-    | "thisUnit"
-    | "thisModel"
-    | "opponentArmy"
-    | "opposingUnit"
-    | "opposingModel"
-    | "targetUnit"
-    | "targetModel";
+export type Entity = "thisArmy" | "thisUnit" | "thisModel" | "opponentArmy" | "opposingUnit" | "opposingModel" | "targetUnit" | "targetModel";
 
 /**
  * Type of effect the mechanic applies
  */
-export type Effect =
-    | "rollBonus"
-    | "rollPenalty"
-    | "staticNumber"
-    | "addsKeyword"
-    | "addsAbility"
-    | "reroll"
-    | "autoSuccess"
-    | "mortalWounds"
-    | "ignoreModifier"
-    | "halveDamage"
-    | "minDamage";
+export type Effect = "rollBonus" | "rollPenalty" | "staticNumber" | "addsKeyword" | "addsAbility" | "reroll" | "autoSuccess" | "mortalWounds" | "ignoreModifier" | "halveDamage" | "minDamage" | "setsFnp";
 
 /**
  * Roll-related attributes
@@ -52,15 +33,7 @@ export type Attribute = RollAttribute | UnitAttribute | WeaponAttribute;
 /**
  * Comparison operators for conditions
  */
-export type Operator =
-    | "equals"
-    | "notEquals"
-    | "greaterThan"
-    | "greaterThanOrEqualTo"
-    | "lessThan"
-    | "lessThanOrEqualTo"
-    | "includes"
-    | "notIncludes";
+export type Operator = "equals" | "notEquals" | "greaterThan" | "greaterThanOrEqualTo" | "lessThan" | "lessThanOrEqualTo" | "includes" | "notIncludes";
 
 /**
  * Condition that must be met for a mechanic to apply

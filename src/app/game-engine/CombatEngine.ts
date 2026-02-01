@@ -47,6 +47,10 @@ export class CombatEngine {
         // 2. Calculate base values
         const baseValues = this.calculateBaseValues();
 
+        // 2b. Derive FNP from collected mechanics (must happen after collection)
+        // FNP is ability-granted, not a base model stat
+        const derivedFnp = this.deriveFnpFromMechanics();
+
         // 3. Evaluate modifiers for each step
         const attacksMods = this.evaluateStep("attacks");
         const hitMods = this.evaluateStep("hitRoll");
@@ -73,7 +77,7 @@ export class CombatEngine {
             baseToWound: baseValues.toWound,
             baseSave: baseValues.armorSave,
             baseInvuln: baseValues.invulnSave,
-            baseFnp: baseValues.fnp,
+            baseFnp: derivedFnp,
             baseDamage: baseValues.damage,
 
             weaponStrength: baseValues.strength,
@@ -91,7 +95,7 @@ export class CombatEngine {
             finalToWound,
             finalSave,
             useInvuln,
-            finalFnp: baseValues.fnp,
+            finalFnp: derivedFnp,
 
             criticalHitThreshold,
             criticalWoundThreshold,
@@ -122,7 +126,6 @@ export class CombatEngine {
             invulnSave: targetModel.invSv ?? null,
             ap: weapon.ap,
             damage: weapon.d,
-            fnp: (targetModel as any).fnp ?? null,
             strength,
             toughness,
         };
@@ -558,6 +561,29 @@ export class CombatEngine {
         const bonusPerModel = Math.floor(defenderModelCount / 5);
 
         return { bonusPerModel };
+    }
+
+    /**
+     * Derive FNP value from collected mechanics with setsFnp effect.
+     * FNP is an ability-granted characteristic, not a base model stat.
+     * Returns the best (lowest) FNP value, or null if none.
+     */
+    private deriveFnpFromMechanics(): number | null {
+        let bestFnp: number | null = null;
+
+        for (const { mechanic } of this.collectedMechanics) {
+            if (mechanic.effect === "setsFnp" && typeof mechanic.value === "number") {
+                // Evaluate conditions (e.g., phase-specific FNP)
+                if (!this.evaluateConditions(mechanic.conditions)) continue;
+
+                // Take the best (lowest) FNP value
+                if (bestFnp === null || mechanic.value < bestFnp) {
+                    bestFnp = mechanic.value;
+                }
+            }
+        }
+
+        return bestFnp;
     }
 }
 

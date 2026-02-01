@@ -28,7 +28,16 @@
       "factionId": "",
       "description": "While a Captain or Chapter Master model is leading this unit, each time an attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -37,7 +46,26 @@
       "factionId": "",
       "description": "While this unit contains an Ancient, add 1 to the Objective Control characteristic of models in this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "abilities": [
+                "ANCIENT"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +74,60 @@
       "factionId": "",
       "description": "While this unit contains a <span class=\"kwb\">CHAPTER</span> <span class=\"kwb\">CHAMPION</span>, add 1 to Advance and Charge rolls made for this unit and you can target this unit with the Heroic Intervention Stratagem for 0CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "CHAPTER CHAMPION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "CHAPTER CHAMPION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "HEROIC INTERVENTION"
+          ],
+          "value": "0CP",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "CHAPTER CHAMPION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "HONOUR GUARD OF MACRAGGE",

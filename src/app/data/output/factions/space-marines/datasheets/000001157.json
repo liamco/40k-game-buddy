@@ -28,7 +28,50 @@
       "factionId": "",
       "description": "If you control an objective marker at the end of your Command phase and this unit is within range of that objective marker, that objective marker remains under your control, even if you have no models within range of it, until your opponent controls it at the start or end of any turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": "remains under control",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "state": "hasNoModelsWithinRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opponentArmy",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": "controlled by opponent",
+          "conditions": [
+            {
+              "entity": "opponentArmy",
+              "state": "controlsObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "state": "isAtStartOrEndOfTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

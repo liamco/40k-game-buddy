@@ -28,7 +28,16 @@
       "factionId": "",
       "description": "At the start of your Shooting phase or at the start of the Fight phase, you can spend 1 Pain token to Empower this unit. While this unit is Empowered:<br><ul><li>If it contains one or more Lhamaean models, melee weapons equipped by models in this unit have the [LETHAL HITS] ability.</li><li>If it contains one or more Medusae models, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability.</li><li>If it contains one or more Sslyth models, each time a melee attack targets this unit, subtract 1 from the Wound roll.</li><li>If this unit contains one or more Ur-ghul models, this unit has the Fights First ability.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -37,7 +46,18 @@
       "factionId": "",
       "description": "While a <span class=\"kwb\">CHARACTER</span> model is leading a unit that contains one or more Lhamaean, Medusae, Sslyth and/or Ur-ghul models, that <span class=\"kwb\">CHARACTER</span> model has the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "COURT OF THE ARCHON",

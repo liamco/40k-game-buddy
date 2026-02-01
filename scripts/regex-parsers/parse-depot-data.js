@@ -892,6 +892,60 @@ async function main() {
         process.exit(1);
     }
 
+    // Warning: Check if output directory has extracted mechanics that would be overwritten
+    if (fs.existsSync(outputPath)) {
+        // Check a sample file for mechanics
+        const factionDirs = path.join(outputPath, "factions");
+        if (fs.existsSync(factionDirs)) {
+            const sampleFiles = [];
+            const factions = fs.readdirSync(factionDirs, { withFileTypes: true }).filter((d) => d.isDirectory());
+            for (const faction of factions.slice(0, 3)) {
+                const datasheetDir = path.join(factionDirs, faction.name, "datasheets");
+                if (fs.existsSync(datasheetDir)) {
+                    const files = fs
+                        .readdirSync(datasheetDir)
+                        .filter((f) => f.endsWith(".json"))
+                        .slice(0, 5);
+                    sampleFiles.push(...files.map((f) => path.join(datasheetDir, f)));
+                }
+            }
+
+            let hasMechanics = false;
+            for (const file of sampleFiles) {
+                try {
+                    const content = JSON.parse(fs.readFileSync(file, "utf-8"));
+                    if (content.abilities?.some((a) => a.mechanics && a.mechanics.length > 0)) {
+                        hasMechanics = true;
+                        break;
+                    }
+                } catch {
+                    // Ignore parsing errors
+                }
+            }
+
+            if (hasMechanics) {
+                console.warn("═".repeat(60));
+                console.warn("⚠️  WARNING: Existing output files contain extracted mechanics!");
+                console.warn("   Running this script will OVERWRITE them with data from src/");
+                console.warn("   which does NOT contain the extracted mechanics.");
+                console.warn("");
+                console.warn("   If you have already run extract-effects:regex or extract-effects:openai,");
+                console.warn("   those extracted mechanics will be LOST.");
+                console.warn("");
+                console.warn("   To proceed anyway, set FORCE=true:");
+                console.warn("   FORCE=true npm run parse-depot-data");
+                console.warn("═".repeat(60));
+
+                if (process.env.FORCE !== "true") {
+                    console.error("\n❌ Aborting to prevent data loss. Use FORCE=true to override.\n");
+                    process.exit(1);
+                } else {
+                    console.warn("\n⚠️  FORCE=true set. Proceeding with overwrite...\n");
+                }
+            }
+        }
+    }
+
     // Create output directory if it doesn't exist
     if (!fs.existsSync(outputPath)) {
         fs.mkdirSync(outputPath, { recursive: true });

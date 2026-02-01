@@ -32,7 +32,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +58,24 @@
       "factionId": "",
       "description": "While an enemy unit is within Engagement Range of this model, halve the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": "half",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

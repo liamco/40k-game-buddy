@@ -37,7 +37,24 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

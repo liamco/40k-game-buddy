@@ -33,7 +33,24 @@
       "factionId": "",
       "description": "Each time this model fights, after it has resolved its attacks, if one or more enemy models (excluding <span class=\"kwb\">VEHICLE</span> models) were destroyed as the result of those attacks, this model regains up to D3 wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isDestroyed",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

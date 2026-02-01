@@ -28,7 +28,27 @@
       "factionId": "",
       "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "IGNORES COVER"
+          ],
+          "state": "isStationary",
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -37,7 +57,23 @@
       "factionId": "",
       "description": "Once per battle, after making a Hit roll for a model in this unit, you can change that roll to an unmodified 6.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "h",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "notEquals",
+              "value": "hasUsedOncePerBattle"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +82,19 @@
       "factionId": "",
       "description": "Place an Armorium Cherub token next to the unit, removing it once this ability has been used.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ARMORIUM CHERUB"
+          ],
+          "value": "used",
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

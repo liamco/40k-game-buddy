@@ -41,7 +41,22 @@
       "factionId": "",
       "description": "At the start of your opponent's Shooting phase, one Psyker model from your army with this ability can use it. If used, select one enemy unit within 18\" of that <span class=\"kwb\">PSYKER</span> model and roll one D6: on a 1, that <span class=\"kwb\">PSYKER</span> model suffers D3 mortal wounds; on a 2-5, until the end of the phase, each time a model in that enemy unit makes an attack, subtract 1 from the Hit roll; on a 6, each time a model in that enemy unit makes an attack, subtract 1 from the Hit roll and subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

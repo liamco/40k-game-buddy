@@ -33,7 +33,27 @@
       "factionId": "",
       "description": "Each time a ranged attack made by this model is allocated to a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> model, you can re-roll the Damage roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

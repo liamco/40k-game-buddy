@@ -40,7 +40,26 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "cp",
+          "value": -1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "abilities": [
+                "STRATAGEM"
+              ],
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -49,7 +68,32 @@
       "factionId": "",
       "description": "After both players have deployed their armies, if your army includes one or more models with this ability, you can select up to three friendly Adeptus Astartes Infantry units and redeploy all of those units. When doing so, any of those units can be placed into Strategic Reserves, regardless of how many units are already in Strategic Reserves.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "REDEPLOY"
+          ],
+          "value": "up to three friendly Adeptus Astartes Infantry units"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "STRATEGIC RESERVES"
+          ],
+          "value": "any of those units can be placed into Strategic Reserves"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "regardless of how many units are already in Strategic Reserves"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

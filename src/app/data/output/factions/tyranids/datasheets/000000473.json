@@ -44,7 +44,23 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isCharacter",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -53,7 +69,18 @@
       "factionId": "",
       "description": "Once per battle round, you can target one model with this ability with the Rapid Ingress Stratagem for 0CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "RAPID INGRESS"
+          ],
+          "value": "0"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

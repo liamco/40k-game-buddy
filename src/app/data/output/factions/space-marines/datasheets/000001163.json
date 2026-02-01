@@ -33,7 +33,29 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets the closest eligible enemy unit, re-roll a Hit roll of 1 and re-roll a Wound roll or 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "operator": "equals",
+              "value": "closest eligible enemy unit"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

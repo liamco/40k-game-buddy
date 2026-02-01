@@ -33,7 +33,74 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets a <span class=\"kwb\">VEHICLE</span>, improve the Strength and Damage characteristic of that attack by 1 (if that attack targets a <span class=\"kwb\">FORTIFICATION</span> unit, improve the Strength and Damage characteristics of that attack by 2 instead).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

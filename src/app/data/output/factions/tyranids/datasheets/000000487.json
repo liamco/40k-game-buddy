@@ -32,7 +32,38 @@
       "factionId": "",
       "description": "Enemy units cannot start or end an Advance move within 6\" of this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +72,51 @@
       "factionId": "",
       "description": "Each time this unit or an enemy unit ends a move, for each model in this unit that is within 3\" of one or more enemy units, select one of those enemy units. That model in this unit is destroyed, then roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D6 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isWithin3Inches",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "mortalWounds",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isWithin3Inches",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "roll",
+              "value": 6,
+              "operator": "equals"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

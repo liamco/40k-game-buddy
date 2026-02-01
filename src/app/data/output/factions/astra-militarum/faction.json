@@ -2074,7 +2074,16 @@
           "legend": "Key to this force's mission is the swift purgation of local enemy forces through sudden deployment and focused firefights. As such, whether they hit the ground from a low-altitude drop or deploy from armoured transports, the soldiers of this formation are trained to find targets and start shooting the instant the foe is in sight.",
           "description": "Each time a Militarum Tempestus model from your army makes a ranged attack in a turn in which it was set up on the battlefield from Reserves or it disembarked from a Transport, add 1 to the Hit roll.",
           "detachment": "Bridgehead Strike",
-          "detachmentId": 996
+          "detachmentId": 996,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2133,7 +2142,18 @@
           ],
           "detachment": "Bridgehead Strike",
           "detachmentId": 996,
-          "description": "<b>WHEN:</b> The Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Astra Militarum Infantry unit from your army that is in Reserves and has the Deep Strike ability.<br><br><b>EFFECT:</b> Until the end of the phase, when your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units.<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit is not eligible to declare a charge."
+          "description": "<b>WHEN:</b> The Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Astra Militarum Infantry unit from your army that is in Reserves and has the Deep Strike ability.<br><br><b>EFFECT:</b> Until the end of the phase, when your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units.<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit is not eligible to declare a charge.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2163,7 +2183,18 @@
           ],
           "detachment": "Bridgehead Strike",
           "detachmentId": 996,
-          "description": "<b>WHEN:</b> End of your opponent's Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> unit from your army that is not within Engagement Range of one or more enemy units, if all of its models have the Deep Strike ability, or one Valkyrie unit from your army that is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Remove your unit from the battlefield and place it into Strategic Reserves."
+          "description": "<b>WHEN:</b> End of your opponent's Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> unit from your army that is not within Engagement Range of one or more enemy units, if all of its models have the Deep Strike ability, or one Valkyrie unit from your army that is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Remove your unit from the battlefield and place it into Strategic Reserves.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2412,7 +2443,16 @@
           ],
           "detachment": "Embarked Regiment",
           "detachmentId": 927,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> unit from your army (excluding OGRYN units) that was selected as the target of one or more of the attacking unit's attacks and has one or more models on the opposite side of an open Hatchway from one or more models in the attacking unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> unit from your army (excluding OGRYN units) that was selected as the target of one or more of the attacking unit's attacks and has one or more models on the opposite side of an open Hatchway from one or more models in the attacking unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2506,7 +2546,18 @@
           "detachment": "Grizzled Company",
           "detachmentId": 1121,
           "legend": "This veteran commando officer imparts their experience in clandestine warfare to the rank and file.",
-          "description": "Astra Militarum Infantry officer model only. Each time you select an Order for the bearer to issue, you can select the Order below:<br><br><b>Move to the Shadows (Order):</b> Each time a ranged attack targets this unit, until those attacks are resolved, models in this unit have the Stealth ability."
+          "description": "Astra Militarum Infantry officer model only. Each time you select an Order for the bearer to issue, you can select the Order below:<br><br><b>Move to the Shadows (Order):</b> Each time a ranged attack targets this unit, until those attacks are resolved, models in this unit have the Stealth ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2645,7 +2696,18 @@
           "detachment": "Hammer of the Emperor",
           "detachmentId": 1012,
           "legend": "This officer goes to war in a favoured vehicle that - whether by fortune or apparent divine intervention - has survived dozens of battles despite suffering heavy damage on multiple occasions.",
-          "description": "Vehicle Officer model only. The bearer has the Feel No Pain 6+ ability."
+          "description": "Vehicle Officer model only. The bearer has the Feel No Pain 6+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2773,7 +2835,16 @@
           "legend": "Astra Militarum mechanised forces combine heavy armour with elite infantry. Reliant on speed and short-ranged firepower, the armoured spearhead hurtles through the enemy line and deploys its cargo of shock troops to cut the enemy down with volleys of lasgun fire.",
           "description": "Each time an <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> model from your army makes a ranged attack in a turn in which it disembarked from a Transport, add 1 to the Wound roll.",
           "detachment": "Mechanised Assault",
-          "detachmentId": 1011
+          "detachmentId": 1011,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2954,7 +3025,18 @@
           "detachment": "Recon Element",
           "detachmentId": 1013,
           "legend": "Whether equipped with climbing gear, machetes or snow shoes, this unit moves swiftly across inhospitable terrain to engage the enemy.",
-          "description": "Astra Militarum Infantry model only. The bearer has the Scouts 6\" ability."
+          "description": "Astra Militarum Infantry model only. The bearer has the Scouts 6\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2964,7 +3046,16 @@
           "detachment": "Recon Element",
           "detachmentId": 1013,
           "legend": "Carefully placed tripwires detonate booby traps as the enemy advance, the resulting explosions causing the foe to halt in their tracks.",
-          "description": "Astra Militarum Infantry model only. Each time an enemy <span class=\"kwb\">INFANTRY</span> or <span class=\"kwb\">MOUNTED</span> unit ends a Normal, Advance, Charge or Fall Back move within 9\" of the bearer's unit, roll one D6: on a 4+, until the start of your next turn, that enemy unit is stunned. While a unit is stunned, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "Astra Militarum Infantry model only. Each time an enemy <span class=\"kwb\">INFANTRY</span> or <span class=\"kwb\">MOUNTED</span> unit ends a Normal, Advance, Charge or Fall Back move within 9\" of the bearer's unit, roll one D6: on a 4+, until the start of your next turn, that enemy unit is stunned. While a unit is stunned, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -3026,7 +3117,24 @@
           ],
           "detachment": "Recon Element",
           "detachmentId": 1013,
-          "description": "<b>WHEN:</b> Start of your opponent's Shooting phase.<br><br><b>TARGET:</b> One Astra Militarum Infantry or Astra Militarum Mounted unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Feel No Pain 6+ ability, and each time an enemy model makes an attack, if your unit is the closest eligible target, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Start of your opponent's Shooting phase.<br><br><b>TARGET:</b> One Astra Militarum Infantry or Astra Militarum Mounted unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Feel No Pain 6+ ability, and each time an enemy model makes an attack, if your unit is the closest eligible target, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -3071,7 +3179,18 @@
           "legend": "Artillery barrages lay the ground for the assault to come.",
           "description": "At the start of the battle round, select one of the following types of artillery support.<br><li><b>Creeping Barrage:</b> Roll one D6 for each enemy unit that is more than 12\" from every model from your army that is on the battlefield: On a 5+, until the end of the battle round, that unit is shaken. While a unit is shaken, subtract 2\" from its Move characteristic and subtract 2 from Charge rolls made for it. The maximum number of units that can be shaken by this rule in each battle round depends on the battle size, as shown below.</li><li><b>Incendiary Bombardment:</b> Select a number of enemy units more than 12\" from every model from your army that is on the battlefield. Until the end of the battle round, those enemy units are scattered. While a unit is scattered, it cannot have the Benefit of Cover. The maximum number of units you can select in this way depends on the battle size, as shown below.</li><b>Smoke Shells:</b> Select a number of units from your army. Until the end of the battle round, those units have the Stealth ability.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>BATTLE SIZE</b></td><td><b>MAXIMUM NUMBER OF UNITS</b></td></tr><tr><td>Incursion</td><td>2</td></tr><tr><td>Strike Force</td><td>3</td></tr><tr><td>Onslaught</td><td>4</td></tr></tbody></table></td></tr></tbody></table></div>",
           "detachment": "Siege Regiment",
-          "detachmentId": 1010
+          "detachmentId": 1010,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -3083,7 +3202,18 @@
           "detachment": "Siege Regiment",
           "detachmentId": 1010,
           "legend": "This officer relishes serving in the vanguard and seeks to take up a forward position to be closer to the foe when the firing begins.",
-          "description": "Infantry Officer model only. While the bearer is leading a Regiment unit, that unit has the Scouts 6\" ability."
+          "description": "Infantry Officer model only. While the bearer is leading a Regiment unit, that unit has the Scouts 6\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -3242,7 +3372,16 @@
           "detachment": "Tempestus Boarding Regiment",
           "detachmentId": 928,
           "legend": "Tasked with the destruction of a specific enemy asset, the Tempestus Scions focus their most lethal attentions against it as per their explicit orders.",
-          "description": "At the start of the first battle round, select one enemy unit. Each time a model in the bearer's unit makes an attack that targets that enemy unit, if the Strength characteristic of that attack is less than the Toughness characteristic of that enemy unit, add 1 to the Wound roll."
+          "description": "At the start of the first battle round, select one enemy unit. Each time a model in the bearer's unit makes an attack that targets that enemy unit, if the Strength characteristic of that attack is less than the Toughness characteristic of that enemy unit, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [

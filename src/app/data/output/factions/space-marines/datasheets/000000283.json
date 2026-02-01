@@ -37,7 +37,42 @@
       "factionId": "",
       "description": "Once per battle, in your Charge phase, this model can use this ability. If it does, until the end of the turn, you can re-roll Charge rolls made for <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army and, until the end of the turn, each time an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model from your army makes a melee attack, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "ADEPTUS ASTARTES"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "ADEPTUS ASTARTES"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +81,26 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy unit, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -55,7 +109,26 @@
       "factionId": "",
       "description": "Your army cannot contain both Logan Grimnar and <span class=\"kwb\">LOGAN</span> <span class=\"kwb\">GRIMNAR</span> <span class=\"kwb2\">ON</span> <span class=\"kwb\">STORMRIDER</span>.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attributes": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "notIncludes",
+              "value": "LOGAN GRIMNAR ON STORMRIDER"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

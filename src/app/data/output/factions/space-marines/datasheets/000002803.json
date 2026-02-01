@@ -36,7 +36,16 @@
       "factionId": "",
       "description": "The bearer has a Wounds characteristic of 4.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -45,7 +54,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, once per battle, when a Battle-shock test is taken for that unit, you can re-roll that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "ld",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -54,7 +80,19 @@
       "factionId": "",
       "description": "This model cannot be your Warlord and cannot be given Enhancements.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT BE WARLORD",
+            "CANNOT BE GIVEN ENHANCEMENTS"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
@@ -471,5 +509,8 @@
         }
       ]
     }
-  ]
+  ],
+  "leaderConditions": {
+    "mustAttach": true
+  }
 }

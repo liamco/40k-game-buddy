@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -46,7 +55,19 @@
       "factionId": "",
       "description": "This model's unit is eligible to charge in a turn in which it Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER FALLING BACK"
+          ],
+          "value": true,
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

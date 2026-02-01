@@ -28,7 +28,61 @@
       "factionId": "",
       "description": "Each time a ranged attack made by a model in this unit targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> model, you can re-roll the Hit roll, you can re-roll the Wound roll and you can re-roll the Damage roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": "MONSTER"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

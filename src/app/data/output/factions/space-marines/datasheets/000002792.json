@@ -37,7 +37,32 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a Chaplain Grimaldus model, each time a model in that unit makes a melee attack, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "CHAPLAIN GRIMALDUS"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -46,7 +71,31 @@
       "factionId": "",
       "description": "In your Command phase, if this unit contains one or more Cenobyte Servitor models, select one Temple Relics ability (see left). Until the start of your next Command phase, this unit's Chaplain Grimaldus model has that ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "Temple Relics ability"
+          ],
+          "value": "until the start of your next Command phase",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": null,
+              "abilities": [
+                "Cenobyte Servitor"
+              ],
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -55,7 +104,22 @@
       "factionId": "",
       "description": "Add 1 to Advance and Charge rolls made for this unit.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -64,7 +128,16 @@
       "factionId": "",
       "description": "Add 1 to the Toughness characteristic of models in this unit.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "t",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -73,7 +146,16 @@
       "factionId": "",
       "description": "Improve the Armour Penetration characteristic of melee weapons equipped by models in this unit by 1.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

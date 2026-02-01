@@ -33,7 +33,25 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, if one or more of those attacks made with its Scorpius multi-launcher scored a hit against an enemy <span class=\"kwb\">INFANTRY</span> unit, that unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "BATTLE SHOCK"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "h",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

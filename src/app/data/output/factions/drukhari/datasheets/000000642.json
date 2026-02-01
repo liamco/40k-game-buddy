@@ -37,7 +37,16 @@
       "factionId": "",
       "description": "In your Fight phase, when you select this model's unit to fight, you can spend 1 of your Pain tokens to Empower this model's unit. While that unit is Empowered, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -46,7 +55,18 @@
       "factionId": "",
       "description": "Each time an attack with a Damage characteristic of 1 is allocated to a model in this model's unit, that model has the Feel No Pain 4+ ability against that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

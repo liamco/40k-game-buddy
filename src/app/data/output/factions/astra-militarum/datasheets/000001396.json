@@ -28,7 +28,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Astra Militarum Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -37,7 +48,16 @@
       "factionId": "",
       "description": "In your Command phase, select one friendly Astra Militarum Vehicle model within 3\" of this model. That <span class=\"kwb\">VEHICLE</span> model regains up to D3 lost wounds and, until the start of your next Command phase, that <span class=\"kwb\">VEHICLE</span> model has a 4+ invulnerable save. Each model can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

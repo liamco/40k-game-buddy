@@ -28,7 +28,22 @@
       "factionId": "",
       "description": "You can re-roll Advance and Charge rolls made for this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "m",
+          "value": "all"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "a",
+          "value": "all"
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -37,7 +52,26 @@
       "factionId": "",
       "description": "If a Character from your army with the Leader ability can be attached to a Tactical Squad, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "can be attached to this unit instead",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "LEADER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

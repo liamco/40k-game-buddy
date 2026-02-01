@@ -33,7 +33,31 @@
       "factionId": "",
       "description": "Each time a ranged attack is allocated to a model from your army, if that model is not fully visible to every model in the attacking unit because of this Fellblade model, that model has the Benefit of Cover against that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "BENEFIT OF COVER"
+          ],
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isFullyVisible",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "isBlockingVisibility",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

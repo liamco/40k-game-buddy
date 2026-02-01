@@ -40,7 +40,26 @@
       "factionId": "",
       "description": "You can target this unit with the Heroic Intervention Stratagem for 0CP, and can do so even if you have already used that Stratagem on a different unit this phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "HEROIC INTERVENTION"
+          ],
+          "value": "0CP",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "state": "hasUsedStratagem",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

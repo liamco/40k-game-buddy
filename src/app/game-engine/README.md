@@ -141,7 +141,8 @@ interface CombatResolution {
 | LETHAL HITS | Displays on the relevant AttackStep when present |
 | SUSTAINED HITS | Displays on the relevant AttackStep when present |
 | DEVASTATING WOUNDS | Displays on the relevant AttackStep when present |
-| BLAST | min 3 attacks. +1 attack for every 5 models in target unit |
+| BLAST | +1 attack for every 5 models in target unit |
+| Feel No Pain | Displays in attack resolver if the defending model has FNP |
 
 ### Groundwork Laid - Conditions Need to be Met
 
@@ -160,7 +161,7 @@ interface CombatResolution {
 | Detachment rules | Not collected by engine yet |
 | Faction abilities | Not collected by engine yet |
 | Stratagems | UI and mechanics data needed |
-| Feel No Pain | Model type lacks `fnp` property |
+
 
 
 ### Out of scope or unfeasible

@@ -40,7 +40,22 @@
       "factionId": "",
       "description": "At the start of the Fight phase, select one enemy unit within 6\" of this model. Until the end of the phase: <br><ul><li>Each time a friendly Slaanesh Legiones Daemonica model makes a melee attack that targets that enemy unit, add 1 to the Wound roll. </li><li>Each time a model in that enemy unit makes a melee attack, subtract 1 from the Wound roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

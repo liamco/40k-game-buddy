@@ -28,7 +28,24 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, you can select one enemy <span class=\"kwb\">INFANTRY</span> unit hit by one or more of those attacks made with a pyreblaster. That enemy unit must take a Battle-shock test, subtracting 1 from that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

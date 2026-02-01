@@ -41,7 +41,30 @@
       "factionId": "",
       "description": "In your Shooting phase, you can select one enemy <span class=\"kwb\">INFANTRY</span> unit within 12\" of and visible to this model. That enemy unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            },
+            {
+              "entity": "thisModel",
+              "state": "isVisible",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

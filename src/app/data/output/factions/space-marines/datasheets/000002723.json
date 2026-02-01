@@ -38,7 +38,23 @@
       "factionId": "",
       "description": "At the end of your Command phase, this model regains 1 lost wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

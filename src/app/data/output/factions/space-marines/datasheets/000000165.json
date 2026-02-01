@@ -32,7 +32,16 @@
       "factionId": "",
       "description": "Each time a melee attack targets this unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -41,7 +50,16 @@
       "factionId": "",
       "description": "While a Character model is leading this unit, each time a melee attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -50,7 +68,16 @@
       "factionId": "",
       "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
       "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "oc",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -59,7 +86,46 @@
       "factionId": "",
       "description": "If a Captain model from your army with the Leader ability can be attached to an Assault Intercessors with Jump Packs unit, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attribute": "",
+              "abilities": [
+                "LEADER"
+              ],
+              "state": "",
+              "keywords": [],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [],
+          "value": "",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "",
+              "abilities": [],
+              "state": "",
+              "keywords": [],
+              "operator": "equals",
+              "value": "Assault Intercessors with Jump Packs"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

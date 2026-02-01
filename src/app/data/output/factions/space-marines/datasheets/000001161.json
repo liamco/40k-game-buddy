@@ -33,7 +33,35 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets the enemy unit you selected for the Oath of Moment ability that attack has the [IGNORES COVER] ability and can ignore the penalty to their Hit rolls when making attacks with Indirect Fire weapons against targets that are not visible to them.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "IGNORES COVER"
+          ],
+          "value": true
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "INDIRECT FIRE"
+              ],
+              "state": "notVisible",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

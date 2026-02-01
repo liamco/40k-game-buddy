@@ -37,7 +37,75 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, if an enemy <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit was hit by one or more of those attacks made with this model's helfrost destructor, until the end of your opponent's next turn, that enemy unit is Frozen. While a unit is Frozen, subtract 2 from that unit's Move characteristic, and subtract 2 from Advance and Charge rolls made for that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "addsKeyword",
+          "keywords": [
+            "FROZEN"
+          ],
+          "state": "isFrozen",
+          "value": true,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isHit",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "helFrostDestructor",
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "m",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isFrozen",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "m",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isFrozen",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "a",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isFrozen",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

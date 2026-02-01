@@ -32,7 +32,26 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER ADVANCING"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -41,7 +60,30 @@
       "factionId": "",
       "description": "Each time this model fights, until that fight is resolved, add 1 to the Attacks characteristic of this model's Blood Reaver for every 5 enemy models within 6\" of this model.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "m",
+              "operator": "greaterThanOrEqualTo",
+              "value": 5
+            },
+            {
+              "entity": "opposingModel",
+              "attribute": "m",
+              "operator": "lessThanOrEqualTo",
+              "value": 6
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "FLESH TEARERS",

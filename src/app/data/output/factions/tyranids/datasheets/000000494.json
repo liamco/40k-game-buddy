@@ -32,7 +32,78 @@
       "factionId": "",
       "description": "Each time this model is set up on the battlefield using the Deep Strike ability, roll one D6 for each enemy unit within 12\" of this model: on a 2-4, that unit suffers D3 mortal wounds; on a 5+, that unit suffers 3 mortal wounds and must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 2
+            },
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "state": null,
+              "keywords": null,
+              "operator": "lessThanOrEqualTo",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "BATTLE SHOCK TEST"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "state": null,
+              "keywords": null,
+              "operator": "greaterThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

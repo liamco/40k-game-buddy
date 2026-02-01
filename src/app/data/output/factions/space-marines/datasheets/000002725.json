@@ -28,7 +28,27 @@
       "factionId": "",
       "description": "Weapons equipped by models in this unit are have the [DEVASTATING WOUNDS] ability when targeting <span class=\"kwb\">TYRANIDS</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATING WOUNDS"
+          ],
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "TYRANIDS"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

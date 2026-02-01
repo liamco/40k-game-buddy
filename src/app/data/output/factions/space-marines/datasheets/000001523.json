@@ -36,7 +36,24 @@
       "factionId": "",
       "description": "This unit can only be selected as the target of a ranged attack if the attacking model is within 12\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetUnit",
+          "effect": "rollPenalty",
+          "attribute": "range",
+          "value": 12,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

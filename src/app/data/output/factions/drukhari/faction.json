@@ -705,7 +705,16 @@
           "legend": "The Haemonculi and their servants have been surgically altered in body and mind beyond any measure of sanity. For beings so twisted as these, pain is little more than a fascinating diversion, while none but the most grievous wounds can lay them low for long.",
           "description": "Each time an attack targets a Haemonculus Covens unit from your army, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll.",
           "detachment": "Covenite Coterie",
-          "detachmentId": 1114
+          "detachmentId": 1114,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -877,7 +886,18 @@
           "detachment": "Kabalite Cartel",
           "detachmentId": 1115,
           "legend": "A recklessly destructive implement modified from ancient Aeldari technology, the Webway awl allows its bearer to bore temporary rents into and out of the labyrinth dimension, careless of the ruin they leave in their wake.",
-          "description": "Archon model only. Models in the bearer's unit have the Deep Strike ability, and you can target the bearer's unit with the Rapid Ingress Stratagem for 0CP."
+          "description": "Archon model only. Models in the bearer's unit have the Deep Strike ability, and you can target the bearer's unit with the Rapid Ingress Stratagem for 0CP.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -887,7 +907,18 @@
           "detachment": "Kabalite Cartel",
           "detachmentId": 1115,
           "legend": "A web of infiltrating agents, coerced unfortunates, and infoparasitic organisms keeps this Archon well informed and allows them to plan their realspace raids with insidious accuracy.",
-          "description": "Archon model only. At the start of the Declare Battle Formations step, select up to three Kabalite Warriors and/or Hand of the Archon units from your army; those units gain the Infiltrators ability."
+          "description": "Archon model only. At the start of the Declare Battle Formations step, select up to three Kabalite Warriors and/or Hand of the Archon units from your army; those units gain the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -929,7 +960,16 @@
           ],
           "detachment": "Kabalite Cartel",
           "detachmentId": 1115,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Drukhari unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Hit roll. If your Contract unit is destroyed as a result of those attacks, every unit in your opponent's army must take a Battle-shock test. You cannot gain more than 3 Pain tokens as a result of failed Battle-shock tests caused by this Stratagem."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Drukhari unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, add 1 to the Hit roll. If your Contract unit is destroyed as a result of those attacks, every unit in your opponent's army must take a Battle-shock test. You cannot gain more than 3 Pain tokens as a result of failed Battle-shock tests caused by this Stratagem.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1044,7 +1084,22 @@
           ],
           "detachment": "Kabalite Corsairs",
           "detachmentId": 935,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DRUKHARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and, if your unit has the INcUBI keyword, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DRUKHARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and, if your unit has the INcUBI keyword, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1279,7 +1334,16 @@
           ],
           "detachment": "Realspace Raiders",
           "detachmentId": 804,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Drukhari unit from your army (excluding Haemonculus Covens units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Drukhari unit from your army (excluding Haemonculus Covens units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1367,7 +1431,18 @@
           "detachment": "Reaper's Wager",
           "detachmentId": 993,
           "legend": "A veteran of countless realspace raids or vehicular saedaths, this warrior champion utilises the speed of their sleek anti-grav craft to surprise their enemies.",
-          "description": "Harlequins or Drukhari model only. In the Declare Battle Formations step, if the bearer starts the battle embarked within a Dedicated Transport, that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> has the Scouts 9\" ability."
+          "description": "Harlequins or Drukhari model only. In the Declare Battle Formations step, if the bearer starts the battle embarked within a Dedicated Transport, that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> has the Scouts 9\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 9
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1377,7 +1452,18 @@
           "detachment": "Reaper's Wager",
           "detachmentId": 993,
           "legend": "This elite combatant possesses intricate knowledge of the Webway's hidden paths and employs them to enhance this dreadful performance.",
-          "description": "Harlequins or Drukhari model only. Models in the bearer's unit have the Deep Strike ability. Each time the bearer's unit is set up on the battlefield using the Deep Strike ability, if that unit is currently losing the wager, until the end of the turn, you can re-roll Charge rolls made for that unit."
+          "description": "Harlequins or Drukhari model only. Models in the bearer's unit have the Deep Strike ability. Each time the bearer's unit is set up on the battlefield using the Deep Strike ability, if that unit is currently losing the wager, until the end of the turn, you can re-roll Charge rolls made for that unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1387,7 +1473,18 @@
           "detachment": "Reaper's Wager",
           "detachmentId": 993,
           "legend": "This ebon cloak contains a shadow field generator, which shrouds the bearer in a field of umbral darkness.",
-          "description": "Harlequins model only. Models in the bearer's unit have the Stealth and Infiltrators abilities."
+          "description": "Harlequins model only. Models in the bearer's unit have the Stealth and Infiltrators abilities.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1430,7 +1527,16 @@
           ],
           "detachment": "Reaper's Wager",
           "detachmentId": 993,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Drukhari or Harlequins unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Drukhari or Harlequins unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1546,7 +1652,22 @@
           ],
           "detachment": "Ship-killer Cult",
           "detachmentId": 936,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One WYcH CULT unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One WYcH CULT unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll and subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1618,7 +1739,18 @@
           "detachment": "Skysplinter Assault",
           "detachmentId": 831,
           "legend": "Phantasm grenade launchers worked into sweeping hull plates discharge, laying down covering spreads of hallucinogenic vapours that daze and distract the foe.",
-          "description": "<span class=\"kwb\">DRUKHARI</span> model only. While the bearer's unit is wholly within 6\" of a friendly Drukhari Transport:<br><ul><li>Models in the bearer's unit have the Stealth ability.</li><li>Each time a ranged attack targets the bearer's unit, models in that unit have the Benefit of Cover against that attack.</li></ul>"
+          "description": "<span class=\"kwb\">DRUKHARI</span> model only. While the bearer's unit is wholly within 6\" of a friendly Drukhari Transport:<br><ul><li>Models in the bearer's unit have the Stealth ability.</li><li>Each time a ranged attack targets the bearer's unit, models in that unit have the Benefit of Cover against that attack.</li></ul>",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1740,7 +1872,16 @@
           ],
           "detachment": "Skysplinter Assault",
           "detachmentId": 831,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Drukhari Vehicle unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Drukhari Vehicle unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1810,7 +1951,16 @@
           ],
           "detachment": "Space Lane Raiders",
           "detachmentId": 934,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DRUKHARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">DRUKHARI</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1929,7 +2079,16 @@
           ],
           "detachment": "Spectacle of Spite",
           "detachmentId": 1113,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Wych Cult unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 5+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Wych Cult unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 5+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",

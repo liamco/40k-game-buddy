@@ -513,7 +513,16 @@
           "legend": "When such exceptional warriors as these gather to quest in the Emperors name, even the most dreadful foes of Humanity are right to fear for their lives.",
           "description": "At the start of your Command phase, select one unit from your opponent's army. Until the start of your next Command phase, each time a model in an Adeptus Custodes Character unit from your army makes an attack that targets that enemy unit, add 1 to the Wound roll.",
           "detachment": "Auric Champions",
-          "detachmentId": 863
+          "detachmentId": 863,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -573,7 +582,18 @@
           ],
           "detachment": "Auric Champions",
           "detachmentId": 863,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Adeptus Custodes Character unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, <span class=\"kwb\">CHARACTER</span> models in your unit have the Feel No Pain 4+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Adeptus Custodes Character unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, <span class=\"kwb\">CHARACTER</span> models in your unit have the Feel No Pain 4+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -618,7 +638,16 @@
           ],
           "detachment": "Auric Champions",
           "detachmentId": 863,
-          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Adeptus Custodes Character unit from your army that has just destroyed the unit you selected at the start of your Command phase as the target of your Assemblage of Might ability.<br><br><b>EFFECT:</b> Select one enemy unit on the battlefield Until the start of your next Command phase, each time an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> <span class=\"kwb\">CHARACTER</span> model from your army makes an attack that target that enemy unit, add 1 to the Wound roll In addition, if the destroyed unit was a <span class=\"kwb\">CHARACTER</span> unit, gain 1CP."
+          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Adeptus Custodes Character unit from your army that has just destroyed the unit you selected at the start of your Command phase as the target of your Assemblage of Might ability.<br><br><b>EFFECT:</b> Select one enemy unit on the battlefield Until the start of your next Command phase, each time an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> <span class=\"kwb\">CHARACTER</span> model from your army makes an attack that target that enemy unit, add 1 to the Wound roll In addition, if the destroyed unit was a <span class=\"kwb\">CHARACTER</span> unit, gain 1CP.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -675,7 +704,16 @@
           "detachment": "Black Ship Guardians",
           "detachmentId": 910,
           "legend": "This ancient device is said to have been crafted for use during a vital conclave during the waning days of the Great Crusade, wreathing its bearer in energy veils.",
-          "description": "ANATHEMA PSYKANA model only. While a friendly <span class=\"kwb\">ANATHEMA</span> <span class=\"kwb\">PSYKANA</span> unit is within 3\" of the bearer, models in that unit have a 4+ invulnerable save."
+          "description": "ANATHEMA PSYKANA model only. While a friendly <span class=\"kwb\">ANATHEMA</span> <span class=\"kwb\">PSYKANA</span> unit is within 3\" of the bearer, models in that unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -702,7 +740,16 @@
           ],
           "detachment": "Black Ship Guardians",
           "detachmentId": 910,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One VIgiLATORS, ALEYA or KNIGHT-CENTURA equipped with an executioner greatblade unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One VIgiLATORS, ALEYA or KNIGHT-CENTURA equipped with an executioner greatblade unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -763,7 +810,22 @@
           "legend": "The Adeptus Custodes are outnumbered on every battlefield upon which they fight, yet no matter the foe, and no matter their number, the Lions of the Emperor will prevail.",
           "description": "Each time a model in an Adeptus Custodes unit from your army (excluding Vehicles) makes an attack, if there are no other friendly units within 6\" of that unit, add 1 to the Hit roll and add 1 to the Wound roll.",
           "detachment": "Lions of the Emperor",
-          "detachmentId": 1029
+          "detachmentId": 1029,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -785,7 +847,18 @@
           "detachment": "Lions of the Emperor",
           "detachmentId": 1029,
           "legend": "Fashioned by the Terran armourer Annah Tsvochakin in the latter years of the 32nd millennium, the stunningly worked Praesidius is a singular artefact. Nestled within its golden form are a series of microshield generators and stealth emitters. Employing a modification of displacer technology, the shield generates small localised displacement bubbles at the point of impact, literally beaming bolts, bullets and the tips of blades harmlessly away from its bearer.",
-          "description": "Adeptus Custodes model only. The bearer has the Lone Operative and Stealth abilities."
+          "description": "Adeptus Custodes model only. The bearer has the Lone Operative and Stealth abilities.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1032,7 +1105,16 @@
           ],
           "detachment": "Null Maiden Vigil",
           "detachmentId": 862,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Prosecutors unit from your army that has just shot.<br><br><b>EFFECT:</b> Select one enemy unit hit by one or more of those attacks. Until the start of your next turn, while your unit is on the battlefield, that enemy unit is prosecuted. While a unit is prosecuted, each time an Anathema Psykana model makes an attack against that unit, improve the Armour Penetration characteristic of that attack by 1. While a <span class=\"kwb\">PSYKER</span> or Battle-shocked unit is prosecuted, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Prosecutors unit from your army that has just shot.<br><br><b>EFFECT:</b> Select one enemy unit hit by one or more of those attacks. Until the start of your next turn, while your unit is on the battlefield, that enemy unit is prosecuted. While a unit is prosecuted, each time an Anathema Psykana model makes an attack against that unit, improve the Armour Penetration characteristic of that attack by 1. While a <span class=\"kwb\">PSYKER</span> or Battle-shocked unit is prosecuted, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1047,7 +1129,18 @@
           ],
           "detachment": "Null Maiden Vigil",
           "detachmentId": 862,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Anathema Psykana Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Stealth ability, and Battle-shocked and <span class=\"kwb\">PSYKER</span> models can only select your unit as a target of a ranged attack if they are within 12\"."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Anathema Psykana Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Stealth ability, and Battle-shocked and <span class=\"kwb\">PSYKER</span> models can only select your unit as a target of a ranged attack if they are within 12\".",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1136,7 +1229,18 @@
           ],
           "detachment": "Shield Host",
           "detachmentId": 765,
-          "description": "<b>WHEN:</b> Any phase, just after a mortal wound has been allocated to an Adeptus Custodes model from your army(excluding Anathema Psykana models).<br><br><b>TARGET:</b> That <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> model's unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 4+ ability against mortal wounds."
+          "description": "<b>WHEN:</b> Any phase, just after a mortal wound has been allocated to an Adeptus Custodes model from your army(excluding Anathema Psykana models).<br><br><b>TARGET:</b> That <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> model's unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 4+ ability against mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1181,7 +1285,16 @@
           ],
           "detachment": "Shield Host",
           "detachmentId": 765,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Adeptus Custodes Infantry unit from your army (excluding Anathema Psykana units) that is within range of an objective marker you control and that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a melee attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Adeptus Custodes Infantry unit from your army (excluding Anathema Psykana units) that is within range of an objective marker you control and that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a melee attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1233,7 +1346,18 @@
           "detachment": "Solar Spearhead",
           "detachmentId": 986,
           "legend": "The war engines of the Adeptus Custodes possess an array of augury equipment that combines to build an intricate picture of the unfolding conflict, enabling the bearer to tap into this accumulated data stream, detect incoming threats and angle their armour to repel the worst of enemy attacks.",
-          "description": "<span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> model only. The bearer has the Feel No Pain 5+ ability."
+          "description": "<span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> model only. The bearer has the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1286,7 +1410,16 @@
           ],
           "detachment": "Solar Spearhead",
           "detachmentId": 986,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Adeptus Custodes Vehicle unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets a model in your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Adeptus Custodes Vehicle unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets a model in your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1362,7 +1495,24 @@
           "legend": "The Custodians and the Silent Sisters often fought as one during the earliest days of the Imperium. Ten thousand years on, they have lost none of the unity of doctrine and purpose that makes them such a deadly combination.",
           "description": "Anathema Psykana units from your army gain the following the ability:<br><br><b>Null Aegis (Aura):</b> While an Adeptus Custodes unit is within 6\" of this unit, models in that unit have the Feel No Pain 5+ ability against Psychic Attacks and mortal wounds.<br><br>All other <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> units from your army gain the following ability:<br><br><b>Deadly Unity (Aura):</b> While an <span class=\"kwb\">ANATHEMA</span> <span class=\"kwb\">PSYKANA</span> unit is within 6\" of this unit, each time a model in that <span class=\"kwb\">ANATHEMA</span> <span class=\"kwb\">PSYKANA</span> unit makes an attack, add 1 to the Hit roll.",
           "detachment": "Talons Of The Emperor",
-          "detachmentId": 861
+          "detachmentId": 861,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1394,7 +1544,16 @@
           "detachment": "Talons Of The Emperor",
           "detachmentId": 861,
           "legend": "This warrior wields a close-quarters weapon crafted by the finest noble artisans of Terra, the workmanship of which is magnificent in its lethality.",
-          "description": "ADEPTUS CUSTODES model only. Each time the bearer makes a melee attack, add 1 to the Wound roll."
+          "description": "ADEPTUS CUSTODES model only. Each time the bearer makes a melee attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1404,7 +1563,16 @@
           "detachment": "Talons Of The Emperor",
           "detachmentId": 861,
           "legend": "The golden glory of the Emperor himself glows around this magnificent warrior like Sol's own fire. Enemies are blinded by its light, forced to recoil in pain and terror.",
-          "description": "ADEPTUS CUSTODES model only. Each time an attack targets the bearer's unit, if the attacking model is within 12\", subtract 1 from the Hit roll."
+          "description": "ADEPTUS CUSTODES model only. Each time an attack targets the bearer's unit, if the attacking model is within 12\", subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1436,7 +1604,16 @@
           ],
           "detachment": "Talons Of The Emperor",
           "detachmentId": 861,
-          "description": "<b>WHEN:</b> Start of the Fight phase.<br><br><b>TARGET:</b> Up to two Adeptus Custodes units from your army.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in one of your units targets an enemy unit that is below its Starting Strength, add 1 to the Wound roll.<br><br><b>RESTRICTIONS:</b> You can only select two units if one (and only one) of them is an Anathema Psykana unit and both are within 6\" of each other."
+          "description": "<b>WHEN:</b> Start of the Fight phase.<br><br><b>TARGET:</b> Up to two Adeptus Custodes units from your army.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in one of your units targets an enemy unit that is below its Starting Strength, add 1 to the Wound roll.<br><br><b>RESTRICTIONS:</b> You can only select two units if one (and only one) of them is an Anathema Psykana unit and both are within 6\" of each other.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1452,7 +1629,18 @@
           ],
           "detachment": "Talons Of The Emperor",
           "detachmentId": 861,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEPTUS CusTODES unit from your army that was selected as the target of one or more of the attacking unit's attacks, and one friendly ANATHEMA PSYKANA unit within 6\" of that <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Feel No Pain 4+ ability against Psychic attacks and mortal wounds."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEPTUS CusTODES unit from your army that was selected as the target of one or more of the attacking unit's attacks, and one friendly ANATHEMA PSYKANA unit within 6\" of that <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Feel No Pain 4+ ability against Psychic attacks and mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",

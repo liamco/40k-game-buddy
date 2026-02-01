@@ -36,7 +36,19 @@
       "factionId": "",
       "description": "This unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SHOOT AFTER ADVANCING",
+            "CHARGE AFTER FELL BACK"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -45,7 +57,30 @@
       "factionId": "",
       "description": "At the start of your Command phase, if this model is your <span class=\"kwb\">WARLORD</span> and is on the battlefield, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "CP",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isWarlord",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "onBattlefield",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "LORD CALGAR",

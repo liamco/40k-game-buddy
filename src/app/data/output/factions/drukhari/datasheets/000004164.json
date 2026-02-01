@@ -32,7 +32,22 @@
       "factionId": "",
       "description": "At the start of the Fight phase, select one of the following abilities for this unit to gain until the end of the phase:<br><ul><li><b>Hero's Prowess:</b> Each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li><li><b>Villain's Doom:</b> Each time a model in this unit makes an attack, add 1 to the Wound roll.</li><li><b>Trickster's Grace:</b> Each time an attack targets this unit, subtract 1 from the Hit roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

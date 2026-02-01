@@ -1163,7 +1163,16 @@
           ],
           "detachment": "Boarding Butchers",
           "detachmentId": 977,
-          "description": "<b>WHEN:</b> Your Movement phase, just after a <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit from your army (excluding <span class=\"kwb\">JAKHAL</span> units) opens a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit.<br><br><b>EFFECT:</b> For each enemy unit within 3\" of that Hatchway and wholly on the opposite side of it from your unit, until the start of your next Movement phase, that enemy unit is stunned. While a unit is stunned, each time a model in it makes an attack, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your Movement phase, just after a <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit from your army (excluding <span class=\"kwb\">JAKHAL</span> units) opens a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit.<br><br><b>EFFECT:</b> For each enemy unit within 3\" of that Hatchway and wholly on the opposite side of it from your unit, until the start of your next Movement phase, that enemy unit is stunned. While a unit is stunned, each time a model in it makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1193,7 +1202,28 @@
           "legend": "Titanic Khornate war engines draw teeming masses of cultists to war.",
           "description": "At the start of your Command phase, you can select one of the Idols of Khorne abilities listed below. Until the start of your next Command phase, that ability is active and its effects apply to all World Eaters Titanic and World Eaters Monster units from your army. You can only select each Idols of Khorne ability once per battle.<br><br><span class=\"hi_custom\">Idol of Infinite Rage (Aura)</span><br>While a friendly Jakhals or Goremongers unit is within 6\" of this model (or within 9\" if this model is <span class=\"kwb\">TITANIC</span>), each time a model in that unit makes an attack, add 1 to the Hit roll and add 1 to the Wound roll.<br><br><span class=\"hi_custom\">Idol of Burning Wrath (Aura)</span><br>While a friendly <span class=\"kwb\">JAKHALS</span> or <span class=\"kwb\">GOREMONGERS</span> unit is within 6\" of this model (or within 9\" if this model is <span class=\"kwb\">TITANIC</span>), add 1\" to the Move characteristic of models in that unit and add 1 to Advance and Charge rolls made for that unit.<br><br><span class=\"hi_custom\">Idol of Blessed Blood (Aura)</span><br>While a friendly <span class=\"kwb\">JAKHALS</span> or <span class=\"kwb\">GOREMONGERS</span> unit is within 6\" of this model (or within 9\" if this model is <span class=\"kwb\">TITANIC</span>), models in that unit have a 4+ invulnerable save.<br><br><span class=\"h_custom\">KEYWORDS</span><br><span class=\"kwb\">JAKHALS</span> and <span class=\"kwb\">GOREMONGERS</span> units from your army have the <span class=\"kwb\">BATTLELINE</span> keyword.",
           "detachment": "Cult of Blood",
-          "detachmentId": 1042
+          "detachmentId": 1042,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1215,7 +1245,18 @@
           "detachment": "Cult of Blood",
           "detachmentId": 1042,
           "legend": "Some World Eaters lead packs of cultists into battle, inspiring the masses with their inhuman savagery.",
-          "description": "World Eaters Infantry model only. During the Declare Battle Formations step, the bearer can be attached to a Jakhals or Goremongers unit. If attached to a <span class=\"kwb\">GOREMONGERS</span> unit, the bearer has the Infiltrators ability."
+          "description": "World Eaters Infantry model only. During the Declare Battle Formations step, the bearer can be attached to a Jakhals or Goremongers unit. If attached to a <span class=\"kwb\">GOREMONGERS</span> unit, the bearer has the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1225,7 +1266,18 @@
           "detachment": "Cult of Blood",
           "detachmentId": 1042,
           "legend": "Whether possessed, colossal daemons or heliforged constructs, Khorne's diabolic followers have monstrous resilience.",
-          "description": "World Eaters Monster model only. Add 1 to the bearer's Toughness characteristic and the bearer has the Feel No Pain 5+ ability."
+          "description": "World Eaters Monster model only. Add 1 to the bearer's Toughness characteristic and the bearer has the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1313,7 +1365,18 @@
           ],
           "detachment": "Cult of Blood",
           "detachmentId": 1042,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Jakhals or Goremongers unit from your army that was selected as the target as one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability. If your unit is within 6\" of one or more friendly World Eaters Monster units, or within 9\" of one or more friendly World Eaters Titanic units, your unit has the Feel No Pain 5+ ability instead."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Jakhals or Goremongers unit from your army that was selected as the target as one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability. If your unit is within 6\" of one or more friendly World Eaters Monster units, or within 9\" of one or more friendly World Eaters Titanic units, your unit has the Feel No Pain 5+ ability instead.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1365,7 +1428,18 @@
           "detachment": "Goretrack Onslaught",
           "detachmentId": 1045,
           "legend": "This warrior fights in the vanguard, urging his vehicles forward to unload troops as swiftly as possible.",
-          "description": "World Eaters model only. In the Declare Battle Formations step, if the bearer starts the battle embarked within a Dedicated Transport, that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> has the Scouts 9\" ability."
+          "description": "World Eaters model only. In the Declare Battle Formations step, if the bearer starts the battle embarked within a Dedicated Transport, that <span class=\"kwb\">DEDICATED</span> <span class=\"kwb\">TRANSPORT</span> has the Scouts 9\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 9
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1375,7 +1449,16 @@
           "detachment": "Goretrack Onslaught",
           "detachmentId": 1045,
           "legend": "A veteran tank commander, this warrior orders nearby armoured vehicles to lay down a withering field of fire, providing cover for disembarking troops.",
-          "description": "World Eaters model only. At the start of your Shooting phase, you can select one Vehicle model within 6\" of the bearer or, if the bearer is embarked within a Transport, you can select that <span class=\"kwb\">TRANSPORT</span> model. Until the end of the phase, after the selected model has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "World Eaters model only. At the start of your Shooting phase, you can select one Vehicle model within 6\" of the bearer or, if the bearer is embarked within a Transport, you can select that <span class=\"kwb\">TRANSPORT</span> model. Until the end of the phase, after the selected model has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1493,7 +1576,24 @@
           "legend": "To call forth the blood legions requires the spilling of oceans of crimson gore.",
           "description": "Each time a Blood Legions or World Eaters unit from your army destroys an enemy unit, roll one D6: on a 3+, you gain 1 Blood Tithe point (BTP). At the start of the Command phase, you can spend one or more of your BTP to activate one of the following abilities until the end of the battle:<br><ul><li><b>Enraged Abjuration [2BTP]</b><br><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">LEGIONS</span> and <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> models from your army have the Feel No Pain 5+ ability against Psychic Attacks and mortal wounds.</li><li><b>Daemonic Rage [3BTP]</b><br>Melee weapons equipped by <span class=\"kwb\">BLOOD</span> <span class=\"kwb\">LEGIONS</span> units from your army have the [lance] ability.</li><li><b>Boon of Blood [4BTP]</b><br><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">LEGIONS</span> units from your army have a 4+ invulnerable save.</li><li><b>Might of Khorne [5BTP]</b><br><span class=\"kwb\">BLOOD</span> <span class=\"kwb\">LEGIONS</span> units from your army gain the Blessings of Khorne ability.</li></ul><br><span class=\"h_custom\">RESTRICTIONS</span><br>You can include the Blood Legions units in your army. The combined points cost of such units you can include in your army is:<br><br><b>Incursion:</b> Up to 500 pts<br><b>Strike Force:</b> Up to 1000 pts<br><b>Onslaught:</b> Up to 1500 pts<br><br>No <span class=\"kwb\">BLOOD</span> <span class=\"kwb\">LEGIONS</span> model from your army can be your <span class=\"kwb\">WARLORD</span>.",
           "detachment": "Khorne Daemonkin",
-          "detachmentId": 1043
+          "detachmentId": 1043,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            },
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1525,7 +1625,18 @@
           "detachment": "Khorne Daemonkin",
           "detachmentId": 1043,
           "legend": "This puissant master of carnage has earned the right to lead Khornes immortal legions to war.",
-          "description": "Lord on Juggernaut model only. During the Declare Battle Formations step, the bearer can be attached to a Bloodcrushers or Flesh Hounds unit. While leading one of these units, the bearer has the Deep Strike ability, and it has the <span class=\"kwb\">BLOOD</span> <span class=\"kwb\">LEGIONS</span> Faction keyword instead of the <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> Faction keyword."
+          "description": "Lord on Juggernaut model only. During the Declare Battle Formations step, the bearer can be attached to a Bloodcrushers or Flesh Hounds unit. While leading one of these units, the bearer has the Deep Strike ability, and it has the <span class=\"kwb\">BLOOD</span> <span class=\"kwb\">LEGIONS</span> Faction keyword instead of the <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> Faction keyword.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1568,7 +1679,16 @@
           ],
           "detachment": "Khorne Daemonkin",
           "detachmentId": 1043,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Blood Legions unit from your army that is within 6\" of a friendly World Eaters unit that was selected as the target as one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit have a 5+ invulnerable save. If the Boon of Blood ability is active for your army, then until the end of the phase, models in your <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Blood Legions unit from your army that is within 6\" of a friendly World Eaters unit that was selected as the target as one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit have a 5+ invulnerable save. If the Boon of Blood ability is active for your army, then until the end of the phase, models in your <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1685,7 +1805,18 @@
           "detachment": "Possessed Slaughterband",
           "detachmentId": 1044,
           "legend": "Upon this daemon's death, pent-up rage and empyric energies are released in a howling maelstrom of killing force from which there is no escape.",
-          "description": "World Eaters Daemon model only. The bearer's Deadly Demise ability inflicts mortal wounds on a D6 roll of 2+ instead of on a 6. In addition, the bearer has the Deadly Demise D3+1 ability, instead of the Deadly Demise D3 ability."
+          "description": "World Eaters Daemon model only. The bearer's Deadly Demise ability inflicts mortal wounds on a D6 roll of 2+ instead of on a 6. In addition, the bearer has the Deadly Demise D3+1 ability, instead of the Deadly Demise D3 ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEADLY DEMISE"
+              ],
+              "value": "D3"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1703,7 +1834,16 @@
           ],
           "detachment": "Possessed Slaughterband",
           "detachmentId": 1044,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One World Eaters Possessed unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One World Eaters Possessed unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",
@@ -1984,7 +2124,16 @@
           ],
           "detachment": "Vessels of Wrath",
           "detachmentId": 1007,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll, or, if it is a <span class=\"kwb\">VESSEL</span> <span class=\"kwb\">OF</span> <span class=\"kwb\">WRATH</span> unit, subtract 1 from the Wound roll instead."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">WORLD</span> <span class=\"kwb\">EATERS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll, or, if it is a <span class=\"kwb\">VESSEL</span> <span class=\"kwb\">OF</span> <span class=\"kwb\">WRATH</span> unit, subtract 1 from the Wound roll instead.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "WE",

@@ -44,7 +44,38 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in this unit cannot be targeted by ranged attacks unless the attacking model is within 12\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": 12,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isWithinRange",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "range",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isWithinRange",
+              "operator": "greaterThan",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -53,7 +84,23 @@
       "factionId": "",
       "description": "At the end of your opponent's turn, if this model's unit is not within Engagement Range of any enemy models, you can remove it from the battlefield and place it into Strategic Reserves.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "value": "Strategic Reserves",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "INSPIRING COMMANDER",

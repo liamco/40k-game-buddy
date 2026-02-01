@@ -40,7 +40,37 @@
       "factionId": "",
       "description": "Each time an <span class=\"kwb\">INFANTRY</span> model is destroyed by an attack made with this model's barbed ovipositor, after this model has finished making its attacks, you can add one new Ripper Swarms unit to your army consisting of D3 models and set it up within 3\" of this model. If you do, that <span class=\"kwb\">RIPPER</span> <span class=\"kwb\">SWARMS</span> unit can be set up within Engagement Range of the destroyed model's unit (but not within Engagement Range of any other enemy units).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "d",
+          "value": "D3"
+        },
+        {
+          "entity": "thisArmy",
+          "effect": "addsKeyword",
+          "keywords": [
+            "RIPPER SWARMS"
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -49,7 +79,24 @@
       "factionId": "",
       "description": "At the start of the Fight phase, select one enemy unit within Engagement Range of this model. That enemy unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

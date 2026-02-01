@@ -33,7 +33,16 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets the closest enemy unit: <br><ul><li>If that attack is made with a Punisher gatling cannon and the target is not a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span>, add 1 to the Hit roll. </li><li>If that attack is made with a battle cannon and the target is a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span>, add 1 to the Hit roll. </li><li>If that attack is made with a quad-lascannon and the target can Fly, add 1 to the Hit roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
