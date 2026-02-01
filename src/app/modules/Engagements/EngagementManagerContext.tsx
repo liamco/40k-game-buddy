@@ -323,7 +323,10 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
             prev.map((engagement) => {
                 if (engagement.id !== engagementId) return engagement;
 
-                const forceKey = forceType === "attacking" ? "engagementForceA" : "engagementForceB";
+                // Determine which force contains the unit by checking both forces
+                // This handles the case where activeForce swaps between ForceA and ForceB
+                const unitInForceA = engagement.engagementForceA.items.some((item) => item.listItemId === unitId);
+                const forceKey = unitInForceA ? "engagementForceA" : "engagementForceB";
                 const force = engagement[forceKey];
 
                 const updatedItems = force.items.map((item) => {
@@ -348,7 +351,9 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
             prev.map((engagement) => {
                 if (engagement.id !== engagementId) return engagement;
 
-                const forceKey = forceType === "attacking" ? "engagementForceA" : "engagementForceB";
+                // Determine which force contains the unit by checking both forces
+                const unitInForceA = engagement.engagementForceA.items.some((item) => item.listItemId === unitId);
+                const forceKey = unitInForceA ? "engagementForceA" : "engagementForceB";
                 const force = engagement[forceKey];
 
                 const updatedItems = force.items.map((item) => {

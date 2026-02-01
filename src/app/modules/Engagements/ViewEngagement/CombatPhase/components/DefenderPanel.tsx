@@ -1,14 +1,17 @@
 import React, { useMemo } from "react";
 
 import type { EngagementForce, EngagementForceItemCombatState } from "#types/Engagements";
-import type { WeaponProfile, Model, GamePhase } from "#types/index";
+import type { Model, GamePhase } from "#types/index";
 
-import { type UnitSelectItem, hasPrecisionAttribute } from "../utils/combatUtils";
+import { type UnitSelectItem, type SelectedWeapon, hasPrecisionAttribute } from "../utils/combatUtils";
 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown";
 import SplitHeading from "#components/SplitHeading/SplitHeading";
 import ModelProfileCard from "#components/ModelProfileCard/ModelProfileCard";
 import CombatStatusPanel from "./CombatStatusPanel";
+import EmptyState from "#components/EmptyState/EmptyState.tsx";
+import IconSkull from "#components/icons/IconSkull.tsx";
+import { Badge } from "#components/Badge/Badge.tsx";
 
 interface DefenderPanelProps {
     gamePhase: GamePhase;
@@ -18,11 +21,11 @@ interface DefenderPanelProps {
     onUnitChange: (unit: UnitSelectItem) => void;
     selectedModel: Model | null;
     onModelChange: (model: Model | null) => void;
-    selectedWeaponProfile: WeaponProfile | null;
+    selectedWeapon: SelectedWeapon | null;
     onCombatStatusChange: (updates: Partial<EngagementForceItemCombatState>) => void;
 }
 
-export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedModel, onModelChange, selectedWeaponProfile, onCombatStatusChange }: DefenderPanelProps) {
+export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedModel, onModelChange, selectedWeapon, onCombatStatusChange }: DefenderPanelProps) {
     // Convert unit items to dropdown options
     const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
         return unitItems.map((unit) => ({
@@ -41,7 +44,7 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     }, [selectedUnit]);
 
     // Check if weapon has precision attribute
-    const hasPrecision = hasPrecisionAttribute(selectedWeaponProfile);
+    const hasPrecision = hasPrecisionAttribute(selectedWeapon);
 
     const handleUnitSelect = (unit: UnitSelectItem) => {
         onUnitChange(unit);
@@ -90,13 +93,26 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                 searchPlaceholder="Search units..."
                 emptyMessage="No units found"
                 onSelect={handleUnitSelect}
-                renderOption={(unit) => <span className="text-blockcaps-m">{unit.displayName}</span>}
+                renderOption={(unit) => (
+                    <div className={`flex p-2 items-center justify-between ${unit.item.combatState.isDestroyed ? "bg-wordBearersRed text-wildRiderRed" : ""}`}>
+                        <span className="text-blockcaps-m">{unit.displayName}</span> {unit.item.combatState.isDestroyed ? <Badge variant="destructive">Unit destroyed</Badge> : null}
+                    </div>
+                )}
                 triggerClassName="grow-1 rounded-l-none border-l-0"
             />
 
-            {combatState && selectedUnit && <CombatStatusPanel side="defender" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
+            {/* No unit selected */}
+            {!selectedUnit && (
+                <div className="flex items-center justify-center p-8">
+                    <p className="text-blockcaps-m opacity-50">Select a defending unit</p>
+                </div>
+            )}
 
-            {selectedUnit ? (
+            {/* Combat status panel - shown when unit is selected (alive or destroyed) */}
+            {selectedUnit && combatState && <CombatStatusPanel side="defender" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
+
+            {/* Unit selected and alive - show model selection */}
+            {selectedUnit && !combatState?.isDestroyed && (
                 <div className="space-y-4">
                     <SplitHeading label="Select target model" />
 
@@ -106,7 +122,7 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
 
                             // For combined units, leader models come first in the original array.
                             // Models at originalIdx < leaderModelCount are leaders and need PRECISION to target.
-                            const isLeaderModel = selectedUnit.item.sourceUnits && selectedUnit.item.sourceUnits.length > 1 && originalIdx < leaderModelCount;
+                            const isLeaderModel = selectedUnit?.item.sourceUnits && selectedUnit.item.sourceUnits.length > 1 && originalIdx < leaderModelCount;
                             const isDisabled = isLeaderModel && !hasPrecision;
 
                             return <ModelProfileCard key={`${model.name}-${originalIdx}`} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
@@ -115,9 +131,12 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
 
                     {sortedModels.length === 0 && <p className="text-blockcaps-s opacity-50">No model profiles available</p>}
                 </div>
-            ) : (
-                <div className="flex items-center justify-center p-8">
-                    <p className="text-blockcaps-m opacity-50">Select a defending unit</p>
+            )}
+
+            {/* Unit selected but destroyed */}
+            {selectedUnit && combatState?.isDestroyed && (
+                <div className="flex items-center justify-center p-8 text-wildRiderRed border-2 border-wildRiderRed">
+                    <EmptyState variant="red" label="Everyones dead Dave" leadingIcon={<IconSkull />} />
                 </div>
             )}
         </section>

@@ -40,10 +40,12 @@ export interface CounterControls {
 
 interface Props {
     profile: WeaponProfile;
+    /** Parent wargear ID - used to identify which wargear entry this profile belongs to */
+    wargearId?: string;
     isSelected?: boolean;
     isLinked?: boolean;
     isDisabled?: boolean;
-    onWeaponProfileChange?: (profile: WeaponProfile | null) => void;
+    onWeaponProfileChange?: (profile: WeaponProfile | null, wargearId?: string) => void;
     onToggle?: () => void;
     canToggle?: boolean;
     // Click handler for the whole card (used when no button is shown)
@@ -54,14 +56,14 @@ interface Props {
     statBonuses?: StatBonus[];
 }
 
-const WeaponProfileCard = ({ profile, isSelected, isLinked, isDisabled, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
+const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisabled, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
     const handleClick = () => {
         if (canToggle && onToggle) {
             onToggle();
         } else if (onCardClick) {
             onCardClick();
         } else if (onWeaponProfileChange) {
-            onWeaponProfileChange(profile);
+            onWeaponProfileChange(profile, wargearId);
         }
     };
 

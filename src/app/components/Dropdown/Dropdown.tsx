@@ -98,7 +98,7 @@ export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...",
                             <div className="p-2 text-skarsnikGreen/50">{emptyMessage}</div>
                         ) : (
                             filteredOptions.map((option) => (
-                                <div key={option.id} className="p-2 cursor-pointer hover:bg-skarsnikGreen hover:text-deathWorldForest transition-colors" onClick={() => handleSelect(option)}>
+                                <div key={option.id} className="cursor-pointer hover:bg-skarsnikGreen hover:text-deathWorldForest transition-colors" onClick={() => handleSelect(option)}>
                                     {renderOption ? renderOption(option.data, option.label) : option.label}
                                 </div>
                             ))

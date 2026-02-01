@@ -50,7 +50,7 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
         const aliveCount = totalModels - deadModelIds.length;
         const unitStrength = calculateUnitStrength(aliveCount, startingStrength);
         onModelCountChange(aliveCount);
-        onCombatStatusChange({ deadModelIds, unitStrength });
+        onCombatStatusChange({ deadModelIds, unitStrength, isDestroyed: aliveCount === 0 ? true : false });
     };
 
     const handleIncrement = () => {
@@ -77,7 +77,7 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
 
     const currentObjectiveLabel = objectiveRangeOptions.find((o) => o.data.value === combatState.isInObjectiveRange)?.label || "None";
 
-    const isAllDead = combatState.modelCount <= 0;
+    console.log(unit.name, combatState.isDestroyed);
 
     const getUnitStrengthLabelColour = () => {
         switch (combatState.unitStrength) {
@@ -101,43 +101,43 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
             <div className="flex justify-between items-center">
                 <div className="space-y-1">
                     <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
-                        <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{combatState.modelCount > 0 ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
+                        <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
                     </Button>
                     <div className="flex items-center gap-2">
-                        <button onClick={handleDecrement} disabled={isAllDead} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${isAllDead ? "bg-fireDragonBright/30 cursor-not-allowed" : ""}`}>
+                        <button onClick={handleDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.isDestroyed ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}>
                             <Minus className="w-4 h-4" />
                         </button>
-                        <button onClick={handleIncrement} disabled={combatState.unitStrength === "full"} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.unitStrength === "full" ? "bg-fireDragonBright/30 cursor-not-allowed" : ""}`}>
+                        <button onClick={handleIncrement} disabled={combatState.unitStrength === "full"} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.unitStrength === "full" ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}>
                             <Plus className="w-4 h-4" />
                         </button>
                     </div>
                 </div>
 
                 <ul className={`inline-grid gap-1`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
-                    {unit.modelInstances.map((m: EngagementModelInstance, idx: number) => (
-                        <li className={`${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
-                            <BaseIcon key={idx} size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
+                    {unit.modelInstances.map((m: EngagementModelInstance) => (
+                        <li key={m.instanceId} className={`${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
+                            <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
                                 <IconSkull />
                             </BaseIcon>
                         </li>
                     ))}
                 </ul>
             </div>
-            <div className="flex justify-between items-center">
+            <div className={`flex justify-between items-center ${combatState.isDestroyed ? "cursor-not-allowed opacity-50" : ""}`}>
                 <div className="relative grow max-w-[15rem]">
                     <span className="text-blockcaps-s">In Obj Range</span>
-                    <Dropdown variant="minimal" triggerClassName="w-full" options={objectiveRangeOptions} selectedLabel={currentObjectiveLabel} placeholder="Select..." onSelect={handleObjectiveRangeChange} />
+                    <Dropdown variant="minimal" disabled={combatState.isDestroyed} triggerClassName="w-full" options={objectiveRangeOptions} selectedLabel={currentObjectiveLabel} placeholder="Select..." onSelect={handleObjectiveRangeChange} />
                 </div>
                 <div className="flex gap-2">
-                    <CombatStatusToken icon={combatState.movementBehaviour} active />
+                    <CombatStatusToken disabled={combatState.isDestroyed} icon={combatState.movementBehaviour} active />
 
                     {side === "attacker" && <></>}
                     {side === "defender" && (
                         <>
-                            <CombatStatusToken variant="highlight" icon="cover" active={combatState.isInCover} onChange={handleBooleanToggle("isInCover")} />
+                            <CombatStatusToken disabled={combatState.isDestroyed} variant="highlight" icon="cover" active={combatState.isInCover} onChange={handleBooleanToggle("isInCover")} />
                         </>
                     )}
-                    <CombatStatusToken icon="shock" variant="destructive" active={combatState.isBattleShocked} onChange={handleBooleanToggle("isBattleShocked")} />
+                    <CombatStatusToken disabled={combatState.isDestroyed} icon="shock" variant="destructive" active={combatState.isBattleShocked} onChange={handleBooleanToggle("isBattleShocked")} />
                 </div>
             </div>
 

@@ -45,10 +45,10 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
     const Icon = stepType ? stepIcons[stepType] : null;
 
     return (
-        <section className="relative not-first:border-1 border-t-skarsnikGreen">
-            <div className={`space-y-2 grid h-full grid-rows-[auto_1fr] p-4 ${disabled ? "opacity-25" : ""}`}>
-                <header className="border-1 border-skarsnikGreen p-2 flex items-center justify-between">
-                    <span className="text-blockcaps-m">{label}</span>
+        <section className="relative border-1 border-t-0 first:border-t-1  border-skarsnikGreen">
+            <div className={`grid h-full grid-rows-[auto_1fr] ${disabled ? "opacity-25" : ""}`}>
+                <header className="border-b-1 border-skarsnikGreen bg-deathWorldForest p-2 flex items-center justify-between">
+                    <span className="text-blockcaps-s">{label}</span>
                     {Icon && (
                         <BaseIcon>
                             <Icon />
@@ -56,7 +56,7 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
                     )}
                 </header>
 
-                <div className="grid-cols-3 grid w-full">
+                <div className="grid-cols-3 p-3 grid w-full">
                     {statLabel && statValue ? (
                         <ResultBox label={statLabel} value={statValue} />
                     ) : (
@@ -64,7 +64,7 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
                             <p>-</p>
                         </div>
                     )}
-                    <div className=" grid grid-cols-2">
+                    <div className="grid grid-cols-2">
                         {bonuses.length ? (
                             <ResultBox value={`+${bonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={bonuses} />
                         ) : (

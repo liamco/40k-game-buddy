@@ -64,7 +64,7 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
     }, [resolution]);
 
     return (
-        <section className="grid grid-rows-5 rounded border-2 border-skarsnikGreen overflow-auto h-[calc(100vh-161.5px)]">
+        <section className="grid grid-rows-5 rounded overflow-auto h-[calc(100vh-161.5px)]">
             {resolution ? (
                 <Fragment>
                     <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={resolution.attacksModifiers.forDisplay.bonuses} penalties={resolution.attacksModifiers.forDisplay.penalties} finalValue={attacksDisplay.total} />

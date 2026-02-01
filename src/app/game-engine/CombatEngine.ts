@@ -131,6 +131,22 @@ export class CombatEngine {
         // Weapon attributes (HEAVY, TORRENT, etc.)
         this.collectFromWeapon();
 
+        // Cover: +1 to save if defender is in cover (unless weapon ignores cover)
+        if (this.context.defender.unit.combatState?.isInCover) {
+            const hasIgnoresCover = this.weaponEffects.some((e) => e.type === "ignoresCover");
+            if (!hasIgnoresCover) {
+                this.collectedMechanics.push({
+                    mechanic: {
+                        entity: "targetUnit",
+                        effect: "rollBonus",
+                        attribute: "s",
+                        value: 1,
+                    },
+                    source: createEffectSource("coreRule", "Cover"),
+                });
+            }
+        }
+
         // Future: Unit abilities, leader abilities, stratagems, etc.
         // this.collectFromUnitAbilities();
         // this.collectFromLeaderAbilities();

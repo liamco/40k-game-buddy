@@ -11,6 +11,16 @@ export interface UnitSelectItem {
 }
 
 /**
+ * Selected weapon with reference to parent wargear.
+ * Used to correctly identify which wargear entry the profile belongs to,
+ * especially in combined units where multiple sources may have the same weapon name.
+ */
+export interface SelectedWeapon {
+    profile: WeaponProfile;
+    wargearId: string;
+}
+
+/**
  * Build a list of selectable unit items from an engagement force.
  * Units are already merged (leader + bodyguard) at engagement creation time.
  */
@@ -49,21 +59,38 @@ export function getFirstWeaponProfileForPhase(wargear: EngagementWargear[], phas
 }
 
 /**
- * Check if a weapon profile has the PRECISION attribute.
+ * Get the first weapon (with wargearId) matching the current game phase.
+ * Returns a SelectedWeapon with both the profile and wargearId for proper tracking.
  */
-export function hasPrecisionAttribute(profile: WeaponProfile | null): boolean {
-    if (!profile || !profile.attributes) return false;
+export function getFirstWeaponForPhase(wargear: EngagementWargear[], phase: "shooting" | "fight"): SelectedWeapon | null {
+    const weaponType = phase === "shooting" ? "Ranged" : "Melee";
+    const weapon = wargear.find((w) => w.type === weaponType);
+    if (weapon && weapon.profiles.length > 0) {
+        return { profile: weapon.profiles[0], wargearId: weapon.id };
+    }
+    return null;
+}
+
+/**
+ * Check if a weapon profile has the PRECISION attribute.
+ * Accepts either a WeaponProfile directly or a SelectedWeapon.
+ */
+export function hasPrecisionAttribute(weapon: WeaponProfile | SelectedWeapon | null): boolean {
+    if (!weapon) return false;
+    const profile = "profile" in weapon ? weapon.profile : weapon;
+    if (!profile.attributes) return false;
     return profile.attributes.includes("PRECISION");
 }
 
 /**
  * Get the first valid model for the defender, respecting precision rules.
  * For combined units (with sourceUnits), prefer non-leader models unless weapon has PRECISION.
+ * Accepts either a WeaponProfile directly or a SelectedWeapon.
  */
-export function getFirstValidDefenderModel(unit: EngagementForceItem | undefined, weaponProfile: WeaponProfile | null): Model | null {
+export function getFirstValidDefenderModel(unit: EngagementForceItem | undefined, weapon: WeaponProfile | SelectedWeapon | null): Model | null {
     if (!unit || !unit.models || unit.models.length === 0) return null;
 
-    const hasPrecision = hasPrecisionAttribute(weaponProfile);
+    const hasPrecision = hasPrecisionAttribute(weapon);
 
     // If this is a combined unit (has sourceUnits), handle precision targeting
     if (unit.sourceUnits && unit.sourceUnits.length > 1) {
@@ -110,6 +137,29 @@ export function filterWargearByAliveModels(unit: EngagementForceItem | undefined
 
     // Filter wargear to only weapons carried by alive models
     return (unit.wargear || []).filter((w) => aliveWeaponIds.has(w.id));
+}
+
+/**
+ * Count alive models that have a specific weapon in their loadout.
+ * Used to calculate the number of attacks for a weapon profile.
+ *
+ * @param unit The unit to check
+ * @param selectedWeapon The selected weapon with wargearId for precise matching
+ */
+export function countAliveModelsWithWeapon(unit: EngagementForceItem | undefined, selectedWeapon: SelectedWeapon | null): number {
+    if (!unit || !selectedWeapon) return 0;
+
+    const deadModelIds = unit.combatState?.deadModelIds || [];
+    const instances = unit.modelInstances || [];
+
+    if (instances.length === 0) {
+        // No model instances - fall back to total alive model count
+        return (unit.combatState?.modelCount || 0) - deadModelIds.length;
+    }
+
+    // Use the wargearId directly to find matching models
+    // This correctly handles combined units where multiple sources have the same weapon name
+    return instances.filter((m: EngagementModelInstance) => !deadModelIds.includes(m.instanceId) && m.loadout.includes(selectedWeapon.wargearId)).length;
 }
 
 /**

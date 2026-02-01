@@ -129,11 +129,13 @@ interface CombatResolution {
 | Mechanic | Description |
 |----------|-------------|
 | Base calculations | To-hit (BS/WS), to-wound (S vs T), saves (armor/invuln with AP) |
-| TORRENT | Auto-hit detection, displays "Auto" |
-| HEAVY | +1 to hit when unit's `movementBehaviour` is "hold" |
 | Modifier capping | +1/-1 cap enforced for hit and wound rolls |
 | Modifier attribution | Bonuses/penalties display with source labels |
+| Benefit of cover | +1 save when unit's `isInCover` is "true" |
+| HEAVY | +1 to hit when unit's `movementBehaviour` is "hold" |
+| TORRENT | Auto-hit detection, displays "Auto" |
 | PRECISION | Allows targeting of leaders in combined units |
+| IGNORES COVER | Parsed | Cover bonuses for defenders |
 
 ### Groundwork Laid - Conditions Need to be Met
 
@@ -145,7 +147,7 @@ interface CombatResolution {
 | DEVASTATING WOUNDS | Parsed as SpecialEffect | Dice rolling implementation |
 | RAPID FIRE | Parsed with value | "In half range" state tracking |
 | MELTA | Parsed with value | "In half range" state tracking |
-| IGNORES COVER | Parsed | Cover bonuses for defenders |
+
 | ASSAULT, HAZARDOUS, BLAST, INDIRECT | Parsed as SpecialEffect | Display only currently |
 
 ### Future Phases
@@ -158,9 +160,7 @@ interface CombatResolution {
 | Detachment rules | Not collected by engine yet |
 | Faction abilities | Not collected by engine yet |
 | Enhancements | Not collected by engine yet |
-| Cover bonuses | `isInCover` tracked but not applied |
 | Feel No Pain | Model type lacks `fnp` property |
-| Dice rolling | Engine outputs target numbers only |
 | Rerolls | Type exists but no implementation |
 
 ## Extending the Engine

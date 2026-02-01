@@ -3,12 +3,15 @@ import React, { useMemo, Fragment } from "react";
 import type { EngagementForce, EngagementForceItemCombatState, EngagementWargear } from "#types/Engagements";
 import type { WeaponProfile, GamePhase } from "#types/index";
 
-import { type UnitSelectItem, filterWargearByAliveModels, groupWargearBySource } from "../utils/combatUtils";
+import { type UnitSelectItem, type SelectedWeapon, filterWargearByAliveModels, groupWargearBySource } from "../utils/combatUtils";
 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown.tsx";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 import WeaponProfileCard from "#components/WeaponProfileCard/WeaponProfileCard.tsx";
 import CombatStatusPanel from "./CombatStatusPanel.tsx";
+import EmptyState from "#components/EmptyState/EmptyState.tsx";
+import IconSkull from "#components/icons/IconSkull.tsx";
+import { Badge } from "#components/Badge/Badge.tsx";
 
 interface AttackerPanelProps {
     gamePhase: GamePhase;
@@ -16,12 +19,12 @@ interface AttackerPanelProps {
     unitItems: UnitSelectItem[];
     selectedUnit: UnitSelectItem | undefined;
     onUnitChange: (unit: UnitSelectItem) => void;
-    selectedWeaponProfile: WeaponProfile | null;
-    onWeaponProfileChange: (profile: WeaponProfile | null) => void;
+    selectedWeapon: SelectedWeapon | null;
+    onWeaponChange: (weapon: SelectedWeapon | null) => void;
     onCombatStatusChange: (updates: Partial<EngagementForceItemCombatState>) => void;
 }
 
-export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedWeaponProfile, onWeaponProfileChange, onCombatStatusChange }: AttackerPanelProps) {
+export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedWeapon, onWeaponChange, onCombatStatusChange }: AttackerPanelProps) {
     // Convert unit items to dropdown options
     const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
         return unitItems.map((unit) => ({
@@ -56,7 +59,15 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
 
     const handleUnitSelect = (unit: UnitSelectItem) => {
         onUnitChange(unit);
-        onWeaponProfileChange(null);
+        onWeaponChange(null);
+    };
+
+    const handleWeaponProfileSelect = (profile: WeaponProfile | null, wargearId?: string) => {
+        if (profile && wargearId) {
+            onWeaponChange({ profile, wargearId });
+        } else {
+            onWeaponChange(null);
+        }
     };
 
     return (
@@ -69,13 +80,26 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                 searchPlaceholder="Search units..."
                 emptyMessage="No units found"
                 onSelect={handleUnitSelect}
-                renderOption={(unit) => <span className="text-blockcaps-m">{unit.displayName}</span>}
+                renderOption={(unit) => (
+                    <div className={`flex p-2 items-center justify-between ${unit.item.combatState.isDestroyed ? "bg-wordBearersRed text-wildRiderRed" : ""}`}>
+                        <span className="text-blockcaps-m">{unit.displayName}</span> {unit.item.combatState.isDestroyed ? <Badge variant="destructive">Unit destroyed</Badge> : null}
+                    </div>
+                )}
                 triggerClassName="grow-1 rounded-l-none border-l-0"
             />
 
-            {combatState && selectedUnit && <CombatStatusPanel side="attacker" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
+            {/* No unit selected */}
+            {!selectedUnit && (
+                <div className="flex items-center justify-center p-8">
+                    <p className="text-blockcaps-m opacity-50">Select an attacking unit</p>
+                </div>
+            )}
 
-            {selectedUnit ? (
+            {/* Combat status panel - shown when unit is selected (alive or destroyed) */}
+            {selectedUnit && combatState && <CombatStatusPanel side="attacker" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
+
+            {/* Unit selected and alive - show weapon selection */}
+            {selectedUnit && !combatState?.isDestroyed && (
                 <div className="space-y-4">
                     <SplitHeading label="Select weapon" />
 
@@ -88,8 +112,8 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                     {groupedWeapons.groups[source].map((weapon: EngagementWargear) => (
                                         <Fragment key={weapon.id}>
                                             {weapon.profiles.map((profile: WeaponProfile) => {
-                                                const isSelected = selectedWeaponProfile?.datasheetId === profile.datasheetId && selectedWeaponProfile?.line === profile.line;
-                                                return <WeaponProfileCard key={`${profile.datasheetId}-${profile.line}`} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                                const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
+                                                return <WeaponProfileCard key={`${weapon.id}-${profile.line}`} profile={profile} wargearId={weapon.id} isSelected={isSelected} onWeaponProfileChange={handleWeaponProfileSelect} />;
                                             })}
                                         </Fragment>
                                     ))}
@@ -102,8 +126,8 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                             {filteredWeapons.map((weapon) => (
                                 <Fragment key={weapon.id}>
                                     {weapon.profiles.map((profile: WeaponProfile) => {
-                                        const isSelected = selectedWeaponProfile?.datasheetId === profile.datasheetId && selectedWeaponProfile?.line === profile.line;
-                                        return <WeaponProfileCard key={`${profile.datasheetId}-${profile.line}`} profile={profile} isSelected={isSelected} onWeaponProfileChange={onWeaponProfileChange} />;
+                                        const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
+                                        return <WeaponProfileCard key={`${weapon.id}-${profile.line}`} profile={profile} wargearId={weapon.id} isSelected={isSelected} onWeaponProfileChange={handleWeaponProfileSelect} />;
                                     })}
                                 </Fragment>
                             ))}
@@ -112,9 +136,12 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
 
                     {filteredWeapons.length === 0 && <p className="text-blockcaps-s opacity-50">No {gamePhase === "shooting" ? "ranged" : "melee"} weapons available</p>}
                 </div>
-            ) : (
-                <div className="flex items-center justify-center p-8">
-                    <p className="text-blockcaps-m opacity-50">Select an attacking unit</p>
+            )}
+
+            {/* Unit selected but destroyed */}
+            {selectedUnit && combatState?.isDestroyed && (
+                <div className="flex items-center justify-center p-8 text-wildRiderRed border-2 border-wildRiderRed">
+                    <EmptyState variant="red" label="Everyones dead Dave" leadingIcon={<IconSkull />} />
                 </div>
             )}
         </section>
