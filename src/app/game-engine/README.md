@@ -137,6 +137,7 @@ interface CombatResolution {
 | PRECISION | Allows targeting of leaders in combined units |
 | IGNORES COVER | Parsed | Cover bonuses for defenders |
 | ANTI-X Y | Parsed | Critical wounds on Y when targeting units with keyword X |
+| ASSAULT | Parsed | Allows a weapon to be fired after a unit advances |
 
 ### Groundwork Laid - Conditions Need to be Met
 
@@ -149,7 +150,7 @@ interface CombatResolution {
 | RAPID FIRE | Parsed with value | "In half range" state tracking |
 | MELTA | Parsed with value | "In half range" state tracking |
 
-| ASSAULT, HAZARDOUS, BLAST, INDIRECT | Parsed as SpecialEffect | Display only currently |
+| HAZARDOUS, BLAST, INDIRECT | Parsed as SpecialEffect | Display only currently |
 
 ### Future Phases
 

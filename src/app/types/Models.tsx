@@ -1,3 +1,5 @@
+import { Weapon } from "./Weapons";
+
 export interface Model {
     datasheetId: string;
     name: string;

@@ -11,6 +11,7 @@ import FinalResultBox from "./FinalResultbox";
 import ResultBox from "./ResultBox";
 
 import strikethrough from "#assets/StrikethroughGreen.svg";
+import ModifierBox from "./ModifierBox";
 
 interface Modifier {
     label: string;
@@ -57,30 +58,9 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
                     )}
                 </header>
 
-                <div className="grid-cols-3 p-3 grid w-full">
-                    {statLabel && statValue ? (
-                        <ResultBox label={statLabel} value={statValue} />
-                    ) : (
-                        <div className=" flex items-center justify-center">
-                            <p>-</p>
-                        </div>
-                    )}
-                    <div className="space-y-2 flex flex-col justify-center items-center">
-                        {bonuses.length ? (
-                            <ResultBox value={`+${bonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={bonuses} />
-                        ) : (
-                            <div className="flex items-center justify-center">
-                                <p>-</p>
-                            </div>
-                        )}
-                        {penalties.length ? (
-                            <ResultBox value={`${penalties.reduce((sum, p) => sum + p.value, 0)}`} modifiers={penalties} />
-                        ) : (
-                            <div className="flex items-center justify-center">
-                                <p>-</p>
-                            </div>
-                        )}
-                    </div>
+                <div className="grid-cols-8 p-3 grid w-full">
+                    <ResultBox value={statValue} />
+                    <ModifierBox bonuses={bonuses} penalties={penalties} />
                     <FinalResultBox className={finalClassName} value={finalValue} isCritical={isCritical} />
                 </div>
             </div>

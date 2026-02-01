@@ -1,6 +1,20 @@
 import { Model } from "./Models";
 import { DamagedMechanic } from "./States";
 import { Weapon } from "./Weapons";
+import type { Mechanic } from "#game-engine/types/Mechanic";
+
+export type AbilityType = "Core" | "Faction" | "Datasheet";
+
+export interface Ability {
+    name: string;
+    type: AbilityType;
+    id?: string;
+    legend?: string;
+    factionId?: string;
+    description?: string;
+    parameter?: string;
+    mechanics?: Mechanic[];
+}
 
 export interface Datasheet {
     id: string;
@@ -13,7 +27,7 @@ export interface Datasheet {
     legend?: string;
     loadout?: string;
     transport?: string;
-    abilities?: any[];
+    abilities?: Ability[];
     factionAbilityIds?: string[];
     keywords?: any[];
     models?: Model[];

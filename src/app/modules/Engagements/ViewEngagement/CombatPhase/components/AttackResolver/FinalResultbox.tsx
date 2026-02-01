@@ -11,7 +11,7 @@ interface Props {
 
 const FinalResultBox = ({ className = "bg-fireDragonBright text-mournfangBrown", value, isCritical }: Props) => {
     return (
-        <div className={`${className} h-full bg-fireDragonBright text-mournfangBrown rounded px-4 flex items-center justify-center gap-1`}>
+        <div className={`${className} col-span-3 h-full bg-fireDragonBright text-mournfangBrown rounded px-4 flex items-center justify-center gap-1`}>
             <figure className="text-title-l">{value}</figure>
             {isCritical && (
                 <BaseIcon color="mournfangBrown" size="large">
