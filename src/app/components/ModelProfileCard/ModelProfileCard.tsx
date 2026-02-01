@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Model } from "#types/Models.tsx";
 
 import { Badge } from "#components/Badge/Badge.tsx";
@@ -6,26 +6,42 @@ import { Badge } from "#components/Badge/Badge.tsx";
 import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconShield from "#components/icons/IconShield.tsx";
 
-import strikethrough from "#assets/StrikethroughGreen.svg";
+import strikethroughGreen from "#assets/StrikethroughGreen.svg";
+import strikethroughRed from "#assets/StrikethroughRed.svg";
+import IconSkull from "#components/icons/IconSkull.tsx";
 
 interface Props {
     model: Model & { sourceUnit?: string; isLeader?: boolean };
     isDisabled?: boolean;
+    isDestroyed?: boolean;
     isSelected?: boolean;
     onUnitModelChange?: (profile: Model | null) => void;
 }
 
-const ModelProfileCard = ({ model, isDisabled, isSelected, onUnitModelChange }: Props) => {
+const ModelProfileCard = ({ model, isDisabled, isSelected, isDestroyed, onUnitModelChange }: Props) => {
+    const resolveStyles = () => {
+        if (isDestroyed) {
+            return "bg-wordBearersRed shadow-none border-wildRiderRed  text-wildRiderRed";
+        }
+        if (isDisabled) {
+            return "";
+        }
+        if (isSelected) {
+            return "bg-skarsnikGreen shadow-glow-green text-deathWorldForest";
+        }
+        return "";
+    };
+
     return (
         <div
-            className={`relative rounded p-3 border-1 transition-colors border-skarsnikGreen ${isSelected ? "bg-skarsnikGreen shadow-glow-green text-deathWorldForest" : "text-skarsnikGreen"} ${!isDisabled && onUnitModelChange ? "cursor-pointer " : ""}`}
+            className={`relative rounded p-3 border-1 transition-colors border-skarsnikGreen ${resolveStyles()} ${!isDisabled && onUnitModelChange ? "cursor-pointer " : ""}`}
             onClick={() => {
-                if (!isDisabled && onUnitModelChange) {
+                if (!isDisabled && !isDestroyed && onUnitModelChange) {
                     onUnitModelChange(model);
                 }
             }}
         >
-            <div className={`space-y-3 ${isDisabled ? "opacity-25" : ""}`}>
+            <div className={`space-y-3 ${isDisabled ? "opacity-25" : ""} ${isDestroyed ? "opacity-40" : ""}`}>
                 <div className="flex items-center gap-2">
                     <p>{model.name}</p>
                     {model.isLeader && <Badge variant="outline">Leader</Badge>}
@@ -49,12 +65,22 @@ const ModelProfileCard = ({ model, isDisabled, isSelected, onUnitModelChange }: 
                             <BaseIcon color="deathWorldForest" size="large">
                                 <IconShield />
                             </BaseIcon>
-                            <span className="inline-block text-skarsnikGreen absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">{model.invSv}</span>
+                            <span className={`inline-block ${isDestroyed ? "text-wildRiderRed" : "text-skarsnikGreen"} absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}>{model.invSv}</span>
                         </div>
                     )}
                 </div>
             </div>
-            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />}
+            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethroughGreen} alt="X" />}
+            {isDestroyed && (
+                <Fragment>
+                    <img className="absolute w-full h-full top-0 left-0 pointer-events-none" src={strikethroughRed} alt="X" />
+                    <div className="bg-wordBearersRed border-1 border-wildRiderRed shadow-glow-red p-2 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+                        <BaseIcon size="xlarge" color="wildRiderRed">
+                            <IconSkull />
+                        </BaseIcon>
+                    </div>
+                </Fragment>
+            )}
         </div>
     );
 };

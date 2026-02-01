@@ -69,6 +69,24 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
         return leaderModelTypes.size;
     }, [selectedUnit]);
 
+    // Check if all bodyguard models are dead - if so, leaders become targetable without PRECISION
+    const allBodyguardsKilled = useMemo(() => {
+        if (!selectedUnit?.item.sourceUnits || selectedUnit.item.sourceUnits.length <= 1) return false;
+
+        const instances = selectedUnit.item.modelInstances || [];
+        const deadModelIds = selectedUnit.item.combatState?.deadModelIds || [];
+        const bodyguardNames = new Set(selectedUnit.item.sourceUnits.filter((s) => !s.isLeader).map((s) => s.name));
+
+        // Find all bodyguard model instances
+        const bodyguardInstances = instances.filter((m) => m.sourceUnitName && bodyguardNames.has(m.sourceUnitName));
+
+        // If no bodyguard instances, leaders are targetable
+        if (bodyguardInstances.length === 0) return true;
+
+        // Check if all bodyguard instances are dead
+        return bodyguardInstances.every((m) => deadModelIds.includes(m.instanceId));
+    }, [selectedUnit, combatState?.deadModelIds]);
+
     // Sort models: bodyguard first, leaders last (for combined units)
     const sortedModels = useMemo(() => {
         if (!selectedUnit?.item.sourceUnits || selectedUnit.item.sourceUnits.length <= 1) {
@@ -121,11 +139,24 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                             const isSelected = selectedModel?.name === model.name;
 
                             // For combined units, leader models come first in the original array.
-                            // Models at originalIdx < leaderModelCount are leaders and need PRECISION to target.
+                            // Models at originalIdx < leaderModelCount are leaders and need PRECISION to target,
+                            // UNLESS all bodyguard models have been killed.
                             const isLeaderModel = selectedUnit?.item.sourceUnits && selectedUnit.item.sourceUnits.length > 1 && originalIdx < leaderModelCount;
-                            const isDisabled = isLeaderModel && !hasPrecision;
+                            const isDisabled = isLeaderModel && !hasPrecision && !allBodyguardsKilled;
 
-                            return <ModelProfileCard key={`${model.name}-${originalIdx}`} model={model} isSelected={isSelected} isDisabled={isDisabled} onUnitModelChange={onModelChange} />;
+                            // Check if all model instances of this profile are dead
+                            // Match by modelType, accounting for singular/plural differences
+                            // (e.g., model.name = "Zoanthropes", instance.modelType = "Zoanthrope")
+                            const instances = selectedUnit.item.modelInstances || [];
+                            const deadModelIds = combatState?.deadModelIds || [];
+                            const modelNameLower = model.name.toLowerCase();
+                            const profileInstances = instances.filter((m) => {
+                                const instanceTypeLower = m.modelType.toLowerCase();
+                                return instanceTypeLower === modelNameLower || instanceTypeLower + "s" === modelNameLower || instanceTypeLower === modelNameLower + "s";
+                            });
+                            const isDestroyed = profileInstances.length > 0 && profileInstances.every((m) => deadModelIds.includes(m.instanceId));
+
+                            return <ModelProfileCard key={`${model.name}-${originalIdx}`} model={model} isSelected={isSelected} isDisabled={isDisabled} isDestroyed={isDestroyed} onUnitModelChange={onModelChange} />;
                         })}
                     </div>
 
