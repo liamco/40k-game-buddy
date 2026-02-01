@@ -32,7 +32,7 @@ function AlertDialogOverlay({ className, ...props }: React.ComponentProps<typeof
 
 const alertDialogContentVariants = {
     default: "bg-deathWorldForest text-skarsnikGreen border-skarsnikGreen",
-    warning: "bg-averland text-yurielYellow border-yurielYellow",
+    warning: "bg-mournfangBrown text-fireDragonBright border-fireDragonBright",
     destructive: "bg-wordBearersRed text-wildRiderRed border-wildRiderRed",
 };
 

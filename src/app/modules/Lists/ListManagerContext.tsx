@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useMemo, useCallback, ReactNode } from "react";
 
 import { getAllFactions, loadFactionData, loadFactionConfig, loadDatasheetData } from "../../utils/depotDataLoader";
+import { getUnitById } from "../../utils/unitHelpers";
 import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, UnitWeapons, LeaderReference, LeaderCondition, UnitCombatState, Enhancement, Weapon, WarlordEligibility, ModelInstance } from "../../types";
 
 /**
@@ -903,7 +904,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     }, []);
 
     const removeItemFromList = useCallback((list: ArmyList, itemId: string): ArmyList => {
-        const itemToRemove = list.items.find((item) => item.listItemId === itemId);
+        const itemToRemove = getUnitById(list.items, itemId);
         if (!itemToRemove) return list;
 
         let updatedItems = list.items.map((item) => {
@@ -981,7 +982,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     // Add a model instance to a unit
     const addModelInstance = useCallback(
         (list: ArmyList, unitId: string, compositionLine: number): ArmyList => {
-            const unit = list.items.find((item) => item.listItemId === unitId);
+            const unit = getUnitById(list.items, unitId);
             if (!unit) return list;
 
             const comp = unit.unitComposition?.find((c) => (c.line || 1) === compositionLine);
@@ -1019,7 +1020,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     // Remove a model instance from a unit (removes last of that type)
     const removeModelInstance = useCallback(
         (list: ArmyList, unitId: string, compositionLine: number): ArmyList => {
-            const unit = list.items.find((item) => item.listItemId === unitId);
+            const unit = getUnitById(list.items, unitId);
             if (!unit || !unit.modelInstances) return list;
 
             const comp = unit.unitComposition?.find((c) => (c.line || 1) === compositionLine);
@@ -1052,7 +1053,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Update a specific model's loadout
     const updateModelLoadout = useCallback((list: ArmyList, unitId: string, instanceId: string, newLoadout: string[]): ArmyList => {
-        const unit = list.items.find((item) => item.listItemId === unitId);
+        const unit = getUnitById(list.items, unitId);
         if (!unit || !unit.modelInstances) return list;
 
         const updatedInstances = unit.modelInstances.map((instance) => (instance.instanceId === instanceId ? { ...instance, loadout: newLoadout } : instance));
@@ -1080,8 +1081,8 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Validate if a leader can attach to a unit (considering existing leaders)
     const canAttachLeaderToUnit = useCallback((list: ArmyList, leaderItemId: string, targetUnitItemId: string): MultiLeaderValidationResult => {
-        const leaderItem = list.items.find((item) => item.listItemId === leaderItemId);
-        const targetUnitItem = list.items.find((item) => item.listItemId === targetUnitItemId);
+        const leaderItem = getUnitById(list.items, leaderItemId);
+        const targetUnitItem = getUnitById(list.items, targetUnitItemId);
 
         if (!leaderItem || !targetUnitItem) {
             return { canAttach: false, reason: "Leader or target unit not found" };
@@ -1089,19 +1090,19 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
         // Get existing leaders attached to the target unit
         const existingLeaderRefs = targetUnitItem.leadBy || [];
-        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.listItemId === ref.listItemId)).filter((item): item is ArmyListItem => item !== undefined);
+        const existingLeaders = existingLeaderRefs.map((ref) => getUnitById(list.items, ref.listItemId)).filter((item): item is ArmyListItem => item !== undefined);
 
         return validateMultiLeaderAttachment(leaderItem, existingLeaders);
     }, []);
 
     const attachLeaderToUnit = useCallback((list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace: boolean = false): ArmyList => {
-        const leaderItem = list.items.find((item) => item.listItemId === leaderItemId);
-        const targetUnitItem = list.items.find((item) => item.listItemId === targetUnitItemId);
+        const leaderItem = getUnitById(list.items, leaderItemId);
+        const targetUnitItem = getUnitById(list.items, targetUnitItemId);
         if (!leaderItem || !targetUnitItem) return list;
 
         // Get existing leaders attached to the target unit
         const existingLeaderRefs = targetUnitItem.leadBy || [];
-        const existingLeaders = existingLeaderRefs.map((ref) => list.items.find((item) => item.listItemId === ref.listItemId)).filter((item): item is ArmyListItem => item !== undefined);
+        const existingLeaders = existingLeaderRefs.map((ref) => getUnitById(list.items, ref.listItemId)).filter((item): item is ArmyListItem => item !== undefined);
 
         // Validate multi-leader attachment
         const validation = validateMultiLeaderAttachment(leaderItem, existingLeaders);
@@ -1110,7 +1111,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         const shouldReplace = !validation.canAttach && (forceReplace || validation.wouldReplace);
 
         // Find previous target if this leader was already attached somewhere
-        const previousTargetItem = leaderItem.leading ? list.items.find((item) => item.listItemId === leaderItem.leading?.listItemId) : null;
+        const previousTargetItem = leaderItem.leading ? getUnitById(list.items, leaderItem.leading.listItemId) : null;
 
         const updatedItems = list.items.map((item) => {
             // Update the leader with new target
@@ -1166,10 +1167,10 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     }, []);
 
     const detachLeaderFromUnit = useCallback((list: ArmyList, leaderItemId: string): ArmyList => {
-        const leaderItem = list.items.find((item) => item.listItemId === leaderItemId);
+        const leaderItem = getUnitById(list.items, leaderItemId);
         if (!leaderItem?.leading) return list;
 
-        const targetUnitItem = list.items.find((item) => item.listItemId === leaderItem.leading?.listItemId);
+        const targetUnitItem = getUnitById(list.items, leaderItem.leading.listItemId);
 
         const updatedItems = list.items.map((item) => {
             // Remove leading from the leader
@@ -1336,8 +1337,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Get the current warlord unit from a list
     const getWarlord = useCallback((list: ArmyList): ArmyListItem | undefined => {
-        if (!list.warlordItemId) return undefined;
-        return list.items.find((item) => item.listItemId === list.warlordItemId);
+        return getUnitById(list.items, list.warlordItemId);
     }, []);
 
     // Get all units eligible to be warlord in a list

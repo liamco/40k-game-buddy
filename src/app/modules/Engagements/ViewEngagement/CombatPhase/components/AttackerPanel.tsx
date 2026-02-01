@@ -80,8 +80,9 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                 searchPlaceholder="Search units..."
                 emptyMessage="No units found"
                 onSelect={handleUnitSelect}
+                optionClassName={(unit) => (unit.item.combatState.isDestroyed ? "bg-wordBearersRed hover:bg-wordBearersRed hover:text-wildRiderRed text-wildRiderRed" : "")}
                 renderOption={(unit) => (
-                    <div className={`flex p-2 items-center justify-between ${unit.item.combatState.isDestroyed ? "bg-wordBearersRed text-wildRiderRed" : ""}`}>
+                    <div className="flex p-2 items-center justify-between">
                         <span className="text-blockcaps-m">{unit.displayName}</span> {unit.item.combatState.isDestroyed ? <Badge variant="destructive">Unit destroyed</Badge> : null}
                     </div>
                 )}

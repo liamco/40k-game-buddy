@@ -111,8 +111,9 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                 searchPlaceholder="Search units..."
                 emptyMessage="No units found"
                 onSelect={handleUnitSelect}
+                optionClassName={(unit) => (unit.item.combatState.isDestroyed ? "bg-wordBearersRed hover:bg-wordBearersRed hover:text-wildRiderRed text-wildRiderRed" : "")}
                 renderOption={(unit) => (
-                    <div className={`flex p-2 items-center justify-between ${unit.item.combatState.isDestroyed ? "bg-wordBearersRed text-wildRiderRed" : ""}`}>
+                    <div className="flex p-2 items-center justify-between">
                         <span className="text-blockcaps-m">{unit.displayName}</span> {unit.item.combatState.isDestroyed ? <Badge variant="destructive">Unit destroyed</Badge> : null}
                     </div>
                 )}
@@ -145,15 +146,26 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                             const isDisabled = isLeaderModel && !hasPrecision && !allBodyguardsKilled;
 
                             // Check if all model instances of this profile are dead
-                            // Match by modelType, accounting for singular/plural differences
-                            // (e.g., model.name = "Zoanthropes", instance.modelType = "Zoanthrope")
+                            // For combined units, match by sourceUnitName using originalIdx
+                            // For single units, match all instances to the single profile
                             const instances = selectedUnit.item.modelInstances || [];
                             const deadModelIds = combatState?.deadModelIds || [];
-                            const modelNameLower = model.name.toLowerCase();
-                            const profileInstances = instances.filter((m) => {
-                                const instanceTypeLower = m.modelType.toLowerCase();
-                                return instanceTypeLower === modelNameLower || instanceTypeLower + "s" === modelNameLower || instanceTypeLower === modelNameLower + "s";
-                            });
+                            const sourceUnits = selectedUnit.item.sourceUnits;
+
+                            let profileInstances: typeof instances;
+                            if (sourceUnits && sourceUnits.length > 1) {
+                                // Combined unit: originalIdx maps to sourceUnits order (leaders first, then bodyguard)
+                                // Models are merged as [...leaderModels, ...bodyguardModels]
+                                const sourceUnit = sourceUnits[originalIdx];
+                                if (sourceUnit) {
+                                    profileInstances = instances.filter((m) => m.sourceUnitName === sourceUnit.name);
+                                } else {
+                                    profileInstances = [];
+                                }
+                            } else {
+                                // Single unit: all instances belong to this profile
+                                profileInstances = instances;
+                            }
                             const isDestroyed = profileInstances.length > 0 && profileInstances.every((m) => deadModelIds.includes(m.instanceId));
 
                             return <ModelProfileCard key={`${model.name}-${originalIdx}`} model={model} isSelected={isSelected} isDisabled={isDisabled} isDestroyed={isDestroyed} onUnitModelChange={onModelChange} />;

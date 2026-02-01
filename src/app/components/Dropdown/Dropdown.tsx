@@ -9,6 +9,10 @@ export interface DropdownOption<T> {
     label: string;
     /** The underlying data for this option */
     data: T;
+    /** Whether this option is disabled */
+    disabled?: boolean;
+    /** Reason why this option is disabled (shown as tooltip and inline text) */
+    disabledReason?: string;
 }
 
 type DropdownVariant = "default" | "minimal";
@@ -37,6 +41,8 @@ interface DropdownProps<T> {
     renderOption?: (option: T, label: string) => ReactNode;
     /** Optional className for the trigger button */
     triggerClassName?: string;
+    /** Optional className for option wrapper - can be a string or function that receives the option data */
+    optionClassName?: string | ((option: T) => string);
     /** Whether the dropdown is disabled */
     disabled?: boolean;
     /** Enable search functionality */
@@ -49,7 +55,7 @@ interface DropdownProps<T> {
     variant?: DropdownVariant;
 }
 
-export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...", onSelect, renderOption, triggerClassName = "", disabled = false, searchable = false, searchPlaceholder = "Search...", emptyMessage = "No results found.", variant = "default" }: DropdownProps<T>) {
+export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...", onSelect, renderOption, optionClassName, triggerClassName = "", disabled = false, searchable = false, searchPlaceholder = "Search...", emptyMessage = "No results found.", variant = "default" }: DropdownProps<T>) {
     const [open, setOpen] = useState(false);
     const [searchValue, setSearchValue] = useState("");
 
@@ -97,11 +103,23 @@ export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...",
                         {filteredOptions.length === 0 ? (
                             <div className="p-2 text-skarsnikGreen/50">{emptyMessage}</div>
                         ) : (
-                            filteredOptions.map((option) => (
-                                <div key={option.id} className="cursor-pointer hover:bg-skarsnikGreen hover:text-deathWorldForest transition-colors" onClick={() => handleSelect(option)}>
-                                    {renderOption ? renderOption(option.data, option.label) : option.label}
-                                </div>
-                            ))
+                            filteredOptions.map((option) => {
+                                const resolvedOptionClassName = typeof optionClassName === "function" ? optionClassName(option.data) : optionClassName || "";
+                                const isDisabled = option.disabled === true;
+                                return (
+                                    <div
+                                        key={option.id}
+                                        className={`${resolvedOptionClassName} p-2 transition-colors ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-skarsnikGreen hover:text-deathWorldForest"}`}
+                                        onClick={() => !isDisabled && handleSelect(option)}
+                                        title={isDisabled ? option.disabledReason : undefined}
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <span className="flex-1">{renderOption ? renderOption(option.data, option.label) : option.label}</span>
+                                            {isDisabled && option.disabledReason && <span className="ml-2 text-xs opacity-70 shrink-0">{option.disabledReason}</span>}
+                                        </div>
+                                    </div>
+                                );
+                            })
                         )}
                     </div>
                 </div>

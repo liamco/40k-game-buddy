@@ -27,14 +27,14 @@ const ModelProfileCard = ({ model, isDisabled, isSelected, isDestroyed, onUnitMo
             return "";
         }
         if (isSelected) {
-            return "bg-skarsnikGreen shadow-glow-green text-deathWorldForest";
+            return "bg-fireDragonBright shadow-glow-orange text-mournfangBrown";
         }
         return "";
     };
 
     return (
         <div
-            className={`relative rounded p-3 border-1 transition-colors border-skarsnikGreen ${resolveStyles()} ${!isDisabled && onUnitModelChange ? "cursor-pointer " : ""}`}
+            className={`relative rounded p-3 border-1 transition-colors text-fireDragonBright border-fireDragonBright ${resolveStyles()} ${!isDisabled && onUnitModelChange ? "cursor-pointer " : ""}`}
             onClick={() => {
                 if (!isDisabled && !isDestroyed && onUnitModelChange) {
                     onUnitModelChange(model);
@@ -65,7 +65,7 @@ const ModelProfileCard = ({ model, isDisabled, isSelected, isDestroyed, onUnitMo
                             <BaseIcon color="deathWorldForest" size="large">
                                 <IconShield />
                             </BaseIcon>
-                            <span className={`inline-block ${isDestroyed ? "text-wildRiderRed" : "text-skarsnikGreen"} absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}>{model.invSv}</span>
+                            <span className={`inline-block ${isDestroyed ? "text-wildRiderRed" : "text-fireDragonBright"} absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}>{model.invSv}</span>
                         </div>
                     )}
                 </div>

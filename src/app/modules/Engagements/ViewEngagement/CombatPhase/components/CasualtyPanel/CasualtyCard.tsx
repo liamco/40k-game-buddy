@@ -20,7 +20,7 @@ export function CasualtyCard({ instance, modelProfile, wargear, displayIndex, is
     const weapons = instance.loadout.map((id) => wargear.find((w) => w.id === id)).filter((w): w is EngagementWargear => w !== undefined);
 
     return (
-        <div className={`relative rounded p-3 border-1 transition-colors cursor-pointer ${isDead ? "border-wildRiderRed/50 bg-wordBearersRed/20 text-wildRiderRed/50" : "border-skarsnikGreen bg-transparent text-skarsnikGreen"}`} onClick={() => onToggle(instance.instanceId)}>
+        <div className={`relative rounded p-3 border-1 transition-colors cursor-pointer ${isDead ? "border-wildRiderRed/50 bg-wordBearersRed/20 text-wildRiderRed/50" : "border-fireDragonBright bg-transparent text-fireDragonBright"}`} onClick={() => onToggle(instance.instanceId)}>
             <div className={`space-y-2 ${isDead ? "opacity-40" : ""}`}>
                 <div className="flex items-center justify-between">
                     <p className="text-body-s font-medium">{instance.modelType}</p>
@@ -30,7 +30,7 @@ export function CasualtyCard({ instance, modelProfile, wargear, displayIndex, is
                 {weapons.length > 0 && (
                     <div className="flex gap-2 flex-wrap">
                         {weapons.map((w) => (
-                            <Badge variant={isDead ? "destructive" : "default"}>
+                            <Badge variant={isDead ? "destructive" : "secondaryAlt"}>
                                 <span className="text-blockcaps-xs">{w.name}</span>
                             </Badge>
                         ))}

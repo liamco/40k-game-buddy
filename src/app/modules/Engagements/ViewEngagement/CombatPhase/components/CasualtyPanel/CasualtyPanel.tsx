@@ -52,20 +52,16 @@ export function CasualtyPanel({ open, onOpenChange, unit, deadModelIds, onCasual
     return (
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
             <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 z-50 bg-black/80" />
-                <Dialog.Content className="fixed inset-0 z-50 bg-deathWorldForest flex flex-col">
-                    <div className="flex items-center justify-between p-4 border-b border-skarsnikGreen/30">
-                        <Dialog.Title className="text-metadata-l font-medium text-skarsnikGreen">{unit.name}</Dialog.Title>
-                        <div className="flex items-center gap-4">
-                            <span className="text-body-s text-skarsnikGreen">
-                                {aliveCount}/{instances.length} alive
-                            </span>
-                            <Dialog.Close asChild>
-                                <button className="text-skarsnikGreen hover:text-skarsnikGreen/70 transition-colors">
-                                    <X className="w-6 h-6" />
-                                </button>
-                            </Dialog.Close>
-                        </div>
+                <Dialog.Overlay className="fixed inset-0 z-50 bg-nocturneGreen/70" />
+                <Dialog.Content className="fixed inset-0 z-50 w-full h-full max-w-[72rem] max-h-[80vh] top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-nocturneGreen/85 border-1 border-skarsnikGreen flex flex-col">
+                    <div className="flex justify-between">
+                        <Dialog.Title className="p-4 text-metadata-l font-medium text-skarsnikGreen">{unit.name}</Dialog.Title>
+
+                        <Dialog.Close asChild>
+                            <button className="cursor-pointer aspect-square text-center text-deathWorldForest hover:text-deathWorldForest/70 bg-skarsnikGreen transition-colors p-2">
+                                <X className="w-6 h-6 inline-block" />
+                            </button>
+                        </Dialog.Close>
                     </div>
 
                     <div className="flex-1 overflow-auto p-4 space-y-6">
@@ -79,14 +75,6 @@ export function CasualtyPanel({ open, onOpenChange, unit, deadModelIds, onCasual
                                 </div>
                             </div>
                         ))}
-                    </div>
-
-                    <div className="p-4 border-t border-skarsnikGreen/30">
-                        <Dialog.Close asChild>
-                            <Button variant="secondary" className="w-full">
-                                Done
-                            </Button>
-                        </Dialog.Close>
                     </div>
                 </Dialog.Content>
             </Dialog.Portal>

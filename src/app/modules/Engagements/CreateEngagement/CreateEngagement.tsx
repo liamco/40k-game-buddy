@@ -62,8 +62,21 @@ const CreateEngagement = () => {
         navigate(`/engagements/view/${engagement.id}`);
     };
 
+    const calculateEngagementPoints = () => {
+        switch (engagementSize) {
+            case "combat-patrol":
+                return 500;
+            case "incursion":
+                return 1000;
+            case "strike-force":
+                return 2000;
+            case "onslaught":
+                return 3000;
+        }
+    };
+
     return (
-        <main className="w-full h-full items-center justify-center p-6 flex flex-col gap-6 border-1 border-skarsnikGreen">
+        <main className="w-full h-full items-center justify-center p-6 flex flex-col gap-12 border-1 border-skarsnikGreen">
             <div className="text-center space-y-4">
                 <BaseIcon size="large">
                     <IconCrossedSwords />
@@ -144,12 +157,15 @@ const CreateEngagement = () => {
                         )}
                     </div>
                 </aside>
-                <div className="grid grid-cols-2 gap-6">
-                    <section className="border-1 border-skarsnikGreen">{attackerList ? <ForceOverViewCard force={attackerList} role="attacker" /> : <EmptyState leadingIcon={<IconList />} label="force missing or redacted" />}</section>
-                    <section className="border-1 border-skarsnikGreen">{defenderList ? <ForceOverViewCard force={defenderList} role="defender" /> : <EmptyState leadingIcon={<IconList />} label="force missing or redacted" />}</section>
+                <div className="grid grid-cols-[1fr_auto_1fr]">
+                    <section className="border-1 border-skarsnikGreen">{attackerList ? <ForceOverViewCard force={attackerList} role="attacker" engagementPointsLimit={calculateEngagementPoints()} /> : <EmptyState leadingIcon={<IconList />} label="force missing or redacted" />}</section>
+                    <div className="flex items-center px-2">
+                        <span className="text-blockcaps-l">vs</span>
+                    </div>
+                    <section className="border-1 border-skarsnikGreen">{defenderList ? <ForceOverViewCard force={defenderList} role="defender" engagementPointsLimit={calculateEngagementPoints()} /> : <EmptyState leadingIcon={<IconList />} label="force missing or redacted" />}</section>
                 </div>
             </div>
-            <div className="max-w-[720px] w-full m-auto border-2 border-fireDragonBright p-4 rounded">
+            <div className="max-w-[720px] w-full mx-auto border-2 border-fireDragonBright p-4 rounded">
                 <AlertDialog variant="warning">
                     <AlertDialogTrigger asChild>
                         <Button variant="cta" className="w-full flex gap-4" disabled={!canCommence}>

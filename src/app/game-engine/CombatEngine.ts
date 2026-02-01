@@ -131,7 +131,8 @@ export class CombatEngine {
         // Weapon attributes (HEAVY, TORRENT, etc.)
         this.collectFromWeapon();
 
-        // Cover: +1 to save if defender is in cover (unless weapon ignores cover)
+        // Cover: Improves save by 1 if defender is in cover (unless weapon ignores cover)
+        // For saves, a lower number is better, so we use -1 to improve the roll target
         if (this.context.defender.unit.combatState?.isInCover) {
             const hasIgnoresCover = this.weaponEffects.some((e) => e.type === "ignoresCover");
             if (!hasIgnoresCover) {
@@ -140,7 +141,7 @@ export class CombatEngine {
                         entity: "targetUnit",
                         effect: "rollBonus",
                         attribute: "s",
-                        value: 1,
+                        value: -1,
                     },
                     source: createEffectSource("coreRule", "Cover"),
                 });
@@ -232,14 +233,17 @@ export class CombatEngine {
         result.isCapped = shouldCap && result.rawTotal !== result.cappedTotal;
 
         // Build display format
+        // For save rolls, bonuses have negative values (lower roll needed = better)
+        // but should display as positive numbers in the UI
+        const isSaveRoll = step === "saveRoll";
         result.forDisplay = {
             bonuses: result.bonuses.map((b) => ({
                 label: b.source.attribute || b.source.name,
-                value: b.value,
+                value: isSaveRoll ? Math.abs(b.value) : b.value,
             })),
             penalties: result.penalties.map((p) => ({
                 label: p.source.attribute || p.source.name,
-                value: p.value,
+                value: isSaveRoll ? Math.abs(p.value) : p.value,
             })),
         };
 

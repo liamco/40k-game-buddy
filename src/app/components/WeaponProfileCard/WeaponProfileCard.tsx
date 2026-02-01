@@ -131,12 +131,12 @@ const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisable
     };
 
     const linkedClasses = "";
-    const selectedClasses = "bg-skarsnikGreen shadow-glow-green text-deathWorldForest";
+    const selectedClasses = "bg-fireDragonBright shadow-glow-orange text-mournfangBrown";
 
     return (
         <div
             key={profile.name}
-            className={`relative rounded p-3 border-1 transition-colors border-skarsnikGreen ${isDisabled ? "cursor-not-allowed" : ""} ${onWeaponProfileChange || onCardClick ? "cursor-pointer" : ""} ${isSelected ? selectedClasses : "text-skarsnikGreen"} ${isLinked ? linkedClasses : ""}`}
+            className={`relative rounded p-3 border-1 transition-colors border-fireDragonBright ${isDisabled ? "cursor-not-allowed" : ""} ${onWeaponProfileChange || onCardClick ? "cursor-pointer" : ""} ${isSelected ? selectedClasses : "text-fireDragonBright"} ${isLinked ? linkedClasses : ""}`}
             onClick={handleClick}
         >
             <div className={`${isDisabled ? "opacity-25" : ""} space-y-2`}>
@@ -146,7 +146,7 @@ const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisable
                 {(profile.attributes || (bonusAttributes && bonusAttributes.length > 0)) && (
                     <div className="flex flex-wrap gap-2">
                         {profile.attributes?.map((attr: string) => (
-                            <Badge key={attr} variant={isSelected ? "secondary" : "default"}>
+                            <Badge key={attr} variant={isSelected ? "secondaryAlt" : "outlineAlt"}>
                                 {attr}
                             </Badge>
                         ))}

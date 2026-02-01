@@ -43,7 +43,7 @@ const EngagementIndex = () => {
                                     <span className="text-xs opacity-75">Turn {engagement.currentTurn}</span>
                                 </div>
                             </NavLink>
-                            <AlertDialog>
+                            <AlertDialog variant="destructive">
                                 <AlertDialogTrigger asChild>
                                     <Button variant="ghost" size="icon" className="text-fireDragonBright hover:text-red-500">
                                         <Trash2 className="w-4 h-4" />

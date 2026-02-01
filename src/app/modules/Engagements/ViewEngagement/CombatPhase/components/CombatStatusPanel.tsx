@@ -100,9 +100,8 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
         <section className="space-y-4">
             <div className="flex justify-between items-center">
                 <div className="space-y-1">
-                    <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
-                        <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
-                    </Button>
+                    <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
+
                     <div className="flex items-center gap-2">
                         <button onClick={handleDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.isDestroyed ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}>
                             <Minus className="w-4 h-4" />
@@ -113,15 +112,17 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
                     </div>
                 </div>
 
-                <ul className={`inline-grid gap-1`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
-                    {unit.modelInstances.map((m: EngagementModelInstance) => (
-                        <li key={m.instanceId} className={`${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
-                            <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
-                                <IconSkull />
-                            </BaseIcon>
-                        </li>
-                    ))}
-                </ul>
+                <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
+                    <ul className={`inline-grid gap-1`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
+                        {unit.modelInstances.map((m: EngagementModelInstance) => (
+                            <li key={m.instanceId} className={`${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
+                                <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
+                                    <IconSkull />
+                                </BaseIcon>
+                            </li>
+                        ))}
+                    </ul>
+                </Button>
             </div>
             <div className={`flex justify-between items-center ${combatState.isDestroyed ? "cursor-not-allowed opacity-50" : ""}`}>
                 <div className="relative grow max-w-[15rem]">
@@ -140,7 +141,6 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
                     <CombatStatusToken disabled={combatState.isDestroyed} icon="shock" variant="destructive" active={combatState.isBattleShocked} onChange={handleBooleanToggle("isBattleShocked")} />
                 </div>
             </div>
-
             <CasualtyPanel open={casualtyPanelOpen} onOpenChange={setCasualtyPanelOpen} unit={unit} deadModelIds={combatState.deadModelIds || []} onCasualtyChange={handleCasualtyChange} />
         </section>
     );

@@ -7,6 +7,7 @@ import { Datasheet } from "#types/Units.tsx";
 import { ArmyListItem } from "#types/Lists.tsx";
 
 import { useListManager } from "../ListManagerContext";
+import { getUnitById } from "#utils/unitHelpers";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
 import IconList from "#components/icons/IconList.tsx";
 import { Badge } from "#components/Badge/Badge.tsx";
@@ -26,8 +27,8 @@ const ViewList = () => {
 
     // Derive selectedItem from the current list data to keep it in sync with updates
     const selectedItem = useMemo(() => {
-        if (!selectedItemId || !selectedList) return null;
-        return selectedList.items.find((item) => item.listItemId === selectedItemId) || null;
+        if (!selectedList) return null;
+        return getUnitById(selectedList.items, selectedItemId) || null;
     }, [selectedItemId, selectedList]);
 
     // Load faction data when the selected list changes
@@ -42,34 +43,62 @@ const ViewList = () => {
         return factionData.detachments.find((d) => d.slug === selectedList.detachmentSlug) || null;
     }, [selectedList?.detachmentSlug, factionData?.detachments]);
 
+    // Derive the effective supplement from units already in the list
+    // This locks the list to one supplement once a supplement-specific unit is added
+    const effectiveSupplement = useMemo(() => {
+        if (!selectedList?.items) return null;
+
+        const supplementUnit = selectedList.items.find((item) => item.supplementSlug && item.supplementSlug !== "codex");
+        return supplementUnit?.supplementSlug || null;
+    }, [selectedList?.items]);
+
+    // Helper to format supplement slug to display name
+    const formatSupplementName = (slug: string): string => {
+        return slug
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+    };
+
     const datasheetOptions = useMemo((): DropdownOption<Datasheet>[] => {
         if (!factionData?.datasheets) return [];
 
         const detachmentSupplement = selectedDetachment?.supplementSlug;
 
-        const filteredDatasheets = factionData.datasheets.filter((datasheet: Datasheet) => {
+        return factionData.datasheets.map((datasheet: Datasheet) => {
             const datasheetSupplement = datasheet.supplementSlug;
+            let disabled = false;
+            let disabledReason = "";
 
-            // detachment supp == codex should allow anything
-
-            // if there's no datasheet supplement, or if it is codex, return true
+            // Codex/generic units always allowed
             if (!datasheetSupplement || datasheetSupplement === "codex") {
-                return true;
+                disabled = false;
             }
-            // if there's a datasheet supplement, and it matches the detachment supplement, return true
-            if (detachmentSupplement) {
-                return datasheetSupplement === detachmentSupplement;
+            // If detachment is chapter-locked, must match
+            else if (detachmentSupplement) {
+                disabled = datasheetSupplement !== detachmentSupplement;
+                if (disabled) {
+                    disabledReason = `Requires ${formatSupplementName(detachmentSupplement)} detachment`;
+                }
             }
+            // Generic detachment with effective supplement set
+            else if (effectiveSupplement) {
+                disabled = datasheetSupplement !== effectiveSupplement;
+                if (disabled) {
+                    disabledReason = `List contains ${formatSupplementName(effectiveSupplement)} units`;
+                }
+            }
+            // Generic detachment, no supplement units yet - all allowed
 
-            return false;
+            return {
+                id: datasheet.id,
+                label: `${datasheet.name} ${datasheet.roleLabel}`,
+                data: datasheet,
+                disabled,
+                disabledReason,
+            };
         });
-
-        return filteredDatasheets.map((datasheet: Datasheet) => ({
-            id: datasheet.id,
-            label: `${datasheet.name} ${datasheet.roleLabel}`,
-            data: datasheet,
-        }));
-    }, [factionData, selectedDetachment]);
+    }, [factionData, selectedDetachment, effectiveSupplement]);
 
     const orderedListItems = useMemo(() => {
         if (!selectedList) return [];
@@ -187,7 +216,10 @@ const ViewList = () => {
                     </div>
                     <div className="flex justify-between items-start">
                         <span>{selectedList.factionName}</span>
-                        <span>{selectedList.detachmentName}</span>
+                        <div className="flex items-center gap-2">
+                            <span>{selectedList.detachmentName}</span>
+                            {effectiveSupplement && !selectedDetachment?.supplementSlug && <Badge variant="outline">{formatSupplementName(effectiveSupplement)} units</Badge>}
+                        </div>
                     </div>
                 </div>
                 <SplitHeading label="units in roster" />

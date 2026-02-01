@@ -64,7 +64,7 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
                             <p>-</p>
                         </div>
                     )}
-                    <div className="grid grid-cols-2">
+                    <div className="space-y-2 flex flex-col justify-center items-center">
                         {bonuses.length ? (
                             <ResultBox value={`+${bonuses.reduce((sum, b) => sum + b.value, 0)}`} modifiers={bonuses} />
                         ) : (
