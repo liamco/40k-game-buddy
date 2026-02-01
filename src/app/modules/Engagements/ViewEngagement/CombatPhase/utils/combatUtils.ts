@@ -1,5 +1,5 @@
-import type { EngagementForce, EngagementForceItem, EngagementModelInstance, EngagementWargear } from "#types/Engagements";
-import type { WeaponProfile, Model } from "#types/index";
+import type { EngagementForce, EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance, EngagementWargear } from "#types/Engagements";
+import type { WeaponProfile, Model, Weapon } from "#types/index";
 
 /**
  * Wrapper for an EngagementForceItem for UI selection purposes.
@@ -175,4 +175,95 @@ export function groupWargearBySource(wargear: EngagementWargear[]): Record<strin
         groups[source].push(w);
     });
     return groups;
+}
+
+/**
+ * Check if a weapon has the ASSAULT attribute.
+ * Works with Weapon (has profiles array) or WeaponProfile (has attributes directly).
+ */
+export function hasAssaultAttribute(weapon: Weapon | WeaponProfile | null): boolean {
+    if (!weapon) return false;
+
+    // If it's a Weapon with profiles, check first profile
+    if ("profiles" in weapon && weapon.profiles) {
+        const attributes = weapon.profiles[0]?.attributes;
+        if (!attributes) return false;
+        return attributes.some((attr) => attr.toUpperCase() === "ASSAULT");
+    }
+
+    // If it's a WeaponProfile with attributes directly
+    if ("attributes" in weapon && weapon.attributes) {
+        return weapon.attributes.some((attr) => attr.toUpperCase() === "ASSAULT");
+    }
+
+    return false;
+}
+
+/**
+ * Result of checking if a weapon can be fired
+ */
+export interface CanFireResult {
+    canFire: boolean;
+    reason?: string;
+}
+
+/**
+ * Determine if a weapon can be fired based on unit's movement behaviour.
+ *
+ * Rules:
+ * - Fall back: Cannot shoot any weapons
+ * - Advance: Can only shoot ASSAULT weapons (unless override)
+ * - Hold/Move: Can shoot any weapon
+ *
+ * @param weapon The weapon to check
+ * @param movementBehaviour The unit's movement behaviour
+ * @param canAdvanceAndShoot Override for detachment rules (e.g., Gladius Task Force)
+ */
+export function canFireWeapon(weapon: Weapon | WeaponProfile, movementBehaviour: EngagementForceItemCombatState["movementBehaviour"], canAdvanceAndShoot: boolean = false): CanFireResult {
+    // Units that fell back cannot shoot at all (core rule)
+    if (movementBehaviour === "fallBack") {
+        return { canFire: false, reason: "Fell back" };
+    }
+
+    // Units that advanced can only fire ASSAULT weapons (unless override)
+    if (movementBehaviour === "advance") {
+        if (canAdvanceAndShoot) {
+            return { canFire: true };
+        }
+        if (!hasAssaultAttribute(weapon)) {
+            return { canFire: false, reason: "Requires ASSAULT" };
+        }
+    }
+
+    return { canFire: true };
+}
+
+/**
+ * Get the first valid weapon for the current phase and movement behaviour.
+ * Respects ASSAULT restrictions when unit has advanced.
+ */
+export function getFirstValidWeaponForMovement(wargear: EngagementWargear[] | undefined, phase: "shooting" | "fight", movementBehaviour: EngagementForceItemCombatState["movementBehaviour"], canAdvanceAndShoot: boolean = false): SelectedWeapon | null {
+    if (!wargear) return null;
+
+    const weaponType = phase === "shooting" ? "Ranged" : "Melee";
+
+    for (const weapon of wargear) {
+        if (weapon.type !== weaponType) continue;
+
+        // For melee, movement restrictions don't apply
+        if (phase === "fight") {
+            if (weapon.profiles.length > 0) {
+                return { profile: weapon.profiles[0], wargearId: weapon.id };
+            }
+            continue;
+        }
+
+        // For shooting, check if weapon can be fired
+        const { canFire } = canFireWeapon(weapon, movementBehaviour, canAdvanceAndShoot);
+        if (canFire && weapon.profiles.length > 0) {
+            return { profile: weapon.profiles[0], wargearId: weapon.id };
+        }
+    }
+
+    return null;
 }

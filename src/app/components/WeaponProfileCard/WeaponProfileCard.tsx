@@ -11,7 +11,7 @@ import IconLeader from "../icons/IconLeader.tsx";
 const LeaderIcon = <IconLeader />;
 const LaurelsIcon = <IconLaurels />;
 
-import strikethrough from "#assets/StrikethroughGreen.svg";
+import strikethrough from "#assets/StrikethroughOrange.svg";
 
 export type BonusSourceType = "leader" | "enhancement" | "detachment";
 

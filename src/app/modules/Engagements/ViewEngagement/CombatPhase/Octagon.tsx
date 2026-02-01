@@ -6,7 +6,7 @@ import type { Model } from "#types/Models.tsx";
 
 import { useCombatResolution } from "#game-engine";
 
-import { buildUnitSelectItems, findUnitByItemId, getFirstWeaponForPhase, getFirstValidDefenderModel, hasPrecisionAttribute, countAliveModelsWithWeapon, type UnitSelectItem, type SelectedWeapon } from "./utils/combatUtils";
+import { buildUnitSelectItems, findUnitByItemId, getFirstWeaponForPhase, getFirstValidDefenderModel, hasPrecisionAttribute, countAliveModelsWithWeapon, canFireWeapon, getFirstValidWeaponForMovement, type UnitSelectItem, type SelectedWeapon } from "./utils/combatUtils";
 
 import AttackerPanel from "./components/AttackerPanel";
 import DefenderPanel from "./components/DefenderPanel";
@@ -148,6 +148,27 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
             }
         }
     }, [gamePhase]);
+
+    // Auto-deselect weapon when movement behaviour invalidates current selection (ASSAULT restriction)
+    const movementBehaviour = selectedAttackerUnit?.item.combatState?.movementBehaviour;
+    useEffect(() => {
+        // Only applies during shooting phase
+        if (gamePhase !== "shooting" || !selectedAttackerUnit || !selectedWeapon) return;
+
+        const { canFire } = canFireWeapon(selectedWeapon.profile, movementBehaviour || "hold");
+
+        if (!canFire) {
+            // Find first valid ASSAULT weapon, or clear selection
+            const validWeapon = getFirstValidWeaponForMovement(selectedAttackerUnit.item.wargear, "shooting", movementBehaviour || "hold");
+            setSelectedWeapon(validWeapon);
+
+            // Update defender model selection based on new weapon's precision status
+            if (selectedDefenderUnit && validWeapon) {
+                const validModel = getFirstValidDefenderModel(selectedDefenderUnit.item, validWeapon);
+                setSelectedDefenderModel(validModel);
+            }
+        }
+    }, [movementBehaviour, gamePhase]);
 
     return (
         <main className="w-full h-full grid grid-cols-[4fr_4fr_3fr] gap-2 mt-6">

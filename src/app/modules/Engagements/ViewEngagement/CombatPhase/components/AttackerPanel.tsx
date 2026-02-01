@@ -3,7 +3,7 @@ import React, { useMemo, Fragment } from "react";
 import type { EngagementForce, EngagementForceItemCombatState, EngagementWargear } from "#types/Engagements";
 import type { WeaponProfile, GamePhase } from "#types/index";
 
-import { type UnitSelectItem, type SelectedWeapon, filterWargearByAliveModels, groupWargearBySource } from "../utils/combatUtils";
+import { type UnitSelectItem, type SelectedWeapon, filterWargearByAliveModels, groupWargearBySource, canFireWeapon } from "../utils/combatUtils";
 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown.tsx";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
@@ -114,7 +114,8 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                         <Fragment key={weapon.id}>
                                             {weapon.profiles.map((profile: WeaponProfile) => {
                                                 const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
-                                                return <WeaponProfileCard key={`${weapon.id}-${profile.line}`} profile={profile} wargearId={weapon.id} isSelected={isSelected} onWeaponProfileChange={handleWeaponProfileSelect} />;
+                                                const { canFire, reason } = gamePhase === "shooting" ? canFireWeapon(profile, combatState?.movementBehaviour || "hold") : { canFire: true, reason: undefined };
+                                                return <WeaponProfileCard key={`${weapon.id}-${profile.line}`} profile={profile} wargearId={weapon.id} isSelected={isSelected && canFire} isDisabled={!canFire} onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined} />;
                                             })}
                                         </Fragment>
                                     ))}
@@ -128,7 +129,8 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                 <Fragment key={weapon.id}>
                                     {weapon.profiles.map((profile: WeaponProfile) => {
                                         const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
-                                        return <WeaponProfileCard key={`${weapon.id}-${profile.line}`} profile={profile} wargearId={weapon.id} isSelected={isSelected} onWeaponProfileChange={handleWeaponProfileSelect} />;
+                                        const { canFire, reason } = gamePhase === "shooting" ? canFireWeapon(profile, combatState?.movementBehaviour || "hold") : { canFire: true, reason: undefined };
+                                        return <WeaponProfileCard key={`${weapon.id}-${profile.line}`} profile={profile} wargearId={weapon.id} isSelected={isSelected && canFire} isDisabled={!canFire} onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined} />;
                                     })}
                                 </Fragment>
                             ))}
