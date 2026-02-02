@@ -812,6 +812,12 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
 
         // Remove stratagems, detachmentAbilities, enhancements, and Core/Faction abilities from datasheet files (but keep them in faction files)
         const isDatasheet = isDatasheetFile(filePath, depotdataPath);
+
+        // Skip Legends datasheets unless INCLUDE_LEGENDS_UNITS is set to true
+        const includeLegends = process.env.INCLUDE_LEGENDS_UNITS === "true";
+        if (isDatasheet && processedData.isLegends === true && !includeLegends) {
+            return { success: true, skipped: true, reason: "legends" };
+        }
         if (isDatasheet) {
             processedData = removeStratagemsFromDatasheet(processedData);
             processedData = removeDetachmentAbilitiesFromDatasheet(processedData);
@@ -872,10 +878,10 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
         // Write to output file with proper formatting
         fs.writeFileSync(outputFilePath, JSON.stringify(processedData, null, 2), "utf-8");
 
-        return true;
+        return { success: true, skipped: false };
     } catch (error) {
         console.error(`Error processing ${filePath}:`, error);
-        return false;
+        return { success: false, skipped: false };
     }
 }
 
@@ -981,10 +987,13 @@ async function main() {
         .filter((f) => f.endsWith(".json"))
         .map((f) => path.join(depotdataPath, f));
 
+    const includeLegends = process.env.INCLUDE_LEGENDS_UNITS === "true";
+
     console.log(`📁 Found ${jsonFiles.length} JSON files to process...`);
     console.log(`📁 Found ${topLevelFiles.length} top-level JSON files to copy...`);
     console.log(`📂 Source: ${depotdataPath}`);
-    console.log(`📂 Output: ${outputPath}\n`);
+    console.log(`📂 Output: ${outputPath}`);
+    console.log(`📜 Legends units: ${includeLegends ? "INCLUDED" : "EXCLUDED (set INCLUDE_LEGENDS_UNITS=true to include)"}\n`);
 
     // Copy top-level JSON files directly (no processing needed)
     for (const topLevelFile of topLevelFiles) {
@@ -1002,15 +1011,23 @@ async function main() {
     // Cache for faction-config.json files to avoid re-reading them
     const factionConfigCache = new Map();
 
+    let skippedLegendsCount = 0;
+
     for (const jsonFile of jsonFiles) {
         fileIndex++;
         const relativePath = path.relative(depotdataPath, jsonFile);
 
         console.log(`[${fileIndex}/${jsonFiles.length}] Processing: ${relativePath}`);
 
-        if (await processJsonFile(jsonFile, depotdataPath, outputPath, factionConfigCache)) {
-            successCount++;
-            console.log(`✅ Completed: ${relativePath}\n`);
+        const result = await processJsonFile(jsonFile, depotdataPath, outputPath, factionConfigCache);
+        if (result.success) {
+            if (result.skipped) {
+                skippedLegendsCount++;
+                console.log(`⏭️  Skipped (Legends): ${relativePath}\n`);
+            } else {
+                successCount++;
+                console.log(`✅ Completed: ${relativePath}\n`);
+            }
         } else {
             errorCount++;
             console.log(`❌ Failed: ${relativePath}\n`);
@@ -1024,6 +1041,9 @@ async function main() {
     console.log("═".repeat(50));
     console.log(`📊 Processing Summary:`);
     console.log(`   ✅ Success: ${successCount}`);
+    if (skippedLegendsCount > 0) {
+        console.log(`   ⏭️  Skipped (Legends): ${skippedLegendsCount}`);
+    }
     console.log(`   ❌ Errors: ${errorCount}`);
     console.log(`   📄 Total: ${jsonFiles.length}`);
     if (invalidModelCosts.length > 0 || invalidUnitCompositions.length > 0) {

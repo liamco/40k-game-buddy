@@ -78,7 +78,7 @@ const UnitDetailsView = ({ unit, list }: Props) => {
                         <span className="text-blockcaps-s">Stats & abilities</span>
                     </TabsTrigger>
                     <TabsTrigger value="wargear">
-                        <span className="text-blockcaps-s">Wargear & loadouts</span>
+                        <span className="text-blockcaps-s">Wargear options</span>
                     </TabsTrigger>
                     <TabsTrigger value="leaders" disabled={!showLeadersTab}>
                         <span className={`text-blockcaps-s ${!showLeadersTab ? "line-through" : ""}`}>Leaders</span>

@@ -575,7 +575,9 @@ interface ListManagerContextType {
     addModelInstance: (list: ArmyList, unitId: string, compositionLine: number) => ArmyList;
     removeModelInstance: (list: ArmyList, unitId: string, compositionLine: number) => ArmyList;
     getModelCountForLine: (unit: ArmyListItem, line: number) => number;
-    updateModelLoadout: (list: ArmyList, unitId: string, instanceId: string, newLoadout: string[]) => ArmyList;
+    updateModelLoadout: (list: ArmyList, unitId: string, instanceId: string, newLoadout: string[], optionSelections?: Record<number, string>) => ArmyList;
+    updateAllModelLoadouts: (list: ArmyList, unitId: string, loadoutUpdater: (instance: ModelInstance) => string[]) => ArmyList;
+    updateUnitWideSelection: (list: ArmyList, unitId: string, optionLine: number, newWeaponId: string, oldWeaponId: string) => ArmyList;
 
     // Attachment operations
     attachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace?: boolean) => ArmyList;
@@ -1052,14 +1054,88 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     );
 
     // Update a specific model's loadout
-    const updateModelLoadout = useCallback((list: ArmyList, unitId: string, instanceId: string, newLoadout: string[]): ArmyList => {
+    const updateModelLoadout = useCallback((list: ArmyList, unitId: string, instanceId: string, newLoadout: string[], optionSelections?: Record<number, string>): ArmyList => {
         const unit = getUnitById(list.items, unitId);
         if (!unit || !unit.modelInstances) return list;
 
-        const updatedInstances = unit.modelInstances.map((instance) => (instance.instanceId === instanceId ? { ...instance, loadout: newLoadout } : instance));
+        const updatedInstances = unit.modelInstances.map((instance) => {
+            if (instance.instanceId !== instanceId) return instance;
+            const updated = { ...instance, loadout: newLoadout };
+            if (optionSelections !== undefined) {
+                updated.optionSelections = optionSelections;
+            }
+            return updated;
+        });
 
         const updatedUnit: ArmyListItem = {
             ...unit,
+            modelInstances: updatedInstances,
+        };
+
+        const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));
+        const updatedList = finalizeList(list, updatedItems);
+        setLists((prev) => prev.map((l) => (l.id === list.id ? updatedList : l)));
+        return updatedList;
+    }, []);
+
+    // Update all model loadouts in a unit at once (avoids race conditions from multiple updateModelLoadout calls)
+    const updateAllModelLoadouts = useCallback((list: ArmyList, unitId: string, loadoutUpdater: (instance: ModelInstance) => string[]): ArmyList => {
+        const unit = getUnitById(list.items, unitId);
+        if (!unit || !unit.modelInstances) return list;
+
+        const updatedInstances = unit.modelInstances.map((instance) => ({
+            ...instance,
+            loadout: loadoutUpdater(instance),
+        }));
+
+        const updatedUnit: ArmyListItem = {
+            ...unit,
+            modelInstances: updatedInstances,
+        };
+
+        const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));
+        const updatedList = finalizeList(list, updatedItems);
+        setLists((prev) => prev.map((l) => (l.id === list.id ? updatedList : l)));
+        return updatedList;
+    }, []);
+
+    // Update unit-wide selection (for "All models in this unit" options)
+    // This updates all models that don't have a per-model ratio override
+    const updateUnitWideSelection = useCallback((list: ArmyList, unitId: string, optionLine: number, newWeaponId: string, oldWeaponId: string): ArmyList => {
+        const unit = getUnitById(list.items, unitId);
+        if (!unit || !unit.modelInstances) return list;
+
+        // Update unitWideSelections
+        const newUnitWideSelections = { ...(unit.unitWideSelections || {}) };
+        newUnitWideSelections[optionLine] = newWeaponId;
+
+        // Update each model that doesn't have a per-model ratio override
+        const updatedInstances = unit.modelInstances.map((instance) => {
+            // Check if model has a per-model option selection that overrides the unit-wide weapon
+            // (i.e., they've selected a ratio option like strangleweb instead of the unit-wide default)
+            const hasRatioOverride =
+                instance.optionSelections &&
+                Object.entries(instance.optionSelections).some(([line, selectedId]) => {
+                    // Skip the unit-wide option line itself
+                    if (parseInt(line, 10) === optionLine) return false;
+                    // If they've selected something other than the old unit-wide weapon, they have an override
+                    return selectedId !== oldWeaponId && selectedId !== newWeaponId;
+                });
+
+            if (hasRatioOverride) {
+                // Keep existing loadout - model has a ratio option selected
+                return instance;
+            }
+
+            // Replace old weapon with new in loadout
+            const newLoadout = instance.loadout.map((id) => (id === oldWeaponId ? newWeaponId : id));
+
+            return { ...instance, loadout: newLoadout };
+        });
+
+        const updatedUnit: ArmyListItem = {
+            ...unit,
+            unitWideSelections: newUnitWideSelections,
             modelInstances: updatedInstances,
         };
 
@@ -1363,6 +1439,8 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         removeModelInstance,
         getModelCountForLine,
         updateModelLoadout,
+        updateAllModelLoadouts,
+        updateUnitWideSelection,
         attachLeaderToUnit,
         detachLeaderFromUnit,
         attachEnhancementToLeader,

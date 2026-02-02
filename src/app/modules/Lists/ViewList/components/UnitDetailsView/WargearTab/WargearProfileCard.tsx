@@ -53,9 +53,11 @@ interface Props {
     bonusAttributes?: BonusAttribute[];
     // Stat bonuses from enhancements/abilities (e.g., +1 Strength)
     statBonuses?: StatBonus[];
+    // Label to display when disabled (e.g., constraint reason)
+    disabledLabel?: string;
 }
 
-const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisabled, isStacked, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
+const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisabled, isStacked, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses, disabledLabel }: Props) => {
     const handleClick = () => {
         if (canToggle && onToggle) {
             onToggle();
@@ -160,7 +162,12 @@ const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisable
                     {renderStat("d", profile.d)}
                 </div>
             </div>
-            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />}
+            {isDisabled && (
+                <>
+                    <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />
+                    {disabledLabel && <span className="absolute bottom-1 right-3 text-body-xs text-fireDragonBright/60 italic">{disabledLabel}</span>}
+                </>
+            )}
         </div>
     );
 };

@@ -32,6 +32,9 @@ export interface ModelInstance {
     modelTypeLine: number; // unitComposition line number (for stats lookup)
     loadout: string[]; // Array of weapon IDs from availableWargear
     defaultLoadout: string[]; // Original loadout at creation (for detecting customization)
+    // Tracks which weapon was selected for each option line (for overlapping options)
+    // Key: option line number, Value: weapon ID selected for that option
+    optionSelections?: Record<number, string>;
 }
 
 export type ArmyListItem = Datasheet & {
@@ -44,4 +47,8 @@ export type ArmyListItem = Datasheet & {
 
     // Per-model weapon tracking
     modelInstances?: ModelInstance[]; // Each model with its loadout
+
+    // Unit-wide option selections (for "All models in this unit" options)
+    // Key: option line number, Value: weapon ID selected for that option
+    unitWideSelections?: Record<number, string>;
 };

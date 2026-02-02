@@ -112,11 +112,14 @@ export function parseOptionTargeting(description: string): OptionTargeting {
     // Example: "For every 5 models in this unit, 1 Heavy Intercessor's heavy bolt rifle can be replaced"
     const ratioWithModelTypeMatch = normalized.match(/for every (\d+) models.*?(\d+)\s+([a-z][a-z\s]+?)'s\s+/i);
     if (ratioWithModelTypeMatch) {
+        const possibleModelType = ratioWithModelTypeMatch[3].trim();
+        // "model" is a generic term, not a specific model type - don't set modelType filter
+        const isGenericModel = possibleModelType.toLowerCase() === "model";
         return {
             type: "ratio",
             n: parseInt(ratioWithModelTypeMatch[1], 10),
             upTo: parseInt(ratioWithModelTypeMatch[2], 10),
-            modelType: ratioWithModelTypeMatch[3].trim(),
+            ...(isGenericModel ? {} : { modelType: possibleModelType }),
         };
     }
 
@@ -568,12 +571,26 @@ function hasWeaponByName(instance: ModelInstance, weaponName: string, availableW
 function countOptionUsage(unit: ArmyListItem, option: ParsedOption): number {
     if (!unit.modelInstances || !unit.availableWargear) return 0;
 
-    // Count models that have one of the "adds" weapons but not the "replaces" weapon
+    // Count models that have used this specific option
+    // Use optionSelections if available for accurate tracking
     if (option.action === "replace" && option.addsWeaponNames.length > 0) {
         let count = 0;
         unit.modelInstances.forEach((instance) => {
-            const hasAddedWeapon = option.addsWeaponNames.some((name) => hasWeaponByName(instance, name, unit.availableWargear!));
-            if (hasAddedWeapon) count++;
+            // If we have explicit option tracking, use it
+            if (instance.optionSelections && instance.optionSelections[option.line] !== undefined) {
+                // Check if the selection for this option line is one of the added weapons (not the default)
+                const selectedWeaponId = instance.optionSelections[option.line];
+                const replacedWeapon = findWeaponByName(unit.availableWargear!, option.replacesWeaponNames[0]);
+                if (replacedWeapon && selectedWeaponId !== replacedWeapon.id) {
+                    count++;
+                }
+            } else {
+                // Fallback: check if model has added weapon AND doesn't have the replaced weapon
+                // This indicates the option was used
+                const hasAddedWeapon = option.addsWeaponNames.some((name) => hasWeaponByName(instance, name, unit.availableWargear!));
+                const hasReplacedWeapon = option.replacesWeaponNames.some((name) => hasWeaponByName(instance, name, unit.availableWargear!));
+                if (hasAddedWeapon && !hasReplacedWeapon) count++;
+            }
         });
         return count;
     }
@@ -690,4 +707,83 @@ export function resolveGenericWeaponReference(genericName: string, loadout: stri
     if (!weaponType) return [];
 
     return loadout.map((id) => availableWargear.find((w) => w.id === id)).filter((w): w is Weapon => w !== undefined && w.type === weaponType);
+}
+
+/**
+ * Categorized options by their targeting type for UI rendering
+ */
+export interface CategorizedOptions {
+    unitWideOptions: ParsedOption[]; // targeting.type === "all-models"
+    ratioOptions: ParsedOption[]; // targeting.type === "ratio" | "ratio-up-to"
+    otherOptions: ParsedOption[]; // everything else (this-model, specific-model, any-number, etc.)
+}
+
+/**
+ * Categorize parsed options by their targeting type.
+ * Used to separate unit-wide options from per-model options in the UI.
+ */
+export function categorizeOptions(parsedOptions: ParsedOption[]): CategorizedOptions {
+    return {
+        unitWideOptions: parsedOptions.filter((opt) => opt.targeting.type === "all-models" && !opt.isNote),
+        ratioOptions: parsedOptions.filter((opt) => (opt.targeting.type === "ratio" || opt.targeting.type === "ratio-up-to") && !opt.isNote),
+        otherOptions: parsedOptions.filter((opt) => !["all-models", "ratio", "ratio-up-to"].includes(opt.targeting.type) && !opt.isNote),
+    };
+}
+
+/**
+ * Get the indices of models that are eligible for ratio options.
+ * For example, "for every 10 models, 1 model can..." means the first N models
+ * are eligible where N = floor(totalModels / 10).
+ *
+ * @param totalModels - Total number of models in the unit
+ * @param ratioOptions - Parsed ratio options
+ * @returns Set of model indices (0-indexed) that are eligible for ratio options
+ */
+export function getModelsEligibleForRatioOptions(totalModels: number, ratioOptions: ParsedOption[]): Set<number> {
+    const eligibleIndices = new Set<number>();
+
+    for (const ratioOpt of ratioOptions) {
+        const ratio = ratioOpt.targeting.n || 10;
+        const upTo = ratioOpt.targeting.upTo || 1;
+        const maxEligible = Math.floor(totalModels / ratio) * upTo;
+
+        // First N models are eligible (0-indexed)
+        for (let i = 0; i < maxEligible && i < totalModels; i++) {
+            eligibleIndices.add(i);
+        }
+    }
+
+    return eligibleIndices;
+}
+
+/**
+ * Check if a unit has any "all models" options.
+ */
+export function hasUnitWideOptions(parsedOptions: ParsedOption[]): boolean {
+    return parsedOptions.some((opt) => opt.targeting.type === "all-models" && !opt.isNote);
+}
+
+/**
+ * Get the current unit-wide weapon ID for a given option line.
+ * Returns the weapon selected in unitWideSelections, or falls back to the default weapon.
+ */
+export function getUnitWideWeaponId(unit: ArmyListItem, unitWideOptions: ParsedOption[]): string | null {
+    // Check if there's an explicit selection for ANY of the unit-wide options
+    // (they all replace the same weapon, so any selection tells us the current weapon)
+    if (unit.unitWideSelections) {
+        for (const opt of unitWideOptions) {
+            if (unit.unitWideSelections[opt.line]) {
+                return unit.unitWideSelections[opt.line];
+            }
+        }
+    }
+
+    // Fall back to the default (replaced) weapon from the first option
+    const firstOption = unitWideOptions[0];
+    if (firstOption && firstOption.replacesWeaponNames.length > 0) {
+        const defaultWeapon = findWeaponByName(unit.availableWargear || [], firstOption.replacesWeaponNames[0]);
+        return defaultWeapon?.id || null;
+    }
+
+    return null;
 }

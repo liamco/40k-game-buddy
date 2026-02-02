@@ -113,9 +113,9 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
                 </div>
 
                 <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
-                    <ul className={`inline-grid gap-1`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
+                    <ul className={`inline-grid gap-1 list-none m-0 p-0`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
                         {unit.modelInstances.map((m: EngagementModelInstance) => (
-                            <li key={m.instanceId} className={`${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
+                            <li key={m.instanceId} className={` !mt-0 ${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
                                 <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
                                     <IconSkull />
                                 </BaseIcon>
