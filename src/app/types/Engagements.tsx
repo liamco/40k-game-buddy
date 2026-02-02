@@ -1,4 +1,5 @@
 import { ArmyListItem, ModelInstance } from "./Lists";
+import { Ability } from "./Units";
 import { Weapon } from "./Weapons";
 
 /**
@@ -9,6 +10,15 @@ export interface SourceUnit {
     datasheetId: string;
     name: string;
     isLeader: boolean;
+}
+
+/**
+ * Extended ability with source unit tagging for combined units.
+ * Allows tracking which leader granted an ability.
+ */
+export interface EngagementAbility extends Ability {
+    sourceUnitName?: string;
+    isFromLeader?: boolean;
 }
 
 /**
@@ -59,9 +69,11 @@ export interface EngagementForce {
     items: EngagementForceItem[];
 }
 
-export type EngagementForceItem = Omit<ArmyListItem, "availableWargear" | "modelInstances"> & {
+export type EngagementForceItem = Omit<ArmyListItem, "availableWargear" | "modelInstances" | "abilities"> & {
     wargear: EngagementWargear[];
     modelInstances?: EngagementModelInstance[];
+    /** Abilities with source tracking for combined units */
+    abilities?: EngagementAbility[];
     combatState: EngagementForceItemCombatState;
     /** For combined units: tracks the original source units (leaders + bodyguard) */
     sourceUnits?: SourceUnit[];

@@ -5,16 +5,7 @@
 /**
  * Categories of effect sources, ordered by typical application priority
  */
-export type EffectSourceType =
-    | "coreRule"
-    | "factionAbility"
-    | "detachmentRule"
-    | "unitAbility"
-    | "leaderAbility"
-    | "enhancement"
-    | "weaponAttribute"
-    | "weaponAbility"
-    | "stratagem";
+export type EffectSourceType = "coreRule" | "factionAbility" | "detachmentRule" | "unitAbility" | "leaderAbility" | "enhancement" | "weaponAttribute" | "weaponAbility" | "stratagem";
 
 /**
  * Priority values for each source type (higher = applied later, can override)
@@ -42,16 +33,14 @@ export interface EffectSource {
     sourceId?: string;
     attribute?: string;
     priority: number;
+    /** Whether this effect comes from an attached leader */
+    isFromLeader?: boolean;
 }
 
 /**
  * Create an EffectSource with appropriate priority
  */
-export function createEffectSource(
-    type: EffectSourceType,
-    name: string,
-    options?: Partial<Omit<EffectSource, "type" | "name" | "priority">>
-): EffectSource {
+export function createEffectSource(type: EffectSourceType, name: string, options?: Partial<Omit<EffectSource, "type" | "name" | "priority">>): EffectSource {
     return {
         type,
         name,

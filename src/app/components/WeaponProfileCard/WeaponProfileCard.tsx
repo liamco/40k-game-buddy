@@ -160,7 +160,7 @@ const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisable
                             .map((bonus, idx) => {
                                 const icon = bonus.sourceType === "leader" ? LeaderIcon : bonus.sourceType === "enhancement" ? LaurelsIcon : undefined;
                                 return (
-                                    <Badge key={`bonus-${idx}`} variant={isSelected ? "secondary" : "default"} icon={icon} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
+                                    <Badge key={`bonus-${idx}`} variant={isSelected ? "secondaryAlt" : "outlineAlt"} icon={icon} title={bonus.sourceName ? `From: ${bonus.sourceName}` : undefined}>
                                         {formatBonusAttribute(bonus)}
                                     </Badge>
                                 );

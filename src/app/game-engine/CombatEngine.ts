@@ -19,6 +19,8 @@ import { extractAbilityMechanics } from "./abilityMechanics";
 interface SourcedMechanic {
     mechanic: Mechanic;
     source: EffectSource;
+    /** For leader abilities: the name of the leader unit that granted this ability */
+    leaderSourceName?: string;
 }
 
 /**
@@ -170,9 +172,51 @@ export class CombatEngine {
             }
         }
 
-        // Future: Leader abilities, stratagems, etc.
-        // this.collectFromLeaderAbilities();
+        // Convert addsAbility mechanics to special effects (LETHAL HITS, SUSTAINED HITS, etc.)
+        this.processAbilityGrantingMechanics();
+
+        // Future: stratagems, etc.
         // this.collectFromStratagems();
+    }
+
+    /**
+     * Process mechanics that grant weapon abilities (addsAbility effect).
+     * Converts them to special effects that display on attack steps.
+     */
+    private processAbilityGrantingMechanics(): void {
+        for (const { mechanic, source, leaderSourceName } of this.collectedMechanics) {
+            if (mechanic.effect !== "addsAbility") continue;
+            if (!mechanic.abilities || !Array.isArray(mechanic.abilities)) continue;
+
+            // Evaluate conditions (including isLeadingUnit for leader abilities)
+            if (!this.evaluateConditions(mechanic.conditions, leaderSourceName)) continue;
+
+            for (const abilityName of mechanic.abilities) {
+                const upperName = abilityName.toUpperCase();
+                const specialEffect = this.createSpecialEffectForAbility(upperName, source, mechanic.value);
+                if (specialEffect) {
+                    this.weaponEffects.push(specialEffect);
+                }
+            }
+        }
+    }
+
+    /**
+     * Create a special effect for a granted ability name.
+     */
+    private createSpecialEffectForAbility(abilityName: string, source: EffectSource, value?: any): SpecialEffect | null {
+        switch (abilityName) {
+            case "LETHAL HITS":
+                return { type: "lethalHits", value: true, source };
+            case "SUSTAINED HITS":
+                return { type: "sustainedHits", value: typeof value === "number" ? value : 1, source };
+            case "DEVASTATING WOUNDS":
+                return { type: "devastatingWounds", value: true, source };
+            case "PRECISION":
+                return { type: "precision", value: true, source };
+            default:
+                return null;
+        }
     }
 
     /**
@@ -185,18 +229,18 @@ export class CombatEngine {
         // Attacker abilities (affect attacks made by this unit)
         const attackerMechanics = extractAbilityMechanics(attackerUnit.abilities, attackerUnit.name, "unitAbility");
 
-        for (const { mechanic, source, appliesTo } of attackerMechanics) {
+        for (const { mechanic, source, appliesTo, leaderSourceName } of attackerMechanics) {
             if (appliesTo === "attacksMade") {
-                this.collectedMechanics.push({ mechanic, source });
+                this.collectedMechanics.push({ mechanic, source, leaderSourceName });
             }
         }
 
         // Defender abilities (affect attacks received by this unit)
         const defenderMechanics = extractAbilityMechanics(defenderUnit.abilities, defenderUnit.name, "unitAbility");
 
-        for (const { mechanic, source, appliesTo } of defenderMechanics) {
+        for (const { mechanic, source, appliesTo, leaderSourceName } of defenderMechanics) {
             if (appliesTo === "attacksAgainst") {
-                this.collectedMechanics.push({ mechanic, source });
+                this.collectedMechanics.push({ mechanic, source, leaderSourceName });
             }
         }
     }
@@ -246,12 +290,12 @@ export class CombatEngine {
         const result = createEmptyStepModifiers(step);
         const attribute = this.stepToAttribute(step);
 
-        for (const { mechanic, source } of this.collectedMechanics) {
+        for (const { mechanic, source, leaderSourceName } of this.collectedMechanics) {
             // Check if mechanic applies to this step
             if (!this.mechanicAppliesToStep(mechanic, step, attribute)) continue;
 
-            // Evaluate conditions
-            if (!this.evaluateConditions(mechanic.conditions)) continue;
+            // Evaluate conditions (pass leader source name for leader-specific checks)
+            if (!this.evaluateConditions(mechanic.conditions, leaderSourceName)) continue;
 
             // Apply the effect
             if (mechanic.effect === "rollBonus" && typeof mechanic.value === "number") {
@@ -287,10 +331,14 @@ export class CombatEngine {
             bonuses: result.bonuses.map((b) => ({
                 label: b.source.attribute || b.source.name,
                 value: isSaveRoll ? Math.abs(b.value) : b.value,
+                leaderName: b.source.isFromLeader ? b.source.sourceUnitName : undefined,
+                isFromLeader: b.source.isFromLeader,
             })),
             penalties: result.penalties.map((p) => ({
                 label: p.source.attribute || p.source.name,
                 value: isSaveRoll ? Math.abs(p.value) : p.value,
+                leaderName: p.source.isFromLeader ? p.source.sourceUnitName : undefined,
+                isFromLeader: p.source.isFromLeader,
             })),
         };
 
@@ -329,21 +377,25 @@ export class CombatEngine {
 
     /**
      * Evaluate all conditions for a mechanic
+     * @param conditions - The conditions to evaluate
+     * @param leaderSourceName - For leader abilities, the name of the leader (for isLeadingUnit checks)
      */
-    private evaluateConditions(conditions?: Condition[]): boolean {
+    private evaluateConditions(conditions?: Condition[], leaderSourceName?: string): boolean {
         if (!conditions || conditions.length === 0) return true;
-        return conditions.every((condition) => this.evaluateCondition(condition));
+        return conditions.every((condition) => this.evaluateCondition(condition, leaderSourceName));
     }
 
     /**
      * Evaluate a single condition against the current context
+     * @param condition - The condition to evaluate
+     * @param leaderSourceName - For leader abilities, the name of the leader (for isLeadingUnit checks)
      */
-    private evaluateCondition(condition: Condition): boolean {
+    private evaluateCondition(condition: Condition, leaderSourceName?: string): boolean {
         const { entity, state, attribute, keywords, operator, value } = condition;
 
         // State-based conditions
         if (state) {
-            const stateValue = this.getStateValue(entity, state);
+            const stateValue = this.getStateValue(entity, state, leaderSourceName);
             return this.compare(stateValue, operator, value);
         }
 
@@ -363,8 +415,11 @@ export class CombatEngine {
 
     /**
      * Get a state flag value for an entity
+     * @param entity - The entity to check
+     * @param state - The state to check
+     * @param leaderSourceName - For leader abilities, the name of the specific leader to check
      */
-    private getStateValue(entity: Entity, state: string): boolean {
+    private getStateValue(entity: Entity, state: string, leaderSourceName?: string): boolean {
         const unit = this.resolveEntityToUnit(entity);
         if (!unit) return false;
 
@@ -401,9 +456,49 @@ export class CombatEngine {
             case "isMeleePhase":
             case "isFightPhase":
                 return this.context.phase === "fight";
+            // Leader condition: unit has an attached leader who is still alive
+            // If leaderSourceName provided, check that specific leader; otherwise any leader
+            case "isLeadingUnit":
+                return this.isLeaderAlive(unit, leaderSourceName);
             default:
                 return false;
         }
+    }
+
+    /**
+     * Check if a unit has an attached leader who is still alive.
+     *
+     * @param unit - The unit to check
+     * @param specificLeaderName - If provided, check only this specific leader; otherwise check any leader
+     * @returns true if the leader (or any leader if not specified) is still alive
+     */
+    private isLeaderAlive(unit: any, specificLeaderName?: string): boolean {
+        const sourceUnits = unit.sourceUnits;
+        if (!sourceUnits || !Array.isArray(sourceUnits)) return false;
+
+        const leaderSources = sourceUnits.filter((su: any) => su.isLeader);
+        if (leaderSources.length === 0) return false;
+
+        // Check if at least one leader model is still alive
+        const modelInstances = unit.modelInstances || [];
+        const deadModelIds = unit.combatState?.deadModelIds || [];
+
+        for (const leaderSource of leaderSources) {
+            // If checking a specific leader, skip others
+            if (specificLeaderName && leaderSource.name !== specificLeaderName) {
+                continue;
+            }
+
+            // Find models that belong to this leader
+            const leaderModels = modelInstances.filter((m: any) => m.sourceUnitName === leaderSource.name);
+
+            // If at least one model from this leader is alive, the leader is active
+            const hasAliveModel = leaderModels.some((m: any) => !deadModelIds.includes(m.instanceId));
+
+            if (hasAliveModel) return true;
+        }
+
+        return false;
     }
 
     /**
@@ -586,10 +681,10 @@ export class CombatEngine {
     private deriveFnpFromMechanics(): number | null {
         let bestFnp: number | null = null;
 
-        for (const { mechanic } of this.collectedMechanics) {
+        for (const { mechanic, leaderSourceName } of this.collectedMechanics) {
             if (mechanic.effect === "setsFnp" && typeof mechanic.value === "number") {
-                // Evaluate conditions (e.g., phase-specific FNP)
-                if (!this.evaluateConditions(mechanic.conditions)) continue;
+                // Evaluate conditions (e.g., phase-specific FNP, leader alive check)
+                if (!this.evaluateConditions(mechanic.conditions, leaderSourceName)) continue;
 
                 // Take the best (lowest) FNP value
                 if (bestFnp === null || mechanic.value < bestFnp) {
