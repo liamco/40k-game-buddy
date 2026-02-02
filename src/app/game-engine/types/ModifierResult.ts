@@ -21,7 +21,7 @@ export interface AttributedModifier {
 /**
  * Special effects that aren't simple numeric modifiers
  */
-export type SpecialEffectType = "autoSuccess" | "reroll" | "lethalHits" | "sustainedHits" | "devastatingWounds" | "ignoresCover" | "precision" | "lance" | "assault" | "heavy" | "rapidFire" | "melta" | "hazardous" | "blast" | "indirect" | "antiKeyword";
+export type SpecialEffectType = "torrent" | "reroll" | "lethalHits" | "sustainedHits" | "devastatingWounds" | "ignoresCover" | "precision" | "lance" | "assault" | "heavy" | "rapidFire" | "melta" | "hazardous" | "blast" | "indirect" | "antiKeyword";
 
 export interface SpecialEffect {
     type: SpecialEffectType;

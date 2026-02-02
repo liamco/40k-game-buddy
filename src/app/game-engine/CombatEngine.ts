@@ -149,11 +149,15 @@ export class CombatEngine {
         // Weapon attributes (HEAVY, TORRENT, etc.)
         this.collectFromWeapon();
 
+        // Unit abilities (STEALTH, FEEL NO PAIN, etc.)
+        this.collectFromUnitAbilities();
+
         // Cover: Improves save by 1 if defender is in cover (unless weapon ignores cover)
         // For saves, a lower number is better, so we use -1 to improve the roll target
+        // This must come after collectFromWeapon so ignoreModifier mechanics are available
         if (this.context.defender.unit.combatState?.isInCover) {
-            const hasIgnoresCover = this.weaponEffects.some((e) => e.type === "ignoresCover");
-            if (!hasIgnoresCover) {
+            const ignoresCover = this.hasIgnoreModifierFor("s", "cover");
+            if (!ignoresCover) {
                 this.collectedMechanics.push({
                     mechanic: {
                         entity: "targetUnit",
@@ -165,9 +169,6 @@ export class CombatEngine {
                 });
             }
         }
-
-        // Unit abilities (STEALTH, FEEL NO PAIN, etc.)
-        this.collectFromUnitAbilities();
 
         // Future: Leader abilities, stratagems, etc.
         // this.collectFromLeaderAbilities();
@@ -471,8 +472,8 @@ export class CombatEngine {
      * Compute final to-hit value
      */
     private computeFinalToHit(baseToHit: number | string, modifiers: StepModifiers): number | "auto" {
-        // Check for auto-hit (TORRENT)
-        const hasAutoHit = this.weaponEffects.some((e) => e.type === "autoSuccess");
+        // Check for auto-hit (TORRENT) via mechanics
+        const hasAutoHit = this.hasAutoSuccessForAttribute("h");
         if (hasAutoHit) return "auto";
 
         if (typeof baseToHit === "string") {
@@ -481,6 +482,20 @@ export class CombatEngine {
         }
 
         return Math.max(2, Math.min(6, baseToHit - modifiers.cappedTotal));
+    }
+
+    /**
+     * Check if any collected mechanic grants autoSuccess for a given attribute
+     */
+    private hasAutoSuccessForAttribute(attribute: Attribute): boolean {
+        return this.collectedMechanics.some(({ mechanic }) => mechanic.effect === "autoSuccess" && mechanic.attribute === attribute && this.evaluateConditions(mechanic.conditions));
+    }
+
+    /**
+     * Check if any collected mechanic has ignoreModifier for a given attribute and modifier type
+     */
+    private hasIgnoreModifierFor(attribute: Attribute, modifierType: string): boolean {
+        return this.collectedMechanics.some(({ mechanic }) => mechanic.effect === "ignoreModifier" && mechanic.attribute === attribute && mechanic.value === modifierType && this.evaluateConditions(mechanic.conditions));
     }
 
     /**

@@ -1,6 +1,6 @@
 import type { UnitSelectItem } from "../../CombatPhase/utils/combatUtils";
-import type { Weapon, WeaponProfile } from "#types/Weapons";
-import type { EngagementForceItem } from "#types/Engagements";
+import type { Weapon, WeaponProfile } from "#types/Weapons.tsx";
+import type { EngagementForceItem } from "#types/Engagements.tsx";
 
 /**
  * Movement behavior types that effects can be relevant to

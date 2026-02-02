@@ -22,7 +22,7 @@ export function parseWeaponAttribute(attribute: string, weaponName: string): Wea
     const attr = attribute.toUpperCase().trim();
     const source = createEffectSource("weaponAttribute", weaponName, { attribute: attr });
 
-    // TORRENT - auto-hit
+    // TORRENT - auto-hit (handled via mechanic, specialEffect for UI badge only)
     if (attr === "TORRENT") {
         return {
             mechanic: {
@@ -32,7 +32,7 @@ export function parseWeaponAttribute(attribute: string, weaponName: string): Wea
                 value: true,
             },
             specialEffect: {
-                type: "autoSuccess",
+                type: "torrent",
                 value: true,
                 source,
             },
@@ -179,7 +179,7 @@ export function parseWeaponAttribute(attribute: string, weaponName: string): Wea
         };
     }
 
-    // IGNORES COVER
+    // IGNORES COVER (handled via mechanic, specialEffect for UI badge only)
     if (attr === "IGNORES COVER") {
         return {
             mechanic: {
