@@ -4,11 +4,23 @@ import { Badge } from "#components/Badge/Badge";
 interface Modifier {
     label: string;
     value: number;
+    leaderName?: string;
+    isFromLeader?: boolean;
 }
 
 interface ModifierBoxProps {
     bonuses?: Modifier[];
     penalties?: Modifier[];
+}
+
+/**
+ * Format modifier label with leader attribution if applicable
+ */
+function formatModifierLabel(mod: Modifier): string {
+    if (mod.isFromLeader && mod.leaderName) {
+        return `${mod.leaderName}: ${mod.label}`;
+    }
+    return mod.label;
 }
 
 function ModifierBox({ bonuses = [], penalties = [] }: ModifierBoxProps) {
@@ -30,8 +42,8 @@ function ModifierBox({ bonuses = [], penalties = [] }: ModifierBoxProps) {
                 <div className="flex items-center gap-1">
                     <div className="flex flex-wrap gap-1 justify-center">
                         {activeBonuses.map((mod, idx) => (
-                            <Badge key={idx} variant="default">
-                                <span className="text-blockcaps-s">{mod.label}</span>
+                            <Badge key={idx} variant={mod.isFromLeader ? "leader" : "default"}>
+                                <span className="text-blockcaps-s">{formatModifierLabel(mod)}</span>
                             </Badge>
                         ))}
                     </div>
@@ -46,8 +58,8 @@ function ModifierBox({ bonuses = [], penalties = [] }: ModifierBoxProps) {
                 <div className="flex items-center gap-1">
                     <div className="flex flex-wrap gap-1 justify-center">
                         {activePenalties.map((mod, idx) => (
-                            <Badge key={idx} variant="destructive">
-                                <span className="text-blockcaps-s">{mod.label}</span>
+                            <Badge key={idx} variant={mod.isFromLeader ? "leaderDestructive" : "destructive"}>
+                                <span className="text-blockcaps-s">{formatModifierLabel(mod)}</span>
                             </Badge>
                         ))}
                     </div>

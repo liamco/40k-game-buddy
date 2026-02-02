@@ -18,6 +18,8 @@ const badgeVariants = cva(
                 outlineDark: "text-deathWorldForest border-deathWorldForest fill-deathWorldForest",
                 outlineAlt: "text-fireDragonBright border-fireDragonBright fill-fireDragonBright",
                 outlineDestructive: "border-wildRiderRed text-wildRiderRed fill-wildRiderRed ",
+                leader: "bg-fireDragonBright text-mournfangBrown fill-mournfangBrown",
+                leaderDestructive: "bg-wildRiderRed text-fireDragonBright fill-fireDragonBright border-fireDragonBright",
             },
         },
         defaultVariants: {
