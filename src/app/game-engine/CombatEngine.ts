@@ -34,6 +34,8 @@ export class CombatEngine {
     private context: CombatContext;
     private collectedMechanics: SourcedMechanic[] = [];
     private weaponEffects: SpecialEffect[] = [];
+    private grantedAttackerKeywords: string[] = [];
+    private grantedDefenderKeywords: string[] = [];
 
     constructor(context: CombatContext) {
         this.context = context;
@@ -49,9 +51,11 @@ export class CombatEngine {
         // 2. Calculate base values
         const baseValues = this.calculateBaseValues();
 
-        // 2b. Derive FNP from collected mechanics (must happen after collection)
-        // FNP is ability-granted, not a base model stat
-        const derivedFnp = this.deriveFnpFromMechanics();
+        // 2b. Derive static values from collected mechanics (must happen after collection)
+        // FNP and invuln can be ability-granted, not just base model stats
+        const derivedFnp = this.deriveStaticValue("fnp");
+        const derivedInvuln = this.deriveStaticValue("invSv");
+        const effectiveInvuln = this.getBestSaveValue(baseValues.invulnSave, derivedInvuln);
 
         // 3. Evaluate modifiers for each step
         const attacksMods = this.evaluateStep("attacks");
@@ -64,7 +68,7 @@ export class CombatEngine {
         // 4. Compute final values
         const finalToHit = this.computeFinalToHit(baseValues.toHit, hitMods);
         const finalToWound = this.computeFinalToWound(baseValues.toWound, woundMods);
-        const { finalSave, useInvuln } = this.computeFinalSave(baseValues.armorSave, baseValues.invulnSave, baseValues.ap, saveMods);
+        const { finalSave, useInvuln } = this.computeFinalSave(baseValues.armorSave, effectiveInvuln, baseValues.ap, saveMods);
 
         // 5. Compute critical thresholds
         const { criticalHitThreshold } = this.computeCriticalHitThreshold();
@@ -78,7 +82,7 @@ export class CombatEngine {
             baseToHit: baseValues.toHit,
             baseToWound: baseValues.toWound,
             baseSave: baseValues.armorSave,
-            baseInvuln: baseValues.invulnSave,
+            baseInvuln: effectiveInvuln,
             baseFnp: derivedFnp,
             baseDamage: baseValues.damage,
 
@@ -175,8 +179,30 @@ export class CombatEngine {
         // Convert addsAbility mechanics to special effects (LETHAL HITS, SUSTAINED HITS, etc.)
         this.processAbilityGrantingMechanics();
 
+        // Collect keywords granted by addsKeyword mechanics
+        this.collectGrantedKeywords();
+
         // Future: stratagems, etc.
         // this.collectFromStratagems();
+    }
+
+    /**
+     * Collect keywords granted by addsKeyword mechanics.
+     * These are added to the unit's effective keywords for condition evaluation.
+     */
+    private collectGrantedKeywords(): void {
+        for (const { mechanic, leaderSourceName } of this.collectedMechanics) {
+            if (mechanic.effect !== "addsKeyword") continue;
+            if (!mechanic.keywords || !Array.isArray(mechanic.keywords)) continue;
+            if (!this.evaluateConditions(mechanic.conditions, leaderSourceName)) continue;
+
+            const targetUnit = this.resolveEntityToUnit(mechanic.entity);
+            if (targetUnit === this.context.attacker.unit) {
+                this.grantedAttackerKeywords.push(...mechanic.keywords.map((k) => k.toUpperCase()));
+            } else if (targetUnit === this.context.defender.unit) {
+                this.grantedDefenderKeywords.push(...mechanic.keywords.map((k) => k.toUpperCase()));
+            }
+        }
     }
 
     /**
@@ -522,7 +548,7 @@ export class CombatEngine {
     }
 
     /**
-     * Get keywords for an entity
+     * Get keywords for an entity, including any granted by abilities
      */
     private getUnitKeywords(entity: Entity): string[] {
         const unit = this.resolveEntityToUnit(entity);
@@ -531,10 +557,16 @@ export class CombatEngine {
         const keywords = unit.keywords || [];
 
         // Keywords can be either strings or objects with a 'keyword' property
-        return keywords.map((k: string | { keyword: string }) => {
+        const baseKeywords = keywords.map((k: string | { keyword: string }) => {
             const keyword = typeof k === "string" ? k : k.keyword;
             return keyword.toUpperCase();
         });
+
+        // Add granted keywords from addsKeyword mechanics
+        const grantedKeywords = unit === this.context.attacker.unit ? this.grantedAttackerKeywords : this.grantedDefenderKeywords;
+
+        // Return unique combined keywords
+        return [...new Set([...baseKeywords, ...grantedKeywords])];
     }
 
     /**
@@ -674,26 +706,39 @@ export class CombatEngine {
     }
 
     /**
-     * Derive FNP value from collected mechanics with setsFnp effect.
-     * FNP is an ability-granted characteristic, not a base model stat.
-     * Returns the best (lowest) FNP value, or null if none.
+     * Derive a static characteristic value from collected mechanics.
+     * Handles both `staticNumber` effect and legacy `setsFnp` for backwards compatibility.
+     * For save-like attributes (invSv, fnp, sv), returns the best (lowest) value.
      */
-    private deriveFnpFromMechanics(): number | null {
-        let bestFnp: number | null = null;
+    private deriveStaticValue(attr: Attribute): number | null {
+        let bestValue: number | null = null;
+        const lowerIsBetter = ["invSv", "fnp", "sv"].includes(attr);
 
         for (const { mechanic, leaderSourceName } of this.collectedMechanics) {
-            if (mechanic.effect === "setsFnp" && typeof mechanic.value === "number") {
-                // Evaluate conditions (e.g., phase-specific FNP, leader alive check)
-                if (!this.evaluateConditions(mechanic.conditions, leaderSourceName)) continue;
+            // Match staticNumber with matching attribute, or legacy setsFnp for fnp
+            const isMatch = (mechanic.effect === "staticNumber" && mechanic.attribute === attr) || (mechanic.effect === "setsFnp" && attr === "fnp");
 
-                // Take the best (lowest) FNP value
-                if (bestFnp === null || mechanic.value < bestFnp) {
-                    bestFnp = mechanic.value;
-                }
+            if (!isMatch || typeof mechanic.value !== "number") continue;
+            if (!this.evaluateConditions(mechanic.conditions, leaderSourceName)) continue;
+
+            if (bestValue === null) {
+                bestValue = mechanic.value;
+            } else if (lowerIsBetter) {
+                bestValue = Math.min(bestValue, mechanic.value);
+            } else {
+                bestValue = Math.max(bestValue, mechanic.value);
             }
         }
+        return bestValue;
+    }
 
-        return bestFnp;
+    /**
+     * Get the best value between base and derived, where lower is better (for saves).
+     */
+    private getBestSaveValue(base: number | null, derived: number | null): number | null {
+        if (base === null) return derived;
+        if (derived === null) return base;
+        return Math.min(base, derived);
     }
 }
 

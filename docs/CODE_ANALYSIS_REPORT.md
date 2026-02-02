@@ -26,14 +26,16 @@ export type Effect = "rollBonus" | "rollPenalty" | "staticNumber" | "addsKeyword
 ```
 
 - **Defined:** 12 effect types
-- **Fully Implemented:** 6 types
+- **Fully Implemented:** 8 types
   - `rollBonus` - in `evaluateStep()`, adds to hit/wound/save modifiers
   - `rollPenalty` - in `evaluateStep()`, subtracts from modifiers
-  - `setsFnp` - in `deriveFnpFromMechanics()`, sets Feel No Pain value
+  - `setsFnp` - in `deriveStaticValue("fnp")`, sets Feel No Pain value (unified with staticNumber)
   - `addsAbility` - in `processAbilityGrantingMechanics()`, converts to special effects (LETHAL HITS, etc.)
   - `autoSuccess` - in `hasAutoSuccessForAttribute()`, checked in `computeFinalToHit()` which returns `"auto"` (used by TORRENT)
   - `ignoreModifier` - in `hasIgnoreModifierFor()`, suppresses specific modifiers like cover bonus (used by IGNORES COVER)
-- **Unimplemented:** 6 types (`staticNumber`, `addsKeyword`, `reroll`, `mortalWounds`, `halveDamage`, `minDamage`)
+  - `staticNumber` - in `deriveStaticValue()`, sets characteristic values like invSv (used by Storm Shield)
+  - `addsKeyword` - in `collectGrantedKeywords()`, grants keywords for condition evaluation (used by wargear like Ironclad Assault Launchers)
+- **Unimplemented:** 4 types (`reroll`, `mortalWounds`, `halveDamage`, `minDamage`)
 
 No type safety prevents using unimplemented effects, leading to silent failures.
 
@@ -324,7 +326,7 @@ No validation utilities for:
 
 | Category | Severity | Count | Key Issues |
 |----------|----------|-------|-----------|
-| Unimplemented Features | High | 3 | 6 effect types, range conditions, stratagems |
+| Unimplemented Features | High | 3 | 4 effect types, range conditions, stratagems |
 | Type Safety | High | 4 | `any` types, unsafe casts, loose parameters |
 | Dead Code | Medium | 4 | Console.log, unused state, commented code |
 | Duplication | Medium | 6 | Entity resolution, state aliases, turn flags |

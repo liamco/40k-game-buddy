@@ -1,227 +1,222 @@
 {
-  "id": "000000472",
-  "name": "Hive Guard",
-  "factionId": "TYR",
-  "sourceId": "000000020",
-  "legend": "Hive Guard are spawned to protect Tyranid bio-architecture and vital spore-seeding sites. They carry a monstrous arsenal of grafted bio-weapons and are instinctively driven - or sometimes synaptically impelled - to lay down heavy hails of firepower against those prey organisms the Hive Mind wishes to see eradicated.",
-  "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> shockcannon; chitinous claws and teeth.",
-  "transport": "",
-  "virtual": false,
-  "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
-  "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Hive-Guard",
-  "slug": "hive-guard",
-  "factionSlug": "tyranids",
-  "supplementKey": "codex",
-  "abilities": [
-    {
-      "name": "Synapse",
-      "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Defensive Stance",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time you target this unit with the Fire Overwatch Stratagem, while resolving that Stratagem, hits are scored on unmodified Hit rolls of 5+, or unmodified Hit rolls of 4+ instead if this unit is within range of an objective marker.",
-      "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
+    "id": "000000472",
+    "name": "Hive Guard",
+    "factionId": "TYR",
+    "sourceId": "000000020",
+    "legend": "Hive Guard are spawned to protect Tyranid bio-architecture and vital spore-seeding sites. They carry a monstrous arsenal of grafted bio-weapons and are instinctively driven - or sometimes synaptically impelled - to lay down heavy hails of firepower against those prey organisms the Hive Mind wishes to see eradicated.",
+    "role": "Other",
+    "loadout": "<b>Every model is equipped with:</b> shockcannon; chitinous claws and teeth.",
+    "transport": "",
+    "virtual": false,
+    "leaderHead": "",
+    "leaderFooter": "",
+    "damagedW": "",
+    "damagedDescription": "",
+    "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Hive-Guard",
+    "slug": "hive-guard",
+    "factionSlug": "tyranids",
+    "supplementKey": "codex",
+    "abilities": [
         {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inRangeOfObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
+            "name": "Synapse",
+            "type": "Faction"
         },
         {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 2,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inRangeOfObjective",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
+            "id": "",
+            "name": "Defensive Stance",
+            "legend": "",
+            "factionId": "",
+            "description": "Each time you target this unit with the Fire Overwatch Stratagem, while resolving that Stratagem, hits are scored on unmodified Hit rolls of 5+, or unmodified Hit rolls of 4+ instead if this unit is within range of an objective marker.",
+            "type": "Datasheet",
+            "parameter": "",
+            "mechanics": [
+                {
+                    "entity": "thisUnit",
+                    "effect": "staticNumber",
+                    "attribute": "h",
+                    "value": 5,
+                    "conditions": [
+                        {
+                            "entity": "thisUnit",
+                            "state": "inRangeOfObjective",
+                            "operator": "equals",
+                            "value": false
+                        }
+                    ]
+                },
+                {
+                    "entity": "thisUnit",
+                    "effect": "staticNumber",
+                    "attribute": "h",
+                    "value": 4,
+                    "conditions": [
+                        {
+                            "entity": "thisUnit",
+                            "state": "inRangeOfObjective",
+                            "operator": "equals",
+                            "value": true
+                        }
+                    ]
+                }
+            ],
+            "mechanicsSource": "openai"
         }
-      ],
-      "mechanicsSource": "openai"
-    }
-  ],
-  "keywords": [
-    {
-      "datasheetId": "000000472",
-      "keyword": "Tyranids",
-      "model": "",
-      "isFactionKeyword": "true"
-    },
-    {
-      "datasheetId": "000000472",
-      "keyword": "Infantry",
-      "model": "",
-      "isFactionKeyword": "false"
-    },
-    {
-      "datasheetId": "000000472",
-      "keyword": "Great Devourer",
-      "model": "",
-      "isFactionKeyword": "false"
-    },
-    {
-      "datasheetId": "000000472",
-      "keyword": "Hive Guard",
-      "model": "",
-      "isFactionKeyword": "false"
-    }
-  ],
-  "models": [
-    {
-      "datasheetId": "000000472",
-      "line": 1,
-      "name": "Hive Guard",
-      "m": 6,
-      "t": 7,
-      "sv": 3,
-      "invSv": null,
-      "invSvDescr": "",
-      "w": 4,
-      "ld": 8,
-      "oc": 1,
-      "baseSize": "50mm",
-      "baseSizeDescr": ""
-    }
-  ],
-  "options": [
-    {
-      "datasheetId": "000000472",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their shockcannon replaced with 1 impaler cannon."
-    }
-  ],
-  "unitComposition": [
-    {
-      "datasheetId": "000000472",
-      "line": 1,
-      "description": "3-6 Hive Guard",
-      "min": 3,
-      "max": 6
-    }
-  ],
-  "modelCosts": [
-    {
-      "datasheetId": "000000472",
-      "line": 1,
-      "description": "3 models",
-      "cost": 90,
-      "count": 3
-    },
-    {
-      "datasheetId": "000000472",
-      "line": 2,
-      "description": "6 models",
-      "cost": 180,
-      "count": 6
-    }
-  ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000472:impaler-cannon",
-      "datasheetId": "000000472",
-      "line": 1,
-      "name": "Impaler cannon",
-      "type": "Ranged",
-      "profiles": [
+    ],
+    "keywords": [
         {
-          "datasheetId": "000000472",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Impaler cannon",
-          "attributes": [
-            "HEAVY",
-            "INDIRECT FIRE"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000472:shockcannon",
-      "datasheetId": "000000472",
-      "line": 2,
-      "name": "Shockcannon",
-      "type": "Ranged",
-      "profiles": [
+            "datasheetId": "000000472",
+            "keyword": "Tyranids",
+            "model": "",
+            "isFactionKeyword": "true"
+        },
         {
-          "datasheetId": "000000472",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Shockcannon",
-          "attributes": [
-            "ANTI-VEHICLE 2+"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -1,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000472:chitinous-claws-and-teeth",
-      "datasheetId": "000000472",
-      "line": 3,
-      "name": "Chitinous claws and teeth",
-      "type": "Melee",
-      "profiles": [
+            "datasheetId": "000000472",
+            "keyword": "Infantry",
+            "model": "",
+            "isFactionKeyword": "false"
+        },
         {
-          "datasheetId": "000000472",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chitinous claws and teeth",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
+            "datasheetId": "000000472",
+            "keyword": "Great Devourer",
+            "model": "",
+            "isFactionKeyword": "false"
+        },
+        {
+            "datasheetId": "000000472",
+            "keyword": "Hive Guard",
+            "model": "",
+            "isFactionKeyword": "false"
         }
-      ]
-    }
-  ]
+    ],
+    "models": [
+        {
+            "datasheetId": "000000472",
+            "line": 1,
+            "name": "Hive Guard",
+            "m": 6,
+            "t": 7,
+            "sv": 3,
+            "invSv": null,
+            "invSvDescr": "",
+            "w": 4,
+            "ld": 8,
+            "oc": 1,
+            "baseSize": "50mm",
+            "baseSizeDescr": ""
+        }
+    ],
+    "options": [
+        {
+            "datasheetId": "000000472",
+            "line": 1,
+            "button": "•",
+            "description": "Any number of models can each have their shockcannon replaced with 1 impaler cannon."
+        }
+    ],
+    "unitComposition": [
+        {
+            "datasheetId": "000000472",
+            "line": 1,
+            "description": "3-6 Hive Guard",
+            "min": 3,
+            "max": 6
+        }
+    ],
+    "modelCosts": [
+        {
+            "datasheetId": "000000472",
+            "line": 1,
+            "description": "3 models",
+            "cost": 90,
+            "count": 3
+        },
+        {
+            "datasheetId": "000000472",
+            "line": 2,
+            "description": "6 models",
+            "cost": 180,
+            "count": 6
+        }
+    ],
+    "leaders": [],
+    "supplementLabel": "None",
+    "isSupplement": false,
+    "roleLabel": "Other",
+    "sourceName": "Faction Pack: Tyranids",
+    "isForgeWorld": false,
+    "isLegends": false,
+    "availableWargear": [
+        {
+            "id": "000000472:impaler-cannon",
+            "datasheetId": "000000472",
+            "line": 1,
+            "name": "Impaler cannon",
+            "type": "Ranged",
+            "profiles": [
+                {
+                    "datasheetId": "000000472",
+                    "line": 1,
+                    "lineInWargear": 1,
+                    "dice": "",
+                    "name": "Impaler cannon",
+                    "attributes": ["HEAVY", "INDIRECT FIRE"],
+                    "range": 36,
+                    "type": "Ranged",
+                    "a": 4,
+                    "bsWs": 4,
+                    "s": 5,
+                    "ap": -1,
+                    "d": 1
+                }
+            ]
+        },
+        {
+            "id": "000000472:shockcannon",
+            "datasheetId": "000000472",
+            "line": 2,
+            "name": "Shockcannon",
+            "type": "Ranged",
+            "profiles": [
+                {
+                    "datasheetId": "000000472",
+                    "line": 2,
+                    "lineInWargear": 1,
+                    "dice": "",
+                    "name": "Shockcannon",
+                    "attributes": ["ANTI-VEHICLE 2+"],
+                    "range": 24,
+                    "type": "Ranged",
+                    "a": 2,
+                    "bsWs": 3,
+                    "s": 7,
+                    "ap": -1,
+                    "d": 3
+                }
+            ]
+        },
+        {
+            "id": "000000472:chitinous-claws-and-teeth",
+            "datasheetId": "000000472",
+            "line": 3,
+            "name": "Chitinous claws and teeth",
+            "type": "Melee",
+            "profiles": [
+                {
+                    "datasheetId": "000000472",
+                    "line": 3,
+                    "lineInWargear": 1,
+                    "dice": "",
+                    "name": "Chitinous claws and teeth",
+                    "attributes": [],
+                    "range": "Melee",
+                    "type": "Melee",
+                    "a": 3,
+                    "bsWs": 4,
+                    "s": 5,
+                    "ap": 0,
+                    "d": 1
+                }
+            ]
+        }
+    ]
 }
