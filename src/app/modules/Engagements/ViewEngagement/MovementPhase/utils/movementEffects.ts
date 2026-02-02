@@ -1,6 +1,6 @@
 import type { UnitSelectItem } from "../../CombatPhase/utils/combatUtils";
 import type { Weapon, WeaponProfile } from "#types/Weapons";
-import type { EngagementForceItem } from "#types/Engagements";
+import type { EngagementForceItem, EngagementAbility } from "#types/Engagements";
 
 /**
  * Movement behavior types that effects can be relevant to
@@ -19,6 +19,10 @@ export interface EffectSource {
     type: EffectSourceType;
     name: string;
     attribute?: string; // For weapon attributes like "ASSAULT", "HEAVY"
+    /** Whether this effect comes from an attached leader */
+    isFromLeader?: boolean;
+    /** The name of the leader unit if this is from a leader ability */
+    leaderName?: string;
 }
 
 /**
@@ -107,6 +111,11 @@ function extractEffectsFromUnit(unit: EngagementForceItem): MovementEffect[] {
     // 2. Scan unit abilities for movement-related mechanics
     if (unit.abilities) {
         for (const ability of unit.abilities) {
+            // Cast to EngagementAbility to access leader source info
+            const engAbility = ability as EngagementAbility;
+            const isFromLeader = engAbility.isFromLeader ?? false;
+            const leaderName = isFromLeader ? engAbility.sourceUnitName : undefined;
+
             if (ability.mechanics && Array.isArray(ability.mechanics)) {
                 for (const mechanic of ability.mechanics) {
                     // Check for addsAbility effect with movement-related abilities
@@ -120,6 +129,8 @@ function extractEffectsFromUnit(unit: EngagementForceItem): MovementEffect[] {
                                     source: {
                                         type: "unitAbility",
                                         name: ability.name,
+                                        isFromLeader,
+                                        leaderName,
                                     },
                                     relevantMovement: effectDef.relevantMovement,
                                 });
@@ -140,6 +151,8 @@ function extractEffectsFromUnit(unit: EngagementForceItem): MovementEffect[] {
                                         source: {
                                             type: "unitAbility",
                                             name: ability.name,
+                                            isFromLeader,
+                                            leaderName,
                                         },
                                         relevantMovement: ["hold"],
                                     });
@@ -154,6 +167,8 @@ function extractEffectsFromUnit(unit: EngagementForceItem): MovementEffect[] {
                                         source: {
                                             type: "unitAbility",
                                             name: ability.name,
+                                            isFromLeader,
+                                            leaderName,
                                         },
                                         relevantMovement: ["charge"],
                                     });
@@ -268,6 +283,11 @@ export function formatSourceAttribution(source: EffectSource): string {
 
     if (source.type === "weapon" && source.attribute) {
         return `${name} has ${source.attribute}`;
+    }
+
+    // For leader abilities, show "LeaderName: AbilityName"
+    if (source.isFromLeader && source.leaderName) {
+        return `${source.leaderName}: ${name}`;
     }
 
     return `Unit has ${name}`;

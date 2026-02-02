@@ -44,6 +44,10 @@ export interface CriticalEffect {
 export interface DisplayModifier {
     label: string;
     value: number;
+    /** If this modifier comes from a leader ability, the leader's name */
+    leaderName?: string;
+    /** Whether this modifier is from an attached leader */
+    isFromLeader?: boolean;
 }
 
 /**

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 
-import type { Engagement, EngagementType, EngagementSize, EngagementPhase, EngagementForce, EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance, EngagementWargear, SourceUnit, ArmyList, ArmyListItem } from "../../types";
+import type { Engagement, EngagementType, EngagementSize, EngagementPhase, EngagementForce, EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance, EngagementWargear, EngagementAbility, SourceUnit, ArmyList, ArmyListItem } from "../../types";
 import { resolveUnitWargear } from "../Lists/ListManagerContext";
 
 const STORAGE_KEY = "battle-cogitator-engagements";
@@ -143,6 +143,22 @@ function mergeUnitsForEngagement(leaders: ArmyListItem[], bodyguard: ArmyListIte
         })),
     ];
 
+    // Merge abilities with source tagging
+    const abilities: EngagementAbility[] = [
+        ...leaders.flatMap((l) =>
+            (l.abilities || []).map((a) => ({
+                ...a,
+                sourceUnitName: l.name,
+                isFromLeader: true,
+            }))
+        ),
+        ...(bodyguard.abilities || []).map((a) => ({
+            ...a,
+            sourceUnitName: bodyguard.name,
+            isFromLeader: false,
+        })),
+    ];
+
     // Merge model profiles
     const models = [...leaders.flatMap((l) => l.models || []), ...(bodyguard.models || [])];
 
@@ -151,7 +167,7 @@ function mergeUnitsForEngagement(leaders: ArmyListItem[], bodyguard: ArmyListIte
     const displayName = `${leaderNames} + ${bodyguard.name}`;
 
     // Use first leader as base, but override with merged data
-    const { availableWargear, modelInstances: _, ...baseItem } = leaders[0];
+    const { availableWargear, modelInstances: _, abilities: __, ...baseItem } = leaders[0];
 
     // Create a temporary item for combat state calculation
     const tempItem = { ...baseItem, modelInstances } as ArmyListItem;
@@ -162,6 +178,7 @@ function mergeUnitsForEngagement(leaders: ArmyListItem[], bodyguard: ArmyListIte
         modelInstances,
         models,
         wargear,
+        abilities,
         sourceUnits,
         combatState: createDefaultCombatState(tempItem),
     };

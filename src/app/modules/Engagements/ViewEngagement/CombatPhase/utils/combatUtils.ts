@@ -1,6 +1,7 @@
-import type { EngagementForce, EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance, EngagementWargear } from "#types/Engagements";
+import type { EngagementForce, EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance, EngagementWargear, EngagementAbility } from "#types/Engagements";
 import type { WeaponProfile, Model, Weapon } from "#types/index";
 import type { SpecialEffect, CriticalEffect } from "#game-engine/types/ModifierResult";
+import type { BonusAttribute } from "#components/WeaponProfileCard/WeaponProfileCard";
 
 /**
  * Wrapper for an EngagementForceItem for UI selection purposes.
@@ -57,6 +58,69 @@ export function getFirstWeaponProfileForPhase(wargear: EngagementWargear[], phas
         return weapon.profiles[0];
     }
     return null;
+}
+
+/**
+ * Weapon abilities that can be granted by leader abilities.
+ * Maps ability names to their display format.
+ */
+const WEAPON_ABILITY_NAMES = ["LETHAL HITS", "SUSTAINED HITS", "DEVASTATING WOUNDS", "PRECISION"];
+
+/**
+ * Extract weapon abilities granted by leader abilities.
+ * These are abilities with `addsAbility` effect and `isLeadingUnit` condition.
+ *
+ * @param unit The unit to check
+ * @returns Array of BonusAttribute objects for display on weapon cards
+ */
+export function getLeaderGrantedWeaponAbilities(unit: EngagementForceItem | undefined): BonusAttribute[] {
+    if (!unit || !unit.abilities) return [];
+
+    const bonuses: BonusAttribute[] = [];
+    const deadModelIds = unit.combatState?.deadModelIds || [];
+    const modelInstances = unit.modelInstances || [];
+
+    for (const ability of unit.abilities) {
+        const engAbility = ability as EngagementAbility;
+
+        // Only process leader abilities
+        if (!engAbility.isFromLeader) continue;
+
+        // Check if the leader is still alive
+        const leaderName = engAbility.sourceUnitName;
+        if (leaderName) {
+            const leaderModels = modelInstances.filter((m) => m.sourceUnitName === leaderName);
+            const leaderAlive = leaderModels.some((m) => !deadModelIds.includes(m.instanceId));
+            if (!leaderAlive) continue;
+        }
+
+        // Check for addsAbility mechanics with isLeadingUnit condition
+        if (!ability.mechanics || !Array.isArray(ability.mechanics)) continue;
+
+        for (const mechanic of ability.mechanics) {
+            if (mechanic.effect !== "addsAbility") continue;
+            if (!mechanic.abilities || !Array.isArray(mechanic.abilities)) continue;
+
+            // Check for isLeadingUnit condition
+            const hasLeadingCondition = mechanic.conditions?.some((c: any) => c.state === "isLeadingUnit");
+            if (!hasLeadingCondition) continue;
+
+            // Extract weapon abilities
+            for (const abilityName of mechanic.abilities) {
+                const upperName = abilityName.toUpperCase();
+                if (WEAPON_ABILITY_NAMES.includes(upperName)) {
+                    bonuses.push({
+                        name: upperName,
+                        value: typeof mechanic.value === "number" ? mechanic.value : null,
+                        sourceName: ability.name,
+                        sourceType: "leader",
+                    });
+                }
+            }
+        }
+    }
+
+    return bonuses;
 }
 
 /**

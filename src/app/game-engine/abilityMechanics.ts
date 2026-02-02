@@ -6,6 +6,7 @@
  */
 
 import type { Ability } from "#types/Units";
+import type { EngagementAbility } from "#types/Engagements";
 import type { Mechanic } from "./types/Mechanic";
 import type { EffectSource, EffectSourceType } from "./types/EffectSource";
 import { createEffectSource } from "./types/EffectSource";
@@ -24,21 +25,20 @@ export interface SourcedAbilityMechanic {
     mechanic: Mechanic;
     source: EffectSource;
     appliesTo: AbilityApplicationTarget;
+    /** For leader abilities: the name of the leader unit that granted this ability */
+    leaderSourceName?: string;
 }
 
 /**
  * Extract combat mechanics from a unit's abilities.
+ * Supports both regular Ability and EngagementAbility (with leader source tracking).
  *
  * @param abilities - The unit's abilities array
  * @param unitName - Name of the unit (for source attribution)
  * @param sourceType - Type of effect source (unitAbility or leaderAbility)
  * @returns Array of mechanics with source attribution
  */
-export function extractAbilityMechanics(
-    abilities: Ability[] | undefined,
-    unitName: string,
-    sourceType: EffectSourceType = "unitAbility"
-): SourcedAbilityMechanic[] {
+export function extractAbilityMechanics(abilities: (Ability | EngagementAbility)[] | undefined, unitName: string, sourceType: EffectSourceType = "unitAbility"): SourcedAbilityMechanic[] {
     if (!abilities || abilities.length === 0) {
         return [];
     }
@@ -48,17 +48,26 @@ export function extractAbilityMechanics(
     for (const ability of abilities) {
         const mechanics = getMechanicsForAbility(ability);
 
+        // Check if this is an EngagementAbility with leader source info
+        const engagementAbility = ability as EngagementAbility;
+        const isFromLeader = engagementAbility.isFromLeader ?? false;
+        const leaderSourceName = isFromLeader ? engagementAbility.sourceUnitName : undefined;
+
+        // Use leaderAbility source type if from a leader
+        const effectiveSourceType = isFromLeader ? "leaderAbility" : sourceType;
+
         for (const mechanic of mechanics) {
             // Determine if this mechanic affects attacks made or received
             const appliesTo = getApplicationTarget(mechanic);
 
             results.push({
                 mechanic,
-                source: createEffectSource(sourceType, ability.name, {
-                    unitName,
-                    abilityType: ability.type,
+                source: createEffectSource(effectiveSourceType, ability.name, {
+                    sourceUnitName: engagementAbility.sourceUnitName,
+                    isFromLeader,
                 }),
                 appliesTo,
+                leaderSourceName,
             });
         }
     }
