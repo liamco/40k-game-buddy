@@ -48,8 +48,8 @@ const ViewList = () => {
     const effectiveSupplement = useMemo(() => {
         if (!selectedList?.items) return null;
 
-        const supplementUnit = selectedList.items.find((item) => item.supplementSlug && item.supplementSlug !== "codex");
-        return supplementUnit?.supplementSlug || null;
+        const supplementUnit = selectedList.items.find((item) => item.supplement?.slug && item.supplement.slug !== "codex");
+        return supplementUnit?.supplement?.slug || null;
     }, [selectedList?.items]);
 
     // Helper to format supplement slug to display name
@@ -66,7 +66,7 @@ const ViewList = () => {
         const detachmentSupplement = selectedDetachment?.supplementSlug;
 
         return factionData.datasheets.map((datasheet: Datasheet) => {
-            const datasheetSupplement = datasheet.supplementSlug;
+            const datasheetSupplement = datasheet.supplement?.slug;
             let disabled = false;
             let disabledReason = "";
 

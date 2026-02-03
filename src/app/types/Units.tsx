@@ -81,8 +81,18 @@ export interface WargearOptionsContainer {
 
 // Consolidated wargear data
 export interface WargearData {
+    defaultLoadout: string; // Raw HTML text describing default equipment (e.g., "Every model is equipped with: bolt pistol; boltgun")
     weapons: Weapon[]; // Available weapon profiles for this unit
     options: WargearOptionsContainer; // Wargear customization options
+}
+
+// Consolidated supplement data
+export interface SupplementData {
+    key: string; // e.g., "codex", "black-templars"
+    slug: string; // e.g., "codex", "black-templars" (may be empty for non-SM factions)
+    name: string; // e.g., "Codex", "Black Templars"
+    label: string; // e.g., "None", "Black Templars"
+    isSupplement: boolean; // true if from a chapter supplement (not base codex)
 }
 
 export interface Datasheet {
@@ -94,7 +104,6 @@ export interface Datasheet {
     role: string;
     roleLabel: string;
     legend?: string;
-    loadout?: string;
     transport?: string;
     abilities?: Ability[];
     factionAbilityIds?: string[];
@@ -105,9 +114,9 @@ export interface Datasheet {
     path: string;
     isForgeWorld?: boolean;
     isLegends?: boolean;
-    supplementSlug?: string; // e.g., "codex", "black-templars" - used to filter by detachment supplement
 
     // Consolidated properties
+    supplement?: SupplementData; // Consolidated supplement data
     damaged?: DamagedProfile | null; // Consolidated damaged profile data (null if no damaged profile)
     leader?: LeaderData | null; // Consolidated leader data (null if not a leader)
     wargear?: WargearData; // Consolidated wargear (weapons + options)

@@ -14,7 +14,6 @@ import { WargearRulesPanel, UnparsedOptionsWarning } from "./components";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 
 import WargearProfileCard from "./WargearProfileCard.tsx";
-import ComplexWargearSelector from "./ComplexWargearSelector.tsx";
 
 import styles from "./WargearProfileCard.module.css";
 
@@ -257,16 +256,6 @@ function getModelsEligibleForRatioOptions(totalModels: number, ratioOptions: War
 const WargearTab = ({ unit, list }: Props) => {
     const { updateModelLoadout, updateAllModelLoadouts, updateUnitWideSelection } = useListManager();
     const [expandedModels, setExpandedModels] = useState<Set<number>>(new Set());
-
-    // Check if unit has precomputed loadouts (complex wargear)
-    const precomputedLoadouts = useMemo(() => {
-        return (unit as any).precomputedLoadouts || null;
-    }, [unit]);
-
-    // If unit has precomputed loadouts, use the complex selector
-    if (precomputedLoadouts && precomputedLoadouts.length > 0) {
-        return <ComplexWargearSelector unit={unit} list={list} loadouts={precomputedLoadouts} />;
-    }
 
     // Check if unit has any wargear options (not just notes)
     const hasOptions = useMemo(() => {

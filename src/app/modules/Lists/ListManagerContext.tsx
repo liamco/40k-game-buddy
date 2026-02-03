@@ -335,7 +335,7 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
     }
 
     // Parse default loadouts per model type
-    const loadoutByType = parseLoadoutByModelType(unit.loadout || "", unit.unitComposition);
+    const loadoutByType = parseLoadoutByModelType(unit.wargear?.defaultLoadout || "", unit.unitComposition);
 
     // Generate instances for each composition line
     for (const comp of unit.unitComposition) {
@@ -394,7 +394,7 @@ export function resolveUnitWargear(unit: ArmyListItem): Weapon[] {
     }
 
     // Fallback: return default weapons from loadout string
-    const defaultWeaponNames = parseLoadoutWeapons(unit.loadout || "").map((w) => w.toLowerCase());
+    const defaultWeaponNames = parseLoadoutWeapons(unit.wargear?.defaultLoadout || "").map((w) => w.toLowerCase());
 
     return unit.wargear?.weapons.filter((weapon) => {
         const weaponNameLower = weapon.name.toLowerCase();
@@ -1149,9 +1149,9 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Helper to get default loadout for a model type
     function getDefaultLoadoutForModelType(unit: ArmyListItem, modelType: string): string[] {
-        if (!unit.loadout || !unit.wargear?.weapons) return [];
+        if (!unit.wargear?.defaultLoadout || !unit.wargear?.weapons) return [];
 
-        const loadoutByType = parseLoadoutByModelType(unit.loadout, unit.unitComposition || []);
+        const loadoutByType = parseLoadoutByModelType(unit.wargear.defaultLoadout, unit.unitComposition || []);
         const weaponNames = loadoutByType.get(modelType) || loadoutByType.get("Every model") || [];
 
         return weaponNames.map((name) => findWeaponIdByName(unit.wargear?.weapons!, name)).filter((id): id is string => id !== null);
@@ -1358,7 +1358,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Get the default loadout weapon names from the unit's loadout string
     const getDefaultLoadout = useCallback((unit: ArmyListItem): string[] => {
-        return parseLoadoutWeapons(unit.loadout || "");
+        return parseLoadoutWeapons(unit.wargear?.defaultLoadout || "");
     }, []);
 
     // Get unit's current weapons accounting for loadout selections

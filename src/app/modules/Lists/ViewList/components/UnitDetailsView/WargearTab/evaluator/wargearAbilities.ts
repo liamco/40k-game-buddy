@@ -32,9 +32,8 @@ export function getWargearAbilities(abilities: Ability[]): Ability[] {
  * Build ability-to-weapon mappings for a unit.
  *
  * Strategy:
- * 1. If precomputedLoadouts has wargearAbilities mapping, use that
- * 2. Otherwise, infer from ability name matching weapon name
- * 3. Common wargear items (icons, instruments, banners) are equipment-based
+ * 1. Infer from ability name matching weapon name
+ * 2. Common wargear items (icons, instruments, banners) are equipment-based
  */
 export function buildAbilityMappings(wargearAbilities: Ability[], weapons: Weapon[], precomputedMappings?: WargearAbilityMapping[]): WargearAbilityMapping[] {
     // Use precomputed if available

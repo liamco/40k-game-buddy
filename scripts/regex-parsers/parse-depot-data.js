@@ -708,6 +708,7 @@ function consolidateDamagedProperties(obj) {
  * Consolidates wargear-related properties into a single `wargear` object.
  *
  * Transforms:
+ *   - loadout (default equipment text) -> wargear.defaultLoadout
  *   - wargear (weapon profiles) -> wargear.weapons (after grouping profiles)
  *   - options (raw option text) -> wargear.options.raw
  *   - (parsed options will be added later by parse-wargear-options.js)
@@ -728,8 +729,12 @@ function consolidateWargearProperties(obj) {
     // Get raw options
     const rawOptions = obj.options && Array.isArray(obj.options) ? obj.options : [];
 
+    // Get default loadout text
+    const defaultLoadout = obj.loadout || "";
+
     // Build the consolidated wargear object
     const wargearData = {
+        defaultLoadout: defaultLoadout,
         weapons: weapons,
         options: {
             raw: rawOptions,
@@ -745,12 +750,56 @@ function consolidateWargearProperties(obj) {
     if (consolidated.hasOwnProperty("options")) {
         delete consolidated.options;
     }
+    if (consolidated.hasOwnProperty("loadout")) {
+        delete consolidated.loadout;
+    }
     // Also remove availableWargear if it somehow exists (shouldn't at this point)
     if (consolidated.hasOwnProperty("availableWargear")) {
         delete consolidated.availableWargear;
     }
 
     consolidated.wargear = wargearData;
+
+    return consolidated;
+}
+
+/**
+ * Consolidates supplement-related properties into a single `supplement` object.
+ *
+ * Transforms:
+ *   - supplementKey -> supplement.key
+ *   - supplementSlug -> supplement.slug
+ *   - supplementName -> supplement.name
+ *   - supplementLabel -> supplement.label
+ *   - isSupplement -> supplement.isSupplement
+ *
+ * @param {object} obj - The datasheet object to process
+ * @returns {object} - The datasheet with consolidated supplement property
+ */
+function consolidateSupplementProperties(obj) {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+        return obj;
+    }
+
+    const consolidated = { ...obj };
+
+    // Build the supplement object
+    const supplementData = {
+        key: obj.supplementKey || "",
+        slug: obj.supplementSlug || "",
+        name: obj.supplementName || "",
+        label: obj.supplementLabel || "",
+        isSupplement: obj.isSupplement || false,
+    };
+
+    // Remove old properties
+    delete consolidated.supplementKey;
+    delete consolidated.supplementSlug;
+    delete consolidated.supplementName;
+    delete consolidated.supplementLabel;
+    delete consolidated.isSupplement;
+
+    consolidated.supplement = supplementData;
 
     return consolidated;
 }
@@ -1062,6 +1111,9 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
 
             // Rename 'leaders' to 'leadsUnits' for clarity
             processedData = renameLeadersProperty(processedData);
+
+            // Consolidate supplement properties into single object
+            processedData = consolidateSupplementProperties(processedData);
 
             // Reorder properties so arrays come last (cleaner JSON output)
             processedData = reorderDatasheetProperties(processedData);
