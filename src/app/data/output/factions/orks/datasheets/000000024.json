@@ -171,11 +171,13 @@
             "removes": [
               {
                 "name": "kustom shoota",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "power klaw",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -183,11 +185,13 @@
                 "weapons": [
                   {
                     "name": "kombi-weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power klaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -196,11 +200,13 @@
                 "weapons": [
                   {
                     "name": "kombi-weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "killsaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -209,11 +215,13 @@
                 "weapons": [
                   {
                     "name": "kustom shoota",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "killsaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -222,11 +230,13 @@
                 "weapons": [
                   {
                     "name": "killsaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power klaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -235,7 +245,8 @@
                 "weapons": [
                   {
                     "name": "twin killsaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -247,7 +258,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -268,7 +280,18 @@
       "factionId": "",
       "description": "While the Waaagh! is active for your army, models in this unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

@@ -214,7 +214,8 @@
             "removes": [
               {
                 "name": "EtaCarn plasma gun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -222,7 +223,8 @@
                 "weapons": [
                   {
                     "name": "volkanite disintegrator",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -244,7 +246,8 @@
             "removes": [
               {
                 "name": "concussion gauntlet",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -252,7 +255,8 @@
                 "weapons": [
                   {
                     "name": "plasma blade gauntlet",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -275,7 +279,8 @@
             "removes": [
               {
                 "name": "concussion gauntlet or plasma blade gauntlet",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -283,7 +288,8 @@
                 "weapons": [
                   {
                     "name": "graviton hammer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -306,7 +312,8 @@
             "removes": [
               {
                 "name": "weavefield crest",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -314,7 +321,8 @@
                 "weapons": [
                   {
                     "name": "teleport crest",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -326,7 +334,39 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002599:teleport-crest",
+        "name": "Teleport Crest",
+        "description": "Models in the bearer's unit have the Deep Strike ability.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "DEEP STRIKE"
+            ],
+            "value": true
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000002599:weavefield-crest",
+        "name": "Weavefield Crest",
+        "description": "Models in the bearer's unit have a 5+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -347,24 +387,6 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a ranged attack that targets the closest eligible target, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Teleport Crest",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have the Deep Strike ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Weavefield Crest",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have a 5+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

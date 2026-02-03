@@ -122,7 +122,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -156,7 +157,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one <span class=\"kwb\">INFANTRY</span> unit hit by one or more of those attacks made with its Agonising Energies. Until the start of your next turn, that unit is wracked with agonies. While a unit is wracked with agonies, subtract 2\" from its Move characteristic and subtract 2 from Charge rolls made for it.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "charge",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

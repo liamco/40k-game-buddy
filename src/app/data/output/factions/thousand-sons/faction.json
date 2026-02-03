@@ -977,7 +977,16 @@
           "legend": "The otherworldly auras of Tzeentch's daemons and the empowering arcane sigil carried by his mortal servants wear away at the fragile skein of reality.",
           "description": "Scintillating Legions units from your army have the following the ability:<br><br><b>Daemonic Illusions (Aura):</b> While a friendly Thousand Sons Psyker unit is within 6\" of and visible to this unit, models in that unit have a 4+ invulnerable save against ranged attacks.<br><br>Thousand Sons units from your army have the following ability:<br><br><b>Mortal Sorcery (Aura):</b> While a friendly Scintillating Legions Psyker unit is within 6\" of and visible to this unit, that <span class=\"kwb\">SCINTILLATING</span> <span class=\"kwb\">LEGIONS</span> unit has the Cabal of Sorcerers ability.<br><br><span class=\"hi_custom\">RESTRICTIONS</span><br>You can include Scintillating Legions units in your army, even though they do not have the <span class=\"kwb\">THOUSAND</span> <span class=\"kwb\">SONS</span> Faction keyword. The combined points cost of such units you can include in your army is:<br><br><b>Incursion:</b> Up to 500 pts<br><b>Strike Force:</b> Up to 1000 pts<br><b>Onslaught:</b> Up to 1500 pts<br><br>No <span class=\"kwb\">SCINTILLATING</span> <span class=\"kwb\">LEGIONS</span> models from your army can be your <span class=\"kwb\">WARLORD</span>.",
           "detachment": "Changehost of Deceit",
-          "detachmentId": 1062
+          "detachmentId": 1062,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1019,7 +1028,16 @@
           "detachment": "Changehost of Deceit",
           "detachmentId": 1062,
           "legend": "Stolen from Imperial daemonhunters and added to over millennia, this dangerous tome can compel a host of empyric entities to shield the bearer in extremis. Once uttered, however, the names vanish.",
-          "description": "Thousand Sons Infantry model only. Once per battle, at the start of any phase, the bearer can use this Enhancement. If it does, until the end of the phase, the bearer has a 2+ invulnerable save."
+          "description": "Thousand Sons Infantry model only. Once per battle, at the start of any phase, the bearer can use this Enhancement. If it does, until the end of the phase, the bearer has a 2+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1037,7 +1055,16 @@
           ],
           "detachment": "Changehost of Deceit",
           "detachmentId": 1062,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Thousand Sons or Scintillating Legions unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Thousand Sons or Scintillating Legions unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1067,7 +1094,16 @@
           ],
           "detachment": "Changehost of Deceit",
           "detachmentId": 1062,
-          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One Thousand Sons Psyker or Scintillating Legions unit from your army that was selected as a target of that charge.<br><br><b>EFFECT:</b> Until the end of the phase, subtract 2 from Charge rolls made for that enemy unit (this is not cumulative with any other negative modifiers to that Charge roll)."
+          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One Thousand Sons Psyker or Scintillating Legions unit from your army that was selected as a target of that charge.<br><br><b>EFFECT:</b> Until the end of the phase, subtract 2 from Charge rolls made for that enemy unit (this is not cumulative with any other negative modifiers to that Charge roll).",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "charge",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1196,7 +1232,16 @@
           ],
           "detachment": "Chosen Cabal",
           "detachmentId": 969,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One THOUSAND SONS PSYKER CHARAcTER model from your army that was selected as the target of one or more of the attacking unit's attacks. <br><br><b>EFFECT:</b> Until the end of the phase, your model has a 3+ invulnerable save. At the end of the phase, your model suffers D3 mortal wounds."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One THOUSAND SONS PSYKER CHARAcTER model from your army that was selected as the target of one or more of the attacking unit's attacks. <br><br><b>EFFECT:</b> Until the end of the phase, your model has a 3+ invulnerable save. At the end of the phase, your model suffers D3 mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 3
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1266,7 +1311,18 @@
           ],
           "detachment": "Devoted Thralls",
           "detachmentId": 970,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One TzAANGORS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One TzAANGORS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1425,7 +1481,16 @@
           "legend": "For an instant, the chanting voices of the Thousand Sons achieve eerie synchronisation. Their words of malign incantation roll out like the peal of some cursed bell amidst the Empyrean to signal the onset of the next fateful tide of ritual power.",
           "description": "In your Command phase, you can select one of the abilities listed below to take effect until the start of your next Command phase. You can only select each of these abilities once per battle.<div></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Imbued Manifestation</p><p>Add 6\" to the Range characteristic of ranged <span class=\"tooltip00094\" data-tooltip-content=\"#tooltip_content00094\"><span class=\"tt kwbu\">Psychic</span> <span class=\"tt kwbu\">weapons</span></span> equipped by <span class=\"tooltip00018\" data-tooltip-content=\"#tooltip_content00018\" data-tooltip-anchor=\"#tooltip_content00018\"><span class=\"kwb kwbu\">THOUSAND</span> <span class=\"kwb kwbu\">SONS</span></span> models from your army.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Psychic Maelstrom</p><p>Each time a <span class=\"tooltip00018\" data-tooltip-content=\"#tooltip_content00018\" data-tooltip-anchor=\"#tooltip_content00018\"><span class=\"kwb kwbu\">THOUSAND</span> <span class=\"kwb kwbu\">SONS</span></span> model from your army makes an attack with a <span class=\"tooltip00094\" data-tooltip-content=\"#tooltip_content00094\"><span class=\"tt kwbu\">Psychic</span> <span class=\"tt kwbu\">weapon</span></span>, add 1 to the <span class=\"tooltip00032\" data-tooltip-content=\"#tooltip_content00032\"><span class=\"tt kwbu\">Wound</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Wrath of the Immaterium</p><p><span class=\"tooltip00094\" data-tooltip-content=\"#tooltip_content00094\"><span class=\"tt kwbu\">Psychic</span> <span class=\"tt kwbu\">weapons</span></span> equipped by <span class=\"tooltip00018\" data-tooltip-content=\"#tooltip_content00018\" data-tooltip-anchor=\"#tooltip_content00018\"><span class=\"kwb kwbu\">THOUSAND</span> <span class=\"kwb kwbu\">SONS</span></span> models from your army have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00008\" data-tooltip-content=\"#tooltip_content00008\"><span class=\"tt kwbu\">[devastating</span> <span class=\"tt kwbu\">wounds]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div>",
           "detachment": "Grand Coven",
-          "detachmentId": 1061
+          "detachmentId": 1061,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1529,7 +1594,18 @@
           ],
           "detachment": "Grand Coven",
           "detachmentId": 1061,
-          "description": "<b>WHEN:</b> Any phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Thousand Sons unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, Psychic weapons equipped by models in the attacking unit have the [hazardous] ability, and models in your unit have the Feel No Pain 4+ ability against Psychic Attacks."
+          "description": "<b>WHEN:</b> Any phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Thousand Sons unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, Psychic weapons equipped by models in the attacking unit have the [hazardous] ability, and models in your unit have the Feel No Pain 4+ ability against Psychic Attacks.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1574,7 +1650,16 @@
           "legend": "With each site seized by the thrallband's warriors, the flow of arcane energies increases, and the veil between reality and the Warp erodes. The resultant influxes of Warp energy are potent enough to invoke the flesh-change and must be channelled carefully by the thrallband's Sorcerers. With masterful skill, they wield these mutagenic energies, expertly syphoning excess magic to empower themselves and the warriors at their command while maintaining control of their ever-expanding ritual.",
           "description": "Certain areas of the battlefield are within your army's Flow of Magic, as follows:<br><ul><li>Your deployment zone is always within your army's Flow of Magic.</li><li>At the start of any phase, if you control at least half of the objective markers within No Man's Land, until the end of that phase, No Man's Land is within your army's Flow of Magic.</li><li>At the start of any phase, if you control at least half of the objective markers within your opponent's deployment zone, until the end of that phase, your opponent's deployment zone is within your army's Flow of Magic.</li></ul><br>Each time a <span class=\"kwb\">THOUSAND</span> <span class=\"kwb\">SONS</span> model from your army makes a Psychic Attack, re-roll a Wound roll of 1. If such a model is wholly within your army's Flow of Magic, each time it makes a Psychic Attack, add 1 to the Wound roll instead.",
           "detachment": "Hexwarp Thrallband",
-          "detachmentId": 983
+          "detachmentId": 983,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1633,7 +1718,18 @@
           ],
           "detachment": "Hexwarp Thrallband",
           "detachmentId": 983,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Thousand Sons Psyker unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Stealth ability, and, if your unit is wholly within your army's Flow of Magic, each time an attack targets your unit, it has the Benefit of Cover against that attack."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Thousand Sons Psyker unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Stealth ability, and, if your unit is wholly within your army's Flow of Magic, each time an attack targets your unit, it has the Benefit of Cover against that attack.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1663,7 +1759,18 @@
           ],
           "detachment": "Hexwarp Thrallband",
           "detachmentId": 983,
-          "description": "<b>WHEN:</b> Start of the Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Rubric Marines or Scarab Occult Terminators unit from your army that is in Strategic Reserves.<br><br><b>EFFECT:</b> If it is a <span class=\"kwb\">RUBRIC</span> <span class=\"kwb\">MARINES</span> unit, until the end of the phase, it has the Deep Strike ability. When your unit is set up on the battlefield using the Deep Strike ability, if it is a <span class=\"kwb\">SCARAB</span> <span class=\"kwb\">OCCULT</span> <span class=\"kwb\">TERMINATOR</span> unit it can be set up anywhere on the battlefield that is wholly within your army's Flow of Magic and more than 6\" horizontally away from all enemy models.<br><br><b>RESTRICTIONS:</b> If a <span class=\"kwb\">SCARAB</span> <span class=\"kwb\">OCCULT</span> <span class=\"kwb\">TERMINATORS</span> unit is targeted with this Stratagem, it is not eligible to declare a charge in the same turn."
+          "description": "<b>WHEN:</b> Start of the Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One Rubric Marines or Scarab Occult Terminators unit from your army that is in Strategic Reserves.<br><br><b>EFFECT:</b> If it is a <span class=\"kwb\">RUBRIC</span> <span class=\"kwb\">MARINES</span> unit, until the end of the phase, it has the Deep Strike ability. When your unit is set up on the battlefield using the Deep Strike ability, if it is a <span class=\"kwb\">SCARAB</span> <span class=\"kwb\">OCCULT</span> <span class=\"kwb\">TERMINATOR</span> unit it can be set up anywhere on the battlefield that is wholly within your army's Flow of Magic and more than 6\" horizontally away from all enemy models.<br><br><b>RESTRICTIONS:</b> If a <span class=\"kwb\">SCARAB</span> <span class=\"kwb\">OCCULT</span> <span class=\"kwb\">TERMINATORS</span> unit is targeted with this Stratagem, it is not eligible to declare a charge in the same turn.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1735,7 +1842,18 @@
           "detachment": "Rubricae Phalanx",
           "detachmentId": 1064,
           "legend": "A plan decades in the making comes to fruition as hidden, silent Rubricae emerge at a fateful hour to deliver the killing blow.",
-          "description": "<span class=\"kwb\">THOUSAND</span> <span class=\"kwb\">SONS</span> model only. At the start of the Declare Battle Formations step, select either two Rubricae Battleline units from your army or one other Rubricae unit from your army; models in the selected units have the Infiltrators ability."
+          "description": "<span class=\"kwb\">THOUSAND</span> <span class=\"kwb\">SONS</span> model only. At the start of the Declare Battle Formations step, select either two Rubricae Battleline units from your army or one other Rubricae unit from your army; models in the selected units have the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1755,7 +1873,16 @@
           "detachment": "Rubricae Phalanx",
           "detachmentId": 1064,
           "legend": "This champion draws power from the Immaterium and channels it into his Rubricae to enhance their might.",
-          "description": "<span class=\"kwb\">THOUSAND</span> <span class=\"kwb\">SONS</span> model only. While the bearer is leading a unit, each time a Rubricae model in that unit makes an attack, add 1 to the Hit roll."
+          "description": "<span class=\"kwb\">THOUSAND</span> <span class=\"kwb\">SONS</span> model only. While the bearer is leading a unit, each time a Rubricae model in that unit makes an attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1782,7 +1909,16 @@
           ],
           "detachment": "Rubricae Phalanx",
           "detachmentId": 1064,
-          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit ends a Charge move.<br><br><b>TARGET:</b> One Rubric Marines unit from your army within Engagement Range of that enemy unit.<br><br><b>EFFECT:</b> Until the end of the turn, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit ends a Charge move.<br><br><b>TARGET:</b> One Rubric Marines unit from your army within Engagement Range of that enemy unit.<br><br><b>EFFECT:</b> Until the end of the turn, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1894,7 +2030,18 @@
           "detachment": "Warpforged Cabal",
           "detachmentId": 1065,
           "legend": "Woven from fibres pulled from mind impulse units while their owners are still alive, this cloak is a ritual interface between the biological and the mechanical, masking the wearer in the shadow of their iron wards.",
-          "description": "Thousand Sons Infantry model only. While the bearer is within 3\" of one or more friendly Thousand Sons Vehicle units, the bearer has the Lone Operative ability."
+          "description": "Thousand Sons Infantry model only. While the bearer is within 3\" of one or more friendly Thousand Sons Vehicle units, the bearer has the Lone Operative ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -1947,7 +2094,16 @@
           ],
           "detachment": "Warpforged Cabal",
           "detachmentId": 1065,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Thousand Sons Vehicle unit from your army that has not been selected to shoot this phase, that is within 6\" of one or more friendly Thousand Sons Psyker units.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by <span class=\"kwb\">VEHICLE</span> models in your unit have the [PSYCHIC] ability and each time an attack is made with such a weapon, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Thousand Sons Vehicle unit from your army that has not been selected to shoot this phase, that is within 6\" of one or more friendly Thousand Sons Psyker units.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by <span class=\"kwb\">VEHICLE</span> models in your unit have the [PSYCHIC] ability and each time an attack is made with such a weapon, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -2022,7 +2178,22 @@
           "legend": "The flesh and bone ofTzeentch's malleable servants flow like molten wax when his mutative power is invoked in ritual pleas. Some, such as the devoted Tzaangors, willingly make such requests, while more mindless abominations have their pact made for them by their callous masters. No boon is without its price, however. Some suffer changes so rapid that they burst apart, are absorbed by heaving mounds that were once allies or reduced to mewling piles of bubbling flesh.",
           "description": "Each time an enemy unit is selected to shoot or fight and one or more Tzeentch Mutant Infantry or Tzeentch Mutant Mounted units from your army are selected as a target of one or more of those attacks, each of those <span class=\"kwb\">TZEENTCH</span> <span class=\"kwb\">MUTANT</span> units can make a Warpmeld Sacrifice. If it does, until the end of the phase, each time an attack targets that unit, subtract 1 from the Wound roll. At the end of the phase, that <span class=\"kwb\">TZEENTCH</span> <span class=\"kwb\">MUTANT</span> unit suffers D3 mortal wounds.<br><br>Each time a <span class=\"kwb\">TZEENTCH</span> <span class=\"kwb\">MUTANT</span> <span class=\"kwb\">INFANTRY</span> or <span class=\"kwb\">TZEENTCH</span> <span class=\"kwb\">MUTANT</span> <span class=\"kwb\">MOUNTED</span> unit from your army is selected to shoot or fight, before selecting its targets, that unit can make a Warpmeld Sacrifice. If it does, until the end of the phase, each time a model in that unit makes an attack, add 1 to the Wound roll. At the end of the phase, that <span class=\"kwb\">TZEENTCH</span> <span class=\"kwb\">MUTANT</span> unit suffers D3 mortal wounds.<br><br><span class=\"hi_custom\">KEYWORDS</span><br>Tzaangors units from your army have the <span class=\"kwb\">BATTLELINE</span> keyword, and while such a unit is not Battle-shocked, add 1 to the Objective Control characteristic of <span class=\"kwb\">TZAANGOR</span> models in that unit.",
           "detachment": "Warpmeld Pact",
-          "detachmentId": 1063
+          "detachmentId": 1063,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2044,7 +2215,16 @@
           "detachment": "Warpmeld Pact",
           "detachmentId": 1063,
           "legend": "This precious gem is infused with a strange energy that distorts reality around the bearer, making them all but impossible to strike.",
-          "description": "Tzaangor Shaman model only. While the bearer is leading a unit, each time an attack targets that unit, subtract 1 from the Hit roll."
+          "description": "Tzaangor Shaman model only. While the bearer is leading a unit, each time an attack targets that unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -2054,7 +2234,18 @@
           "detachment": "Warpmeld Pact",
           "detachmentId": 1063,
           "legend": "There are those amongst Magnus' gene-sons that revel in dominating the twisted mutants of Sortiarius, setting themselves up as demigods over their shrieking flocks.",
-          "description": "Sorcerer or Infernal Master model only. The bearer has the Scouts 6\" ability. During the Declare Battle Formations step, the bearer can be attached to a Tzaangors unit."
+          "description": "Sorcerer or Infernal Master model only. The bearer has the Scouts 6\" ability. During the Declare Battle Formations step, the bearer can be attached to a Tzaangors unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",
@@ -2064,7 +2255,18 @@
           "detachment": "Warpmeld Pact",
           "detachmentId": 1063,
           "legend": "This prophet is favoured by the transmutative boon of Tzeentch's fell mutations, their body a rippling vessel of constantly reforming flesh and sinew, feather and bone.",
-          "description": "Tzaangor Shaman model only. The bearer has the Feel No Pain 4+ ability and a Wounds characteristic of 5."
+          "description": "Tzaangor Shaman model only. The bearer has the Feel No Pain 4+ ability and a Wounds characteristic of 5.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2097,7 +2299,16 @@
           ],
           "detachment": "Warpmeld Pact",
           "detachmentId": 1063,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Tzaangors unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Tzaangors unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TS",

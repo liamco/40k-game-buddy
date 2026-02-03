@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-6",
-    "threshold": 6,
+    "threshold": 0,
     "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> castigator gatling cannon; heavy stubber; twin battle cannon; armoured tracks.",
@@ -302,7 +295,8 @@
             "removes": [
               {
                 "name": "twin battle cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -310,11 +304,13 @@
                 "weapons": [
                   {
                     "name": "oppressor cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "coaxial autocannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -336,7 +332,8 @@
             "removes": [
               {
                 "name": "castigator gatling cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -344,7 +341,8 @@
                 "weapons": [
                   {
                     "name": "pulveriser cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -369,7 +367,8 @@
                 "weapons": [
                   {
                     "name": "meltaguns",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -378,7 +377,8 @@
                 "weapons": [
                   {
                     "name": "additional heavy stubbers",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -403,7 +403,8 @@
                 "weapons": [
                   {
                     "name": "heavy bolters",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -412,7 +413,8 @@
                 "weapons": [
                   {
                     "name": "multi-meltas",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -424,7 +426,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

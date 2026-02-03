@@ -615,7 +615,16 @@
           "detachment": "Cohort Cybernetica",
           "detachmentId": 823,
           "legend": "An intense burst of viral static can overload those machine spirits yoked to the service of the enemy.",
-          "description": "TECH-PRIEST model only. Once per turn, at the start of your opponent's Shooting phase, select one enemy VEHICLE unit within 12\" of and visible to the bearer. That unit must take a Leadership test: if that test is passed, until the end of the phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll; if that test is failed, that unit is not eligible to shoot this phase."
+          "description": "TECH-PRIEST model only. Once per turn, at the start of your opponent's Shooting phase, select one enemy VEHICLE unit within 12\" of and visible to the bearer. That unit must take a Leadership test: if that test is passed, until the end of the phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll; if that test is failed, that unit is not eligible to shoot this phase.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -667,7 +676,18 @@
           ],
           "detachment": "Cohort Cybernetica",
           "detachmentId": 823,
-          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One LEGIO CYBERNETICA or ADEPTUS MECHANICUS VEHICLE unit from your army.<br><br><b>EFFECT:</b> Until the start of your next Command phase, models in your unit have the Feel No Pain  6+ ability, which is improved to Feel No Pain 5+ against mortal wounds."
+          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One LEGIO CYBERNETICA or ADEPTUS MECHANICUS VEHICLE unit from your army.<br><br><b>EFFECT:</b> Until the start of your next Command phase, models in your unit have the Feel No Pain  6+ ability, which is improved to Feel No Pain 5+ against mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -754,7 +774,16 @@
           "detachment": "Data-Psalm Conclave",
           "detachmentId": 821,
           "legend": "Amongst every congregation of Tech-Priests are masters of arcane knowledge - inspirational leaders of the cybernetic and the mechanical.",
-          "description": "TECH-PRIEST model only. The bearer has a Leadership characteristic of 6+ and, once per battle, at the start of any phase, you can select one friendly CULT MECHANICUS unit that is Battle-shocked and within 12\" of the bearer. That unit is no longer Battle-shocked."
+          "description": "TECH-PRIEST model only. The bearer has a Leadership characteristic of 6+ and, once per battle, at the start of any phase, you can select one friendly CULT MECHANICUS unit that is Battle-shocked and within 12\" of the bearer. That unit is no longer Battle-shocked.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "ld",
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -801,7 +830,16 @@
           ],
           "detachment": "Data-Psalm Conclave",
           "detachmentId": 821,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One CULT MECHANICUS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One CULT MECHANICUS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -816,7 +854,18 @@
           ],
           "detachment": "Data-Psalm Conclave",
           "detachmentId": 821,
-          "description": "<b>WHEN:</b> Any phase, just after you allocate a mortal wound to a CULT MECHANICUS model from your army.<br><br><b>TARGET:</b> That <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> model's unit.<br><br><b>EFFECT:</b> Until the end of the phase, <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> models in your unit have the Feel No Pain 4+ ability against mortal wounds."
+          "description": "<b>WHEN:</b> Any phase, just after you allocate a mortal wound to a CULT MECHANICUS model from your army.<br><br><b>TARGET:</b> That <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> model's unit.<br><br><b>EFFECT:</b> Until the end of the phase, <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> models in your unit have the Feel No Pain 4+ ability against mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -831,7 +880,16 @@
           ],
           "detachment": "Data-Psalm Conclave",
           "detachmentId": 821,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One CULT MECHANICUS unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> model in your unit makes a melee attack, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One CULT MECHANICUS unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a <span class=\"kwb\">CULT</span> <span class=\"kwb\">MECHANICUS</span> model in your unit makes a melee attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -846,7 +904,16 @@
           ],
           "detachment": "Data-Psalm Conclave",
           "detachmentId": 821,
-          "description": "<b>WHEN:</b> Start of your Movement phase.<br><br><b>TARGET:</b> One CULT MECHANICUS unit from your army and one enemy unit within 18\" of it.<br><br><b>EFFECT:</b> That enemy unit must take a Battle-shock test. If that test is failed, until the start of your next Command phase, each time a model in that enemy unit makes an attack, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Start of your Movement phase.<br><br><b>TARGET:</b> One CULT MECHANICUS unit from your army and one enemy unit within 18\" of it.<br><br><b>EFFECT:</b> That enemy unit must take a Battle-shock test. If that test is failed, until the start of your next Command phase, each time a model in that enemy unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -945,7 +1012,16 @@
           ],
           "detachment": "Electromartyrs",
           "detachmentId": 912,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [PISTOL] ability. If one or more of those weapons already have this ability, then until the end of the phase, each time an attack is made with such a weapon that targets a unit within 6\", add 1 to the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [PISTOL] ability. If one or more of those weapons already have this ability, then until the end of the phase, each time an attack is made with such a weapon that targets a unit within 6\", add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -960,7 +1036,16 @@
           ],
           "detachment": "Electromartyrs",
           "detachmentId": 912,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army (excluding KATAPHRON units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army (excluding KATAPHRON units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1012,7 +1097,16 @@
           "detachment": "Explorator Maniple",
           "detachmentId": 822,
           "legend": "Cyborg interfaces, genetic manipulation and alchemical behavioural modification are all avenues of interest to Genetors, and their enhanced creations are formidable in protecting their master's divine work.",
-          "description": "TECH-PRIEST model only. While the bearer is leading a unit that is within range of your Acquisition objective marker, models in that unit have a 4+ invulnerable save."
+          "description": "TECH-PRIEST model only. While the bearer is leading a unit that is within range of your Acquisition objective marker, models in that unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1022,7 +1116,16 @@
           "detachment": "Explorator Maniple",
           "detachmentId": 822,
           "legend": "Data-vores and biocogitators, logi amass huge stores of information. They analyse data from thousands of sources, rationalising every weak point the foe has. It is a fool indeed that stands before a logi and their prize.",
-          "description": "TECH-PRIEST model only. While the bearer is leading a unit, each time a model in that unit makes an attack that targets a unit within range of your Acquisition objective marker, add 1 to the Hit roll."
+          "description": "TECH-PRIEST model only. While the bearer is leading a unit, each time a model in that unit makes an attack that targets a unit within range of your Acquisition objective marker, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1064,7 +1167,16 @@
           ],
           "detachment": "Explorator Maniple",
           "detachmentId": 822,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army that disembarked from a TRANSPORT this turn.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack that targets an enemy unit within range of your Acquisition objective marker, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army that disembarked from a TRANSPORT this turn.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack that targets an enemy unit within range of your Acquisition objective marker, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1109,7 +1221,18 @@
           ],
           "detachment": "Explorator Maniple",
           "detachmentId": 822,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEPTUS MECHANICUS INFANTRY unit<br>from your army that was selected as the target of one or more of the attacking unit's attacks, and one friendly ADEPTUS MECHANICUS SMOKE unit within 6\" of it.<br><br><b>EFFECT:</b> Until the end of the phase, both of those units have the Stealth ability and the Benefit of Cover."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEPTUS MECHANICUS INFANTRY unit<br>from your army that was selected as the target of one or more of the attacking unit's attacks, and one friendly ADEPTUS MECHANICUS SMOKE unit within 6\" of it.<br><br><b>EFFECT:</b> Until the end of the phase, both of those units have the Stealth ability and the Benefit of Cover.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1139,7 +1262,18 @@
           "legend": "Tech-Priests can override the will of their thralls and project martial data inloads into the minds of their warriors, blessing the soldiery with endless streams of precisely tailored binharic code.",
           "description": "In your Command phase, select one or more <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> units from your army (including units that are embarked within Transports). The maximum number of units you can select depends on the battle size, as follows:<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>INCURSION:</b></td><td><b>1 UNIT</b></td></tr><tr><td><b>STRIKE FORCE</b></td><td><b>2 UNITS</b></td></tr><tr><td><b>ONSLAUGHT</b></td><td><b>3 UNITS</b></td></tr></tbody></table></td></tr></tbody></table></div><br>Until the start of your next Command phase, those units gain the <span class=\"kwb\">HALO</span> <span class=\"kwb\">OVERRIDE</span> keyword. Then, select one of the Override abilities below. Until the start of your next Command phase, units from your army with the <span class=\"kwb\">HALO</span> <span class=\"kwb\">OVERRIDE</span> keyword have the selected Override ability:<br><br><span class=\"h_custom\">Electromotive Energisation</span><br>Add 2\" to the Move characteristic of models in this unit.<br><br><span class=\"h_custom\">Microactuator Bracing</span><br>Add 1 to the Toughness characteristic of models in this unit.<br><br><span class=\"h_custom\">Predation Protocols</span><br>This unit is eligible to declare a charge in a turn in which it Advanced.<br><br><span class=\"h_custom\">Muted Servomotors</span><br>Models in this unit have the Stealth ability.",
           "detachment": "Haloscreed Battle Clade",
-          "detachmentId": 984
+          "detachmentId": 984,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1375,7 +1509,16 @@
           ],
           "detachment": "Machine Cult",
           "detachmentId": 914,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ELEcTRO-PRIESTS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the attacking model is within 6\" of your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ELEcTRO-PRIESTS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the attacking model is within 6\" of your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1412,7 +1555,18 @@
           "detachment": "Rad-Zone Corps",
           "detachmentId": 762,
           "legend": "This master of splintered choruses leads their followers in a projection of clashing frequencies. Scanners and sensoriums trained in their direction are befouled by the disruptive input.",
-          "description": "<span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> model only. While the bearer is leading a unit, models in that unit have the Stealth ability."
+          "description": "<span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> model only. While the bearer is leading a unit, models in that unit have the Stealth ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1449,7 +1603,16 @@
           ],
           "detachment": "Rad-Zone Corps",
           "detachmentId": 762,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army (excluding Vehicle units) that was selected as the target of one or more of that enemy unit's attacks. If that unit is BATTLELINE, you can also target one friendly SKITARII unit (excluding <span class=\"kwb\">BATTLELINE</span> units) within 6\" of it.<br><br><b>EFFECT:</b> Until the end of the turn, each time an attack is made that targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit from your army (excluding Vehicle units) that was selected as the target of one or more of that enemy unit's attacks. If that unit is BATTLELINE, you can also target one friendly SKITARII unit (excluding <span class=\"kwb\">BATTLELINE</span> units) within 6\" of it.<br><br><b>EFFECT:</b> Until the end of the turn, each time an attack is made that targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1494,7 +1657,16 @@
           ],
           "detachment": "Rad-Zone Corps",
           "detachmentId": 762,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One SKITARII unit from your army that was selected as the target of one or more of the attacking unit's attacks. If that unit is BATTLELINE, you can also target one friendly <span class=\"kwb\">SKITARII</span> unit (excluding <span class=\"kwb\">BATTLELINE</span> units) within 6\" of it.<br><br><b>EFFECT:</b> Until the end of the phase, models in those units from your army have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One SKITARII unit from your army that was selected as the target of one or more of the attacking unit's attacks. If that unit is BATTLELINE, you can also target one friendly <span class=\"kwb\">SKITARII</span> unit (excluding <span class=\"kwb\">BATTLELINE</span> units) within 6\" of it.<br><br><b>EFFECT:</b> Until the end of the phase, models in those units from your army have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1624,7 +1796,16 @@
           ],
           "detachment": "Response Clade",
           "detachmentId": 913,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One SKITARII unit from your army that is within range of an objective marker and was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One SKITARII unit from your army that is within range of an objective marker and was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1639,7 +1820,18 @@
           "legend": "Hunter Cohorts combine a mastery of stealth warfare and cogitational analysis with stealth screen projectors and target-fouling apparatuses. They are elusive foes to face, and especially sinister to those they have designated as prey.",
           "description": "SKITARII INFANTRY, SKITARII MOUNTED and IRONSTRIDER BALLISTARII units from your army have the Stealth ability, and each time a ranged attack targets a SICARIAN unit from your army, unless the attacking model is within 12\", the target has the Benefit of Cover against that attack.",
           "detachment": "Skitarii Hunter Cohort",
-          "detachmentId": 820
+          "detachmentId": 820,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1661,7 +1853,26 @@
           "detachment": "Skitarii Hunter Cohort",
           "detachmentId": 820,
           "legend": "Under cover of auspex scramblers, this holy soldier leads their fellows in a stealthy advance.",
-          "description": "SKITARII model only. The bearer, and models in any unit they are leading, have the Infiltrators and Scouts 6\" abilities."
+          "description": "SKITARII model only. The bearer, and models in any unit they are leading, have the Infiltrators and Scouts 6\" abilities.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 6
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1699,7 +1910,18 @@
           ],
           "detachment": "Skitarii Hunter Cohort",
           "detachmentId": 820,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase orthe Fight phase, just after an enemy unit has selected its targets. <br><br><b>TARGET:</b> One SICARIAN, PTERAXII or SYDONIAN unit from your army that was selected as the target of one or more of the attacking unit's attacks. <br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase orthe Fight phase, just after an enemy unit has selected its targets. <br><br><b>TARGET:</b> One SICARIAN, PTERAXII or SYDONIAN unit from your army that was selected as the target of one or more of the attacking unit's attacks. <br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AdM",
@@ -1775,7 +1997,16 @@
           ],
           "detachment": "Skitarii Hunter Cohort",
           "detachmentId": 820,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One SICARIAN, PTERAXII, SYDONIAN,<br>IRONSTRIDER BALLISTARII or SKITARII MOUNTED unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, if there are no other enemy units within 6\" of the unit targeted by that attack, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One SICARIAN, PTERAXII, SYDONIAN,<br>IRONSTRIDER BALLISTARII or SKITARII MOUNTED unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, if there are no other enemy units within 6\" of the unit targeted by that attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     }

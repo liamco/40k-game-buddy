@@ -186,7 +186,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -194,7 +195,8 @@
                 "weapons": [
                   {
                     "name": "flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -217,7 +219,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -225,7 +228,8 @@
                 "weapons": [
                   {
                     "name": "fusion gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -248,7 +252,8 @@
             "removes": [
               {
                 "name": "close combat weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -256,7 +261,8 @@
                 "weapons": [
                   {
                     "name": "power sword",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -268,7 +274,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000590:serpent-shield",
+        "name": "Serpent Shield",
+        "description": "Models in the bearer's unit have a 5+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -298,15 +320,6 @@
       "factionId": "",
       "description": "When the last Storm Guardian model in this unit is destroyed, any remaining Serpent's Scale Platform models in this unit are also destroyed.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Serpent Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have a 5+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

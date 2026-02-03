@@ -76,7 +76,8 @@
                 "weapons": [
                   {
                     "name": "hover drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -101,7 +102,8 @@
                 "weapons": [
                   {
                     "name": "gun drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -110,7 +112,8 @@
                 "weapons": [
                   {
                     "name": "marker drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -119,7 +122,8 @@
                 "weapons": [
                   {
                     "name": "shield drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -134,7 +138,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000404:hover-drone",
+        "name": "Hover Drone",
+        "description": "The bearer can <span class=\"kwb\">FLY</span> and has a Move characteristic of 10\".",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -154,21 +166,23 @@
     },
     {
       "id": "",
-      "name": "Hover Drone",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer can <span class=\"kwb\">FLY</span> and has a Move characteristic of 10\".",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
       "name": "Failure Is Not an Option",
       "legend": "",
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

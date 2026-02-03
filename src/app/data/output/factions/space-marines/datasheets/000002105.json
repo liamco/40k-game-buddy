@@ -51,7 +51,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -80,7 +81,16 @@
       "factionId": "",
       "description": "Each time an attack targets this model's unit, if the Strength characteristic of that attack is greater than or equal to the Toughness characteristic of that unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -89,7 +99,16 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, this model has a 2+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "INSPIRING COMMANDER",

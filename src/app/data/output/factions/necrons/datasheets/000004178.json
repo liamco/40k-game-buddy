@@ -18,12 +18,7 @@
   "leader": {
     "description": "",
     "footer": "You can attach this model to one of the above units even if one Royal Warden or Noble model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-    "conditions": {
-      "allowedExistingLeaderKeywords": [
-        "ROYAL WARDEN",
-        "NOBLE"
-      ]
-    },
+    "conditions": null,
     "attachableUnits": []
   },
   "damaged": null,
@@ -103,7 +98,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -128,7 +124,16 @@
       "factionId": "",
       "description": "In your Movement phase, you can select one enemy unit within 18\" of and visible to this model. Until the start of your next Movement phase that enemy unit is pinned. While a unit is pinned, subtract 2 from that unit's Move characteristic and subtract 2 from Charge rolls made for it.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "charge",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

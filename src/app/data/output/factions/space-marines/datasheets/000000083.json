@@ -257,7 +257,8 @@
             "removes": [
               {
                 "name": "heavy bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -265,7 +266,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -274,7 +276,8 @@
                 "weapons": [
                   {
                     "name": "hand flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -296,7 +299,8 @@
             "removes": [
               {
                 "name": "Astartes chainsword",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -304,7 +308,8 @@
                 "weapons": [
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -313,7 +318,8 @@
                 "weapons": [
                   {
                     "name": "relic weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -335,11 +341,13 @@
             "removes": [
               {
                 "name": "heavy bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "Astartes chainsword",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -347,11 +355,13 @@
                 "weapons": [
                   {
                     "name": "thunder hammer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "relic shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -383,7 +393,8 @@
                 "weapons": [
                   {
                     "name": "relic shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -395,7 +406,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000083:relic-shield",
+        "name": "Relic Shield",
+        "description": "The bearer has a Wounds characteristic of 6.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "w",
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -433,15 +460,6 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Relic Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a Wounds characteristic of 6.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

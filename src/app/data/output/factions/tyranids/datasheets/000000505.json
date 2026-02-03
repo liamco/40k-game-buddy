@@ -18,22 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-10",
-    "threshold": 10,
+    "threshold": 0,
     "description": "While this model has 1-10 wounds remaining, subtract 6 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      },
-      {
-        "entity": "thisModel",
-        "effect": "statPenalty",
-        "attribute": "oc",
-        "value": 6
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> bio-plasma torrent; 2 dire bio-cannons; lashwhip pods; titanic scything talons.",
@@ -169,7 +156,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -195,7 +183,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets a unit that is Battle-shocked, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

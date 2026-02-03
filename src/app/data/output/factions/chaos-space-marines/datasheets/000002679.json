@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-4",
-    "threshold": 4,
+    "threshold": 0,
     "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> Vashtorr's claw; Vashtorr's hammer.",
@@ -109,7 +102,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -148,7 +142,16 @@
       "factionId": "",
       "description": "Each time an enemy unit within 18\" of this model targets this model, subtract 1 from the Hit roll and, until the end of the phase, that enemy unit's ranged weapons have the [HAZARDOUS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -157,7 +160,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Daemon Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

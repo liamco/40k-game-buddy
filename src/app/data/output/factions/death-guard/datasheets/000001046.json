@@ -394,7 +394,8 @@
             "removes": [
               {
                 "name": "multi-melta",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -402,7 +403,8 @@
                 "weapons": [
                   {
                     "name": "plasma cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -411,7 +413,8 @@
                 "weapons": [
                   {
                     "name": "twin autocannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -420,7 +423,8 @@
                 "weapons": [
                   {
                     "name": "twin lascannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -429,7 +433,8 @@
                 "weapons": [
                   {
                     "name": "twin heavy bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -438,7 +443,8 @@
                 "weapons": [
                   {
                     "name": "additional Helbrute fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -462,7 +468,8 @@
             "removes": [
               {
                 "name": "Helbrute fists",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -470,7 +477,8 @@
                 "weapons": [
                   {
                     "name": "missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -494,7 +502,8 @@
             "removes": [
               {
                 "name": "Helbrute fists",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -502,7 +511,8 @@
                 "weapons": [
                   {
                     "name": "Helbrute hammer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -511,7 +521,8 @@
                 "weapons": [
                   {
                     "name": "power scourge",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -536,7 +547,8 @@
                 "weapons": [
                   {
                     "name": "combi-bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -545,7 +557,8 @@
                 "weapons": [
                   {
                     "name": "heavy flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -572,7 +585,8 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -598,7 +612,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets an Afflicted unit, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

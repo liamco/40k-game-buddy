@@ -18,22 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-8",
-    "threshold": 8,
+    "threshold": 0,
     "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      },
-      {
-        "entity": "thisModel",
-        "effect": "statPenalty",
-        "attribute": "oc",
-        "value": 4
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> 2 lascannons; quake cannon; twin heavy bolter; 2 twin heavy flamers; armoured tracks.",
@@ -197,7 +184,8 @@
             "removes": [
               {
                 "name": "twin heavy flamers",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -205,7 +193,8 @@
                 "weapons": [
                   {
                     "name": "twin heavy bolters",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -230,11 +219,13 @@
                 "weapons": [
                   {
                     "name": "lascannons",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   },
                   {
                     "name": "twin heavy bolters",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -243,11 +234,13 @@
                 "weapons": [
                   {
                     "name": "lascannons",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   },
                   {
                     "name": "twin heavy flamers",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -259,7 +252,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

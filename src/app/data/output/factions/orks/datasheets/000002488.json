@@ -76,7 +76,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -106,7 +107,36 @@
       "factionId": "",
       "description": "While this model is leading a unit: <br><ul><li>Models in that unit have the Scouts 9\" ability. </li><li>Each time a model in that unit makes an attack, add 1 to the Hit roll and add 1 to the Wound roll. </li><li>Each time an attack targets that unit, subtract 1 from the Wound roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 9
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

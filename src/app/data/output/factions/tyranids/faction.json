@@ -971,7 +971,16 @@
           ],
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
-          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Harvester unit from your army that was just destroyed. You can use this Stratagem on that unit even though it was just destroyed.<br><br><b>EFFECT:</b> Until the end of the battle, each time a friendly <span class=\"kwb\">TYRANIDS</span> model makes an attack that targets the enemy unit that just destroyed your <span class=\"kwb\">HARVESTER</span> unit, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Harvester unit from your army that was just destroyed. You can use this Stratagem on that unit even though it was just destroyed.<br><br><b>EFFECT:</b> Until the end of the battle, each time a friendly <span class=\"kwb\">TYRANIDS</span> model makes an attack that targets the enemy unit that just destroyed your <span class=\"kwb\">HARVESTER</span> unit, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -987,7 +996,18 @@
           ],
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Harvester unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability. If your unit is within range of an objective marker you control, until the end of the phase models in your unit have the Feel No Pain 4+ ability instead."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Harvester unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability. If your unit is within range of an objective marker you control, until the end of the phase models in your unit have the Feel No Pain 4+ ability instead.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1086,7 +1106,16 @@
           ],
           "detachment": "Biotide",
           "detachmentId": 975,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army (excluding WINGED TYRANID PRIME units), that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army (excluding WINGED TYRANID PRIME units), that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1131,7 +1160,18 @@
           ],
           "detachment": "Biotide",
           "detachmentId": 975,
-          "description": "<b>WHEN:</b> Your Movement phase, at the start of the Reinforcements step.<br><br><b>TARGET:</b> One ENDLESS MULTITUDE unit from your army that is in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Deep Strike ability and, when setting them upon the battlefield using that ability, they can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, provided they are also within Synapse Range of your army.<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once and, until the end of the turn, your unit is not eligible to declare a charge."
+          "description": "<b>WHEN:</b> Your Movement phase, at the start of the Reinforcements step.<br><br><b>TARGET:</b> One ENDLESS MULTITUDE unit from your army that is in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Deep Strike ability and, when setting them upon the battlefield using that ability, they can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, provided they are also within Synapse Range of your army.<br><br><b>RESTRICTIONS:</b> You can only use this Stratagem once and, until the end of the turn, your unit is not eligible to declare a charge.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1175,7 +1215,16 @@
           ],
           "detachment": "Boarding Swarm",
           "detachmentId": 974,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 5+ invulnerable save."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 5+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1267,7 +1316,18 @@
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
           "legend": "A contraganglion knot in this creature's cranium channels and amplifies the smothering power of the Shadow in the Warp to nullify its prey's psychic abilities.",
-          "description": "Tyranids Monster model only. Once per battle, when a Psychic Attack is allocated to the bearer, it can use this ability. If it does, until the end of the phase, the bearer has the Feel No Pain 5+ ability against Psychic Attacks."
+          "description": "Tyranids Monster model only. Once per battle, when a Psychic Attack is allocated to the bearer, it can use this ability. If it does, until the end of the phase, the bearer has the Feel No Pain 5+ ability against Psychic Attacks.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1277,7 +1337,16 @@
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
           "legend": "With its basic logic centres and instinctive drivers augmented, this warrior organism is capable of singling out and hunting down valuable prey without direct synaptic oversight.",
-          "description": "Tyranids Monster model only. Each time the bearer makes a melee attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, add 1 to the Wound roll."
+          "description": "Tyranids Monster model only. Each time the bearer makes a melee attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1385,7 +1454,16 @@
           "legend": "Possessed of alien cunning and unnatural stealth, Genestealers are able to fade back into the shadows or crawl across ceilings or under deck-plates, the better to evade notice by their prey.",
           "description": "Each time a ranged attack targets a GREAT DEvOURER unit from your army, if the attacking model is not within 6\" of that unit, subtract 1 from the Hit roll.",
           "detachment": "Infestation Swarm",
-          "detachmentId": 979
+          "detachmentId": 979,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1424,7 +1502,16 @@
           ],
           "detachment": "Infestation Swarm",
           "detachmentId": 979,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One GREAT DEVOURER unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One GREAT DEVOURER unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1526,7 +1613,18 @@
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
           "legend": "The same weapon rarely works against this leader-beast twice, as its alien physiology adapts at an astonishing rate to counter the attacks of the foe.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. The bearer has the Feel No Pain 5+ ability. At the start of any turn, if the bearer has fewer than its starting number of wounds remaining, until the end of the battle, it has the Feel No Pain 4+ ability instead."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. The bearer has the Feel No Pain 5+ ability. At the start of any turn, if the bearer has fewer than its starting number of wounds remaining, until the end of the battle, it has the Feel No Pain 4+ ability instead.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1559,7 +1657,18 @@
           ],
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability. If your unit is within Synapse Range of your army, models in your unit have the Feel No Pain 5+ ability instead."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability. If your unit is within Synapse Range of your army, models in your unit have the Feel No Pain 5+ ability instead.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1783,7 +1892,22 @@
           "legend": "The leader-beasts of these swarms act as conduits to the will of the Hive Mind. Irresistible imperatives lash out from them like whips that drive lesser bioforms to hurl themselves at the prey, to fight on through fatal wounds or to attack with redoubled savagery.",
           "description": "At the start of the battle round, you can select one of the Synaptic Imperatives shown below. Until the end of the battle round, that Synaptic Imperative is active for your army and while a <span class=\"kwb\">TYRANIDS</span> unit from your army is within Synapse Range of your army, it will benefit from it. Each Synaptic Imperative can only be selected once per battle.<br><ul><li><b>Synaptic Augmentation:</b> While this unit is within Synapse Range of your army, models in this unit have a 5+ invulnerable save.</li><li><b>Surging Vitality:</b> While this unit is within Synapse Range of your army, add 1 to Advance and Charge rolls made for this unit.</li><li><b>Goaded to Slaughter:</b> While this unit is within Synapse Range of your army, each time a model in this unit makes a melee attack, add 1 to the Hit roll.</li></ul>",
           "detachment": "Synaptic Nexus",
-          "detachmentId": 773
+          "detachmentId": 773,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2003,7 +2127,16 @@
           ],
           "detachment": "Tyranid Attack",
           "detachmentId": 973,
-          "description": "WHEN: Your Shooting phase.<br><br>TARGET: One TYRANID WARRIORS wITH RANGED BIO-wEAPONS unit from your army that has not been selected to shoot this phase.<br><br>EFFECT: Select one enemy unit that is visible to your unit and within Engagement Range of one or more friendly ENDLESS MULTITUDE or RIPPER SwARMS units. Until the end of the phase, your unit is eligible to make ranged attacks against that enemy unit as if it was not within Engagement Range of those friendly units. When doing so, each time a model in your unit makes a ranged attack, subtract 1 from the Hit roll and, after your unit has finished making its attacks, each of those friendly units that started the phase within Engagement Range of that enemy unit suffers D3 mortal wounds."
+          "description": "WHEN: Your Shooting phase.<br><br>TARGET: One TYRANID WARRIORS wITH RANGED BIO-wEAPONS unit from your army that has not been selected to shoot this phase.<br><br>EFFECT: Select one enemy unit that is visible to your unit and within Engagement Range of one or more friendly ENDLESS MULTITUDE or RIPPER SwARMS units. Until the end of the phase, your unit is eligible to make ranged attacks against that enemy unit as if it was not within Engagement Range of those friendly units. When doing so, each time a model in your unit makes a ranged attack, subtract 1 from the Hit roll and, after your unit has finished making its attacks, each of those friendly units that started the phase within Engagement Range of that enemy unit suffers D3 mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2094,7 +2227,16 @@
           ],
           "detachment": "Unending Swarm",
           "detachmentId": 770,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2207,7 +2349,18 @@
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
           "legend": "Subdermal crystals in this organisms carapace capture and redirect light, helping to conceal it.",
-          "description": "Vanguard Invader model only. The bearer has the Stealth ability and each time a ranged attack targets the bearer's unit, models in that unit have the Benefit of Cover against that attack."
+          "description": "Vanguard Invader model only. The bearer has the Stealth ability and each time a ranged attack targets the bearer's unit, models in that unit have the Benefit of Cover against that attack.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2217,7 +2370,22 @@
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
           "legend": "This hunter seeks vital priority prey that has been pheromonally marked for swift slaughter.",
-          "description": "Vanguard Invader model only. At the start of the battle, select one enemy unit. Each time the bearer makes an attack that targets that enemy unit, add 1 to the Hit roll and add 1 to the Wound roll."
+          "description": "Vanguard Invader model only. At the start of the battle, select one enemy unit. Each time the bearer makes an attack that targets that enemy unit, add 1 to the Hit roll and add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2290,7 +2458,18 @@
           ],
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Vanguard Invader unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit can only be selected as the target of a ranged attack if the attacking model is within 18\" or, if your unit has the Lone Operative ability, if the attacking model is within 6\". Your opponent can select new targets for the attacking unit's attacks."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Vanguard Invader unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit can only be selected as the target of a ranged attack if the attacking model is within 18\" or, if your unit has the Lone Operative ability, if the attacking model is within 6\". Your opponent can select new targets for the attacking unit's attacks.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2335,7 +2514,22 @@
           "legend": "Tyranid Warriors are adapted to shepherd the hive fleet's teeming swarms to war. Benefiting from heightened senses, hardened forms and great strength, they serve as ferocious beacons for and enforcers of the Hive Mind's indomitable will.",
           "description": "Tyranid Warriors (see below) and Winged Tyranid Prime units from your army have a 5+ invulnerable save.<br><br><span class=\"hi_custom\">KEYWORDS</span><br>Tyranid Warriors with Ranged Bio-weapons and Tyranid Warriors with Melee Bio-weapons units from your army gain the <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">WARRIORS</span> and <span class=\"kwb\">BATTLELINE</span> keywords, and while such a unit is not Battle-shocked, <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">WARRIORS</span> models in that unit have an Objective Control characteristic of 3.",
           "detachment": "Warrior Bioform Onslaught",
-          "detachmentId": 982
+          "detachmentId": 982,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            },
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "oc",
+              "value": 3
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2357,7 +2551,16 @@
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
           "legend": "This node-beast's bio-adaptations allow it to perceive the minutest electrical impulse or heat signature. Few prey organisms escape its clutches.",
-          "description": "Winged Tyranid Prime model only. Each time a model in the bearer's unit makes an attack, add 1 to the Hit roll."
+          "description": "Winged Tyranid Prime model only. Each time a model in the bearer's unit makes an attack, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2367,7 +2570,16 @@
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
           "legend": "The Hive Mind feeds accumulated sensory data to this leader‑beast, providing it with forewarning of incoming attacks long before the foe can land a blow.",
-          "description": "Winged Tyranid Prime model only. Each time an attack targets the bearer's unit, subtract 1 from the Hit roll."
+          "description": "Winged Tyranid Prime model only. Each time an attack targets the bearer's unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2410,7 +2622,16 @@
           ],
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Tyranid Warriors unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> If that unit is a <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">WARRIORS</span> unit, select up to one Endless Multitude unit from your army, that is not Battle-shocked, within 6\" of it. Until the end of the phase, each time a ranged attack targets one of those units, if the Strength characteristic of that attack is greater than the Toughness characteristic of that unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Tyranid Warriors unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> If that unit is a <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">WARRIORS</span> unit, select up to one Endless Multitude unit from your army, that is not Battle-shocked, within 6\" of it. Until the end of the phase, each time a ranged attack targets one of those units, if the Strength characteristic of that attack is greater than the Toughness characteristic of that unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",

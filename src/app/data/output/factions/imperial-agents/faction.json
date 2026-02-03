@@ -737,7 +737,22 @@
           "legend": "While the nature of the missions undertaken by Imperial agents is as varied as they are, the vital importance of these tasks rarely changes. The enemies they face are the most unholy. The prizes they seek are as priceless as they are nightmarishly dangerous. Thus, when such warriors of the Imperium identify a priority target for elimination or acquisition, no effort is too great nor price too high to see their aims achieved.",
           "description": "At the start of your Command phase, you can select one of the following to apply:<div></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Eliminate At All Costs</p><p>Select one enemy unit on the battlefield. Until the start of your next Command phase, each time an <span class=\"tooltip00059\" data-tooltip-content=\"#tooltip_content00059\" data-tooltip-anchor=\"#tooltip_content00059\"><span class=\"kwb kwbu\">AGENTS</span> <span class=\"kwb2 kwbu\">OF</span> <span class=\"kwb2 kwbu\">THE</span> <span class=\"kwb kwbu\">IMPERIUM</span></span> model from your army makes an attack that targets that enemy unit, add 1 to the <span class=\"tooltip00006\" data-tooltip-content=\"#tooltip_content00006\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span>.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Acquire At All Costs</p><p>Select one <span class=\"tooltip00031\" data-tooltip-content=\"#tooltip_content00031\"><span class=\"tt kwbu\">objective</span> <span class=\"tt kwbu\">marker</span></span> on the battlefield. Until the start of your next Command phase, while an <span class=\"tooltip00059\" data-tooltip-content=\"#tooltip_content00059\" data-tooltip-anchor=\"#tooltip_content00059\"><span class=\"kwb kwbu\">AGENTS</span> <span class=\"kwb2 kwbu\">OF</span> <span class=\"kwb2 kwbu\">THE</span> <span class=\"kwb kwbu\">IMPERIUM</span></span> unit from your army is within range of that objective marker, improve the Leadership and Objective Control characteristics of models in that unit by 1 and models in that unit have a 5+ <span class=\"tooltip00060\" data-tooltip-content=\"#tooltip_content00060\"><span class=\"tt kwbu\">invulnerable</span> <span class=\"tt kwbu\">save</span></span>.</p></td></tr></tbody></tbody></table></div>",
           "detachment": "Imperialis Fleet",
-          "detachmentId": 895
+          "detachmentId": 895,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -749,7 +764,18 @@
           "detachment": "Imperialis Fleet",
           "detachmentId": 895,
           "legend": "This war leader prefers to strike with subtlety and precision, working their forces into advanced positions before commencing hostilities.",
-          "description": "AGENTS OF THE IMPERIUM model only. At the start of the Declare Battle Formations step, you can select up to three AGENTS OF THE IMPERIUM INFANTRy units from your army (excluding GREy KNIGHTS TERMINATOR SqUAD units) - those units gain the Infiltrators ability."
+          "description": "AGENTS OF THE IMPERIUM model only. At the start of the Declare Battle Formations step, you can select up to three AGENTS OF THE IMPERIUM INFANTRy units from your army (excluding GREy KNIGHTS TERMINATOR SqUAD units) - those units gain the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -759,7 +785,18 @@
           "detachment": "Imperialis Fleet",
           "detachmentId": 895,
           "legend": "This commander has access to swift drop craft that can bear portions of their forces directly into the heart of the most ferocious battles.",
-          "description": "VOIDFARERS model only. At the start of the Declare Battle Formations step, you can select up to three <span class=\"kwb\">VOIDFARERS</span> units from your army - those units gain the Deep Strike ability."
+          "description": "VOIDFARERS model only. At the start of the Declare Battle Formations step, you can select up to three <span class=\"kwb\">VOIDFARERS</span> units from your army - those units gain the Deep Strike ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -873,7 +910,16 @@
           ],
           "detachment": "Imperialis Fleet",
           "detachmentId": 895,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One AGENTS OF THE IMpERIUM CHARACTER unit from your army (excluding OFFICIO ASSASSINORUM units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save and, after the attacking unit has resolved its attacks, unless your unit is within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\" (when doing so, models in this unit move as if they have the Fly keyword)."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One AGENTS OF THE IMpERIUM CHARACTER unit from your army (excluding OFFICIO ASSASSINORUM units) that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save and, after the attacking unit has resolved its attacks, unless your unit is within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\" (when doing so, models in this unit move as if they have the Fly keyword).",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -900,7 +946,16 @@
           "detachment": "Interdiction Team",
           "detachmentId": 925,
           "legend": "This unique flock of artificer servo-skulls can rapidly map every twist and turn of even the largest voidships, before providing their master with comprehensive data on enemy strengths and movements.",
-          "description": "Proctor-Exactant model only. At the start of the first battle round, select one enemy unit to be your Priority Target. Each time an ADEPTUS ARbiTES model from your army makes an attack that targets your Priority Target, if the bearer is on the battlefield, add 1 to the Wound roll. Each time your Priority Target is destroyed, if the bearer is on the battlefield, you can select a new enemy unit to be your Priority Target."
+          "description": "Proctor-Exactant model only. At the start of the first battle round, select one enemy unit to be your Priority Target. Each time an ADEPTUS ARbiTES model from your army makes an attack that targets your Priority Target, if the bearer is on the battlefield, add 1 to the Wound roll. Each time your Priority Target is destroyed, if the bearer is on the battlefield, you can select a new enemy unit to be your Priority Target.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -928,7 +983,18 @@
           ],
           "detachment": "Interdiction Team",
           "detachmentId": 925,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEPTUS ARBITES unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 4+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEPTUS ARBITES unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 4+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1109,7 +1175,18 @@
           ],
           "detachment": "Ordo Hereticus Purgation Force",
           "detachmentId": 893,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEpTUS ARbITES, INQUISITORIAl AGENTS or ORDO HERETICUS INFANTRy unit from your army within range of an objective marker and that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One ADEpTUS ARbITES, INQUISITORIAl AGENTS or ORDO HERETICUS INFANTRy unit from your army within range of an objective marker and that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1124,7 +1201,16 @@
           ],
           "detachment": "Ordo Hereticus Purgation Force",
           "detachmentId": 893,
-          "description": "<b>WHEN:</b> Start of any phase (excluding the Command phase).<br><br><b>TARGET:</b> One ADEpTUS ARbITES, INQUISITORIAl AGENTS or ORDO HERETICUS GRENADES unit from your army that is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> or <span class=\"kwb\">VEHICLES</span>) within 8\" of and visible to your unit. That enemy unit must take a Battle-shock test and, until the end of the phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Start of any phase (excluding the Command phase).<br><br><b>TARGET:</b> One ADEpTUS ARbITES, INQUISITORIAl AGENTS or ORDO HERETICUS GRENADES unit from your army that is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> or <span class=\"kwb\">VEHICLES</span>) within 8\" of and visible to your unit. That enemy unit must take a Battle-shock test and, until the end of the phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1303,7 +1389,16 @@
           "detachment": "Ordo Xenos Alien Hunters",
           "detachmentId": 892,
           "legend": "This talisman houses a hate-filled machine spirit that despises alien artifice. Its influence can be focused against the war engines of aliens and traitors alike to disrupt or even paralyse them altogether.",
-          "description": "<span class=\"kwb\">WATCH</span> <span class=\"kwb\">MASTER</span> model only. At the start of your opponents Shooting phase, select one enemy <span class=\"kwb\">VEHICLE</span> unit (excluding <span class=\"kwb\">TITANIC</span> units) within 12\" of and visible to the bearer. That unit must take a Leadership test. If that test is passed, until the end of the phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll; if that test is failed, that unit is not eligible to shoot this phase."
+          "description": "<span class=\"kwb\">WATCH</span> <span class=\"kwb\">MASTER</span> model only. At the start of your opponents Shooting phase, select one enemy <span class=\"kwb\">VEHICLE</span> unit (excluding <span class=\"kwb\">TITANIC</span> units) within 12\" of and visible to the bearer. That unit must take a Leadership test. If that test is passed, until the end of the phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll; if that test is failed, that unit is not eligible to shoot this phase.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1313,7 +1408,18 @@
           "detachment": "Ordo Xenos Alien Hunters",
           "detachmentId": 892,
           "legend": "The Beacon Angelis was devised to guide the Death watch to the threshold of the alien adversary. Housed within a reliquary, it calls out to the warriors' augur arrays with the voices of a hundred electric cherubim, its summons so strong that it draws the righteous unto its locale regardless of what darkness may surround it.",
-          "description": "WATCH MASTER model only. Models in the bearer's unit have the Deep Strike ability. In addition, you can target the bearer's unit with the Rapid Ingress Stratagem for 0CP."
+          "description": "WATCH MASTER model only. Models in the bearer's unit have the Deep Strike ability. In addition, you can target the bearer's unit with the Rapid Ingress Stratagem for 0CP.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1323,7 +1429,18 @@
           "detachment": "Ordo Xenos Alien Hunters",
           "detachmentId": 892,
           "legend": "This hypermorphic bodyglove of uncertain origin is worn beneath a warrior's armour. It forms a fibrous medium that shields the warrior's most vital systems.",
-          "description": "<span class=\"kwb\">AGENTS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb2\">THE</span> <span class=\"kwb\">IMPERIUM</span> model only. The bearer has the Feel No Pain 4+ ability."
+          "description": "<span class=\"kwb\">AGENTS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb2\">THE</span> <span class=\"kwb\">IMPERIUM</span> model only. The bearer has the Feel No Pain 4+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1501,7 +1618,18 @@
           ],
           "detachment": "Veiled Blade Elimination Force",
           "detachmentId": 987,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Agents of the Imperium Character unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, add 1 to the Toughness characteristic of models in your unit. In addition, if it is an Eversor Assassin unit, until the end of the phase, it has the Feel No Pain 4+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Agents of the Imperium Character unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, add 1 to the Toughness characteristic of models in your unit. In addition, if it is an Eversor Assassin unit, until the end of the phase, it has the Feel No Pain 4+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1532,7 +1660,16 @@
           ],
           "detachment": "Veiled Blade Elimination Force",
           "detachmentId": 987,
-          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One Agents of the Imperium Grenades or Vindicare Assassin unit from your army that was selected as one of the targets of that charge and is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Until the end of the phase, subtract 1 from Charge rolls made for that enemy unit, or, if your unit is a <span class=\"kwb\">VINDICARE</span> <span class=\"kwb\">ASSASSIN</span>, subtract 2 from Charge rolls made for that enemy unit instead."
+          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One Agents of the Imperium Grenades or Vindicare Assassin unit from your army that was selected as one of the targets of that charge and is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Until the end of the phase, subtract 1 from Charge rolls made for that enemy unit, or, if your unit is a <span class=\"kwb\">VINDICARE</span> <span class=\"kwb\">ASSASSIN</span>, subtract 2 from Charge rolls made for that enemy unit instead.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "charge",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1547,7 +1684,18 @@
           ],
           "detachment": "Veiled Blade Elimination Force",
           "detachmentId": 987,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Agents of the Imperium Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit can only be selected as the target of a ranged attack if the attacking model is within 18\", or, if your unit has the Lone Operative ability, if the attacking model is within 6\"."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Agents of the Imperium Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit can only be selected as the target of a ranged attack if the attacking model is within 18\", or, if your unit has the Lone Operative ability, if the attacking model is within 6\".",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1577,7 +1725,16 @@
           ],
           "detachment": "Veiled Blade Elimination Force",
           "detachmentId": 987,
-          "description": "<b>WHEN:</b> End of your opponent's Charge phase.<br><br><b>TARGET:</b> One Agents of the Imperium Infantry unit from your army that is within 6\" of one or more enemy units and would be eligible to declare a charge against one or more of those enemy units.<br><br><b>EFFECT:</b> Your unit can declare a charge. When doing so, you must select one or more of those enemy units as the targets of that charge, and your unit does not receive a Charge bonus this turn. In addition, if it is a Callidus Assassin unit and it makes a Charge move as a result of this Stratagem, until the end of the turn, each time a model in your unit makes a melee attack, add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> End of your opponent's Charge phase.<br><br><b>TARGET:</b> One Agents of the Imperium Infantry unit from your army that is within 6\" of one or more enemy units and would be eligible to declare a charge against one or more of those enemy units.<br><br><b>EFFECT:</b> Your unit can declare a charge. When doing so, you must select one or more of those enemy units as the targets of that charge, and your unit does not receive a Charge bonus this turn. In addition, if it is a Callidus Assassin unit and it makes a Charge move as a result of this Stratagem, until the end of the turn, each time a model in your unit makes a melee attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1604,7 +1761,18 @@
           "detachment": "Voidship's Company",
           "detachmentId": 924,
           "legend": "This unique flock of artificer servo-skulls can rapidly map every twist and turn of even the largest voidships, before providing their master with comprehensive data on enemy strengths and movements.",
-          "description": "VOiDFARERS model only. In the Deploy Armies step, your opponent must deploy their entire army before you deploy yours. If both players have this rule, they must roll off and deploy their armies normally. In addition, IMPERiAL NAvY BREACHERS units from your army gain the Infiltrators ability."
+          "description": "VOiDFARERS model only. In the Deploy Armies step, your opponent must deploy their entire army before you deploy yours. If both players have this rule, they must roll off and deploy their armies normally. In addition, IMPERiAL NAvY BREACHERS units from your army gain the Infiltrators ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INFILTRATORS"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",
@@ -1631,7 +1799,22 @@
           ],
           "detachment": "Voidship's Company",
           "detachmentId": 924,
-          "description": "<b>WHEN:</b> Your Movement phase, just after an IMPERIAL NAvY BREAcHERS unit from yourarmy opens a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">NAVY</span> <span class=\"kwb\">BREACHERS</span> unit.<br><br><b>EFFECT:</b> Until the end of the turn, each time a model in your unit makes an attack, if that model is on the opposite side of the Hatchway from the side it started the turn on, add 1 to the Hit roll and add 1 to the Wound roll."
+          "description": "<b>WHEN:</b> Your Movement phase, just after an IMPERIAL NAvY BREAcHERS unit from yourarmy opens a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">NAVY</span> <span class=\"kwb\">BREACHERS</span> unit.<br><br><b>EFFECT:</b> Until the end of the turn, each time a model in your unit makes an attack, if that model is on the opposite side of the Hatchway from the side it started the turn on, add 1 to the Hit roll and add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AoI",

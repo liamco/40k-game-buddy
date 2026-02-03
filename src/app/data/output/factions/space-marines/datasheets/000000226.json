@@ -128,7 +128,15 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000226:book-of-salvation",
+        "name": "Book of Salvation",
+        "description": "While this model is leading a unit, add 1 to the Attacks characteristic of melee weapons equipped by models in that unit. When this model is destroyed, each friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit within 6\" of this model must take a Battle-shock test.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "dark-angels",
@@ -153,7 +161,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -162,15 +181,6 @@
       "factionId": "",
       "description": "In your Shooting phase, you can select one enemy unit within 18\" of this model. That enemy unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Book of Salvation",
-      "legend": "",
-      "factionId": "",
-      "description": "While this model is leading a unit, add 1 to the Attacks characteristic of melee weapons equipped by models in that unit. When this model is destroyed, each friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit within 6\" of this model must take a Battle-shock test.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

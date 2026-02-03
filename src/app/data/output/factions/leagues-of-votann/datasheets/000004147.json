@@ -120,7 +120,8 @@
                 "weapons": [
                   {
                     "name": "smoke launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -132,7 +133,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004147:smoke-launcher",
+        "name": "Smoke Launcher",
+        "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -168,16 +177,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Smoke Launcher",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

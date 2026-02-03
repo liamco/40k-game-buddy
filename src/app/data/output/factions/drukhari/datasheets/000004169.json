@@ -453,11 +453,13 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "power sword",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -465,7 +467,8 @@
                 "weapons": [
                   {
                     "name": "shuriken rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -488,7 +491,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -496,7 +500,8 @@
                 "weapons": [
                   {
                     "name": "neuro disruptor",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -505,7 +510,8 @@
                 "weapons": [
                   {
                     "name": "shuriken rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -531,7 +537,8 @@
                 "weapons": [
                   {
                     "name": "mistshield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -556,7 +563,8 @@
             "removes": [
               {
                 "name": "shuriken rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -564,7 +572,8 @@
                 "weapons": [
                   {
                     "name": "blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -573,7 +582,8 @@
                 "weapons": [
                   {
                     "name": "shredder",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -596,7 +606,8 @@
             "removes": [
               {
                 "name": "If this unit contains 10 models, 1 Corsair Voidscarred's shuriken rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -604,7 +615,8 @@
                 "weapons": [
                   {
                     "name": "shuriken cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -613,7 +625,8 @@
                 "weapons": [
                   {
                     "name": "wraithcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -636,7 +649,8 @@
             "removes": [
               {
                 "name": "If this unit contains 10 models, 1 Corsair Voidscarred's shuriken rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -644,7 +658,8 @@
                 "weapons": [
                   {
                     "name": "long rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -687,7 +702,8 @@
                 "weapons": [
                   {
                     "name": "Faolchú",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -699,7 +715,35 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004169:channeller-stones",
+        "name": "Channeller Stones",
+        "description": "Once per turn, the first time a saving throw is failed for the bearer's unit, change the Damage characteristic of that attack to 0.",
+        "mechanics": []
+      },
+      {
+        "id": "000004169:faolch",
+        "name": "Faolchú",
+        "description": "Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability.",
+        "mechanics": []
+      },
+      {
+        "id": "000004169:mistshield",
+        "name": "Mistshield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -725,33 +769,6 @@
       "factionId": "",
       "description": "At the start of the battle, select one unit from your opponent's army. Weapons equipped by models in this unit have the [LETHAL HITS] and [PRECISION] abilities while targeting that unit.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Channeller Stones",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per turn, the first time a saving throw is failed for the bearer's unit, change the Damage characteristic of that attack to 0.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Faolchú",
-      "legend": "",
-      "factionId": "",
-      "description": "Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Mistshield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

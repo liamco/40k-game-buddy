@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-4",
-    "threshold": 4,
+    "threshold": 0,
     "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> smasha gun; twin wazbom mega-kannon; armoured hull.",
@@ -200,7 +193,8 @@
             "removes": [
               {
                 "name": "twin wazbom mega-kannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -208,7 +202,8 @@
                 "weapons": [
                   {
                     "name": "twin tellyport mega-blasta",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -233,7 +228,8 @@
                 "weapons": [
                   {
                     "name": "blastajet force field",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -258,7 +254,8 @@
                 "weapons": [
                   {
                     "name": "twin supa-shoota",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -270,7 +267,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000032:blastajet-force-field",
+        "name": "Blastajet Force Field",
+        "description": "The bearer has a 4+ invulnerable save, but it loses the Grenades keyword.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -296,15 +309,6 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that cannot <span class=\"kwb\">FLY</span>, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Blastajet Force Field",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save, but it loses the Grenades keyword.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

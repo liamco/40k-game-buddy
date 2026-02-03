@@ -475,7 +475,8 @@
             "removes": [
               {
                 "name": "boltgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -483,7 +484,8 @@
                 "weapons": [
                   {
                     "name": "flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -492,7 +494,8 @@
                 "weapons": [
                   {
                     "name": "grenade launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -501,7 +504,8 @@
                 "weapons": [
                   {
                     "name": "meltagun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -510,7 +514,8 @@
                 "weapons": [
                   {
                     "name": "plasma gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -533,7 +538,8 @@
             "removes": [
               {
                 "name": "power weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -541,7 +547,8 @@
                 "weapons": [
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -567,7 +574,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -591,7 +599,8 @@
             "removes": [
               {
                 "name": "chainsword",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -599,7 +608,8 @@
                 "weapons": [
                   {
                     "name": "trench club",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -608,7 +618,8 @@
                 "weapons": [
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -632,7 +643,8 @@
             "removes": [
               {
                 "name": "laspistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -640,7 +652,8 @@
                 "weapons": [
                   {
                     "name": "bolt pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -649,7 +662,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -661,7 +675,43 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000003889:master-vox",
+        "name": "Master Vox",
+        "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
+        "mechanics": []
+      },
+      {
+        "id": "000003889:alchemyk-counteragents",
+        "name": "Alchemyk Counteragents",
+        "description": "The bearer's unit has the Feel No Pain 6+ ability against mortal wounds.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000003889:regimental-standard",
+        "name": "Regimental Standard",
+        "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
+        "mechanics": []
+      },
+      {
+        "id": "000003889:servo-scribes",
+        "name": "Servo-scribes",
+        "description": "Once per battle, when issuing an Order, the Lord Commissar can issue one additional Order.<br><br><b>Designer's Note:</b> Place a Servo-scribes token next to the unit, removing it when this ability has been used.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -686,42 +736,6 @@
       "factionId": "",
       "description": "While this unit contains an <span class=\"kwb\">OFFICER</span>, you can target this unit with Stratagems even while it is Battle-shocked and Orders issued to this unit do not cease to affect this unit if it becomes Battle-shocked.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Master Vox",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Alchemyk Counteragents",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer's unit has the Feel No Pain 6+ ability against mortal wounds.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Regimental Standard",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Servo-scribes",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, when issuing an Order, the Lord Commissar can issue one additional Order.<br><br><b>Designer's Note:</b> Place a Servo-scribes token next to the unit, removing it when this ability has been used.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

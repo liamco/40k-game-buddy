@@ -178,7 +178,8 @@
             "removes": [
               {
                 "name": "big choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -186,7 +187,8 @@
                 "weapons": [
                   {
                     "name": "power klaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -211,7 +213,8 @@
                 "weapons": [
                   {
                     "name": "attack squig",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -223,7 +226,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -248,7 +252,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

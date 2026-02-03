@@ -256,7 +256,8 @@
             "removes": [
               {
                 "name": "hallowed mace",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -264,7 +265,8 @@
                 "weapons": [
                   {
                     "name": "anointed halberd",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -287,7 +289,8 @@
             "removes": [
               {
                 "name": "bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -295,7 +298,8 @@
                 "weapons": [
                   {
                     "name": "inferno pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -304,7 +308,8 @@
                 "weapons": [
                   {
                     "name": "Ministorum hand flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -313,7 +318,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -336,7 +342,8 @@
             "removes": [
               {
                 "name": "hallowed mace",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -344,7 +351,8 @@
                 "weapons": [
                   {
                     "name": "spear of the faithful",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -356,7 +364,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -377,7 +386,16 @@
       "factionId": "",
       "description": "While an ADEPTA SORORITAS CHARACTER is leading this unit, each time an attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

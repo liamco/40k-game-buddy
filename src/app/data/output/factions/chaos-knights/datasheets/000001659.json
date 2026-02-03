@@ -18,22 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-10",
-    "threshold": 10,
+    "threshold": 0,
     "description": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      },
-      {
-        "entity": "thisModel",
-        "effect": "statPenalty",
-        "attribute": "oc",
-        "value": 5
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> brimstone volcano lance; ectoplasma decimator; 2 gheiststrike missile launchers; 2 twin daemonbreath meltaguns; twin Desecrator cannon; titanic feet.",
@@ -296,11 +283,13 @@
             "removes": [
               {
                 "name": "gheiststrike missile launchers",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               },
               {
                 "name": "twin Desecrator cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -308,11 +297,13 @@
                 "weapons": [
                   {
                     "name": "gheiststrike missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "twin Desecrator cannons",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -334,11 +325,13 @@
             "removes": [
               {
                 "name": "brimstone volcano lance",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "ectoplasma decimator",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -346,11 +339,13 @@
                 "weapons": [
                   {
                     "name": "darkflame cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "warpshock harpoon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -362,7 +357,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

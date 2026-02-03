@@ -244,7 +244,8 @@
             "removes": [
               {
                 "name": "las-talon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -252,7 +253,8 @@
                 "weapons": [
                   {
                     "name": "icarus stormcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -274,7 +276,8 @@
             "removes": [
               {
                 "name": "skyhammer missile launcher",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -282,7 +285,8 @@
                 "weapons": [
                   {
                     "name": "twin heavy bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -291,7 +295,8 @@
                 "weapons": [
                   {
                     "name": "typhoon missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -303,7 +308,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -329,7 +335,16 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets a unit that can <span class=\"kwb\">FLY</span>, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

@@ -425,7 +425,8 @@
             "removes": [
               {
                 "name": "boltgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -433,7 +434,8 @@
                 "weapons": [
                   {
                     "name": "bolt pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -442,7 +444,8 @@
                 "weapons": [
                   {
                     "name": "combi-weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -451,7 +454,8 @@
                 "weapons": [
                   {
                     "name": "condemnor boltgun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -460,7 +464,8 @@
                 "weapons": [
                   {
                     "name": "inferno pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -469,7 +474,8 @@
                 "weapons": [
                   {
                     "name": "Ministorum hand flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -478,7 +484,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -504,7 +511,8 @@
                 "weapons": [
                   {
                     "name": "chainsword",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -513,7 +521,8 @@
                 "weapons": [
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -536,7 +545,8 @@
             "removes": [
               {
                 "name": "boltgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -544,7 +554,8 @@
                 "weapons": [
                   {
                     "name": "artificer-crafted storm bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -553,7 +564,8 @@
                 "weapons": [
                   {
                     "name": "meltagun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -562,7 +574,8 @@
                 "weapons": [
                   {
                     "name": "Ministorum flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -589,7 +602,8 @@
                 "weapons": [
                   {
                     "name": "simulacrum imperialis",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -605,7 +619,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000909:simulacrum-imperialis",
+        "name": "Simulacrum Imperialis",
+        "description": "At the end of your Command phase, for each objective marker you control that has one or more units from your army with this ability within range of it, roll one D6: on a 4+, you gain 1 Miracle dice showing a value equal to that result.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -649,16 +671,18 @@
       "factionId": "",
       "description": "If this unit has a Leader unit attached to it during the Declare Battle Formations step and this unit starts the battle embarked within a TRANSPORT, that Leader unit gains the Scouts 6\" ability.",
       "type": "Special (правая колонка)",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Simulacrum Imperialis",
-      "legend": "",
-      "factionId": "",
-      "description": "At the end of your Command phase, for each objective marker you control that has one or more units from your army with this ability within range of it, roll one D6: on a 4+, you gain 1 Miracle dice showing a value equal to that result.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

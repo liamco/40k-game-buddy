@@ -18,22 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-10",
-    "threshold": 10,
+    "threshold": 0,
     "description": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      },
-      {
-        "entity": "thisModel",
-        "effect": "statPenalty",
-        "attribute": "oc",
-        "value": 5
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> 4 burst cannons; fusion eradicator; 3 pulse ordnance drivers; 4 smart missile systems; tri-axis ion cannon; crushing feet.",
@@ -320,7 +307,8 @@
             "removes": [
               {
                 "name": "tri-axis ion cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -328,7 +316,8 @@
                 "weapons": [
                   {
                     "name": "fusion eradicator",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -350,7 +339,8 @@
             "removes": [
               {
                 "name": "fusion eradicator",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -358,7 +348,8 @@
                 "weapons": [
                   {
                     "name": "tri-axis ion cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -380,7 +371,8 @@
             "removes": [
               {
                 "name": "pulse ordnance drivers",
-                "count": 3
+                "count": 3,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -388,7 +380,8 @@
                 "weapons": [
                   {
                     "name": "nexus missile launchers",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -397,11 +390,13 @@
                 "weapons": [
                   {
                     "name": "heavy rail cannon array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "fragmentation cluster shell launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -413,7 +408,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

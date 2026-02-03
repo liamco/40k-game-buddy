@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-5",
-    "threshold": 5,
+    "threshold": 0,
     "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; macro plasma incinerator; Repulsor Executioner defensive array; twin heavy bolter; twin Icarus ironhail heavy stubber; armoured hull.",
@@ -318,7 +311,8 @@
             "removes": [
               {
                 "name": "macro plasma incinerator",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -326,7 +320,8 @@
                 "weapons": [
                   {
                     "name": "heavy laser destroyer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -351,7 +346,8 @@
                 "weapons": [
                   {
                     "name": "ironhail heavy stubber",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -376,7 +372,8 @@
                 "weapons": [
                   {
                     "name": "Icarus rocket pod",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -388,7 +385,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -414,7 +412,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets a unit that is Below Half-strength, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

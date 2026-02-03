@@ -161,7 +161,8 @@
             "removes": [
               {
                 "name": "twin gauss blaster",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -169,7 +170,8 @@
                 "weapons": [
                   {
                     "name": "particle beamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -178,7 +180,8 @@
                 "weapons": [
                   {
                     "name": "twin tesla carbine",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -203,7 +206,8 @@
                 "weapons": [
                   {
                     "name": "shieldvanes",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -230,7 +234,37 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000548:nebuloscope",
+        "name": "Nebuloscope",
+        "description": "Ranged weapons equipped by the bearer have the [IGNORES COVER] ability.",
+        "mechanics": []
+      },
+      {
+        "id": "000000548:shadowloom",
+        "name": "Shadowloom",
+        "description": "The bearer has the Stealth ability.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "STEALTH"
+            ],
+            "value": true
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000548:shieldvanes",
+        "name": "Shieldvanes",
+        "description": "The bearer has a 3+ Save characteristic and a Move characteristic of 8\".",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -248,33 +282,6 @@
     {
       "name": "Reanimation Protocols",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Nebuloscope",
-      "legend": "",
-      "factionId": "",
-      "description": "Ranged weapons equipped by the bearer have the [IGNORES COVER] ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Shadowloom",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the Stealth ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Shieldvanes",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 3+ Save characteristic and a Move characteristic of 8\".",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

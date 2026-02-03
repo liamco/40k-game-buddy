@@ -103,7 +103,25 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004186:nullstone-field-generator-aura",
+        "name": "Nullstone Field Generator (Aura)",
+        "description": "While a friendly <span class=\"kwb\">NECRONS</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 5+ ability against mortal wounds and Psychic Attacks.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -132,7 +150,18 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more other friendly Destroyer Cult units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LONE OPERATIVE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -150,15 +179,6 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy unit, select one other friendly Destroyer Cult unit within 9\" of it. Until the end of the phase, each time a model in that unit makes an attack, re-roll a Wound roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Nullstone Field Generator (Aura)",
-      "legend": "",
-      "factionId": "",
-      "description": "While a friendly <span class=\"kwb\">NECRONS</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 5+ ability against mortal wounds and Psychic Attacks.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

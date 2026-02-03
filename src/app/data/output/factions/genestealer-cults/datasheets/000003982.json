@@ -354,7 +354,8 @@
             "removes": [
               {
                 "name": "lascannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -362,7 +363,8 @@
                 "weapons": [
                   {
                     "name": "heavy bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -371,7 +373,8 @@
                 "weapons": [
                   {
                     "name": "heavy flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -396,7 +399,8 @@
                 "weapons": [
                   {
                     "name": "heavy bolters",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -405,7 +409,8 @@
                 "weapons": [
                   {
                     "name": "heavy flamers",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -414,7 +419,8 @@
                 "weapons": [
                   {
                     "name": "multi-meltas",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -423,7 +429,8 @@
                 "weapons": [
                   {
                     "name": "plasma cannons",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -448,7 +455,8 @@
                 "weapons": [
                   {
                     "name": "heavy stubber",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -457,7 +465,8 @@
                 "weapons": [
                   {
                     "name": "storm bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -482,7 +491,8 @@
                 "weapons": [
                   {
                     "name": "hunter-killer missile",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -494,7 +504,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -516,7 +527,16 @@
       "factionId": "",
       "description": "Each time this model makes an attack with its executioner plasma cannon that targets a unit that is Below Half-strength, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "One Shot",

@@ -164,7 +164,8 @@
             "removes": [
               {
                 "name": "combat knife",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -172,11 +173,13 @@
                 "weapons": [
                   {
                     "name": "bolt carbine",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -201,7 +204,8 @@
                 "weapons": [
                   {
                     "name": "combat knife",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -226,7 +230,8 @@
                 "weapons": [
                   {
                     "name": "Reiver grav-chute",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -251,7 +256,8 @@
                 "weapons": [
                   {
                     "name": "grapnel launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -263,7 +269,31 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002718:grapnel-launcher",
+        "name": "Grapnel Launcher",
+        "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
+        "mechanics": []
+      },
+      {
+        "id": "000002718:reiver-grav-chute",
+        "name": "Reiver Grav-chute",
+        "description": "The bearer has the Deep Strike ability.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "DEEP STRIKE"
+            ],
+            "value": true
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -298,24 +328,6 @@
       "factionId": "",
       "description": "While an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is within 3\" of one or more units with this ability, subtract 1 from the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Grapnel Launcher",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Reiver Grav-chute",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the Deep Strike ability.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

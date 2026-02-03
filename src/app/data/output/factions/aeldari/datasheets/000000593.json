@@ -187,7 +187,8 @@
             "removes": [
               {
                 "name": "Avenger shuriken catapult",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -195,7 +196,8 @@
                 "weapons": [
                   {
                     "name": "shuriken pistol and one of the following:<ul><li>1 diresword</li><li>1 power glaive</li></ul>",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -224,7 +226,8 @@
                 "weapons": [
                   {
                     "name": "additional Avenger shuriken catapult",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -247,7 +250,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -255,7 +259,8 @@
                 "weapons": [
                   {
                     "name": "shimmershield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -281,7 +286,8 @@
                 "weapons": [
                   {
                     "name": "Aspect Shrine token",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -293,7 +299,29 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000593:shimmershield",
+        "name": "Shimmershield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000593:aspect-shrine-token",
+        "name": "Aspect Shrine Token",
+        "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -314,24 +342,6 @@
       "factionId": "",
       "description": "Ranged weapons equipped by models in this unit have the [SUSTAINED HITS 1] ability while targeting an enemy unit within half range.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Shimmershield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Aspect Shrine Token",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

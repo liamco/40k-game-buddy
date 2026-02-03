@@ -79,7 +79,31 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000218:the-lion-helm",
+        "name": "The Lion Helm",
+        "description": "Models in the bearer's unit have a 4+ invulnerable save. In addition, once per battle, in any phase, the bearer can summon a Watcher in the Dark. When it does, until the end of the phase, models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          },
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "dark-angels",
@@ -96,15 +120,6 @@
     {
       "name": "Oath of Moment",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "The Lion Helm",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have a 4+ invulnerable save. In addition, once per battle, in any phase, the bearer can summon a Watcher in the Dark. When it does, until the end of the phase, models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

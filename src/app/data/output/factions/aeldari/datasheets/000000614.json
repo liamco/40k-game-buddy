@@ -18,22 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-6",
-    "threshold": 6,
+    "threshold": 0,
     "description": "While this model has 1-6 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      },
-      {
-        "entity": "thisModel",
-        "effect": "statPenalty",
-        "attribute": "oc",
-        "value": 5
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> suncannon; titanic feet; scattershield.",
@@ -225,7 +212,8 @@
             "removes": [
               {
                 "name": "suncannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -233,7 +221,8 @@
                 "weapons": [
                   {
                     "name": "heavy wraithcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -255,7 +244,8 @@
             "removes": [
               {
                 "name": "scattershield",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -263,7 +253,8 @@
                 "weapons": [
                   {
                     "name": "heavy wraithcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -288,7 +279,8 @@
                 "weapons": [
                   {
                     "name": "scatter laser",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -297,7 +289,8 @@
                 "weapons": [
                   {
                     "name": "shuriken cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -306,7 +299,8 @@
                 "weapons": [
                   {
                     "name": "starcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -320,7 +314,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000614:scattershield",
+        "name": "Scattershield",
+        "description": "The bearer has a 4+ invulnerable save and each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -355,15 +365,6 @@
       "factionId": "",
       "description": "Each time this model's heavy wraithcannon or suncannon targets a unit within half range, you can re-roll the dice to determine the number of attacks made.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Scattershield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save and each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

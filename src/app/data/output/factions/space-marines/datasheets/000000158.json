@@ -18,13 +18,7 @@
   "leader": {
     "description": "",
     "footer": "You can attach this model to one of the above units, even if one Captain, Chapter Master or Lieutenant model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-    "conditions": {
-      "allowedExistingLeaderKeywords": [
-        "CAPTAIN",
-        "CHAPTER MASTER",
-        "LIEUTENANT"
-      ]
-    },
+    "conditions": null,
     "attachableUnits": []
   },
   "damaged": null,
@@ -86,7 +80,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "blood-angels",
@@ -111,7 +106,18 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

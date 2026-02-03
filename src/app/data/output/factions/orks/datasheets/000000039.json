@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-5",
-    "threshold": 5,
+    "threshold": 0,
     "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> tracks and wheels.",
@@ -326,7 +319,8 @@
                 "weapons": [
                   {
                     "name": "kannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -335,7 +329,8 @@
                 "weapons": [
                   {
                     "name": "killkannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -344,7 +339,8 @@
                 "weapons": [
                   {
                     "name": "zzap gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -369,7 +365,8 @@
                 "weapons": [
                   {
                     "name": "lobba",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -406,11 +403,13 @@
             "removes": [
               {
                 "name": "tracks",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "wheels",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -418,7 +417,8 @@
                 "weapons": [
                   {
                     "name": "deff rolla",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -445,7 +445,15 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000039:ard-case",
+        "name": "'Ard Case",
+        "description": "Add 2 to the bearer's Toughness characteristic, but it no longer has the Firing Deck ability.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -476,15 +484,6 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, worsen the Armour Penetration characteristic of that attack by 1.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "'Ard Case",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 2 to the bearer's Toughness characteristic, but it no longer has the Firing Deck ability.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

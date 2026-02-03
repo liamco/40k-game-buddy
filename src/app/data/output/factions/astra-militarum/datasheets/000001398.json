@@ -197,7 +197,8 @@
             "removes": [
               {
                 "name": "ripper gun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -205,7 +206,8 @@
                 "weapons": [
                   {
                     "name": "grenadier gauntlet",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -214,7 +216,8 @@
                 "weapons": [
                   {
                     "name": "Bullgryn maul",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -236,7 +239,8 @@
             "removes": [
               {
                 "name": "huge knife",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -244,7 +248,8 @@
                 "weapons": [
                   {
                     "name": "brute shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -253,7 +258,8 @@
                 "weapons": [
                   {
                     "name": "slabshield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -265,7 +271,37 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000001398:brute-shield",
+        "name": "Brute Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000001398:slabshield",
+        "name": "Slabshield",
+        "description": "The bearer has a Wounds characteristic of 7.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "w",
+            "value": 7
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -287,25 +323,18 @@
       "factionId": "",
       "description": "While one or more Officer models are in the same unit as this model, those <span class=\"kwb\">OFFICER</span> models have the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Brute Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Slabshield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a Wounds characteristic of 7.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "LOYAL PROTECTOR",

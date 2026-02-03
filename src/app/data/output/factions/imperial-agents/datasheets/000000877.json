@@ -187,7 +187,8 @@
             "removes": [
               {
                 "name": "bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -195,7 +196,8 @@
                 "weapons": [
                   {
                     "name": "combi-weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -217,7 +219,8 @@
             "removes": [
               {
                 "name": "blessed wardings",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -225,11 +228,13 @@
                 "weapons": [
                   {
                     "name": "psychic gifts",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   },
                   {
                     "name": "Psychic Shock Wave",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -255,7 +260,8 @@
             "removes": [
               {
                 "name": "If this model is equipped with 1 psychic gifts, its Inquisitorial melee weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -263,7 +269,8 @@
                 "weapons": [
                   {
                     "name": "force weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -275,7 +282,29 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000877:blessed-wardings",
+        "name": "Blessed Wardings",
+        "description": "While this model is leading a unit, models in that unit have the 6+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000877:psychic-gifts",
+        "name": "Psychic Gifts",
+        "description": "The bearer has the <span class=\"kwb\">PSYKER</span> keyword.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -309,24 +338,6 @@
       "factionId": "",
       "description": "Each time you target this model's unit with a Stratagem, roll one D6: on a 3+, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Blessed Wardings",
-      "legend": "",
-      "factionId": "",
-      "description": "While this model is leading a unit, models in that unit have the 6+ invulnerable save.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Psychic Gifts",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the <span class=\"kwb\">PSYKER</span> keyword.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

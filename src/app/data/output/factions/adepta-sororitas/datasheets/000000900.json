@@ -18,14 +18,7 @@
   "leader": {
     "description": "",
     "footer": "This model can be attached to a Battle Sisters Squad, even if one Canoness, Palatine, Junith Eruita or AESTRED THURGA model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-    "conditions": {
-      "allowedExistingLeaderKeywords": [
-        "CANONESS",
-        "PALATINE",
-        "JUNITH ERUITA",
-        "AESTRED THURGA"
-      ]
-    },
+    "conditions": null,
     "attachableUnits": []
   },
   "damaged": null,
@@ -113,7 +106,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -147,7 +141,22 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a Save characteristic of 2+ and a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "sv",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

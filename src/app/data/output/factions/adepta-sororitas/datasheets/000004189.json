@@ -237,7 +237,8 @@
             "removes": [
               {
                 "name": "condemnor bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -245,7 +246,8 @@
                 "weapons": [
                   {
                     "name": "inferno pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -268,7 +270,8 @@
             "removes": [
               {
                 "name": "condemnor bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -276,7 +279,8 @@
                 "weapons": [
                   {
                     "name": "Ministorum hand flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -299,11 +303,13 @@
             "removes": [
               {
                 "name": "condemnor bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "null mace",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -311,7 +317,8 @@
                 "weapons": [
                   {
                     "name": "blessed sword",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -335,11 +342,13 @@
             "removes": [
               {
                 "name": "One Celestian Insidiant's condemnor bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "null mace",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -347,7 +356,8 @@
                 "weapons": [
                   {
                     "name": "virge of admonition",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -371,7 +381,8 @@
             "removes": [
               {
                 "name": "One Celestian Insidiant's condemnor bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -379,7 +390,8 @@
                 "weapons": [
                   {
                     "name": "denuncia oratory",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -406,7 +418,8 @@
                 "weapons": [
                   {
                     "name": "simulacrum imperialis",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -422,7 +435,21 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004189:simulacrum-imperialis",
+        "name": "Simulacrum Imperialis",
+        "description": "At the end of your Command phase, for each objective marker you control that has one or more units from your army with this ability within range of it, roll one D6: on a 4+, you gain 1 Miracle dice showing a value equal to that result.",
+        "mechanics": []
+      },
+      {
+        "id": "000004189:denuncia-oratory",
+        "name": "Denuncia Oratory",
+        "description": "Each time the bearer's unit's quarry is destroyed, you can select a new unit from your opponent's army to be its quarry.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -443,7 +470,18 @@
       "factionId": "",
       "description": "Models in this unit have the Feel No Pain 4+ ability against Psychic Attacks and mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -452,24 +490,6 @@
       "factionId": "",
       "description": "At the start of the battle, select one unit from your opponent's army to be this unit's quarry. Each time a model in this unit makes an attack that targets its quarry, that attack has the [PRECISION] ability and you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Simulacrum Imperialis",
-      "legend": "",
-      "factionId": "",
-      "description": "At the end of your Command phase, for each objective marker you control that has one or more units from your army with this ability within range of it, roll one D6: on a 4+, you gain 1 Miracle dice showing a value equal to that result.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Denuncia Oratory",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the bearer's unit's quarry is destroyed, you can select a new unit from your opponent's army to be its quarry.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

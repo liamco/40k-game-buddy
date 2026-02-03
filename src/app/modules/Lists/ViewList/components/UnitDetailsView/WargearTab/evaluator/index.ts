@@ -14,7 +14,3 @@ export type { EvaluatedOption, ModelEvaluation, UnitEvaluation, EligibilityConte
 export { checkTargetingEligibility } from "./eligibility/checkTargetingEligibility";
 export { checkConstraintEligibility } from "./eligibility/checkConstraintEligibility";
 export { countOptionUsage, countWeaponUsage, getCurrentSelection, calculateRatioSlots } from "./eligibility/countUsage";
-
-// Wargear abilities
-export { getWargearAbilities, buildAbilityMappings, computeActiveAbilities, computeUnitActiveAbilities, evaluateWargearAbilities } from "./wargearAbilities";
-export type { WargearAbilityMapping, WargearAbilityEvaluation } from "./wargearAbilities";

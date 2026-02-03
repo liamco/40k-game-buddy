@@ -271,7 +271,8 @@
                 "weapons": [
                   {
                     "name": "ironhail heavy stubber",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -280,7 +281,8 @@
                 "weapons": [
                   {
                     "name": "multi-melta",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -302,7 +304,8 @@
             "removes": [
               {
                 "name": "storm bolters",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -310,7 +313,8 @@
                 "weapons": [
                   {
                     "name": "fragstorm grenade launchers",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -335,7 +339,8 @@
                 "weapons": [
                   {
                     "name": "bellicatus missile array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -344,7 +349,8 @@
                 "weapons": [
                   {
                     "name": "ironhail skytalon array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -353,7 +359,8 @@
                 "weapons": [
                   {
                     "name": "orbital comms array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -362,7 +369,8 @@
                 "weapons": [
                   {
                     "name": "shield dome",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -374,7 +382,29 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002786:orbital-comms-array-aura",
+        "name": "Orbital Comms Array (Aura)",
+        "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+        "mechanics": []
+      },
+      {
+        "id": "000002786:shield-dome",
+        "name": "Shield Dome",
+        "description": "The bearer has a 5+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "black-templars",
@@ -405,24 +435,6 @@
       "factionId": "",
       "description": "Units can disembark from this <span class=\"kwb\">TRANSPORT</span> after it has Advanced. Units that do so count as having made a Normal move, and cannot declare a charge that turn.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Orbital Comms Array (Aura)",
-      "legend": "",
-      "factionId": "",
-      "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Shield Dome",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 5+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

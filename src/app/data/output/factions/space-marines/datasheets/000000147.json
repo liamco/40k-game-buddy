@@ -224,7 +224,23 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000147:storm-shield",
+        "name": "Storm Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -249,15 +265,6 @@
       "factionId": "",
       "description": "Each time this unit ends a Charge move, until the end of the turn, melee weapons equipped by models in this unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Storm Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

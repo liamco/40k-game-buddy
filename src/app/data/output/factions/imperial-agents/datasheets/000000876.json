@@ -106,7 +106,15 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000876:glovodan-psyber-eagle",
+        "name": "Glovodan Psyber-eagle",
+        "description": "In your Command phase, you can select one enemy unit within 18\" of the bearer. Until the start of your next Command phase, that unit cannot have the Benefit of Cover.<br><br><b>Designer's Note:</b> Place a Glovodan Psyber-eagle token next to the selected unit to remind you.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -140,7 +148,16 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 6+ invulnerable save, and a 4+ invulnerable save against Psychic Attacks and attacks made by <span class=\"kwb\">DAEMON</span> models.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -149,15 +166,6 @@
       "factionId": "",
       "description": "Each time your opponent gains a CP as the result of an ability, roll one D6: on a 2+, you also gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Glovodan Psyber-eagle",
-      "legend": "",
-      "factionId": "",
-      "description": "In your Command phase, you can select one enemy unit within 18\" of the bearer. Until the start of your next Command phase, that unit cannot have the Benefit of Cover.<br><br><b>Designer's Note:</b> Place a Glovodan Psyber-eagle token next to the selected unit to remind you.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

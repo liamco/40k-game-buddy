@@ -301,7 +301,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -309,7 +310,8 @@
                 "weapons": [
                   {
                     "name": "neuro disruptor",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -318,7 +320,8 @@
                 "weapons": [
                   {
                     "name": "shuriken rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -344,7 +347,8 @@
                 "weapons": [
                   {
                     "name": "mistshield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -366,11 +370,13 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "power sword",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -378,7 +384,8 @@
                 "weapons": [
                   {
                     "name": "shuriken rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -403,7 +410,8 @@
             "removes": [
               {
                 "name": "power sword or shuriken rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -411,7 +419,8 @@
                 "weapons": [
                   {
                     "name": "blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -420,7 +429,8 @@
                 "weapons": [
                   {
                     "name": "shredder",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -443,7 +453,8 @@
             "removes": [
               {
                 "name": "If this unit contains 10 models, 1 Corsair Voidreaver's shuriken rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -451,7 +462,8 @@
                 "weapons": [
                   {
                     "name": "shuriken cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -460,7 +472,8 @@
                 "weapons": [
                   {
                     "name": "wraithcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -472,7 +485,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002531:mistshield",
+        "name": "Mistshield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -498,15 +527,6 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack, re-roll a Hit roll of 1. If the target of that attack is within range of an objective marker, you can re-roll the Hit roll instead.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Mistshield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

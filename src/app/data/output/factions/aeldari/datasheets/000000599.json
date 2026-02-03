@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-4",
-    "threshold": 4,
+    "threshold": 0,
     "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> twin shuriken cannon; twin shuriken catapult; wraithbone hull.",
@@ -288,7 +281,8 @@
             "removes": [
               {
                 "name": "twin shuriken cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -296,7 +290,8 @@
                 "weapons": [
                   {
                     "name": "twin missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -305,7 +300,8 @@
                 "weapons": [
                   {
                     "name": "twin bright lance",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -314,7 +310,8 @@
                 "weapons": [
                   {
                     "name": "twin scatter laser",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -323,7 +320,8 @@
                 "weapons": [
                   {
                     "name": "twin starcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -345,7 +343,8 @@
             "removes": [
               {
                 "name": "twin shuriken catapult",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -353,7 +352,8 @@
                 "weapons": [
                   {
                     "name": "shuriken cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -365,7 +365,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -391,7 +392,16 @@
       "factionId": "",
       "description": "Each time a ranged attack targets this model, if the Strength characteristic of that attack is greater than the Toughness characteristic of this model, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

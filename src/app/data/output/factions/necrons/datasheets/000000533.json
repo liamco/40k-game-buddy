@@ -181,7 +181,8 @@
             "removes": [
               {
                 "name": "gauss cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -189,7 +190,8 @@
                 "weapons": [
                   {
                     "name": "tesla cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -211,7 +213,8 @@
             "removes": [
               {
                 "name": "staff of light",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -219,7 +222,8 @@
                 "weapons": [
                   {
                     "name": "Overlord's blade",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -244,7 +248,8 @@
                 "weapons": [
                   {
                     "name": "resurrection orb",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -256,7 +261,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000533:resurrection-orb",
+        "name": "Resurrection Orb",
+        "description": "Once per battle, at the end of any phase, select one friendly NECRONS INFANTRY or NECRONS MOUNTED unit within 6\" of the bearer and resurrect that unit. When you do, that unit's Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -277,15 +290,6 @@
     },
     {
       "id": "",
-      "name": "Resurrection Orb",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, at the end of any phase, select one friendly NECRONS INFANTRY or NECRONS MOUNTED unit within 6\" of the bearer and resurrect that unit. When you do, that unit's Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
       "name": "Carrier Wave (Aura)",
       "legend": "",
       "factionId": "",
@@ -300,7 +304,16 @@
       "factionId": "",
       "description": "Each time an attack targets this model, if the Strength characteristic of that attack is greater than this model's Toughness characteristic, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

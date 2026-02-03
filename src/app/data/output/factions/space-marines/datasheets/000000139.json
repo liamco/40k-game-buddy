@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-10",
-    "threshold": 10,
+    "threshold": 0,
     "description": "While this model has 1-10 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> 2 lascannons; Thunderhawk heavy cannon; 4 twin heavy bolters; armoured hull; Thunderhawk cluster bombs.",
@@ -214,7 +207,8 @@
             "removes": [
               {
                 "name": "Thunderhawk heavy cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -222,7 +216,8 @@
                 "weapons": [
                   {
                     "name": "turbo-laser destructor",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -244,7 +239,8 @@
             "removes": [
               {
                 "name": "Thunderhawk cluster bombs",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -252,7 +248,8 @@
                 "weapons": [
                   {
                     "name": "hellstrike missile battery",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -264,7 +261,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000139:thunderhawk-cluster-bombs",
+        "name": "Thunderhawk Cluster Bombs",
+        "description": "Each time the bearer ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 3+, that unit suffers 1 mortal wound.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -286,15 +291,6 @@
     {
       "name": "Oath of Moment",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Thunderhawk Cluster Bombs",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the bearer ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 3+, that unit suffers 1 mortal wound.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

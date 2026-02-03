@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-4",
-    "threshold": 4,
+    "threshold": 0,
     "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> 2 entropy cannons; heavy slugger; Plagueburst mortar; armoured tracks.",
@@ -220,7 +213,8 @@
             "removes": [
               {
                 "name": "entropy cannons",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -228,7 +222,8 @@
                 "weapons": [
                   {
                     "name": "plaguespitters",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -250,7 +245,8 @@
             "removes": [
               {
                 "name": "heavy slugger",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -258,7 +254,8 @@
                 "weapons": [
                   {
                     "name": "rothail volley gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -270,7 +267,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

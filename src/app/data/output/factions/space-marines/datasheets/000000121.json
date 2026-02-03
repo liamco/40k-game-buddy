@@ -101,7 +101,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -135,7 +136,18 @@
       "factionId": "",
       "description": "During the Declare Battle Formations step, if your army includes this model, select one Phobos, Gravis or Tacticus Adeptus Astartes Infantry unit from your army. That unit gains the Deep Strike ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

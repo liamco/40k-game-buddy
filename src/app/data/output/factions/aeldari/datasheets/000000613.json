@@ -314,7 +314,8 @@
             "removes": [
               {
                 "name": "shuriken catapults",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -322,7 +323,8 @@
                 "weapons": [
                   {
                     "name": "flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -347,7 +349,8 @@
                 "weapons": [
                   {
                     "name": "ghostglaive",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -372,7 +375,8 @@
                 "weapons": [
                   {
                     "name": "missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -381,7 +385,8 @@
                 "weapons": [
                   {
                     "name": "bright lance",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -390,7 +395,8 @@
                 "weapons": [
                   {
                     "name": "scatter laser",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -399,7 +405,8 @@
                 "weapons": [
                   {
                     "name": "shuriken cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -408,7 +415,8 @@
                 "weapons": [
                   {
                     "name": "starcannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -422,7 +430,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -453,7 +462,16 @@
       "factionId": "",
       "description": "While this model is within 12\" of one or more friendly Aeldari Psyker models, improve the Ballistic Skill and Weapon Skill characteristics of weapons equipped by this model by 1 and it has a Leadership characteristic of 6+.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "ld",
+          "value": 6
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

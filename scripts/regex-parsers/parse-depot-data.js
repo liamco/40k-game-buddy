@@ -764,6 +764,63 @@ function consolidateWargearProperties(obj) {
 }
 
 /**
+ * Converts a string to a URL-friendly slug
+ * @param {string} str - The string to slugify
+ * @returns {string} - The slugified string
+ */
+function slugify(str) {
+    return str
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
+/**
+ * Extracts wargear abilities from the abilities array and moves them to wargear.abilities[].
+ * Also removes wargear abilities from the main abilities array.
+ *
+ * Wargear abilities are abilities with type: "Wargear" (e.g., Storm Shield, Relic Shield).
+ * They provide stat bonuses or special rules rather than attack profiles.
+ *
+ * @param {object} obj - The datasheet object to process (must have wargear object already)
+ * @returns {object} - The datasheet with wargear abilities extracted
+ */
+function extractWargearAbilities(obj) {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+        return obj;
+    }
+
+    // Skip if no abilities array or no wargear object
+    if (!obj.abilities || !Array.isArray(obj.abilities) || !obj.wargear) {
+        return obj;
+    }
+
+    const consolidated = { ...obj };
+    const datasheetId = obj.id || "unknown";
+
+    // Extract wargear abilities (type === "Wargear")
+    const wargearAbilities = obj.abilities
+        .filter((a) => a.type === "Wargear")
+        .map((a) => ({
+            id: `${datasheetId}:${slugify(a.name)}`,
+            name: a.name,
+            description: a.description || "",
+            mechanics: a.mechanics || [],
+        }));
+
+    // Remove wargear abilities from main abilities array
+    consolidated.abilities = obj.abilities.filter((a) => a.type !== "Wargear");
+
+    // Add wargear abilities to wargear object
+    consolidated.wargear = {
+        ...obj.wargear,
+        abilities: wargearAbilities,
+    };
+
+    return consolidated;
+}
+
+/**
  * Consolidates supplement-related properties into a single `supplement` object.
  *
  * Transforms:
@@ -1108,6 +1165,9 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
 
             // Consolidate wargear properties (wargear, options -> wargear object with weapons and options)
             processedData = consolidateWargearProperties(processedData);
+
+            // Extract wargear abilities from abilities array and move to wargear.abilities[]
+            processedData = extractWargearAbilities(processedData);
 
             // Rename 'leaders' to 'leadsUnits' for clarity
             processedData = renameLeadersProperty(processedData);

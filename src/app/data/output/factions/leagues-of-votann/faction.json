@@ -502,7 +502,18 @@
           "legend": "Efficiency and practicality are ingrained in all Kin. Thus, the most meagre of Cthonian dêlves are well-equipped networks of passages, accessways and teleport nodes that enable a guild's bionically altered elites to appear where the foe least expects them. They emerge saturated with cyberstimulants and full of fury, ready to smash asunder those who dare trespass amongst their guild's operations.",
           "description": "Cthonian Beserks units from your army have the Deep Strike ability.<br><br><span class=\"hi_custom\">KEYWORDS</span><br><span class=\"kwb\">CTHONIAN</span> <span class=\"kwb\">BESERKS</span> units from your army gain the <span class=\"kwb\">BATTLELINE</span> keyword.",
           "detachment": "Dêlve Assault Shift",
-          "detachmentId": 1098
+          "detachmentId": 1098,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -534,7 +545,24 @@
           "detachment": "Dêlve Assault Shift",
           "detachmentId": 1098,
           "legend": "This structural analyst specialises in plotting attacks that exploit underlying weaknesses to deadly effect:",
-          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. While the bearer is within 3\" of one or more friendly Leagues of Votann Artillery units, the bearer has the Lone Operative ability, and each time one of those <span class=\"kwb\">ARTILLERY</span> units makes a ranged attack that targets an enemy unit visible to the bearer, add 1 to the Hit roll."
+          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. While the bearer is within 3\" of one or more friendly Leagues of Votann Artillery units, the bearer has the Lone Operative ability, and each time one of those <span class=\"kwb\">ARTILLERY</span> units makes a ranged attack that targets an enemy unit visible to the bearer, add 1 to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LONE OPERATIVE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -621,7 +649,16 @@
           ],
           "detachment": "Dêlve Assault Shift",
           "detachmentId": 1098,
-          "description": "<b>WHEN:</b> Your Shooting phase, just after a <span class=\"kwb\">CTHONIAN</span> <span class=\"kwb\">EARTHSHAKERS</span> unit from your army has shot.<br><br><b>TARGET:</b> That Cthonian Earthshakers unit.<br><br><b>EFFECT:</b> Each time you use this Stratagem, you can spend 2YP. Select one enemy unit hit by one or more of your unit's attacks this phase. Until the start of your next Shooting phase, subtract 2 from that unit's Move characteristic and, if you spent YP during this use of this Stratagem, subtract 2 from Charge rolls made for that unit."
+          "description": "<b>WHEN:</b> Your Shooting phase, just after a <span class=\"kwb\">CTHONIAN</span> <span class=\"kwb\">EARTHSHAKERS</span> unit from your army has shot.<br><br><b>TARGET:</b> That Cthonian Earthshakers unit.<br><br><b>EFFECT:</b> Each time you use this Stratagem, you can spend 2YP. Select one enemy unit hit by one or more of your unit's attacks this phase. Until the start of your next Shooting phase, subtract 2 from that unit's Move characteristic and, if you spent YP during this use of this Stratagem, subtract 2 from Charge rolls made for that unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "charge",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -636,7 +673,16 @@
           ],
           "detachment": "Dêlve Assault Shift",
           "detachmentId": 1098,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets, if units from your army have Hostile Acquisition.<br><br><b>TARGET:</b> One Leagues of Votann Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets, if units from your army have Hostile Acquisition.<br><br><b>TARGET:</b> One Leagues of Votann Infantry unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -673,7 +719,16 @@
           "detachment": "Hearthband",
           "detachmentId": 1001,
           "legend": "Extremely rare and costly to manufacture, this darkstar-powered coil enables a weapon to initiate tremendously powerful reverberations.",
-          "description": "Kâhl model only. In your Shooting phase, after the bearer has shot, select one enemy unit (excluding <span class=\"kwb\">TITANIC</span> units) hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "Kâhl model only. In your Shooting phase, after the bearer has shot, select one enemy unit (excluding <span class=\"kwb\">TITANIC</span> units) hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -725,7 +780,16 @@
           ],
           "detachment": "Hearthband",
           "detachmentId": 1001,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Kâhl, Ûthar the Destined or Einhyr Hearthguard unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Kâhl, Ûthar the Destined or Einhyr Hearthguard unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -785,7 +849,18 @@
           ],
           "detachment": "Hearthband",
           "detachmentId": 1001,
-          "description": "<b>WHEN:</b> The Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that is in Reserves and has the Deep Strike ability.<br><br><b>EFFECT:</b> Until the end of the phase, when your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units.<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit is not eligible to declare a charge."
+          "description": "<b>WHEN:</b> The Reinforcements step of your Movement phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that is in Reserves and has the Deep Strike ability.<br><br><b>EFFECT:</b> Until the end of the phase, when your unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units.<br><br><b>RESTRICTIONS:</b> Until the end of the turn, your unit is not eligible to declare a charge.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -839,7 +914,16 @@
           ],
           "detachment": "Hearthfire Strike",
           "detachmentId": 951,
-          "description": "<b>WHEN:</b> Your Charge phase, just after a <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army ends a Charge move.<br><br><b>TARGET:</b> That <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit.<br><br><b>EFFECT:</b> For each enemy unit within Engagement Range of your unit, until the end of the turn, that unit loses the Fights First ability (if it has it) and, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your Charge phase, just after a <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army ends a Charge move.<br><br><b>TARGET:</b> That <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit.<br><br><b>EFFECT:</b> For each enemy unit within Engagement Range of your unit, until the end of the turn, that unit loses the Fights First ability (if it has it) and, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -885,7 +969,16 @@
           ],
           "detachment": "Hearthfire Strike",
           "detachmentId": 951,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -912,7 +1005,18 @@
           "detachment": "Hearthfyre Arsenal",
           "detachmentId": 1100,
           "legend": "An evolutionary stride in teleportation technology, this experimental device shields its wearer and their companions in a bubble of esoteric force. It is.so strong that they can endure brief teleportation plunges through the Warp to strike at the most opportune time.",
-          "description": "Iron-master or Memnyr Strategist model only. Models in the bearer's unit have the Deep Strike ability."
+          "description": "Iron-master or Memnyr Strategist model only. Models in the bearer's unit have the Deep Strike ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -942,7 +1046,16 @@
           "detachment": "Hearthfyre Arsenal",
           "detachmentId": 1100,
           "legend": "This rune-scribed device holds a cache of forgewrought particles. Funnelled through an Iron-master's graviton arsenal, they mutate and cause anarchic fluxes in neuroelectrical impulses of the largest targets.",
-          "description": "Iron-master model only. In your Shooting phase, after the bearer has shot, and in the Fight phase, after the bearer has fought, select one enemy <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+          "description": "Iron-master model only. In your Shooting phase, after the bearer has shot, and in the Fight phase, after the bearer has fought, select one enemy <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -989,7 +1102,16 @@
           ],
           "detachment": "Hearthfyre Arsenal",
           "detachmentId": 1100,
-          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit ends a Fall Back move.<br><br><b>TARGET:</b> One Brôkhyr Thunderkyn or Ironkin Steeljacks unit from your army.<br><br><b>EFFECT:</b> Your unit can shoot as if it were your Shooting phase. When doing so, models in your unit can only target that enemy unit (and only if it is an eligible target) and each time a model in your unit makes an attack, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit ends a Fall Back move.<br><br><b>TARGET:</b> One Brôkhyr Thunderkyn or Ironkin Steeljacks unit from your army.<br><br><b>EFFECT:</b> Your unit can shoot as if it were your Shooting phase. When doing so, models in your unit can only target that enemy unit (and only if it is an eligible target) and each time a model in your unit makes an attack, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -1061,7 +1183,16 @@
           "detachment": "Needgaârd Oathband",
           "detachmentId": 1096,
           "legend": "This kindred hero is a master of knowing the right moment to funnel the kinhosts precious resources into the most efficient destruction of the foe.",
-          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. Each time a model in the bearer's unit makes an attack, re-roll a Wound roll of 1. Each time the bearer's unit is selected to shoot or fight, you can spend 3YP. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, add 1 to the Wound roll."
+          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. Each time a model in the bearer's unit makes an attack, re-roll a Wound roll of 1. Each time the bearer's unit is selected to shoot or fight, you can spend 3YP. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -1199,7 +1330,16 @@
           "legend": "The Kin of persecution prospects are skilled in escalating their attacks with unrelenting volleys of fire. They pressure the kindred's foes repeatedly from infiltration positions, unleash enfilading fire from the flanks and surge forward to blaze away at point-blank range before manoeuvring swiftly to other attack angles. Besides the death and destruction they cause, the prospect's forces leave foes disarrayed, with little chance to rally any ravaged survivors before other Kin capitalise on their plight.",
           "description": "Leagues of Votann units from your army have the following ability:<br><br><b>Guerrilla Adepts:</b> In your Shooting phase, just after this unit is selected to shoot, this unit can use this ability. If it does, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>). Until the end of the phase, attacks made by models in this unit can only target that enemy unit (and only if it is an eligible target) and, after resolving those attacks, if one or more of those attacks hit that enemy unit, until the start of your next Shooting phase, that enemy unit is assailed (this simply labels that unit for the purposes of this ability and some Enhancements and Stratagems). If that unit is already assailed, until the start of your next Shooting phase, it is also pinned. While a unit is pinned, subtract 2\" from its Move characteristic and subtract 2 from Charge rolls made for it.",
           "detachment": "Persecution Prospect",
-          "detachmentId": 1097
+          "detachmentId": 1097,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "charge",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1211,7 +1351,16 @@
           "detachment": "Persecution Prospect",
           "detachmentId": 1097,
           "legend": "Any hint of vulnerability draws the gaze of this punitive assessor like a rich vein of ore.",
-          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. Each time a model in the bearer's unit makes an attack that targets an assailed unit, add 1 to the Wound roll."
+          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. Each time a model in the bearer's unit makes an attack that targets an assailed unit, add 1 to the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -1318,7 +1467,18 @@
           ],
           "detachment": "Persecution Prospect",
           "detachmentId": 1097,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Leagues of Votann Infantry or Leagues of Votann Mounted unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Stealth ability and each time a ranged attack targets your unit, models in your unit have the Benefit of Cover against that attack."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Leagues of Votann Infantry or Leagues of Votann Mounted unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit has the Stealth ability and each time a ranged attack targets your unit, models in your unit have the Benefit of Cover against that attack.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "STEALTH"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",

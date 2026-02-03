@@ -18,22 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-5",
-    "threshold": 5,
+    "threshold": 0,
     "description": "While this model has 1-5 wounds remaining, subtract 3 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      },
-      {
-        "entity": "thisModel",
-        "effect": "statPenalty",
-        "attribute": "oc",
-        "value": 3
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> diabolus heavy stubber; reaper chaintalon; slaughterclaw.",
@@ -166,7 +153,8 @@
             "removes": [
               {
                 "name": "diabolus heavy stubber",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -174,7 +162,8 @@
                 "weapons": [
                   {
                     "name": "havoc multi-launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -186,7 +175,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

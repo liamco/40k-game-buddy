@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-5",
-    "threshold": 5,
+    "threshold": 0,
     "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> hellstrike missiles; multi-laser; armoured hull.",
@@ -217,7 +210,8 @@
             "removes": [
               {
                 "name": "multi-laser",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -225,7 +219,8 @@
                 "weapons": [
                   {
                     "name": "lascannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -247,7 +242,8 @@
             "removes": [
               {
                 "name": "hellstrike missiles",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -255,7 +251,8 @@
                 "weapons": [
                   {
                     "name": "multiple rocket pods",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -280,7 +277,8 @@
                 "weapons": [
                   {
                     "name": "heavy bolters",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -292,7 +290,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

@@ -668,7 +668,18 @@
           ],
           "detachment": "Army of Faith",
           "detachmentId": 880,
-          "description": "<b>WHEN:</b> Any phase, just after an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army suffers a mortal wound.<br><br><b>TARGET:</b> That <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit, or one friendly ADEPTA SORORITAS JUMP PACK unit within 3\" of it.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds. If you targeted an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> <span class=\"kwb\">JUMP</span> <span class=\"kwb\">PACK</span> unit from your army with this Stratagem, then until the end of the phase, while a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is unit is within 3\" of your unit, models in that unit have the Feel No Pain 5+ ability against mortal wounds."
+          "description": "<b>WHEN:</b> Any phase, just after an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army suffers a mortal wound.<br><br><b>TARGET:</b> That <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit, or one friendly ADEPTA SORORITAS JUMP PACK unit within 3\" of it.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds. If you targeted an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> <span class=\"kwb\">JUMP</span> <span class=\"kwb\">PACK</span> unit from your army with this Stratagem, then until the end of the phase, while a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is unit is within 3\" of your unit, models in that unit have the Feel No Pain 5+ ability against mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -730,7 +741,16 @@
           ],
           "detachment": "Army of Faith",
           "detachmentId": 880,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks, or one friendly ADEPTA SORORITAS JUMP PACK unit within 3\" of such a unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll. If you targeted an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> <span class=\"kwb\">JUMP</span> <span class=\"kwb\">PACK</span> unit from your army with this Stratagem, then until the end of the phase, while a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is unit is within 3\" of your unit, each time an attack targets that unit, subtract 1 from the Hit roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks, or one friendly ADEPTA SORORITAS JUMP PACK unit within 3\" of such a unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll. If you targeted an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> <span class=\"kwb\">JUMP</span> <span class=\"kwb\">PACK</span> unit from your army with this Stratagem, then until the end of the phase, while a friendly <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit is unit is within 3\" of your unit, each time an attack targets that unit, subtract 1 from the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -802,7 +822,24 @@
           "detachment": "Bringers of Flame",
           "detachmentId": 879,
           "legend": "Worked upon by generations of artificers, consecrated with holy oils and steeped in the smoke of sacred incense, this suit of power armour is amongst the most battle-proven relics held by the Orders Militant.",
-          "description": "CANONESS or PALATINE model only. The bearer has a Save characteristic of 2+ and the Feel No Pain 5+ ability."
+          "description": "CANONESS or PALATINE model only. The bearer has a Save characteristic of 2+ and the Feel No Pain 5+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 5
+            },
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "sv",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -880,7 +917,16 @@
           ],
           "detachment": "Bringers of Flame",
           "detachmentId": 879,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army that disembarked from a TRANSPORT this turn and has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack that targets an enemy unit within 6\" that is also within range of an objective marker, add 1 to the Wound roll. If one or more enemy models are destroyed as the result of those attacks, select one of those destroyed models; that destroyed model's unit must take a Battle-shock test."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army that disembarked from a TRANSPORT this turn and has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack that targets an enemy unit within 6\" that is also within range of an objective marker, add 1 to the Wound roll. If one or more enemy models are destroyed as the result of those attacks, select one of those destroyed models; that destroyed model's unit must take a Battle-shock test.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -1014,7 +1060,18 @@
           ],
           "detachment": "Champions of Faith",
           "detachmentId": 1003,
-          "description": "<b>WHEN:</b> Any phase, just after a mortal wound is allocated to an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army.<br><br><b>TARGET:</b> That <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability against mortal wounds. If your unit is Righteous, until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds instead."
+          "description": "<b>WHEN:</b> Any phase, just after a mortal wound is allocated to an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army.<br><br><b>TARGET:</b> That <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability against mortal wounds. If your unit is Righteous, until the end of the phase, models in your unit have the Feel No Pain 5+ ability against mortal wounds instead.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -1241,7 +1298,16 @@
           "detachment": "Penitent Host",
           "detachmentId": 878,
           "legend": "Faith is the shield of the righteous. The passionate benedictions of the pious may bestow the blessings of the God-Emperor.",
-          "description": "PENITENT model only. While the bearer is leading a unit, models in that unit have a 5+ invulnerable save."
+          "description": "PENITENT model only. While the bearer is leading a unit, models in that unit have a 5+ invulnerable save.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 5
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -1269,7 +1335,18 @@
           ],
           "detachment": "Penitent Host",
           "detachmentId": 878,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One PENITENT unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, PENITENT models in your unit have the Feel No Pain 4+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One PENITENT unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, PENITENT models in your unit have the Feel No Pain 4+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -1371,7 +1448,18 @@
           "detachment": "Penitents and Pilgrims",
           "detachmentId": 917,
           "legend": "So inflamed by their own fiery rhetoric is this priest, that terrible wounds go unnoticed as they hurl themselves towards the foe.",
-          "description": "The bearer has the Feel No Pain 4+ ability."
+          "description": "The bearer has the Feel No Pain 4+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -1414,7 +1502,16 @@
           ],
           "detachment": "Penitents and Pilgrims",
           "detachmentId": 917,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AS",
@@ -1459,7 +1556,16 @@
           "legend": "The Adepta Sororitas fight to defend the Imperial faith from those who would seek to bring about its ruin. The Battle Sisters believe that the light of the Emperor falls upon those who defend his sacred realm, lending them divine protection from the blades and bullets of the enemy.",
           "description": "Each time an attack targets an <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army (excluding ARCO-FLAGELLANTS and REPENTiA SqUAD units), if that unit is within range of an objective marker, models in that unit have a 4+ invulnerable save against that attack. If that unit also performed the Secure Site Tactical Manoeuvre in your previous Shooting phase, models in it have a 3+ invulnerable save against that attack instead.",
           "detachment": "Pious Protectors",
-          "detachmentId": 916
+          "detachmentId": 916,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1481,7 +1587,16 @@
           "detachment": "Pious Protectors",
           "detachmentId": 916,
           "legend": "This leader is a bombastic commander whose faith is matched by their boundless charisma. With the intonation of a single battle-psalm they may restore order and morale to a shattered formation.",
-          "description": "While the bearer is on the battlefield, friendly Battle-shocked <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> models (excluding ARCO-FLAGELLANTS and REPENTiA SqUAD models) have an Objective Control characteristic of 1."
+          "description": "While the bearer is on the battlefield, friendly Battle-shocked <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> models (excluding ARCO-FLAGELLANTS and REPENTiA SqUAD models) have an Objective Control characteristic of 1.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1544,7 +1659,16 @@
           ],
           "detachment": "Pious Protectors",
           "detachmentId": 916,
-          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army (excluding ARcO-fLAGELLANTS and REPENTIA SqUAD units) that was selected as a target of that charge.<br><br><b>EFFECT:</b> You can discard 1 Miracle dice. Until the end of the phase, subtract 1 from Charge rolls made for that enemy unit. If you discarded a Miracle dice, subtract 2 from Charge rolls made forthat enemy unit instead."
+          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTA</span> <span class=\"kwb\">SORORITAS</span> unit from your army (excluding ARcO-fLAGELLANTS and REPENTIA SqUAD units) that was selected as a target of that charge.<br><br><b>EFFECT:</b> You can discard 1 Miracle dice. Until the end of the phase, subtract 1 from Charge rolls made for that enemy unit. If you discarded a Miracle dice, subtract 2 from Charge rolls made forthat enemy unit instead.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "charge",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     }

@@ -117,11 +117,13 @@
             "removes": [
               {
                 "name": "scything talons",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "rending claws",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -129,7 +131,8 @@
                 "weapons": [
                   {
                     "name": "bone cleaver, lash whip and rending claws",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -138,7 +141,8 @@
                 "weapons": [
                   {
                     "name": "crushing claws and rending claws",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -150,7 +154,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -171,7 +176,18 @@
       "factionId": "",
       "description": "While a Character model is leading this unit, that <span class=\"kwb\">CHARACTER</span> has the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

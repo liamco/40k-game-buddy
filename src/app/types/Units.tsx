@@ -9,7 +9,7 @@ import type { WargearOptionDef as ParsedWargearOptionDef, TargetingType, ActionT
 export type { TargetingType, ActionType, TargetingDef, ActionDef, ConstraintsDef, WeaponRef, WeaponChoice };
 export type WargearOptionDef = ParsedWargearOptionDef;
 
-export type AbilityType = "Core" | "Faction" | "Datasheet";
+export type AbilityType = "Core" | "Faction" | "Datasheet" | "Wargear";
 
 export interface Ability {
     name: string;
@@ -79,10 +79,19 @@ export interface WargearOptionsContainer {
     allParsed: boolean; // True if all options were successfully parsed
 }
 
+// Wargear ability (equipment that provides bonuses rather than attack profiles)
+export interface WargearAbility {
+    id: string; // Unique identifier (format: {datasheetId}:{slug})
+    name: string; // Display name (e.g., "Storm Shield")
+    description?: string; // Ability text describing the effect
+    mechanics?: Mechanic[]; // Parsed game effects for calculations
+}
+
 // Consolidated wargear data
 export interface WargearData {
     defaultLoadout: string; // Raw HTML text describing default equipment (e.g., "Every model is equipped with: bolt pistol; boltgun")
     weapons: Weapon[]; // Available weapon profiles for this unit
+    abilities: WargearAbility[]; // Wargear abilities (shields, equipment bonuses, etc.)
     options: WargearOptionsContainer; // Wargear customization options
 }
 

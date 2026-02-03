@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-5",
-    "threshold": 5,
+    "threshold": 0,
     "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> fleshborer hive; stinger salvoes; powerful limbs.",
@@ -183,7 +176,8 @@
             "removes": [
               {
                 "name": "fleshborer hive",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -191,7 +185,8 @@
                 "weapons": [
                   {
                     "name": "acid spray",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -200,7 +195,8 @@
                 "weapons": [
                   {
                     "name": "rupture cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -212,7 +208,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

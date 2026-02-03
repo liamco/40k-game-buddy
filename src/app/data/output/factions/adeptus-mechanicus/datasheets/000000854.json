@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-4",
-    "threshold": 4,
+    "threshold": 0,
     "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> eradication beamer; Dunecrawler legs.",
@@ -269,7 +262,8 @@
             "removes": [
               {
                 "name": "eradication beamer",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -277,11 +271,13 @@
                 "weapons": [
                   {
                     "name": "daedalus missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "Icarus array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -290,11 +286,13 @@
                 "weapons": [
                   {
                     "name": "neutron laser",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "cognis heavy stubber",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -303,7 +301,8 @@
                 "weapons": [
                   {
                     "name": "twin Onager heavy phosphor blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -328,7 +327,8 @@
                 "weapons": [
                   {
                     "name": "additional cognis heavy stubber",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -353,7 +353,8 @@
                 "weapons": [
                   {
                     "name": "broad spectrum data-tether",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -365,7 +366,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000854:broad-spectrum-data-tether",
+        "name": "Broad spectrum data-tether",
+        "description": "The bearer loses the <span class=\"kwb\">SMOKE</span> keyword, but each time you target the bearer with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -386,21 +395,21 @@
     },
     {
       "id": "",
-      "name": "Broad spectrum data-tether",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer loses the <span class=\"kwb\">SMOKE</span> keyword, but each time you target the bearer with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
       "name": "Emanatus Force Field (Aura)",
       "legend": "",
       "factionId": "",
       "description": "While a friendly ADEPTUS MECHANICUS BATTLELINE model is wholly within 6\" of this model, that <span class=\"kwb\">BATTLELINE</span> model has a 4+ invulnerable save against ranged attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

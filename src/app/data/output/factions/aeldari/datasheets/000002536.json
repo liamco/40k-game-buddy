@@ -222,7 +222,8 @@
             "removes": [
               {
                 "name": "Harlequin's blade",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -230,7 +231,8 @@
                 "weapons": [
                   {
                     "name": "Harlequin's special weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -253,7 +255,8 @@
             "removes": [
               {
                 "name": "Harlequin's blade",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -261,7 +264,8 @@
                 "weapons": [
                   {
                     "name": "power sword",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -284,7 +288,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -292,7 +297,8 @@
                 "weapons": [
                   {
                     "name": "Up to 2 models can each have their shuriken pistol replaced with 1 fusion pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -315,7 +321,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -323,7 +330,8 @@
                 "weapons": [
                   {
                     "name": "Up to 4 models can each have their shuriken pistol replaced with 1 fusion pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -335,7 +343,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002536:flip-belt",
+        "name": "Flip Belt",
+        "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -360,16 +376,22 @@
       "factionId": "",
       "description": "At the start of the Fight phase, select one of the following abilities for this unit to gain until the end of the phase:<br><ul><li><b>Hero's Prowess:</b> Each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li><li><b>Villain's Doom:</b> Each time a model in this unit makes an attack, add 1 to the Wound roll.</li><li><b>Trickster's Grace:</b> Each time an attack targets this unit, subtract 1 from the Hit roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Flip Belt",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

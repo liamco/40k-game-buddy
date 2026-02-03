@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-6",
-    "threshold": 6,
+    "threshold": 0,
     "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> 2 burst cannons; 2 ion cannons; 2 missile pods; armoured hull; transport bay.",
@@ -333,7 +326,8 @@
             "removes": [
               {
                 "name": "burst cannons",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -341,7 +335,8 @@
                 "weapons": [
                   {
                     "name": "cyclic ion blasters",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -363,7 +358,8 @@
             "removes": [
               {
                 "name": "ion cannons",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -371,7 +367,8 @@
                 "weapons": [
                   {
                     "name": "swiftstrike burst cannons",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -380,7 +377,8 @@
                 "weapons": [
                   {
                     "name": "swiftstrike railguns",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -417,7 +415,8 @@
             "removes": [
               {
                 "name": "transport bay",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -425,7 +424,8 @@
                 "weapons": [
                   {
                     "name": "skyspear missile racks",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -437,7 +437,15 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000454:transport-bay",
+        "name": "Transport Bay",
+        "description": "The bearer has the <span class=\"kwb\">TRANSPORT</span> keyword and has a transport capacity of 12 <span class=\"kwb\">TACTICAL</span> <span class=\"kwb\">DRONES</span> models.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -455,15 +463,6 @@
     {
       "name": "For the Greater Good",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Transport Bay",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the <span class=\"kwb\">TRANSPORT</span> keyword and has a transport capacity of 12 <span class=\"kwb\">TACTICAL</span> <span class=\"kwb\">DRONES</span> models.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

@@ -73,7 +73,8 @@
                 "weapons": [
                   {
                     "name": "grot orderly",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -85,7 +86,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002491:grot-orderly",
+        "name": "Grot Orderly",
+        "description": "Once per battle, in your Command phase, if the bearer is leading a unit that is below its Starting Strength, you can return up to D3 destroyed Bodyguard models to that unit.<br><br><b>Designer's Note:</b> Place a Grot Orderly token next to the unit, removing it once this ability has been used.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -110,21 +119,23 @@
     },
     {
       "id": "",
-      "name": "Grot Orderly",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, in your Command phase, if the bearer is leading a unit that is below its Starting Strength, you can return up to D3 destroyed Bodyguard models to that unit.<br><br><b>Designer's Note:</b> Place a Grot Orderly token next to the unit, removing it once this ability has been used.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
       "name": "Dok's Toolz",
       "legend": "",
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 5
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

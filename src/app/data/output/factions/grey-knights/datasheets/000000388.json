@@ -201,11 +201,13 @@
             "removes": [
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "Nemesis force weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -213,11 +215,13 @@
                 "weapons": [
                   {
                     "name": "incinerator",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -226,11 +230,13 @@
                 "weapons": [
                   {
                     "name": "psilencer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -239,11 +245,13 @@
                 "weapons": [
                   {
                     "name": "psycannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -255,7 +263,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -280,7 +289,16 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks: until the start of your next turn, that enemy unit is pinned. While a unit is pinned, subtract 2 from that unit's Move characteristic and subtract 2 from Charge rolls made for it.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "charge",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

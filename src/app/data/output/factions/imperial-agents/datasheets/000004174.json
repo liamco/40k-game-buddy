@@ -533,7 +533,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's infernus heavy bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -541,7 +542,8 @@
                 "weapons": [
                   {
                     "name": "frag cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -550,11 +552,13 @@
                 "weapons": [
                   {
                     "name": "hellstorm bolt rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "Astartes grenade launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -578,7 +582,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's heavy thunder hammer",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -586,11 +591,13 @@
                 "weapons": [
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "Astartes shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -614,7 +621,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's stalker bolt rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -622,7 +630,8 @@
                 "weapons": [
                   {
                     "name": "plasma incinerator",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -646,7 +655,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's Deathwatch marksman bolt carbine",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -654,7 +664,8 @@
                 "weapons": [
                   {
                     "name": "combat knife",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -666,7 +677,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004174:astartes-shield",
+        "name": "Astartes Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -696,15 +723,6 @@
       "factionId": "",
       "description": "Each time an attack targets this unit, if it contains models with different Toughness characteristics, until the attacking unit has finished making its attacks, use the Toughness characteristic of the majority of the models in that unit when determining what roll is required for that attack to successfully wound. If two or more Toughness characteristics are tied for majority, use the highest value.<br><br>For the purposes of determining which models in this unit can embark within a Transport, Gravis Veteran models take up the space of 2 models, but can otherwise embark within any <span class=\"kwb\">TRANSPORT</span> their unit can embark within, even though similar models in other units have the <span class=\"kwb\">GRAVIS</span> keyword.<br><br><b>Designer's Note:</b> While the abstractions in the above rule cause some models to behave differently to similar models in other units, they are designed to minimise complicated Transport rules.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Astartes Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

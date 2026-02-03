@@ -184,7 +184,8 @@
             "removes": [
               {
                 "name": "shuriken pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -192,7 +193,8 @@
                 "weapons": [
                   {
                     "name": "fusion pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -201,7 +203,8 @@
                 "weapons": [
                   {
                     "name": "neuro disruptor",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -223,7 +226,8 @@
             "removes": [
               {
                 "name": "Troupe Master's blade",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -231,7 +235,8 @@
                 "weapons": [
                   {
                     "name": "Harlequin's special weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -243,7 +248,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004161:flip-belt",
+        "name": "Flip Belt",
+        "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -281,20 +294,20 @@
       "factionId": "",
       "description": "Each time this model makes a melee attack, you can re-roll a Hit roll of 1 and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "TRAVELLING PLAYERS",
       "type": "Fortification (левая колонка)"
-    },
-    {
-      "id": "",
-      "name": "Flip Belt",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
-      "type": "Wargear",
-      "parameter": ""
     }
   ],
   "keywords": [

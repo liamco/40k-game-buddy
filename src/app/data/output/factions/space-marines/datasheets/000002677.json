@@ -18,13 +18,7 @@
   "leader": {
     "description": "",
     "footer": "You can attach this model to one of the above units even if one Captain, Chapter Master or Lieutenant model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the <span class=\"kwb\">LEADER</span> units attached to it become separate units, with their original Starting Strengths.",
-    "conditions": {
-      "allowedExistingLeaderKeywords": [
-        "CAPTAIN",
-        "CHAPTER MASTER",
-        "LIEUTENANT"
-      ]
-    },
+    "conditions": null,
     "attachableUnits": []
   },
   "damaged": null,
@@ -236,7 +230,8 @@
             "removes": [
               {
                 "name": "power fist",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -244,7 +239,8 @@
                 "weapons": [
                   {
                     "name": "chainfist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -253,7 +249,8 @@
                 "weapons": [
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -262,7 +259,8 @@
                 "weapons": [
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -271,7 +269,8 @@
                 "weapons": [
                   {
                     "name": "thunder hammer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -293,11 +292,13 @@
             "removes": [
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "power fist",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -305,7 +306,8 @@
                 "weapons": [
                   {
                     "name": "twin lightning claws",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -314,11 +316,13 @@
                 "weapons": [
                   {
                     "name": "thunder hammer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "Terminator storm shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -330,7 +334,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002677:terminator-storm-shield",
+        "name": "Terminator Storm Shield",
+        "description": "The bearer has a Wounds characteristic of 6.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "w",
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -368,15 +388,6 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll if that unit is below its Starting Strength, and add 1 to the Wound roll as well if that unit is Below Half-strength.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Terminator Storm Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a Wounds characteristic of 6.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

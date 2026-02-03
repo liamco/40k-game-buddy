@@ -165,11 +165,13 @@
             "removes": [
               {
                 "name": "Fenrisian greataxe or great wolf claw",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -177,11 +179,13 @@
                 "weapons": [
                   {
                     "name": "blizzard shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   },
                   {
                     "name": "heavy flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -203,7 +207,8 @@
             "removes": [
               {
                 "name": "If this model is not equipped with a storm bolter, its heavy flamer",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -211,7 +216,8 @@
                 "weapons": [
                   {
                     "name": "storm bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -223,7 +229,23 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004133:blizzard-shield",
+        "name": "Blizzard Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "space-wolves",
@@ -267,15 +289,6 @@
       "factionId": "",
       "description": "If this model is equipped with two melee weapons, those weapon profiles have the [TWIN-LINKED] ability.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Blizzard Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

@@ -136,7 +136,8 @@
                 "weapons": [
                   {
                     "name": "helix gauntlet",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -163,7 +164,8 @@
                 "weapons": [
                   {
                     "name": "Infiltrator comms array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -190,7 +192,31 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000128:helix-gauntlet",
+        "name": "Helix Gauntlet",
+        "description": "Models in the bearer's unit have the Feel No Pain 6+ ability.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000128:infiltrator-comms-array",
+        "name": "Infiltrator Comms Array",
+        "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -215,24 +241,6 @@
       "factionId": "",
       "description": "Enemy units that are set up on the battlefield from Reserves cannot be set up within 12\" of this unit.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Helix Gauntlet",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have the Feel No Pain 6+ ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Infiltrator Comms Array",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

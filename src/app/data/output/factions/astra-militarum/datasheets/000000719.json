@@ -407,7 +407,8 @@
             "removes": [
               {
                 "name": "hot-shot lasgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -415,7 +416,8 @@
                 "weapons": [
                   {
                     "name": "flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -424,7 +426,8 @@
                 "weapons": [
                   {
                     "name": "grenade launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -433,7 +436,8 @@
                 "weapons": [
                   {
                     "name": "hot-shot volley gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -442,7 +446,8 @@
                 "weapons": [
                   {
                     "name": "meltagun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -451,7 +456,8 @@
                 "weapons": [
                   {
                     "name": "plasma gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -478,7 +484,8 @@
                 "weapons": [
                   {
                     "name": "regimental standard",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -506,7 +513,8 @@
             "removes": [
               {
                 "name": "hot-shot lasgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -514,11 +522,13 @@
                 "weapons": [
                   {
                     "name": "hot-shot laspistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "master vox",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -542,7 +552,8 @@
             "removes": [
               {
                 "name": "hot-shot lasgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -550,11 +561,13 @@
                 "weapons": [
                   {
                     "name": "hot-shot laspistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "medi-pack",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -563,11 +576,13 @@
                 "weapons": [
                   {
                     "name": "hot-shot lasgun, 1 hot-shot laspistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "medi-pack [that model's hot-shot lasgun cannot be replaced]",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -590,7 +605,8 @@
             "removes": [
               {
                 "name": "bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -598,7 +614,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -607,7 +624,8 @@
                 "weapons": [
                   {
                     "name": "command rod",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -634,7 +652,33 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000719:medi-pack",
+        "name": "Medi-pack",
+        "description": "At the start of your Command phase, if the bearer's unit is below its Starting Strength, you can return up to D3 destroyed Tempestus Scions models to this unit.",
+        "mechanics": []
+      },
+      {
+        "id": "000000719:regimental-standard",
+        "name": "Regimental Standard",
+        "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
+        "mechanics": []
+      },
+      {
+        "id": "000000719:command-rod",
+        "name": "Command Rod",
+        "description": "While the bearer is leading a unit, that unit can be affected by up to two different Orders at the same time.",
+        "mechanics": []
+      },
+      {
+        "id": "000000719:master-vox",
+        "name": "Master Vox",
+        "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -663,42 +707,6 @@
       "factionId": "",
       "description": "While this unit contains a Tempestor Prime, ranged weapons equipped by models in this unit have the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Medi-pack",
-      "legend": "",
-      "factionId": "",
-      "description": "At the start of your Command phase, if the bearer's unit is below its Starting Strength, you can return up to D3 destroyed Tempestus Scions models to this unit.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Regimental Standard",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Command Rod",
-      "legend": "",
-      "factionId": "",
-      "description": "While the bearer is leading a unit, that unit can be affected by up to two different Orders at the same time.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Master Vox",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

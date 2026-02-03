@@ -160,7 +160,8 @@
             "removes": [
               {
                 "name": "great weapon of the Unforgiven",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -168,7 +169,8 @@
                 "weapons": [
                   {
                     "name": "relic weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -190,7 +192,8 @@
             "removes": [
               {
                 "name": "mace of absolution",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -198,7 +201,8 @@
                 "weapons": [
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -223,7 +227,8 @@
                 "weapons": [
                   {
                     "name": "Watcher in the Dark",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -235,7 +240,25 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000231:watcher-in-the-dark",
+        "name": "Watcher in the Dark",
+        "description": "Once per battle, in any phase, just after a mortal wound is allocated to an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model in this unit, this unit can summon a Watcher in the Dark. When it does, until the end of the phase, models in this unit have the Feel No Pain 4+ ability against mortal wounds.<br><br><b>Designer's Note:</b> Place a Watcher in the Dark token next to the unit, removing it when this ability has been used.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "dark-angels",
@@ -269,15 +292,6 @@
       "factionId": "",
       "description": "Each time an attack is allocated to a model in this unit, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Watcher in the Dark",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, in any phase, just after a mortal wound is allocated to an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model in this unit, this unit can summon a Watcher in the Dark. When it does, until the end of the phase, models in this unit have the Feel No Pain 4+ ability against mortal wounds.<br><br><b>Designer's Note:</b> Place a Watcher in the Dark token next to the unit, removing it when this ability has been used.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

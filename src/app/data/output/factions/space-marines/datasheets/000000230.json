@@ -293,7 +293,8 @@
             "removes": [
               {
                 "name": "power fist",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -301,7 +302,8 @@
                 "weapons": [
                   {
                     "name": "chainfist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -324,7 +326,8 @@
             "removes": [
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -332,7 +335,8 @@
                 "weapons": [
                   {
                     "name": "assault cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -341,7 +345,8 @@
                 "weapons": [
                   {
                     "name": "heavy flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -350,7 +355,8 @@
                 "weapons": [
                   {
                     "name": "plasma cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -359,11 +365,13 @@
                 "weapons": [
                   {
                     "name": "storm bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "cyclone missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -388,7 +396,8 @@
                 "weapons": [
                   {
                     "name": "Watcher in the Dark",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -400,7 +409,25 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000230:watcher-in-the-dark",
+        "name": "Watcher in the Dark",
+        "description": "Once per battle, in any phase, just after a mortal wound is allocated to an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model in this unit, this unit can summon a Watcher in the Dark. When it does, until the end of the phase, models in this unit have the Feel No Pain 4+ ability against mortal wounds.<br><br><b>Designer's Note:</b> Place a Watcher in the Dark token next to the unit, removing it when this ability has been used.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "dark-angels",
@@ -434,7 +461,16 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack, you can ignore any or all modifiers to that attack's Ballistic Skill or Weapon Skill characteristics and/or to the Hit roll. In addition, each time a model in this unit makes an attack that targets the enemy unit you selected at the start of your Command phase for the Oath of Moment ability, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -443,15 +479,6 @@
       "factionId": "",
       "description": "If a Character unit from your army with the Leader ability can be attached to a Terminator Squad, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Watcher in the Dark",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, in any phase, just after a mortal wound is allocated to an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model in this unit, this unit can summon a Watcher in the Dark. When it does, until the end of the phase, models in this unit have the Feel No Pain 4+ ability against mortal wounds.<br><br><b>Designer's Note:</b> Place a Watcher in the Dark token next to the unit, removing it when this ability has been used.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

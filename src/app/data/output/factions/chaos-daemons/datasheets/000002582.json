@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-6",
-    "threshold": 6,
+    "threshold": 0,
     "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> hellfire breath; great axe of Khorne",
@@ -210,7 +203,8 @@
             "removes": [
               {
                 "name": "great axe of Khorne",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -218,7 +212,8 @@
                 "weapons": [
                   {
                     "name": "axe of Khorne and one of the following:<ul><li>1 bloodflail</li><li>1 lash of Khorne</li></ul>",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -230,7 +225,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -260,7 +256,16 @@
       "factionId": "",
       "description": "While a friendly Khorne Legiones Daemonica unit is within 6\" of this model, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

@@ -196,7 +196,8 @@
             "removes": [
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -204,7 +205,8 @@
                 "weapons": [
                   {
                     "name": "incinerator",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -213,7 +215,8 @@
                 "weapons": [
                   {
                     "name": "psilencer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -222,7 +225,8 @@
                 "weapons": [
                   {
                     "name": "psycannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -249,7 +253,8 @@
                 "weapons": [
                   {
                     "name": "Ancient's banner",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -273,7 +278,8 @@
             "removes": [
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -281,7 +287,8 @@
                 "weapons": [
                   {
                     "name": "narthecium",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -308,7 +315,21 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000003813:ancient-s-banner",
+        "name": "Ancient's Banner",
+        "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
+        "mechanics": []
+      },
+      {
+        "id": "000003813:narthecium",
+        "name": "Narthecium",
+        "description": "In your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTERS</span>) to the bearer's unit.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -337,30 +358,23 @@
     },
     {
       "id": "",
-      "name": "Ancient's Banner",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Narthecium",
-      "legend": "",
-      "factionId": "",
-      "description": "In your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTERS</span>) to the bearer's unit.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
       "name": "Rites of Teleportation",
       "legend": "",
       "factionId": "",
       "description": "If one or more INQUISITOR units are attached to this unit during the Declare Battle formations step, models in those units have the Deep Strike ability.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

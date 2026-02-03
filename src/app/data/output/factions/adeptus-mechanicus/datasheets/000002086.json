@@ -147,7 +147,8 @@
             "removes": [
               {
                 "name": "command uplink",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -155,7 +156,8 @@
                 "weapons": [
                   {
                     "name": "chaff launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -167,7 +169,21 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002086:chaff-launcher",
+        "name": "Chaff Launcher",
+        "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
+        "mechanics": []
+      },
+      {
+        "id": "000002086:command-uplink",
+        "name": "Command Uplink",
+        "description": "Each time you select the bearer's unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -192,30 +208,21 @@
     },
     {
       "id": "",
-      "name": "Chaff Launcher",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Command Uplink",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time you select the bearer's unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
       "name": "Strafing Run",
       "legend": "",
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets an enemy unit (excluding units that can <span class=\"kwb\">FLY</span>), add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

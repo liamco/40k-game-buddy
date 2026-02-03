@@ -174,7 +174,8 @@
             "removes": [
               {
                 "name": "shuriken cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -182,7 +183,8 @@
                 "weapons": [
                   {
                     "name": "Skyweaver haywire cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -204,7 +206,8 @@
             "removes": [
               {
                 "name": "star bolas",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -212,7 +215,8 @@
                 "weapons": [
                   {
                     "name": "zephyrglaive",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -224,7 +228,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -249,7 +254,16 @@
       "factionId": "",
       "description": "Each time an attack targets this unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

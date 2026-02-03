@@ -535,7 +535,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's infernus heavy bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -543,7 +544,8 @@
                 "weapons": [
                   {
                     "name": "frag cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -552,11 +554,13 @@
                 "weapons": [
                   {
                     "name": "hellstorm bolt rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "Astartes grenade launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -580,7 +584,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's heavy thunder hammer",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -588,11 +593,13 @@
                 "weapons": [
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "Astartes shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -616,7 +623,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's stalker bolt rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -624,7 +632,8 @@
                 "weapons": [
                   {
                     "name": "plasma incinerator",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -648,7 +657,8 @@
             "removes": [
               {
                 "name": "For every 5 models in the unit, up to 1 model's Deathwatch marksman bolt carbine",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -656,7 +666,8 @@
                 "weapons": [
                   {
                     "name": "combat knife",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -668,7 +679,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004175:astartes-shield",
+        "name": "Astartes Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "deathwatch",
@@ -693,15 +720,6 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack, re-roll a Hit roll of 1. If the target of that attack does not have the <span class=\"kwb\">IMPERIUM</span> or <span class=\"kwb\">CHAOS</span> keywords, you can re-roll the Hit roll instead.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Astartes Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

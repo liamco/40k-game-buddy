@@ -328,7 +328,8 @@
             "removes": [
               {
                 "name": "plasma pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -336,7 +337,8 @@
                 "weapons": [
                   {
                     "name": "plasma gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -363,7 +365,8 @@
                 "weapons": [
                   {
                     "name": "haywire mine",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -391,11 +394,13 @@
             "removes": [
               {
                 "name": "plasma pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "combat blade",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -403,11 +408,13 @@
                 "weapons": [
                   {
                     "name": "bolt pistol, 1 Thunderclap",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "runic stave",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -430,7 +437,8 @@
             "removes": [
               {
                 "name": "If this unit contains 12 models, 1 Wolf Scout's plasma pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -438,7 +446,8 @@
                 "weapons": [
                   {
                     "name": "instigator bolt carbine",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -450,7 +459,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004182:haywire-mine",
+        "name": "Haywire Mine",
+        "description": "Once per battle, at the start of any phase, you can select one enemy unit within 3\" of the bearer and roll one D6: on a 2+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a <span class=\"kwb\">VEHICLE</span> unit.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "space-wolves",
@@ -480,7 +497,16 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets an enemy unit, if there are no other units from your opponent's army within 6\" of that target, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -489,16 +515,16 @@
       "factionId": "",
       "description": "While this unit is within 6\" of one or more friendly Space Wolves Character models (excluding Wulfen models), if this unit is not Battle-shocked, Hunting Wolves models in this unit have an Objective Control characteristic of 1.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Haywire Mine",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, at the start of any phase, you can select one enemy unit within 3\" of the bearer and roll one D6: on a 2+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a <span class=\"kwb\">VEHICLE</span> unit.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

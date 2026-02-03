@@ -18,16 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-5",
-    "threshold": 5,
+    "threshold": 0,
     "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> 2 Blackstar rocket launchers; twin assault cannon; armoured hull.",
@@ -227,7 +220,8 @@
             "removes": [
               {
                 "name": "twin assault cannon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -235,7 +229,8 @@
                 "weapons": [
                   {
                     "name": "twin lascannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -257,7 +252,8 @@
             "removes": [
               {
                 "name": "Blackstar rocket launchers",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -265,7 +261,8 @@
                 "weapons": [
                   {
                     "name": "stormstrike missile launchers",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -290,7 +287,8 @@
                 "weapons": [
                   {
                     "name": "hurricane bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -315,7 +313,8 @@
                 "weapons": [
                   {
                     "name": "auspex array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -324,7 +323,8 @@
                 "weapons": [
                   {
                     "name": "infernum halo-launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -336,7 +336,21 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000003817:auspex-array",
+        "name": "Auspex Array",
+        "description": "Ranged weapons equipped by the bearer have the [IGNORES COVER] ability.",
+        "mechanics": []
+      },
+      {
+        "id": "000003817:infernum-halo-launcher",
+        "name": "Infernum Halo-launcher",
+        "description": "The bearer has the Smoke keyword.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -370,24 +384,6 @@
       "factionId": "",
       "description": "Each time this model ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 5+, that unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Auspex Array",
-      "legend": "",
-      "factionId": "",
-      "description": "Ranged weapons equipped by the bearer have the [IGNORES COVER] ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Infernum Halo-launcher",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the Smoke keyword.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

@@ -229,7 +229,8 @@
             "removes": [
               {
                 "name": "twin Kastelan fist",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -237,11 +238,13 @@
                 "weapons": [
                   {
                     "name": "Kastelan phosphor blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "Kastelan fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -250,11 +253,13 @@
                 "weapons": [
                   {
                     "name": "twin Kastelan phosphor blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -276,7 +281,8 @@
             "removes": [
               {
                 "name": "incendine combustor",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -284,7 +290,8 @@
                 "weapons": [
                   {
                     "name": "heavy phosphor blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -296,7 +303,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -322,7 +330,18 @@
       "factionId": "",
       "description": "While a Cybernetica Datasmith model is leading this unit, that model has the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

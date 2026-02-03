@@ -115,7 +115,8 @@
             "removes": [
               {
                 "name": "klaive",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -123,7 +124,8 @@
                 "weapons": [
                   {
                     "name": "demiklaives",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -149,7 +151,8 @@
                 "weapons": [
                   {
                     "name": "Incubi Shrine token",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -161,7 +164,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000648:incubi-shrine-token",
+        "name": "Incubi Shrine Token",
+        "description": "Once per battle for each Incubi Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a Klaivex or Incubi model in this unit to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Incubi Shrine token next to the unit for each Incubi Shrine token it has, removing one each time this ability is used.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -191,16 +202,16 @@
       "factionId": "",
       "description": "At the start of the Fight phase, each enemy unit within Engagement Range of one or more units with this ability must take a Battle-shock test. Each time a model in this unit makes a melee attack that targets a Battle-shocked unit, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Incubi Shrine Token",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle for each Incubi Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a Klaivex or Incubi model in this unit to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Incubi Shrine token next to the unit for each Incubi Shrine token it has, removing one each time this ability is used.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

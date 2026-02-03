@@ -478,6 +478,102 @@ const PATTERNS = {
             return null;
         },
     },
+
+    /**
+     * Characteristic modifiers: "has a Save characteristic of 3+", "Wounds characteristic of 6"
+     * Common in wargear abilities like shields
+     * ~95% reliability
+     */
+    characteristicValue: {
+        name: "Characteristic Value",
+        extract: (text) => {
+            const mechanics = [];
+
+            // Save characteristic: "has a Save characteristic of 3+"
+            const saveMatch = text.match(/(?:has|have)\s+a\s+save\s+characteristic\s+of\s+(\d)\+?/i);
+            if (saveMatch) {
+                mechanics.push({
+                    entity: "thisModel",
+                    effect: "staticNumber",
+                    attribute: "sv",
+                    value: parseInt(saveMatch[1], 10),
+                });
+            }
+
+            // Wounds characteristic: "has a Wounds characteristic of 6"
+            const woundsMatch = text.match(/(?:has|have)\s+a\s+wounds\s+characteristic\s+of\s+(\d+)/i);
+            if (woundsMatch) {
+                mechanics.push({
+                    entity: "thisModel",
+                    effect: "staticNumber",
+                    attribute: "w",
+                    value: parseInt(woundsMatch[1], 10),
+                });
+            }
+
+            // Leadership characteristic: "have a Leadership characteristic of 6+"
+            const leadershipMatch = text.match(/(?:has|have)\s+a\s+leadership\s+characteristic\s+of\s+(\d)\+?/i);
+            if (leadershipMatch) {
+                mechanics.push({
+                    entity: "thisModel",
+                    effect: "staticNumber",
+                    attribute: "ld",
+                    value: parseInt(leadershipMatch[1], 10),
+                });
+            }
+
+            // Objective Control characteristic: "has an Objective Control characteristic of 0"
+            const ocMatch = text.match(/(?:has|have)\s+an?\s+objective\s+control\s+characteristic\s+of\s+(\d+)/i);
+            if (ocMatch) {
+                mechanics.push({
+                    entity: "thisModel",
+                    effect: "staticNumber",
+                    attribute: "oc",
+                    value: parseInt(ocMatch[1], 10),
+                });
+            }
+
+            return mechanics.length > 0 ? mechanics : null;
+        },
+    },
+
+    /**
+     * Charge roll modifiers: "Add 1 to Charge rolls"
+     * Common in wargear abilities like instruments
+     * ~95% reliability
+     */
+    chargeRollModifier: {
+        name: "Charge Roll Modifier",
+        extract: (text) => {
+            // Pattern: "add X to Charge rolls"
+            const bonusMatch = text.match(/add\s+(\d+)\s+to\s+charge\s+rolls?/i);
+            if (bonusMatch) {
+                return [
+                    {
+                        entity: "thisUnit",
+                        effect: "rollBonus",
+                        attribute: "charge",
+                        value: parseInt(bonusMatch[1], 10),
+                    },
+                ];
+            }
+
+            // Pattern: "subtract X from Charge rolls"
+            const penaltyMatch = text.match(/subtract\s+(\d+)\s+from\s+charge\s+rolls?/i);
+            if (penaltyMatch) {
+                return [
+                    {
+                        entity: "thisUnit",
+                        effect: "rollPenalty",
+                        attribute: "charge",
+                        value: parseInt(penaltyMatch[1], 10),
+                    },
+                ];
+            }
+
+            return null;
+        },
+    },
 };
 
 /**
@@ -559,6 +655,15 @@ function processFile(filePath) {
     if (data.abilities && Array.isArray(data.abilities)) {
         const originalCount = stats.mechanicsExtracted;
         data.abilities = processAbilities(data.abilities, data.name || fileName);
+        if (stats.mechanicsExtracted > originalCount) {
+            modified = true;
+        }
+    }
+
+    // Process wargear abilities (e.g., Storm Shield, Relic Shield)
+    if (data.wargear && data.wargear.abilities && Array.isArray(data.wargear.abilities)) {
+        const originalCount = stats.mechanicsExtracted;
+        data.wargear.abilities = processAbilities(data.wargear.abilities, `${data.name || fileName} Wargear`);
         if (stats.mechanicsExtracted > originalCount) {
             modified = true;
         }

@@ -18,12 +18,7 @@
   "leader": {
     "description": "",
     "footer": "You can attach this model to one of the above units even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the <span class=\"kwb\">LEADER</span> units attached to it become separate units, with their original Starting Strengths.",
-    "conditions": {
-      "allowedExistingLeaderKeywords": [
-        "CAPTAIN",
-        "CHAPTER MASTER"
-      ]
-    },
+    "conditions": null,
     "attachableUnits": []
   },
   "damaged": null,
@@ -85,7 +80,8 @@
       "raw": [],
       "parsed": [],
       "allParsed": false
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -119,7 +115,16 @@
       "factionId": "",
       "description": "If this model's unit destroys an enemy unit as the result of a melee attack, until the end of the battle, this model has an Objective Control characteristic of 9.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 9
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

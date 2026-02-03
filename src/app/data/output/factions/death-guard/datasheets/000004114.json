@@ -134,7 +134,8 @@
                 "weapons": [
                   {
                     "name": "instrument of Chaos",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -161,7 +162,8 @@
                 "weapons": [
                   {
                     "name": "daemonic icon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -173,7 +175,37 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004114:daemonic-icon",
+        "name": "Daemonic Icon",
+        "description": "Models in the bearer's unit have a Leadership characteristic of 6+.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "ld",
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000004114:instrument-of-chaos",
+        "name": "Instrument of Chaos",
+        "description": "Add 1 to Charge rolls made for the bearer's unit.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "attribute": "charge",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -198,24 +230,6 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks. Until the end of the turn, each time a friendly Plague Legions unit makes an attack that targets that unit, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Daemonic Icon",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have a Leadership characteristic of 6+.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Instrument of Chaos",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 1 to Charge rolls made for the bearer's unit.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

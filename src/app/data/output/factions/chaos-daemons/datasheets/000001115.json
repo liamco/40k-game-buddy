@@ -105,7 +105,8 @@
                 "weapons": [
                   {
                     "name": "instrument of Chaos",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -132,7 +133,8 @@
                 "weapons": [
                   {
                     "name": "daemonic icon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -144,7 +146,37 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000001115:daemonic-icon",
+        "name": "Daemonic Icon",
+        "description": "Models in the bearer's unit have a Leadership characteristic of 6+.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "ld",
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000001115:instrument-of-chaos",
+        "name": "Instrument of Chaos",
+        "description": "Add 1 to Charge rolls made for the bearer's unit.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "attribute": "charge",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -161,24 +193,6 @@
     {
       "name": "The Shadow of Chaos",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Daemonic Icon",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have a Leadership characteristic of 6+.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Instrument of Chaos",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 1 to Charge rolls made for the bearer's unit.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

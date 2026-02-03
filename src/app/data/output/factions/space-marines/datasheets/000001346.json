@@ -18,12 +18,7 @@
   "leader": {
     "description": "",
     "footer": "You can attach this model to a unit it can lead even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-    "conditions": {
-      "allowedExistingLeaderKeywords": [
-        "CAPTAIN",
-        "CHAPTER MASTER"
-      ]
-    },
+    "conditions": null,
     "attachableUnits": []
   },
   "damaged": null,
@@ -290,7 +285,8 @@
             "removes": [
               {
                 "name": "master-crafted bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -298,7 +294,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -307,7 +304,8 @@
                 "weapons": [
                   {
                     "name": "master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -316,7 +314,8 @@
                 "weapons": [
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -338,11 +337,13 @@
             "removes": [
               {
                 "name": "bolt pistol, master-crafted bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "close combat weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -350,11 +351,13 @@
                 "weapons": [
                   {
                     "name": "neo volkite pistol, 1 master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "storm shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -376,7 +379,8 @@
             "removes": [
               {
                 "name": "bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -384,7 +388,8 @@
                 "weapons": [
                   {
                     "name": "heavy bolt pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -406,7 +411,8 @@
             "removes": [
               {
                 "name": "close combat weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -414,7 +420,8 @@
                 "weapons": [
                   {
                     "name": "master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -423,7 +430,8 @@
                 "weapons": [
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -435,7 +443,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000001346:storm-shield",
+        "name": "Storm Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -469,15 +493,6 @@
       "factionId": "",
       "description": "This model's unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Storm Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

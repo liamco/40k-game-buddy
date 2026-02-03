@@ -340,7 +340,8 @@
             "removes": [
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -348,7 +349,8 @@
                 "weapons": [
                   {
                     "name": "assault cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -357,7 +359,8 @@
                 "weapons": [
                   {
                     "name": "heavy flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -366,7 +369,8 @@
                 "weapons": [
                   {
                     "name": "plasma cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -375,11 +379,13 @@
                 "weapons": [
                   {
                     "name": "cyclone missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "storm bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -401,11 +407,13 @@
             "removes": [
               {
                 "name": "power fist",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "storm bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -413,11 +421,13 @@
                 "weapons": [
                   {
                     "name": "storm bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -426,11 +436,13 @@
                 "weapons": [
                   {
                     "name": "storm bolter",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "chainfist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -439,11 +451,13 @@
                 "weapons": [
                   {
                     "name": "thunder hammer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "storm shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -452,7 +466,8 @@
                 "weapons": [
                   {
                     "name": "twin lightning claws",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -464,7 +479,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000003873:storm-shield",
+        "name": "Storm Shield",
+        "description": "The bearer has a Wounds characteristic of 4.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "w",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "deathwatch",
@@ -502,15 +533,6 @@
       "factionId": "",
       "description": "At the start of the battle, you can set up one Teleport Homer token for this unit anywhere on the battlefield that is not within your opponent's deployment zone. If you do, once per battle, you can target this unit with the Rapid Ingress Stratagem for 0CP, but when resolving that Stratagem, you must set this unit up within 3\" of that token and not within 9\" horizontally of one or more enemy units. That token is then removed.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Storm Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a Wounds characteristic of 4.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

@@ -289,7 +289,8 @@
             "removes": [
               {
                 "name": "bolt pistol",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -297,7 +298,8 @@
                 "weapons": [
                   {
                     "name": "condemnor boltgun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -306,7 +308,8 @@
                 "weapons": [
                   {
                     "name": "inferno pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -315,7 +318,8 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -337,7 +341,8 @@
             "removes": [
               {
                 "name": "hallowed chainsword",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -345,7 +350,8 @@
                 "weapons": [
                   {
                     "name": "blessed blade",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -354,7 +360,8 @@
                 "weapons": [
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -383,7 +390,8 @@
                 "weapons": [
                   {
                     "name": "brazier of holy fire",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -392,7 +400,8 @@
                 "weapons": [
                   {
                     "name": "null rod",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -424,7 +433,8 @@
                 "weapons": [
                   {
                     "name": "rod of office",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -436,7 +446,31 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000899:null-rod",
+        "name": "Null Rod",
+        "description": "Models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds and Psychic Attacks.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000899:rod-of-office",
+        "name": "Rod of Office",
+        "description": "Each time a model in the bearer's unit makes an attack, re-roll a Hit roll of 1.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -470,25 +504,16 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, this model has a 2+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Null Rod",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds and Psychic Attacks.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Rod of Office",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time a model in the bearer's unit makes an attack, re-roll a Hit roll of 1.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "invSv",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "One Shot",

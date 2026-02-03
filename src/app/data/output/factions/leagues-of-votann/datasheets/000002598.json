@@ -387,7 +387,8 @@
             "removes": [
               {
                 "name": "Autoch-pattern bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -395,7 +396,8 @@
                 "weapons": [
                   {
                     "name": "ion blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -418,7 +420,8 @@
             "removes": [
               {
                 "name": "Autoch-pattern bolter or ion blaster",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -426,7 +429,8 @@
                 "weapons": [
                   {
                     "name": "HYLas auto rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -435,7 +439,8 @@
                 "weapons": [
                   {
                     "name": "HYLas rotary cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -444,7 +449,8 @@
                 "weapons": [
                   {
                     "name": "L7 missile launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -453,7 +459,8 @@
                 "weapons": [
                   {
                     "name": "EtaCarn plasma beamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -462,7 +469,8 @@
                 "weapons": [
                   {
                     "name": "magna-rail rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -485,7 +493,8 @@
             "removes": [
               {
                 "name": "Autoch-pattern bolter or ion blaster",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -493,7 +502,8 @@
                 "weapons": [
                   {
                     "name": "plasma knife",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -516,7 +526,8 @@
             "removes": [
               {
                 "name": "Autoch-pattern bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -524,7 +535,8 @@
                 "weapons": [
                   {
                     "name": "ion blaster",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -533,7 +545,8 @@
                 "weapons": [
                   {
                     "name": "Theyn's pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -559,7 +572,8 @@
                 "weapons": [
                   {
                     "name": "Theyn's melee weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -571,7 +585,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002598:weavefield-crest",
+        "name": "Weavefield Crest",
+        "description": "Models in the bearer's unit have a 5+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -606,15 +636,6 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a ranged attack, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Weavefield Crest",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have a 5+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

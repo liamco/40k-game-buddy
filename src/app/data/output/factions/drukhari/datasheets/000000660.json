@@ -238,7 +238,8 @@
             "removes": [
               {
                 "name": "dark lances",
-                "count": 2
+                "count": 2,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -246,7 +247,8 @@
                 "weapons": [
                   {
                     "name": "disintegrator cannons",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -268,7 +270,8 @@
             "removes": [
               {
                 "name": "twin splinter rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -276,7 +279,8 @@
                 "weapons": [
                   {
                     "name": "splinter cannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -288,7 +292,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -318,7 +323,16 @@
       "factionId": "",
       "description": "In your Shooting phase, when you select this unit to shoot, you can spend 1 Pain token to Empower this unit. While Empowered, after this unit has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks; until the start of your next turn, that enemy unit is pinned. While a unit is pinned, subtract 2 from that unit's Move characteristic and subtract 2 from Charge rolls made for that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "charge",
+          "value": 2
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -327,7 +341,16 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a ranged attack that targets an enemy unit (excluding units that can <span class=\"kwb\">FLY</span>), add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

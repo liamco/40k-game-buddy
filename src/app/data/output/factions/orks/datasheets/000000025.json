@@ -305,7 +305,8 @@
             "removes": [
               {
                 "name": "choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -313,7 +314,8 @@
                 "weapons": [
                   {
                     "name": "big choppa",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -322,7 +324,8 @@
                 "weapons": [
                   {
                     "name": "power klaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -345,11 +348,13 @@
             "removes": [
               {
                 "name": "slugga",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -357,11 +362,13 @@
                 "weapons": [
                   {
                     "name": "speshul Kommando shoota",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -385,11 +392,13 @@
             "removes": [
               {
                 "name": "slugga",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -397,7 +406,8 @@
                 "weapons": [
                   {
                     "name": "breacha ram",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -421,11 +431,13 @@
             "removes": [
               {
                 "name": "slugga",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -433,11 +445,13 @@
                 "weapons": [
                   {
                     "name": "burna",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -461,11 +475,13 @@
             "removes": [
               {
                 "name": "slugga",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -473,11 +489,13 @@
                 "weapons": [
                   {
                     "name": "rokkit launcha",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -502,7 +520,8 @@
                 "weapons": [
                   {
                     "name": "bomb squig",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -527,7 +546,8 @@
                 "weapons": [
                   {
                     "name": "distraction grot",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -539,7 +559,29 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000025:distraction-grot",
+        "name": "Distraction Grot",
+        "description": "Once per battle, in your opponent's Shooting phase, before making a saving throw for a model in this unit, it can deploy the distraction grot. If it does, until the end of the phase, models in this unit have a 5+ invulnerable save.<br><br><b>Designer's Note:</b> Place a Distraction Grot token next to the unit, removing it when this unit uses this ability.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000025:bomb-squigs",
+        "name": "Bomb Squigs",
+        "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer's Note:</b> Place a Bomb Squig token next to the unit, removing it when this unit uses this ability.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -560,24 +602,6 @@
     {
       "name": "Waaagh!",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Distraction Grot",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, in your opponent's Shooting phase, before making a saving throw for a model in this unit, it can deploy the distraction grot. If it does, until the end of the phase, models in this unit have a 5+ invulnerable save.<br><br><b>Designer's Note:</b> Place a Distraction Grot token next to the unit, removing it when this unit uses this ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Bomb Squigs",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer's Note:</b> Place a Bomb Squig token next to the unit, removing it when this unit uses this ability.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

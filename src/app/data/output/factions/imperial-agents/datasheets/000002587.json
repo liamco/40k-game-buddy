@@ -392,7 +392,8 @@
             "removes": [
               {
                 "name": "The Navis Sergeant-at-Arms' Navis shotgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -400,11 +401,13 @@
                 "weapons": [
                   {
                     "name": "autopistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "chainsword",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -413,11 +416,13 @@
                 "weapons": [
                   {
                     "name": "bolt pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -441,7 +446,8 @@
             "removes": [
               {
                 "name": "Navis las-volley",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -449,7 +455,8 @@
                 "weapons": [
                   {
                     "name": "meltagun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -458,7 +465,8 @@
                 "weapons": [
                   {
                     "name": "plasma gun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -482,7 +490,8 @@
             "removes": [
               {
                 "name": "Navis shotgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -490,11 +499,13 @@
                 "weapons": [
                   {
                     "name": "autopistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -518,7 +529,8 @@
             "removes": [
               {
                 "name": "Navis shotgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -526,11 +538,13 @@
                 "weapons": [
                   {
                     "name": "autopistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "chainfist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -557,7 +571,8 @@
                 "weapons": [
                   {
                     "name": "demolition charge",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -569,7 +584,23 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002587:endurant-shield",
+        "name": "Endurant Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -608,15 +639,6 @@
       "factionId": "",
       "description": "Once per battle, when this unit is selected to shoot, until the end of the phase, ranged weapons equipped by models in this unit gain the [IGNORES COVER] ability.<br><br><b>Designer's Note:</b> Place one Gheistskull and one CAT Unit token next to this unit, removing each token once the relevant ability has been used.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Endurant Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

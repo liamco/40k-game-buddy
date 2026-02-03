@@ -158,7 +158,8 @@
             "removes": [
               {
                 "name": "encarmine blade",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -166,7 +167,8 @@
                 "weapons": [
                   {
                     "name": "encarmine spear",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -191,7 +193,8 @@
             "removes": [
               {
                 "name": "Angelus boltgun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -199,7 +202,8 @@
                 "weapons": [
                   {
                     "name": "inferno pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -226,7 +230,8 @@
                 "weapons": [
                   {
                     "name": "Sanguinary banner",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -238,7 +243,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000165:sanguinary-banner",
+        "name": "Sanguinary Banner",
+        "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "blood-angels",
@@ -263,7 +276,16 @@
       "factionId": "",
       "description": "Each time a melee attack targets this unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -272,16 +294,16 @@
       "factionId": "",
       "description": "While a Character model is leading this unit, each time a melee attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Sanguinary Banner",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

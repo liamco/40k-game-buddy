@@ -181,7 +181,8 @@
             "removes": [
               {
                 "name": "big choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -189,7 +190,8 @@
                 "weapons": [
                   {
                     "name": "power klaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -211,11 +213,13 @@
             "removes": [
               {
                 "name": "slugga",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "big choppa",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -223,11 +227,13 @@
                 "weapons": [
                   {
                     "name": "kombi-weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -253,7 +259,8 @@
                 "weapons": [
                   {
                     "name": "ammo runt",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -265,7 +272,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000021:ammo-runt",
+        "name": "Ammo Runt",
+        "description": "Once per battle for each ammo runt this unit has, when this unit is selected to shoot, it can use this ability. If it does, until the end of the phase, ranged weapons equipped by models in this unit have the [LETHAL HITS] ability.<br><br><b>Designer's Note:</b> Place the relevant number of Ammo Runt tokens next to the unit, removing one each time the unit uses this ability.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -286,16 +301,16 @@
       "factionId": "",
       "description": "While a Warboss model is leading this unit, each time an attack targets this unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Ammo Runt",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle for each ammo runt this unit has, when this unit is selected to shoot, it can use this ability. If it does, until the end of the phase, ranged weapons equipped by models in this unit have the [LETHAL HITS] ability.<br><br><b>Designer's Note:</b> Place the relevant number of Ammo Runt tokens next to the unit, removing one each time the unit uses this ability.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

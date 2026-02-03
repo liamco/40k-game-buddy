@@ -370,7 +370,8 @@
             "removes": [
               {
                 "name": "bolt sniper rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -378,7 +379,8 @@
                 "weapons": [
                   {
                     "name": "instigator bolt carbine",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -400,7 +402,8 @@
             "removes": [
               {
                 "name": "bolt sniper rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -408,7 +411,8 @@
                 "weapons": [
                   {
                     "name": "las fusil",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -430,7 +434,8 @@
             "removes": [
               {
                 "name": "combat knife",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -438,7 +443,8 @@
                 "weapons": [
                   {
                     "name": "Deathwatch bolt carbine and 1 close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -450,7 +456,37 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002779:helix-gauntlet",
+        "name": "Helix Gauntlet",
+        "description": "Models in the bearer's unit have the Feel No Pain 6+ ability.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000002779:infiltrator-comms-array",
+        "name": "Infiltrator Comms Array",
+        "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+        "mechanics": []
+      },
+      {
+        "id": "000002779:instigator-bolt-carbine",
+        "name": "Instigator Bolt Carbine",
+        "description": "In your Shooting phase, after the bearer's unit has shot, the bearer's unit can make a Normal move. If it does, until the end of the turn, the bearer's unit is not eligible to declare a charge.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "deathwatch",
@@ -488,39 +524,31 @@
     },
     {
       "id": "",
-      "name": "Helix Gauntlet",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have the Feel No Pain 6+ ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Infiltrator Comms Array",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Instigator Bolt Carbine",
-      "legend": "",
-      "factionId": "",
-      "description": "In your Shooting phase, after the bearer's unit has shot, the bearer's unit can make a Normal move. If it does, until the end of the turn, the bearer's unit is not eligible to declare a charge.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
       "name": "ATTACHED UNIT",
       "legend": "",
       "factionId": "",
       "description": "If a Character from your army with the Leader ability can be attached to an Infiltrator Squad, it can be attached to this unit instead.<br><br>If this unit has a Leader unit attached to it during the Declare Battle Formations step, that Leader unit gains the Infiltrators and Scouts 6\" abilities.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SCOUTS"
+          ],
+          "value": 6
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "INFILTRATORS"
+          ],
+          "value": true
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

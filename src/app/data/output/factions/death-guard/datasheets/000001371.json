@@ -125,7 +125,8 @@
                 "weapons": [
                   {
                     "name": "additional plaguespurt gauntlet",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -151,7 +152,8 @@
                 "weapons": [
                   {
                     "name": "icon of despair",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -163,7 +165,15 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000001371:icon-of-despair-aura",
+        "name": "Icon of Despair (Aura)",
+        "description": "While an enemy unit is within 6\" of the bearer, worsen the Leadership characteristic of models in that unit by 1.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -188,7 +198,18 @@
       "factionId": "",
       "description": "While a Character model is leading this unit, that <span class=\"kwb\">CHARACTER</span> model has the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -197,15 +218,6 @@
       "factionId": "",
       "description": "In your Movement phase, when this unit is set up on the battlefield using the Deep Strike ability, it can be set up anywhere on the battlefield that is more than 6\" horizontally away from all Afflicted enemy units, and more than 9\" horizontally away from all other enemy units.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Icon of Despair (Aura)",
-      "legend": "",
-      "factionId": "",
-      "description": "While an enemy unit is within 6\" of the bearer, worsen the Leadership characteristic of models in that unit by 1.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

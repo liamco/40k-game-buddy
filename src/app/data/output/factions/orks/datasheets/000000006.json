@@ -209,7 +209,8 @@
             "removes": [
               {
                 "name": "kustom-mega blasta",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -217,7 +218,8 @@
                 "weapons": [
                   {
                     "name": "killsaw",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -226,7 +228,8 @@
                 "weapons": [
                   {
                     "name": "kombi-weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -235,7 +238,8 @@
                 "weapons": [
                   {
                     "name": "kustom shoota",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -260,7 +264,8 @@
                 "weapons": [
                   {
                     "name": "tellyport blasta",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -269,7 +274,8 @@
                 "weapons": [
                   {
                     "name": "kustom force field",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -294,7 +300,8 @@
                 "weapons": [
                   {
                     "name": "grot oiler",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -306,7 +313,29 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000006:kustom-force-field",
+        "name": "Kustom Force Field",
+        "description": "While the bearer is leading a unit, models in that unit have a 4+ invulnerable save against ranged attacks.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000006:grot-oiler",
+        "name": "Grot Oiler",
+        "description": "Once per battle, at the end of your Movement phase, one model in the bearer's unit regains D3 lost wounds.<br><br><b>Designer's Note:</b> Place a Grot Oiler token next to the unit, removing it once this ability has been used.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -340,24 +369,6 @@
       "factionId": "",
       "description": "While this model is leading a unit, in your Command phase, you can return 1 destroyed Bodyguard model to that unit.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Kustom Force Field",
-      "legend": "",
-      "factionId": "",
-      "description": "While the bearer is leading a unit, models in that unit have a 4+ invulnerable save against ranged attacks.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Grot Oiler",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, at the end of your Movement phase, one model in the bearer's unit regains D3 lost wounds.<br><br><b>Designer's Note:</b> Place a Grot Oiler token next to the unit, removing it once this ability has been used.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

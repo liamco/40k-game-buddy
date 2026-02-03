@@ -123,7 +123,8 @@
             "removes": [
               {
                 "name": "staff of light",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -131,7 +132,8 @@
                 "weapons": [
                   {
                     "name": "Lord's blade",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -156,7 +158,8 @@
                 "weapons": [
                   {
                     "name": "nanoscarab amulet",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -165,7 +168,8 @@
                 "weapons": [
                   {
                     "name": "resurrection orb",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -177,7 +181,31 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002351:nanoscarab-amulet",
+        "name": "Nanoscarab Amulet",
+        "description": "The bearer has the Feel No Pain 5+ ability.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000002351:resurrection-orb",
+        "name": "Resurrection Orb",
+        "description": "Once per battle, while the bearer is leading a unit, at the end of any phase, it can resurrect that unit if it is on the battlefield. When you do, that unit's Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -194,24 +222,6 @@
     {
       "name": "Reanimation Protocols",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Nanoscarab Amulet",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has the Feel No Pain 5+ ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Resurrection Orb",
-      "legend": "",
-      "factionId": "",
-      "description": "Once per battle, while the bearer is leading a unit, at the end of any phase, it can resurrect that unit if it is on the battlefield. When you do, that unit's Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

@@ -153,7 +153,8 @@
             "removes": [
               {
                 "name": "Autoch-pattem combi-bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -161,7 +162,8 @@
                 "weapons": [
                   {
                     "name": "volkanite disintegrator",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -183,7 +185,8 @@
             "removes": [
               {
                 "name": "forgewrought plasma axe",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -191,7 +194,8 @@
                 "weapons": [
                   {
                     "name": "mass gauntlet",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -213,7 +217,8 @@
             "removes": [
               {
                 "name": "rampart crest",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -221,7 +226,8 @@
                 "weapons": [
                   {
                     "name": "teleport crest",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -233,7 +239,39 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002594:rampart-crest",
+        "name": "Rampart Crest",
+        "description": "While this model is leading a unit, models in that unit have a 5+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000002594:teleport-crest",
+        "name": "Teleport Crest",
+        "description": "While the bearer is leading a unit, models in that unit have the Deep Strike ability.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "DEEP STRIKE"
+            ],
+            "value": true
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -267,24 +305,6 @@
       "factionId": "",
       "description": "Once per phase, one model from your army with this ability can use it when its unit destroys an enemy unit. If it does, you gain 1YP.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Rampart Crest",
-      "legend": "",
-      "factionId": "",
-      "description": "While this model is leading a unit, models in that unit have a 5+ invulnerable save.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Teleport Crest",
-      "legend": "",
-      "factionId": "",
-      "description": "While the bearer is leading a unit, models in that unit have the Deep Strike ability.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

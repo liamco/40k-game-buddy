@@ -316,7 +316,8 @@
             "removes": [
               {
                 "name": "plasma gun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -324,7 +325,8 @@
                 "weapons": [
                   {
                     "name": "meltagun",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -351,7 +353,8 @@
                 "weapons": [
                   {
                     "name": "holy fire",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -375,7 +378,8 @@
             "removes": [
               {
                 "name": "Sanctifier melee weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -383,11 +387,13 @@
                 "weapons": [
                   {
                     "name": "Ministorum hand flamer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -411,7 +417,8 @@
             "removes": [
               {
                 "name": "Sanctifier melee weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -419,11 +426,13 @@
                 "weapons": [
                   {
                     "name": "close combat weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "simulacrum imperialis",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -435,7 +444,21 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004074:salvationist-medikit",
+        "name": "Salvationist Medikit",
+        "description": "In your Command phase, if the bearer is on the battlefield, you can return up to D3 destroyed models (excluding <span class=\"kwb\">CHARACTER</span> models) to this unit.",
+        "mechanics": []
+      },
+      {
+        "id": "000004074:simulacrum-imperialis",
+        "name": "Simulacrum Imperialis",
+        "description": "Improve the Leadership characteristic of models in the bearer's unit by 1.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -465,7 +488,16 @@
       "factionId": "",
       "description": "While this unit contains a <span class=\"kwb\">MINISTORUM</span> <span class=\"kwb\">PRIEST</span>, each time a model in this unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",
@@ -479,24 +511,6 @@
     {
       "name": "ATTACHED UNIT",
       "type": "Fortification (левая колонка)"
-    },
-    {
-      "id": "",
-      "name": "Salvationist Medikit",
-      "legend": "",
-      "factionId": "",
-      "description": "In your Command phase, if the bearer is on the battlefield, you can return up to D3 destroyed models (excluding <span class=\"kwb\">CHARACTER</span> models) to this unit.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Simulacrum Imperialis",
-      "legend": "",
-      "factionId": "",
-      "description": "Improve the Leadership characteristic of models in the bearer's unit by 1.",
-      "type": "Wargear",
-      "parameter": ""
     }
   ],
   "keywords": [

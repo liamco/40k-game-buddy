@@ -18,22 +18,7 @@
   "leader": {
     "description": "",
     "footer": "* This model cannot be attached to a BLADEGUARD VETERAN SQUAD unless this model is equipped with a relic shield, and cannot be attached to a HELLBLASTER SQUAD unless this model is equipped with a plasma pistol.",
-    "conditions": {
-      "equipmentRequirements": [
-        {
-          "targetUnitKeywords": [
-            "BLADEGUARD VETERAN SQUAD"
-          ],
-          "requiredEquipment": "relic shield"
-        },
-        {
-          "targetUnitKeywords": [
-            "HELLBLASTER SQUAD"
-          ],
-          "requiredEquipment": "plasma pistol"
-        }
-      ]
-    },
+    "conditions": null,
     "attachableUnits": []
   },
   "damaged": null,
@@ -298,11 +283,13 @@
             "removes": [
               {
                 "name": "bolt pistol, master-crafted bolter",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               },
               {
                 "name": "close combat weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -310,11 +297,13 @@
                 "weapons": [
                   {
                     "name": "heavy bolt pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -323,11 +312,13 @@
                 "weapons": [
                   {
                     "name": "heavy bolt pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -336,11 +327,13 @@
                 "weapons": [
                   {
                     "name": "neo-volkite pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -349,11 +342,13 @@
                 "weapons": [
                   {
                     "name": "neo-volkite pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -362,11 +357,13 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -375,11 +372,13 @@
                 "weapons": [
                   {
                     "name": "plasma pistol",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -388,11 +387,13 @@
                 "weapons": [
                   {
                     "name": "heavy bolt pistol, 1 master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "relic shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": true
@@ -414,7 +415,8 @@
             "removes": [
               {
                 "name": "close combat weapon",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -422,7 +424,8 @@
                 "weapons": [
                   {
                     "name": "master-crafted power weapon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -431,7 +434,8 @@
                 "weapons": [
                   {
                     "name": "power fist",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -443,7 +447,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000073:relic-shield",
+        "name": "Relic Shield",
+        "description": "The bearer has a Wounds characteristic of 6.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "w",
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -460,15 +480,6 @@
     {
       "name": "Oath of Moment",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Relic Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a Wounds characteristic of 6.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

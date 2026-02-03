@@ -123,7 +123,8 @@
             "removes": [
               {
                 "name": "grenadier gauntlet",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -131,7 +132,8 @@
                 "weapons": [
                   {
                     "name": "Bullgryn maul",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -153,7 +155,8 @@
             "removes": [
               {
                 "name": "slabshield",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -161,7 +164,8 @@
                 "weapons": [
                   {
                     "name": "brute shield",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -173,7 +177,37 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000723:brute-shield",
+        "name": "Brute Shield",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000723:slabshield",
+        "name": "Slabshield",
+        "description": "The bearer has a Wounds characteristic of 4.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "w",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -195,24 +229,6 @@
       "factionId": "",
       "description": "Each time an attack is allocated to a model in this unit, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Brute Shield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Slabshield",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a Wounds characteristic of 4.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

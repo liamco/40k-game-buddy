@@ -18,22 +18,9 @@
   "leader": null,
   "damaged": {
     "range": "1-9",
-    "threshold": 9,
+    "threshold": 0,
     "description": "While this model has 1‑9 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": [
-      {
-        "entity": "thisModel",
-        "effect": "rollPenalty",
-        "attribute": "h",
-        "value": 1
-      },
-      {
-        "entity": "thisModel",
-        "effect": "statPenalty",
-        "attribute": "oc",
-        "value": 5
-      }
-    ]
+    "mechanics": []
   },
   "wargear": {
     "defaultLoadout": "<b>This model is equipped with:</b> avenger gatling cannon; heavy flamer; meltagun; reaper chainsword.",
@@ -332,7 +319,8 @@
             "removes": [
               {
                 "name": "meltagun",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -340,7 +328,8 @@
                 "weapons": [
                   {
                     "name": "Questoris heavy stubber",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -362,7 +351,8 @@
             "removes": [
               {
                 "name": "reaper chainsword",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -370,7 +360,8 @@
                 "weapons": [
                   {
                     "name": "thunderstrike gauntlet",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -395,7 +386,8 @@
                 "weapons": [
                   {
                     "name": "ironstorm missile pod",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -404,7 +396,8 @@
                 "weapons": [
                   {
                     "name": "stormspear rocket pod",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -413,7 +406,8 @@
                 "weapons": [
                   {
                     "name": "twin Icarus autocannon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -425,7 +419,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",

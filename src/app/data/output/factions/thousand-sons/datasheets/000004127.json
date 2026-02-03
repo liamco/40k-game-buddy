@@ -207,7 +207,8 @@
                 "weapons": [
                   {
                     "name": "instrument of Chaos",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -234,7 +235,8 @@
                 "weapons": [
                   {
                     "name": "daemonic icon",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -246,7 +248,37 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000004127:daemonic-icon",
+        "name": "Daemonic Icon",
+        "description": "Models in the bearer's unit have a Leadership characteristic of 6+.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "ld",
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000004127:instrument-of-chaos",
+        "name": "Instrument of Chaos",
+        "description": "Add 1 to Charge rolls made for the bearer's unit.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "attribute": "charge",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -271,24 +303,6 @@
       "factionId": "",
       "description": "Each time a <span class=\"kwb\">PINK</span> <span class=\"kwb\">HORROR</span> or <span class=\"kwb\">BLUE</span> <span class=\"kwb\">HORROR</span> model in this unit is destroyed, after the attacking unit has finished making its attacks, if this unit is not destroyed, roll one D6 for that model. On a 4+, if it was a <span class=\"kwb\">PINK</span> <span class=\"kwb\">HORROR</span>, add two <span class=\"kwb\">BLUE</span> <span class=\"kwb\">HORROR</span> models to this unit, and if it was a <span class=\"kwb\">BLUE</span> <span class=\"kwb\">HORROR</span>, add one <span class=\"kwb\">BRIMSTONE</span> <span class=\"kwb\">HORROR</span> model to this unit.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Daemonic Icon",
-      "legend": "",
-      "factionId": "",
-      "description": "Models in the bearer's unit have a Leadership characteristic of 6+.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Instrument of Chaos",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 1 to Charge rolls made for the bearer's unit.",
-      "type": "Wargear",
       "parameter": ""
     },
     {

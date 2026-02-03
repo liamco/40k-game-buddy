@@ -966,6 +966,69 @@ function parseAllOptions(options) {
     return options.map(parseOption);
 }
 
+/**
+ * Resolve a weapon reference against the datasheet's weapons and abilities.
+ * Adds `isAbility: true` if the reference matches a wargear ability rather than a weapon.
+ *
+ * @param {object} ref - Weapon reference { name, count }
+ * @param {Array} weapons - Array of weapon objects from wargear.weapons
+ * @param {Array} abilities - Array of wargear ability objects from wargear.abilities
+ * @returns {object} - Updated reference with isAbility flag
+ */
+function resolveWargearReference(ref, weapons, abilities) {
+    const normalizedName = ref.name.toLowerCase().trim();
+
+    // Check if it matches a weapon
+    const matchesWeapon = weapons.some((w) => w.name.toLowerCase().trim() === normalizedName);
+    if (matchesWeapon) {
+        return { ...ref, isAbility: false };
+    }
+
+    // Check if it matches a wargear ability
+    const matchesAbility = abilities.some((a) => a.name.toLowerCase().trim() === normalizedName);
+    if (matchesAbility) {
+        return { ...ref, isAbility: true };
+    }
+
+    // Unknown - default to weapon (isAbility: false)
+    return { ...ref, isAbility: false };
+}
+
+/**
+ * Resolve all weapon references in a parsed option's action.
+ * Updates refs in action.removes and action.adds with isAbility flag.
+ *
+ * @param {object} parsedOption - Parsed option with action containing removes/adds
+ * @param {Array} weapons - Array of weapon objects from wargear.weapons
+ * @param {Array} abilities - Array of wargear ability objects from wargear.abilities
+ * @returns {object} - Updated parsed option with resolved references
+ */
+function resolveOptionReferences(parsedOption, weapons, abilities) {
+    if (!parsedOption.action || parsedOption.action.type === "unknown") {
+        return parsedOption;
+    }
+
+    const updatedAction = { ...parsedOption.action };
+
+    // Resolve removes
+    if (updatedAction.removes && Array.isArray(updatedAction.removes)) {
+        updatedAction.removes = updatedAction.removes.map((ref) => resolveWargearReference(ref, weapons, abilities));
+    }
+
+    // Resolve adds (each add is a WeaponChoice with weapons array)
+    if (updatedAction.adds && Array.isArray(updatedAction.adds)) {
+        updatedAction.adds = updatedAction.adds.map((choice) => ({
+            ...choice,
+            weapons: choice.weapons.map((ref) => resolveWargearReference(ref, weapons, abilities)),
+        }));
+    }
+
+    return {
+        ...parsedOption,
+        action: updatedAction,
+    };
+}
+
 // ============================================================================
 // FILE PROCESSING
 // ============================================================================
@@ -973,6 +1036,7 @@ function parseAllOptions(options) {
 /**
  * Process a single datasheet JSON file.
  * Reads from wargear.options.raw and writes parsed options to wargear.options.parsed
+ * Also resolves weapon references against wargear.weapons and wargear.abilities
  */
 function processDatasheetFile(filePath) {
     try {
@@ -985,7 +1049,13 @@ function processDatasheetFile(filePath) {
         }
 
         // Parse all options from the raw options array
-        const parsedOptions = parseAllOptions(datasheet.wargear.options.raw);
+        let parsedOptions = parseAllOptions(datasheet.wargear.options.raw);
+
+        // Resolve weapon references against weapons and abilities
+        // This adds isAbility flag to each weapon reference
+        const weapons = datasheet.wargear.weapons || [];
+        const abilities = datasheet.wargear.abilities || [];
+        parsedOptions = parsedOptions.map((opt) => resolveOptionReferences(opt, weapons, abilities));
 
         // Add unit-level flag: true if ALL options were successfully parsed
         const allParsed = parsedOptions.every((o) => o.wargearParsed);

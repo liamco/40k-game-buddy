@@ -109,7 +109,8 @@
                 "weapons": [
                   {
                     "name": "particle beamers",
-                    "count": 2
+                    "count": 2,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -134,7 +135,8 @@
                 "weapons": [
                   {
                     "name": "fabricator claw array",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -159,7 +161,8 @@
                 "weapons": [
                   {
                     "name": "gloom prism",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -171,7 +174,41 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000551:fabricator-claw-array-aura",
+        "name": "Fabricator Claw Array (Aura)",
+        "description": "While a friendly Necrons Vehicle unit is within 6\" of the bearer, that unit has the Feel No Pain 6+ ability.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 6
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000551:gloom-prism-aura",
+        "name": "Gloom Prism (Aura)",
+        "description": "While a friendly <span class=\"kwb\">NECRONS</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 5+ ability against mortal wounds and Psychic Attacks.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "addsAbility",
+            "abilities": [
+              "FEEL NO PAIN"
+            ],
+            "value": 5
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -189,24 +226,6 @@
     {
       "name": "Reanimation Protocols",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Fabricator Claw Array (Aura)",
-      "legend": "",
-      "factionId": "",
-      "description": "While a friendly Necrons Vehicle unit is within 6\" of the bearer, that unit has the Feel No Pain 6+ ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Gloom Prism (Aura)",
-      "legend": "",
-      "factionId": "",
-      "description": "While a friendly <span class=\"kwb\">NECRONS</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 5+ ability against mortal wounds and Psychic Attacks.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",

@@ -121,7 +121,8 @@
             "removes": [
               {
                 "name": "mass hammer",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -129,7 +130,8 @@
                 "weapons": [
                   {
                     "name": "darkstar axe",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -151,7 +153,8 @@
             "removes": [
               {
                 "name": "weavefield crest",
-                "count": 1
+                "count": 1,
+                "isAbility": true
               }
             ],
             "adds": [
@@ -159,7 +162,8 @@
                 "weapons": [
                   {
                     "name": "teleport crest",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -171,7 +175,39 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000002595:teleport-crest",
+        "name": "Teleport Crest",
+        "description": "While the bearer is leading a unit, models in that unit have the Deep Strike ability.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "DEEP STRIKE"
+            ],
+            "value": true
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000002595:weavefield-crest",
+        "name": "Weavefield Crest",
+        "description": "The bearer has a 4+ invulnerable save.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "invSv",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -205,24 +241,6 @@
       "factionId": "",
       "description": "Each time this model ends a Charge move, you can select one enemy unit within Engagement Range of this model and roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Teleport Crest",
-      "legend": "",
-      "factionId": "",
-      "description": "While the bearer is leading a unit, models in that unit have the Deep Strike ability.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Weavefield Crest",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a 4+ invulnerable save.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

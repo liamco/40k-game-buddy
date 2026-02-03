@@ -217,7 +217,8 @@
             "removes": [
               {
                 "name": "heavy rail rifle",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -225,7 +226,8 @@
                 "weapons": [
                   {
                     "name": "high-yield missile pods",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -288,7 +290,15 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000433:weapon-support-system",
+        "name": "Weapon Support System",
+        "description": "Each time the bearer makes a ranged attack, you can ignore any or all modifiers to the Hit roll.",
+        "mechanics": []
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -309,16 +319,18 @@
       "factionId": "",
       "description": "Models in this unit have the Feel No Pain 4+ ability against mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Weapon Support System",
-      "legend": "",
-      "factionId": "",
-      "description": "Each time the bearer makes a ranged attack, you can ignore any or all modifiers to the Hit roll.",
-      "type": "Wargear",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 4
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "One Shot",

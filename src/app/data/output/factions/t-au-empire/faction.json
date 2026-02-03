@@ -1021,7 +1021,18 @@
           "detachment": "Auxiliary Cadre",
           "detachmentId": 1005,
           "legend": "This Shaper has not only studied the Code of Fire but has also adapted it to best suit their people's skills.",
-          "description": "Kroot Shaper model only. In the Declare Battle Formations step, you can select up to three Kroot Carnivores or Kroot Farstalkers units from your army. Models in those units have the Deep Strike ability."
+          "description": "Kroot Shaper model only. In the Declare Battle Formations step, you can select up to three Kroot Carnivores or Kroot Farstalkers units from your army. Models in those units have the Deep Strike ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",
@@ -1220,7 +1231,16 @@
           ],
           "detachment": "Experimental Prototype Cadre",
           "detachmentId": 1028,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One T'au Empire Battlesuit unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One T'au Empire Battlesuit unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",
@@ -1384,7 +1404,16 @@
           ],
           "detachment": "Kauyon",
           "detachmentId": 781,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> unit from your army that has not been selected to shoot this phase. The first time you use this Stratagem, you must also select one objective marker that is not in your opponent's deployment zone; until the end of the battle, this becomes your Trap objective marker.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack that targets an enemy unit within range of your Trap objective marker, add 1 to the Wound roll.<br><br><b>RESTRICTIONS:</b> You cannot use this Stratagem during the first or second battle rounds."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> unit from your army that has not been selected to shoot this phase. The first time you use this Stratagem, you must also select one objective marker that is not in your opponent's deployment zone; until the end of the battle, this becomes your Trap objective marker.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack that targets an enemy unit within range of your Trap objective marker, add 1 to the Wound roll.<br><br><b>RESTRICTIONS:</b> You cannot use this Stratagem during the first or second battle rounds.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",
@@ -1429,7 +1458,16 @@
           ],
           "detachment": "Kauyon",
           "detachmentId": 781,
-          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One T'au Empire Grenades unit from your army that was selected as one of the targets of that charge.<br><br><b>EFFECT:</b> That enemy unit must immediately take a Battle-shock test, and until the end of the phase, subtract 2 from Charge rolls made for that enemy unit."
+          "description": "<b>WHEN:</b> Your opponent's Charge phase, just after an enemy unit has declared a charge.<br><br><b>TARGET:</b> One T'au Empire Grenades unit from your army that was selected as one of the targets of that charge.<br><br><b>EFFECT:</b> That enemy unit must immediately take a Battle-shock test, and until the end of the phase, subtract 2 from Charge rolls made for that enemy unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "charge",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",
@@ -1468,7 +1506,16 @@
           "legend": "Though ill-suited to protracted warfare, the Kroot are experts at light, swift skirmishing. Here their fieldcraft and wiry natural agility help them to evade the hostile attentions of their foes.",
           "description": "Kroot models from your army have a 6+ invulnerable save against melee attacks and a 5+ invulnerable save against ranged attacks.",
           "detachment": "Kroot Hunting Pack",
-          "detachmentId": 847
+          "detachmentId": 847,
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "invSv",
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "id": "000008820",
@@ -1769,7 +1816,18 @@
           "detachment": "Mont'ka",
           "detachmentId": 845,
           "legend": "This commander knows victory is best assured by taking the fight to the enemy as soon as battle is joined.",
-          "description": "<span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> model only. At the start of the battle, before any moves are made using the Scouts ability, you can select up to two friendly <span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> units within 6\" of the bearer that do not have the Scouts ability. Until the end of the battle, all models in the selected units have the Scouts 6\" ability."
+          "description": "<span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> model only. At the start of the battle, before any moves are made using the Scouts ability, you can select up to two friendly <span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> units within 6\" of the bearer that do not have the Scouts ability. Until the end of the battle, all models in the selected units have the Scouts 6\" ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SCOUTS"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -2011,7 +2069,18 @@
           ],
           "detachment": "Retaliation Cadre",
           "detachmentId": 846,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One T'au Empire Battlesuit unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One T'au Empire Battlesuit unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit have the Feel No Pain 6+ ability.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEEL NO PAIN"
+              ],
+              "value": 6
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },

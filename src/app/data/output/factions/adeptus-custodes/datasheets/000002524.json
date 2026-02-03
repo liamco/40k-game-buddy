@@ -122,7 +122,8 @@
                 "weapons": [
                   {
                     "name": "hunter-killer missile",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -134,7 +135,8 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": []
   },
   "supplement": {
     "key": "codex",
@@ -161,7 +163,18 @@
       "factionId": "",
       "description": "This model has the Feel No Pain 3+ ability against Psychic Attacks and mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FEEL NO PAIN"
+          ],
+          "value": 3
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "id": "",

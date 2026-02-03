@@ -275,7 +275,8 @@
                 "weapons": [
                   {
                     "name": "grav-inhibitor drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -284,7 +285,8 @@
                 "weapons": [
                   {
                     "name": "pulse accelerator drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -293,7 +295,8 @@
                 "weapons": [
                   {
                     "name": "recon drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": true
                   }
                 ],
                 "isPackage": false
@@ -318,7 +321,8 @@
                 "weapons": [
                   {
                     "name": "gun drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -327,7 +331,8 @@
                 "weapons": [
                   {
                     "name": "marker drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -336,7 +341,8 @@
                 "weapons": [
                   {
                     "name": "shield drone",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -362,7 +368,8 @@
             "removes": [
               {
                 "name": "pulse carbine",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -370,7 +377,8 @@
                 "weapons": [
                   {
                     "name": "ion rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -379,7 +387,8 @@
                 "weapons": [
                   {
                     "name": "rail rifle",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -406,7 +415,8 @@
                 "weapons": [
                   {
                     "name": "semi-automatic grenade launcher",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": false
@@ -418,7 +428,45 @@
         }
       ],
       "allParsed": false
-    }
+    },
+    "abilities": [
+      {
+        "id": "000000422:grav-inhibitor-drone",
+        "name": "Grav-inhibitor Drone",
+        "description": "Subtract 2 from Charge rolls made for any enemy unit that declares a charge against the bearer's unit (this is not cumulative with any other reductions to that Charge roll).",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollPenalty",
+            "attribute": "charge",
+            "value": 2
+          }
+        ],
+        "mechanicsSource": "regex"
+      },
+      {
+        "id": "000000422:pulse-accelerator-drone",
+        "name": "Pulse Accelerator Drone",
+        "description": "Add 6\" to the Range characteristic of pulse carbines equipped by models in the bearer's unit.",
+        "mechanics": []
+      },
+      {
+        "id": "000000422:recon-drone",
+        "name": "Recon Drone",
+        "description": "The bearer is equipped with 1 drone burst cannon and the bearer's unit has the Infiltrators ability.",
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "INFILTRATORS"
+            ],
+            "value": true
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -444,33 +492,6 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets their Spotted unit, improve the Ballistic Skill characteristic of that attack by 1 and that attack has the [IGNORES COVER] ability.",
       "type": "Datasheet",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Grav-inhibitor Drone",
-      "legend": "",
-      "factionId": "",
-      "description": "Subtract 2 from Charge rolls made for any enemy unit that declares a charge against the bearer's unit (this is not cumulative with any other reductions to that Charge roll).",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Pulse Accelerator Drone",
-      "legend": "",
-      "factionId": "",
-      "description": "Add 6\" to the Range characteristic of pulse carbines equipped by models in the bearer's unit.",
-      "type": "Wargear",
-      "parameter": ""
-    },
-    {
-      "id": "",
-      "name": "Recon Drone",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer is equipped with 1 drone burst cannon and the bearer's unit has the Infiltrators ability.",
-      "type": "Wargear",
       "parameter": ""
     }
   ],

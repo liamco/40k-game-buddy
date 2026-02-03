@@ -146,7 +146,8 @@
             "removes": [
               {
                 "name": "Venatari lance",
-                "count": 1
+                "count": 1,
+                "isAbility": false
               }
             ],
             "adds": [
@@ -154,11 +155,13 @@
                 "weapons": [
                   {
                     "name": "kinetic destroyer",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   },
                   {
                     "name": "tarsus buckler",
-                    "count": 1
+                    "count": 1,
+                    "isAbility": false
                   }
                 ],
                 "isPackage": true
@@ -170,7 +173,23 @@
         }
       ],
       "allParsed": true
-    }
+    },
+    "abilities": [
+      {
+        "id": "000001561:tarsis-buckler",
+        "name": "Tarsis Buckler",
+        "description": "The bearer has a Wounds characteristic of 4.",
+        "mechanics": [
+          {
+            "entity": "thisModel",
+            "effect": "staticNumber",
+            "attribute": "w",
+            "value": 4
+          }
+        ],
+        "mechanicsSource": "regex"
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -187,15 +206,6 @@
     {
       "name": "Martial Ka'tah",
       "type": "Faction"
-    },
-    {
-      "id": "",
-      "name": "Tarsis Buckler",
-      "legend": "",
-      "factionId": "",
-      "description": "The bearer has a Wounds characteristic of 4.",
-      "type": "Wargear",
-      "parameter": ""
     },
     {
       "id": "",
