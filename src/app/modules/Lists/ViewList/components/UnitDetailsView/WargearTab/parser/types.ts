@@ -26,8 +26,8 @@ export type TargetingType =
 
 export interface TargetingDef {
     type: TargetingType;
-    modelType?: string; // For specific-model, n-model-specific, each-model-type
-    count?: number; // For n-model-specific (e.g., "1" in "1 Battle Sister")
+    modelType?: string; // For specific-model, n-model-specific, each-model-type, ratio (e.g., "Terminator" in "1 Terminator's")
+    count?: number; // For n-model-specific and ratio (e.g., "1" in "1 Terminator's storm bolter")
     ratio?: number; // For ratio types (e.g., "5" in "for every 5 models")
     maxPerRatio?: number; // For ratio-capped (e.g., "2" in "up to 2")
     maxTotal?: number; // For up-to-n

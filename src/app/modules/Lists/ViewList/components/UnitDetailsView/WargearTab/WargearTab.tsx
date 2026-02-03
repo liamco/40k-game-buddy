@@ -61,6 +61,35 @@ function isGenericWeaponReference(name: string): boolean {
     return normalized === "ranged weapon" || normalized === "melee weapon" || normalized === "pistol" || normalized === "ranged weapons" || normalized === "melee weapons" || normalized === "pistols";
 }
 
+// Helper to check if a model type matches a target type
+// This is strict matching - "Terminator" should NOT match "Terminator Sergeant"
+// but "Terminator Sergeant" should match "Terminator Sergeant"
+function modelTypeMatches(modelType: string, targetType: string): boolean {
+    const normalizedModel = modelType.toLowerCase().trim();
+    const normalizedTarget = targetType.toLowerCase().trim();
+
+    // Exact match
+    if (normalizedModel === normalizedTarget) return true;
+
+    // Handle plural forms (e.g., "Terminators" matching "Terminator")
+    if (normalizedModel === normalizedTarget + "s" || normalizedTarget === normalizedModel + "s") return true;
+
+    // For specific-model targeting (like "Terminator Sergeant"),
+    // the target should match as a prefix or suffix
+    // e.g., "Terminator Sergeant" matches target "Terminator Sergeant"
+    // but "Terminator" does NOT match model "Terminator Sergeant"
+
+    // Only allow model to match if target is a complete word match within model
+    // "Terminator Sergeant" should match target "Terminator Sergeant"
+    // "Terminator" should NOT match model "Terminator Sergeant" (target is less specific than model)
+
+    // If the target is shorter than the model, it means target is less specific
+    // We should NOT match in that case for targeting purposes
+    // e.g., targeting "Terminator" should not affect "Terminator Sergeant"
+
+    return false;
+}
+
 // Helper to resolve generic weapon references to actual weapons
 function resolveGenericWeaponReference(genericName: string, loadout: string[], wargear: Weapon[]): Weapon[] {
     const normalized = genericName.toLowerCase().trim();
@@ -162,21 +191,16 @@ function checkOptionEligibility(opt: WargearOptionDef, instance: ModelInstance, 
         case "specific-model":
         case "each-model-type":
             if (targeting.modelType) {
-                const normalizedTarget = targeting.modelType.toLowerCase();
-                const normalizedModel = instance.modelType.toLowerCase();
-                const matches = normalizedModel.includes(normalizedTarget) || normalizedTarget.includes(normalizedModel);
+                const matches = modelTypeMatches(instance.modelType, targeting.modelType);
                 return { isEligible: matches, isDisabled: false };
             }
             return { isEligible: false, isDisabled: false };
 
         case "n-model-specific":
             if (targeting.modelType && targeting.count !== undefined) {
-                const normalizedTarget = targeting.modelType.toLowerCase();
-                const normalizedModel = instance.modelType.toLowerCase();
-                const matches = normalizedModel.includes(normalizedTarget) || normalizedTarget.includes(normalizedModel);
+                const matches = modelTypeMatches(instance.modelType, targeting.modelType);
                 if (!matches) return { isEligible: false, isDisabled: false };
 
-                // Count how many of this model type have already selected this option
                 const usageCount = countOptionUsage(opt.line, unit.modelInstances || [], unit.unitWideSelections || {});
                 return { isEligible: true, isDisabled: usageCount >= targeting.count };
             }
@@ -189,9 +213,26 @@ function checkOptionEligibility(opt: WargearOptionDef, instance: ModelInstance, 
             const cap = targeting.maxPerRatio ?? Infinity;
             const effectiveMax = Math.min(maxAllowed, cap);
 
-            // Count current usage
+            if (targeting.modelType) {
+                const matchesType = modelTypeMatches(instance.modelType, targeting.modelType);
+                if (!matchesType) {
+                    return { isEligible: false, isDisabled: false };
+                }
+
+                const matchingIndices = (unit.modelInstances || [])
+                    .map((m, idx) => ({ modelType: m.modelType, idx }))
+                    .filter((m) => modelTypeMatches(m.modelType, targeting.modelType!))
+                    .map((m) => m.idx);
+
+                const positionInPool = matchingIndices.indexOf(instanceIndex);
+                const isEligible = positionInPool >= 0 && positionInPool < effectiveMax;
+                const usageCount = countOptionUsage(opt.line, unit.modelInstances || [], unit.unitWideSelections || {});
+
+                return { isEligible, isDisabled: usageCount >= effectiveMax };
+            }
+
             const usageCount = countOptionUsage(opt.line, unit.modelInstances || [], unit.unitWideSelections || {});
-            const isEligible = instanceIndex < effectiveMax * ratio;
+            const isEligible = instanceIndex < effectiveMax;
 
             return { isEligible, isDisabled: usageCount >= effectiveMax };
         }
@@ -234,9 +275,13 @@ function countOptionUsage(optionLine: number, modelInstances: ModelInstance[], u
     return count;
 }
 
-// Get indices of models eligible for ratio options
-function getModelsEligibleForRatioOptions(totalModels: number, ratioOptions: WargearOptionDef[]): Set<number> {
+// Get indices of models eligible for ratio options (model-type aware)
+function getModelsEligibleForRatioOptions(modelInstances: ModelInstance[] | undefined, ratioOptions: WargearOptionDef[]): Set<number> {
     const eligibleIndices = new Set<number>();
+
+    if (!modelInstances || modelInstances.length === 0) return eligibleIndices;
+
+    const totalModels = modelInstances.length;
 
     for (const opt of ratioOptions) {
         const ratio = opt.targeting.ratio || 5;
@@ -244,9 +289,19 @@ function getModelsEligibleForRatioOptions(totalModels: number, ratioOptions: War
         const cap = opt.targeting.maxPerRatio ?? Infinity;
         const effectiveMax = Math.min(maxAllowed, cap);
 
-        // First N models are eligible where N = effectiveMax
-        for (let i = 0; i < effectiveMax && i < totalModels; i++) {
-            eligibleIndices.add(i);
+        if (opt.targeting.modelType) {
+            const matchingIndices = modelInstances
+                .map((m, idx) => ({ modelType: m.modelType, idx }))
+                .filter((m) => modelTypeMatches(m.modelType, opt.targeting.modelType!))
+                .map((m) => m.idx);
+
+            for (let i = 0; i < effectiveMax && i < matchingIndices.length; i++) {
+                eligibleIndices.add(matchingIndices[i]);
+            }
+        } else {
+            for (let i = 0; i < effectiveMax && i < totalModels; i++) {
+                eligibleIndices.add(i);
+            }
         }
     }
 
@@ -274,8 +329,8 @@ const WargearTab = ({ unit, list }: Props) => {
     // Get total model count
     const totalModels = unit.modelInstances?.length || 1;
 
-    // Get indices of models eligible for ratio options
-    const ratioEligibleIndices = useMemo(() => getModelsEligibleForRatioOptions(totalModels, categorizedOptions.ratio), [totalModels, categorizedOptions.ratio]);
+    // Get indices of models eligible for ratio options (model-type aware)
+    const ratioEligibleIndices = useMemo(() => getModelsEligibleForRatioOptions(unit.modelInstances, categorizedOptions.ratio), [unit.modelInstances, categorizedOptions.ratio]);
 
     // Get current unit-wide weapon ID
     const unitWideWeaponId = useMemo(() => {

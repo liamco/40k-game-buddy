@@ -349,7 +349,19 @@ const TARGETING_PATTERNS = [
         }),
     },
 
-    // "For every N models"
+    // "For every N models in this unit, X ModelType's..." (with model type targeting)
+    {
+        name: "ratio-with-model-type",
+        pattern: /^for every (\d+) models in (?:this|the) unit,?\s+(\d+)\s+([\w\s]+?)'s/i,
+        extract: (match) => ({
+            type: "ratio",
+            ratio: parseInt(match[1], 10),
+            count: parseInt(match[2], 10),
+            modelType: match[3].trim(),
+        }),
+    },
+
+    // "For every N models" (generic, no model type specified)
     {
         name: "ratio",
         pattern: /^for every (\d+) models/i,

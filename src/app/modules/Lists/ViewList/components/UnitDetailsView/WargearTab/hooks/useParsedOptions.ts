@@ -58,13 +58,18 @@ export function useCategorizedOptions(parsedOptions: WargearOptionDef[]): Catego
             const { targeting } = opt;
             switch (targeting.type) {
                 case "all-models":
-                case "any-number":
                 case "this-unit":
+                    // Truly unit-wide: all models get the same thing
                     unitWide.push(opt);
                     break;
                 case "ratio":
                 case "ratio-capped":
                     ratio.push(opt);
+                    break;
+                case "any-number":
+                    // "Any number of models can each..." = per-model choice
+                    // Each model independently decides whether to take the option
+                    perModel.push(opt);
                     break;
                 default:
                     perModel.push(opt);
