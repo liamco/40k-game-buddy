@@ -5,17 +5,181 @@
   "sourceId": "000000046",
   "legend": "Welded, lashed and nailed together from enemy wrecks and scavenged scrap, the Hunta Rig forgoes a Wurrboy wurrtower (much to its crew's relief). Instead it boasts an open metal deck and copious grab-handles, the better for chanting and bellowing mobs of Beast Snagga Boyz to ride along on the hunt.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> 'eavy lobba; stikka kannon; butcha boyz; savage horns and hooves; saw blades.",
   "transport": "This model has a transport capacity of 21 Beast Snagga Infantry models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Hunta-Rig",
   "slug": "hunta-rig",
   "factionSlug": "orks",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 'eavy lobba; stikka kannon; butcha boyz; savage horns and hooves; saw blades.",
+    "weapons": [
+      {
+        "id": "000002498:eavy-lobba",
+        "datasheetId": "000002498",
+        "line": 1,
+        "name": "'Eavy lobba",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002498",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "'Eavy lobba",
+            "attributes": [
+              "BLAST",
+              "INDIRECT FIRE"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 5,
+            "s": 6,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002498:stikka-kannon",
+        "datasheetId": "000002498",
+        "line": 2,
+        "name": "Stikka kannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002498",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Stikka kannon",
+            "attributes": [
+              "ANTI-MONSTER 2+",
+              "ANTI-VEHICLE 2+",
+              "SNAGGED"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 5,
+            "s": 12,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000002498:butcha-boyz",
+        "datasheetId": "000002498",
+        "line": 3,
+        "name": "Butcha boyz",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002498",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Butcha boyz",
+            "attributes": [
+              "EXTRA ATTACKS",
+              "ANTI-MONSTER 4+",
+              "ANTI-VEHICLE 4+"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002498:savage-horns-and-hooves",
+        "datasheetId": "000002498",
+        "line": 4,
+        "name": "Savage horns and hooves",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002498",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Savage horns and hooves",
+            "attributes": [
+              "EXTRA ATTACKS",
+              "LANCE"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -1,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000002498:saw-blades",
+        "datasheetId": "000002498",
+        "line": 5,
+        "name": "Saw blades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002498",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Saw blades",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 10,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -99,7 +263,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002498",
@@ -118,147 +281,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002498:eavy-lobba",
-      "datasheetId": "000002498",
-      "line": 1,
-      "name": "'Eavy lobba",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002498",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "'Eavy lobba",
-          "attributes": [
-            "BLAST",
-            "INDIRECT FIRE"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 5,
-          "s": 6,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002498:stikka-kannon",
-      "datasheetId": "000002498",
-      "line": 2,
-      "name": "Stikka kannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002498",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Stikka kannon",
-          "attributes": [
-            "ANTI-MONSTER 2+",
-            "ANTI-VEHICLE 2+",
-            "SNAGGED"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 5,
-          "s": 12,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000002498:butcha-boyz",
-      "datasheetId": "000002498",
-      "line": 3,
-      "name": "Butcha boyz",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002498",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Butcha boyz",
-          "attributes": [
-            "EXTRA ATTACKS",
-            "ANTI-MONSTER 4+",
-            "ANTI-VEHICLE 4+"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002498:savage-horns-and-hooves",
-      "datasheetId": "000002498",
-      "line": 4,
-      "name": "Savage horns and hooves",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002498",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Savage horns and hooves",
-          "attributes": [
-            "EXTRA ATTACKS",
-            "LANCE"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -1,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000002498:saw-blades",
-      "datasheetId": "000002498",
-      "line": 5,
-      "name": "Saw blades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002498",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Saw blades",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 10,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

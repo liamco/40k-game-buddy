@@ -5,17 +5,59 @@
   "sourceId": "000000020",
   "legend": "Spore Mines are a form of living bomb, which drift across the battlefield in shoals and detonate when they detect prey organisms nearby. Those caught in the blast are torn apart as surely as if they had caught a brace of live frag grenades. The Hive Mind often uses Spore Mines to deny areas of the battlefield to the prey.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> nothing.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Spore-Mines",
   "slug": "spore-mines",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> nothing.",
+    "weapons": [
+      {
+        "id": "000000488:wargear-1",
+        "datasheetId": "000000488",
+        "line": 1,
+        "name": "Wargear 1",
+        "type": "",
+        "profiles": [
+          {
+            "datasheetId": "000000488",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "",
+            "attributes": [],
+            "range": "",
+            "type": "",
+            "a": 0,
+            "bsWs": "-",
+            "s": "-",
+            "ap": 0,
+            "d": "-"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -32,24 +74,7 @@
       "factionId": "",
       "description": "Enemy units cannot start or end an Advance move within 6\" of this unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "attribute": "m",
-              "operator": "notEquals",
-              "value": "within 6\" of this unit"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -58,47 +83,7 @@
       "factionId": "",
       "description": "Each time this unit or an enemy unit ends a move, for each model in this unit that is within 3\" of one or more enemy units, select one of those enemy units. That model in this unit is destroyed, then roll one D6: on a 2-5, that enemy unit suffers 1 mortal wound; on a 6, that enemy unit suffers D3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "mortalWounds",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "operator": "includes",
-              "value": "2-5"
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "mortalWounds",
-          "value": "D3",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "operator": "includes",
-              "value": "6"
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 3,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "operator": "includes",
-              "value": "one or more"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -150,7 +135,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000488",
@@ -176,37 +160,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000488:wargear-1",
-      "datasheetId": "000000488",
-      "line": 1,
-      "name": "Wargear 1",
-      "type": "",
-      "profiles": [
-        {
-          "datasheetId": "000000488",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "",
-          "attributes": [],
-          "range": "",
-          "type": "",
-          "a": 0,
-          "bsWs": "-",
-          "s": "-",
-          "ap": 0,
-          "d": "-"
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

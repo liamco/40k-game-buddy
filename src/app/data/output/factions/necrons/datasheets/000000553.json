@@ -5,17 +5,176 @@
   "sourceId": "000000029",
   "legend": "Slow-moving but deadly, Annihilation Barges serve as anti-infantry fire support platforms. They are often deployed to watch over important strategic locations, gliding serenely into position upon a cushion of repulsion energies before unleashing furious storms of eldritch lightning from their massive cannons.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> gauss cannon; twin tesla destructor; armoured bulk.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Annihilation-Barge",
   "slug": "annihilation-barge",
   "factionSlug": "necrons",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> gauss cannon; twin tesla destructor; armoured bulk.",
+    "weapons": [
+      {
+        "id": "000000553:gauss-cannon",
+        "datasheetId": "000000553",
+        "line": 1,
+        "name": "Gauss cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000553",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gauss cannon",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000553:tesla-cannon",
+        "datasheetId": "000000553",
+        "line": 2,
+        "name": "Tesla cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000553",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Tesla cannon",
+            "attributes": [
+              "SUSTAINED HITS 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000553:twin-tesla-destructor",
+        "datasheetId": "000000553",
+        "line": 3,
+        "name": "Twin tesla destructor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000553",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin tesla destructor",
+            "attributes": [
+              "SUSTAINED HITS 2",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 8,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000553:armoured-bulk",
+        "datasheetId": "000000553",
+        "line": 4,
+        "name": "Armoured bulk",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000553",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured bulk",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000553",
+          "line": 1,
+          "button": "•",
+          "description": "This model's gauss cannon can be replaced with 1 tesla cannon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's gauss cannon can be replaced with 1 tesla cannon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "gauss cannon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "tesla cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -79,14 +238,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000553",
-      "line": 1,
-      "button": "•",
-      "description": "This model's gauss cannon can be replaced with 1 tesla cannon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000553",
@@ -105,116 +256,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000553:gauss-cannon",
-      "datasheetId": "000000553",
-      "line": 1,
-      "name": "Gauss cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000553",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauss cannon",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000553:tesla-cannon",
-      "datasheetId": "000000553",
-      "line": 2,
-      "name": "Tesla cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000553",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Tesla cannon",
-          "attributes": [
-            "SUSTAINED HITS 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000553:twin-tesla-destructor",
-      "datasheetId": "000000553",
-      "line": 3,
-      "name": "Twin tesla destructor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000553",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin tesla destructor",
-          "attributes": [
-            "SUSTAINED HITS 2",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 8,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000553:armoured-bulk",
-      "datasheetId": "000000553",
-      "line": 4,
-      "name": "Armoured bulk",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000553",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured bulk",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

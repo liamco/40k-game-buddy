@@ -5,17 +5,138 @@
   "sourceId": "000000012",
   "legend": "Masters of Possession are psykers who specialise in channelling daemons into living hosts; they bolster their possessed kin with empyric energies that strengthen and reinvigorate such tainted unions. In battle, they unleash daemonic forces into the foe, ripping apart their souls to channel them to greater use.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; Rite of Possession; staff of possession.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-space-marines/Master-Of-Possession",
   "slug": "master-of-possession-2",
   "factionSlug": "chaos-space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; Rite of Possession; staff of possession.",
+    "weapons": [
+      {
+        "id": "000001581:bolt-pistol",
+        "datasheetId": "000001581",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001581",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001581:rite-of-possession",
+        "datasheetId": "000001581",
+        "line": 2,
+        "name": "Rite of Possession",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001581",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Rite of Possession - witchfire",
+            "attributes": [
+              "ANTI-PSYKER 2+",
+              "PISTOL",
+              "PRECISION",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -3,
+            "d": 2
+          },
+          {
+            "datasheetId": "000001581",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Rite of Possession - focused witchfire",
+            "attributes": [
+              "ANTI-PSYKER 2+",
+              "HAZARDOUS",
+              "PISTOL",
+              "PRECISION",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001581:staff-of-possession",
+        "datasheetId": "000001581",
+        "line": 4,
+        "name": "Staff of possession",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001581",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of possession",
+            "attributes": [
+              "ANTI-PSYKER 2+",
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -41,22 +162,7 @@
       "factionId": "",
       "description": "Once per phase, when this model is selected to shoot or fight, it can use this ability. If it does, this model's unit suffers 1 mortal wound and, until the end of the phase, each time this model makes a Psychic Attack, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -114,7 +220,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001581",
@@ -133,7 +238,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002570",
       "slug": "legionaries-2"
@@ -149,117 +254,6 @@
     {
       "id": "000000953",
       "slug": "possessed-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001581:bolt-pistol",
-      "datasheetId": "000001581",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001581",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001581:rite-of-possession",
-      "datasheetId": "000001581",
-      "line": 2,
-      "name": "Rite of Possession",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001581",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Rite of Possession - witchfire",
-          "attributes": [
-            "ANTI-PSYKER 2+",
-            "PISTOL",
-            "PRECISION",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -3,
-          "d": 2
-        },
-        {
-          "datasheetId": "000001581",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Rite of Possession - focused witchfire",
-          "attributes": [
-            "ANTI-PSYKER 2+",
-            "HAZARDOUS",
-            "PISTOL",
-            "PRECISION",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001581:staff-of-possession",
-      "datasheetId": "000001581",
-      "line": 4,
-      "name": "Staff of possession",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001581",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of possession",
-          "attributes": [
-            "ANTI-PSYKER 2+",
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

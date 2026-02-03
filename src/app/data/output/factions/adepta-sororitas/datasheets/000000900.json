@@ -5,17 +5,123 @@
   "sourceId": "000000112",
   "legend": "It is the most sacred role of the Imagifier to extol the virtues of fallen Sisters and preach tales of their saintly deeds. Imagifiers bear aloft great stanchions in the image of a martyr inscribed with holy texts, and go wherever the fighting is thickest to recite litanies and inspire their fellow Sisters.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "This model can be attached to a Battle Sisters Squad, even if one Canoness, Palatine, Junith Eruita or AESTRED THURGA model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adepta-sororitas/Imagifier",
   "slug": "imagifier",
   "factionSlug": "adepta-sororitas",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "This model can be attached to a Battle Sisters Squad, even if one Canoness, Palatine, Junith Eruita or AESTRED THURGA model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "CANONESS",
+        "PALATINE",
+        "JUNITH ERUITA",
+        "AESTRED THURGA"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+    "weapons": [
+      {
+        "id": "000000900:bolt-pistol",
+        "datasheetId": "000000900",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000900",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000900:boltgun",
+        "datasheetId": "000000900",
+        "line": 2,
+        "name": "Boltgun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000900",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Boltgun",
+            "attributes": [
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000900:close-combat-weapon",
+        "datasheetId": "000000900",
+        "line": 3,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000900",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -41,16 +147,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a Save characteristic of 2+ and a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -108,7 +205,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000900",
@@ -127,7 +223,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000894",
       "slug": "crusaders"
@@ -151,90 +247,6 @@
     {
       "id": "000000909",
       "slug": "dominion-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000900:bolt-pistol",
-      "datasheetId": "000000900",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000900",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000900:boltgun",
-      "datasheetId": "000000900",
-      "line": 2,
-      "name": "Boltgun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000900",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Boltgun",
-          "attributes": [
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000900:close-combat-weapon",
-      "datasheetId": "000000900",
-      "line": 3,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000900",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
     }
   ]
 }

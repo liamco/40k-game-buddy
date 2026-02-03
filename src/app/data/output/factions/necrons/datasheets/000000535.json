@@ -5,17 +5,150 @@
   "sourceId": "000000029",
   "legend": "Once the shook troops of the Necrontyr, Immortals still provide their masters with a powerful core of skilled soldiery millennia later. More advanced than Necron Warriors, they can employ a number of strategies even without command, and their firepower makes them deadly in close or midrange engagements.",
   "role": "Battleline",
-  "loadout": "<b>Every model is equipped with:</b> gauss blaster; close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Immortals",
   "slug": "immortals",
   "factionSlug": "necrons",
-  "supplementKey": "codex",
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> gauss blaster; close combat weapon.",
+    "weapons": [
+      {
+        "id": "000000535:gauss-blaster",
+        "datasheetId": "000000535",
+        "line": 1,
+        "name": "Gauss blaster",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000535",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gauss blaster",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000535:tesla-carbine",
+        "datasheetId": "000000535",
+        "line": 2,
+        "name": "Tesla carbine",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000535",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Tesla carbine",
+            "attributes": [
+              "ASSAULT",
+              "SUSTAINED HITS 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000535:close-combat-weapon",
+        "datasheetId": "000000535",
+        "line": 3,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000535",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000535",
+          "line": 1,
+          "button": "•",
+          "description": "All models in this unit can each have their gauss blaster replaced with 1 tesla carbine."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "All models in this unit can each have their gauss blaster replaced with 1 tesla carbine.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "all-models"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "gauss blaster",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "tesla carbine",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Reanimation Protocols",
@@ -74,14 +207,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000535",
-      "line": 1,
-      "button": "•",
-      "description": "All models in this unit can each have their gauss blaster replaced with 1 tesla carbine."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000535",
@@ -107,90 +232,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000535:gauss-blaster",
-      "datasheetId": "000000535",
-      "line": 1,
-      "name": "Gauss blaster",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000535",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauss blaster",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000535:tesla-carbine",
-      "datasheetId": "000000535",
-      "line": 2,
-      "name": "Tesla carbine",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000535",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Tesla carbine",
-          "attributes": [
-            "ASSAULT",
-            "SUSTAINED HITS 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000535:close-combat-weapon",
-      "datasheetId": "000000535",
-      "line": 3,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000535",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

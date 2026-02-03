@@ -5,17 +5,92 @@
   "sourceId": "000000259",
   "legend": "A Culexus Assassin projects an aura of unsettling fear all around them. Their primary targets are psykers, who are wracked with agony from these soulless assassins' mere presence, and against the arcane blasts of a Culexus' animus speculum, no witch long survives.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> animus speculum; life-draining touch.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/imperial-agents/Culexus-Assassin",
   "slug": "culexus-assassin",
   "factionSlug": "imperial-agents",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Imperial Agents",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> animus speculum; life-draining touch.",
+    "weapons": [
+      {
+        "id": "000000873:animus-speculum",
+        "datasheetId": "000000873",
+        "line": 1,
+        "name": "Animus speculum",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000873",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Animus speculum",
+            "attributes": [
+              "ANTI-PSYKER 2+",
+              "ASSAULT",
+              "PRECISION",
+              "PSYCHIC ASSASSIN"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000000873:life-draining-touch",
+        "datasheetId": "000000873",
+        "line": 2,
+        "name": "Life-draining touch",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000873",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Life-draining touch",
+            "attributes": [
+              "ANTI-PSYKER 2+",
+              "DEVASTATING WOUNDS",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -49,18 +124,7 @@
       "factionId": "",
       "description": "This model has the Feel No Pain 2+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 2
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -152,7 +216,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000873",
@@ -171,70 +234,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Imperial Agents",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000873:animus-speculum",
-      "datasheetId": "000000873",
-      "line": 1,
-      "name": "Animus speculum",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000873",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Animus speculum",
-          "attributes": [
-            "ANTI-PSYKER 2+",
-            "ASSAULT",
-            "PRECISION",
-            "PSYCHIC ASSASSIN"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000000873:life-draining-touch",
-      "datasheetId": "000000873",
-      "line": 2,
-      "name": "Life-draining touch",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000873",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Life-draining touch",
-          "attributes": [
-            "ANTI-PSYKER 2+",
-            "DEVASTATING WOUNDS",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

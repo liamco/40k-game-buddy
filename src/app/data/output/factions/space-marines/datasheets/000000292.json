@@ -5,17 +5,134 @@
   "sourceId": "000000036",
   "legend": "Summoning ice-toothed blizzards to scatter his foes, Njal Stormcaller is an elemental focus of psychic fury. He is High Rune Priest of the Space Wolves and wields a crackling staff by which he nullifies enemy sorceries.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; Living Lightning; Staff of the Stormcaller.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Njal-Stormcaller",
   "slug": "njal-stormcaller",
   "factionSlug": "space-marines",
-  "supplementKey": "space-wolves",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; Living Lightning; Staff of the Stormcaller.",
+    "weapons": [
+      {
+        "id": "000000292:bolt-pistol",
+        "datasheetId": "000000292",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000292",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000292:living-lightning",
+        "datasheetId": "000000292",
+        "line": 2,
+        "name": "Living Lightning",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000292",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Living Lightning - witchfire",
+            "attributes": [
+              "PSYCHIC",
+              "SUSTAINED HITS 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 7,
+            "ap": -1,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000292",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Living Lightning - focused witchfire",
+            "attributes": [
+              "HAZARDOUS",
+              "PSYCHIC",
+              "SUSTAINED HITS 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": 3,
+            "s": 7,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000292:staff-of-the-stormcaller",
+        "datasheetId": "000000292",
+        "line": 4,
+        "name": "Staff of the Stormcaller",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000292",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of the Stormcaller",
+            "attributes": [
+              "PSYCHIC",
+              "SUSTAINED HITS 2"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "space-wolves",
+    "slug": "space-wolves",
+    "name": "Space Wolves",
+    "label": "Space Wolves",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,45 +149,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, ranged weapons equipped by models in that unit have the [ASSAULT] ability and each time that unit Advances, do not make an Advance roll. Instead, until the end of the phase, add 6\" to the Move characteristic of models in this unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "ASSAULT"
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -79,67 +158,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model's unit has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks made with this model's Living Lightning weapon. Until the start of your next turn, that enemy unit is stormwracked. While a unit is stormwracked, subtract 6\" from the Range characteristic of ranged weapons equipped by models in that unit (to a minimum of 12\").",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "addsKeyword",
-          "keywords": [
-            "STORMWRACKED"
-          ],
-          "state": "isStormwracked",
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": null,
-              "abilities": null,
-              "state": null,
-              "keywords": null,
-              "operator": "notIncludes",
-              "value": "MONSTERS"
-            },
-            {
-              "entity": "thisModel",
-              "attribute": null,
-              "abilities": null,
-              "state": null,
-              "keywords": null,
-              "operator": "notIncludes",
-              "value": "VEHICLES"
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "range",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isStormwracked",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "range",
-          "value": 12,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "attribute": "range",
-              "operator": "lessThan",
-              "value": 12
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -215,7 +234,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000292",
@@ -234,7 +252,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000004131",
       "slug": "wolf-guard-headtakers"
@@ -246,115 +264,6 @@
     {
       "id": "000000303",
       "slug": "blood-claws"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000292:bolt-pistol",
-      "datasheetId": "000000292",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000292",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000292:living-lightning",
-      "datasheetId": "000000292",
-      "line": 2,
-      "name": "Living Lightning",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000292",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Living Lightning - witchfire",
-          "attributes": [
-            "PSYCHIC",
-            "SUSTAINED HITS 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 7,
-          "ap": -1,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000292",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Living Lightning - focused witchfire",
-          "attributes": [
-            "HAZARDOUS",
-            "PSYCHIC",
-            "SUSTAINED HITS 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": 3,
-          "s": 7,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000292:staff-of-the-stormcaller",
-      "datasheetId": "000000292",
-      "line": 4,
-      "name": "Staff of the Stormcaller",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000292",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of the Stormcaller",
-          "attributes": [
-            "PSYCHIC",
-            "SUSTAINED HITS 2"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

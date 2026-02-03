@@ -5,17 +5,85 @@
   "sourceId": "000000046",
   "legend": "Any good Ork hunter knows the safest way to deal with a rampaging Warboss is to hit them with tank-busting artillery from as far away as possible. By donning a piston-driven suit of incredibly durable mega armour, the Warboss makes a mockery of such underhanded enemy tactics, much to the terror of his foes.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> big shoota; 'uge choppa.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Warboss-In-Mega-Armour",
   "slug": "warboss-in-mega-armour",
   "factionSlug": "orks",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> big shoota; 'uge choppa.",
+    "weapons": [
+      {
+        "id": "000000002:big-shoota",
+        "datasheetId": "000000002",
+        "line": 1,
+        "name": "Big shoota",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000002",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Big shoota",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000002:uge-choppa",
+        "datasheetId": "000000002",
+        "line": 2,
+        "name": "'Uge choppa",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000002",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "'Uge choppa",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 12,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,16 +100,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -108,7 +167,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000002",
@@ -127,68 +185,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000024",
       "slug": "meganobz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000002:big-shoota",
-      "datasheetId": "000000002",
-      "line": 1,
-      "name": "Big shoota",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000002",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Big shoota",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000002:uge-choppa",
-      "datasheetId": "000000002",
-      "line": 2,
-      "name": "'Uge choppa",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000002",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "'Uge choppa",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 12,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

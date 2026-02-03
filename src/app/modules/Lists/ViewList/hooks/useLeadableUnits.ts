@@ -21,7 +21,7 @@ export function useLeadableUnits(list: ArmyList | null, unit: ArmyListItem | nul
                 return;
             }
 
-            if (!unit.leaders?.length) {
+            if (!unit.leadsUnits?.length) {
                 setBodyguardUnits([]);
                 return;
             }
@@ -29,7 +29,7 @@ export function useLeadableUnits(list: ArmyList | null, unit: ArmyListItem | nul
             setLoading(true);
             const bodyguards: Datasheet[] = [];
 
-            for (const datasheetRef of unit.leaders) {
+            for (const datasheetRef of unit.leadsUnits) {
                 try {
                     const fullDatasheet = await loadDatasheetData(list.factionSlug, datasheetRef.id);
                     if (fullDatasheet) {

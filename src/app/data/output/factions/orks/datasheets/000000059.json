@@ -5,17 +5,203 @@
   "sourceId": "000000378",
   "legend": "Squiggoths can grow in size indefinitely. The larger they get, the more prized they become in the eyes of Ork Warbosses, whose simple minds see them for the colossal living weapons they are. Kitted out with armour, guns and bellowing passengers, truly giant specimens are walking bastions, their momentum all but unstoppable.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> huge tusks.",
   "transport": "This model has a transport capacity of 20 Orks Infantry models. Each Mega Armour or Jump Pack model takes up the space of 2 models. Ghazghkull Thraka takes up the space of 18 models. If this model is equipped with a supa-kannon, it has a transport capacity of 15 <span class=\"kwb\">ORKS</span> <span class=\"kwb\">INFANTRY</span> models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 6 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Gargantuan-Squiggoth",
   "slug": "gargantuan-squiggoth",
   "factionSlug": "orks",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-10",
+    "threshold": 10,
+    "description": "While this model has 1-10 wounds remaining, subtract 6 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 6
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> huge tusks.",
+    "weapons": [
+      {
+        "id": "000000059:kannon",
+        "datasheetId": "000000059",
+        "line": 1,
+        "name": "Kannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000059",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Kannon - frag",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000059",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Kannon - shell",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 5,
+            "s": 9,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000059:supa-kannon",
+        "datasheetId": "000000059",
+        "line": 3,
+        "name": "Supa-kannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000059",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Supa-kannon",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 60,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": 5,
+            "s": 12,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000059:huge-tusks",
+        "datasheetId": "000000059",
+        "line": 4,
+        "name": "Huge tusks",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000059",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Huge tusks - strike",
+            "attributes": [
+              "LANCE"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -3,
+            "d": 12
+          },
+          {
+            "datasheetId": "000000059",
+            "line": 5,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Huge tusks - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 18,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000059",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 kannon</li><li>1 supa-kannon</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 kannon</li><li>1 supa-kannon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "kannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "supa-kannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -105,14 +291,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000059",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 kannon</li><li>1 supa-kannon</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000059",
@@ -131,121 +309,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000059:kannon",
-      "datasheetId": "000000059",
-      "line": 1,
-      "name": "Kannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000059",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Kannon - frag",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000059",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Kannon - shell",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 5,
-          "s": 9,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000059:supa-kannon",
-      "datasheetId": "000000059",
-      "line": 3,
-      "name": "Supa-kannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000059",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Supa-kannon",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 60,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": 5,
-          "s": 12,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000059:huge-tusks",
-      "datasheetId": "000000059",
-      "line": 4,
-      "name": "Huge tusks",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000059",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Huge tusks - strike",
-          "attributes": [
-            "LANCE"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -3,
-          "d": 12
-        },
-        {
-          "datasheetId": "000000059",
-          "line": 5,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Huge tusks - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 18,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

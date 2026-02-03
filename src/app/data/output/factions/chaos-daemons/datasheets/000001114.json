@@ -5,17 +5,127 @@
   "sourceId": "000000025",
   "legend": "Bloodletters are hate and violence made manifest. Attacking in berserk packs or in martial, marching ranks, they hack apart their victims with monstrous hellblades. These weapons glow red-hot with the fury of their wielders, and even the slightest wound they inflict can see the victim bled dry in seconds.",
   "role": "Battleline",
-  "loadout": "<b>Every model is equipped with:</b> hellblade.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-daemons/Bloodletters",
   "slug": "bloodletters",
   "factionSlug": "chaos-daemons",
-  "supplementKey": "codex",
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> hellblade.",
+    "weapons": [
+      {
+        "id": "000001114:hellblade",
+        "datasheetId": "000001114",
+        "line": 1,
+        "name": "Hellblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001114",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hellblade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001114",
+          "line": 1,
+          "button": "•",
+          "description": "1 Bloodletter that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
+        },
+        {
+          "datasheetId": "000001114",
+          "line": 2,
+          "button": "•",
+          "description": "1 Bloodletter that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "1 Bloodletter that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Bloodletter that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "instrument of Chaos",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "1 Bloodletter that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Bloodletter that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "daemonic icon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -120,20 +230,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001114",
-      "line": 1,
-      "button": "•",
-      "description": "1 Bloodletter that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
-    },
-    {
-      "datasheetId": "000001114",
-      "line": 2,
-      "button": "•",
-      "description": "1 Bloodletter that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001114",
@@ -159,37 +255,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001114:hellblade",
-      "datasheetId": "000001114",
-      "line": 1,
-      "name": "Hellblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001114",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hellblade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

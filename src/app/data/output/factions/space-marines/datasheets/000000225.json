@@ -5,17 +5,102 @@
   "sourceId": "000000023",
   "legend": "Asmodai is the Dark Angels' most successful Interrogator-Chaplain. Relentless and humourless, in battle he incites his battle-brothers' fighting spirit to reach new heights, rendering them unstoppable killing machines by chanting his litanies of hate with unshakeable belief.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> heavy bolt pistol; crozius arcanum and power weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Asmodai",
   "slug": "asmodai",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolt pistol; crozius arcanum and power weapon.",
+    "weapons": [
+      {
+        "id": "000000225:heavy-bolt-pistol",
+        "datasheetId": "000000225",
+        "line": 1,
+        "name": "Heavy bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000225",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000225:crozius-arcanum-and-power-weapon",
+        "datasheetId": "000000225",
+        "line": 2,
+        "name": "Crozius arcanum and power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000225",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Crozius arcanum and power weapon - strike",
+            "profileName": "strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          },
+          {
+            "datasheetId": "000000225",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Crozius arcanum and power weapon - sweep",
+            "profileName": "sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,24 +117,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "h",
-          "value": "all",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -58,50 +126,7 @@
       "factionId": "",
       "description": "At the start of the Fight phase, each enemy <span class=\"kwb\">CHARACTER</span> unit within 6\" of this model must take a Battle-shock test, subtracting 1 from that test when they do. In addition, each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model with a melee attack, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "ld",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isBattleShocked",
-              "operator": "equals",
-              "value": false
-            },
-            {
-              "entity": "opposingUnit",
-              "attribute": "range",
-              "operator": "lessThanOrEqualTo",
-              "value": 6
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "cp",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingModel",
-              "state": "isDestroyed",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "attackType",
-              "operator": "equals",
-              "value": "melee"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -189,7 +214,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000225",
@@ -208,7 +232,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001157",
       "slug": "intercessor-squad"
@@ -292,83 +316,6 @@
     {
       "id": "000000315",
       "slug": "wolf-guard"
-    }
-  ],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000225:heavy-bolt-pistol",
-      "datasheetId": "000000225",
-      "line": 1,
-      "name": "Heavy bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000225",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000225:crozius-arcanum-and-power-weapon",
-      "datasheetId": "000000225",
-      "line": 2,
-      "name": "Crozius arcanum and power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000225",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Crozius arcanum and power weapon - strike",
-          "profileName": "strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000000225",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Crozius arcanum and power weapon - sweep",
-          "profileName": "sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
     }
   ]
 }

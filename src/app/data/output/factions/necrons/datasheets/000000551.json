@@ -5,17 +5,181 @@
   "sourceId": "000000029",
   "legend": "Canoptek Spyders are formidable control-and-repair constructs, augmented with battlefield support systems. Whether blasting enemies with particle beamers, warding off empyric energies with gloom prisms or fabricating and unleashing fresh waves of Canoptek Scarabs, they are a force to be reckoned with.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> automaton claws.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Canoptek-Spyders",
   "slug": "canoptek-spyders",
   "factionSlug": "necrons",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> automaton claws.",
+    "weapons": [
+      {
+        "id": "000000551:particle-beamer",
+        "datasheetId": "000000551",
+        "line": 1,
+        "name": "Particle beamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000551",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Particle beamer",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000551:automaton-claws",
+        "datasheetId": "000000551",
+        "line": 2,
+        "name": "Automaton claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000551",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Automaton claws",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000551",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each be equipped with 2 particle beamers."
+        },
+        {
+          "datasheetId": "000000551",
+          "line": 2,
+          "button": "•",
+          "description": "Any number of models can each be equipped with 1 fabricator claw array."
+        },
+        {
+          "datasheetId": "000000551",
+          "line": 3,
+          "button": "•",
+          "description": "Any number of models can each be equipped with 1 gloom prism."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each be equipped with 2 particle beamers.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "particle beamers",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "Any number of models can each be equipped with 1 fabricator claw array.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "fabricator claw array",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "Any number of models can each be equipped with 1 gloom prism.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "gloom prism",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,18 +197,7 @@
       "factionId": "",
       "description": "While a friendly Necrons Vehicle unit is within 6\" of the bearer, that unit has the Feel No Pain 6+ ability.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 6
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -53,18 +206,7 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">NECRONS</span> unit is within 6\" of the bearer, models in that unit have the Feel No Pain 5+ ability against mortal wounds and Psychic Attacks.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 5
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -125,26 +267,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000551",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each be equipped with 2 particle beamers."
-    },
-    {
-      "datasheetId": "000000551",
-      "line": 2,
-      "button": "•",
-      "description": "Any number of models can each be equipped with 1 fabricator claw array."
-    },
-    {
-      "datasheetId": "000000551",
-      "line": 3,
-      "button": "•",
-      "description": "Any number of models can each be equipped with 1 gloom prism."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000551",
@@ -170,64 +292,5 @@
       "count": 2
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000551:particle-beamer",
-      "datasheetId": "000000551",
-      "line": 1,
-      "name": "Particle beamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000551",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Particle beamer",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000551:automaton-claws",
-      "datasheetId": "000000551",
-      "line": 2,
-      "name": "Automaton claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000551",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Automaton claws",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

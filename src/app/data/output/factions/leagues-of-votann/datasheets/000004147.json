@@ -5,17 +5,142 @@
   "sourceId": "000000203",
   "legend": "A variant of the adaptable Kapricus design, the Carrier provides elite teams of Hernkyn Yaegirs with the means to penetrate enemy lines at speed. The transport's quad magna-coils grant it the manoeuvrability to traverse almost any frontier terrain. At the same time, its banks of scanner uplinks enable it to lay down withering hails of accurate, suppressive fire to purge claim sites.",
   "role": "Dedicated Transports",
-  "loadout": "<b>This model is equipped with:</b> magna-coil autocannon; twin magna-coil autocannon; armoured hull.",
   "transport": "This model has a transport capacity of 5 Hernkyn Yaegir models.<br><br>At the start of the Declare Battle Formations step, you can select one <span class=\"kwb\">HERNKYN</span> <span class=\"kwb\">YAEGIR</span> unit from your army that has not been split. If you do, that unit is split into two units, each containing as equal a number of models as possible (when splitting a unit in this way, make a note of which models form each of the two new units). One of these units must start the battle embarked within this <span class=\"kwb\">TRANSPORT</span>; the other can start the battle embarked within another <span class=\"kwb\">TRANSPORT</span>, or it can be deployed as a separate unit.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/leagues-of-votann/Kapricus-Carrier",
   "slug": "kapricus-carrier",
   "factionSlug": "leagues-of-votann",
-  "supplementKey": "codex",
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> magna-coil autocannon; twin magna-coil autocannon; armoured hull.",
+    "weapons": [
+      {
+        "id": "000004147:magna-coil-autocannon",
+        "datasheetId": "000004147",
+        "line": 1,
+        "name": "Magna-coil autocannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004147",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Magna-coil autocannon",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004147:twin-magna-coil-autocannon",
+        "datasheetId": "000004147",
+        "line": 2,
+        "name": "Twin magna-coil autocannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004147",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin magna-coil autocannon",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004147:armoured-hull",
+        "datasheetId": "000004147",
+        "line": 3,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004147",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000004147",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 smoke launcher."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 smoke launcher.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "smoke launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -43,16 +168,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -131,14 +247,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000004147",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 smoke launcher."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004147",
@@ -157,87 +265,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004147:magna-coil-autocannon",
-      "datasheetId": "000004147",
-      "line": 1,
-      "name": "Magna-coil autocannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004147",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Magna-coil autocannon",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004147:twin-magna-coil-autocannon",
-      "datasheetId": "000004147",
-      "line": 2,
-      "name": "Twin magna-coil autocannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004147",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin magna-coil autocannon",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004147:armoured-hull",
-      "datasheetId": "000004147",
-      "line": 3,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004147",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

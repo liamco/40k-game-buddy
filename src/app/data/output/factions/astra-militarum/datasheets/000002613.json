@@ -5,17 +5,731 @@
   "sourceId": "000000335",
   "legend": "The grim regiments of the Death Korps of Krieg excel in the most gruelling of conditions, their famous siege regiments resolutely holding key positions no matter the onslaught unleashed upon them. They are extollers of a pitiless cult of sacrifice, but with their legendary endurance, death often claims their foes first.",
   "role": "Battleline",
-  "loadout": "<b>Every Death Korps Watchmaster is equipped with:</b> laspistol; chainsword. <br><br><b>Every Death Korps Trooper is equipped with: lasgun;</b> close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/astra-militarum/Death-Korps-Of-Krieg",
   "slug": "death-korps-of-krieg",
   "factionSlug": "astra-militarum",
-  "supplementKey": "codex",
+  "roleLabel": "Battleline",
+  "sourceName": "Expansion: Death Korps of Krieg",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every Death Korps Watchmaster is equipped with:</b> laspistol; chainsword. <br><br><b>Every Death Korps Trooper is equipped with: lasgun;</b> close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "weapons": [
+      {
+        "id": "000002613:bolt-pistol",
+        "datasheetId": "000002613",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002613:boltgun",
+        "datasheetId": "000002613",
+        "line": 2,
+        "name": "Boltgun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Boltgun",
+            "attributes": [
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002613:flamer",
+        "datasheetId": "000002613",
+        "line": 3,
+        "name": "Flamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Flamer",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002613:grenade-launcher",
+        "datasheetId": "000002613",
+        "line": 4,
+        "name": "Grenade launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Grenade launcher - frag",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          },
+          {
+            "datasheetId": "000002613",
+            "line": 5,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Grenade launcher - krak",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 9,
+            "ap": -2,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000002613:lasgun",
+        "datasheetId": "000002613",
+        "line": 6,
+        "name": "Lasgun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lasgun",
+            "attributes": [
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002613:laspistol",
+        "datasheetId": "000002613",
+        "line": 7,
+        "name": "Laspistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Laspistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002613:long-las",
+        "datasheetId": "000002613",
+        "line": 8,
+        "name": "Long-las",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 8,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Long-las",
+            "attributes": [
+              "HEAVY",
+              "PRECISION"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002613:meltagun",
+        "datasheetId": "000002613",
+        "line": 9,
+        "name": "Meltagun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 9,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Meltagun",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000002613:plasma-gun",
+        "datasheetId": "000002613",
+        "line": 10,
+        "name": "Plasma gun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 10,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma gun - standard",
+            "attributes": [
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000002613",
+            "line": 11,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma gun - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002613:plasma-pistol",
+        "datasheetId": "000002613",
+        "line": 12,
+        "name": "Plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 12,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma pistol - standard",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000002613",
+            "line": 12,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma pistol - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002613:chainsword",
+        "datasheetId": "000002613",
+        "line": 13,
+        "name": "Chainsword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 13,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chainsword",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002613:close-combat-weapon",
+        "datasheetId": "000002613",
+        "line": 14,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 14,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002613:power-weapon",
+        "datasheetId": "000002613",
+        "line": 15,
+        "name": "Power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002613",
+            "line": 15,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 4,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002613",
+          "line": 1,
+          "button": "•",
+          "description": "For every 10 models in this unit, up to 2 Death Korps Troopers can each have their lasgun replaced with one of the following*:<ul><li>1 flamer</li><li>1 grenade launcher</li><li>1 long-las</li><li>1 meltagun</li><li>1 plasma gun</li></ul>"
+        },
+        {
+          "datasheetId": "000002613",
+          "line": 2,
+          "button": "•",
+          "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 Death Korps medi-pack (that model's lasgun cannot be replaced)**."
+        },
+        {
+          "datasheetId": "000002613",
+          "line": 3,
+          "button": "•",
+          "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 vox-caster (that model's lasgun cannot be replaced).**"
+        },
+        {
+          "datasheetId": "000002613",
+          "line": 4,
+          "button": "•",
+          "description": "Any number of Death Korps Watchmasters can each replace their laspistol and chainsword with 1 boltgun and 1 close combat weapon."
+        },
+        {
+          "datasheetId": "000002613",
+          "line": 5,
+          "button": "•",
+          "description": "Any number of Death Korps Watchmasters can each replace their chainsword with 1 power weapon."
+        },
+        {
+          "datasheetId": "000002613",
+          "line": 6,
+          "button": "•",
+          "description": "Any number of Death Korps Watchmasters can each replace their laspistol with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li></ul>"
+        },
+        {
+          "datasheetId": "000002613",
+          "line": 7,
+          "button": "*",
+          "description": "*  You cannot select the same option more than once per unit unless it contains 20 models, in which case you cannot select the same option more than twice per unit."
+        },
+        {
+          "datasheetId": "000002613",
+          "line": 8,
+          "button": "*",
+          "description": "** A model can only take one of these options."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "For every 10 models in this unit, up to 2 Death Korps Troopers can each have their lasgun replaced with one of the following*:<ul><li>1 flamer</li><li>1 grenade launcher</li><li>1 long-las</li><li>1 meltagun</li><li>1 plasma gun</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio-capped",
+            "ratio": 10,
+            "maxPerRatio": 2
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "lasgun",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "flamer",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "grenade launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "long-las",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "meltagun",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "plasma gun",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 Death Korps medi-pack (that model's lasgun cannot be replaced)**.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 10
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Death Korps medi-pack",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {
+            "restrictedWeapons": [
+              "lasgun"
+            ]
+          }
+        },
+        {
+          "line": 3,
+          "rawText": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 vox-caster (that model's lasgun cannot be replaced).**",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 10
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "vox-caster",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {
+            "restrictedWeapons": [
+              "lasgun"
+            ]
+          }
+        },
+        {
+          "line": 4,
+          "rawText": "Any number of Death Korps Watchmasters can each replace their laspistol and chainsword with 1 boltgun and 1 close combat weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "laspistol",
+                "count": 1
+              },
+              {
+                "name": "chainsword",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "boltgun and 1 close combat weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 5,
+          "rawText": "Any number of Death Korps Watchmasters can each replace their chainsword with 1 power weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "chainsword",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "power weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 6,
+          "rawText": "Any number of Death Korps Watchmasters can each replace their laspistol with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "laspistol",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "bolt pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "plasma pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 7,
+          "rawText": "*  You cannot select the same option more than once per unit unless it contains 20 models, in which case you cannot select the same option more than twice per unit.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 8,
+          "rawText": "** A model can only take one of these options.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "id": "",
@@ -112,56 +826,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002613",
-      "line": 1,
-      "button": "•",
-      "description": "For every 10 models in this unit, up to 2 Death Korps Troopers can each have their lasgun replaced with one of the following*:<ul><li>1 flamer</li><li>1 grenade launcher</li><li>1 long-las</li><li>1 meltagun</li><li>1 plasma gun</li></ul>"
-    },
-    {
-      "datasheetId": "000002613",
-      "line": 2,
-      "button": "•",
-      "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 Death Korps medi-pack (that model's lasgun cannot be replaced)**."
-    },
-    {
-      "datasheetId": "000002613",
-      "line": 3,
-      "button": "•",
-      "description": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 vox-caster (that model's lasgun cannot be replaced).**"
-    },
-    {
-      "datasheetId": "000002613",
-      "line": 4,
-      "button": "•",
-      "description": "Any number of Death Korps Watchmasters can each replace their laspistol and chainsword with 1 boltgun and 1 close combat weapon."
-    },
-    {
-      "datasheetId": "000002613",
-      "line": 5,
-      "button": "•",
-      "description": "Any number of Death Korps Watchmasters can each replace their chainsword with 1 power weapon."
-    },
-    {
-      "datasheetId": "000002613",
-      "line": 6,
-      "button": "•",
-      "description": "Any number of Death Korps Watchmasters can each replace their laspistol with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li></ul>"
-    },
-    {
-      "datasheetId": "000002613",
-      "line": 7,
-      "button": "*",
-      "description": "*  You cannot select the same option more than once per unit unless it contains 20 models, in which case you cannot select the same option more than twice per unit."
-    },
-    {
-      "datasheetId": "000002613",
-      "line": 8,
-      "button": "*",
-      "description": "** A model can only take one of these options."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002613",
@@ -199,398 +863,5 @@
       "count": 20
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Expansion: Death Korps of Krieg",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002613:bolt-pistol",
-      "datasheetId": "000002613",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002613:boltgun",
-      "datasheetId": "000002613",
-      "line": 2,
-      "name": "Boltgun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Boltgun",
-          "attributes": [
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002613:flamer",
-      "datasheetId": "000002613",
-      "line": 3,
-      "name": "Flamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Flamer",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002613:grenade-launcher",
-      "datasheetId": "000002613",
-      "line": 4,
-      "name": "Grenade launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Grenade launcher - frag",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        },
-        {
-          "datasheetId": "000002613",
-          "line": 5,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Grenade launcher - krak",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 9,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000002613:lasgun",
-      "datasheetId": "000002613",
-      "line": 6,
-      "name": "Lasgun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lasgun",
-          "attributes": [
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002613:laspistol",
-      "datasheetId": "000002613",
-      "line": 7,
-      "name": "Laspistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Laspistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002613:long-las",
-      "datasheetId": "000002613",
-      "line": 8,
-      "name": "Long-las",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 8,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Long-las",
-          "attributes": [
-            "HEAVY",
-            "PRECISION"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002613:meltagun",
-      "datasheetId": "000002613",
-      "line": 9,
-      "name": "Meltagun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 9,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Meltagun",
-          "attributes": [
-            "MELTA 2"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000002613:plasma-gun",
-      "datasheetId": "000002613",
-      "line": 10,
-      "name": "Plasma gun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 10,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma gun - standard",
-          "attributes": [
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000002613",
-          "line": 11,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma gun - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002613:plasma-pistol",
-      "datasheetId": "000002613",
-      "line": 12,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 12,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol - standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000002613",
-          "line": 12,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002613:chainsword",
-      "datasheetId": "000002613",
-      "line": 13,
-      "name": "Chainsword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 13,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chainsword",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002613:close-combat-weapon",
-      "datasheetId": "000002613",
-      "line": 14,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 14,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002613:power-weapon",
-      "datasheetId": "000002613",
-      "line": 15,
-      "name": "Power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002613",
-          "line": 15,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

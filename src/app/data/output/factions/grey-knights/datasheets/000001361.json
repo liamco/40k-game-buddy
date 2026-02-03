@@ -5,17 +5,184 @@
   "sourceId": "000000013",
   "legend": "Even in a Chapter of potent psykers, the Grey Knights' Librarians wield the energies of the Warp with exacting control and devastating power. Even as they shield their battle-brothers with whirling storms of psychic flame and the warding sigils wrought into their arcane wargear, the Librarians gather their true might before unleashing it in vortices of devastating sorcerous annihilation.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Nemesis force weapon; Vortex of Doom.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/grey-knights/Brotherhood-Librarian",
   "slug": "brotherhood-librarian",
   "factionSlug": "grey-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Grey Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Nemesis force weapon; Vortex of Doom.",
+    "weapons": [
+      {
+        "id": "000001361:combi-weapon",
+        "datasheetId": "000001361",
+        "line": 1,
+        "name": "Combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001361",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001361:storm-bolter",
+        "datasheetId": "000001361",
+        "line": 2,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001361",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001361:vortex-of-doom",
+        "datasheetId": "000001361",
+        "line": 3,
+        "name": "Vortex of Doom",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001361",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Vortex of Doom",
+            "attributes": [
+              "BLAST",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001361:nemesis-force-weapon",
+        "datasheetId": "000001361",
+        "line": 4,
+        "name": "Nemesis force weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001361",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Nemesis force weapon",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001361",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 combi-weapon</li><li>1 storm bolter</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 combi-weapon</li><li>1 storm bolter</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "combi-weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "storm bolter",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,18 +203,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -120,14 +276,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001361",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 combi-weapon</li><li>1 storm bolter</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001361",
@@ -146,7 +294,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000382",
       "slug": "brotherhood-terminator-squad"
@@ -154,121 +302,6 @@
     {
       "id": "000000384",
       "slug": "paladin-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Grey Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001361:combi-weapon",
-      "datasheetId": "000001361",
-      "line": 1,
-      "name": "Combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001361",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001361:storm-bolter",
-      "datasheetId": "000001361",
-      "line": 2,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001361",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001361:vortex-of-doom",
-      "datasheetId": "000001361",
-      "line": 3,
-      "name": "Vortex of Doom",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001361",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Vortex of Doom",
-          "attributes": [
-            "BLAST",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001361:nemesis-force-weapon",
-      "datasheetId": "000001361",
-      "line": 4,
-      "name": "Nemesis force weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001361",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Nemesis force weapon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
     }
   ]
 }

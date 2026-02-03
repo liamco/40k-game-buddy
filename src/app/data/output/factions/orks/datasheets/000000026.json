@@ -5,17 +5,144 @@
   "sourceId": "000000046",
   "legend": "Trukks are ramshackle assemblages of hastily welded and riveted scrap metal bolted to overpowered engine blocks and rusty chassis. Rolling on fat, armoured tyres, they bear mobs of Orks into battle at high speed, shrugging off enemy fire by the simple expedient of shedding ablative panels and plates.",
   "role": "Dedicated Transports",
-  "loadout": "<b>This model is equipped with:</b> big shoota; spiked wheels.",
   "transport": "This model has a transport capacity of 12 Orks Infantry models. Each Mega Armour model takes up the space of 2 models. It cannot transport Jump Pack or Ghazghkull Thraka models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Trukk",
   "slug": "trukk",
   "factionSlug": "orks",
-  "supplementKey": "codex",
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> big shoota; spiked wheels.",
+    "weapons": [
+      {
+        "id": "000000026:big-shoota",
+        "datasheetId": "000000026",
+        "line": 1,
+        "name": "Big shoota",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000026",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Big shoota",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000026:spiked-wheels",
+        "datasheetId": "000000026",
+        "line": 2,
+        "name": "Spiked wheels",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000026",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Spiked wheels",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000026:wreckin-ball",
+        "datasheetId": "000000026",
+        "line": 3,
+        "name": "Wreckin' ball",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000026",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Wreckin' ball",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 10,
+            "ap": 0,
+            "d": "D6"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000026",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 wreckin' ball."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 wreckin' ball.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "wreckin' ball",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -90,14 +217,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000026",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 wreckin' ball."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000026",
@@ -116,89 +235,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000026:big-shoota",
-      "datasheetId": "000000026",
-      "line": 1,
-      "name": "Big shoota",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000026",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Big shoota",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000026:spiked-wheels",
-      "datasheetId": "000000026",
-      "line": 2,
-      "name": "Spiked wheels",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000026",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Spiked wheels",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000026:wreckin-ball",
-      "datasheetId": "000000026",
-      "line": 3,
-      "name": "Wreckin' ball",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000026",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Wreckin' ball",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 10,
-          "ap": 0,
-          "d": "D6"
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

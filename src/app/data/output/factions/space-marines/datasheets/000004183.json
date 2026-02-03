@@ -5,17 +5,88 @@
   "sourceId": "000000139",
   "legend": "Inspiring leader and superlative warrior both, Marneus Calgar goes to battle clad in the Armour of Antilochus. Obliterating swathes of enemies with volleys of bolt shells from the Gauntlets of Ultramar and tearing apart any foes foolish enough to stand before him, he is an architect of destruction whose gift for grand strategy is without question.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> 1 Gauntlets of Ultramar.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Marneus-Calgar-in-Armour-of-Antilochus",
   "slug": "marneus-calgar-in-armour-of-antilochus",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 1 Gauntlets of Ultramar.",
+    "weapons": [
+      {
+        "id": "000004183:gauntlets-of-ultramar",
+        "datasheetId": "000004183",
+        "line": 1,
+        "name": "Gauntlets of Ultramar",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004183",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gauntlets of Ultramar",
+            "attributes": [
+              "PISTOL",
+              "TWIN-LINKED"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004183:gauntlets-of-ultramar-2",
+        "datasheetId": "000004183",
+        "line": 2,
+        "name": "Gauntlets of Ultramar",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004183",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gauntlets of Ultramar",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,19 +107,7 @@
       "factionId": "",
       "description": "This unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SHOOT AFTER ADVANCING",
-            "CHARGE AFTER FELL BACK"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -57,30 +116,7 @@
       "factionId": "",
       "description": "At the start of your Command phase, if this model is your <span class=\"kwb\">WARLORD</span> and is on the battlefield, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "CP",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isWarlord",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "state": "onBattlefield",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "name": "LORD CALGAR",
@@ -160,7 +196,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004183",
@@ -179,7 +214,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002302",
       "slug": "deathwing-command-squad"
@@ -307,69 +342,6 @@
     {
       "id": "000004138",
       "slug": "terminator-squad-2"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004183:gauntlets-of-ultramar",
-      "datasheetId": "000004183",
-      "line": 1,
-      "name": "Gauntlets of Ultramar",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004183",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauntlets of Ultramar",
-          "attributes": [
-            "PISTOL",
-            "TWIN-LINKED"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004183:gauntlets-of-ultramar-2",
-      "datasheetId": "000004183",
-      "line": 2,
-      "name": "Gauntlets of Ultramar",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004183",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauntlets of Ultramar",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 3
-        }
-      ]
     }
   ]
 }

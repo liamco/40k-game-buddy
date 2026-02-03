@@ -5,17 +5,59 @@
   "sourceId": "000000020",
   "legend": "Stealthy hunters and expert ambushers, Von Ryan's Leapers are swift, agile and especially lethal when fighting in dense terrain. Akin to living mines, they lie still at the optimum locations to cause as much damage as possible. When they sense the perfect time to strike, they butcher all around in a murderous frenzy.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> Leaper's talons.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Von-Ryan-s-Leapers",
   "slug": "von-ryan-s-leapers-2",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> Leaper's talons.",
+    "weapons": [
+      {
+        "id": "000002693:leaper-s-talons",
+        "datasheetId": "000002693",
+        "line": 1,
+        "name": "Leaper's talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002693",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Leaper's talons",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Fights First",
@@ -40,26 +82,7 @@
       "factionId": "",
       "description": "You can target this unit with the Heroic Intervention Stratagem for 0CP, and can do so even if you have already used that Stratagem on a different unit this phase.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "HEROIC INTERVENTION"
-          ],
-          "value": "0CP",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "state": "hasUsedStratagem",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -111,7 +134,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002693",
@@ -137,37 +159,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002693:leaper-s-talons",
-      "datasheetId": "000002693",
-      "line": 1,
-      "name": "Leaper's talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002693",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Leaper's talons",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

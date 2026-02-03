@@ -5,17 +5,61 @@
   "sourceId": "000000139",
   "legend": "Raising high his storm shield, Rampart, as he swings the Fist of Dorn, Lysander wades through his foes like a warship smashing through stormy seas. Each hammer blow reduces enemies to bloody ruin, sweeping whole ranks of warriors from their feet. All the while, Lysander's obstinate scowl never wavers, his determination absolute.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> 1 Fist of Dorn.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Darnath-Lysander",
   "slug": "darnath-lysander",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 1 Fist of Dorn.",
+    "weapons": [
+      {
+        "id": "000002105:fist-of-dorn",
+        "datasheetId": "000002105",
+        "line": 1,
+        "name": "Fist of Dorn",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002105",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Fist of Dorn",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,16 +80,7 @@
       "factionId": "",
       "description": "Each time an attack targets this model's unit, if the Strength characteristic of that attack is greater than or equal to the Toughness characteristic of that unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -54,16 +89,7 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, this model has a 2+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 2
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "name": "INSPIRING COMMANDER",
@@ -143,7 +169,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002105",
@@ -162,7 +187,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000004138",
       "slug": "terminator-squad-2"
@@ -194,42 +219,6 @@
     {
       "id": "000001183",
       "slug": "terminator-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002105:fist-of-dorn",
-      "datasheetId": "000002105",
-      "line": 1,
-      "name": "Fist of Dorn",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002105",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Fist of Dorn",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        }
-      ]
     }
   ]
 }

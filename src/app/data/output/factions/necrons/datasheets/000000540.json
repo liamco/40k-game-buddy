@@ -5,17 +5,203 @@
   "sourceId": "000000029",
   "legend": "Triarch Stalkers are agile combat walkers whose heavy firepower makes them excellent tank-hunters and anti-infantry assault units both. As though their focused blasts of energy and flame were not enough, they can also augment the targeting of nearby Necron forces to further punish the foe.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> heat ray; Stalker's forelimbs.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Triarch-Stalker",
   "slug": "triarch-stalker",
   "factionSlug": "necrons",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> heat ray; Stalker's forelimbs.",
+    "weapons": [
+      {
+        "id": "000000540:heat-ray",
+        "datasheetId": "000000540",
+        "line": 1,
+        "name": "Heat ray",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000540",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heat ray - dispersed",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000540",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Heat ray - focused",
+            "attributes": [
+              "MELTA 4"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000540:particle-shredder",
+        "datasheetId": "000000540",
+        "line": 3,
+        "name": "Particle shredder",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000540",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Particle shredder",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6+6",
+            "bsWs": 2,
+            "s": 7,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000540:heavy-gauss-cannon-array",
+        "datasheetId": "000000540",
+        "line": 4,
+        "name": "Heavy gauss cannon array",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000540",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy gauss cannon array",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000540:stalker-s-forelimbs",
+        "datasheetId": "000000540",
+        "line": 5,
+        "name": "Stalker's forelimbs",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000540",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Stalker's forelimbs",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -1,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000540",
+          "line": 1,
+          "button": "•",
+          "description": "This model's heat ray can be replaced with one of the following:<ul><li>1 particle shredder</li><li>1 heavy gauss cannon array</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's heat ray can be replaced with one of the following:<ul><li>1 particle shredder</li><li>1 heavy gauss cannon array</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "heat ray",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "particle shredder",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "heavy gauss cannon array",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -90,14 +276,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000540",
-      "line": 1,
-      "button": "•",
-      "description": "This model's heat ray can be replaced with one of the following:<ul><li>1 particle shredder</li><li>1 heavy gauss cannon array</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000540",
@@ -116,134 +294,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000540:heat-ray",
-      "datasheetId": "000000540",
-      "line": 1,
-      "name": "Heat ray",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000540",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heat ray - dispersed",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000540",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Heat ray - focused",
-          "attributes": [
-            "MELTA 4"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000540:particle-shredder",
-      "datasheetId": "000000540",
-      "line": 3,
-      "name": "Particle shredder",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000540",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Particle shredder",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6+6",
-          "bsWs": 2,
-          "s": 7,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000540:heavy-gauss-cannon-array",
-      "datasheetId": "000000540",
-      "line": 4,
-      "name": "Heavy gauss cannon array",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000540",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy gauss cannon array",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000540:stalker-s-forelimbs",
-      "datasheetId": "000000540",
-      "line": 5,
-      "name": "Stalker's forelimbs",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000540",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Stalker's forelimbs",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -1,
-          "d": 3
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

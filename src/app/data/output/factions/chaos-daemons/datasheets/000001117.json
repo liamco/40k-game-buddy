@@ -5,17 +5,144 @@
   "sourceId": "000000025",
   "legend": "Wielding the warp-forged Staff of Tomorrow, and with the ability to predict all that may come to pass while knowing all that has already transpired, Kairos Fateweaver is amongst the galaxy's most canny strategists. What the daemon lacks in physical and martial prowess, it more than makes up for in pure Tzeentchian cunning.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Infernal Gateway; Staff of Tomorrow.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-7",
-  "damagedDescription": "While this model has 1-7 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-daemons/Kairos-Fateweaver",
   "slug": "kairos-fateweaver",
   "factionSlug": "chaos-daemons",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-7",
+    "threshold": 7,
+    "description": "While this model has 1-7 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Infernal Gateway; Staff of Tomorrow.",
+    "weapons": [
+      {
+        "id": "000001117:infernal-gateway",
+        "datasheetId": "000001117",
+        "line": 1,
+        "name": "Infernal Gateway",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001117",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Infernal Gateway - witchfire",
+            "attributes": [
+              "BLAST",
+              "INDIRECT FIRE",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 2,
+            "s": 9,
+            "ap": -2,
+            "d": "D3"
+          },
+          {
+            "datasheetId": "000001117",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Infernal Gateway - focused witchfire",
+            "attributes": [
+              "BLAST",
+              "INDIRECT FIRE",
+              "HAZARDOUS",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D3+6",
+            "bsWs": 2,
+            "s": 9,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001117:staff-of-tomorrow",
+        "datasheetId": "000001117",
+        "line": 3,
+        "name": "Staff of Tomorrow",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001117",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of Tomorrow",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": "2D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001117",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -137,14 +264,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001117",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001117",
@@ -163,87 +282,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001117:infernal-gateway",
-      "datasheetId": "000001117",
-      "line": 1,
-      "name": "Infernal Gateway",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001117",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Infernal Gateway - witchfire",
-          "attributes": [
-            "BLAST",
-            "INDIRECT FIRE",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 2,
-          "s": 9,
-          "ap": -2,
-          "d": "D3"
-        },
-        {
-          "datasheetId": "000001117",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Infernal Gateway - focused witchfire",
-          "attributes": [
-            "BLAST",
-            "INDIRECT FIRE",
-            "HAZARDOUS",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D3+6",
-          "bsWs": 2,
-          "s": 9,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001117:staff-of-tomorrow",
-      "datasheetId": "000001117",
-      "line": 3,
-      "name": "Staff of Tomorrow",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001117",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of Tomorrow",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": "2D3"
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

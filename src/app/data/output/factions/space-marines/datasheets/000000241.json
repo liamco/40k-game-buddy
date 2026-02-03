@@ -5,17 +5,211 @@
   "sourceId": "000000023",
   "legend": "The Ravenwing Black Knights are the 2nd Company's greatest warriors, elite fighters who style themselves after the monster-hunting knights of old Caliban. They speed towards the foe, swinging their corvus hammers with such force that the spiked end punctures even the thickest armour.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> bolt pistol; plasma talon; Black Knight combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Ravenwing-Black-Knights",
   "slug": "ravenwing-black-knights",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; plasma talon; Black Knight combat weapon.",
+    "weapons": [
+      {
+        "id": "000000241:astartes-grenade-launcher",
+        "datasheetId": "000000241",
+        "line": 1,
+        "name": "Astartes grenade launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000241",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Astartes grenade launcher - frag",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000241",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Astartes grenade launcher - krak",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -2,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000000241:bolt-pistol",
+        "datasheetId": "000000241",
+        "line": 3,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000241",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000241:plasma-talon",
+        "datasheetId": "000000241",
+        "line": 4,
+        "name": "Plasma talon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000241",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma talon - standard",
+            "attributes": [
+              "RAPID FIRE 1"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000241",
+            "line": 5,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma talon - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "RAPID FIRE 1"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000241:black-knight-combat-weapon",
+        "datasheetId": "000000241",
+        "line": 6,
+        "name": "Black Knight combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000241",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Black Knight combat weapon",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000241",
+          "line": 1,
+          "button": "•",
+          "description": "For every 3 models in this unit, 1 model can replace its plasma talon with 1 Astartes grenade launcher."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "For every 3 models in this unit, 1 model can replace its plasma talon with 1 Astartes grenade launcher.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 3
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "plasma talon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Astartes grenade launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Oath of Moment",
@@ -28,42 +222,7 @@
       "factionId": "",
       "description": "Each time this unit is selected to fight, if it made a Charge move this turn, until the end of the phase, melee weapons equipped by models in this unit have the [ANTI-MONSTER 4+] and [ANTI-VEHICLE 4+] abilities.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "ANTI-MONSTER"
-          ],
-          "value": "4+",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "hasChargedThisTurn",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "ANTI-VEHICLE"
-          ],
-          "value": "4+",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "hasChargedThisTurn",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -72,41 +231,7 @@
       "factionId": "",
       "description": "If a Character unit from your army with the Leader ability can be attached to an Outrider Squad, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [],
-          "value": "",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "abilities": [
-                "LEADER"
-              ],
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "OUTRIDER SQUAD"
-          ],
-          "value": "",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -170,14 +295,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000241",
-      "line": 1,
-      "button": "•",
-      "description": "For every 3 models in this unit, 1 model can replace its plasma talon with 1 Astartes grenade launcher."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000241",
@@ -210,152 +327,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000241:astartes-grenade-launcher",
-      "datasheetId": "000000241",
-      "line": 1,
-      "name": "Astartes grenade launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000241",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Astartes grenade launcher - frag",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000241",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Astartes grenade launcher - krak",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000000241:bolt-pistol",
-      "datasheetId": "000000241",
-      "line": 3,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000241",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000241:plasma-talon",
-      "datasheetId": "000000241",
-      "line": 4,
-      "name": "Plasma talon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000241",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma talon - standard",
-          "attributes": [
-            "RAPID FIRE 1"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000241",
-          "line": 5,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma talon - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "RAPID FIRE 1"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000241:black-knight-combat-weapon",
-      "datasheetId": "000000241",
-      "line": 6,
-      "name": "Black Knight combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000241",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Black Knight combat weapon",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

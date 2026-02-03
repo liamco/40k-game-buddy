@@ -5,17 +5,120 @@
   "sourceId": "000000380",
   "legend": "Of the winged horrors of the Tyranids, none are as monstrously powerful as the Harridan. Borne on huge membranous wings tipped with bio-cannons, they swoop into enemy lines carving through troops and armour with their scything talons or showering shrieking Gargoyles that had been clinging batlike to the Harridan's underbelly.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> 2 dire bio-cannons; gargantuan scything talons.",
   "transport": "This model has a transport capacity of 20 Gargoyles models and 1 Winged Tyranid Prime model.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Harridan",
   "slug": "harridan",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-10",
+    "threshold": 10,
+    "description": "While this model has 1-10 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 2 dire bio-cannons; gargantuan scything talons.",
+    "weapons": [
+      {
+        "id": "000000504:dire-bio-cannon",
+        "datasheetId": "000000504",
+        "line": 1,
+        "name": "Dire bio-cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000504",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Dire bio-cannon",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6+6",
+            "bsWs": 3,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000504:gargantuan-scything-talons",
+        "datasheetId": "000000504",
+        "line": 2,
+        "name": "Gargantuan scything talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000504",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gargantuan scything talons",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000504",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,16 +140,7 @@
       "factionId": "",
       "description": "Each time this model is selected to shoot, you can use this ability. If you do, until the end of the phase, each time this model makes an attack, add 1 to the Wound roll. After resolving those attacks, roll one D6: on a 2+, this model suffers D3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -116,14 +210,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000504",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000504",
@@ -142,63 +228,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000504:dire-bio-cannon",
-      "datasheetId": "000000504",
-      "line": 1,
-      "name": "Dire bio-cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000504",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Dire bio-cannon",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6+6",
-          "bsWs": 3,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000504:gargantuan-scything-talons",
-      "datasheetId": "000000504",
-      "line": 2,
-      "name": "Gargantuan scything talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000504",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gargantuan scything talons",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

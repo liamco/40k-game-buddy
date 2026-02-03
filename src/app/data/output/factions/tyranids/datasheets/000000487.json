@@ -5,17 +5,59 @@
   "sourceId": "000000020",
   "legend": "These rudimentary organisms are filled with poisonous gases held under extremely high pressure. Instinct drives them to drift towards prey formations or up into the path of enemy aircraft, before detonating in a nauseating spray of poisonous filth and chitinous shrapnel.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> nothing.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Mucolid-Spores",
   "slug": "mucolid-spores",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> nothing.",
+    "weapons": [
+      {
+        "id": "000000487:wargear-1",
+        "datasheetId": "000000487",
+        "line": 1,
+        "name": "Wargear 1",
+        "type": "",
+        "profiles": [
+          {
+            "datasheetId": "000000487",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "",
+            "attributes": [],
+            "range": "",
+            "type": "",
+            "a": 0,
+            "bsWs": "-",
+            "s": "-",
+            "ap": 0,
+            "d": "-"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -32,38 +74,7 @@
       "factionId": "",
       "description": "Enemy units cannot start or end an Advance move within 6\" of this unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": false
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -72,51 +83,7 @@
       "factionId": "",
       "description": "Each time this unit or an enemy unit ends a move, for each model in this unit that is within 3\" of one or more enemy units, select one of those enemy units. That model in this unit is destroyed, then roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D6 mortal wounds.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "mortalWounds",
-          "value": "D3",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isWithin3Inches",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "mortalWounds",
-          "value": "D6",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isWithin3Inches",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "roll",
-              "value": 6,
-              "operator": "equals"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -168,7 +135,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000487",
@@ -194,37 +160,5 @@
       "count": 2
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000487:wargear-1",
-      "datasheetId": "000000487",
-      "line": 1,
-      "name": "Wargear 1",
-      "type": "",
-      "profiles": [
-        {
-          "datasheetId": "000000487",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "",
-          "attributes": [],
-          "range": "",
-          "type": "",
-          "a": 0,
-          "bsWs": "-",
-          "s": "-",
-          "ap": 0,
-          "d": "-"
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

@@ -69,7 +69,7 @@ export interface EngagementForce {
     items: EngagementForceItem[];
 }
 
-export type EngagementForceItem = Omit<ArmyListItem, "availableWargear" | "modelInstances" | "abilities"> & {
+export type EngagementForceItem = Omit<ArmyListItem, "wargear" | "modelInstances" | "abilities"> & {
     wargear: EngagementWargear[];
     modelInstances?: EngagementModelInstance[];
     /** Abilities with source tracking for combined units */

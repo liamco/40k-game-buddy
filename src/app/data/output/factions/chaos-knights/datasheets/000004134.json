@@ -5,17 +5,148 @@
   "sourceId": "000000070",
   "legend": "Knights Ruinator charge the enemy lines amidst searing torrents of cursed flame and salvoes of shocking terrorpulse missiles. Fixating on a single foe or enemy formation until it is utterly destroyed then moving on to the next, these ghastly war engines burn and drill a trail of utter devastation for their comrades to follow into the very heart of their foes' position.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> darkflame lance; terrorpulse missiles; fellbore.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-9",
-  "damagedDescription": "While this model has 1-9 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/Knight-Ruinator",
   "slug": "knight-ruinator",
   "factionSlug": "chaos-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-9",
+    "threshold": 9,
+    "description": "While this model has 1-9 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 5
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> darkflame lance; terrorpulse missiles; fellbore.",
+    "weapons": [
+      {
+        "id": "000004134:darkflame-lance",
+        "datasheetId": "000004134",
+        "line": 1,
+        "name": "Darkflame lance",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004134",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Darkflame lance",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": "N/A",
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004134:terrorpulse-missiles",
+        "datasheetId": "000004134",
+        "line": 2,
+        "name": "Terrorpulse missiles",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004134",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Terrorpulse missiles",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004134:fellbore",
+        "datasheetId": "000004134",
+        "line": 3,
+        "name": "Fellbore",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004134",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Fellbore - strike",
+            "attributes": [
+              "ANTI-MONSTER 2+",
+              "ANTI-VEHICLE 2+"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -3,
+            "d": 6
+          },
+          {
+            "datasheetId": "000004134",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Fellbore - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 10,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -122,7 +253,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004134",
@@ -141,108 +271,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004134:darkflame-lance",
-      "datasheetId": "000004134",
-      "line": 1,
-      "name": "Darkflame lance",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004134",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Darkflame lance",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": "N/A",
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004134:terrorpulse-missiles",
-      "datasheetId": "000004134",
-      "line": 2,
-      "name": "Terrorpulse missiles",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004134",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Terrorpulse missiles",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004134:fellbore",
-      "datasheetId": "000004134",
-      "line": 3,
-      "name": "Fellbore",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004134",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Fellbore - strike",
-          "attributes": [
-            "ANTI-MONSTER 2+",
-            "ANTI-VEHICLE 2+"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -3,
-          "d": 6
-        },
-        {
-          "datasheetId": "000004134",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Fellbore - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 10,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

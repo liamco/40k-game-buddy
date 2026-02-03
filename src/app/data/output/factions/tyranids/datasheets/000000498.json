@@ -5,17 +5,83 @@
   "sourceId": "000000020",
   "legend": "Dropped from orbit, Sporocysts dig into the surface of the prey world like ticks then begin spewing toxic spores from their living chimneys. They are able to eject shoals of Mucolid Spores, while prey who stray too close are subjected to hails of organic projectiles from the bio-cannons grafted to the Sporocyst's hide.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> Sporocyst bio-weapons; flensing whips.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Sporocyst",
   "slug": "sporocyst",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Sporocyst bio-weapons; flensing whips.",
+    "weapons": [
+      {
+        "id": "000000498:sporocyst-bio-weapons",
+        "datasheetId": "000000498",
+        "line": 1,
+        "name": "Sporocyst bio-weapons",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000498",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Sporocyst bio-weapons",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 10,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000498:flensing-whips",
+        "datasheetId": "000000498",
+        "line": 2,
+        "name": "Flensing whips",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000498",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Flensing whips",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,48 +99,7 @@
       "factionId": "",
       "description": "Once per turn, in your Shooting phase, when selected to shoot, one unit with this ability can use it instead of making any attacks with its ranged weapons. If it does, you can add one new Mucolid Spores unit containing 1 model to your army and set it up anywhere on the battlefield that is wholly within 18\" of this model and more than 9\" horizontally away from all enemy units.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "MUCOLID SPORES"
-          ],
-          "value": 1
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "addsAbility",
-          "abilities": [
-            "MUCOLID SPORES"
-          ],
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -83,32 +108,7 @@
       "factionId": "",
       "description": "You can target this model with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted a different unit with that Stratagem this turn. This model can only be targeted with that Stratagem once per turn.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FIRE OVERWATCH"
-          ],
-          "value": "0CP"
-        },
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "thisModel",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "hasFiredThisPhase",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -154,7 +154,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000498",
@@ -173,61 +172,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000498:sporocyst-bio-weapons",
-      "datasheetId": "000000498",
-      "line": 1,
-      "name": "Sporocyst bio-weapons",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000498",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Sporocyst bio-weapons",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 10,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000498:flensing-whips",
-      "datasheetId": "000000498",
-      "line": 2,
-      "name": "Flensing whips",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000498",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Flensing whips",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

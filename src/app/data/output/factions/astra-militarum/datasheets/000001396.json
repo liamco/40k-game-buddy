@@ -5,17 +5,135 @@
   "sourceId": "000000016",
   "legend": "Adepts of the Omnissiah, Enginseers are robed machine-mystics tasked with using arcane lore and cybernetic arrays to effect battlefield repairs upon damaged fighting machines. To them, every war engine is a priceless artefact of technology, whose spirit need only be roused once more to take revenge on the enemy.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Mechanicus pistol; Enginseer axe; servo-arm.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/astra-militarum/Tech-Priest-Enginseer",
   "slug": "tech-priest-enginseer-2",
   "factionSlug": "astra-militarum",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Mechanicus pistol; Enginseer axe; servo-arm.",
+    "weapons": [
+      {
+        "id": "000001396:mechanicus-pistol",
+        "datasheetId": "000001396",
+        "line": 1,
+        "name": "Mechanicus pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001396",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mechanicus pistol",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001396:enginseer-axe",
+        "datasheetId": "000001396",
+        "line": 2,
+        "name": "Enginseer axe",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001396",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Enginseer axe",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001396:servo-arm",
+        "datasheetId": "000001396",
+        "line": 3,
+        "name": "Servo-arm",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001396",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Servo-arm",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001396",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -28,18 +146,7 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Astra Militarum Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LONE OPERATIVE"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -48,16 +155,7 @@
       "factionId": "",
       "description": "In your Command phase, select one friendly Astra Militarum Vehicle model within 3\" of this model. That <span class=\"kwb\">VEHICLE</span> model regains up to D3 lost wounds and, until the start of your next Command phase, that <span class=\"kwb\">VEHICLE</span> model has a 4+ invulnerable save. Each model can only be selected for this ability once per turn.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -118,14 +216,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001396",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001396",
@@ -144,7 +234,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003893",
       "slug": "krieg-combat-engineers"
@@ -164,91 +254,6 @@
     {
       "id": "000002612",
       "slug": "cadian-shock-troops"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001396:mechanicus-pistol",
-      "datasheetId": "000001396",
-      "line": 1,
-      "name": "Mechanicus pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001396",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mechanicus pistol",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001396:enginseer-axe",
-      "datasheetId": "000001396",
-      "line": 2,
-      "name": "Enginseer axe",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001396",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Enginseer axe",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001396:servo-arm",
-      "datasheetId": "000001396",
-      "line": 3,
-      "name": "Servo-arm",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001396",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Servo-arm",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

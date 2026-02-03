@@ -5,17 +5,61 @@
   "sourceId": "000000020",
   "legend": "The Deathleaper is an advancement of the Lictor strain intended to act as a terror weapon. Possessing an instinctive understanding of how to spread fear through prey populations, it uses its skills in stealth, infiltration and assassination to sow paranoia and dread before the hive fleet attacks en masse.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Lictor claws and talons.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Deathleaper",
   "slug": "deathleaper-2",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Lictor claws and talons.",
+    "weapons": [
+      {
+        "id": "000000479:lictor-claws-and-talons",
+        "datasheetId": "000000479",
+        "line": 1,
+        "name": "Lictor claws and talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000479",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lictor claws and talons",
+            "attributes": [
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Fights First",
@@ -44,23 +88,7 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingModel",
-              "state": "isCharacter",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -69,66 +97,7 @@
       "factionId": "",
       "description": "While an enemy unit is within 6\" of this model, worsen the Leadership characteristic of models in that unit by 1. In addition, in the Battle-shock step of your opponent's Command phase, if such an enemy unit is below its Starting Strength, it must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "ld",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inRangeOfEnemyObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "ld",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "inRangeOfObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "ld",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "ld",
-          "value": "Battle-shock test",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isBelowStartingStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -137,18 +106,7 @@
       "factionId": "",
       "description": "This model cannot be your <span class=\"kwb\">WARLORD</span>.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "CANNOT BE WARLORD"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -212,7 +170,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000479",
@@ -231,39 +188,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000479:lictor-claws-and-talons",
-      "datasheetId": "000000479",
-      "line": 1,
-      "name": "Lictor claws and talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000479",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lictor claws and talons",
-          "attributes": [
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

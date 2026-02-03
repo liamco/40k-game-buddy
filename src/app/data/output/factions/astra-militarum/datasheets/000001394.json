@@ -5,17 +5,178 @@
   "sourceId": "000000016",
   "legend": "Serving amongst the Imperial Guard's regiments to bolster the spiritual strength of its soldiers, Regimental Preachers are fiery zealots and fanatical orators. They do not shy away from combat, but wade amongst the foe, their voices raised in prayer to the God-Emperor and in furious castigation of the enemy.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> zealot's vindictor.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/astra-militarum/Ministorum-Priest",
   "slug": "ministorum-priest",
   "factionSlug": "astra-militarum",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> zealot's vindictor.",
+    "weapons": [
+      {
+        "id": "000001394:holy-pistol",
+        "datasheetId": "000001394",
+        "line": 1,
+        "name": "Holy pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001394",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Holy pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001394:zealot-s-vindictor",
+        "datasheetId": "000001394",
+        "line": 2,
+        "name": "Zealot's vindictor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001394",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Zealot's vindictor",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001394:power-weapon",
+        "datasheetId": "000001394",
+        "line": 3,
+        "name": "Power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001394",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001394:zealot-s-vindictor-2",
+        "datasheetId": "000001394",
+        "line": 4,
+        "name": "Zealot's vindictor",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001394",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Zealot's vindictor",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001394",
+          "line": 1,
+          "button": "•",
+          "description": "This model's zealot's vindictor can be replaced with 1 holy pistol and 1 power weapon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's zealot's vindictor can be replaced with 1 holy pistol and 1 power weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "zealot's vindictor",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "holy pistol",
+                    "count": 1
+                  },
+                  {
+                    "name": "power weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -95,14 +256,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001394",
-      "line": 1,
-      "button": "•",
-      "description": "This model's zealot's vindictor can be replaced with 1 holy pistol and 1 power weapon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001394",
@@ -121,7 +274,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002746",
       "slug": "tempestus-scions"
@@ -145,115 +298,6 @@
     {
       "id": "000002612",
       "slug": "cadian-shock-troops"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001394:holy-pistol",
-      "datasheetId": "000001394",
-      "line": 1,
-      "name": "Holy pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001394",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Holy pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001394:zealot-s-vindictor",
-      "datasheetId": "000001394",
-      "line": 2,
-      "name": "Zealot's vindictor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001394",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Zealot's vindictor",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001394:power-weapon",
-      "datasheetId": "000001394",
-      "line": 3,
-      "name": "Power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001394",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001394:zealot-s-vindictor-2",
-      "datasheetId": "000001394",
-      "line": 4,
-      "name": "Zealot's vindictor",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001394",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Zealot's vindictor",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
     }
   ]
 }

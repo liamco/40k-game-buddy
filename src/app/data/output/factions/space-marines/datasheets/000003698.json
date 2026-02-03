@@ -5,17 +5,106 @@
   "sourceId": "000000023",
   "legend": "Wielding Calibanite greatswords with breathtaking skill, wreathed in the incense smoke of their braziers of judgement, the Inner Circle Companions cut a crimson path through their foes. They are sinister warriors whether battling as ally or enemy, for they fight in silence save for the whine of their armour servos and the crunch of their blades through flesh and bone.",
   "role": "Other",
-  "loadout": "<b>Every Inner Circle Companion is equipped with:</b> heavy bolt pistol; Calibanite greatsword.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Inner-Circle-Companions",
   "slug": "inner-circle-companions",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every Inner Circle Companion is equipped with:</b> heavy bolt pistol; Calibanite greatsword.",
+    "weapons": [
+      {
+        "id": "000003698:heavy-bolt-pistol",
+        "datasheetId": "000003698",
+        "line": 1,
+        "name": "Heavy bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003698",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003698:calibanite-greatsword",
+        "datasheetId": "000003698",
+        "line": 2,
+        "name": "Calibanite greatsword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003698",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Calibanite greatsword - strike",
+            "profileName": "strike",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          },
+          {
+            "datasheetId": "000003698",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Calibanite greatsword - sweep",
+            "profileName": "sweep",
+            "attributes": [
+              "SUSTAINED HITS 2"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Oath of Moment",
@@ -28,16 +117,7 @@
       "factionId": "",
       "description": "While a Character model is leading this unit, each time an attack targets this unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -46,16 +126,7 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets a <span class=\"kwb\">CHARACTER</span> unit, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -64,44 +135,7 @@
       "factionId": "",
       "description": "If a Character unit from your army with the Leader ability can be attached to a Sternguard Veteran Squad, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [],
-          "value": "",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "abilities": [
-                "LEADER"
-              ],
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "STERNGUARD VETERAN SQUAD"
-          ],
-          "value": "",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "abilities": [
-                "LEADER"
-              ],
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -165,7 +199,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000003698",
@@ -191,86 +224,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003698:heavy-bolt-pistol",
-      "datasheetId": "000003698",
-      "line": 1,
-      "name": "Heavy bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003698",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003698:calibanite-greatsword",
-      "datasheetId": "000003698",
-      "line": 2,
-      "name": "Calibanite greatsword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003698",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Calibanite greatsword - strike",
-          "profileName": "strike",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000003698",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Calibanite greatsword - sweep",
-          "profileName": "sweep",
-          "attributes": [
-            "SUSTAINED HITS 2"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

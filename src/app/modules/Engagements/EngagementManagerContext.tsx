@@ -75,7 +75,7 @@ export function getUnitStrengthLabel(strength: EngagementForceItemCombatState["u
 
 // Create a single (non-combined) engagement item
 function createSingleEngagementItem(item: ArmyListItem): EngagementForceItem {
-    const { availableWargear, modelInstances, ...rest } = item;
+    const { wargear: wargearData, modelInstances, ...rest } = item;
 
     // Tag model instances with source unit name (for consistency)
     const taggedInstances: EngagementModelInstance[] = (modelInstances || []).map((m) => ({
@@ -167,7 +167,7 @@ function mergeUnitsForEngagement(leaders: ArmyListItem[], bodyguard: ArmyListIte
     const displayName = `${leaderNames} + ${bodyguard.name}`;
 
     // Use first leader as base, but override with merged data
-    const { availableWargear, modelInstances: _, abilities: __, ...baseItem } = leaders[0];
+    const { wargear: _wargearData, modelInstances: _, abilities: __, ...baseItem } = leaders[0];
 
     // Create a temporary item for combat state calculation
     const tempItem = { ...baseItem, modelInstances } as ArmyListItem;

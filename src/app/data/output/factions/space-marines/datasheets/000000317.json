@@ -5,17 +5,91 @@
   "sourceId": "000000036",
   "legend": "Arjac Rockfist is a towering mass of muscle and a taciturn anvil of endurance. Wielding the enormous Foehammer - recalling his former role as an Iron Priest of the forge - Arjac crushes his foes with pulverising strength. As personal champion of the Great Wolf, Arjac upholds the honour of the Chapter.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Foehammer.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Arjac-Rockfist",
   "slug": "arjac-rockfist",
   "factionSlug": "space-marines",
-  "supplementKey": "space-wolves",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Foehammer.",
+    "weapons": [
+      {
+        "id": "000000317:foehammer",
+        "datasheetId": "000000317",
+        "line": 1,
+        "name": "Foehammer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000317",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Foehammer",
+            "attributes": [
+              "ANTI-MONSTER 3+",
+              "ANTI-VEHICLE 3+",
+              "ASSAULT"
+            ],
+            "range": 6,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000317:foehammer-2",
+        "datasheetId": "000000317",
+        "line": 2,
+        "name": "Foehammer",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000317",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Foehammer",
+            "attributes": [
+              "ANTI-MONSTER 3+",
+              "ANTI-VEHICLE 3+",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "space-wolves",
+    "slug": "space-wolves",
+    "name": "Space Wolves",
+    "label": "Space Wolves",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,53 +110,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit is destroyed by a melee attack, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "targetModel",
-              "state": "hasFoughtThisPhase",
-              "operator": "equals",
-              "value": false
-            }
-          ]
-        },
-        {
-          "entity": "targetModel",
-          "effect": "staticNumber",
-          "attribute": "h",
-          "value": 4,
-          "conditions": [
-            {
-              "entity": "opposingModel",
-              "state": "isDestroyed",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "targetModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FIGHT AFTER DEATH"
-          ],
-          "conditions": [
-            {
-              "entity": "targetModel",
-              "state": "hasFoughtThisPhase",
-              "operator": "equals",
-              "value": false
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -91,42 +119,7 @@
       "factionId": "",
       "description": "Each time this model makes a melee attack that targets a <span class=\"kwb\">CHARACTER</span> unit, you can re-roll the Hit roll and you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "h",
-          "value": "all",
-          "conditions": [
-            {
-              "entity": "targetUnit",
-              "keywords": [
-                "CHARACTER"
-              ],
-              "operator": "includes",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "w",
-          "value": "all",
-          "conditions": [
-            {
-              "entity": "targetUnit",
-              "keywords": [
-                "CHARACTER"
-              ],
-              "operator": "includes",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -196,7 +189,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000317",
@@ -215,76 +207,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000318",
       "slug": "wolf-guard-terminators"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000317:foehammer",
-      "datasheetId": "000000317",
-      "line": 1,
-      "name": "Foehammer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000317",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Foehammer",
-          "attributes": [
-            "ANTI-MONSTER 3+",
-            "ANTI-VEHICLE 3+",
-            "ASSAULT"
-          ],
-          "range": 6,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000317:foehammer-2",
-      "datasheetId": "000000317",
-      "line": 2,
-      "name": "Foehammer",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000317",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Foehammer",
-          "attributes": [
-            "ANTI-MONSTER 3+",
-            "ANTI-VEHICLE 3+",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        }
-      ]
     }
   ]
 }

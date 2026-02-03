@@ -5,17 +5,127 @@
   "sourceId": "000000029",
   "legend": "Incapable of disloyalty and clad in forms as resilient and resplendent as their masters', Lychguard are the ultimate protectors. Whether reaping the foe with warscythes or advancing with dispersion shields locked and hyperphase swords thrumming, at close quarters these bodyguards are nigh on unstoppable.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> warscythe.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Lychguard",
   "slug": "lychguard",
   "factionSlug": "necrons",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> warscythe.",
+    "weapons": [
+      {
+        "id": "000000536:hyperphase-sword",
+        "datasheetId": "000000536",
+        "line": 1,
+        "name": "Hyperphase sword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000536",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hyperphase sword",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000536:warscythe",
+        "datasheetId": "000000536",
+        "line": 2,
+        "name": "Warscythe",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000536",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Warscythe",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000536",
+          "line": 1,
+          "button": "•",
+          "description": "All models in this unit can each have their warscythe replaced with 1 hyperphase sword and 1 dispersion shield."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "All models in this unit can each have their warscythe replaced with 1 hyperphase sword and 1 dispersion shield.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "all-models"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "warscythe",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "hyperphase sword",
+                    "count": 1
+                  },
+                  {
+                    "name": "dispersion shield",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Reanimation Protocols",
@@ -28,16 +138,7 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -46,16 +147,7 @@
       "factionId": "",
       "description": "While a Noble model is leading this unit, each time an attack targets this unit, if the Strength characteristic of that attack is greater than this unit's Toughness characteristic, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -95,14 +187,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000536",
-      "line": 1,
-      "button": "•",
-      "description": "All models in this unit can each have their warscythe replaced with 1 hyperphase sword and 1 dispersion shield."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000536",
@@ -128,63 +212,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000536:hyperphase-sword",
-      "datasheetId": "000000536",
-      "line": 1,
-      "name": "Hyperphase sword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000536",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hyperphase sword",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000536:warscythe",
-      "datasheetId": "000000536",
-      "line": 2,
-      "name": "Warscythe",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000536",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Warscythe",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

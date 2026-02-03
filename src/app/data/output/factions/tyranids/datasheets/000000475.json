@@ -5,17 +5,104 @@
   "sourceId": "000000020",
   "legend": "A Zoanthrope's physical form is given over to harnessing the might of the Hive Mind. Not only do they act as synapse nodes, but they can also draw upon the energies of the Hive Mind to unleash searing psychic blasts, and to generate fields of defensive power that can stop an artillery shell dead.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> Warp Blast; chitinous claws and teeth.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Zoanthropes",
   "slug": "zoanthropes",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> Warp Blast; chitinous claws and teeth.",
+    "weapons": [
+      {
+        "id": "000000475:warp-blast",
+        "datasheetId": "000000475",
+        "line": 1,
+        "name": "Warp Blast",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000475",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Warp Blast - witchfire",
+            "attributes": [
+              "BLAST",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": "D3"
+          },
+          {
+            "datasheetId": "000000475",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Warp Blast - focused witchfire",
+            "attributes": [
+              "LETHAL HITS",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000000475:chitinous-claws-and-teeth",
+        "datasheetId": "000000475",
+        "line": 3,
+        "name": "Chitinous claws and teeth",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000475",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chitinous claws and teeth",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 5,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Shadow in the Warp",
@@ -32,38 +119,7 @@
       "factionId": "",
       "description": "While an enemy unit is within 6\" of this unit, if this unit contains a Neurothrope, each time that enemy unit fails a Battle-shock test, it suffers D3 mortal wounds and one model in this unit regains up to D3 lost wounds.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "mortalWounds",
-          "value": "D3",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "attribute": "ld",
-              "state": "isBattleShocked",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "w",
-          "value": "D3",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isBattleShocked",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -72,16 +128,7 @@
       "factionId": "",
       "description": "While a friendly Tyranids unit is within 6\" of this unit, models in that unit have a 6+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 6
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -145,7 +192,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000475",
@@ -178,82 +224,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000475:warp-blast",
-      "datasheetId": "000000475",
-      "line": 1,
-      "name": "Warp Blast",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000475",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Warp Blast - witchfire",
-          "attributes": [
-            "BLAST",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": "D3"
-        },
-        {
-          "datasheetId": "000000475",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Warp Blast - focused witchfire",
-          "attributes": [
-            "LETHAL HITS",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000000475:chitinous-claws-and-teeth",
-      "datasheetId": "000000475",
-      "line": 3,
-      "name": "Chitinous claws and teeth",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000475",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chitinous claws and teeth",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 5,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

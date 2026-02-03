@@ -5,17 +5,152 @@
   "sourceId": "000000029",
   "legend": "The Destroyer Cults think nothing of sacrificing their physical forms to optimise themselves for slaughter. Lokhust Heavy Destroyers skim to battle upon repulsor-sled bodies, their upper limbs bound into gauss destructors or enmitic exterminators with which they decimate their foes with devastating blasts from afar.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> gauss destructor; close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Lokhust-Heavy-Destroyers",
   "slug": "lokhust-heavy-destroyers",
   "factionSlug": "necrons",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> gauss destructor; close combat weapon.",
+    "weapons": [
+      {
+        "id": "000002116:enmitic-exterminator",
+        "datasheetId": "000002116",
+        "line": 1,
+        "name": "Enmitic exterminator",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002116",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Enmitic exterminator",
+            "attributes": [
+              "HEAVY",
+              "RAPID FIRE 6",
+              "SUSTAINED HITS 1"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002116:gauss-destructor",
+        "datasheetId": "000002116",
+        "line": 2,
+        "name": "Gauss destructor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002116",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gauss destructor",
+            "attributes": [
+              "HEAVY",
+              "LETHAL HITS"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -4,
+            "d": 6
+          }
+        ]
+      },
+      {
+        "id": "000002116:close-combat-weapon",
+        "datasheetId": "000002116",
+        "line": 3,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002116",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002116",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their gauss destructor replaced with 1 enmitic exterminator."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their gauss destructor replaced with 1 enmitic exterminator.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "gauss destructor",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "enmitic exterminator",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Reanimation Protocols",
@@ -80,14 +215,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002116",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their gauss destructor replaced with 1 enmitic exterminator."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002116",
@@ -120,92 +247,5 @@
       "count": 3
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002116:enmitic-exterminator",
-      "datasheetId": "000002116",
-      "line": 1,
-      "name": "Enmitic exterminator",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002116",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Enmitic exterminator",
-          "attributes": [
-            "HEAVY",
-            "RAPID FIRE 6",
-            "SUSTAINED HITS 1"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002116:gauss-destructor",
-      "datasheetId": "000002116",
-      "line": 2,
-      "name": "Gauss destructor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002116",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauss destructor",
-          "attributes": [
-            "HEAVY",
-            "LETHAL HITS"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -4,
-          "d": 6
-        }
-      ]
-    },
-    {
-      "id": "000002116:close-combat-weapon",
-      "datasheetId": "000002116",
-      "line": 3,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002116",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

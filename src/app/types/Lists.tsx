@@ -30,7 +30,7 @@ export interface ModelInstance {
     instanceId: string; // Unique: "{listItemId}-{modelTypeSlug}-{index}"
     modelType: string; // From unitComposition: "Tactical Sergeant", "Tactical Marine"
     modelTypeLine: number; // unitComposition line number (for stats lookup)
-    loadout: string[]; // Array of weapon IDs from availableWargear
+    loadout: string[]; // Array of weapon IDs from wargear.weapons
     defaultLoadout: string[]; // Original loadout at creation (for detecting customization)
     // Tracks which weapon was selected for each option line (for overlapping options)
     // Key: option line number, Value: weapon ID selected for that option
@@ -51,4 +51,8 @@ export type ArmyListItem = Datasheet & {
     // Unit-wide option selections (for "All models in this unit" options)
     // Key: option line number, Value: weapon ID selected for that option
     unitWideSelections?: Record<number, string>;
+
+    // Wargear abilities that are currently active based on equipped weapons
+    // Populated by evaluator when loadout changes
+    activeWargearAbilities?: string[];
 };

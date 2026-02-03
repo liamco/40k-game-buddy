@@ -5,17 +5,266 @@
   "sourceId": "000000210",
   "legend": "Jakhals are amongst the strongest and most bloodthirsty of all the mortal followers of the World Eaters, and seek to emulate their gore-crazed masters in every way they can. When sent into battle, they enter the fray with wild abandon, hacking and slashing with their chain weapons in the hope of earning the favour of their lords.",
   "role": "Other",
-  "loadout": "<b>The Jakhal Pack Leader and every Jakhal is equipped with:</b> autopistol; chainblades.<br><br><b>Every Dishonoured is equipped with:</b> paired manglers.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/world-eaters/Jakhals",
   "slug": "jakhals",
   "factionSlug": "world-eaters",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: World Eaters",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>The Jakhal Pack Leader and every Jakhal is equipped with:</b> autopistol; chainblades.<br><br><b>Every Dishonoured is equipped with:</b> paired manglers.",
+    "weapons": [
+      {
+        "id": "000002628:autopistol",
+        "datasheetId": "000002628",
+        "line": 1,
+        "name": "Autopistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002628",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Autopistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002628:chainblades",
+        "datasheetId": "000002628",
+        "line": 2,
+        "name": "Chainblades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002628",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chainblades",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002628:paired-manglers",
+        "datasheetId": "000002628",
+        "line": 3,
+        "name": "Paired manglers",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002628",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Paired manglers",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002628:mauler-chainblade",
+        "datasheetId": "000002628",
+        "line": 4,
+        "name": "Mauler chainblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002628",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mauler chainblade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 5,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002628:skullsmasher-and-mangler",
+        "datasheetId": "000002628",
+        "line": 5,
+        "name": "Skullsmasher and mangler",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002628",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Skullsmasher and mangler",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002628",
+          "line": 1,
+          "button": "•",
+          "description": "For every 10 models in this unit, 1 Jakhal's chainblades can be replaced with 1 mauler chainblade."
+        },
+        {
+          "datasheetId": "000002628",
+          "line": 2,
+          "button": "•",
+          "description": "Any number of Dishonoured models can each have their paired manglers replaced with 1 skullsmasher and mangler."
+        },
+        {
+          "datasheetId": "000002628",
+          "line": 3,
+          "button": "•",
+          "description": "For every 10 models in this unit, 1 Jakhal can be equipped with 1 icon of Khorne."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "For every 10 models in this unit, 1 Jakhal's chainblades can be replaced with 1 mauler chainblade.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1,
+            "modelType": "Jakhal"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "chainblades",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "mauler chainblade",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "Any number of Dishonoured models can each have their paired manglers replaced with 1 skullsmasher and mangler.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "paired manglers",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "skullsmasher and mangler",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "For every 10 models in this unit, 1 Jakhal can be equipped with 1 icon of Khorne.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 10
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "icon of Khorne",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Blessings of Khorne",
@@ -101,26 +350,6 @@
       "baseSizeDescr": "Dishonoured model 40mm"
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002628",
-      "line": 1,
-      "button": "•",
-      "description": "For every 10 models in this unit, 1 Jakhal's chainblades can be replaced with 1 mauler chainblade."
-    },
-    {
-      "datasheetId": "000002628",
-      "line": 2,
-      "button": "•",
-      "description": "Any number of Dishonoured models can each have their paired manglers replaced with 1 skullsmasher and mangler."
-    },
-    {
-      "datasheetId": "000002628",
-      "line": 3,
-      "button": "•",
-      "description": "For every 10 models in this unit, 1 Jakhal can be equipped with 1 icon of Khorne."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002628",
@@ -158,135 +387,5 @@
       "count": 20
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: World Eaters",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002628:autopistol",
-      "datasheetId": "000002628",
-      "line": 1,
-      "name": "Autopistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002628",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Autopistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002628:chainblades",
-      "datasheetId": "000002628",
-      "line": 2,
-      "name": "Chainblades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002628",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chainblades",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002628:paired-manglers",
-      "datasheetId": "000002628",
-      "line": 3,
-      "name": "Paired manglers",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002628",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Paired manglers",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002628:mauler-chainblade",
-      "datasheetId": "000002628",
-      "line": 4,
-      "name": "Mauler chainblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002628",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mauler chainblade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 5,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002628:skullsmasher-and-mangler",
-      "datasheetId": "000002628",
-      "line": 5,
-      "name": "Skullsmasher and mangler",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002628",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Skullsmasher and mangler",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

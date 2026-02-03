@@ -5,17 +5,245 @@
   "sourceId": "000000023",
   "legend": "Deathwing Knights are the Chapter's ultimate death-dealers, their strikes breaking the enemy's back in one fell swoop. Equipped with heirloom wargear, they teleport into the heart of the thickest fighting, led by Knight Masters who are whirlwinds of deathly destruction.",
   "role": "Other",
-  "loadout": "<b>The Knight Master is equipped with:</b> great weapon of the Unforgiven.<br><br><b>Every Deathwing Knight is equipped with:</b> mace of absolution.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Deathwing-Knights",
   "slug": "deathwing-knights",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>The Knight Master is equipped with:</b> great weapon of the Unforgiven.<br><br><b>Every Deathwing Knight is equipped with:</b> mace of absolution.",
+    "weapons": [
+      {
+        "id": "000000231:great-weapon-of-the-unforgiven",
+        "datasheetId": "000000231",
+        "line": 1,
+        "name": "Great weapon of the Unforgiven",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000231",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Great weapon of the Unforgiven",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000231:mace-of-absolution",
+        "datasheetId": "000000231",
+        "line": 2,
+        "name": "Mace of absolution",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000231",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mace of absolution",
+            "attributes": [
+              "ANTI-MONSTER 4+",
+              "ANTI-VEHICLE 4+"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000231:power-weapon",
+        "datasheetId": "000000231",
+        "line": 3,
+        "name": "Power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000231",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000231:relic-weapon",
+        "datasheetId": "000000231",
+        "line": 4,
+        "name": "Relic weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000231",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Relic weapon",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000231",
+          "line": 1,
+          "button": "•",
+          "description": "The Knight Master's great weapon of the Unforgiven can be replaced with 1 relic weapon."
+        },
+        {
+          "datasheetId": "000000231",
+          "line": 2,
+          "button": "•",
+          "description": "All Deathwing Knights in this unit can each have their mace of absolution replaced with 1 power weapon."
+        },
+        {
+          "datasheetId": "000000231",
+          "line": 3,
+          "button": "•",
+          "description": "This unit can be equipped with 1 Watcher in the Dark."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "The Knight Master's great weapon of the Unforgiven can be replaced with 1 relic weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "specific-model",
+            "modelType": "Knight Master"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "great weapon of the Unforgiven",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "relic weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "All Deathwing Knights in this unit can each have their mace of absolution replaced with 1 power weapon.",
+          "wargearParsed": false,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "mace of absolution",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "power weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This unit can be equipped with 1 Watcher in the Dark.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-unit"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Watcher in the Dark",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -32,54 +260,7 @@
       "factionId": "",
       "description": "At the start of the battle, you can set up one Teleport Homer token for this unit anywhere on the battlefield that is not in your opponent's deployment zone. If you do, once per battle, you can target this unit with the Rapid Ingress Stratagem for 0CP, but when resolving that Stratagem, you must set this unit up within 3\" horizontally of that token and not within 9\" horizontally of any enemy models. That token is then removed.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "RAPID INGRESS"
-          ],
-          "value": "0CP",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 3,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 9,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inEngagementRange",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -88,23 +269,7 @@
       "factionId": "",
       "description": "Each time an attack is allocated to a model in this unit, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "targetModel",
-          "effect": "rollPenalty",
-          "attribute": "d",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingModel",
-              "operator": "notEquals",
-              "value": null
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -113,18 +278,7 @@
       "factionId": "",
       "description": "Once per battle, in any phase, just after a mortal wound is allocated to an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model in this unit, this unit can summon a Watcher in the Dark. When it does, until the end of the phase, models in this unit have the Feel No Pain 4+ ability against mortal wounds.<br><br><b>Designer's Note:</b> Place a Watcher in the Dark token next to the unit, removing it when this ability has been used.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -133,38 +287,7 @@
       "factionId": "",
       "description": "If a Character unit from your army with the Leader ability can be attached to a Terminator Squad, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [],
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "abilities": [
-                "LEADER"
-              ],
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [],
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isBeingLed",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -228,26 +351,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000231",
-      "line": 1,
-      "button": "•",
-      "description": "The Knight Master's great weapon of the Unforgiven can be replaced with 1 relic weapon."
-    },
-    {
-      "datasheetId": "000000231",
-      "line": 2,
-      "button": "•",
-      "description": "All Deathwing Knights in this unit can each have their mace of absolution replaced with 1 power weapon."
-    },
-    {
-      "datasheetId": "000000231",
-      "line": 3,
-      "button": "•",
-      "description": "This unit can be equipped with 1 Watcher in the Dark."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000231",
@@ -273,119 +376,5 @@
       "count": 5
     }
   ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000231:great-weapon-of-the-unforgiven",
-      "datasheetId": "000000231",
-      "line": 1,
-      "name": "Great weapon of the Unforgiven",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000231",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Great weapon of the Unforgiven",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000231:mace-of-absolution",
-      "datasheetId": "000000231",
-      "line": 2,
-      "name": "Mace of absolution",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000231",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mace of absolution",
-          "attributes": [
-            "ANTI-MONSTER 4+",
-            "ANTI-VEHICLE 4+"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000231:power-weapon",
-      "datasheetId": "000000231",
-      "line": 3,
-      "name": "Power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000231",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000231:relic-weapon",
-      "datasheetId": "000000231",
-      "line": 4,
-      "name": "Relic weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000231",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Relic weapon",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

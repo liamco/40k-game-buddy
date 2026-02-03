@@ -5,17 +5,139 @@
   "sourceId": "000000028",
   "legend": "The XV8 Crisis Battlesuit is the most iconic and versatile fighting platform available to the Fire caste. When equipped with paired fusion blasters and shield generator it is said to be in the Sunforge conf iguration and becomes a devastating asset for hunting armoured vehicles or monstrous war beasts, slaying them with blasts of superthermic energy.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> 2 fusion blasters; battlesuit fists.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Crisis-Sunforge-Battlesuits",
   "slug": "crisis-sunforge-battlesuits",
   "factionSlug": "t-au-empire",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> 2 fusion blasters; battlesuit fists.",
+    "weapons": [
+      {
+        "id": "000003699:fusion-blaster",
+        "datasheetId": "000003699",
+        "line": 1,
+        "name": "Fusion blaster",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003699",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Fusion blaster",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000003699:battlesuit-fists",
+        "datasheetId": "000003699",
+        "line": 2,
+        "name": "Battlesuit fists",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003699",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Battlesuit fists",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003699",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can be equipped with up to two of the following, but cannot take duplicates:<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can be equipped with up to two of the following, but cannot take duplicates:<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "gun drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "marker drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "shield drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {
+            "noDuplicates": true,
+            "maxSelections": 2
+          }
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -96,14 +218,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003699",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can be equipped with up to two of the following, but cannot take duplicates:<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003699",
@@ -129,63 +243,5 @@
       "count": 3
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003699:fusion-blaster",
-      "datasheetId": "000003699",
-      "line": 1,
-      "name": "Fusion blaster",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003699",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Fusion blaster",
-          "attributes": [
-            "MELTA 2"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000003699:battlesuit-fists",
-      "datasheetId": "000003699",
-      "line": 2,
-      "name": "Battlesuit fists",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003699",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Battlesuit fists",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

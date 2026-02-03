@@ -5,17 +5,211 @@
   "sourceId": "000000139",
   "legend": "Space Marine Captains are expected to fight from the front, and few kinds of armour enable them to do so as effectively as Terminator plate. Formidably resilient, such a suit protects the Captain against all but the most devastating enemy fire and enables him to deploy by teleport strike right into the heart of the foe.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> storm bolter; relic weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Captain-In-Terminator-Armour",
   "slug": "captain-in-terminator-armour",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> storm bolter; relic weapon.",
+    "weapons": [
+      {
+        "id": "000000135:storm-bolter",
+        "datasheetId": "000000135",
+        "line": 1,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000135",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000135:combi-weapon",
+        "datasheetId": "000000135",
+        "line": 2,
+        "name": "Combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000135",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000135:relic-fist",
+        "datasheetId": "000000135",
+        "line": 3,
+        "name": "Relic fist",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000135",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Relic fist",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000135:relic-weapon",
+        "datasheetId": "000000135",
+        "line": 4,
+        "name": "Relic weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000135",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Relic weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000135",
+          "line": 1,
+          "button": "•",
+          "description": "This model's storm bolter can be replaced with 1 combi-weapon"
+        },
+        {
+          "datasheetId": "000000135",
+          "line": 2,
+          "button": "•",
+          "description": "This model's relic weapon can be replaced with 1 relic fist"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's storm bolter can be replaced with 1 combi-weapon",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "storm bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "combi-weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's relic weapon can be replaced with 1 relic fist",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "relic weapon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "relic fist",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,26 +230,7 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "cp",
-          "value": -1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "abilities": [
-                "Stratagem"
-              ],
-              "operator": "notEquals",
-              "value": null
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -64,16 +239,7 @@
       "factionId": "",
       "description": "You can re-roll Charge rolls made for this model's unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "charge",
-          "value": "all"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -137,20 +303,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000135",
-      "line": 1,
-      "button": "•",
-      "description": "This model's storm bolter can be replaced with 1 combi-weapon"
-    },
-    {
-      "datasheetId": "000000135",
-      "line": 2,
-      "button": "•",
-      "description": "This model's relic weapon can be replaced with 1 relic fist"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000135",
@@ -169,7 +321,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000004138",
       "slug": "terminator-squad-2"
@@ -201,118 +353,6 @@
     {
       "id": "000002302",
       "slug": "deathwing-command-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000135:storm-bolter",
-      "datasheetId": "000000135",
-      "line": 1,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000135",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000135:combi-weapon",
-      "datasheetId": "000000135",
-      "line": 2,
-      "name": "Combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000135",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000135:relic-fist",
-      "datasheetId": "000000135",
-      "line": 3,
-      "name": "Relic fist",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000135",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Relic fist",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000135:relic-weapon",
-      "datasheetId": "000000135",
-      "line": 4,
-      "name": "Relic weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000135",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Relic weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

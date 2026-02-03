@@ -16,7 +16,7 @@ const LeadersTab = ({ unit, list }: Props) => {
     const { attachLeaderToUnit, detachLeaderFromUnit, canAttachLeaderToUnit, setWarlord } = useListManager();
     const { unitsInList, unitsNotInList, loading: loadingBodyguards } = useLeadableUnits(list, unit);
 
-    const canLead = unit.leaders && unit.leaders.length > 0;
+    const canLead = unit.leadsUnits && unit.leadsUnits.length > 0;
     const warlordEligibility = getWarlordEligibility(unit);
     const isWarlord = list.warlordItemId === unit.listItemId;
 

@@ -5,17 +5,455 @@
   "sourceId": "000000046",
   "legend": "No two Battlewagons are the same, for the Meks that build them can never resist cobbling on armour plates, ramming spikes, assorted dakka and random worky-gubbinz. However, all are rugged transport tanks with the capacity to bear a vast number of angry Orks into battle while shrugging off the worst the enemy can throw at them.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> tracks and wheels.",
   "transport": "This model has a transport capacity of 22 Orks Infantry models. If this model is equipped with a killkannon, it has a transport capacity of 12 <span class=\"kwb\">ORKS</span> <span class=\"kwb\">INFANTRY</span> models. Each Mega Armour or Jump Pack model takes up the space of 2 models. The Ghazghkull Thraka model takes up the space of 4 models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Battlewagon",
   "slug": "battlewagon",
   "factionSlug": "orks",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> tracks and wheels.",
+    "weapons": [
+      {
+        "id": "000000039:big-shoota",
+        "datasheetId": "000000039",
+        "line": 1,
+        "name": "Big shoota",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Big shoota",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000039:kannon",
+        "datasheetId": "000000039",
+        "line": 2,
+        "name": "Kannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Kannon - frag",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 5,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000039",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Kannon - shell",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 5,
+            "s": 10,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000039:killkannon",
+        "datasheetId": "000000039",
+        "line": 4,
+        "name": "Killkannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Killkannon",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6+1",
+            "bsWs": 5,
+            "s": 9,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000039:lobba",
+        "datasheetId": "000000039",
+        "line": 5,
+        "name": "Lobba",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lobba",
+            "attributes": [
+              "BLAST",
+              "INDIRECT FIRE"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000039:zzap-gun",
+        "datasheetId": "000000039",
+        "line": 6,
+        "name": "Zzap gun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Zzap gun",
+            "attributes": [
+              "ANTI-VEHICLE 4+"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 5,
+            "s": "D6+6",
+            "ap": -3,
+            "d": 5
+          }
+        ]
+      },
+      {
+        "id": "000000039:deff-rolla",
+        "datasheetId": "000000039",
+        "line": 7,
+        "name": "Deff rolla",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Deff rolla",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000039:grabbin-klaw",
+        "datasheetId": "000000039",
+        "line": 8,
+        "name": "Grabbin' klaw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 8,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Grabbin' klaw",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000039:tracks-and-wheels",
+        "datasheetId": "000000039",
+        "line": 9,
+        "name": "Tracks and wheels",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 9,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Tracks and wheels",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000039:wreckin-ball",
+        "datasheetId": "000000039",
+        "line": 10,
+        "name": "Wreckin' ball",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000039",
+            "line": 10,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Wreckin' ball",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 10,
+            "ap": 0,
+            "d": "D6"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000039",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 kannon</li><li>1 killkannon</li><li>1 zzap gun</li></ul>"
+        },
+        {
+          "datasheetId": "000000039",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with:<ul><li>1 lobba</li></ul>"
+        },
+        {
+          "datasheetId": "000000039",
+          "line": 3,
+          "button": "•",
+          "description": "This model can be equipped with up to 4 big shootas."
+        },
+        {
+          "datasheetId": "000000039",
+          "line": 4,
+          "button": "•",
+          "description": "This model's tracks and wheels can be replaced with 1 deff rolla."
+        },
+        {
+          "datasheetId": "000000039",
+          "line": 5,
+          "button": "•",
+          "description": "This model can be equipped with any of the following:<ul><li>1 'ard case</li><li>1 grabbin' klaw</li><li>1 wreckin' ball</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 kannon</li><li>1 killkannon</li><li>1 zzap gun</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "kannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "killkannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "zzap gun",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with:<ul><li>1 lobba</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "lobba",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model can be equipped with up to 4 big shootas.",
+          "wargearParsed": false,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 4,
+          "rawText": "This model's tracks and wheels can be replaced with 1 deff rolla.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "tracks",
+                "count": 1
+              },
+              {
+                "name": "wheels",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "deff rolla",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 5,
+          "rawText": "This model can be equipped with any of the following:<ul><li>1 'ard case</li><li>1 grabbin' klaw</li><li>1 wreckin' ball</li></ul>",
+          "wargearParsed": false,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -93,38 +531,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000039",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 kannon</li><li>1 killkannon</li><li>1 zzap gun</li></ul>"
-    },
-    {
-      "datasheetId": "000000039",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with:<ul><li>1 lobba</li></ul>"
-    },
-    {
-      "datasheetId": "000000039",
-      "line": 3,
-      "button": "•",
-      "description": "This model can be equipped with up to 4 big shootas."
-    },
-    {
-      "datasheetId": "000000039",
-      "line": 4,
-      "button": "•",
-      "description": "This model's tracks and wheels can be replaced with 1 deff rolla."
-    },
-    {
-      "datasheetId": "000000039",
-      "line": 5,
-      "button": "•",
-      "description": "This model can be equipped with any of the following:<ul><li>1 'ard case</li><li>1 grabbin' klaw</li><li>1 wreckin' ball</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000039",
@@ -143,1784 +549,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000039:big-shoota",
-      "datasheetId": "000000039",
-      "line": 1,
-      "name": "Big shoota",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Big shoota",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000039:kannon",
-      "datasheetId": "000000039",
-      "line": 2,
-      "name": "Kannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Kannon - frag",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 5,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000039",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Kannon - shell",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 5,
-          "s": 10,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000039:killkannon",
-      "datasheetId": "000000039",
-      "line": 4,
-      "name": "Killkannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Killkannon",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6+1",
-          "bsWs": 5,
-          "s": 9,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000039:lobba",
-      "datasheetId": "000000039",
-      "line": 5,
-      "name": "Lobba",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lobba",
-          "attributes": [
-            "BLAST",
-            "INDIRECT FIRE"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000039:zzap-gun",
-      "datasheetId": "000000039",
-      "line": 6,
-      "name": "Zzap gun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Zzap gun",
-          "attributes": [
-            "ANTI-VEHICLE 4+"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 5,
-          "s": "D6+6",
-          "ap": -3,
-          "d": 5
-        }
-      ]
-    },
-    {
-      "id": "000000039:deff-rolla",
-      "datasheetId": "000000039",
-      "line": 7,
-      "name": "Deff rolla",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Deff rolla",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000039:grabbin-klaw",
-      "datasheetId": "000000039",
-      "line": 8,
-      "name": "Grabbin' klaw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 8,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Grabbin' klaw",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000039:tracks-and-wheels",
-      "datasheetId": "000000039",
-      "line": 9,
-      "name": "Tracks and wheels",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 9,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Tracks and wheels",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000039:wreckin-ball",
-      "datasheetId": "000000039",
-      "line": 10,
-      "name": "Wreckin' ball",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000039",
-          "line": 10,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Wreckin' ball",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 10,
-          "ap": 0,
-          "d": "D6"
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.562Z"
-  },
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quintus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Sextus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Septimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Octavus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Nonus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Decimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Undecimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Duodecimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Tertius Decimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quartus Decimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Quintus Decimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Sextus Decimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Septimus Decimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Duodevicesimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Undevicesimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Vicesimus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Vicesimus Primus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Vicesimus Secundus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Vicesimus Tertius",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Vicesimus Quartus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Vicesimus Quintus",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 26",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 27",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 28",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 29",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 30",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 31",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 32",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:kannon",
-          "name": "Kannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 33",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 34",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 35",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 36",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 37",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 38",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 39",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 40",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 41",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 42",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 43",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 44",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 45",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 46",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 47",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 48",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:killkannon",
-          "name": "Killkannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 49",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 50",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 51",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 52",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 53",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 54",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 55",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 56",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 57",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 58",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 59",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 60",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 61",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 62",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "'ard case",
-          "abilityName": "'Ard Case"
-        }
-      ]
-    },
-    {
-      "label": "Loadout 63",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:grabbin-klaw",
-          "name": "Grabbin' klaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout 64",
-      "weapons": [
-        {
-          "id": "000000039:tracks-and-wheels",
-          "name": "Tracks and wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000000039:zzap-gun",
-          "name": "Zzap gun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:lobba",
-          "name": "Lobba",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:big-shoota",
-          "name": "Big shoota",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000039:wreckin-ball",
-          "name": "Wreckin' ball",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    }
-  ]
+  "leadsUnits": []
 }

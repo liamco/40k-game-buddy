@@ -5,17 +5,108 @@
   "sourceId": "000000035",
   "legend": "The galaxy's foremost xenos hunters, each Watch Master commands one of the Chapter's vigilant fortresses. These leaders possess centuries of strategic and esoteric knowledge of the horrors assailing Mankind. In battle, the crackling blades and tailored bolts of their vigil spears destroy any xenos before them.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> vigil spear.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Watch-Master",
   "slug": "watch-master-2",
   "factionSlug": "space-marines",
-  "supplementKey": "deathwatch",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> vigil spear.",
+    "weapons": [
+      {
+        "id": "000003871:vigil-spear",
+        "datasheetId": "000003871",
+        "line": 1,
+        "name": "Vigil spear",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003871",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Vigil spear",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003871:vigil-spear-2",
+        "datasheetId": "000003871",
+        "line": 2,
+        "name": "Vigil spear",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003871",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Vigil spear",
+            "attributes": [
+              "LANCE"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003871",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "deathwatch",
+    "slug": "deathwatch",
+    "name": "Deathwatch",
+    "label": "Deathwatch",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -36,27 +127,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SHOOT AFTER ADVANCING",
-            "CHARGE AFTER FALLING BACK"
-          ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -65,26 +136,7 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "cp",
-          "value": -1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "abilities": [
-                "STRATAGEM"
-              ],
-              "operator": "includes",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -154,14 +206,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003871",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003871",
@@ -180,7 +224,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002783",
       "slug": "deathwatch-veterans"
@@ -188,66 +232,6 @@
     {
       "id": "000002780",
       "slug": "fortis-kill-team-2"
-    }
-  ],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003871:vigil-spear",
-      "datasheetId": "000003871",
-      "line": 1,
-      "name": "Vigil spear",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003871",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Vigil spear",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003871:vigil-spear-2",
-      "datasheetId": "000003871",
-      "line": 2,
-      "name": "Vigil spear",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003871",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Vigil spear",
-          "attributes": [
-            "LANCE"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

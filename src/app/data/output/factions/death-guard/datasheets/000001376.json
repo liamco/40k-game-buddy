@@ -5,17 +5,280 @@
   "sourceId": "000000014",
   "legend": "The brainchild of Mortarion himself, the Plagueburst Crawler is a hulking Daemon Engine with a giant ram-blade and thick armour plating that renders it incredibly resilient. Equipped with a Plagueburst mortar, the engine launches hideously powerful explosive shells that unleash clouds of corrosive spores upon detonation.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> 2 entropy cannons; heavy slugger; Plagueburst mortar; armoured tracks.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Plagueburst-Crawler",
   "slug": "plagueburst-crawler",
   "factionSlug": "death-guard",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 2 entropy cannons; heavy slugger; Plagueburst mortar; armoured tracks.",
+    "weapons": [
+      {
+        "id": "000001376:entropy-cannon",
+        "datasheetId": "000001376",
+        "line": 1,
+        "name": "Entropy cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001376",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Entropy cannon",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 10,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000001376:heavy-slugger",
+        "datasheetId": "000001376",
+        "line": 2,
+        "name": "Heavy slugger",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001376",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy slugger",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001376:plagueburst-mortar",
+        "datasheetId": "000001376",
+        "line": 3,
+        "name": "Plagueburst mortar",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001376",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plagueburst mortar",
+            "attributes": [
+              "BLAST",
+              "INDIRECT FIRE",
+              "LETHAL HITS"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001376:plaguespitter",
+        "datasheetId": "000001376",
+        "line": 4,
+        "name": "Plaguespitter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001376",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plaguespitter",
+            "attributes": [
+              "ANTI-INFANTRY 2+",
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001376:rothail-volley-gun",
+        "datasheetId": "000001376",
+        "line": 5,
+        "name": "Rothail volley gun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001376",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Rothail volley gun",
+            "attributes": [
+              "LETHAL HITS",
+              "RAPID FIRE 3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001376:armoured-tracks",
+        "datasheetId": "000001376",
+        "line": 6,
+        "name": "Armoured tracks",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001376",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured tracks",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001376",
+          "line": 1,
+          "button": "•",
+          "description": "This model's 2 entropy cannons can be replaced with 2 plaguespitters."
+        },
+        {
+          "datasheetId": "000001376",
+          "line": 2,
+          "button": "•",
+          "description": "This model's heavy slugger can be replaced with 1 rothail volley gun."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's 2 entropy cannons can be replaced with 2 plaguespitters.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "entropy cannons",
+                "count": 2
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plaguespitters",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's heavy slugger can be replaced with 1 rothail volley gun.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "heavy slugger",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "rothail volley gun",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -97,20 +360,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001376",
-      "line": 1,
-      "button": "•",
-      "description": "This model's 2 entropy cannons can be replaced with 2 plaguespitters."
-    },
-    {
-      "datasheetId": "000001376",
-      "line": 2,
-      "button": "•",
-      "description": "This model's heavy slugger can be replaced with 1 rothail volley gun."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001376",
@@ -129,172 +378,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001376:entropy-cannon",
-      "datasheetId": "000001376",
-      "line": 1,
-      "name": "Entropy cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001376",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Entropy cannon",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 10,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000001376:heavy-slugger",
-      "datasheetId": "000001376",
-      "line": 2,
-      "name": "Heavy slugger",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001376",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy slugger",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001376:plagueburst-mortar",
-      "datasheetId": "000001376",
-      "line": 3,
-      "name": "Plagueburst mortar",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001376",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plagueburst mortar",
-          "attributes": [
-            "BLAST",
-            "INDIRECT FIRE",
-            "LETHAL HITS"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001376:plaguespitter",
-      "datasheetId": "000001376",
-      "line": 4,
-      "name": "Plaguespitter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001376",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plaguespitter",
-          "attributes": [
-            "ANTI-INFANTRY 2+",
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001376:rothail-volley-gun",
-      "datasheetId": "000001376",
-      "line": 5,
-      "name": "Rothail volley gun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001376",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Rothail volley gun",
-          "attributes": [
-            "LETHAL HITS",
-            "RAPID FIRE 3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001376:armoured-tracks",
-      "datasheetId": "000001376",
-      "line": 6,
-      "name": "Armoured tracks",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001376",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured tracks",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

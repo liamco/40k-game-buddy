@@ -5,17 +5,297 @@
   "sourceId": "000000031",
   "legend": "When the Hellion gangs ride their bladed skyboards alongside Drukhari raiding parties, they bring terror to the battlefields of realspace. Arrogant and agile, Hellions wield their hellglaives with such skill that battle becomes a contest as to who amongst them can perform the most ostentatious acts of spectacular airborne slaughter.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> splinter pods; hellglaive.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/drukhari/Hellions",
   "slug": "hellions",
   "factionSlug": "drukhari",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Drukhari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> splinter pods; hellglaive.",
+    "weapons": [
+      {
+        "id": "000000659:splinter-pistol",
+        "datasheetId": "000000659",
+        "line": 1,
+        "name": "Splinter pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000659",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Splinter pistol",
+            "attributes": [
+              "ANTI-INFANTRY 3+",
+              "ASSAULT",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 2,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000659:splinter-pods",
+        "datasheetId": "000000659",
+        "line": 2,
+        "name": "Splinter pods",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000659",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Splinter pods",
+            "attributes": [
+              "ANTI-INFANTRY 3+",
+              "ASSAULT",
+              "TWIN-LINKED"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 2,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000659:hellglaive",
+        "datasheetId": "000000659",
+        "line": 3,
+        "name": "Hellglaive",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000659",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hellglaive",
+            "attributes": [
+              "LANCE",
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000659:power-weapon",
+        "datasheetId": "000000659",
+        "line": 4,
+        "name": "Power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000659",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power weapon",
+            "attributes": [
+              "ANTI-INFANTRY 3+",
+              "LANCE",
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 3,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000659:stunclaw",
+        "datasheetId": "000000659",
+        "line": 5,
+        "name": "Stunclaw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000659",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Stunclaw",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "LANCE",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 3,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000659",
+          "line": 1,
+          "button": "•",
+          "description": "The Helliarch can be equipped with 1 phantasm grenade launcher."
+        },
+        {
+          "datasheetId": "000000659",
+          "line": 2,
+          "button": "•",
+          "description": "The Helliarch's hellglaive can be replaced with one of the following:<ul><li>1 splinter pistol and 1 power weapon.</li><li>1 splinter pistol and 1 stunclaw.</li></ul>"
+        },
+        {
+          "datasheetId": "000000659",
+          "line": 3,
+          "button": "•",
+          "description": "If the Helliarch is equipped with 1 splinter pistol, it can be equipped with 1 hellglaive (that model's hellglaive cannot be replaced)."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "The Helliarch can be equipped with 1 phantasm grenade launcher.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "specific-model",
+            "modelType": "Helliarch"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "phantasm grenade launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "The Helliarch's hellglaive can be replaced with one of the following:<ul><li>1 splinter pistol and 1 power weapon.</li><li>1 splinter pistol and 1 stunclaw.</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "specific-model",
+            "modelType": "Helliarch"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "hellglaive",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "splinter pistol",
+                    "count": 1
+                  },
+                  {
+                    "name": "power weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "splinter pistol",
+                    "count": 1
+                  },
+                  {
+                    "name": "stunclaw",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "If the Helliarch is equipped with 1 splinter pistol, it can be equipped with 1 hellglaive (that model's hellglaive cannot be replaced).",
+          "wargearParsed": false,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "hellglaive",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {
+            "restrictedWeapons": [
+              "hellglaive"
+            ]
+          }
+        }
+      ],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -108,26 +388,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000659",
-      "line": 1,
-      "button": "•",
-      "description": "The Helliarch can be equipped with 1 phantasm grenade launcher."
-    },
-    {
-      "datasheetId": "000000659",
-      "line": 2,
-      "button": "•",
-      "description": "The Helliarch's hellglaive can be replaced with one of the following:<ul><li>1 splinter pistol and 1 power weapon.</li><li>1 splinter pistol and 1 stunclaw.</li></ul>"
-    },
-    {
-      "datasheetId": "000000659",
-      "line": 3,
-      "button": "•",
-      "description": "If the Helliarch is equipped with 1 splinter pistol, it can be equipped with 1 hellglaive (that model's hellglaive cannot be replaced)."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000659",
@@ -160,341 +420,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Drukhari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000659:splinter-pistol",
-      "datasheetId": "000000659",
-      "line": 1,
-      "name": "Splinter pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000659",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Splinter pistol",
-          "attributes": [
-            "ANTI-INFANTRY 3+",
-            "ASSAULT",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 2,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000659:splinter-pods",
-      "datasheetId": "000000659",
-      "line": 2,
-      "name": "Splinter pods",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000659",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Splinter pods",
-          "attributes": [
-            "ANTI-INFANTRY 3+",
-            "ASSAULT",
-            "TWIN-LINKED"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 2,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000659:hellglaive",
-      "datasheetId": "000000659",
-      "line": 3,
-      "name": "Hellglaive",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000659",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hellglaive",
-          "attributes": [
-            "LANCE",
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000659:power-weapon",
-      "datasheetId": "000000659",
-      "line": 4,
-      "name": "Power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000659",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power weapon",
-          "attributes": [
-            "ANTI-INFANTRY 3+",
-            "LANCE",
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 3,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000659:stunclaw",
-      "datasheetId": "000000659",
-      "line": 5,
-      "name": "Stunclaw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000659",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Stunclaw",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "LANCE",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 3,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:hellglaive",
-          "name": "Hellglaive",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:hellglaive",
-          "name": "Hellglaive",
-          "type": "Melee"
-        },
-        {
-          "id": "000000659:splinter-pistol",
-          "name": "Splinter pistol",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:splinter-pistol",
-          "name": "Splinter pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:power-weapon",
-          "name": "Power weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:splinter-pistol",
-          "name": "Splinter pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:stunclaw",
-          "name": "Stunclaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Quintus",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:hellglaive",
-          "name": "Hellglaive",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "phantasm grenade launcher",
-          "abilityName": "Phantasm Grenade Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Sextus",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:hellglaive",
-          "name": "Hellglaive",
-          "type": "Melee"
-        },
-        {
-          "id": "000000659:splinter-pistol",
-          "name": "Splinter pistol",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "phantasm grenade launcher",
-          "abilityName": "Phantasm Grenade Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Septimus",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:splinter-pistol",
-          "name": "Splinter pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:power-weapon",
-          "name": "Power weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "phantasm grenade launcher",
-          "abilityName": "Phantasm Grenade Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Octavus",
-      "weapons": [
-        {
-          "id": "000000659:splinter-pods",
-          "name": "Splinter pods",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:splinter-pistol",
-          "name": "Splinter pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000659:stunclaw",
-          "name": "Stunclaw",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "phantasm grenade launcher",
-          "abilityName": "Phantasm Grenade Launcher"
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.416Z"
-  }
+  "leadsUnits": []
 }

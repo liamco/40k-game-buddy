@@ -5,17 +5,167 @@
   "sourceId": "000000112",
   "legend": "Palatines are highly capable and experienced commanders of Adepta Sororitas Missions. Unshakeable of faith and purpose, they act as excellent examples to the Battle Sisters that follow them. This makes them a powerful force on the battlefield, inspiring zealous warriors to victory.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; Palatine blade.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adepta-sororitas/Palatine",
   "slug": "palatine",
   "factionSlug": "adepta-sororitas",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; Palatine blade.",
+    "weapons": [
+      {
+        "id": "000002472:bolt-pistol",
+        "datasheetId": "000002472",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002472",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002472:plasma-pistol",
+        "datasheetId": "000002472",
+        "line": 2,
+        "name": "Plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002472",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma pistol - standard",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000002472",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma pistol - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002472:palatine-blade",
+        "datasheetId": "000002472",
+        "line": 4,
+        "name": "Palatine blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002472",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Palatine blade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002472",
+          "line": 1,
+          "button": "•",
+          "description": "This model's bolt pistol can be replaced with 1 plasma pistol."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's bolt pistol can be replaced with 1 plasma pistol.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "bolt pistol",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plasma pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -99,14 +249,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002472",
-      "line": 1,
-      "button": "•",
-      "description": "This model's bolt pistol can be replaced with 1 plasma pistol."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002472",
@@ -125,7 +267,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000908",
       "slug": "retributor-squad"
@@ -153,108 +295,6 @@
     {
       "id": "000002507",
       "slug": "sisters-novitiate-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002472:bolt-pistol",
-      "datasheetId": "000002472",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002472",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002472:plasma-pistol",
-      "datasheetId": "000002472",
-      "line": 2,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002472",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol - standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000002472",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002472:palatine-blade",
-      "datasheetId": "000002472",
-      "line": 4,
-      "name": "Palatine blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002472",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Palatine blade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

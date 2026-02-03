@@ -5,17 +5,157 @@
   "sourceId": "000000070",
   "legend": "Seen as especially blessed by the Dark Gods, Knights Abominant are suffused with warp energy. They unleash this power in terrifying waves, corrupting and mutating those nearby, and incinerating distant foes with blasts of volkite energy. In combat, they thrash coiling, warp- wrought appendages, crushing anything that remains untainted.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> diabolus heavy stubber; volkite combustor; balemace; electroscourge.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-9",
-  "damagedDescription": "While this model has 1-9 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/Knight-Abominant",
   "slug": "knight-abominant",
   "factionSlug": "chaos-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-9",
+    "threshold": 9,
+    "description": "While this model has 1-9 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 5
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> diabolus heavy stubber; volkite combustor; balemace; electroscourge.",
+    "weapons": [
+      {
+        "id": "000002567:diabolus-heavy-stubber",
+        "datasheetId": "000002567",
+        "line": 1,
+        "name": "Diabolus heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002567",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Diabolus heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002567:volkite-combustor",
+        "datasheetId": "000002567",
+        "line": 2,
+        "name": "Volkite combustor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002567",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Volkite combustor",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 30,
+            "type": "Ranged",
+            "a": 12,
+            "bsWs": 3,
+            "s": 12,
+            "ap": 0,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000002567:balemace",
+        "datasheetId": "000002567",
+        "line": 3,
+        "name": "Balemace",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002567",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Balemace",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002567:electroscourge",
+        "datasheetId": "000002567",
+        "line": 4,
+        "name": "Electroscourge",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002567",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Electroscourge",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 9,
+            "bsWs": 3,
+            "s": 10,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -128,7 +268,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002567",
@@ -147,117 +286,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002567:diabolus-heavy-stubber",
-      "datasheetId": "000002567",
-      "line": 1,
-      "name": "Diabolus heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002567",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Diabolus heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002567:volkite-combustor",
-      "datasheetId": "000002567",
-      "line": 2,
-      "name": "Volkite combustor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002567",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Volkite combustor",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 30,
-          "type": "Ranged",
-          "a": 12,
-          "bsWs": 3,
-          "s": 12,
-          "ap": 0,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000002567:balemace",
-      "datasheetId": "000002567",
-      "line": 3,
-      "name": "Balemace",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002567",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Balemace",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002567:electroscourge",
-      "datasheetId": "000002567",
-      "line": 4,
-      "name": "Electroscourge",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002567",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Electroscourge",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 9,
-          "bsWs": 3,
-          "s": 10,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

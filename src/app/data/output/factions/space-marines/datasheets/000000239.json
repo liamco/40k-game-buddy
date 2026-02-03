@@ -5,17 +5,212 @@
   "sourceId": "000000023",
   "legend": "Sleek air-to-air interceptors, Nephilim Jetfighters perform lightning-fast manoeuvres in high-speed warfare. These pilots continually push the Techmarines for enhancements and modification to their craft to make them faster and deadlier - the results have proven truly substantial.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> avenger mega bolter; blacksword missiles; twin heavy bolter; armoured hull.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-3",
-  "damagedDescription": "While this model has 1-3 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Nephilim-Jetfighter",
   "slug": "nephilim-jetfighter",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-3",
+    "threshold": 3,
+    "description": "While this model has 1-3 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> avenger mega bolter; blacksword missiles; twin heavy bolter; armoured hull.",
+    "weapons": [
+      {
+        "id": "000000239:avenger-mega-bolter",
+        "datasheetId": "000000239",
+        "line": 1,
+        "name": "Avenger mega bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000239",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Avenger mega bolter",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 10,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000239:blacksword-missiles",
+        "datasheetId": "000000239",
+        "line": 2,
+        "name": "Blacksword missiles",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000239",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Blacksword missiles",
+            "attributes": [
+              "ANTI-FLY 2+"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000239:nephilim-lascannons",
+        "datasheetId": "000000239",
+        "line": 3,
+        "name": "Nephilim lascannons",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000239",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Nephilim lascannons",
+            "attributes": [],
+            "range": 48,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000000239:twin-heavy-bolter",
+        "datasheetId": "000000239",
+        "line": 4,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000239",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000239:armoured-hull",
+        "datasheetId": "000000239",
+        "line": 5,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000239",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000239",
+          "line": 1,
+          "button": "•",
+          "description": "This model's avenger mega bolter can be replaced with 1 Nephilim lascannons."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's avenger mega bolter can be replaced with 1 Nephilim lascannons.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "avenger mega bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Nephilim lascannons",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -107,14 +302,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000239",
-      "line": 1,
-      "button": "•",
-      "description": "This model's avenger mega bolter can be replaced with 1 Nephilim lascannons."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000239",
@@ -133,142 +320,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000239:avenger-mega-bolter",
-      "datasheetId": "000000239",
-      "line": 1,
-      "name": "Avenger mega bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000239",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Avenger mega bolter",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 10,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000239:blacksword-missiles",
-      "datasheetId": "000000239",
-      "line": 2,
-      "name": "Blacksword missiles",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000239",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Blacksword missiles",
-          "attributes": [
-            "ANTI-FLY 2+"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000239:nephilim-lascannons",
-      "datasheetId": "000000239",
-      "line": 3,
-      "name": "Nephilim lascannons",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000239",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Nephilim lascannons",
-          "attributes": [],
-          "range": 48,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000000239:twin-heavy-bolter",
-      "datasheetId": "000000239",
-      "line": 4,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000239",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000239:armoured-hull",
-      "datasheetId": "000000239",
-      "line": 5,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000239",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

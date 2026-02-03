@@ -5,17 +5,138 @@
   "sourceId": "000000139",
   "legend": "The Hailstrike is so heavily armed that it can annihilate entire swathes of infantry in fusillades of blistering projectiles. Speeding over the battlefield, its specialised loadout shatters charging formations and shreds barricades and defences.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> 2 fragstorm grenade launchers; onslaught gatling cannon; twin ironhail heavy stubber; close combat weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Storm-Speeder-Hailstrike",
   "slug": "storm-speeder-hailstrike",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 2 fragstorm grenade launchers; onslaught gatling cannon; twin ironhail heavy stubber; close combat weapon.",
+    "weapons": [
+      {
+        "id": "000000124:fragstorm-grenade-launcher",
+        "datasheetId": "000000124",
+        "line": 1,
+        "name": "Fragstorm grenade launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000124",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Fragstorm grenade launcher",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000124:onslaught-gatling-cannon",
+        "datasheetId": "000000124",
+        "line": 2,
+        "name": "Onslaught gatling cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000124",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Onslaught gatling cannon",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 8,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000124:twin-ironhail-heavy-stubber",
+        "datasheetId": "000000124",
+        "line": 3,
+        "name": "Twin ironhail heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000124",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin ironhail heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000124:close-combat-weapon",
+        "datasheetId": "000000124",
+        "line": 4,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000124",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,48 +158,7 @@
       "factionId": "",
       "description": "Each time this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks. Until the end of the phase, each time a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit makes a ranged attack that targets that enemy unit, improve the Armour Penetration characteristic of that attack by 1. The same enemy unit can only be affected by this ability once per phase.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "ARMOUR PENETRATION"
-          ],
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "opposingUnit",
-              "keywords": [
-                "MONSTERS",
-                "VEHICLES"
-              ],
-              "operator": "notIncludes",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "rollBonus",
-          "attribute": "ap",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "operator": "equals",
-              "value": "selected enemy unit"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -136,7 +216,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000124",
@@ -155,118 +234,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000124:fragstorm-grenade-launcher",
-      "datasheetId": "000000124",
-      "line": 1,
-      "name": "Fragstorm grenade launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000124",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Fragstorm grenade launcher",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000124:onslaught-gatling-cannon",
-      "datasheetId": "000000124",
-      "line": 2,
-      "name": "Onslaught gatling cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000124",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Onslaught gatling cannon",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 8,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000124:twin-ironhail-heavy-stubber",
-      "datasheetId": "000000124",
-      "line": 3,
-      "name": "Twin ironhail heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000124",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin ironhail heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000124:close-combat-weapon",
-      "datasheetId": "000000124",
-      "line": 4,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000124",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

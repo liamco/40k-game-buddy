@@ -5,17 +5,98 @@
   "sourceId": "000000139",
   "legend": "When a Space Marine commander needs the enemy broken in terror, he unleashes detachments led by Lieutenants clad in the wargear of the Reiver Squads. With the masterful leadership of the Lieutenant, these forces become more powerful than the sum of their parts, and drive contingents of the foe to flight.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> master-crafted special issue bolt pistol; combat knife.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to a unit it can lead even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Lieutenant-In-Reiver-Armour",
   "slug": "lieutenant-in-reiver-armour",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to a unit it can lead even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "CAPTAIN",
+        "CHAPTER MASTER"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> master-crafted special issue bolt pistol; combat knife.",
+    "weapons": [
+      {
+        "id": "000001345:master-crafted-special-issue-bolt-pistol",
+        "datasheetId": "000001345",
+        "line": 1,
+        "name": "Master-crafted special issue bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001345",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Master-crafted special issue bolt pistol",
+            "attributes": [
+              "PISTOL",
+              "PRECISION"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001345:combat-knife",
+        "datasheetId": "000001345",
+        "line": 2,
+        "name": "Combat knife",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001345",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combat knife",
+            "attributes": [
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -37,25 +118,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LETHAL HITS"
-          ],
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -64,24 +127,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, increase the range of that unit's Terror Troops ability by 3\".",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "range",
-          "value": 3,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -157,7 +203,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001345",
@@ -176,7 +221,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002718",
       "slug": "reiver-squad"
@@ -185,74 +230,5 @@
       "id": "000002806",
       "slug": "hounds-of-morkai"
     }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001345:master-crafted-special-issue-bolt-pistol",
-      "datasheetId": "000001345",
-      "line": 1,
-      "name": "Master-crafted special issue bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001345",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted special issue bolt pistol",
-          "attributes": [
-            "PISTOL",
-            "PRECISION"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001345:combat-knife",
-      "datasheetId": "000001345",
-      "line": 2,
-      "name": "Combat knife",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001345",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combat knife",
-          "attributes": [
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "leaderConditions": {
-    "allowedExistingLeaderKeywords": [
-      "CAPTAIN",
-      "CHAPTER MASTER"
-    ]
-  }
+  ]
 }

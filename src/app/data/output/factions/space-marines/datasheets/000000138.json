@@ -5,17 +5,113 @@
   "sourceId": "000000139",
   "legend": "In one of Guilliman's hands blazes the burning Emperor's Sword. The other is clad in the Hand of Dominion, a gauntlet with which Guilliman can tear apart tanks. The Primarch's strategic brilliance is his greatest weapon however, his enemies outmanoeuvred and out-thought before the battle has even begun.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Hand of Dominion; Emperor's Sword.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Roboute-Guilliman",
   "slug": "roboute-guilliman",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Hand of Dominion; Emperor's Sword.",
+    "weapons": [
+      {
+        "id": "000000138:hand-of-dominion",
+        "datasheetId": "000000138",
+        "line": 1,
+        "name": "Hand of Dominion",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000138",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hand of Dominion",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 30,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000138:emperor-s-sword",
+        "datasheetId": "000000138",
+        "line": 2,
+        "name": "Emperor's Sword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000138",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Emperor's Sword",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 14,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000138:hand-of-dominion-2",
+        "datasheetId": "000000138",
+        "line": 3,
+        "name": "Hand of Dominion",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000138",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hand of Dominion",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 7,
+            "bsWs": 2,
+            "s": 14,
+            "ap": -4,
+            "d": 4
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Oath of Moment",
@@ -28,19 +124,7 @@
       "factionId": "",
       "description": "At the Start of your Command phase, select two Author of the Codex abilities (see left). Until the start of your next Command phase, this model has those abilities.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "Author of the Codex Ability 1",
-            "Author of the Codex Ability 2"
-          ],
-          "value": "Until the start of your next Command phase"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -49,18 +133,7 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Adeptus Astartes Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LONE OPERATIVE"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -69,51 +142,7 @@
       "factionId": "",
       "description": "The first time this model is destroyed, roll one D6 at the end of the phase: on a 3+, set this model back up on the battlefield as close as possible to where it was destroyed and not within Engagement Range of any enemy models, with 6 wounds remaining.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isBelowStartingStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "w",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isBelowStartingStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 3,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isBelowStartingStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -122,18 +151,7 @@
       "factionId": "",
       "description": "If this model is in your army, it must be your Warlord.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisArmy",
-          "effect": "addsAbility",
-          "abilities": [
-            "Warlord"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -142,36 +160,7 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of this model, add 1 to the Objective Control characteristic of models in that unit and you can re-roll Battle-shock and Leadership tests taken for that unit.",
       "type": "Primarch",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "oc",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "ld",
-          "value": "failed"
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "ld",
-          "value": "failed"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -180,32 +169,7 @@
       "factionId": "",
       "description": "At the start of your Command phase, after you have selected your Oath of Moment target, select a second enemy unit. Until the start of your next Command phase, if your Oath of Moment target is destroyed, that second enemy unit becomes your Oath of Moment target until you select a new one.",
       "type": "Primarch",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisArmy",
-          "effect": "addsAbility",
-          "abilities": [
-            "OATH OF MOMENT"
-          ],
-          "value": "second enemy unit"
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "staticNumber",
-          "attribute": "OATH OF MOMENT TARGET",
-          "value": "second enemy unit",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "attribute": "OATH OF MOMENT TARGET",
-              "operator": "equals",
-              "value": "destroyed"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -214,32 +178,7 @@
       "factionId": "",
       "description": "Once per battle round, one unit from your army with this ability can use it when a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit within 12\" of that model is targeted with a Stratagem. If it does, reduce the CP cost of that usage of that Stratagem by 1CP.",
       "type": "Primarch",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "cp",
-          "value": -1,
-          "conditions": [
-            {
-              "entity": "targetUnit",
-              "abilities": [
-                "ADEPTUS ASTARTES"
-              ],
-              "operator": "includes",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -309,7 +248,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000138",
@@ -328,93 +266,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000138:hand-of-dominion",
-      "datasheetId": "000000138",
-      "line": 1,
-      "name": "Hand of Dominion",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000138",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hand of Dominion",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 30,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000138:emperor-s-sword",
-      "datasheetId": "000000138",
-      "line": 2,
-      "name": "Emperor's Sword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000138",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Emperor's Sword",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 14,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000138:hand-of-dominion-2",
-      "datasheetId": "000000138",
-      "line": 3,
-      "name": "Hand of Dominion",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000138",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hand of Dominion",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 7,
-          "bsWs": 2,
-          "s": 14,
-          "ap": -4,
-          "d": 4
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

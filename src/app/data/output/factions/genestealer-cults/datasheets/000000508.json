@@ -5,17 +5,87 @@
   "sourceId": "000000053",
   "legend": "The Magus acts as its Patriarch's vizier, and as the head of that alien monstrosity's deviant church. Each one is a powerful psyker, their formidable will enhanced by the gestalt powers of the Star Children until they can manipulate enemies' minds and bodies like puppets - or tear them apart from within.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> autopistol; Magus stave.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/genestealer-cults/Magus",
   "slug": "magus",
   "factionSlug": "genestealer-cults",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Genestealer Cults",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> autopistol; Magus stave.",
+    "weapons": [
+      {
+        "id": "000000508:autopistol",
+        "datasheetId": "000000508",
+        "line": 1,
+        "name": "Autopistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000508",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Autopistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000508:magus-stave",
+        "datasheetId": "000000508",
+        "line": 2,
+        "name": "Magus stave",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000508",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Magus stave",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -41,22 +111,7 @@
       "factionId": "",
       "description": "At the start of your opponent's Shooting phase, one Psyker model from your army with this ability can use it. If used, select one enemy unit within 18\" of that <span class=\"kwb\">PSYKER</span> model and roll one D6: on a 1, that <span class=\"kwb\">PSYKER</span> model suffers D3 mortal wounds; on a 2-5, until the end of the phase, each time a model in that enemy unit makes an attack, subtract 1 from the Hit roll; on a 6, each time a model in that enemy unit makes an attack, subtract 1 from the Hit roll and subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -123,7 +178,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000508",
@@ -142,7 +196,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000512",
       "slug": "neophyte-hybrids"
@@ -158,66 +212,6 @@
     {
       "id": "000000511",
       "slug": "acolyte-hybrids-with-autopistols"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Genestealer Cults",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000508:autopistol",
-      "datasheetId": "000000508",
-      "line": 1,
-      "name": "Autopistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000508",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Autopistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000508:magus-stave",
-      "datasheetId": "000000508",
-      "line": 2,
-      "name": "Magus stave",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000508",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Magus stave",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

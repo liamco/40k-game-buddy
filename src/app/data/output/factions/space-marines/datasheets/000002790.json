@@ -5,17 +5,433 @@
   "sourceId": "000000162",
   "legend": "The Repulsor Executioner sacrifices some transport capacity to carry far more powerful weaponry. Armed with a blessed heavy laser destroyer, it can cripple enemy tanks, while the macro plasma incinerator can incinerate infantry formations. The Executioner's crew are skilled in close-range support, combating threats to the rest of their fighting company with pinpoint interception strikes.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; macro plasma incinerator; Repulsor Executioner defensive array; twin heavy bolter; twin Icarus ironhail heavy stubber; armoured hull.",
   "transport": "This model has a transport capacity of 7 Adeptus Astartes Infantry models. Each Jump Pack, Gravis or Terminator model takes up the space of 2 models and each Centurion model takes up the space of 3 models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Repulsor-Executioner-1",
   "slug": "repulsor-executioner-2",
   "factionSlug": "space-marines",
-  "supplementKey": "black-templars",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; macro plasma incinerator; Repulsor Executioner defensive array; twin heavy bolter; twin Icarus ironhail heavy stubber; armoured hull.",
+    "weapons": [
+      {
+        "id": "000002790:heavy-laser-destroyer",
+        "datasheetId": "000002790",
+        "line": 1,
+        "name": "Heavy laser destroyer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy laser destroyer",
+            "attributes": [
+              "HEAVY"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 16,
+            "ap": -4,
+            "d": "D6+4"
+          }
+        ]
+      },
+      {
+        "id": "000002790:heavy-onslaught-gatling-cannon",
+        "datasheetId": "000002790",
+        "line": 2,
+        "name": "Heavy onslaught gatling cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy onslaught gatling cannon",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 12,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002790:icarus-rocket-pod",
+        "datasheetId": "000002790",
+        "line": 3,
+        "name": "Icarus rocket pod",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Icarus rocket pod",
+            "attributes": [
+              "ANTI-FLY 2+"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002790:ironhail-heavy-stubber",
+        "datasheetId": "000002790",
+        "line": 4,
+        "name": "Ironhail heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ironhail heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002790:macro-plasma-incinerator",
+        "datasheetId": "000002790",
+        "line": 5,
+        "name": "Macro plasma incinerator",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Macro plasma incinerator - standard",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+1",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          },
+          {
+            "datasheetId": "000002790",
+            "line": 6,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Macro plasma incinerator - supercharge",
+            "attributes": [
+              "BLAST",
+              "HAZARDOUS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+1",
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000002790:multi-melta",
+        "datasheetId": "000002790",
+        "line": 7,
+        "name": "Multi-melta",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Multi-melta",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000002790:repulsor-executioner-defensive-array",
+        "datasheetId": "000002790",
+        "line": 8,
+        "name": "Repulsor Executioner defensive array",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 8,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Repulsor Executioner defensive array",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 10,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002790:twin-heavy-bolter",
+        "datasheetId": "000002790",
+        "line": 9,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 9,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002790:twin-icarus-ironhail-heavy-stubber",
+        "datasheetId": "000002790",
+        "line": 10,
+        "name": "Twin Icarus ironhail heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 10,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin Icarus ironhail heavy stubber",
+            "attributes": [
+              "ANTI-FLY 4+",
+              "RAPID FIRE 3",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002790:armoured-hull",
+        "datasheetId": "000002790",
+        "line": 11,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002790",
+            "line": 11,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002790",
+          "line": 1,
+          "button": "•",
+          "description": "This model's macro plasma incinerator can be replaced with 1 heavy laser destroyer."
+        },
+        {
+          "datasheetId": "000002790",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 ironhail heavy stubber</li><li>1 multi-melta</li></ul>"
+        },
+        {
+          "datasheetId": "000002790",
+          "line": 3,
+          "button": "•",
+          "description": "This model can be equipped with 1 Icarus rocket pod."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's macro plasma incinerator can be replaced with 1 heavy laser destroyer.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "macro plasma incinerator",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "heavy laser destroyer",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 ironhail heavy stubber</li><li>1 multi-melta</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "ironhail heavy stubber",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "multi-melta",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model can be equipped with 1 Icarus rocket pod.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Icarus rocket pod",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "black-templars",
+    "slug": "black-templars",
+    "name": "Black Templars",
+    "label": "Black Templars",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,32 +449,7 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets an enemy unit within 12\" of one or more <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> units from your army, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "h",
-          "value": "failed",
-          "conditions": [
-            {
-              "entity": "targetUnit",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisArmy",
-              "keywords": [
-                "ADEPTUS ASTARTES"
-              ],
-              "operator": "includes",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -122,26 +513,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002790",
-      "line": 1,
-      "button": "•",
-      "description": "This model's macro plasma incinerator can be replaced with 1 heavy laser destroyer."
-    },
-    {
-      "datasheetId": "000002790",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 ironhail heavy stubber</li><li>1 multi-melta</li></ul>"
-    },
-    {
-      "datasheetId": "000002790",
-      "line": 3,
-      "button": "•",
-      "description": "This model can be equipped with 1 Icarus rocket pod."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002790",
@@ -160,292 +531,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002790:heavy-laser-destroyer",
-      "datasheetId": "000002790",
-      "line": 1,
-      "name": "Heavy laser destroyer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy laser destroyer",
-          "attributes": [
-            "HEAVY"
-          ],
-          "range": 72,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 16,
-          "ap": -4,
-          "d": "D6+4"
-        }
-      ]
-    },
-    {
-      "id": "000002790:heavy-onslaught-gatling-cannon",
-      "datasheetId": "000002790",
-      "line": 2,
-      "name": "Heavy onslaught gatling cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy onslaught gatling cannon",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 12,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002790:icarus-rocket-pod",
-      "datasheetId": "000002790",
-      "line": 3,
-      "name": "Icarus rocket pod",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Icarus rocket pod",
-          "attributes": [
-            "ANTI-FLY 2+"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002790:ironhail-heavy-stubber",
-      "datasheetId": "000002790",
-      "line": 4,
-      "name": "Ironhail heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ironhail heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002790:macro-plasma-incinerator",
-      "datasheetId": "000002790",
-      "line": 5,
-      "name": "Macro plasma incinerator",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Macro plasma incinerator - standard",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+1",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        },
-        {
-          "datasheetId": "000002790",
-          "line": 6,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Macro plasma incinerator - supercharge",
-          "attributes": [
-            "BLAST",
-            "HAZARDOUS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+1",
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000002790:multi-melta",
-      "datasheetId": "000002790",
-      "line": 7,
-      "name": "Multi-melta",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Multi-melta",
-          "attributes": [
-            "MELTA 2"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000002790:repulsor-executioner-defensive-array",
-      "datasheetId": "000002790",
-      "line": 8,
-      "name": "Repulsor Executioner defensive array",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 8,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Repulsor Executioner defensive array",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 10,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002790:twin-heavy-bolter",
-      "datasheetId": "000002790",
-      "line": 9,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 9,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002790:twin-icarus-ironhail-heavy-stubber",
-      "datasheetId": "000002790",
-      "line": 10,
-      "name": "Twin Icarus ironhail heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 10,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin Icarus ironhail heavy stubber",
-          "attributes": [
-            "ANTI-FLY 4+",
-            "RAPID FIRE 3",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002790:armoured-hull",
-      "datasheetId": "000002790",
-      "line": 11,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002790",
-          "line": 11,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

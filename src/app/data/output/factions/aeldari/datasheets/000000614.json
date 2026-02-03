@@ -5,17 +5,330 @@
   "sourceId": "000000186",
   "legend": "Wraithknights are as elegantly sinister as they are lethal. Their graceful build and slender limbs belie their tremendous resilience. They move with agility utterly at odds with their colossal size, bounding into position before unleashing firepower of a magnitude capable of eradicating squadrons of enemy armour, devastating infantry phalanxes and turning the tide of battle.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> suncannon; titanic feet; scattershield.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-6",
-  "damagedDescription": "While this model has 1-6 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/aeldari/Wraithknight",
   "slug": "wraithknight",
   "factionSlug": "aeldari",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-6",
+    "threshold": 6,
+    "description": "While this model has 1-6 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 5
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> suncannon; titanic feet; scattershield.",
+    "weapons": [
+      {
+        "id": "000000614:heavy-wraithcannon",
+        "datasheetId": "000000614",
+        "line": 1,
+        "name": "Heavy wraithcannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000614",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy wraithcannon",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 20,
+            "ap": -4,
+            "d": "2D6"
+          }
+        ]
+      },
+      {
+        "id": "000000614:scatter-laser",
+        "datasheetId": "000000614",
+        "line": 2,
+        "name": "Scatter laser",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000614",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Scatter laser",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000614:shuriken-cannon",
+        "datasheetId": "000000614",
+        "line": 3,
+        "name": "Shuriken cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000614",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Shuriken cannon",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000614:starcannon",
+        "datasheetId": "000000614",
+        "line": 4,
+        "name": "Starcannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000614",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Starcannon",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000614:suncannon",
+        "datasheetId": "000000614",
+        "line": 5,
+        "name": "Suncannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000614",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Suncannon",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6+4",
+            "bsWs": 3,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000614:titanic-feet",
+        "datasheetId": "000000614",
+        "line": 6,
+        "name": "Titanic feet",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000614",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Titanic feet",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000614",
+          "line": 1,
+          "button": "•",
+          "description": "This model's suncannon can be replaced with 1 heavy wraithcannon."
+        },
+        {
+          "datasheetId": "000000614",
+          "line": 2,
+          "button": "•",
+          "description": "This model's scattershield can be replaced with 1 heavy wraithcannon."
+        },
+        {
+          "datasheetId": "000000614",
+          "line": 3,
+          "button": "•",
+          "description": "This model can be equipped with up to two of the following:<ul><li>1 scatter laser</li><li>1 shuriken cannon</li><li>1 starcannon</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's suncannon can be replaced with 1 heavy wraithcannon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "suncannon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "heavy wraithcannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's scattershield can be replaced with 1 heavy wraithcannon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "scattershield",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "heavy wraithcannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model can be equipped with up to two of the following:<ul><li>1 scatter laser</li><li>1 shuriken cannon</li><li>1 starcannon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "scatter laser",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "shuriken cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "starcannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {
+            "maxSelections": 2
+          }
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -51,16 +364,7 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save and each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -136,26 +440,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000614",
-      "line": 1,
-      "button": "•",
-      "description": "This model's suncannon can be replaced with 1 heavy wraithcannon."
-    },
-    {
-      "datasheetId": "000000614",
-      "line": 2,
-      "button": "•",
-      "description": "This model's scattershield can be replaced with 1 heavy wraithcannon."
-    },
-    {
-      "datasheetId": "000000614",
-      "line": 3,
-      "button": "•",
-      "description": "This model can be equipped with up to two of the following:<ul><li>1 scatter laser</li><li>1 shuriken cannon</li><li>1 starcannon</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000614",
@@ -174,165 +458,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000614:heavy-wraithcannon",
-      "datasheetId": "000000614",
-      "line": 1,
-      "name": "Heavy wraithcannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000614",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy wraithcannon",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 20,
-          "ap": -4,
-          "d": "2D6"
-        }
-      ]
-    },
-    {
-      "id": "000000614:scatter-laser",
-      "datasheetId": "000000614",
-      "line": 2,
-      "name": "Scatter laser",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000614",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Scatter laser",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000614:shuriken-cannon",
-      "datasheetId": "000000614",
-      "line": 3,
-      "name": "Shuriken cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000614",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Shuriken cannon",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000614:starcannon",
-      "datasheetId": "000000614",
-      "line": 4,
-      "name": "Starcannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000614",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Starcannon",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000614:suncannon",
-      "datasheetId": "000000614",
-      "line": 5,
-      "name": "Suncannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000614",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Suncannon",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6+4",
-          "bsWs": 3,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000614:titanic-feet",
-      "datasheetId": "000000614",
-      "line": 6,
-      "name": "Titanic feet",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000614",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Titanic feet",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

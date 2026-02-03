@@ -5,17 +5,125 @@
   "sourceId": "000000023",
   "legend": "The Dark Talon is a close-attack aircraft designed to help the Rovenwing snatch up their most tenacious or troublesome prey. It is aided in this role by armaments doting bock to the Dark Age of Technology, such os the empirically charged rift cannon and the sinister stasis bomb, that trammels victims in o rone of slowed time.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> rift cannon; 2 hurricane bolters; armoured hull.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-3",
-  "damagedDescription": "While this model has 1-3 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Ravenwing-Dark-Talon",
   "slug": "ravenwing-dark-talon",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-3",
+    "threshold": 3,
+    "description": "While this model has 1-3 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> rift cannon; 2 hurricane bolters; armoured hull.",
+    "weapons": [
+      {
+        "id": "000000240:hurricane-bolter",
+        "datasheetId": "000000240",
+        "line": 1,
+        "name": "Hurricane bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000240",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hurricane bolter",
+            "attributes": [
+              "RAPID FIRE 6",
+              "TWIN-LINKED"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000240:rift-cannon",
+        "datasheetId": "000000240",
+        "line": 2,
+        "name": "Rift cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000240",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Rift cannon",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D3+1",
+            "bsWs": 3,
+            "s": 16,
+            "ap": -4,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000240:armoured-hull",
+        "datasheetId": "000000240",
+        "line": 3,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000240",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,85 +145,7 @@
       "factionId": "",
       "description": "Once per turn, one model from your army with this ability can use it after it ends a Normal move. If it does, you can select one enemy unit (excluding <span class=\"kwb\">AIRCRAFT</span>) that model moved over this phase. That unit suffers D3 mortal wounds and you must roll one D6: on a 1-3, that unit cannot Advance or Fall Back in your opponent's next Movement phase; on a 4-6, that unit must Remain Stationary in your opponent's next Movement phase. Each model can only use this ability once per battle.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "mortalWounds",
-          "value": "D3"
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": "m",
-              "operator": "greaterThan",
-              "value": 0
-            },
-            {
-              "entity": "thisModel",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": false
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "CANNOT ADVANCE OR FALL BACK"
-          ],
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "m",
-              "operator": "greaterThan",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "MUST REMAIN STATIONARY"
-          ],
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": false
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "m",
-              "operator": "greaterThan",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "ABILITY USED ONCE PER BATTLE"
-          ],
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -185,7 +215,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000240",
@@ -204,93 +233,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000240:hurricane-bolter",
-      "datasheetId": "000000240",
-      "line": 1,
-      "name": "Hurricane bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000240",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hurricane bolter",
-          "attributes": [
-            "RAPID FIRE 6",
-            "TWIN-LINKED"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000240:rift-cannon",
-      "datasheetId": "000000240",
-      "line": 2,
-      "name": "Rift cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000240",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Rift cannon",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D3+1",
-          "bsWs": 3,
-          "s": 16,
-          "ap": -4,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000240:armoured-hull",
-      "datasheetId": "000000240",
-      "line": 3,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000240",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

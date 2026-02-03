@@ -5,17 +5,391 @@
   "sourceId": "000000203",
   "legend": "The iconic battle tank and armoured transport of the Leagues of Votann, the Hekaton Land Fortress is as venerable and well-respected as it is powerful. With a fearsome arsenal of heavy weaponry and tremendously resilient armour - and with the ability to bear bands of Kin soldiery into battle - it is a versatile military asset.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> cyclic ion cannon; MATR autocannon; 2 twin bolt cannons; armoured wheels; pan spectral scanner.",
   "transport": "This model has a transport capacity of 14 Leagues of Votann Infantry models. Each Exoarmour, Exoframe or Ironkin Steeljacks model takes up the space of 2 models. It cannot transport Artillery models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/leagues-of-votann/Hekaton-Land-Fortress",
   "slug": "hekaton-land-fortress",
   "factionSlug": "leagues-of-votann",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> cyclic ion cannon; MATR autocannon; 2 twin bolt cannons; armoured wheels; pan spectral scanner.",
+    "weapons": [
+      {
+        "id": "000002604:cyclic-ion-cannon",
+        "datasheetId": "000002604",
+        "line": 1,
+        "name": "Cyclic ion cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Cyclic ion cannon",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6+2",
+            "bsWs": 4,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002604:heavy-magna-rail-cannon",
+        "datasheetId": "000002604",
+        "line": 2,
+        "name": "Heavy magna-rail cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy magna-rail cannon",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "HEAVY"
+            ],
+            "range": 30,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 18,
+            "ap": -4,
+            "d": "D6+4"
+          }
+        ]
+      },
+      {
+        "id": "000002604:hekaton-warhead",
+        "datasheetId": "000002604",
+        "line": 3,
+        "name": "Hekaton warhead",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hekaton warhead",
+            "attributes": [
+              "BLAST",
+              "ONE SHOT"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 4,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002604:matr-autocannon",
+        "datasheetId": "000002604",
+        "line": 4,
+        "name": "MATR autocannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "MATR autocannon",
+            "attributes": [
+              "ASSAULT",
+              "SUSTAINED HITS 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002604:sp-heavy-conversion-beamer",
+        "datasheetId": "000002604",
+        "line": 5,
+        "name": "SP heavy conversion beamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "SP heavy conversion beamer",
+            "attributes": [
+              "CONVERSION",
+              "LETHAL HITS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -2,
+            "d": 4
+          }
+        ]
+      },
+      {
+        "id": "000002604:twin-bolt-cannon",
+        "datasheetId": "000002604",
+        "line": 6,
+        "name": "Twin bolt cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin bolt cannon",
+            "attributes": [
+              "SUSTAINED HITS 2",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002604:twin-ion-beamer",
+        "datasheetId": "000002604",
+        "line": 7,
+        "name": "Twin ion beamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin ion beamer",
+            "attributes": [
+              "BLAST",
+              "TWIN-LINKED"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D3+1",
+            "bsWs": 4,
+            "s": 8,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002604:armoured-wheels",
+        "datasheetId": "000002604",
+        "line": 8,
+        "name": "Armoured wheels",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002604",
+            "line": 8,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured wheels",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002604",
+          "line": 1,
+          "button": "•",
+          "description": "This model's 2 twin bolt cannons can be replaced with one of the following:<ul><li>1 twin bolt cannon and 1 twin ion beamer</li><li>2 twin ion beamers</li></ul>"
+        },
+        {
+          "datasheetId": "000002604",
+          "line": 2,
+          "button": "•",
+          "description": "This model's cyclic ion cannon can be replaced with one of the following:<ul><li>1 SP heavy conversion beamer</li><li>1 heavy magna-rail cannon</li></ul>"
+        },
+        {
+          "datasheetId": "000002604",
+          "line": 3,
+          "button": "•",
+          "description": "This model's panspectral scanner can be replaced with 1 Hekaton warhead."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's 2 twin bolt cannons can be replaced with one of the following:<ul><li>1 twin bolt cannon and 1 twin ion beamer</li><li>2 twin ion beamers</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "twin bolt cannons",
+                "count": 2
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "twin bolt cannon",
+                    "count": 1
+                  },
+                  {
+                    "name": "twin ion beamer",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "twin ion beamers",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's cyclic ion cannon can be replaced with one of the following:<ul><li>1 SP heavy conversion beamer</li><li>1 heavy magna-rail cannon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "cyclic ion cannon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "SP heavy conversion beamer",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "heavy magna-rail cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model's panspectral scanner can be replaced with 1 Hekaton warhead.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "panspectral scanner",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Hekaton warhead",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -96,26 +470,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002604",
-      "line": 1,
-      "button": "•",
-      "description": "This model's 2 twin bolt cannons can be replaced with one of the following:<ul><li>1 twin bolt cannon and 1 twin ion beamer</li><li>2 twin ion beamers</li></ul>"
-    },
-    {
-      "datasheetId": "000002604",
-      "line": 2,
-      "button": "•",
-      "description": "This model's cyclic ion cannon can be replaced with one of the following:<ul><li>1 SP heavy conversion beamer</li><li>1 heavy magna-rail cannon</li></ul>"
-    },
-    {
-      "datasheetId": "000002604",
-      "line": 3,
-      "button": "•",
-      "description": "This model's panspectral scanner can be replaced with 1 Hekaton warhead."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002604",
@@ -134,310 +488,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002604:cyclic-ion-cannon",
-      "datasheetId": "000002604",
-      "line": 1,
-      "name": "Cyclic ion cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Cyclic ion cannon",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6+2",
-          "bsWs": 4,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002604:heavy-magna-rail-cannon",
-      "datasheetId": "000002604",
-      "line": 2,
-      "name": "Heavy magna-rail cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy magna-rail cannon",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "HEAVY"
-          ],
-          "range": 30,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 18,
-          "ap": -4,
-          "d": "D6+4"
-        }
-      ]
-    },
-    {
-      "id": "000002604:hekaton-warhead",
-      "datasheetId": "000002604",
-      "line": 3,
-      "name": "Hekaton warhead",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hekaton warhead",
-          "attributes": [
-            "BLAST",
-            "ONE SHOT"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 4,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002604:matr-autocannon",
-      "datasheetId": "000002604",
-      "line": 4,
-      "name": "MATR autocannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "MATR autocannon",
-          "attributes": [
-            "ASSAULT",
-            "SUSTAINED HITS 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002604:sp-heavy-conversion-beamer",
-      "datasheetId": "000002604",
-      "line": 5,
-      "name": "SP heavy conversion beamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "SP heavy conversion beamer",
-          "attributes": [
-            "CONVERSION",
-            "LETHAL HITS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -2,
-          "d": 4
-        }
-      ]
-    },
-    {
-      "id": "000002604:twin-bolt-cannon",
-      "datasheetId": "000002604",
-      "line": 6,
-      "name": "Twin bolt cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin bolt cannon",
-          "attributes": [
-            "SUSTAINED HITS 2",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002604:twin-ion-beamer",
-      "datasheetId": "000002604",
-      "line": 7,
-      "name": "Twin ion beamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin ion beamer",
-          "attributes": [
-            "BLAST",
-            "TWIN-LINKED"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D3+1",
-          "bsWs": 4,
-          "s": 8,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002604:armoured-wheels",
-      "datasheetId": "000002604",
-      "line": 8,
-      "name": "Armoured wheels",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002604",
-          "line": 8,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured wheels",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000002604:cyclic-ion-cannon",
-          "name": "Cyclic ion cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002604:matr-autocannon",
-          "name": "MATR autocannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002604:twin-bolt-cannon",
-          "name": "Twin bolt cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002604:armoured-wheels",
-          "name": "Armoured wheels",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000002604:matr-autocannon",
-          "name": "MATR autocannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002604:twin-bolt-cannon",
-          "name": "Twin bolt cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002604:armoured-wheels",
-          "name": "Armoured wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000002604:sp-heavy-conversion-beamer",
-          "name": "SP heavy conversion beamer",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000002604:matr-autocannon",
-          "name": "MATR autocannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002604:twin-bolt-cannon",
-          "name": "Twin bolt cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002604:armoured-wheels",
-          "name": "Armoured wheels",
-          "type": "Melee"
-        },
-        {
-          "id": "000002604:heavy-magna-rail-cannon",
-          "name": "Heavy magna-rail cannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.540Z"
-  }
+  "leadsUnits": []
 }

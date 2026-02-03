@@ -10,7 +10,7 @@ import IconLeader from "#components/icons/IconLeader.tsx";
 
 import styles from "./WargearProfileCard.module.css";
 
-import strikethrough from "#assets/StrikethroughGreen.svg";
+import strikethrough from "#assets/StrikethroughOrange.svg";
 
 export type BonusSourceType = "leader" | "enhancement" | "detachment";
 
@@ -165,7 +165,7 @@ const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisable
             {isDisabled && (
                 <>
                     <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />
-                    {disabledLabel && <span className="absolute bottom-1 right-3 text-body-xs text-fireDragonBright/60 italic">{disabledLabel}</span>}
+                    {disabledLabel && <span className="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] text-fireDragonBright inline-block bg-mournfangBrown border-1 border-fireDragonBright p-2">{disabledLabel}</span>}
                 </>
             )}
         </div>

@@ -5,17 +5,208 @@
   "sourceId": "000000070",
   "legend": "Like hounds on the scent, Huntsmen often pursue hulking enemies, hunting them down as prey. Their daemonbreath spears melt through the thickest armour while chaintalons are employed to drive deeply into gushing innards, tearing through organs and crew alike.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> daemonbreath spear; diabolus heavy stubber; reaper chaintalon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, subtract 3 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/War-Dog-Huntsman",
   "slug": "war-dog-huntsman",
   "factionSlug": "chaos-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Chaos Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, subtract 3 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 3
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> daemonbreath spear; diabolus heavy stubber; reaper chaintalon.",
+    "weapons": [
+      {
+        "id": "000002566:daemonbreath-meltagun",
+        "datasheetId": "000002566",
+        "line": 1,
+        "name": "Daemonbreath meltagun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002566",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Daemonbreath meltagun",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000002566:daemonbreath-spear",
+        "datasheetId": "000002566",
+        "line": 2,
+        "name": "Daemonbreath spear",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002566",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Daemonbreath spear",
+            "attributes": [
+              "MELTA 4"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000002566:diabolus-heavy-stubber",
+        "datasheetId": "000002566",
+        "line": 3,
+        "name": "Diabolus heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002566",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Diabolus heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002566:reaper-chaintalon",
+        "datasheetId": "000002566",
+        "line": 4,
+        "name": "Reaper chaintalon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002566",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Reaper chaintalon - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          },
+          {
+            "datasheetId": "000002566",
+            "line": 5,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Reaper chaintalon - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002566",
+          "line": 1,
+          "button": "•",
+          "description": "This model's diabolus heavy stubber can be replaced with 1 daemonbreath meltagun."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's diabolus heavy stubber can be replaced with 1 daemonbreath meltagun.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "diabolus heavy stubber",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "daemonbreath meltagun",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -91,14 +282,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002566",
-      "line": 1,
-      "button": "•",
-      "description": "This model's diabolus heavy stubber can be replaced with 1 daemonbreath meltagun."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002566",
@@ -117,130 +300,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Chaos Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002566:daemonbreath-meltagun",
-      "datasheetId": "000002566",
-      "line": 1,
-      "name": "Daemonbreath meltagun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002566",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Daemonbreath meltagun",
-          "attributes": [
-            "MELTA 2"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000002566:daemonbreath-spear",
-      "datasheetId": "000002566",
-      "line": 2,
-      "name": "Daemonbreath spear",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002566",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Daemonbreath spear",
-          "attributes": [
-            "MELTA 4"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000002566:diabolus-heavy-stubber",
-      "datasheetId": "000002566",
-      "line": 3,
-      "name": "Diabolus heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002566",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Diabolus heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002566:reaper-chaintalon",
-      "datasheetId": "000002566",
-      "line": 4,
-      "name": "Reaper chaintalon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002566",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Reaper chaintalon - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        },
-        {
-          "datasheetId": "000002566",
-          "line": 5,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Reaper chaintalon - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

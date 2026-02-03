@@ -5,17 +5,111 @@
   "sourceId": "000000139",
   "legend": "When a Chaplain takes to the field on a Raider-pattern bike, he is able to keep pace with even the swiftest armoured advance or spearhead breakthrough. Fighting in such an action, he will urge his brothers to victory as he bellows his catechisms and charges headlong into the foe, crozius arcanum swinging.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> absolvor bolt pistol; twin bolt rifle; crozius arcanum.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Chaplain-On-Bike",
   "slug": "chaplain-on-bike",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> absolvor bolt pistol; twin bolt rifle; crozius arcanum.",
+    "weapons": [
+      {
+        "id": "000000094:absolvor-bolt-pistol",
+        "datasheetId": "000000094",
+        "line": 1,
+        "name": "Absolvor bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000094",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Absolvor bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000094:twin-bolt-rifle",
+        "datasheetId": "000000094",
+        "line": 2,
+        "name": "Twin bolt rifle",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000094",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin bolt rifle",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000094:crozius-arcanum",
+        "datasheetId": "000000094",
+        "line": 3,
+        "name": "Crozius arcanum",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000094",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Crozius arcanum",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,16 +126,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -50,31 +135,7 @@
       "factionId": "",
       "description": "Each time this model's unit is selected to shoot, you can select one enemy unit within 12\" of and visible to this model. Until the end of the phase, ranged weapons equipped by models in this model's unit have the [DEVASTATING WOUNDS] ability when targeting that enemy unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "DEVASTATING WOUNDS"
-          ],
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isVisible",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "opposingUnit",
-              "attribute": "range",
-              "operator": "lessThanOrEqualTo",
-              "value": 12
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -138,7 +199,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000094",
@@ -157,7 +217,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000241",
       "slug": "ravenwing-black-knights"
@@ -173,92 +233,6 @@
     {
       "id": "000001166",
       "slug": "company-veterans-on-bikes"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000094:absolvor-bolt-pistol",
-      "datasheetId": "000000094",
-      "line": 1,
-      "name": "Absolvor bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000094",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Absolvor bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000094:twin-bolt-rifle",
-      "datasheetId": "000000094",
-      "line": 2,
-      "name": "Twin bolt rifle",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000094",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin bolt rifle",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000094:crozius-arcanum",
-      "datasheetId": "000000094",
-      "line": 3,
-      "name": "Crozius arcanum",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000094",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Crozius arcanum",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
     }
   ]
 }

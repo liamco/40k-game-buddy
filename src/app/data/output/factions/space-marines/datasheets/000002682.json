@@ -5,17 +5,144 @@
   "sourceId": "000000023",
   "legend": "Lion El'Jonson stalks from mist-wreathed shadow realms like an ancient questing knight hunting down the galaxy's terrors. With the immense blade, Fealty, the Primarch cleaves apart the most heinous of monstrosities, while the Emperor's Shield erupts in blazes of light and force in response to his foes' savage blows.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Arma Luminis; Fealty.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Lion-El-jonson",
   "slug": "lion-el-jonson",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Arma Luminis; Fealty.",
+    "weapons": [
+      {
+        "id": "000002682:arma-luminis",
+        "datasheetId": "000002682",
+        "line": 1,
+        "name": "Arma Luminis",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002682",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Arma Luminis - bolt",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          },
+          {
+            "datasheetId": "000002682",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Arma Luminis - plasma",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002682:fealty",
+        "datasheetId": "000002682",
+        "line": 3,
+        "name": "Fealty",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002682",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Fealty - strike",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 2,
+            "s": 12,
+            "ap": -4,
+            "d": 4
+          },
+          {
+            "datasheetId": "000002682",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Fealty - sweep",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 16,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002682",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,26 +163,7 @@
       "factionId": "",
       "description": "At the start of your Command phase, select two Primarch of the First Legion abilities. Until the start of your next Command phase, this model has those abilities.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "Primarch of the First Legion ability 1"
-          ],
-          "value": "selected ability 1"
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "Primarch of the First Legion ability 2"
-          ],
-          "value": "selected ability 2"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -64,16 +172,7 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, if the Strength characteristic of that attack is greater than the Toughness characteristic of this model, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -82,18 +181,7 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Adeptus Astartes Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LONE OPERATIVE"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -102,18 +190,7 @@
       "factionId": "",
       "description": "If this model is in your army, it must be your Warlord.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisArmy",
-          "effect": "addsAbility",
-          "abilities": [
-            "Warlord"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -122,32 +199,7 @@
       "factionId": "",
       "description": "In your Command phase, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
       "type": "Primarch",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "STRATEGIC RESERVES"
-          ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inEngagementRange",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": "removed from battlefield"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -156,38 +208,7 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of this model, each time a model in that unit makes a melee attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
       "type": "Primarch",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "h",
-          "value": "ones",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "w",
-          "value": "ones",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -196,18 +217,7 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of this model, models in that unit have the Feel No Pain 4+ ability against mortal wounds.",
       "type": "Primarch",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -277,14 +287,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002682",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002682",
@@ -303,101 +305,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002682:arma-luminis",
-      "datasheetId": "000002682",
-      "line": 1,
-      "name": "Arma Luminis",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002682",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Arma Luminis - bolt",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        },
-        {
-          "datasheetId": "000002682",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Arma Luminis - plasma",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002682:fealty",
-      "datasheetId": "000002682",
-      "line": 3,
-      "name": "Fealty",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002682",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Fealty - strike",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 2,
-          "s": 12,
-          "ap": -4,
-          "d": 4
-        },
-        {
-          "datasheetId": "000002682",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Fealty - sweep",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 16,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

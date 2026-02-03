@@ -5,17 +5,148 @@
   "sourceId": "000000014",
   "legend": "To stand in Mortarion's presence is lethal, such is the pestilential aura that surrounds him. Wielding his gigantic scythe, Silence, he cuts apart entire enemy squads in seconds. With furious blasts of Lantern, his devastating sidearm of unknown provenance, he disintegrates heavy infantry and armour alike.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Lantern; Rotwind; Silence.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-6",
-  "damagedDescription": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Mortarion",
   "slug": "mortarion",
   "factionSlug": "death-guard",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-6",
+    "threshold": 6,
+    "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Lantern; Rotwind; Silence.",
+    "weapons": [
+      {
+        "id": "000001377:lantern",
+        "datasheetId": "000001377",
+        "line": 1,
+        "name": "Lantern",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001377",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lantern",
+            "attributes": [
+              "PISTOL",
+              "SUSTAINED HITS D3"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001377:rotwind",
+        "datasheetId": "000001377",
+        "line": 2,
+        "name": "Rotwind",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001377",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Rotwind",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS",
+              "LETHAL HITS",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001377:silence",
+        "datasheetId": "000001377",
+        "line": 3,
+        "name": "Silence",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001377",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Silence - strike",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 14,
+            "ap": -3,
+            "d": "D6+1"
+          },
+          {
+            "datasheetId": "000001377",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Silence - sweep",
+            "attributes": [
+              "LETHAL HITS",
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 15,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -182,7 +313,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001377",
@@ -201,114 +331,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001377:lantern",
-      "datasheetId": "000001377",
-      "line": 1,
-      "name": "Lantern",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001377",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lantern",
-          "attributes": [
-            "PISTOL",
-            "SUSTAINED HITS D3"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001377:rotwind",
-      "datasheetId": "000001377",
-      "line": 2,
-      "name": "Rotwind",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001377",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Rotwind",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS",
-            "LETHAL HITS",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001377:silence",
-      "datasheetId": "000001377",
-      "line": 3,
-      "name": "Silence",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001377",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Silence - strike",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 14,
-          "ap": -3,
-          "d": "D6+1"
-        },
-        {
-          "datasheetId": "000001377",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Silence - sweep",
-          "attributes": [
-            "LETHAL HITS",
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 15,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

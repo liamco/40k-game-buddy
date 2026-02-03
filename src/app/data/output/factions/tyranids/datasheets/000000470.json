@@ -5,17 +5,120 @@
   "sourceId": "000000020",
   "legend": "Living carpets of Rippers squirm across the ground wherever the Tyranid swarms advance. Little more than simple eating machines, these chitinous horrors swarm over the wounded and dead alike, and can even drag down trained warriors in sufficient numbers. Once a Ripper's fangs sink home, it will not let go…",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> chitinous claws and teeth.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Ripper-Swarms",
   "slug": "ripper-swarms",
   "factionSlug": "tyranids",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> chitinous claws and teeth.",
+    "weapons": [
+      {
+        "id": "000000470:spinemaws",
+        "datasheetId": "000000470",
+        "line": 1,
+        "name": "Spinemaws",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000470",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Spinemaws",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 6,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 5,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000470:chitinous-claws-and-teeth",
+        "datasheetId": "000000470",
+        "line": 2,
+        "name": "Chitinous claws and teeth",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000470",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chitinous claws and teeth",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 5,
+            "s": 2,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000470",
+          "line": 1,
+          "button": "•",
+          "description": "All models in this unit can each be equipped with 1 spinemaws."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "All models in this unit can each be equipped with 1 spinemaws.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "all-models"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "spinemaws",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -32,24 +135,7 @@
       "factionId": "",
       "description": "While an enemy unit is within Engagement Range of this unit, halve the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "oc",
-          "value": "half",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inEngagementRange",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -101,14 +187,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000470",
-      "line": 1,
-      "button": "•",
-      "description": "All models in this unit can each be equipped with 1 spinemaws."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000470",
@@ -141,65 +219,5 @@
       "count": 3
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000470:spinemaws",
-      "datasheetId": "000000470",
-      "line": 1,
-      "name": "Spinemaws",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000470",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Spinemaws",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 6,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 5,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000470:chitinous-claws-and-teeth",
-      "datasheetId": "000000470",
-      "line": 2,
-      "name": "Chitinous claws and teeth",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000470",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chitinous claws and teeth",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 5,
-          "s": 2,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

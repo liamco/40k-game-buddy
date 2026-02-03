@@ -5,17 +5,89 @@
   "sourceId": "000000023",
   "legend": "Supreme Grand Master Azrael is a beacon of inspiration to those who follow him, and is paid enormous respect for his ability as a strategist. A masterful commander, he quickly grasps changing battlefield realities and orchestrates his forces to maximum advantage. In the fray, Azrael decapitates foes with every strike of the Sword of Secrets.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Lion's Wrath; the Sword of Secrets; the Lion Helm.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Azrael",
   "slug": "azrael",
   "factionSlug": "space-marines",
-  "supplementKey": "dark-angels",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Lion's Wrath; the Sword of Secrets; the Lion Helm.",
+    "weapons": [
+      {
+        "id": "000000218:lion-s-wrath",
+        "datasheetId": "000000218",
+        "line": 1,
+        "name": "Lion's Wrath",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000218",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lion's Wrath",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000218:the-sword-of-secrets",
+        "datasheetId": "000000218",
+        "line": 2,
+        "name": "The Sword of Secrets",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000218",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "The Sword of Secrets",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -4,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "dark-angels",
+    "slug": "dark-angels",
+    "name": "Dark Angels",
+    "label": "Dark Angels",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,24 +104,7 @@
       "factionId": "",
       "description": "Models in the bearer's unit have a 4+ invulnerable save. In addition, once per battle, in any phase, the bearer can summon a Watcher in the Dark. When it does, until the end of the phase, models in the bearer's unit have the Feel No Pain 4+ ability against mortal wounds.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -58,26 +113,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SUSTAINED HITS"
-          ],
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -86,23 +122,7 @@
       "factionId": "",
       "description": "At the start of your Command phase, if this model is on the battlefield, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isOnBattlefield",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -190,7 +210,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000218",
@@ -209,7 +228,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000061",
       "slug": "assault-squad"
@@ -281,70 +300,6 @@
     {
       "id": "000001606",
       "slug": "assault-intercessor-squad"
-    }
-  ],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000218:lion-s-wrath",
-      "datasheetId": "000000218",
-      "line": 1,
-      "name": "Lion's Wrath",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000218",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lion's Wrath",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000218:the-sword-of-secrets",
-      "datasheetId": "000000218",
-      "line": 2,
-      "name": "The Sword of Secrets",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000218",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "The Sword of Secrets",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -4,
-          "d": 2
-        }
-      ]
     }
   ]
 }

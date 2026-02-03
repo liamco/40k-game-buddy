@@ -5,17 +5,210 @@
   "sourceId": "000000046",
   "legend": "Big Meks build all sorts of powerful weapons and bizarre devices. They readily bring their favourites into battle to test 'em out, even building and wearing a bionik exoskeleton to help them wield as many as possible. So equipped, the Big Mek unleashes mechanical violence and blasts of energy, or wrenches open warp tunnels down which he and his followers pile into the fight.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> kustom-mega blaster; power klaw.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Big-Mek",
   "slug": "big-mek",
   "factionSlug": "orks",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> kustom-mega blaster; power klaw.",
+    "weapons": [
+      {
+        "id": "000003707:kustom-mega-blasta",
+        "datasheetId": "000003707",
+        "line": 1,
+        "name": "Kustom mega-blasta",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003707",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Kustom mega-blasta",
+            "attributes": [
+              "HAZARDOUS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 5,
+            "s": 9,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000003707:traktor-blasta",
+        "datasheetId": "000003707",
+        "line": 2,
+        "name": "Traktor blasta",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003707",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Traktor blasta",
+            "attributes": [
+              "ANTI-FLY 3+",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 5,
+            "s": 10,
+            "ap": -2,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000003707:drilla",
+        "datasheetId": "000003707",
+        "line": 3,
+        "name": "Drilla",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003707",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Drilla",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000003707:power-klaw",
+        "datasheetId": "000003707",
+        "line": 4,
+        "name": "Power klaw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003707",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power klaw",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003707",
+          "line": 1,
+          "button": "•",
+          "description": "This model's kustom mega-blasta can be replaced with 1 traktor blasta."
+        },
+        {
+          "datasheetId": "000003707",
+          "line": 2,
+          "button": "•",
+          "description": "This model's power klaw can be replaced with 1 drilla."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's kustom mega-blasta can be replaced with 1 traktor blasta.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "kustom mega-blasta",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "traktor blasta",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's power klaw can be replaced with 1 drilla.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "power klaw",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "drilla",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -99,20 +292,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003707",
-      "line": 1,
-      "button": "•",
-      "description": "This model's kustom mega-blasta can be replaced with 1 traktor blasta."
-    },
-    {
-      "datasheetId": "000003707",
-      "line": 2,
-      "button": "•",
-      "description": "This model's power klaw can be replaced with 1 drilla."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003707",
@@ -131,7 +310,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000038",
       "slug": "mek-gunz"
@@ -155,115 +334,6 @@
     {
       "id": "000000021",
       "slug": "nobz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003707:kustom-mega-blasta",
-      "datasheetId": "000003707",
-      "line": 1,
-      "name": "Kustom mega-blasta",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003707",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Kustom mega-blasta",
-          "attributes": [
-            "HAZARDOUS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 5,
-          "s": 9,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000003707:traktor-blasta",
-      "datasheetId": "000003707",
-      "line": 2,
-      "name": "Traktor blasta",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003707",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Traktor blasta",
-          "attributes": [
-            "ANTI-FLY 3+",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 5,
-          "s": 10,
-          "ap": -2,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000003707:drilla",
-      "datasheetId": "000003707",
-      "line": 3,
-      "name": "Drilla",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003707",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Drilla",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000003707:power-klaw",
-      "datasheetId": "000003707",
-      "line": 4,
-      "name": "Power klaw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003707",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power klaw",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

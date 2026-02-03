@@ -5,17 +5,98 @@
   "sourceId": "000000012",
   "legend": "Infernal beasts whose Path to Glory has elevated them to daemonhood, Daemon Princes are paragons of evil. Warped and corrupted by Chaos, they lead their warbands in devastating assaults, striding through their mortal enemies' attacks and unleashing monstrous blows and blasts of sorcery against all before them.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> infernal cannon; hellforged weapons.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-space-marines/Heretic-Astartes-Daemon-Prince",
   "slug": "heretic-astartes-daemon-prince",
   "factionSlug": "chaos-space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> infernal cannon; hellforged weapons.",
+    "weapons": [
+      {
+        "id": "000000937:infernal-cannon",
+        "datasheetId": "000000937",
+        "line": 1,
+        "name": "Infernal cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000937",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Infernal cannon",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000937:hellforged-weapons",
+        "datasheetId": "000000937",
+        "line": 2,
+        "name": "Hellforged weapons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000937",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hellforged weapons - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          },
+          {
+            "datasheetId": "000000937",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Hellforged weapons - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 14,
+            "bsWs": 2,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -51,18 +132,7 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Heretic Astartes Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LONE OPERATIVE"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -165,7 +235,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000937",
@@ -184,76 +253,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000937:infernal-cannon",
-      "datasheetId": "000000937",
-      "line": 1,
-      "name": "Infernal cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000937",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Infernal cannon",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000937:hellforged-weapons",
-      "datasheetId": "000000937",
-      "line": 2,
-      "name": "Hellforged weapons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000937",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hellforged weapons - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        },
-        {
-          "datasheetId": "000000937",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Hellforged weapons - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 14,
-          "bsWs": 2,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

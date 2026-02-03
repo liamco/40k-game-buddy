@@ -5,17 +5,231 @@
   "sourceId": "000000031",
   "legend": "Mounting some of the most powerful guns in the Drukhari arsenal, the Voidraven Bomber's dark scythes and void lances can crack heavily armoured targets. Yet they pale against the silent aircraft's primary weapon - the void mine. Once this arcane payload is deployed, the resulting darklight implosion erases all caught within its blast.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> 2 void lances; bladed wings.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/drukhari/Voidraven-Bomber",
   "slug": "voidraven-bomber",
   "factionSlug": "drukhari",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Drukhari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 2 void lances; bladed wings.",
+    "weapons": [
+      {
+        "id": "000000661:dark-scythe",
+        "datasheetId": "000000661",
+        "line": 1,
+        "name": "Dark scythe",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000661",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Dark scythe",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -4,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000661:void-lance",
+        "datasheetId": "000000661",
+        "line": 2,
+        "name": "Void lance",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000661",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Void lance",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -4,
+            "d": "D6+2"
+          }
+        ]
+      },
+      {
+        "id": "000000661:voidraven-missiles",
+        "datasheetId": "000000661",
+        "line": 3,
+        "name": "Voidraven missiles",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000661",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Voidraven missiles - implosion missiles",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 9,
+            "ap": -2,
+            "d": 3
+          },
+          {
+            "datasheetId": "000000661",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Voidraven missiles - shatterfield missiles",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000661:bladed-wings",
+        "datasheetId": "000000661",
+        "line": 5,
+        "name": "Bladed wings",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000661",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bladed wings",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000661",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 Voidraven missiles."
+        },
+        {
+          "datasheetId": "000000661",
+          "line": 2,
+          "button": "•",
+          "description": "This model's 2 void lances can be replaced with 2 dark scythes."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 Voidraven missiles.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Voidraven missiles",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's 2 void lances can be replaced with 2 dark scythes.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "void lances",
+                "count": 2
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "dark scythes",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -104,20 +318,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000661",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 Voidraven missiles."
-    },
-    {
-      "datasheetId": "000000661",
-      "line": 2,
-      "button": "•",
-      "description": "This model's 2 void lances can be replaced with 2 dark scythes."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000661",
@@ -136,128 +336,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Drukhari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000661:dark-scythe",
-      "datasheetId": "000000661",
-      "line": 1,
-      "name": "Dark scythe",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000661",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Dark scythe",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -4,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000661:void-lance",
-      "datasheetId": "000000661",
-      "line": 2,
-      "name": "Void lance",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000661",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Void lance",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -4,
-          "d": "D6+2"
-        }
-      ]
-    },
-    {
-      "id": "000000661:voidraven-missiles",
-      "datasheetId": "000000661",
-      "line": 3,
-      "name": "Voidraven missiles",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000661",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Voidraven missiles - implosion missiles",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": 3
-        },
-        {
-          "datasheetId": "000000661",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Voidraven missiles - shatterfield missiles",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000661:bladed-wings",
-      "datasheetId": "000000661",
-      "line": 5,
-      "name": "Bladed wings",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000661",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bladed wings",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

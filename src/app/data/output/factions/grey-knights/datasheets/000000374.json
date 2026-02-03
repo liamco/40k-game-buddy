@@ -5,17 +5,114 @@
   "sourceId": "000000013",
   "legend": "Grand Master Aldrik Voldus wields the mighty Malleus Argyrum, a daemon hammer whose head dances with sorcerous flame fewfoes can withstand. One of the most potent psykers his Chapter has known in years, he also possesses the power to unleash waves of soulfire against his enemies and to conjure sanctuaries of dancing psychic luminescence that shield his brothers from harm.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Searing Purity; storm bolter; Malleus Argyrum.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/grey-knights/Grand-Master-Voldus",
   "slug": "grand-master-voldus",
   "factionSlug": "grey-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Grey Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Searing Purity; storm bolter; Malleus Argyrum.",
+    "weapons": [
+      {
+        "id": "000000374:searing-purity",
+        "datasheetId": "000000374",
+        "line": 1,
+        "name": "Searing Purity",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000374",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Searing Purity",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PSYCHIC"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D3+1",
+            "bsWs": 2,
+            "s": 12,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000374:storm-bolter",
+        "datasheetId": "000000374",
+        "line": 2,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000374",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000374:malleus-argyrum",
+        "datasheetId": "000000374",
+        "line": 3,
+        "name": "Malleus Argyrum",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000374",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Malleus Argyrum",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 10,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,16 +133,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time an attack targets that unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -124,7 +212,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000374",
@@ -143,7 +230,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000384",
       "slug": "paladin-squad"
@@ -151,93 +238,6 @@
     {
       "id": "000000382",
       "slug": "brotherhood-terminator-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Grey Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000374:searing-purity",
-      "datasheetId": "000000374",
-      "line": 1,
-      "name": "Searing Purity",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000374",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Searing Purity",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D3+1",
-          "bsWs": 2,
-          "s": 12,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000374:storm-bolter",
-      "datasheetId": "000000374",
-      "line": 2,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000374",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000374:malleus-argyrum",
-      "datasheetId": "000000374",
-      "line": 3,
-      "name": "Malleus Argyrum",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000374",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Malleus Argyrum",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 10,
-          "ap": -2,
-          "d": 3
-        }
-      ]
     }
   ]
 }

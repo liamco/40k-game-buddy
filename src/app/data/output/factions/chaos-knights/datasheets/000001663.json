@@ -5,17 +5,371 @@
   "sourceId": "000000369",
   "legend": "Moirax-pattern Armigers excel in speeding ahead of their larger brethren, hunting down targets of opportunity and cutting down the vulnerable. They relish the slaughter of the weak, each slain only proving the War Dogs' superiority as well as that of the monstrous deity or deities they have elected to follow in the Emperor's stead.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> graviton pulsar; volkite veuglaire; armoured feet.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, subtract 3 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/War-Dog-Moirax",
   "slug": "war-dog-moirax",
   "factionSlug": "chaos-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Chaos Knights (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, subtract 3 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 3
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> graviton pulsar; volkite veuglaire; armoured feet.",
+    "weapons": [
+      {
+        "id": "000001663:conversion-beam-cannon",
+        "datasheetId": "000001663",
+        "line": 1,
+        "name": "Conversion beam cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001663",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Conversion beam cannon",
+            "attributes": [
+              "CONVERSION",
+              "SUSTAINED HITS D3"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 10,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001663:graviton-pulsar",
+        "datasheetId": "000001663",
+        "line": 2,
+        "name": "Graviton pulsar",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001663",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Graviton pulsar",
+            "attributes": [
+              "ANTI-VEHICLE 2+",
+              "BLAST"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001663:lightning-lock",
+        "datasheetId": "000001663",
+        "line": 3,
+        "name": "Lightning lock",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001663",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lightning lock",
+            "attributes": [
+              "SUSTAINED HITS 2"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001663:rad-cleanser",
+        "datasheetId": "000001663",
+        "line": 4,
+        "name": "Rad cleanser",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001663",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Rad cleanser",
+            "attributes": [
+              "ANTI-INFANTRY 2+",
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 2,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001663:volkite-veuglaire",
+        "datasheetId": "000001663",
+        "line": 5,
+        "name": "Volkite veuglaire",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001663",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Volkite veuglaire",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 3,
+            "s": 8,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001663:armoured-feet",
+        "datasheetId": "000001663",
+        "line": 6,
+        "name": "Armoured feet",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001663",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured feet",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001663:siege-claw",
+        "datasheetId": "000001663",
+        "line": 7,
+        "name": "Siege claw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001663",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Siege claw",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+2"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001663",
+          "line": 1,
+          "button": "•",
+          "description": "This model's graviton pulsar can be replaced with one of the following;<ul><li>1 siege claw and 1 rad cleanser</li><li>1 lightning lock</li><li>1 conversion beam cannon</li><li>1 volkite veuglaire</li></ul>"
+        },
+        {
+          "datasheetId": "000001663",
+          "line": 2,
+          "button": "•",
+          "description": "This model's volkite veuglaire can be replaced with one of the following:<ul><li>1 siege claw and 1 rad cleanser</li><li>1 graviton pulsar</li><li>1 lightning lock</li><li>1 conversion beam cannon</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's graviton pulsar can be replaced with one of the following;<ul><li>1 siege claw and 1 rad cleanser</li><li>1 lightning lock</li><li>1 conversion beam cannon</li><li>1 volkite veuglaire</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "graviton pulsar",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "siege claw",
+                    "count": 1
+                  },
+                  {
+                    "name": "rad cleanser",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "lightning lock",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "conversion beam cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "volkite veuglaire",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's volkite veuglaire can be replaced with one of the following:<ul><li>1 siege claw and 1 rad cleanser</li><li>1 graviton pulsar</li><li>1 lightning lock</li><li>1 conversion beam cannon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "volkite veuglaire",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "siege claw",
+                    "count": 1
+                  },
+                  {
+                    "name": "rad cleanser",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "graviton pulsar",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "lightning lock",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "conversion beam cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -95,20 +449,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001663",
-      "line": 1,
-      "button": "•",
-      "description": "This model's graviton pulsar can be replaced with one of the following;<ul><li>1 siege claw and 1 rad cleanser</li><li>1 lightning lock</li><li>1 conversion beam cannon</li><li>1 volkite veuglaire</li></ul>"
-    },
-    {
-      "datasheetId": "000001663",
-      "line": 2,
-      "button": "•",
-      "description": "This model's volkite veuglaire can be replaced with one of the following:<ul><li>1 siege claw and 1 rad cleanser</li><li>1 graviton pulsar</li><li>1 lightning lock</li><li>1 conversion beam cannon</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001663",
@@ -127,432 +467,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Chaos Knights (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001663:conversion-beam-cannon",
-      "datasheetId": "000001663",
-      "line": 1,
-      "name": "Conversion beam cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001663",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Conversion beam cannon",
-          "attributes": [
-            "CONVERSION",
-            "SUSTAINED HITS D3"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 10,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001663:graviton-pulsar",
-      "datasheetId": "000001663",
-      "line": 2,
-      "name": "Graviton pulsar",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001663",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Graviton pulsar",
-          "attributes": [
-            "ANTI-VEHICLE 2+",
-            "BLAST"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001663:lightning-lock",
-      "datasheetId": "000001663",
-      "line": 3,
-      "name": "Lightning lock",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001663",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lightning lock",
-          "attributes": [
-            "SUSTAINED HITS 2"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001663:rad-cleanser",
-      "datasheetId": "000001663",
-      "line": 4,
-      "name": "Rad cleanser",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001663",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Rad cleanser",
-          "attributes": [
-            "ANTI-INFANTRY 2+",
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 2,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001663:volkite-veuglaire",
-      "datasheetId": "000001663",
-      "line": 5,
-      "name": "Volkite veuglaire",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001663",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Volkite veuglaire",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 3,
-          "s": 8,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001663:armoured-feet",
-      "datasheetId": "000001663",
-      "line": 6,
-      "name": "Armoured feet",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001663",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured feet",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001663:siege-claw",
-      "datasheetId": "000001663",
-      "line": 7,
-      "name": "Siege claw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001663",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Siege claw",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+2"
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000001663:graviton-pulsar",
-          "name": "Graviton pulsar",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:volkite-veuglaire",
-          "name": "Volkite veuglaire",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000001663:graviton-pulsar",
-          "name": "Graviton pulsar",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:lightning-lock",
-          "name": "Lightning lock",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000001663:graviton-pulsar",
-          "name": "Graviton pulsar",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:conversion-beam-cannon",
-          "name": "Conversion beam cannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000001663:graviton-pulsar",
-          "name": "Graviton pulsar",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:siege-claw",
-          "name": "Siege claw",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:rad-cleanser",
-          "name": "Rad cleanser",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Quintus",
-      "weapons": [
-        {
-          "id": "000001663:volkite-veuglaire",
-          "name": "Volkite veuglaire",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:lightning-lock",
-          "name": "Lightning lock",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Sextus",
-      "weapons": [
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:lightning-lock",
-          "name": "Lightning lock",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:conversion-beam-cannon",
-          "name": "Conversion beam cannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Septimus",
-      "weapons": [
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:lightning-lock",
-          "name": "Lightning lock",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:siege-claw",
-          "name": "Siege claw",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:rad-cleanser",
-          "name": "Rad cleanser",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Octavus",
-      "weapons": [
-        {
-          "id": "000001663:volkite-veuglaire",
-          "name": "Volkite veuglaire",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:conversion-beam-cannon",
-          "name": "Conversion beam cannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Nonus",
-      "weapons": [
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:conversion-beam-cannon",
-          "name": "Conversion beam cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:siege-claw",
-          "name": "Siege claw",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:rad-cleanser",
-          "name": "Rad cleanser",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Decimus",
-      "weapons": [
-        {
-          "id": "000001663:armoured-feet",
-          "name": "Armoured feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:volkite-veuglaire",
-          "name": "Volkite veuglaire",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001663:siege-claw",
-          "name": "Siege claw",
-          "type": "Melee"
-        },
-        {
-          "id": "000001663:rad-cleanser",
-          "name": "Rad cleanser",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.307Z"
-  }
+  "leadsUnits": []
 }

@@ -5,17 +5,88 @@
   "sourceId": "000000139",
   "legend": "Sworn to silence, Judiciars do not preach aloud, but instead their deeds are a litany of fury. Wielding a tempormortis in one hand and an immense blade in the other, they must prove their worth in battle to join the Chaplaincy proper, doing so through acts of devotion and the slaying of enemies.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> absolvor bolt pistol; executioner relic blade.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Judiciar",
   "slug": "judiciar",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> absolvor bolt pistol; executioner relic blade.",
+    "weapons": [
+      {
+        "id": "000002707:absolvor-bolt-pistol",
+        "datasheetId": "000002707",
+        "line": 1,
+        "name": "Absolvor bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002707",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Absolvor bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002707:executioner-relic-blade",
+        "datasheetId": "000002707",
+        "line": 2,
+        "name": "Executioner relic blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002707",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Executioner relic blade",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,26 +103,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit has the Fights First ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "FIGHTS FIRST"
-          ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -60,24 +112,7 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, until the end of the battle, add 1 to the Attacks characteristic of its executioner relic blade.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "a",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingModel",
-              "state": "isCharacter",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -135,7 +170,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002707",
@@ -154,7 +188,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000070",
       "slug": "tactical-squad"
@@ -222,69 +256,6 @@
     {
       "id": "000001606",
       "slug": "assault-intercessor-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002707:absolvor-bolt-pistol",
-      "datasheetId": "000002707",
-      "line": 1,
-      "name": "Absolvor bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002707",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Absolvor bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002707:executioner-relic-blade",
-      "datasheetId": "000002707",
-      "line": 2,
-      "name": "Executioner relic blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002707",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Executioner relic blade",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

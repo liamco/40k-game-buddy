@@ -5,17 +5,154 @@
   "sourceId": "000000025",
   "legend": "Unholy fusions of daemon and machine, Juggernauts of Khorne are unstoppable beasts whose blood is fire and whose every step is thunder. When ridden into battle by Bloodletters, they act as shock cavalry, bearing down on their victims like battering rams. The destruction when their charge hits home is hideous to behold.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> hellblade; Juggernaut's bladed horn.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-daemons/Bloodcrushers",
   "slug": "bloodcrushers",
   "factionSlug": "chaos-daemons",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> hellblade; Juggernaut's bladed horn.",
+    "weapons": [
+      {
+        "id": "000001115:hellblade",
+        "datasheetId": "000001115",
+        "line": 1,
+        "name": "Hellblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001115",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hellblade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001115:juggernaut-s-bladed-horn",
+        "datasheetId": "000001115",
+        "line": 2,
+        "name": "Juggernaut's bladed horn",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001115",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Juggernaut's bladed horn",
+            "attributes": [
+              "EXTRA ATTACKS",
+              "LANCE"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001115",
+          "line": 1,
+          "button": "•",
+          "description": "1 Bloodcrusher that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
+        },
+        {
+          "datasheetId": "000001115",
+          "line": 2,
+          "button": "•",
+          "description": "1 Bloodcrusher that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "1 Bloodcrusher that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Bloodcrusher that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "instrument of Chaos",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "1 Bloodcrusher that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Bloodcrusher that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "daemonic icon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -114,20 +251,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001115",
-      "line": 1,
-      "button": "•",
-      "description": "1 Bloodcrusher that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
-    },
-    {
-      "datasheetId": "000001115",
-      "line": 2,
-      "button": "•",
-      "description": "1 Bloodcrusher that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001115",
@@ -160,64 +283,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001115:hellblade",
-      "datasheetId": "000001115",
-      "line": 1,
-      "name": "Hellblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001115",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hellblade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001115:juggernaut-s-bladed-horn",
-      "datasheetId": "000001115",
-      "line": 2,
-      "name": "Juggernaut's bladed horn",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001115",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Juggernaut's bladed horn",
-          "attributes": [
-            "EXTRA ATTACKS",
-            "LANCE"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

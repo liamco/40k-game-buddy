@@ -5,17 +5,301 @@
   "sourceId": "000000139",
   "legend": "With pinpoint accuracy, the Gladiator Lancer picks off the heaviest enemy armour, laser destroyer punching smouldering holes in their hulls. Such is the range of its heavy cannon that it can eliminate threats to the Space Marines before they encounter them, storming past burning wrecks to claim their objectives.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> Lancer laser destroyer; 2 storm bolters; armoured hull.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Gladiator-Lancer",
   "slug": "gladiator-lancer",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Lancer laser destroyer; 2 storm bolters; armoured hull.",
+    "weapons": [
+      {
+        "id": "000002705:fragstorm-grenade-launcher",
+        "datasheetId": "000002705",
+        "line": 1,
+        "name": "Fragstorm grenade launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002705",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Fragstorm grenade launcher",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002705:icarus-rocket-pod",
+        "datasheetId": "000002705",
+        "line": 2,
+        "name": "Icarus rocket pod",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002705",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Icarus rocket pod",
+            "attributes": [
+              "ANTI-FLY 2+"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002705:ironhail-heavy-stubber",
+        "datasheetId": "000002705",
+        "line": 3,
+        "name": "Ironhail heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002705",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ironhail heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002705:lancer-laser-destroyer",
+        "datasheetId": "000002705",
+        "line": 4,
+        "name": "Lancer laser destroyer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002705",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lancer laser destroyer",
+            "attributes": [
+              "HEAVY"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -4,
+            "d": "D6+3"
+          }
+        ]
+      },
+      {
+        "id": "000002705:storm-bolter",
+        "datasheetId": "000002705",
+        "line": 5,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002705",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002705:armoured-hull",
+        "datasheetId": "000002705",
+        "line": 6,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002705",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002705",
+          "line": 1,
+          "button": "•",
+          "description": "This model's 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
+        },
+        {
+          "datasheetId": "000002705",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with 1 ironhail heavy stubber."
+        },
+        {
+          "datasheetId": "000002705",
+          "line": 3,
+          "button": "•",
+          "description": "This model can be equipped with 1 Icarus rocket pod."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's 2 storm bolters can be replaced with 2 fragstorm grenade launchers.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "storm bolters",
+                "count": 2
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "fragstorm grenade launchers",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with 1 ironhail heavy stubber.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "ironhail heavy stubber",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model can be equipped with 1 Icarus rocket pod.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Icarus rocket pod",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,28 +317,7 @@
       "factionId": "",
       "description": "Each time this model is selected to shoot, you can re-roll one Hit roll, you can re-roll one Wound roll and you can re-roll one Damage roll when resolving those attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "h",
-          "value": "failed"
-        },
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "w",
-          "value": "failed"
-        },
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "d",
-          "value": "failed"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -106,26 +369,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002705",
-      "line": 1,
-      "button": "•",
-      "description": "This model's 2 storm bolters can be replaced with 2 fragstorm grenade launchers."
-    },
-    {
-      "datasheetId": "000002705",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with 1 ironhail heavy stubber."
-    },
-    {
-      "datasheetId": "000002705",
-      "line": 3,
-      "button": "•",
-      "description": "This model can be equipped with 1 Icarus rocket pod."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002705",
@@ -144,169 +387,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002705:fragstorm-grenade-launcher",
-      "datasheetId": "000002705",
-      "line": 1,
-      "name": "Fragstorm grenade launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002705",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Fragstorm grenade launcher",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002705:icarus-rocket-pod",
-      "datasheetId": "000002705",
-      "line": 2,
-      "name": "Icarus rocket pod",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002705",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Icarus rocket pod",
-          "attributes": [
-            "ANTI-FLY 2+"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002705:ironhail-heavy-stubber",
-      "datasheetId": "000002705",
-      "line": 3,
-      "name": "Ironhail heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002705",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ironhail heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002705:lancer-laser-destroyer",
-      "datasheetId": "000002705",
-      "line": 4,
-      "name": "Lancer laser destroyer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002705",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lancer laser destroyer",
-          "attributes": [
-            "HEAVY"
-          ],
-          "range": 72,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -4,
-          "d": "D6+3"
-        }
-      ]
-    },
-    {
-      "id": "000002705:storm-bolter",
-      "datasheetId": "000002705",
-      "line": 5,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002705",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002705:armoured-hull",
-      "datasheetId": "000002705",
-      "line": 6,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002705",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

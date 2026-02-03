@@ -5,17 +5,106 @@
   "sourceId": "000000036",
   "legend": "A paragon of wisdom and experience, Ulrik the Slayer has mentored many of the Space Wolves' greatest champions. He is the Wolf High Priest, inspiring all who fight alongside him with his aggression and martial prowess. Turning his fearsome gaze upon mighty foes, Ulrik swears weighty oaths to cut them down.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> plasma pistol; artificer crozius arcanum.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Ulrik-The-Slayer",
   "slug": "ulrik-the-slayer",
   "factionSlug": "space-marines",
-  "supplementKey": "space-wolves",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> plasma pistol; artificer crozius arcanum.",
+    "weapons": [
+      {
+        "id": "000000297:plasma-pistol",
+        "datasheetId": "000000297",
+        "line": 1,
+        "name": "Plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000297",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma pistol - standard",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000297",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma pistol - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000297:artificer-crozius-arcanum",
+        "datasheetId": "000000297",
+        "line": 3,
+        "name": "Artificer crozius arcanum",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000297",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Artificer crozius arcanum",
+            "attributes": [
+              "ANTI-MONSTER 4+",
+              "ANTI-VEHICLE 4+"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "space-wolves",
+    "slug": "space-wolves",
+    "name": "Space Wolves",
+    "label": "Space Wolves",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Feel No Pain",
@@ -37,48 +126,7 @@
       "factionId": "",
       "description": "At the start of the battle, select one of the following keywords to be this model's Slayer's Oath: <span class=\"kwb\">CHARACTER</span>; <span class=\"kwb\">MONSTER</span>; <span class=\"kwb\">VEHICLE</span>. The first time this model's unit destroys a unit with this model's Slayer's Oath keyword, if your Detachment rule has a Saga, until the end of the battle, this model's unit receives the benefits of that Detachment rule as if that Saga had been completed.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsKeyword",
-          "keywords": [
-            "CHARACTER",
-            "MONSTER",
-            "VEHICLE"
-          ],
-          "value": "selected"
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SAGA BENEFITS"
-          ],
-          "value": "until the end of the battle",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "abilities": [
-                "SAGA"
-              ],
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "opposingUnit",
-              "keywords": [
-                "CHARACTER",
-                "MONSTER",
-                "VEHICLE"
-              ],
-              "operator": "includes",
-              "value": "thisModel's Slayer's Oath keyword"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -163,7 +211,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000297",
@@ -182,7 +229,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000303",
       "slug": "blood-claws"
@@ -194,87 +241,6 @@
     {
       "id": "000004131",
       "slug": "wolf-guard-headtakers"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000297:plasma-pistol",
-      "datasheetId": "000000297",
-      "line": 1,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000297",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol - standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000297",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000297:artificer-crozius-arcanum",
-      "datasheetId": "000000297",
-      "line": 3,
-      "name": "Artificer crozius arcanum",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000297",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Artificer crozius arcanum",
-          "attributes": [
-            "ANTI-MONSTER 4+",
-            "ANTI-VEHICLE 4+"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

@@ -5,17 +5,277 @@
   "sourceId": "000000014",
   "legend": "Land Raiders are destructive and versatile vehicles equipped with a fearsome arsenal of weapons and a large transport capacity. Drenched in thick, stinking slime, Death Guard Land Raiders are host to various scratching and biting parasites and sprout throbbing growths emitting fogs of foetid gas.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> 2 soulshatter lascannons; twin heavy bolter; armoured tracks.",
   "transport": "This model has a transport capacity of 14 Death Guard Infantry models. Each Terminator model takes up the space of 2 models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Chaos-Land-Raider",
   "slug": "chaos-land-raider-2",
   "factionSlug": "death-guard",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 2 soulshatter lascannons; twin heavy bolter; armoured tracks.",
+    "weapons": [
+      {
+        "id": "000001049:combi-bolter",
+        "datasheetId": "000001049",
+        "line": 1,
+        "name": "Combi-bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001049",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-bolter",
+            "attributes": [
+              "LETHAL HITS",
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001049:combi-weapon",
+        "datasheetId": "000001049",
+        "line": 2,
+        "name": "Combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001049",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001049:havoc-launcher",
+        "datasheetId": "000001049",
+        "line": 3,
+        "name": "Havoc launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001049",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Havoc launcher",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001049:soulshatter-lascannon",
+        "datasheetId": "000001049",
+        "line": 4,
+        "name": "Soulshatter lascannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001049",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Soulshatter lascannon",
+            "attributes": [],
+            "range": 48,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000001049:twin-heavy-bolter",
+        "datasheetId": "000001049",
+        "line": 5,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001049",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "LETHAL HITS",
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001049:armoured-tracks",
+        "datasheetId": "000001049",
+        "line": 6,
+        "name": "Armoured tracks",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001049",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured tracks",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001049",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 combi-bolter</li><li>1 combi-weapon</li></ul>"
+        },
+        {
+          "datasheetId": "000001049",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with 1 havoc launcher."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 combi-bolter</li><li>1 combi-weapon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "combi-bolter",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "combi-weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with 1 havoc launcher.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "havoc launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -103,20 +363,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001049",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 combi-bolter</li><li>1 combi-weapon</li></ul>"
-    },
-    {
-      "datasheetId": "000001049",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with 1 havoc launcher."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001049",
@@ -135,170 +381,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001049:combi-bolter",
-      "datasheetId": "000001049",
-      "line": 1,
-      "name": "Combi-bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001049",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-bolter",
-          "attributes": [
-            "LETHAL HITS",
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001049:combi-weapon",
-      "datasheetId": "000001049",
-      "line": 2,
-      "name": "Combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001049",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001049:havoc-launcher",
-      "datasheetId": "000001049",
-      "line": 3,
-      "name": "Havoc launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001049",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Havoc launcher",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001049:soulshatter-lascannon",
-      "datasheetId": "000001049",
-      "line": 4,
-      "name": "Soulshatter lascannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001049",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Soulshatter lascannon",
-          "attributes": [],
-          "range": 48,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000001049:twin-heavy-bolter",
-      "datasheetId": "000001049",
-      "line": 5,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001049",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "LETHAL HITS",
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001049:armoured-tracks",
-      "datasheetId": "000001049",
-      "line": 6,
-      "name": "Armoured tracks",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001049",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured tracks",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

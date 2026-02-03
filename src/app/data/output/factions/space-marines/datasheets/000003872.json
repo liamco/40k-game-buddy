@@ -5,17 +5,111 @@
   "sourceId": "000000035",
   "legend": "Born survivor of a feral world and formerly of the macabre Mortifactors Chapter, Artemis leads a Watch Company of Talasa Prime. Known for his instinct for xenos trickery, he still relishes the prospect of violence, whether with his blade, the mutagenic acid-fire of Hellfire Extremis or a time-warping stasis grenade.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Hellfire Extremis; master-crafted power weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Watch-Captain-Artemis",
   "slug": "watch-captain-artemis-2",
   "factionSlug": "space-marines",
-  "supplementKey": "deathwatch",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Deathwatch",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Hellfire Extremis; master-crafted power weapon.",
+    "weapons": [
+      {
+        "id": "000003872:hellfire-extremis",
+        "datasheetId": "000003872",
+        "line": 1,
+        "name": "Hellfire Extremis",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003872",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hellfire Extremis",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003872:master-crafted-power-weapon",
+        "datasheetId": "000003872",
+        "line": 2,
+        "name": "Master-crafted power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003872",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Master-crafted power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003872",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "deathwatch",
+    "slug": "deathwatch",
+    "name": "Deathwatch",
+    "label": "Deathwatch",
+    "isSupplement": true
+  },
   "abilities": [
     {
       "name": "Feel No Pain",
@@ -41,25 +135,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LETHAL HITS"
-          ],
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -68,46 +144,7 @@
       "factionId": "",
       "description": "The first time this model is destroyed, roll one D6 at the end of the phase. On a 2+, set this model back up on the battlefield, as close as possible to where it was destroyed and not within Engagement Range of any enemy units, with 1 wound remaining.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "s",
-          "value": 2,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isDamaged",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "w",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isDamaged",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "RESURRECTION"
-          ],
-          "value": null
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -183,14 +220,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003872",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003872",
@@ -209,7 +238,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002783",
       "slug": "deathwatch-veterans"
@@ -217,69 +246,6 @@
     {
       "id": "000002780",
       "slug": "fortis-kill-team-2"
-    }
-  ],
-  "supplementSlug": "deathwatch",
-  "supplementName": "Deathwatch",
-  "supplementLabel": "Deathwatch",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Deathwatch",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003872:hellfire-extremis",
-      "datasheetId": "000003872",
-      "line": 1,
-      "name": "Hellfire Extremis",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003872",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hellfire Extremis",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003872:master-crafted-power-weapon",
-      "datasheetId": "000003872",
-      "line": 2,
-      "name": "Master-crafted power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003872",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

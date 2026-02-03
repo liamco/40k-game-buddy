@@ -5,17 +5,85 @@
   "sourceId": "000000028",
   "legend": "These mobile anti-grav gun turrets mount railguns whose hypersonic rounds can stop even super-heavy war engines dead in their tracks. They form deadly fire points around which Tidewall Shieldlines and droneports are arrayed into full defence networks - floating fortresses that can reposition at need to funnel and slaughter the foe.",
   "role": "Fortifications",
-  "loadout": "<b>This model is equipped with:</b> supremacy railgun.",
   "transport": "This model has a transport capacity of 11 T'au Empire Infantry models. It cannot transport Battlesuit, Kroot or Vespid Stingwings models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Tidewall-Gunrig",
   "slug": "tidewall-gunrig",
   "factionSlug": "t-au-empire",
-  "supplementKey": "codex",
+  "roleLabel": "Fortifications",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> supremacy railgun.",
+    "weapons": [
+      {
+        "id": "000000437:supremacy-railgun",
+        "datasheetId": "000000437",
+        "line": 1,
+        "name": "Supremacy railgun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000437",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Supremacy railgun",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "TWIN-LINKED"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 5,
+            "s": 20,
+            "ap": -5,
+            "d": "D6+6"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000437",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -34,16 +102,7 @@
       "factionId": "",
       "description": "While an enemy unit is only within Engagement Range of one or more Fortifications from your army: <br><ul><li>That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. </li><li>Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.</li></ul>",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -110,14 +169,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000437",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000437",
@@ -136,40 +187,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Fortifications",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000437:supremacy-railgun",
-      "datasheetId": "000000437",
-      "line": 1,
-      "name": "Supremacy railgun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000437",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Supremacy railgun",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "TWIN-LINKED"
-          ],
-          "range": 72,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 5,
-          "s": 20,
-          "ap": -5,
-          "d": "D6+6"
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

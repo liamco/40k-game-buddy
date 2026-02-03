@@ -5,17 +5,95 @@
   "sourceId": "000000046",
   "legend": "The Painboss specialises in both the surgical care and cyber-augmentation of squigs, and of those suffering squig-related injuries. So as to provide their services 'on the hoof', Painbosses augment themselves with piston-driven soopa-legz, monowheels and the like - the better to deliver high-speed doktorin'.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Beast Snagga klaw.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Painboss",
   "slug": "painboss",
   "factionSlug": "orks",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Beast Snagga klaw.",
+    "weapons": [
+      {
+        "id": "000002491:beast-snagga-klaw",
+        "datasheetId": "000002491",
+        "line": 1,
+        "name": "Beast Snagga klaw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002491",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Beast Snagga klaw",
+            "attributes": [
+              "ANTI-MONSTER 4+",
+              "ANTI-VEHICLE 4+"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 9,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002491",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 grot orderly."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 grot orderly.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "grot orderly",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Feel No Pain",
@@ -46,18 +124,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 5
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -118,14 +185,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002491",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 grot orderly."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002491",
@@ -144,45 +203,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002494",
       "slug": "beast-snagga-boyz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002491:beast-snagga-klaw",
-      "datasheetId": "000002491",
-      "line": 1,
-      "name": "Beast Snagga klaw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002491",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Beast Snagga klaw",
-          "attributes": [
-            "ANTI-MONSTER 4+",
-            "ANTI-VEHICLE 4+"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 9,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

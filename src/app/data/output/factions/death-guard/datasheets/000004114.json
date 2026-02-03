@@ -5,17 +5,183 @@
   "sourceId": "000000014",
   "legend": "Plague Drones ride monstrous rot flies to war. These vile steeds scrabble and rip at their prey, impaling them on dripping proboscis orbiting off the heads of their victims. The finest stolen craniums are recovered and fashioned into filth-swollen projectiles - death's heads - for the daemonic riders to hurl at their foes.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> death's heads; foul mouthparts; plaguesword.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Plague-Drones",
   "slug": "plague-drones-2",
   "factionSlug": "death-guard",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> death's heads; foul mouthparts; plaguesword.",
+    "weapons": [
+      {
+        "id": "000004114:death-s-heads",
+        "datasheetId": "000004114",
+        "line": 1,
+        "name": "Death's heads",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004114",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Death's heads",
+            "attributes": [
+              "BLAST",
+              "LETHAL HITS"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004114:foul-mouthparts",
+        "datasheetId": "000004114",
+        "line": 2,
+        "name": "Foul mouthparts",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004114",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Foul mouthparts",
+            "attributes": [
+              "EXTRA ATTACKS",
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004114:plaguesword",
+        "datasheetId": "000004114",
+        "line": 3,
+        "name": "Plaguesword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004114",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plaguesword",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000004114",
+          "line": 1,
+          "button": "•",
+          "description": "1 Plague Drone that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
+        },
+        {
+          "datasheetId": "000004114",
+          "line": 2,
+          "button": "•",
+          "description": "1 Plague Drone that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "1 Plague Drone that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Plague Drone that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "instrument of Chaos",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "1 Plague Drone that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Plague Drone that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "daemonic icon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -126,20 +292,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000004114",
-      "line": 1,
-      "button": "•",
-      "description": "1 Plague Drone that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
-    },
-    {
-      "datasheetId": "000004114",
-      "line": 2,
-      "button": "•",
-      "description": "1 Plague Drone that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004114",
@@ -172,93 +324,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004114:death-s-heads",
-      "datasheetId": "000004114",
-      "line": 1,
-      "name": "Death's heads",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004114",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Death's heads",
-          "attributes": [
-            "BLAST",
-            "LETHAL HITS"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004114:foul-mouthparts",
-      "datasheetId": "000004114",
-      "line": 2,
-      "name": "Foul mouthparts",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004114",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Foul mouthparts",
-          "attributes": [
-            "EXTRA ATTACKS",
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004114:plaguesword",
-      "datasheetId": "000004114",
-      "line": 3,
-      "name": "Plaguesword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004114",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plaguesword",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

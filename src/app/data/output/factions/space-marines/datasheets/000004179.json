@@ -5,17 +5,88 @@
   "sourceId": "000000385",
   "legend": "A forbidding figure garbed in black, Xacharus has sworn a vow of silence to better contemplate his duty to the Emperor. In battle, he is a lethal executioner who hews his foes with his relic blade and leads the battle line with unswerving resolve.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> absolvor bolt pistol; executioner relic blade.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Judiciar-Xacharus",
   "slug": "judiciar-xacharus",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Boxset: Warhammer 40,000: Dawn of War - Onslaught",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> absolvor bolt pistol; executioner relic blade.",
+    "weapons": [
+      {
+        "id": "000004179:absolvor-bolt-pistol",
+        "datasheetId": "000004179",
+        "line": 1,
+        "name": "Absolvor bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004179",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Absolvor bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004179:executioner-relic-blade",
+        "datasheetId": "000004179",
+        "line": 2,
+        "name": "Executioner relic blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004179",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Executioner relic blade",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,26 +103,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit has the Fights First ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "FIGHTS FIRST"
-          ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -60,24 +112,7 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a Consolidation move, it can move up to 6\" instead of up to 3\".",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -153,7 +188,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004179",
@@ -172,7 +206,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002798",
       "slug": "sword-brethren-squad"
@@ -240,67 +274,6 @@
     {
       "id": "000001606",
       "slug": "assault-intercessor-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Boxset: Warhammer 40,000: Dawn of War - Onslaught",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004179:absolvor-bolt-pistol",
-      "datasheetId": "000004179",
-      "line": 1,
-      "name": "Absolvor bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004179",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Absolvor bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004179:executioner-relic-blade",
-      "datasheetId": "000004179",
-      "line": 2,
-      "name": "Executioner relic blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004179",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Executioner relic blade",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

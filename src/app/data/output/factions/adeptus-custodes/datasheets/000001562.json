@@ -5,17 +5,109 @@
   "sourceId": "000000354",
   "legend": "Designed as a highly manoeuvrable hunter-killer, the Pallas Grav-attack provides the Adeptus Custodes with a rapid strike capacity, using its agility and versatile twin arachnus blaze cannon to inflict devastating hit-and-run assaults on the enemy, or to hunt down fleeing targets that have evaded Custodes ground troops.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> twin arachnus blaze cannon; armoured hull.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-custodes/Pallas-Grav-attack",
   "slug": "pallas-grav-attack",
   "factionSlug": "adeptus-custodes",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> twin arachnus blaze cannon; armoured hull.",
+    "weapons": [
+      {
+        "id": "000001562:twin-arachnus-blaze-cannon",
+        "datasheetId": "000001562",
+        "line": 1,
+        "name": "Twin arachnus blaze cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001562",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin arachnus blaze cannon",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "TWIN-LINKED"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 8,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001562:armoured-hull",
+        "datasheetId": "000001562",
+        "line": 2,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001562",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001562",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,16 +125,7 @@
       "factionId": "",
       "description": "In your Shooting phase, each time this model makes an attack that targets an enemy unit that is Below Half-strength, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -94,14 +177,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001562",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001562",
@@ -120,64 +195,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001562:twin-arachnus-blaze-cannon",
-      "datasheetId": "000001562",
-      "line": 1,
-      "name": "Twin arachnus blaze cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001562",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin arachnus blaze cannon",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "TWIN-LINKED"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 8,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001562:armoured-hull",
-      "datasheetId": "000001562",
-      "line": 2,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001562",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

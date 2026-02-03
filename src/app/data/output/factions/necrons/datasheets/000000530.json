@@ -5,17 +5,71 @@
   "sourceId": "000000029",
   "legend": "Orikan is a master astromancer, using his knowledge of astral conjunctions to predict the tides of battle and empower himself with cosmic energies. He supplements these skills with chronomantic abilities that allow him to see events before they happen and know just where to aim his blows.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Staff of Tomorrow.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to one of the above units even if one Royal Warden or Noble model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Orikan-The-Diviner",
   "slug": "orikan-the-diviner",
   "factionSlug": "necrons",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to one of the above units even if one Royal Warden or Noble model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "ROYAL WARDEN",
+        "NOBLE"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Staff of Tomorrow.",
+    "weapons": [
+      {
+        "id": "000000530:staff-of-tomorrow",
+        "datasheetId": "000000530",
+        "line": 1,
+        "name": "Staff of Tomorrow",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000530",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of Tomorrow",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -3,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,16 +86,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -114,7 +159,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000530",
@@ -133,7 +177,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000534",
       "slug": "necron-warriors"
@@ -141,40 +185,6 @@
     {
       "id": "000000535",
       "slug": "immortals"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000530:staff-of-tomorrow",
-      "datasheetId": "000000530",
-      "line": 1,
-      "name": "Staff of Tomorrow",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000530",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of Tomorrow",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -3,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

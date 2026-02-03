@@ -5,17 +5,182 @@
   "sourceId": "000000027",
   "legend": "Clad in hulking Terminator plate, a Sorcerer of the Thousand Sons can shrug off even the punishing fire of anti-tank weaponry. So protected, they can unleash their mutative magicks with impunity, leading offensives into even the most heavily defended enemy strongpoints and laying low any who bar their path.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Gaze of Hate; inferno combi-bolter; force weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/thousand-sons/Sorcerer-In-Terminator-Armour",
   "slug": "sorcerer-in-terminator-armour-3",
   "factionSlug": "thousand-sons",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Gaze of Hate; inferno combi-bolter; force weapon.",
+    "weapons": [
+      {
+        "id": "000001017:gaze-of-hate",
+        "datasheetId": "000001017",
+        "line": 1,
+        "name": "Gaze of Hate",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001017",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gaze of Hate",
+            "attributes": [
+              "ANTI-MONSTER 4+",
+              "ANTI-VEHICLE 4+",
+              "DEVASTATING WOUNDS",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001017:inferno-combi-bolter",
+        "datasheetId": "000001017",
+        "line": 2,
+        "name": "Inferno combi-bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001017",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Inferno combi-bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001017:inferno-combi-weapon",
+        "datasheetId": "000001017",
+        "line": 3,
+        "name": "Inferno combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001017",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Inferno combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001017:force-weapon",
+        "datasheetId": "000001017",
+        "line": 4,
+        "name": "Force weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001017",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Force weapon",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001017",
+          "line": 1,
+          "button": "•",
+          "description": "This model's inferno combi-bolter can be replaced with 1 inferno combi-weapon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's inferno combi-bolter can be replaced with 1 inferno combi-weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "inferno combi-bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "inferno combi-weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -45,16 +210,7 @@
       "factionId": "",
       "description": "At the start of your Shooting phase, select one enemy unit that is visible to this <span class=\"kwb\">PSYKER</span> model. Until the end of the phase, each time a model in this unit makes an attack that targets that enemy unit, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -130,14 +286,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001017",
-      "line": 1,
-      "button": "•",
-      "description": "This model's inferno combi-bolter can be replaced with 1 inferno combi-weapon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001017",
@@ -156,127 +304,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001035",
       "slug": "scarab-occult-terminators"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001017:gaze-of-hate",
-      "datasheetId": "000001017",
-      "line": 1,
-      "name": "Gaze of Hate",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001017",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gaze of Hate",
-          "attributes": [
-            "ANTI-MONSTER 4+",
-            "ANTI-VEHICLE 4+",
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001017:inferno-combi-bolter",
-      "datasheetId": "000001017",
-      "line": 2,
-      "name": "Inferno combi-bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001017",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Inferno combi-bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001017:inferno-combi-weapon",
-      "datasheetId": "000001017",
-      "line": 3,
-      "name": "Inferno combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001017",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Inferno combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001017:force-weapon",
-      "datasheetId": "000001017",
-      "line": 4,
-      "name": "Force weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001017",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Force weapon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

@@ -5,17 +5,183 @@
   "sourceId": "000000369",
   "legend": "The appearance of a Chaos Knight Asterius on the battlefield is a portent of doom, a symbol of Chaos' ascendancy and the inevitable fall of Mankind - such is its incredible destructive potential and its formidable resilience. The pilots of these fell machines revel in their awesome power, levelling fortification after fortification.",
   "role": "Other",
-  "loadout": "<b>This model is equipped with:</b> 2 Asterius volkite culverins; karacnos mortar battery; 2 twin conversion beam cannons; titanic feet.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/Chaos-Acastus-Knight-Asterius",
   "slug": "chaos-acastus-knight-asterius",
   "factionSlug": "chaos-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Chaos Knights (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-10",
+    "threshold": 10,
+    "description": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 5
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> 2 Asterius volkite culverins; karacnos mortar battery; 2 twin conversion beam cannons; titanic feet.",
+    "weapons": [
+      {
+        "id": "000001662:asterius-volkite-culverin",
+        "datasheetId": "000001662",
+        "line": 1,
+        "name": "Asterius volkite culverin",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001662",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Asterius volkite culverin",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001662:karacnos-mortar-battery",
+        "datasheetId": "000001662",
+        "line": 2,
+        "name": "Karacnos mortar battery",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001662",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Karacnos mortar battery",
+            "attributes": [
+              "ANTI-INFANTRY 2+",
+              "BLAST",
+              "IGNORES COVER",
+              "INDIRECT FIRE"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001662:twin-conversion-beam-cannon",
+        "datasheetId": "000001662",
+        "line": 3,
+        "name": "Twin conversion beam cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001662",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin conversion beam cannon",
+            "attributes": [
+              "CONVERSION",
+              "SUSTAINED HITS D3",
+              "TWIN-LINKED"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 16,
+            "ap": -2,
+            "d": 6
+          }
+        ]
+      },
+      {
+        "id": "000001662:titanic-feet",
+        "datasheetId": "000001662",
+        "line": 4,
+        "name": "Titanic feet",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001662",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Titanic feet",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001662",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -111,14 +277,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001662",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001662",
@@ -137,120 +295,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Chaos Knights (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001662:asterius-volkite-culverin",
-      "datasheetId": "000001662",
-      "line": 1,
-      "name": "Asterius volkite culverin",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001662",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Asterius volkite culverin",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001662:karacnos-mortar-battery",
-      "datasheetId": "000001662",
-      "line": 2,
-      "name": "Karacnos mortar battery",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001662",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Karacnos mortar battery",
-          "attributes": [
-            "ANTI-INFANTRY 2+",
-            "BLAST",
-            "IGNORES COVER",
-            "INDIRECT FIRE"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001662:twin-conversion-beam-cannon",
-      "datasheetId": "000001662",
-      "line": 3,
-      "name": "Twin conversion beam cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001662",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin conversion beam cannon",
-          "attributes": [
-            "CONVERSION",
-            "SUSTAINED HITS D3",
-            "TWIN-LINKED"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 16,
-          "ap": -2,
-          "d": 6
-        }
-      ]
-    },
-    {
-      "id": "000001662:titanic-feet",
-      "datasheetId": "000001662",
-      "line": 4,
-      "name": "Titanic feet",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001662",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Titanic feet",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

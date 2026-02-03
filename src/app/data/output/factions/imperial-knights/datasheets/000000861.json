@@ -5,17 +5,169 @@
   "sourceId": "000000370",
   "legend": "The Cerastus Knight Acheron is a war machine designed not only to destroy, but also to inspire terror. Armed with a fearsome reaper chainfist, twin heavy bolters and an Acheron-pattern flame cannon, they are employed as weapons of extermination, and nothing will sway them from their grim task until the enemy is utterly crushed.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Acheron flame cannon; twin heavy bolter; reaper chainfist.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/imperial-knights/Cerastus-Knight-Acheron",
   "slug": "cerastus-knight-acheron",
   "factionSlug": "imperial-knights",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Imperial Knights (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-10",
+    "threshold": 10,
+    "description": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 5
+      }
+    ]
+  },
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Acheron flame cannon; twin heavy bolter; reaper chainfist.",
+    "weapons": [
+      {
+        "id": "000000861:acheron-flame-cannon",
+        "datasheetId": "000000861",
+        "line": 1,
+        "name": "Acheron flame cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000861",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Acheron flame cannon",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": "N/A",
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000861:twin-heavy-bolter",
+        "datasheetId": "000000861",
+        "line": 2,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000861",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000861:reaper-chainfist",
+        "datasheetId": "000000861",
+        "line": 3,
+        "name": "Reaper chainfist",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000861",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Reaper chainfist - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -4,
+            "d": 6
+          },
+          {
+            "datasheetId": "000000861",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Reaper chainfist - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 12,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000861",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -122,14 +274,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000861",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000861",
@@ -148,106 +292,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Imperial Knights (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000861:acheron-flame-cannon",
-      "datasheetId": "000000861",
-      "line": 1,
-      "name": "Acheron flame cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000861",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Acheron flame cannon",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": "N/A",
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000861:twin-heavy-bolter",
-      "datasheetId": "000000861",
-      "line": 2,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000861",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000861:reaper-chainfist",
-      "datasheetId": "000000861",
-      "line": 3,
-      "name": "Reaper chainfist",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000861",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Reaper chainfist - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -4,
-          "d": 6
-        },
-        {
-          "datasheetId": "000000861",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Reaper chainfist - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 12,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

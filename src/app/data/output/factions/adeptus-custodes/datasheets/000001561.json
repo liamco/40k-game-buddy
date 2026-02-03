@@ -5,17 +5,180 @@
   "sourceId": "000000354",
   "legend": "The role of Venatari Custodian is vaunted as a high honour within the Adeptus Custodes, bestowed upon those with the most aquiline combat senses. These airborne hunting squads make masterful use of their archeotech jump packs to strike from the skies, swooping into the enemy's midst to deliver swift ruin with their pistols and polearms.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> Venatari lance.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-custodes/Venatari-Custodians",
   "slug": "venatari-custodians",
   "factionSlug": "adeptus-custodes",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> Venatari lance.",
+    "weapons": [
+      {
+        "id": "000001561:kinetic-destroyer",
+        "datasheetId": "000001561",
+        "line": 1,
+        "name": "Kinetic destroyer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001561",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Kinetic destroyer",
+            "attributes": [
+              "PISTOL",
+              "SUSTAINED HITS 1"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001561:venatari-lance",
+        "datasheetId": "000001561",
+        "line": 2,
+        "name": "Venatari lance",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001561",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Venatari lance",
+            "attributes": [
+              "ASSAULT"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001561:tarsis-buckler",
+        "datasheetId": "000001561",
+        "line": 3,
+        "name": "Tarsis buckler",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001561",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Tarsis buckler",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001561:venatari-lance-2",
+        "datasheetId": "000001561",
+        "line": 4,
+        "name": "Venatari lance",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001561",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Venatari lance",
+            "attributes": [
+              "LANCE"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001561",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their Venatari lance replaced with 1 kinetic destroyer and 1 tarsus buckler."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their Venatari lance replaced with 1 kinetic destroyer and 1 tarsus buckler.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Venatari lance",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "kinetic destroyer",
+                    "count": 1
+                  },
+                  {
+                    "name": "tarsus buckler",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -117,14 +280,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001561",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their Venatari lance replaced with 1 kinetic destroyer and 1 tarsus buckler."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001561",
@@ -150,116 +305,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001561:kinetic-destroyer",
-      "datasheetId": "000001561",
-      "line": 1,
-      "name": "Kinetic destroyer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001561",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Kinetic destroyer",
-          "attributes": [
-            "PISTOL",
-            "SUSTAINED HITS 1"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001561:venatari-lance",
-      "datasheetId": "000001561",
-      "line": 2,
-      "name": "Venatari lance",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001561",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Venatari lance",
-          "attributes": [
-            "ASSAULT"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001561:tarsis-buckler",
-      "datasheetId": "000001561",
-      "line": 3,
-      "name": "Tarsis buckler",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001561",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Tarsis buckler",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001561:venatari-lance-2",
-      "datasheetId": "000001561",
-      "line": 4,
-      "name": "Venatari lance",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001561",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Venatari lance",
-          "attributes": [
-            "LANCE"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

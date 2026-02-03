@@ -5,17 +5,89 @@
   "sourceId": "000000027",
   "legend": "Tzaangor Shamans possess prodigious sorcerous abilities stemming from their faith in Tzeentch and can unleash ferocious psgchic bombardments against the foe as they soar high upon their daemonic Discs. The mere presence of these bestial champions inspires the herds they lead to ever greater heights of violence.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Baleful Devolution; force stave.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/thousand-sons/Tzaangor-Shaman",
   "slug": "tzaangor-shaman",
   "factionSlug": "thousand-sons",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Baleful Devolution; force stave.",
+    "weapons": [
+      {
+        "id": "000001472:baleful-devolution",
+        "datasheetId": "000001472",
+        "line": 1,
+        "name": "Baleful Devolution",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001472",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Baleful Devolution",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 9,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001472:force-stave",
+        "datasheetId": "000001472",
+        "line": 2,
+        "name": "Force stave",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001472",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Force stave",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,16 +104,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -138,7 +201,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001472",
@@ -157,7 +219,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001034",
       "slug": "tzaangors"
@@ -169,68 +231,6 @@
     {
       "id": "000001474",
       "slug": "tzaangor-enlightened"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001472:baleful-devolution",
-      "datasheetId": "000001472",
-      "line": 1,
-      "name": "Baleful Devolution",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001472",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Baleful Devolution",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 9,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001472:force-stave",
-      "datasheetId": "000001472",
-      "line": 2,
-      "name": "Force stave",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001472",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Force stave",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

@@ -5,17 +5,202 @@
   "sourceId": "000000139",
   "legend": "The powers of a Chapter's Librarians lend a lethal psychic edge to its elite infantry spearheads. Whether it be gruelling boarding actions, ferocious urban combat or on the front line against overwhelming enemy numbers, Librarians in Terminator armour blast at the foe with their powerful psychic energies.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Smite; force weapon.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Librarian-In-Terminator-Armour",
   "slug": "librarian-in-terminator-armour",
   "factionSlug": "space-marines",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Smite; force weapon.",
+    "weapons": [
+      {
+        "id": "000000079:combi-weapon",
+        "datasheetId": "000000079",
+        "line": 1,
+        "name": "Combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000079",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000079:smite",
+        "datasheetId": "000000079",
+        "line": 2,
+        "name": "Smite",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000079",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Smite - witchfire",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": "D3"
+          },
+          {
+            "datasheetId": "000000079",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Smite - focused witchfire",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "HAZARDOUS",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 6,
+            "ap": -2,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000000079:storm-bolter",
+        "datasheetId": "000000079",
+        "line": 4,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000079",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000079:force-weapon",
+        "datasheetId": "000000079",
+        "line": 5,
+        "name": "Force weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000079",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Force weapon",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000079",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 combi-weapon</li><li>1 storm bolter</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 combi-weapon</li><li>1 storm bolter</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "combi-weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "storm bolter",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "codex",
+    "name": "Codex",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,18 +221,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -56,26 +230,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SUSTAINED HITS"
-          ],
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -145,14 +300,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000079",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 combi-weapon</li><li>1 storm bolter</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000079",
@@ -171,7 +318,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000004138",
       "slug": "terminator-squad-2"
@@ -203,141 +350,6 @@
     {
       "id": "000002302",
       "slug": "deathwing-command-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000079:combi-weapon",
-      "datasheetId": "000000079",
-      "line": 1,
-      "name": "Combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000079",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000079:smite",
-      "datasheetId": "000000079",
-      "line": 2,
-      "name": "Smite",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000079",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Smite - witchfire",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": "D3"
-        },
-        {
-          "datasheetId": "000000079",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Smite - focused witchfire",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "HAZARDOUS",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000000079:storm-bolter",
-      "datasheetId": "000000079",
-      "line": 4,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000079",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000079:force-weapon",
-      "datasheetId": "000000079",
-      "line": 5,
-      "name": "Force weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000079",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Force weapon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

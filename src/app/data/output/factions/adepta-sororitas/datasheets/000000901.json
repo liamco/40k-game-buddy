@@ -5,17 +5,97 @@
   "sourceId": "000000112",
   "legend": "Hospitallers are physical and spiritual healers. They are possessed of medicinal expertise as well as serving as a font of faith for those in need, whispering mantras of vigour to dull pain and intoning prayers to salve fevered minds. They move swiftly across the battlefield, working in solemn calm despite the harshest conditions.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> bolt pistol; chirurgeon's tools.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "This model can be attached to a Battle Sisters Squad, even if one Canoness, Palatine, Junith Eruita or AESTRED THURGA model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adepta-sororitas/Hospitaller",
   "slug": "hospitaller",
   "factionSlug": "adepta-sororitas",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "This model can be attached to a Battle Sisters Squad, even if one Canoness, Palatine, Junith Eruita or AESTRED THURGA model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "CANONESS",
+        "PALATINE",
+        "JUNITH ERUITA",
+        "AESTRED THURGA"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; chirurgeon's tools.",
+    "weapons": [
+      {
+        "id": "000000901:bolt-pistol",
+        "datasheetId": "000000901",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000901",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000901:chirurgeon-s-tools",
+        "datasheetId": "000000901",
+        "line": 2,
+        "name": "Chirurgeon's tools",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000901",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chirurgeon's tools",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,18 +112,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 5
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -104,7 +173,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000901",
@@ -123,7 +191,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002507",
       "slug": "sisters-novitiate-squad"
@@ -151,64 +219,6 @@
     {
       "id": "000000909",
       "slug": "dominion-squad"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000901:bolt-pistol",
-      "datasheetId": "000000901",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000901",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000901:chirurgeon-s-tools",
-      "datasheetId": "000000901",
-      "line": 2,
-      "name": "Chirurgeon's tools",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000901",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chirurgeon's tools",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
     }
   ]
 }

@@ -5,17 +5,156 @@
   "sourceId": "000000280",
   "legend": "Sat astride swift Steeds of Slaanesh, Seekers pursue their mortal prey with obsessive delight. Even the fastest of mortal vehicles cannot outpace these vicious entities, while those who stand and fight soon find their ranks smashed asunder by charging shock cavalry drawn from the darkest depths of nightmare.",
   "role": "Other",
-  "loadout": "<b>Every model is equipped with:</b> lashing tongue; slashing claws.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/emperor-s-children/Seekers",
   "slug": "seekers-2",
   "factionSlug": "emperor-s-children",
-  "supplementKey": "codex",
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Emperor's Children",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> lashing tongue; slashing claws.",
+    "weapons": [
+      {
+        "id": "000004098:lashing-tongue",
+        "datasheetId": "000004098",
+        "line": 1,
+        "name": "Lashing tongue",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004098",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lashing tongue",
+            "attributes": [
+              "EXTRA ATTACKS",
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004098:slashing-claws",
+        "datasheetId": "000004098",
+        "line": 2,
+        "name": "Slashing claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004098",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Slashing claws",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000004098",
+          "line": 1,
+          "button": "•",
+          "description": "1 Seeker that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
+        },
+        {
+          "datasheetId": "000004098",
+          "line": 2,
+          "button": "•",
+          "description": "1 Seeker that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "1 Seeker that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Seeker that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "instrument of Chaos",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "1 Seeker that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Seeker that is not"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "daemonic icon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -125,20 +264,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000004098",
-      "line": 1,
-      "button": "•",
-      "description": "1 Seeker that is not equipped with a daemonic icon can be equipped with 1 instrument of Chaos."
-    },
-    {
-      "datasheetId": "000004098",
-      "line": 2,
-      "button": "•",
-      "description": "1 Seeker that is not equipped with an instrument of Chaos can be equipped with 1 daemonic icon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004098",
@@ -171,66 +296,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Emperor's Children",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004098:lashing-tongue",
-      "datasheetId": "000004098",
-      "line": 1,
-      "name": "Lashing tongue",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004098",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lashing tongue",
-          "attributes": [
-            "EXTRA ATTACKS",
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004098:slashing-claws",
-      "datasheetId": "000004098",
-      "line": 2,
-      "name": "Slashing claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004098",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Slashing claws",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

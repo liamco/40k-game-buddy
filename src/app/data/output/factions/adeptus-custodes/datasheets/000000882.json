@@ -5,17 +5,257 @@
   "sourceId": "000000024",
   "legend": "These warriors form the backbone of the shield companies, and every one is a terrifying force of destruction equal to the strongest of the foe. Whether armed with guardian spear or sentinel blade, their shots are perfectly placed, and every cut, thrust and parry is a masterclass in bladesmanship.",
   "role": "Battleline",
-  "loadout": "<b>Every model is equipped with:</b> guardian spear.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-custodes/Custodian-Guard",
   "slug": "custodian-guard",
   "factionSlug": "adeptus-custodes",
-  "supplementKey": "codex",
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Adeptus Custodes",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>Every model is equipped with:</b> guardian spear.",
+    "weapons": [
+      {
+        "id": "000000882:guardian-spear",
+        "datasheetId": "000000882",
+        "line": 1,
+        "name": "Guardian spear",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000882",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Guardian spear",
+            "attributes": [
+              "ASSAULT"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000882:sentinel-blade",
+        "datasheetId": "000000882",
+        "line": 2,
+        "name": "Sentinel blade",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000882",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Sentinel blade",
+            "attributes": [
+              "ASSAULT",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000882:guardian-spear-2",
+        "datasheetId": "000000882",
+        "line": 3,
+        "name": "Guardian spear",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000882",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Guardian spear",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000882:misericordia",
+        "datasheetId": "000000882",
+        "line": 4,
+        "name": "Misericordia",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000882",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Misericordia",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000882:sentinel-blade-2",
+        "datasheetId": "000000882",
+        "line": 5,
+        "name": "Sentinel blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000882",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Sentinel blade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000882",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their guardian spear replaced with 1 sentinel blade and 1 praesidium shield."
+        },
+        {
+          "datasheetId": "000000882",
+          "line": 2,
+          "button": "•",
+          "description": "1 model's guardian spear can be replaced with one of the following:<ul><li>1 vexilla and 1 misericordia</li><li>1 vexilla, 1 misericordia and 1 praesidium shield</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their guardian spear replaced with 1 sentinel blade and 1 praesidium shield.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "guardian spear",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "sentinel blade",
+                    "count": 1
+                  },
+                  {
+                    "name": "praesidium shield",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "1 model's guardian spear can be replaced with one of the following:<ul><li>1 vexilla and 1 misericordia</li><li>1 vexilla, 1 misericordia and 1 praesidium shield</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "guardian spear",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "vexilla",
+                    "count": 1
+                  },
+                  {
+                    "name": "misericordia",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "vexilla, 1 misericordia",
+                    "count": 1
+                  },
+                  {
+                    "name": "praesidium shield",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -111,20 +351,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000882",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their guardian spear replaced with 1 sentinel blade and 1 praesidium shield."
-    },
-    {
-      "datasheetId": "000000882",
-      "line": 2,
-      "button": "•",
-      "description": "1 model's guardian spear can be replaced with one of the following:<ul><li>1 vexilla and 1 misericordia</li><li>1 vexilla, 1 misericordia and 1 praesidium shield</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000882",
@@ -150,264 +376,5 @@
       "count": 5
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Adeptus Custodes",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000882:guardian-spear",
-      "datasheetId": "000000882",
-      "line": 1,
-      "name": "Guardian spear",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000882",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Guardian spear",
-          "attributes": [
-            "ASSAULT"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000882:sentinel-blade",
-      "datasheetId": "000000882",
-      "line": 2,
-      "name": "Sentinel blade",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000882",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Sentinel blade",
-          "attributes": [
-            "ASSAULT",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000882:guardian-spear-2",
-      "datasheetId": "000000882",
-      "line": 3,
-      "name": "Guardian spear",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000882",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Guardian spear",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000882:misericordia",
-      "datasheetId": "000000882",
-      "line": 4,
-      "name": "Misericordia",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000882",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Misericordia",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000882:sentinel-blade-2",
-      "datasheetId": "000000882",
-      "line": 5,
-      "name": "Sentinel blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000882",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Sentinel blade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000000882:guardian-spear",
-          "name": "Guardian spear",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000000882:misericordia",
-          "name": "Misericordia",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "vexilla",
-          "abilityName": "Vexilla"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000000882:misericordia",
-          "name": "Misericordia",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "praesidium shield",
-          "abilityName": "Praesidium Shield"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000000882:guardian-spear",
-          "name": "Guardian spear",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000882:sentinel-blade",
-          "name": "Sentinel blade",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "praesidium shield",
-          "abilityName": "Praesidium Shield"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Quintus",
-      "weapons": [
-        {
-          "id": "000000882:sentinel-blade",
-          "name": "Sentinel blade",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000882:misericordia",
-          "name": "Misericordia",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "praesidium shield",
-          "abilityName": "Praesidium Shield"
-        },
-        {
-          "name": "vexilla",
-          "abilityName": "Vexilla"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Sextus",
-      "weapons": [
-        {
-          "id": "000000882:sentinel-blade",
-          "name": "Sentinel blade",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000882:misericordia",
-          "name": "Misericordia",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "praesidium shield",
-          "abilityName": "Praesidium Shield"
-        },
-        {
-          "name": "praesidium shield",
-          "abilityName": "Praesidium Shield"
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.146Z"
-  }
+  "leadsUnits": []
 }

@@ -5,17 +5,106 @@
   "sourceId": "000000186",
   "legend": "The Visarch darts amongst the foe, taking off limbs and heads with the Cronesword Asu-var, the Sword of Silent Screams. The many faces that adorn his ancient suit of Bel-Anshoc armour represent the personalities he can take in battle, which include the sure blade of an Exarch and the acrobatic prowess of a Drukhari Wych.",
   "role": "Characters",
-  "loadout": "<b>This model is equipped with:</b> Asu-var.",
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this unit to one of the above units, even if Yvraine has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/aeldari/The-Visarch",
   "slug": "the-visarch",
   "factionSlug": "aeldari",
-  "supplementKey": "codex",
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this unit to one of the above units, even if Yvraine has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "YVRAINE"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "defaultLoadout": "<b>This model is equipped with:</b> Asu-var.",
+    "weapons": [
+      {
+        "id": "000002543:asu-var",
+        "datasheetId": "000002543",
+        "line": 1,
+        "name": "Asu-var",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002543",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Asu-var - quicksilver stance",
+            "attributes": [
+              "SUSTAINED HITS 2"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          },
+          {
+            "datasheetId": "000002543",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Asu-var - duellist stance",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          },
+          {
+            "datasheetId": "000002543",
+            "line": 3,
+            "lineInWargear": 3,
+            "dice": "",
+            "name": "Asu-var - mythic stance",
+            "attributes": [
+              "ANTI-EPIC HERO 2+",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 3,
+            "ap": -4,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
+  "supplement": {
+    "key": "codex",
+    "slug": "",
+    "name": "",
+    "label": "None",
+    "isSupplement": false
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -45,18 +134,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, other Character models attached to that unit have the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "name": "SERVANT OFTHE WHISPERING GOD",
@@ -124,7 +202,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002543",
@@ -143,7 +220,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003917",
       "slug": "ynnari-wyches"
@@ -171,76 +248,6 @@
     {
       "id": "000002531",
       "slug": "corsair-voidreavers"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002543:asu-var",
-      "datasheetId": "000002543",
-      "line": 1,
-      "name": "Asu-var",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002543",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Asu-var - quicksilver stance",
-          "attributes": [
-            "SUSTAINED HITS 2"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        },
-        {
-          "datasheetId": "000002543",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Asu-var - duellist stance",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000002543",
-          "line": 3,
-          "lineInWargear": 3,
-          "dice": "",
-          "name": "Asu-var - mythic stance",
-          "attributes": [
-            "ANTI-EPIC HERO 2+",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 3,
-          "ap": -4,
-          "d": 3
-        }
-      ]
     }
   ]
 }
