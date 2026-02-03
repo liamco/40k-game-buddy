@@ -33,6 +33,7 @@ interface WeaponSwapGroup {
     type: "swap";
     replacesWeaponId: string;
     replacesWeaponName: string;
+    replacesWeaponIds?: string[]; // Multiple weapon IDs when replacing "X and Y"
     optionLine: number; // The option line this swap group came from
     options: SwapOption[];
     parsedOption: ParsedOption;
@@ -258,6 +259,19 @@ const WargearTab = ({ unit, list }: Props) => {
                                     ...allReplacementOptions,
                                 ],
                             };
+
+                            // If there are multiple replaced weapons (e.g., "bolt rifle and close combat weapon"),
+                            // track all their IDs so we can remove all of them when a replacement is selected
+                            if (opt.replacesWeaponNames.length > 1) {
+                                const additionalReplacedIds = opt.replacesWeaponNames
+                                    .slice(1) // Skip first one, it's already the primary
+                                    .map((name) => findWeaponByName(unit.availableWargear || [], name)?.id)
+                                    .filter((id): id is string => id !== undefined);
+                                if (additionalReplacedIds.length > 0) {
+                                    swapGroup.replacesWeaponIds = [replacedWeapon.id, ...additionalReplacedIds];
+                                }
+                            }
+
                             swapGroupsByReplacedWeapon.set(replacedWeapon.id, swapGroup);
                             groups.push(swapGroup);
                         }
@@ -301,6 +315,11 @@ const WargearTab = ({ unit, list }: Props) => {
                     opt.packageWeapons.forEach((w) => allSwapWeaponIds.add(w.id));
                 }
             });
+
+            // Also include any additional replaced weapons (for "X and Y can be replaced" cases)
+            if (swapGroup.replacesWeaponIds) {
+                swapGroup.replacesWeaponIds.forEach((id) => allSwapWeaponIds.add(id));
+            }
 
             // Remove all swap group weapons from loadout
             const newLoadout = instance.loadout.filter((id) => !allSwapWeaponIds.has(id));

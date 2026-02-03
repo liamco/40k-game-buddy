@@ -592,19 +592,19 @@ This document tracks which datasheets have wargear options or abilities and whet
 
 | Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
 |--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000002099 | Aggressor Squad | 1 | - | - | |
-| [ ] | 000002775 | Ancient | 1 | - | - | |
-| [ ] | 000002677 | Ancient In Terminator Armour | 2 | 7 | 1 | |
-| [ ] | 000001606 | Assault Intercessor Squad | 2 | - | - | |
-| [ ] | 000002776 | Assault Intercessors With Jump Packs | 3 | 9 | - | |
-| [ ] | 000002700 | Astraeus | 3 | - | - | |
-| [ ] | 000000218 | Azrael | - | - | 1 | |
-| [ ] | 000000168 | Baal Predator | 4 | - | - | |
-| [ ] | 000000302 | Bjorn The Fell-handed | 1 | - | - | |
-| [ ] | 000000071 | Bladeguard Veteran Squad | 1 | - | - | |
-| [ ] | 000003831 | Blood Angels Captain | 2 | - | - | |
-| [ ] | 000000303 | Blood Claws | 2 | - | - | |
-| [ ] | 000000136 | Brutalis Dreadnought | 2 | 4 | - | |
+| [~] | 000002099 | Aggressor Squad | 1 | - | - | Fragstorm launchers don't come bundled with auto bolt storm gauntlet weapon |
+| [~] | 000002775 | Ancient | 1 | - | - | the power weapon should remove the bolt rifle and CCW, not just the CCW |
+| [x] | 000002677 | Ancient In Terminator Armour | 2 | 7 | 1 | |
+| [!] | 000001606 | Assault Intercessor Squad | 2 | - | - | no options displayed |
+| [!] | 000002776 | Assault Intercessors With Jump Packs | 3 | 9 | - | no options displayed |
+| [x] | 000002700 | Astraeus | 3 | - | - | |
+| [~] | 000000218 | Azrael | - | - | 1 | doesn't need any options, is only showing up because he has a wargear abilitiy |
+| [x] | 000000168 | Baal Predator | 4 | - | - | |
+| [x] | 000000302 | Bjorn The Fell-handed | 1 | - | - | |
+| [~] | 000000071 | Bladeguard Veteran Squad | 1 | - | - | sergeant missing his pistol options |
+| [x] | 000003831 | Blood Angels Captain | 2 | - | - | |
+| [~] | 000000303 | Blood Claws | 2 | - | - | leader missing chainsword vs power weapon option |
+| [x] | 000000136 | Brutalis Dreadnought | 2 | 4 | - | |
 | [ ] | 000000073 | Captain | 2 | 10 | 1 | |
 | [ ] | 000001172 | Captain In Gravis Armour | 1 | - | - | |
 | [ ] | 000000135 | Captain In Terminator Armour | 2 | - | - | |
@@ -648,7 +648,7 @@ This document tracks which datasheets have wargear options or abilities and whet
 | [ ] | 000002098 | Hellblaster Squad | 1 | - | - | |
 | [ ] | 000002568 | Impulsor | 3 | - | 2 | |
 | [ ] | 000002786 | Impulsor | 3 | - | 2 | |
-| [ ] | 000000125 | Inceptor Squad | 1 | - | - | |
+| [x] | 000000125 | Inceptor Squad | 1 | - | - | |
 | [ ] | 000001159 | Incursor Squad | 1 | - | 1 | |
 | [ ] | 000002781 | Indomitor Kill Team | 3 | 2 | - | |
 | [ ] | 000000128 | Infiltrator Squad | 2 | - | 2 | |
@@ -778,14 +778,14 @@ This document tracks which datasheets have wargear options or abilities and whet
 | [x] | 000000490 | Carnifexes | 4 | - | - | |
 | [x] | 000000485 | Harpy | 1 | - | - | |
 | [x] | 000000472 | Hive Guard | 1 | - | - | |
-| [!] | 000000460 | Hive Tyrant | 2 | 3 | - | Missing a loadout which is two sets of monstrous scything talons |
-| [ ] | 000000470 | Ripper Swarms | 1 | - | - | |
-| [ ] | 000000468 | Termagants | 5 | 4 | - | |
-| [ ] | 000000465 | Tervigon | 1 | - | - | |
-| [ ] | 000002692 | Tyranid Warriors With Ranged Bio-weapons | 3 | 3 | - | |
-| [ ] | 000000496 | Tyrannofex | 1 | - | - | |
-| [ ] | 000000471 | Tyrant Guard | 1 | - | - | |
-| [ ] | 000002528 | Winged Hive Tyrant | 1 | - | - | |
+| [x] | 000000460 | Hive Tyrant | 2 | 3 | - | - |
+| [x] | 000000470 | Ripper Swarms | 1 | - | - | Missing all-models functionality in the UI |
+| [x] | 000000468 | Termagants | 5 | 4 | - | Uses complex loadout UI but should use default as the options are either swaps or 'all-models' |
+| [x] | 000000465 | Tervigon | 1 | - | - | |
+| [x] | 000002692 | Tyranid Warriors With Ranged Bio-weapons | 3 | 3 | - | uses complex loadout UI but should use default |
+| [x] | 000000496 | Tyrannofex | 1 | - | - | |
+| [x] | 000000471 | Tyrant Guard | 1 | - | - | |
+| [x] | 000002528 | Winged Hive Tyrant | 1 | - | - | |
 
 ### World Eaters
 

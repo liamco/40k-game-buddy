@@ -82,7 +82,8 @@ export function parseOptionTargeting(description: string): OptionTargeting {
     }
 
     // "The Sergeant/Superior/Champion..." (leader models with "the" prefix)
-    const leaderMatch = normalized.match(/^the ([a-z\s]+?)((?:'s)?\s+(bolt|power|storm|chain|close|plasma|melta)|\s+can)/i);
+    // Match "The [Model Type]'s [weapon]" or "The [Model Type] can..."
+    const leaderMatch = normalized.match(/^the ([a-z\s]+?)((?:'s)?\s+(bolt|power|storm|chain|close|plasma|melta|heavy|hand|astartes)|\s+can)/i);
     if (leaderMatch) {
         const modelType = leaderMatch[1].trim();
         return { type: "specific-model", modelType };
@@ -214,7 +215,20 @@ export function parseWeaponsFromDescription(description: string): ParsedWeapons 
     // Fallback: look for "with X" pattern
     const withMatch = description.match(/(?:replaced with|equipped with)\s+(\d+\s+)?([^.<]+)/i);
     if (withMatch && withMatch[2]) {
-        weapons.push(withMatch[2].trim());
+        const addedText = withMatch[2].trim();
+
+        // Check if this is a package deal (contains " and " with numbers, e.g., "1 X and 1 Y")
+        if (/ and \d+\s+/i.test(addedText)) {
+            // Split on " and " and extract weapon names
+            const parts = addedText.split(/ and /i);
+            const packageWeapons = parts.map((part) => {
+                const weaponMatch = part.match(/^(\d+\s+)?(.+?)$/i);
+                return weaponMatch ? weaponMatch[2].trim() : part.trim();
+            });
+            packages.push(packageWeapons);
+        } else {
+            weapons.push(addedText);
+        }
     }
 
     return { weapons, packages };
@@ -283,10 +297,22 @@ export function parseOption(option: { line: number; button: string; description:
                 replacedPart = replacedPart.replace(/^(this\s+)?model\W?s?\s+/i, "");
                 // Strip "The [Model Type]'s" pattern (e.g., "The Terminator Sergeant's")
                 replacedPart = replacedPart.replace(/^the\s+[a-z\s]+?'s\s+/i, "");
-                // Extract weapon name
-                const weaponMatch = replacedPart.match(/(\d+\s+)?([a-z][a-z\s-]+)/i);
-                if (weaponMatch && weaponMatch[2]) {
-                    replacesWeaponNames.push(weaponMatch[2].trim());
+
+                // Check if multiple weapons are being replaced (e.g., "bolt rifle and close combat weapon")
+                if (/ and /i.test(replacedPart)) {
+                    const parts = replacedPart.split(/ and /i);
+                    parts.forEach((part) => {
+                        const weaponMatch = part.trim().match(/(\d+\s+)?([a-z][a-z\s-]+)/i);
+                        if (weaponMatch && weaponMatch[2]) {
+                            replacesWeaponNames.push(weaponMatch[2].trim());
+                        }
+                    });
+                } else {
+                    // Extract single weapon name
+                    const weaponMatch = replacedPart.match(/(\d+\s+)?([a-z][a-z\s-]+)/i);
+                    if (weaponMatch && weaponMatch[2]) {
+                        replacesWeaponNames.push(weaponMatch[2].trim());
+                    }
                 }
             }
         }
