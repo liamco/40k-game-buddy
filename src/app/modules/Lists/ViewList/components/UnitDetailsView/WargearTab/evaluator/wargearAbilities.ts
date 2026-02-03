@@ -88,17 +88,59 @@ export function buildAbilityMappings(wargearAbilities: Ability[], weapons: Weapo
 }
 
 /**
+ * Check if a weapon ID is a virtual weapon representing a wargear ability.
+ * Virtual weapon IDs have format: "wargear-ability:ability-name-slug"
+ */
+function isWargearAbilityId(weaponId: string): boolean {
+    return weaponId.startsWith("wargear-ability:");
+}
+
+/**
+ * Extract ability name from a virtual weapon ID.
+ * Converts "wargear-ability:storm-shield" to "storm shield"
+ */
+function getAbilityNameFromId(weaponId: string): string | undefined {
+    if (!isWargearAbilityId(weaponId)) return undefined;
+    const slug = weaponId.replace("wargear-ability:", "");
+    return slug.replace(/-/g, " ");
+}
+
+/**
  * Compute which wargear abilities are currently active based on loadout.
  */
 export function computeActiveAbilities(loadout: string[], mappings: WargearAbilityMapping[], weapons: Weapon[]): string[] {
     const activeAbilities: string[] = [];
-    const loadoutLower = loadout.map((id) => {
-        // Convert weapon ID to name for matching
-        const weapon = weapons.find((w) => w.id === id);
-        return weapon ? weapon.name.toLowerCase() : id.toLowerCase();
-    });
+
+    // First, check for direct virtual weapon matches (wargear-ability:xxx IDs in loadout)
+    const directActiveFromVirtualWeapons = new Set<string>();
+    for (const id of loadout) {
+        if (isWargearAbilityId(id)) {
+            const abilityName = getAbilityNameFromId(id);
+            if (abilityName) {
+                // Find the mapping that matches this ability name (case-insensitive)
+                const mapping = mappings.find((m) => m.abilityName.toLowerCase() === abilityName.toLowerCase());
+                if (mapping) {
+                    directActiveFromVirtualWeapons.add(mapping.abilityName);
+                }
+            }
+        }
+    }
+
+    // Convert loadout to names for weapon-based matching
+    const loadoutLower = loadout
+        .filter((id) => !isWargearAbilityId(id)) // Exclude virtual weapons from name-based matching
+        .map((id) => {
+            const weapon = weapons.find((w) => w.id === id);
+            return weapon ? weapon.name.toLowerCase() : id.toLowerCase();
+        });
 
     for (const mapping of mappings) {
+        // If already active from virtual weapon, mark as active
+        if (directActiveFromVirtualWeapons.has(mapping.abilityName)) {
+            activeAbilities.push(mapping.abilityName);
+            continue;
+        }
+
         // Check if any trigger weapon is in the loadout
         const isActive = mapping.triggerWeaponNames.some((triggerName) => loadoutLower.some((loadoutName) => loadoutName.includes(triggerName.toLowerCase()) || triggerName.toLowerCase().includes(loadoutName)));
 

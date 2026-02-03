@@ -13,19 +13,10 @@ import { computeModelLoadout } from "../state";
 
 export interface WargearActions {
     /** Select a weapon for a specific model's option */
-    selectForModel: (
-        instanceId: string,
-        optionLine: number,
-        weaponId: string,
-        removedWeaponIds: string[]
-    ) => void;
+    selectForModel: (instanceId: string, optionLine: number, weaponId: string, removedWeaponIds: string[]) => void;
 
-    /** Select a weapon for a unit-wide option (applies to all models) */
-    selectUnitWide: (
-        optionLine: number,
-        newWeaponId: string,
-        oldWeaponId: string
-    ) => void;
+    /** Select a weapon for a unit-wide option (applies to all models, supports packages) */
+    selectUnitWide: (optionLine: number, newWeaponIds: string[], oldWeaponIds: string[]) => void;
 
     /** Toggle an addition (equip/unequip) for a specific model */
     toggleAdditionForModel: (instanceId: string, weaponId: string) => void;
@@ -43,27 +34,12 @@ export interface WargearActions {
 /**
  * Hook to get wargear action dispatchers.
  */
-export function useWargearActions(
-    list: ArmyList,
-    unit: ArmyListItem,
-    parsedOptions: WargearOptionDef[]
-): WargearActions {
-    const {
-        updateModelLoadout,
-        updateAllModelLoadouts,
-        updateUnitWideSelection,
-    } = useListManager();
+export function useWargearActions(list: ArmyList, unit: ArmyListItem, parsedOptions: WargearOptionDef[]): WargearActions {
+    const { updateModelLoadout, updateAllModelLoadouts, updateUnitWideSelection } = useListManager();
 
     const selectForModel = useCallback(
-        (
-            instanceId: string,
-            optionLine: number,
-            weaponId: string,
-            removedWeaponIds: string[]
-        ) => {
-            const instance = unit.modelInstances?.find(
-                (m) => m.instanceId === instanceId
-            );
+        (instanceId: string, optionLine: number, weaponId: string, removedWeaponIds: string[]) => {
+            const instance = unit.modelInstances?.find((m) => m.instanceId === instanceId);
             if (!instance) return;
 
             // Update option selections
@@ -75,46 +51,28 @@ export function useWargearActions(
             // Compute new loadout
             // Remove the old weapons and add the new one
             const removedSet = new Set(removedWeaponIds);
-            const newLoadout = instance.loadout.filter(
-                (id) => !removedSet.has(id)
-            );
+            const newLoadout = instance.loadout.filter((id) => !removedSet.has(id));
             newLoadout.push(weaponId);
 
-            updateModelLoadout(
-                list,
-                unit.listItemId,
-                instanceId,
-                newLoadout,
-                newOptionSelections
-            );
+            updateModelLoadout(list, unit.listItemId, instanceId, newLoadout, newOptionSelections);
         },
         [list, unit.listItemId, unit.modelInstances, updateModelLoadout]
     );
 
     const selectUnitWide = useCallback(
-        (optionLine: number, newWeaponId: string, oldWeaponId: string) => {
-            updateUnitWideSelection(
-                list,
-                unit.listItemId,
-                optionLine,
-                newWeaponId,
-                oldWeaponId
-            );
+        (optionLine: number, newWeaponIds: string[], oldWeaponIds: string[]) => {
+            updateUnitWideSelection(list, unit.listItemId, optionLine, newWeaponIds, oldWeaponIds);
         },
         [list, unit.listItemId, updateUnitWideSelection]
     );
 
     const toggleAdditionForModel = useCallback(
         (instanceId: string, weaponId: string) => {
-            const instance = unit.modelInstances?.find(
-                (m) => m.instanceId === instanceId
-            );
+            const instance = unit.modelInstances?.find((m) => m.instanceId === instanceId);
             if (!instance) return;
 
             const hasWeapon = instance.loadout.includes(weaponId);
-            const newLoadout = hasWeapon
-                ? instance.loadout.filter((id) => id !== weaponId)
-                : [...instance.loadout, weaponId];
+            const newLoadout = hasWeapon ? instance.loadout.filter((id) => id !== weaponId) : [...instance.loadout, weaponId];
 
             updateModelLoadout(list, unit.listItemId, instanceId, newLoadout);
         },
@@ -125,17 +83,13 @@ export function useWargearActions(
         (weaponId: string) => {
             if (!unit.modelInstances) return;
 
-            const allModelsHaveWeapon = unit.modelInstances.every((instance) =>
-                instance.loadout.includes(weaponId)
-            );
+            const allModelsHaveWeapon = unit.modelInstances.every((instance) => instance.loadout.includes(weaponId));
 
             updateAllModelLoadouts(list, unit.listItemId, (instance) => {
                 if (allModelsHaveWeapon) {
                     return instance.loadout.filter((id) => id !== weaponId);
                 } else {
-                    return instance.loadout.includes(weaponId)
-                        ? instance.loadout
-                        : [...instance.loadout, weaponId];
+                    return instance.loadout.includes(weaponId) ? instance.loadout : [...instance.loadout, weaponId];
                 }
             });
         },
@@ -144,9 +98,7 @@ export function useWargearActions(
 
     const resetModelLoadout = useCallback(
         (instanceId: string) => {
-            const instance = unit.modelInstances?.find(
-                (m) => m.instanceId === instanceId
-            );
+            const instance = unit.modelInstances?.find((m) => m.instanceId === instanceId);
             if (!instance) return;
 
             updateModelLoadout(
@@ -163,9 +115,7 @@ export function useWargearActions(
     const resetAllLoadouts = useCallback(() => {
         if (!unit.modelInstances) return;
 
-        updateAllModelLoadouts(list, unit.listItemId, (instance) => [
-            ...instance.defaultLoadout,
-        ]);
+        updateAllModelLoadouts(list, unit.listItemId, (instance) => [...instance.defaultLoadout]);
 
         // Also clear unit-wide selections
         // This would need a new context method if we want to clear those too

@@ -54,8 +54,70 @@ function cleanWeaponName(name) {
         .replace(/\s*\(.*?\)\s*/g, "") // Remove parenthetical notes
         .replace(/[.,;:*]+$/, "") // Remove trailing punctuation
         .replace(/^\s*\d+\s+/, "") // Remove leading count if present
+        .replace(/\s+and\s*$/i, "") // Remove trailing " and"
         .replace(/\s+/g, " ") // Normalize whitespace
         .trim();
+}
+
+/**
+ * Strip HTML tags from text
+ */
+function stripHtml(text) {
+    return text.replace(/<[^>]*>/g, "").trim();
+}
+
+/**
+ * Parse a single weapon choice item (plain text, no HTML).
+ * Handles both single weapons ("1 bolt pistol") and packages ("1 weapon1 and 1 weapon2").
+ * Returns a choice object: { weapons: [...], isPackage: boolean }
+ */
+function parseWeaponChoiceItem(text) {
+    const cleaned = text.trim();
+    if (!cleaned) return null;
+
+    // Check for package pattern: "N weapon1 and N weapon2"
+    // Must have "and" with a number after it to be a package
+    if (/\s+and\s+\d+\s+/i.test(cleaned)) {
+        const parts = cleaned.split(/\s+and\s+/i);
+        const weapons = [];
+
+        for (const part of parts) {
+            const match = part.trim().match(/^(\d+)\s+(.+)$/);
+            if (match) {
+                weapons.push({
+                    name: cleanWeaponName(match[2]),
+                    count: parseInt(match[1], 10),
+                });
+            }
+        }
+
+        if (weapons.length > 1) {
+            return { weapons, isPackage: true };
+        }
+    }
+
+    // Single weapon: "1 bolt pistol" or "bolt pistol"
+    const match = cleaned.match(/^(\d+)\s+(.+)$/);
+    if (match) {
+        const name = cleanWeaponName(match[2]);
+        if (name) {
+            return {
+                weapons: [{ name, count: parseInt(match[1], 10) }],
+                isPackage: false,
+            };
+        }
+    }
+
+    // No leading number - assume count of 1
+    const name = cleanWeaponName(cleaned);
+    if (name) {
+        return {
+            weapons: [{ name, count: 1 }],
+            isPackage: false,
+        };
+    }
+
+    return null;
 }
 
 /**
@@ -130,7 +192,8 @@ function extractChoicesFallback(text) {
 
 /**
  * Extract weapon choices from a choice list.
- * Handles HTML lists like <ul><li>1 weapon</li><li>1 other</li></ul>
+ * Handles both HTML lists (<ul><li>...</li></ul>) and plain text.
+ * Uses unified parseWeaponChoiceItem() for consistent parsing.
  */
 function extractWeaponChoices(text) {
     if (!text) return [];
@@ -138,50 +201,17 @@ function extractWeaponChoices(text) {
     const cleaned = text.trim();
     const choices = [];
 
-    // If text contains <li> tags, extract items from each list item
+    // If text contains <ul>/<li> tags, split by list items first
     if (cleaned.includes("<li>")) {
-        const liPattern = /<li>([^<]+)<\/li>/gi;
+        const liPattern = /<li>([\s\S]*?)<\/li>/gi;
         let liMatch;
 
         while ((liMatch = liPattern.exec(cleaned)) !== null) {
-            const itemText = liMatch[1].trim();
-            // Parse "1 weapon name" or "weapon name"
-            const itemMatch = itemText.match(/^(\d+)\s+(.+)$/);
-            if (itemMatch) {
-                const count = parseInt(itemMatch[1], 10);
-                const rawName = itemMatch[2].trim();
-
-                // Check for package (e.g., "1 weapon and 1 other")
-                if (rawName.toLowerCase().includes(" and ")) {
-                    const parts = rawName.split(/\s+and\s+/i);
-                    const weapons = [];
-
-                    for (let i = 0; i < parts.length; i++) {
-                        const part = parts[i].trim();
-                        const partMatch = part.match(/^(\d+)\s+(.+)$/);
-                        if (partMatch) {
-                            weapons.push({
-                                name: cleanWeaponName(partMatch[2]),
-                                count: parseInt(partMatch[1], 10),
-                            });
-                        } else {
-                            weapons.push({
-                                name: cleanWeaponName(part),
-                                count: i === 0 ? count : 1,
-                            });
-                        }
-                    }
-
-                    choices.push({ weapons, isPackage: true });
-                } else {
-                    const name = cleanWeaponName(rawName);
-                    if (name) {
-                        choices.push({
-                            weapons: [{ name, count }],
-                            isPackage: false,
-                        });
-                    }
-                }
+            // Strip any remaining HTML and parse as plain text
+            const itemText = stripHtml(liMatch[1]);
+            const choice = parseWeaponChoiceItem(itemText);
+            if (choice) {
+                choices.push(choice);
             }
         }
 
@@ -190,51 +220,14 @@ function extractWeaponChoices(text) {
         }
     }
 
-    // Fallback: original regex-based parsing for non-HTML text
-    const weaponPattern = /(\d+)\s+([^0-9]+?)(?=\s+\d+\s+|\s*$)/g;
-    let match;
-
-    while ((match = weaponPattern.exec(cleaned)) !== null) {
-        const count = parseInt(match[1], 10);
-        const rawName = match[2].trim();
-
-        if (rawName.toLowerCase().includes(" and ")) {
-            const parts = rawName.split(/\s+and\s+/i);
-            const weapons = [];
-
-            for (let i = 0; i < parts.length; i++) {
-                const part = parts[i].trim();
-                const partMatch = part.match(/^(\d+)\s+(.+)$/);
-                if (partMatch) {
-                    weapons.push({
-                        name: cleanWeaponName(partMatch[2]),
-                        count: parseInt(partMatch[1], 10),
-                    });
-                } else {
-                    weapons.push({
-                        name: cleanWeaponName(part),
-                        count: i === 0 ? count : 1,
-                    });
-                }
-            }
-
-            choices.push({ weapons, isPackage: true });
-        } else {
-            const name = cleanWeaponName(rawName);
-            if (name) {
-                choices.push({
-                    weapons: [{ name, count }],
-                    isPackage: false,
-                });
-            }
-        }
+    // Plain text: try to parse as a single item (may be a package)
+    const singleChoice = parseWeaponChoiceItem(cleaned);
+    if (singleChoice) {
+        return [singleChoice];
     }
 
-    if (choices.length === 0) {
-        return extractChoicesFallback(cleaned);
-    }
-
-    return choices;
+    // Fallback for comma-separated lists or other edge cases
+    return extractChoicesFallback(cleaned);
 }
 
 /**

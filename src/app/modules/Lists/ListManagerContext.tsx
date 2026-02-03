@@ -578,7 +578,7 @@ interface ListManagerContextType {
     getModelCountForLine: (unit: ArmyListItem, line: number) => number;
     updateModelLoadout: (list: ArmyList, unitId: string, instanceId: string, newLoadout: string[], optionSelections?: Record<number, string>) => ArmyList;
     updateAllModelLoadouts: (list: ArmyList, unitId: string, loadoutUpdater: (instance: ModelInstance) => string[]) => ArmyList;
-    updateUnitWideSelection: (list: ArmyList, unitId: string, optionLine: number, newWeaponId: string, oldWeaponId: string) => ArmyList;
+    updateUnitWideSelection: (list: ArmyList, unitId: string, optionLine: number, newWeaponIds: string[], oldWeaponIds: string[]) => ArmyList;
 
     // Attachment operations
     attachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace?: boolean) => ArmyList;
@@ -1103,13 +1103,17 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Update unit-wide selection (for "All models in this unit" options)
     // This updates all models that don't have a per-model ratio override
-    const updateUnitWideSelection = useCallback((list: ArmyList, unitId: string, optionLine: number, newWeaponId: string, oldWeaponId: string): ArmyList => {
+    // Supports packages: newWeaponIds and oldWeaponIds can be arrays for multi-weapon packages
+    const updateUnitWideSelection = useCallback((list: ArmyList, unitId: string, optionLine: number, newWeaponIds: string[], oldWeaponIds: string[]): ArmyList => {
         const unit = getUnitById(list.items, unitId);
         if (!unit || !unit.modelInstances) return list;
 
-        // Update unitWideSelections
+        const oldWeaponIdSet = new Set(oldWeaponIds);
+        const newWeaponIdSet = new Set(newWeaponIds);
+
+        // Update unitWideSelections - store first weapon ID as the primary identifier
         const newUnitWideSelections = { ...(unit.unitWideSelections || {}) };
-        newUnitWideSelections[optionLine] = newWeaponId;
+        newUnitWideSelections[optionLine] = newWeaponIds[0];
 
         // Update each model that doesn't have a per-model ratio override
         const updatedInstances = unit.modelInstances.map((instance) => {
@@ -1120,8 +1124,8 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 Object.entries(instance.optionSelections).some(([line, selectedId]) => {
                     // Skip the unit-wide option line itself
                     if (parseInt(line, 10) === optionLine) return false;
-                    // If they've selected something other than the old unit-wide weapon, they have an override
-                    return selectedId !== oldWeaponId && selectedId !== newWeaponId;
+                    // If they've selected something other than the old/new unit-wide weapons, they have an override
+                    return !oldWeaponIdSet.has(selectedId) && !newWeaponIdSet.has(selectedId);
                 });
 
             if (hasRatioOverride) {
@@ -1129,8 +1133,13 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 return instance;
             }
 
-            // Replace old weapon with new in loadout
-            const newLoadout = instance.loadout.map((id) => (id === oldWeaponId ? newWeaponId : id));
+            // Remove all old weapon IDs and add all new weapon IDs
+            const newLoadout = instance.loadout.filter((id) => !oldWeaponIdSet.has(id));
+            newWeaponIds.forEach((id) => {
+                if (!newLoadout.includes(id)) {
+                    newLoadout.push(id);
+                }
+            });
 
             return { ...instance, loadout: newLoadout };
         });

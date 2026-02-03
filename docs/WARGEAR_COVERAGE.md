@@ -593,15 +593,15 @@ This document tracks which datasheets have wargear options or abilities and whet
 | Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
 |--------|-----|------|---------|-------------|-------------------|-------|
 | [~] | 000002099 | Aggressor Squad | 1 | - | - | Fragstorm launchers don't come bundled with auto bolt storm gauntlet weapon |
-| [~] | 000002775 | Ancient | 1 | - | - | the power weapon should remove the bolt rifle and CCW, not just the CCW |
+| [~] | 000002775 | Ancient | 1 | - | - | adding power weapon makes CCS disappear |
 | [x] | 000002677 | Ancient In Terminator Armour | 2 | 7 | 1 | |
-| [!] | 000001606 | Assault Intercessor Squad | 2 | - | - | no options displayed |
-| [!] | 000002776 | Assault Intercessors With Jump Packs | 3 | 9 | - | no options displayed |
+| [x] | 000001606 | Assault Intercessor Squad | 2 | - | - | no options displayed |
+| [~] | 000002776 | Assault Intercessors With Jump Packs | 3 | 9 | - | no options displayed for 'every 5 models in this unit' rule |
 | [x] | 000002700 | Astraeus | 3 | - | - | |
 | [~] | 000000218 | Azrael | - | - | 1 | doesn't need any options, is only showing up because he has a wargear abilitiy |
 | [x] | 000000168 | Baal Predator | 4 | - | - | |
 | [x] | 000000302 | Bjorn The Fell-handed | 1 | - | - | |
-| [~] | 000000071 | Bladeguard Veteran Squad | 1 | - | - | sergeant missing his pistol options |
+| [x] | 000000071 | Bladeguard Veteran Squad | 1 | - | - |  |
 | [x] | 000003831 | Blood Angels Captain | 2 | - | - | |
 | [~] | 000000303 | Blood Claws | 2 | - | - | leader missing chainsword vs power weapon option |
 | [x] | 000000136 | Brutalis Dreadnought | 2 | 4 | - | |
