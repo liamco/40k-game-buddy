@@ -260,5 +260,80 @@
       ],
       "isPackageDeal": false
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "Any number of Sicarian Ruststalkers can each have their transonic razor and chordclaw replaced with 1 transonic blades.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "transonic razor",
+            "count": 1
+          },
+          {
+            "name": "chordclaw",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "transonic blades",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "The Sicarian Ruststalker Princeps' transonic razor and chordclaw can be replaced with 1 transonic blades and chordclaw.",
+      "wargearParsed": false,
+      "targeting": {
+        "type": "unknown"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "The Sicarian Ruststalker Princeps' transonic razor",
+            "count": 1
+          },
+          {
+            "name": "chordclaw",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "transonic blades",
+                "count": 1
+              },
+              {
+                "name": "chordclaw",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": false
 }

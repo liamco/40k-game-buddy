@@ -450,5 +450,165 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "This model's bolt pistol can be replaced with one of the following:<ul><li>1 condemnor boltgun</li><li>1 inferno pistol</li><li>1 plasma pistol</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "bolt pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "condemnor boltgun",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "inferno pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "plasma pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "This model's hallowed chainsword can be replaced with one of the following:<ul><li>1 blessed blade</li><li>1 power weapon</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "hallowed chainsword",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "blessed blade",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "power weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "If this model is equipped with a hallowed chainsword, it can be equipped with one of the following:<ul><li>1 brazier of holy fire</li><li>1 null rod</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "conditional",
+        "condition": {
+          "type": "equipped-with",
+          "weaponName": "a hallowed chainsword"
+        }
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "brazier of holy fire",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "null rod",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 4,
+      "rawText": "If this model is equipped with a plasma pistol and a power weapon, it can be equipped with:<ul><li>1 rod of office</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "conditional",
+        "condition": {
+          "type": "equipped-with",
+          "weaponNames": [
+            "a plasma pistol",
+            "a power weapon"
+          ]
+        }
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "rod of office",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

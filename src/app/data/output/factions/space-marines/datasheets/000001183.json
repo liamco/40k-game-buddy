@@ -498,5 +498,137 @@
     "isComplex": true,
     "reason": "package deal",
     "generatedAt": "2026-02-02T17:55:35.583Z"
-  }
+  },
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "For every 5 models in this unit, 1 Terminator's storm bolter can be replaced with one of the following:<ul><li>1 assault cannon</li><li>1 heavy flamer</li><li>1 cyclone missile launcher and 1 storm bolter.*</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "storm bolter",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "assault cannon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "heavy flamer",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "cyclone missile launcher",
+                "count": 1
+              },
+              {
+                "name": "storm bolter",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "Any number of models can each have their power fist replaced with 1 chainfist.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "power fist",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "chainfist",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "The Terminator Sergeant's power fist can be replaced with 1 power weapon.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Terminator Sergeant"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "power fist",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "power weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 4,
+      "rawText": "* This model's storm bolter cannot be replaced.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "unknown"
+      },
+      "action": {
+        "type": "unknown",
+        "removes": [],
+        "adds": [],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

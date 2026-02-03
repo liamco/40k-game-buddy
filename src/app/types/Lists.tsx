@@ -51,4 +51,8 @@ export type ArmyListItem = Datasheet & {
     // Unit-wide option selections (for "All models in this unit" options)
     // Key: option line number, Value: weapon ID selected for that option
     unitWideSelections?: Record<number, string>;
+
+    // Wargear abilities that are currently active based on equipped weapons
+    // Populated by evaluator when loadout changes
+    activeWargearAbilities?: string[];
 };

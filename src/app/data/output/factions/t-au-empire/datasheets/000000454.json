@@ -410,5 +410,122 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "This model's 2 burst cannons can be replaced with 2 cyclic ion blasters.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "burst cannons",
+            "count": 2
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "cyclic ion blasters",
+                "count": 2
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "This model's 2 ion cannons can be replaced with one of the following:<ul><li>2 swiftstrike burst cannons</li><li>2 swiftstrike railguns</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "ion cannons",
+            "count": 2
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "swiftstrike burst cannons",
+                "count": 2
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "swiftstrike railguns",
+                "count": 2
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "This model can be equipped with up to 6 seeker missiles.",
+      "wargearParsed": false,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "unknown",
+        "removes": [],
+        "adds": [],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 4,
+      "rawText": "This model's transport bay can be replaced with 2 skyspear missile racks.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "transport bay",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "skyspear missile racks",
+                "count": 2
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": false
 }

@@ -226,5 +226,53 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "Any number of models can each be equipped with one of the following:<ul><li>1 particle caster</li><li>1 transdimensional beamer</li></ul>",
+      "wargearParsed": false,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "unknown",
+        "removes": [],
+        "adds": [],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "Any number of models can each have their vicious claws replaced with whip coils.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "vicious claws",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "whip coils",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": false
 }

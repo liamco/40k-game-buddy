@@ -245,5 +245,47 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "This model's heat ray can be replaced with one of the following:<ul><li>1 particle shredder</li><li>1 heavy gauss cannon array</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "heat ray",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "particle shredder",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "heavy gauss cannon array",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

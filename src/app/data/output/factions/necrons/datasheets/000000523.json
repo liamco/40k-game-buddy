@@ -308,5 +308,76 @@
       ],
       "isPackageDeal": false
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "This model's tachyon arrow and Overlord's blade can be replaced with one of the following:<ul><li>1 staff of light</li><li>1 voidscythe</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "tachyon arrow",
+            "count": 1
+          },
+          {
+            "name": "Overlord's blade",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "staff of light",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "voidscythe",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "If this model is not equipped with a tachyon arrow, it can be equipped with 1 resurrection orb.",
+      "wargearParsed": false,
+      "targeting": {
+        "type": "unknown"
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "resurrection orb",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": false
 }

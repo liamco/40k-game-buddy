@@ -319,5 +319,67 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "This model's absolvor bolt pistol can be replaced with 1 pyre pistol.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "absolvor bolt pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "pyre pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "If this model is equipped with an absolvor bolt pistol, it can be equipped with 1 master-crafted power weapon (this model's absolvor bolt pistol cannot be replaced).",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "conditional",
+        "condition": {
+          "type": "equipped-with",
+          "weaponName": "an absolvor bolt pistol"
+        }
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "master-crafted power weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

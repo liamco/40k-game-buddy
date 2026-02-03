@@ -350,5 +350,118 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "Any number of models can each have their hallowed mace replaced with 1 anointed halberd.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "hallowed mace",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "anointed halberd",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "The Sacresant Superior's bolt pistol can be replaced with one of the following:<ul><li>1 inferno pistol</li><li>1 Ministorum hand flamer</li><li>1 plasma pistol</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Sacresant Superior"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "bolt pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "inferno pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "Ministorum hand flamer",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "plasma pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "The Sacresant Superior's hallowed mace can be replaced with 1 spear of the faithful.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Sacresant Superior"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "hallowed mace",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "spear of the faithful",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

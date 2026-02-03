@@ -391,5 +391,80 @@
     "isComplex": true,
     "reason": "package deal",
     "generatedAt": "2026-02-02T17:55:35.494Z"
-  }
+  },
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "This model's 2 twin heavy flamers can be replaced with 2 twin heavy bolters.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "twin heavy flamers",
+            "count": 2
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "twin heavy bolters",
+                "count": 2
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "This model can be equipped with one of the following:<ul><li>2 lascannons and 2 twin heavy bolters</li><li>2 lascannons and 2 twin heavy flamers</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "this-model"
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "lascannons",
+                "count": 2
+              },
+              {
+                "name": "twin heavy bolters",
+                "count": 2
+              }
+            ],
+            "isPackage": true
+          },
+          {
+            "weapons": [
+              {
+                "name": "lascannons",
+                "count": 2
+              },
+              {
+                "name": "twin heavy flamers",
+                "count": 2
+              }
+            ],
+            "isPackage": true
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

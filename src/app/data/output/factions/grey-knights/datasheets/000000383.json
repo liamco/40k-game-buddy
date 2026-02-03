@@ -323,5 +323,74 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "For every 5 models in this unit, up to 2 Purifiers can each have their storm bolter and Nemesis force weapon replaced with one of the following:<ul><li>1 incinerator and 1 close combat weapon</li><li>1 psilencer and 1 close combat weapon</li><li>1 psycannon and 1 close combat weapon</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio-capped",
+        "ratio": 5,
+        "maxPerRatio": 2
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "storm bolter",
+            "count": 1
+          },
+          {
+            "name": "Nemesis force weapon",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "incinerator",
+                "count": 1
+              },
+              {
+                "name": "close combat weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          },
+          {
+            "weapons": [
+              {
+                "name": "psilencer",
+                "count": 1
+              },
+              {
+                "name": "close combat weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          },
+          {
+            "weapons": [
+              {
+                "name": "psycannon",
+                "count": 1
+              },
+              {
+                "name": "close combat weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

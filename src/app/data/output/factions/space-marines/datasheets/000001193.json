@@ -315,5 +315,77 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "Any number of models can each have their Centurion bolters replaced with 1 Centurion missile launcher.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "Centurion bolters",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Centurion missile launcher",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "Any number of models can each have their grav-cannon replaced with one of the following:<ul><li>1 twin heavy bolter</li><li>1 twin lascannon</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "grav-cannon",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "twin heavy bolter",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "twin lascannon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

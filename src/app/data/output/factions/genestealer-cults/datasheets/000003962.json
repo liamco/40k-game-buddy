@@ -313,5 +313,65 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "For every 5 models in this unit, 1 model's hunting lance can be replaced with 1 goad lance.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "hunting lance",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "goad lance",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "The Rough Rider Sergeant can be equipped with 1 power sabre.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Rough Rider Sergeant"
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "power sabre",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

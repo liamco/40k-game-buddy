@@ -406,5 +406,74 @@
     "isComplex": true,
     "reason": "package deal",
     "generatedAt": "2026-02-02T17:55:35.148Z"
-  }
+  },
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "Any number of models can each have their guardian spear replaced with 1 castellan axe.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "guardian spear",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "castellan axe",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "1 model's guardian spear can be replaced with 1 vexilla and 1 misericordia.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "n-model-specific",
+        "count": 1,
+        "modelType": "model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "guardian spear",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "vexilla",
+                "count": 1
+              },
+              {
+                "name": "misericordia",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

@@ -589,5 +589,156 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "1 Wolf Scout's plasma pistol can be replaced with 1 plasma gun.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "n-model-specific",
+        "count": 1,
+        "modelType": "Wolf Scout"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "plasma pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "plasma gun",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "1 Wolf Scout equipped with a plasma pistol can be equipped with 1 haywire mine (That model's plasma pistol cannot be replaced).",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "n-model-specific",
+        "count": 1,
+        "modelType": "Wolf Scout"
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "haywire mine",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {
+        "restrictedWeapons": [
+          "plasma pistol"
+        ]
+      }
+    },
+    {
+      "line": 3,
+      "rawText": "1 Wolf Scout's plasma pistol and combat blade can be replaced with 1 bolt pistol, 1 Thunderclap and 1 runic stave.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "n-model-specific",
+        "count": 1,
+        "modelType": "Wolf Scout"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "plasma pistol",
+            "count": 1
+          },
+          {
+            "name": "combat blade",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "bolt pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "Thunderclap and",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "runic stave",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 4,
+      "rawText": "If this unit contains 12 models, 1 Wolf Scout's plasma pistol can be replaced with 1 instigator bolt carbine.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "if-unit-size",
+        "unitSizeThreshold": 12
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "If this unit contains 12 models, 1 Wolf Scout's plasma pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "instigator bolt carbine",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

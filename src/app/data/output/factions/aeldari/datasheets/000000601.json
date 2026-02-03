@@ -367,5 +367,91 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "The Warp Spider Exarch's Exarch's death spinner can be replaced with one of the following:<ul><li>1 spinneret rifle and 1 death weavers</li><li>1 powerblades and 1 death weavers</li><li>1 powerblade array</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Warp Spider Exarch"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "Exarch's death spinner",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "spinneret rifle",
+                "count": 1
+              },
+              {
+                "name": "death weavers",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          },
+          {
+            "weapons": [
+              {
+                "name": "powerblades",
+                "count": 1
+              },
+              {
+                "name": "death weavers",
+                "count": 1
+              }
+            ],
+            "isPackage": true
+          },
+          {
+            "weapons": [
+              {
+                "name": "powerblade array",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "For every 5 models in this unit, it can have 1 Aspect Shrine token.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Aspect Shrine token",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

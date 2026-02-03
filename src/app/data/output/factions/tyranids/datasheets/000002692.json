@@ -335,5 +335,109 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "Any number of models can each have their devourer replaced with one of the following:<ul><li>1 deathspitter</li><li>1 spinefists</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "devourer",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "deathspitter",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "spinefists",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "For every 3 models in this unit, 1 model's devourer can be replaced with 1 barbed strangler.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 3
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "devourer",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "barbed strangler",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "For every 3 models in this unit, 1 model's devourer can be replaced with 1 venom cannon.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 3
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "devourer",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "venom cannon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

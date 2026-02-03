@@ -373,5 +373,105 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "The Scarab Occult Sorcerer's inferno combi-bolter can be replaced with 1 Prosperine khopesh.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Scarab Occult Sorcerer"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "inferno combi-bolter",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Prosperine khopesh",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "For every 5 models in this unit, 1 Scarab Occult Terminator's inferno combi-bolter can be replaced with one of the following:<ul><li>1 heavy warpflamer</li><li>1 soulreaper cannon</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "inferno combi-bolter",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "heavy warpflamer",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "soulreaper cannon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "For every 5 models in this unit, 1 Scarab Occult Terminator can be equipped with 1 hellfyre missile rack.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "hellfyre missile rack",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

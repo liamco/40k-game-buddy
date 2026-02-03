@@ -582,5 +582,149 @@
     "isComplex": true,
     "reason": "overlapping replacements",
     "generatedAt": "2026-02-02T17:55:35.582Z"
-  }
+  },
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "The Scout Sergeant's boltgun can be replaced with 1 Astartes chainsword.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Scout Sergeant"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "boltgun",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Astartes chainsword",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "Any number of models can each have their boltgun replaced with one of the following: <br><ul><li>1 Astartes shotgun </li><li>1 combat knife</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "boltgun",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Astartes shotgun",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "combat knife",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "For every 5 models in this unit, 1 Scout's boltgun can be replaced with 1 Scout sniper rifle.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "boltgun",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Scout sniper rifle",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 4,
+      "rawText": "For every 5 models in this unit, 1 Scout's boltgun can be replaced with one of the following: <br><ul><li>1 heavy bolter </li><li>1 missile launcher</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "boltgun",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "heavy bolter",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "missile launcher",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

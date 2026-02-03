@@ -650,5 +650,117 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "One model equipped with a Deathwatch marksman bolt carbine can be equipped with one of<br>the following:<ul><li>1 helix gauntlet</li><li>1 Infiltrator comms array</li></ul>",
+      "wargearParsed": false,
+      "targeting": {
+        "type": "n-model-specific",
+        "count": 1,
+        "modelType": "model"
+      },
+      "action": {
+        "type": "unknown",
+        "removes": [],
+        "adds": [],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "One model can replace its bolt sniper rifle with 1 instigator bolt carbine.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "n-model-specific",
+        "count": 1,
+        "modelType": "model"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "bolt sniper rifle",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "instigator bolt carbine",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "Any number of models can each replace their bolt sniper rifle with 1 las fusil.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "bolt sniper rifle",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "las fusil",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 4,
+      "rawText": "Any number of models can each replace their combat knife with 1 Deathwatch bolt carbine and 1 close combat weapon.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "combat knife",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Deathwatch bolt carbine and 1 close combat weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": false
 }

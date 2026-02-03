@@ -318,5 +318,107 @@
       ],
       "isPackageDeal": false
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "One Acolyte Hybrid's hand flamer can be replaced with 1 cult icon.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "n-model-specific",
+        "count": 1,
+        "modelType": "Acolyte Hybrid"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "One Acolyte Hybrid's hand flamer",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "cult icon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "For every 5 models in this unit, up to 2 Acolyte Hybrids can each have their hand flamer replaced with 1 demolition charges",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio-capped",
+        "ratio": 5,
+        "maxPerRatio": 2
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "hand flamer",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "demolition charges",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "The Acolyte Leader's cult claws and knife can be replaced with 1 Leader's bio-weapons.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Acolyte Leader"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "cult claws",
+            "count": 1
+          },
+          {
+            "name": "knife",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Leader's bio-weapons",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

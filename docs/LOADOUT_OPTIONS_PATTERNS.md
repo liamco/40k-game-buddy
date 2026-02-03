@@ -77,10 +77,84 @@ Examples:
 - **Canoness**: "If this model is equipped with a hallowed chainsword, it can be equipped with one of the following: 1 brazier of holy fire 1 null rod..."
 - **Canoness**: "If this model is equipped with a plasma pistol and a power weapon, it can be equipped with: 1 rod of office..."
 
-### other (338 options)
+### other (338 options - detailed breakdown below)
+
+The "other" category breaks down into these subcategories:
+
+#### none-empty (88 options)
+Units with "None" as the option text (no wargear options available)
+
 Examples:
-- **Battle Sisters Squad**: "The Sister Superior's boltgun can be replaced with one of the following: 1 bolt pistol 1 combi-weapon 1 condemnor boltgun 1 inferno pistol 1 Ministoru..."
-- **Battle Sisters Squad**: "The Sister Superior can be equipped with one of the following: 1 chainsword 1 power weapon..."
+- **Triumph Of Saint Katherine**: "None"
+- **Cherub**: "None"
+
+#### one-model-specific (26 options)
+Variant of 1-model-specific using "One" instead of "1"
+
+Examples:
+- **Zephyrim Squad**: "One Zephyrim's bolt pistol can be replaced with 1 plasma pistol...."
+- **Celestian Sacresants**: "One model can be equipped with 1 sacresant banner...."
+
+#### if-unit-size (20 options)
+Conditional based on unit model count
+
+Examples:
+- **Cadian Shock Troops**: "If this unit contains 20 models, up to 4 Shock Troopers can each have their lasgun replaced with..."
+- **Guardian Defenders**: "If this unit contains between 11 and 20 models, it can include 1 heavy weapons platform..."
+
+#### this-unit (5 options)
+Unit-level equipment (affects entire unit)
+
+Examples:
+- **Krootox Rampagers**: "This unit can be equipped with 1 baggage harness...."
+- **War Dog Executioner**: "This unit can be equipped with one of the following: 1 diabolus heavy stubber 1 Daemonbreath spear..."
+
+#### all-of-the-models (4 options)
+Variant of "all models" with different wording
+
+Examples:
+- **Desolation Squad**: "All of the models in this unit can each have their Vengor launcher replaced with 1 superkrak rocket launcher...."
+- **Wolf Guard Terminators**: "All of the models in this unit can each have their storm bolter and power fist replaced with..."
+
+#### for-each-weapon (4 options)
+Per-weapon conditional (each instance of weapon X)
+
+Examples:
+- **Leman Russ Vanquisher**: "For each sponson this model is equipped with, it can have its lascannon replaced with..."
+- **Rogal Dorn Battle Tank**: "For each castigator gatling cannon this model is equipped with, it can be replaced with..."
+
+#### veteran-equipped (4 options)
+Model-state conditional (veteran status)
+
+Examples:
+- **Wolf Guard Terminators**: "1 model already equipped with a power fist can have it replaced with..."
+- **Terminator Squad**: "1 model already equipped with a power fist can have it replaced with 1 chainfist..."
+
+#### up-to-word (2 options)
+"Up to N" using word instead of number
+
+Examples:
+- **Company Veterans**: "Up to two Company Veterans can each have their boltgun replaced with..."
+- **Vanguard Veterans**: "Up to two Vanguard Veterans can each have their bolt pistol replaced with..."
+
+#### the-model-conditional (2 options)
+Conditional on model's current state
+
+Examples:
+- **Dire Avengers**: "If this unit's Dire Avenger Exarch is equipped with 2 Avenger shuriken catapults..."
+
+#### 2-model-specific (1 option)
+Exactly 2 specific models can take this option
+
+Examples:
+- **Space Wolves Lone Wolf**: "2 Space Wolves can each have their bolt pistol and chainsword replaced with..."
+
+#### still-other (18 options)
+Truly uncategorized edge cases requiring manual handling
+
+Examples:
+- **Tank Commander**: "This model can be equipped with one of the following instead of hull-mounted lascannon..."
+- **Imperial Guard Sentinel**: "This model's multi-laser can be replaced with one of the following, or it can be equipped with..."
 
 
 ## Action Patterns (WHAT the option does)
@@ -184,7 +258,18 @@ Examples:
 | | up-to-N | 29 |
 | | each-model-type | 6 |
 | | if-equipped | 5 |
-| | other | 338 |
+| | other (total) | 338 |
+| | ↳ none-empty | 88 |
+| | ↳ one-model-specific | 26 |
+| | ↳ if-unit-size | 20 |
+| | ↳ this-unit | 5 |
+| | ↳ all-of-the-models | 4 |
+| | ↳ for-each-weapon | 4 |
+| | ↳ veteran-equipped | 4 |
+| | ↳ up-to-word | 2 |
+| | ↳ the-model-conditional | 2 |
+| | ↳ 2-model-specific | 1 |
+| | ↳ still-other | 18 |
 | **Action** | | |
 | | replace-X-with-choice | 289 |
 | | replace-X-with-single | 437 |

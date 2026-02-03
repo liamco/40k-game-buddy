@@ -392,5 +392,119 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "For every 5 models in this unit, 1 Assault Intercessor with Jump Pack's heavy bolt pistol can be replaced with 1 plasma pistol.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "ratio",
+        "ratio": 5
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "heavy bolt pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "plasma pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "The Assault Intercessor Sergeant with Jump Pack's Astartes chainsword can be replaced with one of the following: <br><ul><li>1 power weapon </li><li>1 power fist </li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Assault Intercessor Sergeant with Jump Pack"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "Astartes chainsword",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "power weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "power fist",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "The Assault Intercessor Sergeant with Jump Pack's heavy bolt pistol can be replaced with one of the following: <br><ul><li>1 hand flamer</li><li>1 plasma pistol</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Assault Intercessor Sergeant with Jump Pack"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "heavy bolt pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "hand flamer",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "plasma pistol",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

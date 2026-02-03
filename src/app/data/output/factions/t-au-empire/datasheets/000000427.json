@@ -261,5 +261,34 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "If this unit contains 10 models:<ul><li>The Vespid Strain Leader can be equipped with 1 Oversight Drone.</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 T'au flamer</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron grenade launcher</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron rail rifle.</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "if-unit-size",
+        "unitSizeThreshold": 10
+      },
+      "action": {
+        "type": "add",
+        "removes": [],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Oversight Drone",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }

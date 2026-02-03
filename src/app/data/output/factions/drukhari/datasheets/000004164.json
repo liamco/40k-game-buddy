@@ -355,5 +355,167 @@
         }
       ]
     }
-  ]
+  ],
+  "parsedWargearOptions": [
+    {
+      "line": 1,
+      "rawText": "Any number of models can each have their Harlequin's blade replaced with 1 Harlequin's special weapon.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "any-number"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "Harlequin's blade",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "Harlequin's special weapon",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 2,
+      "rawText": "The Lead Player's Harlequin's blade can be replaced with 1 power sword.",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "specific-model",
+        "modelType": "Lead Player"
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "Harlequin's blade",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "power sword",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": false
+      },
+      "constraints": {}
+    },
+    {
+      "line": 3,
+      "rawText": "If this unit contains 9 or fewer models:<ul><li>Up to 2 models can each have their shuriken pistol replaced with 1 neuro disruptor</li><li>Up to 2 models can each have their shuriken pistol replaced with 1 fusion pistol</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "if-unit-size",
+        "unitSizeThreshold": 9
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "shuriken pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "neuro disruptor</li><li>Up to",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "models can each have their shuriken pistol replaced with",
+                "count": 2
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "fusion pistol</li></ul>",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    },
+    {
+      "line": 4,
+      "rawText": "If this unit contains 10 or more models:<ul><li>Up to 4 models can each have their shuriken pistol replaced with 1 neuro disruptor</li><li>Up to 4 models can each have their shuriken pistol replaced with 1 fusion pistol</li></ul>",
+      "wargearParsed": true,
+      "targeting": {
+        "type": "if-unit-size",
+        "unitSizeThreshold": 10
+      },
+      "action": {
+        "type": "replace",
+        "removes": [
+          {
+            "name": "shuriken pistol",
+            "count": 1
+          }
+        ],
+        "adds": [
+          {
+            "weapons": [
+              {
+                "name": "neuro disruptor</li><li>Up to",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "models can each have their shuriken pistol replaced with",
+                "count": 4
+              }
+            ],
+            "isPackage": false
+          },
+          {
+            "weapons": [
+              {
+                "name": "fusion pistol</li></ul>",
+                "count": 1
+              }
+            ],
+            "isPackage": false
+          }
+        ],
+        "isChoiceList": true
+      },
+      "constraints": {}
+    }
+  ],
+  "allWargearParsed": true
 }
