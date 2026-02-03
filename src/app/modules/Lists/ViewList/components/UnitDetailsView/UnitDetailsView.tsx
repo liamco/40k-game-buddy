@@ -21,7 +21,7 @@ const UnitDetailsView = ({ unit, list }: Props) => {
     const usedEnhancements = getUsedEnhancements(list, unit.listItemId);
 
     // Check if unit can lead other units
-    const canLead = unit.leaders && unit.leaders.length > 0;
+    const canLead = unit.leadsUnits && unit.leadsUnits.length > 0;
 
     // Check warlord eligibility
     const warlordEligibility = getWarlordEligibility(unit);

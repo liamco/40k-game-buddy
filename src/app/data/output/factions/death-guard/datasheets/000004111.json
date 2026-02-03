@@ -9,13 +9,112 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-7",
-  "damagedDescription": "While this model has 1-7 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Rotigus",
   "slug": "rotigus-2",
   "factionSlug": "death-guard",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-7",
+    "threshold": 7,
+    "description": "While this model has 1-7 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004111:streams-of-brackish-filth",
+        "datasheetId": "000004111",
+        "line": 1,
+        "name": "Streams of brackish filth",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004111",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Streams of brackish filth",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": "N/A",
+            "s": 8,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004111:gnarlrod",
+        "datasheetId": "000004111",
+        "line": 2,
+        "name": "Gnarlrod",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004111",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gnarlrod - strike",
+            "attributes": [
+              "LETHAL HITS",
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 7,
+            "bsWs": 2,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          },
+          {
+            "datasheetId": "000004111",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Gnarlrod - sweep",
+            "attributes": [
+              "LETHAL HITS",
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 14,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -139,7 +238,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004111",
@@ -158,86 +256,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004111:streams-of-brackish-filth",
-      "datasheetId": "000004111",
-      "line": 1,
-      "name": "Streams of brackish filth",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004111",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Streams of brackish filth",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": "N/A",
-          "s": 8,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004111:gnarlrod",
-      "datasheetId": "000004111",
-      "line": 2,
-      "name": "Gnarlrod",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004111",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gnarlrod - strike",
-          "attributes": [
-            "LETHAL HITS",
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 7,
-          "bsWs": 2,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        },
-        {
-          "datasheetId": "000004111",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Gnarlrod - sweep",
-          "attributes": [
-            "LETHAL HITS",
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 14,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

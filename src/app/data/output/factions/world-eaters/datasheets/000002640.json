@@ -9,13 +9,204 @@
   "transport": "This model has a transport capacity of 12 World Eaters Infantry models. It cannot transport Possessed or Terminator models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/world-eaters/Chaos-Rhino",
   "slug": "chaos-rhino-5",
   "factionSlug": "world-eaters",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: World Eaters",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002640:combi-bolter",
+        "datasheetId": "000002640",
+        "line": 1,
+        "name": "Combi-bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002640",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-bolter",
+            "attributes": [
+              "RAPID FIRE 4"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002640:combi-weapon",
+        "datasheetId": "000002640",
+        "line": 2,
+        "name": "Combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002640",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002640:havoc-launcher",
+        "datasheetId": "000002640",
+        "line": 3,
+        "name": "Havoc launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002640",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Havoc launcher",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002640:armoured-tracks",
+        "datasheetId": "000002640",
+        "line": 4,
+        "name": "Armoured tracks",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002640",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured tracks",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002640",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 additional combi-bolter</li><li>1 combi-weapon</li></ul>"
+        },
+        {
+          "datasheetId": "000002640",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with 1 havoc launcher or can replace 1 combi-bolter with 1 havoc launcher."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 additional combi-bolter</li><li>1 combi-weapon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "additional combi-bolter",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "combi-weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with 1 havoc launcher or can replace 1 combi-bolter with 1 havoc launcher.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "havoc launcher or can replace 1 combi-bolter with 1 havoc launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -114,20 +305,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002640",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 additional combi-bolter</li><li>1 combi-weapon</li></ul>"
-    },
-    {
-      "datasheetId": "000002640",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with 1 havoc launcher or can replace 1 combi-bolter with 1 havoc launcher."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002640",
@@ -146,179 +323,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: World Eaters",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002640:combi-bolter",
-      "datasheetId": "000002640",
-      "line": 1,
-      "name": "Combi-bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002640",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-bolter",
-          "attributes": [
-            "RAPID FIRE 4"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002640:combi-weapon",
-      "datasheetId": "000002640",
-      "line": 2,
-      "name": "Combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002640",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002640:havoc-launcher",
-      "datasheetId": "000002640",
-      "line": 3,
-      "name": "Havoc launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002640",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Havoc launcher",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002640:armoured-tracks",
-      "datasheetId": "000002640",
-      "line": 4,
-      "name": "Armoured tracks",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002640",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured tracks",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with one of the following:<ul><li>1 additional combi-bolter</li><li>1 combi-weapon</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "additional combi-bolter",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "combi-weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model can be equipped with 1 havoc launcher or can replace 1 combi-bolter with 1 havoc launcher.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "havoc launcher or can replace 1 combi-bolter with 1 havoc launcher",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

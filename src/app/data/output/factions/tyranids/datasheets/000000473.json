@@ -9,13 +9,53 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Lictor",
   "slug": "lictor-2",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000473:lictor-claws-and-talons",
+        "datasheetId": "000000473",
+        "line": 1,
+        "name": "Lictor claws and talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000473",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lictor claws and talons",
+            "attributes": [
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Fights First",
@@ -44,23 +84,7 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingModel",
-              "state": "isCharacter",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -69,18 +93,7 @@
       "factionId": "",
       "description": "Once per battle round, you can target one model with this ability with the Rapid Ingress Stratagem for 0CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "RAPID INGRESS"
-          ],
-          "value": "0"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -132,7 +145,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000473",
@@ -151,39 +163,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000473:lictor-claws-and-talons",
-      "datasheetId": "000000473",
-      "line": 1,
-      "name": "Lictor claws and talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000473",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lictor claws and talons",
-          "attributes": [
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

@@ -9,13 +9,291 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/world-eaters/Khorne-Berzerkers",
   "slug": "khorne-berzerkers-2",
   "factionSlug": "world-eaters",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: World Eaters",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002627:bolt-pistol",
+        "datasheetId": "000002627",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002627",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002627:plasma-pistol",
+        "datasheetId": "000002627",
+        "line": 2,
+        "name": "Plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002627",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma pistol - standard",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000002627",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma pistol - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002627:chainblade",
+        "datasheetId": "000002627",
+        "line": 4,
+        "name": "Chainblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002627",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chainblade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002627:khornate-eviscerator",
+        "datasheetId": "000002627",
+        "line": 5,
+        "name": "Khornate eviscerator",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002627",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Khornate eviscerator",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002627",
+          "line": 1,
+          "button": "•",
+          "description": "The Khorne Berzerker Champion's bolt pistol can be replaced with 1 plasma pistol."
+        },
+        {
+          "datasheetId": "000002627",
+          "line": 2,
+          "button": "•",
+          "description": "For every 5 models in this unit, 1 Khorne Berzerker's bolt pistol can be replaced with 1 plasma pistol."
+        },
+        {
+          "datasheetId": "000002627",
+          "line": 3,
+          "button": "•",
+          "description": "For every 5 models in this unit, 1 Khorne Berzerker's chainblade can be replaced with 1 Khornate eviscerator."
+        },
+        {
+          "datasheetId": "000002627",
+          "line": 4,
+          "button": "•",
+          "description": "1 model can be equipped with 1 icon of Khorne."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "The Khorne Berzerker Champion's bolt pistol can be replaced with 1 plasma pistol.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "specific-model",
+            "modelType": "Khorne Berzerker Champion"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "bolt pistol",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plasma pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "For every 5 models in this unit, 1 Khorne Berzerker's bolt pistol can be replaced with 1 plasma pistol.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 5
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "bolt pistol",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plasma pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "For every 5 models in this unit, 1 Khorne Berzerker's chainblade can be replaced with 1 Khornate eviscerator.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 5
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "chainblade",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Khornate eviscerator",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 4,
+          "rawText": "1 model can be equipped with 1 icon of Khorne.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "icon of Khorne",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Blessings of Khorne",
@@ -107,32 +385,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002627",
-      "line": 1,
-      "button": "•",
-      "description": "The Khorne Berzerker Champion's bolt pistol can be replaced with 1 plasma pistol."
-    },
-    {
-      "datasheetId": "000002627",
-      "line": 2,
-      "button": "•",
-      "description": "For every 5 models in this unit, 1 Khorne Berzerker's bolt pistol can be replaced with 1 plasma pistol."
-    },
-    {
-      "datasheetId": "000002627",
-      "line": 3,
-      "button": "•",
-      "description": "For every 5 models in this unit, 1 Khorne Berzerker's chainblade can be replaced with 1 Khornate eviscerator."
-    },
-    {
-      "datasheetId": "000002627",
-      "line": 4,
-      "button": "•",
-      "description": "1 model can be equipped with 1 icon of Khorne."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002627",
@@ -165,337 +417,5 @@
       "count": 20
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: World Eaters",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002627:bolt-pistol",
-      "datasheetId": "000002627",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002627",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002627:plasma-pistol",
-      "datasheetId": "000002627",
-      "line": 2,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002627",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol - standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000002627",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002627:chainblade",
-      "datasheetId": "000002627",
-      "line": 4,
-      "name": "Chainblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002627",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chainblade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002627:khornate-eviscerator",
-      "datasheetId": "000002627",
-      "line": 5,
-      "name": "Khornate eviscerator",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002627",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Khornate eviscerator",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000002627:bolt-pistol",
-          "name": "Bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002627:chainblade",
-          "name": "Chainblade",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000002627:bolt-pistol",
-          "name": "Bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002627:chainblade",
-          "name": "Chainblade",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "icon of Khorne",
-          "abilityName": "Icon of Khorne"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000002627:chainblade",
-          "name": "Chainblade",
-          "type": "Melee"
-        },
-        {
-          "id": "000002627:plasma-pistol",
-          "name": "Plasma pistol",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000002627:chainblade",
-          "name": "Chainblade",
-          "type": "Melee"
-        },
-        {
-          "id": "000002627:plasma-pistol",
-          "name": "Plasma pistol",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "icon of Khorne",
-          "abilityName": "Icon of Khorne"
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "overlapping replacements",
-    "generatedAt": "2026-02-02T17:55:35.639Z"
-  },
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "The Khorne Berzerker Champion's bolt pistol can be replaced with 1 plasma pistol.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "specific-model",
-        "modelType": "Khorne Berzerker Champion"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "bolt pistol",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "plasma pistol",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "For every 5 models in this unit, 1 Khorne Berzerker's bolt pistol can be replaced with 1 plasma pistol.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "ratio",
-        "ratio": 5
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "bolt pistol",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "plasma pistol",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "For every 5 models in this unit, 1 Khorne Berzerker's chainblade can be replaced with 1 Khornate eviscerator.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "ratio",
-        "ratio": 5
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "chainblade",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Khornate eviscerator",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 4,
-      "rawText": "1 model can be equipped with 1 icon of Khorne.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "n-model-specific",
-        "count": 1,
-        "modelType": "model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "icon of Khorne",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

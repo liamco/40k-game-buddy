@@ -9,13 +9,79 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Wolf-Priest",
   "slug": "wolf-priest",
   "factionSlug": "space-marines",
   "supplementKey": "space-wolves",
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004129:absolvor-bolt-pistol",
+        "datasheetId": "000004129",
+        "line": 1,
+        "name": "Absolvor bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004129",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Absolvor bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004129:crozius-arcanum",
+        "datasheetId": "000004129",
+        "line": 2,
+        "name": "Crozius arcanum",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004129",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Crozius arcanum",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,32 +98,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, in your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTER</span> models) to that unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "RETURN DESTROYED MODEL"
-          ],
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisUnit",
-              "state": "isBelowStartingStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -66,16 +107,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -139,7 +171,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004129",
@@ -158,7 +189,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000303",
       "slug": "blood-claws"
@@ -170,66 +201,6 @@
     {
       "id": "000004131",
       "slug": "wolf-guard-headtakers"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004129:absolvor-bolt-pistol",
-      "datasheetId": "000004129",
-      "line": 1,
-      "name": "Absolvor bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004129",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Absolvor bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004129:crozius-arcanum",
-      "datasheetId": "000004129",
-      "line": 2,
-      "name": "Crozius arcanum",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004129",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Crozius arcanum",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
     }
   ]
 }

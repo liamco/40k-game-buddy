@@ -9,13 +9,81 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Ragnar-Blackmane",
   "slug": "ragnar-blackmane",
   "factionSlug": "space-marines",
   "supplementKey": "space-wolves",
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000285:bolt-pistol",
+        "datasheetId": "000000285",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000285",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000285:frostfang",
+        "datasheetId": "000000285",
+        "line": 2,
+        "name": "Frostfang",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000285",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Frostfang",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,39 +100,7 @@
       "factionId": "",
       "description": "While this model is leading a Blood Claws unit, each time a model in that unit makes a melee attack, you can re-roll the Wound roll. While this model is leading a Wolf Guard Headtakers unit, that unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "w",
-          "value": "failed",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "CHARGE AFTER ADVANCING"
-          ],
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -73,24 +109,7 @@
       "factionId": "",
       "description": "Each time this model ends a Charge move, until the end of the turn, add 2 to the Attacks characteristic of this model's Frostfang weapon.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "a",
-          "value": 2,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "hasChargedThisTurn",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -172,7 +191,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000285",
@@ -191,7 +209,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000004131",
       "slug": "wolf-guard-headtakers"
@@ -199,68 +217,6 @@
     {
       "id": "000000303",
       "slug": "blood-claws"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000285:bolt-pistol",
-      "datasheetId": "000000285",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000285",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000285:frostfang",
-      "datasheetId": "000000285",
-      "line": 2,
-      "name": "Frostfang",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000285",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Frostfang",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -3,
-          "d": 2
-        }
-      ]
     }
   ]
 }

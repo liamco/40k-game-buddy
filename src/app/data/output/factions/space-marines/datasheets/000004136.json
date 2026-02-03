@@ -9,13 +9,93 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to one of the above units even if one Captain, Chapter Master, Execrator or Lieutenant model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Crusade-Ancient",
   "slug": "crusade-ancient",
   "factionSlug": "space-marines",
   "supplementKey": "black-templars",
+  "supplementSlug": "black-templars",
+  "supplementName": "Black Templars",
+  "supplementLabel": "Black Templars",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Black Templars",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to one of the above units even if one Captain, Chapter Master, Execrator or Lieutenant model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "CAPTAIN",
+        "CHAPTER MASTER",
+        "EXECRATOR",
+        "LIEUTENANT"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004136:bolt-pistol",
+        "datasheetId": "000004136",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004136",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004136:master-crafted-power-weapon",
+        "datasheetId": "000004136",
+        "line": 2,
+        "name": "Master-crafted power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004136",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Master-crafted power weapon",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,30 +112,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 4+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "value": -1,
-          "conditions": [
-            {
-              "entity": "targetModel",
-              "state": "hasFoughtThisPhase",
-              "operator": "equals",
-              "value": false
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FIGHT AFTER BEING DESTROYED"
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -64,30 +121,7 @@
       "factionId": "",
       "description": "The first time a model in this model's unit makes a melee attack that destroys one or more enemy units, until the end of the battle, while this model's unit is not Battle-shocked, add 5 to this model's Objective Control characteristic.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "oc",
-          "value": 5,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isBattleShocked",
-              "operator": "notEquals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "a",
-              "operator": "greaterThan",
-              "value": 0
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -163,7 +197,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004136",
@@ -182,7 +215,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000004154",
       "slug": "crusader-squad-legendary"
@@ -195,75 +228,5 @@
       "id": "000002798",
       "slug": "sword-brethren-squad"
     }
-  ],
-  "supplementSlug": "black-templars",
-  "supplementName": "Black Templars",
-  "supplementLabel": "Black Templars",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Black Templars",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004136:bolt-pistol",
-      "datasheetId": "000004136",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004136",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004136:master-crafted-power-weapon",
-      "datasheetId": "000004136",
-      "line": 2,
-      "name": "Master-crafted power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004136",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted power weapon",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "leaderConditions": {
-    "allowedExistingLeaderKeywords": [
-      "CAPTAIN",
-      "CHAPTER MASTER",
-      "EXECRATOR",
-      "LIEUTENANT"
-    ]
-  }
+  ]
 }

@@ -9,13 +9,367 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-mechanicus/Onager-Dunecrawler",
   "slug": "onager-dunecrawler",
   "factionSlug": "adeptus-mechanicus",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000854:cognis-heavy-stubber",
+        "datasheetId": "000000854",
+        "line": 1,
+        "name": "Cognis heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000854",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Cognis heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3",
+              "SUSTAINED HITS 1"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000854:daedalus-missile-launcher",
+        "datasheetId": "000000854",
+        "line": 2,
+        "name": "Daedalus missile launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000854",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Daedalus missile launcher",
+            "attributes": [
+              "ANTI-FLY 2+"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -2,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000000854:eradication-beamer",
+        "datasheetId": "000000854",
+        "line": 3,
+        "name": "Eradication beamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000854",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Eradication beamer - dissipated",
+            "attributes": [
+              "BLAST",
+              "SUSTAINED HITS 1"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "3D3",
+            "bsWs": 4,
+            "s": 9,
+            "ap": -2,
+            "d": 2
+          },
+          {
+            "datasheetId": "000000854",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Eradication beamer - focused",
+            "attributes": [
+              "BLAST",
+              "SUSTAINED HITS 1"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "3D3",
+            "bsWs": 4,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000854:neutron-laser",
+        "datasheetId": "000000854",
+        "line": 5,
+        "name": "Neutron laser",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000854",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Neutron laser",
+            "attributes": [
+              "HEAVY"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 16,
+            "ap": -4,
+            "d": "D6+2"
+          }
+        ]
+      },
+      {
+        "id": "000000854:icarus-array",
+        "datasheetId": "000000854",
+        "line": 6,
+        "name": "Icarus array",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000854",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Icarus array",
+            "attributes": [
+              "ANTI-FLY 4+",
+              "TWIN-LINKED"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000854:twin-onager-heavy-phosphor-blaster",
+        "datasheetId": "000000854",
+        "line": 7,
+        "name": "Twin Onager heavy phosphor blaster",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000854",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin Onager heavy phosphor blaster",
+            "attributes": [
+              "IGNORES COVER",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 12,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000854:dunecrawler-legs",
+        "datasheetId": "000000854",
+        "line": 8,
+        "name": "Dunecrawler legs",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000854",
+            "line": 8,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Dunecrawler legs",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000854",
+          "line": 1,
+          "button": "•",
+          "description": "This model's eradication beamer can be replaced with one of the following:<ul><li>1 daedalus missile launcher and 1 Icarus array</li><li>1 neutron laser and 1 cognis heavy stubber</li><li>1 twin Onager heavy phosphor blaster</li></ul>"
+        },
+        {
+          "datasheetId": "000000854",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with 1 additional cognis heavy stubber."
+        },
+        {
+          "datasheetId": "000000854",
+          "line": 3,
+          "button": "•",
+          "description": "This model can be equipped with 1 broad spectrum data-tether."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's eradication beamer can be replaced with one of the following:<ul><li>1 daedalus missile launcher and 1 Icarus array</li><li>1 neutron laser and 1 cognis heavy stubber</li><li>1 twin Onager heavy phosphor blaster</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "eradication beamer",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "daedalus missile launcher",
+                    "count": 1
+                  },
+                  {
+                    "name": "Icarus array",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "neutron laser",
+                    "count": 1
+                  },
+                  {
+                    "name": "cognis heavy stubber",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "twin Onager heavy phosphor blaster",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with 1 additional cognis heavy stubber.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "additional cognis heavy stubber",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model can be equipped with 1 broad spectrum data-tether.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "broad spectrum data-tether",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -42,16 +396,7 @@
       "factionId": "",
       "description": "While a friendly ADEPTUS MECHANICUS BATTLELINE model is wholly within 6\" of this model, that <span class=\"kwb\">BATTLELINE</span> model has a 4+ invulnerable save against ranged attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -124,26 +469,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000854",
-      "line": 1,
-      "button": "•",
-      "description": "This model's eradication beamer can be replaced with one of the following:<ul><li>1 daedalus missile launcher and 1 Icarus array</li><li>1 neutron laser and 1 cognis heavy stubber</li><li>1 twin Onager heavy phosphor blaster</li></ul>"
-    },
-    {
-      "datasheetId": "000000854",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with 1 additional cognis heavy stubber."
-    },
-    {
-      "datasheetId": "000000854",
-      "line": 3,
-      "button": "•",
-      "description": "This model can be equipped with 1 broad spectrum data-tether."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000854",
@@ -162,657 +487,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000854:cognis-heavy-stubber",
-      "datasheetId": "000000854",
-      "line": 1,
-      "name": "Cognis heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000854",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Cognis heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3",
-            "SUSTAINED HITS 1"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000854:daedalus-missile-launcher",
-      "datasheetId": "000000854",
-      "line": 2,
-      "name": "Daedalus missile launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000854",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Daedalus missile launcher",
-          "attributes": [
-            "ANTI-FLY 2+"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -2,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000000854:eradication-beamer",
-      "datasheetId": "000000854",
-      "line": 3,
-      "name": "Eradication beamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000854",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Eradication beamer - dissipated",
-          "attributes": [
-            "BLAST",
-            "SUSTAINED HITS 1"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "3D3",
-          "bsWs": 4,
-          "s": 9,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000000854",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Eradication beamer - focused",
-          "attributes": [
-            "BLAST",
-            "SUSTAINED HITS 1"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "3D3",
-          "bsWs": 4,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000854:neutron-laser",
-      "datasheetId": "000000854",
-      "line": 5,
-      "name": "Neutron laser",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000854",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Neutron laser",
-          "attributes": [
-            "HEAVY"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 16,
-          "ap": -4,
-          "d": "D6+2"
-        }
-      ]
-    },
-    {
-      "id": "000000854:icarus-array",
-      "datasheetId": "000000854",
-      "line": 6,
-      "name": "Icarus array",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000854",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Icarus array",
-          "attributes": [
-            "ANTI-FLY 4+",
-            "TWIN-LINKED"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000854:twin-onager-heavy-phosphor-blaster",
-      "datasheetId": "000000854",
-      "line": 7,
-      "name": "Twin Onager heavy phosphor blaster",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000854",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin Onager heavy phosphor blaster",
-          "attributes": [
-            "IGNORES COVER",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 12,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000854:dunecrawler-legs",
-      "datasheetId": "000000854",
-      "line": 8,
-      "name": "Dunecrawler legs",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000854",
-          "line": 8,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Dunecrawler legs",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000000854:eradication-beamer",
-          "name": "Eradication beamer",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000000854:eradication-beamer",
-          "name": "Eradication beamer",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "broad spectrum data-tether",
-          "abilityName": "Broad spectrum data-tether"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000000854:eradication-beamer",
-          "name": "Eradication beamer",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000000854:eradication-beamer",
-          "name": "Eradication beamer",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "broad spectrum data-tether",
-          "abilityName": "Broad spectrum data-tether"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Quintus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:twin-onager-heavy-phosphor-blaster",
-          "name": "Twin Onager heavy phosphor blaster",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Sextus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:twin-onager-heavy-phosphor-blaster",
-          "name": "Twin Onager heavy phosphor blaster",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "broad spectrum data-tether",
-          "abilityName": "Broad spectrum data-tether"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Septimus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:twin-onager-heavy-phosphor-blaster",
-          "name": "Twin Onager heavy phosphor blaster",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Octavus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:twin-onager-heavy-phosphor-blaster",
-          "name": "Twin Onager heavy phosphor blaster",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "broad spectrum data-tether",
-          "abilityName": "Broad spectrum data-tether"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Nonus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:daedalus-missile-launcher",
-          "name": "Daedalus missile launcher",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:icarus-array",
-          "name": "Icarus array",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Decimus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:daedalus-missile-launcher",
-          "name": "Daedalus missile launcher",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:icarus-array",
-          "name": "Icarus array",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "broad spectrum data-tether",
-          "abilityName": "Broad spectrum data-tether"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Undecimus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:daedalus-missile-launcher",
-          "name": "Daedalus missile launcher",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:icarus-array",
-          "name": "Icarus array",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Duodecimus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:daedalus-missile-launcher",
-          "name": "Daedalus missile launcher",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:icarus-array",
-          "name": "Icarus array",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "broad spectrum data-tether",
-          "abilityName": "Broad spectrum data-tether"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Tertius Decimus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:neutron-laser",
-          "name": "Neutron laser",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Quartus Decimus",
-      "weapons": [
-        {
-          "id": "000000854:dunecrawler-legs",
-          "name": "Dunecrawler legs",
-          "type": "Melee"
-        },
-        {
-          "id": "000000854:neutron-laser",
-          "name": "Neutron laser",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000854:cognis-heavy-stubber",
-          "name": "Cognis heavy stubber",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "broad spectrum data-tether",
-          "abilityName": "Broad spectrum data-tether"
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.158Z"
-  },
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's eradication beamer can be replaced with one of the following:<ul><li>1 daedalus missile launcher and 1 Icarus array</li><li>1 neutron laser and 1 cognis heavy stubber</li><li>1 twin Onager heavy phosphor blaster</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "eradication beamer",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "daedalus missile launcher",
-                "count": 1
-              },
-              {
-                "name": "Icarus array",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          },
-          {
-            "weapons": [
-              {
-                "name": "neutron laser",
-                "count": 1
-              },
-              {
-                "name": "cognis heavy stubber",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          },
-          {
-            "weapons": [
-              {
-                "name": "twin Onager heavy phosphor blaster",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model can be equipped with 1 additional cognis heavy stubber.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "additional cognis heavy stubber",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "This model can be equipped with 1 broad spectrum data-tether.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "broad spectrum data-tether",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

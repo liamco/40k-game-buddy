@@ -9,13 +9,120 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Logan-Grimnar",
   "slug": "logan-grimnar",
   "factionSlug": "space-marines",
   "supplementKey": "space-wolves",
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000282:storm-bolter",
+        "datasheetId": "000000282",
+        "line": 1,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000282",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000282:axe-morkai",
+        "datasheetId": "000000282",
+        "line": 2,
+        "name": "Axe Morkai",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000282",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Axe Morkai - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          },
+          {
+            "datasheetId": "000000282",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Axe Morkai - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 10,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000282:tyrnak-and-fenrir",
+        "datasheetId": "000000282",
+        "line": 4,
+        "name": "Tyrnak and Fenrir",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000282",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Tyrnak and Fenrir",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,24 +143,7 @@
       "factionId": "",
       "description": "Once per battle round, in your Movement phase, you can select one friendly Space Wolves unit that is in Reserves. If you do, until the end of the phase, for the purpose of setting up that unit on the battlefield, treat the current battle round number as being one higher than it actually is.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": "current battle round number + 1",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inReserves",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -62,30 +152,7 @@
       "factionId": "",
       "description": "Each time your opponent targets a unit from their army with a Stratagem, if that unit is within 12\" of this model, increase the cost of that usage of that Stratagem by 1CP (this is not cumulative with any other rules that increase the CP cost of that Stratagem).",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "cpCost",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "range",
-              "operator": "lessThanOrEqualTo",
-              "value": 12
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "name": "EMBARKING WITHIN TRANSPORTS",
@@ -165,7 +232,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000282",
@@ -184,111 +250,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000318",
       "slug": "wolf-guard-terminators"
-    }
-  ],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000282:storm-bolter",
-      "datasheetId": "000000282",
-      "line": 1,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000282",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000282:axe-morkai",
-      "datasheetId": "000000282",
-      "line": 2,
-      "name": "Axe Morkai",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000282",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Axe Morkai - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        },
-        {
-          "datasheetId": "000000282",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Axe Morkai - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 10,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000282:tyrnak-and-fenrir",
-      "datasheetId": "000000282",
-      "line": 4,
-      "name": "Tyrnak and Fenrir",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000282",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Tyrnak and Fenrir",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
     }
   ]
 }

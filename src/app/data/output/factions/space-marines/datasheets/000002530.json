@@ -9,13 +9,115 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to a unit it can lead even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Lieutenant-In-Phobos-Armour",
   "slug": "lieutenant-in-phobos-armour",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to a unit it can lead even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "CAPTAIN",
+        "CHAPTER MASTER"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002530:bolt-pistol",
+        "datasheetId": "000002530",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002530",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002530:master-crafted-scoped-bolt-carbine",
+        "datasheetId": "000002530",
+        "line": 2,
+        "name": "Master-crafted scoped bolt carbine",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002530",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Master-crafted scoped bolt carbine",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002530:paired-combat-blades",
+        "datasheetId": "000002530",
+        "line": 3,
+        "name": "Paired combat blades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002530",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Paired combat blades",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -45,25 +147,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LETHAL HITS"
-          ],
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -72,52 +156,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model's unit has shot, if it is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\". If it does, until the end of the turn, that unit is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisUnit",
-              "state": "inEngagementRange",
-              "operator": "equals",
-              "value": false
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "NOT ELIGIBLE TO DECLARE A CHARGE"
-          ],
-          "value": "until the end of the turn",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisUnit",
-              "state": "inEngagementRange",
-              "operator": "equals",
-              "value": false
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -181,7 +220,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002530",
@@ -200,7 +238,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002806",
       "slug": "hounds-of-morkai"
@@ -221,97 +259,5 @@
       "id": "000001159",
       "slug": "incursor-squad"
     }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002530:bolt-pistol",
-      "datasheetId": "000002530",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002530",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002530:master-crafted-scoped-bolt-carbine",
-      "datasheetId": "000002530",
-      "line": 2,
-      "name": "Master-crafted scoped bolt carbine",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002530",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted scoped bolt carbine",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002530:paired-combat-blades",
-      "datasheetId": "000002530",
-      "line": 3,
-      "name": "Paired combat blades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002530",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Paired combat blades",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "leaderConditions": {
-    "allowedExistingLeaderKeywords": [
-      "CAPTAIN",
-      "CHAPTER MASTER"
-    ]
-  }
+  ]
 }

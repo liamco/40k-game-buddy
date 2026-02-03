@@ -9,13 +9,62 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to a <span class=\"kwb\">ACOLYTE</span> <span class=\"kwb\">HYBRIDS</span> or <span class=\"kwb\">NEOPHYTE</span> <span class=\"kwb\">HYBRIDS</span> unit, even if a Primus, Magus or Acolyte Iconward model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/genestealer-cults/Locus",
   "slug": "locus",
   "factionSlug": "genestealer-cults",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Genestealer Cults",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to a <span class=\"kwb\">ACOLYTE</span> <span class=\"kwb\">HYBRIDS</span> or <span class=\"kwb\">NEOPHYTE</span> <span class=\"kwb\">HYBRIDS</span> unit, even if a Primus, Magus or Acolyte Iconward model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "PRIMUS",
+        "MAGUS",
+        "ACOLYTE ICONWARD"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001568:locus-blades",
+        "datasheetId": "000001568",
+        "line": 1,
+        "name": "Locus blades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001568",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Locus blades",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -45,18 +94,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, other Character models attached to that unit have the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -108,7 +146,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001568",
@@ -127,7 +164,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003716",
       "slug": "acolyte-hybrids-with-hand-flamers"
@@ -143,38 +180,6 @@
     {
       "id": "000000513",
       "slug": "hybrid-metamorphs"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Genestealer Cults",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001568:locus-blades",
-      "datasheetId": "000001568",
-      "line": 1,
-      "name": "Locus blades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001568",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Locus blades",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

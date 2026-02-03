@@ -9,13 +9,142 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/imperial-knights/Tech-priest-Manipulus",
   "slug": "tech-priest-manipulus-2",
   "factionSlug": "imperial-knights",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000003840:transonic-cannon",
+        "datasheetId": "000003840",
+        "line": 1,
+        "name": "Transonic cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003840",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Transonic cannon",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 4,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003840:omnissian-staff",
+        "datasheetId": "000003840",
+        "line": 1,
+        "name": "Omnissian staff",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003840",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Omnissian staff",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003840:magnarail-lance",
+        "datasheetId": "000003840",
+        "line": 1,
+        "name": "Magnarail lance",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003840",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Magnarail lance",
+            "attributes": [
+              "HEAVY"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003840",
+          "line": 1,
+          "button": "•",
+          "description": "This model's magnarail lance can be replaced with 1 transonic cannon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's magnarail lance can be replaced with 1 transonic cannon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "magnarail lance",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "transonic cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Doctrina Imperatives",
@@ -41,16 +170,7 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, all models in this model's unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -120,14 +240,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003840",
-      "line": 1,
-      "button": "•",
-      "description": "This model's magnarail lance can be replaced with 1 transonic cannon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003840",
@@ -146,7 +258,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003842",
       "slug": "skitarii-rangers-2"
@@ -155,123 +267,5 @@
       "id": "000003843",
       "slug": "skitarii-vanguard-2"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003840:transonic-cannon",
-      "datasheetId": "000003840",
-      "line": 1,
-      "name": "Transonic cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003840",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Transonic cannon",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 4,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003840:omnissian-staff",
-      "datasheetId": "000003840",
-      "line": 1,
-      "name": "Omnissian staff",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003840",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Omnissian staff",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003840:magnarail-lance",
-      "datasheetId": "000003840",
-      "line": 1,
-      "name": "Magnarail lance",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003840",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Magnarail lance",
-          "attributes": [
-            "HEAVY"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's magnarail lance can be replaced with 1 transonic cannon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "magnarail lance",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "transonic cannon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

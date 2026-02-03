@@ -9,13 +9,112 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Painboy",
   "slug": "painboy",
   "factionSlug": "orks",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000013:power-klaw",
+        "datasheetId": "000000013",
+        "line": 1,
+        "name": "Power klaw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000013",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power klaw",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 9,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000013:urty-syringe",
+        "datasheetId": "000000013",
+        "line": 2,
+        "name": "'Urty syringe",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000013",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "'Urty syringe",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "EXTRA ATTACKS",
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 3,
+            "s": 2,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000013",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 grot orderly."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 grot orderly.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "grot orderly",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -41,18 +140,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 5
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -107,14 +195,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000013",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 grot orderly."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000013",
@@ -133,7 +213,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003861",
       "slug": "breaka-boyz"
@@ -158,93 +238,5 @@
       "id": "000000016",
       "slug": "boyz"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000013:power-klaw",
-      "datasheetId": "000000013",
-      "line": 1,
-      "name": "Power klaw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000013",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power klaw",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 9,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000013:urty-syringe",
-      "datasheetId": "000000013",
-      "line": 2,
-      "name": "'Urty syringe",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000013",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "'Urty syringe",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "EXTRA ATTACKS",
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 3,
-          "s": 2,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with 1 grot orderly.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "grot orderly",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

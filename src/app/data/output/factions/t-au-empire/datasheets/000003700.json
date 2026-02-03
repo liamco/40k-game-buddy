@@ -9,13 +9,225 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Crisis-Fireknife-Battlesuits",
   "slug": "crisis-fireknife-battlesuits",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000003700:missile-pod",
+        "datasheetId": "000003700",
+        "line": 1,
+        "name": "Missile pod",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003700",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Missile pod",
+            "attributes": [],
+            "range": 30,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003700:plasma-rifle",
+        "datasheetId": "000003700",
+        "line": 2,
+        "name": "Plasma rifle",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003700",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma rifle",
+            "attributes": [],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000003700:battlesuit-fists",
+        "datasheetId": "000003700",
+        "line": 3,
+        "name": "Battlesuit fists",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003700",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Battlesuit fists",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003700",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their plasma rifle replaced with 1 missile pod."
+        },
+        {
+          "datasheetId": "000003700",
+          "line": 2,
+          "button": "•",
+          "description": "Any number of models can each have their missile pod replaced with 1 plasma rifle."
+        },
+        {
+          "datasheetId": "000003700",
+          "line": 3,
+          "button": "•",
+          "description": "Any number of models can be equipped with up to two of the following, but cannot take duplicates<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their plasma rifle replaced with 1 missile pod.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "plasma rifle",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "missile pod",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "Any number of models can each have their missile pod replaced with 1 plasma rifle.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "missile pod",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plasma rifle",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "Any number of models can be equipped with up to two of the following, but cannot take duplicates<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "gun drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "marker drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "shield drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {
+            "noDuplicates": true,
+            "maxSelections": 2
+          }
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -105,26 +317,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003700",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their plasma rifle replaced with 1 missile pod."
-    },
-    {
-      "datasheetId": "000003700",
-      "line": 2,
-      "button": "•",
-      "description": "Any number of models can each have their missile pod replaced with 1 plasma rifle."
-    },
-    {
-      "datasheetId": "000003700",
-      "line": 3,
-      "button": "•",
-      "description": "Any number of models can be equipped with up to two of the following, but cannot take duplicates<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003700",
@@ -150,194 +342,5 @@
       "count": 3
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003700:missile-pod",
-      "datasheetId": "000003700",
-      "line": 1,
-      "name": "Missile pod",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003700",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Missile pod",
-          "attributes": [],
-          "range": 30,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003700:plasma-rifle",
-      "datasheetId": "000003700",
-      "line": 2,
-      "name": "Plasma rifle",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003700",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma rifle",
-          "attributes": [],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000003700:battlesuit-fists",
-      "datasheetId": "000003700",
-      "line": 3,
-      "name": "Battlesuit fists",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003700",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Battlesuit fists",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "Any number of models can each have their plasma rifle replaced with 1 missile pod.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "plasma rifle",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "missile pod",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "Any number of models can each have their missile pod replaced with 1 plasma rifle.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "missile pod",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "plasma rifle",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "Any number of models can be equipped with up to two of the following, but cannot take duplicates<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "gun drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "marker drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "shield drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {
-        "noDuplicates": true,
-        "maxSelections": 2
-      }
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

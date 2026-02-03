@@ -9,13 +9,272 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Reiver-Squad",
   "slug": "reiver-squad",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002718:bolt-carbine",
+        "datasheetId": "000002718",
+        "line": 1,
+        "name": "Bolt carbine",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002718",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt carbine",
+            "attributes": [
+              "PRECISION"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002718:special-issue-bolt-pistol",
+        "datasheetId": "000002718",
+        "line": 2,
+        "name": "Special issue bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002718",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Special issue bolt pistol",
+            "attributes": [
+              "PISTOL",
+              "PRECISION"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002718:close-combat-weapon",
+        "datasheetId": "000002718",
+        "line": 3,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002718",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002718:combat-knife",
+        "datasheetId": "000002718",
+        "line": 4,
+        "name": "Combat knife",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002718",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combat knife",
+            "attributes": [
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002718",
+          "line": 1,
+          "button": "•",
+          "description": "All models in this unit can each have their combat knife replaced with 1 bolt carbine and 1 close combat weapon."
+        },
+        {
+          "datasheetId": "000002718",
+          "line": 2,
+          "button": "•",
+          "description": "If the Reiver Sergeant is equipped with 1 bolt carbine, it can be equipped with 1 combat knife."
+        },
+        {
+          "datasheetId": "000002718",
+          "line": 3,
+          "button": "•",
+          "description": "All models in this unit can each be equipped with 1 Reiver grav-chute."
+        },
+        {
+          "datasheetId": "000002718",
+          "line": 4,
+          "button": "•",
+          "description": "All models in this unit can each be equipped with 1 grapnel launcher."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "All models in this unit can each have their combat knife replaced with 1 bolt carbine and 1 close combat weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "all-models"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "combat knife",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "bolt carbine and",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "close combat weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "If the Reiver Sergeant is equipped with 1 bolt carbine, it can be equipped with 1 combat knife.",
+          "wargearParsed": false,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "combat knife",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "All models in this unit can each be equipped with 1 Reiver grav-chute.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "all-models"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Reiver grav-chute",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 4,
+          "rawText": "All models in this unit can each be equipped with 1 grapnel launcher.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "all-models"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "grapnel launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Scouts",
@@ -33,24 +292,7 @@
       "factionId": "",
       "description": "At the start of the Fight phase, each enemy unit within Engagement Range of one or more units with this ability must take a Battle-shock test, subtracting 1 from that test.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "ld",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inEngagementRange",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -59,33 +301,7 @@
       "factionId": "",
       "description": "While an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is within 3\" of one or more units with this ability, subtract 1 from the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "oc",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "opposingUnit",
-              "keywords": [
-                "MONSTERS",
-                "VEHICLES"
-              ],
-              "operator": "notIncludes",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -94,16 +310,7 @@
       "factionId": "",
       "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": "ignore vertical distance"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -112,18 +319,7 @@
       "factionId": "",
       "description": "The bearer has the Deep Strike ability.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "DEEP STRIKE"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -187,32 +383,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002718",
-      "line": 1,
-      "button": "•",
-      "description": "All models in this unit can each have their combat knife replaced with 1 bolt carbine and 1 close combat weapon."
-    },
-    {
-      "datasheetId": "000002718",
-      "line": 2,
-      "button": "•",
-      "description": "If the Reiver Sergeant is equipped with 1 bolt carbine, it can be equipped with 1 combat knife."
-    },
-    {
-      "datasheetId": "000002718",
-      "line": 3,
-      "button": "•",
-      "description": "All models in this unit can each be equipped with 1 Reiver grav-chute."
-    },
-    {
-      "datasheetId": "000002718",
-      "line": 4,
-      "button": "•",
-      "description": "All models in this unit can each be equipped with 1 grapnel launcher."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002718",
@@ -245,560 +415,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002718:bolt-carbine",
-      "datasheetId": "000002718",
-      "line": 1,
-      "name": "Bolt carbine",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002718",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt carbine",
-          "attributes": [
-            "PRECISION"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002718:special-issue-bolt-pistol",
-      "datasheetId": "000002718",
-      "line": 2,
-      "name": "Special issue bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002718",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Special issue bolt pistol",
-          "attributes": [
-            "PISTOL",
-            "PRECISION"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002718:close-combat-weapon",
-      "datasheetId": "000002718",
-      "line": 3,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002718",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002718:combat-knife",
-      "datasheetId": "000002718",
-      "line": 4,
-      "name": "Combat knife",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002718",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combat knife",
-          "attributes": [
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "grapnel launcher",
-          "abilityName": "Grapnel Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Reiver grav-chute",
-          "abilityName": "Reiver Grav-chute"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Reiver grav-chute",
-          "abilityName": "Reiver Grav-chute"
-        },
-        {
-          "name": "grapnel launcher",
-          "abilityName": "Grapnel Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Quintus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Sextus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "grapnel launcher",
-          "abilityName": "Grapnel Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Septimus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Reiver grav-chute",
-          "abilityName": "Reiver Grav-chute"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Octavus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Reiver grav-chute",
-          "abilityName": "Reiver Grav-chute"
-        },
-        {
-          "name": "grapnel launcher",
-          "abilityName": "Grapnel Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Nonus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:close-combat-weapon",
-          "name": "Close combat weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true
-    },
-    {
-      "label": "Loadout Decimus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:close-combat-weapon",
-          "name": "Close combat weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "grapnel launcher",
-          "abilityName": "Grapnel Launcher"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Undecimus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:close-combat-weapon",
-          "name": "Close combat weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "Reiver grav-chute",
-          "abilityName": "Reiver Grav-chute"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Duodecimus",
-      "weapons": [
-        {
-          "id": "000002718:special-issue-bolt-pistol",
-          "name": "Special issue bolt pistol",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:combat-knife",
-          "name": "Combat knife",
-          "type": "Melee"
-        },
-        {
-          "id": "000002718:bolt-carbine",
-          "name": "Bolt carbine",
-          "type": "Ranged"
-        },
-        {
-          "id": "000002718:close-combat-weapon",
-          "name": "Close combat weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true,
-      "wargearAbilities": [
-        {
-          "name": "Reiver grav-chute",
-          "abilityName": "Reiver Grav-chute"
-        },
-        {
-          "name": "grapnel launcher",
-          "abilityName": "Grapnel Launcher"
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.597Z"
-  },
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "All models in this unit can each have their combat knife replaced with 1 bolt carbine and 1 close combat weapon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "all-models"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "combat knife",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "bolt carbine and",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "close combat weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "If the Reiver Sergeant is equipped with 1 bolt carbine, it can be equipped with 1 combat knife.",
-      "wargearParsed": false,
-      "targeting": {
-        "type": "unknown"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "combat knife",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "All models in this unit can each be equipped with 1 Reiver grav-chute.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "all-models"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Reiver grav-chute",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 4,
-      "rawText": "All models in this unit can each be equipped with 1 grapnel launcher.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "all-models"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "grapnel launcher",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": false
+  "leadsUnits": []
 }

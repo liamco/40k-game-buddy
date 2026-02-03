@@ -9,13 +9,240 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Sanguinary-Guard",
   "slug": "sanguinary-guard",
   "factionSlug": "space-marines",
   "supplementKey": "blood-angels",
+  "supplementSlug": "blood-angels",
+  "supplementName": "Blood Angels",
+  "supplementLabel": "Blood Angels",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Blood Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000165:angelus-boltgun",
+        "datasheetId": "000000165",
+        "line": 1,
+        "name": "Angelus boltgun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000165",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Angelus boltgun",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000165:inferno-pistol",
+        "datasheetId": "000000165",
+        "line": 2,
+        "name": "Inferno pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000165",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Inferno pistol",
+            "attributes": [
+              "MELTA 2",
+              "PISTOL"
+            ],
+            "range": 6,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -4,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000000165:encarmine-blade",
+        "datasheetId": "000000165",
+        "line": 3,
+        "name": "Encarmine blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000165",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Encarmine blade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000165:encarmine-spear",
+        "datasheetId": "000000165",
+        "line": 4,
+        "name": "Encarmine spear",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000165",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Encarmine spear",
+            "attributes": [
+              "LANCE"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000165",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their encarmine blade replaced with 1 encarmine spear."
+        },
+        {
+          "datasheetId": "000000165",
+          "line": 2,
+          "button": "•",
+          "description": "For every 3 models in this unit, 1 model's Angelus boltgun can be replaced with 1 inferno pistol."
+        },
+        {
+          "datasheetId": "000000165",
+          "line": 3,
+          "button": "•",
+          "description": "One model can be equipped with 1 Sanguinary banner."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their encarmine blade replaced with 1 encarmine spear.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "encarmine blade",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "encarmine spear",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "For every 3 models in this unit, 1 model's Angelus boltgun can be replaced with 1 inferno pistol.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 3
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Angelus boltgun",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "inferno pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "One model can be equipped with 1 Sanguinary banner.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Sanguinary banner",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -32,16 +259,7 @@
       "factionId": "",
       "description": "Each time a melee attack targets this unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -50,16 +268,7 @@
       "factionId": "",
       "description": "While a Character model is leading this unit, each time a melee attack targets this unit, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -68,16 +277,7 @@
       "factionId": "",
       "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "oc",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -86,46 +286,7 @@
       "factionId": "",
       "description": "If a Captain model from your army with the Leader ability can be attached to an Assault Intercessors with Jump Packs unit, it can be attached to this unit instead.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [],
-          "value": "",
-          "conditions": [
-            {
-              "entity": "thisArmy",
-              "attribute": "",
-              "abilities": [
-                "LEADER"
-              ],
-              "state": "",
-              "keywords": [],
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [],
-          "value": "",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": "",
-              "abilities": [],
-              "state": "",
-              "keywords": [],
-              "operator": "equals",
-              "value": "Assault Intercessors with Jump Packs"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -201,26 +362,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000165",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their encarmine blade replaced with 1 encarmine spear."
-    },
-    {
-      "datasheetId": "000000165",
-      "line": 2,
-      "button": "•",
-      "description": "For every 3 models in this unit, 1 model's Angelus boltgun can be replaced with 1 inferno pistol."
-    },
-    {
-      "datasheetId": "000000165",
-      "line": 3,
-      "button": "•",
-      "description": "One model can be equipped with 1 Sanguinary banner."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000165",
@@ -246,209 +387,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementSlug": "blood-angels",
-  "supplementName": "Blood Angels",
-  "supplementLabel": "Blood Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Blood Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000165:angelus-boltgun",
-      "datasheetId": "000000165",
-      "line": 1,
-      "name": "Angelus boltgun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000165",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Angelus boltgun",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000165:inferno-pistol",
-      "datasheetId": "000000165",
-      "line": 2,
-      "name": "Inferno pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000165",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Inferno pistol",
-          "attributes": [
-            "MELTA 2",
-            "PISTOL"
-          ],
-          "range": 6,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -4,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000000165:encarmine-blade",
-      "datasheetId": "000000165",
-      "line": 3,
-      "name": "Encarmine blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000165",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Encarmine blade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000165:encarmine-spear",
-      "datasheetId": "000000165",
-      "line": 4,
-      "name": "Encarmine spear",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000165",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Encarmine spear",
-          "attributes": [
-            "LANCE"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "Any number of models can each have their encarmine blade replaced with 1 encarmine spear.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "encarmine blade",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "encarmine spear",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "For every 3 models in this unit, 1 model's Angelus boltgun can be replaced with 1 inferno pistol.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "ratio",
-        "ratio": 3
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Angelus boltgun",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "inferno pistol",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "One model can be equipped with 1 Sanguinary banner.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "n-model-specific",
-        "count": 1,
-        "modelType": "model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Sanguinary banner",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

@@ -9,13 +9,97 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/genestealer-cults/Benefictus",
   "slug": "benefictus",
   "factionSlug": "genestealer-cults",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Genestealer Cults",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000003715:psionic-cascade",
+        "datasheetId": "000003715",
+        "line": 1,
+        "name": "Psionic Cascade",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003715",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Psionic Cascade - witchfire",
+            "profileName": "witchfire",
+            "attributes": [
+              "IGNORES COVER",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          },
+          {
+            "datasheetId": "000003715",
+            "line": 1,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Psionic Cascade - focused witchfire",
+            "profileName": "focused witchfire",
+            "attributes": [
+              "HAZARDOUS. IGNORES COVER. PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000003715:close-combat-weapon",
+        "datasheetId": "000003715",
+        "line": 2,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003715",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -41,16 +125,7 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, this model has a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -108,7 +183,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000003715",
@@ -127,7 +201,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003716",
       "slug": "acolyte-hybrids-with-hand-flamers"
@@ -143,84 +217,6 @@
     {
       "id": "000000513",
       "slug": "hybrid-metamorphs"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Genestealer Cults",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003715:psionic-cascade",
-      "datasheetId": "000003715",
-      "line": 1,
-      "name": "Psionic Cascade",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003715",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Psionic Cascade - witchfire",
-          "profileName": "witchfire",
-          "attributes": [
-            "IGNORES COVER",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        },
-        {
-          "datasheetId": "000003715",
-          "line": 1,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Psionic Cascade - focused witchfire",
-          "profileName": "focused witchfire",
-          "attributes": [
-            "HAZARDOUS. IGNORES COVER. PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000003715:close-combat-weapon",
-      "datasheetId": "000003715",
-      "line": 2,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003715",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
     }
   ]
 }

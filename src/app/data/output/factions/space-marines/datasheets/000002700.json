@@ -9,13 +9,376 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-8",
-  "damagedDescription": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Astraeus",
   "slug": "astraeus",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-8",
+    "threshold": 8,
+    "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 4
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002700:astraeus-las-ripper",
+        "datasheetId": "000002700",
+        "line": 1,
+        "name": "Astraeus las-ripper",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Astraeus las-ripper",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000002700:ironhail-heavy-stubber",
+        "datasheetId": "000002700",
+        "line": 2,
+        "name": "Ironhail heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ironhail heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002700:plasma-eradicator",
+        "datasheetId": "000002700",
+        "line": 3,
+        "name": "Plasma eradicator",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma eradicator - standard",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          },
+          {
+            "datasheetId": "000002700",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma eradicator - supercharge",
+            "attributes": [
+              "BLAST",
+              "HAZARDOUS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000002700:storm-bolter",
+        "datasheetId": "000002700",
+        "line": 5,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002700:twin-heavy-bolter",
+        "datasheetId": "000002700",
+        "line": 6,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002700:twin-lascannon",
+        "datasheetId": "000002700",
+        "line": 7,
+        "name": "Twin lascannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin lascannon",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000002700:twin-macro-accelerator-cannon",
+        "datasheetId": "000002700",
+        "line": 8,
+        "name": "Twin macro-accelerator cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 8,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin macro-accelerator cannon",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": 12,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -1,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000002700:armoured-hull",
+        "datasheetId": "000002700",
+        "line": 9,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002700",
+            "line": 9,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002700",
+          "line": 1,
+          "button": "•",
+          "description": "This model's 2 Astraeus las-rippers can be replaced with 2 plasma eradicators."
+        },
+        {
+          "datasheetId": "000002700",
+          "line": 2,
+          "button": "•",
+          "description": "This model's twin heavy bolter can be replaced with 1 twin lascannon."
+        },
+        {
+          "datasheetId": "000002700",
+          "line": 3,
+          "button": "•",
+          "description": "This model can be equipped with 1 ironhail heavy stubber."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's 2 Astraeus las-rippers can be replaced with 2 plasma eradicators.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Astraeus las-rippers",
+                "count": 2
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plasma eradicators",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's twin heavy bolter can be replaced with 1 twin lascannon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "twin heavy bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "twin lascannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model can be equipped with 1 ironhail heavy stubber.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "ironhail heavy stubber",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,16 +396,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more attacks made with its twin macro-accelerator cannon this phase. Until the start of your next turn, while this model is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -94,26 +448,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002700",
-      "line": 1,
-      "button": "•",
-      "description": "This model's 2 Astraeus las-rippers can be replaced with 2 plasma eradicators."
-    },
-    {
-      "datasheetId": "000002700",
-      "line": 2,
-      "button": "•",
-      "description": "This model's twin heavy bolter can be replaced with 1 twin lascannon."
-    },
-    {
-      "datasheetId": "000002700",
-      "line": 3,
-      "button": "•",
-      "description": "This model can be equipped with 1 ironhail heavy stubber."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002700",
@@ -132,327 +466,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002700:astraeus-las-ripper",
-      "datasheetId": "000002700",
-      "line": 1,
-      "name": "Astraeus las-ripper",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Astraeus las-ripper",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000002700:ironhail-heavy-stubber",
-      "datasheetId": "000002700",
-      "line": 2,
-      "name": "Ironhail heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ironhail heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002700:plasma-eradicator",
-      "datasheetId": "000002700",
-      "line": 3,
-      "name": "Plasma eradicator",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma eradicator - standard",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000002700",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma eradicator - supercharge",
-          "attributes": [
-            "BLAST",
-            "HAZARDOUS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000002700:storm-bolter",
-      "datasheetId": "000002700",
-      "line": 5,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002700:twin-heavy-bolter",
-      "datasheetId": "000002700",
-      "line": 6,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002700:twin-lascannon",
-      "datasheetId": "000002700",
-      "line": 7,
-      "name": "Twin lascannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin lascannon",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000002700:twin-macro-accelerator-cannon",
-      "datasheetId": "000002700",
-      "line": 8,
-      "name": "Twin macro-accelerator cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 8,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin macro-accelerator cannon",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 72,
-          "type": "Ranged",
-          "a": 12,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -1,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000002700:armoured-hull",
-      "datasheetId": "000002700",
-      "line": 9,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002700",
-          "line": 9,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's 2 Astraeus las-rippers can be replaced with 2 plasma eradicators.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Astraeus las-rippers",
-            "count": 2
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "plasma eradicators",
-                "count": 2
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model's twin heavy bolter can be replaced with 1 twin lascannon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "twin heavy bolter",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "twin lascannon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "This model can be equipped with 1 ironhail heavy stubber.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "ironhail heavy stubber",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

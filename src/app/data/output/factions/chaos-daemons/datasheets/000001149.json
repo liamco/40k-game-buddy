@@ -9,13 +9,113 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-daemons/Daemon-Prince-of-Chaos",
   "slug": "daemon-prince-of-chaos",
   "factionSlug": "chaos-daemons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001149:infernal-cannon",
+        "datasheetId": "000001149",
+        "line": 1,
+        "name": "Infernal cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001149",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Infernal cannon",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001149:hellforged-weapons",
+        "datasheetId": "000001149",
+        "line": 2,
+        "name": "Hellforged weapons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001149",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hellforged weapons - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          },
+          {
+            "datasheetId": "000001149",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Hellforged weapons - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 14,
+            "bsWs": 2,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001149",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,18 +137,7 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Legiones Daemonica Infantry units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LONE OPERATIVE"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -57,18 +146,7 @@
       "factionId": "",
       "description": "While a friendly Legiones Daemonica unit is within 6\" of this model, models in that unit have the Stealth ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "STEALTH"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -77,16 +155,7 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, this model can use this ability. If it does, until the end of the phase, this model has a 3+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 3
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -195,14 +264,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001149",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001149",
@@ -221,94 +282,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001149:infernal-cannon",
-      "datasheetId": "000001149",
-      "line": 1,
-      "name": "Infernal cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001149",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Infernal cannon",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001149:hellforged-weapons",
-      "datasheetId": "000001149",
-      "line": 2,
-      "name": "Hellforged weapons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001149",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hellforged weapons - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        },
-        {
-          "datasheetId": "000001149",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Hellforged weapons - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 14,
-          "bsWs": 2,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "None",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "unknown"
-      },
-      "action": {
-        "type": "unknown",
-        "removes": [],
-        "adds": [],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

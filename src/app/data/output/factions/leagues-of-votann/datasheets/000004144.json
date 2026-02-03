@@ -9,13 +9,143 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/leagues-of-votann/Ironkin-Steeljacks-with-Melee-Weapons",
   "slug": "ironkin-steeljacks-with-melee-weapons",
   "factionSlug": "leagues-of-votann",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Leagues of Votann",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004144:autoch-pattern-bolter",
+        "datasheetId": "000004144",
+        "line": 1,
+        "name": "Autoch-pattern bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004144",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Autoch-pattern bolter",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004144:concussion-gauntlet",
+        "datasheetId": "000004144",
+        "line": 2,
+        "name": "Concussion gauntlet",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004144",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Concussion gauntlet",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004144:plasma-sword",
+        "datasheetId": "000004144",
+        "line": 3,
+        "name": "Plasma sword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004144",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma sword",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000004144",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models in this unit can each have their plasma sword replaced with 1 concussion gauntlet."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models in this unit can each have their plasma sword replaced with 1 concussion gauntlet.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "plasma sword",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "concussion gauntlet",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Prioritised Efficiency",
@@ -83,14 +213,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000004144",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models in this unit can each have their plasma sword replaced with 1 concussion gauntlet."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004144",
@@ -123,124 +245,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Leagues of Votann",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004144:autoch-pattern-bolter",
-      "datasheetId": "000004144",
-      "line": 1,
-      "name": "Autoch-pattern bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004144",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Autoch-pattern bolter",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004144:concussion-gauntlet",
-      "datasheetId": "000004144",
-      "line": 2,
-      "name": "Concussion gauntlet",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004144",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Concussion gauntlet",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004144:plasma-sword",
-      "datasheetId": "000004144",
-      "line": 3,
-      "name": "Plasma sword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004144",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma sword",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "Any number of models in this unit can each have their plasma sword replaced with 1 concussion gauntlet.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "plasma sword",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "concussion gauntlet",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

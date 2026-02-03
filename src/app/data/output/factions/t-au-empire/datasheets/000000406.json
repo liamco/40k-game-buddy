@@ -9,13 +9,90 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Commander-Farsight",
   "slug": "commander-farsight",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000406:high-intensity-plasma-rifle",
+        "datasheetId": "000000406",
+        "line": 1,
+        "name": "High-intensity plasma rifle",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000406",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "High-intensity plasma rifle",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000406:dawn-blade",
+        "datasheetId": "000000406",
+        "line": 2,
+        "name": "Dawn Blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000406",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Dawn Blade - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 10,
+            "ap": -2,
+            "d": 3
+          },
+          {
+            "datasheetId": "000000406",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Dawn Blade - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,16 +113,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack that targets an enemy unit within 9\", add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -133,7 +201,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000406",
@@ -152,7 +219,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003699",
       "slug": "crisis-sunforge-battlesuits"
@@ -164,77 +231,6 @@
     {
       "id": "000003701",
       "slug": "crisis-starscythe-battlesuits"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000406:high-intensity-plasma-rifle",
-      "datasheetId": "000000406",
-      "line": 1,
-      "name": "High-intensity plasma rifle",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000406",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "High-intensity plasma rifle",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000406:dawn-blade",
-      "datasheetId": "000000406",
-      "line": 2,
-      "name": "Dawn Blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000406",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Dawn Blade - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 10,
-          "ap": -2,
-          "d": 3
-        },
-        {
-          "datasheetId": "000000406",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Dawn Blade - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
     }
   ]
 }

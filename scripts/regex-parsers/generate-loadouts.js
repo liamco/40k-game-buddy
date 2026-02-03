@@ -4,11 +4,16 @@
  * Detects datasheets with complex wargear options and generates all valid
  * loadout combinations for them. Complex datasheets are those with:
  * - Package deals (multiple weapons replaced/added together)
- * - Same weapon appearing in multiple options
  * - Overlapping replacements (same weapon can be replaced by different options)
+ *
+ * This script now consumes the pre-parsed wargear options from parse-wargear-options.js
+ * instead of doing its own parsing.
  *
  * Usage:
  *   npm run generate-loadouts
+ *
+ * Prerequisites:
+ *   npm run parse-wargear-options  (must run first to generate parsedWargearOptions)
  *
  * This script reads from src/app/data/output and writes back to the same location.
  */
@@ -16,6 +21,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { getFactionsOutputPath, findDatasheetFiles, readJsonFile, writeJsonFile, normalizeForComparison, printHeader, printSummary } from "./parser-utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -91,183 +97,64 @@ function getLoadoutLabel(index) {
     return `Loadout ${index + 1}`;
 }
 
-/**
- * Normalize text for comparison
- * Normalizes hyphens to spaces to handle variations like "neo-volkite" vs "neo volkite"
- */
-function normalizeText(text) {
-    if (typeof text !== "string") return "";
-    return text
-        .toLowerCase()
-        .replace(/[\u2018\u2019]/g, "'")
-        .replace(/[\u201C\u201D]/g, '"')
-        .replace(/[\u2013\u2014-]/g, " ") // Normalize all hyphens to spaces
-        .replace(/\s+/g, " ") // Collapse multiple spaces
-        .trim();
-}
+// ============================================================================
+// USING PARSED WARGEAR OPTIONS
+// ============================================================================
 
 /**
- * Parse weapons from option description (simplified version of wargearHelpers logic)
+ * Convert a parsed wargear option to the format needed for loadout generation
+ * @param {object} parsedOption - A WargearOptionDef from parsedWargearOptions
+ * @returns {object|null} - Converted option or null if not valid for loadout generation
  */
-function parseWeaponsFromDescription(description) {
-    const weapons = [];
-    const packages = [];
-
-    const normalized = description.replace(/<[^>]*>/g, " ").trim();
-
-    // Check for <li> list items
-    if (description.includes("<li>")) {
-        const liMatches = description.matchAll(/<li>(.+?)<\/li>/gi);
-        for (const match of liMatches) {
-            const itemText = match[1].replace(/<[^>]*>/g, " ").trim();
-
-            // Check if this is a package deal (contains " and " with a number)
-            if (/ and \d+\s+/i.test(itemText)) {
-                const parts = itemText.split(/ and /i);
-                const packageWeapons = parts.map((part) => {
-                    const weaponMatch = part.match(/^(\d+\s+)?(.+?)(?:\s*\*|\.|$)/i);
-                    return weaponMatch ? weaponMatch[2].trim() : part.trim();
-                });
-                packages.push(packageWeapons);
-            } else {
-                const weaponMatch = itemText.match(/^(\d+\s+)?(.+?)(?:\s*\*|\.|$)/i);
-                if (weaponMatch && weaponMatch[2]) {
-                    weapons.push(weaponMatch[2].trim());
-                }
-            }
-        }
-    }
-
-    if (weapons.length > 0 || packages.length > 0) {
-        return { weapons, packages };
-    }
-
-    // Fallback: look for "with X" pattern (handles non-list format)
-    const withMatch = normalized.match(/(?:replaced with|equipped with)\s+(.+?)\.?\s*$/i);
-    if (withMatch && withMatch[1]) {
-        const addedPart = withMatch[1].trim();
-
-        // Check if it's a package deal with multiple items: "1 X, 1 Y and 1 Z"
-        // Pattern: contains ", " and " and " suggesting multiple items
-        if (/,.*\s+and\s+/i.test(addedPart) || /\s+and\s+\d+\s+/i.test(addedPart)) {
-            // Split on ", " and " and " to get all items
-            const parts = addedPart.split(/,\s*|\s+and\s+/i);
-            const packageWeapons = parts
-                .map((part) => {
-                    const weaponMatch = part.trim().match(/^(\d+\s+)?(.+?)$/i);
-                    return weaponMatch ? weaponMatch[2].trim() : part.trim();
-                })
-                .filter((name) => name.length > 0);
-
-            if (packageWeapons.length > 1) {
-                packages.push(packageWeapons);
-            } else if (packageWeapons.length === 1) {
-                weapons.push(packageWeapons[0]);
-            }
-        } else {
-            // Single item
-            const weaponMatch = addedPart.match(/^(\d+\s+)?(.+?)$/i);
-            if (weaponMatch && weaponMatch[2]) {
-                weapons.push(weaponMatch[2].trim());
-            }
-        }
-    }
-
-    return { weapons, packages };
-}
-
-/**
- * Parse replaced weapons from option description
- */
-function parseReplacedWeapons(description) {
-    const normalized = normalizeText(description);
-    const replacedWeapons = [];
-
-    const replaceMatch = normalized.match(/(.+?)\s+can be replaced/i);
-    if (replaceMatch) {
-        let replacedPart = replaceMatch[1];
-
-        // Remove "For every X models in this unit," prefix - this is a constraint, not a weapon
-        replacedPart = replacedPart.replace(/^for every \d+ models in this unit\s*,?\s*/i, "");
-        // Remove "Any number of models can each have their" prefix
-        replacedPart = replacedPart.replace(/^any number of models can each have their\s*/i, "");
-        // Remove "X model's" or "X models'" prefix (e.g., "1 model's devourer")
-        replacedPart = replacedPart.replace(/^\d+\s+models?'s?\s*/i, "");
-
-        // Handle "X, Y and Z can be replaced" pattern
-        // But first check if there's actually multiple weapons (not just constraint text)
-        const hasMultipleWeapons = replacedPart.includes(" and ") || replacedPart.includes(",");
-
-        if (hasMultipleWeapons) {
-            // Split on commas and "and"
-            const parts = replacedPart.split(/,\s*|\s+and\s+/i);
-            for (const part of parts) {
-                // Extract weapon name, removing "this model's" prefix
-                const cleanPart = part
-                    .replace(/^(this\s+)?model\W?s?\s+/i, "")
-                    .replace(/^the\s+[a-z\s]+?'s\s+/i, "")
-                    .trim();
-                if (cleanPart) {
-                    // Extract just the weapon name (must start with a letter, not "for" or numbers)
-                    const weaponMatch = cleanPart.match(/^(\d+\s+)?([a-z][a-z\s-]+)/i);
-                    if (weaponMatch && weaponMatch[2]) {
-                        const weaponName = weaponMatch[2].trim();
-                        // Filter out non-weapon phrases
-                        if (!weaponName.match(/^(for every|models?|this unit)/i)) {
-                            replacedWeapons.push(weaponName);
-                        }
-                    }
-                }
-            }
-        } else {
-            // Single weapon replacement
-            replacedPart = replacedPart.replace(/^(this\s+)?model\W?s?\s+/i, "");
-            replacedPart = replacedPart.replace(/^the\s+[a-z\s]+?'s\s+/i, "");
-            const weaponMatch = replacedPart.match(/(\d+\s+)?([a-z][a-z\s-]+)/i);
-            if (weaponMatch && weaponMatch[2]) {
-                const weaponName = weaponMatch[2].trim();
-                // Filter out non-weapon phrases
-                if (!weaponName.match(/^(for every|models?|this unit)/i)) {
-                    replacedWeapons.push(weaponName);
-                }
-            }
-        }
-    }
-
-    return replacedWeapons;
-}
-
-/**
- * Parse a single option into structured data
- */
-function parseOption(option) {
-    const desc = option.description || "";
-    const normalized = normalizeText(desc);
-    const isNote = option.button === "*";
-
-    if (isNote) {
+function convertParsedOption(parsedOption) {
+    // Skip unparsed options
+    if (!parsedOption.wargearParsed) {
         return null;
     }
 
-    const isReplace = /can be replaced|replaced with/i.test(normalized);
-    const action = isReplace ? "replace" : "add";
+    // Skip footnotes and "none" entries
+    if (parsedOption.targeting.type === "unknown" || parsedOption.action.type === "unknown") {
+        return null;
+    }
 
-    const replacesWeaponNames = isReplace ? parseReplacedWeapons(desc) : [];
-    const parsed = parseWeaponsFromDescription(desc);
+    const action = parsedOption.action;
+    const isReplace = action.type === "replace";
+
+    // Extract weapon names from removes
+    const replacesWeaponNames = isReplace ? action.removes.map((ref) => ref.name) : [];
+
+    // Extract weapon names and packages from adds
+    const addsWeaponNames = [];
+    const addsWeaponPackages = [];
+
+    for (const choice of action.adds || []) {
+        if (choice.isPackage && choice.weapons.length > 1) {
+            // This is a package deal
+            addsWeaponPackages.push(choice.weapons.map((w) => w.name));
+        } else {
+            // Single weapon(s)
+            for (const weapon of choice.weapons) {
+                addsWeaponNames.push(weapon.name);
+            }
+        }
+    }
+
+    // Determine if this is a package deal
+    const isPackageDeal = replacesWeaponNames.length > 1 || addsWeaponPackages.length > 0;
 
     return {
-        line: option.line,
-        description: desc,
-        action,
+        line: parsedOption.line,
+        description: parsedOption.rawText,
+        action: isReplace ? "replace" : "add",
         replacesWeaponNames,
-        addsWeaponNames: parsed.weapons,
-        addsWeaponPackages: parsed.packages,
-        isPackageDeal: replacesWeaponNames.length > 1 || parsed.packages.length > 0,
+        addsWeaponNames,
+        addsWeaponPackages,
+        isPackageDeal,
     };
 }
 
 /**
- * Detect if a datasheet has complex wargear options
+ * Detect if a datasheet has complex wargear options using parsedWargearOptions
  */
 function detectComplexity(datasheet) {
     // Check manual overrides first
@@ -278,29 +165,26 @@ function detectComplexity(datasheet) {
         return { isComplex: false, reason: "manual override (simple)" };
     }
 
-    const options = datasheet.options || [];
-    if (options.length === 0) {
+    // Use parsedWargearOptions if available
+    const parsedOptions = datasheet.parsedWargearOptions || [];
+    if (parsedOptions.length === 0) {
         return { isComplex: false, reason: "no options" };
     }
 
-    const parsedOptions = options.map(parseOption).filter((o) => o !== null);
+    // Convert parsed options to the format we need
+    const convertedOptions = parsedOptions.map(convertParsedOption).filter((o) => o !== null);
 
-    if (parsedOptions.length <= 1) {
+    if (convertedOptions.length <= 1) {
         return { isComplex: false, reason: "single option only" };
     }
 
     // Check for package deals (multiple weapons replaced together)
-    const hasPackageDeal = parsedOptions.some((opt) => opt.isPackageDeal);
+    const hasPackageDeal = convertedOptions.some((opt) => opt.isPackageDeal);
 
     // Check for overlapping replacements (same BASE weapon replaced by different options)
-    // This creates mutual exclusivity - you can only pick one option for that weapon slot
-    const allReplacedWeapons = parsedOptions.flatMap((opt) => opt.replacesWeaponNames.map(normalizeText));
+    const allReplacedWeapons = convertedOptions.flatMap((opt) => opt.replacesWeaponNames.map(normalizeForComparison));
     const uniqueReplaced = new Set(allReplacedWeapons);
     const hasOverlappingReplacements = uniqueReplaced.size < allReplacedWeapons.length;
-
-    // Note: "same weapon appears in multiple options" is NOT a complexity indicator by itself.
-    // If those options replace DIFFERENT base weapons, they're independent swap groups.
-    // Only overlapping replacements (same base weapon) creates the mutual exclusivity problem.
 
     const isComplex = hasPackageDeal || hasOverlappingReplacements;
 
@@ -316,19 +200,23 @@ function detectComplexity(datasheet) {
     };
 }
 
+// ============================================================================
+// WEAPON RESOLUTION
+// ============================================================================
+
 /**
  * Find weapon by name in available wargear
  */
 function findWeaponByName(availableWargear, name) {
-    const nameLower = normalizeText(name);
+    const nameLower = normalizeForComparison(name);
 
     // First try exact match
-    const exactMatch = availableWargear.find((w) => normalizeText(w.name) === nameLower);
+    const exactMatch = availableWargear.find((w) => normalizeForComparison(w.name) === nameLower);
     if (exactMatch) return exactMatch;
 
     // Then try partial match
     const partialMatches = availableWargear.filter((w) => {
-        const weaponLower = normalizeText(w.name);
+        const weaponLower = normalizeForComparison(w.name);
         return weaponLower.includes(nameLower) || nameLower.includes(weaponLower);
     });
 
@@ -349,11 +237,11 @@ function findWeaponByName(availableWargear, name) {
 function findWargearAbility(abilities, name) {
     if (!abilities || !Array.isArray(abilities)) return null;
 
-    const nameLower = normalizeText(name);
+    const nameLower = normalizeForComparison(name);
 
     return abilities.find((a) => {
         if (a.type !== "Wargear") return false;
-        return normalizeText(a.name) === nameLower;
+        return normalizeForComparison(a.name) === nameLower;
     });
 }
 
@@ -407,29 +295,31 @@ function getDefaultLoadout(datasheet) {
     return loadout;
 }
 
+// ============================================================================
+// LOADOUT GENERATION
+// ============================================================================
+
 /**
  * Generate all valid loadout combinations for a complex datasheet
  *
- * This uses a different approach: instead of slot-based generation,
- * we enumerate all possible option choices and compute the resulting loadout.
+ * Uses parsedWargearOptions to enumerate all possible option choices
+ * and compute the resulting loadout for each combination.
  */
 function generateLoadouts(datasheet) {
-    const options = datasheet.options || [];
     const availableWargear = datasheet.availableWargear || [];
     const abilities = datasheet.abilities || [];
     const defaultLoadoutIds = getDefaultLoadout(datasheet);
+    const parsedOptions = datasheet.parsedWargearOptions || [];
 
-    const parsedOptions = options.map(parseOption).filter((o) => o !== null);
+    // Convert parsed options
+    const convertedOptions = parsedOptions.map(convertParsedOption).filter((o) => o !== null);
 
     // Get default weapons
     const defaultWeapons = defaultLoadoutIds.map((id) => availableWargear.find((w) => w.id === id)).filter(Boolean);
 
-    // Helper to find weapon by name
-    const findWeapon = (name) => findWeaponByName(availableWargear, name);
-
     // Build choice sets for each option
     // Each option can be: "skip" (don't use), or one of its choices
-    const optionChoices = parsedOptions.map((opt) => {
+    const optionChoices = convertedOptions.map((opt) => {
         const choices = [{ type: "skip" }]; // Always can skip an option
 
         // Single weapon choices
@@ -465,7 +355,6 @@ function generateLoadouts(datasheet) {
         }
 
         // Multi-weapon replacement package (when replacesWeaponNames > 1 and addsWeaponNames matches)
-        // This handles "X, Y and Z can be replaced with A, B and C"
         if (opt.replacesWeaponNames.length > 1 && opt.addsWeaponNames.length > 1 && opt.addsWeaponPackages.length === 0) {
             const resolvedItems = opt.addsWeaponNames
                 .map((name) => ({
@@ -531,10 +420,10 @@ function generateLoadouts(datasheet) {
 
             // Check if this choice conflicts with already-replaced weapons
             for (const replaceName of choice.replaces) {
-                const normalizedReplace = normalizeText(replaceName);
+                const normalizedReplace = normalizeForComparison(replaceName);
 
                 // Check if weapon to be replaced still exists in loadout
-                const weaponIndex = weapons.findIndex((w) => normalizeText(w.name) === normalizedReplace);
+                const weaponIndex = weapons.findIndex((w) => normalizeForComparison(w.name) === normalizedReplace);
 
                 if (weaponIndex === -1) {
                     // Weapon already replaced by another option - conflict!
@@ -547,8 +436,8 @@ function generateLoadouts(datasheet) {
 
             // Remove replaced weapons
             for (const replaceName of choice.replaces) {
-                const normalizedReplace = normalizeText(replaceName);
-                const weaponIndex = weapons.findIndex((w) => normalizeText(w.name) === normalizedReplace);
+                const normalizedReplace = normalizeForComparison(replaceName);
+                const weaponIndex = weapons.findIndex((w) => normalizeForComparison(w.name) === normalizedReplace);
                 if (weaponIndex !== -1) {
                     weapons.splice(weaponIndex, 1);
                     replacedWeaponNames.add(normalizedReplace);
@@ -579,7 +468,7 @@ function generateLoadouts(datasheet) {
         if (!isValid) continue;
 
         // No duplicate weapons
-        const weaponNames = weapons.map((w) => normalizeText(w.name));
+        const weaponNames = weapons.map((w) => normalizeForComparison(w.name));
         const uniqueNames = new Set(weaponNames);
         if (uniqueNames.size < weaponNames.length) {
             continue; // Has duplicates
@@ -625,138 +514,134 @@ function generateLoadouts(datasheet) {
     }));
 }
 
+// ============================================================================
+// FILE PROCESSING
+// ============================================================================
+
 /**
  * Process a single datasheet file
  */
 function processDatasheet(filePath) {
-    try {
-        const content = fs.readFileSync(filePath, "utf-8");
-        const datasheet = JSON.parse(content);
-
-        // Skip if no options
-        if (!datasheet.options || datasheet.options.length === 0) {
-            return { processed: false, reason: "no options" };
-        }
-
-        // Detect complexity
-        const complexity = detectComplexity(datasheet);
-
-        if (!complexity.isComplex) {
-            // Remove precomputedLoadouts and wargearComplexity if they exist (in case complexity changed)
-            if (datasheet.precomputedLoadouts || datasheet.wargearComplexity) {
-                delete datasheet.precomputedLoadouts;
-                delete datasheet.wargearComplexity;
-                fs.writeFileSync(filePath, JSON.stringify(datasheet, null, 2), "utf-8");
-                return { processed: true, reason: "removed (now simple)", loadoutCount: 0 };
-            }
-            return { processed: false, reason: complexity.reason };
-        }
-
-        // Generate loadouts
-        const loadouts = generateLoadouts(datasheet);
-
-        if (loadouts.length === 0) {
-            return { processed: false, reason: "no valid loadouts generated" };
-        }
-
-        // Add precomputedLoadouts to datasheet
-        datasheet.precomputedLoadouts = loadouts;
-        datasheet.wargearComplexity = {
-            isComplex: true,
-            reason: complexity.reason,
-            generatedAt: new Date().toISOString(),
-        };
-
-        // Write back to file
-        fs.writeFileSync(filePath, JSON.stringify(datasheet, null, 2), "utf-8");
-
-        return {
-            processed: true,
-            reason: complexity.reason,
-            loadoutCount: loadouts.length,
-        };
-    } catch (error) {
-        return { processed: false, reason: `error: ${error.message}` };
+    const datasheet = readJsonFile(filePath);
+    if (!datasheet) {
+        return { processed: false, reason: "read error" };
     }
+
+    // Skip if no options or no parsedWargearOptions
+    if (!datasheet.options || datasheet.options.length === 0) {
+        return { processed: false, reason: "no options" };
+    }
+
+    if (!datasheet.parsedWargearOptions || datasheet.parsedWargearOptions.length === 0) {
+        return { processed: false, reason: "no parsed options (run parse-wargear-options first)" };
+    }
+
+    // Detect complexity
+    const complexity = detectComplexity(datasheet);
+
+    if (!complexity.isComplex) {
+        // Remove precomputedLoadouts and wargearComplexity if they exist
+        if (datasheet.precomputedLoadouts || datasheet.wargearComplexity) {
+            delete datasheet.precomputedLoadouts;
+            delete datasheet.wargearComplexity;
+            writeJsonFile(filePath, datasheet);
+            return { processed: true, reason: "removed (now simple)", loadoutCount: 0 };
+        }
+        return { processed: false, reason: complexity.reason };
+    }
+
+    // Generate loadouts
+    const loadouts = generateLoadouts(datasheet);
+
+    if (loadouts.length === 0) {
+        return { processed: false, reason: "no valid loadouts generated" };
+    }
+
+    // Add precomputedLoadouts to datasheet
+    datasheet.precomputedLoadouts = loadouts;
+    datasheet.wargearComplexity = {
+        isComplex: true,
+        reason: complexity.reason,
+        generatedAt: new Date().toISOString(),
+    };
+
+    // Write back to file
+    writeJsonFile(filePath, datasheet);
+
+    return {
+        processed: true,
+        reason: complexity.reason,
+        loadoutCount: loadouts.length,
+    };
 }
 
-/**
- * Main function
- */
+// ============================================================================
+// MAIN
+// ============================================================================
+
 async function main() {
-    const outputPath = path.join(__dirname, "..", "..", "src", "app", "data", "output", "factions");
+    printHeader("Generate Precomputed Loadouts for Complex Datasheets");
+
+    const outputPath = getFactionsOutputPath(__dirname);
 
     if (!fs.existsSync(outputPath)) {
-        console.error(`Error: ${outputPath} does not exist`);
-        console.error("Run 'npm run parse-depot-data' first to generate output files.");
+        console.error(`❌ Output path not found: ${outputPath}`);
+        console.error("   Run 'npm run parse-depot-data' first to generate output files.");
         process.exit(1);
     }
 
-    console.log("═".repeat(60));
-    console.log("🔧 Generating Precomputed Loadouts for Complex Datasheets");
-    console.log("═".repeat(60));
+    console.log(`📂 Source: ${outputPath}`);
     console.log("");
 
-    // Find all faction directories
-    const factionDirs = fs.readdirSync(outputPath, { withFileTypes: true }).filter((d) => d.isDirectory());
+    // Find all datasheet files
+    const datasheetFiles = findDatasheetFiles(outputPath);
+    console.log(`📄 Found ${datasheetFiles.length} datasheet files\n`);
 
     let totalProcessed = 0;
     let totalComplex = 0;
     let totalLoadouts = 0;
     const complexDatasheets = [];
 
-    for (const factionDir of factionDirs) {
-        const datasheetDir = path.join(outputPath, factionDir.name, "datasheets");
+    for (const filePath of datasheetFiles) {
+        const result = processDatasheet(filePath);
 
-        if (!fs.existsSync(datasheetDir)) {
-            continue;
-        }
+        totalProcessed++;
 
-        const datasheetFiles = fs.readdirSync(datasheetDir).filter((f) => f.endsWith(".json"));
+        if (result.processed && result.loadoutCount > 0) {
+            totalComplex++;
+            totalLoadouts += result.loadoutCount;
 
-        for (const file of datasheetFiles) {
-            const filePath = path.join(datasheetDir, file);
-            const result = processDatasheet(filePath);
+            // Read the datasheet name for logging
+            const datasheet = readJsonFile(filePath);
+            if (datasheet) {
+                const factionMatch = filePath.match(/factions\/([^/]+)\//);
+                const faction = factionMatch ? factionMatch[1] : "unknown";
 
-            totalProcessed++;
-
-            if (result.processed && result.loadoutCount > 0) {
-                totalComplex++;
-                totalLoadouts += result.loadoutCount;
-
-                // Read the datasheet name for logging
-                const datasheet = JSON.parse(fs.readFileSync(filePath, "utf-8"));
                 complexDatasheets.push({
                     id: datasheet.id,
                     name: datasheet.name,
-                    faction: factionDir.name,
+                    faction,
                     loadoutCount: result.loadoutCount,
                     reason: result.reason,
                 });
 
-                console.log(`✅ ${datasheet.name} (${factionDir.name}): ${result.loadoutCount} loadouts - ${result.reason}`);
+                console.log(`✅ ${datasheet.name} (${faction}): ${result.loadoutCount} loadouts - ${result.reason}`);
             }
         }
     }
 
-    console.log("");
-    console.log("═".repeat(60));
-    console.log("📊 Summary");
-    console.log("═".repeat(60));
-    console.log(`   Total datasheets processed: ${totalProcessed}`);
-    console.log(`   Complex datasheets: ${totalComplex}`);
-    console.log(`   Total loadouts generated: ${totalLoadouts}`);
-    console.log("");
+    printSummary({
+        "Total datasheets processed": totalProcessed,
+        "Complex datasheets": totalComplex,
+        "Total loadouts generated": totalLoadouts,
+    });
 
     if (complexDatasheets.length > 0) {
-        console.log("📋 Complex Datasheets:");
+        console.log("\n📋 Complex Datasheets:");
         for (const ds of complexDatasheets) {
             console.log(`   - ${ds.name} (${ds.faction}): ${ds.loadoutCount} loadouts`);
         }
     }
-
-    console.log("");
-    console.log("═".repeat(60));
 }
 
 // Run the script

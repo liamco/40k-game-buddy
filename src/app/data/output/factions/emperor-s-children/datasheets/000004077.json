@@ -9,13 +9,134 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-6",
-  "damagedDescription": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/emperor-s-children/Fulgrim",
   "slug": "fulgrim",
   "factionSlug": "emperor-s-children",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Emperor's Children",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-6",
+    "threshold": 6,
+    "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004077:malefic-lash",
+        "datasheetId": "000004077",
+        "line": 1,
+        "name": "Malefic lash",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004077",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Malefic lash",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004077:daemonic-blades",
+        "datasheetId": "000004077",
+        "line": 2,
+        "name": "Daemonic blades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004077",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Daemonic blades - strike",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 14,
+            "ap": -3,
+            "d": "D6+1"
+          },
+          {
+            "datasheetId": "000004077",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Daemonic blades - sweep",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 12,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004077:serpentine-tail",
+        "datasheetId": "000004077",
+        "line": 4,
+        "name": "Serpentine tail",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004077",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Serpentine tail",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -64,16 +185,7 @@
       "factionId": "",
       "description": "Each time a model makes an attack that targets this model, subtract 1 from the Hit roll.",
       "type": "Primarch",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -183,7 +295,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004077",
@@ -202,108 +313,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Emperor's Children",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004077:malefic-lash",
-      "datasheetId": "000004077",
-      "line": 1,
-      "name": "Malefic lash",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004077",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Malefic lash",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004077:daemonic-blades",
-      "datasheetId": "000004077",
-      "line": 2,
-      "name": "Daemonic blades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004077",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Daemonic blades - strike",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 14,
-          "ap": -3,
-          "d": "D6+1"
-        },
-        {
-          "datasheetId": "000004077",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Daemonic blades - sweep",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 12,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004077:serpentine-tail",
-      "datasheetId": "000004077",
-      "line": 4,
-      "name": "Serpentine tail",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004077",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Serpentine tail",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

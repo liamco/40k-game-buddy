@@ -9,13 +9,85 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Ophydian-Destroyers",
   "slug": "ophydian-destroyers",
   "factionSlug": "necrons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002358:ophydian-hyperphase-weapons",
+        "datasheetId": "000002358",
+        "line": 1,
+        "name": "Ophydian hyperphase weapons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002358",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ophydian hyperphase weapons",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002358",
+          "line": 1,
+          "button": "•",
+          "description": "For every 3 models in this unit, this unit can have 1 Plasmacyte."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "For every 3 models in this unit, this unit can have 1 Plasmacyte.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 3
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Plasmacyte",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -87,14 +159,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002358",
-      "line": 1,
-      "button": "•",
-      "description": "For every 3 models in this unit, this unit can have 1 Plasmacyte."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002358",
@@ -120,66 +184,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002358:ophydian-hyperphase-weapons",
-      "datasheetId": "000002358",
-      "line": 1,
-      "name": "Ophydian hyperphase weapons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002358",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ophydian hyperphase weapons",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "For every 3 models in this unit, this unit can have 1 Plasmacyte.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "ratio",
-        "ratio": 3
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Plasmacyte",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

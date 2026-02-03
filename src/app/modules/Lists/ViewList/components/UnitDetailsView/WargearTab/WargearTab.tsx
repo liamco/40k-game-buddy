@@ -88,7 +88,7 @@ function getUnitWideWeaponId(unit: ArmyListItem, unitWideOptions: WargearOptionD
         // Check if any added weapon is in the loadout
         for (const choice of opt.action.adds) {
             for (const weaponRef of choice.weapons) {
-                const weapon = findWeaponByName(unit.availableWargear || [], weaponRef.name);
+                const weapon = findWeaponByName(unit.wargear?.weapons || [], weaponRef.name);
                 if (weapon && firstModel.loadout.includes(weapon.id)) {
                     return weapon.id;
                 }
@@ -96,7 +96,7 @@ function getUnitWideWeaponId(unit: ArmyListItem, unitWideOptions: WargearOptionD
         }
         // Check if default (replaced) weapon is in the loadout
         for (const removed of opt.action.removes) {
-            const weapon = findWeaponByName(unit.availableWargear || [], removed.name);
+            const weapon = findWeaponByName(unit.wargear?.weapons || [], removed.name);
             if (weapon && firstModel.loadout.includes(weapon.id)) {
                 return weapon.id;
             }
@@ -126,7 +126,7 @@ function getModelOptionsInfo(unit: ArmyListItem, parsedOptions: WargearOptionDef
     const totalModels = unit.modelInstances.length;
 
     return unit.modelInstances.map((instance, index) => {
-        const currentWeapons = instance.loadout.map((id) => (unit.availableWargear || []).find((w) => w.id === id)).filter((w): w is Weapon => w !== undefined);
+        const currentWeapons = instance.loadout.map((id) => (unit.wargear?.weapons || []).find((w) => w.id === id)).filter((w): w is Weapon => w !== undefined);
 
         const availableOptions = parsedOptions
             .filter((opt) => opt.wargearParsed)
@@ -205,7 +205,7 @@ function checkOptionEligibility(opt: WargearOptionDef, instance: ModelInstance, 
 
         case "conditional":
             if (targeting.condition?.weaponName) {
-                const conditionWeapon = findWeaponByName(unit.availableWargear || [], targeting.condition.weaponName);
+                const conditionWeapon = findWeaponByName(unit.wargear?.weapons || [], targeting.condition.weaponName);
                 const hasWeapon = conditionWeapon && instance.loadout.includes(conditionWeapon.id);
                 return { isEligible: !!hasWeapon, isDisabled: false };
             }
@@ -270,13 +270,14 @@ const WargearTab = ({ unit, list }: Props) => {
 
     // Check if unit has any wargear options (not just notes)
     const hasOptions = useMemo(() => {
-        if (!unit.options || unit.options.length === 0) return false;
-        return unit.options.some((opt) => opt.button !== "*");
-    }, [unit.options]);
+        const rawOptions = unit.wargear?.options?.raw;
+        if (!rawOptions || rawOptions.length === 0) return false;
+        return rawOptions.some((opt) => opt.button !== "*");
+    }, [unit.wargear?.options?.raw]);
 
     // Parse all options using new pipeline
-    // Use pre-parsed options from datasheet JSON (generated at build time)
-    const parsedOptions = useParsedOptions((unit as any).parsedWargearOptions);
+    // Use pre-parsed options from consolidated wargear.options.parsed (generated at build time)
+    const parsedOptions = useParsedOptions(unit.wargear?.options?.parsed);
 
     // Categorize options into unit-wide, ratio, and other
     const categorizedOptions = useCategorizedOptions(parsedOptions);
@@ -374,11 +375,11 @@ const WargearTab = ({ unit, list }: Props) => {
                     const replacedWeaponName = opt.action.removes[0].name;
 
                     if (isGenericWeaponReference(replacedWeaponName)) {
-                        const resolvedWeapons = resolveGenericWeaponReference(replacedWeaponName, modelInfo.instance.loadout, unit.availableWargear || []);
+                        const resolvedWeapons = resolveGenericWeaponReference(replacedWeaponName, modelInfo.instance.loadout, unit.wargear?.weapons || []);
 
                         const replacementWeapons = opt.action.adds
                             .flatMap((choice) => choice.weapons)
-                            .map((ref) => findWeaponByName(unit.availableWargear || [], ref.name))
+                            .map((ref) => findWeaponByName(unit.wargear?.weapons || [], ref.name))
                             .filter((w): w is Weapon => w !== undefined);
 
                         resolvedWeapons.forEach((replacedWeapon) => {
@@ -418,7 +419,7 @@ const WargearTab = ({ unit, list }: Props) => {
                             }
                         });
                     } else {
-                        const replacedWeapon = findWeaponByName(unit.availableWargear || [], replacedWeaponName);
+                        const replacedWeapon = findWeaponByName(unit.wargear?.weapons || [], replacedWeaponName);
 
                         if (!replacedWeapon) return;
 
@@ -426,7 +427,7 @@ const WargearTab = ({ unit, list }: Props) => {
                         const singleWeaponOptions: SwapOption[] = opt.action.adds
                             .filter((choice) => !choice.isPackage)
                             .flatMap((choice) => choice.weapons)
-                            .map((ref) => findWeaponByName(unit.availableWargear || [], ref.name))
+                            .map((ref) => findWeaponByName(unit.wargear?.weapons || [], ref.name))
                             .filter((w): w is Weapon => w !== undefined)
                             .map((w) => ({
                                 weapon: w,
@@ -438,7 +439,7 @@ const WargearTab = ({ unit, list }: Props) => {
                         const packageOptions: SwapOption[] = opt.action.adds
                             .filter((choice) => choice.isPackage)
                             .map((choice) => {
-                                const packageWeapons = choice.weapons.map((ref) => findWeaponByName(unit.availableWargear || [], ref.name)).filter((w): w is Weapon => w !== undefined);
+                                const packageWeapons = choice.weapons.map((ref) => findWeaponByName(unit.wargear?.weapons || [], ref.name)).filter((w): w is Weapon => w !== undefined);
 
                                 if (packageWeapons.length === 0) return null;
 
@@ -480,7 +481,7 @@ const WargearTab = ({ unit, list }: Props) => {
                             if (opt.action.removes.length > 1) {
                                 const additionalReplacedIds = opt.action.removes
                                     .slice(1)
-                                    .map((ref) => findWeaponByName(unit.availableWargear || [], ref.name)?.id)
+                                    .map((ref) => findWeaponByName(unit.wargear?.weapons || [], ref.name)?.id)
                                     .filter((id): id is string => id !== undefined);
                                 if (additionalReplacedIds.length > 0) {
                                     swapGroup.replacesWeaponIds = [replacedWeapon.id, ...additionalReplacedIds];
@@ -497,7 +498,7 @@ const WargearTab = ({ unit, list }: Props) => {
                     opt.action.adds
                         .flatMap((choice) => choice.weapons)
                         .forEach((ref) => {
-                            const weapon = findWeaponByName(unit.availableWargear || [], ref.name);
+                            const weapon = findWeaponByName(unit.wargear?.weapons || [], ref.name);
                             if (!weapon) return;
 
                             const addition: WeaponAddition = {
@@ -513,7 +514,7 @@ const WargearTab = ({ unit, list }: Props) => {
 
             return groups;
         },
-        [unit.availableWargear]
+        [unit.wargear?.weapons]
     );
 
     // Handle weapon selection in a swap group
@@ -577,12 +578,12 @@ const WargearTab = ({ unit, list }: Props) => {
             if (opt.action.type !== "replace" || opt.action.removes.length === 0) return;
 
             const replacedWeaponName = opt.action.removes[0].name;
-            const replacedWeapon = findWeaponByName(unit.availableWargear || [], replacedWeaponName);
+            const replacedWeapon = findWeaponByName(unit.wargear?.weapons || [], replacedWeaponName);
             if (!replacedWeapon) return;
 
             const replacementWeapons = opt.action.adds
                 .flatMap((choice) => choice.weapons)
-                .map((ref) => findWeaponByName(unit.availableWargear || [], ref.name))
+                .map((ref) => findWeaponByName(unit.wargear?.weapons || [], ref.name))
                 .filter((w): w is Weapon => w !== undefined);
 
             const existingGroup = swapGroupsByReplacedWeapon.get(replacedWeapon.id);
@@ -624,7 +625,7 @@ const WargearTab = ({ unit, list }: Props) => {
         });
 
         return groups;
-    }, [categorizedOptions.unitWide, unit.availableWargear, unitWideWeaponId]);
+    }, [categorizedOptions.unitWide, unit.wargear?.weapons, unitWideWeaponId]);
 
     // Build unit-wide additions
     const unitWideAdditions = useMemo((): WeaponAddition[] => {
@@ -636,7 +637,7 @@ const WargearTab = ({ unit, list }: Props) => {
             opt.action.adds
                 .flatMap((choice) => choice.weapons)
                 .forEach((ref) => {
-                    const weapon = findWeaponByName(unit.availableWargear || [], ref.name);
+                    const weapon = findWeaponByName(unit.wargear?.weapons || [], ref.name);
                     if (!weapon) return;
 
                     const allModelsHaveWeapon = unit.modelInstances ? unit.modelInstances.every((instance) => instance.loadout.includes(weapon.id)) : false;
@@ -651,7 +652,7 @@ const WargearTab = ({ unit, list }: Props) => {
         });
 
         return additions;
-    }, [categorizedOptions.unitWide, unit.availableWargear, unit.modelInstances]);
+    }, [categorizedOptions.unitWide, unit.wargear?.weapons, unit.modelInstances]);
 
     // Handle unit-wide addition toggle
     const handleUnitWideAdditionToggle = useCallback(
@@ -980,13 +981,13 @@ const WargearTab = ({ unit, list }: Props) => {
                     const replacedWeaponName = opt.action.removes[0].name;
 
                     if (isGenericWeaponReference(replacedWeaponName)) {
-                        const currentUnitWideWeapon = unitWideWeaponId ? (unit.availableWargear || []).find((w) => w.id === unitWideWeaponId) : null;
+                        const currentUnitWideWeapon = unitWideWeaponId ? (unit.wargear?.weapons || []).find((w) => w.id === unitWideWeaponId) : null;
 
                         if (!currentUnitWideWeapon) return;
 
                         const replacementWeapons = opt.action.adds
                             .flatMap((choice) => choice.weapons)
-                            .map((ref) => findWeaponByName(unit.availableWargear || [], ref.name))
+                            .map((ref) => findWeaponByName(unit.wargear?.weapons || [], ref.name))
                             .filter((w): w is Weapon => w !== undefined);
 
                         const existingGroup = swapGroupsByReplacedWeapon.get(currentUnitWideWeapon.id);
@@ -1024,12 +1025,12 @@ const WargearTab = ({ unit, list }: Props) => {
                             groups.push(swapGroup);
                         }
                     } else {
-                        const replacedWeapon = findWeaponByName(unit.availableWargear || [], replacedWeaponName);
+                        const replacedWeapon = findWeaponByName(unit.wargear?.weapons || [], replacedWeaponName);
                         if (!replacedWeapon) return;
 
                         const replacementWeapons = opt.action.adds
                             .flatMap((choice) => choice.weapons)
-                            .map((ref) => findWeaponByName(unit.availableWargear || [], ref.name))
+                            .map((ref) => findWeaponByName(unit.wargear?.weapons || [], ref.name))
                             .filter((w): w is Weapon => w !== undefined);
 
                         const existingGroup = swapGroupsByReplacedWeapon.get(replacedWeapon.id);
@@ -1074,7 +1075,7 @@ const WargearTab = ({ unit, list }: Props) => {
 
             return groups;
         },
-        [unit.availableWargear, categorizedOptions.unitWide, unitWideWeaponId]
+        [unit.wargear?.weapons, categorizedOptions.unitWide, unitWideWeaponId]
     );
 
     const renderModelWithRatioOptions = (modelInfo: ModelOptionsInfo, displayIndex: number) => {
@@ -1103,13 +1104,13 @@ const WargearTab = ({ unit, list }: Props) => {
 
         categorizedOptions.unitWide.forEach((opt) => {
             opt.action.removes.forEach((ref) => {
-                const weapon = findWeaponByName(unit.availableWargear || [], ref.name);
+                const weapon = findWeaponByName(unit.wargear?.weapons || [], ref.name);
                 if (weapon) coveredWeaponIds.add(weapon.id);
             });
             opt.action.adds
                 .flatMap((choice) => choice.weapons)
                 .forEach((ref) => {
-                    const weapon = findWeaponByName(unit.availableWargear || [], ref.name);
+                    const weapon = findWeaponByName(unit.wargear?.weapons || [], ref.name);
                     if (weapon) coveredWeaponIds.add(weapon.id);
                 });
         });
@@ -1278,7 +1279,7 @@ const WargearTab = ({ unit, list }: Props) => {
                 )}
             </div>
             <div className="space-y-6 pt-7">
-                <WargearRulesPanel options={unit.options} />
+                <WargearRulesPanel options={unit.wargear?.options?.raw} />
             </div>
         </div>
     );

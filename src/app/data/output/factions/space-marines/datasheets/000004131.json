@@ -9,13 +9,169 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Wolf-Guard-Headtakers",
   "slug": "wolf-guard-headtakers",
   "factionSlug": "space-marines",
   "supplementKey": "space-wolves",
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004131:heavy-bolt-pistol",
+        "datasheetId": "000004131",
+        "line": 1,
+        "name": "Heavy bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004131",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004131:master-crafted-power-weapon",
+        "datasheetId": "000004131",
+        "line": 2,
+        "name": "Master-crafted power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004131",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Master-crafted power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004131:paired-master-crafted-power-weapons",
+        "datasheetId": "000004131",
+        "line": 3,
+        "name": "Paired master-crafted power weapons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004131",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Paired master-crafted power weapons",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004131:teeth-and-claws",
+        "datasheetId": "000004131",
+        "line": 4,
+        "name": "Teeth and claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004131",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Teeth and claws",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000004131",
+          "line": 1,
+          "button": "•",
+          "description": "All of the models in this unit can each have their master-crafted power weapon and storm shield replaced with 1 paired master-crafted power weapons."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "All of the models in this unit can each have their master-crafted power weapon and storm shield replaced with 1 paired master-crafted power weapons.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "all-models"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "master-crafted power weapon",
+                "count": 1
+              },
+              {
+                "name": "storm shield",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "paired master-crafted power weapons",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Oath of Moment",
@@ -28,26 +184,7 @@
       "factionId": "",
       "description": "At the start of the Declare Battle Formations step, split this unit into two units, one containing all of its <span class=\"kwb\">HEADTAKERS</span> models and one containing all of its <span class=\"kwb\">HUNTING</span> <span class=\"kwb\">WOLVES</span> models, with new Starting Strengths accordingly.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SPLIT"
-          ],
-          "value": "two units",
-          "conditions": []
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "a",
-          "value": "new Starting Strengths",
-          "conditions": []
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -56,50 +193,7 @@
       "factionId": "",
       "description": "At the start of the battle, select one unit from your opponent's army to be this unit's quarry. Weapons equipped by <span class=\"kwb\">HEADTAKERS</span> models in this unit have the [DEVASTATING WOUNDS] and [PRECISION] abilities while targeting its quarry. Each time this unit's quarry is destroyed, select one new enemy unit to be this unit's quarry. This ability can be used even if this unit is embarked within a Transport.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "DEVASTATING WOUNDS",
-            "PRECISION"
-          ],
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isQuarry",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "QUARRY"
-          ],
-          "value": "one enemy unit",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isDestroyed",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "EMBARKED"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -108,32 +202,7 @@
       "factionId": "",
       "description": "While this unit is within 6\" of one or more friendly Space Wolves Character models (excluding Wulfen models), if this unit is not Battle-shocked, <span class=\"kwb\">HUNTING</span> <span class=\"kwb\">WOLVES</span> models in it have an Objective Control characteristic of 1.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "oc",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isBattleShocked",
-              "operator": "equals",
-              "value": false
-            },
-            {
-              "entity": "thisArmy",
-              "keywords": [
-                "SPACE WOLVES CHARACTER"
-              ],
-              "operator": "includes",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -142,16 +211,7 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -248,14 +308,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000004131",
-      "line": 1,
-      "button": "•",
-      "description": "All of the models in this unit can each have their master-crafted power weapon and storm shield replaced with 1 paired master-crafted power weapons."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004131",
@@ -302,150 +354,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004131:heavy-bolt-pistol",
-      "datasheetId": "000004131",
-      "line": 1,
-      "name": "Heavy bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004131",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004131:master-crafted-power-weapon",
-      "datasheetId": "000004131",
-      "line": 2,
-      "name": "Master-crafted power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004131",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004131:paired-master-crafted-power-weapons",
-      "datasheetId": "000004131",
-      "line": 3,
-      "name": "Paired master-crafted power weapons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004131",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Paired master-crafted power weapons",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004131:teeth-and-claws",
-      "datasheetId": "000004131",
-      "line": 4,
-      "name": "Teeth and claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004131",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Teeth and claws",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "All of the models in this unit can each have their master-crafted power weapon and storm shield replaced with 1 paired master-crafted power weapons.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "all-models"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "master-crafted power weapon",
-            "count": 1
-          },
-          {
-            "name": "storm shield",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "paired master-crafted power weapons",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

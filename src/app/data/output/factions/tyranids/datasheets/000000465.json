@@ -9,13 +9,164 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Tervigon",
   "slug": "tervigon",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000465:stinger-salvoes",
+        "datasheetId": "000000465",
+        "line": 1,
+        "name": "Stinger salvoes",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000465",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Stinger salvoes",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 8,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000465:massive-crushing-claws",
+        "datasheetId": "000000465",
+        "line": 2,
+        "name": "Massive crushing claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000465",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Massive crushing claws",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000000465:massive-scything-talons",
+        "datasheetId": "000000465",
+        "line": 3,
+        "name": "Massive scything talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000465",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Massive scything talons - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -2,
+            "d": "D6"
+          },
+          {
+            "datasheetId": "000000465",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Massive scything talons - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000465",
+          "line": 1,
+          "button": "•",
+          "description": "This model's massive scything talons can be replaced with 1 massive crushing claws."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's massive scything talons can be replaced with 1 massive crushing claws.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "massive scything talons",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "massive crushing claws",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,36 +188,7 @@
       "factionId": "",
       "description": "In your Command phase, you can select one friendly Termagants unit within 6\" of this model and return up to D3+3 destroyed models to that unit. A <span class=\"kwb\">TERMAGANTS</span> unit cannot be selected for this ability more than once per phase.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6
-        },
-        {
-          "entity": "targetUnit",
-          "effect": "staticNumber",
-          "attribute": "w",
-          "value": "D3+3"
-        },
-        {
-          "entity": "targetUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "CANNOT BE SELECTED MORE THAN ONCE PER PHASE"
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "COMMAND PHASE ABILITY"
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -75,25 +197,7 @@
       "factionId": "",
       "description": "While a friendly Termagants unit is within 6\" of this model, ranged weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LETHAL HITS"
-          ],
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "inRangeOfFriendlyObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -157,14 +261,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000465",
-      "line": 1,
-      "button": "•",
-      "description": "This model's massive scything talons can be replaced with 1 massive crushing claws."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000465",
@@ -183,133 +279,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000465:stinger-salvoes",
-      "datasheetId": "000000465",
-      "line": 1,
-      "name": "Stinger salvoes",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000465",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Stinger salvoes",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 8,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000465:massive-crushing-claws",
-      "datasheetId": "000000465",
-      "line": 2,
-      "name": "Massive crushing claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000465",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Massive crushing claws",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000000465:massive-scything-talons",
-      "datasheetId": "000000465",
-      "line": 3,
-      "name": "Massive scything talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000465",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Massive scything talons - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": "D6"
-        },
-        {
-          "datasheetId": "000000465",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Massive scything talons - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's massive scything talons can be replaced with 1 massive crushing claws.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "massive scything talons",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "massive crushing claws",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

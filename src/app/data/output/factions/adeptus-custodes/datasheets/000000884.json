@@ -9,13 +9,230 @@
   "transport": "This model has a transport capacity of 6 Adeptus Custodes Infantry models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-custodes/Venerable-Land-Raider",
   "slug": "venerable-land-raider",
   "factionSlug": "adeptus-custodes",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000884:godhammer-lascannon",
+        "datasheetId": "000000884",
+        "line": 1,
+        "name": "Godhammer lascannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000884",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Godhammer lascannon",
+            "attributes": [],
+            "range": 48,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000000884:hunter-killer-missile",
+        "datasheetId": "000000884",
+        "line": 2,
+        "name": "Hunter-killer missile",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000884",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hunter-killer missile",
+            "attributes": [
+              "ONE SHOT"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 14,
+            "ap": -3,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000884:storm-bolter",
+        "datasheetId": "000000884",
+        "line": 3,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000884",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000884:twin-heavy-bolter",
+        "datasheetId": "000000884",
+        "line": 4,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000884",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000884:armoured-tracks",
+        "datasheetId": "000000884",
+        "line": 5,
+        "name": "Armoured tracks",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000884",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured tracks",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000884",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 hunter-killer missile."
+        },
+        {
+          "datasheetId": "000000884",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with 1 storm bolter."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 hunter-killer missile.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "hunter-killer missile",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with 1 storm bolter.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "storm bolter",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -95,20 +312,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000884",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 hunter-killer missile."
-    },
-    {
-      "datasheetId": "000000884",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with 1 storm bolter."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000884",
@@ -127,193 +330,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000884:godhammer-lascannon",
-      "datasheetId": "000000884",
-      "line": 1,
-      "name": "Godhammer lascannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000884",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Godhammer lascannon",
-          "attributes": [],
-          "range": 48,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000000884:hunter-killer-missile",
-      "datasheetId": "000000884",
-      "line": 2,
-      "name": "Hunter-killer missile",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000884",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hunter-killer missile",
-          "attributes": [
-            "ONE SHOT"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 14,
-          "ap": -3,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000884:storm-bolter",
-      "datasheetId": "000000884",
-      "line": 3,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000884",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000884:twin-heavy-bolter",
-      "datasheetId": "000000884",
-      "line": 4,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000884",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000884:armoured-tracks",
-      "datasheetId": "000000884",
-      "line": 5,
-      "name": "Armoured tracks",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000884",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured tracks",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with 1 hunter-killer missile.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "hunter-killer missile",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model can be equipped with 1 storm bolter.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "storm bolter",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

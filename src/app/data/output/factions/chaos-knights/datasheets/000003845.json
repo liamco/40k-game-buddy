@@ -9,13 +9,172 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/Dark-Commune",
   "slug": "dark-commune-3",
   "factionSlug": "chaos-knights",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000003845:commune-blade",
+        "datasheetId": "000003845",
+        "line": 1,
+        "name": "Commune blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003845",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Commune blade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 4,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003845:close-combat-weapon",
+        "datasheetId": "000003845",
+        "line": 1,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003845",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003845:commune-stave",
+        "datasheetId": "000003845",
+        "line": 1,
+        "name": "Commune stave",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003845",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Commune stave",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000003845:autopistol",
+        "datasheetId": "000003845",
+        "line": 1,
+        "name": "Autopistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003845",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Autopistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003845:warp-curse",
+        "datasheetId": "000003845",
+        "line": 1,
+        "name": "Warp Curse",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003845",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Warp Curse - witchfire",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          },
+          {
+            "datasheetId": "000003845",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Warp Curse - focused witchfire",
+            "attributes": [
+              "HAZARDOUS",
+              "PSYCHIC",
+              "SUSTAINED HITS 2"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,16 +191,7 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a <span class=\"kwb\">CULT</span> <span class=\"kwb\">DEMAGOGUE</span> model, models in that unit have a 5+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 5
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -50,22 +200,7 @@
       "factionId": "",
       "description": "Once per battle, in your Command phase, if this unit contains a <span class=\"kwb\">CULT</span> <span class=\"kwb\">DEMAGOGUE</span> model, it can use this ability. If it does, until the end of the turn, this unit can declare a charge in a turn in which it Advanced and each time a model in this unit makes an attack, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -171,7 +306,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000003845",
@@ -211,7 +345,7 @@
       "count": 5
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003849",
       "slug": "cultist-mob-3"
@@ -219,159 +353,6 @@
     {
       "id": "000003851",
       "slug": "accursed-cultists-3"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003845:commune-blade",
-      "datasheetId": "000003845",
-      "line": 1,
-      "name": "Commune blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003845",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Commune blade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003845:close-combat-weapon",
-      "datasheetId": "000003845",
-      "line": 1,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003845",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003845:commune-stave",
-      "datasheetId": "000003845",
-      "line": 1,
-      "name": "Commune stave",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003845",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Commune stave",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000003845:autopistol",
-      "datasheetId": "000003845",
-      "line": 1,
-      "name": "Autopistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003845",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Autopistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003845:warp-curse",
-      "datasheetId": "000003845",
-      "line": 1,
-      "name": "Warp Curse",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003845",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Warp Curse - witchfire",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        },
-        {
-          "datasheetId": "000003845",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Warp Curse - focused witchfire",
-          "attributes": [
-            "HAZARDOUS",
-            "PSYCHIC",
-            "SUSTAINED HITS 2"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
     }
   ]
 }

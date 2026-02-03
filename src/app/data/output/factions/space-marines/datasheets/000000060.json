@@ -9,13 +9,89 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to one of the above units even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the <span class=\"kwb\">LEADER</span> units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Apothecary-Biologis",
   "slug": "apothecary-biologis",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to one of the above units even if one Captain or Chapter Master model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the <span class=\"kwb\">LEADER</span> units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "CAPTAIN",
+        "CHAPTER MASTER"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000060:absolvor-bolt-pistol",
+        "datasheetId": "000000060",
+        "line": 1,
+        "name": "Absolvor bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000060",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Absolvor bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000060:close-combat-weapon",
+        "datasheetId": "000000060",
+        "line": 2,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000060",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,25 +108,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LETHAL HITS"
-          ],
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -59,38 +117,7 @@
       "factionId": "",
       "description": "If this model's unit destroys an enemy unit as the result of a melee attack, until the end of the battle, this model has an Objective Control characteristic of 9.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "oc",
-          "value": 9,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isDestroyed",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisUnit",
-              "effect": "rollBonus",
-              "attribute": "h",
-              "value": 1,
-              "conditions": [
-                {
-                  "entity": "thisUnit",
-                  "state": "isInMelee",
-                  "operator": "equals",
-                  "value": true
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -154,7 +181,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000060",
@@ -173,7 +199,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002781",
       "slug": "indomitor-kill-team-2"
@@ -190,71 +216,5 @@
       "id": "000002099",
       "slug": "aggressor-squad"
     }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000060:absolvor-bolt-pistol",
-      "datasheetId": "000000060",
-      "line": 1,
-      "name": "Absolvor bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000060",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Absolvor bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000060:close-combat-weapon",
-      "datasheetId": "000000060",
-      "line": 2,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000060",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "leaderConditions": {
-    "allowedExistingLeaderKeywords": [
-      "CAPTAIN",
-      "CHAPTER MASTER"
-    ]
-  }
+  ]
 }

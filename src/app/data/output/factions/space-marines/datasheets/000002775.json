@@ -9,13 +9,183 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to one of the above units even if one CAPTAIN, CHAPTER MASTER or LIEUTENANT model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Ancient",
   "slug": "ancient",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to one of the above units even if one CAPTAIN, CHAPTER MASTER or LIEUTENANT model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "CAPTAIN",
+        "CHAPTER MASTER",
+        "LIEUTENANT"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002775:bolt-pistol",
+        "datasheetId": "000002775",
+        "line": 1,
+        "name": "Bolt Pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002775",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt Pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002775:bolt-rifle",
+        "datasheetId": "000002775",
+        "line": 2,
+        "name": "Bolt rifle",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002775",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt rifle",
+            "attributes": [
+              "ASSAULT",
+              "HEAVY"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002775:close-combat-weapon",
+        "datasheetId": "000002775",
+        "line": 3,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002775",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002775:power-weapon",
+        "datasheetId": "000002775",
+        "line": 4,
+        "name": "Power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002775",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002775",
+          "line": 1,
+          "button": "•",
+          "description": "This model's bolt rifle and close combat weapon can be replaced with 1 power weapon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's bolt rifle and close combat weapon can be replaced with 1 power weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "bolt rifle",
+                "count": 1
+              },
+              {
+                "name": "close combat weapon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "power weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,24 +202,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, add 1 to the Objective Control characteristic of models in that unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "oc",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -58,18 +211,7 @@
       "factionId": "",
       "description": "While this model is within range of an objective marker and/or within 6\" of the centre of the battlefield, this model has the Feel No Pain 4+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -133,14 +275,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002775",
-      "line": 1,
-      "button": "•",
-      "description": "This model's bolt rifle and close combat weapon can be replaced with 1 power weapon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002775",
@@ -159,7 +293,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000003698",
       "slug": "inner-circle-companions"
@@ -240,160 +374,5 @@
       "id": "000002780",
       "slug": "fortis-kill-team-2"
     }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002775:bolt-pistol",
-      "datasheetId": "000002775",
-      "line": 1,
-      "name": "Bolt Pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002775",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt Pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002775:bolt-rifle",
-      "datasheetId": "000002775",
-      "line": 2,
-      "name": "Bolt rifle",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002775",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt rifle",
-          "attributes": [
-            "ASSAULT",
-            "HEAVY"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002775:close-combat-weapon",
-      "datasheetId": "000002775",
-      "line": 3,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002775",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002775:power-weapon",
-      "datasheetId": "000002775",
-      "line": 4,
-      "name": "Power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002775",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "leaderConditions": {
-    "allowedExistingLeaderKeywords": [
-      "CAPTAIN",
-      "CHAPTER MASTER",
-      "LIEUTENANT"
-    ]
-  },
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's bolt rifle and close combat weapon can be replaced with 1 power weapon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "bolt rifle",
-            "count": 1
-          },
-          {
-            "name": "close combat weapon",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "power weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

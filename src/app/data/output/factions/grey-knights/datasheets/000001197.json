@@ -9,13 +9,266 @@
   "transport": "This model has a transport capacity of 30 Grey Knights Infantry models. Each Terminator model takes up the space of 2 models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/grey-knights/Grey-Knights-Thunderhawk-Gunship",
   "slug": "grey-knights-thunderhawk-gunship",
   "factionSlug": "grey-knights",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Grey Knights (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-10",
+    "threshold": 10,
+    "description": "While this model has 1-10 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001197:hellstrike-missile-battery",
+        "datasheetId": "000001197",
+        "line": 1,
+        "name": "Hellstrike missile battery",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001197",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hellstrike missile battery",
+            "attributes": [
+              "ANTI-FLY 4+"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001197:lascannon",
+        "datasheetId": "000001197",
+        "line": 2,
+        "name": "Lascannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001197",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lascannon",
+            "attributes": [],
+            "range": 48,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000001197:thunderhawk-heavy-cannon",
+        "datasheetId": "000001197",
+        "line": 3,
+        "name": "Thunderhawk heavy cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001197",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Thunderhawk heavy cannon",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6+6",
+            "bsWs": 3,
+            "s": 10,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001197:turbo-laser-destructor",
+        "datasheetId": "000001197",
+        "line": 4,
+        "name": "Turbo-laser destructor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001197",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Turbo-laser destructor",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 96,
+            "type": "Ranged",
+            "a": "D3+1",
+            "bsWs": 3,
+            "s": 20,
+            "ap": -4,
+            "d": "D6+6"
+          }
+        ]
+      },
+      {
+        "id": "000001197:twin-heavy-bolter",
+        "datasheetId": "000001197",
+        "line": 5,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001197",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001197:armoured-hull",
+        "datasheetId": "000001197",
+        "line": 6,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001197",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001197",
+          "line": 1,
+          "button": "•",
+          "description": "This model's Thunderhawk cluster bombs can be replaced with 1 hellstrike missile battery."
+        },
+        {
+          "datasheetId": "000001197",
+          "line": 2,
+          "button": "•",
+          "description": "This model's Thunderhawk heavy cannon can be replaced with 1 turbo-laser destructor."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's Thunderhawk cluster bombs can be replaced with 1 hellstrike missile battery.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Thunderhawk cluster bombs",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "hellstrike missile battery",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's Thunderhawk heavy cannon can be replaced with 1 turbo-laser destructor.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Thunderhawk heavy cannon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "turbo-laser destructor",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -112,20 +365,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001197",
-      "line": 1,
-      "button": "•",
-      "description": "This model's Thunderhawk cluster bombs can be replaced with 1 hellstrike missile battery."
-    },
-    {
-      "datasheetId": "000001197",
-      "line": 2,
-      "button": "•",
-      "description": "This model's Thunderhawk heavy cannon can be replaced with 1 turbo-laser destructor."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001197",
@@ -144,229 +383,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Grey Knights (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001197:hellstrike-missile-battery",
-      "datasheetId": "000001197",
-      "line": 1,
-      "name": "Hellstrike missile battery",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001197",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hellstrike missile battery",
-          "attributes": [
-            "ANTI-FLY 4+"
-          ],
-          "range": 72,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001197:lascannon",
-      "datasheetId": "000001197",
-      "line": 2,
-      "name": "Lascannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001197",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lascannon",
-          "attributes": [],
-          "range": 48,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000001197:thunderhawk-heavy-cannon",
-      "datasheetId": "000001197",
-      "line": 3,
-      "name": "Thunderhawk heavy cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001197",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Thunderhawk heavy cannon",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6+6",
-          "bsWs": 3,
-          "s": 10,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001197:turbo-laser-destructor",
-      "datasheetId": "000001197",
-      "line": 4,
-      "name": "Turbo-laser destructor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001197",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Turbo-laser destructor",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 96,
-          "type": "Ranged",
-          "a": "D3+1",
-          "bsWs": 3,
-          "s": 20,
-          "ap": -4,
-          "d": "D6+6"
-        }
-      ]
-    },
-    {
-      "id": "000001197:twin-heavy-bolter",
-      "datasheetId": "000001197",
-      "line": 5,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001197",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001197:armoured-hull",
-      "datasheetId": "000001197",
-      "line": 6,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001197",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's Thunderhawk cluster bombs can be replaced with 1 hellstrike missile battery.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Thunderhawk cluster bombs",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "hellstrike missile battery",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model's Thunderhawk heavy cannon can be replaced with 1 turbo-laser destructor.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Thunderhawk heavy cannon",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "turbo-laser destructor",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

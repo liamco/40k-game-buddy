@@ -9,13 +9,101 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-daemons/Dark-Apostle",
   "slug": "dark-apostle",
   "factionSlug": "chaos-daemons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004062:accursed-crozius",
+        "datasheetId": "000004062",
+        "line": 1,
+        "name": "Accursed crozius",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004062",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Accursed crozius",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004062:close-combat-weapon",
+        "datasheetId": "000004062",
+        "line": 1,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004062",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004062:bolt-pistol",
+        "datasheetId": "000004062",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004062",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,16 +120,7 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a <span class=\"kwb\">DARK</span> <span class=\"kwb\">APOSTLE</span> model, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -318,7 +397,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004062",
@@ -344,7 +422,7 @@
       "count": 3
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000004044",
       "slug": "chosen"
@@ -360,88 +438,6 @@
     {
       "id": "000004064",
       "slug": "legionaries"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004062:accursed-crozius",
-      "datasheetId": "000004062",
-      "line": 1,
-      "name": "Accursed crozius",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004062",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Accursed crozius",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004062:close-combat-weapon",
-      "datasheetId": "000004062",
-      "line": 1,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004062",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004062:bolt-pistol",
-      "datasheetId": "000004062",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004062",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
     }
   ]
 }

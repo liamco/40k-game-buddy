@@ -9,13 +9,134 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time it makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/drukhari/Ravager",
   "slug": "ravager",
   "factionSlug": "drukhari",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Drukhari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time it makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000665:dark-lance",
+        "datasheetId": "000000665",
+        "line": 1,
+        "name": "Dark lance",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000665",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Dark lance",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+2"
+          }
+        ]
+      },
+      {
+        "id": "000000665:disintegrator-cannon",
+        "datasheetId": "000000665",
+        "line": 2,
+        "name": "Disintegrator cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000665",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Disintegrator cannon",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000665:bladevanes",
+        "datasheetId": "000000665",
+        "line": 3,
+        "name": "Bladevanes",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000665",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bladevanes",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000665",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of this model's dark lances can each be replaced with 1 disintegrator cannon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of this model's dark lances can each be replaced with 1 disintegrator cannon.",
+          "wargearParsed": false,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,16 +158,7 @@
       "factionId": "",
       "description": "In your Shooting phase, when you select this model to shoot, you can spend 1 Pain token to Empower this model. While Empowered, after this model has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -113,14 +225,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000665",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of this model's dark lances can each be replaced with 1 disintegrator cannon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000665",
@@ -139,103 +243,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Drukhari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000665:dark-lance",
-      "datasheetId": "000000665",
-      "line": 1,
-      "name": "Dark lance",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000665",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Dark lance",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+2"
-        }
-      ]
-    },
-    {
-      "id": "000000665:disintegrator-cannon",
-      "datasheetId": "000000665",
-      "line": 2,
-      "name": "Disintegrator cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000665",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Disintegrator cannon",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000665:bladevanes",
-      "datasheetId": "000000665",
-      "line": 3,
-      "name": "Bladevanes",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000665",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bladevanes",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "Any number of this model's dark lances can each be replaced with 1 disintegrator cannon.",
-      "wargearParsed": false,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "unknown",
-        "removes": [],
-        "adds": [],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": false
+  "leadsUnits": []
 }

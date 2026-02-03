@@ -9,13 +9,189 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Land-Speeder-Vengeance",
   "slug": "land-speeder-vengeance",
   "factionSlug": "space-marines",
   "supplementKey": "dark-angels",
+  "supplementSlug": "dark-angels",
+  "supplementName": "Dark Angels",
+  "supplementLabel": "Dark Angels",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000242:assault-cannon",
+        "datasheetId": "000000242",
+        "line": 1,
+        "name": "Assault cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000242",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Assault cannon",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000242:heavy-bolter",
+        "datasheetId": "000000242",
+        "line": 2,
+        "name": "Heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000242",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000242:plasma-storm-battery",
+        "datasheetId": "000000242",
+        "line": 3,
+        "name": "Plasma storm battery",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000242",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma storm battery - standard",
+            "attributes": [
+              "BLAST",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+1",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          },
+          {
+            "datasheetId": "000000242",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma storm battery - supercharge",
+            "attributes": [
+              "BLAST",
+              "HAZARDOUS",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+1",
+            "bsWs": 3,
+            "s": 9,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000242:close-combat-weapon",
+        "datasheetId": "000000242",
+        "line": 5,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000242",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000242",
+          "line": 1,
+          "button": "•",
+          "description": "This model's heavy bolter can be replaced with 1 assault cannon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's heavy bolter can be replaced with 1 assault cannon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "heavy bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "assault cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,74 +209,7 @@
       "factionId": "",
       "description": "Once per turn, in your opponent's Shooting phase, when a friendly <b>Adeptus Astartes</b> unit within 6\" of this model is destroyed, this model can use this ability (it cannot use this ability when it is itself destroyed). If it does, after the attacking unit has finished making its attacks, this model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "SHOOT AFTER BEING DESTROYED"
-          ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isDestroyed",
-              "operator": "notEquals",
-              "value": true
-            },
-            {
-              "entity": "opposingUnit",
-              "state": "isDestroyed",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "range",
-              "operator": "lessThanOrEqualTo",
-              "value": 6
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "autoSuccess",
-          "attribute": "h",
-          "value": true,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isDestroyed",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "range",
-          "value": "as if it were your Shooting phase",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isDestroyed",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "CAN ONLY TARGET DESTROYING UNIT"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -164,14 +273,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000242",
-      "line": 1,
-      "button": "•",
-      "description": "This model's heavy bolter can be replaced with 1 assault cannon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000242",
@@ -190,170 +291,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000242:assault-cannon",
-      "datasheetId": "000000242",
-      "line": 1,
-      "name": "Assault cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000242",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Assault cannon",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000242:heavy-bolter",
-      "datasheetId": "000000242",
-      "line": 2,
-      "name": "Heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000242",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000242:plasma-storm-battery",
-      "datasheetId": "000000242",
-      "line": 3,
-      "name": "Plasma storm battery",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000242",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma storm battery - standard",
-          "attributes": [
-            "BLAST",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+1",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000000242",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma storm battery - supercharge",
-          "attributes": [
-            "BLAST",
-            "HAZARDOUS",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+1",
-          "bsWs": 3,
-          "s": 9,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000242:close-combat-weapon",
-      "datasheetId": "000000242",
-      "line": 5,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000242",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's heavy bolter can be replaced with 1 assault cannon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "heavy bolter",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "assault cannon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

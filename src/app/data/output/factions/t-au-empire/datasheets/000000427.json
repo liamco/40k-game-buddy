@@ -9,13 +9,191 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Vespid-Stingwings",
   "slug": "vespid-stingwings",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000427:neutron-blaster",
+        "datasheetId": "000000427",
+        "line": 1,
+        "name": "Neutron blaster",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000427",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Neutron blaster",
+            "attributes": [
+              "ASSAULT"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000427:neutron-grenade-launcher",
+        "datasheetId": "000000427",
+        "line": 2,
+        "name": "Neutron grenade launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000427",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Neutron grenade launcher",
+            "attributes": [
+              "ANTI-INFANTRY 3+",
+              "BLAST"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 4,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000427:neutron-rail-rifle",
+        "datasheetId": "000000427",
+        "line": 3,
+        "name": "Neutron rail rifle",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000427",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Neutron rail rifle",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 30,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -4,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000427:t-au-flamer",
+        "datasheetId": "000000427",
+        "line": 4,
+        "name": "T'au flamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000427",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "T'au flamer",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000427:stingwing-claws",
+        "datasheetId": "000000427",
+        "line": 5,
+        "name": "Stingwing claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000427",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Stingwing claws",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000427",
+          "line": 1,
+          "button": "•",
+          "description": "If this unit contains 10 models:<ul><li>The Vespid Strain Leader can be equipped with 1 Oversight Drone.</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 T'au flamer</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron grenade launcher</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron rail rifle.</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "If this unit contains 10 models:<ul><li>The Vespid Strain Leader can be equipped with 1 Oversight Drone.</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 T'au flamer</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron grenade launcher</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron rail rifle.</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "if-unit-size",
+            "unitSizeThreshold": 10
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Oversight Drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -83,14 +261,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000427",
-      "line": 1,
-      "button": "•",
-      "description": "If this unit contains 10 models:<ul><li>The Vespid Strain Leader can be equipped with 1 Oversight Drone.</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 T'au flamer</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron grenade launcher</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron rail rifle.</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000427",
@@ -123,172 +293,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000427:neutron-blaster",
-      "datasheetId": "000000427",
-      "line": 1,
-      "name": "Neutron blaster",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000427",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Neutron blaster",
-          "attributes": [
-            "ASSAULT"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000427:neutron-grenade-launcher",
-      "datasheetId": "000000427",
-      "line": 2,
-      "name": "Neutron grenade launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000427",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Neutron grenade launcher",
-          "attributes": [
-            "ANTI-INFANTRY 3+",
-            "BLAST"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 4,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000427:neutron-rail-rifle",
-      "datasheetId": "000000427",
-      "line": 3,
-      "name": "Neutron rail rifle",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000427",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Neutron rail rifle",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 30,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -4,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000427:t-au-flamer",
-      "datasheetId": "000000427",
-      "line": 4,
-      "name": "T'au flamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000427",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "T'au flamer",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000427:stingwing-claws",
-      "datasheetId": "000000427",
-      "line": 5,
-      "name": "Stingwing claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000427",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Stingwing claws",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "If this unit contains 10 models:<ul><li>The Vespid Strain Leader can be equipped with 1 Oversight Drone.</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 T'au flamer</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron grenade launcher</li><li>1 Vespid Stingwing can replace its neutron blaster with 1 neutron rail rifle.</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "if-unit-size",
-        "unitSizeThreshold": 10
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Oversight Drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

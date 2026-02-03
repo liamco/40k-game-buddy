@@ -9,13 +9,162 @@
   "transport": "This model has a transport capacity of 12 Adeptus Custodes Infantry models. This model can also transport 1 Venerable Contemptor Dreadnought, 1 Contemptor-Achillus Dreadnought or 1 Contemptor Galatus-Dreadnought; while doing so, its transport capacity is reduced to 6 <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> <span class=\"kwb\">INFANTRY</span> models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-7",
-  "damagedDescription": "While this model has 1-7 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-custodes/Orion-Assault-Dropship",
   "slug": "orion-assault-dropship",
   "factionSlug": "adeptus-custodes",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-7",
+    "threshold": 7,
+    "description": "While this model has 1-7 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001564:arachnus-heavy-blaze-cannon",
+        "datasheetId": "000001564",
+        "line": 1,
+        "name": "Arachnus heavy blaze cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001564",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Arachnus heavy blaze cannon",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 2,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000001564:spiculus-heavy-bolt-launcher",
+        "datasheetId": "000001564",
+        "line": 2,
+        "name": "Spiculus heavy bolt launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001564",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Spiculus heavy bolt launcher",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+6",
+            "bsWs": 2,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001564:twin-lastrum-bolt-cannon",
+        "datasheetId": "000001564",
+        "line": 3,
+        "name": "Twin lastrum bolt cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001564",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin lastrum bolt cannon",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001564:armoured-hull",
+        "datasheetId": "000001564",
+        "line": 4,
+        "name": "Armoured hull",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001564",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured hull",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 9,
+            "bsWs": 4,
+            "s": 9,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001564",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -101,14 +250,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001564",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001564",
@@ -127,131 +268,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001564:arachnus-heavy-blaze-cannon",
-      "datasheetId": "000001564",
-      "line": 1,
-      "name": "Arachnus heavy blaze cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001564",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Arachnus heavy blaze cannon",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 2,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000001564:spiculus-heavy-bolt-launcher",
-      "datasheetId": "000001564",
-      "line": 2,
-      "name": "Spiculus heavy bolt launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001564",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Spiculus heavy bolt launcher",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+6",
-          "bsWs": 2,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001564:twin-lastrum-bolt-cannon",
-      "datasheetId": "000001564",
-      "line": 3,
-      "name": "Twin lastrum bolt cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001564",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin lastrum bolt cannon",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001564:armoured-hull",
-      "datasheetId": "000001564",
-      "line": 4,
-      "name": "Armoured hull",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001564",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured hull",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 9,
-          "bsWs": 4,
-          "s": 9,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "None",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "unknown"
-      },
-      "action": {
-        "type": "unknown",
-        "removes": [],
-        "adds": [],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

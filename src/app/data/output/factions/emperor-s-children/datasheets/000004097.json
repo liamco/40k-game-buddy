@@ -9,13 +9,221 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-6",
-  "damagedDescription": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/emperor-s-children/Keeper-of-Secrets",
   "slug": "keeper-of-secrets-2",
   "factionSlug": "emperor-s-children",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Emperor's Children",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-6",
+    "threshold": 6,
+    "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004097:living-whip",
+        "datasheetId": "000004097",
+        "line": 1,
+        "name": "Living whip",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004097",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Living whip",
+            "attributes": [
+              "ASSAULT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004097:phantasmagoria",
+        "datasheetId": "000004097",
+        "line": 2,
+        "name": "Phantasmagoria",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004097",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Phantasmagoria - witchfire",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000004097",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Phantasmagoria - focused witchfire",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "HAZARDOUS",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 9,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004097:ritual-knife",
+        "datasheetId": "000004097",
+        "line": 4,
+        "name": "Ritual knife",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004097",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ritual knife",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004097:snapping-claws",
+        "datasheetId": "000004097",
+        "line": 5,
+        "name": "Snapping claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004097",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Snapping claws",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000004097:witstealer-sword",
+        "datasheetId": "000004097",
+        "line": 6,
+        "name": "Witstealer sword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004097",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Witstealer sword",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000004097",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>living whip</li><li>ritual knife</li><li>shining aegis</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>living whip</li><li>ritual knife</li><li>shining aegis</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "ul><li>living whip</li><li>ritual knife</li><li>shining aegis</li></ul>",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -46,16 +254,7 @@
       "factionId": "",
       "description": "Each time an attack targets this model, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -146,14 +345,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000004097",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>living whip</li><li>ritual knife</li><li>shining aegis</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004097",
@@ -172,190 +363,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Emperor's Children",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004097:living-whip",
-      "datasheetId": "000004097",
-      "line": 1,
-      "name": "Living whip",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004097",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Living whip",
-          "attributes": [
-            "ASSAULT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004097:phantasmagoria",
-      "datasheetId": "000004097",
-      "line": 2,
-      "name": "Phantasmagoria",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004097",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Phantasmagoria - witchfire",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000004097",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Phantasmagoria - focused witchfire",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "HAZARDOUS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 9,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004097:ritual-knife",
-      "datasheetId": "000004097",
-      "line": 4,
-      "name": "Ritual knife",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004097",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ritual knife",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004097:snapping-claws",
-      "datasheetId": "000004097",
-      "line": 5,
-      "name": "Snapping claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004097",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Snapping claws",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000004097:witstealer-sword",
-      "datasheetId": "000004097",
-      "line": 6,
-      "name": "Witstealer sword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004097",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Witstealer sword",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with one of the following:<ul><li>living whip</li><li>ritual knife</li><li>shining aegis</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "ul><li>living whip</li><li>ritual knife</li><li>shining aegis</li></ul>",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

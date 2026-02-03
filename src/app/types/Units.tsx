@@ -1,7 +1,13 @@
 import { Model } from "./Models";
-import { DamagedMechanic } from "./States";
 import { Weapon } from "./Weapons";
 import type { Mechanic } from "#game-engine/types/Mechanic";
+
+// Import WargearOptionDef from parser module for use in this file
+import type { WargearOptionDef as ParsedWargearOptionDef, TargetingType, ActionType, TargetingDef, ActionDef, ConstraintsDef, WeaponRef, WeaponChoice } from "../modules/Lists/ViewList/components/UnitDetailsView/WargearTab/parser/types";
+
+// Re-export for external use
+export type { TargetingType, ActionType, TargetingDef, ActionDef, ConstraintsDef, WeaponRef, WeaponChoice };
+export type WargearOptionDef = ParsedWargearOptionDef;
 
 export type AbilityType = "Core" | "Faction" | "Datasheet";
 
@@ -14,6 +20,69 @@ export interface Ability {
     description?: string;
     parameter?: string;
     mechanics?: Mechanic[];
+}
+
+// Damaged profile mechanic (parsed from damagedDescription)
+export interface DamagedMechanic {
+    entity: string; // e.g., "thisModel"
+    effect: string; // e.g., "rollPenalty", "statPenalty", "statBonus"
+    attribute: string; // e.g., "h" (hit), "oc", "a" (attacks)
+    value: number;
+    conditions?: {
+        weapon?: string;
+        operator?: string;
+        value?: string;
+    }[];
+}
+
+// Consolidated damaged profile data
+export interface DamagedProfile {
+    range: string; // Original text like "1-4"
+    threshold: number; // Upper bound (e.g., 4)
+    description: string; // Text description of damaged effects
+    mechanics: DamagedMechanic[]; // Parsed mechanics
+}
+
+// Leader attachment conditions extracted from leaderFooter text
+export interface LeaderConditions {
+    allowedExistingLeaderKeywords?: string[]; // Can attach if existing leader has one of these keywords
+    allowsAnyExistingLeader?: boolean; // Can attach alongside any existing leader
+    equipmentRequirements?: {
+        // Equipment restrictions for attaching to specific units
+        targetUnitKeywords: string[];
+        requiredEquipment: string;
+    }[];
+    maxOfThisType?: number; // Maximum count of this leader type per unit
+    mustAttach?: boolean; // Leader must be attached (cannot be standalone)
+}
+
+// Consolidated leader data
+export interface LeaderData {
+    description: string; // HTML description of leader ability (from leaderHead)
+    footer: string; // HTML footer text with attachment rules
+    conditions: LeaderConditions | null; // Parsed conditions
+    attachableUnits: string[]; // Array of unit names this can lead
+}
+
+// Raw wargear option from source data
+export interface RawWargearOption {
+    datasheetId: string;
+    line: number;
+    button: string;
+    description: string;
+}
+
+// Wargear options container (within consolidated wargear object)
+export interface WargearOptionsContainer {
+    raw: RawWargearOption[]; // Raw option text from source data
+    parsed: WargearOptionDef[]; // Parsed option definitions
+    allParsed: boolean; // True if all options were successfully parsed
+}
+
+// Consolidated wargear data
+export interface WargearData {
+    weapons: Weapon[]; // Available weapon profiles for this unit
+    options: WargearOptionsContainer; // Wargear customization options
 }
 
 export interface Datasheet {
@@ -31,20 +100,26 @@ export interface Datasheet {
     factionAbilityIds?: string[];
     keywords?: any[];
     models?: Model[];
-    options?: any[];
-    availableWargear: Weapon[];
     unitComposition?: any[];
     modelCosts?: number;
     path: string;
     isForgeWorld?: boolean;
     isLegends?: boolean;
-    leaderConditions?: LeaderCondition; // Conditions for multi-leader attachment
-    damagedW?: string; // Wound range for damaged profile (e.g., "1-4")
-    damagedDescription?: string; // Text description of damaged effects
-    damagedThreshold?: number; // Upper bound of damagedW (e.g., 4)
-    damagedMechanics?: DamagedMechanic[]; // Parsed mechanics for damaged profile
     supplementSlug?: string; // e.g., "codex", "black-templars" - used to filter by detachment supplement
+
+    // Consolidated properties
+    damaged?: DamagedProfile | null; // Consolidated damaged profile data (null if no damaged profile)
+    leader?: LeaderData | null; // Consolidated leader data (null if not a leader)
+    wargear?: WargearData; // Consolidated wargear (weapons + options)
+    leadsUnits?: DatasheetReference[]; // Units this character can lead (attach to as a leader)
+
     [key: string]: any; // Allow for additional properties
+}
+
+// Reference to a datasheet (used in leadsUnits array)
+export interface DatasheetReference {
+    id: string; // Datasheet ID
+    slug: string; // Datasheet slug
 }
 
 // Reference to a leader or unit (used in leadBy and leading)
@@ -52,17 +127,4 @@ export interface LeaderReference {
     listItemId: string; // Unique list item ID - stable even when names change
     id: string; // Datasheet ID
     name: string; // Display name (may change if duplicates are added)
-}
-
-// Leader attachment conditions extracted from leaderFooter text
-export interface LeaderCondition {
-    allowedExistingLeaderKeywords?: string[]; // Can attach if existing leader has one of these keywords
-    allowsAnyExistingLeader?: boolean; // Can attach alongside any existing leader
-    equipmentRequirements?: {
-        // Equipment restrictions for attaching to specific units
-        targetUnitKeywords: string[];
-        requiredEquipment: string;
-    }[];
-    maxOfThisType?: number; // Maximum count of this leader type per unit
-    mustAttach?: boolean; // Leader must be attached (cannot be standalone)
 }

@@ -9,13 +9,292 @@
   "transport": "This model has a transport capacity of 16 Adeptus Astartes Infantry models. Each Jump Pack, Wulfen, Gravis or Terminator model takes up the space of 2 models and each Centurion model takes up the space of 3 models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Land-Raider-Crusader",
   "slug": "land-raider-crusader-2",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000066:hunter-killer-missile",
+        "datasheetId": "000000066",
+        "line": 1,
+        "name": "Hunter-killer missile",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000066",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hunter-killer missile",
+            "attributes": [
+              "ONE SHOT"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 14,
+            "ap": -3,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000066:hurricane-bolter",
+        "datasheetId": "000000066",
+        "line": 2,
+        "name": "Hurricane bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000066",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hurricane bolter",
+            "attributes": [
+              "RAPID FIRE 6",
+              "TWIN-LINKED"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000066:multi-melta",
+        "datasheetId": "000000066",
+        "line": 3,
+        "name": "Multi-melta",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000066",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Multi-melta",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000066:storm-bolter",
+        "datasheetId": "000000066",
+        "line": 4,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000066",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000066:twin-assault-cannon",
+        "datasheetId": "000000066",
+        "line": 5,
+        "name": "Twin assault cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000066",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin assault cannon",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "TWIN-LINKED"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000066:armoured-tracks",
+        "datasheetId": "000000066",
+        "line": 6,
+        "name": "Armoured tracks",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000066",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured tracks",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 4,
+            "s": 8,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000066",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 hunter-killer missile."
+        },
+        {
+          "datasheetId": "000000066",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with 1 multi-melta."
+        },
+        {
+          "datasheetId": "000000066",
+          "line": 3,
+          "button": "•",
+          "description": "This model can be equipped with 1 storm bolter."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 hunter-killer missile.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "hunter-killer missile",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with 1 multi-melta.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "multi-melta",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "This model can be equipped with 1 storm bolter.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "storm bolter",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,26 +312,7 @@
       "factionId": "",
       "description": "Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "DECLARE CHARGE"
-          ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": "m",
-              "operator": "greaterThan",
-              "value": 0
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "name": "One Shot",
@@ -132,26 +392,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000066",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 hunter-killer missile."
-    },
-    {
-      "datasheetId": "000000066",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with 1 multi-melta."
-    },
-    {
-      "datasheetId": "000000066",
-      "line": 3,
-      "button": "•",
-      "description": "This model can be equipped with 1 storm bolter."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000066",
@@ -170,249 +410,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000066:hunter-killer-missile",
-      "datasheetId": "000000066",
-      "line": 1,
-      "name": "Hunter-killer missile",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000066",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hunter-killer missile",
-          "attributes": [
-            "ONE SHOT"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 14,
-          "ap": -3,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000066:hurricane-bolter",
-      "datasheetId": "000000066",
-      "line": 2,
-      "name": "Hurricane bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000066",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hurricane bolter",
-          "attributes": [
-            "RAPID FIRE 6",
-            "TWIN-LINKED"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000066:multi-melta",
-      "datasheetId": "000000066",
-      "line": 3,
-      "name": "Multi-melta",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000066",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Multi-melta",
-          "attributes": [
-            "MELTA 2"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000066:storm-bolter",
-      "datasheetId": "000000066",
-      "line": 4,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000066",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000066:twin-assault-cannon",
-      "datasheetId": "000000066",
-      "line": 5,
-      "name": "Twin assault cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000066",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin assault cannon",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "TWIN-LINKED"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000066:armoured-tracks",
-      "datasheetId": "000000066",
-      "line": 6,
-      "name": "Armoured tracks",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000066",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured tracks",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 4,
-          "s": 8,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with 1 hunter-killer missile.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "hunter-killer missile",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model can be equipped with 1 multi-melta.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "multi-melta",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "This model can be equipped with 1 storm bolter.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "storm bolter",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

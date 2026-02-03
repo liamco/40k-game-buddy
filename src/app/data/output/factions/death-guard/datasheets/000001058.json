@@ -9,13 +9,105 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to a <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">MARINES</span> or <span class=\"kwb\">POXWALKERS</span> unit, even if one other Leader unit has already been attached to it (you cannot attach more than one of the same Leader to the same unit). If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Noxious-Blightbringer",
   "slug": "noxious-blightbringer",
   "factionSlug": "death-guard",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to a <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">MARINES</span> or <span class=\"kwb\">POXWALKERS</span> unit, even if one other Leader unit has already been attached to it (you cannot attach more than one of the same Leader to the same unit). If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowsAnyExistingLeader": true
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001058:plasma-pistol",
+        "datasheetId": "000001058",
+        "line": 1,
+        "name": "Plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001058",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma pistol - standard",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000001058",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma pistol - supercharge",
+            "attributes": [
+              "PISTOL",
+              "HAZARDOUS"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001058:cursed-plague-bell",
+        "datasheetId": "000001058",
+        "line": 3,
+        "name": "Cursed plague bell",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001058",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Cursed plague bell",
+            "attributes": [
+              "ANTI-PSYKER 2+",
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -105,7 +197,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001058",
@@ -124,7 +215,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001044",
       "slug": "plague-marines-2"
@@ -132,85 +223,6 @@
     {
       "id": "000001056",
       "slug": "poxwalkers"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001058:plasma-pistol",
-      "datasheetId": "000001058",
-      "line": 1,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001058",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol - standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000001058",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol - supercharge",
-          "attributes": [
-            "PISTOL",
-            "HAZARDOUS"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001058:cursed-plague-bell",
-      "datasheetId": "000001058",
-      "line": 3,
-      "name": "Cursed plague bell",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001058",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Cursed plague bell",
-          "attributes": [
-            "ANTI-PSYKER 2+",
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 2
-        }
-      ]
     }
   ]
 }

@@ -9,13 +9,136 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Ethereal",
   "slug": "ethereal",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000404:honour-stave",
+        "datasheetId": "000000404",
+        "line": 1,
+        "name": "Honour stave",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000404",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Honour stave",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000404",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 hover drone."
+        },
+        {
+          "datasheetId": "000000404",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with up to two of the following, and can take duplicates:<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 hover drone.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "hover drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with up to two of the following, and can take duplicates:<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "gun drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "marker drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "shield drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {
+            "allowDuplicates": true,
+            "maxSelections": 2
+          }
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -41,18 +164,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 5
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -107,20 +219,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000404",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 hover drone."
-    },
-    {
-      "datasheetId": "000000404",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with up to two of the following, and can take duplicates:<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000404",
@@ -139,7 +237,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000411",
       "slug": "strike-team"
@@ -148,111 +246,5 @@
       "id": "000000412",
       "slug": "breacher-team"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000404:honour-stave",
-      "datasheetId": "000000404",
-      "line": 1,
-      "name": "Honour stave",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000404",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Honour stave",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with 1 hover drone.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "hover drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model can be equipped with up to two of the following, and can take duplicates:<ul><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "gun drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "marker drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "shield drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {
-        "allowDuplicates": true,
-        "maxSelections": 2
-      }
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

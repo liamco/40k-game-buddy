@@ -9,13 +9,204 @@
   "transport": "This model has a transport capacity of 12 Thousand Sons Infantry models (excluding TERMiNATOR models).",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/thousand-sons/Chaos-Rhino",
   "slug": "chaos-rhino-4",
   "factionSlug": "thousand-sons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001022:havoc-launcher",
+        "datasheetId": "000001022",
+        "line": 1,
+        "name": "Havoc launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001022",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Havoc launcher",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001022:inferno-combi-bolter",
+        "datasheetId": "000001022",
+        "line": 2,
+        "name": "Inferno combi-bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001022",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Inferno combi-bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001022:inferno-combi-weapon",
+        "datasheetId": "000001022",
+        "line": 3,
+        "name": "Inferno combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001022",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Inferno combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001022:armoured-tracks",
+        "datasheetId": "000001022",
+        "line": 4,
+        "name": "Armoured tracks",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001022",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured tracks",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001022",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 additional inferno combi-bolter</li><li>1 inferno combi-weapon</li></ul>"
+        },
+        {
+          "datasheetId": "000001022",
+          "line": 2,
+          "button": "•",
+          "description": "This model can be equipped with 1 havoc launcher or can replace 1 inferno combi-bolter with 1 havoc launcher."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 additional inferno combi-bolter</li><li>1 inferno combi-weapon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "additional inferno combi-bolter",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "inferno combi-weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model can be equipped with 1 havoc launcher or can replace 1 inferno combi-bolter with 1 havoc launcher.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "havoc launcher or can replace 1 inferno combi-bolter with 1 havoc launcher",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -34,22 +225,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks. Until the end of the phase, each time a friendly model that disembarked from this <span class=\"kwb\">TRANSPORT</span> this turn makes a Psychic Attack that targets that enemy unit, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -125,20 +301,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001022",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 additional inferno combi-bolter</li><li>1 inferno combi-weapon</li></ul>"
-    },
-    {
-      "datasheetId": "000001022",
-      "line": 2,
-      "button": "•",
-      "description": "This model can be equipped with 1 havoc launcher or can replace 1 inferno combi-bolter with 1 havoc launcher."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001022",
@@ -157,179 +319,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001022:havoc-launcher",
-      "datasheetId": "000001022",
-      "line": 1,
-      "name": "Havoc launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001022",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Havoc launcher",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001022:inferno-combi-bolter",
-      "datasheetId": "000001022",
-      "line": 2,
-      "name": "Inferno combi-bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001022",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Inferno combi-bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001022:inferno-combi-weapon",
-      "datasheetId": "000001022",
-      "line": 3,
-      "name": "Inferno combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001022",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Inferno combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001022:armoured-tracks",
-      "datasheetId": "000001022",
-      "line": 4,
-      "name": "Armoured tracks",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001022",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured tracks",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with one of the following:<ul><li>1 additional inferno combi-bolter</li><li>1 inferno combi-weapon</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "additional inferno combi-bolter",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "inferno combi-weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model can be equipped with 1 havoc launcher or can replace 1 inferno combi-bolter with 1 havoc launcher.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "havoc launcher or can replace 1 inferno combi-bolter with 1 havoc launcher",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

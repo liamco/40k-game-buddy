@@ -9,13 +9,79 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Pyrovores",
   "slug": "pyrovores",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000477:flamespurt",
+        "datasheetId": "000000477",
+        "line": 1,
+        "name": "Flamespurt",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000477",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Flamespurt",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT",
+              "TWIN-LINKED"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6+1",
+            "bsWs": "N/A",
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000477:chitin-barbed-limbs",
+        "datasheetId": "000000477",
+        "line": 2,
+        "name": "Chitin-barbed limbs",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000477",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chitin-barbed limbs",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,26 +99,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks. Until the end of the phase, that enemy unit cannot have the Benefit of Cover.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "BENEFIT OF COVER"
-          ],
-          "value": false,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -104,7 +151,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000477",
@@ -137,65 +183,5 @@
       "count": 3
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000477:flamespurt",
-      "datasheetId": "000000477",
-      "line": 1,
-      "name": "Flamespurt",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000477",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Flamespurt",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT",
-            "TWIN-LINKED"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6+1",
-          "bsWs": "N/A",
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000477:chitin-barbed-limbs",
-      "datasheetId": "000000477",
-      "line": 2,
-      "name": "Chitin-barbed limbs",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000477",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chitin-barbed limbs",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

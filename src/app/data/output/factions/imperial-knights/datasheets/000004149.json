@@ -9,13 +9,195 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-9",
-  "damagedDescription": "While this model has 1‑9 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/imperial-knights/Knight-Defender",
   "slug": "knight-defender",
   "factionSlug": "imperial-knights",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Imperial Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-9",
+    "threshold": 9,
+    "description": "While this model has 1‑9 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 5
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004149:conversion-beam-obliterator",
+        "datasheetId": "000004149",
+        "line": 1,
+        "name": "Conversion beam obliterator",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004149",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Conversion beam obliterator",
+            "attributes": [
+              "CONVERSION",
+              "SUSTAINED HITS D3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -2,
+            "d": 4
+          }
+        ]
+      },
+      {
+        "id": "000004149:plasma-executor",
+        "datasheetId": "000004149",
+        "line": 2,
+        "name": "Plasma executor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004149",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma executor - standard",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          },
+          {
+            "datasheetId": "000004149",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma executor - supercharge",
+            "attributes": [
+              "BLAST",
+              "HAZARDOUS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 9,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000004149:phosphor-blaster",
+        "datasheetId": "000004149",
+        "line": 4,
+        "name": "Phosphor blaster",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004149",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Phosphor blaster",
+            "attributes": [
+              "IGNORES COVER",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004149:twin-incendine-combustor",
+        "datasheetId": "000004149",
+        "line": 5,
+        "name": "Twin incendine combustor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004149",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin incendine combustor",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT",
+              "TWIN-LINKED"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000004149:titanic-feet",
+        "datasheetId": "000004149",
+        "line": 6,
+        "name": "Titanic feet",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004149",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Titanic feet",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -46,16 +228,7 @@
       "factionId": "",
       "description": "Each time a ranged attack is allocated to an Imperial Knights model from your army, if that model is not fully visible to every model in the attacking unit because of this Knight Defender model, that model has the Benefit of Cover and a 4+ invulnerable save against that attack.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "name": "Conversion",
@@ -135,7 +308,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000004149",
@@ -154,163 +326,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Imperial Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004149:conversion-beam-obliterator",
-      "datasheetId": "000004149",
-      "line": 1,
-      "name": "Conversion beam obliterator",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004149",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Conversion beam obliterator",
-          "attributes": [
-            "CONVERSION",
-            "SUSTAINED HITS D3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -2,
-          "d": 4
-        }
-      ]
-    },
-    {
-      "id": "000004149:plasma-executor",
-      "datasheetId": "000004149",
-      "line": 2,
-      "name": "Plasma executor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004149",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma executor - standard",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        },
-        {
-          "datasheetId": "000004149",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma executor - supercharge",
-          "attributes": [
-            "BLAST",
-            "HAZARDOUS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 9,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000004149:phosphor-blaster",
-      "datasheetId": "000004149",
-      "line": 4,
-      "name": "Phosphor blaster",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004149",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Phosphor blaster",
-          "attributes": [
-            "IGNORES COVER",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004149:twin-incendine-combustor",
-      "datasheetId": "000004149",
-      "line": 5,
-      "name": "Twin incendine combustor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004149",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin incendine combustor",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT",
-            "TWIN-LINKED"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000004149:titanic-feet",
-      "datasheetId": "000004149",
-      "line": 6,
-      "name": "Titanic feet",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004149",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Titanic feet",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

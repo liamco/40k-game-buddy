@@ -9,13 +9,80 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Biovores",
   "slug": "biovores",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000491:spore-mine-launcher",
+        "datasheetId": "000000491",
+        "line": 1,
+        "name": "Spore Mine launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000491",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Spore Mine launcher",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS",
+              "HEAVY",
+              "INDIRECT FIRE"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000491:chitin-barbed-limbs",
+        "datasheetId": "000000491",
+        "line": 2,
+        "name": "Chitin-barbed limbs",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000491",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Chitin-barbed limbs",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,54 +100,7 @@
       "factionId": "",
       "description": "Once per turn, in your Shooting phase, when selected to shoot, one unit with this ability can use it instead of making any attacks with its ranged weapons. If it does, you can add one new Spore Mines unit to your army and set it up anywhere on the battlefield that is wholly within 48\" of this unit and more than 9\" horizontally away from all enemy units. That <span class=\"kwb\">SPORE</span> <span class=\"kwb\">MINES</span> unit contains 1 model for each model in this unit.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SPAWN SPORE MINES"
-          ],
-          "value": "once per turn"
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 48,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 9,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inEngagementRange",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "addsAbility",
-          "abilities": [
-            "SPORE MINES"
-          ],
-          "value": "1 model for each model in this unit"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -126,7 +146,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000491",
@@ -159,66 +178,5 @@
       "count": 3
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000491:spore-mine-launcher",
-      "datasheetId": "000000491",
-      "line": 1,
-      "name": "Spore Mine launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000491",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Spore Mine launcher",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS",
-            "HEAVY",
-            "INDIRECT FIRE"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000491:chitin-barbed-limbs",
-      "datasheetId": "000000491",
-      "line": 2,
-      "name": "Chitin-barbed limbs",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000491",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Chitin-barbed limbs",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

@@ -9,13 +9,200 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, subtract 3 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/imperial-knights/Armiger-Warglaive",
   "slug": "armiger-warglaive",
   "factionSlug": "imperial-knights",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Imperial Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, subtract 3 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 3
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001482:meltagun",
+        "datasheetId": "000001482",
+        "line": 1,
+        "name": "Meltagun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001482",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Meltagun",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000001482:questoris-heavy-stubber",
+        "datasheetId": "000001482",
+        "line": 2,
+        "name": "Questoris heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001482",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Questoris heavy stubber",
+            "attributes": [
+              "RAPID FIRE 3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001482:thermal-spear",
+        "datasheetId": "000001482",
+        "line": 3,
+        "name": "Thermal spear",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001482",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Thermal spear",
+            "attributes": [
+              "MELTA 4"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000001482:reaper-chain-cleaver",
+        "datasheetId": "000001482",
+        "line": 4,
+        "name": "Reaper chain-cleaver",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001482",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Reaper chain-cleaver - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          },
+          {
+            "datasheetId": "000001482",
+            "line": 5,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Reaper chain-cleaver - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001482",
+          "line": 1,
+          "button": "•",
+          "description": "This model's Questoris heavy stubber can be replaced with 1 meltagun."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's Questoris heavy stubber can be replaced with 1 meltagun.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Questoris heavy stubber",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "meltagun",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -91,14 +278,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001482",
-      "line": 1,
-      "button": "•",
-      "description": "This model's Questoris heavy stubber can be replaced with 1 meltagun."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001482",
@@ -117,163 +296,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Imperial Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001482:meltagun",
-      "datasheetId": "000001482",
-      "line": 1,
-      "name": "Meltagun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001482",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Meltagun",
-          "attributes": [
-            "MELTA 2"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000001482:questoris-heavy-stubber",
-      "datasheetId": "000001482",
-      "line": 2,
-      "name": "Questoris heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001482",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Questoris heavy stubber",
-          "attributes": [
-            "RAPID FIRE 3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001482:thermal-spear",
-      "datasheetId": "000001482",
-      "line": 3,
-      "name": "Thermal spear",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001482",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Thermal spear",
-          "attributes": [
-            "MELTA 4"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000001482:reaper-chain-cleaver",
-      "datasheetId": "000001482",
-      "line": 4,
-      "name": "Reaper chain-cleaver",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001482",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Reaper chain-cleaver - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        },
-        {
-          "datasheetId": "000001482",
-          "line": 5,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Reaper chain-cleaver - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's Questoris heavy stubber can be replaced with 1 meltagun.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Questoris heavy stubber",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "meltagun",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

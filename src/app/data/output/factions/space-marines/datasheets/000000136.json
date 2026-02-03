@@ -9,13 +9,296 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Brutalis-Dreadnought-UL",
   "slug": "brutalis-dreadnought",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000136:brutalis-bolt-rifles",
+        "datasheetId": "000000136",
+        "line": 1,
+        "name": "Brutalis bolt rifles",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000136",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Brutalis bolt rifles",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000136:twin-heavy-bolter",
+        "datasheetId": "000000136",
+        "line": 2,
+        "name": "Twin heavy bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000136",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin heavy bolter",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000136:twin-icarus-ironhail-heavy-stubber",
+        "datasheetId": "000000136",
+        "line": 3,
+        "name": "Twin Icarus ironhail heavy stubber",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000136",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin Icarus ironhail heavy stubber",
+            "attributes": [
+              "ANTI-FLY 4+",
+              "RAPID FIRE 3",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000136:twin-multi-melta",
+        "datasheetId": "000000136",
+        "line": 4,
+        "name": "Twin multi-melta",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000136",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin multi-melta",
+            "attributes": [
+              "MELTA 2",
+              "TWIN-LINKED"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000136:brutalis-fists",
+        "datasheetId": "000000136",
+        "line": 5,
+        "name": "Brutalis fists",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000136",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Brutalis fists",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000136:brutalis-talons",
+        "datasheetId": "000000136",
+        "line": 6,
+        "name": "Brutalis talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000136",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Brutalis talons - strike",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -2,
+            "d": 3
+          },
+          {
+            "datasheetId": "000000136",
+            "line": 7,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Brutalis talons - sweep",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 10,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000136",
+          "line": 1,
+          "button": "•",
+          "description": "This model's twin heavy bolter can be replaced with 1 twin multi-melta."
+        },
+        {
+          "datasheetId": "000000136",
+          "line": 2,
+          "button": "•",
+          "description": "This model's Brutalis fists and Brutalis bolt rifles can be replaced with 1 Brutalis talons."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's twin heavy bolter can be replaced with 1 twin multi-melta.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "twin heavy bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "twin multi-melta",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's Brutalis fists and Brutalis bolt rifles can be replaced with 1 Brutalis talons.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Brutalis fists",
+                "count": 1
+              },
+              {
+                "name": "Brutalis bolt rifles",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Brutalis talons",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,92 +316,7 @@
       "factionId": "",
       "description": "Each time this model ends a Charge move, select one enemy unit within Engagement Range of it and roll one D6: on a 2-3, that enemy unit suffers D3 mortal wounds; on a 4-5, that enemy unit suffers 3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "mortalWounds",
-          "value": "D3",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "inEngagementRange",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "chargeMoveEnded",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "value": "D6",
-              "operator": "lessThanOrEqualTo"
-            },
-            {
-              "entity": "thisModel",
-              "value": "D6",
-              "operator": "greaterThanOrEqualTo"
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "mortalWounds",
-          "value": 3,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "inEngagementRange",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "chargeMoveEnded",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "value": "D6",
-              "operator": "lessThanOrEqualTo"
-            },
-            {
-              "entity": "thisModel",
-              "value": "D6",
-              "operator": "greaterThanOrEqualTo"
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "mortalWounds",
-          "value": "D3+3",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "inEngagementRange",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "attribute": "chargeMoveEnded",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisModel",
-              "value": "D6",
-              "operator": "equals"
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -182,20 +380,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000136",
-      "line": 1,
-      "button": "•",
-      "description": "This model's twin heavy bolter can be replaced with 1 twin multi-melta."
-    },
-    {
-      "datasheetId": "000000136",
-      "line": 2,
-      "button": "•",
-      "description": "This model's Brutalis fists and Brutalis bolt rifles can be replaced with 1 Brutalis talons."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000136",
@@ -214,360 +398,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000136:brutalis-bolt-rifles",
-      "datasheetId": "000000136",
-      "line": 1,
-      "name": "Brutalis bolt rifles",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000136",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Brutalis bolt rifles",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000136:twin-heavy-bolter",
-      "datasheetId": "000000136",
-      "line": 2,
-      "name": "Twin heavy bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000136",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin heavy bolter",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000136:twin-icarus-ironhail-heavy-stubber",
-      "datasheetId": "000000136",
-      "line": 3,
-      "name": "Twin Icarus ironhail heavy stubber",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000136",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin Icarus ironhail heavy stubber",
-          "attributes": [
-            "ANTI-FLY 4+",
-            "RAPID FIRE 3",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000136:twin-multi-melta",
-      "datasheetId": "000000136",
-      "line": 4,
-      "name": "Twin multi-melta",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000136",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin multi-melta",
-          "attributes": [
-            "MELTA 2",
-            "TWIN-LINKED"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000136:brutalis-fists",
-      "datasheetId": "000000136",
-      "line": 5,
-      "name": "Brutalis fists",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000136",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Brutalis fists",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000136:brutalis-talons",
-      "datasheetId": "000000136",
-      "line": 6,
-      "name": "Brutalis talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000136",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Brutalis talons - strike",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -2,
-          "d": 3
-        },
-        {
-          "datasheetId": "000000136",
-          "line": 7,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Brutalis talons - sweep",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 10,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.573Z"
-  },
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000000136:twin-icarus-ironhail-heavy-stubber",
-          "name": "Twin Icarus ironhail heavy stubber",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:twin-heavy-bolter",
-          "name": "Twin heavy bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:brutalis-bolt-rifles",
-          "name": "Brutalis bolt rifles",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:brutalis-fists",
-          "name": "Brutalis fists",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000000136:twin-icarus-ironhail-heavy-stubber",
-          "name": "Twin Icarus ironhail heavy stubber",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:twin-heavy-bolter",
-          "name": "Twin heavy bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:brutalis-talons",
-          "name": "Brutalis talons",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000000136:twin-icarus-ironhail-heavy-stubber",
-          "name": "Twin Icarus ironhail heavy stubber",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:brutalis-bolt-rifles",
-          "name": "Brutalis bolt rifles",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:brutalis-fists",
-          "name": "Brutalis fists",
-          "type": "Melee"
-        },
-        {
-          "id": "000000136:twin-multi-melta",
-          "name": "Twin multi-melta",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000000136:twin-icarus-ironhail-heavy-stubber",
-          "name": "Twin Icarus ironhail heavy stubber",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:twin-multi-melta",
-          "name": "Twin multi-melta",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000136:brutalis-talons",
-          "name": "Brutalis talons",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's twin heavy bolter can be replaced with 1 twin multi-melta.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "twin heavy bolter",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "twin multi-melta",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model's Brutalis fists and Brutalis bolt rifles can be replaced with 1 Brutalis talons.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Brutalis fists",
-            "count": 1
-          },
-          {
-            "name": "Brutalis bolt rifles",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Brutalis talons",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

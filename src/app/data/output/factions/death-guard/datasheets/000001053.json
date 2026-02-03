@@ -9,13 +9,70 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Typhus",
   "slug": "typhus",
   "factionSlug": "death-guard",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001053:lakrimae",
+        "datasheetId": "000001053",
+        "line": 1,
+        "name": "Lakrimae",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001053",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Lakrimae - strike",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 9,
+            "ap": -2,
+            "d": 3
+          },
+          {
+            "datasheetId": "000001053",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Lakrimae - sweep",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 12,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,16 +93,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a melee attack targets that unit, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -136,7 +184,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001053",
@@ -155,7 +202,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001371",
       "slug": "deathshroud-terminators"
@@ -167,57 +214,6 @@
     {
       "id": "000001372",
       "slug": "blightlord-terminators"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001053:lakrimae",
-      "datasheetId": "000001053",
-      "line": 1,
-      "name": "Lakrimae",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001053",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Lakrimae - strike",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 9,
-          "ap": -2,
-          "d": 3
-        },
-        {
-          "datasheetId": "000001053",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Lakrimae - sweep",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 12,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
     }
   ]
 }

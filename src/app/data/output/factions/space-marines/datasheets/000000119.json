@@ -9,13 +9,126 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Librarian-In-Phobos-Armour",
   "slug": "librarian-in-phobos-armour",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000119:bolt-pistol",
+        "datasheetId": "000000119",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000119",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000119:smite",
+        "datasheetId": "000000119",
+        "line": 2,
+        "name": "Smite",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000119",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Smite - witchfire",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 5,
+            "ap": -1,
+            "d": "D3"
+          },
+          {
+            "datasheetId": "000000119",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Smite - focused witchfire",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "HAZARDOUS",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 6,
+            "ap": -2,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000000119:force-weapon",
+        "datasheetId": "000000119",
+        "line": 4,
+        "name": "Force weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000119",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Force weapon",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Infiltrators",
@@ -36,18 +149,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -56,18 +158,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Stealth ability and that unit cannot be targeted by ranged attacks unless the attacking model is within 12\".",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "STEALTH"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -137,7 +228,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000119",
@@ -156,7 +246,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001159",
       "slug": "incursor-squad"
@@ -180,113 +270,6 @@
     {
       "id": "000002718",
       "slug": "reiver-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000119:bolt-pistol",
-      "datasheetId": "000000119",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000119",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000119:smite",
-      "datasheetId": "000000119",
-      "line": 2,
-      "name": "Smite",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000119",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Smite - witchfire",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 5,
-          "ap": -1,
-          "d": "D3"
-        },
-        {
-          "datasheetId": "000000119",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Smite - focused witchfire",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "HAZARDOUS",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000000119:force-weapon",
-      "datasheetId": "000000119",
-      "line": 4,
-      "name": "Force weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000119",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Force weapon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

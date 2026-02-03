@@ -7,7 +7,7 @@
  * Note: Parsing now happens at build time via:
  *   npm run parse-wargear-options
  *
- * The parsed data is stored in each datasheet JSON as `parsedWargearOptions`.
+ * The parsed data is stored in each datasheet JSON as `wargear.options.parsed`.
  */
 
 // Types

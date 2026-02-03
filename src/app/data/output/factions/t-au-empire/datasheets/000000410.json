@@ -9,13 +9,77 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Darkstrider",
   "slug": "darkstrider",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000410:shade",
+        "datasheetId": "000000410",
+        "line": 1,
+        "name": "Shade",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000410",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Shade",
+            "attributes": [
+              "ASSAULT"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 5,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000410:close-combat-weapon",
+        "datasheetId": "000000410",
+        "line": 2,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000410",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Infiltrators",
@@ -41,16 +105,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a ranged attack, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -117,7 +172,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000410",
@@ -136,68 +190,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000422",
       "slug": "pathfinder-team"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000410:shade",
-      "datasheetId": "000000410",
-      "line": 1,
-      "name": "Shade",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000410",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Shade",
-          "attributes": [
-            "ASSAULT"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 5,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000410:close-combat-weapon",
-      "datasheetId": "000000410",
-      "line": 2,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000410",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
     }
   ]
 }

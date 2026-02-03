@@ -9,13 +9,187 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-7",
-  "damagedDescription": "While this model has 1-7 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Monolith",
   "slug": "monolith",
   "factionSlug": "necrons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-7",
+    "threshold": 7,
+    "description": "While this model has 1-7 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 4
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000552:death-ray",
+        "datasheetId": "000000552",
+        "line": 1,
+        "name": "Death ray",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000552",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Death ray",
+            "attributes": [
+              "SUSTAINED HITS D3"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -4,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000000552:gauss-flux-arc",
+        "datasheetId": "000000552",
+        "line": 2,
+        "name": "Gauss flux arc",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000552",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gauss flux arc",
+            "attributes": [
+              "LETHAL HITS",
+              "RAPID FIRE 3"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000552:particle-whip",
+        "datasheetId": "000000552",
+        "line": 3,
+        "name": "Particle whip",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000552",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Particle whip",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "3D6",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000552:portal-of-exile",
+        "datasheetId": "000000552",
+        "line": 4,
+        "name": "Portal of exile",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000552",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Portal of exile",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000552",
+          "line": 1,
+          "button": "•",
+          "description": "This model's 4 gauss flux arcs can be replaced with 4 death rays."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's 4 gauss flux arcs can be replaced with 4 death rays.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "gauss flux arcs",
+                "count": 4
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "death rays",
+                    "count": 4
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -95,14 +269,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000552",
-      "line": 1,
-      "button": "•",
-      "description": "This model's 4 gauss flux arcs can be replaced with 4 death rays."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000552",
@@ -121,150 +287,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000552:death-ray",
-      "datasheetId": "000000552",
-      "line": 1,
-      "name": "Death ray",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000552",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Death ray",
-          "attributes": [
-            "SUSTAINED HITS D3"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -4,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000000552:gauss-flux-arc",
-      "datasheetId": "000000552",
-      "line": 2,
-      "name": "Gauss flux arc",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000552",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gauss flux arc",
-          "attributes": [
-            "LETHAL HITS",
-            "RAPID FIRE 3"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000552:particle-whip",
-      "datasheetId": "000000552",
-      "line": 3,
-      "name": "Particle whip",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000552",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Particle whip",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "3D6",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000552:portal-of-exile",
-      "datasheetId": "000000552",
-      "line": 4,
-      "name": "Portal of exile",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000552",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Portal of exile",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's 4 gauss flux arcs can be replaced with 4 death rays.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "gauss flux arcs",
-            "count": 4
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "death rays",
-                "count": 4
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

@@ -9,13 +9,109 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Murderfang",
   "slug": "murderfang",
   "factionSlug": "space-marines",
   "supplementKey": "space-wolves",
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000314:heavy-flamer",
+        "datasheetId": "000000314",
+        "line": 1,
+        "name": "Heavy flamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000314",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy flamer",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000314:storm-bolter",
+        "datasheetId": "000000314",
+        "line": 2,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000314",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000314:murderclaws",
+        "datasheetId": "000000314",
+        "line": 3,
+        "name": "Murderclaws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000314",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Murderclaws",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -42,82 +138,7 @@
       "factionId": "",
       "description": "In the Fight phase, each time an attack targets a friendly Wulfen unit within 6\" of this model, if a model in that unit is destroyed as a result of that attack, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "targetUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isBeingLed",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "targetModel",
-              "state": "isDamaged",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "targetModel",
-              "state": "isBelowStartingStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "w",
-          "value": "D6",
-          "conditions": [
-            {
-              "entity": "targetModel",
-              "state": "isBelowHalfStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "FIGHTING BACK"
-          ],
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "targetModel",
-              "state": "isDamaged",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -126,22 +147,7 @@
       "factionId": "",
       "description": "You can re-roll Advance and Charge rolls made for this model.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "m",
-          "value": "all"
-        },
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "a",
-          "value": "all"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "name": "FORCE OF UNTAMED DESTRUCTION",
@@ -227,7 +233,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000314",
@@ -246,95 +251,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000314:heavy-flamer",
-      "datasheetId": "000000314",
-      "line": 1,
-      "name": "Heavy flamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000314",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy flamer",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000314:storm-bolter",
-      "datasheetId": "000000314",
-      "line": 2,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000314",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000314:murderclaws",
-      "datasheetId": "000000314",
-      "line": 3,
-      "name": "Murderclaws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000314",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Murderclaws",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

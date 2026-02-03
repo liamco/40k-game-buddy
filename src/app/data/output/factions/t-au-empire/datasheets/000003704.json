@@ -9,13 +9,79 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Kroot-Flesh-Shaper",
   "slug": "kroot-flesh-shaper",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000003704:kroot-scattergun",
+        "datasheetId": "000003704",
+        "line": 1,
+        "name": "Kroot scattergun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003704",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Kroot scattergun",
+            "attributes": [
+              "ASSAULT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003704:twin-ritualistic-blades",
+        "datasheetId": "000003704",
+        "line": 2,
+        "name": "Twin ritualistic blades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003704",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin ritualistic blades",
+            "attributes": [
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Infiltrators",
@@ -50,18 +116,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 6+ ability. If that unit destroys one or more enemy units in the Fight phase, until the end of the battle, models in that unit have the Feel No Pain 5+ ability instead.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 6
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -119,7 +174,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000003704",
@@ -138,7 +192,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002588",
       "slug": "kroot-farstalkers"
@@ -146,66 +200,6 @@
     {
       "id": "000000413",
       "slug": "kroot-carnivores"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003704:kroot-scattergun",
-      "datasheetId": "000003704",
-      "line": 1,
-      "name": "Kroot scattergun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003704",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Kroot scattergun",
-          "attributes": [
-            "ASSAULT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003704:twin-ritualistic-blades",
-      "datasheetId": "000003704",
-      "line": 2,
-      "name": "Twin ritualistic blades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003704",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin ritualistic blades",
-          "attributes": [
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
     }
   ]
 }

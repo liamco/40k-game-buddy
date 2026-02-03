@@ -9,13 +9,91 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Mawloc",
   "slug": "mawloc-2",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000494:distensible-jaw",
+        "datasheetId": "000000494",
+        "line": 1,
+        "name": "Distensible jaw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000494",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Distensible jaw",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000494:mawloc-scything-talons",
+        "datasheetId": "000000494",
+        "line": 2,
+        "name": "Mawloc scything talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000494",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mawloc scything talons",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 16,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -32,78 +110,7 @@
       "factionId": "",
       "description": "Each time this model is set up on the battlefield using the Deep Strike ability, roll one D6 for each enemy unit within 12\" of this model: on a 2-4, that unit suffers D3 mortal wounds; on a 5+, that unit suffers 3 mortal wounds and must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "mortalWounds",
-          "value": "D3",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": null,
-              "abilities": [
-                "DEEP STRIKE"
-              ],
-              "state": null,
-              "keywords": null,
-              "operator": "greaterThanOrEqualTo",
-              "value": 2
-            },
-            {
-              "entity": "thisModel",
-              "attribute": null,
-              "abilities": [
-                "DEEP STRIKE"
-              ],
-              "state": null,
-              "keywords": null,
-              "operator": "lessThanOrEqualTo",
-              "value": 4
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "mortalWounds",
-          "value": 3,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": null,
-              "abilities": [
-                "DEEP STRIKE"
-              ],
-              "state": null,
-              "keywords": null,
-              "operator": "greaterThanOrEqualTo",
-              "value": 5
-            }
-          ]
-        },
-        {
-          "entity": "opposingUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "BATTLE SHOCK TEST"
-          ],
-          "value": null,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": null,
-              "abilities": [
-                "DEEP STRIKE"
-              ],
-              "state": null,
-              "keywords": null,
-              "operator": "greaterThanOrEqualTo",
-              "value": 5
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -161,7 +168,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000494",
@@ -180,65 +186,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000494:distensible-jaw",
-      "datasheetId": "000000494",
-      "line": 1,
-      "name": "Distensible jaw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000494",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Distensible jaw",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000494:mawloc-scything-talons",
-      "datasheetId": "000000494",
-      "line": 2,
-      "name": "Mawloc scything talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000494",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mawloc scything talons",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 16,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

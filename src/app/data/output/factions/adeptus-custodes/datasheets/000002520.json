@@ -9,13 +9,186 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-custodes/Knight-centura",
   "slug": "knight-centura",
   "factionSlug": "adeptus-custodes",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adeptus Custodes",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002520:master-crafted-boltgun",
+        "datasheetId": "000002520",
+        "line": 1,
+        "name": "Master-crafted boltgun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002520",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Master-crafted boltgun",
+            "attributes": [
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000002520:witchseeker-flamer",
+        "datasheetId": "000002520",
+        "line": 2,
+        "name": "Witchseeker flamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002520",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Witchseeker flamer",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002520:close-combat-weapon",
+        "datasheetId": "000002520",
+        "line": 3,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002520",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 2,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002520:executioner-greatblade",
+        "datasheetId": "000002520",
+        "line": 4,
+        "name": "Executioner greatblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002520",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Executioner greatblade",
+            "attributes": [
+              "ANTI-PSYKER 5+",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000002520",
+          "line": 1,
+          "button": "•",
+          "description": "This model's executioner greatblade can be replaced with one of the following:<ul><li>1 master-crafted boltgun and 1 close combat weapon</li><li>1 Witchseeker flamer and 1 close combat weapon</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's executioner greatblade can be replaced with one of the following:<ul><li>1 master-crafted boltgun and 1 close combat weapon</li><li>1 Witchseeker flamer and 1 close combat weapon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "executioner greatblade",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "master-crafted boltgun",
+                    "count": 1
+                  },
+                  {
+                    "name": "close combat weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "Witchseeker flamer",
+                    "count": 1
+                  },
+                  {
+                    "name": "close combat weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -42,18 +215,7 @@
       "factionId": "",
       "description": "This model has the Feel No Pain 3+ ability against Psychic Attacks and mortal wounds.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 3
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -120,14 +282,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000002520",
-      "line": 1,
-      "button": "•",
-      "description": "This model's executioner greatblade can be replaced with one of the following:<ul><li>1 master-crafted boltgun and 1 close combat weapon</li><li>1 Witchseeker flamer and 1 close combat weapon</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000002520",
@@ -146,7 +300,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002522",
       "slug": "vigilators"
@@ -159,167 +313,5 @@
       "id": "000002521",
       "slug": "prosecutors"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adeptus Custodes",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002520:master-crafted-boltgun",
-      "datasheetId": "000002520",
-      "line": 1,
-      "name": "Master-crafted boltgun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002520",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Master-crafted boltgun",
-          "attributes": [
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000002520:witchseeker-flamer",
-      "datasheetId": "000002520",
-      "line": 2,
-      "name": "Witchseeker flamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002520",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Witchseeker flamer",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002520:close-combat-weapon",
-      "datasheetId": "000002520",
-      "line": 3,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002520",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 2,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002520:executioner-greatblade",
-      "datasheetId": "000002520",
-      "line": 4,
-      "name": "Executioner greatblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002520",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Executioner greatblade",
-          "attributes": [
-            "ANTI-PSYKER 5+",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's executioner greatblade can be replaced with one of the following:<ul><li>1 master-crafted boltgun and 1 close combat weapon</li><li>1 Witchseeker flamer and 1 close combat weapon</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "executioner greatblade",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "master-crafted boltgun",
-                "count": 1
-              },
-              {
-                "name": "close combat weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          },
-          {
-            "weapons": [
-              {
-                "name": "Witchseeker flamer",
-                "count": 1
-              },
-              {
-                "name": "close combat weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

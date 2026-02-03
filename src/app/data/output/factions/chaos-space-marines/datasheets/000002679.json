@@ -9,13 +9,111 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-space-marines/Vashtorr-The-Arkifane",
   "slug": "vashtorr-the-arkifane",
   "factionSlug": "chaos-space-marines",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002679:vashtorr-s-claw",
+        "datasheetId": "000002679",
+        "line": 1,
+        "name": "Vashtorr's claw",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002679",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Vashtorr's claw",
+            "attributes": [
+              "ANTI-VEHICLE 4+",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002679:vashtorr's-hammer",
+        "datasheetId": "000002679",
+        "line": 2,
+        "name": "Vashtorr's hammer",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002679",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Vashtorr's hammer - strike",
+            "attributes": [
+              "ANTI-VEHICLE 4+",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 14,
+            "ap": -3,
+            "d": 3
+          },
+          {
+            "datasheetId": "000002679",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Vashtorr's hammer - sweep",
+            "attributes": [
+              "ANTI-VEHICLE 4+",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 12,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -46,16 +144,7 @@
       "factionId": "",
       "description": "Each time an enemy unit within 18\" of this model targets this model, subtract 1 from the Hit roll and, until the end of the phase, that enemy unit's ranged weapons have the [HAZARDOUS] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -64,18 +153,7 @@
       "factionId": "",
       "description": "While this model is within 3\" of one or more friendly Daemon Vehicle units, this model has the Lone Operative ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "LONE OPERATIVE"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -145,7 +223,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002679",
@@ -164,85 +241,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002679:vashtorr-s-claw",
-      "datasheetId": "000002679",
-      "line": 1,
-      "name": "Vashtorr's claw",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002679",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Vashtorr's claw",
-          "attributes": [
-            "ANTI-VEHICLE 4+",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002679:vashtorr's-hammer",
-      "datasheetId": "000002679",
-      "line": 2,
-      "name": "Vashtorr's hammer",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002679",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Vashtorr's hammer - strike",
-          "attributes": [
-            "ANTI-VEHICLE 4+",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 14,
-          "ap": -3,
-          "d": 3
-        },
-        {
-          "datasheetId": "000002679",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Vashtorr's hammer - sweep",
-          "attributes": [
-            "ANTI-VEHICLE 4+",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 12,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

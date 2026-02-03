@@ -84,9 +84,9 @@ const ComplexWargearSelector = ({ unit, list, loadouts }: Props) => {
     // Get weapon from available wargear by ID
     const getWeaponById = useCallback(
         (weaponId: string): Weapon | undefined => {
-            return unit.availableWargear?.find((w) => w.id === weaponId);
+            return unit.wargear?.weapons?.find((w) => w.id === weaponId);
         },
-        [unit.availableWargear]
+        [unit.wargear?.weapons]
     );
 
     // Render a single loadout option
@@ -176,7 +176,7 @@ const ComplexWargearSelector = ({ unit, list, loadouts }: Props) => {
             </div>
             <div className="space-y-6 pt-7">
                 <SplitHeading label="Wargear rules" />
-                {unit.options?.map((o, idx) => (
+                {unit.wargear?.options?.raw?.map((o, idx) => (
                     <div key={idx} dangerouslySetInnerHTML={{ __html: o.description }} />
                 ))}
             </div>

@@ -9,13 +9,358 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/grey-knights/Paladin-Squad",
   "slug": "paladin-squad",
   "factionSlug": "grey-knights",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Grey Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000384:incinerator",
+        "datasheetId": "000000384",
+        "line": 1,
+        "name": "Incinerator",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000384",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Incinerator",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000384:psilencer",
+        "datasheetId": "000000384",
+        "line": 2,
+        "name": "Psilencer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000384",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Psilencer",
+            "attributes": [
+              "PRECISION",
+              "PSYCHIC",
+              "SUSTAINED HITS 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 2,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000384:psycannon",
+        "datasheetId": "000000384",
+        "line": 3,
+        "name": "Psycannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000384",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Psycannon",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000384:storm-bolter",
+        "datasheetId": "000000384",
+        "line": 4,
+        "name": "Storm bolter",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000384",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Storm bolter",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 2,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000384:nemesis-force-weapon",
+        "datasheetId": "000000384",
+        "line": 5,
+        "name": "Nemesis force weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000384",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Nemesis force weapon",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000384",
+          "line": 1,
+          "button": "•",
+          "description": "For every 5 models in this unit, up to 2 Paladins can each have their storm bolter replaced with one of the following:<ul><li>1 incinerator</li><li>1 psilencer</li><li>1 psycannon</li></ul>"
+        },
+        {
+          "datasheetId": "000000384",
+          "line": 2,
+          "button": "•",
+          "description": "1 Paladin can have its storm bolter replaced with 1 Apothecary's narthecium."
+        },
+        {
+          "datasheetId": "000000384",
+          "line": 3,
+          "button": "•",
+          "description": "1 Paladin's storm bolter can be replaced with one of the following:<ul><li>1 incinerator and 1 Ancient's banner</li><li>1 psilencer and 1 Ancient's banner</li><li>1 psycannon and 1 Ancient's banner</li><li>1 storm bolter and 1 Ancient's banner*</li></ul>"
+        },
+        {
+          "datasheetId": "000000384",
+          "line": 4,
+          "button": "*",
+          "description": "* That model's storm bolter cannot be replaced."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "For every 5 models in this unit, up to 2 Paladins can each have their storm bolter replaced with one of the following:<ul><li>1 incinerator</li><li>1 psilencer</li><li>1 psycannon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio-capped",
+            "ratio": 5,
+            "maxPerRatio": 2
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "storm bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "incinerator",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "psilencer",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "psycannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "1 Paladin can have its storm bolter replaced with 1 Apothecary's narthecium.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Paladin"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "storm bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Apothecary's narthecium",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 3,
+          "rawText": "1 Paladin's storm bolter can be replaced with one of the following:<ul><li>1 incinerator and 1 Ancient's banner</li><li>1 psilencer and 1 Ancient's banner</li><li>1 psycannon and 1 Ancient's banner</li><li>1 storm bolter and 1 Ancient's banner*</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "n-model-specific",
+            "count": 1,
+            "modelType": "Paladin"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "storm bolter",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "incinerator",
+                    "count": 1
+                  },
+                  {
+                    "name": "Ancient's banner",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "psilencer",
+                    "count": 1
+                  },
+                  {
+                    "name": "Ancient's banner",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "psycannon",
+                    "count": 1
+                  },
+                  {
+                    "name": "Ancient's banner",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "storm bolter",
+                    "count": 1
+                  },
+                  {
+                    "name": "Ancient's banner",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 4,
+          "rawText": "* That model's storm bolter cannot be replaced.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -114,32 +459,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000384",
-      "line": 1,
-      "button": "•",
-      "description": "For every 5 models in this unit, up to 2 Paladins can each have their storm bolter replaced with one of the following:<ul><li>1 incinerator</li><li>1 psilencer</li><li>1 psycannon</li></ul>"
-    },
-    {
-      "datasheetId": "000000384",
-      "line": 2,
-      "button": "•",
-      "description": "1 Paladin can have its storm bolter replaced with 1 Apothecary's narthecium."
-    },
-    {
-      "datasheetId": "000000384",
-      "line": 3,
-      "button": "•",
-      "description": "1 Paladin's storm bolter can be replaced with one of the following:<ul><li>1 incinerator and 1 Ancient's banner</li><li>1 psilencer and 1 Ancient's banner</li><li>1 psycannon and 1 Ancient's banner</li><li>1 storm bolter and 1 Ancient's banner*</li></ul>"
-    },
-    {
-      "datasheetId": "000000384",
-      "line": 4,
-      "button": "*",
-      "description": "* That model's storm bolter cannot be replaced."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000384",
@@ -186,510 +505,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Grey Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000384:incinerator",
-      "datasheetId": "000000384",
-      "line": 1,
-      "name": "Incinerator",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000384",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Incinerator",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000384:psilencer",
-      "datasheetId": "000000384",
-      "line": 2,
-      "name": "Psilencer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000384",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Psilencer",
-          "attributes": [
-            "PRECISION",
-            "PSYCHIC",
-            "SUSTAINED HITS 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000384:psycannon",
-      "datasheetId": "000000384",
-      "line": 3,
-      "name": "Psycannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000384",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Psycannon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000384:storm-bolter",
-      "datasheetId": "000000384",
-      "line": 4,
-      "name": "Storm bolter",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000384",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Storm bolter",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 2,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000384:nemesis-force-weapon",
-      "datasheetId": "000000384",
-      "line": 5,
-      "name": "Nemesis force weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000384",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Nemesis force weapon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Apothecary's narthecium",
-          "abilityName": "Apothecary's Narthecium"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Tertius",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        },
-        {
-          "id": "000000384:incinerator",
-          "name": "Incinerator",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Quartus",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        },
-        {
-          "id": "000000384:incinerator",
-          "name": "Incinerator",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Apothecary's narthecium",
-          "abilityName": "Apothecary's Narthecium"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Quintus",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        },
-        {
-          "id": "000000384:psilencer",
-          "name": "Psilencer",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Sextus",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        },
-        {
-          "id": "000000384:psilencer",
-          "name": "Psilencer",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Apothecary's narthecium",
-          "abilityName": "Apothecary's Narthecium"
-        }
-      ]
-    },
-    {
-      "label": "Loadout Septimus",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        },
-        {
-          "id": "000000384:psycannon",
-          "name": "Psycannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Octavus",
-      "weapons": [
-        {
-          "id": "000000384:storm-bolter",
-          "name": "Storm bolter",
-          "type": "Ranged"
-        },
-        {
-          "id": "000000384:nemesis-force-weapon",
-          "name": "Nemesis force weapon",
-          "type": "Melee"
-        },
-        {
-          "id": "000000384:psycannon",
-          "name": "Psycannon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": false,
-      "wargearAbilities": [
-        {
-          "name": "Apothecary's narthecium",
-          "abilityName": "Apothecary's Narthecium"
-        }
-      ]
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.510Z"
-  },
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "For every 5 models in this unit, up to 2 Paladins can each have their storm bolter replaced with one of the following:<ul><li>1 incinerator</li><li>1 psilencer</li><li>1 psycannon</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "ratio-capped",
-        "ratio": 5,
-        "maxPerRatio": 2
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "storm bolter",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "incinerator",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "psilencer",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "psycannon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "1 Paladin can have its storm bolter replaced with 1 Apothecary's narthecium.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "n-model-specific",
-        "count": 1,
-        "modelType": "Paladin"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "storm bolter",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Apothecary's narthecium",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 3,
-      "rawText": "1 Paladin's storm bolter can be replaced with one of the following:<ul><li>1 incinerator and 1 Ancient's banner</li><li>1 psilencer and 1 Ancient's banner</li><li>1 psycannon and 1 Ancient's banner</li><li>1 storm bolter and 1 Ancient's banner*</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "n-model-specific",
-        "count": 1,
-        "modelType": "Paladin"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "storm bolter",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "incinerator",
-                "count": 1
-              },
-              {
-                "name": "Ancient's banner",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          },
-          {
-            "weapons": [
-              {
-                "name": "psilencer",
-                "count": 1
-              },
-              {
-                "name": "Ancient's banner",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          },
-          {
-            "weapons": [
-              {
-                "name": "psycannon",
-                "count": 1
-              },
-              {
-                "name": "Ancient's banner",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          },
-          {
-            "weapons": [
-              {
-                "name": "storm bolter",
-                "count": 1
-              },
-              {
-                "name": "Ancient's banner",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 4,
-      "rawText": "* That model's storm bolter cannot be replaced.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "unknown"
-      },
-      "action": {
-        "type": "unknown",
-        "removes": [],
-        "adds": [],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

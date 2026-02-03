@@ -9,13 +9,242 @@
   "transport": "This model has a transport capacity of 22 Orks Infantry models. Each Mega Armour or Jump Pack model takes up the space of 2 models. The Ghazghkull Thraka model takes up the space of 15 models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 6 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Stompa",
   "slug": "stompa",
   "factionSlug": "orks",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-10",
+    "threshold": 10,
+    "description": "While this model has 1-10 wounds remaining, subtract 6 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 6
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000046:big-shoota",
+        "datasheetId": "000000046",
+        "line": 1,
+        "name": "Big shoota",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000046",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Big shoota",
+            "attributes": [
+              "RAPID FIRE 2"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000046:deffkannon",
+        "datasheetId": "000000046",
+        "line": 2,
+        "name": "Deffkannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000046",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Deffkannon",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": "3D6",
+            "bsWs": 5,
+            "s": 14,
+            "ap": -3,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000046:skorcha",
+        "datasheetId": "000000046",
+        "line": 3,
+        "name": "Skorcha",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000046",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Skorcha",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000046:supa-gatler",
+        "datasheetId": "000000046",
+        "line": 4,
+        "name": "Supa-gatler",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000046",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Supa-gatler",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 20,
+            "bsWs": 5,
+            "s": 7,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000046:supa-rokkits",
+        "datasheetId": "000000046",
+        "line": 5,
+        "name": "Supa-rokkits",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000046",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Supa-rokkits",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 100,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 5,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+2"
+          }
+        ]
+      },
+      {
+        "id": "000000046:twin-big-shoota",
+        "datasheetId": "000000046",
+        "line": 6,
+        "name": "Twin big shoota",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000046",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin big shoota",
+            "attributes": [
+              "RAPID FIRE 2",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000046:mega-choppa",
+        "datasheetId": "000000046",
+        "line": 7,
+        "name": "Mega-choppa",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000046",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mega-choppa - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 24,
+            "ap": -5,
+            "d": 10
+          },
+          {
+            "datasheetId": "000000046",
+            "line": 8,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Mega-choppa - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 18,
+            "bsWs": 3,
+            "s": 10,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -106,7 +335,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000046",
@@ -125,210 +353,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000046:big-shoota",
-      "datasheetId": "000000046",
-      "line": 1,
-      "name": "Big shoota",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000046",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Big shoota",
-          "attributes": [
-            "RAPID FIRE 2"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000046:deffkannon",
-      "datasheetId": "000000046",
-      "line": 2,
-      "name": "Deffkannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000046",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Deffkannon",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 72,
-          "type": "Ranged",
-          "a": "3D6",
-          "bsWs": 5,
-          "s": 14,
-          "ap": -3,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000046:skorcha",
-      "datasheetId": "000000046",
-      "line": 3,
-      "name": "Skorcha",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000046",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Skorcha",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000046:supa-gatler",
-      "datasheetId": "000000046",
-      "line": 4,
-      "name": "Supa-gatler",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000046",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Supa-gatler",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 20,
-          "bsWs": 5,
-          "s": 7,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000046:supa-rokkits",
-      "datasheetId": "000000046",
-      "line": 5,
-      "name": "Supa-rokkits",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000046",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Supa-rokkits",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 100,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 5,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+2"
-        }
-      ]
-    },
-    {
-      "id": "000000046:twin-big-shoota",
-      "datasheetId": "000000046",
-      "line": 6,
-      "name": "Twin big shoota",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000046",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin big shoota",
-          "attributes": [
-            "RAPID FIRE 2",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000046:mega-choppa",
-      "datasheetId": "000000046",
-      "line": 7,
-      "name": "Mega-choppa",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000046",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mega-choppa - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 24,
-          "ap": -5,
-          "d": 10
-        },
-        {
-          "datasheetId": "000000046",
-          "line": 8,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Mega-choppa - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 18,
-          "bsWs": 3,
-          "s": 10,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

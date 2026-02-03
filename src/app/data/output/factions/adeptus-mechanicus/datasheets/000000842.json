@@ -9,13 +9,246 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-mechanicus/Kataphron-Destroyers",
   "slug": "kataphron-destroyers",
   "factionSlug": "adeptus-mechanicus",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Mechanicus",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000842:cognis-flamer",
+        "datasheetId": "000000842",
+        "line": 1,
+        "name": "Cognis flamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000842",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Cognis flamer",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000842:heavy-grav-cannon",
+        "datasheetId": "000000842",
+        "line": 2,
+        "name": "Heavy grav-cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000842",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy grav-cannon",
+            "attributes": [
+              "ANTI-VEHICLE 2+"
+            ],
+            "range": 30,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000842:kataphron-plasma-culverin",
+        "datasheetId": "000000842",
+        "line": 3,
+        "name": "Kataphron plasma culverin",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000842",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Kataphron plasma culverin - standard",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 4,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000842",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Kataphron plasma culverin - supercharge",
+            "attributes": [
+              "HAZARDOUS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 4,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000842:phosphor-blaster",
+        "datasheetId": "000000842",
+        "line": 5,
+        "name": "Phosphor blaster",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000842",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Phosphor blaster",
+            "attributes": [
+              "IGNORES COVER",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000842:close-combat-weapon",
+        "datasheetId": "000000842",
+        "line": 6,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000842",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000842",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their heavy grav-cannon replaced with 1 Kataphron plasma culverin."
+        },
+        {
+          "datasheetId": "000000842",
+          "line": 2,
+          "button": "•",
+          "description": "Any number of models can each have their phosphor blaster replaced with 1 cognis flamer."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their heavy grav-cannon replaced with 1 Kataphron plasma culverin.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "heavy grav-cannon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Kataphron plasma culverin",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "Any number of models can each have their phosphor blaster replaced with 1 cognis flamer.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "phosphor blaster",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "cognis flamer",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Doctrina Imperatives",
@@ -86,20 +319,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000842",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their heavy grav-cannon replaced with 1 Kataphron plasma culverin."
-    },
-    {
-      "datasheetId": "000000842",
-      "line": 2,
-      "button": "•",
-      "description": "Any number of models can each have their phosphor blaster replaced with 1 cognis flamer."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000842",
@@ -125,221 +344,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Mechanicus",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000842:cognis-flamer",
-      "datasheetId": "000000842",
-      "line": 1,
-      "name": "Cognis flamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000842",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Cognis flamer",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000842:heavy-grav-cannon",
-      "datasheetId": "000000842",
-      "line": 2,
-      "name": "Heavy grav-cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000842",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy grav-cannon",
-          "attributes": [
-            "ANTI-VEHICLE 2+"
-          ],
-          "range": 30,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000842:kataphron-plasma-culverin",
-      "datasheetId": "000000842",
-      "line": 3,
-      "name": "Kataphron plasma culverin",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000842",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Kataphron plasma culverin - standard",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 4,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000842",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Kataphron plasma culverin - supercharge",
-          "attributes": [
-            "HAZARDOUS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 4,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000842:phosphor-blaster",
-      "datasheetId": "000000842",
-      "line": 5,
-      "name": "Phosphor blaster",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000842",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Phosphor blaster",
-          "attributes": [
-            "IGNORES COVER",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000842:close-combat-weapon",
-      "datasheetId": "000000842",
-      "line": 6,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000842",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "Any number of models can each have their heavy grav-cannon replaced with 1 Kataphron plasma culverin.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "heavy grav-cannon",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Kataphron plasma culverin",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "Any number of models can each have their phosphor blaster replaced with 1 cognis flamer.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "phosphor blaster",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "cognis flamer",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

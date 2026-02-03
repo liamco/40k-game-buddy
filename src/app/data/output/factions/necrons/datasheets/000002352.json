@@ -9,13 +9,85 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to one of the above units even if one Royal Warden or Noble model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Technomancer",
   "slug": "technomancer",
   "factionSlug": "necrons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to one of the above units even if one Royal Warden or Noble model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "ROYAL WARDEN",
+        "NOBLE"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002352:staff-of-light",
+        "datasheetId": "000002352",
+        "line": 1,
+        "name": "Staff of light",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002352",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of light",
+            "attributes": [],
+            "range": 18,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000002352:staff-of-light-2",
+        "datasheetId": "000002352",
+        "line": 2,
+        "name": "Staff of light",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002352",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of light",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,18 +104,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 5+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 5
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -110,7 +171,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002352",
@@ -129,7 +189,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000534",
       "slug": "necron-warriors"
@@ -141,62 +201,6 @@
     {
       "id": "000000546",
       "slug": "canoptek-wraiths"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002352:staff-of-light",
-      "datasheetId": "000002352",
-      "line": 1,
-      "name": "Staff of light",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002352",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of light",
-          "attributes": [],
-          "range": 18,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000002352:staff-of-light-2",
-      "datasheetId": "000002352",
-      "line": 2,
-      "name": "Staff of light",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002352",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of light",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
     }
   ]
 }

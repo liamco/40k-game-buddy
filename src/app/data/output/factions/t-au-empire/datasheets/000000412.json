@@ -9,13 +9,194 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Breacher-Team",
   "slug": "breacher-team",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000412:pulse-blaster",
+        "datasheetId": "000000412",
+        "line": 1,
+        "name": "Pulse blaster",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000412",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Pulse blaster",
+            "attributes": [
+              "ASSAULT"
+            ],
+            "range": 10,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000412:pulse-pistol",
+        "datasheetId": "000000412",
+        "line": 2,
+        "name": "Pulse pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000412",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Pulse pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000412:support-turret",
+        "datasheetId": "000000412",
+        "line": 3,
+        "name": "Support turret",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000412",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Support turret",
+            "attributes": [
+              "INDIRECT FIRE",
+              "TWIN-LINKED"
+            ],
+            "range": 30,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000412:close-combat-weapon",
+        "datasheetId": "000000412",
+        "line": 4,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000412",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 5,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000412",
+          "line": 1,
+          "button": "•",
+          "description": "The Breacher Fire Warrior Shas'ui can be equipped with up to two of the following, and can take duplicates:<ul><li>1 guardian drone (it cannot take duplicates of this piece of wargear)</li><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "The Breacher Fire Warrior Shas'ui can be equipped with up to two of the following, and can take duplicates:<ul><li>1 guardian drone (it cannot take duplicates of this piece of wargear)</li><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>",
+          "wargearParsed": false,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "guardian drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "gun drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "marker drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "shield drone",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {
+            "noDuplicates": true,
+            "allowDuplicates": true,
+            "maxSelections": 2
+          }
+        }
+      ],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "For the Greater Good",
@@ -101,14 +282,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000412",
-      "line": 1,
-      "button": "•",
-      "description": "The Breacher Fire Warrior Shas'ui can be equipped with up to two of the following, and can take duplicates:<ul><li>1 guardian drone (it cannot take duplicates of this piece of wargear)</li><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000412",
@@ -134,175 +307,5 @@
       "count": 10
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000412:pulse-blaster",
-      "datasheetId": "000000412",
-      "line": 1,
-      "name": "Pulse blaster",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000412",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Pulse blaster",
-          "attributes": [
-            "ASSAULT"
-          ],
-          "range": 10,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000412:pulse-pistol",
-      "datasheetId": "000000412",
-      "line": 2,
-      "name": "Pulse pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000412",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Pulse pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000412:support-turret",
-      "datasheetId": "000000412",
-      "line": 3,
-      "name": "Support turret",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000412",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Support turret",
-          "attributes": [
-            "INDIRECT FIRE",
-            "TWIN-LINKED"
-          ],
-          "range": 30,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000412:close-combat-weapon",
-      "datasheetId": "000000412",
-      "line": 4,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000412",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 5,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "The Breacher Fire Warrior Shas'ui can be equipped with up to two of the following, and can take duplicates:<ul><li>1 guardian drone (it cannot take duplicates of this piece of wargear)</li><li>1 gun drone</li><li>1 marker drone</li><li>1 shield drone</li></ul>",
-      "wargearParsed": false,
-      "targeting": {
-        "type": "unknown"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "guardian drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "gun drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "marker drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "shield drone",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {
-        "noDuplicates": true,
-        "allowDuplicates": true,
-        "maxSelections": 2
-      }
-    }
-  ],
-  "allWargearParsed": false
+  "leadsUnits": []
 }

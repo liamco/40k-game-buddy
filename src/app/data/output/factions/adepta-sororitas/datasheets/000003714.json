@@ -9,13 +9,180 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adepta-sororitas/Canoness-with-Jump-Pack",
   "slug": "canoness-with-jump-pack",
   "factionSlug": "adepta-sororitas",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000003714:ministorum-hand-flamer",
+        "datasheetId": "000003714",
+        "line": 1,
+        "name": "Ministorum hand flamer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003714",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ministorum hand flamer",
+            "attributes": [
+              "IGNORES COVER",
+              "PISTOL",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003714:blessed-halberd",
+        "datasheetId": "000003714",
+        "line": 2,
+        "name": "Blessed halberd",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003714",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Blessed halberd",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003714:holy-eviscerator",
+        "datasheetId": "000003714",
+        "line": 3,
+        "name": "Holy Eviscerator",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003714",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Holy Eviscerator",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003714:power-weapon",
+        "datasheetId": "000003714",
+        "line": 4,
+        "name": "Power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003714",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003714",
+          "line": 1,
+          "button": "•",
+          "description": "This model's blessed halberd can be replaced with one of the following:<ul><li>1 holy eviscerator</li><li>1 Ministorum hand flamer and 1 power weapon</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's blessed halberd can be replaced with one of the following:<ul><li>1 holy eviscerator</li><li>1 Ministorum hand flamer and 1 power weapon</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "blessed halberd",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "holy eviscerator",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "Ministorum hand flamer",
+                    "count": 1
+                  },
+                  {
+                    "name": "power weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -115,14 +282,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003714",
-      "line": 1,
-      "button": "•",
-      "description": "This model's blessed halberd can be replaced with one of the following:<ul><li>1 holy eviscerator</li><li>1 Ministorum hand flamer and 1 power weapon</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003714",
@@ -141,7 +300,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002066",
       "slug": "zephyrim-squad"
@@ -150,161 +309,5 @@
       "id": "000000904",
       "slug": "seraphim-squad"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003714:ministorum-hand-flamer",
-      "datasheetId": "000003714",
-      "line": 1,
-      "name": "Ministorum hand flamer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003714",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ministorum hand flamer",
-          "attributes": [
-            "IGNORES COVER",
-            "PISTOL",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003714:blessed-halberd",
-      "datasheetId": "000003714",
-      "line": 2,
-      "name": "Blessed halberd",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003714",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Blessed halberd",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003714:holy-eviscerator",
-      "datasheetId": "000003714",
-      "line": 3,
-      "name": "Holy Eviscerator",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003714",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Holy Eviscerator",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003714:power-weapon",
-      "datasheetId": "000003714",
-      "line": 4,
-      "name": "Power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003714",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's blessed halberd can be replaced with one of the following:<ul><li>1 holy eviscerator</li><li>1 Ministorum hand flamer and 1 power weapon</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "blessed halberd",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "holy eviscerator",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "Ministorum hand flamer",
-                "count": 1
-              },
-              {
-                "name": "power weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

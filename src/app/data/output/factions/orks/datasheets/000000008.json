@@ -9,13 +9,125 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "If this unit's Bodyguard unit is destroyed, Ghazkghull Thraka and Makari become a single unit with their original Starting Strength.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/orks/Ghazghkull-Thraka",
   "slug": "ghazghkull-thraka",
   "factionSlug": "orks",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Orks",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "If this unit's Bodyguard unit is destroyed, Ghazkghull Thraka and Makari become a single unit with their original Starting Strength.",
+    "conditions": null,
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000008:mork-s-roar",
+        "datasheetId": "000000008",
+        "line": 1,
+        "name": "Mork's Roar",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000008",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mork's Roar",
+            "attributes": [
+              "RAPID FIRE 4"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 12,
+            "bsWs": 5,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000008:gork-s-klaw",
+        "datasheetId": "000000008",
+        "line": 2,
+        "name": "Gork's Klaw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000008",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gork's Klaw - strike",
+            "profileName": "strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 14,
+            "ap": -3,
+            "d": 4
+          },
+          {
+            "datasheetId": "000000008",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Gork's Klaw - sweep",
+            "profileName": "sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 12,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000008:makari-s-stabba",
+        "datasheetId": "000000008",
+        "line": 4,
+        "name": "Makari's stabba",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000008",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Makari's stabba",
+            "attributes": [
+              "DEVASTATING WOUNDS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 1,
+            "bsWs": 4,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,22 +144,7 @@
       "factionId": "",
       "description": "While this unit is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll and add 1 to the Wound roll and if the Waaagh! is active for your army, a Critical Hit is scored on a successful unmodified Hit roll of 5+.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -138,7 +235,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000008",
@@ -164,7 +260,7 @@
       "count": 2
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000021",
       "slug": "nobz"
@@ -180,107 +276,6 @@
     {
       "id": "000003861",
       "slug": "breaka-boyz"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Orks",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000008:mork-s-roar",
-      "datasheetId": "000000008",
-      "line": 1,
-      "name": "Mork's Roar",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000008",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mork's Roar",
-          "attributes": [
-            "RAPID FIRE 4"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 12,
-          "bsWs": 5,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000008:gork-s-klaw",
-      "datasheetId": "000000008",
-      "line": 2,
-      "name": "Gork's Klaw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000008",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gork's Klaw - strike",
-          "profileName": "strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 14,
-          "ap": -3,
-          "d": 4
-        },
-        {
-          "datasheetId": "000000008",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Gork's Klaw - sweep",
-          "profileName": "sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 12,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000008:makari-s-stabba",
-      "datasheetId": "000000008",
-      "line": 4,
-      "name": "Makari's stabba",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000008",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Makari's stabba",
-          "attributes": [
-            "DEVASTATING WOUNDS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 1,
-          "bsWs": 4,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
     }
   ]
 }

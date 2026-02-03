@@ -9,13 +9,132 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Ezekiel",
   "slug": "ezekiel",
   "factionSlug": "space-marines",
   "supplementKey": "dark-angels",
+  "supplementSlug": "dark-angels",
+  "supplementName": "Dark Angels",
+  "supplementLabel": "Dark Angels",
+  "isSupplement": true,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Dark Angels",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000226:the-deliverer",
+        "datasheetId": "000000226",
+        "line": 1,
+        "name": "The Deliverer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000226",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "The Deliverer",
+            "attributes": [
+              "PISTOL",
+              "PRECISION"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000226:mind-wipe",
+        "datasheetId": "000000226",
+        "line": 2,
+        "name": "Mind Wipe",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000226",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mind Wipe - witchfire",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PRECISION",
+              "PSYCHIC"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": "D6"
+          },
+          {
+            "datasheetId": "000000226",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Mind Wipe - focused witchfire",
+            "attributes": [
+              "ANTI-CHARACTER 4+",
+              "DEVASTATING WOUNDS",
+              "HAZARDOUS",
+              "PRECISION",
+              "PSYCHIC"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000226:traitor-s-bane",
+        "datasheetId": "000000226",
+        "line": 4,
+        "name": "Traitor's Bane",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000226",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Traitor's Bane",
+            "attributes": [
+              "ANTI-CHAOS 2+",
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,18 +151,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -52,24 +160,7 @@
       "factionId": "",
       "description": "In your Shooting phase, you can select one enemy unit within 18\" of this model. That enemy unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "staticNumber",
-          "attribute": "ld",
-          "value": "Battle-shock test",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": "range",
-              "operator": "lessThanOrEqualTo",
-              "value": 18
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -78,52 +169,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, add 1 to the Attacks characteristic of melee weapons equipped by models in that unit. When this model is destroyed, each friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit within 6\" of this model must take a Battle-shock test.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "a",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "staticNumber",
-          "attribute": "ld",
-          "value": "Battle-shock test",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isDamaged",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisArmy",
-          "effect": "staticNumber",
-          "attribute": "ld",
-          "value": "Battle-shock test",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -211,7 +257,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000226",
@@ -230,7 +275,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000070",
       "slug": "tactical-squad"
@@ -302,119 +347,6 @@
     {
       "id": "000000126",
       "slug": "infernus-squad"
-    }
-  ],
-  "supplementSlug": "dark-angels",
-  "supplementName": "Dark Angels",
-  "supplementLabel": "Dark Angels",
-  "isSupplement": true,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Dark Angels",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000226:the-deliverer",
-      "datasheetId": "000000226",
-      "line": 1,
-      "name": "The Deliverer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000226",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "The Deliverer",
-          "attributes": [
-            "PISTOL",
-            "PRECISION"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000226:mind-wipe",
-      "datasheetId": "000000226",
-      "line": 2,
-      "name": "Mind Wipe",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000226",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mind Wipe - witchfire",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PRECISION",
-            "PSYCHIC"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": "D6"
-        },
-        {
-          "datasheetId": "000000226",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Mind Wipe - focused witchfire",
-          "attributes": [
-            "ANTI-CHARACTER 4+",
-            "DEVASTATING WOUNDS",
-            "HAZARDOUS",
-            "PRECISION",
-            "PSYCHIC"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000226:traitor-s-bane",
-      "datasheetId": "000000226",
-      "line": 4,
-      "name": "Traitor's Bane",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000226",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Traitor's Bane",
-          "attributes": [
-            "ANTI-CHAOS 2+",
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

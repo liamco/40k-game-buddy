@@ -9,13 +9,203 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-7",
-  "damagedDescription": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/thousand-sons/Lord-of-Change",
   "slug": "lord-of-change-2",
   "factionSlug": "thousand-sons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-7",
+    "threshold": 7,
+    "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000004124:rod-of-sorcery",
+        "datasheetId": "000004124",
+        "line": 1,
+        "name": "Rod of sorcery",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004124",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Rod of sorcery",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000004124:bolt-of-change",
+        "datasheetId": "000004124",
+        "line": 2,
+        "name": "Bolt of Change",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000004124",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt of Change - witchfire",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 9,
+            "bsWs": 2,
+            "s": 9,
+            "ap": -1,
+            "d": 1
+          },
+          {
+            "datasheetId": "000004124",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Bolt of Change - focused witchfire",
+            "attributes": [
+              "HAZARDOUS",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 9,
+            "bsWs": 2,
+            "s": 9,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000004124:baleful-sword",
+        "datasheetId": "000004124",
+        "line": 4,
+        "name": "Baleful sword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004124",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Baleful sword",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000004124:staff-of-tzeentch",
+        "datasheetId": "000004124",
+        "line": 5,
+        "name": "Staff of Tzeentch",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000004124",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of Tzeentch",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000004124",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with one of the following:<ul><li>1 rod of sorcery</li><li>1 baleful sword</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with one of the following:<ul><li>1 rod of sorcery</li><li>1 baleful sword</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "rod of sorcery",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "baleful sword",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -134,14 +324,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000004124",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with one of the following:<ul><li>1 rod of sorcery</li><li>1 baleful sword</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000004124",
@@ -160,172 +342,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000004124:rod-of-sorcery",
-      "datasheetId": "000004124",
-      "line": 1,
-      "name": "Rod of sorcery",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004124",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Rod of sorcery",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000004124:bolt-of-change",
-      "datasheetId": "000004124",
-      "line": 2,
-      "name": "Bolt of Change",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000004124",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt of Change - witchfire",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 9,
-          "bsWs": 2,
-          "s": 9,
-          "ap": -1,
-          "d": 1
-        },
-        {
-          "datasheetId": "000004124",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Bolt of Change - focused witchfire",
-          "attributes": [
-            "HAZARDOUS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 9,
-          "bsWs": 2,
-          "s": 9,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000004124:baleful-sword",
-      "datasheetId": "000004124",
-      "line": 4,
-      "name": "Baleful sword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004124",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Baleful sword",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000004124:staff-of-tzeentch",
-      "datasheetId": "000004124",
-      "line": 5,
-      "name": "Staff of Tzeentch",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000004124",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of Tzeentch",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 3
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with one of the following:<ul><li>1 rod of sorcery</li><li>1 baleful sword</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "rod of sorcery",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "baleful sword",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

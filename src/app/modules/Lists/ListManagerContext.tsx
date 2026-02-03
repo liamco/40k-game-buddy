@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useMemo, useCall
 
 import { getAllFactions, loadFactionData, loadFactionConfig, loadDatasheetData } from "../../utils/depotDataLoader";
 import { getUnitById } from "../../utils/unitHelpers";
-import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, UnitWeapons, LeaderReference, LeaderCondition, UnitCombatState, Enhancement, Weapon, WarlordEligibility, ModelInstance } from "../../types";
+import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, UnitWeapons, LeaderReference, LeaderConditions, UnitCombatState, Enhancement, Weapon, WarlordEligibility, ModelInstance } from "../../types";
 
 /**
  * Result of multi-leader attachment validation
@@ -15,7 +15,7 @@ export interface MultiLeaderValidationResult {
 
 /**
  * Validates whether a leader can attach to a unit that already has leaders attached.
- * This checks the leader's leaderConditions against the existing leaders' keywords.
+ * This checks the leader's leader.conditions against the existing leaders' keywords.
  *
  * @param newLeader - The leader attempting to attach
  * @param existingLeaders - Leaders already attached to the target unit
@@ -27,9 +27,10 @@ export function validateMultiLeaderAttachment(newLeader: ArmyListItem, existingL
         return { canAttach: true };
     }
 
-    const leaderConditions: LeaderCondition | undefined = newLeader.leaderConditions;
+    // Access leader conditions from consolidated leader object
+    const leaderConditions: LeaderConditions | null | undefined = newLeader.leader?.conditions;
 
-    // If the new leader has no leaderConditions, it cannot join existing leaders
+    // If the new leader has no leader conditions, it cannot join existing leaders
     if (!leaderConditions) {
         return {
             canAttach: false,
@@ -311,11 +312,11 @@ function parseLoadoutByModelType(loadout: string, unitComposition: any[]): Map<s
 }
 
 /**
- * Find weapon ID from availableWargear by name (case-insensitive, fuzzy).
+ * Find weapon ID from wargear.weapons by name (case-insensitive, fuzzy).
  */
-function findWeaponIdByName(availableWargear: Weapon[], weaponName: string): string | null {
+function findWeaponIdByName(weapons: Weapon[], weaponName: string): string | null {
     const nameLower = weaponName.toLowerCase();
-    const weapon = availableWargear.find((w) => {
+    const weapon = weapons.find((w) => {
         const wNameLower = w.name.toLowerCase();
         return wNameLower === nameLower || wNameLower.includes(nameLower) || nameLower.includes(wNameLower);
     });
@@ -329,7 +330,7 @@ function findWeaponIdByName(availableWargear: Weapon[], weaponName: string): str
 function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): ModelInstance[] {
     const instances: ModelInstance[] = [];
 
-    if (!unit.unitComposition || !unit.availableWargear) {
+    if (!unit.unitComposition || !unit.wargear?.weapons) {
         return instances;
     }
 
@@ -351,7 +352,7 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
         // Convert weapon names to IDs
         const defaultLoadout: string[] = [];
         for (const weaponName of defaultWeaponNames) {
-            const weaponId = findWeaponIdByName(unit.availableWargear, weaponName);
+            const weaponId = findWeaponIdByName(unit.wargear?.weapons, weaponName);
             if (weaponId) {
                 defaultLoadout.push(weaponId);
             }
@@ -378,7 +379,7 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
  * This is used when creating EngagementForceItems to pre-compute the active weapons.
  */
 export function resolveUnitWargear(unit: ArmyListItem): Weapon[] {
-    if (!unit.availableWargear) {
+    if (!unit.wargear?.weapons) {
         return [];
     }
 
@@ -388,14 +389,14 @@ export function resolveUnitWargear(unit: ArmyListItem): Weapon[] {
         unit.modelInstances.forEach((m) => m.loadout.forEach((id) => weaponIds.add(id)));
 
         return Array.from(weaponIds)
-            .map((id) => unit.availableWargear!.find((w) => w.id === id))
+            .map((id) => unit.wargear?.weapons!.find((w) => w.id === id))
             .filter((w): w is Weapon => w !== undefined);
     }
 
     // Fallback: return default weapons from loadout string
     const defaultWeaponNames = parseLoadoutWeapons(unit.loadout || "").map((w) => w.toLowerCase());
 
-    return unit.availableWargear.filter((weapon) => {
+    return unit.wargear?.weapons.filter((weapon) => {
         const weaponNameLower = weapon.name.toLowerCase();
         return defaultWeaponNames.some((defaultName) => weaponNameLower.includes(defaultName) || defaultName.includes(weaponNameLower));
     });
@@ -658,9 +659,10 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                                     try {
                                         const freshDatasheet = await loadDatasheetData(list.factionSlug, migratedItem.id);
                                         if (freshDatasheet) {
-                                            migratedItem.leaderConditions = freshDatasheet.leaderConditions;
+                                            // Refresh consolidated leader object (includes conditions, attachableUnits, etc.)
+                                            migratedItem.leader = freshDatasheet.leader;
                                             migratedItem.abilities = freshDatasheet.abilities;
-                                            migratedItem.leaders = freshDatasheet.leaders;
+                                            migratedItem.leadsUnits = freshDatasheet.leadsUnits;
                                         }
                                     } catch (err) {
                                         console.warn(`Failed to refresh datasheet ${migratedItem.id}:`, err);
@@ -1147,12 +1149,12 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Helper to get default loadout for a model type
     function getDefaultLoadoutForModelType(unit: ArmyListItem, modelType: string): string[] {
-        if (!unit.loadout || !unit.availableWargear) return [];
+        if (!unit.loadout || !unit.wargear?.weapons) return [];
 
         const loadoutByType = parseLoadoutByModelType(unit.loadout, unit.unitComposition || []);
         const weaponNames = loadoutByType.get(modelType) || loadoutByType.get("Every model") || [];
 
-        return weaponNames.map((name) => findWeaponIdByName(unit.availableWargear!, name)).filter((id): id is string => id !== null);
+        return weaponNames.map((name) => findWeaponIdByName(unit.wargear?.weapons!, name)).filter((id): id is string => id !== null);
     }
 
     // Validate if a leader can attach to a unit (considering existing leaders)
@@ -1362,7 +1364,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     // Get unit's current weapons accounting for loadout selections
     const getUnitWeapons = useCallback(
         (unit: ArmyListItem): UnitWeapons => {
-            if (!unit.availableWargear) {
+            if (!unit.wargear?.weapons) {
                 return { ranged: [], melee: [] };
             }
 
@@ -1372,7 +1374,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
                 unit.modelInstances.forEach((m) => m.loadout.forEach((id) => weaponIds.add(id)));
 
                 const activeWeapons = Array.from(weaponIds)
-                    .map((id) => unit.availableWargear!.find((w) => w.id === id))
+                    .map((id) => unit.wargear?.weapons!.find((w) => w.id === id))
                     .filter((w): w is Weapon => w !== undefined);
 
                 const ranged = activeWeapons.filter((w) => w.type === "Ranged");
@@ -1384,7 +1386,7 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             // Fallback: return default weapons from loadout string
             const defaultWeaponNames = getDefaultLoadout(unit).map((w) => w.toLowerCase());
 
-            const activeWeapons: Weapon[] = unit.availableWargear.filter((weapon) => {
+            const activeWeapons: Weapon[] = unit.wargear?.weapons.filter((weapon) => {
                 const weaponNameLower = weapon.name.toLowerCase();
                 return defaultWeaponNames.some((defaultName) => weaponNameLower.includes(defaultName) || defaultName.includes(weaponNameLower));
             });

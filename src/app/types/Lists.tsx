@@ -30,7 +30,7 @@ export interface ModelInstance {
     instanceId: string; // Unique: "{listItemId}-{modelTypeSlug}-{index}"
     modelType: string; // From unitComposition: "Tactical Sergeant", "Tactical Marine"
     modelTypeLine: number; // unitComposition line number (for stats lookup)
-    loadout: string[]; // Array of weapon IDs from availableWargear
+    loadout: string[]; // Array of weapon IDs from wargear.weapons
     defaultLoadout: string[]; // Original loadout at creation (for detecting customization)
     // Tracks which weapon was selected for each option line (for overlapping options)
     // Key: option line number, Value: weapon ID selected for that option

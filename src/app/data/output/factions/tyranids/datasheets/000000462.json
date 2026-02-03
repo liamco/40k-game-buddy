@@ -9,13 +9,66 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Old-One-Eye",
   "slug": "old-one-eye",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000462:old-one-eye's-claws-and-talons",
+        "datasheetId": "000000462",
+        "line": 1,
+        "name": "Old One Eye's claws and talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000462",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Old One Eye's claws and talons - strike",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 3,
+            "s": 14,
+            "ap": -3,
+            "d": "D6+1"
+          },
+          {
+            "datasheetId": "000000462",
+            "line": 2,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Old One Eye's claws and talons - sweep",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 12,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Feel No Pain",
@@ -37,24 +90,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "reroll",
-          "attribute": "h",
-          "value": "failed",
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isLeadingUnit",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -63,16 +99,7 @@
       "factionId": "",
       "description": "At the start of each player's Command phase, this model regains up to D3 lost wounds.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "w",
-          "value": "D3"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -130,7 +157,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000462",
@@ -149,57 +175,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000490",
       "slug": "carnifexes"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000462:old-one-eye's-claws-and-talons",
-      "datasheetId": "000000462",
-      "line": 1,
-      "name": "Old One Eye's claws and talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000462",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Old One Eye's claws and talons - strike",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 3,
-          "s": 14,
-          "ap": -3,
-          "d": "D6+1"
-        },
-        {
-          "datasheetId": "000000462",
-          "line": 2,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Old One Eye's claws and talons - sweep",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 12,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
     }
   ]
 }

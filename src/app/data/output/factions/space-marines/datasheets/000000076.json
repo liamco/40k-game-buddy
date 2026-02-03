@@ -9,13 +9,84 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Lieutenant-With-Combi-weapon",
   "slug": "lieutenant-with-combi-weapon",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000076:combi-weapon",
+        "datasheetId": "000000076",
+        "line": 1,
+        "name": "Combi-weapon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000076",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Combi-weapon",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "DEVASTATING WOUNDS",
+              "RAPID FIRE 1"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000076:paired-combat-blades",
+        "datasheetId": "000000076",
+        "line": 2,
+        "name": "Paired combat blades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000076",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Paired combat blades",
+            "attributes": [
+              "ANTI-INFANTRY 4+",
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Feel No Pain",
@@ -45,32 +116,7 @@
       "factionId": "",
       "description": "At the start of the first battle round, if your army includes one or more models with this ability, you can select one objective marker on the battlefield. Until the end of the battle, while one or more models with this ability are on the battlefield, each time a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model makes an attack that targets an enemy unit that is within range of that objective marker, re-roll a Wound roll of 1.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisArmy",
-          "effect": "addsAbility",
-          "abilities": [
-            "OBJECTIVE MARKER SELECTION"
-          ],
-          "value": "one objective marker"
-        },
-        {
-          "entity": "thisModel",
-          "effect": "reroll",
-          "attribute": "w",
-          "value": "ones",
-          "conditions": [
-            {
-              "entity": "targetUnit",
-              "state": "inRangeOfObjective",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -79,32 +125,7 @@
       "factionId": "",
       "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this unit, if this unit is not within Engagement Range of one or more enemy units, it can make a Normal move.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "NORMAL MOVE"
-          ],
-          "value": "once per turn",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inRangeOfEnemyObjective",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "thisUnit",
-              "state": "inEngagementRange",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -113,18 +134,7 @@
       "factionId": "",
       "description": "This model cannot be selected as your Warlord.",
       "type": "Special (правая колонка)",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "CANNOT BE WARLORD"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -194,7 +204,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000076",
@@ -213,70 +222,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000076:combi-weapon",
-      "datasheetId": "000000076",
-      "line": 1,
-      "name": "Combi-weapon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000076",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Combi-weapon",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "DEVASTATING WOUNDS",
-            "RAPID FIRE 1"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000076:paired-combat-blades",
-      "datasheetId": "000000076",
-      "line": 2,
-      "name": "Paired combat blades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000076",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Paired combat blades",
-          "attributes": [
-            "ANTI-INFANTRY 4+",
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

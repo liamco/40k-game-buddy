@@ -9,13 +9,127 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Storm-Speeder-Hammerstrike",
   "slug": "storm-speeder-hammerstrike",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000114:hammerstrike-missile-launcher",
+        "datasheetId": "000000114",
+        "line": 1,
+        "name": "Hammerstrike missile launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000114",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hammerstrike missile launcher",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -3,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000114:krakstorm-grenade-launcher",
+        "datasheetId": "000000114",
+        "line": 2,
+        "name": "Krakstorm grenade launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000114",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Krakstorm grenade launcher",
+            "attributes": [],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      },
+      {
+        "id": "000000114:melta-destroyer",
+        "datasheetId": "000000114",
+        "line": 3,
+        "name": "Melta destroyer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000114",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Melta destroyer",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000114:close-combat-weapon",
+        "datasheetId": "000000114",
+        "line": 4,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000114",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,32 +151,7 @@
       "factionId": "",
       "description": "Each time this model has shot, select one enemy unit that was hit by one or more attacks made by this model this phase. Until the end of the phase, that enemy unit cannot have the Benefit of Cover.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "COVER"
-          ],
-          "value": false,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            },
-            {
-              "entity": "opposingUnit",
-              "attribute": "hit",
-              "operator": "notEquals",
-              "value": 0
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -120,7 +209,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000114",
@@ -139,113 +227,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000114:hammerstrike-missile-launcher",
-      "datasheetId": "000000114",
-      "line": 1,
-      "name": "Hammerstrike missile launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000114",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hammerstrike missile launcher",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -3,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000114:krakstorm-grenade-launcher",
-      "datasheetId": "000000114",
-      "line": 2,
-      "name": "Krakstorm grenade launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000114",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Krakstorm grenade launcher",
-          "attributes": [],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
-    },
-    {
-      "id": "000000114:melta-destroyer",
-      "datasheetId": "000000114",
-      "line": 3,
-      "name": "Melta destroyer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000114",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Melta destroyer",
-          "attributes": [
-            "MELTA 2"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000114:close-combat-weapon",
-      "datasheetId": "000000114",
-      "line": 4,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000114",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

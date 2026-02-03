@@ -9,13 +9,86 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to a <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">MARINES</span> unit, even if one other Leader unit has already been attached to it (you cannot attach more than one of the same leader to the same unit). If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Foul-Blightspawn",
   "slug": "foul-blightspawn",
   "factionSlug": "death-guard",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to a <span class=\"kwb\">PLAGUE</span> <span class=\"kwb\">MARINES</span> unit, even if one other Leader unit has already been attached to it (you cannot attach more than one of the same leader to the same unit). If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowsAnyExistingLeader": true
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001367:plague-sprayer",
+        "datasheetId": "000001367",
+        "line": 1,
+        "name": "Plague sprayer",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001367",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plague sprayer",
+            "attributes": [
+              "ANTI-INFANTRY 2+",
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 7,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001367:close-combat-weapon",
+        "datasheetId": "000001367",
+        "line": 2,
+        "name": "Close combat weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001367",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Close combat weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -111,7 +184,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001367",
@@ -130,70 +202,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001044",
       "slug": "plague-marines-2"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001367:plague-sprayer",
-      "datasheetId": "000001367",
-      "line": 1,
-      "name": "Plague sprayer",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001367",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plague sprayer",
-          "attributes": [
-            "ANTI-INFANTRY 2+",
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 7,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001367:close-combat-weapon",
-      "datasheetId": "000001367",
-      "line": 2,
-      "name": "Close combat weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001367",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Close combat weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
     }
   ]
 }

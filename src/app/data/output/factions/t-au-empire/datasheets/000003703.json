@@ -9,13 +9,177 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Kroot-War-Shaper",
   "slug": "kroot-war-shaper",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000003703:dart-bow-and-tri-blade",
+        "datasheetId": "000003703",
+        "line": 1,
+        "name": "Dart-bow and tri-blade",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003703",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Dart-bow and tri-blade",
+            "attributes": [
+              "ANTI-INFANTRY 3+",
+              "ASSAULT",
+              "HEAVY"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D3+1",
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003703:kroot-pistol",
+        "datasheetId": "000003703",
+        "line": 2,
+        "name": "Kroot pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000003703",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Kroot pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 4,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000003703:bladestave-and-prey-hook",
+        "datasheetId": "000003703",
+        "line": 3,
+        "name": "Bladestave and prey-hook",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003703",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bladestave and prey-hook",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000003703:shaper-s-blade",
+        "datasheetId": "000003703",
+        "line": 4,
+        "name": "Shaper's blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000003703",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Shaper's blade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 2,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000003703",
+          "line": 1,
+          "button": "•",
+          "description": "This model's dart-bow and tri-bade can be replaced with 1 bladestave and prey-hook."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's dart-bow and tri-bade can be replaced with 1 bladestave and prey-hook.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "dart-bow",
+                "count": 1
+              },
+              {
+                "name": "tri-bade",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "bladestave",
+                    "count": 1
+                  },
+                  {
+                    "name": "prey-hook",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Infiltrators",
@@ -108,14 +272,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000003703",
-      "line": 1,
-      "button": "•",
-      "description": "This model's dart-bow and tri-bade can be replaced with 1 bladestave and prey-hook."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000003703",
@@ -134,7 +290,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002588",
       "slug": "kroot-farstalkers"
@@ -143,158 +299,5 @@
       "id": "000000413",
       "slug": "kroot-carnivores"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000003703:dart-bow-and-tri-blade",
-      "datasheetId": "000003703",
-      "line": 1,
-      "name": "Dart-bow and tri-blade",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003703",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Dart-bow and tri-blade",
-          "attributes": [
-            "ANTI-INFANTRY 3+",
-            "ASSAULT",
-            "HEAVY"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D3+1",
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003703:kroot-pistol",
-      "datasheetId": "000003703",
-      "line": 2,
-      "name": "Kroot pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000003703",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Kroot pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 4,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000003703:bladestave-and-prey-hook",
-      "datasheetId": "000003703",
-      "line": 3,
-      "name": "Bladestave and prey-hook",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003703",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bladestave and prey-hook",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000003703:shaper-s-blade",
-      "datasheetId": "000003703",
-      "line": 4,
-      "name": "Shaper's blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000003703",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Shaper's blade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 2,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's dart-bow and tri-bade can be replaced with 1 bladestave and prey-hook.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "dart-bow",
-            "count": 1
-          },
-          {
-            "name": "tri-bade",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "bladestave",
-                "count": 1
-              },
-              {
-                "name": "prey-hook",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

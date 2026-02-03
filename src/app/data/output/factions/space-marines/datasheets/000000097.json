@@ -9,13 +9,175 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Hammerfall-Bunker",
   "slug": "hammerfall-bunker",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Fortifications",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000097:hammerfall-heavy-bolter-array",
+        "datasheetId": "000000097",
+        "line": 1,
+        "name": "Hammerfall heavy bolter array",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000097",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hammerfall heavy bolter array",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000097:hammerfall-heavy-flamer-array",
+        "datasheetId": "000000097",
+        "line": 2,
+        "name": "Hammerfall heavy flamer array",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000097",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hammerfall heavy flamer array",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT",
+              "TWIN-LINKED"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000097:hammerfall-missile-launcher",
+        "datasheetId": "000000097",
+        "line": 3,
+        "name": "Hammerfall missile launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000097",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hammerfall missile launcher - superfrag",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "2D6+2",
+            "bsWs": 4,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000097",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Hammerfall missile launcher - superkrak",
+            "attributes": [],
+            "range": 48,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -2,
+            "d": "D6+1"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000097",
+          "line": 1,
+          "button": "•",
+          "description": "This model's Hammerfall heavy bolter array can be replaced with 1 Hammerfall heavy flamer array."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's Hammerfall heavy bolter array can be replaced with 1 Hammerfall heavy flamer array.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Hammerfall heavy bolter array",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Hammerfall heavy flamer array",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,16 +195,7 @@
       "factionId": "",
       "description": "While an enemy unit is only within Engagement Range of one or more <span class=\"kwb\">FORTIFICATIONS</span> from your army: <br><ul><li>That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. </li><li>Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.</li></ul>",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -51,25 +204,7 @@
       "factionId": "",
       "description": "Each time a ranged attack is allocated to a model, if that model is not fully visible to every model in the attacking unit because of this <span class=\"kwb\">FORTIFICATION</span>, that model has the Benefit of Cover against that attack.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "targetModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "BENEFIT OF COVER"
-          ],
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "isFullyVisible",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -78,32 +213,7 @@
       "factionId": "",
       "description": "You can target this <span class=\"kwb\">FORTIFICATION</span> with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted another unit with that Stratagem this turn. This <span class=\"kwb\">FORTIFICATION</span> can only be targeted with that Stratagem once per turn.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "FIRE OVERWATCH"
-          ],
-          "value": 0
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "targetedWithStratagem",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "attribute": "targetedWithStratagem",
-              "operator": "lessThanOrEqualTo",
-              "value": 1
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -155,14 +265,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000097",
-      "line": 1,
-      "button": "•",
-      "description": "This model's Hammerfall heavy bolter array can be replaced with 1 Hammerfall heavy flamer array."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000097",
@@ -181,144 +283,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Fortifications",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000097:hammerfall-heavy-bolter-array",
-      "datasheetId": "000000097",
-      "line": 1,
-      "name": "Hammerfall heavy bolter array",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000097",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hammerfall heavy bolter array",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000097:hammerfall-heavy-flamer-array",
-      "datasheetId": "000000097",
-      "line": 2,
-      "name": "Hammerfall heavy flamer array",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000097",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hammerfall heavy flamer array",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT",
-            "TWIN-LINKED"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000097:hammerfall-missile-launcher",
-      "datasheetId": "000000097",
-      "line": 3,
-      "name": "Hammerfall missile launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000097",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hammerfall missile launcher - superfrag",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "2D6+2",
-          "bsWs": 4,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000097",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Hammerfall missile launcher - superkrak",
-          "attributes": [],
-          "range": 48,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -2,
-          "d": "D6+1"
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's Hammerfall heavy bolter array can be replaced with 1 Hammerfall heavy flamer array.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Hammerfall heavy bolter array",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Hammerfall heavy flamer array",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

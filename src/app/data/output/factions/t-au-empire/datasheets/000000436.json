@@ -9,13 +9,84 @@
   "transport": "This model has a transport capacity of 11 T'au Empire Infantry models. It cannot transport Battlesuit, Kroot or Vespid Stingwings models. If this model is equipped with a Tidewall defence platform, it has a transport capacity of 22 T'au Infantry models instead.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/t-au-empire/Tidewall-Shieldline",
   "slug": "tidewall-shieldline",
   "factionSlug": "t-au-empire",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Fortifications",
+  "sourceName": "Faction Pack: T'au Empire",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000436:wargear-1",
+        "datasheetId": "000000436",
+        "line": 1,
+        "name": "Wargear 1",
+        "type": "",
+        "profiles": [
+          {
+            "datasheetId": "000000436",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "",
+            "attributes": [],
+            "range": "",
+            "type": "",
+            "a": 0,
+            "bsWs": "-",
+            "s": "-",
+            "ap": 0,
+            "d": "-"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000436",
+          "line": 1,
+          "button": "•",
+          "description": "This model can be equipped with 1 Tidewall defence platform."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model can be equipped with 1 Tidewall defence platform.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "add",
+            "removes": [],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "Tidewall defence platform",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -34,16 +105,7 @@
       "factionId": "",
       "description": "While an enemy unit is only within Engagement Range of one or more Fortifications from your army: <br><ul><li>That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. </li><li>Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.</li></ul>",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -119,14 +181,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000436",
-      "line": 1,
-      "button": "•",
-      "description": "This model can be equipped with 1 Tidewall defence platform."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000436",
@@ -151,65 +205,5 @@
       "cost": "+20"
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Fortifications",
-  "sourceName": "Faction Pack: T'au Empire",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000436:wargear-1",
-      "datasheetId": "000000436",
-      "line": 1,
-      "name": "Wargear 1",
-      "type": "",
-      "profiles": [
-        {
-          "datasheetId": "000000436",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "",
-          "attributes": [],
-          "range": "",
-          "type": "",
-          "a": 0,
-          "bsWs": "-",
-          "s": "-",
-          "ap": 0,
-          "d": "-"
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model can be equipped with 1 Tidewall defence platform.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "add",
-        "removes": [],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "Tidewall defence platform",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

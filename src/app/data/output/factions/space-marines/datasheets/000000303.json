@@ -9,13 +9,223 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Blood-Claws",
   "slug": "blood-claws",
   "factionSlug": "space-marines",
   "supplementKey": "space-wolves",
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Battleline",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000303:bolt-pistol",
+        "datasheetId": "000000303",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000303",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000303:plasma-pistol",
+        "datasheetId": "000000303",
+        "line": 2,
+        "name": "Plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000303",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma pistol - standard",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000303",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma pistol - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000303:astartes-chainsword",
+        "datasheetId": "000000303",
+        "line": 4,
+        "name": "Astartes chainsword",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000303",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Astartes chainsword",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000303:power-weapon",
+        "datasheetId": "000000303",
+        "line": 5,
+        "name": "Power weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000303",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Power weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000303",
+          "line": 1,
+          "button": "•",
+          "description": "The Blood Claw Pack Leader's bolt pistol can be replaced with 1 plasma pistol."
+        },
+        {
+          "datasheetId": "000000303",
+          "line": 2,
+          "button": "•",
+          "description": "The Blood Claw Pack Leader's Astartes chainsword can be replaced with 1 power weapon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "The Blood Claw Pack Leader's bolt pistol can be replaced with 1 plasma pistol.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "specific-model",
+            "modelType": "Blood Claw Pack Leader"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "bolt pistol",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plasma pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "The Blood Claw Pack Leader's Astartes chainsword can be replaced with 1 power weapon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "specific-model",
+            "modelType": "Blood Claw Pack Leader"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Astartes chainsword",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "power weapon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Oath of Moment",
@@ -28,18 +238,7 @@
       "factionId": "",
       "description": "This unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "CHARGE AFTER ADVANCING"
-          ],
-          "value": true
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -109,20 +308,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000303",
-      "line": 1,
-      "button": "•",
-      "description": "The Blood Claw Pack Leader's bolt pistol can be replaced with 1 plasma pistol."
-    },
-    {
-      "datasheetId": "000000303",
-      "line": 2,
-      "button": "•",
-      "description": "The Blood Claw Pack Leader's Astartes chainsword can be replaced with 1 power weapon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000303",
@@ -155,198 +340,5 @@
       "count": 20
     }
   ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Battleline",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000303:bolt-pistol",
-      "datasheetId": "000000303",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000303",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000303:plasma-pistol",
-      "datasheetId": "000000303",
-      "line": 2,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000303",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol - standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000303",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000303:astartes-chainsword",
-      "datasheetId": "000000303",
-      "line": 4,
-      "name": "Astartes chainsword",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000303",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Astartes chainsword",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000303:power-weapon",
-      "datasheetId": "000000303",
-      "line": 5,
-      "name": "Power weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000303",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Power weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "The Blood Claw Pack Leader's bolt pistol can be replaced with 1 plasma pistol.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "specific-model",
-        "modelType": "Blood Claw Pack Leader"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "bolt pistol",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "plasma pistol",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "The Blood Claw Pack Leader's Astartes chainsword can be replaced with 1 power weapon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "specific-model",
-        "modelType": "Blood Claw Pack Leader"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Astartes chainsword",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "power weapon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

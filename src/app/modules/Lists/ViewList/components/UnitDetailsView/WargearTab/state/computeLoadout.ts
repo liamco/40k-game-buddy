@@ -124,22 +124,22 @@ function weaponIdMatches(weaponId: string, weaponName: string): boolean {
 }
 
 /**
- * Find the weapon object from availableWargear by ID or name.
+ * Find the weapon object from weapons array by ID or name.
  */
-export function findWeaponById(weaponIdOrName: string, availableWargear: Weapon[]): Weapon | undefined {
+export function findWeaponById(weaponIdOrName: string, weapons: Weapon[]): Weapon | undefined {
     // Try exact ID match first
-    let weapon = availableWargear.find((w) => w.id === weaponIdOrName);
+    let weapon = weapons.find((w) => w.id === weaponIdOrName);
     if (weapon) return weapon;
 
     // Try name match
-    weapon = availableWargear.find((w) => w.name.toLowerCase() === weaponIdOrName.toLowerCase());
+    weapon = weapons.find((w) => w.name.toLowerCase() === weaponIdOrName.toLowerCase());
     if (weapon) return weapon;
 
     // Try slug match from ID format
     const idParts = weaponIdOrName.split(":");
     if (idParts.length === 2) {
         const slug = idParts[1];
-        weapon = availableWargear.find((w) => {
+        weapon = weapons.find((w) => {
             const wSlug = w.name.toLowerCase().replace(/\s+/g, "-");
             return wSlug === slug;
         });

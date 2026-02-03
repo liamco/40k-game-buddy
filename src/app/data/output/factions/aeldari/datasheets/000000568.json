@@ -9,13 +9,118 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "If this model is not already attached to a unit, you can attach this model to a unit, even if one Warlocks unit has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/aeldari/Eldrad-Ulthran",
   "slug": "eldrad-ulthran",
   "factionSlug": "aeldari",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "If this model is not already attached to a unit, you can attach this model to a unit, even if one Warlocks unit has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "WARLOCKS"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000568:mind-war",
+        "datasheetId": "000000568",
+        "line": 1,
+        "name": "Mind War",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000568",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Mind War",
+            "attributes": [
+              "ANTI-CHARACTER 4+",
+              "PRECISION",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000000568:shuriken-pistol",
+        "datasheetId": "000000568",
+        "line": 2,
+        "name": "Shuriken pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000568",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Shuriken pistol",
+            "attributes": [
+              "ASSAULT",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000568:staff-of-ulthamar-and-witchblade",
+        "datasheetId": "000000568",
+        "line": 3,
+        "name": "Staff of Ulthamar and witchblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000568",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Staff of Ulthamar and witchblade",
+            "attributes": [
+              "ANTI-INFANTRY 2+",
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -41,16 +146,7 @@
       "factionId": "",
       "description": "At the end of your Movement phase, select one enemy unit within 18\" of and visible to this model. Until the start of your next Command phase, each time a friendly <span class=\"kwb\">AELDARI</span> model makes an attack that targets that enemy unit, add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -126,7 +222,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000568",
@@ -145,7 +240,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000584",
       "slug": "warlock-conclave"
@@ -157,96 +252,6 @@
     {
       "id": "000000589",
       "slug": "guardian-defenders"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000568:mind-war",
-      "datasheetId": "000000568",
-      "line": 1,
-      "name": "Mind War",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000568",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Mind War",
-          "attributes": [
-            "ANTI-CHARACTER 4+",
-            "PRECISION",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000000568:shuriken-pistol",
-      "datasheetId": "000000568",
-      "line": 2,
-      "name": "Shuriken pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000568",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Shuriken pistol",
-          "attributes": [
-            "ASSAULT",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000568:staff-of-ulthamar-and-witchblade",
-      "datasheetId": "000000568",
-      "line": 3,
-      "name": "Staff of Ulthamar and witchblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000568",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Staff of Ulthamar and witchblade",
-          "attributes": [
-            "ANTI-INFANTRY 2+",
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -1,
-          "d": 2
-        }
-      ]
     }
   ]
 }

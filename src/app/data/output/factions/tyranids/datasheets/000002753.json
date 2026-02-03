@@ -9,13 +9,53 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Neurolictor",
   "slug": "neurolictor-2",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002753:piercing-claws-and-talons",
+        "datasheetId": "000002753",
+        "line": 1,
+        "name": "Piercing claws and talons",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000002753",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Piercing claws and talons",
+            "attributes": [
+              "PRECISION"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 6,
+            "ap": -2,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Infiltrators",
@@ -44,23 +84,7 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "opposingModel",
-              "state": "isCharacter",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -69,27 +93,7 @@
       "factionId": "",
       "description": "In your Command phase, select one enemy unit within 12\" of this model. That unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "opposingUnit",
-          "effect": "rollPenalty",
-          "attribute": "ld",
-          "value": 0,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "attribute": null,
-              "abilities": null,
-              "state": null,
-              "keywords": null,
-              "operator": "notEquals",
-              "value": null
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -98,22 +102,7 @@
       "factionId": "",
       "description": "While an enemy unit is within 12\" of this model, if that unit is Battle-shocked:<br><ul><li>Each time a model in that unit makes an attack, subtract 1 from the Hit roll.</li><li>Each time a friendly <span class=\"kwb\">TYRANIDS</span> model makes an attack that targets that unit, add 1 to the Wound roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -171,7 +160,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002753",
@@ -190,39 +178,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002753:piercing-claws-and-talons",
-      "datasheetId": "000002753",
-      "line": 1,
-      "name": "Piercing claws and talons",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000002753",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Piercing claws and talons",
-          "attributes": [
-            "PRECISION"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 6,
-          "ap": -2,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

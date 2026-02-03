@@ -9,13 +9,147 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/death-guard/Myphitic-Blight-hauler",
   "slug": "myphitic-blight-hauler",
   "factionSlug": "death-guard",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Death Guard",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001374:bile-spurt",
+        "datasheetId": "000001374",
+        "line": 1,
+        "name": "Bile spurt",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001374",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bile spurt",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001374:missile-launcher",
+        "datasheetId": "000001374",
+        "line": 2,
+        "name": "Missile launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001374",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Missile launcher - frag",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 48,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          },
+          {
+            "datasheetId": "000001374",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Missile launcher - krak",
+            "attributes": [],
+            "range": 48,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -2,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000001374:multi-melta",
+        "datasheetId": "000001374",
+        "line": 4,
+        "name": "Multi-melta",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001374",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Multi-melta",
+            "attributes": [
+              "MELTA 2",
+              "LETHAL HITS"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000001374:gnashing-maw",
+        "datasheetId": "000001374",
+        "line": 5,
+        "name": "Gnashing maw",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001374",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gnashing maw",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,22 +167,7 @@
       "factionId": "",
       "description": "In your Shooting phase, each time a model in this unit makes an attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, add 1 to the Hit roll and add 1 to the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "h",
-          "value": 1
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "rollBonus",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -118,7 +237,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001374",
@@ -144,133 +262,5 @@
       "count": 2
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Death Guard",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001374:bile-spurt",
-      "datasheetId": "000001374",
-      "line": 1,
-      "name": "Bile spurt",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001374",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bile spurt",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001374:missile-launcher",
-      "datasheetId": "000001374",
-      "line": 2,
-      "name": "Missile launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001374",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Missile launcher - frag",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 48,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        },
-        {
-          "datasheetId": "000001374",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Missile launcher - krak",
-          "attributes": [],
-          "range": 48,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -2,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000001374:multi-melta",
-      "datasheetId": "000001374",
-      "line": 4,
-      "name": "Multi-melta",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001374",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Multi-melta",
-          "attributes": [
-            "MELTA 2",
-            "LETHAL HITS"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000001374:gnashing-maw",
-      "datasheetId": "000001374",
-      "line": 5,
-      "name": "Gnashing maw",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001374",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gnashing maw",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

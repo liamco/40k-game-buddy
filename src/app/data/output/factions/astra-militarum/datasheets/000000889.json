@@ -9,13 +9,127 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/astra-militarum/Primaris-Psyker",
   "slug": "primaris-psyker",
   "factionSlug": "astra-militarum",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Astra Militarum",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000889:laspistol",
+        "datasheetId": "000000889",
+        "line": 1,
+        "name": "Laspistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000889",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Laspistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 3,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000889:psychic-maelstrom",
+        "datasheetId": "000000889",
+        "line": 2,
+        "name": "Psychic Maelstrom",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000889",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Psychic Maelstrom - witchfire",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000889",
+            "line": 3,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Psychic Maelstrom - focused witchfire",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS",
+              "HAZARDOUS",
+              "PSYCHIC"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "D6+1",
+            "bsWs": 3,
+            "s": 6,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000889:force-weapon",
+        "datasheetId": "000000889",
+        "line": 4,
+        "name": "Force weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000889",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Force weapon",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": "D3"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -28,18 +142,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -48,16 +151,7 @@
       "factionId": "",
       "description": "At the start of your opponent's Shooting phase, you can roll one D6: on a 1, this <span class=\"kwb\">PSYKER</span>'s unit suffers D3 mortal wounds; on a 2+, until the end of the phase, models in this <span class=\"kwb\">PSYKER</span>'s unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -115,7 +209,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000889",
@@ -134,7 +227,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000002746",
       "slug": "tempestus-scions"
@@ -158,114 +251,6 @@
     {
       "id": "000002612",
       "slug": "cadian-shock-troops"
-    }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Astra Militarum",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000889:laspistol",
-      "datasheetId": "000000889",
-      "line": 1,
-      "name": "Laspistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000889",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Laspistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 3,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000889:psychic-maelstrom",
-      "datasheetId": "000000889",
-      "line": 2,
-      "name": "Psychic Maelstrom",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000889",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Psychic Maelstrom - witchfire",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000889",
-          "line": 3,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Psychic Maelstrom - focused witchfire",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS",
-            "HAZARDOUS",
-            "PSYCHIC"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "D6+1",
-          "bsWs": 3,
-          "s": 6,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000889:force-weapon",
-      "datasheetId": "000000889",
-      "line": 4,
-      "name": "Force weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000889",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Force weapon",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": "D3"
-        }
-      ]
     }
   ]
 }

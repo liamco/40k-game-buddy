@@ -9,13 +9,51 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Convergence-Of-Dominion",
   "slug": "convergence-of-dominion",
   "factionSlug": "necrons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Fortifications",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000002361:transdimensional-abductor",
+        "datasheetId": "000002361",
+        "line": 1,
+        "name": "Transdimensional abductor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002361",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Transdimensional abductor",
+            "attributes": [],
+            "range": 18,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Reanimation Protocols",
@@ -28,18 +66,7 @@
       "factionId": "",
       "description": "While a friendly Necrons Infantry unit is within 6\" of this Fortification, models in that unit have Feel No Pain 6+ ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "FEEL NO PAIN"
-          ],
-          "value": 6
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -57,16 +84,7 @@
       "factionId": "",
       "description": "While an enemy unit is only within Engagement Range of one or more Fortifications from your army: <br><ul><li>That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. </li><li>Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.</li></ul>",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -121,7 +139,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000002361",
@@ -154,37 +171,5 @@
       "count": 3
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Fortifications",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000002361:transdimensional-abductor",
-      "datasheetId": "000002361",
-      "line": 1,
-      "name": "Transdimensional abductor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000002361",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Transdimensional abductor",
-          "attributes": [],
-          "range": 18,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

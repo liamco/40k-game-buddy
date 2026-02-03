@@ -590,6 +590,221 @@ function removeEnhancementsFromDatasheet(obj) {
 }
 
 /**
+ * Consolidates leader-related properties into a single `leader` object.
+ * Returns null if there's no usable leader data.
+ *
+ * Transforms:
+ *   - leader (description) -> leader.description
+ *   - leaderFooter -> leader.footer
+ *   - leaderInfo (attachable units array) -> leader.attachableUnits
+ *   - (leaderConditions will be added later by parse-datasheet-fields.js)
+ *
+ * @param {object} obj - The datasheet object to process
+ * @returns {object} - The datasheet with consolidated leader property (or null if empty)
+ */
+function consolidateLeaderProperties(obj) {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+        return obj;
+    }
+
+    // Check for leader-related properties
+    const hasLeaderDescription = obj.hasOwnProperty("leader") && typeof obj.leader === "string";
+    const hasLeaderFooter = obj.hasOwnProperty("leaderFooter");
+    const hasLeaderInfo = obj.hasOwnProperty("leaderInfo");
+
+    const consolidated = { ...obj };
+
+    // Remove old properties regardless
+    if (hasLeaderDescription) {
+        delete consolidated.leader;
+    }
+    if (hasLeaderFooter) {
+        delete consolidated.leaderFooter;
+    }
+    if (hasLeaderInfo) {
+        delete consolidated.leaderInfo;
+    }
+
+    // Check if there's any actual leader data
+    const leaderDescription = hasLeaderDescription ? obj.leader : "";
+    const leaderFooter = obj.leaderFooter || "";
+    const leaderInfo = Array.isArray(obj.leaderInfo) ? obj.leaderInfo : [];
+
+    const hasActualData = leaderDescription.trim() !== "" || leaderFooter.trim() !== "" || leaderInfo.length > 0;
+
+    if (!hasActualData) {
+        // No usable leader data - set to null
+        consolidated.leader = null;
+        return consolidated;
+    }
+
+    // Build the new leader object with actual data
+    const leaderData = {
+        description: leaderDescription,
+        footer: leaderFooter,
+        conditions: null, // Will be populated by parse-datasheet-fields.js
+        attachableUnits: leaderInfo,
+    };
+
+    consolidated.leader = leaderData;
+
+    return consolidated;
+}
+
+/**
+ * Consolidates damaged-related properties into a single `damaged` object.
+ * Returns null if there's no usable damaged data.
+ *
+ * Transforms:
+ *   - damagedW -> damaged.range
+ *   - damagedDescription -> damaged.description
+ *   - (damagedThreshold and damagedMechanics will be added later by parse-datasheet-fields.js)
+ *
+ * @param {object} obj - The datasheet object to process
+ * @returns {object} - The datasheet with consolidated damaged property (or null if empty)
+ */
+function consolidateDamagedProperties(obj) {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+        return obj;
+    }
+
+    // Only process if the datasheet has damaged-related properties
+    const hasDamagedW = obj.hasOwnProperty("damagedW");
+    const hasDamagedDescription = obj.hasOwnProperty("damagedDescription");
+
+    const consolidated = { ...obj };
+
+    // Remove old properties regardless
+    if (hasDamagedW) {
+        delete consolidated.damagedW;
+    }
+    if (hasDamagedDescription) {
+        delete consolidated.damagedDescription;
+    }
+
+    // Check if there's any actual damaged data
+    const hasActualData = (obj.damagedW && obj.damagedW.trim() !== "") || (obj.damagedDescription && obj.damagedDescription.trim() !== "");
+
+    if (!hasActualData) {
+        // No usable damaged data - set to null
+        consolidated.damaged = null;
+        return consolidated;
+    }
+
+    // Build the new damaged object with actual data
+    const damagedData = {
+        range: obj.damagedW || "",
+        threshold: 0, // Will be populated by parse-datasheet-fields.js
+        description: obj.damagedDescription || "",
+        mechanics: [], // Will be populated by parse-datasheet-fields.js
+    };
+
+    consolidated.damaged = damagedData;
+
+    return consolidated;
+}
+
+/**
+ * Consolidates wargear-related properties into a single `wargear` object.
+ *
+ * Transforms:
+ *   - wargear (weapon profiles) -> wargear.weapons (after grouping profiles)
+ *   - options (raw option text) -> wargear.options.raw
+ *   - (parsed options will be added later by parse-wargear-options.js)
+ *
+ * @param {object} obj - The datasheet object to process
+ * @returns {object} - The datasheet with consolidated wargear property
+ */
+function consolidateWargearProperties(obj) {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+        return obj;
+    }
+
+    const consolidated = { ...obj };
+
+    // Group weapon profiles first (e.g., "Plasma pistol – standard" and "Plasma pistol – supercharge" become one weapon)
+    const weapons = obj.wargear && Array.isArray(obj.wargear) ? groupWeaponProfiles(obj.wargear) : [];
+
+    // Get raw options
+    const rawOptions = obj.options && Array.isArray(obj.options) ? obj.options : [];
+
+    // Build the consolidated wargear object
+    const wargearData = {
+        weapons: weapons,
+        options: {
+            raw: rawOptions,
+            parsed: [], // Will be populated by parse-wargear-options.js
+            allParsed: false, // Will be set by parse-wargear-options.js
+        },
+    };
+
+    // Remove old properties
+    if (consolidated.hasOwnProperty("wargear")) {
+        delete consolidated.wargear;
+    }
+    if (consolidated.hasOwnProperty("options")) {
+        delete consolidated.options;
+    }
+    // Also remove availableWargear if it somehow exists (shouldn't at this point)
+    if (consolidated.hasOwnProperty("availableWargear")) {
+        delete consolidated.availableWargear;
+    }
+
+    consolidated.wargear = wargearData;
+
+    return consolidated;
+}
+
+/**
+ * Renames the 'leaders' property to 'leadsUnits' for clarity.
+ * The 'leaders' array contains units this character can lead (attach to as a leader),
+ * not units that can lead this unit.
+ *
+ * @param {object} obj - The datasheet object to process
+ * @returns {object} - The datasheet with renamed property
+ */
+function renameLeadersProperty(obj) {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+        return obj;
+    }
+
+    if (!obj.hasOwnProperty("leaders")) {
+        return obj;
+    }
+
+    const { leaders, ...rest } = obj;
+    return { ...rest, leadsUnits: leaders };
+}
+
+/**
+ * Reorders properties in a datasheet object so that array properties come last.
+ * This makes the JSON output cleaner and easier to read.
+ *
+ * @param {object} obj - The datasheet object to reorder
+ * @returns {object} - The datasheet with reordered properties
+ */
+function reorderDatasheetProperties(obj) {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) {
+        return obj;
+    }
+
+    const scalarProps = {};
+    const arrayProps = {};
+
+    for (const key of Object.keys(obj)) {
+        const value = obj[key];
+        if (Array.isArray(value)) {
+            arrayProps[key] = value;
+        } else {
+            scalarProps[key] = value;
+        }
+    }
+
+    // Return object with scalar properties first, then array properties
+    return { ...scalarProps, ...arrayProps };
+}
+
+/**
  * Processes Core and Faction type abilities in a datasheet's abilities array.
  * - Datasheet and Wargear abilities are kept as-is (full data)
  * - Core and Faction abilities are converted to references (name, type, parameter only)
@@ -836,12 +1051,20 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
                 processedData.unitComposition = processUnitComposition(processedData.unitComposition, processedData.id || "unknown", processedData.name || "unknown", relativePath);
             }
 
-            // Group weapon profiles (e.g., "Plasma pistol – standard" and "Plasma pistol – supercharge" become one weapon with two profiles)
-            // Rename wargear to availableWargear (wargear on EngagementForceItem is the resolved active weapons)
-            if (processedData.wargear && Array.isArray(processedData.wargear)) {
-                processedData.availableWargear = groupWeaponProfiles(processedData.wargear);
-                delete processedData.wargear;
-            }
+            // Consolidate leader properties (leader, leaderFooter, leaderInfo -> leader object)
+            processedData = consolidateLeaderProperties(processedData);
+
+            // Consolidate damaged properties (damagedW, damagedDescription -> damaged object)
+            processedData = consolidateDamagedProperties(processedData);
+
+            // Consolidate wargear properties (wargear, options -> wargear object with weapons and options)
+            processedData = consolidateWargearProperties(processedData);
+
+            // Rename 'leaders' to 'leadsUnits' for clarity
+            processedData = renameLeadersProperty(processedData);
+
+            // Reorder properties so arrays come last (cleaner JSON output)
+            processedData = reorderDatasheetProperties(processedData);
         } else {
             // This is a faction.json file - check for faction-config.json and apply supplement slugs to detachments
             // Extract faction slug from path (e.g., "factions/space-marines/faction.json" -> "space-marines")

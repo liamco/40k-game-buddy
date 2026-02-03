@@ -9,13 +9,76 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-daemons/Epidemius",
   "slug": "epidemius",
   "factionSlug": "chaos-daemons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Daemons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001129:balesword-and-nurgling-attendants",
+        "datasheetId": "000001129",
+        "line": 1,
+        "name": "Balesword and Nurgling attendants",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001129",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Balesword and Nurgling attendants",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001129",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deep Strike",
@@ -36,16 +99,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have a 4+ invulnerable save.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -124,14 +178,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001129",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001129",
@@ -150,62 +196,10 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000001132",
       "slug": "plaguebearers"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Daemons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001129:balesword-and-nurgling-attendants",
-      "datasheetId": "000001129",
-      "line": 1,
-      "name": "Balesword and Nurgling attendants",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001129",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Balesword and Nurgling attendants",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "None",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "unknown"
-      },
-      "action": {
-        "type": "unknown",
-        "removes": [],
-        "adds": [],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

@@ -36,11 +36,7 @@ export function getWargearAbilities(abilities: Ability[]): Ability[] {
  * 2. Otherwise, infer from ability name matching weapon name
  * 3. Common wargear items (icons, instruments, banners) are equipment-based
  */
-export function buildAbilityMappings(
-    wargearAbilities: Ability[],
-    availableWargear: Weapon[],
-    precomputedMappings?: WargearAbilityMapping[]
-): WargearAbilityMapping[] {
+export function buildAbilityMappings(wargearAbilities: Ability[], weapons: Weapon[], precomputedMappings?: WargearAbilityMapping[]): WargearAbilityMapping[] {
     // Use precomputed if available
     if (precomputedMappings && precomputedMappings.length > 0) {
         return precomputedMappings;
@@ -48,27 +44,21 @@ export function buildAbilityMappings(
 
     // Build inferred mappings
     const mappings: WargearAbilityMapping[] = [];
-    const weaponNames = availableWargear.map((w) => w.name.toLowerCase());
+    const weaponNames = weapons.map((w) => w.name.toLowerCase());
 
     for (const ability of wargearAbilities) {
         const abilityNameLower = ability.name.toLowerCase();
         const triggerWeapons: string[] = [];
 
         // Check for exact match
-        const exactMatch = availableWargear.find(
-            (w) => w.name.toLowerCase() === abilityNameLower
-        );
+        const exactMatch = weapons.find((w) => w.name.toLowerCase() === abilityNameLower);
         if (exactMatch) {
             triggerWeapons.push(exactMatch.name);
         }
 
         // Check for partial match (e.g., "Storm Shield" ability matches "storm shield" weapon)
         if (triggerWeapons.length === 0) {
-            const partialMatches = availableWargear.filter(
-                (w) =>
-                    w.name.toLowerCase().includes(abilityNameLower) ||
-                    abilityNameLower.includes(w.name.toLowerCase())
-            );
+            const partialMatches = weapons.filter((w) => w.name.toLowerCase().includes(abilityNameLower) || abilityNameLower.includes(w.name.toLowerCase()));
             for (const match of partialMatches) {
                 triggerWeapons.push(match.name);
             }
@@ -78,24 +68,13 @@ export function buildAbilityMappings(
         if (triggerWeapons.length === 0) {
             // Icons, Instruments, Banners, Standards
             if (abilityNameLower.includes("icon")) {
-                const iconWeapons = availableWargear.filter((w) =>
-                    w.name.toLowerCase().includes("icon")
-                );
+                const iconWeapons = weapons.filter((w) => w.name.toLowerCase().includes("icon"));
                 triggerWeapons.push(...iconWeapons.map((w) => w.name));
             } else if (abilityNameLower.includes("instrument")) {
-                const instrumentWeapons = availableWargear.filter((w) =>
-                    w.name.toLowerCase().includes("instrument")
-                );
+                const instrumentWeapons = weapons.filter((w) => w.name.toLowerCase().includes("instrument"));
                 triggerWeapons.push(...instrumentWeapons.map((w) => w.name));
-            } else if (
-                abilityNameLower.includes("banner") ||
-                abilityNameLower.includes("standard")
-            ) {
-                const bannerWeapons = availableWargear.filter(
-                    (w) =>
-                        w.name.toLowerCase().includes("banner") ||
-                        w.name.toLowerCase().includes("standard")
-                );
+            } else if (abilityNameLower.includes("banner") || abilityNameLower.includes("standard")) {
+                const bannerWeapons = weapons.filter((w) => w.name.toLowerCase().includes("banner") || w.name.toLowerCase().includes("standard"));
                 triggerWeapons.push(...bannerWeapons.map((w) => w.name));
             }
         }
@@ -112,27 +91,17 @@ export function buildAbilityMappings(
 /**
  * Compute which wargear abilities are currently active based on loadout.
  */
-export function computeActiveAbilities(
-    loadout: string[],
-    mappings: WargearAbilityMapping[],
-    availableWargear: Weapon[]
-): string[] {
+export function computeActiveAbilities(loadout: string[], mappings: WargearAbilityMapping[], weapons: Weapon[]): string[] {
     const activeAbilities: string[] = [];
     const loadoutLower = loadout.map((id) => {
         // Convert weapon ID to name for matching
-        const weapon = availableWargear.find((w) => w.id === id);
+        const weapon = weapons.find((w) => w.id === id);
         return weapon ? weapon.name.toLowerCase() : id.toLowerCase();
     });
 
     for (const mapping of mappings) {
         // Check if any trigger weapon is in the loadout
-        const isActive = mapping.triggerWeaponNames.some((triggerName) =>
-            loadoutLower.some(
-                (loadoutName) =>
-                    loadoutName.includes(triggerName.toLowerCase()) ||
-                    triggerName.toLowerCase().includes(loadoutName)
-            )
-        );
+        const isActive = mapping.triggerWeaponNames.some((triggerName) => loadoutLower.some((loadoutName) => loadoutName.includes(triggerName.toLowerCase()) || triggerName.toLowerCase().includes(loadoutName)));
 
         if (isActive) {
             activeAbilities.push(mapping.abilityName);
@@ -146,15 +115,11 @@ export function computeActiveAbilities(
  * Compute active wargear abilities for an entire unit.
  * Checks all model loadouts to see which abilities are active.
  */
-export function computeUnitActiveAbilities(
-    modelLoadouts: string[][],
-    mappings: WargearAbilityMapping[],
-    availableWargear: Weapon[]
-): string[] {
+export function computeUnitActiveAbilities(modelLoadouts: string[][], mappings: WargearAbilityMapping[], weapons: Weapon[]): string[] {
     const allActive = new Set<string>();
 
     for (const loadout of modelLoadouts) {
-        const active = computeActiveAbilities(loadout, mappings, availableWargear);
+        const active = computeActiveAbilities(loadout, mappings, weapons);
         for (const abilityName of active) {
             allActive.add(abilityName);
         }
@@ -180,26 +145,13 @@ export interface WargearAbilityEvaluation {
 /**
  * Evaluate all wargear abilities for display.
  */
-export function evaluateWargearAbilities(
-    abilities: Ability[],
-    modelLoadouts: string[][],
-    availableWargear: Weapon[],
-    precomputedMappings?: WargearAbilityMapping[]
-): WargearAbilityEvaluation[] {
+export function evaluateWargearAbilities(abilities: Ability[], modelLoadouts: string[][], weapons: Weapon[], precomputedMappings?: WargearAbilityMapping[]): WargearAbilityEvaluation[] {
     const wargearAbilities = getWargearAbilities(abilities);
     if (wargearAbilities.length === 0) return [];
 
-    const mappings = buildAbilityMappings(
-        wargearAbilities,
-        availableWargear,
-        precomputedMappings
-    );
+    const mappings = buildAbilityMappings(wargearAbilities, weapons, precomputedMappings);
 
-    const activeAbilities = computeUnitActiveAbilities(
-        modelLoadouts,
-        mappings,
-        availableWargear
-    );
+    const activeAbilities = computeUnitActiveAbilities(modelLoadouts, mappings, weapons);
 
     return wargearAbilities.map((ability) => {
         const mapping = mappings.find((m) => m.abilityName === ability.name);

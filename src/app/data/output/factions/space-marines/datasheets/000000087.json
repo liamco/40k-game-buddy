@@ -9,13 +9,53 @@
   "transport": "This model has a transport capacity of 12 Adeptus Astartes Infantry models. It cannot transport Centurion, Gravis, Jump Pack, Wulfen or Terminator models.",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Drop-Pod",
   "slug": "drop-pod",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000087:wargear-1",
+        "datasheetId": "000000087",
+        "line": 1,
+        "name": "Wargear 1",
+        "type": "",
+        "profiles": [
+          {
+            "datasheetId": "000000087",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "",
+            "attributes": [],
+            "range": "",
+            "type": "",
+            "a": 0,
+            "bsWs": "-",
+            "s": "-",
+            "ap": 0,
+            "d": "-"
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -37,32 +77,7 @@
       "factionId": "",
       "description": "This model must start the battle in Reserves and can be set up in the Reinforcements step of your first, second or third Movement phase, regardless of any mission rules. Any units embarked within this model must immediately disembark after it has been set up on the battlefield, and they must be set up more than 9\" away from all enemy models.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "RESERVES"
-          ],
-          "value": "first, second or third Movement phase"
-        },
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": "more than 9\""
-        },
-        {
-          "entity": "thisModel",
-          "effect": "addsAbility",
-          "abilities": [
-            "DISEMBARK"
-          ],
-          "value": "immediately after setup"
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -71,26 +86,7 @@
       "factionId": "",
       "description": "Each time a unit disembarks from this model after it has been set up on the battlefield, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "DECLARE CHARGE"
-          ],
-          "value": true,
-          "conditions": [
-            {
-              "entity": "thisModel",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -99,52 +95,7 @@
       "factionId": "",
       "description": "Once this unit is set up on the battlefield and all units within it have disembarked, until the end of the battle, units cannot embark within this <span class=\"kwb\">TRANSPORT</span>.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": "0",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isStationary",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": "0",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isBelowStartingStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        },
-        {
-          "entity": "thisUnit",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": "0",
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "isBelowHalfStrength",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "name": "Designer's Note",
@@ -206,7 +157,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000087",
@@ -225,39 +175,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000087:wargear-1",
-      "datasheetId": "000000087",
-      "line": 1,
-      "name": "Wargear 1",
-      "type": "",
-      "profiles": [
-        {
-          "datasheetId": "000000087",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "",
-          "attributes": [],
-          "range": "",
-          "type": "",
-          "a": 0,
-          "bsWs": "-",
-          "s": "-",
-          "ap": 0,
-          "d": "-"
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

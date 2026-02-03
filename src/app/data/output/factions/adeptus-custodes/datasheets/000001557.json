@@ -9,13 +9,102 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adeptus-custodes/Contemptor-galatus-Dreadnought",
   "slug": "contemptor-galatus-dreadnought",
   "factionSlug": "adeptus-custodes",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
+  "isForgeWorld": true,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001557:galatus-warblade",
+        "datasheetId": "000001557",
+        "line": 1,
+        "name": "Galatus warblade",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001557",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Galatus warblade",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT",
+              "TWIN-LINKED"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001557:galatus-warblade-2",
+        "datasheetId": "000001557",
+        "line": 2,
+        "name": "Galatus warblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001557",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Galatus warblade",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001557",
+          "line": 1,
+          "button": "•",
+          "description": "None"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "None",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "unknown"
+          },
+          "action": {
+            "type": "unknown",
+            "removes": [],
+            "adds": [],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,16 +122,7 @@
       "factionId": "",
       "description": "Each time a melee attack targets this model, subtract 1 from the Wound roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "w",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -94,14 +174,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001557",
-      "line": 1,
-      "button": "•",
-      "description": "None"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001557",
@@ -120,83 +192,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adeptus Custodes (Forge World)",
-  "isForgeWorld": true,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001557:galatus-warblade",
-      "datasheetId": "000001557",
-      "line": 1,
-      "name": "Galatus warblade",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001557",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Galatus warblade",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT",
-            "TWIN-LINKED"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001557:galatus-warblade-2",
-      "datasheetId": "000001557",
-      "line": 2,
-      "name": "Galatus warblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001557",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Galatus warblade",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "None",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "unknown"
-      },
-      "action": {
-        "type": "unknown",
-        "removes": [],
-        "adds": [],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

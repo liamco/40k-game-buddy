@@ -9,13 +9,137 @@
   "transport": "This model has a transport capacity of 11 Drukhari Infantry models (excluding Jump Pack models).",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/drukhari/Raider",
   "slug": "raider",
   "factionSlug": "drukhari",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Dedicated Transports",
+  "sourceName": "Faction Pack: Drukhari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000656:dark-lance",
+        "datasheetId": "000000656",
+        "line": 1,
+        "name": "Dark lance",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000656",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Dark lance",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -3,
+            "d": "D6+2"
+          }
+        ]
+      },
+      {
+        "id": "000000656:disintegrator-cannon",
+        "datasheetId": "000000656",
+        "line": 2,
+        "name": "Disintegrator cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000656",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Disintegrator cannon",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 6,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000656:bladevanes-and-chainsnares",
+        "datasheetId": "000000656",
+        "line": 3,
+        "name": "Bladevanes and chainsnares",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000656",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bladevanes and chainsnares",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": "D3+3",
+            "bsWs": 4,
+            "s": 6,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000656",
+          "line": 1,
+          "button": "•",
+          "description": "This model's dark lance can be replaced with 1 disintegrator cannon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's dark lance can be replaced with 1 disintegrator cannon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "dark lance",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "disintegrator cannon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -151,14 +275,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000656",
-      "line": 1,
-      "button": "•",
-      "description": "This model's dark lance can be replaced with 1 disintegrator cannon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000656",
@@ -177,118 +293,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Dedicated Transports",
-  "sourceName": "Faction Pack: Drukhari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000656:dark-lance",
-      "datasheetId": "000000656",
-      "line": 1,
-      "name": "Dark lance",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000656",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Dark lance",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -3,
-          "d": "D6+2"
-        }
-      ]
-    },
-    {
-      "id": "000000656:disintegrator-cannon",
-      "datasheetId": "000000656",
-      "line": 2,
-      "name": "Disintegrator cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000656",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Disintegrator cannon",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 6,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000656:bladevanes-and-chainsnares",
-      "datasheetId": "000000656",
-      "line": 3,
-      "name": "Bladevanes and chainsnares",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000656",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bladevanes and chainsnares",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": "D3+3",
-          "bsWs": 4,
-          "s": 6,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's dark lance can be replaced with 1 disintegrator cannon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "dark lance",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "disintegrator cannon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

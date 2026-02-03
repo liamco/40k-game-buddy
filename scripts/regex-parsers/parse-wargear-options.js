@@ -967,26 +967,27 @@ function parseAllOptions(options) {
 
 /**
  * Process a single datasheet JSON file.
+ * Reads from wargear.options.raw and writes parsed options to wargear.options.parsed
  */
 function processDatasheetFile(filePath) {
     try {
         const content = fs.readFileSync(filePath, "utf-8");
         const datasheet = JSON.parse(content);
 
-        // Skip if no options
-        if (!datasheet.options || datasheet.options.length === 0) {
+        // Skip if no wargear object or no raw options
+        if (!datasheet.wargear || !datasheet.wargear.options || !datasheet.wargear.options.raw || datasheet.wargear.options.raw.length === 0) {
             return { modified: false, parsed: 0, unparsed: 0 };
         }
 
-        // Parse all options
-        const parsedOptions = parseAllOptions(datasheet.options);
-
-        // Add parsed options to datasheet
-        datasheet.parsedWargearOptions = parsedOptions;
+        // Parse all options from the raw options array
+        const parsedOptions = parseAllOptions(datasheet.wargear.options.raw);
 
         // Add unit-level flag: true if ALL options were successfully parsed
         const allParsed = parsedOptions.every((o) => o.wargearParsed);
-        datasheet.allWargearParsed = allParsed;
+
+        // Write to consolidated wargear.options object
+        datasheet.wargear.options.parsed = parsedOptions;
+        datasheet.wargear.options.allParsed = allParsed;
 
         // Write back to file
         fs.writeFileSync(filePath, JSON.stringify(datasheet, null, 2), "utf-8");

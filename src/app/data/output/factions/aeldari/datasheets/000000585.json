@@ -9,13 +9,209 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "You can attach this model to a unit, even if one Autarch or Farseer model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/aeldari/Warlock",
   "slug": "warlock",
   "factionSlug": "aeldari",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Aeldari",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": {
+    "description": "",
+    "footer": "You can attach this model to a unit, even if one Autarch or Farseer model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "conditions": {
+      "allowedExistingLeaderKeywords": [
+        "AUTARCH",
+        "FARSEER"
+      ]
+    },
+    "attachableUnits": []
+  },
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000585:destructor",
+        "datasheetId": "000000585",
+        "line": 1,
+        "name": "Destructor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000585",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Destructor",
+            "attributes": [
+              "PSYCHIC",
+              "TORRENT"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000585:shuriken-pistol",
+        "datasheetId": "000000585",
+        "line": 2,
+        "name": "Shuriken pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000585",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Shuriken pistol",
+            "attributes": [
+              "ASSAULT",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000585:singing-spear",
+        "datasheetId": "000000585",
+        "line": 3,
+        "name": "Singing spear",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000585",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Singing spear",
+            "attributes": [
+              "ASSAULT",
+              "PSYCHIC"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 9,
+            "ap": 0,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000585:singing-spear-2",
+        "datasheetId": "000000585",
+        "line": 4,
+        "name": "Singing spear",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000585",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Singing spear",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 3,
+            "ap": 0,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000585:witchblade",
+        "datasheetId": "000000585",
+        "line": 5,
+        "name": "Witchblade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000585",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Witchblade",
+            "attributes": [
+              "ANTI-INFANTRY 2+",
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 2,
+            "bsWs": 3,
+            "s": 3,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000585",
+          "line": 1,
+          "button": "•",
+          "description": "This model's witchblade can be replaced with 1 singing spear."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's witchblade can be replaced with 1 singing spear.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "witchblade",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "singing spear",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -105,14 +301,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000585",
-      "line": 1,
-      "button": "•",
-      "description": "This model's witchblade can be replaced with 1 singing spear."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000585",
@@ -131,7 +319,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000590",
       "slug": "storm-guardians"
@@ -140,180 +328,5 @@
       "id": "000000589",
       "slug": "guardian-defenders"
     }
-  ],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Aeldari",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000585:destructor",
-      "datasheetId": "000000585",
-      "line": 1,
-      "name": "Destructor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000585",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Destructor",
-          "attributes": [
-            "PSYCHIC",
-            "TORRENT"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000585:shuriken-pistol",
-      "datasheetId": "000000585",
-      "line": 2,
-      "name": "Shuriken pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000585",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Shuriken pistol",
-          "attributes": [
-            "ASSAULT",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000585:singing-spear",
-      "datasheetId": "000000585",
-      "line": 3,
-      "name": "Singing spear",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000585",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Singing spear",
-          "attributes": [
-            "ASSAULT",
-            "PSYCHIC"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 9,
-          "ap": 0,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000585:singing-spear-2",
-      "datasheetId": "000000585",
-      "line": 4,
-      "name": "Singing spear",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000585",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Singing spear",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 3,
-          "ap": 0,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000585:witchblade",
-      "datasheetId": "000000585",
-      "line": 5,
-      "name": "Witchblade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000585",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Witchblade",
-          "attributes": [
-            "ANTI-INFANTRY 2+",
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 2,
-          "bsWs": 3,
-          "s": 3,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's witchblade can be replaced with 1 singing spear.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "witchblade",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "singing spear",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  ]
 }

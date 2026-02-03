@@ -9,13 +9,374 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-10",
-  "damagedDescription": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/chaos-knights/Knight-Tyrant",
   "slug": "knight-tyrant",
   "factionSlug": "chaos-knights",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Chaos Knights",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-10",
+    "threshold": 10,
+    "description": "While this model has 1-10 wounds remaining, subtract 5 from this model's Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 5
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001659:brimstone-volcano-lance",
+        "datasheetId": "000001659",
+        "line": 1,
+        "name": "Brimstone volcano lance",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Brimstone volcano lance",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 60,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 20,
+            "ap": -5,
+            "d": "D6+8"
+          }
+        ]
+      },
+      {
+        "id": "000001659:darkflame-cannon",
+        "datasheetId": "000001659",
+        "line": 2,
+        "name": "Darkflame cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Darkflame cannon",
+            "attributes": [
+              "IGNORES COVER",
+              "TORRENT"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": "3D6",
+            "bsWs": "N/A",
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001659:ectoplasma-decimator",
+        "datasheetId": "000001659",
+        "line": 3,
+        "name": "Ectoplasma decimator",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ectoplasma decimator - standard",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          },
+          {
+            "datasheetId": "000001659",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Ectoplasma decimator - supercharge",
+            "attributes": [
+              "BLAST",
+              "HAZARDOUS"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001659:gheiststrike-missile-launcher",
+        "datasheetId": "000001659",
+        "line": 5,
+        "name": "Gheiststrike missile launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gheiststrike missile launcher",
+            "attributes": [
+              "ANTI-TITANIC 4+",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -6,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000001659:twin-daemonbreath-meltagun",
+        "datasheetId": "000001659",
+        "line": 6,
+        "name": "Twin daemonbreath meltagun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin daemonbreath meltagun",
+            "attributes": [
+              "MELTA 2",
+              "TWIN-LINKED"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ]
+      },
+      {
+        "id": "000001659:twin-desecrator-cannon",
+        "datasheetId": "000001659",
+        "line": 7,
+        "name": "Twin Desecrator cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 7,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin Desecrator cannon",
+            "attributes": [
+              "BLAST",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001659:warpshock-harpoon",
+        "datasheetId": "000001659",
+        "line": 8,
+        "name": "Warpshock harpoon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 8,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Warpshock harpoon",
+            "attributes": [
+              "BLAST",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 24,
+            "ap": -6,
+            "d": 12
+          }
+        ]
+      },
+      {
+        "id": "000001659:titanic-feet",
+        "datasheetId": "000001659",
+        "line": 9,
+        "name": "Titanic feet",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001659",
+            "line": 9,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Titanic feet",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001659",
+          "line": 1,
+          "button": "•",
+          "description": "This model's 2 gheiststrike missile launchers and twin Desecrator cannon can be replaced with 1 gheiststrike missile launcher and 2 twin Desecrator cannons."
+        },
+        {
+          "datasheetId": "000001659",
+          "line": 2,
+          "button": "•",
+          "description": "This model's brimstone volcano lance and ectoplasma decimator can be replaced with 1 darkflame cannon and 1 warpshock harpoon."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's 2 gheiststrike missile launchers and twin Desecrator cannon can be replaced with 1 gheiststrike missile launcher and 2 twin Desecrator cannons.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "gheiststrike missile launchers",
+                "count": 2
+              },
+              {
+                "name": "twin Desecrator cannon",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "gheiststrike missile launcher and",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "twin Desecrator cannons",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's brimstone volcano lance and ectoplasma decimator can be replaced with 1 darkflame cannon and 1 warpshock harpoon.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "brimstone volcano lance",
+                "count": 1
+              },
+              {
+                "name": "ectoplasma decimator",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "darkflame cannon and",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "warpshock harpoon",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -116,20 +477,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001659",
-      "line": 1,
-      "button": "•",
-      "description": "This model's 2 gheiststrike missile launchers and twin Desecrator cannon can be replaced with 1 gheiststrike missile launcher and 2 twin Desecrator cannons."
-    },
-    {
-      "datasheetId": "000001659",
-      "line": 2,
-      "button": "•",
-      "description": "This model's brimstone volcano lance and ectoplasma decimator can be replaced with 1 darkflame cannon and 1 warpshock harpoon."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001659",
@@ -148,410 +495,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Chaos Knights",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001659:brimstone-volcano-lance",
-      "datasheetId": "000001659",
-      "line": 1,
-      "name": "Brimstone volcano lance",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Brimstone volcano lance",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 60,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 20,
-          "ap": -5,
-          "d": "D6+8"
-        }
-      ]
-    },
-    {
-      "id": "000001659:darkflame-cannon",
-      "datasheetId": "000001659",
-      "line": 2,
-      "name": "Darkflame cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Darkflame cannon",
-          "attributes": [
-            "IGNORES COVER",
-            "TORRENT"
-          ],
-          "range": 18,
-          "type": "Ranged",
-          "a": "3D6",
-          "bsWs": "N/A",
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001659:ectoplasma-decimator",
-      "datasheetId": "000001659",
-      "line": 3,
-      "name": "Ectoplasma decimator",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ectoplasma decimator - standard",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        },
-        {
-          "datasheetId": "000001659",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Ectoplasma decimator - supercharge",
-          "attributes": [
-            "BLAST",
-            "HAZARDOUS"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001659:gheiststrike-missile-launcher",
-      "datasheetId": "000001659",
-      "line": 5,
-      "name": "Gheiststrike missile launcher",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gheiststrike missile launcher",
-          "attributes": [
-            "ANTI-TITANIC 4+",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 72,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 12,
-          "ap": -6,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000001659:twin-daemonbreath-meltagun",
-      "datasheetId": "000001659",
-      "line": 6,
-      "name": "Twin daemonbreath meltagun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin daemonbreath meltagun",
-          "attributes": [
-            "MELTA 2",
-            "TWIN-LINKED"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 9,
-          "ap": -4,
-          "d": "D6"
-        }
-      ]
-    },
-    {
-      "id": "000001659:twin-desecrator-cannon",
-      "datasheetId": "000001659",
-      "line": 7,
-      "name": "Twin Desecrator cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 7,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin Desecrator cannon",
-          "attributes": [
-            "BLAST",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6",
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001659:warpshock-harpoon",
-      "datasheetId": "000001659",
-      "line": 8,
-      "name": "Warpshock harpoon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 8,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Warpshock harpoon",
-          "attributes": [
-            "BLAST",
-            "DEVASTATING WOUNDS"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 24,
-          "ap": -6,
-          "d": 12
-        }
-      ]
-    },
-    {
-      "id": "000001659:titanic-feet",
-      "datasheetId": "000001659",
-      "line": 9,
-      "name": "Titanic feet",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001659",
-          "line": 9,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Titanic feet",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000001659:brimstone-volcano-lance",
-          "name": "Brimstone volcano lance",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:ectoplasma-decimator",
-          "name": "Ectoplasma decimator",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:gheiststrike-missile-launcher",
-          "name": "Gheiststrike missile launcher",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:twin-daemonbreath-meltagun",
-          "name": "Twin daemonbreath meltagun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:twin-desecrator-cannon",
-          "name": "Twin Desecrator cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:titanic-feet",
-          "name": "Titanic feet",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000001659:gheiststrike-missile-launcher",
-          "name": "Gheiststrike missile launcher",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:twin-daemonbreath-meltagun",
-          "name": "Twin daemonbreath meltagun",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:twin-desecrator-cannon",
-          "name": "Twin Desecrator cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:titanic-feet",
-          "name": "Titanic feet",
-          "type": "Melee"
-        },
-        {
-          "id": "000001659:darkflame-cannon",
-          "name": "Darkflame cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001659:warpshock-harpoon",
-          "name": "Warpshock harpoon",
-          "type": "Ranged"
-        }
-      ],
-      "isPackageDeal": true
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.304Z"
-  },
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's 2 gheiststrike missile launchers and twin Desecrator cannon can be replaced with 1 gheiststrike missile launcher and 2 twin Desecrator cannons.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "gheiststrike missile launchers",
-            "count": 2
-          },
-          {
-            "name": "twin Desecrator cannon",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "gheiststrike missile launcher and",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "twin Desecrator cannons",
-                "count": 2
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model's brimstone volcano lance and ectoplasma decimator can be replaced with 1 darkflame cannon and 1 warpshock harpoon.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "brimstone volcano lance",
-            "count": 1
-          },
-          {
-            "name": "ectoplasma decimator",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "darkflame cannon and",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "warpshock harpoon",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

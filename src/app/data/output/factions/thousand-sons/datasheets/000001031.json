@@ -9,13 +9,138 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-6",
-  "damagedDescription": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/thousand-sons/Magnus-The-Red",
   "slug": "magnus-the-red",
   "factionSlug": "thousand-sons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-6",
+    "threshold": 6,
+    "description": "While this model has 1-6 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001031:gaze-of-magnus",
+        "datasheetId": "000001031",
+        "line": 1,
+        "name": "Gaze of Magnus",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001031",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Gaze of Magnus",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "3D3",
+            "bsWs": 2,
+            "s": 11,
+            "ap": -2,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001031:tzeentch-s-firestorm",
+        "datasheetId": "000001031",
+        "line": 2,
+        "name": "Tzeentch's Firestorm",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001031",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Tzeentch's Firestorm",
+            "attributes": [
+              "BLAST",
+              "IGNORES COVER",
+              "PSYCHIC"
+            ],
+            "range": 24,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 2,
+            "s": 6,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001031:blade-of-magnus",
+        "datasheetId": "000001031",
+        "line": 3,
+        "name": "Blade of Magnus",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001031",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Blade of Magnus - strike",
+            "attributes": [
+              "DEVASTATING WOUNDS",
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 7,
+            "bsWs": 2,
+            "s": 16,
+            "ap": -3,
+            "d": 3
+          },
+          {
+            "datasheetId": "000001031",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Blade of Magnus - sweep",
+            "attributes": [
+              "PSYCHIC"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 14,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -1,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -171,7 +296,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000001031",
@@ -190,112 +314,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001031:gaze-of-magnus",
-      "datasheetId": "000001031",
-      "line": 1,
-      "name": "Gaze of Magnus",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001031",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Gaze of Magnus",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "3D3",
-          "bsWs": 2,
-          "s": 11,
-          "ap": -2,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001031:tzeentch-s-firestorm",
-      "datasheetId": "000001031",
-      "line": 2,
-      "name": "Tzeentch's Firestorm",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001031",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Tzeentch's Firestorm",
-          "attributes": [
-            "BLAST",
-            "IGNORES COVER",
-            "PSYCHIC"
-          ],
-          "range": 24,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 2,
-          "s": 6,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001031:blade-of-magnus",
-      "datasheetId": "000001031",
-      "line": 3,
-      "name": "Blade of Magnus",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001031",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Blade of Magnus - strike",
-          "attributes": [
-            "DEVASTATING WOUNDS",
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 7,
-          "bsWs": 2,
-          "s": 16,
-          "ap": -3,
-          "d": 3
-        },
-        {
-          "datasheetId": "000001031",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Blade of Magnus - sweep",
-          "attributes": [
-            "PSYCHIC"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 14,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -1,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

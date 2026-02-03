@@ -9,13 +9,257 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Thunderwolf-Cavalry",
   "slug": "thunderwolf-cavalry",
   "factionSlug": "space-marines",
   "supplementKey": "space-wolves",
+  "supplementSlug": "space-wolves",
+  "supplementName": "Space Wolves",
+  "supplementLabel": "Space Wolves",
+  "isSupplement": true,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Space Wolves",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000322:bolt-pistol",
+        "datasheetId": "000000322",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000322",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000322:boltgun",
+        "datasheetId": "000000322",
+        "line": 2,
+        "name": "Boltgun",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000322",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Boltgun",
+            "attributes": [],
+            "range": 24,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000322:plasma-pistol",
+        "datasheetId": "000000322",
+        "line": 3,
+        "name": "Plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000322",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Plasma pistol - standard",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 7,
+            "ap": -2,
+            "d": 1
+          },
+          {
+            "datasheetId": "000000322",
+            "line": 4,
+            "lineInWargear": 2,
+            "dice": "",
+            "name": "Plasma pistol - supercharge",
+            "attributes": [
+              "HAZARDOUS",
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000322:teeth-and-claws",
+        "datasheetId": "000000322",
+        "line": 5,
+        "name": "Teeth and claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000322",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Teeth and claws",
+            "attributes": [
+              "EXTRA ATTACKS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000322:wolf-guard-weapon",
+        "datasheetId": "000000322",
+        "line": 6,
+        "name": "Wolf Guard weapon",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000322",
+            "line": 6,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Wolf Guard weapon",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 3,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000322",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their bolt pistol replaced with one of the following:<ul><li>1 boltgun</li><li>1 storm shield</li></ul>"
+        },
+        {
+          "datasheetId": "000000322",
+          "line": 2,
+          "button": "•",
+          "description": "For every 3 models in this unit, one model's bolt pistol can be replaced with 1 plasma pistol."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their bolt pistol replaced with one of the following:<ul><li>1 boltgun</li><li>1 storm shield</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "bolt pistol",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "boltgun",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "storm shield",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "For every 3 models in this unit, one model's bolt pistol can be replaced with 1 plasma pistol.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "ratio",
+            "ratio": 3
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "For every 3 models in this unit, one model's bolt pistol",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "plasma pistol",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Oath of Moment",
@@ -28,24 +272,7 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a melee attack with its Wolf Guard weapon, if it made a Charge move this turn, add 1 to the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "rollBonus",
-          "attribute": "d",
-          "value": 1,
-          "conditions": [
-            {
-              "entity": "thisUnit",
-              "state": "hasChargedThisTurn",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     },
     {
       "id": "",
@@ -54,16 +281,7 @@
       "factionId": "",
       "description": "The bearer has a 4+ invulnerable save.",
       "type": "Wargear",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "invSv",
-          "value": 4
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -121,20 +339,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000322",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their bolt pistol replaced with one of the following:<ul><li>1 boltgun</li><li>1 storm shield</li></ul>"
-    },
-    {
-      "datasheetId": "000000322",
-      "line": 2,
-      "button": "•",
-      "description": "For every 3 models in this unit, one model's bolt pistol can be replaced with 1 plasma pistol."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000322",
@@ -167,232 +371,5 @@
       "count": 6
     }
   ],
-  "leaders": [],
-  "supplementSlug": "space-wolves",
-  "supplementName": "Space Wolves",
-  "supplementLabel": "Space Wolves",
-  "isSupplement": true,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Space Wolves",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000322:bolt-pistol",
-      "datasheetId": "000000322",
-      "line": 1,
-      "name": "Bolt pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000322",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bolt pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000322:boltgun",
-      "datasheetId": "000000322",
-      "line": 2,
-      "name": "Boltgun",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000322",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Boltgun",
-          "attributes": [],
-          "range": 24,
-          "type": "Ranged",
-          "a": 2,
-          "bsWs": 3,
-          "s": 4,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000322:plasma-pistol",
-      "datasheetId": "000000322",
-      "line": 3,
-      "name": "Plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000322",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Plasma pistol - standard",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 7,
-          "ap": -2,
-          "d": 1
-        },
-        {
-          "datasheetId": "000000322",
-          "line": 4,
-          "lineInWargear": 2,
-          "dice": "",
-          "name": "Plasma pistol - supercharge",
-          "attributes": [
-            "HAZARDOUS",
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000322:teeth-and-claws",
-      "datasheetId": "000000322",
-      "line": 5,
-      "name": "Teeth and claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000322",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Teeth and claws",
-          "attributes": [
-            "EXTRA ATTACKS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000322:wolf-guard-weapon",
-      "datasheetId": "000000322",
-      "line": 6,
-      "name": "Wolf Guard weapon",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000322",
-          "line": 6,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Wolf Guard weapon",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 3,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "Any number of models can each have their bolt pistol replaced with one of the following:<ul><li>1 boltgun</li><li>1 storm shield</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "bolt pistol",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "boltgun",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          },
-          {
-            "weapons": [
-              {
-                "name": "storm shield",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "For every 3 models in this unit, one model's bolt pistol can be replaced with 1 plasma pistol.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "ratio",
-        "ratio": 3
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "For every 3 models in this unit, one model's bolt pistol",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "plasma pistol",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

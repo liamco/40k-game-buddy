@@ -9,13 +9,81 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Captain-Sicarius",
   "slug": "captain-sicarius",
   "factionSlug": "space-marines",
   "supplementKey": "codex",
+  "supplementSlug": "codex",
+  "supplementName": "Codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Characters",
+  "sourceName": "Faction Pack: Space Marines",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000081:artisan-plasma-pistol",
+        "datasheetId": "000000081",
+        "line": 1,
+        "name": "Artisan plasma pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000081",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Artisan plasma pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 2,
+            "s": 8,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000081:talassarian-tempest-blade",
+        "datasheetId": "000000081",
+        "line": 2,
+        "name": "Talassarian Tempest Blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000081",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Talassarian Tempest Blade",
+            "attributes": [
+              "LETHAL HITS"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 6,
+            "bsWs": 2,
+            "s": 5,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Leader",
@@ -32,18 +100,7 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in that unit have the Scouts 6\" ability and ranged weapons equipped by models in that unit have the [ASSAULT] ability.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "addsAbility",
-          "abilities": [
-            "SCOUTS"
-          ],
-          "value": 6
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     },
     {
       "id": "",
@@ -52,24 +109,7 @@
       "factionId": "",
       "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this model, if this model's unit is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\".",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisModel",
-          "effect": "staticNumber",
-          "attribute": "m",
-          "value": 6,
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "inEngagementRange",
-              "operator": "notEquals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -145,7 +185,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000081",
@@ -164,7 +203,7 @@
       "count": 1
     }
   ],
-  "leaders": [
+  "leadsUnits": [
     {
       "id": "000000071",
       "slug": "bladeguard-veteran-squad"
@@ -220,68 +259,6 @@
     {
       "id": "000002103",
       "slug": "command-squad"
-    }
-  ],
-  "supplementSlug": "codex",
-  "supplementName": "Codex",
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Characters",
-  "sourceName": "Faction Pack: Space Marines",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000081:artisan-plasma-pistol",
-      "datasheetId": "000000081",
-      "line": 1,
-      "name": "Artisan plasma pistol",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000081",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Artisan plasma pistol",
-          "attributes": [
-            "PISTOL"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": 1,
-          "bsWs": 2,
-          "s": 8,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000081:talassarian-tempest-blade",
-      "datasheetId": "000000081",
-      "line": 2,
-      "name": "Talassarian Tempest Blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000081",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Talassarian Tempest Blade",
-          "attributes": [
-            "LETHAL HITS"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 6,
-          "bsWs": 2,
-          "s": 5,
-          "ap": -2,
-          "d": 2
-        }
-      ]
     }
   ]
 }

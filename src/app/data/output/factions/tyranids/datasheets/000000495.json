@@ -9,13 +9,90 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-5",
-  "damagedDescription": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Exocrine",
   "slug": "exocrine",
   "factionSlug": "tyranids",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Tyranids",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-5",
+    "threshold": 5,
+    "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000495:bio-plasmic-cannon",
+        "datasheetId": "000000495",
+        "line": 1,
+        "name": "Bio-plasmic cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000495",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bio-plasmic cannon",
+            "attributes": [
+              "BLAST",
+              "HEAVY"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6+3",
+            "bsWs": 3,
+            "s": 9,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000000495:powerful-limbs",
+        "datasheetId": "000000495",
+        "line": 2,
+        "name": "Powerful limbs",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000495",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Powerful limbs",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 7,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,24 +110,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks. Until the end of the phase, each time a friendly <span class=\"kwb\">TYRANIDS</span> model makes an attack that targets that unit, re-roll a Hit roll of 1.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisArmy",
-          "effect": "reroll",
-          "attribute": "h",
-          "value": "ones",
-          "conditions": [
-            {
-              "entity": "opposingUnit",
-              "state": "hasFiredThisPhase",
-              "operator": "equals",
-              "value": true
-            }
-          ]
-        }
-      ],
-      "mechanicsSource": "openai"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -96,7 +156,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000495",
@@ -115,64 +174,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Tyranids",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000495:bio-plasmic-cannon",
-      "datasheetId": "000000495",
-      "line": 1,
-      "name": "Bio-plasmic cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000495",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Bio-plasmic cannon",
-          "attributes": [
-            "BLAST",
-            "HEAVY"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D6+3",
-          "bsWs": 3,
-          "s": 9,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000000495:powerful-limbs",
-      "datasheetId": "000000495",
-      "line": 2,
-      "name": "Powerful limbs",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000495",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Powerful limbs",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 7,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

@@ -9,13 +9,215 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/thousand-sons/Forgefiend",
   "slug": "forgefiend-2",
   "factionSlug": "thousand-sons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Thousand Sons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000001028:ectoplasma-cannon",
+        "datasheetId": "000001028",
+        "line": 1,
+        "name": "Ectoplasma cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001028",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Ectoplasma cannon",
+            "attributes": [
+              "BLAST"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D3",
+            "bsWs": 3,
+            "s": 10,
+            "ap": -3,
+            "d": 3
+          }
+        ]
+      },
+      {
+        "id": "000001028:hades-autocannon",
+        "datasheetId": "000001028",
+        "line": 2,
+        "name": "Hades autocannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001028",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Hades autocannon",
+            "attributes": [],
+            "range": 36,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 8,
+            "ap": -2,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000001028:forgefiend-claws",
+        "datasheetId": "000001028",
+        "line": 3,
+        "name": "Forgefiend claws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001028",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Forgefiend claws",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000001028:forgefiend-jaws",
+        "datasheetId": "000001028",
+        "line": 4,
+        "name": "Forgefiend jaws",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000001028",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Forgefiend jaws",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 5,
+            "bsWs": 3,
+            "s": 7,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000001028",
+          "line": 1,
+          "button": "•",
+          "description": "This model's 2 Hades autocannons can be replaced with 2 ectoplasma cannons."
+        },
+        {
+          "datasheetId": "000001028",
+          "line": 2,
+          "button": "•",
+          "description": "This model's Forgefiend jaws can be replaced with 1 ectoplasma cannon and 1 Forgefiend claws."
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "This model's 2 Hades autocannons can be replaced with 2 ectoplasma cannons.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Hades autocannons",
+                "count": 2
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "ectoplasma cannons",
+                    "count": 2
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        },
+        {
+          "line": 2,
+          "rawText": "This model's Forgefiend jaws can be replaced with 1 ectoplasma cannon and 1 Forgefiend claws.",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "this-model"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "Forgefiend jaws",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "ectoplasma cannon",
+                    "count": 1
+                  },
+                  {
+                    "name": "Forgefiend claws",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              }
+            ],
+            "isChoiceList": false
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -29,16 +231,7 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -108,20 +301,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000001028",
-      "line": 1,
-      "button": "•",
-      "description": "This model's 2 Hades autocannons can be replaced with 2 ectoplasma cannons."
-    },
-    {
-      "datasheetId": "000001028",
-      "line": 2,
-      "button": "•",
-      "description": "This model's Forgefiend jaws can be replaced with 1 ectoplasma cannon and 1 Forgefiend claws."
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000001028",
@@ -140,222 +319,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Thousand Sons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000001028:ectoplasma-cannon",
-      "datasheetId": "000001028",
-      "line": 1,
-      "name": "Ectoplasma cannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001028",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Ectoplasma cannon",
-          "attributes": [
-            "BLAST"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": "D3",
-          "bsWs": 3,
-          "s": 10,
-          "ap": -3,
-          "d": 3
-        }
-      ]
-    },
-    {
-      "id": "000001028:hades-autocannon",
-      "datasheetId": "000001028",
-      "line": 2,
-      "name": "Hades autocannon",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000001028",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Hades autocannon",
-          "attributes": [],
-          "range": 36,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 8,
-          "ap": -2,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000001028:forgefiend-claws",
-      "datasheetId": "000001028",
-      "line": 3,
-      "name": "Forgefiend claws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001028",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Forgefiend claws",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 3,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000001028:forgefiend-jaws",
-      "datasheetId": "000001028",
-      "line": 4,
-      "name": "Forgefiend jaws",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000001028",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Forgefiend jaws",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 5,
-          "bsWs": 3,
-          "s": 7,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    }
-  ],
-  "precomputedLoadouts": [
-    {
-      "label": "Loadout Primus",
-      "weapons": [
-        {
-          "id": "000001028:hades-autocannon",
-          "name": "Hades autocannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001028:forgefiend-jaws",
-          "name": "Forgefiend jaws",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": false
-    },
-    {
-      "label": "Loadout Secundus",
-      "weapons": [
-        {
-          "id": "000001028:hades-autocannon",
-          "name": "Hades autocannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001028:ectoplasma-cannon",
-          "name": "Ectoplasma cannon",
-          "type": "Ranged"
-        },
-        {
-          "id": "000001028:forgefiend-claws",
-          "name": "Forgefiend claws",
-          "type": "Melee"
-        }
-      ],
-      "isPackageDeal": true
-    }
-  ],
-  "wargearComplexity": {
-    "isComplex": true,
-    "reason": "package deal",
-    "generatedAt": "2026-02-02T17:55:35.630Z"
-  },
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "This model's 2 Hades autocannons can be replaced with 2 ectoplasma cannons.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Hades autocannons",
-            "count": 2
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "ectoplasma cannons",
-                "count": 2
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    },
-    {
-      "line": 2,
-      "rawText": "This model's Forgefiend jaws can be replaced with 1 ectoplasma cannon and 1 Forgefiend claws.",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "this-model"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "Forgefiend jaws",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "ectoplasma cannon",
-                "count": 1
-              },
-              {
-                "name": "Forgefiend claws",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          }
-        ],
-        "isChoiceList": false
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }

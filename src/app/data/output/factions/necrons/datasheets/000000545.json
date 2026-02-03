@@ -9,13 +9,116 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "1-4",
-  "damagedDescription": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
   "link": "https://wahapedia.ru/wh40k10ed/factions/necrons/Doom-Scythe",
   "slug": "doom-scythe",
   "factionSlug": "necrons",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Necrons",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": {
+    "range": "1-4",
+    "threshold": 4,
+    "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
+  },
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000545:heavy-death-ray",
+        "datasheetId": "000000545",
+        "line": 1,
+        "name": "Heavy death ray",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000545",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Heavy death ray",
+            "attributes": [
+              "SUSTAINED HITS D3"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 3,
+            "bsWs": 3,
+            "s": 16,
+            "ap": -4,
+            "d": "D6+1"
+          }
+        ]
+      },
+      {
+        "id": "000000545:twin-tesla-destructor",
+        "datasheetId": "000000545",
+        "line": 2,
+        "name": "Twin tesla destructor",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000545",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin tesla destructor",
+            "attributes": [
+              "SUSTAINED HITS 2",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": 6,
+            "bsWs": 3,
+            "s": 8,
+            "ap": 0,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000545:armoured-bulk",
+        "datasheetId": "000000545",
+        "line": 3,
+        "name": "Armoured bulk",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000545",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Armoured bulk",
+            "attributes": [],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 3,
+            "bsWs": 4,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [],
+      "parsed": [],
+      "allParsed": false
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -33,16 +136,7 @@
       "factionId": "",
       "description": "Each time this model targets an enemy unit with its heavy death ray, your opponent must declare if that unit will stand firm or duck for cover:<br><ul><li>If it stands firm, when resolving ranged attacks against that unit this phase, a successful unmodified Hit roll of 5+ scores a Critical Hit.  </li><li>If it ducks for cover, until the start of your next Shooting phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll.</li></ul>",
       "type": "Datasheet",
-      "parameter": "",
-      "mechanics": [
-        {
-          "entity": "thisUnit",
-          "effect": "rollPenalty",
-          "attribute": "h",
-          "value": 1
-        }
-      ],
-      "mechanicsSource": "regex"
+      "parameter": ""
     }
   ],
   "keywords": [
@@ -94,7 +188,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [],
   "unitComposition": [
     {
       "datasheetId": "000000545",
@@ -113,90 +206,5 @@
       "count": 1
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Necrons",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000545:heavy-death-ray",
-      "datasheetId": "000000545",
-      "line": 1,
-      "name": "Heavy death ray",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000545",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Heavy death ray",
-          "attributes": [
-            "SUSTAINED HITS D3"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 3,
-          "bsWs": 3,
-          "s": 16,
-          "ap": -4,
-          "d": "D6+1"
-        }
-      ]
-    },
-    {
-      "id": "000000545:twin-tesla-destructor",
-      "datasheetId": "000000545",
-      "line": 2,
-      "name": "Twin tesla destructor",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000545",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin tesla destructor",
-          "attributes": [
-            "SUSTAINED HITS 2",
-            "TWIN-LINKED"
-          ],
-          "range": 36,
-          "type": "Ranged",
-          "a": 6,
-          "bsWs": 3,
-          "s": 8,
-          "ap": 0,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000545:armoured-bulk",
-      "datasheetId": "000000545",
-      "line": 3,
-      "name": "Armoured bulk",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000545",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Armoured bulk",
-          "attributes": [],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 3,
-          "bsWs": 4,
-          "s": 6,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    }
-  ]
+  "leadsUnits": []
 }

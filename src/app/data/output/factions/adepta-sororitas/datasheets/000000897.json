@@ -9,13 +9,213 @@
   "transport": "",
   "virtual": false,
   "leaderHead": "",
-  "leaderFooter": "",
-  "damagedW": "",
-  "damagedDescription": "",
   "link": "https://wahapedia.ru/wh40k10ed/factions/adepta-sororitas/Penitent-Engines",
   "slug": "penitent-engines",
   "factionSlug": "adepta-sororitas",
   "supplementKey": "codex",
+  "supplementLabel": "None",
+  "isSupplement": false,
+  "roleLabel": "Other",
+  "sourceName": "Faction Pack: Adepta Sororitas",
+  "isForgeWorld": false,
+  "isLegends": false,
+  "leader": null,
+  "damaged": null,
+  "wargear": {
+    "weapons": [
+      {
+        "id": "000000897:penitent-flamers",
+        "datasheetId": "000000897",
+        "line": 1,
+        "name": "Penitent flamers",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000897",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Penitent flamers",
+            "attributes": [
+              "ASSAULT",
+              "IGNORES COVER",
+              "TORRENT",
+              "TWIN-LINKED"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": "2D6",
+            "bsWs": "N/A",
+            "s": 5,
+            "ap": 0,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000897:penitent-buzz-blade",
+        "datasheetId": "000000897",
+        "line": 2,
+        "name": "Penitent buzz-blade",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000897",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Penitent buzz-blade",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000897:penitent-flail",
+        "datasheetId": "000000897",
+        "line": 3,
+        "name": "Penitent flail",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000897",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Penitent flail",
+            "attributes": [
+              "SUSTAINED HITS 1"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      },
+      {
+        "id": "000000897:twin-penitent-buzz-blades",
+        "datasheetId": "000000897",
+        "line": 4,
+        "name": "Twin penitent buzz-blades",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000897",
+            "line": 4,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin penitent buzz-blades",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 4,
+            "bsWs": 4,
+            "s": 10,
+            "ap": -3,
+            "d": 2
+          }
+        ]
+      },
+      {
+        "id": "000000897:twin-penitent-flails",
+        "datasheetId": "000000897",
+        "line": 5,
+        "name": "Twin penitent flails",
+        "type": "Melee",
+        "profiles": [
+          {
+            "datasheetId": "000000897",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin penitent flails",
+            "attributes": [
+              "SUSTAINED HITS 1",
+              "TWIN-LINKED"
+            ],
+            "range": "Melee",
+            "type": "Melee",
+            "a": 8,
+            "bsWs": 4,
+            "s": 5,
+            "ap": -1,
+            "d": 1
+          }
+        ]
+      }
+    ],
+    "options": {
+      "raw": [
+        {
+          "datasheetId": "000000897",
+          "line": 1,
+          "button": "•",
+          "description": "Any number of models can each have their twin penitent buzz-blades replaced with one of the following:<ul><li>1 penitent buzz-blade and 1 penitent flail</li><li>1 twin penitent flails</li></ul>"
+        }
+      ],
+      "parsed": [
+        {
+          "line": 1,
+          "rawText": "Any number of models can each have their twin penitent buzz-blades replaced with one of the following:<ul><li>1 penitent buzz-blade and 1 penitent flail</li><li>1 twin penitent flails</li></ul>",
+          "wargearParsed": true,
+          "targeting": {
+            "type": "any-number"
+          },
+          "action": {
+            "type": "replace",
+            "removes": [
+              {
+                "name": "twin penitent buzz-blades",
+                "count": 1
+              }
+            ],
+            "adds": [
+              {
+                "weapons": [
+                  {
+                    "name": "penitent buzz-blade",
+                    "count": 1
+                  },
+                  {
+                    "name": "penitent flail",
+                    "count": 1
+                  }
+                ],
+                "isPackage": true
+              },
+              {
+                "weapons": [
+                  {
+                    "name": "twin penitent flails",
+                    "count": 1
+                  }
+                ],
+                "isPackage": false
+              }
+            ],
+            "isChoiceList": true
+          },
+          "constraints": {}
+        }
+      ],
+      "allParsed": true
+    }
+  },
   "abilities": [
     {
       "name": "Deadly Demise",
@@ -96,14 +296,6 @@
       "baseSizeDescr": ""
     }
   ],
-  "options": [
-    {
-      "datasheetId": "000000897",
-      "line": 1,
-      "button": "•",
-      "description": "Any number of models can each have their twin penitent buzz-blades replaced with one of the following:<ul><li>1 penitent buzz-blade and 1 penitent flail</li><li>1 twin penitent flails</li></ul>"
-    }
-  ],
   "unitComposition": [
     {
       "datasheetId": "000000897",
@@ -129,194 +321,5 @@
       "count": 2
     }
   ],
-  "leaders": [],
-  "supplementLabel": "None",
-  "isSupplement": false,
-  "roleLabel": "Other",
-  "sourceName": "Faction Pack: Adepta Sororitas",
-  "isForgeWorld": false,
-  "isLegends": false,
-  "availableWargear": [
-    {
-      "id": "000000897:penitent-flamers",
-      "datasheetId": "000000897",
-      "line": 1,
-      "name": "Penitent flamers",
-      "type": "Ranged",
-      "profiles": [
-        {
-          "datasheetId": "000000897",
-          "line": 1,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Penitent flamers",
-          "attributes": [
-            "ASSAULT",
-            "IGNORES COVER",
-            "TORRENT",
-            "TWIN-LINKED"
-          ],
-          "range": 12,
-          "type": "Ranged",
-          "a": "2D6",
-          "bsWs": "N/A",
-          "s": 5,
-          "ap": 0,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000897:penitent-buzz-blade",
-      "datasheetId": "000000897",
-      "line": 2,
-      "name": "Penitent buzz-blade",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000897",
-          "line": 2,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Penitent buzz-blade",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000897:penitent-flail",
-      "datasheetId": "000000897",
-      "line": 3,
-      "name": "Penitent flail",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000897",
-          "line": 3,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Penitent flail",
-          "attributes": [
-            "SUSTAINED HITS 1"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    },
-    {
-      "id": "000000897:twin-penitent-buzz-blades",
-      "datasheetId": "000000897",
-      "line": 4,
-      "name": "Twin penitent buzz-blades",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000897",
-          "line": 4,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin penitent buzz-blades",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 4,
-          "bsWs": 4,
-          "s": 10,
-          "ap": -3,
-          "d": 2
-        }
-      ]
-    },
-    {
-      "id": "000000897:twin-penitent-flails",
-      "datasheetId": "000000897",
-      "line": 5,
-      "name": "Twin penitent flails",
-      "type": "Melee",
-      "profiles": [
-        {
-          "datasheetId": "000000897",
-          "line": 5,
-          "lineInWargear": 1,
-          "dice": "",
-          "name": "Twin penitent flails",
-          "attributes": [
-            "SUSTAINED HITS 1",
-            "TWIN-LINKED"
-          ],
-          "range": "Melee",
-          "type": "Melee",
-          "a": 8,
-          "bsWs": 4,
-          "s": 5,
-          "ap": -1,
-          "d": 1
-        }
-      ]
-    }
-  ],
-  "parsedWargearOptions": [
-    {
-      "line": 1,
-      "rawText": "Any number of models can each have their twin penitent buzz-blades replaced with one of the following:<ul><li>1 penitent buzz-blade and 1 penitent flail</li><li>1 twin penitent flails</li></ul>",
-      "wargearParsed": true,
-      "targeting": {
-        "type": "any-number"
-      },
-      "action": {
-        "type": "replace",
-        "removes": [
-          {
-            "name": "twin penitent buzz-blades",
-            "count": 1
-          }
-        ],
-        "adds": [
-          {
-            "weapons": [
-              {
-                "name": "penitent buzz-blade",
-                "count": 1
-              },
-              {
-                "name": "penitent flail",
-                "count": 1
-              }
-            ],
-            "isPackage": true
-          },
-          {
-            "weapons": [
-              {
-                "name": "twin penitent flails",
-                "count": 1
-              }
-            ],
-            "isPackage": false
-          }
-        ],
-        "isChoiceList": true
-      },
-      "constraints": {}
-    }
-  ],
-  "allWargearParsed": true
+  "leadsUnits": []
 }
