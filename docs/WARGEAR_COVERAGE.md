@@ -1,837 +1,924 @@
-# Wargear UI Coverage Tracker
+# Wargear Loadout Coverage Report
 
-This document tracks which datasheets have wargear options or abilities and whether their UI is fully functional.
-
-## Summary Statistics
-
-| Metric | Count |
-|--------|-------|
-| Total datasheets with wargear | 669 |
-| With wargear options | 648 |
-| With precomputed loadouts (complex) | 150 |
-| Simple swap/add (standard UI) | 498 |
-| With wargear abilities | 223 |
+This report tracks all datasheets with wargear loadout options and their testing status.
 
 ## Status Legend
 
-- `[ ]` - Not tested
-- `[~]` - Partially working (has issues)
-- `[x]` - Fully working
-- `[!]` - Broken / needs investigation
+| Status | Meaning |
+|--------|---------|
+| `[ ]` | Not tested |
+| `[~]` | Partially working |
+| `[x]` | Fully working |
+| `[!]` | Broken |
 
-## Coverage by Faction
+## Complexity Indicators
 
-### Adepta Sororitas
+- **R** = Has ratio-based weapons (e.g., 1 per 5 models)
+- **M** = Has model-type specific weapons (e.g., Sergeant only)
+- **L#** = Number of valid loadout groups
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000903 | Battle Sisters Squad | 5 | 33 | 1 | |
-| [ ] | 000000899 | Canoness | 4 | - | 2 | |
-| [ ] | 000003714 | Canoness with Jump Pack | 1 | - | - | |
-| [ ] | 000002484 | Castigator | 3 | - | - | |
-| [ ] | 000004189 | Celestian Insidiants | 6 | 12 | 2 | |
-| [ ] | 000002481 | Celestian Sacresants | 3 | - | - | |
-| [ ] | 000000909 | Dominion Squad | 4 | - | 1 | |
-| [ ] | 000000912 | Exorcist | 2 | - | - | |
-| [ ] | 000000911 | Immolator | 2 | - | - | |
-| [ ] | 000001553 | Ministorum Priest | 1 | - | - | |
-| [ ] | 000002067 | Mortifiers | 3 | 12 | 1 | |
-| [ ] | 000002472 | Palatine | 1 | - | - | |
-| [ ] | 000002483 | Paragon Warsuits | 3 | - | - | |
-| [ ] | 000000897 | Penitent Engines | 1 | - | - | |
-| [ ] | 000000908 | Retributor Squad | 3 | - | - | |
-| [ ] | 000004075 | Sanctifiers | 4 | - | 2 | |
-| [ ] | 000000904 | Seraphim Squad | 2 | 3 | - | |
-| [ ] | 000002507 | Sisters Novitiate Squad | 5 | - | 2 | |
-| [ ] | 000000910 | Sororitas Rhino | 1 | - | - | |
-| [ ] | 000002066 | Zephyrim Squad | 2 | - | 1 | |
+---
 
-### Adeptus Custodes
+## Summary
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000001560 | Agamatus Custodians | 1 | - | - | |
-| [ ] | 000001453 | Allarus Custodians | 2 | 2 | 1 | |
-| [ ] | 000002524 | Anathema Psykana Rhino | 1 | - | - | |
-| [ ] | 000001558 | Aquilon Custodians | 2 | - | - | |
-| [ ] | 000001460 | Caladius Grav-tank | 1 | - | - | |
-| [ ] | 000001458 | Contemptor-achillus Dreadnought | 1 | - | - | |
-| [ ] | 000000882 | Custodian Guard | 2 | 2 | 2 | |
-| [ ] | 000001559 | Custodian Guard With Adrasite And Pyrithite Spears | 1 | - | - | |
-| [ ] | 000001450 | Custodian Wardens | 2 | - | 1 | |
-| [ ] | 000002520 | Knight-centura | 1 | - | - | |
-| [ ] | 000001447 | Shield-captain | 1 | - | 1 | |
-| [ ] | 000001448 | Shield-captain In Allarus Terminator Armour | 1 | - | - | |
-| [ ] | 000001449 | Shield-captain On Dawneagle Jetbike | 1 | - | - | |
-| [ ] | 000001479 | Telemon Heavy Dreadnought | 1 | - | - | |
-| [ ] | 000001561 | Venatari Custodians | 1 | - | 1 | |
-| [ ] | 000000883 | Venerable Contemptor Dreadnought | 1 | - | - | |
-| [ ] | 000000884 | Venerable Land Raider | 2 | - | - | |
-| [ ] | 000001454 | Vertus Praetors | 1 | - | - | |
+| Faction | Units with Options |
+|---------|-------------------|
+| Adepta Sororitas | 20 |
+| Adeptus Custodes | 25 |
+| Adeptus Mechanicus | 19 |
+| Adeptus Titanicus | 4 |
+| Aeldari | 48 |
+| Astra Militarum | 58 |
+| Chaos Daemons | 68 |
+| Chaos Knights | 21 |
+| Chaos Space Marines | 34 |
+| Death Guard | 14 |
+| Drukhari | 24 |
+| Emperor's Children | 13 |
+| Genestealer Cults | 57 |
+| Grey Knights | 21 |
+| Imperial Agents | 16 |
+| Imperial Knights | 23 |
+| Leagues of Votann | 15 |
+| Necrons | 19 |
+| Orks | 32 |
+| Space Marines | 115 |
+| T'au Empire | 35 |
+| Thousand Sons | 21 |
+| Tyranids | 16 |
+| World Eaters | 18 |
+| **Total** | **736** |
 
-### Adeptus Mechanicus
+---
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000002087 | Archaeopter Fusilave | 1 | - | 2 | |
-| [ ] | 000002086 | Archaeopter Stratoraptor | 1 | - | 2 | |
-| [ ] | 000002085 | Archaeopter Transvector | 1 | - | 2 | |
-| [ ] | 000000852 | Ironstrider Ballistarii | 1 | - | - | |
-| [ ] | 000000845 | Kastelan Robots | 2 | 6 | - | |
-| [ ] | 000000841 | Kataphron Breachers | 2 | - | - | |
-| [ ] | 000000842 | Kataphron Destroyers | 2 | - | - | |
-| [ ] | 000000854 | Onager Dunecrawler | 3 | 14 | 1 | |
-| [ ] | 000002082 | Serberys Raiders | 1 | - | 1 | |
-| [ ] | 000002081 | Serberys Sulphurhounds | 1 | - | - | |
-| [ ] | 000004119 | Servitor Battleclade | 2 | - | - | |
-| [ ] | 000000850 | Sicarian Infiltrators | 1 | - | - | |
-| [ ] | 000000851 | Sicarian Ruststalkers | 2 | 2 | - | |
-| [ ] | 000000848 | Skitarii Rangers | 6 | 12 | 2 | |
-| [ ] | 000000849 | Skitarii Vanguard | 6 | 12 | 2 | |
-| [ ] | 000001651 | Skorpius Disintegrator | 1 | - | - | |
-| [ ] | 000003695 | Sydonian Skatros | 1 | - | - | |
-| [ ] | 000000839 | Tech-priest Dominus | 2 | - | - | |
-| [ ] | 000001580 | Tech-priest Manipulus | 1 | - | - | |
+## Adepta Sororitas
 
-### Adeptus Titanicus
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [!] | Battle Sisters Squad | M13 L3 | Sister superior missing valid loadouts containing chainsword or power weapon. Sisters with a Simalcrum Imperialis are marked as invalid. |
+| [x] | Canoness | L1 | |
+| [x] | Canoness with Jump Pack | L1 | |
+| [!] | Castigator | L1 | Default loadout invalid. Storm bolter and HK not counting as addons |
+| [!] | Celestian Insidiants | M2 L2 | Almost no rules validate |
+| [x] | Celestian Sacresants | M4 L2 | |
+| [ ] | Dominion Squad | M7 L2 | |
+| [ ] | Exorcist | L1 | |
+| [ ] | Immolator | L1 | |
+| [ ] | Ministorum Priest | L1 | |
+| [ ] | Mortifiers | L1 | |
+| [ ] | Palatine | L1 | |
+| [ ] | Paragon Warsuits | L1 | |
+| [ ] | Penitent Engines | L1 | |
+| [ ] | Retributor Squad | M9 L2 | |
+| [ ] | Sanctifiers | M3 L5 | |
+| [ ] | Seraphim Squad | M4 L2 | |
+| [ ] | Sisters Novitiate Squad | M2 L2 | |
+| [ ] | Sororitas Rhino | L1 | |
+| [ ] | Zephyrim Squad | M1 L2 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000868 | Reaver Titan | 2 | - | - | |
-| [ ] | 000002077 | Warbringer Nemesis Titan | 3 | - | - | |
-| [ ] | 000000867 | Warhound Titan | 2 | - | - | |
-| [ ] | 000000869 | Warlord Titan | 3 | - | - | |
+## Adeptus Custodes
 
-### Aeldari
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Agamatus Custodians | L1 | |
+| [ ] | Allarus Custodians | M1 L1 | |
+| [ ] | Anathema Psykana Rhino | L1 | |
+| [ ] | Aquilon Custodians | L1 | |
+| [ ] | Ares Gunship | - | |
+| [ ] | Caladius Grav-tank | L1 | |
+| [ ] | Contemptor-achillus Dreadnought | L1 | |
+| [ ] | Contemptor-galatus Dreadnought | - | |
+| [ ] | Coronus Grav-carrier | - | |
+| [ ] | Custodian Guard | M1 L1 | |
+| [ ] | Custodian Guard With Adrasite And Pyrithite Spears | L1 | |
+| [ ] | Custodian Wardens | L1 | |
+| [ ] | Knight-centura | L1 | |
+| [ ] | Orion Assault Dropship | - | |
+| [ ] | Pallas Grav-attack | - | |
+| [ ] | Sagittarum Custodians | - | |
+| [ ] | Shield-captain | L1 | |
+| [ ] | Shield-captain In Allarus Terminator Armour | L1 | |
+| [ ] | Shield-captain On Dawneagle Jetbike | L1 | |
+| [ ] | Telemon Heavy Dreadnought | L1 | |
+| [ ] | Venatari Custodians | L1 | |
+| [ ] | Venerable Contemptor Dreadnought | L1 | |
+| [ ] | Venerable Land Raider | L1 | |
+| [ ] | Vertus Praetors | L1 | |
+| [ ] | Witchseekers | - | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000577 | Autarch | 2 | - | - | |
-| [ ] | 000002759 | Autarch Wayleaper | 2 | - | - | |
-| [ ] | 000002531 | Corsair Voidreavers | 5 | 10 | 1 | |
-| [ ] | 000002532 | Corsair Voidscarred | 8 | - | 3 | |
-| [ ] | 000000603 | Crimson Hunter | 1 | - | - | |
-| [ ] | 000000607 | Dark Reapers | 2 | - | 1 | |
-| [ ] | 000002537 | Death Jester | - | - | 1 | |
-| [ ] | 000000593 | Dire Avengers | 4 | - | 2 | |
-| [ ] | 000000609 | Falcon | 2 | - | - | |
-| [ ] | 000000582 | Farseer | 1 | - | - | |
-| [ ] | 000000583 | Farseer Skyrunner | 1 | - | - | |
-| [ ] | 000000596 | Fire Dragons | 2 | - | 1 | |
-| [ ] | 000000610 | Fire Prism | 1 | - | - | |
-| [ ] | 000000589 | Guardian Defenders | 1 | - | - | |
-| [ ] | 000000594 | Howling Banshees | 3 | 4 | 1 | |
-| [ ] | 000000611 | Night Spinner | 1 | - | - | |
-| [ ] | 000000631 | Phantom Titan | 3 | 4 | - | |
-| [ ] | 000000628 | Revenant Titan | 2 | - | - | |
-| [ ] | 000002535 | Shadowseer | 1 | - | 1 | |
-| [ ] | 000000602 | Shining Spears | 3 | - | 1 | |
-| [ ] | 000002539 | Skyweavers | 2 | - | - | |
-| [ ] | 000002538 | Solitaire | - | - | 1 | |
-| [ ] | 000000590 | Storm Guardians | 3 | - | 1 | |
-| [ ] | 000000595 | Striking Scorpions | 2 | 3 | 1 | |
-| [ ] | 000000600 | Swooping Hawks | 2 | - | 1 | |
-| [ ] | 000002536 | Troupe | 4 | - | 1 | |
-| [ ] | 000002534 | Troupe Master | 2 | - | 1 | |
-| [ ] | 000002540 | Voidweaver | 1 | - | - | |
-| [ ] | 000000605 | Vypers | 1 | - | - | |
-| [ ] | 000000612 | War Walkers | 1 | - | - | |
-| [ ] | 000000585 | Warlock | 1 | - | - | |
-| [ ] | 000000584 | Warlock Conclave | 1 | - | - | |
-| [ ] | 000000587 | Warlock Skyrunners | 1 | - | - | |
-| [ ] | 000000601 | Warp Spiders | 2 | - | 1 | |
-| [ ] | 000000599 | Wave Serpent | 2 | - | - | |
-| [ ] | 000000591 | Windriders | 1 | - | - | |
-| [ ] | 000000598 | Wraithblades | 1 | - | 1 | |
-| [ ] | 000000597 | Wraithguard | 1 | - | - | |
-| [ ] | 000000614 | Wraithknight | 3 | - | 1 | |
-| [ ] | 000003913 | Wraithknight with Ghostglaive | 2 | - | 1 | |
-| [ ] | 000000613 | Wraithlord | 3 | - | - | |
-| [ ] | 000003914 | Ynnari Archon | 1 | - | 1 | |
-| [ ] | 000003918 | Ynnari Incubi | 1 | - | - | |
-| [ ] | 000003916 | Ynnari Kabalite Warriors | 7 | 12 | 1 | |
-| [ ] | 000003920 | Ynnari Raider | 1 | - | - | |
-| [ ] | 000003919 | Ynnari Reavers | 3 | 6 | 2 | |
-| [ ] | 000003915 | Ynnari Succubus | 1 | - | - | |
-| [ ] | 000003921 | Ynnari Venom | 1 | - | - | |
-| [ ] | 000003917 | Ynnari Wyches | 1 | - | - | |
+## Adeptus Mechanicus
 
-### Astra Militarum
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Archaeopter Fusilave | L1 | |
+| [ ] | Archaeopter Stratoraptor | L1 | |
+| [ ] | Archaeopter Transvector | L1 | |
+| [ ] | Ironstrider Ballistarii | L1 | |
+| [ ] | Kastelan Robots | L1 | |
+| [ ] | Kataphron Breachers | L1 | |
+| [ ] | Kataphron Destroyers | L1 | |
+| [ ] | Onager Dunecrawler | L1 | |
+| [ ] | Serberys Raiders | L1 | |
+| [ ] | Serberys Sulphurhounds | R2 L1 | |
+| [ ] | Servitor Battleclade | M1 L3 | |
+| [ ] | Sicarian Infiltrators | L1 | |
+| [ ] | Sicarian Ruststalkers | L1 | |
+| [ ] | Skitarii Rangers | M5 L3 | |
+| [ ] | Skitarii Vanguard | M5 L3 | |
+| [ ] | Skorpius Disintegrator | L1 | |
+| [ ] | Sydonian Skatros | L1 | |
+| [ ] | Tech-priest Dominus | L1 | |
+| [ ] | Tech-priest Manipulus | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000691 | Armoured Sentinels | 3 | - | - | |
-| [ ] | 000003896 | Artillery Team | 1 | - | - | |
-| [ ] | 000002616 | Attilan Rough Riders | 2 | 2 | - | |
-| [ ] | 000000702 | Baneblade | 2 | 1 | - | |
-| [ ] | 000000703 | Banehammer | 2 | 1 | - | |
-| [ ] | 000000704 | Banesword | 2 | 1 | - | |
-| [ ] | 000000695 | Basilisk | 2 | - | - | |
-| [ ] | 000000723 | Bullgryn Squad | 2 | - | 2 | |
-| [ ] | 000002607 | Cadian Castellan | 2 | 12 | - | |
-| [ ] | 000002609 | Cadian Command Squad | 5 | - | 3 | |
-| [ ] | 000000686 | Cadian Heavy Weapons Squad | 1 | - | - | |
-| [ ] | 000002612 | Cadian Shock Troops | 4 | 20 | 1 | |
-| [ ] | 000003891 | Catachan Command Squad | 6 | - | 3 | |
-| [ ] | 000003894 | Catachan Heavy Weapons Squad | 1 | - | - | |
-| [ ] | 000002614 | Catachan Jungle Fighters | 2 | - | 1 | |
-| [ ] | 000000692 | Chimera | 4 | - | - | |
-| [ ] | 000000716 | Commissar | 2 | - | - | |
-| [ ] | 000002613 | Death Korps Of Krieg | 6 | - | 2 | |
-| [ ] | 000000699 | Deathstrike | 2 | - | - | |
-| [ ] | 000000705 | Doomhammer | 2 | 1 | - | |
-| [ ] | 000003897 | Field Ordnance Battery | 1 | - | - | |
-| [ ] | 000000706 | Hellhammer | 2 | 1 | - | |
-| [ ] | 000000694 | Hellhound | 3 | - | - | |
-| [ ] | 000000696 | Hydra | 2 | - | - | |
-| [ ] | 000002615 | Kasrkin | 6 | 18 | 2 | |
-| [ ] | 000003893 | Krieg Combat Engineers | 5 | 24 | 1 | |
-| [ ] | 000003889 | Krieg Command Squad | 5 | - | 4 | |
-| [ ] | 000003895 | Krieg Heavy Weapons Squad | 1 | - | - | |
-| [ ] | 000000700 | Leman Russ Battle Tank | 4 | - | - | |
-| [ ] | 000000680 | Leman Russ Commander | 5 | - | - | |
-| [ ] | 000000701 | Leman Russ Demolisher | 4 | - | - | |
-| [ ] | 000002741 | Leman Russ Eradicator | 4 | - | - | |
-| [ ] | 000002742 | Leman Russ Executioner | 4 | - | - | |
-| [ ] | 000002743 | Leman Russ Exterminator | 4 | - | - | |
-| [ ] | 000002744 | Leman Russ Punisher | 4 | - | - | |
-| [ ] | 000002745 | Leman Russ Vanquisher | 4 | - | - | |
-| [ ] | 000000698 | Manticore | 2 | - | - | |
-| [ ] | 000000719 | Militarum Tempestus Command Squad | 5 | 36 | 4 | |
-| [ ] | 000001394 | Ministorum Priest | 1 | - | - | |
-| [ ] | 000001398 | Ogryn Bodyguard | 2 | - | 2 | |
-| [ ] | 000000724 | Ratlings | 3 | 2 | 2 | |
-| [ ] | 000002617 | Rogal Dorn Battle Tank | 4 | 24 | - | |
-| [ ] | 000003892 | Rogal Dorn Commander | 4 | 12 | - | |
-| [ ] | 000000690 | Scout Sentinels | 3 | - | - | |
-| [ ] | 000000707 | Shadowsword | 2 | 1 | - | |
-| [ ] | 000000708 | Stormlord | 2 | 1 | - | |
-| [ ] | 000000709 | Stormsword | 2 | 1 | - | |
-| [ ] | 000000693 | Taurox | 1 | - | - | |
-| [ ] | 000000721 | Taurox Prime | 3 | - | - | |
-| [ ] | 000003834 | Tempestus Aquilons | 7 | 30 | - | |
-| [ ] | 000002746 | Tempestus Scions | 4 | 18 | 1 | |
-| [ ] | 000000727 | Valkyrie | 3 | - | - | |
-| [ ] | 000000697 | Wyvern | 2 | - | - | |
+## Adeptus Titanicus
 
-### Chaos Daemons
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Reaver Titan | L1 | |
+| [ ] | Warbringer Nemesis Titan | L1 | |
+| [ ] | Warhound Titan | L1 | |
+| [ ] | Warlord Titan | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000001115 | Bloodcrushers | 2 | - | 2 | |
-| [ ] | 000001114 | Bloodletters | 2 | - | 2 | |
-| [ ] | 000002582 | Bloodthirster | 1 | - | - | |
-| [ ] | 000004036 | Chaos Lord | 2 | - | - | |
-| [ ] | 000004037 | Chaos Lord In Terminator Armour | 3 | 7 | - | |
-| [ ] | 000004038 | Chaos Lord with Jump Pack | 3 | 5 | - | |
-| [ ] | 000004043 | Chaos Terminator Squad | 5 | 4 | - | |
-| [ ] | 000004044 | Chosen | 5 | 8 | 1 | |
-| [ ] | 000004050 | Cultist Mob | 1 | - | - | |
-| [ ] | 000001142 | Daemonettes | 2 | - | 2 | |
-| [ ] | 000004046 | Dark Commune | - | - | 1 | |
-| [ ] | 000004053 | Fellgor Beastmen | 3 | 2 | - | |
-| [ ] | 000001112 | Flesh Hounds | - | - | 1 | |
-| [ ] | 000001130 | Great Unclean One | 2 | - | - | |
-| [ ] | 000004063 | Havocs | 3 | - | - | |
-| [ ] | 000001104 | Karanak | - | - | 1 | |
-| [ ] | 000001137 | Keeper Of Secrets | 1 | - | 1 | |
-| [ ] | 000004064 | Legionaries | 7 | 50 | 1 | |
-| [ ] | 000001120 | Lord of Change | 1 | - | - | |
-| [ ] | 000002584 | Pink Horrors | 2 | - | 2 | |
-| [ ] | 000001135 | Plague Drones | 2 | - | 2 | |
-| [ ] | 000001132 | Plaguebearers | 2 | - | 2 | |
-| [ ] | 000004066 | Possessed | 1 | - | 1 | |
-| [ ] | 000004067 | Raptors | 7 | 56 | - | |
-| [ ] | 000001145 | Seekers | 2 | - | 2 | |
-| [ ] | 000004072 | Sorcerer In Terminator Armour | 2 | - | 1 | |
-| [ ] | 000001151 | Soul Grinder | 1 | - | - | |
-| [ ] | 000004054 | Traitor Guardsmen Squad | 3 | - | - | |
+## Aeldari
 
-### Chaos Knights
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Autarch | L1 | |
+| [ ] | Autarch Wayleaper | L1 | |
+| [ ] | Corsair Voidreavers | R2 M1 L2 | |
+| [ ] | Corsair Voidscarred | R2 M1 L6 | |
+| [ ] | Crimson Hunter | L1 | |
+| [ ] | Dark Reapers | L2 | |
+| [ ] | Dire Avengers | L2 | |
+| [ ] | Falcon | L1 | |
+| [ ] | Farseer | L1 | |
+| [ ] | Farseer Skyrunner | L1 | |
+| [ ] | Fire Dragons | L1 | |
+| [ ] | Fire Prism | L1 | |
+| [ ] | Guardian Defenders | M4 L2 | |
+| [ ] | Howling Banshees | M1 L2 | |
+| [ ] | Night Spinner | L1 | |
+| [ ] | Phantom Titan | L1 | |
+| [ ] | Rangers | - | |
+| [ ] | Revenant Titan | L1 | |
+| [ ] | Shadowseer | L1 | |
+| [ ] | Shining Spears | M3 L2 | |
+| [ ] | Skyweavers | L1 | |
+| [ ] | Storm Guardians | L2 | |
+| [ ] | Striking Scorpions | M2 L1 | |
+| [ ] | Swooping Hawks | M4 L2 | |
+| [ ] | Troupe | M1 L2 | |
+| [ ] | Troupe Master | L1 | |
+| [ ] | Voidweaver | L1 | |
+| [ ] | Vypers | L1 | |
+| [ ] | War Walkers | L1 | |
+| [ ] | Warlock | L1 | |
+| [ ] | Warlock Conclave | L1 | |
+| [ ] | Warlock Skyrunners | L1 | |
+| [ ] | Warp Spiders | M4 L2 | |
+| [ ] | Wave Serpent | L1 | |
+| [ ] | Windriders | L1 | |
+| [ ] | Wraithblades | L1 | |
+| [ ] | Wraithguard | L1 | |
+| [ ] | Wraithknight | L1 | |
+| [ ] | Wraithknight with Ghostglaive | L1 | |
+| [ ] | Wraithlord | M1 L1 | |
+| [ ] | Ynnari Archon | L1 | |
+| [ ] | Ynnari Incubi | L2 | |
+| [ ] | Ynnari Kabalite Warriors | M7 L3 | |
+| [ ] | Ynnari Raider | L1 | |
+| [ ] | Ynnari Reavers | R2 M1 L1 | |
+| [ ] | Ynnari Succubus | L1 | |
+| [ ] | Ynnari Venom | L1 | |
+| [ ] | Ynnari Wyches | M1 L2 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000001099 | Chaos Acastus Knight Porphyrion | 2 | 4 | - | |
-| [ ] | 000001098 | Chaos Questoris Knight Magaera | 1 | - | - | |
-| [ ] | 000001100 | Chaos Questoris Knight Styrix | 1 | - | - | |
-| [ ] | 000003849 | Cultist Mob | 1 | - | - | |
-| [ ] | 000003845 | Dark Commune | - | - | 1 | |
-| [ ] | 000003852 | Fellgor Beastmen | 3 | 2 | - | |
-| [ ] | 000001660 | Knight Desecrator | 1 | - | - | |
-| [ ] | 000001658 | Knight Despoiler | 4 | 64 | - | |
-| [ ] | 000001659 | Knight Tyrant | 2 | 2 | - | |
-| [ ] | 000003853 | Traitor Guardsmen Squad | 3 | - | - | |
-| [ ] | 000002565 | War Dog Brigand | 1 | - | - | |
-| [ ] | 000002562 | War Dog Executioner | 1 | - | - | |
-| [ ] | 000002566 | War Dog Huntsman | 1 | - | - | |
-| [ ] | 000002564 | War Dog Karnivore | 1 | - | - | |
-| [ ] | 000001663 | War Dog Moirax | 2 | 10 | - | |
-| [ ] | 000002563 | War Dog Stalker | 3 | - | - | |
+## Astra Militarum
 
-### Chaos Space Marines
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Aegis Defence Line | - | |
+| [ ] | Armoured Sentinels | L1 | |
+| [ ] | Artillery Team | L1 | |
+| [ ] | Attilan Rough Riders | R1 M1 L1 | |
+| [ ] | Avenger Strike Fighter | - | |
+| [ ] | Baneblade | L1 | |
+| [ ] | Banehammer | L1 | |
+| [ ] | Banesword | L1 | |
+| [ ] | Basilisk | L1 | |
+| [ ] | Bullgryn Squad | L1 | |
+| [ ] | Cadian Castellan | L1 | |
+| [ ] | Cadian Command Squad | M9 L2 | |
+| [ ] | Cadian Heavy Weapons Squad | L1 | |
+| [ ] | Cadian Shock Troops | R4 L1 | |
+| [ ] | Catachan Command Squad | M6 L2 | |
+| [ ] | Catachan Heavy Weapons Squad | L1 | |
+| [ ] | Catachan Jungle Fighters | R1 L1 | |
+| [ ] | Chimera | L1 | |
+| [ ] | Commissar | L1 | |
+| [ ] | Cyclops Demolition Vehicle | - | |
+| [ ] | Death Korps Of Krieg | R5 L1 | |
+| [ ] | Deathstrike | L1 | |
+| [ ] | Doomhammer | L1 | |
+| [ ] | Field Ordnance Battery | L1 | |
+| [ ] | Hellhammer | L1 | |
+| [ ] | Hellhound | L1 | |
+| [ ] | Hydra | L1 | |
+| [ ] | Kasrkin | M4 L2 | |
+| [ ] | Krieg Combat Engineers | M6 L3 | |
+| [ ] | Krieg Command Squad | M8 L2 | |
+| [ ] | Krieg Heavy Weapons Squad | L2 | |
+| [ ] | Leman Russ Battle Tank | L1 | |
+| [ ] | Leman Russ Commander | L1 | |
+| [ ] | Leman Russ Demolisher | L1 | |
+| [ ] | Leman Russ Eradicator | L1 | |
+| [ ] | Leman Russ Executioner | L1 | |
+| [ ] | Leman Russ Exterminator | L1 | |
+| [ ] | Leman Russ Punisher | L1 | |
+| [ ] | Leman Russ Vanquisher | L1 | |
+| [ ] | Manticore | L1 | |
+| [ ] | Militarum Tempestus Command Squad | M2 L2 | |
+| [ ] | Ministorum Priest | L1 | |
+| [ ] | Ogryn Bodyguard | L1 | |
+| [ ] | Ogryn Squad | - | |
+| [ ] | Ratlings | L1 | |
+| [ ] | Rogal Dorn Battle Tank | L1 | |
+| [ ] | Rogal Dorn Commander | L1 | |
+| [ ] | Scout Sentinels | L1 | |
+| [ ] | Shadowsword | L1 | |
+| [ ] | Stormlord | L1 | |
+| [ ] | Stormsword | L1 | |
+| [ ] | Taurox | L1 | |
+| [ ] | Taurox Prime | L1 | |
+| [ ] | Tech-Priest Enginseer | - | |
+| [ ] | Tempestus Aquilons | M6 L2 | |
+| [ ] | Tempestus Scions | R5 M4 L2 | |
+| [ ] | Valkyrie | L1 | |
+| [ ] | Wyvern | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000957 | Chaos Bikers | 4 | - | 1 | |
-| [ ] | 000000962 | Chaos Land Raider | 2 | - | - | |
-| [ ] | 000000929 | Chaos Lord | 2 | - | - | |
-| [ ] | 000000930 | Chaos Lord In Terminator Armour | 3 | 7 | - | |
-| [ ] | 000003711 | Chaos Lord with Jump Pack | 3 | 5 | - | |
-| [ ] | 000002572 | Chaos Predator Annihilator | 3 | - | - | |
-| [ ] | 000000963 | Chaos Predator Destructor | 3 | - | - | |
-| [ ] | 000000956 | Chaos Rhino | 2 | - | - | |
-| [ ] | 000000947 | Chaos Terminator Squad | 5 | 4 | - | |
-| [ ] | 000000964 | Chaos Vindicator | 2 | - | - | |
-| [ ] | 000000952 | Chosen | 5 | 8 | 1 | |
-| [ ] | 000000946 | Cultist Mob | 1 | - | - | |
-| [ ] | 000002569 | Dark Commune | - | - | 1 | |
-| [ ] | 000000969 | Defiler | 3 | - | - | |
-| [ ] | 000001604 | Fellgor Beastmen | 3 | 2 | - | |
-| [ ] | 000000967 | Forgefiend | 2 | 2 | - | |
-| [ ] | 000000966 | Havocs | 3 | - | - | |
-| [ ] | 000000954 | Helbrute | 3 | - | - | |
-| [ ] | 000000961 | Heldrake | 1 | - | - | |
-| [ ] | 000003582 | Khorne Berzerkers | 4 | 4 | 1 | |
-| [ ] | 000000970 | Khorne Lord Of Skulls | 2 | - | - | |
-| [ ] | 000002570 | Legionaries | 7 | 50 | 1 | |
-| [ ] | 000001583 | Lord Discordant On Helstalker | 2 | - | - | |
-| [ ] | 000000968 | Maulerfiend | 1 | - | - | |
-| [ ] | 000003876 | Nemesis Claw | 6 | 50 | 1 | |
-| [ ] | 000004099 | Noise Marines | 2 | 2 | - | |
-| [ ] | 000003584 | Plague Marines | 8 | 70 | 1 | |
-| [ ] | 000000953 | Possessed | 1 | - | 1 | |
-| [ ] | 000000958 | Raptors | 7 | 56 | - | |
-| [ ] | 000003583 | Rubric Marines | 4 | - | 1 | |
-| [ ] | 000000939 | Sorcerer In Terminator Armour | 2 | - | 1 | |
-| [ ] | 000002590 | Traitor Guardsmen Squad | 3 | - | - | |
+## Chaos Daemons
 
-### Death Guard
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Be'lakor | - | |
+| [ ] | Beasts Of Nurgle | - | |
+| [ ] | Bloodcrushers | L1 | |
+| [ ] | Bloodletters | L1 | |
+| [ ] | Bloodmaster | - | |
+| [ ] | Bloodthirster | L1 | |
+| [ ] | Blue Horrors | - | |
+| [ ] | Burning Chariot | - | |
+| [ ] | Changecaster | - | |
+| [ ] | Chaos Lord | L1 | |
+| [ ] | Chaos Lord In Terminator Armour | L1 | |
+| [ ] | Chaos Lord with Jump Pack | L1 | |
+| [ ] | Chaos Terminator Squad | R5 L1 | |
+| [ ] | Chosen | R4 L1 | |
+| [ ] | Contorted Epitome | - | |
+| [ ] | Cultist Mob | M1 L2 | |
+| [ ] | Daemon Prince of Chaos | - | |
+| [ ] | Daemon Prince Of Chaos With Wings | - | |
+| [ ] | Daemonettes | L1 | |
+| [ ] | Epidemius | - | |
+| [ ] | Exalted Flamer | - | |
+| [ ] | Fateskimmer | - | |
+| [ ] | Feculent Gnarlmaw | - | |
+| [ ] | Fellgor Beastmen | M3 L2 | |
+| [ ] | Fiends | - | |
+| [ ] | Flamers | - | |
+| [ ] | Flesh Hounds | - | |
+| [ ] | Fluxmaster | - | |
+| [ ] | Great Unclean One | L1 | |
+| [ ] | Havocs | M6 L2 | |
+| [ ] | Hellflayers | - | |
+| [ ] | Horticulous Slimux | - | |
+| [ ] | Infernal Enrapturess | - | |
+| [ ] | Kairos Fateweaver | - | |
+| [ ] | Karanak | - | |
+| [ ] | Keeper Of Secrets | L1 | |
+| [ ] | Legionaries | R9 M3 L2 | |
+| [ ] | Lord of Change | L1 | |
+| [ ] | Nurglings | - | |
+| [ ] | Pink Horrors | L1 | |
+| [ ] | Plague Drones | L1 | |
+| [ ] | Plaguebearers | L1 | |
+| [ ] | Possessed | L1 | |
+| [ ] | Poxbringer | - | |
+| [ ] | Raptors | R3 M1 L2 | |
+| [ ] | Rendmaster On Blood Throne | - | |
+| [ ] | Rotigus | - | |
+| [ ] | Screamers | - | |
+| [ ] | Seekers | L1 | |
+| [ ] | Shalaxi Helbane | - | |
+| [ ] | Skarbrand | - | |
+| [ ] | Skull Altar | - | |
+| [ ] | Skull Cannon | - | |
+| [ ] | Skullmaster | - | |
+| [ ] | Skulltaker | - | |
+| [ ] | Sloppity Bilepiper | - | |
+| [ ] | Sorcerer In Terminator Armour | L1 | |
+| [ ] | Soul Grinder | L1 | |
+| [ ] | Spoilpox Scrivener | - | |
+| [ ] | Syll'esske | - | |
+| [ ] | The Blue Scribes | - | |
+| [ ] | The Changeling | - | |
+| [ ] | The Masque Of Slaanesh | - | |
+| [ ] | Tormentbringer | - | |
+| [ ] | Traitor Enforcer | - | |
+| [ ] | Traitor Guardsmen Squad | M3 L2 | |
+| [ ] | Tranceweaver | - | |
+| [ ] | Warp Talons | - | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000001372 | Blightlord Terminators | 6 | 2 | - | |
-| [ ] | 000001049 | Chaos Land Raider | 2 | - | - | |
-| [ ] | 000001050 | Chaos Predator Annihilator | 3 | - | - | |
-| [ ] | 000002461 | Chaos Predator Destructor | 3 | - | - | |
-| [ ] | 000001047 | Chaos Rhino | 2 | - | - | |
-| [ ] | 000001371 | Deathshroud Terminators | 2 | - | 1 | |
-| [ ] | 000001051 | Defiler | 3 | - | - | |
-| [ ] | 000001057 | Foetid Bloat-drone | 1 | - | - | |
-| [ ] | 000004112 | Great Unclean One | 2 | - | - | |
-| [ ] | 000001046 | Helbrute | 4 | 15 | - | |
-| [ ] | 000004114 | Plague Drones | 2 | - | 2 | |
-| [ ] | 000001044 | Plague Marines | 8 | 70 | 1 | |
-| [ ] | 000004113 | Plaguebearers | 2 | - | 2 | |
-| [ ] | 000001376 | Plagueburst Crawler | 2 | - | - | |
+## Chaos Knights
 
-### Drukhari
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Chaos Acastus Knight Asterius | - | |
+| [ ] | Chaos Acastus Knight Porphyrion | L1 | |
+| [ ] | Chaos Cerastus Knight Acheron | - | |
+| [ ] | Chaos Cerastus Knight Atrapos | - | |
+| [ ] | Chaos Cerastus Knight Castigator | - | |
+| [ ] | Chaos Cerastus Knight Lancer | - | |
+| [ ] | Chaos Questoris Knight Magaera | L1 | |
+| [ ] | Chaos Questoris Knight Styrix | L1 | |
+| [ ] | Cultist Mob | M1 L2 | |
+| [ ] | Fellgor Beastmen | M3 L2 | |
+| [ ] | Knight Desecrator | L1 | |
+| [ ] | Knight Despoiler | L1 | |
+| [ ] | Knight Tyrant | L1 | |
+| [ ] | Traitor Enforcer | - | |
+| [ ] | Traitor Guardsmen Squad | M3 L2 | |
+| [ ] | War Dog Brigand | L1 | |
+| [ ] | War Dog Executioner | L1 | |
+| [ ] | War Dog Huntsman | L1 | |
+| [ ] | War Dog Karnivore | L1 | |
+| [ ] | War Dog Moirax | L1 | |
+| [ ] | War Dog Stalker | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000634 | Archon | 2 | - | 2 | |
-| [ ] | 000004168 | Corsair Voidreavers | 5 | 10 | 1 | |
-| [ ] | 000004169 | Corsair Voidscarred | 8 | - | 3 | |
-| [ ] | 000000664 | Cronos | 1 | - | - | |
-| [ ] | 000004158 | Death Jester | - | - | 1 | |
-| [ ] | 000004156 | Hand of the Archon | 10 | 30 | 3 | |
-| [ ] | 000000659 | Hellions | 3 | 8 | 1 | |
-| [ ] | 000000648 | Incubi | 2 | - | 1 | |
-| [ ] | 000000644 | Kabalite Warriors | 7 | 18 | 2 | |
-| [ ] | 000000656 | Raider | 1 | - | - | |
-| [ ] | 000000665 | Ravager | 1 | - | - | |
-| [ ] | 000000660 | Razorwing Jetfighter | 2 | - | - | |
-| [ ] | 000000658 | Reavers | 2 | 3 | 2 | |
-| [ ] | 000000662 | Scourges with Heavy Weapons | 2 | - | - | |
-| [ ] | 000004157 | Scourges with Shardcarbines | 2 | 3 | - | |
-| [ ] | 000004159 | Shadowseer | 1 | - | 1 | |
-| [ ] | 000004163 | Skyweavers | 2 | - | - | |
-| [ ] | 000004160 | Solitaire | - | - | 1 | |
-| [ ] | 000000663 | Talos | 3 | - | - | |
-| [ ] | 000004164 | Troupe | 4 | - | 1 | |
-| [ ] | 000004161 | Troupe Master | 2 | - | 1 | |
-| [ ] | 000000657 | Venom | 1 | - | - | |
-| [ ] | 000000661 | Voidraven Bomber | 2 | - | - | |
-| [ ] | 000004165 | Voidweaver | 1 | - | - | |
-| [ ] | 000000650 | Wracks | 3 | 1 | - | |
-| [ ] | 000000646 | Wyches | 3 | - | - | |
+## Chaos Space Marines
 
-### Emperor S Children
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Chaos Bikers | M3 L2 | |
+| [ ] | Chaos Land Raider | L1 | |
+| [ ] | Chaos Lord | L1 | |
+| [ ] | Chaos Lord In Terminator Armour | L1 | |
+| [ ] | Chaos Lord with Jump Pack | L1 | |
+| [ ] | Chaos Predator Annihilator | L1 | |
+| [ ] | Chaos Predator Destructor | L1 | |
+| [ ] | Chaos Rhino | L1 | |
+| [ ] | Chaos Spawn | - | |
+| [ ] | Chaos Terminator Squad | R5 L1 | |
+| [ ] | Chaos Vindicator | L1 | |
+| [ ] | Chosen | R4 L1 | |
+| [ ] | Cultist Mob | M1 L2 | |
+| [ ] | Defiler | L1 | |
+| [ ] | Fellgor Beastmen | M3 L2 | |
+| [ ] | Forgefiend | L1 | |
+| [ ] | Havocs | M6 L2 | |
+| [ ] | Helbrute | L1 | |
+| [ ] | Heldrake | L1 | |
+| [ ] | Khorne Berzerkers | R2 L2 | |
+| [ ] | Khorne Lord Of Skulls | L1 | |
+| [ ] | Legionaries | R9 M3 L2 | |
+| [ ] | Lord Discordant On Helstalker | L1 | |
+| [ ] | Maulerfiend | L1 | |
+| [ ] | Nemesis Claw | M5 L2 | |
+| [ ] | Noise Marines | M2 L2 | |
+| [ ] | Plague Marines | R7 M3 L3 | |
+| [ ] | Possessed | L1 | |
+| [ ] | Raptors | R3 M1 L2 | |
+| [ ] | Rubric Marines | M2 L2 | |
+| [ ] | Sorcerer In Terminator Armour | L1 | |
+| [ ] | Traitor Enforcer | - | |
+| [ ] | Traitor Guardsmen Squad | M3 L2 | |
+| [ ] | Warp Talons | - | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000004082 | Chaos Land Raider | 2 | - | - | |
-| [ ] | 000004093 | Chaos Rhino | 2 | - | - | |
-| [ ] | 000004081 | Chaos Terminators | 5 | 4 | - | |
-| [ ] | 000004095 | Daemonettes | 2 | - | 2 | |
-| [ ] | 000004092 | Heldrake | 1 | - | - | |
-| [ ] | 000004080 | Infractors | 3 | - | 1 | |
-| [ ] | 000004097 | Keeper of Secrets | 1 | - | 1 | |
-| [ ] | 000004078 | Lord Exultant | 2 | - | - | |
-| [ ] | 000004084 | Lord Kakophonist | 1 | - | - | |
-| [ ] | 000004091 | Maulerfiend | 1 | - | - | |
-| [ ] | 000004088 | Noise Marines | 2 | 2 | - | |
-| [ ] | 000004098 | Seekers | 2 | - | 2 | |
-| [ ] | 000004079 | Tormentors | 5 | 8 | 1 | |
+## Death Guard
 
-### Genestealer Cults
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Blightlord Terminators | R4 L2 | |
+| [ ] | Chaos Land Raider | L1 | |
+| [ ] | Chaos Predator Annihilator | L1 | |
+| [ ] | Chaos Predator Destructor | L1 | |
+| [ ] | Chaos Rhino | L1 | |
+| [ ] | Deathshroud Terminators | L1 | |
+| [ ] | Defiler | L1 | |
+| [ ] | Foetid Bloat-drone | L1 | |
+| [ ] | Great Unclean One | L1 | |
+| [ ] | Helbrute | M3 L1 | |
+| [ ] | Plague Drones | L1 | |
+| [ ] | Plague Marines | R7 M3 L3 | |
+| [ ] | Plaguebearers | L1 | |
+| [ ] | Plagueburst Crawler | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000001573 | Achilles Ridgerunners | 2 | - | 3 | |
-| [ ] | 000000511 | Acolyte Hybrids With Autopistols | 3 | 2 | 1 | |
-| [ ] | 000003716 | Acolyte Hybrids With Hand Flamers | 3 | 2 | 1 | |
-| [ ] | 000003960 | Armoured Sentinels | 3 | - | - | |
-| [ ] | 000003961 | Artillery Team | 1 | - | - | |
-| [ ] | 000001574 | Atalan Jackals | 3 | - | - | |
-| [ ] | 000003962 | Attilan Rough Riders | 2 | 2 | - | |
-| [ ] | 000003963 | Baneblade | 2 | 1 | - | |
-| [ ] | 000003964 | Banehammer | 2 | 1 | - | |
-| [ ] | 000003965 | Banesword | 2 | 1 | - | |
-| [ ] | 000003966 | Basilisk | 2 | - | - | |
-| [ ] | 000001572 | Biophagus | - | - | 1 | |
-| [ ] | 000003938 | Cadian Castellan | 2 | 12 | - | |
-| [ ] | 000003939 | Cadian Command Squad | 5 | - | 3 | |
-| [ ] | 000003967 | Cadian Heavy Weapons Squad | 1 | - | - | |
-| [ ] | 000003948 | Cadian Shock Troops | 4 | 20 | 1 | |
-| [ ] | 000003940 | Catachan Command Squad | 6 | - | 3 | |
-| [ ] | 000003968 | Catachan Heavy Weapons Squad | 1 | - | - | |
-| [ ] | 000003949 | Catachan Jungle Fighters | 2 | - | 1 | |
-| [ ] | 000003951 | Chimera | 4 | - | - | |
-| [ ] | 000003950 | Death Korps Of Krieg | 6 | - | 2 | |
-| [ ] | 000003970 | Deathstrike | 2 | - | - | |
-| [ ] | 000003971 | Doomhammer | 2 | 1 | - | |
-| [ ] | 000003972 | Field Ordnance Battery | 1 | - | - | |
-| [ ] | 000000521 | Goliath Rockgrinder | 1 | - | - | |
-| [ ] | 000003973 | Hellhammer | 2 | 1 | - | |
-| [ ] | 000003974 | Hellhound | 3 | - | - | |
-| [ ] | 000000513 | Hybrid Metamorphs | 2 | - | 1 | |
-| [ ] | 000003975 | Hydra | 2 | - | - | |
-| [ ] | 000003976 | Kasrkin | 6 | 18 | 2 | |
-| [ ] | 000003977 | Krieg Combat Engineers | 5 | 24 | 1 | |
-| [ ] | 000003941 | Krieg Command Squad | 5 | - | 4 | |
-| [ ] | 000003978 | Krieg Heavy Weapons Squad | 1 | - | - | |
-| [ ] | 000003979 | Leman Russ Battle Tank | 4 | - | - | |
-| [ ] | 000003942 | Leman Russ Commander | 5 | - | - | |
-| [ ] | 000003980 | Leman Russ Demolisher | 4 | - | - | |
-| [ ] | 000003981 | Leman Russ Eradicator | 4 | - | - | |
-| [ ] | 000003982 | Leman Russ Executioner | 4 | - | - | |
-| [ ] | 000003983 | Leman Russ Exterminator | 4 | - | - | |
-| [ ] | 000003984 | Leman Russ Punisher | 4 | - | - | |
-| [ ] | 000003985 | Leman Russ Vanquisher | 4 | - | - | |
-| [ ] | 000003986 | Manticore | 2 | - | - | |
-| [ ] | 000000512 | Neophyte Hybrids | 4 | 80 | 1 | |
-| [ ] | 000003987 | Rogal Dorn Battle Tank | 4 | 24 | - | |
-| [ ] | 000003944 | Rogal Dorn Commander | 4 | 12 | - | |
-| [ ] | 000001569 | Sanctus | 1 | - | - | |
-| [ ] | 000003988 | Scout Sentinels | 3 | - | - | |
-| [ ] | 000003989 | Shadowsword | 2 | 3 | - | |
-| [ ] | 000003990 | Stormlord | 2 | 1 | - | |
-| [ ] | 000003991 | Stormsword | 2 | 1 | - | |
-| [ ] | 000003952 | Taurox | 1 | - | - | |
-| [ ] | 000003953 | Taurox Prime | 3 | - | - | |
-| [ ] | 000003879 | Winged Hive Tyrant | 1 | - | - | |
-| [ ] | 000003992 | Wyvern | 2 | - | - | |
+## Drukhari
 
-### Grey Knights
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Archon | L1 | |
+| [ ] | Corsair Voidreavers | R2 M1 L2 | |
+| [ ] | Corsair Voidscarred | R2 M1 L6 | |
+| [ ] | Cronos | L1 | |
+| [ ] | Hand of the Archon | M11 L3 | |
+| [ ] | Hellions | M3 L2 | |
+| [ ] | Incubi | M1 L2 | |
+| [ ] | Kabalite Warriors | M7 L3 | |
+| [ ] | Raider | L1 | |
+| [ ] | Ravager | L1 | |
+| [ ] | Razorwing Jetfighter | L1 | |
+| [ ] | Reavers | R2 L1 | |
+| [ ] | Scourges with Heavy Weapons | M3 L2 | |
+| [ ] | Scourges with Shardcarbines | M5 L3 | |
+| [ ] | Shadowseer | L1 | |
+| [ ] | Skyweavers | L1 | |
+| [ ] | Talos | L1 | |
+| [ ] | Troupe | M1 L2 | |
+| [ ] | Troupe Master | L1 | |
+| [ ] | Venom | L1 | |
+| [ ] | Voidraven Bomber | L1 | |
+| [ ] | Voidweaver | L1 | |
+| [ ] | Wracks | M1 L2 | |
+| [ ] | Wyches | M2 L2 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000376 | Brother-captain | 1 | - | - | |
-| [ ] | 000001361 | Brotherhood Librarian | 1 | - | - | |
-| [ ] | 000000382 | Brotherhood Terminator Squad | 3 | 2 | 2 | |
-| [ ] | 000000375 | Grand Master | 1 | - | - | |
-| [ ] | 000001360 | Grand Master In Nemesis Dreadknight | 3 | - | - | |
-| [ ] | 000001197 | Grey Knights Thunderhawk Gunship | 2 | - | 1 | |
-| [ ] | 000000387 | Interceptor Squad | 1 | - | - | |
-| [ ] | 000000391 | Land Raider | 3 | - | - | |
-| [ ] | 000000392 | Land Raider Crusader | 3 | - | - | |
-| [ ] | 000000393 | Land Raider Redeemer | 3 | - | - | |
-| [ ] | 000000389 | Nemesis Dreadknight | 2 | - | - | |
-| [ ] | 000000384 | Paladin Squad | 3 | 8 | 2 | |
-| [ ] | 000000388 | Purgation Squad | 1 | - | - | |
-| [ ] | 000000383 | Purifier Squad | 1 | - | - | |
-| [ ] | 000000395 | Razorback | 3 | - | - | |
-| [ ] | 000000396 | Rhino | 2 | - | - | |
-| [ ] | 000001363 | Stormhawk Interceptor | 2 | - | - | |
-| [ ] | 000000398 | Stormraven Gunship | 3 | - | - | |
-| [ ] | 000001364 | Stormtalon Gunship | 1 | - | - | |
-| [ ] | 000000381 | Strike Squad | 1 | - | - | |
-| [ ] | 000000400 | Venerable Dreadnought | 2 | - | - | |
+## Emperor's Children
 
-### Imperial Agents
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Chaos Land Raider | L1 | |
+| [ ] | Chaos Rhino | L1 | |
+| [ ] | Chaos Terminators | M4 L2 | |
+| [ ] | Daemonettes | L1 | |
+| [ ] | Heldrake | L1 | |
+| [ ] | Infractors | M2 L2 | |
+| [ ] | Keeper of Secrets | L1 | |
+| [ ] | Lord Exultant | L1 | |
+| [ ] | Lord Kakophonist | L1 | |
+| [ ] | Maulerfiend | L1 | |
+| [ ] | Noise Marines | M2 L2 | |
+| [ ] | Seekers | L1 | |
+| [ ] | Tormentors | R2 M2 L2 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000004174 | Aquila Kill Team | 4 | - | 1 | |
-| [ ] | 000003817 | Corvus Blackstar | 4 | - | 2 | |
-| [ ] | 000003816 | Deathwatch Kill Team | 9 | 80 | 1 | |
-| [ ] | 000002685 | Exaction Squad | 5 | - | 3 | |
-| [ ] | 000003813 | Grey Knights Terminator Squad | 3 | 1 | 2 | |
-| [ ] | 000002587 | Imperial Navy Breachers | 5 | - | 1 | |
-| [ ] | 000003830 | Imperial Rhino | 1 | - | - | |
-| [ ] | 000000877 | Inquisitor | 3 | 2 | 2 | |
-| [ ] | 000000876 | Inquisitor Coteaz | - | - | 1 | |
-| [ ] | 000002767 | Inquisitorial Agents | 5 | - | 1 | |
-| [ ] | 000003820 | Inquisitorial Chimera | 4 | - | - | |
-| [ ] | 000003812 | Ministorum Priest | 1 | - | - | |
-| [ ] | 000002762 | Rogue Trader Entourage | - | - | 1 | |
-| [ ] | 000004074 | Sanctifiers | 4 | - | 2 | |
-| [ ] | 000003819 | Sisters of Battle Immolator | 2 | - | - | |
-| [ ] | 000003818 | Sisters of Battle Squad | 5 | 33 | 1 | |
-| [ ] | 000002684 | Subductor Squad | 1 | - | 1 | |
-| [ ] | 000002683 | Vigilant Squad | 2 | - | 1 | |
+## Genestealer Cults
 
-### Imperial Knights
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Achilles Ridgerunners | L1 | |
+| [ ] | Acolyte Hybrids With Autopistols | R1 M1 L1 | |
+| [ ] | Acolyte Hybrids With Hand Flamers | R1 M1 L1 | |
+| [ ] | Aegis Defence Line | - | |
+| [ ] | Armoured Sentinels | L1 | |
+| [ ] | Artillery Team | L1 | |
+| [ ] | Atalan Jackals | L2 | |
+| [ ] | Attilan Rough Riders | R1 M1 L1 | |
+| [ ] | Baneblade | L1 | |
+| [ ] | Banehammer | L1 | |
+| [ ] | Banesword | L1 | |
+| [ ] | Basilisk | L1 | |
+| [ ] | Cadian Castellan | L1 | |
+| [ ] | Cadian Command Squad | M9 L2 | |
+| [ ] | Cadian Heavy Weapons Squad | L1 | |
+| [ ] | Cadian Shock Troops | R4 L1 | |
+| [ ] | Catachan Command Squad | M6 L2 | |
+| [ ] | Catachan Heavy Weapons Squad | L1 | |
+| [ ] | Catachan Jungle Fighters | R1 L1 | |
+| [ ] | Chimera | L1 | |
+| [ ] | Cyclops Demolition Vehicle | - | |
+| [ ] | Death Korps Of Krieg | R5 L1 | |
+| [ ] | Deathstrike | L1 | |
+| [ ] | Doomhammer | L1 | |
+| [ ] | Field Ordnance Battery | L1 | |
+| [ ] | Goliath Rockgrinder | L1 | |
+| [ ] | Hellhammer | L1 | |
+| [ ] | Hellhound | L1 | |
+| [ ] | Hybrid Metamorphs | L2 | |
+| [ ] | Hydra | L1 | |
+| [ ] | Kasrkin | M4 L2 | |
+| [ ] | Krieg Combat Engineers | M6 L3 | |
+| [ ] | Krieg Command Squad | M8 L2 | |
+| [ ] | Krieg Heavy Weapons Squad | L2 | |
+| [ ] | Leman Russ Battle Tank | L1 | |
+| [ ] | Leman Russ Commander | L1 | |
+| [ ] | Leman Russ Demolisher | L1 | |
+| [ ] | Leman Russ Eradicator | L1 | |
+| [ ] | Leman Russ Executioner | L1 | |
+| [ ] | Leman Russ Exterminator | L1 | |
+| [ ] | Leman Russ Punisher | L1 | |
+| [ ] | Leman Russ Vanquisher | L1 | |
+| [ ] | Manticore | L1 | |
+| [ ] | Neophyte Hybrids | R6 M3 L2 | |
+| [ ] | Raveners | - | |
+| [ ] | Rogal Dorn Battle Tank | L1 | |
+| [ ] | Rogal Dorn Commander | L1 | |
+| [ ] | Sanctus | L1 | |
+| [ ] | Scout Sentinels | L1 | |
+| [ ] | Shadowsword | L1 | |
+| [ ] | Stormlord | L1 | |
+| [ ] | Stormsword | L1 | |
+| [ ] | Taurox | L1 | |
+| [ ] | Taurox Prime | L1 | |
+| [ ] | Winged Hive Tyrant | L1 | |
+| [ ] | Winged Tyranid Prime | - | |
+| [ ] | Wyvern | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000860 | Acastus Knight Porphyrion | 2 | 2 | - | |
-| [ ] | 000001481 | Armiger Helverin | 1 | - | - | |
-| [ ] | 000002769 | Armiger Moirax | 2 | 10 | - | |
-| [ ] | 000001482 | Armiger Warglaive | 1 | - | - | |
-| [ ] | 000001485 | Knight Castellan | 1 | - | - | |
-| [ ] | 000000859 | Knight Crusader | 3 | 12 | - | |
-| [ ] | 000000856 | Knight Errant | 3 | - | - | |
-| [ ] | 000000858 | Knight Gallant | 2 | - | - | |
-| [ ] | 000000855 | Knight Paladin | 3 | - | - | |
-| [ ] | 000001483 | Knight Preceptor | 3 | - | - | |
-| [ ] | 000001486 | Knight Valiant | 1 | - | - | |
-| [ ] | 000000857 | Knight Warden | 3 | - | - | |
-| [ ] | 000000865 | Questoris Knight Magaera | 1 | - | - | |
-| [ ] | 000000866 | Questoris Knight Styrix | 1 | - | - | |
-| [ ] | 000003842 | Skitarii Rangers | 6 | 12 | 2 | |
-| [ ] | 000003843 | Skitarii Vanguard | 6 | 12 | 2 | |
-| [ ] | 000003839 | Tech-priest Dominus | 2 | - | - | |
-| [ ] | 000003840 | Tech-priest Manipulus | 1 | - | - | |
+## Grey Knights
 
-### Leagues Of Votann
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Brother-captain | L1 | |
+| [ ] | Brotherhood Librarian | L1 | |
+| [ ] | Brotherhood Terminator Squad | R3 L2 | |
+| [ ] | Grand Master | L1 | |
+| [ ] | Grand Master In Nemesis Dreadknight | L1 | |
+| [ ] | Grey Knights Thunderhawk Gunship | L1 | |
+| [ ] | Interceptor Squad | R4 L2 | |
+| [ ] | Land Raider | L1 | |
+| [ ] | Land Raider Crusader | L1 | |
+| [ ] | Land Raider Redeemer | L1 | |
+| [ ] | Nemesis Dreadknight | L1 | |
+| [ ] | Paladin Squad | R3 L2 | |
+| [ ] | Purgation Squad | L1 | |
+| [ ] | Purifier Squad | R4 L1 | |
+| [ ] | Razorback | L1 | |
+| [ ] | Rhino | L1 | |
+| [ ] | Stormhawk Interceptor | L1 | |
+| [ ] | Stormraven Gunship | L1 | |
+| [ ] | Stormtalon Gunship | L1 | |
+| [ ] | Strike Squad | R4 L2 | |
+| [ ] | Venerable Dreadnought | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000002603 | Brôkhyr Thunderkyn | 2 | - | - | |
-| [ ] | 000002600 | Cthonian Beserks | 3 | - | - | |
-| [ ] | 000004145 | Cthonian Earthshakers | 1 | - | - | |
-| [ ] | 000002595 | Einhyr Champion | 2 | - | 2 | |
-| [ ] | 000002599 | Einhyr Hearthguard | 4 | - | 2 | |
-| [ ] | 000002598 | Hearthkyn Warriors | 5 | - | 1 | |
-| [ ] | 000002604 | Hekaton Land Fortress | 3 | 3 | 1 | |
-| [ ] | 000002601 | Hernkyn Pioneers | 4 | - | 3 | |
-| [ ] | 000003710 | Hernkyn Yaegirs | 3 | 8 | - | |
-| [ ] | 000004143 | Ironkin Steeljacks with Heavy Volkanite Disintegrators | 1 | - | 1 | |
-| [ ] | 000004144 | Ironkin Steeljacks with Melee Weapons | 1 | - | 1 | |
-| [ ] | 000002594 | Kâhl | 3 | - | 2 | |
-| [ ] | 000004147 | Kapricus Carrier | 1 | - | 1 | |
-| [ ] | 000004146 | Kapricus Defenders | 2 | - | 1 | |
-| [ ] | 000002602 | Sagitaur | 1 | - | - | |
-| [ ] | 000002593 | Ûthar the Destined | - | - | 1 | |
+## Imperial Agents
 
-### Necrons
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Aquila Kill Team | R5 L4 | |
+| [ ] | Corvus Blackstar | L1 | |
+| [ ] | Deathwatch Kill Team | R6 M3 L2 | |
+| [ ] | Exaction Squad | M1 L3 | |
+| [ ] | Grey Knights Terminator Squad | R3 L2 | |
+| [ ] | Imperial Navy Breachers | M6 L1 | |
+| [ ] | Imperial Rhino | L1 | |
+| [ ] | Inquisitor | L1 | |
+| [ ] | Inquisitorial Agents | L2 | |
+| [ ] | Inquisitorial Chimera | L1 | |
+| [ ] | Ministorum Priest | L1 | |
+| [ ] | Sanctifiers | M3 L5 | |
+| [ ] | Sisters of Battle Immolator | L1 | |
+| [ ] | Sisters of Battle Squad | M13 L3 | |
+| [ ] | Subductor Squad | L3 | |
+| [ ] | Vigilant Squad | L3 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000553 | Annihilation Barge | 1 | - | - | |
-| [ ] | 000004176 | Canoptek Macrocytes | 3 | 2 | 2 | |
-| [ ] | 000000551 | Canoptek Spyders | 3 | - | 2 | |
-| [ ] | 000004177 | Canoptek Tomb Crawlers | 1 | - | - | |
-| [ ] | 000000546 | Canoptek Wraiths | 2 | - | - | |
-| [ ] | 000000533 | Catacomb Command Barge | 3 | - | 1 | |
-| [ ] | 000000535 | Immortals | 1 | - | - | |
-| [ ] | 000002116 | Lokhust Heavy Destroyers | 1 | - | - | |
-| [ ] | 000002351 | Lokhust Lord | 2 | - | 2 | |
-| [ ] | 000000536 | Lychguard | 1 | - | 1 | |
-| [ ] | 000000552 | Monolith | 1 | - | - | |
-| [ ] | 000000534 | Necron Warriors | 1 | - | - | |
-| [ ] | 000004186 | Nekrosor Ammentar | - | - | 1 | |
-| [ ] | 000002358 | Ophydian Destroyers | 1 | - | 1 | |
-| [ ] | 000000523 | Overlord | 2 | 1 | 1 | |
-| [ ] | 000003693 | Overlord with translocation shroud | - | - | 1 | |
-| [ ] | 000001577 | Seraptek Heavy Construct | 1 | - | - | |
-| [ ] | 000002110 | Skorpekh Destroyers | 1 | - | 1 | |
-| [ ] | 000000548 | Tomb Blades | 3 | - | 3 | |
-| [ ] | 000000539 | Triarch Praetorians | 1 | - | - | |
-| [ ] | 000000540 | Triarch Stalker | 1 | - | - | |
+## Imperial Knights
 
-### Orks
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Acastus Knight Asterius | - | |
+| [ ] | Acastus Knight Porphyrion | L1 | |
+| [ ] | Armiger Helverin | L1 | |
+| [ ] | Armiger Moirax | L1 | |
+| [ ] | Armiger Warglaive | L1 | |
+| [ ] | Cerastus Knight Acheron | - | |
+| [ ] | Cerastus Knight Atrapos | - | |
+| [ ] | Cerastus Knight Castigator | - | |
+| [ ] | Cerastus Knight Lancer | - | |
+| [ ] | Knight Castellan | L1 | |
+| [ ] | Knight Crusader | L1 | |
+| [ ] | Knight Errant | L1 | |
+| [ ] | Knight Gallant | L1 | |
+| [ ] | Knight Paladin | L1 | |
+| [ ] | Knight Preceptor | L1 | |
+| [ ] | Knight Valiant | L1 | |
+| [ ] | Knight Warden | L1 | |
+| [ ] | Questoris Knight Magaera | L1 | |
+| [ ] | Questoris Knight Styrix | L1 | |
+| [ ] | Skitarii Rangers | M5 L3 | |
+| [ ] | Skitarii Vanguard | M5 L3 | |
+| [ ] | Tech-priest Dominus | L1 | |
+| [ ] | Tech-priest Manipulus | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000039 | Battlewagon | 5 | 64 | 1 | |
-| [ ] | 000002494 | Beast Snagga Boyz | 1 | - | - | |
-| [ ] | 000002490 | Beastboss On Squigosaur | 1 | - | - | |
-| [ ] | 000003707 | Big Mek | 2 | - | - | |
-| [ ] | 000000006 | Big Mek In Mega Armour | 3 | - | 2 | |
-| [ ] | 000001536 | Big Mek With Shokk Attack Gun | 1 | - | 1 | |
-| [ ] | 000002499 | Big'ed Bossbunka | 1 | - | - | |
-| [ ] | 000000016 | Boyz | 4 | 5 | - | |
-| [ ] | 000003861 | Breaka Boyz | 3 | - | - | |
-| [ ] | 000000019 | Burna Boyz | 1 | - | - | |
-| [ ] | 000000030 | Burna-bommer | 1 | - | - | |
-| [ ] | 000000029 | Dakkajet | 1 | - | - | |
-| [ ] | 000000040 | Deff Dread | 2 | - | - | |
-| [ ] | 000000028 | Deffkoptas | 1 | - | - | |
-| [ ] | 000000045 | Flash Gitz | 1 | - | 1 | |
-| [ ] | 000000059 | Gargantuan Squiggoth | 1 | - | - | |
-| [ ] | 000000041 | Killa Kans | 1 | - | - | |
-| [ ] | 000000025 | Kommandos | 7 | 12 | 2 | |
-| [ ] | 000000044 | Lootas | 1 | - | - | |
-| [ ] | 000000024 | Meganobz | 1 | - | - | |
-| [ ] | 000000012 | Mek | 1 | - | - | |
-| [ ] | 000000038 | Mek Gunz | 1 | - | - | |
-| [ ] | 000000021 | Nobz | 3 | 8 | 1 | |
-| [ ] | 000002491 | Painboss | 1 | - | 1 | |
-| [ ] | 000000013 | Painboy | 1 | - | 1 | |
-| [ ] | 000002496 | Squighog Boyz | 1 | - | 1 | |
-| [ ] | 000000027 | Stormboyz | 1 | - | - | |
-| [ ] | 000000020 | Tankbustas | 2 | - | 1 | |
-| [ ] | 000000026 | Trukk | 1 | - | - | |
-| [ ] | 000000033 | Warbikers | 2 | - | - | |
-| [ ] | 000000001 | Warboss | 2 | - | - | |
-| [ ] | 000000032 | Wazbom Blastajet | 3 | - | 1 | |
+## Leagues of Votann
 
-### Space Marines
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Brôkhyr Thunderkyn | L1 | |
+| [ ] | Cthonian Beserks | R2 L1 | |
+| [ ] | Cthonian Earthshakers | L1 | |
+| [ ] | Einhyr Champion | L1 | |
+| [ ] | Einhyr Hearthguard | M1 L1 | |
+| [ ] | Hearthkyn Warriors | M2 L2 | |
+| [ ] | Hekaton Land Fortress | L1 | |
+| [ ] | Hernkyn Pioneers | R2 L1 | |
+| [ ] | Hernkyn Yaegirs | M2 L1 | |
+| [ ] | Ironkin Steeljacks with Heavy Volkanite Disintegrators | M2 L2 | |
+| [ ] | Ironkin Steeljacks with Melee Weapons | L2 | |
+| [ ] | Kâhl | L1 | |
+| [ ] | Kapricus Carrier | L1 | |
+| [ ] | Kapricus Defenders | L1 | |
+| [ ] | Sagitaur | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [~] | 000002099 | Aggressor Squad | 1 | - | - | Fragstorm launchers don't come bundled with auto bolt storm gauntlet weapon |
-| [~] | 000002775 | Ancient | 1 | - | - | adding power weapon makes CCS disappear |
-| [x] | 000002677 | Ancient In Terminator Armour | 2 | 7 | 1 | |
-| [x] | 000001606 | Assault Intercessor Squad | 2 | - | - | no options displayed |
-| [~] | 000002776 | Assault Intercessors With Jump Packs | 3 | 9 | - | no options displayed for 'every 5 models in this unit' rule |
-| [x] | 000002700 | Astraeus | 3 | - | - | |
-| [~] | 000000218 | Azrael | - | - | 1 | doesn't need any options, is only showing up because he has a wargear abilitiy |
-| [x] | 000000168 | Baal Predator | 4 | - | - | |
-| [x] | 000000302 | Bjorn The Fell-handed | 1 | - | - | |
-| [x] | 000000071 | Bladeguard Veteran Squad | 1 | - | - |  |
-| [x] | 000003831 | Blood Angels Captain | 2 | - | - | |
-| [~] | 000000303 | Blood Claws | 2 | - | - | leader missing chainsword vs power weapon option |
-| [x] | 000000136 | Brutalis Dreadnought | 2 | 4 | - | |
-| [ ] | 000000073 | Captain | 2 | 10 | 1 | |
-| [ ] | 000001172 | Captain In Gravis Armour | 1 | - | - | |
-| [ ] | 000000135 | Captain In Terminator Armour | 2 | - | - | |
-| [ ] | 000000083 | Captain With Jump Pack | 4 | 10 | 1 | |
-| [ ] | 000002793 | Castellan | 2 | - | - | |
-| [ ] | 000002703 | Centurion Assault Squad | 2 | - | 1 | |
-| [ ] | 000001193 | Centurion Devastator Squad | 2 | - | - | |
-| [ ] | 000000115 | Chaplain In Terminator Armour | 1 | - | 1 | |
-| [ ] | 000000112 | Chaplain With Jump Pack | 1 | - | - | |
-| [ ] | 000000358 | Corvus Blackstar | 4 | - | 2 | |
-| [ ] | 000002799 | Crusader Squad | 4 | 5 | - | |
-| [ ] | 000003832 | Death Company Captain | 2 | - | - | |
-| [ ] | 000003833 | Death Company Captain with Jump Pack | 2 | - | - | |
-| [ ] | 000000166 | Death Company Dreadnought | 2 | 4 | - | |
-| [ ] | 000001997 | Death Company Marines | 3 | 1 | - | |
-| [ ] | 000002285 | Death Company Marines with Bolt Rifles | 4 | 2 | - | |
-| [ ] | 000002737 | Death Company Marines With Jump Packs | 4 | 1 | - | |
-| [ ] | 000003873 | Deathwatch Terminator Squad | 2 | 12 | 1 | |
-| [ ] | 000002783 | Deathwatch Veterans | 9 | 64 | 1 | |
-| [ ] | 000000231 | Deathwing Knights | 3 | - | 1 | |
-| [ ] | 000000230 | Deathwing Terminator Squad | 3 | - | 1 | |
-| [ ] | 000004175 | Decimus Kill Team | 4 | - | 1 | |
-| [ ] | 000002270 | Desolation Squad | 2 | - | - | |
-| [ ] | 000002202 | Devastator Squad | 2 | 14 | - | |
-| [ ] | 000000117 | Dreadnought | 2 | 12 | - | |
-| [ ] | 000001668 | Eliminator Squad | 2 | - | - | |
-| [ ] | 000000103 | Eradicator Squad | 1 | - | - | |
-| [ ] | 000004135 | Execrator | 2 | - | - | |
-| [ ] | 000000226 | Ezekiel | - | - | 1 | |
-| [ ] | 000000086 | Firestrike Servo-turrets | 1 | - | - | |
-| [ ] | 000002780 | Fortis Kill Team | 6 | - | - | |
-| [ ] | 000002705 | Gladiator Lancer | 3 | - | - | |
-| [ ] | 000002787 | Gladiator Lancer | 3 | - | - | |
-| [ ] | 000001667 | Gladiator Reaper | 2 | - | - | |
-| [ ] | 000002789 | Gladiator Reaper | 2 | - | - | |
-| [ ] | 000001825 | Gladiator Valiant | 2 | - | - | |
-| [ ] | 000002788 | Gladiator Valiant | 2 | - | - | |
-| [ ] | 000000305 | Grey Hunters | 2 | - | - | |
-| [ ] | 000000097 | Hammerfall Bunker | 1 | - | - | |
-| [ ] | 000001177 | Heavy Intercessor Squad | 1 | - | - | |
-| [ ] | 000002098 | Hellblaster Squad | 1 | - | - | |
-| [ ] | 000002568 | Impulsor | 3 | - | 2 | |
-| [ ] | 000002786 | Impulsor | 3 | - | 2 | |
-| [x] | 000000125 | Inceptor Squad | 1 | - | - | |
-| [ ] | 000001159 | Incursor Squad | 1 | - | 1 | |
-| [ ] | 000002781 | Indomitor Kill Team | 3 | 2 | - | |
-| [ ] | 000000128 | Infiltrator Squad | 2 | - | 2 | |
-| [ ] | 000001157 | Intercessor Squad | 3 | - | - | |
-| [ ] | 000001158 | Invader ATV | 1 | - | - | |
-| [ ] | 000001156 | Invictor Tactical Warsuit | 1 | - | - | |
-| [ ] | 000000065 | Land Raider | 3 | - | - | |
-| [ ] | 000000066 | Land Raider Crusader | 3 | - | - | |
-| [ ] | 000004139 | Land Raider Crusader | 3 | - | - | |
-| [ ] | 000002173 | Land Raider Redeemer | 3 | - | - | |
-| [ ] | 000000242 | Land Speeder Vengeance | 1 | - | - | |
-| [ ] | 000000079 | Librarian In Terminator Armour | 1 | - | - | |
-| [ ] | 000001346 | Lieutenant | 4 | 19 | 1 | |
-| [ ] | 000002796 | Marshal | 1 | - | - | |
-| [ ] | 000000239 | Nephilim Jetfighter | 1 | - | - | |
-| [ ] | 000002712 | Outrider Squad | 1 | - | - | |
-| [ ] | 000002714 | Predator Annihilator | 3 | - | - | |
-| [ ] | 000002715 | Predator Destructor | 3 | - | - | |
-| [ ] | 000000241 | Ravenwing Black Knights | 1 | - | - | |
-| [ ] | 000002748 | Ravenwing Command Squad | 1 | - | - | |
-| [ ] | 000000238 | Ravenwing Darkshroud | 1 | - | - | |
-| [ ] | 000000129 | Razorback | 3 | - | - | |
-| [ ] | 000002717 | Redemptor Dreadnought | 4 | - | - | |
-| [ ] | 000002718 | Reiver Squad | 4 | 12 | 2 | |
-| [ ] | 000002721 | Repulsor | 2 | - | - | |
-| [ ] | 000002791 | Repulsor | 3 | - | - | |
-| [ ] | 000002722 | Repulsor Executioner | 3 | - | - | |
-| [ ] | 000002790 | Repulsor Executioner | 3 | - | - | |
-| [ ] | 000002723 | Rhino | 1 | - | - | |
-| [ ] | 000000165 | Sanguinary Guard | 3 | 4 | 1 | |
-| [ ] | 000001160 | Scout Squad | 4 | 6 | - | |
-| [ ] | 000002779 | Spectrus Kill Team | 4 | - | 3 | |
-| [ ] | 000002255 | Sternguard Veteran Squad | 3 | 15 | - | |
-| [ ] | 000004137 | Sternguard Veteran Squad | 3 | 15 | - | |
-| [ ] | 000000084 | Stormhawk Interceptor | 2 | - | - | |
-| [ ] | 000001191 | Stormraven Gunship | 3 | - | - | |
-| [ ] | 000001190 | Stormtalon Gunship | 1 | - | - | |
-| [ ] | 000002798 | Sword Brethren Squad | 5 | 4 | - | |
-| [ ] | 000000070 | Tactical Squad | 3 | 2 | - | |
-| [ ] | 000003874 | Talonstrike Kill Team | 4 | - | - | |
-| [ ] | 000000118 | Terminator Assault Squad | 1 | - | 1 | |
-| [ ] | 000001183 | Terminator Squad | 3 | 4 | - | |
-| [ ] | 000004138 | Terminator Squad | 3 | 4 | - | |
-| [ ] | 000000139 | Thunderhawk Gunship | 2 | - | 1 | |
-| [ ] | 000000322 | Thunderwolf Cavalry | 2 | 3 | 1 | |
-| [ ] | 000000147 | Vanguard Veteran Squad With Jump Packs | 1 | - | 1 | |
-| [ ] | 000002801 | Venerable Dreadnought | 3 | 8 | 1 | |
-| [ ] | 000004185 | Victrix Honour Guard | - | - | 1 | |
-| [ ] | 000001188 | Vindicator | 2 | - | - | |
-| [ ] | 000004188 | Wardens of Ultramar | - | - | 2 | |
-| [ ] | 000002727 | Whirlwind | 2 | - | - | |
-| [ ] | 000004130 | Wolf Guard Battle Leader | 2 | - | 1 | |
-| [ ] | 000004131 | Wolf Guard Headtakers | 1 | - | 1 | |
-| [ ] | 000000318 | Wolf Guard Terminators | 3 | 2 | 1 | |
-| [ ] | 000004182 | Wolf Scouts | 4 | - | 1 | |
-| [ ] | 000000311 | Wulfen | 1 | - | 1 | |
-| [ ] | 000004133 | Wulfen Dreadnought | 2 | 1 | 1 | |
-| [ ] | 000004132 | Wulfen with Storm Shields | 1 | - | 1 | |
+## Necrons
 
-### T Au Empire
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Annihilation Barge | L1 | |
+| [ ] | Canoptek Macrocytes | M1 L1 | |
+| [ ] | Canoptek Spyders | L1 | |
+| [ ] | Canoptek Tomb Crawlers | M1 L1 | |
+| [ ] | Canoptek Wraiths | L1 | |
+| [ ] | Catacomb Command Barge | L1 | |
+| [ ] | Immortals | L1 | |
+| [ ] | Lokhust Heavy Destroyers | L1 | |
+| [ ] | Lokhust Lord | L1 | |
+| [ ] | Lychguard | L1 | |
+| [ ] | Monolith | L1 | |
+| [ ] | Necron Warriors | L1 | |
+| [ ] | Ophydian Destroyers | L1 | |
+| [ ] | Overlord | L1 | |
+| [ ] | Seraptek Heavy Construct | L1 | |
+| [ ] | Skorpekh Destroyers | L1 | |
+| [ ] | Tomb Blades | L1 | |
+| [ ] | Triarch Praetorians | L1 | |
+| [ ] | Triarch Stalker | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000000455 | AX-1-0 Tiger Shark | 2 | - | - | |
-| [ ] | 000000412 | Breacher Team | 1 | - | - | |
-| [ ] | 000000433 | Broadside Battlesuits | 3 | - | 1 | |
-| [ ] | 000000405 | Cadre Fireblade | 1 | - | - | |
-| [ ] | 000000402 | Commander In Coldstar Battlesuit | 3 | - | 3 | |
-| [ ] | 000001478 | Commander In Enforcer Battlesuit | 3 | - | 3 | |
-| [ ] | 000000407 | Commander Shadowsun | - | - | 2 | |
-| [ ] | 000003700 | Crisis Fireknife Battlesuits | 3 | - | - | |
-| [ ] | 000003701 | Crisis Starscythe Battlesuits | 3 | - | - | |
-| [ ] | 000003699 | Crisis Sunforge Battlesuits | 1 | - | - | |
-| [ ] | 000000424 | Devilfish | 2 | - | - | |
-| [ ] | 000000404 | Ethereal | 2 | - | 1 | |
-| [ ] | 000000420 | Ghostkeel Battlesuit | 3 | - | 1 | |
-| [ ] | 000000432 | Hammerhead Gunship | 3 | - | - | |
-| [ ] | 000000413 | Kroot Carnivores | 2 | - | - | |
-| [ ] | 000002588 | Kroot Farstalkers | 3 | - | 1 | |
-| [ ] | 000003705 | Kroot Lone-Spear | 1 | - | - | |
-| [ ] | 000003703 | Kroot War Shaper | 1 | - | - | |
-| [ ] | 000000414 | Krootox Riders | 1 | - | - | |
-| [ ] | 000000422 | Pathfinder Team | 4 | - | 3 | |
-| [ ] | 000000423 | Piranhas | 2 | - | - | |
-| [ ] | 000000425 | Razorshark Strike Fighter | 1 | - | - | |
-| [ ] | 000000421 | Riptide Battlesuit | 3 | - | - | |
-| [ ] | 000000430 | Sky Ray Gunship | 1 | - | - | |
-| [ ] | 000000417 | Stealth Battlesuits | 5 | - | 1 | |
-| [ ] | 000000434 | Stormsurge | 2 | - | - | |
-| [ ] | 000000411 | Strike Team | 2 | - | - | |
-| [ ] | 000000426 | Sun Shark Bomber | 1 | - | - | |
-| [ ] | 000000446 | Ta'unar Supremacy Armour | 3 | 1 | - | |
-| [ ] | 000000436 | Tidewall Shieldline | 1 | - | - | |
-| [ ] | 000000454 | Tiger Shark | 4 | - | 1 | |
-| [ ] | 000000427 | Vespid Stingwings | 1 | - | 1 | |
+## Orks
 
-### Thousand Sons
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Battlewagon | L1 | |
+| [ ] | Beast Snagga Boyz | R2 L2 | |
+| [ ] | Beastboss On Squigosaur | L1 | |
+| [ ] | Big Mek | L1 | |
+| [ ] | Big Mek In Mega Armour | L1 | |
+| [ ] | Big Mek With Shokk Attack Gun | L1 | |
+| [ ] | Big'ed Bossbunka | L1 | |
+| [ ] | Boyz | R2 M2 L2 | |
+| [ ] | Breaka Boyz | M2 L2 | |
+| [ ] | Burna Boyz | L2 | |
+| [ ] | Burna-bommer | L1 | |
+| [ ] | Dakkajet | L1 | |
+| [ ] | Deff Dread | L1 | |
+| [ ] | Deffkoptas | R1 L1 | |
+| [ ] | Flash Gitz | L1 | |
+| [ ] | Gargantuan Squiggoth | L1 | |
+| [ ] | Killa Kans | M3 L1 | |
+| [ ] | Kommandos | M5 L3 | |
+| [ ] | Lootas | L2 | |
+| [ ] | Meganobz | L1 | |
+| [ ] | Mek | L1 | |
+| [ ] | Mek Gunz | M3 L1 | |
+| [ ] | Nobz | L1 | |
+| [ ] | Painboss | L1 | |
+| [ ] | Painboy | L1 | |
+| [ ] | Squighog Boyz | L2 | |
+| [ ] | Stormboyz | M1 L2 | |
+| [ ] | Tankbustas | M1 L2 | |
+| [ ] | Trukk | L1 | |
+| [ ] | Warbikers | M4 L1 | |
+| [ ] | Warboss | L1 | |
+| [ ] | Wazbom Blastajet | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000001025 | Chaos Land Raider | 2 | - | - | |
-| [ ] | 000002501 | Chaos Predator Annihilator | 3 | - | - | |
-| [ ] | 000001026 | Chaos Predator Destructor | 3 | - | - | |
-| [ ] | 000001022 | Chaos Rhino | 2 | - | - | |
-| [ ] | 000001027 | Chaos Vindicator | 2 | - | - | |
-| [ ] | 000001030 | Defiler | 3 | - | - | |
-| [ ] | 000001033 | Exalted Sorcerer | 1 | - | - | |
-| [ ] | 000002755 | Exalted Sorcerer on Disc of Tzeentch | 1 | - | - | |
-| [ ] | 000001028 | Forgefiend | 2 | 2 | - | |
-| [ ] | 000001021 | Helbrute | 3 | - | - | |
-| [ ] | 000001024 | Heldrake | 1 | - | - | |
-| [ ] | 000004124 | Lord of Change | 1 | - | - | |
-| [ ] | 000001029 | Maulerfiend | 1 | - | - | |
-| [ ] | 000004127 | Pink Horrors | 2 | - | 2 | |
-| [ ] | 000001020 | Rubric Marines | 4 | - | 1 | |
-| [ ] | 000001035 | Scarab Occult Terminators | 3 | - | - | |
-| [ ] | 000004121 | Sekhetar Robots | 1 | - | - | |
-| [ ] | 000001016 | Sorcerer | 1 | - | - | |
-| [ ] | 000001017 | Sorcerer In Terminator Armour | 1 | - | - | |
-| [ ] | 000001474 | Tzaangor Enlightened | 1 | - | - | |
-| [ ] | 000001034 | Tzaangors | 3 | 2 | 2 | |
+## Space Marines
 
-### Tyranids
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Aggressor Squad | L1 | |
+| [ ] | Ancient | L1 | |
+| [ ] | Ancient In Terminator Armour | L1 | |
+| [ ] | Assault Intercessor Squad | M5 L2 | |
+| [ ] | Assault Intercessors With Jump Packs | R1 M3 L2 | |
+| [ ] | Astraeus | L1 | |
+| [ ] | Baal Predator | L1 | |
+| [ ] | Bjorn The Fell-handed | L1 | |
+| [ ] | Bladeguard Veteran Squad | M2 L2 | |
+| [ ] | Blood Angels Captain | L1 | |
+| [ ] | Blood Claws | M2 L2 | |
+| [ ] | Brutalis Dreadnought | L1 | |
+| [ ] | Captain | L1 | |
+| [ ] | Captain In Gravis Armour | L1 | |
+| [ ] | Captain In Terminator Armour | L1 | |
+| [ ] | Captain With Jump Pack | L1 | |
+| [ ] | Castellan | L1 | |
+| [ ] | Centurion Assault Squad | L1 | |
+| [ ] | Centurion Devastator Squad | L1 | |
+| [ ] | Chaplain In Terminator Armour | L1 | |
+| [ ] | Chaplain With Jump Pack | L1 | |
+| [ ] | Corvus Blackstar | L1 | |
+| [ ] | Crusader Squad | R2 M1 L3 | |
+| [ ] | Death Company Captain | L1 | |
+| [ ] | Death Company Captain with Jump Pack | L1 | |
+| [ ] | Death Company Dreadnought | L1 | |
+| [ ] | Death Company Marines | M6 L1 | |
+| [ ] | Death Company Marines with Bolt Rifles | R2 M7 L1 | |
+| [ ] | Death Company Marines With Jump Packs | R6 L1 | |
+| [ ] | Deathwatch Terminator Squad | L1 | |
+| [ ] | Deathwatch Veterans | R6 M3 L2 | |
+| [ ] | Deathwing Knights | M1 L2 | |
+| [x] | Deathwing Terminator Squad | R4 L2 |
+| [ ] | Decimus Kill Team | R5 L4 | |
+| [ ] | Desolation Squad | M1 L1 | |
+| [ ] | Devastator Squad | M6 L2 | |
+| [ ] | Dreadnought | L1 | |
+| [ ] | Eliminator Squad | M2 L2 | |
+| [ ] | Eradicator Squad | R1 L2 | |
+| [ ] | Execrator | L1 | |
+| [ ] | Firestrike Servo-turrets | L1 | |
+| [ ] | Fortis Kill Team | R1 M7 L2 | |
+| [ ] | Gladiator Lancer | L1 | |
+| [ ] | Gladiator Lancer | L1 | |
+| [ ] | Gladiator Reaper | L1 | |
+| [ ] | Gladiator Reaper | L1 | |
+| [ ] | Gladiator Valiant | L1 | |
+| [ ] | Gladiator Valiant | L1 | |
+| [ ] | Grey Hunters | M3 L2 | |
+| [ ] | Hammerfall Bunker | L1 | |
+| [ ] | Heavy Intercessor Squad | R1 L2 | |
+| [ ] | Hellblaster Squad | M1 L2 | |
+| [ ] | High Marshal Helbrecht | - | |
+| [ ] | Impulsor | L1 | |
+| [ ] | Impulsor | L1 | |
+| [ ] | Inceptor Squad | L1 | |
+| [ ] | Incursor Squad | L1 | |
+| [ ] | Indomitor Kill Team | R1 M1 L1 | |
+| [ ] | Infiltrator Squad | L1 | |
+| [ ] | Intercessor Squad | R1 M6 L2 | |
+| [ ] | Invader ATV | L1 | |
+| [ ] | Invictor Tactical Warsuit | L1 | |
+| [ ] | Land Raider | L1 | |
+| [ ] | Land Raider Crusader | L1 | |
+| [ ] | Land Raider Crusader | L1 | |
+| [ ] | Land Raider Redeemer | L1 | |
+| [ ] | Land Speeder Vengeance | L1 | |
+| [ ] | Librarian In Terminator Armour | L1 | |
+| [ ] | Lieutenant | L1 | |
+| [ ] | Lion El'jonson | - | |
+| [ ] | Marshal | L1 | |
+| [ ] | Nephilim Jetfighter | L1 | |
+| [ ] | Outrider Squad | L3 | |
+| [ ] | Predator Annihilator | L1 | |
+| [ ] | Predator Destructor | L1 | |
+| [ ] | Ravenwing Black Knights | R1 L1 | |
+| [ ] | Ravenwing Command Squad | R1 L1 | |
+| [ ] | Ravenwing Darkshroud | L1 | |
+| [ ] | Razorback | L1 | |
+| [ ] | Redemptor Dreadnought | L1 | |
+| [ ] | Reiver Squad | L1 | |
+| [ ] | Repulsor | L1 | |
+| [ ] | Repulsor | L1 | |
+| [ ] | Repulsor Executioner | L1 | |
+| [ ] | Repulsor Executioner | L1 | |
+| [ ] | Rhino | L1 | |
+| [ ] | Sanguinary Guard | R1 L1 | |
+| [ ] | Scout Squad | R3 M1 L3 | |
+| [ ] | Spectrus Kill Team | M1 L1 | |
+| [ ] | Sternguard Veteran Squad | R2 M3 L3 | |
+| [ ] | Sternguard Veteran Squad | R2 M3 L3 | |
+| [ ] | Stormhawk Interceptor | L1 | |
+| [ ] | Stormraven Gunship | L1 | |
+| [ ] | Stormtalon Gunship | L1 | |
+| [ ] | Sword Brethren Squad | R4 L1 | |
+| [ ] | Tactical Squad | M18 L3 | |
+| [ ] | Talonstrike Kill Team | R1 M3 L2 | |
+| [ ] | Terminator Assault Squad | L1 | |
+| [x] | Terminator Squad | R3 M1 L3 |
+| [x] | Terminator Squad | R3 M1 L3 |
+| [ ] | Thunderhawk Gunship | L1 | |
+| [ ] | Thunderwolf Cavalry | R1 L1 | |
+| [ ] | Vanguard Veteran Squad With Jump Packs | L1 | |
+| [ ] | Venerable Dreadnought | L1 | |
+| [ ] | Vindicator | L1 | |
+| [ ] | Watch Captain Artemis | - | |
+| [ ] | Watch Master | - | |
+| [ ] | Whirlwind | L1 | |
+| [ ] | Wolf Guard Battle Leader | L1 | |
+| [ ] | Wolf Guard Headtakers | L1 | |
+| [ ] | Wolf Guard Terminators | M2 L2 | |
+| [ ] | Wolf Scouts | M2 L5 | |
+| [ ] | Wulfen | L1 | |
+| [ ] | Wulfen Dreadnought | L1 | |
+| [ ] | Wulfen with Storm Shields | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [x] | 000000490 | Carnifexes | 4 | - | - | |
-| [x] | 000000485 | Harpy | 1 | - | - | |
-| [x] | 000000472 | Hive Guard | 1 | - | - | |
-| [x] | 000000460 | Hive Tyrant | 2 | 3 | - | - |
-| [x] | 000000470 | Ripper Swarms | 1 | - | - | Missing all-models functionality in the UI |
-| [x] | 000000468 | Termagants | 5 | 4 | - | Uses complex loadout UI but should use default as the options are either swaps or 'all-models' |
-| [x] | 000000465 | Tervigon | 1 | - | - | |
-| [x] | 000002692 | Tyranid Warriors With Ranged Bio-weapons | 3 | 3 | - | uses complex loadout UI but should use default |
-| [x] | 000000496 | Tyrannofex | 1 | - | - | |
-| [x] | 000000471 | Tyrant Guard | 1 | - | - | |
-| [x] | 000002528 | Winged Hive Tyrant | 1 | - | - | |
+## T'au Empire
 
-### World Eaters
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | AX-1-0 Tiger Shark | L1 | |
+| [ ] | Breacher Team | L1 | |
+| [ ] | Broadside Battlesuits | L1 | |
+| [ ] | Cadre Fireblade | L1 | |
+| [ ] | Commander In Coldstar Battlesuit | L1 | |
+| [ ] | Commander In Enforcer Battlesuit | L1 | |
+| [ ] | Crisis Fireknife Battlesuits | L1 | |
+| [ ] | Crisis Starscythe Battlesuits | L1 | |
+| [ ] | Crisis Sunforge Battlesuits | L1 | |
+| [ ] | Devilfish | L1 | |
+| [ ] | Ethereal | L1 | |
+| [ ] | Firesight Team | - | |
+| [ ] | Ghostkeel Battlesuit | L1 | |
+| [ ] | Hammerhead Gunship | L1 | |
+| [ ] | Kroot Carnivores | R1 L2 | |
+| [ ] | Kroot Farstalkers | M2 L3 | |
+| [ ] | Kroot Lone-Spear | L1 | |
+| [ ] | Kroot War Shaper | L1 | |
+| [ ] | Krootox Riders | L1 | |
+| [ ] | Manta | - | |
+| [ ] | Pathfinder Team | M1 L1 | |
+| [ ] | Piranhas | L1 | |
+| [ ] | Razorshark Strike Fighter | L1 | |
+| [ ] | Riptide Battlesuit | L1 | |
+| [ ] | Sky Ray Gunship | L1 | |
+| [ ] | Stealth Battlesuits | M1 L1 | |
+| [ ] | Stormsurge | L1 | |
+| [ ] | Strike Team | L1 | |
+| [ ] | Sun Shark Bomber | L1 | |
+| [ ] | Ta'unar Supremacy Armour | L1 | |
+| [ ] | Tidewall Droneport | - | |
+| [ ] | Tidewall Gunrig | - | |
+| [ ] | Tidewall Shieldline | - | |
+| [ ] | Tiger Shark | L1 | |
+| [ ] | Vespid Stingwings | L1 | |
 
-| Status | ID | Name | Options | Precomputed | Wargear Abilities | Notes |
-|--------|-----|------|---------|-------------|-------------------|-------|
-| [ ] | 000004107 | Bloodcrushers | 2 | - | 2 | |
-| [ ] | 000004106 | Bloodletters | 2 | - | 2 | |
-| [ ] | 000004105 | Bloodthirster | 1 | - | - | |
-| [ ] | 000002634 | Chaos Land Raider | 2 | - | - | |
-| [ ] | 000002637 | Chaos Predator Annihilator | 3 | - | - | |
-| [ ] | 000002636 | Chaos Predator Destructor | 3 | - | - | |
-| [ ] | 000002640 | Chaos Rhino | 2 | - | - | |
-| [ ] | 000002629 | Chaos Terminators | 5 | 4 | - | |
-| [ ] | 000002635 | Defiler | 3 | - | - | |
-| [ ] | 000004108 | Flesh Hounds | - | - | 1 | |
-| [ ] | 000002638 | Forgefiend | 2 | 2 | - | |
-| [ ] | 000004076 | Goremongers | 2 | 1 | - | |
-| [ ] | 000002632 | Helbrute | 3 | - | - | |
-| [ ] | 000002641 | Heldrake | 1 | - | - | |
-| [ ] | 000002628 | Jakhals | 3 | 4 | 1 | |
-| [ ] | 000002627 | Khorne Berzerkers | 4 | 4 | 1 | |
-| [ ] | 000002642 | Khorne Lord of Skulls | 2 | - | - | |
-| [ ] | 000002639 | Maulerfiend | 1 | - | - | |
+## Thousand Sons
+
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Chaos Land Raider | L1 | |
+| [ ] | Chaos Predator Annihilator | L1 | |
+| [ ] | Chaos Predator Destructor | L1 | |
+| [ ] | Chaos Rhino | L1 | |
+| [ ] | Chaos Vindicator | L1 | |
+| [ ] | Defiler | L1 | |
+| [ ] | Exalted Sorcerer | L1 | |
+| [ ] | Exalted Sorcerer on Disc of Tzeentch | L1 | |
+| [ ] | Forgefiend | L1 | |
+| [ ] | Helbrute | L1 | |
+| [ ] | Heldrake | L1 | |
+| [ ] | Lord of Change | L1 | |
+| [ ] | Maulerfiend | L1 | |
+| [ ] | Pink Horrors | L1 | |
+| [ ] | Rubric Marines | M2 L2 | |
+| [ ] | Scarab Occult Terminators | R3 M1 L2 | |
+| [ ] | Sekhetar Robots | L1 | |
+| [ ] | Sorcerer | L1 | |
+| [ ] | Sorcerer In Terminator Armour | L1 | |
+| [ ] | Tzaangor Enlightened | L1 | |
+| [ ] | Tzaangors | L1 | |
+
+## Tyranids
+
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Carnifexes | L1 | |
+| [ ] | Harpy | L1 | |
+| [ ] | Harridan | - | |
+| [ ] | Hierophant | - | |
+| [ ] | Hive Guard | L1 | |
+| [ ] | Hive Tyrant | L1 | |
+| [ ] | Neurotyrant | - | |
+| [ ] | Raveners | - | |
+| [ ] | Ripper Swarms | L1 | |
+| [ ] | Termagants | R3 L1 | |
+| [ ] | Tervigon | L1 | |
+| [ ] | Tyranid Warriors With Ranged Bio-weapons | R2 L1 | |
+| [ ] | Tyrannofex | L1 | |
+| [ ] | Tyrant Guard | L1 | |
+| [ ] | Winged Hive Tyrant | L1 | |
+| [ ] | Winged Tyranid Prime | - | |
+
+## World Eaters
+
+| Status | Datasheet | Complexity | Notes |
+|--------|-----------|------------|-------|
+| [ ] | Bloodcrushers | L1 | |
+| [ ] | Bloodletters | L1 | |
+| [ ] | Bloodthirster | L1 | |
+| [ ] | Chaos Land Raider | L1 | |
+| [ ] | Chaos Predator Annihilator | L1 | |
+| [ ] | Chaos Predator Destructor | L1 | |
+| [ ] | Chaos Rhino | L1 | |
+| [ ] | Chaos Terminators | R5 L2 | |
+| [ ] | Defiler | L1 | |
+| [ ] | Flesh Hounds | - | |
+| [ ] | Forgefiend | L1 | |
+| [ ] | Goremongers | M1 L2 | |
+| [ ] | Helbrute | L1 | |
+| [ ] | Heldrake | L1 | |
+| [ ] | Jakhals | R1 L1 | |
+| [ ] | Khorne Berzerkers | R2 L2 | |
+| [ ] | Khorne Lord of Skulls | L1 | |
+| [ ] | Maulerfiend | L1 | |
+
+---
 
 ## How to Use This Document
 
 1. **Testing a unit**: Add the unit to an army list in the app and check the Wargear tab
 2. **Update status**: Change `[ ]` to the appropriate status symbol
-3. **Add notes**: Document any issues or quirks in the Notes column
-4. **Track issues**: Units marked `[!]` should have a corresponding GitHub issue
+3. **Add notes**: Document any issues directly in a PR or issue
 
 ### Common Issues to Check
 
-- All weapon options display correctly
+- All weapon options display correctly for each model type
+- Ratio-based weapons only appear on the correct number of models
+- Model-type restrictions work (e.g., Sergeant-only options)
 - Swap groups show correct default/replacement options
-- Package deals work (multiple weapons replaced together)
-- Wargear abilities (like Storm Shield) are displayed
-- Model counts affect option availability correctly
-- Constraints (e.g., "1 in 5 models") are enforced
-
-### Regenerating This Document
-
-Run the wargear coverage script to regenerate this file with fresh data:
-
-```bash
-node scripts/generate-wargear-coverage.js
-```
-
-**Note**: Regenerating will reset all status checkboxes. Copy your progress first!
+- Constraints (e.g., "1 in 5 models") are enforced correctly

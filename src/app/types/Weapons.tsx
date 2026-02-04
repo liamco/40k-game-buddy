@@ -1,5 +1,5 @@
 // Eligibility rule types for determining which models can see/select a weapon
-export type EligibilityRuleType = "any" | "modelType" | "ratio";
+export type EligibilityRuleType = "any" | "modelType" | "ratio" | "count";
 
 // Base eligibility rule
 export interface EligibilityRuleBase {
@@ -25,8 +25,15 @@ export interface EligibilityRuleRatio extends EligibilityRuleBase {
     modelType?: string[]; // Optional: limit ratio to specific model types
 }
 
+// Count-based eligibility (e.g., "Up to 2 models can replace", "1 Battle Sister can replace")
+export interface EligibilityRuleCount extends EligibilityRuleBase {
+    type: "count";
+    count: number; // Fixed number of models that can take this weapon
+    modelType?: string[]; // Optional: limit to specific model types
+}
+
 // Union type for all eligibility rules
-export type EligibilityRule = EligibilityRuleAny | EligibilityRuleModelType | EligibilityRuleRatio;
+export type EligibilityRule = EligibilityRuleAny | EligibilityRuleModelType | EligibilityRuleRatio | EligibilityRuleCount;
 
 export interface Weapon {
     name: string;

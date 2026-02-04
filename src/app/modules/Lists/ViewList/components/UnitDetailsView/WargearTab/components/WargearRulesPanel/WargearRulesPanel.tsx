@@ -6,7 +6,8 @@
  */
 
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
-import { Fragment } from "react";
+
+import styles from "./WargearRulesPanel.module.css";
 
 interface DatasheetOption {
     datasheetId: string;
@@ -34,23 +35,22 @@ export function WargearRulesPanel({ options }: Props) {
     const footnotes = options.filter((opt) => opt.button === "*");
 
     return (
-        <div className="bg-stone-900 rounded-lg p-4">
+        <div className="bg-deathWorldForest rounded p-4">
             <SplitHeading label="Wargear rules" />
-            <ul className="space-y-2">
+            <ul className={`${styles.WargearRulesList} space-y-4 text-paragraph-s`}>
                 {mainOptions.map((opt, idx) => (
-                    <li key={opt.line} className="flex gap-2">
-                        <span className="shrink-0">{opt.button}</span>
-                        <span>{opt.description}</span>
+                    <li key={opt.line}>
+                        <p dangerouslySetInnerHTML={{ __html: opt.description }} />
                     </li>
                 ))}
+                {footnotes.length > 0 && (
+                    <div className="mt-4 pt-3">
+                        {footnotes.map((opt) => (
+                            <p key={opt.line}>* {opt.description}</p>
+                        ))}
+                    </div>
+                )}
             </ul>
-            {footnotes.length > 0 && (
-                <div className="mt-4 pt-3">
-                    {footnotes.map((opt) => (
-                        <p key={opt.line}>* {opt.description}</p>
-                    ))}
-                </div>
-            )}
         </div>
     );
 }

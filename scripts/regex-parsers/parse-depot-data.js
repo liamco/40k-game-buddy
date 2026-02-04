@@ -1184,6 +1184,17 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
             const pathParts = relativePath.split(path.sep);
             const factionSlug = pathParts.length >= 2 ? pathParts[1] : null;
 
+            // Filter out legends datasheets from faction file unless INCLUDE_LEGENDS_UNITS is set
+            const includeLegends = process.env.INCLUDE_LEGENDS_UNITS === "true";
+            if (!includeLegends && processedData.datasheets && Array.isArray(processedData.datasheets)) {
+                const originalCount = processedData.datasheets.length;
+                processedData.datasheets = processedData.datasheets.filter((ds) => ds.isLegends !== true);
+                const filteredCount = originalCount - processedData.datasheets.length;
+                if (filteredCount > 0) {
+                    console.log(`   📜 Filtered out ${filteredCount} Legends datasheets from faction index`);
+                }
+            }
+
             if (factionSlug) {
                 // Check cache first, otherwise read and cache the config
                 // Config files are in src/app/data/mappings/{faction-slug}/faction-config.json

@@ -80,7 +80,7 @@ function modelTypeMatchesAny(modelType: string, targetTypes: string[]): boolean 
 interface EligibilityContext {
     modelType: string;
     modelIndex: number; // Index of this model in the unit
-    ratioWeaponEligibleModels: Map<string, Set<number>>; // weaponId -> set of eligible model indices
+    slotBasedWeaponEligibleModels: Map<string, Set<number>>; // weaponId -> set of eligible model indices (for ratio and count rules)
 }
 
 /**
@@ -116,9 +116,10 @@ function checkEligibilityRule(rule: EligibilityRule, weaponId: string, context: 
         case "modelType":
             return modelTypeMatchesAny(context.modelType, rule.modelType);
 
-        case "ratio": {
+        case "ratio":
+        case "count": {
             // Check if this model is in the pre-computed eligible indices for this weapon
-            const eligibleIndices = context.ratioWeaponEligibleModels.get(weaponId);
+            const eligibleIndices = context.slotBasedWeaponEligibleModels.get(weaponId);
             return eligibleIndices?.has(context.modelIndex) ?? false;
         }
 
@@ -203,18 +204,28 @@ const WargearTab = ({ unit, list }: Props) => {
     // Count total models in the unit
     const totalModels = unit.modelInstances?.length || 0;
 
-    // Pre-compute which model indices are eligible for each ratio-based weapon
+    // Pre-compute which model indices are eligible for each slot-based weapon (ratio or count)
     // For ratio 1:5, only the first N eligible models (by index) see the weapon
-    const ratioWeaponEligibleModels = useMemo(() => {
+    // For count 2, only the first 2 eligible models see the weapon
+    const slotBasedWeaponEligibleModels = useMemo(() => {
         const assignments = new Map<string, Set<number>>(); // weaponId -> set of eligible model indices
 
         if (!unit.modelInstances) return assignments;
 
         for (const weapon of weapons) {
-            const ratioRule = weapon.eligibility?.find((r): r is EligibilityRule & { type: "ratio" } => r.type === "ratio");
-            if (!ratioRule) continue;
+            // Find ratio or count rule
+            const slotRule = weapon.eligibility?.find((r): r is EligibilityRule & { type: "ratio" | "count" } => r.type === "ratio" || r.type === "count");
+            if (!slotRule) continue;
 
-            const slots = Math.floor(totalModels / ratioRule.ratio) * ratioRule.count;
+            // Calculate number of slots based on rule type
+            let slots: number;
+            if (slotRule.type === "ratio") {
+                slots = Math.floor(totalModels / slotRule.ratio) * slotRule.count;
+            } else {
+                // count type - fixed number
+                slots = slotRule.count;
+            }
+
             const eligibleIndices = new Set<number>();
             let assigned = 0;
 
@@ -223,7 +234,7 @@ const WargearTab = ({ unit, list }: Props) => {
                 if (assigned >= slots) return;
 
                 // Check model type restriction if specified
-                if (ratioRule.modelType && !modelTypeMatchesAny(instance.modelType, ratioRule.modelType)) {
+                if (slotRule.modelType && !modelTypeMatchesAny(instance.modelType, slotRule.modelType)) {
                     return;
                 }
 
@@ -260,7 +271,7 @@ const WargearTab = ({ unit, list }: Props) => {
             const context: EligibilityContext = {
                 modelType: instance.modelType,
                 modelIndex,
-                ratioWeaponEligibleModels,
+                slotBasedWeaponEligibleModels,
             };
 
             return allSelectableItems.filter((item) => {
@@ -271,7 +282,7 @@ const WargearTab = ({ unit, list }: Props) => {
                 return true;
             });
         },
-        [allSelectableItems, ratioWeaponEligibleModels]
+        [allSelectableItems, slotBasedWeaponEligibleModels]
     );
 
     // Check if model has any options (more than just default weapons)
@@ -574,9 +585,11 @@ const WargearTab = ({ unit, list }: Props) => {
                     });
                 })}
             </div>
-            <div className="space-y-6">
-                {loadoutValidation.hasAnyInvalid && <InvalidLoadoutWarning validation={loadoutValidation} weapons={weapons} abilities={abilities} />}
-                <WargearRulesPanel options={unit.wargear?.options?.raw} />
+            <div className="relative">
+                <div className="space-y-6 sticky top-6">
+                    {loadoutValidation.hasAnyInvalid && <InvalidLoadoutWarning validation={loadoutValidation} weapons={weapons} abilities={abilities} />}
+                    <WargearRulesPanel options={unit.wargear?.options?.raw} />
+                </div>
             </div>
         </div>
     );

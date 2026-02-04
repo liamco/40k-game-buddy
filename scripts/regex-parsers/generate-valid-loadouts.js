@@ -962,7 +962,7 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
     const datasheetId = datasheet.id;
 
     // Track eligibility info per weapon
-    // Key: weapon ID, Value: { modelTypes: Set, ratio: { ratio, count } | null, isDefault: boolean }
+    // Key: weapon ID, Value: { modelTypes: Set, ratio: { ratio, count } | null, countLimit: { count, modelType? } | null, isDefault: boolean }
     const eligibilityMap = new Map();
 
     // Initialize all weapons
@@ -970,6 +970,7 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
         eligibilityMap.set(weapon.id, {
             modelTypes: new Set(),
             ratio: null,
+            countLimit: null, // For "up to N" or "N <modelType> can replace" constraints
             isDefault: defaultLoadout.includes(weapon.id),
         });
     }
@@ -1016,11 +1017,18 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
 
                 case "specific-model":
                 case "each-model-type":
-                case "n-model-specific":
                     // Only specific model types
                     if (targeting.modelType) {
                         eligibility.modelTypes.add(targeting.modelType);
                     }
+                    break;
+
+                case "n-model-specific":
+                    // "1 Battle Sister can replace" - count-based with model type
+                    eligibility.countLimit = {
+                        count: targeting.count || 1,
+                        modelType: targeting.modelType || null,
+                    };
                     break;
 
                 case "ratio":
@@ -1037,9 +1045,11 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
                     break;
 
                 case "up-to-n":
-                    // Up to N models can take this - treat similar to ratio for now
-                    // but without the ratio calculation
-                    eligibility.modelTypes.add("*any*");
+                    // "Up to N models can take this" - count-based without model type restriction
+                    eligibility.countLimit = {
+                        count: targeting.maxTotal || 1,
+                        modelType: null,
+                    };
                     break;
 
                 case "conditional":
@@ -1079,6 +1089,16 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
             const realModelTypes = [...eligibility.modelTypes].filter((t) => t !== "*any*");
             if (realModelTypes.length > 0) {
                 rule.modelType = realModelTypes;
+            }
+            rules.push(rule);
+        } else if (eligibility.countLimit) {
+            // Count-based eligibility (e.g., "1 Battle Sister can replace", "Up to 2 models")
+            const rule = {
+                type: "count",
+                count: eligibility.countLimit.count,
+            };
+            if (eligibility.countLimit.modelType) {
+                rule.modelType = [eligibility.countLimit.modelType];
             }
             rules.push(rule);
         } else if (eligibility.modelTypes.size > 0) {
