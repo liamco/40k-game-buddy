@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; heavy bolt rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; heavy bolt rifle; close combat weapon.",
+      "parsed": [
+        "000001177:bolt-pistol",
+        "000001177:heavy-bolt-rifle",
+        "000001177:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001177:bolt-pistol",
@@ -174,7 +181,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001177:bolt-pistol",
+            "000001177:heavy-bolt-rifle",
+            "000001177:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Heavy Intercessor",
+        "items": [
+          [
+            "000001177:bolt-pistol",
+            "000001177:close-combat-weapon",
+            "000001177:heavy-bolter"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> splinter rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> splinter rifle; close combat weapon.",
+      "parsed": [
+        "000000644:splinter-rifle",
+        "000000644:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000644:blast-pistol",
@@ -569,6 +575,67 @@
         "name": "Phantasm Grenade Launcher",
         "description": "The bearer's unit has the Smoke and Grenades keywords.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000644:splinter-rifle",
+            "000000644:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Sybarite",
+        "items": [
+          [
+            "000000644:close-combat-weapon",
+            "000000644:blast-pistol"
+          ],
+          [
+            "000000644:close-combat-weapon",
+            "000000644:splinter-pistol"
+          ],
+          [
+            "000000644:splinter-rifle",
+            "000000644:power-weapon"
+          ],
+          [
+            "000000644:power-weapon",
+            "000000644:blast-pistol"
+          ],
+          [
+            "000000644:power-weapon",
+            "000000644:splinter-pistol"
+          ]
+        ]
+      },
+      {
+        "modelType": "Kabalite Warrior",
+        "items": [
+          [
+            "000000644:close-combat-weapon",
+            "000000644:splinter-cannon"
+          ],
+          [
+            "000000644:close-combat-weapon",
+            "000000644:shredder"
+          ],
+          [
+            "000000644:close-combat-weapon",
+            "000000644:dark-lance"
+          ],
+          [
+            "000000644:close-combat-weapon",
+            "000000644:blaster"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

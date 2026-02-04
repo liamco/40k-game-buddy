@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> lasher tendrils; Maulerfiend fists.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> lasher tendrils; Maulerfiend fists.",
+      "parsed": [
+        "000004091:lasher-tendrils",
+        "000004091:maulerfiend-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000004091:magma-cutters",
@@ -147,7 +153,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004091:lasher-tendrils",
+            "000004091:maulerfiend-fists"
+          ],
+          [
+            "000004091:maulerfiend-fists",
+            "000004091:magma-cutters"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; bolt sniper rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; bolt sniper rifle; close combat weapon.",
+      "parsed": [
+        "000001668:bolt-pistol",
+        "000001668:bolt-sniper-rifle",
+        "000001668:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001668:bolt-pistol",
@@ -244,7 +251,29 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001668:bolt-pistol",
+            "000001668:bolt-sniper-rifle",
+            "000001668:close-combat-weapon"
+          ],
+          [
+            "000001668:bolt-pistol",
+            "000001668:close-combat-weapon",
+            "000001668:instigator-bolt-carbine"
+          ],
+          [
+            "000001668:bolt-pistol",
+            "000001668:close-combat-weapon",
+            "000001668:las-fusil"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

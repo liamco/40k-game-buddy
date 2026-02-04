@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Exorcist missile launcher; heavy bolter; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Exorcist missile launcher; heavy bolter; armoured tracks.",
+      "parsed": [
+        "000000912:exorcist-missile-launcher",
+        "000000912:heavy-bolter",
+        "000000912:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000912:exorcist-conflagration-rockets",
@@ -233,7 +240,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000912:exorcist-missile-launcher",
+            "000000912:heavy-bolter",
+            "000000912:armoured-tracks"
+          ],
+          [
+            "000000912:heavy-bolter",
+            "000000912:armoured-tracks",
+            "000000912:exorcist-conflagration-rockets"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

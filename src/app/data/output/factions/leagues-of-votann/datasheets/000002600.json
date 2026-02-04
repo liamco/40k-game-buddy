@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> heavy plasma axe.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> heavy plasma axe.",
+      "parsed": [
+        "000002600:heavy-plasma-axe"
+      ]
+    },
     "weapons": [
       {
         "id": "000002600:mole-grenade-launcher",
@@ -263,7 +268,25 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Cthonian Beserk",
+        "items": [
+          [
+            "000002600:heavy-plasma-axe"
+          ],
+          [
+            "000002600:concussion-maul"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

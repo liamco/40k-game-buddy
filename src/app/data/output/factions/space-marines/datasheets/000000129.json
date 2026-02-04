@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> twin heavy bolter; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> twin heavy bolter; armoured tracks.",
+      "parsed": [
+        "000000129:twin-heavy-bolter",
+        "000000129:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000129:hunter-killer-missile",
@@ -259,7 +265,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000129:twin-heavy-bolter",
+            "000000129:armoured-tracks"
+          ],
+          [
+            "000000129:armoured-tracks",
+            "000000129:twin-lascannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

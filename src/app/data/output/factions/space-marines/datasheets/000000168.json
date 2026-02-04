@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> twin assault cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> twin assault cannon; armoured tracks.",
+      "parsed": [
+        "000000168:twin-assault-cannon",
+        "000000168:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000168:baal-flamestorm-cannon",
@@ -364,7 +370,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000168:twin-assault-cannon",
+            "000000168:armoured-tracks"
+          ],
+          [
+            "000000168:armoured-tracks",
+            "000000168:baal-flamestorm-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "blood-angels",

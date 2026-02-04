@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> burst cannon; battlesuit fists.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> burst cannon; battlesuit fists.",
+      "parsed": [
+        "000001478:burst-cannon",
+        "000001478:battlesuit-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000001478:airbursting-fragmentation-projector",
@@ -590,6 +596,53 @@
         "name": "Weapon Support System",
         "description": "Each time the bearer makes a ranged attack, you can ignore any or all modifiers to the Hit roll.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001478:burst-cannon",
+            "000001478:battlesuit-fists"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "000001478:airbursting-fragmentation-projector"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "wargear-ability:battlesuit-support-system"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "000001478:cyclic-ion-blaster"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "000001478:fusion-blaster"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "000001478:missile-pod"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "000001478:plasma-rifle"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "wargear-ability:shield-generator"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "000001478:t-au-flamer"
+          ],
+          [
+            "000001478:battlesuit-fists",
+            "wargear-ability:weapon-support-system"
+          ]
+        ]
       }
     ]
   },

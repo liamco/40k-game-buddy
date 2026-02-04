@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Solarite is equipped with:</b> shardcarbine; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Solarite is equipped with:</b> shardcarbine; close combat weapon.",
+      "parsed": [
+        "000004157:shardcarbine",
+        "000004157:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004157:blast-pistol",
@@ -321,7 +327,50 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004157:shardcarbine",
+            "000004157:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Solarite",
+        "items": [
+          [
+            "000004157:close-combat-weapon",
+            "000004157:blast-pistol",
+            "000004157:power-weapon"
+          ],
+          [
+            "000004157:close-combat-weapon",
+            "000004157:splinter-pistol",
+            "000004157:power-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Scourge",
+        "items": [
+          [
+            "000004157:close-combat-weapon",
+            "000004157:blaster"
+          ],
+          [
+            "000004157:close-combat-weapon",
+            "000004157:shredder"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

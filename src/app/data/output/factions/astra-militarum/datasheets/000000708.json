@@ -23,7 +23,17 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 heavy stubbers; 2 lascannons; twin heavy bolter; 2 twin heavy flamers; vulcan mega-bolter; armoured tracks",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 heavy stubbers; 2 lascannons; twin heavy bolter; 2 twin heavy flamers; vulcan mega-bolter; armoured tracks",
+      "parsed": [
+        "000000708:heavy-stubbers",
+        "000000708:lascannons",
+        "000000708:twin-heavy-bolter",
+        "000000708:twin-heavy-flamers",
+        "000000708:vulcan-mega-bolter",
+        "000000708:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000708:heavy-stubber",
@@ -278,7 +288,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000708:heavy-stubbers",
+            "000000708:lascannons",
+            "000000708:twin-heavy-bolter",
+            "000000708:twin-heavy-flamers",
+            "000000708:vulcan-mega-bolter",
+            "000000708:armoured-tracks"
+          ],
+          [
+            "000000708:heavy-stubbers",
+            "000000708:lascannons",
+            "000000708:twin-heavy-bolter",
+            "000000708:vulcan-mega-bolter",
+            "000000708:armoured-tracks",
+            "000000708:twin-heavy-bolters"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

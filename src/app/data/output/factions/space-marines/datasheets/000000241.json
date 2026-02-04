@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; plasma talon; Black Knight combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; plasma talon; Black Knight combat weapon.",
+      "parsed": [
+        "000000241:bolt-pistol",
+        "000000241:plasma-talon",
+        "000000241:black-knight-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000241:astartes-grenade-launcher",
@@ -204,7 +211,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000241:bolt-pistol",
+            "000000241:plasma-talon",
+            "000000241:black-knight-combat-weapon"
+          ],
+          [
+            "000000241:bolt-pistol",
+            "000000241:black-knight-combat-weapon",
+            "000000241:astartes-grenade-launcher"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "dark-angels",

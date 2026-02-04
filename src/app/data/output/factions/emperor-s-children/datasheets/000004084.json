@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> screamer pistol; power sword.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> screamer pistol; power sword.",
+      "parsed": [
+        "000004084:screamer-pistol",
+        "000004084:power-sword"
+      ]
+    },
     "weapons": [
       {
         "id": "000004084:screamer-pistol",
@@ -146,7 +152,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004084:screamer-pistol",
+            "000004084:power-sword"
+          ],
+          [
+            "000004084:screamer-pistol",
+            "000004084:close-combat-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

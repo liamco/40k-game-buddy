@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> executioner plasma cannon; lascannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> executioner plasma cannon; lascannon; armoured tracks.",
+      "parsed": [
+        "000002742:executioner-plasma-cannon",
+        "000002742:lascannon",
+        "000002742:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000002742:executioner-plasma-cannon",
@@ -510,7 +517,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002742:executioner-plasma-cannon",
+            "000002742:lascannon",
+            "000002742:armoured-tracks"
+          ],
+          [
+            "000002742:executioner-plasma-cannon",
+            "000002742:armoured-tracks",
+            "000002742:heavy-bolter"
+          ],
+          [
+            "000002742:executioner-plasma-cannon",
+            "000002742:armoured-tracks",
+            "000002742:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

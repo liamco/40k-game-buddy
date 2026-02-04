@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> magnarail lance; Omnissian staff.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> magnarail lance; Omnissian staff.",
+      "parsed": [
+        "000003840:magnarail-lance",
+        "000003840:omnissian-staff"
+      ]
+    },
     "weapons": [
       {
         "id": "000003840:transonic-cannon",
@@ -143,7 +149,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003840:magnarail-lance",
+            "000003840:omnissian-staff"
+          ],
+          [
+            "000003840:omnissian-staff",
+            "000003840:transonic-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

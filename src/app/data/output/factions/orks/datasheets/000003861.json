@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Boss Nob is equipped with:</b> rokkit pistol; smash hammer; choppa.<br><br><b>Each Breaka Boy is equipped with:</b> smash hammer.",
+    "defaultLoadout": {
+      "raw": "<b>The Boss Nob is equipped with:</b> rokkit pistol; smash hammer; choppa.<br><br><b>Each Breaka Boy is equipped with:</b> smash hammer.",
+      "parsed": [
+        "000003861:rokkit-pistol",
+        "000003861:smash-hammer",
+        "000003861:choppa"
+      ]
+    },
     "weapons": [
       {
         "id": "000003861:rokkit-pistol",
@@ -281,7 +288,28 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003861:rokkit-pistol",
+            "000003861:smash-hammer",
+            "000003861:choppa"
+          ]
+        ]
+      },
+      {
+        "modelType": "Boss Nob",
+        "items": [
+          [
+            "000003861:rokkit-pistol",
+            "000003861:choppa"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 big shootas; 2 dread klaws; stompy feet.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 big shootas; 2 dread klaws; stompy feet.",
+      "parsed": [
+        "000000040:big-shootas",
+        "000000040:dread-klaws",
+        "000000040:stompy-feet"
+      ]
+    },
     "weapons": [
       {
         "id": "000000040:big-shoota",
@@ -225,7 +232,19 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000040:big-shootas",
+            "000000040:dread-klaws",
+            "000000040:stompy-feet"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

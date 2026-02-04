@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> twin cognis autocannon; Ironstrider feet.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> twin cognis autocannon; Ironstrider feet.",
+      "parsed": [
+        "000000852:twin-cognis-autocannon",
+        "000000852:ironstrider-feet"
+      ]
+    },
     "weapons": [
       {
         "id": "000000852:twin-cognis-autocannon",
@@ -144,7 +150,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000852:twin-cognis-autocannon",
+            "000000852:ironstrider-feet"
+          ],
+          [
+            "000000852:ironstrider-feet",
+            "000000852:twin-cognis-lascannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> staff of light.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> staff of light.",
+      "parsed": [
+        "000002351:staff-of-light"
+      ]
+    },
     "weapons": [
       {
         "id": "000002351:staff-of-light",
@@ -204,6 +209,19 @@
         "name": "Resurrection Orb",
         "description": "Once per battle, while the bearer is leading a unit, at the end of any phase, it can resurrect that unit if it is on the battlefield. When you do, that unit's Reanimation Protocols are activated, reanimating D6 wounds rather than D3 when doing so. You cannot resurrect more than one unit per turn.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002351:staff-of-light"
+          ],
+          [
+            "000002351:lord-s-blade"
+          ]
+        ]
       }
     ]
   },

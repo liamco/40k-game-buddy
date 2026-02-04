@@ -18,7 +18,18 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> flechette launcher; 2 high-energy fusion blasters; light missile pod; pulse pistol; battlesuit fists; advanced guardian drone; command-link drone.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> flechette launcher; 2 high-energy fusion blasters; light missile pod; pulse pistol; battlesuit fists; advanced guardian drone; command-link drone.",
+      "parsed": [
+        "000000407:flechette-launcher",
+        "000000407:high-energy-fusion-blasters",
+        "000000407:light-missile-pod",
+        "000000407:pulse-pistol",
+        "000000407:battlesuit-fists",
+        "wargear-ability:advanced-guardian-drone",
+        "000000407:command-link-drone"
+      ]
+    },
     "weapons": [
       {
         "id": "000000407:flechette-launcher",
@@ -171,7 +182,8 @@
         "description": "While a friendly <span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> unit is within 6\" of the bearer, each time you select that unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
         "mechanics": []
       }
-    ]
+    ],
+    "validLoadouts": []
   },
   "supplement": {
     "key": "codex",

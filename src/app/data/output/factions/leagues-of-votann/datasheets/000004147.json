@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> magna-coil autocannon; twin magna-coil autocannon; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> magna-coil autocannon; twin magna-coil autocannon; armoured hull.",
+      "parsed": [
+        "000004147:magna-coil-autocannon",
+        "000004147:twin-magna-coil-autocannon",
+        "000004147:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000004147:magna-coil-autocannon",
@@ -140,6 +147,18 @@
         "name": "Smoke Launcher",
         "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004147:magna-coil-autocannon",
+            "000004147:twin-magna-coil-autocannon",
+            "000004147:armoured-hull"
+          ]
+        ]
       }
     ]
   },

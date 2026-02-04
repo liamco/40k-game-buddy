@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Visionary is equipped with:</b> bolt pistol; Nostraman chainblade.<br><br><b>Each Legionary is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Visionary is equipped with:</b> bolt pistol; Nostraman chainblade.<br><br><b>Each Legionary is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+      "parsed": [
+        "000003876:bolt-pistol",
+        "000003876:nostraman-chainblade"
+      ]
+    },
     "weapons": [
       {
         "id": "000003876:bolt-pistol",
@@ -779,6 +785,46 @@
         "name": "Voice Eater",
         "description": "Enemy units (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) cannot be targeted with Stratagems while they are within Engagement Range of the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003876:bolt-pistol",
+            "000003876:nostraman-chainblade"
+          ]
+        ]
+      },
+      {
+        "modelType": "Visionary",
+        "items": [
+          [
+            "000003876:bolt-pistol",
+            "000003876:accursed-weapon"
+          ],
+          [
+            "000003876:bolt-pistol",
+            "000003876:power-fist"
+          ],
+          [
+            "000003876:nostraman-chainblade",
+            "000003876:plasma-pistol"
+          ],
+          [
+            "000003876:plasma-pistol",
+            "000003876:accursed-weapon"
+          ],
+          [
+            "000003876:plasma-pistol",
+            "000003876:power-fist"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 4
+        }
       }
     ]
   },

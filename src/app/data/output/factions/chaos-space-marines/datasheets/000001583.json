@@ -18,7 +18,16 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; Helstalker autocannon; techno-virus injector; bladed limbs; impaler chainglaive.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol; Helstalker autocannon; techno-virus injector; bladed limbs; impaler chainglaive.",
+      "parsed": [
+        "000001583:bolt-pistol",
+        "000001583:helstalker-autocannon",
+        "000001583:techno-virus-injector",
+        "000001583:bladed-limbs",
+        "000001583:impaler-chainglaive"
+      ]
+    },
     "weapons": [
       {
         "id": "000001583:baleflamer",
@@ -286,7 +295,42 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001583:bolt-pistol",
+            "000001583:helstalker-autocannon",
+            "000001583:techno-virus-injector",
+            "000001583:bladed-limbs",
+            "000001583:impaler-chainglaive"
+          ],
+          [
+            "000001583:bolt-pistol",
+            "000001583:helstalker-autocannon",
+            "000001583:bladed-limbs",
+            "000001583:impaler-chainglaive",
+            "000001583:magma-cutter"
+          ],
+          [
+            "000001583:bolt-pistol",
+            "000001583:techno-virus-injector",
+            "000001583:bladed-limbs",
+            "000001583:impaler-chainglaive",
+            "000001583:baleflamer"
+          ],
+          [
+            "000001583:bolt-pistol",
+            "000001583:bladed-limbs",
+            "000001583:impaler-chainglaive",
+            "000001583:baleflamer",
+            "000001583:magma-cutter"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

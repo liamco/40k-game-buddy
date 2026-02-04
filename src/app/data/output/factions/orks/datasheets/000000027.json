@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> slugga; choppa.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> slugga; choppa.",
+      "parsed": [
+        "000000027:slugga",
+        "000000027:choppa"
+      ]
+    },
     "weapons": [
       {
         "id": "000000027:slugga",
@@ -141,7 +147,27 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000027:slugga",
+            "000000027:choppa"
+          ]
+        ]
+      },
+      {
+        "modelType": "Boss Nob",
+        "items": [
+          [
+            "000000027:slugga",
+            "000000027:power-klaw"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

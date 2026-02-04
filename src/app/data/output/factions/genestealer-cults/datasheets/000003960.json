@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> multi-laser; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> multi-laser; close combat weapon.",
+      "parsed": [
+        "000003960:multi-laser",
+        "000003960:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003960:autocannon",
@@ -431,7 +437,38 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003960:multi-laser",
+            "000003960:close-combat-weapon"
+          ],
+          [
+            "000003960:close-combat-weapon",
+            "000003960:autocannon"
+          ],
+          [
+            "000003960:close-combat-weapon",
+            "000003960:heavy-flamer"
+          ],
+          [
+            "000003960:close-combat-weapon",
+            "000003960:lascannon"
+          ],
+          [
+            "000003960:close-combat-weapon",
+            "000003960:missile-launcher"
+          ],
+          [
+            "000003960:close-combat-weapon",
+            "000003960:plasma-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

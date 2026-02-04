@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> master-crafted power weapon; storm shield.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> master-crafted power weapon; storm shield.",
+      "parsed": [
+        "000004130:master-crafted-power-weapon",
+        "wargear-ability:storm-shield"
+      ]
+    },
     "weapons": [
       {
         "id": "000004130:master-crafted-bolt-carbine",
@@ -282,6 +288,45 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004130:master-crafted-power-weapon",
+            "wargear-ability:storm-shield"
+          ],
+          [
+            "000004130:master-crafted-power-weapon",
+            "000004130:master-crafted-bolt-carbine"
+          ],
+          [
+            "000004130:master-crafted-power-weapon",
+            "000004130:master-crafted-heavy-bolt-pistol"
+          ],
+          [
+            "000004130:master-crafted-power-weapon",
+            "000004130:plasma-pistol"
+          ],
+          [
+            "wargear-ability:storm-shield",
+            "000004130:thunder-hammer"
+          ],
+          [
+            "000004130:thunder-hammer",
+            "000004130:master-crafted-bolt-carbine"
+          ],
+          [
+            "000004130:thunder-hammer",
+            "000004130:master-crafted-heavy-bolt-pistol"
+          ],
+          [
+            "000004130:thunder-hammer",
+            "000004130:plasma-pistol"
+          ]
+        ]
       }
     ]
   },

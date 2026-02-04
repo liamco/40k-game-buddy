@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> splinter cannon; twin splinter rifle; bladevanes.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> splinter cannon; twin splinter rifle; bladevanes.",
+      "parsed": [
+        "000000657:splinter-cannon",
+        "000000657:twin-splinter-rifle",
+        "000000657:bladevanes"
+      ]
+    },
     "weapons": [
       {
         "id": "000000657:splinter-cannon",
@@ -146,7 +153,23 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000657:splinter-cannon",
+            "000000657:twin-splinter-rifle",
+            "000000657:bladevanes"
+          ],
+          [
+            "000000657:splinter-cannon",
+            "000000657:bladevanes"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -11,3 +11,6 @@ export { useEvaluatedOptions, useModelEvaluation } from "./useEvaluatedOptions";
 
 export { useWargearActions } from "./useWargearActions";
 export type { WargearActions } from "./useWargearActions";
+
+export { useLoadoutValidation, useModelLoadoutValidation } from "./useLoadoutValidation";
+export type { LoadoutValidationResult, UnitLoadoutValidation } from "./useLoadoutValidation";

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> shuriken pistol; miststave; flip belt.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> shuriken pistol; miststave; flip belt.",
+      "parsed": [
+        "000004159:shuriken-pistol",
+        "000004159:miststave",
+        "wargear-ability:flip-belt"
+      ]
+    },
     "weapons": [
       {
         "id": "000004159:miststave",
@@ -153,6 +160,23 @@
         "name": "Flip Belt",
         "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004159:shuriken-pistol",
+            "000004159:miststave",
+            "wargear-ability:flip-belt"
+          ],
+          [
+            "000004159:miststave",
+            "wargear-ability:flip-belt",
+            "000004159:neuro-disruptor"
+          ]
+        ]
       }
     ]
   },

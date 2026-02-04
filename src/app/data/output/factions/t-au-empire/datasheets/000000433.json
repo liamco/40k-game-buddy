@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> heavy rail rifle; crushing bulk.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> heavy rail rifle; crushing bulk.",
+      "parsed": [
+        "000000433:heavy-rail-rifle",
+        "000000433:crushing-bulk"
+      ]
+    },
     "weapons": [
       {
         "id": "000000433:heavy-rail-rifle",
@@ -297,6 +303,21 @@
         "name": "Weapon Support System",
         "description": "Each time the bearer makes a ranged attack, you can ignore any or all modifiers to the Hit roll.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000433:heavy-rail-rifle",
+            "000000433:crushing-bulk"
+          ],
+          [
+            "000000433:crushing-bulk",
+            "000000433:high-yield-missile-pods"
+          ]
+        ]
       }
     ]
   },

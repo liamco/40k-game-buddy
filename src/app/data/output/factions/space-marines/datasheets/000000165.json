@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> Angelus boltgun; encarmine blade.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> Angelus boltgun; encarmine blade.",
+      "parsed": [
+        "000000165:angelus-boltgun",
+        "000000165:encarmine-blade"
+      ]
+    },
     "weapons": [
       {
         "id": "000000165:angelus-boltgun",
@@ -250,6 +256,21 @@
         "name": "Sanguinary Banner",
         "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000165:angelus-boltgun",
+            "000000165:encarmine-blade"
+          ],
+          [
+            "000000165:angelus-boltgun",
+            "000000165:encarmine-spear"
+          ]
+        ]
       }
     ]
   },

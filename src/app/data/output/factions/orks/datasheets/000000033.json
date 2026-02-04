@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> twin dakkagun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> twin dakkagun; close combat weapon.",
+      "parsed": [
+        "000000033:twin-dakkagun",
+        "000000033:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000033:slugga",
@@ -274,7 +280,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000033:twin-dakkagun",
+            "000000033:close-combat-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Kill Team Infiltrator is equipped with:</b> bolt pistol; Deathwatch marksman bolt carbine; close combat weapon.<br><br><b>Every Kill Team Infiltrator with bolt sniper rifle is equipped with:</b> bolt pistol; bolt sniper rifle; close combat weapon.<br><br><b>Every Kill Team Infiltrator with Deathwatch occulus bolt carbine is equipped with:</b> bolt pistol; Deathwatch occulus bolt carbine; paired combat blades.<br><br><b>Every Kill Team Infiltrator with combat knife is equipped with:</b> special-issue bolt pistol; combat knife.",
+    "defaultLoadout": {
+      "raw": "<b>Every Kill Team Infiltrator is equipped with:</b> bolt pistol; Deathwatch marksman bolt carbine; close combat weapon.<br><br><b>Every Kill Team Infiltrator with bolt sniper rifle is equipped with:</b> bolt pistol; bolt sniper rifle; close combat weapon.<br><br><b>Every Kill Team Infiltrator with Deathwatch occulus bolt carbine is equipped with:</b> bolt pistol; Deathwatch occulus bolt carbine; paired combat blades.<br><br><b>Every Kill Team Infiltrator with combat knife is equipped with:</b> special-issue bolt pistol; combat knife.",
+      "parsed": [
+        "000002779:bolt-pistol",
+        "000002779:deathwatch-marksman-bolt-carbine",
+        "000002779:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002779:bolt-pistol",
@@ -485,6 +492,18 @@
         "name": "Instigator Bolt Carbine",
         "description": "In your Shooting phase, after the bearer's unit has shot, the bearer's unit can make a Normal move. If it does, until the end of the turn, the bearer's unit is not eligible to declare a charge.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002779:bolt-pistol",
+            "000002779:deathwatch-marksman-bolt-carbine",
+            "000002779:close-combat-weapon"
+          ]
+        ]
       }
     ]
   },

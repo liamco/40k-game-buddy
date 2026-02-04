@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Hades autocannon; Heldrake claws.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Hades autocannon; Heldrake claws.",
+      "parsed": [
+        "000000961:hades-autocannon",
+        "000000961:heldrake-claws"
+      ]
+    },
     "weapons": [
       {
         "id": "000000961:baleflamer",
@@ -149,7 +155,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000961:hades-autocannon",
+            "000000961:heldrake-claws"
+          ],
+          [
+            "000000961:heldrake-claws",
+            "000000961:baleflamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

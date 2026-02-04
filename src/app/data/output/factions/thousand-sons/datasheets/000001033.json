@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Astral Blast; inferno bolt pistol; force weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Astral Blast; inferno bolt pistol; force weapon.",
+      "parsed": [
+        "000001033:astral-blast",
+        "000001033:inferno-bolt-pistol",
+        "000001033:force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001033:astral-blast",
@@ -164,7 +171,19 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001033:astral-blast",
+            "000001033:inferno-bolt-pistol",
+            "000001033:force-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Boss Nob is equipped with:</b> slugga; big choppa. <br><br><b>Every Boy is equipped with:</b> slugga; choppa.",
+    "defaultLoadout": {
+      "raw": "<b>The Boss Nob is equipped with:</b> slugga; big choppa. <br><br><b>Every Boy is equipped with:</b> slugga; choppa.",
+      "parsed": [
+        "000000016:slugga",
+        "000000016:big-choppa"
+      ]
+    },
     "weapons": [
       {
         "id": "000000016:big-shoota",
@@ -458,7 +464,39 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Boss Nob",
+        "items": [
+          [
+            "000000016:slugga",
+            "000000016:big-choppa"
+          ],
+          [
+            "000000016:kombi-weapon",
+            "000000016:close-combat-weapon"
+          ],
+          [
+            "000000016:slugga",
+            "000000016:power-klaw"
+          ]
+        ]
+      },
+      {
+        "modelType": "Boyz",
+        "items": [
+          [
+            "000000016:slugga",
+            "000000016:choppa"
+          ],
+          [
+            "000000016:shoota",
+            "000000016:close-combat-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

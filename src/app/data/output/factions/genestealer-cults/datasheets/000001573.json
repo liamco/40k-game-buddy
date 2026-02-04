@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> heavy mining laser; twin heavy stubbers; armoured hull; flare launcher.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> heavy mining laser; twin heavy stubbers; armoured hull; flare launcher.",
+      "parsed": [
+        "000001573:heavy-mining-laser",
+        "000001573:twin-heavy-stubbers",
+        "000001573:armoured-hull",
+        "wargear-ability:flare-launcher"
+      ]
+    },
     "weapons": [
       {
         "id": "000001573:achilles-missile-launcher",
@@ -270,6 +278,67 @@
         "name": "Survey Augur",
         "description": "Each time the bearer's unit has shot, select one enemy unit that was hit by one or more attacks made by the bearer this phase. Until the end of the phase, each time a friendly <span class=\"kwb\">GENESTEALER</span> <span class=\"kwb\">CULTS</span> model makes an attack against that unit, that attack has the [IGNORES COVER] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001573:heavy-mining-laser",
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "wargear-ability:flare-launcher"
+          ],
+          [
+            "000001573:heavy-mining-laser",
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "wargear-ability:spotter"
+          ],
+          [
+            "000001573:heavy-mining-laser",
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "wargear-ability:survey-augur"
+          ],
+          [
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "wargear-ability:flare-launcher",
+            "000001573:achilles-missile-launcher"
+          ],
+          [
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "000001573:achilles-missile-launcher",
+            "wargear-ability:spotter"
+          ],
+          [
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "000001573:achilles-missile-launcher",
+            "wargear-ability:survey-augur"
+          ],
+          [
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "wargear-ability:flare-launcher",
+            "000001573:heavy-mortar"
+          ],
+          [
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "000001573:heavy-mortar",
+            "wargear-ability:spotter"
+          ],
+          [
+            "000001573:twin-heavy-stubbers",
+            "000001573:armoured-hull",
+            "000001573:heavy-mortar",
+            "wargear-ability:survey-augur"
+          ]
+        ]
       }
     ]
   },

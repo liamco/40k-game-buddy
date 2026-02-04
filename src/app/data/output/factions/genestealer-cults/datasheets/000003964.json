@@ -18,7 +18,16 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 lascannons; tremor cannon; twin heavy bolter; 2 twin heavy flamers; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 lascannons; tremor cannon; twin heavy bolter; 2 twin heavy flamers; armoured tracks.",
+      "parsed": [
+        "000003964:lascannons",
+        "000003964:tremor-cannon",
+        "000003964:twin-heavy-bolter",
+        "000003964:twin-heavy-flamers",
+        "000003964:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003964:twin-heavy-flamer",
@@ -247,7 +256,28 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003964:lascannons",
+            "000003964:tremor-cannon",
+            "000003964:twin-heavy-bolter",
+            "000003964:twin-heavy-flamers",
+            "000003964:armoured-tracks"
+          ],
+          [
+            "000003964:lascannons",
+            "000003964:tremor-cannon",
+            "000003964:twin-heavy-bolter",
+            "000003964:armoured-tracks",
+            "000003964:twin-heavy-bolters"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

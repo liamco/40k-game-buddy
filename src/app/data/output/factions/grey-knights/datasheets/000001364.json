@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> skyhammer missile launcher; twin assault cannon; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> skyhammer missile launcher; twin assault cannon; armoured hull.",
+      "parsed": [
+        "000001364:skyhammer-missile-launcher",
+        "000001364:twin-assault-cannon",
+        "000001364:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000001364:skyhammer-missile-launcher",
@@ -257,7 +264,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001364:skyhammer-missile-launcher",
+            "000001364:twin-assault-cannon",
+            "000001364:armoured-hull"
+          ],
+          [
+            "000001364:twin-assault-cannon",
+            "000001364:armoured-hull",
+            "000001364:twin-heavy-bolter"
+          ],
+          [
+            "000001364:twin-assault-cannon",
+            "000001364:armoured-hull",
+            "000001364:twin-lascannon"
+          ],
+          [
+            "000001364:twin-assault-cannon",
+            "000001364:armoured-hull",
+            "000001364:typhoon-missile-launcher"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

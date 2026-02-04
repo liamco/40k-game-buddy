@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> Avenger shuriken catapult; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> Avenger shuriken catapult; close combat weapon.",
+      "parsed": [
+        "000000593:avenger-shuriken-catapult",
+        "000000593:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000593:avenger-shuriken-catapult",
@@ -320,6 +326,31 @@
         "name": "Aspect Shrine Token",
         "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000593:avenger-shuriken-catapult",
+            "000000593:close-combat-weapon"
+          ],
+          [
+            "000000593:avenger-shuriken-catapult",
+            "000000593:close-combat-weapon",
+            "000000593:additional-avenger-shuriken-catapult"
+          ],
+          [
+            "000000593:close-combat-weapon",
+            "000000593:shuriken-pistol-and-one-of-the-following:<ul><li>1-diresword</li><li>1-power-glaive</li></ul>"
+          ],
+          [
+            "000000593:close-combat-weapon",
+            "000000593:shuriken-pistol-and-one-of-the-following:<ul><li>1-diresword</li><li>1-power-glaive</li></ul>",
+            "000000593:additional-avenger-shuriken-catapult"
+          ]
+        ]
       }
     ]
   },

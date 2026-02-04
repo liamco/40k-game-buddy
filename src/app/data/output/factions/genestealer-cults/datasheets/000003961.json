@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy mortar; lasgun; crew close combat weapons.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy mortar; lasgun; crew close combat weapons.",
+      "parsed": [
+        "000003961:heavy-mortar",
+        "000003961:lasgun",
+        "000003961:crew-close-combat-weapons"
+      ]
+    },
     "weapons": [
       {
         "id": "000003961:heavy-mortar",
@@ -250,7 +257,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003961:heavy-mortar",
+            "000003961:lasgun",
+            "000003961:crew-close-combat-weapons"
+          ],
+          [
+            "000003961:lasgun",
+            "000003961:crew-close-combat-weapons",
+            "000003961:siege-cannon"
+          ],
+          [
+            "000003961:lasgun",
+            "000003961:crew-close-combat-weapons",
+            "000003961:heavy-quad-launcher"
+          ],
+          [
+            "000003961:lasgun",
+            "000003961:crew-close-combat-weapons",
+            "000003961:multiple-rocket-launcher"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

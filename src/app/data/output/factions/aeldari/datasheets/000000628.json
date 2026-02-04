@@ -23,7 +23,15 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> cloudburst missile launcher; Revenant pulsar; sonic lance; Revenant feet.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> cloudburst missile launcher; Revenant pulsar; sonic lance; Revenant feet.",
+      "parsed": [
+        "000000628:cloudburst-missile-launcher",
+        "000000628:revenant-pulsar",
+        "000000628:sonic-lance",
+        "000000628:revenant-feet"
+      ]
+    },
     "weapons": [
       {
         "id": "000000628:cloudburst-missile-launcher",
@@ -214,7 +222,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000628:cloudburst-missile-launcher",
+            "000000628:revenant-pulsar",
+            "000000628:sonic-lance",
+            "000000628:revenant-feet"
+          ],
+          [
+            "000000628:cloudburst-missile-launcher",
+            "000000628:revenant-pulsar",
+            "000000628:revenant-feet"
+          ],
+          [
+            "000000628:cloudburst-missile-launcher",
+            "000000628:sonic-lance",
+            "000000628:revenant-feet"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

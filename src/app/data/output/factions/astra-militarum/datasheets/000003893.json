@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> autopistol; trench club.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> autopistol; trench club.",
+      "parsed": [
+        "000003893:autopistol",
+        "000003893:trench-club"
+      ]
+    },
     "weapons": [
       {
         "id": "000003893:autopistol",
@@ -563,6 +569,87 @@
         "name": "Remote Mine",
         "description": "Once per battle, at the start of your Shooting phase, you can select one enemy unit within 9\" of and visible to the bearer and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a <span class=\"kwb\">VEHICLE</span> or <span class=\"kwb\">FORTIFICATIONS</span> unit.<br><br><b>Designer's Note:</b> Place a Remote Mine token next to the unit, removing it once this ability has been used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003893:autopistol",
+            "000003893:trench-club"
+          ],
+          [
+            "000003893:combat-shotgun",
+            "000003893:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Krieg Engineer Watchmaster",
+        "items": [
+          [
+            "000003893:autopistol",
+            "000003893:chainsword"
+          ],
+          [
+            "000003893:autopistol",
+            "000003893:power-weapon"
+          ],
+          [
+            "000003893:trench-club",
+            "000003893:bolt-pistol"
+          ],
+          [
+            "000003893:bolt-pistol",
+            "000003893:chainsword"
+          ],
+          [
+            "000003893:bolt-pistol",
+            "000003893:power-weapon"
+          ],
+          [
+            "000003893:trench-club",
+            "000003893:hand-flamer"
+          ],
+          [
+            "000003893:hand-flamer",
+            "000003893:chainsword"
+          ],
+          [
+            "000003893:hand-flamer",
+            "000003893:power-weapon"
+          ],
+          [
+            "000003893:trench-club",
+            "000003893:plasma-pistol"
+          ],
+          [
+            "000003893:plasma-pistol",
+            "000003893:chainsword"
+          ],
+          [
+            "000003893:plasma-pistol",
+            "000003893:power-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Krieg Combat Engineer",
+        "items": [
+          [
+            "000003893:autopistol,-1-remote-mine",
+            "000003893:close-combat-weapon"
+          ],
+          [
+            "000003893:flamer",
+            "000003893:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

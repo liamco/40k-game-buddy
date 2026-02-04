@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> twin big shoota; twin supa-shoota; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> twin big shoota; twin supa-shoota; armoured hull.",
+      "parsed": [
+        "000000030:twin-big-shoota",
+        "000000030:twin-supa-shoota",
+        "000000030:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000030:twin-big-shoota",
@@ -171,7 +178,19 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000030:twin-big-shoota",
+            "000000030:twin-supa-shoota",
+            "000000030:armoured-hull"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

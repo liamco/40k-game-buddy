@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> galvanic rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> galvanic rifle; close combat weapon.",
+      "parsed": [
+        "000003842:galvanic-rifle",
+        "000003842:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003842:mechanicus-pistol",
@@ -492,6 +498,33 @@
         "name": "Omnispex",
         "description": "Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003842:galvanic-rifle",
+            "000003842:close-combat-weapon"
+          ],
+          [
+            "000003842:close-combat-weapon",
+            "000003842:transuranic-arquebus"
+          ],
+          [
+            "000003842:close-combat-weapon",
+            "000003842:plasma-caliver"
+          ],
+          [
+            "000003842:close-combat-weapon",
+            "000003842:arc-rifle"
+          ],
+          [
+            "000003842:close-combat-weapon",
+            "000003842:mechanicus-pistol"
+          ]
+        ]
       }
     ]
   },

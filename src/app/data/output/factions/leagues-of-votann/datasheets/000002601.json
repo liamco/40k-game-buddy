@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt revolver; bolt shotgun; magna-coil autocannon; plasma knife.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt revolver; bolt shotgun; magna-coil autocannon; plasma knife.",
+      "parsed": [
+        "000002601:bolt-revolver",
+        "000002601:bolt-shotgun",
+        "000002601:magna-coil-autocannon",
+        "000002601:plasma-knife"
+      ]
+    },
     "weapons": [
       {
         "id": "000002601:bolt-revolver",
@@ -369,6 +377,24 @@
         "name": "Rollbar Searchlight",
         "description": "Each time a model in the bearer's unit makes a ranged attack, you can ignore any or all modifiers to the Hit roll.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Hernkyn Pioneer",
+        "items": [
+          [
+            "000002601:bolt-revolver",
+            "000002601:bolt-shotgun",
+            "000002601:magna-coil-autocannon",
+            "000002601:plasma-knife"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 3,
+          "count": 1
+        }
       }
     ]
   },

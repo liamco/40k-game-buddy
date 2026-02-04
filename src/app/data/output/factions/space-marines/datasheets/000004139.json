@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 hurricane bolters; twin assault cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 hurricane bolters; twin assault cannon; armoured tracks.",
+      "parsed": [
+        "000004139:hurricane-bolters",
+        "000004139:twin-assault-cannon",
+        "000004139:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000004139:hunter-killer-missile",
@@ -285,7 +292,19 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004139:hurricane-bolters",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "black-templars",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Tempestor Aquilon is equipped with:</b> hot-shot lascarbine; sentry flamer; close combat weapon.<br><br><b>Every Tempestus Aquilon is equipped with:</b> hot-shot lascarbine; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Tempestor Aquilon is equipped with:</b> hot-shot lascarbine; sentry flamer; close combat weapon.<br><br><b>Every Tempestus Aquilon is equipped with:</b> hot-shot lascarbine; close combat weapon.",
+      "parsed": [
+        "000003834:hot-shot-lascarbine",
+        "000003834:sentry-flamer",
+        "000003834:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003834:bolt-pistol",
@@ -680,7 +687,95 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Tempestor Aquilon",
+        "items": [
+          [
+            "000003834:hot-shot-lascarbine",
+            "000003834:sentry-flamer",
+            "000003834:close-combat-weapon"
+          ],
+          [
+            "000003834:sentry-flamer",
+            "000003834:close-combat-weapon",
+            "000003834:hot-shot-laspistol"
+          ],
+          [
+            "000003834:sentry-flamer",
+            "000003834:close-combat-weapon",
+            "000003834:chainsword"
+          ],
+          [
+            "000003834:sentry-flamer",
+            "000003834:close-combat-weapon",
+            "000003834:power-weapon"
+          ],
+          [
+            "000003834:hot-shot-lascarbine",
+            "000003834:close-combat-weapon",
+            "000003834:sentry-hot-shot-volley-gun"
+          ],
+          [
+            "000003834:close-combat-weapon",
+            "000003834:sentry-hot-shot-volley-gun",
+            "000003834:hot-shot-laspistol"
+          ],
+          [
+            "000003834:close-combat-weapon",
+            "000003834:sentry-hot-shot-volley-gun",
+            "000003834:chainsword"
+          ],
+          [
+            "000003834:close-combat-weapon",
+            "000003834:sentry-hot-shot-volley-gun",
+            "000003834:power-weapon"
+          ],
+          [
+            "000003834:hot-shot-lascarbine",
+            "000003834:close-combat-weapon",
+            "000003834:sentry-grenade-launcher"
+          ],
+          [
+            "000003834:close-combat-weapon",
+            "000003834:sentry-grenade-launcher",
+            "000003834:hot-shot-laspistol"
+          ],
+          [
+            "000003834:close-combat-weapon",
+            "000003834:sentry-grenade-launcher",
+            "000003834:chainsword"
+          ],
+          [
+            "000003834:close-combat-weapon",
+            "000003834:sentry-grenade-launcher",
+            "000003834:power-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Tempestus Aquilon",
+        "items": [
+          [
+            "000003834:hot-shot-lascarbine",
+            "000003834:close-combat-weapon"
+          ],
+          [
+            "000003834:close-combat-weapon",
+            "000003834:hot-shot-laspistol"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

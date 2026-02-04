@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> twin shuriken catapult; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> twin shuriken catapult; close combat weapon.",
+      "parsed": [
+        "000000591:twin-shuriken-catapult",
+        "000000591:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000591:scatter-laser",
@@ -179,7 +185,26 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000591:twin-shuriken-catapult",
+            "000000591:close-combat-weapon"
+          ],
+          [
+            "000000591:close-combat-weapon",
+            "000000591:scatter-laser"
+          ],
+          [
+            "000000591:close-combat-weapon",
+            "000000591:shuriken-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+      "parsed": [
+        "000000903:bolt-pistol",
+        "000000903:boltgun",
+        "000000903:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000903:artificer-crafted-storm-bolter",
@@ -794,6 +801,91 @@
         "name": "Simulacrum Imperialis",
         "description": "At the end of your Command phase, for each objective marker you control that has one or more units from your army with this ability within range of it, roll one D6: on a 4+, you gain 1 Miracle dice showing a value equal to that result.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000903:bolt-pistol",
+            "000000903:boltgun",
+            "000000903:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Sister Superior",
+        "items": [
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:combi-weapon"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:condemnor-boltgun"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:inferno-pistol"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:ministorum-hand-flamer"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:plasma-pistol"
+          ]
+        ]
+      },
+      {
+        "modelType": "Battle Sister",
+        "items": [
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:artificer-crafted-storm-bolter"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:heavy-bolter"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:meltagun"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:ministorum-flamer"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:ministorum-heavy-flamer"
+          ],
+          [
+            "000000903:bolt-pistol",
+            "000000903:close-combat-weapon",
+            "000000903:multi-melta"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

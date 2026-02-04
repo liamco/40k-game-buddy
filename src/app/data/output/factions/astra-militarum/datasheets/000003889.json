@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Lord Commissar is equipped with:</b> laspistol; power weapon.<br><br><b>One Veteran Guardsman is equipped with:</b> laspistol; chainsword.<br><br><b>One Veteran Guardsman is equipped with:</b> laspistol; close combat weapon; alchemyk counteragents; servo-scribes.<br><br><b>One Veteran Guardsman is equipped with:</b> lasgun; close combat weapon; master vox.<br><br><b>One Veteran Guardsman is equipped with:</b> lasgun; close combat weapon; regimental standard.<br><br><b>One Veteran Guardsman is equipped with:</b> boltgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Lord Commissar is equipped with:</b> laspistol; power weapon.<br><br><b>One Veteran Guardsman is equipped with:</b> laspistol; chainsword.<br><br><b>One Veteran Guardsman is equipped with:</b> laspistol; close combat weapon; alchemyk counteragents; servo-scribes.<br><br><b>One Veteran Guardsman is equipped with:</b> lasgun; close combat weapon; master vox.<br><br><b>One Veteran Guardsman is equipped with:</b> lasgun; close combat weapon; regimental standard.<br><br><b>One Veteran Guardsman is equipped with:</b> boltgun; close combat weapon.",
+      "parsed": [
+        "000003889:laspistol",
+        "000003889:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003889:boltgun",
@@ -710,6 +716,26 @@
         "name": "Servo-scribes",
         "description": "Once per battle, when issuing an Order, the Lord Commissar can issue one additional Order.<br><br><b>Designer's Note:</b> Place a Servo-scribes token next to the unit, removing it when this ability has been used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003889:laspistol",
+            "000003889:power-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Lord Commissar",
+        "items": [
+          [
+            "000003889:laspistol",
+            "000003889:power-fist"
+          ]
+        ]
       }
     ]
   },

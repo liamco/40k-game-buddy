@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Autoch-pattern combi-bolter; forgewrought plasma axe; rampart crest.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Autoch-pattern combi-bolter; forgewrought plasma axe; rampart crest.",
+      "parsed": [
+        "000002594:autoch-pattern-combi-bolter",
+        "000002594:forgewrought-plasma-axe",
+        "wargear-ability:rampart-crest"
+      ]
+    },
     "weapons": [
       {
         "id": "000002594:autoch-pattern-combi-bolter",
@@ -270,6 +277,33 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002594:autoch-pattern-combi-bolter",
+            "000002594:forgewrought-plasma-axe",
+            "wargear-ability:rampart-crest"
+          ],
+          [
+            "000002594:autoch-pattern-combi-bolter",
+            "000002594:forgewrought-plasma-axe",
+            "wargear-ability:teleport-crest"
+          ],
+          [
+            "000002594:autoch-pattern-combi-bolter",
+            "wargear-ability:rampart-crest",
+            "000002594:mass-gauntlet"
+          ],
+          [
+            "000002594:autoch-pattern-combi-bolter",
+            "000002594:mass-gauntlet",
+            "wargear-ability:teleport-crest"
+          ]
+        ]
       }
     ]
   },

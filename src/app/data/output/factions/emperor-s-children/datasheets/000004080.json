@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Obsessionist is equipped with:</b> bolt pistol; power sword.<br><br><b>Every Infractor is equipped with:</b> bolt pistol; duelling sabre.",
+    "defaultLoadout": {
+      "raw": "<b>The Obsessionist is equipped with:</b> bolt pistol; power sword.<br><br><b>Every Infractor is equipped with:</b> bolt pistol; duelling sabre.",
+      "parsed": [
+        "000004080:bolt-pistol",
+        "000004080:power-sword"
+      ]
+    },
     "weapons": [
       {
         "id": "000004080:bolt-pistol",
@@ -296,6 +302,42 @@
         "name": "Icon of Excess",
         "description": "At the end of your Shooting phase or the Fight phase, if the bearer's unit destroyed one or more enemy units that phase, the bearer's unit takes a Leadership test. If that test is passed, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Obsessionist",
+        "items": [
+          [
+            "000004080:bolt-pistol",
+            "000004080:power-sword"
+          ],
+          [
+            "000004080:bolt-pistol",
+            "000004080:rapture-lash"
+          ],
+          [
+            "000004080:power-sword",
+            "000004080:plasma-pistol"
+          ],
+          [
+            "000004080:plasma-pistol",
+            "000004080:rapture-lash"
+          ]
+        ]
+      },
+      {
+        "modelType": "Infractor",
+        "items": [
+          [
+            "000004080:bolt-pistol",
+            "000004080:duelling-sabre"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

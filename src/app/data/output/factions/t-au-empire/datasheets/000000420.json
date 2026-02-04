@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> fusion collider; twin T'au flamer; Ghostkeel fists.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> fusion collider; twin T'au flamer; Ghostkeel fists.",
+      "parsed": [
+        "000000420:fusion-collider",
+        "000000420:twin-t-au-flamer",
+        "000000420:ghostkeel-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000000420:cyclic-ion-raker",
@@ -318,6 +325,43 @@
         "name": "Battlesuit Support System",
         "description": "The bearer is eligible to shoot in a turn in which it Fell Back but it loses the <span class=\"kwb\">SMOKE</span> keyword.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000420:fusion-collider",
+            "000000420:twin-t-au-flamer",
+            "000000420:ghostkeel-fists"
+          ],
+          [
+            "000000420:fusion-collider",
+            "000000420:ghostkeel-fists",
+            "000000420:twin-fusion-blaster"
+          ],
+          [
+            "000000420:fusion-collider",
+            "000000420:ghostkeel-fists",
+            "000000420:twin-burst-cannon"
+          ],
+          [
+            "000000420:twin-t-au-flamer",
+            "000000420:ghostkeel-fists",
+            "000000420:cyclic-ion-raker"
+          ],
+          [
+            "000000420:ghostkeel-fists",
+            "000000420:cyclic-ion-raker",
+            "000000420:twin-fusion-blaster"
+          ],
+          [
+            "000000420:ghostkeel-fists",
+            "000000420:cyclic-ion-raker",
+            "000000420:twin-burst-cannon"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; bolt rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; bolt rifle; close combat weapon.",
+      "parsed": [
+        "000002285:bolt-pistol",
+        "000002285:bolt-rifle",
+        "000002285:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002285:astartes-grenade-launcher",
@@ -590,7 +597,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Death Company Marines with Bolt Rifle",
+        "items": [
+          [
+            "000002285:bolt-pistol",
+            "000002285:bolt-rifle",
+            "000002285:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "blood-angels",

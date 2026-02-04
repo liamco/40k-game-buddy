@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> hellfire breath; great axe of Khorne",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> hellfire breath; great axe of Khorne",
+      "parsed": [
+        "000002582:hellfire-breath",
+        "000002582:great-axe-of-khorne"
+      ]
+    },
     "weapons": [
       {
         "id": "000002582:bloodflail",
@@ -226,7 +232,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002582:hellfire-breath",
+            "000002582:great-axe-of-khorne"
+          ],
+          [
+            "000002582:hellfire-breath",
+            "000002582:axe-of-khorne-and-one-of-the-following:<ul><li>1-bloodflail</li><li>1-lash-of-khorne</li></ul>"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

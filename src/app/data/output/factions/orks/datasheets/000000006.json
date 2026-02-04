@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> kustom-mega blaster; power klaw.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> kustom-mega blaster; power klaw.",
+      "parsed": [
+        "000000006:kustom-mega-blaster",
+        "000000006:power-klaw"
+      ]
+    },
     "weapons": [
       {
         "id": "000000006:kombi-weapon",
@@ -334,6 +340,17 @@
         "name": "Grot Oiler",
         "description": "Once per battle, at the end of your Movement phase, one model in the bearer's unit regains D3 lost wounds.<br><br><b>Designer's Note:</b> Place a Grot Oiler token next to the unit, removing it once this ability has been used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000006:kustom-mega-blaster",
+            "000000006:power-klaw"
+          ]
+        ]
       }
     ]
   },

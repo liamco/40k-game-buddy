@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> multi-laser; heavy bolter; lasgun array; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> multi-laser; heavy bolter; lasgun array; armoured tracks.",
+      "parsed": [
+        "000000692:multi-laser",
+        "000000692:heavy-bolter",
+        "000000692:lasgun-array",
+        "000000692:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000692:heavy-bolter",
@@ -414,7 +422,42 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000692:multi-laser",
+            "000000692:heavy-bolter",
+            "000000692:lasgun-array",
+            "000000692:armoured-tracks"
+          ],
+          [
+            "000000692:heavy-bolter",
+            "000000692:lasgun-array",
+            "000000692:armoured-tracks"
+          ],
+          [
+            "000000692:heavy-bolter",
+            "000000692:lasgun-array",
+            "000000692:armoured-tracks",
+            "000000692:heavy-flamer"
+          ],
+          [
+            "000000692:multi-laser",
+            "000000692:lasgun-array",
+            "000000692:armoured-tracks",
+            "000000692:heavy-flamer"
+          ],
+          [
+            "000000692:lasgun-array",
+            "000000692:armoured-tracks",
+            "000000692:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

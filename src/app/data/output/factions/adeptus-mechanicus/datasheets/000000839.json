@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> macrostubber; volkite blaster; Omnissian axe.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> macrostubber; volkite blaster; Omnissian axe.",
+      "parsed": [
+        "000000839:macrostubber",
+        "000000839:volkite-blaster",
+        "000000839:omnissian-axe"
+      ]
+    },
     "weapons": [
       {
         "id": "000000839:eradication-ray",
@@ -246,7 +253,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000839:macrostubber",
+            "000000839:volkite-blaster",
+            "000000839:omnissian-axe"
+          ],
+          [
+            "000000839:macrostubber",
+            "000000839:omnissian-axe",
+            "000000839:eradication-ray"
+          ],
+          [
+            "000000839:volkite-blaster",
+            "000000839:omnissian-axe",
+            "000000839:phosphor-serpenta"
+          ],
+          [
+            "000000839:omnissian-axe",
+            "000000839:phosphor-serpenta",
+            "000000839:eradication-ray"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

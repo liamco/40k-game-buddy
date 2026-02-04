@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; teeth and claws; Wolf Guard weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; teeth and claws; Wolf Guard weapon.",
+      "parsed": [
+        "000000322:bolt-pistol",
+        "000000322:teeth-and-claws",
+        "000000322:wolf-guard-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000322:bolt-pistol",
@@ -273,6 +280,28 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000322:bolt-pistol",
+            "000000322:teeth-and-claws",
+            "000000322:wolf-guard-weapon"
+          ],
+          [
+            "000000322:teeth-and-claws",
+            "000000322:wolf-guard-weapon",
+            "000000322:boltgun"
+          ],
+          [
+            "000000322:teeth-and-claws",
+            "000000322:wolf-guard-weapon",
+            "wargear-ability:storm-shield"
+          ]
+        ]
       }
     ]
   },

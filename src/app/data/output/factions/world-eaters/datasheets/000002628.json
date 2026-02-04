@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Jakhal Pack Leader and every Jakhal is equipped with:</b> autopistol; chainblades.<br><br><b>Every Dishonoured is equipped with:</b> paired manglers.",
+    "defaultLoadout": {
+      "raw": "<b>The Jakhal Pack Leader and every Jakhal is equipped with:</b> autopistol; chainblades.<br><br><b>Every Dishonoured is equipped with:</b> paired manglers.",
+      "parsed": [
+        "000002628:autopistol",
+        "000002628:chainblades"
+      ]
+    },
     "weapons": [
       {
         "id": "000002628:autopistol",
@@ -268,6 +274,17 @@
         "name": "Icon of Khorne",
         "description": "If the bearer's unit contains one or more Icons of Khorne, each time the bearer's unit destroys an enemy unit, you gain 1 Bloodshed point. Each time you make a Blessings of Khorne roll, roll one additional D6 for each Bloodshed point you have, after which, all your Bloodshed points are lost.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002628:autopistol",
+            "000002628:chainblades"
+          ]
+        ]
       }
     ]
   },

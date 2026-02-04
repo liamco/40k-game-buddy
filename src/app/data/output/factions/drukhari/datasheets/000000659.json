@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> splinter pods; hellglaive.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> splinter pods; hellglaive.",
+      "parsed": [
+        "000000659:splinter-pods",
+        "000000659:hellglaive"
+      ]
+    },
     "weapons": [
       {
         "id": "000000659:splinter-pistol",
@@ -301,6 +307,32 @@
         "name": "Phantasm Grenade Launcher",
         "description": "The bearer's unit has the Smoke and Grenades keywords.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000659:splinter-pods",
+            "000000659:hellglaive"
+          ]
+        ]
+      },
+      {
+        "modelType": "Helliarch",
+        "items": [
+          [
+            "000000659:splinter-pods",
+            "000000659:splinter-pistol",
+            "000000659:power-weapon"
+          ],
+          [
+            "000000659:splinter-pods",
+            "000000659:splinter-pistol",
+            "000000659:stunclaw"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> thunder hammer; death totem.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> thunder hammer; death totem.",
+      "parsed": [
+        "000004132:thunder-hammer",
+        "wargear-ability:death-totem"
+      ]
+    },
     "weapons": [
       {
         "id": "000004132:stormfrag-auto-launcher",
@@ -126,6 +132,21 @@
         "name": "Death Totem",
         "description": "Each time the bearer makes a melee attack, re-roll a Hit roll of 1.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004132:thunder-hammer",
+            "wargear-ability:death-totem"
+          ],
+          [
+            "000004132:thunder-hammer",
+            "000004132:stormfrag-auto-launcher"
+          ]
+        ]
       }
     ]
   },

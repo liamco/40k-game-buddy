@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> heavy grav-cannon; phosphor blaster; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> heavy grav-cannon; phosphor blaster; close combat weapon.",
+      "parsed": [
+        "000000842:heavy-grav-cannon",
+        "000000842:phosphor-blaster",
+        "000000842:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000842:cognis-flamer",
@@ -249,7 +256,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000842:heavy-grav-cannon",
+            "000000842:phosphor-blaster",
+            "000000842:close-combat-weapon"
+          ],
+          [
+            "000000842:heavy-grav-cannon",
+            "000000842:close-combat-weapon",
+            "000000842:cognis-flamer"
+          ],
+          [
+            "000000842:phosphor-blaster",
+            "000000842:close-combat-weapon",
+            "000000842:kataphron-plasma-culverin"
+          ],
+          [
+            "000000842:close-combat-weapon",
+            "000000842:kataphron-plasma-culverin",
+            "000000842:cognis-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

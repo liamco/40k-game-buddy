@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; melta rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; melta rifle; close combat weapon.",
+      "parsed": [
+        "000000103:bolt-pistol",
+        "000000103:melta-rifle",
+        "000000103:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000103:bolt-pistol",
@@ -173,7 +180,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000103:bolt-pistol",
+            "000000103:melta-rifle",
+            "000000103:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Eradicator",
+        "items": [
+          [
+            "000000103:bolt-pistol",
+            "000000103:close-combat-weapon",
+            "000000103:multi-melta"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 3,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

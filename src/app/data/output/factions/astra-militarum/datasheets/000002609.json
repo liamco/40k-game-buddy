@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Cadian Commander is equipped with:</b> laspistol; chainsword.<br><br><b>1 Cadian Veteran Guardsman is equipped with:</b> las pistol; chainsword.<br><br><b>1 other Cadian Veteran Guardsman is equipped with:</b> lasgun; master vox; close combat weapon.<br><br><b>1 other Cadian Veteran Guardsman is equipped with:</b> lasgun; medi-pack; close combat weapon.<br><br><b>1 other Cadian Veteran Guardsman is equipped with:</b> lasgun; regimental standard; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Cadian Commander is equipped with:</b> laspistol; chainsword.<br><br><b>1 Cadian Veteran Guardsman is equipped with:</b> las pistol; chainsword.<br><br><b>1 other Cadian Veteran Guardsman is equipped with:</b> lasgun; master vox; close combat weapon.<br><br><b>1 other Cadian Veteran Guardsman is equipped with:</b> lasgun; medi-pack; close combat weapon.<br><br><b>1 other Cadian Veteran Guardsman is equipped with:</b> lasgun; regimental standard; close combat weapon.",
+      "parsed": [
+        "000002609:laspistol",
+        "000002609:chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000002609:bolt-pistol",
@@ -708,6 +714,30 @@
         "name": "Regimental Standard",
         "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002609:laspistol",
+            "000002609:chainsword"
+          ]
+        ]
+      },
+      {
+        "modelType": "Cadian Commander",
+        "items": [
+          [
+            "000002609:chainsword",
+            "000002609:bolt-pistol"
+          ],
+          [
+            "000002609:chainsword",
+            "000002609:plasma-pistol"
+          ]
+        ]
       }
     ]
   },

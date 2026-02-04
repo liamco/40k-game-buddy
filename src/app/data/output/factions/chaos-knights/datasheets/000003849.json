@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> autopistol; brutal assault weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> autopistol; brutal assault weapon.",
+      "parsed": [
+        "000003849:autopistol",
+        "000003849:brutal-assault-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003849:bolt-pistol",
@@ -143,7 +149,27 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003849:autopistol",
+            "000003849:brutal-assault-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Cultist Champion",
+        "items": [
+          [
+            "000003849:brutal-assault-weapon",
+            "000003849:bolt-pistol"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

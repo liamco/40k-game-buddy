@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Knight Master is equipped with:</b> great weapon of the Unforgiven.<br><br><b>Every Deathwing Knight is equipped with:</b> mace of absolution.",
+    "defaultLoadout": {
+      "raw": "<b>The Knight Master is equipped with:</b> great weapon of the Unforgiven.<br><br><b>Every Deathwing Knight is equipped with:</b> mace of absolution.",
+      "parsed": [
+        "000000231:great-weapon-of-the-unforgiven"
+      ]
+    },
     "weapons": [
       {
         "id": "000000231:great-weapon-of-the-unforgiven",
@@ -257,6 +262,27 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Knight Master",
+        "items": [
+          [
+            "000000231:great-weapon-of-the-unforgiven"
+          ],
+          [
+            "000000231:relic-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Deathwing Knight",
+        "items": [
+          [
+            "000000231:mace-of-absolution"
+          ]
+        ]
       }
     ]
   },

@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> suncannon; titanic feet; scattershield.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> suncannon; titanic feet; scattershield.",
+      "parsed": [
+        "000000614:suncannon",
+        "000000614:titanic-feet",
+        "wargear-ability:scattershield"
+      ]
+    },
     "weapons": [
       {
         "id": "000000614:heavy-wraithcannon",
@@ -329,6 +336,32 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000614:suncannon",
+            "000000614:titanic-feet",
+            "wargear-ability:scattershield"
+          ],
+          [
+            "000000614:suncannon",
+            "000000614:titanic-feet",
+            "000000614:heavy-wraithcannon"
+          ],
+          [
+            "000000614:titanic-feet",
+            "wargear-ability:scattershield",
+            "000000614:heavy-wraithcannon"
+          ],
+          [
+            "000000614:titanic-feet",
+            "000000614:heavy-wraithcannon"
+          ]
+        ]
       }
     ]
   },

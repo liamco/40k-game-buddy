@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; Inquisitorial melee weapon; blessed wardings.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol; Inquisitorial melee weapon; blessed wardings.",
+      "parsed": [
+        "000000877:bolt-pistol",
+        "000000877:inquisitorial-melee-weapon",
+        "wargear-ability:blessed-wardings"
+      ]
+    },
     "weapons": [
       {
         "id": "000000877:bolt-pistol",
@@ -303,6 +310,35 @@
         "name": "Psychic Gifts",
         "description": "The bearer has the <span class=\"kwb\">PSYKER</span> keyword.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000877:bolt-pistol",
+            "000000877:inquisitorial-melee-weapon",
+            "wargear-ability:blessed-wardings"
+          ],
+          [
+            "000000877:bolt-pistol",
+            "000000877:inquisitorial-melee-weapon",
+            "wargear-ability:psychic-gifts",
+            "000000877:psychic-shock-wave"
+          ],
+          [
+            "000000877:inquisitorial-melee-weapon",
+            "wargear-ability:blessed-wardings",
+            "000000877:combi-weapon"
+          ],
+          [
+            "000000877:inquisitorial-melee-weapon",
+            "000000877:combi-weapon",
+            "wargear-ability:psychic-gifts",
+            "000000877:psychic-shock-wave"
+          ]
+        ]
       }
     ]
   },

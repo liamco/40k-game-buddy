@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Jungle Fighter Sergeant is equipped with:</b> laspistol; close combat weapon. <br><br><b>Every Jungle Fighter is equipped with:</b> lasgun; close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "defaultLoadout": {
+      "raw": "<b>Every Jungle Fighter Sergeant is equipped with:</b> laspistol; close combat weapon. <br><br><b>Every Jungle Fighter is equipped with:</b> lasgun; close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+      "parsed": [
+        "000002614:laspistol",
+        "000002614:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002614:flamer",
@@ -215,6 +221,17 @@
         "name": "Vox-caster",
         "description": "Each time you target the bearer's unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly Officer models within 6\": on a 5+, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002614:laspistol",
+            "000002614:close-combat-weapon"
+          ]
+        ]
       }
     ]
   },

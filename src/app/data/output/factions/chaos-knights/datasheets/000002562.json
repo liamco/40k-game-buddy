@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> diabolus heavy stubber; 2 War Dog autocannons; armoured feet.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> diabolus heavy stubber; 2 War Dog autocannons; armoured feet.",
+      "parsed": [
+        "000002562:diabolus-heavy-stubber",
+        "000002562:war-dog-autocannons",
+        "000002562:armoured-feet"
+      ]
+    },
     "weapons": [
       {
         "id": "000002562:daemonbreath-meltagun",
@@ -171,7 +178,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002562:diabolus-heavy-stubber",
+            "000002562:war-dog-autocannons",
+            "000002562:armoured-feet"
+          ],
+          [
+            "000002562:war-dog-autocannons",
+            "000002562:armoured-feet",
+            "000002562:daemonbreath-meltagun"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> lascannon; Leman Russ battle cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> lascannon; Leman Russ battle cannon; armoured tracks.",
+      "parsed": [
+        "000003979:lascannon",
+        "000003979:leman-russ-battle-cannon",
+        "000003979:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003979:hunter-killer-missile",
@@ -487,7 +494,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003979:lascannon",
+            "000003979:leman-russ-battle-cannon",
+            "000003979:armoured-tracks"
+          ],
+          [
+            "000003979:leman-russ-battle-cannon",
+            "000003979:armoured-tracks",
+            "000003979:heavy-bolter"
+          ],
+          [
+            "000003979:leman-russ-battle-cannon",
+            "000003979:armoured-tracks",
+            "000003979:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

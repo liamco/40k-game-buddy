@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Kill Team Sergeant is equipped with:</b> plasma pistol; power weapon.<br><br><b>Each Gravis Veteran is equipped with:</b> infernus heavy bolter; bolt pistol; close combat weapon.<br><br><b>For every 5 models in the unit, 1 Deathwatch Veteran is equipped with:</b> stalker bolt rifle; bolt pistol; close combat weapon.<br><br><b>For every 5 models in the unit, 1 Deathwatch Veteran is equipped with:</b> bolt pistol; heavy thunder hammer.<br><br><b>For every 5 models in the unit, 1 Deathwatch Veteran is equipped with:</b> Deathwatch marksman bolt carbine; special-issue bolt pistol; close combat weapon.<br><br><b>If the unit contains 10 models, 1 Deathwatch Veteran is equipped with:</b> special-issue bolt pistol; xenophase blade.",
+    "defaultLoadout": {
+      "raw": "<b>The Kill Team Sergeant is equipped with:</b> plasma pistol; power weapon.<br><br><b>Each Gravis Veteran is equipped with:</b> infernus heavy bolter; bolt pistol; close combat weapon.<br><br><b>For every 5 models in the unit, 1 Deathwatch Veteran is equipped with:</b> stalker bolt rifle; bolt pistol; close combat weapon.<br><br><b>For every 5 models in the unit, 1 Deathwatch Veteran is equipped with:</b> bolt pistol; heavy thunder hammer.<br><br><b>For every 5 models in the unit, 1 Deathwatch Veteran is equipped with:</b> Deathwatch marksman bolt carbine; special-issue bolt pistol; close combat weapon.<br><br><b>If the unit contains 10 models, 1 Deathwatch Veteran is equipped with:</b> special-issue bolt pistol; xenophase blade.",
+      "parsed": [
+        "000004175:plasma-pistol",
+        "000004175:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004175:astartes-grenade-launcher",
@@ -694,6 +700,70 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Kill Team Sergeant",
+        "items": [
+          [
+            "000004175:plasma-pistol",
+            "000004175:power-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 1
+        }
+      },
+      {
+        "modelType": "Gravis Veteran",
+        "items": [
+          [
+            "000004175:infernus-heavy-bolter",
+            "000004175:bolt-pistol",
+            "000004175:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 1
+        }
+      },
+      {
+        "modelType": "Deathwatch Veteran",
+        "items": [
+          [
+            "000004175:stalker-bolt-rifle",
+            "000004175:bolt-pistol",
+            "000004175:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 1
+        }
+      },
+      {
+        "modelType": "OR",
+        "items": [
+          [
+            "000004175:plasma-pistol",
+            "000004175:power-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 1
+        }
       }
     ]
   },

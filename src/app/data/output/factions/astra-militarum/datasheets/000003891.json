@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Catachan Commander is equipped with:</b> laspistol; close combat weapon.<br><br><b>Every Veteran Guardsman is equipped with:</b> lasgun; laspistol; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Catachan Commander is equipped with:</b> laspistol; close combat weapon.<br><br><b>Every Veteran Guardsman is equipped with:</b> lasgun; laspistol; close combat weapon.",
+      "parsed": [
+        "000003891:laspistol",
+        "000003891:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003891:bolt-pistol",
@@ -811,6 +817,30 @@
         "name": "Regimental Standard",
         "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003891:laspistol",
+            "000003891:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Catachan Commander",
+        "items": [
+          [
+            "000003891:close-combat-weapon",
+            "000003891:bolt-pistol"
+          ],
+          [
+            "000003891:close-combat-weapon",
+            "000003891:plasma-pistol"
+          ]
+        ]
       }
     ]
   },

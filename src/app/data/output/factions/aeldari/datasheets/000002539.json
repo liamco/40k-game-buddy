@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> shuriken cannon; star bolas; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> shuriken cannon; star bolas; close combat weapon.",
+      "parsed": [
+        "000002539:shuriken-cannon",
+        "000002539:star-bolas",
+        "000002539:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002539:shuriken-cannon",
@@ -229,7 +236,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002539:shuriken-cannon",
+            "000002539:star-bolas",
+            "000002539:close-combat-weapon"
+          ],
+          [
+            "000002539:shuriken-cannon",
+            "000002539:close-combat-weapon",
+            "000002539:zephyrglaive"
+          ],
+          [
+            "000002539:star-bolas",
+            "000002539:close-combat-weapon",
+            "000002539:skyweaver-haywire-cannon"
+          ],
+          [
+            "000002539:close-combat-weapon",
+            "000002539:skyweaver-haywire-cannon",
+            "000002539:zephyrglaive"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

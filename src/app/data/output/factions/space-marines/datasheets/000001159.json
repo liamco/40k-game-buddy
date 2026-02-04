@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; occulus bolt carbine; paired combat blades.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; occulus bolt carbine; paired combat blades.",
+      "parsed": [
+        "000001159:bolt-pistol",
+        "000001159:occulus-bolt-carbine",
+        "000001159:paired-combat-blades"
+      ]
+    },
     "weapons": [
       {
         "id": "000001159:bolt-pistol",
@@ -147,6 +154,18 @@
         "name": "Haywire Mine",
         "description": "Once per battle, at the start of any phase, you can select one enemy unit within 3\" of the bearer and roll one D6: on a 2+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a Vehicle unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001159:bolt-pistol",
+            "000001159:occulus-bolt-carbine",
+            "000001159:paired-combat-blades"
+          ]
+        ]
       }
     ]
   },

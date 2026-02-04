@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> lascannon; Leman Russ battle cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> lascannon; Leman Russ battle cannon; armoured tracks.",
+      "parsed": [
+        "000000700:lascannon",
+        "000000700:leman-russ-battle-cannon",
+        "000000700:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000700:heavy-bolter",
@@ -492,7 +499,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000700:lascannon",
+            "000000700:leman-russ-battle-cannon",
+            "000000700:armoured-tracks"
+          ],
+          [
+            "000000700:leman-russ-battle-cannon",
+            "000000700:armoured-tracks",
+            "000000700:heavy-bolter"
+          ],
+          [
+            "000000700:leman-russ-battle-cannon",
+            "000000700:armoured-tracks",
+            "000000700:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

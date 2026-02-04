@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Serberys Sulphurhound Alpha model is equipped with:</b> Mechanicus pistol; sulphur breath; cavalry arc maul; clawed limbs.<br><br><b>Every Serberys Sulphurhound model is equipped with:</b> 2 phosphor pistols; sulphur breath; clawed limbs.",
+    "defaultLoadout": {
+      "raw": "<b>The Serberys Sulphurhound Alpha model is equipped with:</b> Mechanicus pistol; sulphur breath; cavalry arc maul; clawed limbs.<br><br><b>Every Serberys Sulphurhound model is equipped with:</b> 2 phosphor pistols; sulphur breath; clawed limbs.",
+      "parsed": [
+        "000002081:mechanicus-pistol",
+        "000002081:sulphur-breath",
+        "000002081:cavalry-arc-maul",
+        "000002081:clawed-limbs"
+      ]
+    },
     "weapons": [
       {
         "id": "000002081:mechanicus-pistol",
@@ -235,7 +243,20 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002081:mechanicus-pistol",
+            "000002081:sulphur-breath",
+            "000002081:cavalry-arc-maul",
+            "000002081:clawed-limbs"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

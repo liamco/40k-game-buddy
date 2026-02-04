@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; Wyvern quad stormshard mortar; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; Wyvern quad stormshard mortar; armoured tracks.",
+      "parsed": [
+        "000003992:heavy-bolter",
+        "000003992:wyvern-quad-stormshard-mortar",
+        "000003992:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003992:heavy-bolter",
@@ -229,7 +236,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003992:heavy-bolter",
+            "000003992:wyvern-quad-stormshard-mortar",
+            "000003992:armoured-tracks"
+          ],
+          [
+            "000003992:wyvern-quad-stormshard-mortar",
+            "000003992:armoured-tracks",
+            "000003992:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

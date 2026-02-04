@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Aspiring Sorcerer is equipped with:</b> inferno bolt pistol; Malefic Curse; force weapon.<br><br><b>Every Rubric Marine is equipped with:</b> inferno boltgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Aspiring Sorcerer is equipped with:</b> inferno bolt pistol; Malefic Curse; force weapon.<br><br><b>Every Rubric Marine is equipped with:</b> inferno boltgun; close combat weapon.",
+      "parsed": [
+        "000003583:inferno-bolt-pistol",
+        "000003583:malefic-curse",
+        "000003583:force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003583:force-weapon",
@@ -394,6 +401,44 @@
         "name": "Icon of Flame",
         "description": "Ranged weapons equipped by models in the bearer's unit (excluding <span class=\"kwb\">CHARACTERS</span>) have the [IGNORES COVER] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Aspiring Sorcerer",
+        "items": [
+          [
+            "000003583:inferno-bolt-pistol",
+            "000003583:malefic-curse",
+            "000003583:force-weapon"
+          ],
+          [
+            "000003583:malefic-curse",
+            "000003583:force-weapon",
+            "000003583:warpflame-pistol"
+          ]
+        ]
+      },
+      {
+        "modelType": "Rubric Marine",
+        "items": [
+          [
+            "000003583:inferno-boltgun",
+            "000003583:close-combat-weapon"
+          ],
+          [
+            "000003583:close-combat-weapon",
+            "000003583:warpflamer"
+          ],
+          [
+            "000003583:close-combat-weapon",
+            "000003583:soulreaper-cannon"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

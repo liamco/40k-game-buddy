@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> shuriken pistol; Harlequin's blade, flip belt.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> shuriken pistol; Harlequin's blade, flip belt.",
+      "parsed": [
+        "000004164:shuriken-pistol",
+        "000004164:harlequin-s-blade",
+        "wargear-ability:flip-belt"
+      ]
+    },
     "weapons": [
       {
         "id": "000004164:harlequin-s-blade",
@@ -350,6 +357,58 @@
         "name": "Flip Belt",
         "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004164:shuriken-pistol",
+            "000004164:harlequin-s-blade",
+            "wargear-ability:flip-belt"
+          ],
+          [
+            "000004164:harlequin-s-blade",
+            "wargear-ability:flip-belt",
+            "000004164:up-to-4-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ],
+          [
+            "000004164:harlequin-s-blade",
+            "wargear-ability:flip-belt",
+            "000004164:up-to-2-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ],
+          [
+            "000004164:shuriken-pistol",
+            "wargear-ability:flip-belt",
+            "000004164:power-sword"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000004164:power-sword",
+            "000004164:up-to-4-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000004164:power-sword",
+            "000004164:up-to-2-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ],
+          [
+            "000004164:shuriken-pistol",
+            "wargear-ability:flip-belt",
+            "000004164:harlequin-s-special-weapon"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000004164:harlequin-s-special-weapon",
+            "000004164:up-to-4-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000004164:harlequin-s-special-weapon",
+            "000004164:up-to-2-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ]
+        ]
       }
     ]
   },

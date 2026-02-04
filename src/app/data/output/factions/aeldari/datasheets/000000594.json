@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> shuriken pistol; Banshee blade.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> shuriken pistol; Banshee blade.",
+      "parsed": [
+        "000000594:shuriken-pistol",
+        "000000594:banshee-blade"
+      ]
+    },
     "weapons": [
       {
         "id": "000000594:shuriken-pistol",
@@ -308,6 +314,24 @@
         "name": "Aspect Shrine Token",
         "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000594:shuriken-pistol",
+            "000000594:banshee-blade"
+          ],
+          [
+            "000000594:mirrorswords"
+          ],
+          [
+            "000000594:shuriken-pistol",
+            "000000594:of-the-following:<ul><li>1-executioner</li><li>1-triskele</li></ul>"
+          ]
+        ]
       }
     ]
   },

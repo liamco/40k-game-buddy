@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> eradicator nova cannon; lascannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> eradicator nova cannon; lascannon; armoured tracks.",
+      "parsed": [
+        "000003981:eradicator-nova-cannon",
+        "000003981:lascannon",
+        "000003981:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003981:storm-bolter",
@@ -488,7 +495,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003981:eradicator-nova-cannon",
+            "000003981:lascannon",
+            "000003981:armoured-tracks"
+          ],
+          [
+            "000003981:eradicator-nova-cannon",
+            "000003981:armoured-tracks",
+            "000003981:heavy-bolter"
+          ],
+          [
+            "000003981:eradicator-nova-cannon",
+            "000003981:armoured-tracks",
+            "000003981:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

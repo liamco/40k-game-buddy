@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> autopistol; cult claws and knife.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> autopistol; cult claws and knife.",
+      "parsed": [
+        "000000511:autopistol",
+        "000000511:cult-claws-and-knife"
+      ]
+    },
     "weapons": [
       {
         "id": "000000511:autopistol",
@@ -268,6 +274,17 @@
         "name": "Cult Icon",
         "description": "In your Command phase, you can return up to D3 destroyed models to the bearer's unit. If the bearer's unit is within range of an objective marker you control, you can return up to 3 destroyed models to that unit instead. This ability cannot be used to return destroyed Character models in Attached units and any <span class=\"kwb2 bluefont\">[ONE SHOT]</span> weapons equipped by returned models that were shot before they were destroyed are still considered to have been shot.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000511:autopistol",
+            "000000511:cult-claws-and-knife"
+          ]
+        ]
       }
     ]
   },

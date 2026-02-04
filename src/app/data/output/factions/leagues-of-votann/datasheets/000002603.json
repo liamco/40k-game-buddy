@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt cannon; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt cannon; close combat weapon.",
+      "parsed": [
+        "000002603:bolt-cannon",
+        "000002603:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002603:bolt-cannon",
@@ -208,7 +214,26 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002603:bolt-cannon",
+            "000002603:close-combat-weapon"
+          ],
+          [
+            "000002603:close-combat-weapon",
+            "000002603:sp-conversion-beamer"
+          ],
+          [
+            "000002603:close-combat-weapon",
+            "000002603:graviton-blast-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

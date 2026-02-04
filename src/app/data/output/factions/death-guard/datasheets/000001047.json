@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> combi-bolter; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> combi-bolter; armoured tracks.",
+      "parsed": [
+        "000001047:combi-bolter",
+        "000001047:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000001047:combi-bolter",
@@ -207,7 +213,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001047:combi-bolter",
+            "000001047:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

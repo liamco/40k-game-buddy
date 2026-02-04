@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> close combat weapon, shokk attack gun.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> close combat weapon, shokk attack gun.",
+      "parsed": [
+        "000001536:close-combat-weapon",
+        "000001536:shokk-attack-gun"
+      ]
+    },
     "weapons": [
       {
         "id": "000001536:shokk-attack-gun",
@@ -117,6 +123,17 @@
         "name": "Grot Assistant",
         "description": "Once per battle, after rolling to determine how many attacks the bearer's shokk attack gun makes, you can re-roll that dice.<br><br><b>Designer's Note:</b> Place a Grot Assistant token next to the bearer, removing it once this ability has been used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001536:close-combat-weapon",
+            "000001536:shokk-attack-gun"
+          ]
+        ]
       }
     ]
   },

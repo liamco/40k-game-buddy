@@ -87,12 +87,31 @@ export interface WargearAbility {
     mechanics?: Mechanic[]; // Parsed game effects for calculations
 }
 
+// Default loadout structure with raw HTML and parsed weapon IDs
+export interface DefaultLoadout {
+    raw: string; // Raw HTML text describing default equipment
+    parsed: string[]; // Weapon/ability IDs for the primary model type
+}
+
+// Valid loadout group for a specific model type
+export interface ValidLoadoutGroup {
+    modelType: string; // "any" (fallback), "all" (unit-wide), or specific type name
+    items: string[][]; // Array of valid loadouts (each is array of weapon/ability IDs)
+    targeting?: {
+        type: "ratio" | "up-to-n" | "n-model-specific";
+        ratio?: number; // For ratio-based constraints (e.g., 1 per 5 models)
+        count?: number; // Number allowed per ratio or total
+        maxPerRatio?: number; // Max models that can take this per ratio
+    };
+}
+
 // Consolidated wargear data
 export interface WargearData {
-    defaultLoadout: string; // Raw HTML text describing default equipment (e.g., "Every model is equipped with: bolt pistol; boltgun")
+    defaultLoadout: DefaultLoadout; // Default equipment with raw HTML and parsed IDs
     weapons: Weapon[]; // Available weapon profiles for this unit
     abilities: WargearAbility[]; // Wargear abilities (shields, equipment bonuses, etc.)
     options: WargearOptionsContainer; // Wargear customization options
+    validLoadouts: ValidLoadoutGroup[]; // Pre-computed valid loadout combinations by model type
 }
 
 // Consolidated supplement data

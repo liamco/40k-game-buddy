@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+      "parsed": [
+        "000001160:bolt-pistol",
+        "000001160:boltgun",
+        "000001160:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001160:astartes-shotgun",
@@ -453,7 +460,59 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001160:bolt-pistol",
+            "000001160:boltgun",
+            "000001160:close-combat-weapon"
+          ],
+          [
+            "000001160:bolt-pistol",
+            "000001160:close-combat-weapon",
+            "000001160:astartes-shotgun"
+          ],
+          [
+            "000001160:bolt-pistol",
+            "000001160:close-combat-weapon",
+            "000001160:combat-knife"
+          ],
+          [
+            "000001160:bolt-pistol",
+            "000001160:close-combat-weapon",
+            "000001160:astartes-chainsword"
+          ]
+        ]
+      },
+      {
+        "modelType": "Scout",
+        "items": [
+          [
+            "000001160:bolt-pistol",
+            "000001160:close-combat-weapon",
+            "000001160:heavy-bolter"
+          ],
+          [
+            "000001160:bolt-pistol",
+            "000001160:close-combat-weapon",
+            "000001160:missile-launcher"
+          ],
+          [
+            "000001160:bolt-pistol",
+            "000001160:close-combat-weapon",
+            "000001160:scout-sniper-rifle"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

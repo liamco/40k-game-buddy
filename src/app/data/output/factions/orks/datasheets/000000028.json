@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> kopta rokkits; slugga; spinnin' blades.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> kopta rokkits; slugga; spinnin' blades.",
+      "parsed": [
+        "000000028:kopta-rokkits",
+        "000000028:slugga",
+        "000000028:spinnin-blades"
+      ]
+    },
     "weapons": [
       {
         "id": "000000028:kopta-rokkits",
@@ -170,7 +177,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Deffkopta",
+        "items": [
+          [
+            "000000028:kopta-rokkits",
+            "000000028:slugga",
+            "000000028:spinnin-blades"
+          ],
+          [
+            "000000028:slugga",
+            "000000028:spinnin-blades",
+            "000000028:kustom-mega-blasta"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 3,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

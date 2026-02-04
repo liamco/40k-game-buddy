@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Questoris heavy stubber; thermal spear; reaper chain-cleaver.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Questoris heavy stubber; thermal spear; reaper chain-cleaver.",
+      "parsed": [
+        "000001482:questoris-heavy-stubber",
+        "000001482:thermal-spear",
+        "000001482:reaper-chain-cleaver"
+      ]
+    },
     "weapons": [
       {
         "id": "000001482:meltagun",
@@ -188,7 +195,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001482:questoris-heavy-stubber",
+            "000001482:thermal-spear",
+            "000001482:reaper-chain-cleaver"
+          ],
+          [
+            "000001482:thermal-spear",
+            "000001482:reaper-chain-cleaver",
+            "000001482:meltagun"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

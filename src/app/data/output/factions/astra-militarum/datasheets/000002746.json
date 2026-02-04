@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Tempestor is equipped with:</b> hot-shot laspistol; chainsword. <br><br><b>Every Tempestus Scion is equipped with:</b> hot-shot lasgun; close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "defaultLoadout": {
+      "raw": "<b>The Tempestor is equipped with:</b> hot-shot laspistol; chainsword. <br><br><b>Every Tempestus Scion is equipped with:</b> hot-shot lasgun; close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+      "parsed": [
+        "000002746:hot-shot-laspistol",
+        "000002746:chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000002746:bolt-pistol",
@@ -659,6 +665,93 @@
         "name": "Vox-caster",
         "description": "Each time you target the bearer's unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly Officer models within 6\": on a 5+, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Tempestor",
+        "items": [
+          [
+            "000002746:hot-shot-laspistol",
+            "000002746:chainsword"
+          ],
+          [
+            "000002746:chainsword",
+            "000002746:bolt-pistol"
+          ],
+          [
+            "000002746:chainsword",
+            "000002746:plasma-pistol"
+          ],
+          [
+            "000002746:hot-shot-laspistol",
+            "000002746:power-fist"
+          ],
+          [
+            "000002746:power-fist",
+            "000002746:bolt-pistol"
+          ],
+          [
+            "000002746:power-fist",
+            "000002746:plasma-pistol"
+          ],
+          [
+            "000002746:hot-shot-laspistol",
+            "000002746:power-weapon"
+          ],
+          [
+            "000002746:power-weapon",
+            "000002746:bolt-pistol"
+          ],
+          [
+            "000002746:power-weapon",
+            "000002746:plasma-pistol"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Tempestus Scion",
+        "items": [
+          [
+            "000002746:hot-shot-lasgun",
+            "000002746:close-combat-weapon"
+          ],
+          [
+            "000002746:close-combat-weapon",
+            "000002746:hot-shot-laspistol",
+            "wargear-ability:vox-caster"
+          ],
+          [
+            "000002746:close-combat-weapon",
+            "000002746:flamer"
+          ],
+          [
+            "000002746:close-combat-weapon",
+            "000002746:grenade-launcher"
+          ],
+          [
+            "000002746:close-combat-weapon",
+            "000002746:hot-shot-volley-gun"
+          ],
+          [
+            "000002746:close-combat-weapon",
+            "000002746:meltagun"
+          ],
+          [
+            "000002746:close-combat-weapon",
+            "000002746:plasma-gun"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
       }
     ]
   },

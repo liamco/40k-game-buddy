@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> magna-rail cannon; twin magna-coil autocannon; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> magna-rail cannon; twin magna-coil autocannon; armoured hull.",
+      "parsed": [
+        "000004146:magna-rail-cannon",
+        "000004146:twin-magna-coil-autocannon",
+        "000004146:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000004146:hylas-rotary-cannon",
@@ -207,6 +214,23 @@
         "name": "Smoke Launcher",
         "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004146:magna-rail-cannon",
+            "000004146:twin-magna-coil-autocannon",
+            "000004146:armoured-hull"
+          ],
+          [
+            "000004146:twin-magna-coil-autocannon",
+            "000004146:armoured-hull",
+            "000004146:hylas-rotary-cannon"
+          ]
+        ]
       }
     ]
   },

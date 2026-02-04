@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Deathwing Sergeant is equipped with:</b> storm bolter; power weapon. <br><br><b>Every Deathwing Terminator is equipped with:</b> storm bolter; power fist.",
+    "defaultLoadout": {
+      "raw": "<b>The Deathwing Sergeant is equipped with:</b> storm bolter; power weapon. <br><br><b>Every Deathwing Terminator is equipped with:</b> storm bolter; power fist.",
+      "parsed": [
+        "000000230:storm-bolter",
+        "000000230:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000230:assault-cannon",
@@ -426,6 +432,91 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Deathwing Sergeant",
+        "items": [
+          [
+            "000000230:storm-bolter",
+            "000000230:power-weapon"
+          ],
+          [
+            "000000230:power-weapon",
+            "000000230:assault-cannon"
+          ],
+          [
+            "000000230:power-weapon",
+            "000000230:heavy-flamer"
+          ],
+          [
+            "000000230:power-weapon",
+            "000000230:plasma-cannon"
+          ],
+          [
+            "000000230:power-weapon",
+            "000000230:storm-bolter",
+            "000000230:cyclone-missile-launcher"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Deathwing Terminator",
+        "items": [
+          [
+            "000000230:storm-bolter",
+            "000000230:power-fist"
+          ],
+          [
+            "000000230:power-fist",
+            "000000230:assault-cannon"
+          ],
+          [
+            "000000230:power-fist",
+            "000000230:heavy-flamer"
+          ],
+          [
+            "000000230:power-fist",
+            "000000230:plasma-cannon"
+          ],
+          [
+            "000000230:power-fist",
+            "000000230:storm-bolter",
+            "000000230:cyclone-missile-launcher"
+          ],
+          [
+            "000000230:storm-bolter",
+            "000000230:chainfist"
+          ],
+          [
+            "000000230:chainfist",
+            "000000230:assault-cannon"
+          ],
+          [
+            "000000230:chainfist",
+            "000000230:heavy-flamer"
+          ],
+          [
+            "000000230:chainfist",
+            "000000230:plasma-cannon"
+          ],
+          [
+            "000000230:chainfist",
+            "000000230:storm-bolter",
+            "000000230:cyclone-missile-launcher"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
       }
     ]
   },

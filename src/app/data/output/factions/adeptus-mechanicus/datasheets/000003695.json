@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Mechanicus pistol; radium jezzail; Sydonian feet.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Mechanicus pistol; radium jezzail; Sydonian feet.",
+      "parsed": [
+        "000003695:mechanicus-pistol",
+        "000003695:radium-jezzail",
+        "000003695:sydonian-feet"
+      ]
+    },
     "weapons": [
       {
         "id": "000003695:mechanicus-pistol",
@@ -174,7 +181,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003695:mechanicus-pistol",
+            "000003695:radium-jezzail",
+            "000003695:sydonian-feet"
+          ],
+          [
+            "000003695:mechanicus-pistol",
+            "000003695:sydonian-feet",
+            "000003695:skatros-transuranic-arquebus"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

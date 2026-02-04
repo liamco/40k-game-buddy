@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Spanner is equipped with:</b> big shoota; close combat weapon. <br><br><b>Every Loota is equipped with:</b> deffgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every Spanner is equipped with:</b> big shoota; close combat weapon. <br><br><b>Every Loota is equipped with:</b> deffgun; close combat weapon.",
+      "parsed": [
+        "000000044:big-shoota",
+        "000000044:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000044:big-shoota",
@@ -205,7 +211,35 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Spanner",
+        "items": [
+          [
+            "000000044:big-shoota",
+            "000000044:close-combat-weapon"
+          ],
+          [
+            "000000044:close-combat-weapon",
+            "000000044:kustom-mega-blasta"
+          ],
+          [
+            "000000044:close-combat-weapon",
+            "000000044:rokkit-launcha"
+          ]
+        ]
+      },
+      {
+        "modelType": "Loota",
+        "items": [
+          [
+            "000000044:deffgun",
+            "000000044:close-combat-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

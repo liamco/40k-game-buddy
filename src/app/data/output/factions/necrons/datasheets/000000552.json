@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 4 gauss flux arcs; particle whip; portal of exile.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 4 gauss flux arcs; particle whip; portal of exile.",
+      "parsed": [
+        "000000552:gauss-flux-arcs",
+        "000000552:particle-whip",
+        "000000552:portal-of-exile"
+      ]
+    },
     "weapons": [
       {
         "id": "000000552:death-ray",
@@ -175,7 +182,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000552:gauss-flux-arcs",
+            "000000552:particle-whip",
+            "000000552:portal-of-exile"
+          ],
+          [
+            "000000552:particle-whip",
+            "000000552:portal-of-exile",
+            "000000552:death-rays"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

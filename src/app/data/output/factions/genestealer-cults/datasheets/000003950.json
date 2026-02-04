@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Death Korps Watchmaster is equipped with:</b> laspistol; chainsword. <br><br><b>Every Death Korps Trooper is equipped with: lasgun;</b> close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "defaultLoadout": {
+      "raw": "<b>Every Death Korps Watchmaster is equipped with:</b> laspistol; chainsword. <br><br><b>Every Death Korps Trooper is equipped with: lasgun;</b> close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+      "parsed": [
+        "000003950:laspistol",
+        "000003950:chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000003950:wargear-1",
@@ -822,6 +828,40 @@
         "name": "Death Korps Medi-pack",
         "description": "At the start of your Command phase, if the bearer's unit is below its Starting Strength, you can return up to D3 destroyed Death Korps Troopers to this unit (if this unit contains two models equipped with a Death Korps medi-pack, return up to D3+1 destroyed Death Korps Troopers to this unit instead).",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003950:laspistol",
+            "000003950:chainsword"
+          ],
+          [
+            "000003950:chainsword",
+            "000003950:bolt-pistol"
+          ],
+          [
+            "000003950:chainsword",
+            "000003950:plasma-pistol"
+          ],
+          [
+            "000003950:laspistol",
+            "000003950:power-weapon"
+          ],
+          [
+            "000003950:power-weapon",
+            "000003950:bolt-pistol"
+          ],
+          [
+            "000003950:power-weapon",
+            "000003950:plasma-pistol"
+          ],
+          [
+            "000003950:boltgun-and-1-close-combat-weapon"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> plasma rifle; missile pod; battlesuit fists.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> plasma rifle; missile pod; battlesuit fists.",
+      "parsed": [
+        "000003700:plasma-rifle",
+        "000003700:missile-pod",
+        "000003700:battlesuit-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000003700:missile-pod",
@@ -231,7 +238,27 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003700:plasma-rifle",
+            "000003700:missile-pod",
+            "000003700:battlesuit-fists"
+          ],
+          [
+            "000003700:plasma-rifle",
+            "000003700:battlesuit-fists"
+          ],
+          [
+            "000003700:missile-pod",
+            "000003700:battlesuit-fists"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

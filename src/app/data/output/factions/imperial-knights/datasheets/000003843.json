@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> radium carbine; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> radium carbine; close combat weapon.",
+      "parsed": [
+        "000003843:radium-carbine",
+        "000003843:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003843:mechanicus-pistol",
@@ -494,6 +500,33 @@
         "name": "Omnispex",
         "description": "Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003843:radium-carbine",
+            "000003843:close-combat-weapon"
+          ],
+          [
+            "000003843:close-combat-weapon",
+            "000003843:transuranic-arquebus"
+          ],
+          [
+            "000003843:close-combat-weapon",
+            "000003843:plasma-caliver"
+          ],
+          [
+            "000003843:close-combat-weapon",
+            "000003843:arc-rifle"
+          ],
+          [
+            "000003843:close-combat-weapon",
+            "000003843:mechanicus-pistol"
+          ]
+        ]
       }
     ]
   },

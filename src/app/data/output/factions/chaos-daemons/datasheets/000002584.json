@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Pink Horror is equipped with:</b> Coruscating Pink Flames; pink claws. <br><br><b>Every Blue Horror added to this unit using the Split ability is equipped with:</b> Coruscating Blue Flames; blue claws. <br><br><b>Every Brimstone Horror added to this unit using the Split ability is equipped with:</b> Coruscating Yellow Flames; yellow claws.",
+    "defaultLoadout": {
+      "raw": "<b>Every Pink Horror is equipped with:</b> Coruscating Pink Flames; pink claws. <br><br><b>Every Blue Horror added to this unit using the Split ability is equipped with:</b> Coruscating Blue Flames; blue claws. <br><br><b>Every Brimstone Horror added to this unit using the Split ability is equipped with:</b> Coruscating Yellow Flames; yellow claws.",
+      "parsed": [
+        "000002584:coruscating-pink-flames",
+        "000002584:pink-claws"
+      ]
+    },
     "weapons": [
       {
         "id": "000002584:coruscating-pink-flames",
@@ -277,6 +283,21 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Pink Horror",
+        "items": [
+          [
+            "000002584:coruscating-pink-flames",
+            "000002584:pink-claws"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

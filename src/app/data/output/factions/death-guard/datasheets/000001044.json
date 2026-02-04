@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> boltgun; plague knives.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> boltgun; plague knives.",
+      "parsed": [
+        "000001044:boltgun",
+        "000001044:plague-knives"
+      ]
+    },
     "weapons": [
       {
         "id": "000001044:blight-launcher",
@@ -753,6 +759,121 @@
         "name": "Icon of Despair (Aura)",
         "description": "While an enemy unit is within 6\" of the bearer, worsen the Leadership characteristic of models in that unit by 1.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001044:boltgun",
+            "000001044:plague-knives"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:heavy-plague-weapon"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:bubotic-weapons"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:plasma-gun"
+          ]
+        ]
+      },
+      {
+        "modelType": "Plague Champion",
+        "items": [
+          [
+            "000001044:boltgun",
+            "000001044:bubotic-weapons"
+          ],
+          [
+            "000001044:bubotic-weapons",
+            "000001044:heavy-plague-weapon"
+          ],
+          [
+            "000001044:bubotic-weapons"
+          ],
+          [
+            "000001044:boltgun",
+            "000001044:power-fist"
+          ],
+          [
+            "000001044:power-fist",
+            "000001044:heavy-plague-weapon"
+          ],
+          [
+            "000001044:power-fist",
+            "000001044:bubotic-weapons"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:bolt-pistol"
+          ],
+          [
+            "000001044:bolt-pistol",
+            "000001044:bubotic-weapons"
+          ],
+          [
+            "000001044:bolt-pistol",
+            "000001044:power-fist"
+          ],
+          [
+            "000001044:plasma-gun",
+            "000001044:bubotic-weapons"
+          ],
+          [
+            "000001044:plasma-gun",
+            "000001044:power-fist"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:plasma-pistol"
+          ],
+          [
+            "000001044:plasma-pistol",
+            "000001044:bubotic-weapons"
+          ],
+          [
+            "000001044:plasma-pistol",
+            "000001044:power-fist"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 2
+        }
+      },
+      {
+        "modelType": "Plague Marine",
+        "items": [
+          [
+            "000001044:plague-knives",
+            "000001044:meltagun"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:plague-belcher"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:plague-spewer"
+          ],
+          [
+            "000001044:plague-knives",
+            "000001044:blight-launcher"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
       }
     ]
   },

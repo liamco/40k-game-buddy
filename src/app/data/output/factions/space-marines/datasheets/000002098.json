@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; plasma incinerator; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; plasma incinerator; close combat weapon.",
+      "parsed": [
+        "000002098:bolt-pistol",
+        "000002098:plasma-incinerator",
+        "000002098:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002098:bolt-pistol",
@@ -207,7 +214,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002098:bolt-pistol",
+            "000002098:plasma-incinerator",
+            "000002098:close-combat-weapon"
+          ],
+          [
+            "000002098:plasma-incinerator",
+            "000002098:close-combat-weapon",
+            "000002098:plasma-pistol"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> burst cannon; T'au flamer; battlesuit fists.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> burst cannon; T'au flamer; battlesuit fists.",
+      "parsed": [
+        "000003701:burst-cannon",
+        "000003701:t-au-flamer",
+        "000003701:battlesuit-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000003701:burst-cannon",
@@ -234,7 +241,27 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003701:burst-cannon",
+            "000003701:t-au-flamer",
+            "000003701:battlesuit-fists"
+          ],
+          [
+            "000003701:burst-cannon",
+            "000003701:battlesuit-fists"
+          ],
+          [
+            "000003701:t-au-flamer",
+            "000003701:battlesuit-fists"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

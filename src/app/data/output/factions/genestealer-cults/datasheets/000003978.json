@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Each Heavy Weapons Gunner is equipped with:</b> lascannon; laspistol; close combat weapon.<br><br><b>The Fire Coordinator is equipped with:</b> laspistol; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Each Heavy Weapons Gunner is equipped with:</b> lascannon; laspistol; close combat weapon.<br><br><b>The Fire Coordinator is equipped with:</b> laspistol; close combat weapon.",
+      "parsed": [
+        "000003978:lascannon",
+        "000003978:laspistol",
+        "000003978:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003978:krieg-heavy-flamer",
@@ -207,7 +214,38 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Heavy Weapons Gunner",
+        "items": [
+          [
+            "000003978:lascannon",
+            "000003978:laspistol",
+            "000003978:close-combat-weapon"
+          ],
+          [
+            "000003978:laspistol",
+            "000003978:close-combat-weapon",
+            "000003978:krieg-heavy-flamer"
+          ],
+          [
+            "000003978:laspistol",
+            "000003978:close-combat-weapon",
+            "000003978:twin-krieg-heavy-stubber"
+          ]
+        ]
+      },
+      {
+        "modelType": "Fire Coordinator",
+        "items": [
+          [
+            "000003978:laspistol",
+            "000003978:close-combat-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

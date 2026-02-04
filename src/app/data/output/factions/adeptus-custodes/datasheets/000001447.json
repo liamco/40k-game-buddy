@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> guardian spear.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> guardian spear.",
+      "parsed": [
+        "000001447:guardian-spear"
+      ]
+    },
     "weapons": [
       {
         "id": "000001447:castellan-axe",
@@ -313,6 +318,30 @@
         "name": "Praesidium shield",
         "description": "Add 1 to the bearer's Wounds characteristic.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001447:guardian-spear"
+          ],
+          [
+            "000001447:castellan-axe"
+          ],
+          [
+            "000001447:sentinel-blade"
+          ],
+          [
+            "000001447:sentinel-blade",
+            "wargear-ability:praesidium-shield"
+          ],
+          [
+            "000001447:pyrithite-spear",
+            "wargear-ability:praesidium-shield"
+          ]
+        ]
       }
     ]
   },

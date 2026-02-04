@@ -23,7 +23,15 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy mining laser; heavy stubber; drilldozer blade; demolition charge cache.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy mining laser; heavy stubber; drilldozer blade; demolition charge cache.",
+      "parsed": [
+        "000000521:heavy-mining-laser",
+        "000000521:heavy-stubber",
+        "000000521:drilldozer-blade",
+        "000000521:demolition-charge-cache"
+      ]
+    },
     "weapons": [
       {
         "id": "000000521:clearance-incinerator",
@@ -238,7 +246,32 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000521:heavy-mining-laser",
+            "000000521:heavy-stubber",
+            "000000521:drilldozer-blade",
+            "000000521:demolition-charge-cache"
+          ],
+          [
+            "000000521:heavy-stubber",
+            "000000521:drilldozer-blade",
+            "000000521:demolition-charge-cache",
+            "000000521:clearance-incinerator"
+          ],
+          [
+            "000000521:heavy-stubber",
+            "000000521:drilldozer-blade",
+            "000000521:demolition-charge-cache",
+            "000000521:heavy-seismic-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

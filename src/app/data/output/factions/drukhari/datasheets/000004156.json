@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> splinter rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> splinter rifle; close combat weapon.",
+      "parsed": [
+        "000004156:splinter-rifle",
+        "000004156:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004156:blast-pistol",
@@ -819,6 +825,84 @@
         "name": "Stimm-needler",
         "description": "Once per turn, the first time a saving throw is failed for a model in the bearer's unit, change the Damage characteristic of that attack to 0.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004156:splinter-rifle",
+            "000004156:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Kabalite Archsybarite",
+        "items": [
+          [
+            "000004156:close-combat-weapon",
+            "000004156:blast-pistol"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:splinter-pistol"
+          ],
+          [
+            "000004156:splinter-rifle",
+            "000004156:power-weapon"
+          ],
+          [
+            "000004156:power-weapon",
+            "000004156:blast-pistol"
+          ],
+          [
+            "000004156:power-weapon",
+            "000004156:splinter-pistol"
+          ]
+        ]
+      },
+      {
+        "modelType": "Kabalite Agent",
+        "items": [
+          [
+            "000004156:close-combat-weapon",
+            "000004156:splinter-pistol",
+            "000004156:razorflail"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:pain-sculptors"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:shardcarbine"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:stinger-pistol"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:dark-lance"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:splinter-cannon"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:blaster"
+          ],
+          [
+            "000004156:close-combat-weapon",
+            "000004156:shredder"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

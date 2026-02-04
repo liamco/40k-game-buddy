@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> splinter pistol; splinter rifle; bladevanes.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> splinter pistol; splinter rifle; bladevanes.",
+      "parsed": [
+        "000000658:splinter-pistol",
+        "000000658:splinter-rifle",
+        "000000658:bladevanes"
+      ]
+    },
     "weapons": [
       {
         "id": "000000658:blaster",
@@ -268,6 +275,18 @@
         "name": "Grav-talon",
         "description": "The bearer's melee weapons have an Armour Penetration characteristic of -2 and the [LETHAL HITS] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000658:splinter-pistol",
+            "000000658:splinter-rifle",
+            "000000658:bladevanes"
+          ]
+        ]
       }
     ]
   },

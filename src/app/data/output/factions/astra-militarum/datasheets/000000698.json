@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; storm eagle rockets; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; storm eagle rockets; armoured tracks.",
+      "parsed": [
+        "000000698:heavy-bolter",
+        "000000698:storm-eagle-rockets",
+        "000000698:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000698:heavy-bolter",
@@ -234,7 +241,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000698:heavy-bolter",
+            "000000698:storm-eagle-rockets",
+            "000000698:armoured-tracks"
+          ],
+          [
+            "000000698:storm-eagle-rockets",
+            "000000698:armoured-tracks",
+            "000000698:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; Hydra autocannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; Hydra autocannon; armoured tracks.",
+      "parsed": [
+        "000003975:heavy-bolter",
+        "000003975:hydra-autocannon",
+        "000003975:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003975:hunter-killer-missile",
@@ -228,7 +235,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003975:heavy-bolter",
+            "000003975:hydra-autocannon",
+            "000003975:armoured-tracks"
+          ],
+          [
+            "000003975:hydra-autocannon",
+            "000003975:armoured-tracks",
+            "000003975:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

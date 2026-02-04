@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Serberys Raider Alpha model is equipped with:</b> Mechanicus pistol; galvanic carbine; cavalry sabre and clawed limbs. <br><br><b>Every Serberys Raider model is equipped with:</b> galvanic carbine; cavalry sabre and clawed limbs.",
+    "defaultLoadout": {
+      "raw": "<b>The Serberys Raider Alpha model is equipped with:</b> Mechanicus pistol; galvanic carbine; cavalry sabre and clawed limbs. <br><br><b>Every Serberys Raider model is equipped with:</b> galvanic carbine; cavalry sabre and clawed limbs.",
+      "parsed": [
+        "000002082:mechanicus-pistol",
+        "000002082:galvanic-carbine",
+        "000002082:cavalry-sabre-and-clawed-limbs"
+      ]
+    },
     "weapons": [
       {
         "id": "000002082:mechanicus-pistol",
@@ -145,6 +152,18 @@
         "name": "Enhanced data-tether",
         "description": "Each time you select the bearer's unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002082:mechanicus-pistol",
+            "000002082:galvanic-carbine",
+            "000002082:cavalry-sabre-and-clawed-limbs"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolt pistol; Astartes chainsword.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolt pistol; Astartes chainsword.",
+      "parsed": [
+        "000000083:heavy-bolt-pistol",
+        "000000083:astartes-chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000000083:hand-flamer",
@@ -421,6 +427,58 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000083:heavy-bolt-pistol",
+            "000000083:astartes-chainsword"
+          ],
+          [
+            "000000083:heavy-bolt-pistol",
+            "000000083:astartes-chainsword",
+            "wargear-ability:relic-shield"
+          ],
+          [
+            "000000083:thunder-hammer",
+            "wargear-ability:relic-shield"
+          ],
+          [
+            "000000083:heavy-bolt-pistol",
+            "000000083:power-fist"
+          ],
+          [
+            "000000083:heavy-bolt-pistol",
+            "000000083:relic-weapon"
+          ],
+          [
+            "000000083:astartes-chainsword",
+            "000000083:plasma-pistol"
+          ],
+          [
+            "000000083:plasma-pistol",
+            "000000083:power-fist"
+          ],
+          [
+            "000000083:plasma-pistol",
+            "000000083:relic-weapon"
+          ],
+          [
+            "000000083:astartes-chainsword",
+            "000000083:hand-flamer"
+          ],
+          [
+            "000000083:hand-flamer",
+            "000000083:power-fist"
+          ],
+          [
+            "000000083:hand-flamer",
+            "000000083:relic-weapon"
+          ]
+        ]
       }
     ]
   },

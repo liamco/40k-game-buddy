@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> power klaw; 'urty syringe.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> power klaw; 'urty syringe.",
+      "parsed": [
+        "000000013:power-klaw",
+        "000000013:urty-syringe"
+      ]
+    },
     "weapons": [
       {
         "id": "000000013:power-klaw",
@@ -118,6 +124,17 @@
         "name": "Grot Orderly",
         "description": "Once per battle, in your Command phase, if the bearer is leading a unit that is below its Starting Strength, you can return up to D3 destroyed Bodyguard models to that unit.<br><br><b>Designer's Note:</b> Place a Grot Orderly token next to the unit, removing it once this ability has been used",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000013:power-klaw",
+            "000000013:urty-syringe"
+          ]
+        ]
       }
     ]
   },

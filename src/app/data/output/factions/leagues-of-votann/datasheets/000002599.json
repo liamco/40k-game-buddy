@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> EtaCarn plasma gun; exoarmour grenade launcher; concussion gauntlet.<br><br><b>The Hesyr is additionally equipped with:</b> weavefield crest.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> EtaCarn plasma gun; exoarmour grenade launcher; concussion gauntlet.<br><br><b>The Hesyr is additionally equipped with:</b> weavefield crest.",
+      "parsed": [
+        "000002599:etacarn-plasma-gun",
+        "000002599:exoarmour-grenade-launcher",
+        "000002599:concussion-gauntlet"
+      ]
+    },
     "weapons": [
       {
         "id": "000002599:etacarn-plasma-gun",
@@ -365,6 +372,33 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002599:etacarn-plasma-gun",
+            "000002599:exoarmour-grenade-launcher",
+            "000002599:concussion-gauntlet"
+          ],
+          [
+            "000002599:etacarn-plasma-gun",
+            "000002599:exoarmour-grenade-launcher",
+            "000002599:plasma-blade-gauntlet"
+          ],
+          [
+            "000002599:exoarmour-grenade-launcher",
+            "000002599:concussion-gauntlet",
+            "000002599:volkanite-disintegrator"
+          ],
+          [
+            "000002599:exoarmour-grenade-launcher",
+            "000002599:volkanite-disintegrator",
+            "000002599:plasma-blade-gauntlet"
+          ]
+        ]
       }
     ]
   },

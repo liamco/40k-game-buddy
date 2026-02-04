@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; chainsword.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol; chainsword.",
+      "parsed": [
+        "000000716:bolt-pistol",
+        "000000716:chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000000716:bolt-pistol",
@@ -222,7 +228,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000716:bolt-pistol",
+            "000000716:chainsword"
+          ],
+          [
+            "000000716:bolt-pistol",
+            "000000716:power-weapon"
+          ],
+          [
+            "000000716:chainsword",
+            "000000716:plasma-pistol"
+          ],
+          [
+            "000000716:plasma-pistol",
+            "000000716:power-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

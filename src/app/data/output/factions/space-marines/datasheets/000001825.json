@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 multi-meltas; twin las-talon; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 multi-meltas; twin las-talon; armoured hull.",
+      "parsed": [
+        "000001825:multi-meltas",
+        "000001825:twin-las-talon",
+        "000001825:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000001825:icarus-rocket-pod",
@@ -225,7 +232,19 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001825:multi-meltas",
+            "000001825:twin-las-talon",
+            "000001825:armoured-hull"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

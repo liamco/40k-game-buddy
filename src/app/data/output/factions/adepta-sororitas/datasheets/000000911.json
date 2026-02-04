@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; immolation flamers; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; immolation flamers; armoured tracks.",
+      "parsed": [
+        "000000911:heavy-bolter",
+        "000000911:immolation-flamers",
+        "000000911:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000911:heavy-bolter",
@@ -265,7 +272,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000911:heavy-bolter",
+            "000000911:immolation-flamers",
+            "000000911:armoured-tracks"
+          ],
+          [
+            "000000911:heavy-bolter",
+            "000000911:armoured-tracks",
+            "000000911:twin-heavy-bolter"
+          ],
+          [
+            "000000911:heavy-bolter",
+            "000000911:armoured-tracks",
+            "000000911:twin-multi-melta"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> shuriken pistol; Troupe Master's blade; flip belt.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> shuriken pistol; Troupe Master's blade; flip belt.",
+      "parsed": [
+        "000002534:shuriken-pistol",
+        "000002534:troupe-master-s-blade",
+        "wargear-ability:flip-belt"
+      ]
+    },
     "weapons": [
       {
         "id": "000002534:fusion-pistol",
@@ -255,6 +262,43 @@
         "name": "Flip Belt",
         "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002534:shuriken-pistol",
+            "000002534:troupe-master-s-blade",
+            "wargear-ability:flip-belt"
+          ],
+          [
+            "000002534:shuriken-pistol",
+            "wargear-ability:flip-belt",
+            "000002534:harlequin-s-special-weapon"
+          ],
+          [
+            "000002534:troupe-master-s-blade",
+            "wargear-ability:flip-belt",
+            "000002534:fusion-pistol"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000002534:fusion-pistol",
+            "000002534:harlequin-s-special-weapon"
+          ],
+          [
+            "000002534:troupe-master-s-blade",
+            "wargear-ability:flip-belt",
+            "000002534:neuro-disruptor"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000002534:neuro-disruptor",
+            "000002534:harlequin-s-special-weapon"
+          ]
+        ]
       }
     ]
   },

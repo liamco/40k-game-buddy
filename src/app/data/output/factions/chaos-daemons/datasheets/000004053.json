@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Fellgor Champion is equipped with:</b> bolt pistol; chainsword. <br><br><b>Every Fellgor Beastman is equipped with:</b> autopistol; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Fellgor Champion is equipped with:</b> bolt pistol; chainsword. <br><br><b>Every Fellgor Beastman is equipped with:</b> autopistol; close combat weapon.",
+      "parsed": [
+        "000004053:bolt-pistol",
+        "000004053:chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000004053:great-weapon",
@@ -369,7 +375,27 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004053:bolt-pistol",
+            "000004053:chainsword"
+          ]
+        ]
+      },
+      {
+        "modelType": "Fellgor Champion",
+        "items": [
+          [
+            "000004053:chainsword",
+            "000004053:plasma-pistol"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

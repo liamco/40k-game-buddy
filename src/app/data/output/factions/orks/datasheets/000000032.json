@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> smasha gun; twin wazbom mega-kannon; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> smasha gun; twin wazbom mega-kannon; armoured hull.",
+      "parsed": [
+        "000000032:smasha-gun",
+        "000000032:twin-wazbom-mega-kannon",
+        "000000032:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000032:smasha-gun",
@@ -282,6 +289,23 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000032:smasha-gun",
+            "000000032:twin-wazbom-mega-kannon",
+            "000000032:armoured-hull"
+          ],
+          [
+            "000000032:smasha-gun",
+            "000000032:armoured-hull",
+            "000000032:twin-tellyport-mega-blasta"
+          ]
+        ]
       }
     ]
   },

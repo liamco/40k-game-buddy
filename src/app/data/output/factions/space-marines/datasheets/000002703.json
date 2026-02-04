@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> twin flamer; siege drills; Centurion bolters.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> twin flamer; siege drills; Centurion bolters.",
+      "parsed": [
+        "000002703:twin-flamer",
+        "000002703:siege-drills",
+        "000002703:centurion-bolters"
+      ]
+    },
     "weapons": [
       {
         "id": "000002703:centurion-bolters",
@@ -218,6 +225,33 @@
         "name": "Centurion Assault Launcher",
         "description": "The bearer has the Grenades keyword.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002703:twin-flamer",
+            "000002703:siege-drills",
+            "000002703:centurion-bolters"
+          ],
+          [
+            "000002703:twin-flamer",
+            "000002703:siege-drills",
+            "wargear-ability:centurion-assault-launcher"
+          ],
+          [
+            "000002703:siege-drills",
+            "000002703:centurion-bolters",
+            "000002703:twin-meltagun"
+          ],
+          [
+            "000002703:siege-drills",
+            "000002703:twin-meltagun",
+            "wargear-ability:centurion-assault-launcher"
+          ]
+        ]
       }
     ]
   },

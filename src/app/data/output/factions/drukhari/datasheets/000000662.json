@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Solarite is equipped with:</b> shardcarbine; close combat weapon.<br><br><b>Every Scourge is equipped with:</b> splinter cannon; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Solarite is equipped with:</b> shardcarbine; close combat weapon.<br><br><b>Every Scourge is equipped with:</b> splinter cannon; close combat weapon.",
+      "parsed": [
+        "000000662:shardcarbine",
+        "000000662:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000662:blast-pistol",
@@ -459,7 +465,57 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Solarite",
+        "items": [
+          [
+            "000000662:shardcarbine",
+            "000000662:close-combat-weapon"
+          ],
+          [
+            "000000662:close-combat-weapon",
+            "000000662:blast-pistol",
+            "000000662:power-weapon"
+          ],
+          [
+            "000000662:close-combat-weapon",
+            "000000662:splinter-pistol",
+            "000000662:power-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Scourge",
+        "items": [
+          [
+            "000000662:splinter-cannon",
+            "000000662:close-combat-weapon"
+          ],
+          [
+            "000000662:close-combat-weapon",
+            "000000662:blaster"
+          ],
+          [
+            "000000662:close-combat-weapon",
+            "000000662:dark-lance"
+          ],
+          [
+            "000000662:close-combat-weapon",
+            "000000662:haywire-blaster"
+          ],
+          [
+            "000000662:close-combat-weapon",
+            "000000662:heat-lance"
+          ],
+          [
+            "000000662:close-combat-weapon",
+            "000000662:shredder"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

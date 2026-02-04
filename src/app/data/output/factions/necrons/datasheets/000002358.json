@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> Ophydian hyperphase weapons.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> Ophydian hyperphase weapons.",
+      "parsed": [
+        "000002358:ophydian-hyperphase-weapons"
+      ]
+    },
     "weapons": [
       {
         "id": "000002358:ophydian-hyperphase-weapons",
@@ -91,6 +96,21 @@
         "name": "Plasmacyte",
         "description": "Once per battle for each Plasmacyte this unit has, when this unit is selected to fight, you can use this ability. If you do, until the end of the phase, melee weapons equipped by models in this unit have the [DEVASTATING WOUNDS] ability.<br><br><b>Designer's Note:</b> Place the relevant number of Plasmacyte tokens next to the unit, removing one each time this unit uses this ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Ophydian Destroyer",
+        "items": [
+          [
+            "000002358:ophydian-hyperphase-weapons"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 3,
+          "count": 1
+        }
       }
     ]
   },

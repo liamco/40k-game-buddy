@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Gaze of Hate; inferno combi-bolter; force weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Gaze of Hate; inferno combi-bolter; force weapon.",
+      "parsed": [
+        "000001017:gaze-of-hate",
+        "000001017:inferno-combi-bolter",
+        "000001017:force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001017:gaze-of-hate",
@@ -175,7 +182,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001017:gaze-of-hate",
+            "000001017:inferno-combi-bolter",
+            "000001017:force-weapon"
+          ],
+          [
+            "000001017:gaze-of-hate",
+            "000001017:force-weapon",
+            "000001017:inferno-combi-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> storm bolter; Nemesis force weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> storm bolter; Nemesis force weapon.",
+      "parsed": [
+        "000000382:storm-bolter",
+        "000000382:nemesis-force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000382:incinerator",
@@ -385,6 +391,63 @@
         "name": "Apothecary's Narthecium",
         "description": "In your Command phase, if the bearer is not destroyed, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTERS</span>) to the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000382:storm-bolter",
+            "000000382:nemesis-force-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Terminator",
+        "items": [
+          [
+            "000000382:nemesis-force-weapon",
+            "000000382:incinerator",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000382:nemesis-force-weapon",
+            "000000382:psilencer",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000382:nemesis-force-weapon",
+            "000000382:psycannon",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000382:nemesis-force-weapon",
+            "000000382:storm-bolter",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000382:nemesis-force-weapon",
+            "wargear-ability:apothecary's-narthecium"
+          ],
+          [
+            "000000382:nemesis-force-weapon",
+            "000000382:incinerator"
+          ],
+          [
+            "000000382:nemesis-force-weapon",
+            "000000382:psilencer"
+          ],
+          [
+            "000000382:nemesis-force-weapon",
+            "000000382:psycannon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
       }
     ]
   },

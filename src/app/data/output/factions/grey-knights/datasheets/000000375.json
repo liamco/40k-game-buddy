@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> storm bolter; Nemesis force weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> storm bolter; Nemesis force weapon.",
+      "parsed": [
+        "000000375:storm-bolter",
+        "000000375:nemesis-force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000375:incinerator",
@@ -219,7 +225,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000375:storm-bolter",
+            "000000375:nemesis-force-weapon"
+          ],
+          [
+            "000000375:nemesis-force-weapon",
+            "000000375:incinerator"
+          ],
+          [
+            "000000375:nemesis-force-weapon",
+            "000000375:psilencer"
+          ],
+          [
+            "000000375:nemesis-force-weapon",
+            "000000375:psycannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

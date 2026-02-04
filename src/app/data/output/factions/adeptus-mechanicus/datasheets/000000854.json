@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> eradication beamer; Dunecrawler legs.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> eradication beamer; Dunecrawler legs.",
+      "parsed": [
+        "000000854:eradication-beamer",
+        "000000854:dunecrawler-legs"
+      ]
+    },
     "weapons": [
       {
         "id": "000000854:cognis-heavy-stubber",
@@ -373,6 +379,31 @@
         "name": "Broad spectrum data-tether",
         "description": "The bearer loses the <span class=\"kwb\">SMOKE</span> keyword, but each time you target the bearer with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000854:eradication-beamer",
+            "000000854:dunecrawler-legs"
+          ],
+          [
+            "000000854:dunecrawler-legs",
+            "000000854:daedalus-missile-launcher",
+            "000000854:icarus-array"
+          ],
+          [
+            "000000854:dunecrawler-legs",
+            "000000854:neutron-laser",
+            "000000854:cognis-heavy-stubber"
+          ],
+          [
+            "000000854:dunecrawler-legs",
+            "000000854:twin-onager-heavy-phosphor-blaster"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> splinter pistol; Hekatarii blade.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> splinter pistol; Hekatarii blade.",
+      "parsed": [
+        "000003917:splinter-pistol",
+        "000003917:hekatarii-blade"
+      ]
+    },
     "weapons": [
       {
         "id": "000003917:blast-pistol",
@@ -145,7 +151,27 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003917:splinter-pistol",
+            "000003917:hekatarii-blade"
+          ]
+        ]
+      },
+      {
+        "modelType": "Hekatrix",
+        "items": [
+          [
+            "000003917:hekatarii-blade",
+            "000003917:blast-pistol"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

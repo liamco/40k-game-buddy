@@ -23,7 +23,16 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; hunter-slayer missile; Repulsor defensive array; twin heavy bolter; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; hunter-slayer missile; Repulsor defensive array; twin heavy bolter; armoured hull.",
+      "parsed": [
+        "000002721:heavy-onslaught-gatling-cannon",
+        "000002721:hunter-slayer-missile",
+        "000002721:repulsor-defensive-array",
+        "000002721:twin-heavy-bolter",
+        "000002721:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000002721:heavy-onslaught-gatling-cannon",
@@ -287,7 +296,42 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002721:heavy-onslaught-gatling-cannon",
+            "000002721:hunter-slayer-missile",
+            "000002721:repulsor-defensive-array",
+            "000002721:twin-heavy-bolter",
+            "000002721:armoured-hull"
+          ],
+          [
+            "000002721:hunter-slayer-missile",
+            "000002721:repulsor-defensive-array",
+            "000002721:twin-heavy-bolter",
+            "000002721:armoured-hull",
+            "000002721:las-talon"
+          ],
+          [
+            "000002721:heavy-onslaught-gatling-cannon",
+            "000002721:hunter-slayer-missile",
+            "000002721:repulsor-defensive-array",
+            "000002721:armoured-hull",
+            "000002721:twin-lascannon"
+          ],
+          [
+            "000002721:hunter-slayer-missile",
+            "000002721:repulsor-defensive-array",
+            "000002721:armoured-hull",
+            "000002721:twin-lascannon",
+            "000002721:las-talon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

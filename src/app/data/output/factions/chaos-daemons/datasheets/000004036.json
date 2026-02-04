@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> plasma pistol; daemon hammer.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> plasma pistol; daemon hammer.",
+      "parsed": [
+        "000004036:plasma-pistol",
+        "000004036:daemon-hammer"
+      ]
+    },
     "weapons": [
       {
         "id": "000004036:power-fist",
@@ -256,7 +262,38 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004036:plasma-pistol",
+            "000004036:daemon-hammer"
+          ],
+          [
+            "000004036:daemon-hammer",
+            "000004036:power-fist"
+          ],
+          [
+            "000004036:plasma-pistol",
+            "000004036:accursed-weapon"
+          ],
+          [
+            "000004036:accursed-weapon",
+            "000004036:power-fist"
+          ],
+          [
+            "000004036:plasma-pistol",
+            "000004036:astartes-chainsword"
+          ],
+          [
+            "000004036:astartes-chainsword",
+            "000004036:power-fist"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

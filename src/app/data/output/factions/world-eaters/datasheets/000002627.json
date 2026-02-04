@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; chainblade.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; chainblade.",
+      "parsed": [
+        "000002627:bolt-pistol",
+        "000002627:chainblade"
+      ]
+    },
     "weapons": [
       {
         "id": "000002627:bolt-pistol",
@@ -307,6 +313,39 @@
         "name": "Icon of Khorne",
         "description": "If the bearer's unit contains one or more Icons of Khorne, each time the bearer's unit destroys an enemy unit, you gain 1 Bloodshed point. Each time you make a Blessings of Khorne roll, roll one additional D6 for each Bloodshed point you have, after which, all your Bloodshed points are lost.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002627:bolt-pistol",
+            "000002627:chainblade"
+          ],
+          [
+            "000002627:chainblade",
+            "000002627:plasma-pistol"
+          ]
+        ]
+      },
+      {
+        "modelType": "Khorne Berzerker",
+        "items": [
+          [
+            "000002627:bolt-pistol",
+            "000002627:khornate-eviscerator"
+          ],
+          [
+            "000002627:plasma-pistol",
+            "000002627:khornate-eviscerator"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
       }
     ]
   },

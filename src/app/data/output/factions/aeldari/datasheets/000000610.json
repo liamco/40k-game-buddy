@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> prism cannon; twin shuriken catapult; wraithbone hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> prism cannon; twin shuriken catapult; wraithbone hull.",
+      "parsed": [
+        "000000610:prism-cannon",
+        "000000610:twin-shuriken-catapult",
+        "000000610:wraithbone-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000610:prism-cannon",
@@ -191,7 +198,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000610:prism-cannon",
+            "000000610:twin-shuriken-catapult",
+            "000000610:wraithbone-hull"
+          ],
+          [
+            "000000610:prism-cannon",
+            "000000610:wraithbone-hull",
+            "000000610:shuriken-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

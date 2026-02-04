@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Swooping Hawk Exarch is equipped with:</b> Hawk's talon; close combat weapon.<br><br><b>Every Swooping Hawk is equipped with:</b> lasblaster; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Swooping Hawk Exarch is equipped with:</b> Hawk's talon; close combat weapon.<br><br><b>Every Swooping Hawk is equipped with:</b> lasblaster; close combat weapon.",
+      "parsed": [
+        "000000600:hawk-s-talon",
+        "000000600:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000600:exarch-s-lasblaster",
@@ -313,6 +319,30 @@
         "name": "Aspect Shrine Token",
         "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000600:hawk-s-talon",
+            "000000600:close-combat-weapon"
+          ],
+          [
+            "000000600:close-combat-weapon",
+            "000000600:exarch-s-lasblaster"
+          ],
+          [
+            "000000600:close-combat-weapon",
+            "000000600:sunpistol",
+            "000000600:power-sword"
+          ],
+          [
+            "000000600:close-combat-weapon",
+            "000000600:scatter-laser"
+          ]
+        ]
       }
     ]
   },

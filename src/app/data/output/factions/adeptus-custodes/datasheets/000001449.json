@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> salvo launcher; interceptor lance.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> salvo launcher; interceptor lance.",
+      "parsed": [
+        "000001449:salvo-launcher",
+        "000001449:interceptor-lance"
+      ]
+    },
     "weapons": [
       {
         "id": "000001449:vertus-hurricane-bolter",
@@ -145,7 +151,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001449:salvo-launcher",
+            "000001449:interceptor-lance"
+          ],
+          [
+            "000001449:interceptor-lance",
+            "000001449:vertus-hurricane-bolter"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> ripper gun; close combat weapon; huge knife.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> ripper gun; close combat weapon; huge knife.",
+      "parsed": [
+        "000001398:ripper-gun",
+        "000001398:close-combat-weapon",
+        "000001398:huge-knife"
+      ]
+    },
     "weapons": [
       {
         "id": "000001398:grenadier-gauntlet",
@@ -300,6 +307,58 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001398:ripper-gun",
+            "000001398:close-combat-weapon",
+            "000001398:huge-knife"
+          ],
+          [
+            "000001398:ripper-gun",
+            "000001398:close-combat-weapon",
+            "wargear-ability:brute-shield"
+          ],
+          [
+            "000001398:ripper-gun",
+            "000001398:close-combat-weapon",
+            "wargear-ability:slabshield"
+          ],
+          [
+            "000001398:close-combat-weapon",
+            "000001398:huge-knife",
+            "000001398:grenadier-gauntlet"
+          ],
+          [
+            "000001398:close-combat-weapon",
+            "000001398:grenadier-gauntlet",
+            "wargear-ability:brute-shield"
+          ],
+          [
+            "000001398:close-combat-weapon",
+            "000001398:grenadier-gauntlet",
+            "wargear-ability:slabshield"
+          ],
+          [
+            "000001398:close-combat-weapon",
+            "000001398:huge-knife",
+            "000001398:bullgryn-maul"
+          ],
+          [
+            "000001398:close-combat-weapon",
+            "000001398:bullgryn-maul",
+            "wargear-ability:brute-shield"
+          ],
+          [
+            "000001398:close-combat-weapon",
+            "000001398:bullgryn-maul",
+            "wargear-ability:slabshield"
+          ]
+        ]
       }
     ]
   },

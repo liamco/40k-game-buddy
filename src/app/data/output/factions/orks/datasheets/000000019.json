@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Spanner is equipped with:</b> close combat weapon; big shoota. <br><br><b>Every Burna Boy is equipped with:</b> burna; cuttin' flames.",
+    "defaultLoadout": {
+      "raw": "<b>Every Spanner is equipped with:</b> close combat weapon; big shoota. <br><br><b>Every Burna Boy is equipped with:</b> burna; cuttin' flames.",
+      "parsed": [
+        "000000019:close-combat-weapon",
+        "000000019:big-shoota"
+      ]
+    },
     "weapons": [
       {
         "id": "000000019:big-shoota",
@@ -229,7 +235,35 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Spanner",
+        "items": [
+          [
+            "000000019:close-combat-weapon",
+            "000000019:big-shoota"
+          ],
+          [
+            "000000019:close-combat-weapon",
+            "000000019:kustom-mega-blasta"
+          ],
+          [
+            "000000019:close-combat-weapon",
+            "000000019:rokkit-launcha"
+          ]
+        ]
+      },
+      {
+        "modelType": "Burna Boyz",
+        "items": [
+          [
+            "000000019:burna",
+            "000000019:cuttin-flames"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Scarab Occult Sorcerer is equipped with:</b> inferno combi-bolter; Malefic Curse; force weapon.<br><br><b>Every Scarab Occult Terminator is equipped with:</b> inferno combi-bolter; Prosperine khopesh.",
+    "defaultLoadout": {
+      "raw": "<b>The Scarab Occult Sorcerer is equipped with:</b> inferno combi-bolter; Malefic Curse; force weapon.<br><br><b>Every Scarab Occult Terminator is equipped with:</b> inferno combi-bolter; Prosperine khopesh.",
+      "parsed": [
+        "000001035:inferno-combi-bolter",
+        "000001035:malefic-curse",
+        "000001035:force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001035:heavy-warpflamer",
@@ -332,7 +339,51 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Scarab Occult Sorcerer",
+        "items": [
+          [
+            "000001035:inferno-combi-bolter",
+            "000001035:malefic-curse",
+            "000001035:force-weapon"
+          ],
+          [
+            "000001035:malefic-curse",
+            "000001035:force-weapon",
+            "000001035:prosperine-khopesh"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Scarab Occult Terminator",
+        "items": [
+          [
+            "000001035:inferno-combi-bolter",
+            "000001035:prosperine-khopesh"
+          ],
+          [
+            "000001035:prosperine-khopesh",
+            "000001035:heavy-warpflamer"
+          ],
+          [
+            "000001035:prosperine-khopesh",
+            "000001035:soulreaper-cannon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Each model is equipped with:</b> heavy bolt pistol; Astartes chainsword.",
+    "defaultLoadout": {
+      "raw": "<b>Each model is equipped with:</b> heavy bolt pistol; Astartes chainsword.",
+      "parsed": [
+        "000002776:heavy-bolt-pistol",
+        "000002776:astartes-chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000002776:hand-flamer",
@@ -339,7 +345,55 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002776:heavy-bolt-pistol",
+            "000002776:astartes-chainsword"
+          ]
+        ]
+      },
+      {
+        "modelType": "Assault Intercessor Sergeant with Jump Pack",
+        "items": [
+          [
+            "000002776:astartes-chainsword",
+            "000002776:hand-flamer"
+          ],
+          [
+            "000002776:astartes-chainsword",
+            "000002776:plasma-pistol"
+          ],
+          [
+            "000002776:heavy-bolt-pistol",
+            "000002776:power-weapon"
+          ],
+          [
+            "000002776:power-weapon",
+            "000002776:hand-flamer"
+          ],
+          [
+            "000002776:power-weapon",
+            "000002776:plasma-pistol"
+          ],
+          [
+            "000002776:heavy-bolt-pistol",
+            "000002776:power-fist"
+          ],
+          [
+            "000002776:power-fist",
+            "000002776:hand-flamer"
+          ],
+          [
+            "000002776:power-fist",
+            "000002776:plasma-pistol"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

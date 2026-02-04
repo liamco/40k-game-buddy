@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> twin assault cannon; skyhammer missile launcher; las-talon; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> twin assault cannon; skyhammer missile launcher; las-talon; armoured hull.",
+      "parsed": [
+        "000000084:twin-assault-cannon",
+        "000000084:skyhammer-missile-launcher",
+        "000000084:las-talon",
+        "000000084:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000084:icarus-stormcannon",
@@ -309,7 +317,50 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000084:twin-assault-cannon",
+            "000000084:skyhammer-missile-launcher",
+            "000000084:las-talon",
+            "000000084:armoured-hull"
+          ],
+          [
+            "000000084:twin-assault-cannon",
+            "000000084:skyhammer-missile-launcher",
+            "000000084:armoured-hull",
+            "000000084:icarus-stormcannon"
+          ],
+          [
+            "000000084:twin-assault-cannon",
+            "000000084:las-talon",
+            "000000084:armoured-hull",
+            "000000084:twin-heavy-bolter"
+          ],
+          [
+            "000000084:twin-assault-cannon",
+            "000000084:armoured-hull",
+            "000000084:twin-heavy-bolter",
+            "000000084:icarus-stormcannon"
+          ],
+          [
+            "000000084:twin-assault-cannon",
+            "000000084:las-talon",
+            "000000084:armoured-hull",
+            "000000084:typhoon-missile-launcher"
+          ],
+          [
+            "000000084:twin-assault-cannon",
+            "000000084:armoured-hull",
+            "000000084:typhoon-missile-launcher",
+            "000000084:icarus-stormcannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

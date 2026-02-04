@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> storm bolter; Nemesis force weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> storm bolter; Nemesis force weapon.",
+      "parsed": [
+        "000003813:storm-bolter",
+        "000003813:nemesis-force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003813:incinerator",
@@ -328,6 +334,43 @@
         "name": "Narthecium",
         "description": "In your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTERS</span>) to the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003813:storm-bolter",
+            "000003813:nemesis-force-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Grey Knights Terminator",
+        "items": [
+          [
+            "000003813:nemesis-force-weapon",
+            "wargear-ability:narthecium"
+          ],
+          [
+            "000003813:nemesis-force-weapon",
+            "000003813:incinerator"
+          ],
+          [
+            "000003813:nemesis-force-weapon",
+            "000003813:psilencer"
+          ],
+          [
+            "000003813:nemesis-force-weapon",
+            "000003813:psycannon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
       }
     ]
   },

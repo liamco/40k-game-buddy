@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> stubcarbine; power weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> stubcarbine; power weapon.",
+      "parsed": [
+        "000000850:stubcarbine",
+        "000000850:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000850:flechette-blaster",
@@ -178,7 +184,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000850:stubcarbine",
+            "000000850:power-weapon"
+          ],
+          [
+            "000000850:flechette-blaster",
+            "000000850:taser-goad"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

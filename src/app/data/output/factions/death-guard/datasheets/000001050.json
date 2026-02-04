@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Predator twin lascannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Predator twin lascannon; armoured tracks.",
+      "parsed": [
+        "000001050:predator-twin-lascannon",
+        "000001050:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000001050:combi-bolter",
@@ -331,7 +337,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001050:predator-twin-lascannon",
+            "000001050:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

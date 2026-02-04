@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Proctor-Exactant and Exaction Vigilant is equipped with:</b> Arbites combat shotgun; Arbites shotpistol; close combat weapon.<br><br><b>The Cyber-mastiff is equipped with:</b> mechanical bite.",
+    "defaultLoadout": {
+      "raw": "<b>Every Proctor-Exactant and Exaction Vigilant is equipped with:</b> Arbites combat shotgun; Arbites shotpistol; close combat weapon.<br><br><b>The Cyber-mastiff is equipped with:</b> mechanical bite.",
+      "parsed": [
+        "000002685:arbites-combat-shotgun",
+        "000002685:arbites-shotpistol",
+        "000002685:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002685:arbites-combat-shotgun",
@@ -516,6 +523,88 @@
         "name": "Soulguilt Scanner",
         "description": "Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Proctor-Exactant",
+        "items": [
+          [
+            "000002685:arbites-combat-shotgun",
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:executioner-shotgun"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:arbites-grenade-launcher"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:heavy-stubber"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:webber"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Exaction Vigilant",
+        "items": [
+          [
+            "000002685:arbites-combat-shotgun",
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:executioner-shotgun"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:arbites-grenade-launcher"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:heavy-stubber"
+          ],
+          [
+            "000002685:arbites-shotpistol",
+            "000002685:close-combat-weapon",
+            "000002685:webber"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Cyber-mastiff",
+        "items": [
+          [
+            "000002685:mechanical-bite"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
       }
     ]
   },

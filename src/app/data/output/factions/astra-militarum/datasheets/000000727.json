@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> hellstrike missiles; multi-laser; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> hellstrike missiles; multi-laser; armoured hull.",
+      "parsed": [
+        "000000727:hellstrike-missiles",
+        "000000727:multi-laser",
+        "000000727:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000727:heavy-bolter",
@@ -291,7 +298,34 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000727:hellstrike-missiles",
+            "000000727:multi-laser",
+            "000000727:armoured-hull"
+          ],
+          [
+            "000000727:multi-laser",
+            "000000727:armoured-hull",
+            "000000727:multiple-rocket-pods"
+          ],
+          [
+            "000000727:hellstrike-missiles",
+            "000000727:armoured-hull",
+            "000000727:lascannon"
+          ],
+          [
+            "000000727:armoured-hull",
+            "000000727:lascannon",
+            "000000727:multiple-rocket-pods"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

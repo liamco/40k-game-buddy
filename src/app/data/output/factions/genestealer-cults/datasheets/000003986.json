@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; storm eagle rockets; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; storm eagle rockets; armoured tracks.",
+      "parsed": [
+        "000003986:heavy-bolter",
+        "000003986:storm-eagle-rockets",
+        "000003986:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003986:hunter-killer-missile",
@@ -229,7 +236,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003986:heavy-bolter",
+            "000003986:storm-eagle-rockets",
+            "000003986:armoured-tracks"
+          ],
+          [
+            "000003986:storm-eagle-rockets",
+            "000003986:armoured-tracks",
+            "000003986:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

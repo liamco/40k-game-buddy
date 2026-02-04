@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Proctor-Vigilant and Vigilant is equipped with:</b> Arbites combat shotgun; Arbites shotpistol; close combat weapon. <br><br><b>The Cyber-mastiff is equipped with:</b> mechanical bite.",
+    "defaultLoadout": {
+      "raw": "<b>Every Proctor-Vigilant and Vigilant is equipped with:</b> Arbites combat shotgun; Arbites shotpistol; close combat weapon. <br><br><b>The Cyber-mastiff is equipped with:</b> mechanical bite.",
+      "parsed": [
+        "000002683:arbites-combat-shotgun",
+        "000002683:arbites-shotpistol",
+        "000002683:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002683:arbites-combat-shotgun",
@@ -357,6 +364,88 @@
         "name": "Nuncio Aquila (Aura)",
         "description": "Once per battle, at the start of any Command phase, you can select one objective marker within 6\" of the bearer. All enemy units (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) within range of that objective marker must take a Battle-shock test. Each objective marker can only be targeted by this ability once per turn.<br><br><b>Designer's Note:</b> Place one Nuncio-aquila token next to the bearer, removing it once it uses this ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Proctor-Vigilant",
+        "items": [
+          [
+            "000002683:arbites-combat-shotgun",
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:executioner-shotgun"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:arbites-grenade-launcher"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:heavy-stubber"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:webber"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Vigilant",
+        "items": [
+          [
+            "000002683:arbites-combat-shotgun",
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:executioner-shotgun"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:arbites-grenade-launcher"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:heavy-stubber"
+          ],
+          [
+            "000002683:arbites-shotpistol",
+            "000002683:close-combat-weapon",
+            "000002683:webber"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Cyber-mastiff",
+        "items": [
+          [
+            "000002683:mechanical-bite"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
       }
     ]
   },

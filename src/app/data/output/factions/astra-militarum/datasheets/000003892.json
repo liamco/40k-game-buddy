@@ -23,7 +23,15 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> castigator gatling cannon; heavy stubber; twin battle cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> castigator gatling cannon; heavy stubber; twin battle cannon; armoured tracks.",
+      "parsed": [
+        "000003892:castigator-gatling-cannon",
+        "000003892:heavy-stubber",
+        "000003892:twin-battle-cannon",
+        "000003892:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003892:castigator-gatling-cannon",
@@ -427,7 +435,40 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003892:castigator-gatling-cannon",
+            "000003892:heavy-stubber",
+            "000003892:twin-battle-cannon",
+            "000003892:armoured-tracks"
+          ],
+          [
+            "000003892:heavy-stubber",
+            "000003892:twin-battle-cannon",
+            "000003892:armoured-tracks",
+            "000003892:pulveriser-cannon"
+          ],
+          [
+            "000003892:castigator-gatling-cannon",
+            "000003892:heavy-stubber",
+            "000003892:armoured-tracks",
+            "000003892:oppressor-cannon",
+            "000003892:coaxial-autocannon"
+          ],
+          [
+            "000003892:heavy-stubber",
+            "000003892:armoured-tracks",
+            "000003892:oppressor-cannon",
+            "000003892:coaxial-autocannon",
+            "000003892:pulveriser-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>*</b> This unit can only contain 2 Atalan Wolfquads if it also contains 8 Atalan Jackals.<br><br><b>Every Atalan Jackal is equipped with:</b> Atalan small arms; close combat weapon. <br><br><b>Every Atalan Wolfquad is equipped with:</b> Atalan small arms; heavy stubber; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>*</b> This unit can only contain 2 Atalan Wolfquads if it also contains 8 Atalan Jackals.<br><br><b>Every Atalan Jackal is equipped with:</b> Atalan small arms; close combat weapon. <br><br><b>Every Atalan Wolfquad is equipped with:</b> Atalan small arms; heavy stubber; close combat weapon.",
+      "parsed": [
+        "000001574:atalan-small-arms",
+        "000001574:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001574:atalan-incinerator",
@@ -328,7 +334,38 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Atalan Jackal",
+        "items": [
+          [
+            "000001574:atalan-small-arms",
+            "000001574:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Atalan Wolfquads*",
+        "items": [
+          [
+            "000001574:atalan-small-arms",
+            "000001574:heavy-stubber",
+            "000001574:close-combat-weapon"
+          ],
+          [
+            "000001574:atalan-small-arms",
+            "000001574:close-combat-weapon",
+            "000001574:atalan-incinerator"
+          ],
+          [
+            "000001574:atalan-small-arms",
+            "000001574:close-combat-weapon",
+            "000001574:mining-laser"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

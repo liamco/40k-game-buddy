@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Shock Trooper Sergeant is equipped with:</b> laspistol; chainsword. <br><br><b>Every Shock Trooper is equipped with:</b> lasgun; close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+    "defaultLoadout": {
+      "raw": "<b>Every Shock Trooper Sergeant is equipped with:</b> laspistol; chainsword. <br><br><b>Every Shock Trooper is equipped with:</b> lasgun; close combat weapon.<br><br>This unit can have up to two Leader units attached to it, provided no more than one of those units is a Command Squad unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+      "parsed": [
+        "000002612:laspistol",
+        "000002612:chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000002612:bolt-pistol",
@@ -536,6 +542,25 @@
         "name": "Vox-caster",
         "description": "Each time you target the bearer's unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly Officer models within 6\": on a 5+, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002612:laspistol",
+            "000002612:chainsword"
+          ],
+          [
+            "000002612:sergeant-s-autogun",
+            "000002612:close-combat-weapon"
+          ],
+          [
+            "000002612:chainsword",
+            "000002612:bolt-pistol"
+          ]
+        ]
       }
     ]
   },

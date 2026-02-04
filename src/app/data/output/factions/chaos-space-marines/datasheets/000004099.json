@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> sonic blaster; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> sonic blaster; close combat weapon.",
+      "parsed": [
+        "000004099:sonic-blaster",
+        "000004099:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004099:sonic-blaster",
@@ -255,7 +261,36 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004099:sonic-blaster",
+            "000004099:close-combat-weapon"
+          ],
+          [
+            "000004099:close-combat-weapon",
+            "000004099:blastmaster"
+          ]
+        ]
+      },
+      {
+        "modelType": "Disharmonist",
+        "items": [
+          [
+            "000004099:close-combat-weapon",
+            "000004099:screamer-pistol",
+            "000004099:power-sword"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Kill Team Sergeant with Jump Pack is equipped with:</b> heavy bolt pistol; Astartes chainsword.<br><br><b>Every Kill Team Intercessor with Jump Pack is equipped with:</b> heavy bolt pistol; Astartes chainsword.<br><br><b>Every Kill Team Heavy Intercessor with Jump Pack is equipped with:</b> assault bolters; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Kill Team Sergeant with Jump Pack is equipped with:</b> heavy bolt pistol; Astartes chainsword.<br><br><b>Every Kill Team Intercessor with Jump Pack is equipped with:</b> heavy bolt pistol; Astartes chainsword.<br><br><b>Every Kill Team Heavy Intercessor with Jump Pack is equipped with:</b> assault bolters; close combat weapon.",
+      "parsed": [
+        "000003874:heavy-bolt-pistol",
+        "000003874:astartes-chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000003874:assault-bolters",
@@ -476,7 +482,60 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003874:heavy-bolt-pistol",
+            "000003874:astartes-chainsword"
+          ],
+          [
+            "000003874:astartes-chainsword",
+            "000003874:plasma-pistol"
+          ]
+        ]
+      },
+      {
+        "modelType": "Kill Team Sergeant with Jump Pack",
+        "items": [
+          [
+            "000003874:heavy-bolt-pistol",
+            "000003874:power-fist"
+          ],
+          [
+            "000003874:power-fist",
+            "000003874:plasma-pistol"
+          ],
+          [
+            "000003874:heavy-bolt-pistol",
+            "000003874:power-weapon"
+          ],
+          [
+            "000003874:power-weapon",
+            "000003874:plasma-pistol"
+          ],
+          [
+            "000003874:astartes-chainsword",
+            "000003874:hand-flamer"
+          ],
+          [
+            "000003874:hand-flamer",
+            "000003874:power-fist"
+          ],
+          [
+            "000003874:hand-flamer",
+            "000003874:power-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "deathwatch",

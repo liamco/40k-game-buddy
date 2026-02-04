@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> demolisher battle cannon; lascannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> demolisher battle cannon; lascannon; armoured tracks.",
+      "parsed": [
+        "000003980:demolisher-battle-cannon",
+        "000003980:lascannon",
+        "000003980:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003980:heavy-stubber",
@@ -487,7 +494,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003980:demolisher-battle-cannon",
+            "000003980:lascannon",
+            "000003980:armoured-tracks"
+          ],
+          [
+            "000003980:demolisher-battle-cannon",
+            "000003980:armoured-tracks",
+            "000003980:heavy-bolter"
+          ],
+          [
+            "000003980:demolisher-battle-cannon",
+            "000003980:armoured-tracks",
+            "000003980:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -335,7 +335,9 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
     }
 
     // Parse default loadouts per model type
-    const loadoutByType = parseLoadoutByModelType(unit.wargear?.defaultLoadout || "", unit.unitComposition);
+    // Handle both old (string) and new (object with raw/parsed) defaultLoadout formats
+    const defaultLoadoutRaw = typeof unit.wargear?.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear?.defaultLoadout?.raw || "";
+    const loadoutByType = parseLoadoutByModelType(defaultLoadoutRaw, unit.unitComposition);
 
     // Generate instances for each composition line
     for (const comp of unit.unitComposition) {
@@ -394,7 +396,9 @@ export function resolveUnitWargear(unit: ArmyListItem): Weapon[] {
     }
 
     // Fallback: return default weapons from loadout string
-    const defaultWeaponNames = parseLoadoutWeapons(unit.wargear?.defaultLoadout || "").map((w) => w.toLowerCase());
+    // Handle both old (string) and new (object with raw/parsed) defaultLoadout formats
+    const defaultLoadoutRaw = typeof unit.wargear?.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear?.defaultLoadout?.raw || "";
+    const defaultWeaponNames = parseLoadoutWeapons(defaultLoadoutRaw).map((w) => w.toLowerCase());
 
     return unit.wargear?.weapons.filter((weapon) => {
         const weaponNameLower = weapon.name.toLowerCase();
@@ -1160,7 +1164,9 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     function getDefaultLoadoutForModelType(unit: ArmyListItem, modelType: string): string[] {
         if (!unit.wargear?.defaultLoadout || !unit.wargear?.weapons) return [];
 
-        const loadoutByType = parseLoadoutByModelType(unit.wargear.defaultLoadout, unit.unitComposition || []);
+        // Handle both old (string) and new (object with raw/parsed) defaultLoadout formats
+        const defaultLoadoutRaw = typeof unit.wargear.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear.defaultLoadout?.raw || "";
+        const loadoutByType = parseLoadoutByModelType(defaultLoadoutRaw, unit.unitComposition || []);
         const weaponNames = loadoutByType.get(modelType) || loadoutByType.get("Every model") || [];
 
         return weaponNames.map((name) => findWeaponIdByName(unit.wargear?.weapons!, name)).filter((id): id is string => id !== null);
@@ -1367,7 +1373,9 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
 
     // Get the default loadout weapon names from the unit's loadout string
     const getDefaultLoadout = useCallback((unit: ArmyListItem): string[] => {
-        return parseLoadoutWeapons(unit.wargear?.defaultLoadout || "");
+        // Handle both old (string) and new (object with raw/parsed) defaultLoadout formats
+        const defaultLoadoutRaw = typeof unit.wargear?.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear?.defaultLoadout?.raw || "";
+        return parseLoadoutWeapons(defaultLoadoutRaw);
     }, []);
 
     // Get unit's current weapons accounting for loadout selections

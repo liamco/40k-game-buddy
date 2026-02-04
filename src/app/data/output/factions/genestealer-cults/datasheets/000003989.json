@@ -18,7 +18,16 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "This model is equipped with: 2 lascannons; twin heavy bolter; 2 twin heavy flamers; volcano cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "This model is equipped with: 2 lascannons; twin heavy bolter; 2 twin heavy flamers; volcano cannon; armoured tracks.",
+      "parsed": [
+        "000003989:lascannons",
+        "000003989:twin-heavy-bolter",
+        "000003989:twin-heavy-flamers",
+        "000003989:volcano-cannon",
+        "000003989:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003989:volcano-cannon",
@@ -248,7 +257,28 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003989:lascannons",
+            "000003989:twin-heavy-bolter",
+            "000003989:twin-heavy-flamers",
+            "000003989:volcano-cannon",
+            "000003989:armoured-tracks"
+          ],
+          [
+            "000003989:lascannons",
+            "000003989:twin-heavy-bolter",
+            "000003989:volcano-cannon",
+            "000003989:armoured-tracks",
+            "000003989:twin-heavy-bolters"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

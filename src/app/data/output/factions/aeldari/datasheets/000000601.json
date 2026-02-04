@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Warp Spider Exarch is equipped with:</b> Exarch's death spinner; close combat weapon.<br><br><b>Every Warp Spider is equipped with:</b> death spinner; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Warp Spider Exarch is equipped with:</b> Exarch's death spinner; close combat weapon.<br><br><b>Every Warp Spider is equipped with:</b> death spinner; close combat weapon.",
+      "parsed": [
+        "000000601:exarch-s-death-spinner",
+        "000000601:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000601:death-spinner",
@@ -323,6 +329,31 @@
         "name": "Aspect Shrine Token",
         "description": "Once per battle for each Aspect Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a model in this unit (excluding <span class=\"kwb\">CHARACTER</span> models) to an unmodified 6.<br><br><b>Designer's Note:</b> Place an Aspect Shrine token next to the unit for each Aspect Shrine token it has, removing one each time this ability is used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000601:exarch-s-death-spinner",
+            "000000601:close-combat-weapon"
+          ],
+          [
+            "000000601:close-combat-weapon",
+            "000000601:spinneret-rifle",
+            "000000601:death-weavers"
+          ],
+          [
+            "000000601:close-combat-weapon",
+            "000000601:powerblades",
+            "000000601:death-weavers"
+          ],
+          [
+            "000000601:close-combat-weapon",
+            "000000601:powerblade-array"
+          ]
+        ]
       }
     ]
   },

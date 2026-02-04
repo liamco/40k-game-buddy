@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> pulse carbine; pulse pistol; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> pulse carbine; pulse pistol; close combat weapon.",
+      "parsed": [
+        "000000422:pulse-carbine",
+        "000000422:pulse-pistol",
+        "000000422:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000422:drone-burst-cannon",
@@ -465,6 +472,28 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000422:pulse-carbine",
+            "000000422:pulse-pistol",
+            "000000422:close-combat-weapon"
+          ],
+          [
+            "000000422:pulse-pistol",
+            "000000422:close-combat-weapon",
+            "000000422:ion-rifle"
+          ],
+          [
+            "000000422:pulse-pistol",
+            "000000422:close-combat-weapon",
+            "000000422:rail-rifle"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Wolf Scout Pack Leader model is equipped with:</b> plasma pistol; power weapon.<br><br><b>Every Wolf Scout model is equipped with:</b> plasma pistol; combat blade.<br><br><b>Every Hunting Wolf model is equipped with:</b> teeth and claws.",
+    "defaultLoadout": {
+      "raw": "<b>The Wolf Scout Pack Leader model is equipped with:</b> plasma pistol; power weapon.<br><br><b>Every Wolf Scout model is equipped with:</b> plasma pistol; combat blade.<br><br><b>Every Hunting Wolf model is equipped with:</b> teeth and claws.",
+      "parsed": [
+        "000004182:plasma-pistol",
+        "000004182:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004182:bolt-pistol",
@@ -466,6 +472,68 @@
         "name": "Haywire Mine",
         "description": "Once per battle, at the start of any phase, you can select one enemy unit within 3\" of the bearer and roll one D6: on a 2+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a <span class=\"kwb\">VEHICLE</span> unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Wolf Scout Pack Leader",
+        "items": [
+          [
+            "000004182:plasma-pistol",
+            "000004182:power-weapon"
+          ],
+          [
+            "000004182:power-weapon",
+            "000004182:plasma-gun"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Wolf Scout",
+        "items": [
+          [
+            "000004182:plasma-pistol",
+            "000004182:power-weapon"
+          ],
+          [
+            "000004182:power-weapon",
+            "000004182:plasma-gun"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Hunting Wolf",
+        "items": [
+          [
+            "000004182:teeth-and-claws"
+          ]
+        ]
+      },
+      {
+        "modelType": "OR",
+        "items": [
+          [
+            "000004182:plasma-pistol",
+            "000004182:power-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Hunting Wolve",
+        "items": [
+          [
+            "000004182:plasma-pistol",
+            "000004182:power-weapon"
+          ]
+        ]
       }
     ]
   },

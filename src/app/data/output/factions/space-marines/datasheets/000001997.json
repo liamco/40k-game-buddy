@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> heavy bolt pistol; Astartes chainsword.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> heavy bolt pistol; Astartes chainsword.",
+      "parsed": [
+        "000001997:heavy-bolt-pistol",
+        "000001997:astartes-chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000001997:hand-flamer",
@@ -421,7 +427,18 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001997:heavy-bolt-pistol",
+            "000001997:astartes-chainsword"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "blood-angels",

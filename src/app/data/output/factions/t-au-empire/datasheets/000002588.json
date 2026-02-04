@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Kroot Kill-broker is equipped with:</b> Farstalker firearm; Kroot pistol; ritual blade. <br><br><b>Every Kroot Farstalker is equipped with:</b> Farstalker firearm; Kroot pistol; close combat weapon. <br><br><b>Every Kroot Hound is equipped with:</b> ripping fangs.",
+    "defaultLoadout": {
+      "raw": "<b>The Kroot Kill-broker is equipped with:</b> Farstalker firearm; Kroot pistol; ritual blade. <br><br><b>Every Kroot Farstalker is equipped with:</b> Farstalker firearm; Kroot pistol; close combat weapon. <br><br><b>Every Kroot Hound is equipped with:</b> ripping fangs.",
+      "parsed": [
+        "000002588:farstalker-firearm",
+        "000002588:kroot-pistol",
+        "000002588:ritual-blade"
+      ]
+    },
     "weapons": [
       {
         "id": "000002588:dvorgite-skinner",
@@ -361,6 +368,50 @@
         "name": "Pech'ra",
         "description": "Ranged weapons equipped by the bearer's unit have the [IGNORES COVER] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Kroot Kill-broker",
+        "items": [
+          [
+            "000002588:farstalker-firearm",
+            "000002588:kroot-pistol",
+            "000002588:ritual-blade"
+          ]
+        ]
+      },
+      {
+        "modelType": "Kroot Farstalker",
+        "items": [
+          [
+            "000002588:farstalker-firearm",
+            "000002588:kroot-pistol",
+            "000002588:close-combat-weapon"
+          ],
+          [
+            "000002588:kroot-pistol",
+            "000002588:close-combat-weapon",
+            "000002588:dvorgite-skinner"
+          ],
+          [
+            "000002588:kroot-pistol",
+            "000002588:close-combat-weapon",
+            "000002588:londaxi-tribalest"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Kroot Hound",
+        "items": [
+          [
+            "000002588:ripping-fangs"
+          ]
+        ]
       }
     ]
   },

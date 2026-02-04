@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> twin autocannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> twin autocannon; armoured tracks.",
+      "parsed": [
+        "000000693:twin-autocannon",
+        "000000693:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000693:twin-autocannon",
@@ -136,7 +142,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000693:twin-autocannon",
+            "000000693:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

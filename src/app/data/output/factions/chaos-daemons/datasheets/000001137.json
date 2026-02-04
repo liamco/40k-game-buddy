@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Phantasmagoria; snapping claws; witstealer sword.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Phantasmagoria; snapping claws; witstealer sword.",
+      "parsed": [
+        "000001137:phantasmagoria",
+        "000001137:snapping-claws",
+        "000001137:witstealer-sword"
+      ]
+    },
     "weapons": [
       {
         "id": "000001137:living-whip",
@@ -248,6 +255,18 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001137:phantasmagoria",
+            "000001137:snapping-claws",
+            "000001137:witstealer-sword"
+          ]
+        ]
       }
     ]
   },

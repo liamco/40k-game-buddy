@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> combi-bolter; Infernal Gaze; force weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> combi-bolter; Infernal Gaze; force weapon.",
+      "parsed": [
+        "000000939:combi-bolter",
+        "000000939:infernal-gaze",
+        "000000939:force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000939:combi-bolter",
@@ -229,6 +236,23 @@
         "name": "Chaos Familiar",
         "description": "Once per battle, when an attack is allocated to the bearer, you can change the Damage characteristic to 0.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000939:combi-bolter",
+            "000000939:infernal-gaze",
+            "000000939:force-weapon"
+          ],
+          [
+            "000000939:infernal-gaze",
+            "000000939:force-weapon",
+            "000000939:combi-weapon"
+          ]
+        ]
       }
     ]
   },

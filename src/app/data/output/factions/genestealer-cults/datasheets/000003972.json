@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> malleus rocket launcher; lasgun; laspistol; battery close combat weapons.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> malleus rocket launcher; lasgun; laspistol; battery close combat weapons.",
+      "parsed": [
+        "000003972:malleus-rocket-launcher",
+        "000003972:lasgun",
+        "000003972:laspistol",
+        "000003972:battery-close-combat-weapons"
+      ]
+    },
     "weapons": [
       {
         "id": "000003972:laspistol",
@@ -233,7 +241,32 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003972:malleus-rocket-launcher",
+            "000003972:lasgun",
+            "000003972:laspistol",
+            "000003972:battery-close-combat-weapons"
+          ],
+          [
+            "000003972:lasgun",
+            "000003972:laspistol",
+            "000003972:battery-close-combat-weapons",
+            "000003972:bombast-field-gun"
+          ],
+          [
+            "000003972:lasgun",
+            "000003972:laspistol",
+            "000003972:battery-close-combat-weapons",
+            "000003972:heavy-lascannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

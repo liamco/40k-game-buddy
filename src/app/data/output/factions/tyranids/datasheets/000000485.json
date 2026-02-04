@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> stinger salvoes; twin stranglethorn cannon; scything wings.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> stinger salvoes; twin stranglethorn cannon; scything wings.",
+      "parsed": [
+        "000000485:stinger-salvoes",
+        "000000485:twin-stranglethorn-cannon",
+        "000000485:scything-wings"
+      ]
+    },
     "weapons": [
       {
         "id": "000000485:stinger-salvoes",
@@ -173,7 +180,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000485:stinger-salvoes",
+            "000000485:twin-stranglethorn-cannon",
+            "000000485:scything-wings"
+          ],
+          [
+            "000000485:stinger-salvoes",
+            "000000485:scything-wings",
+            "000000485:twin-heavy-venom-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

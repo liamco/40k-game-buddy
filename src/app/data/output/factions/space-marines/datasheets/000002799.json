@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Sword Brother is equipped with:</b> heavy bolt pistol; master-crafted power weapon.<br><br><b>Every Initiate is equipped with:</b> bolt pistol; bolt rifle; close combat weapon.<br><br><b>Every Neophyte is equipped with:</b> bolt pistol; Astartes chainsword.",
+    "defaultLoadout": {
+      "raw": "<b>The Sword Brother is equipped with:</b> heavy bolt pistol; master-crafted power weapon.<br><br><b>Every Initiate is equipped with:</b> bolt pistol; bolt rifle; close combat weapon.<br><br><b>Every Neophyte is equipped with:</b> bolt pistol; Astartes chainsword.",
+      "parsed": [
+        "000002799:heavy-bolt-pistol",
+        "000002799:master-crafted-power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002799:bolt-pistol",
@@ -473,7 +479,80 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Sword Brother",
+        "items": [
+          [
+            "000002799:heavy-bolt-pistol",
+            "000002799:master-crafted-power-weapon"
+          ],
+          [
+            "000002799:master-crafted-power-weapon",
+            "000002799:pyre-pistol"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 10,
+          "count": 1,
+          "maxPerRatio": 2
+        }
+      },
+      {
+        "modelType": "Initiate",
+        "items": [
+          [
+            "000002799:bolt-pistol",
+            "000002799:bolt-rifle",
+            "000002799:close-combat-weapon"
+          ],
+          [
+            "000002799:bolt-pistol",
+            "000002799:close-combat-weapon",
+            "000002799:heavy-bolt-pistol",
+            "000002799:power-fist"
+          ],
+          [
+            "000002799:bolt-pistol",
+            "000002799:close-combat-weapon",
+            "000002799:pyreblaster"
+          ],
+          [
+            "000002799:bolt-pistol",
+            "000002799:close-combat-weapon",
+            "000002799:heavy-bolt-pistol",
+            "000002799:astartes-chainsword"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 10,
+          "count": 1,
+          "maxPerRatio": 2
+        }
+      },
+      {
+        "modelType": "Neophyte",
+        "items": [
+          [
+            "000002799:bolt-pistol",
+            "000002799:astartes-chainsword"
+          ],
+          [
+            "000002799:neophyte-firearm",
+            "000002799:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 10,
+          "count": 1,
+          "maxPerRatio": 2
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "black-templars",

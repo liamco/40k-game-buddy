@@ -23,7 +23,15 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> avenger chaincannon; daemonbreath spear; diabolus heavy stubber; armoured feet.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> avenger chaincannon; daemonbreath spear; diabolus heavy stubber; armoured feet.",
+      "parsed": [
+        "000002565:avenger-chaincannon",
+        "000002565:daemonbreath-spear",
+        "000002565:diabolus-heavy-stubber",
+        "000002565:armoured-feet"
+      ]
+    },
     "weapons": [
       {
         "id": "000002565:avenger-chaincannon",
@@ -198,7 +206,26 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002565:avenger-chaincannon",
+            "000002565:daemonbreath-spear",
+            "000002565:diabolus-heavy-stubber",
+            "000002565:armoured-feet"
+          ],
+          [
+            "000002565:avenger-chaincannon",
+            "000002565:daemonbreath-spear",
+            "000002565:armoured-feet",
+            "000002565:havoc-multi-launcher"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

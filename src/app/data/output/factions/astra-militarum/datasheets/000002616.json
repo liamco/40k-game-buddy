@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> lasgun; laspistol; hunting lance; steed's hooves.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> lasgun; laspistol; hunting lance; steed's hooves.",
+      "parsed": [
+        "000002616:lasgun",
+        "000002616:laspistol",
+        "000002616:hunting-lance",
+        "000002616:steed-s-hooves"
+      ]
+    },
     "weapons": [
       {
         "id": "000002616:lasgun",
@@ -273,7 +281,20 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002616:lasgun",
+            "000002616:laspistol",
+            "000002616:hunting-lance",
+            "000002616:steed-s-hooves"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

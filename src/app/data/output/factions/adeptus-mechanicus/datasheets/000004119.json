@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Servitor Underseer is equipped with:</b> Mechanicus pistol; dataspikes.<br><br><b>1 Gun Servitor is equipped with:</b> heavy arc rifle; servo-claw.<br><br><b>1 Gun Servitor is equipped with:</b> heavy bolter; servo-claw.<br><br><b>Every Combat Servitor is equipped with:</b> phosphor blaster; servo-claw.",
+    "defaultLoadout": {
+      "raw": "<b>The Servitor Underseer is equipped with:</b> Mechanicus pistol; dataspikes.<br><br><b>1 Gun Servitor is equipped with:</b> heavy arc rifle; servo-claw.<br><br><b>1 Gun Servitor is equipped with:</b> heavy bolter; servo-claw.<br><br><b>Every Combat Servitor is equipped with:</b> phosphor blaster; servo-claw.",
+      "parsed": [
+        "000004119:mechanicus-pistol",
+        "000004119:dataspikes"
+      ]
+    },
     "weapons": [
       {
         "id": "000004119:heavy-arc-rifle",
@@ -316,7 +322,56 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Servitor Underseer",
+        "items": [
+          [
+            "000004119:mechanicus-pistol",
+            "000004119:dataspikes"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 3
+        }
+      },
+      {
+        "modelType": "Gun Servitor",
+        "items": [
+          [
+            "000004119:heavy-arc-rifle",
+            "000004119:servo-claw"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 3
+        }
+      },
+      {
+        "modelType": "Combat Servitor",
+        "items": [
+          [
+            "000004119:phosphor-blaster",
+            "000004119:servo-claw"
+          ],
+          [
+            "000004119:servo-claw",
+            "000004119:incendine-igniter"
+          ],
+          [
+            "000004119:servo-claw",
+            "000004119:meltagun"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

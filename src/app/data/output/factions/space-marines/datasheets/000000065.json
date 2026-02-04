@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> twin heavy bolter; 2 godhammer lascannons; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> twin heavy bolter; 2 godhammer lascannons; armoured tracks.",
+      "parsed": [
+        "000000065:twin-heavy-bolter",
+        "000000065:godhammer-lascannons",
+        "000000065:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000065:godhammer-lascannon",
@@ -282,7 +289,19 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000065:twin-heavy-bolter",
+            "000000065:godhammer-lascannons",
+            "000000065:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

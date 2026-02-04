@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> storm bolter; power fist.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> storm bolter; power fist.",
+      "parsed": [
+        "000001183:storm-bolter",
+        "000001183:power-fist"
+      ]
+    },
     "weapons": [
       {
         "id": "000001183:assault-cannon",
@@ -386,7 +392,75 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001183:storm-bolter",
+            "000001183:power-fist"
+          ],
+          [
+            "000001183:storm-bolter",
+            "000001183:power-weapon"
+          ],
+          [
+            "000001183:storm-bolter",
+            "000001183:chainfist"
+          ]
+        ]
+      },
+      {
+        "modelType": "Terminator",
+        "items": [
+          [
+            "000001183:power-fist",
+            "000001183:assault-cannon"
+          ],
+          [
+            "000001183:assault-cannon",
+            "000001183:power-weapon"
+          ],
+          [
+            "000001183:assault-cannon",
+            "000001183:chainfist"
+          ],
+          [
+            "000001183:power-fist",
+            "000001183:heavy-flamer"
+          ],
+          [
+            "000001183:heavy-flamer",
+            "000001183:power-weapon"
+          ],
+          [
+            "000001183:heavy-flamer",
+            "000001183:chainfist"
+          ],
+          [
+            "000001183:power-fist",
+            "000001183:cyclone-missile-launcher",
+            "000001183:storm-bolter"
+          ],
+          [
+            "000001183:cyclone-missile-launcher",
+            "000001183:storm-bolter",
+            "000001183:power-weapon"
+          ],
+          [
+            "000001183:cyclone-missile-launcher",
+            "000001183:storm-bolter",
+            "000001183:chainfist"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

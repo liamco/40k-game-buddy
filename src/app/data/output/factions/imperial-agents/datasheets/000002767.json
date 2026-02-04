@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "*This unit can only contain 2 Gun Servitors if it also contains 10 Inquisitorial Agents.<br><br><b>Every Inquisitorial Agent is equipped with:</b> agent firearm; agent melee weapon.<br><br><b>Every Gun Servitor is equipped with:</b> heavy bolter; agent melee weapon.",
+    "defaultLoadout": {
+      "raw": "*This unit can only contain 2 Gun Servitors if it also contains 10 Inquisitorial Agents.<br><br><b>Every Inquisitorial Agent is equipped with:</b> agent firearm; agent melee weapon.<br><br><b>Every Gun Servitor is equipped with:</b> heavy bolter; agent melee weapon.",
+      "parsed": [
+        "000002767:agent-firearm",
+        "000002767:agent-melee-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002767:agent-firearm",
@@ -478,6 +484,34 @@
         "name": "Tome-skull",
         "description": "Once per battle for each Tome-skull this unit is equipped with, at the start of any phase, you can select either one friendly <span class=\"kwb\">AGENTS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb2\">THE</span> <span class=\"kwb\">IMPERIUM</span> unit that is Battle-shocked and within 6\" of this unit or one enemy unit within 6\" of this unit. If you select a friendly unit, that unit is no longer Battle-shocked. If you select an enemy unit, it must take a Battle-shock test.<br><br><b>Designer's Note:</b> Place the appropriate number of Tome-skull tokens next to the unit at the start of the battle, removing one each time this unit uses this ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Inquisitorial Agent",
+        "items": [
+          [
+            "000002767:agent-firearm",
+            "000002767:agent-melee-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Gun Servitors*",
+        "items": [
+          [
+            "000002767:heavy-bolter",
+            "000002767:agent-melee-weapon"
+          ],
+          [
+            "000002767:agent-melee-weapon",
+            "000002767:multi-melta"
+          ],
+          [
+            "000002767:agent-melee-weapon",
+            "000002767:plasma-cannon"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Novitiate Superior is equipped with:</b> bolt pistol; boltgun; close combat weapon. <br><br><b>Each Sister Novitiate is equipped with:</b> autopistol; autogun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Novitiate Superior is equipped with:</b> bolt pistol; boltgun; close combat weapon. <br><br><b>Each Sister Novitiate is equipped with:</b> autopistol; autogun; close combat weapon.",
+      "parsed": [
+        "000002507:bolt-pistol",
+        "000002507:boltgun",
+        "000002507:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002507:autopistol",
@@ -513,6 +520,37 @@
         "name": "Simulacrum Imperialis",
         "description": "At the end of your Command phase, for each objective marker you control that has one or more units from your army with this ability within range of it, roll one D6: on a 4+, you gain 1 Miracle dice showing a value equal to that result.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002507:bolt-pistol",
+            "000002507:boltgun",
+            "000002507:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Novitiate Superior",
+        "items": [
+          [
+            "000002507:close-combat-weapon",
+            "000002507:bolt-pistol",
+            "000002507:power-weapon"
+          ],
+          [
+            "000002507:close-combat-weapon",
+            "000002507:plasma-pistol",
+            "000002507:power-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
       }
     ]
   },

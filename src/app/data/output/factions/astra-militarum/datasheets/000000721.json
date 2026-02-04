@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Taurox battle cannon; twin Taurox hot-shot volley gun; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Taurox battle cannon; twin Taurox hot-shot volley gun; armoured tracks.",
+      "parsed": [
+        "000000721:taurox-battle-cannon",
+        "000000721:twin-taurox-hot-shot-volley-gun",
+        "000000721:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000721:storm-bolter",
@@ -346,7 +353,44 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000721:taurox-battle-cannon",
+            "000000721:twin-taurox-hot-shot-volley-gun",
+            "000000721:armoured-tracks"
+          ],
+          [
+            "000000721:taurox-battle-cannon",
+            "000000721:armoured-tracks",
+            "000000721:twin-autocannon"
+          ],
+          [
+            "000000721:twin-taurox-hot-shot-volley-gun",
+            "000000721:armoured-tracks",
+            "000000721:taurox-gatling-cannon"
+          ],
+          [
+            "000000721:armoured-tracks",
+            "000000721:taurox-gatling-cannon",
+            "000000721:twin-autocannon"
+          ],
+          [
+            "000000721:twin-taurox-hot-shot-volley-gun",
+            "000000721:armoured-tracks",
+            "000000721:taurox-missile-launcher"
+          ],
+          [
+            "000000721:armoured-tracks",
+            "000000721:taurox-missile-launcher",
+            "000000721:twin-autocannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

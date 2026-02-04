@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; Psychic Blast; Nemesis daemon hammer; Glovodan psyber-eagle.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol; Psychic Blast; Nemesis daemon hammer; Glovodan psyber-eagle.",
+      "parsed": [
+        "000000876:bolt-pistol",
+        "000000876:psychic-blast",
+        "000000876:nemesis-daemon-hammer",
+        "wargear-ability:glovodan-psyber-eagle"
+      ]
+    },
     "weapons": [
       {
         "id": "000000876:bolt-pistol",
@@ -114,7 +122,8 @@
         "description": "In your Command phase, you can select one enemy unit within 18\" of the bearer. Until the start of your next Command phase, that unit cannot have the Benefit of Cover.<br><br><b>Designer's Note:</b> Place a Glovodan Psyber-eagle token next to the selected unit to remind you.",
         "mechanics": []
       }
-    ]
+    ],
+    "validLoadouts": []
   },
   "supplement": {
     "key": "codex",

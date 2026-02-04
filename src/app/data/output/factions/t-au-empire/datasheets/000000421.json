@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy burst cannon; twin plasma rifle; Riptide fists.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy burst cannon; twin plasma rifle; Riptide fists.",
+      "parsed": [
+        "000000421:heavy-burst-cannon",
+        "000000421:twin-plasma-rifle",
+        "000000421:riptide-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000000421:heavy-burst-cannon",
@@ -309,7 +316,24 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000421:heavy-burst-cannon",
+            "000000421:twin-plasma-rifle",
+            "000000421:riptide-fists"
+          ],
+          [
+            "000000421:twin-plasma-rifle",
+            "000000421:riptide-fists",
+            "000000421:ion-accelerator"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

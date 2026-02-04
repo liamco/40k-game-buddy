@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> boltgun; power weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> boltgun; power weapon.",
+      "parsed": [
+        "000003816:boltgun",
+        "000003816:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003816:boltgun",
@@ -776,6 +782,75 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003816:boltgun",
+            "000003816:power-weapon"
+          ],
+          [
+            "000003816:infernus-heavy-bolter",
+            "000003816:close-combat-weapon"
+          ],
+          [
+            "000003816:frag-cannon",
+            "000003816:close-combat-weapon"
+          ],
+          [
+            "000003816:deathwatch-shotgun",
+            "000003816:close-combat-weapon"
+          ],
+          [
+            "000003816:stalker-pattern-boltgun",
+            "000003816:close-combat-weapon"
+          ],
+          [
+            "000003816:deathwatch-thunder-hammer"
+          ],
+          [
+            "000003816:boltgun",
+            "wargear-ability:astartes-shield"
+          ],
+          [
+            "000003816:power-weapon",
+            "wargear-ability:astartes-shield"
+          ]
+        ]
+      },
+      {
+        "modelType": "Watch Sergeant",
+        "items": [
+          [
+            "000003816:power-weapon",
+            "000003816:combi-weapon"
+          ],
+          [
+            "000003816:boltgun",
+            "000003816:xenophase-blade"
+          ],
+          [
+            "000003816:xenophase-blade",
+            "000003816:combi-weapon"
+          ],
+          [
+            "wargear-ability:astartes-shield",
+            "000003816:combi-weapon"
+          ],
+          [
+            "wargear-ability:astartes-shield",
+            "000003816:xenophase-blade"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 2
+        }
       }
     ]
   },

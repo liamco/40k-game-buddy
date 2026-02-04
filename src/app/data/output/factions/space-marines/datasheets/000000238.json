@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; close combat weapon.",
+      "parsed": [
+        "000000238:heavy-bolter",
+        "000000238:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000238:assault-cannon",
@@ -142,7 +148,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000238:heavy-bolter",
+            "000000238:close-combat-weapon"
+          ],
+          [
+            "000000238:close-combat-weapon",
+            "000000238:assault-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "dark-angels",

@@ -23,7 +23,17 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; macro plasma incinerator; Repulsor Executioner defensive array; twin heavy bolter; twin Icarus ironhail heavy stubber; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; macro plasma incinerator; Repulsor Executioner defensive array; twin heavy bolter; twin Icarus ironhail heavy stubber; armoured hull.",
+      "parsed": [
+        "000002790:heavy-onslaught-gatling-cannon",
+        "000002790:macro-plasma-incinerator",
+        "000002790:repulsor-executioner-defensive-array",
+        "000002790:twin-heavy-bolter",
+        "000002790:twin-icarus-ironhail-heavy-stubber",
+        "000002790:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000002790:heavy-laser-destroyer",
@@ -422,7 +432,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002790:heavy-onslaught-gatling-cannon",
+            "000002790:macro-plasma-incinerator",
+            "000002790:repulsor-executioner-defensive-array",
+            "000002790:twin-heavy-bolter",
+            "000002790:twin-icarus-ironhail-heavy-stubber",
+            "000002790:armoured-hull"
+          ],
+          [
+            "000002790:heavy-onslaught-gatling-cannon",
+            "000002790:repulsor-executioner-defensive-array",
+            "000002790:twin-heavy-bolter",
+            "000002790:twin-icarus-ironhail-heavy-stubber",
+            "000002790:armoured-hull",
+            "000002790:heavy-laser-destroyer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "black-templars",

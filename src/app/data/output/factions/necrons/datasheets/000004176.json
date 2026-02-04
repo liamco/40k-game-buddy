@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> gauss scalpel; claws.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> gauss scalpel; claws.",
+      "parsed": [
+        "000004176:gauss-scalpel",
+        "000004176:claws"
+      ]
+    },
     "weapons": [
       {
         "id": "000004176:atomiser-beam",
@@ -264,6 +270,21 @@
         "name": "Nanoscarab Projector",
         "description": "Once per battle round, when a friendly <span class=\"kwb\">NECRONS</span> unit within 3\" of the bearer activates its Reanimation Protocols, the bearer can use this ability. If it does, that unit reanimates 1 additional wound.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004176:gauss-scalpel",
+            "000004176:claws"
+          ],
+          [
+            "000004176:claws",
+            "000004176:tesla-caster"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> kombi-weapon; twin slugga; big choppa.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> kombi-weapon; twin slugga; big choppa.",
+      "parsed": [
+        "000000001:kombi-weapon",
+        "000000001:twin-slugga",
+        "000000001:big-choppa"
+      ]
+    },
     "weapons": [
       {
         "id": "000000001:kombi-weapon",
@@ -227,7 +234,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000001:kombi-weapon",
+            "000000001:twin-slugga",
+            "000000001:big-choppa"
+          ],
+          [
+            "000000001:kombi-weapon",
+            "000000001:twin-slugga",
+            "000000001:power-klaw"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Theyn is equipped with:</b> Autoch-pattern bolt pistol; Autoch-pattern bolter; close combat weapon; weavefield crest.<br><br><b>Every Hearthkyn Warrior is equipped with:</b> Autoch-pattern bolt pistol; Autoch-pattern bolter; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Theyn is equipped with:</b> Autoch-pattern bolt pistol; Autoch-pattern bolter; close combat weapon; weavefield crest.<br><br><b>Every Hearthkyn Warrior is equipped with:</b> Autoch-pattern bolt pistol; Autoch-pattern bolter; close combat weapon.",
+      "parsed": [
+        "000002598:autoch-pattern-bolt-pistol",
+        "000002598:autoch-pattern-bolter",
+        "000002598:close-combat-weapon",
+        "wargear-ability:weavefield-crest"
+      ]
+    },
     "weapons": [
       {
         "id": "000002598:autoch-pattern-bolt-pistol",
@@ -600,6 +608,54 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Theyn",
+        "items": [
+          [
+            "000002598:autoch-pattern-bolt-pistol",
+            "000002598:autoch-pattern-bolter",
+            "000002598:close-combat-weapon",
+            "wargear-ability:weavefield-crest"
+          ],
+          [
+            "000002598:autoch-pattern-bolt-pistol",
+            "000002598:close-combat-weapon",
+            "wargear-ability:weavefield-crest",
+            "000002598:ion-blaster"
+          ],
+          [
+            "000002598:autoch-pattern-bolt-pistol",
+            "000002598:close-combat-weapon",
+            "wargear-ability:weavefield-crest",
+            "000002598:theyn-s-pistol"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Hearthkyn Warrior",
+        "items": [
+          [
+            "000002598:autoch-pattern-bolt-pistol",
+            "000002598:autoch-pattern-bolter",
+            "000002598:close-combat-weapon"
+          ],
+          [
+            "000002598:autoch-pattern-bolt-pistol",
+            "000002598:close-combat-weapon",
+            "000002598:ion-blaster"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
       }
     ]
   },

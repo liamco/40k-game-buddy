@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; Palatine blade.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol; Palatine blade.",
+      "parsed": [
+        "000002472:bolt-pistol",
+        "000002472:palatine-blade"
+      ]
+    },
     "weapons": [
       {
         "id": "000002472:bolt-pistol",
@@ -160,7 +166,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002472:bolt-pistol",
+            "000002472:palatine-blade"
+          ],
+          [
+            "000002472:palatine-blade",
+            "000002472:plasma-pistol"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

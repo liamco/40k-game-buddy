@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> combi-bolter; bubotic blade.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> combi-bolter; bubotic blade.",
+      "parsed": [
+        "000001372:combi-bolter",
+        "000001372:bubotic-blade"
+      ]
+    },
     "weapons": [
       {
         "id": "000001372:blight-launcher",
@@ -481,7 +487,43 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001372:combi-bolter",
+            "000001372:bubotic-blade"
+          ]
+        ]
+      },
+      {
+        "modelType": "Blightlord Terminator",
+        "items": [
+          [
+            "000001372:bubotic-blade",
+            "000001372:plague-spewer"
+          ],
+          [
+            "000001372:bubotic-blade",
+            "000001372:reaper-autocannon"
+          ],
+          [
+            "000001372:bubotic-blade",
+            "000001372:blight-launcher"
+          ],
+          [
+            "000001372:flail-of-corruption"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

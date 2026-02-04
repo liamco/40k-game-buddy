@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; power weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; power weapon.",
+      "parsed": [
+        "000002066:bolt-pistol",
+        "000002066:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002066:bolt-pistol",
@@ -200,6 +206,21 @@
         "name": "Sacred Banner",
         "description": "You can re-roll Advance and Charge rolls made for the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002066:bolt-pistol",
+            "000002066:power-weapon"
+          ],
+          [
+            "000002066:power-weapon",
+            "000002066:plasma-pistol"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> storm bolter; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> storm bolter; armoured tracks.",
+      "parsed": [
+        "000002723:storm-bolter",
+        "000002723:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000002723:hunter-killer-missile",
@@ -136,7 +142,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002723:storm-bolter",
+            "000002723:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

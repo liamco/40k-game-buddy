@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Lancer laser destroyer; 2 storm bolters; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Lancer laser destroyer; 2 storm bolters; armoured hull.",
+      "parsed": [
+        "000002705:lancer-laser-destroyer",
+        "000002705:storm-bolters",
+        "000002705:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000002705:fragstorm-grenade-launcher",
@@ -289,7 +296,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002705:lancer-laser-destroyer",
+            "000002705:storm-bolters",
+            "000002705:armoured-hull"
+          ],
+          [
+            "000002705:lancer-laser-destroyer",
+            "000002705:armoured-hull",
+            "000002705:fragstorm-grenade-launchers"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

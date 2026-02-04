@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Corsair Voidscarred and Voidscarred Felarch is equipped with:</b> shuriken pistol; power sword; close combat weapon.<br><br><b>A Shade Runner is equipped with:</b> shuriken pistol; paired Hekatarii blades.<br><br><b>A Soul Weaver is equipped with:</b> shuriken pistol; power sword; channeller stones.<br><br><b>A Way Seeker is equipped with:</b> shuriken pistol; Executioner; witch staff.",
+    "defaultLoadout": {
+      "raw": "<b>Every Corsair Voidscarred and Voidscarred Felarch is equipped with:</b> shuriken pistol; power sword; close combat weapon.<br><br><b>A Shade Runner is equipped with:</b> shuriken pistol; paired Hekatarii blades.<br><br><b>A Soul Weaver is equipped with:</b> shuriken pistol; power sword; channeller stones.<br><br><b>A Way Seeker is equipped with:</b> shuriken pistol; Executioner; witch staff.",
+      "parsed": [
+        "000002532:shuriken-pistol",
+        "000002532:power-sword",
+        "000002532:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002532:blaster",
@@ -742,6 +749,97 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "This unit can contain a maximum of 10 models.",
+        "items": [
+          [
+            "000002532:shuriken-pistol",
+            "000002532:power-sword",
+            "000002532:close-combat-weapon"
+          ],
+          [
+            "000002532:close-combat-weapon",
+            "000002532:shuriken-rifle"
+          ]
+        ]
+      },
+      {
+        "modelType": "Voidscarred Felarch",
+        "items": [
+          [
+            "000002532:shuriken-pistol",
+            "000002532:power-sword",
+            "000002532:close-combat-weapon"
+          ],
+          [
+            "000002532:power-sword",
+            "000002532:close-combat-weapon",
+            "000002532:neuro-disruptor"
+          ],
+          [
+            "000002532:power-sword",
+            "000002532:close-combat-weapon",
+            "000002532:shuriken-rifle"
+          ],
+          [
+            "000002532:close-combat-weapon",
+            "000002532:shuriken-rifle"
+          ]
+        ]
+      },
+      {
+        "modelType": "Corsair Voidscarred",
+        "items": [
+          [
+            "000002532:shuriken-pistol",
+            "000002532:power-sword",
+            "000002532:close-combat-weapon"
+          ],
+          [
+            "000002532:close-combat-weapon",
+            "000002532:shuriken-rifle"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Shade Runner",
+        "items": [
+          [
+            "000002532:shuriken-pistol",
+            "000002532:paired-hekatarii-blades"
+          ]
+        ]
+      },
+      {
+        "modelType": "Soul Weaver",
+        "items": [
+          [
+            "000002532:shuriken-pistol",
+            "000002532:power-sword",
+            "wargear-ability:channeller-stones"
+          ],
+          [
+            "wargear-ability:channeller-stones",
+            "000002532:shuriken-rifle"
+          ]
+        ]
+      },
+      {
+        "modelType": "Way Seeker",
+        "items": [
+          [
+            "000002532:shuriken-pistol",
+            "000002532:executioner",
+            "000002532:witch-staff"
+          ]
+        ]
       }
     ]
   },

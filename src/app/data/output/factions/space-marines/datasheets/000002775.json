@@ -23,7 +23,14 @@
   },
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; bolt rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol; bolt rifle; close combat weapon.",
+      "parsed": [
+        "000002775:bolt-pistol",
+        "000002775:bolt-rifle",
+        "000002775:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002775:bolt-pistol",
@@ -177,7 +184,23 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002775:bolt-pistol",
+            "000002775:bolt-rifle",
+            "000002775:close-combat-weapon"
+          ],
+          [
+            "000002775:bolt-pistol",
+            "000002775:power-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

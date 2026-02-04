@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> lastrum bolt cannon; interceptor lance.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> lastrum bolt cannon; interceptor lance.",
+      "parsed": [
+        "000001560:lastrum-bolt-cannon",
+        "000001560:interceptor-lance"
+      ]
+    },
     "weapons": [
       {
         "id": "000001560:adrathic-devastator",
@@ -178,7 +184,26 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001560:lastrum-bolt-cannon",
+            "000001560:interceptor-lance"
+          ],
+          [
+            "000001560:interceptor-lance",
+            "000001560:adrathic-devastator"
+          ],
+          [
+            "000001560:interceptor-lance",
+            "000001560:twin-las-pulsar"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

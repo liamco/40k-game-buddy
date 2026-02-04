@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> smasha gun; grot crew. <br><br><b>Designer's Note:</b> Place five Grot Crew tokens next to each Mek Gun model when this unit is first set up, removing one each time its Mek Gun model loses a wound (a Mek Gun model itself is considered to represent its final wound).",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> smasha gun; grot crew. <br><br><b>Designer's Note:</b> Place five Grot Crew tokens next to each Mek Gun model when this unit is first set up, removing one each time its Mek Gun model loses a wound (a Mek Gun model itself is considered to represent its final wound).",
+      "parsed": [
+        "000000038:smasha-gun",
+        "000000038:grot-crew"
+      ]
+    },
     "weapons": [
       {
         "id": "000000038:bubblechukka",
@@ -254,7 +260,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000038:smasha-gun",
+            "000000038:grot-crew"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

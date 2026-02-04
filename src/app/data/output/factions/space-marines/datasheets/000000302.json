@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> assault cannon; heavy flamer; Trueclaw.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> assault cannon; heavy flamer; Trueclaw.",
+      "parsed": [
+        "000000302:assault-cannon",
+        "000000302:heavy-flamer",
+        "000000302:trueclaw"
+      ]
+    },
     "weapons": [
       {
         "id": "000000302:assault-cannon",
@@ -222,7 +229,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000302:assault-cannon",
+            "000000302:heavy-flamer",
+            "000000302:trueclaw"
+          ],
+          [
+            "000000302:heavy-flamer",
+            "000000302:trueclaw",
+            "000000302:helfrost-cannon"
+          ],
+          [
+            "000000302:heavy-flamer",
+            "000000302:trueclaw",
+            "000000302:multi-melta"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "space-wolves",

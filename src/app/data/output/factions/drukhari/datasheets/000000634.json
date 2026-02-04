@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> splinter pistol; huskblade; shadowfield.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> splinter pistol; huskblade; shadowfield.",
+      "parsed": [
+        "000000634:splinter-pistol",
+        "000000634:huskblade",
+        "wargear-ability:shadowfield"
+      ]
+    },
     "weapons": [
       {
         "id": "000000634:blast-pistol",
@@ -266,6 +273,58 @@
         "name": "Soul Trap",
         "description": "Add 1 to the Attacks and Strength characteristics of the bearer's melee weapons. The first time the bearer makes a melee attack that destroys an enemy model, after all the bearer's attacks have been resolved, until the end of the battle, add an additional 1 to the Attacks and Strength characteristics of the bearer's melee weapons.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000634:splinter-pistol",
+            "000000634:huskblade",
+            "wargear-ability:shadowfield"
+          ],
+          [
+            "000000634:splinter-pistol",
+            "wargear-ability:shadowfield",
+            "000000634:agoniser"
+          ],
+          [
+            "000000634:splinter-pistol",
+            "wargear-ability:shadowfield",
+            "000000634:master-crafted-power-weapon"
+          ],
+          [
+            "000000634:huskblade",
+            "wargear-ability:shadowfield",
+            "000000634:blast-pistol"
+          ],
+          [
+            "wargear-ability:shadowfield",
+            "000000634:blast-pistol",
+            "000000634:agoniser"
+          ],
+          [
+            "wargear-ability:shadowfield",
+            "000000634:blast-pistol",
+            "000000634:master-crafted-power-weapon"
+          ],
+          [
+            "000000634:huskblade",
+            "wargear-ability:shadowfield",
+            "wargear-ability:soul-trap"
+          ],
+          [
+            "wargear-ability:shadowfield",
+            "wargear-ability:soul-trap",
+            "000000634:agoniser"
+          ],
+          [
+            "wargear-ability:shadowfield",
+            "wargear-ability:soul-trap",
+            "000000634:master-crafted-power-weapon"
+          ]
+        ]
       }
     ]
   },

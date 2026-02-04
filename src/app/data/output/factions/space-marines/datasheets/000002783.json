@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> boltgun; power weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> boltgun; power weapon.",
+      "parsed": [
+        "000002783:boltgun",
+        "000002783:power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002783:boltgun",
@@ -776,6 +782,71 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002783:boltgun",
+            "000002783:power-weapon"
+          ],
+          [
+            "000002783:infernus-heavy-bolter",
+            "000002783:close-combat-weapon"
+          ],
+          [
+            "000002783:frag-cannon",
+            "000002783:close-combat-weapon"
+          ],
+          [
+            "000002783:deathwatch-shotgun",
+            "000002783:close-combat-weapon"
+          ],
+          [
+            "000002783:stalker-pattern-boltgun",
+            "000002783:close-combat-weapon"
+          ],
+          [
+            "000002783:deathwatch-thunder-hammer"
+          ],
+          [
+            "000002783:boltgun,-1-astartes-shield",
+            "000002783:close-combat-weapon"
+          ],
+          [
+            "000002783:power-weapon",
+            "wargear-ability:astartes-shield"
+          ]
+        ]
+      },
+      {
+        "modelType": "Watch Sergeant",
+        "items": [
+          [
+            "000002783:power-weapon",
+            "000002783:combi-weapon"
+          ],
+          [
+            "000002783:boltgun",
+            "000002783:xenophase-blade"
+          ],
+          [
+            "000002783:xenophase-blade",
+            "000002783:combi-weapon"
+          ],
+          [
+            "wargear-ability:astartes-shield",
+            "000002783:xenophase-blade"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 2
+        }
       }
     ]
   },

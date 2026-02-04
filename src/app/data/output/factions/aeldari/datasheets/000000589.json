@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Guardian Defender is equipped with:</b> shuriken catapult; close combat weapon.<br><br><b>The Heavy Weapon Platform is equipped with:</b> shuriken cannon; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every Guardian Defender is equipped with:</b> shuriken catapult; close combat weapon.<br><br><b>The Heavy Weapon Platform is equipped with:</b> shuriken cannon; close combat weapon.",
+      "parsed": [
+        "000000589:shuriken-catapult",
+        "000000589:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000589:bright-lance",
@@ -288,7 +294,43 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Guardian Defender",
+        "items": [
+          [
+            "000000589:shuriken-catapult",
+            "000000589:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Heavy Weapon Platform",
+        "items": [
+          [
+            "000000589:shuriken-cannon",
+            "000000589:close-combat-weapon"
+          ],
+          [
+            "000000589:close-combat-weapon",
+            "000000589:missile-launcher"
+          ],
+          [
+            "000000589:close-combat-weapon",
+            "000000589:bright-lance"
+          ],
+          [
+            "000000589:close-combat-weapon",
+            "000000589:scatter-laser"
+          ],
+          [
+            "000000589:close-combat-weapon",
+            "000000589:starcannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

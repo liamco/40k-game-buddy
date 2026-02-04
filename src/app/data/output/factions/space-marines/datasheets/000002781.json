@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Kill Team Heavy Intercessor is equipped with:</b> bolt pistol; Deathwatch heavy bolt rifle; close combat weapon.<br><br><b>Every Kill Team Heavy Intercessor with power fists is equipped with:</b> flamestorm gauntlets; twin power fists.<br><br><b>Every Kill Team Heavy Intercessor with melta rifle is equipped with:</b> bolt pistol; melta rifle; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every Kill Team Heavy Intercessor is equipped with:</b> bolt pistol; Deathwatch heavy bolt rifle; close combat weapon.<br><br><b>Every Kill Team Heavy Intercessor with power fists is equipped with:</b> flamestorm gauntlets; twin power fists.<br><br><b>Every Kill Team Heavy Intercessor with melta rifle is equipped with:</b> bolt pistol; melta rifle; close combat weapon.",
+      "parsed": [
+        "000002781:bolt-pistol",
+        "000002781:deathwatch-heavy-bolt-rifle",
+        "000002781:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002781:auto-boltstorm-gauntlets",
@@ -417,7 +424,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002781:bolt-pistol",
+            "000002781:deathwatch-heavy-bolt-rifle",
+            "000002781:close-combat-weapon"
+          ],
+          [
+            "000002781:bolt-pistol",
+            "000002781:close-combat-weapon",
+            "000002781:deathwatch-heavy-bolter"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "deathwatch",

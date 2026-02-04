@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Miraculist is equipped with:</b> holy fire; burning hands.<br><br><b>The Salvationist is equipped with:</b> close combat weapon; Salvationist medikit.<br><br><b>The Death Cult Assassin is equipped with:</b> Death Cult blades.<br><br><b>1 Missionary is equipped with:</b> plasma gun; Sanctifier melee weapon.<br><br><b>1 Missionary is equipped with:</b> Ministorum flamer; Sanctifier melee weapon.<br><br><b>Every Sanctifier is equipped with:</b> Ministorum hand flamer; Sanctifier melee weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Miraculist is equipped with:</b> holy fire; burning hands.<br><br><b>The Salvationist is equipped with:</b> close combat weapon; Salvationist medikit.<br><br><b>The Death Cult Assassin is equipped with:</b> Death Cult blades.<br><br><b>1 Missionary is equipped with:</b> plasma gun; Sanctifier melee weapon.<br><br><b>1 Missionary is equipped with:</b> Ministorum flamer; Sanctifier melee weapon.<br><br><b>Every Sanctifier is equipped with:</b> Ministorum hand flamer; Sanctifier melee weapon.",
+      "parsed": [
+        "000004075:holy-fire",
+        "000004075:burning-hands"
+      ]
+    },
     "weapons": [
       {
         "id": "000004075:holy-fire",
@@ -457,6 +463,65 @@
         "name": "Simulacrum Imperialis",
         "description": "At the end of your Command phase, for each objective marker you control that has one or more units from your army with this ability within range of it, roll one D6: on a 4+, you gain 1 Miracle dice showing a value equal to that result.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Miraculist",
+        "items": [
+          [
+            "000004075:holy-fire",
+            "000004075:burning-hands"
+          ]
+        ]
+      },
+      {
+        "modelType": "Salvationist",
+        "items": [
+          [
+            "000004075:close-combat-weapon",
+            "wargear-ability:salvationist-medikit"
+          ]
+        ]
+      },
+      {
+        "modelType": "Death Cult Assassin",
+        "items": [
+          [
+            "000004075:death-cult-blades"
+          ]
+        ]
+      },
+      {
+        "modelType": "Missionarie",
+        "items": [
+          [
+            "000004075:holy-fire",
+            "000004075:burning-hands"
+          ]
+        ]
+      },
+      {
+        "modelType": "Sanctifier",
+        "items": [
+          [
+            "000004075:ministorum-hand-flamer",
+            "000004075:sanctifier-melee-weapon"
+          ],
+          [
+            "000004075:ministorum-hand-flamer",
+            "000004075:close-combat-weapon",
+            "wargear-ability:simulacrum-imperialis"
+          ],
+          [
+            "000004075:ministorum-hand-flamer",
+            "000004075:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

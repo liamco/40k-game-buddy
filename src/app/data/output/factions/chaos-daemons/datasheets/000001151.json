@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> harvester cannon; iron claw; warpsword.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> harvester cannon; iron claw; warpsword.",
+      "parsed": [
+        "000001151:harvester-cannon",
+        "000001151:iron-claw",
+        "000001151:warpsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000001151:harvester-cannon",
@@ -279,7 +286,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001151:harvester-cannon",
+            "000001151:iron-claw",
+            "000001151:warpsword"
+          ],
+          [
+            "000001151:harvester-cannon",
+            "000001151:iron-claw",
+            "000001151:warpclaw"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

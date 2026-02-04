@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> laser lance; twin shuriken catapult.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> laser lance; twin shuriken catapult.",
+      "parsed": [
+        "000000602:laser-lance",
+        "000000602:twin-shuriken-catapult"
+      ]
+    },
     "weapons": [
       {
         "id": "000000602:laser-lance",
@@ -348,6 +354,37 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000602:laser-lance",
+            "000000602:twin-shuriken-catapult"
+          ],
+          [
+            "000000602:laser-lance",
+            "000000602:shuriken-cannon"
+          ],
+          [
+            "000000602:twin-shuriken-catapult",
+            "000000602:paragon-sabre"
+          ],
+          [
+            "000000602:paragon-sabre",
+            "000000602:shuriken-cannon"
+          ],
+          [
+            "000000602:twin-shuriken-catapult",
+            "000000602:star-lance"
+          ],
+          [
+            "000000602:star-lance",
+            "000000602:shuriken-cannon"
+          ]
+        ]
       }
     ]
   },

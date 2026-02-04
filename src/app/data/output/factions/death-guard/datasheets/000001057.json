@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> fleshmower; plague probe.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> fleshmower; plague probe.",
+      "parsed": [
+        "000001057:fleshmower",
+        "000001057:plague-probe"
+      ]
+    },
     "weapons": [
       {
         "id": "000001057:plaguespitter",
@@ -146,7 +152,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001057:fleshmower",
+            "000001057:plague-probe"
+          ],
+          [
+            "000001057:plague-probe",
+            "000001057:plaguespitters"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

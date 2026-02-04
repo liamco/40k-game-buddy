@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> storm bolter; power fist.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> storm bolter; power fist.",
+      "parsed": [
+        "000004138:storm-bolter",
+        "000004138:power-fist"
+      ]
+    },
     "weapons": [
       {
         "id": "000004138:assault-cannon",
@@ -386,7 +392,75 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004138:storm-bolter",
+            "000004138:power-fist"
+          ],
+          [
+            "000004138:storm-bolter",
+            "000004138:power-weapon"
+          ],
+          [
+            "000004138:storm-bolter",
+            "000004138:chainfist"
+          ]
+        ]
+      },
+      {
+        "modelType": "Terminator",
+        "items": [
+          [
+            "000004138:power-fist",
+            "000004138:assault-cannon"
+          ],
+          [
+            "000004138:assault-cannon",
+            "000004138:power-weapon"
+          ],
+          [
+            "000004138:assault-cannon",
+            "000004138:chainfist"
+          ],
+          [
+            "000004138:power-fist",
+            "000004138:heavy-flamer"
+          ],
+          [
+            "000004138:heavy-flamer",
+            "000004138:power-weapon"
+          ],
+          [
+            "000004138:heavy-flamer",
+            "000004138:chainfist"
+          ],
+          [
+            "000004138:power-fist",
+            "000004138:cyclone-missile-launcher",
+            "000004138:storm-bolter"
+          ],
+          [
+            "000004138:cyclone-missile-launcher",
+            "000004138:storm-bolter",
+            "000004138:power-weapon"
+          ],
+          [
+            "000004138:cyclone-missile-launcher",
+            "000004138:storm-bolter",
+            "000004138:chainfist"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "black-templars",

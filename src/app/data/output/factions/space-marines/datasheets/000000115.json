@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> storm bolter; crozius arcanum.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> storm bolter; crozius arcanum.",
+      "parsed": [
+        "000000115:storm-bolter",
+        "000000115:crozius-arcanum"
+      ]
+    },
     "weapons": [
       {
         "id": "000000115:storm-bolter",
@@ -130,6 +136,21 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000115:storm-bolter",
+            "000000115:crozius-arcanum"
+          ],
+          [
+            "000000115:crozius-arcanum",
+            "wargear-ability:relic-shield"
+          ]
+        ]
       }
     ]
   },

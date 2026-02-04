@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Steeljack Theyn is equipped with:</b> heavy volkanite disintegrator; plasma knife; preymark crest.<br><br><b>Every Ironkin Steeljack is equipped with:</b> heavy volkanite disintegrator; plasma knife.",
+    "defaultLoadout": {
+      "raw": "<b>The Steeljack Theyn is equipped with:</b> heavy volkanite disintegrator; plasma knife; preymark crest.<br><br><b>Every Ironkin Steeljack is equipped with:</b> heavy volkanite disintegrator; plasma knife.",
+      "parsed": [
+        "000004143:heavy-volkanite-disintegrator",
+        "000004143:plasma-knife",
+        "wargear-ability:preymark-crest"
+      ]
+    },
     "weapons": [
       {
         "id": "000004143:autoch-pattern-bolter",
@@ -185,6 +192,32 @@
         "name": "Preymark Crest",
         "description": "Each time a model in the bearer's unit makes an attack that targets an enemy unit within range of one or more objective markers, on a Critical Wound, that attack has the [PRECISION] ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Steeljack Theyn",
+        "items": [
+          [
+            "000004143:heavy-volkanite-disintegrator",
+            "000004143:plasma-knife",
+            "wargear-ability:preymark-crest"
+          ],
+          [
+            "wargear-ability:preymark-crest",
+            "000004143:autoch-pattern-bolter",
+            "000004143:plasma-sword"
+          ]
+        ]
+      },
+      {
+        "modelType": "Ironkin Steeljack",
+        "items": [
+          [
+            "000004143:heavy-volkanite-disintegrator",
+            "000004143:plasma-knife"
+          ]
+        ]
       }
     ]
   },

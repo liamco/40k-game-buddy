@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; Astartes chainsword.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; Astartes chainsword.",
+      "parsed": [
+        "000000303:bolt-pistol",
+        "000000303:astartes-chainsword"
+      ]
+    },
     "weapons": [
       {
         "id": "000000303:bolt-pistol",
@@ -224,7 +230,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000303:bolt-pistol",
+            "000000303:astartes-chainsword"
+          ],
+          [
+            "000000303:bolt-pistol",
+            "000000303:power-weapon"
+          ],
+          [
+            "000000303:astartes-chainsword",
+            "000000303:plasma-pistol"
+          ],
+          [
+            "000000303:plasma-pistol",
+            "000000303:power-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "space-wolves",

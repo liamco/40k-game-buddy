@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> pulse blaster; pulse pistol; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> pulse blaster; pulse pistol; close combat weapon.",
+      "parsed": [
+        "000000412:pulse-blaster",
+        "000000412:pulse-pistol",
+        "000000412:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000412:pulse-blaster",
@@ -197,7 +204,19 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000412:pulse-blaster",
+            "000000412:pulse-pistol",
+            "000000412:close-combat-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

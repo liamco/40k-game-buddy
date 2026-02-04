@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> dark lance; bladevanes and chainsnares.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> dark lance; bladevanes and chainsnares.",
+      "parsed": [
+        "000000656:dark-lance",
+        "000000656:bladevanes-and-chainsnares"
+      ]
+    },
     "weapons": [
       {
         "id": "000000656:dark-lance",
@@ -138,7 +144,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000656:dark-lance",
+            "000000656:bladevanes-and-chainsnares"
+          ],
+          [
+            "000000656:bladevanes-and-chainsnares",
+            "000000656:disintegrator-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

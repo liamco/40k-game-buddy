@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; plasma storm battery; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; plasma storm battery; close combat weapon.",
+      "parsed": [
+        "000000242:heavy-bolter",
+        "000000242:plasma-storm-battery",
+        "000000242:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000242:assault-cannon",
@@ -188,7 +195,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000242:heavy-bolter",
+            "000000242:plasma-storm-battery",
+            "000000242:close-combat-weapon"
+          ],
+          [
+            "000000242:plasma-storm-battery",
+            "000000242:close-combat-weapon",
+            "000000242:assault-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "dark-angels",

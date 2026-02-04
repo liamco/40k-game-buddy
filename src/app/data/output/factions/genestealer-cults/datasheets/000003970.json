@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy bolter; Deathstrike missile; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy bolter; Deathstrike missile; armoured tracks.",
+      "parsed": [
+        "000003970:heavy-bolter",
+        "000003970:deathstrike-missile",
+        "000003970:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003970:deathstrike-missile",
@@ -229,7 +236,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003970:heavy-bolter",
+            "000003970:deathstrike-missile",
+            "000003970:armoured-tracks"
+          ],
+          [
+            "000003970:deathstrike-missile",
+            "000003970:armoured-tracks",
+            "000003970:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Kroot long gun; close combat weapon; Kalamandra's bite.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Kroot long gun; close combat weapon; Kalamandra's bite.",
+      "parsed": [
+        "000003705:kroot-long-gun",
+        "000003705:close-combat-weapon",
+        "000003705:kalamandra-s-bite"
+      ]
+    },
     "weapons": [
       {
         "id": "000003705:blast-javelin",
@@ -201,7 +208,25 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003705:kroot-long-gun",
+            "000003705:close-combat-weapon",
+            "000003705:kalamandra-s-bite"
+          ],
+          [
+            "000003705:close-combat-weapon",
+            "000003705:kalamandra-s-bite",
+            "000003705:blast-javelin",
+            "000003705:hunting-javelin"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

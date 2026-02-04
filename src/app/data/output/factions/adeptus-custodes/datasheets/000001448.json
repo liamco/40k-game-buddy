@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> balistus grenade launcher; guardian spear.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> balistus grenade launcher; guardian spear.",
+      "parsed": [
+        "000001448:balistus-grenade-launcher",
+        "000001448:guardian-spear"
+      ]
+    },
     "weapons": [
       {
         "id": "000001448:balistus-grenade-launcher",
@@ -192,7 +198,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001448:balistus-grenade-launcher",
+            "000001448:guardian-spear"
+          ],
+          [
+            "000001448:balistus-grenade-launcher",
+            "000001448:castellan-axe"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

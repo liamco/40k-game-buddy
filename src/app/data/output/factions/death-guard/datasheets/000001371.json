@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> plaguespurt gauntlet; manreaper.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> plaguespurt gauntlet; manreaper.",
+      "parsed": [
+        "000001371:plaguespurt-gauntlet",
+        "000001371:manreaper"
+      ]
+    },
     "weapons": [
       {
         "id": "000001371:plaguespurt-gauntlet",
@@ -172,6 +178,17 @@
         "name": "Icon of Despair (Aura)",
         "description": "While an enemy unit is within 6\" of the bearer, worsen the Leadership characteristic of models in that unit by 1.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001371:plaguespurt-gauntlet",
+            "000001371:manreaper"
+          ]
+        ]
       }
     ]
   },

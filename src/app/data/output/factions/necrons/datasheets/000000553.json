@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> gauss cannon; twin tesla destructor; armoured bulk.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> gauss cannon; twin tesla destructor; armoured bulk.",
+      "parsed": [
+        "000000553:gauss-cannon",
+        "000000553:twin-tesla-destructor",
+        "000000553:armoured-bulk"
+      ]
+    },
     "weapons": [
       {
         "id": "000000553:gauss-cannon",
@@ -169,7 +176,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000553:gauss-cannon",
+            "000000553:twin-tesla-destructor",
+            "000000553:armoured-bulk"
+          ],
+          [
+            "000000553:twin-tesla-destructor",
+            "000000553:armoured-bulk",
+            "000000553:tesla-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

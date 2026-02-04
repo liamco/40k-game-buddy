@@ -23,7 +23,15 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> belleros energy cannon; 3 cognis heavy stubbers; disruptor missile launcher; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> belleros energy cannon; 3 cognis heavy stubbers; disruptor missile launcher; armoured hull.",
+      "parsed": [
+        "000001651:belleros-energy-cannon",
+        "000001651:cognis-heavy-stubbers",
+        "000001651:disruptor-missile-launcher",
+        "000001651:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000001651:belleros-energy-cannon",
@@ -199,7 +207,26 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001651:belleros-energy-cannon",
+            "000001651:cognis-heavy-stubbers",
+            "000001651:disruptor-missile-launcher",
+            "000001651:armoured-hull"
+          ],
+          [
+            "000001651:cognis-heavy-stubbers",
+            "000001651:disruptor-missile-launcher",
+            "000001651:armoured-hull",
+            "000001651:ferrumite-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 1 railgun; 2 twin pulse carbines; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 1 railgun; 2 twin pulse carbines; armoured hull.",
+      "parsed": [
+        "000000432:railgun",
+        "000000432:twin-pulse-carbines",
+        "000000432:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000432:accelerator-burst-cannon",
@@ -337,7 +344,44 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000432:railgun",
+            "000000432:twin-pulse-carbines",
+            "000000432:armoured-hull"
+          ],
+          [
+            "000000432:railgun",
+            "000000432:armoured-hull",
+            "000000432:accelerator-burst-cannons"
+          ],
+          [
+            "000000432:railgun",
+            "000000432:armoured-hull",
+            "000000432:smart-missile-systems"
+          ],
+          [
+            "000000432:twin-pulse-carbines",
+            "000000432:armoured-hull",
+            "000000432:ion-cannon"
+          ],
+          [
+            "000000432:armoured-hull",
+            "000000432:ion-cannon",
+            "000000432:accelerator-burst-cannons"
+          ],
+          [
+            "000000432:armoured-hull",
+            "000000432:ion-cannon",
+            "000000432:smart-missile-systems"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

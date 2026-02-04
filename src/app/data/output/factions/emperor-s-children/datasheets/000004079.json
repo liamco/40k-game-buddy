@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Obsessionist is equipped with:</b> bolt pistol; power sword.<br><br><b>Every Tormentor is equipped with:</b> boltgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Obsessionist is equipped with:</b> bolt pistol; power sword.<br><br><b>Every Tormentor is equipped with:</b> boltgun; close combat weapon.",
+      "parsed": [
+        "000004079:bolt-pistol",
+        "000004079:power-sword"
+      ]
+    },
     "weapons": [
       {
         "id": "000004079:bolt-pistol",
@@ -476,6 +482,51 @@
         "name": "Icon of Excess",
         "description": "At the end of your Shooting phase or the Fight phase, if the bearer's unit destroyed one or more enemy units that phase, the bearer's unit takes a Leadership test. If that test is passed, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Obsessionist",
+        "items": [
+          [
+            "000004079:bolt-pistol",
+            "000004079:power-sword"
+          ],
+          [
+            "000004079:bolt-pistol",
+            "000004079:rapture-lash"
+          ],
+          [
+            "000004079:power-sword",
+            "000004079:plasma-pistol"
+          ],
+          [
+            "000004079:plasma-pistol",
+            "000004079:rapture-lash"
+          ]
+        ]
+      },
+      {
+        "modelType": "Tormentor",
+        "items": [
+          [
+            "000004079:boltgun",
+            "000004079:close-combat-weapon"
+          ],
+          [
+            "000004079:close-combat-weapon",
+            "000004079:plasma-gun"
+          ],
+          [
+            "000004079:close-combat-weapon",
+            "000004079:meltagun"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
       }
     ]
   },

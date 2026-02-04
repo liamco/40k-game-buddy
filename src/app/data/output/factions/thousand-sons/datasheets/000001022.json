@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> inferno combi-bolter; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> inferno combi-bolter; armoured tracks.",
+      "parsed": [
+        "000001022:inferno-combi-bolter",
+        "000001022:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000001022:havoc-launcher",
@@ -206,7 +212,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001022:inferno-combi-bolter",
+            "000001022:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

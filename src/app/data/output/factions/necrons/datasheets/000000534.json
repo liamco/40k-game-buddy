@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> gauss flayer; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> gauss flayer; close combat weapon.",
+      "parsed": [
+        "000000534:gauss-flayer",
+        "000000534:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000534:gauss-flayer",
@@ -143,7 +149,22 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000534:gauss-flayer",
+            "000000534:close-combat-weapon"
+          ],
+          [
+            "000000534:close-combat-weapon",
+            "000000534:gauss-reaper"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

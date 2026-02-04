@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> heavy bolter; lasgun; weapons team close combat weapons.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> heavy bolter; lasgun; weapons team close combat weapons.",
+      "parsed": [
+        "000003894:heavy-bolter",
+        "000003894:lasgun",
+        "000003894:weapons-team-close-combat-weapons"
+      ]
+    },
     "weapons": [
       {
         "id": "000003894:autocannon",
@@ -297,7 +304,39 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003894:heavy-bolter",
+            "000003894:lasgun",
+            "000003894:weapons-team-close-combat-weapons"
+          ],
+          [
+            "000003894:lasgun",
+            "000003894:weapons-team-close-combat-weapons",
+            "000003894:autocannon"
+          ],
+          [
+            "000003894:lasgun",
+            "000003894:weapons-team-close-combat-weapons",
+            "000003894:lascannon"
+          ],
+          [
+            "000003894:lasgun",
+            "000003894:weapons-team-close-combat-weapons",
+            "000003894:missile-launcher"
+          ],
+          [
+            "000003894:lasgun",
+            "000003894:weapons-team-close-combat-weapons",
+            "000003894:mortar"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

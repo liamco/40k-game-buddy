@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Storm Guardian is equipped with:</b> shuriken pistol; close combat weapon.<br><br><b>The Serpent's Scale Platform is equipped with:</b> close combat weapon; Serpent shield.",
+    "defaultLoadout": {
+      "raw": "<b>Every Storm Guardian is equipped with:</b> shuriken pistol; close combat weapon.<br><br><b>The Serpent's Scale Platform is equipped with:</b> close combat weapon; Serpent shield.",
+      "parsed": [
+        "000000590:shuriken-pistol",
+        "000000590:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000590:flamer",
@@ -289,6 +295,58 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Storm Guardian",
+        "items": [
+          [
+            "000000590:shuriken-pistol",
+            "000000590:close-combat-weapon"
+          ],
+          [
+            "000000590:shuriken-pistol",
+            "000000590:power-sword"
+          ],
+          [
+            "000000590:close-combat-weapon",
+            "000000590:fusion-gun"
+          ],
+          [
+            "000000590:fusion-gun",
+            "000000590:power-sword"
+          ],
+          [
+            "000000590:close-combat-weapon",
+            "000000590:flamer"
+          ],
+          [
+            "000000590:flamer",
+            "000000590:power-sword"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Serpent's Scale Platform",
+        "items": [
+          [
+            "000000590:close-combat-weapon",
+            "wargear-ability:serpent-shield"
+          ],
+          [
+            "wargear-ability:serpent-shield",
+            "000000590:power-sword"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
       }
     ]
   },

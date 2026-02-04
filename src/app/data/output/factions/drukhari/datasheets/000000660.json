@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 dark lances; Razorwing missiles; twin splinter rifle; bladed wings.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 dark lances; Razorwing missiles; twin splinter rifle; bladed wings.",
+      "parsed": [
+        "000000660:dark-lances",
+        "000000660:razorwing-missiles",
+        "000000660:twin-splinter-rifle",
+        "000000660:bladed-wings"
+      ]
+    },
     "weapons": [
       {
         "id": "000000660:dark-lance",
@@ -293,7 +301,38 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000660:dark-lances",
+            "000000660:razorwing-missiles",
+            "000000660:twin-splinter-rifle",
+            "000000660:bladed-wings"
+          ],
+          [
+            "000000660:dark-lances",
+            "000000660:razorwing-missiles",
+            "000000660:bladed-wings",
+            "000000660:splinter-cannon"
+          ],
+          [
+            "000000660:razorwing-missiles",
+            "000000660:twin-splinter-rifle",
+            "000000660:bladed-wings",
+            "000000660:disintegrator-cannons"
+          ],
+          [
+            "000000660:razorwing-missiles",
+            "000000660:bladed-wings",
+            "000000660:disintegrator-cannons",
+            "000000660:splinter-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

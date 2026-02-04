@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> special issue bolt pistol; combat knife.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> special issue bolt pistol; combat knife.",
+      "parsed": [
+        "000002718:special-issue-bolt-pistol",
+        "000002718:combat-knife"
+      ]
+    },
     "weapons": [
       {
         "id": "000002718:bolt-carbine",
@@ -292,6 +298,22 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002718:special-issue-bolt-pistol",
+            "000002718:combat-knife"
+          ],
+          [
+            "000002718:special-issue-bolt-pistol",
+            "000002718:bolt-carbine",
+            "000002718:close-combat-weapon"
+          ]
+        ]
       }
     ]
   },

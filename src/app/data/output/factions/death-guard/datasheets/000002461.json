@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> predator autocannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> predator autocannon; armoured tracks.",
+      "parsed": [
+        "000002461:predator-autocannon",
+        "000002461:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000002461:combi-bolter",
@@ -332,7 +338,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002461:predator-autocannon",
+            "000002461:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

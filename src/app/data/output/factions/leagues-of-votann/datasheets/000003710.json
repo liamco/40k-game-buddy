@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt shotgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt shotgun; close combat weapon.",
+      "parsed": [
+        "000003710:bolt-shotgun",
+        "000003710:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003710:apm-launcher",
@@ -315,7 +321,23 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003710:bolt-shotgun",
+            "000003710:close-combat-weapon"
+          ],
+          [
+            "000003710:close-combat-weapon",
+            "000003710:bolt-revolver",
+            "000003710:plasma-knife"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

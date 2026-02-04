@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> Venatari lance.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> Venatari lance.",
+      "parsed": [
+        "000001561:venatari-lance"
+      ]
+    },
     "weapons": [
       {
         "id": "000001561:kinetic-destroyer",
@@ -188,6 +193,20 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001561:venatari-lance"
+          ],
+          [
+            "000001561:kinetic-destroyer",
+            "000001561:tarsus-buckler"
+          ]
+        ]
       }
     ]
   },

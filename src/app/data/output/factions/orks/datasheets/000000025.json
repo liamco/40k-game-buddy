@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> slugga; choppa.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> slugga; choppa.",
+      "parsed": [
+        "000000025:slugga",
+        "000000025:choppa"
+      ]
+    },
     "weapons": [
       {
         "id": "000000025:burna",
@@ -580,6 +586,58 @@
         "name": "Bomb Squigs",
         "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer's Note:</b> Place a Bomb Squig token next to the unit, removing it when this unit uses this ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000025:slugga",
+            "000000025:choppa"
+          ],
+          [
+            "000000025:speshul-kommando-shoota",
+            "000000025:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Boss Nob",
+        "items": [
+          [
+            "000000025:slugga",
+            "000000025:big-choppa"
+          ],
+          [
+            "000000025:slugga",
+            "000000025:power-klaw"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
+      },
+      {
+        "modelType": "Kommando",
+        "items": [
+          [
+            "000000025:rokkit-launcha",
+            "000000025:close-combat-weapon"
+          ],
+          [
+            "000000025:burna",
+            "000000025:close-combat-weapon"
+          ],
+          [
+            "000000025:breacha-ram"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 2
+        }
       }
     ]
   },

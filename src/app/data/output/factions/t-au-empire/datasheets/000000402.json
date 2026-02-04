@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> high-output burst cannon; battlesuit fists.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> high-output burst cannon; battlesuit fists.",
+      "parsed": [
+        "000000402:high-output-burst-cannon",
+        "000000402:battlesuit-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000000402:airbursting-fragmentation-projector",
@@ -624,6 +630,57 @@
         "name": "Weapon Support System",
         "description": "Each time the bearer makes a ranged attack, you can ignore any or all modifiers to the Hit roll.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000402:high-output-burst-cannon",
+            "000000402:battlesuit-fists"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "000000402:airbursting-fragmentation-projector"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "wargear-ability:battlesuit-support-system"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "000000402:burst-cannon"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "000000402:cyclic-ion-blaster"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "000000402:fusion-blaster"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "000000402:missile-pod"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "000000402:plasma-rifle"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "wargear-ability:shield-generator"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "000000402:t-au-flamer"
+          ],
+          [
+            "000000402:battlesuit-fists",
+            "wargear-ability:weapon-support-system"
+          ]
+        ]
       }
     ]
   },

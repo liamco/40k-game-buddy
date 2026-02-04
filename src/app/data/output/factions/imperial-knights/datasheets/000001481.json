@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 Armiger autocannons; Questoris heavy stubber; armoured feet.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 Armiger autocannons; Questoris heavy stubber; armoured feet.",
+      "parsed": [
+        "000001481:armiger-autocannons",
+        "000001481:questoris-heavy-stubber",
+        "000001481:armoured-feet"
+      ]
+    },
     "weapons": [
       {
         "id": "000001481:armiger-autocannon",
@@ -171,7 +178,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001481:armiger-autocannons",
+            "000001481:questoris-heavy-stubber",
+            "000001481:armoured-feet"
+          ],
+          [
+            "000001481:armiger-autocannons",
+            "000001481:armoured-feet",
+            "000001481:meltagun"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

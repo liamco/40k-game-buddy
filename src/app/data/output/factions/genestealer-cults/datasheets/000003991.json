@@ -18,7 +18,16 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 lascannons; Stormsword siege cannon; twin heavy bolter; 2 twin heavy flamers; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 lascannons; Stormsword siege cannon; twin heavy bolter; 2 twin heavy flamers; armoured tracks.",
+      "parsed": [
+        "000003991:lascannons",
+        "000003991:stormsword-siege-cannon",
+        "000003991:twin-heavy-bolter",
+        "000003991:twin-heavy-flamers",
+        "000003991:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003991:armoured-tracks",
@@ -248,7 +257,28 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003991:lascannons",
+            "000003991:stormsword-siege-cannon",
+            "000003991:twin-heavy-bolter",
+            "000003991:twin-heavy-flamers",
+            "000003991:armoured-tracks"
+          ],
+          [
+            "000003991:lascannons",
+            "000003991:stormsword-siege-cannon",
+            "000003991:twin-heavy-bolter",
+            "000003991:armoured-tracks",
+            "000003991:twin-heavy-bolters"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Wolf Guard Terminator Pack Leader is equipped with:</b> storm bolter; master-crafted power weapon.<br><br><b>Every Wolf Guard Terminator is equipped with:</b> storm bolter; master-crafted power weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Wolf Guard Terminator Pack Leader is equipped with:</b> storm bolter; master-crafted power weapon.<br><br><b>Every Wolf Guard Terminator is equipped with:</b> storm bolter; master-crafted power weapon.",
+      "parsed": [
+        "000000318:storm-bolter",
+        "000000318:master-crafted-power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000318:assault-cannon",
@@ -330,6 +336,30 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000318:storm-bolter",
+            "000000318:master-crafted-power-weapon"
+          ],
+          [
+            "000000318:relic-greataxe"
+          ],
+          [
+            "000000318:twin-lightning-claws"
+          ],
+          [
+            "000000318:assault-cannon-and-1-powerfist"
+          ],
+          [
+            "000000318:master-crafted-power-weapon",
+            "wargear-ability:storm-shield"
+          ]
+        ]
       }
     ]
   },

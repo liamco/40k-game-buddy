@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> storm bolter; Fenrisian greataxe; great wolf claw.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> storm bolter; Fenrisian greataxe; great wolf claw.",
+      "parsed": [
+        "000004133:storm-bolter",
+        "000004133:fenrisian-greataxe",
+        "000004133:great-wolf-claw"
+      ]
+    },
     "weapons": [
       {
         "id": "000004133:heavy-flamer",
@@ -244,6 +251,18 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004133:storm-bolter",
+            "000004133:fenrisian-greataxe",
+            "000004133:great-wolf-claw"
+          ]
+        ]
       }
     ]
   },

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> grenadier gauntlet; close combat weapon; slabshield.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> grenadier gauntlet; close combat weapon; slabshield.",
+      "parsed": [
+        "000000723:grenadier-gauntlet",
+        "000000723:close-combat-weapon",
+        "wargear-ability:slabshield"
+      ]
+    },
     "weapons": [
       {
         "id": "000000723:grenadier-gauntlet",
@@ -206,6 +213,33 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000723:grenadier-gauntlet",
+            "000000723:close-combat-weapon",
+            "wargear-ability:slabshield"
+          ],
+          [
+            "000000723:grenadier-gauntlet",
+            "000000723:close-combat-weapon",
+            "wargear-ability:brute-shield"
+          ],
+          [
+            "000000723:close-combat-weapon",
+            "wargear-ability:slabshield",
+            "000000723:bullgryn-maul"
+          ],
+          [
+            "000000723:close-combat-weapon",
+            "000000723:bullgryn-maul",
+            "wargear-ability:brute-shield"
+          ]
+        ]
       }
     ]
   },

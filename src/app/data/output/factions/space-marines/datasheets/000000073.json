@@ -23,7 +23,14 @@
   },
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol; master-crafted bolter; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol; master-crafted bolter; close combat weapon.",
+      "parsed": [
+        "000000073:bolt-pistol",
+        "000000073:master-crafted-bolter",
+        "000000073:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000073:bolt-pistol",
@@ -462,6 +469,28 @@
           }
         ],
         "mechanicsSource": "regex"
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000073:bolt-pistol",
+            "000000073:master-crafted-bolter",
+            "000000073:close-combat-weapon"
+          ],
+          [
+            "000000073:bolt-pistol",
+            "000000073:master-crafted-bolter",
+            "000000073:master-crafted-power-weapon"
+          ],
+          [
+            "000000073:bolt-pistol",
+            "000000073:master-crafted-bolter",
+            "000000073:power-fist"
+          ]
+        ]
       }
     ]
   },

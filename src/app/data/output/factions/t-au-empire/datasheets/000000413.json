@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The 1 Long-quill is equipped with:</b> Kroot pistol; Kroot rifle; close combat weapon.<br><br><b>Every Kroot Carnivore is equipped with:</b> Kroot rifle; close combat weapon.<br>",
+    "defaultLoadout": {
+      "raw": "<b>The 1 Long-quill is equipped with:</b> Kroot pistol; Kroot rifle; close combat weapon.<br><br><b>Every Kroot Carnivore is equipped with:</b> Kroot rifle; close combat weapon.<br>",
+      "parsed": [
+        "000000413:kroot-pistol",
+        "000000413:kroot-rifle",
+        "000000413:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000413:tanglebomb-launcher",
@@ -231,7 +238,38 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "Long-quill",
+        "items": [
+          [
+            "000000413:kroot-pistol",
+            "000000413:kroot-rifle",
+            "000000413:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 10,
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Kroot Carnivore",
+        "items": [
+          [
+            "000000413:kroot-rifle",
+            "000000413:close-combat-weapon"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 10,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

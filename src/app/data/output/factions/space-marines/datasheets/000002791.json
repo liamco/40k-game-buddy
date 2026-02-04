@@ -23,7 +23,16 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; hunter-slayer missile; Repulsor defensive array; twin heavy bolter; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> heavy onslaught gatling cannon; hunter-slayer missile; Repulsor defensive array; twin heavy bolter; armoured hull.",
+      "parsed": [
+        "000002791:heavy-onslaught-gatling-cannon",
+        "000002791:hunter-slayer-missile",
+        "000002791:repulsor-defensive-array",
+        "000002791:twin-heavy-bolter",
+        "000002791:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000002791:heavy-onslaught-gatling-cannon",
@@ -345,7 +354,42 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002791:heavy-onslaught-gatling-cannon",
+            "000002791:hunter-slayer-missile",
+            "000002791:repulsor-defensive-array",
+            "000002791:twin-heavy-bolter",
+            "000002791:armoured-hull"
+          ],
+          [
+            "000002791:hunter-slayer-missile",
+            "000002791:repulsor-defensive-array",
+            "000002791:twin-heavy-bolter",
+            "000002791:armoured-hull",
+            "000002791:las-talon"
+          ],
+          [
+            "000002791:heavy-onslaught-gatling-cannon",
+            "000002791:hunter-slayer-missile",
+            "000002791:repulsor-defensive-array",
+            "000002791:armoured-hull",
+            "000002791:twin-lascannon"
+          ],
+          [
+            "000002791:hunter-slayer-missile",
+            "000002791:repulsor-defensive-array",
+            "000002791:armoured-hull",
+            "000002791:twin-lascannon",
+            "000002791:las-talon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "black-templars",

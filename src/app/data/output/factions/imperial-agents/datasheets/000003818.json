@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> bolt pistol; boltgun; close combat weapon.",
+      "parsed": [
+        "000003818:bolt-pistol",
+        "000003818:boltgun",
+        "000003818:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000003818:artificer-crafted-storm-bolter",
@@ -796,6 +803,91 @@
         "name": "Simulacrum Imperials",
         "description": "Improve the Leadership characteristic of models in the bearer's unit by 1.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003818:bolt-pistol",
+            "000003818:boltgun",
+            "000003818:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Sister Superior",
+        "items": [
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:combi-weapon"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:condemnor-boltgun"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:inferno-pistol"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:ministorum-hand-flamer"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:plasma-pistol"
+          ]
+        ]
+      },
+      {
+        "modelType": "Battle Sister",
+        "items": [
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:artificer-crafted-storm-bolter"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:heavy-bolter"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:meltagun"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:ministorum-flamer"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:ministorum-heavy-flamer"
+          ],
+          [
+            "000003818:bolt-pistol",
+            "000003818:close-combat-weapon",
+            "000003818:multi-melta"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

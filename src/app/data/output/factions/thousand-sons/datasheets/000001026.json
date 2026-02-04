@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> Predator autocannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> Predator autocannon; armoured tracks.",
+      "parsed": [
+        "000001026:predator-autocannon",
+        "000001026:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000001026:havoc-launcher",
@@ -329,7 +335,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001026:predator-autocannon",
+            "000001026:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

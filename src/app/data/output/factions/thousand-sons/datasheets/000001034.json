@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> Tzaangor blades.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> Tzaangor blades.",
+      "parsed": [
+        "000001034:tzaangor-blades"
+      ]
+    },
     "weapons": [
       {
         "id": "000001034:autopistol",
@@ -225,6 +230,20 @@
         "name": "Herd Banner",
         "description": "While the bearer's unit is within range of one or more objective markers you control, improve the Leadership characteristic of models in the bearer's unit by 1.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001034:tzaangor-blades"
+          ],
+          [
+            "000001034:autopistol",
+            "000001034:chainsword"
+          ]
+        ]
       }
     ]
   },

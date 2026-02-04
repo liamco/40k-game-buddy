@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> plasma pistol; master-crafted power weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> plasma pistol; master-crafted power weapon.",
+      "parsed": [
+        "000002796:plasma-pistol",
+        "000002796:master-crafted-power-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002796:combi-weapon",
@@ -147,7 +153,18 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002796:plasma-pistol",
+            "000002796:master-crafted-power-weapon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "black-templars",

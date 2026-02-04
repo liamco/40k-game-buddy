@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> splinter pistol; huskblade; shadow field.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> splinter pistol; huskblade; shadow field.",
+      "parsed": [
+        "000003914:splinter-pistol",
+        "000003914:huskblade",
+        "wargear-ability:shadow-field"
+      ]
+    },
     "weapons": [
       {
         "id": "000003914:blast-pistol",
@@ -152,6 +159,23 @@
         "name": "Shadow Field",
         "description": "You cannot re-roll invulnerable saving throws made for the bearer. The first time an invulnerable saving throw made for the bearer is failed, until the end of the battle, the bearer has no invulnerable save.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003914:splinter-pistol",
+            "000003914:huskblade",
+            "wargear-ability:shadow-field"
+          ],
+          [
+            "000003914:huskblade",
+            "wargear-ability:shadow-field",
+            "000003914:blast-pistol"
+          ]
+        ]
       }
     ]
   },

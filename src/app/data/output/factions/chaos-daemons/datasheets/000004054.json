@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Traitor Sergeant is equipped with:</b> corrupted pistol; close combat weapon. <br><br><b>Every Traitor Guardsman is equipped with:</b> lasgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Traitor Sergeant is equipped with:</b> corrupted pistol; close combat weapon. <br><br><b>Every Traitor Guardsman is equipped with:</b> lasgun; close combat weapon.",
+      "parsed": [
+        "000004054:corrupted-pistol",
+        "000004054:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004054:close-combat-weapon",
@@ -510,7 +516,47 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004054:corrupted-pistol",
+            "000004054:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Traitor Sergeant",
+        "items": [
+          [
+            "000004054:close-combat-weapon",
+            "000004054:boltgun"
+          ],
+          [
+            "000004054:corrupted-pistol",
+            "000004054:chainsword"
+          ],
+          [
+            "000004054:chainsword",
+            "000004054:boltgun"
+          ],
+          [
+            "000004054:corrupted-pistol",
+            "000004054:power-weapon"
+          ],
+          [
+            "000004054:power-weapon",
+            "000004054:boltgun"
+          ]
+        ],
+        "targeting": {
+          "type": "up-to-n",
+          "max": 3
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

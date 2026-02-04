@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> combi-bolter; accursed weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> combi-bolter; accursed weapon.",
+      "parsed": [
+        "000002629:combi-bolter",
+        "000002629:accursed-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000002629:combi-bolter",
@@ -453,7 +459,56 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002629:combi-bolter",
+            "000002629:accursed-weapon"
+          ],
+          [
+            "000002629:combi-bolter",
+            "000002629:power-fist"
+          ],
+          [
+            "000002629:accursed-weapon",
+            "000002629:combi-weapon"
+          ],
+          [
+            "000002629:combi-weapon",
+            "000002629:power-fist"
+          ]
+        ]
+      },
+      {
+        "modelType": "Chaos Terminator",
+        "items": [
+          [
+            "000002629:accursed-weapon",
+            "000002629:heavy-flamer"
+          ],
+          [
+            "000002629:heavy-flamer",
+            "000002629:power-fist"
+          ],
+          [
+            "000002629:accursed-weapon",
+            "000002629:reaper-autocannon"
+          ],
+          [
+            "000002629:reaper-autocannon",
+            "000002629:power-fist"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

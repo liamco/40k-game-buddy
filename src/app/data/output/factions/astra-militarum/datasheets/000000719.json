@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>The Tempestor Prime is equipped with:</b> bolt pistol; Tempestus dagger. <br><br><b>Every Tempestus Scion is equipped with:</b> hot-shot lasgun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>The Tempestor Prime is equipped with:</b> bolt pistol; Tempestus dagger. <br><br><b>Every Tempestus Scion is equipped with:</b> hot-shot lasgun; close combat weapon.",
+      "parsed": [
+        "000000719:bolt-pistol",
+        "000000719:tempestus-dagger"
+      ]
+    },
     "weapons": [
       {
         "id": "000000719:bolt-pistol",
@@ -677,6 +683,73 @@
         "name": "Master Vox",
         "description": "Each time the <span class=\"kwb\">OFFICER</span> in the bearer's unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Tempestor Prime",
+        "items": [
+          [
+            "000000719:bolt-pistol",
+            "000000719:tempestus-dagger"
+          ],
+          [
+            "000000719:tempestus-dagger",
+            "000000719:plasma-pistol"
+          ],
+          [
+            "000000719:tempestus-dagger",
+            "wargear-ability:command-rod"
+          ]
+        ]
+      },
+      {
+        "modelType": "Tempestus Scion",
+        "items": [
+          [
+            "000000719:hot-shot-lasgun",
+            "000000719:close-combat-weapon"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:hot-shot-laspistol",
+            "wargear-ability:medi-pack"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:hot-shot-lasgun,-1-hot-shot-laspistol",
+            "000000719:medi-pack-[that-model's-hot-shot-lasgun-cannot-be-replaced]"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:hot-shot-laspistol",
+            "wargear-ability:master-vox"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:flamer"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:grenade-launcher"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:hot-shot-volley-gun"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:meltagun"
+          ],
+          [
+            "000000719:close-combat-weapon",
+            "000000719:plasma-gun"
+          ]
+        ],
+        "targeting": {
+          "type": "n-model-specific",
+          "count": 1
+        }
       }
     ]
   },

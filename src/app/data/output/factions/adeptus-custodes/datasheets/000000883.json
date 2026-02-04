@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> combi-bolter; multi-melta; Contemptor combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> combi-bolter; multi-melta; Contemptor combat weapon.",
+      "parsed": [
+        "000000883:combi-bolter",
+        "000000883:multi-melta",
+        "000000883:contemptor-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000883:combi-bolter",
@@ -168,7 +175,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000883:combi-bolter",
+            "000000883:multi-melta",
+            "000000883:contemptor-combat-weapon"
+          ],
+          [
+            "000000883:combi-bolter",
+            "000000883:contemptor-combat-weapon",
+            "000000883:kheres-pattern-assault-cannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

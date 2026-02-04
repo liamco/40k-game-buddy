@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> twin gauss blaster; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> twin gauss blaster; close combat weapon.",
+      "parsed": [
+        "000000548:twin-gauss-blaster",
+        "000000548:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000548:particle-beamer",
@@ -263,6 +269,25 @@
         "name": "Shieldvanes",
         "description": "The bearer has a 3+ Save characteristic and a Move characteristic of 8\".",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000548:twin-gauss-blaster",
+            "000000548:close-combat-weapon"
+          ],
+          [
+            "000000548:close-combat-weapon",
+            "000000548:particle-beamer"
+          ],
+          [
+            "000000548:close-combat-weapon",
+            "000000548:twin-tesla-carbine"
+          ]
+        ]
       }
     ]
   },

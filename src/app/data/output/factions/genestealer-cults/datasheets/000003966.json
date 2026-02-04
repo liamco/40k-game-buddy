@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> earthshaker cannon; heavy bolter; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> earthshaker cannon; heavy bolter; armoured tracks.",
+      "parsed": [
+        "000003966:earthshaker-cannon",
+        "000003966:heavy-bolter",
+        "000003966:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003966:heavy-flamer",
@@ -228,7 +235,24 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003966:earthshaker-cannon",
+            "000003966:heavy-bolter",
+            "000003966:armoured-tracks"
+          ],
+          [
+            "000003966:earthshaker-cannon",
+            "000003966:armoured-tracks",
+            "000003966:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

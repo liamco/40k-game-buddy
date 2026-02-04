@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> lascannon; punisher gatling cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> lascannon; punisher gatling cannon; armoured tracks.",
+      "parsed": [
+        "000003984:lascannon",
+        "000003984:punisher-gatling-cannon",
+        "000003984:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000003984:heavy-flamer",
@@ -485,7 +492,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000003984:lascannon",
+            "000003984:punisher-gatling-cannon",
+            "000003984:armoured-tracks"
+          ],
+          [
+            "000003984:punisher-gatling-cannon",
+            "000003984:armoured-tracks",
+            "000003984:heavy-bolter"
+          ],
+          [
+            "000003984:punisher-gatling-cannon",
+            "000003984:armoured-tracks",
+            "000003984:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

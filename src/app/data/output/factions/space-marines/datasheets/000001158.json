@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> bolt pistol, twin bolt rifle; onslaught gatling cannon; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> bolt pistol, twin bolt rifle; onslaught gatling cannon; close combat weapon.",
+      "parsed": [
+        "000001158:bolt-pistol",
+        "000001158:twin-bolt-rifle",
+        "000001158:onslaught-gatling-cannon",
+        "000001158:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000001158:bolt-pistol",
@@ -194,7 +202,26 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001158:bolt-pistol",
+            "000001158:twin-bolt-rifle",
+            "000001158:onslaught-gatling-cannon",
+            "000001158:close-combat-weapon"
+          ],
+          [
+            "000001158:bolt-pistol",
+            "000001158:twin-bolt-rifle",
+            "000001158:close-combat-weapon",
+            "000001158:multi-melta"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

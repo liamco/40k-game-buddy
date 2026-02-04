@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> flamestorm gauntlets; twin power fist.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> flamestorm gauntlets; twin power fist.",
+      "parsed": [
+        "000002099:flamestorm-gauntlets",
+        "000002099:twin-power-fist"
+      ]
+    },
     "weapons": [
       {
         "id": "000002099:auto-boltstorm-gauntlets",
@@ -177,7 +183,23 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002099:flamestorm-gauntlets",
+            "000002099:twin-power-fist"
+          ],
+          [
+            "000002099:twin-power-fist",
+            "000002099:auto-boltstorm-gauntlets",
+            "000002099:fragstorm-grenade-launcher"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

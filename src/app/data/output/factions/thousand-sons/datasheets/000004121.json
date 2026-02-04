@@ -18,7 +18,15 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> heavy warpflamer; hellfyre missile rack; pyreflux meltagun; close combat weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> heavy warpflamer; hellfyre missile rack; pyreflux meltagun; close combat weapon.",
+      "parsed": [
+        "000004121:heavy-warpflamer",
+        "000004121:hellfyre-missile-rack",
+        "000004121:pyreflux-meltagun",
+        "000004121:close-combat-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004121:heavy-warpflamer",
@@ -223,7 +231,27 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004121:heavy-warpflamer",
+            "000004121:hellfyre-missile-rack",
+            "000004121:pyreflux-meltagun",
+            "000004121:close-combat-weapon"
+          ],
+          [
+            "000004121:heavy-warpflamer",
+            "000004121:hellfyre-missile-rack",
+            "000004121:close-combat-weapon",
+            "000004121:warpflame-projector",
+            "000004121:power-claw"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

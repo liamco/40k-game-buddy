@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> combi-bolter; accursed weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> combi-bolter; accursed weapon.",
+      "parsed": [
+        "000004043:combi-bolter",
+        "000004043:accursed-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000004043:combi-bolter",
@@ -452,7 +458,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000004043:combi-bolter",
+            "000004043:accursed-weapon"
+          ],
+          [
+            "000004043:combi-bolter",
+            "000004043:power-fist"
+          ],
+          [
+            "000004043:accursed-weapon",
+            "000004043:combi-weapon"
+          ],
+          [
+            "000004043:combi-weapon",
+            "000004043:power-fist"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

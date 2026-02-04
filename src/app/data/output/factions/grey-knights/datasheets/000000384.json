@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> storm bolter; Nemesis force weapon.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> storm bolter; Nemesis force weapon.",
+      "parsed": [
+        "000000384:storm-bolter",
+        "000000384:nemesis-force-weapon"
+      ]
+    },
     "weapons": [
       {
         "id": "000000384:incinerator",
@@ -384,6 +390,64 @@
         "name": "Apothecary's Narthecium",
         "description": "In your Command phase, if the bearer is not destroyed, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTERS</span>) to the bearer's unit.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000384:storm-bolter",
+            "000000384:nemesis-force-weapon"
+          ],
+          [
+            "000000384:nemesis-force-weapon",
+            "000000384:incinerator"
+          ],
+          [
+            "000000384:nemesis-force-weapon",
+            "000000384:psilencer"
+          ],
+          [
+            "000000384:nemesis-force-weapon",
+            "000000384:psycannon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Paladin",
+        "items": [
+          [
+            "000000384:nemesis-force-weapon",
+            "000000384:incinerator",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000384:nemesis-force-weapon",
+            "000000384:psilencer",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000384:nemesis-force-weapon",
+            "000000384:psycannon",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000384:nemesis-force-weapon",
+            "000000384:storm-bolter",
+            "wargear-ability:ancient's-banner"
+          ],
+          [
+            "000000384:nemesis-force-weapon",
+            "wargear-ability:apothecary's-narthecium"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1,
+          "maxPerRatio": 2
+        }
       }
     ]
   },

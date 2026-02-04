@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 flamestorm cannons; twin assault cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 flamestorm cannons; twin assault cannon; armoured tracks.",
+      "parsed": [
+        "000000393:flamestorm-cannons",
+        "000000393:twin-assault-cannon",
+        "000000393:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000000393:flamestorm-cannon",
@@ -285,7 +292,19 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000393:flamestorm-cannons",
+            "000000393:twin-assault-cannon",
+            "000000393:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every Nob on Smasha Squig is equipped with:</b> slugga; big choppa; squig jaws.<br><br><b>Every Squighog Boy is equipped with:</b> saddlegit weapons; stikka; squig jaws.",
+    "defaultLoadout": {
+      "raw": "<b>Every Nob on Smasha Squig is equipped with:</b> slugga; big choppa; squig jaws.<br><br><b>Every Squighog Boy is equipped with:</b> saddlegit weapons; stikka; squig jaws.",
+      "parsed": [
+        "000002496:slugga",
+        "000002496:big-choppa",
+        "000002496:squig-jaws"
+      ]
+    },
     "weapons": [
       {
         "id": "000002496:saddlegit-weapons",
@@ -228,6 +235,38 @@
         "name": "Bomb Squigs",
         "description": "Once per battle, for each bomb squig this unit has, after this unit ends a Normal move, you can use one Bomb Squig. If you do, select one enemy unit within 12\" and visible to this unit and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds.<br><br><b>Designer's Note:</b> Place the relevant number of Bomb Squig tokens next to the unit, removing one each time this unit uses this ability.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "Nob On Smasha Squig",
+        "items": [
+          [
+            "000002496:slugga",
+            "000002496:big-choppa",
+            "000002496:squig-jaws"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 3,
+          "count": 1
+        }
+      },
+      {
+        "modelType": "Squighog Boyz",
+        "items": [
+          [
+            "000002496:saddlegit-weapons",
+            "000002496:stikka",
+            "000002496:squig-jaws"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 3,
+          "count": 1
+        }
       }
     ]
   },

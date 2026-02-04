@@ -18,7 +18,12 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> twin torturer's tools.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> twin torturer's tools.",
+      "parsed": [
+        "000000650:twin-torturer-s-tools"
+      ]
+    },
     "weapons": [
       {
         "id": "000000650:hexrifle",
@@ -361,7 +366,31 @@
       ],
       "allParsed": false
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000650:twin-torturer-s-tools"
+          ]
+        ]
+      },
+      {
+        "modelType": "Acothyst",
+        "items": [
+          [
+            "000000650:power-weapon",
+            "000000650:torturer's-tool"
+          ]
+        ],
+        "targeting": {
+          "type": "ratio",
+          "ratio": 5,
+          "count": 1
+        }
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

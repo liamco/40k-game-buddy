@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 soulshatter lascannons; twin heavy bolter; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 soulshatter lascannons; twin heavy bolter; armoured tracks.",
+      "parsed": [
+        "000001049:soulshatter-lascannons",
+        "000001049:twin-heavy-bolter",
+        "000001049:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000001049:combi-bolter",
@@ -264,7 +271,19 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000001049:soulshatter-lascannons",
+            "000001049:twin-heavy-bolter",
+            "000001049:armoured-tracks"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

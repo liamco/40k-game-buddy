@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> cognis heavy stubber array; armoured hull; command uplink.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> cognis heavy stubber array; armoured hull; command uplink.",
+      "parsed": [
+        "000002085:cognis-heavy-stubber-array",
+        "000002085:armoured-hull",
+        "wargear-ability:command-uplink"
+      ]
+    },
     "weapons": [
       {
         "id": "000002085:cognis-heavy-stubber-array",
@@ -130,6 +137,23 @@
         "name": "Command Uplink",
         "description": "Each time you select the bearer's unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002085:cognis-heavy-stubber-array",
+            "000002085:armoured-hull",
+            "wargear-ability:command-uplink"
+          ],
+          [
+            "000002085:cognis-heavy-stubber-array",
+            "000002085:armoured-hull",
+            "wargear-ability:chaff-launcher"
+          ]
+        ]
       }
     ]
   },

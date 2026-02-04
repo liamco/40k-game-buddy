@@ -18,7 +18,14 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> HYLas beam cannon; twin bolt cannon; armoured wheels.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> HYLas beam cannon; twin bolt cannon; armoured wheels.",
+      "parsed": [
+        "000002602:hylas-beam-cannon",
+        "000002602:twin-bolt-cannon",
+        "000002602:armoured-wheels"
+      ]
+    },
     "weapons": [
       {
         "id": "000002602:hylas-beam-cannon",
@@ -248,7 +255,30 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002602:hylas-beam-cannon",
+            "000002602:twin-bolt-cannon",
+            "000002602:armoured-wheels"
+          ],
+          [
+            "000002602:twin-bolt-cannon",
+            "000002602:armoured-wheels",
+            "000002602:l7-missile-launcher",
+            "000002602:sagitaur-missile-launcher"
+          ],
+          [
+            "000002602:twin-bolt-cannon",
+            "000002602:armoured-wheels",
+            "000002602:matr-autocannon"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

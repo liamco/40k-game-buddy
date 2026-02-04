@@ -23,7 +23,13 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> 2 twin supa-shootas; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> 2 twin supa-shootas; armoured hull.",
+      "parsed": [
+        "000000029:twin-supa-shootas",
+        "000000029:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000029:twin-supa-shoota",
@@ -117,7 +123,18 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000029:twin-supa-shootas",
+            "000000029:armoured-hull"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

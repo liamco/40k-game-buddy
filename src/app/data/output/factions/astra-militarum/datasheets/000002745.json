@@ -23,7 +23,14 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> lascannon; vanquisher battle cannon; armoured tracks.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> lascannon; vanquisher battle cannon; armoured tracks.",
+      "parsed": [
+        "000002745:lascannon",
+        "000002745:vanquisher-battle-cannon",
+        "000002745:armoured-tracks"
+      ]
+    },
     "weapons": [
       {
         "id": "000002745:heavy-bolter",
@@ -492,7 +499,29 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000002745:lascannon",
+            "000002745:vanquisher-battle-cannon",
+            "000002745:armoured-tracks"
+          ],
+          [
+            "000002745:vanquisher-battle-cannon",
+            "000002745:armoured-tracks",
+            "000002745:heavy-bolter"
+          ],
+          [
+            "000002745:vanquisher-battle-cannon",
+            "000002745:armoured-tracks",
+            "000002745:heavy-flamer"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",

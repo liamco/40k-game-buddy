@@ -18,7 +18,13 @@
   "leader": null,
   "damaged": null,
   "wargear": {
-    "defaultLoadout": "<b>Every model is equipped with:</b> burst cannon; battlesuit fists.",
+    "defaultLoadout": {
+      "raw": "<b>Every model is equipped with:</b> burst cannon; battlesuit fists.",
+      "parsed": [
+        "000000417:burst-cannon",
+        "000000417:battlesuit-fists"
+      ]
+    },
     "weapons": [
       {
         "id": "000000417:burst-cannon",
@@ -302,6 +308,17 @@
         "name": "Homing Beacon",
         "description": "Once per battle, you can use the Rapid Ingress Stratagem for 0CP. The target must be set up within 3\" of the bearer's unit and more than 9\" away from all enemy units.<br><br><b>Designer's Note:</b> Place a Homing Beacon token next to this unit, removing it once this ability is used.",
         "mechanics": []
+      }
+    ],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000417:burst-cannon",
+            "000000417:battlesuit-fists"
+          ]
+        ]
       }
     ]
   },

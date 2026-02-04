@@ -23,7 +23,15 @@
     "mechanics": []
   },
   "wargear": {
-    "defaultLoadout": "<b>This model is equipped with:</b> missile pod; 2 seeker missiles; 2 twin ion rifles; armoured hull.",
+    "defaultLoadout": {
+      "raw": "<b>This model is equipped with:</b> missile pod; 2 seeker missiles; 2 twin ion rifles; armoured hull.",
+      "parsed": [
+        "000000426:missile-pod",
+        "000000426:seeker-missiles",
+        "000000426:twin-ion-rifles",
+        "000000426:armoured-hull"
+      ]
+    },
     "weapons": [
       {
         "id": "000000426:missile-pod",
@@ -215,7 +223,26 @@
       ],
       "allParsed": true
     },
-    "abilities": []
+    "abilities": [],
+    "validLoadouts": [
+      {
+        "modelType": "any",
+        "items": [
+          [
+            "000000426:missile-pod",
+            "000000426:seeker-missiles",
+            "000000426:twin-ion-rifles",
+            "000000426:armoured-hull"
+          ],
+          [
+            "000000426:seeker-missiles",
+            "000000426:twin-ion-rifles",
+            "000000426:armoured-hull",
+            "000000426:twin-missile-pod"
+          ]
+        ]
+      }
+    ]
   },
   "supplement": {
     "key": "codex",
