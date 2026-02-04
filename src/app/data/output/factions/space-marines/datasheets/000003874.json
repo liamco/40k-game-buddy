@@ -53,6 +53,11 @@
             "ap": -1,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -81,6 +86,14 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Sergeant with Jump Pack"
+            ]
+          }
         ]
       },
       {
@@ -106,6 +119,11 @@
             "s": 4,
             "ap": -1,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -155,6 +173,11 @@
             "ap": -3,
             "d": 3
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -201,6 +224,16 @@
             "ap": -3,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Kill Team Sergeant with Jump Pack"
+            ]
+          }
         ]
       },
       {
@@ -224,6 +257,11 @@
             "s": 4,
             "ap": -1,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -249,6 +287,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -273,6 +316,14 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Sergeant with Jump Pack"
+            ]
+          }
         ]
       },
       {
@@ -296,6 +347,14 @@
             "s": 5,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Sergeant with Jump Pack"
+            ]
           }
         ]
       }
@@ -326,161 +385,7 @@
           "button": "•",
           "description": "Any number of models can each have their assault bolters replaced with 1 plasma exterminators."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "The Kill Team Sergeant with Jump Pack can replace its heavy bolt pistol with one of the following:<br><ul><li>1 hand flamer</li><li>1 plasma pistol</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Kill Team Sergeant with Jump Pack"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "heavy bolt pistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "hand flamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "plasma pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "The Kill Team Sergeant with Jump Pack can replace its Astartes chainsword with one of the following:<br><ul><li>1 power fist</li><li>1 power weapon</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Kill Team Sergeant with Jump Pack"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Astartes chainsword",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "power fist",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "power weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "For every 5 models in this unit, 1 model can replace its heavy bolt pistol with 1 plasma pistol.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "heavy bolt pistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "plasma pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "Any number of models can each have their assault bolters replaced with 1 plasma exterminators.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "assault bolters",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "plasma exterminators",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [],
     "validLoadouts": [
@@ -528,14 +433,10 @@
             "000003874:hand-flamer",
             "000003874:power-weapon"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 5,
-          "count": 1
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "deathwatch",

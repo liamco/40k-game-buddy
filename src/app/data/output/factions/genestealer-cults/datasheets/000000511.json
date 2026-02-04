@@ -50,6 +50,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -73,6 +78,11 @@
             "s": 4,
             "ap": -1,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -100,6 +110,13 @@
             "ap": -2,
             "d": 3
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          }
         ]
       },
       {
@@ -124,6 +141,14 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Acolyte Leader"
+            ]
+          }
         ]
       }
     ],
@@ -147,126 +172,7 @@
           "button": "•",
           "description": "The Acolyte Leader's cult claws and knife can be replaced with 1 Leader's bio-weapons."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "One Acolyte Hybrid's autopistol can be replaced with 1 cult icon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "Acolyte Hybrid"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "One Acolyte Hybrid's autopistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "cult icon",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "For every 5 models in this unit, up to 3 Acolyte Hybrids can each have their autopistol and cult claws and knife replaced with 1 heavy mining tool.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio-capped",
-            "ratio": 5,
-            "maxPerRatio": 3
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "autopistol",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "cult claws",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "knife",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "heavy mining tool",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "The Acolyte Leader's cult claws and knife can be replaced with 1 Leader's bio-weapons.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Acolyte Leader"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "cult claws",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "knife",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Leader's bio-weapons",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -286,7 +192,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

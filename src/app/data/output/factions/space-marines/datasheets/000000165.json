@@ -50,6 +50,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -77,6 +82,16 @@
             "ap": -4,
             "d": "D3"
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 3,
+            "count": 1,
+            "modelType": [
+              "model"
+            ]
+          }
         ]
       },
       {
@@ -100,6 +115,11 @@
             "s": 6,
             "ap": -3,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -127,6 +147,11 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -150,105 +175,7 @@
           "button": "•",
           "description": "One model can be equipped with 1 Sanguinary banner."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "Any number of models can each have their encarmine blade replaced with 1 encarmine spear.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "encarmine blade",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "encarmine spear",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "For every 3 models in this unit, 1 model's Angelus boltgun can be replaced with 1 inferno pistol.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 3,
-            "count": 1,
-            "modelType": "model"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Angelus boltgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "inferno pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "One model can be equipped with 1 Sanguinary banner.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "model"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Sanguinary banner",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -272,7 +199,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "blood-angels",

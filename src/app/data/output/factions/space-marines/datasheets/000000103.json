@@ -51,6 +51,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -77,6 +82,11 @@
             "s": 9,
             "ap": -4,
             "d": "D6"
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -105,6 +115,16 @@
             "ap": -4,
             "d": "D6"
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 3,
+            "count": 1,
+            "modelType": [
+              "Eradicator"
+            ]
+          }
         ]
       },
       {
@@ -129,6 +149,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -140,45 +165,7 @@
           "button": "•",
           "description": "For every 3 models in this unit, 1 Eradicator's melta rifle can be replaced with 1 multi-melta."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 3 models in this unit, 1 Eradicator's melta rifle can be replaced with 1 multi-melta.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 3,
-            "count": 1,
-            "modelType": "Eradicator"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "melta rifle",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "multi-melta",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [],
     "validLoadouts": [
@@ -200,14 +187,10 @@
             "000000103:close-combat-weapon",
             "000000103:multi-melta"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 3,
-          "count": 1
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

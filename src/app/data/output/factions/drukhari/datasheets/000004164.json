@@ -51,6 +51,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -77,6 +82,11 @@
             "s": 4,
             "ap": -1,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -106,6 +116,11 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -132,6 +147,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -157,6 +177,14 @@
             "s": 4,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Lead Player"
+            ]
           }
         ]
       },
@@ -185,6 +213,11 @@
             "s": 8,
             "ap": -4,
             "d": "D6"
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       }
@@ -215,141 +248,7 @@
           "button": "•",
           "description": "If this unit contains 10 or more models:<ul><li>Up to 4 models can each have their shuriken pistol replaced with 1 neuro disruptor</li><li>Up to 4 models can each have their shuriken pistol replaced with 1 fusion pistol</li></ul>"
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "Any number of models can each have their Harlequin's blade replaced with 1 Harlequin's special weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Harlequin's blade",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Harlequin's special weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "The Lead Player's Harlequin's blade can be replaced with 1 power sword.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Lead Player"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Harlequin's blade",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "power sword",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "If this unit contains 9 or fewer models:<ul><li>Up to 2 models can each have their shuriken pistol replaced with 1 neuro disruptor</li><li>Up to 2 models can each have their shuriken pistol replaced with 1 fusion pistol</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "if-unit-size",
-            "unitSizeThreshold": 9
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "shuriken pistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Up to 2 models can each have their shuriken pistol replaced with 1 fusion pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "If this unit contains 10 or more models:<ul><li>Up to 4 models can each have their shuriken pistol replaced with 1 neuro disruptor</li><li>Up to 4 models can each have their shuriken pistol replaced with 1 fusion pistol</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "if-unit-size",
-            "unitSizeThreshold": 10
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "shuriken pistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Up to 4 models can each have their shuriken pistol replaced with 1 fusion pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -381,21 +280,6 @@
           [
             "000004164:shuriken-pistol",
             "wargear-ability:flip-belt",
-            "000004164:power-sword"
-          ],
-          [
-            "wargear-ability:flip-belt",
-            "000004164:power-sword",
-            "000004164:up-to-4-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
-          ],
-          [
-            "wargear-ability:flip-belt",
-            "000004164:power-sword",
-            "000004164:up-to-2-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
-          ],
-          [
-            "000004164:shuriken-pistol",
-            "wargear-ability:flip-belt",
             "000004164:harlequin-s-special-weapon"
           ],
           [
@@ -409,8 +293,29 @@
             "000004164:up-to-2-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
           ]
         ]
+      },
+      {
+        "modelType": "Lead Player",
+        "items": [
+          [
+            "000004164:shuriken-pistol",
+            "wargear-ability:flip-belt",
+            "000004164:power-sword"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000004164:power-sword",
+            "000004164:up-to-4-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ],
+          [
+            "wargear-ability:flip-belt",
+            "000004164:power-sword",
+            "000004164:up-to-2-models-can-each-have-their-shuriken-pistol-replaced-with-1-fusion-pistol"
+          ]
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

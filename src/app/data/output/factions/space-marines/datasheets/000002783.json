@@ -48,6 +48,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -76,6 +81,14 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Watch Sergeant"
+            ]
+          }
         ]
       },
       {
@@ -101,6 +114,13 @@
             "s": 4,
             "ap": 0,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
           }
         ]
       },
@@ -129,6 +149,13 @@
             "s": 7,
             "ap": -1,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
           }
         ]
       },
@@ -175,6 +202,13 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          }
         ]
       },
       {
@@ -202,6 +236,13 @@
             "ap": -1,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          }
         ]
       },
       {
@@ -228,6 +269,14 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "model"
+            ]
+          }
         ]
       },
       {
@@ -251,6 +300,13 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
           }
         ]
       },
@@ -278,6 +334,13 @@
             "ap": -2,
             "d": 3
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          }
         ]
       },
       {
@@ -301,6 +364,11 @@
             "s": 5,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -327,6 +395,14 @@
             "s": 5,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Watch Sergeant"
+            ]
           }
         ]
       }
@@ -387,386 +463,7 @@
           "button": "•",
           "description": "The Watch Sergeant's boltgun can be replaced with 1 combi-weapon."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 5 models in this unit, up to 2 models can each have their boltgun and power weapon replaced with one of the following:<br><ul><li>1 boltgun, 1 Astartes shield and 1 close combat weapon</li><li>1 power weapon and 1 Astartes shield</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio-capped",
-            "ratio": 5,
-            "maxPerRatio": 2
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "boltgun, 1 Astartes shield",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "power weapon",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "Astartes shield",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "For every 5 models in this unit, up to 2 models can each have their boltgun and power weapon replaced with 1 Deathwatch thunder hammer.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio-capped",
-            "ratio": 5,
-            "maxPerRatio": 2
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Deathwatch thunder hammer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "For every 5 models in this unit, 1 model can have its boltgun and power weapon replaced with 1 stalker-pattern boltgun and 1 close combat weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "stalker-pattern boltgun",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "For every 5 models in this unit, up to 2 models can each have their boltgun and power weapon replaced with 1 Deathwatch shotgun and 1 close combat weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio-capped",
-            "ratio": 5,
-            "maxPerRatio": 2
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Deathwatch shotgun",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 5,
-          "rawText": "For every 5 models in this unit, 1 model can have its boltgun and power weapon replaced with 1 frag cannon and 1 close combat weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "frag cannon",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 6,
-          "rawText": "For every 5 models in this unit, 1 model can have its boltgun and power weapon replaced with 1 infernus heavy bolter and 1 close combat weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "infernus heavy bolter",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 7,
-          "rawText": "1 model's boltgun and power weapon can be replaced with 1 Black Shield blades.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "model"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Black Shield blades",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 8,
-          "rawText": "The Watch Sergeant's power weapon can be replaced with 1 xenophase blade.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Watch Sergeant"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "power weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "xenophase blade",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 9,
-          "rawText": "The Watch Sergeant's boltgun can be replaced with 1 combi-weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Watch Sergeant"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "combi-weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -840,15 +537,10 @@
             "wargear-ability:astartes-shield",
             "000002783:xenophase-blade"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 5,
-          "count": 1,
-          "maxPerRatio": 2
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "deathwatch",

@@ -52,6 +52,11 @@
             "ap": -2,
             "d": 3
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -77,6 +82,13 @@
             "s": 9,
             "ap": -2,
             "d": "D6"
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 3,
+            "count": 1
           }
         ]
       },
@@ -104,6 +116,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -128,6 +145,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -139,48 +161,12 @@
           "button": "•",
           "description": "For every 3 models in this unit, 1 Deffkopta can have its kopta rokkits replaced with 1 kustom mega-blasta."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 3 models in this unit, 1 Deffkopta can have its kopta rokkits replaced with 1 kustom mega-blasta.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 3
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "kopta rokkits",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "kustom mega-blasta",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [],
     "validLoadouts": [
       {
-        "modelType": "Deffkopta",
+        "modelType": "any",
         "items": [
           [
             "000000028:kopta-rokkits",
@@ -192,14 +178,10 @@
             "000000028:spinnin-blades",
             "000000028:kustom-mega-blasta"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 3,
-          "count": 1
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

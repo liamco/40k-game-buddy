@@ -50,6 +50,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -78,6 +83,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -104,6 +114,16 @@
             "s": 5,
             "ap": -1,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Terminator"
+            ]
           }
         ]
       },
@@ -132,6 +152,16 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Terminator"
+            ]
+          }
         ]
       },
       {
@@ -155,6 +185,11 @@
             "s": 5,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -182,6 +217,16 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "model"
+            ]
+          }
         ]
       },
       {
@@ -208,6 +253,16 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "model"
+            ]
+          }
         ]
       },
       {
@@ -231,6 +286,13 @@
             "s": 8,
             "ap": -2,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
           }
         ]
       }
@@ -267,196 +329,7 @@
           "button": "•",
           "description": "For every 5 models in this unit, 1 model's accursed weapon can be replaced with 1 chainfist."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 5 models in this unit, 1 Terminator's combi-bolter can be replaced with one of the following:<ul><li>1 heavy flamer</li><li>1 reaper autocannon</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5,
-            "count": 1,
-            "modelType": "Terminator"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "combi-bolter",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "heavy flamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "reaper autocannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "Any number of models can each have their combi-bolter replaced with 1 combi-weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "combi-bolter",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "combi-weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "For every 5 models in this unit, 1 model's combi-bolter and accursed weapon can be replaced with 1 paired accursed weapons.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5,
-            "count": 1,
-            "modelType": "model"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "combi-bolter",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "accursed weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "paired accursed weapons",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "For every 5 models in this unit, up to 3 models can each have their accursed weapon replaced with 1 power fist.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio-capped",
-            "ratio": 5,
-            "maxPerRatio": 3
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "accursed weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "power fist",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 5,
-          "rawText": "For every 5 models in this unit, 1 model's accursed weapon can be replaced with 1 chainfist.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5,
-            "count": 1,
-            "modelType": "model"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "accursed weapon",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "chainfist",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [],
     "validLoadouts": [
@@ -481,7 +354,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

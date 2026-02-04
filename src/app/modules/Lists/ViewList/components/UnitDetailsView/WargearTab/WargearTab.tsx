@@ -1,7 +1,7 @@
 import { useMemo, useCallback, Fragment } from "react";
 
 import { ArmyList, ArmyListItem, ModelInstance } from "#types/Lists.tsx";
-import { Weapon, WeaponProfile } from "#types/Weapons.tsx";
+import { Weapon, WeaponProfile, EligibilityRule } from "#types/Weapons.tsx";
 import { WargearAbility, ValidLoadoutGroup } from "#types/Units.tsx";
 
 import { useListManager } from "#modules/Lists/ListManagerContext.tsx";
@@ -64,43 +64,98 @@ function modelTypeMatches(modelType: string, targetType: string): boolean {
 }
 
 /**
- * Get valid loadouts for a specific model type from validLoadouts groups
+ * Check if a model type matches any of the target types in an array
+ */
+function modelTypeMatchesAny(modelType: string, targetTypes: string[]): boolean {
+    return targetTypes.some((target) => modelTypeMatches(modelType, target));
+}
+
+// ============================================================================
+// ELIGIBILITY CHECKING (for weapon display)
+// ============================================================================
+
+/**
+ * Context for evaluating eligibility rules
+ */
+interface EligibilityContext {
+    modelType: string;
+    modelIndex: number; // Index of this model in the unit
+    ratioWeaponEligibleModels: Map<string, Set<number>>; // weaponId -> set of eligible model indices
+}
+
+/**
+ * Check if a weapon is eligible for display to a model based on eligibility rules.
+ * Returns true if any rule matches (OR logic).
+ */
+function isWeaponEligibleForModel(weapon: Weapon, context: EligibilityContext): boolean {
+    const rules = weapon.eligibility;
+
+    // If no eligibility rules, default to showing the weapon
+    if (!rules || rules.length === 0) {
+        return true;
+    }
+
+    // OR logic - any matching rule makes the weapon eligible
+    for (const rule of rules) {
+        if (checkEligibilityRule(rule, weapon.id, context)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Check a single eligibility rule
+ */
+function checkEligibilityRule(rule: EligibilityRule, weaponId: string, context: EligibilityContext): boolean {
+    switch (rule.type) {
+        case "any":
+            return true;
+
+        case "modelType":
+            return modelTypeMatchesAny(context.modelType, rule.modelType);
+
+        case "ratio": {
+            // Check if this model is in the pre-computed eligible indices for this weapon
+            const eligibleIndices = context.ratioWeaponEligibleModels.get(weaponId);
+            return eligibleIndices?.has(context.modelIndex) ?? false;
+        }
+
+        default:
+            return true;
+    }
+}
+
+// ============================================================================
+// VALIDATION HELPERS (for loadout validation)
+// ============================================================================
+
+/**
+ * Get valid loadouts for a specific model type from validLoadouts groups.
+ * Combines model-specific loadouts with "any" loadouts (which apply to all models).
  */
 function getValidLoadoutsForModelType(modelType: string, validLoadoutGroups: ValidLoadoutGroup[] | undefined): string[][] {
     if (!validLoadoutGroups || validLoadoutGroups.length === 0) {
         return [];
     }
 
-    // First try to find a specific match for this model type
-    for (const group of validLoadoutGroups) {
-        if (group.modelType !== "any" && group.modelType !== "all" && modelTypeMatches(modelType, group.modelType)) {
-            return group.items;
-        }
-    }
+    const result: string[][] = [];
 
-    // Fall back to "any" group
+    // Always include "any" group loadouts (they apply to all models)
     const anyGroup = validLoadoutGroups.find((g) => g.modelType === "any");
     if (anyGroup) {
-        return anyGroup.items;
+        result.push(...anyGroup.items);
     }
 
-    return [];
-}
-
-/**
- * Get all unique weapon/ability IDs that appear in any valid loadout for a model type
- */
-function getAvailableItemIds(modelType: string, validLoadoutGroups: ValidLoadoutGroup[] | undefined): Set<string> {
-    const validLoadouts = getValidLoadoutsForModelType(modelType, validLoadoutGroups);
-    const ids = new Set<string>();
-
-    for (const loadout of validLoadouts) {
-        for (const id of loadout) {
-            ids.add(id);
+    // Also include model-specific loadouts if they exist
+    for (const group of validLoadoutGroups) {
+        if (group.modelType !== "any" && group.modelType !== "all" && modelTypeMatches(modelType, group.modelType)) {
+            result.push(...group.items);
         }
     }
 
-    return ids;
+    return result;
 }
 
 /**
@@ -145,6 +200,43 @@ const WargearTab = ({ unit, list }: Props) => {
     // Validate current loadouts
     const loadoutValidation = useLoadoutValidation(unit.modelInstances, validLoadoutGroups);
 
+    // Count total models in the unit
+    const totalModels = unit.modelInstances?.length || 0;
+
+    // Pre-compute which model indices are eligible for each ratio-based weapon
+    // For ratio 1:5, only the first N eligible models (by index) see the weapon
+    const ratioWeaponEligibleModels = useMemo(() => {
+        const assignments = new Map<string, Set<number>>(); // weaponId -> set of eligible model indices
+
+        if (!unit.modelInstances) return assignments;
+
+        for (const weapon of weapons) {
+            const ratioRule = weapon.eligibility?.find((r): r is EligibilityRule & { type: "ratio" } => r.type === "ratio");
+            if (!ratioRule) continue;
+
+            const slots = Math.floor(totalModels / ratioRule.ratio) * ratioRule.count;
+            const eligibleIndices = new Set<number>();
+            let assigned = 0;
+
+            // Find first N eligible models by index
+            unit.modelInstances.forEach((instance, idx) => {
+                if (assigned >= slots) return;
+
+                // Check model type restriction if specified
+                if (ratioRule.modelType && !modelTypeMatchesAny(instance.modelType, ratioRule.modelType)) {
+                    return;
+                }
+
+                eligibleIndices.add(idx);
+                assigned++;
+            });
+
+            assignments.set(weapon.id, eligibleIndices);
+        }
+
+        return assignments;
+    }, [weapons, totalModels, unit.modelInstances]);
+
     // Build list of all selectable items (weapons + abilities)
     const allSelectableItems = useMemo((): SelectableItem[] => {
         const items: SelectableItem[] = [];
@@ -162,32 +254,39 @@ const WargearTab = ({ unit, list }: Props) => {
         return items;
     }, [weapons, abilities]);
 
-    // Get items available to a specific model type based on validLoadouts
-    const getItemsForModelType = useCallback(
-        (modelType: string): SelectableItem[] => {
-            const availableIds = getAvailableItemIds(modelType, validLoadoutGroups);
-
-            // If no valid loadouts defined, show all items
-            if (availableIds.size === 0) {
-                return allSelectableItems;
-            }
+    // Get items available to a specific model instance based on weapon eligibility
+    const getItemsForModelInstance = useCallback(
+        (instance: ModelInstance, modelIndex: number): SelectableItem[] => {
+            const context: EligibilityContext = {
+                modelType: instance.modelType,
+                modelIndex,
+                ratioWeaponEligibleModels,
+            };
 
             return allSelectableItems.filter((item) => {
-                const id = getItemId(item);
-                return availableIds.has(id);
+                if (item.type === "weapon") {
+                    return isWeaponEligibleForModel(item.weapon, context);
+                }
+                // Abilities are always shown for now
+                return true;
             });
         },
-        [allSelectableItems, validLoadoutGroups]
+        [allSelectableItems, ratioWeaponEligibleModels]
     );
 
-    // Check if model has any options (items beyond default loadout)
+    // Check if model has any options (more than just default weapons)
     const modelHasOptions = useCallback(
-        (modelType: string): boolean => {
-            const validLoadouts = getValidLoadoutsForModelType(modelType, validLoadoutGroups);
-            // Has options if there's more than one valid loadout
-            return validLoadouts.length > 1;
+        (instance: ModelInstance, modelIndex: number): boolean => {
+            const items = getItemsForModelInstance(instance, modelIndex);
+            const defaultLoadout = unit.wargear?.defaultLoadout?.parsed || [];
+
+            // Has options if there are items beyond the default loadout
+            return items.some((item) => {
+                const id = getItemId(item);
+                return !defaultLoadout.includes(id);
+            });
         },
-        [validLoadoutGroups]
+        [getItemsForModelInstance, unit.wargear?.defaultLoadout?.parsed]
     );
 
     // Toggle a weapon/ability selection for a model
@@ -234,7 +333,7 @@ const WargearTab = ({ unit, list }: Props) => {
         let currentGroup: (typeof groups)[0] | null = null;
 
         unit.modelInstances.forEach((instance, idx) => {
-            const hasOpts = modelHasOptions(instance.modelType);
+            const hasOpts = modelHasOptions(instance, idx);
 
             if (hasOpts) {
                 // Model has options - show individually
@@ -332,8 +431,8 @@ const WargearTab = ({ unit, list }: Props) => {
     };
 
     // Render a single model with options
-    const renderModelWithOptions = (instance: ModelInstance, displayIndex: number) => {
-        const items = getItemsForModelType(instance.modelType);
+    const renderModelWithOptions = (instance: ModelInstance, displayIndex: number, modelIndex: number) => {
+        const items = getItemsForModelInstance(instance, modelIndex);
         const validation = loadoutValidation.modelValidations.get(instance.instanceId);
 
         return (
@@ -366,7 +465,8 @@ const WargearTab = ({ unit, list }: Props) => {
 
         // Get weapons from first instance (all should be same)
         const instance = group.instances[0];
-        const items = getItemsForModelType(instance.modelType);
+        const modelIndex = group.startIndex - 1; // Convert 1-indexed display to 0-indexed
+        const items = getItemsForModelInstance(instance, modelIndex);
 
         // Filter to only show items in the loadout
         const equippedItems = items.filter((item) => {
@@ -467,7 +567,11 @@ const WargearTab = ({ unit, list }: Props) => {
                         return renderCollapsedGroup(group);
                     }
 
-                    return group.instances.map((instance, idx) => renderModelWithOptions(instance, group.startIndex + idx));
+                    return group.instances.map((instance, idx) => {
+                        const displayIndex = group.startIndex + idx;
+                        const modelIndex = displayIndex - 1; // Convert 1-indexed display to 0-indexed
+                        return renderModelWithOptions(instance, displayIndex, modelIndex);
+                    });
                 })}
             </div>
             <div className="space-y-6">

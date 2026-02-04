@@ -53,6 +53,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -80,6 +85,16 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Sternguard Veteran"
+            ]
+          }
         ]
       },
       {
@@ -106,6 +121,11 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -136,6 +156,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -164,6 +189,16 @@
             "ap": -1,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Sternguard Veteran"
+            ]
+          }
         ]
       },
       {
@@ -187,6 +222,14 @@
             "s": 4,
             "ap": -1,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Sternguard Veteran Squad Leader"
+            ]
           }
         ]
       },
@@ -212,6 +255,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -236,6 +284,14 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Sternguard Veteran Squad Leader"
+            ]
+          }
         ]
       },
       {
@@ -259,6 +315,14 @@
             "s": 5,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Sternguard Veteran Squad Leader"
+            ]
           }
         ]
       }
@@ -289,210 +353,7 @@
           "button": "*",
           "description": "* This model's Sternguard bolt rifle cannot be replaced."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "The Sternguard Veteran Squad Leader's Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 Astartes chainsword </li><li>1 combi-weapon </li><li>1 power fist </li><li>1 power weapon </li><li>1 Astartes chainsword and 1 Sternguard bolt rifle*</li><li>1 power fist and 1 Sternguard bolt rifle*</li><li>1 power weapon and 1 Sternguard bolt rifle*</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Sternguard Veteran Squad Leader"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Sternguard bolt rifle",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Astartes chainsword",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "combi-weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "power fist",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "power weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "Astartes chainsword",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "Sternguard bolt rifle",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "power fist",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "Sternguard bolt rifle",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "power weapon",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "Sternguard bolt rifle",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "Any number of Sternguard Veterans can each have their Sternguard bolt rifle replaced with 1 combi-weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Sternguard bolt rifle",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "combi-weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "For every 5 models in this unit, 1 Sternguard Veteran's Sternguard bolt rifle can be replaced with one of the following: <br><ul><li>1 pyrecannon</li><li>1 Sternguard heavy bolter</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5,
-            "count": 1,
-            "modelType": "Sternguard Veteran"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Sternguard bolt rifle",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "pyrecannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "Sternguard heavy bolter",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "* This model's Sternguard bolt rifle cannot be replaced.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "unknown"
-          },
-          "action": {
-            "type": "unknown",
-            "removes": [],
-            "adds": [],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [],
     "validLoadouts": [
@@ -508,7 +369,12 @@
             "000004137:sternguard-bolt-pistol",
             "000004137:close-combat-weapon",
             "000004137:combi-weapon"
-          ],
+          ]
+        ]
+      },
+      {
+        "modelType": "Sternguard Veteran Squad Leader",
+        "items": [
           [
             "000004137:sternguard-bolt-pistol",
             "000004137:close-combat-weapon",
@@ -574,51 +440,11 @@
             "000004137:sternguard-bolt-pistol",
             "000004137:close-combat-weapon",
             "000004137:sternguard-heavy-bolter"
-          ],
-          [
-            "000004137:sternguard-bolt-pistol",
-            "000004137:close-combat-weapon",
-            "000004137:astartes-chainsword",
-            "000004137:pyrecannon"
-          ],
-          [
-            "000004137:sternguard-bolt-pistol",
-            "000004137:close-combat-weapon",
-            "000004137:astartes-chainsword",
-            "000004137:sternguard-heavy-bolter"
-          ],
-          [
-            "000004137:sternguard-bolt-pistol",
-            "000004137:close-combat-weapon",
-            "000004137:power-fist",
-            "000004137:pyrecannon"
-          ],
-          [
-            "000004137:sternguard-bolt-pistol",
-            "000004137:close-combat-weapon",
-            "000004137:power-fist",
-            "000004137:sternguard-heavy-bolter"
-          ],
-          [
-            "000004137:sternguard-bolt-pistol",
-            "000004137:close-combat-weapon",
-            "000004137:power-weapon",
-            "000004137:pyrecannon"
-          ],
-          [
-            "000004137:sternguard-bolt-pistol",
-            "000004137:close-combat-weapon",
-            "000004137:power-weapon",
-            "000004137:sternguard-heavy-bolter"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 5,
-          "count": 1
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "black-templars",

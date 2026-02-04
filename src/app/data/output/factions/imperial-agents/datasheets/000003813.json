@@ -51,6 +51,16 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Grey Knights Terminator"
+            ]
+          }
         ]
       },
       {
@@ -78,6 +88,16 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Grey Knights Terminator"
+            ]
+          }
         ]
       },
       {
@@ -103,6 +123,16 @@
             "s": 8,
             "ap": -1,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Grey Knights Terminator"
+            ]
           }
         ]
       },
@@ -130,6 +160,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -155,6 +190,11 @@
             "s": 6,
             "ap": -2,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       }
@@ -185,142 +225,7 @@
           "button": "*",
           "description": "* You cannot select both of these options for the same model."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 5 models in this unit, 1 Grey Knights Terminator's storm bolter can be replaced with one of the following:<ul><li>1 incinerator</li><li>1 psilencer</li><li>1 psycannon</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5,
-            "count": 1,
-            "modelType": "Grey Knights Terminator"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "storm bolter",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "incinerator",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "psilencer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "psycannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "1 Grey Knights Terminator equipped with a storm bolter can be equipped with 1 Ancient's banner.*",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "Grey Knights Terminator"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Ancient's banner",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "1 Grey Knights Terminator can have its storm bolter replaced with 1 narthecium.*",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "Grey Knights Terminator"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "storm bolter",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "narthecium",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "* You cannot select both of these options for the same model.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "unknown"
-          },
-          "action": {
-            "type": "unknown",
-            "removes": [],
-            "adds": [],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -365,14 +270,10 @@
             "000003813:nemesis-force-weapon",
             "000003813:psycannon"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 5,
-          "count": 1
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

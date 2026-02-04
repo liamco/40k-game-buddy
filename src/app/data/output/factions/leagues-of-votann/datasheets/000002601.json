@@ -52,6 +52,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -77,6 +82,11 @@
             "s": 5,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -104,6 +114,13 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 3,
+            "count": 1
+          }
         ]
       },
       {
@@ -130,6 +147,13 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 3,
+            "count": 1
+          }
         ]
       },
       {
@@ -154,6 +178,11 @@
             "ap": -1,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -177,6 +206,11 @@
             "s": 4,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       }
@@ -213,151 +247,7 @@
           "button": "*",
           "description": "* A model can only take one of these options, and cannot be equipped with a HYLas rotary cannon or an ion beamer."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 3 models in this unit, 1 model can be equipped with one of the following::<ul><li>1 HYLas rotary cannon</li><li>1 ion beamer</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 3
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "HYLas rotary cannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "ion beamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 multiwave comms array.*",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "model that is not"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "multiwave comms array",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 panspectral scanner.*",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "model that is not"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "panspectral scanner",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 rollbar searchlight.*",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "model that is not"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "rollbar searchlight",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 5,
-          "rawText": "* A model can only take one of these options, and cannot be equipped with a HYLas rotary cannon or an ion beamer.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "unknown"
-          },
-          "action": {
-            "type": "unknown",
-            "removes": [],
-            "adds": [],
-            "isChoiceList": false
-          },
-          "constraints": {
-            "excludedWeapons": [
-              "HYLas rotary cannon",
-              "ion beamer"
-            ]
-          }
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -381,7 +271,7 @@
     ],
     "validLoadouts": [
       {
-        "modelType": "Hernkyn Pioneer",
+        "modelType": "any",
         "items": [
           [
             "000002601:bolt-revolver",
@@ -389,14 +279,10 @@
             "000002601:magna-coil-autocannon",
             "000002601:plasma-knife"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 3,
-          "count": 1
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

@@ -50,6 +50,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -77,6 +82,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -100,6 +110,11 @@
             "s": 3,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -125,6 +140,11 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -148,6 +168,11 @@
             "s": 5,
             "ap": -3,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       }
@@ -178,133 +203,7 @@
           "button": "•",
           "description": "For every 5 models in this unit, it can have 1 Aspect Shrine token."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "The Dire Avenger Exarch's Avenger shuriken catapult can be replaced with 1 shuriken pistol and one of the following:<ul><li>1 diresword</li><li>1 power glaive</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Dire Avenger Exarch"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Avenger shuriken catapult",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "shuriken pistol and one of the following:<ul><li>1 diresword</li><li>1 power glaive</li></ul>",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "If this unit's Dire Avenger Exarch is equipped with 1 Avenger shuriken catapult, it can be equipped with 1 additional Avenger shuriken catapult.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "conditional",
-            "modelType": "Dire Avenger Exarch",
-            "condition": {
-              "type": "equipped-with"
-            }
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "additional Avenger shuriken catapult",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "The Dire Avenger Exarch's shuriken pistol can be replaced with 1 shimmershield.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Dire Avenger Exarch"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "shuriken pistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "shimmershield",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "For every 5 models in this unit, it can have 1 Aspect Shrine token.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Aspect Shrine token",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -340,7 +239,12 @@
             "000000593:avenger-shuriken-catapult",
             "000000593:close-combat-weapon",
             "000000593:additional-avenger-shuriken-catapult"
-          ],
+          ]
+        ]
+      },
+      {
+        "modelType": "Dire Avenger Exarch",
+        "items": [
           [
             "000000593:close-combat-weapon",
             "000000593:shuriken-pistol-and-one-of-the-following:<ul><li>1-diresword</li><li>1-power-glaive</li></ul>"
@@ -352,7 +256,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

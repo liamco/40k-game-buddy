@@ -51,6 +51,16 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1,
+            "modelType": [
+              "Jungle Fighter"
+            ]
+          }
         ]
       },
       {
@@ -76,6 +86,11 @@
             "s": 3,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -103,6 +118,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -127,6 +147,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -144,76 +169,7 @@
           "button": "•",
           "description": "For every 10 models in this unit, 1 Jungle Fighter equipped with a lasgun can be equipped with 1 vox-caster (that model's lasgun cannot be replaced)."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 5 models in this unit, 1 Jungle Fighter's lasgun can be replaced with 1 flamer.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5,
-            "count": 1,
-            "modelType": "Jungle Fighter"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "lasgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "flamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "For every 10 models in this unit, 1 Jungle Fighter equipped with a lasgun can be equipped with 1 vox-caster (that model's lasgun cannot be replaced).",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 10
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "vox-caster",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {
-            "restrictedWeapons": [
-              "lasgun"
-            ]
-          }
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -233,7 +189,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

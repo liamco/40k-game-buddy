@@ -50,6 +50,16 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1,
+            "modelType": [
+              "Boy"
+            ]
+          }
         ]
       },
       {
@@ -78,6 +88,14 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Boss Nob"
+            ]
+          }
         ]
       },
       {
@@ -103,6 +121,16 @@
             "s": 9,
             "ap": -2,
             "d": 3
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1,
+            "modelType": [
+              "Boy"
+            ]
           }
         ]
       },
@@ -130,6 +158,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -156,6 +189,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -179,6 +217,11 @@
             "s": 7,
             "ap": -1,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -204,6 +247,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -228,6 +276,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -251,6 +304,14 @@
             "s": 9,
             "ap": -2,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Boss Nob"
+            ]
           }
         ]
       }
@@ -281,188 +342,7 @@
           "button": "•",
           "description": "For every 10 models in this unit, 1 Boy's choppa and slugga can be replaced with one of the following:<ul><li>1 big shoota and 1 close combat weapon</li><li>1 rokkit launcha and 1 close combat weapon</li></ul>"
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "The Boss Nob's big choppa can be replaced with 1 power klaw.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Boss Nob"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "big choppa",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "power klaw",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "The Boss Nob's big choppa and slugga can be replaced with 1 kombi-weapon and 1 close combat weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Boss Nob"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "big choppa",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "slugga",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "kombi-weapon",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "Any number of Boyz can each have their slugga and choppa replaced with 1 shoota and 1 close combat weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "slugga",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "choppa",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "shoota",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "For every 10 models in this unit, 1 Boy's choppa and slugga can be replaced with one of the following:<ul><li>1 big shoota and 1 close combat weapon</li><li>1 rokkit launcha and 1 close combat weapon</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 10,
-            "count": 1,
-            "modelType": "Boy"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "choppa",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "slugga",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "big shoota",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "rokkit launcha",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [],
     "validLoadouts": [
@@ -496,7 +376,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

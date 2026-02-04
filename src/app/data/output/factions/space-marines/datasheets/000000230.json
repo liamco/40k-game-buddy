@@ -50,6 +50,13 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          }
         ]
       },
       {
@@ -91,6 +98,13 @@
             "ap": -2,
             "d": "D6"
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          }
         ]
       },
       {
@@ -117,6 +131,13 @@
             "s": 5,
             "ap": -1,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
           }
         ]
       },
@@ -162,6 +183,13 @@
             "ap": -3,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          }
         ]
       },
       {
@@ -187,6 +215,11 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -214,6 +247,11 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -237,6 +275,11 @@
             "s": 8,
             "ap": -2,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -262,6 +305,11 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -285,136 +333,7 @@
           "button": "•",
           "description": "This unit can be equipped with 1 Watcher in the Dark."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "Any number of Deathwing Terminators can each have their power fist replaced with 1 chainfist.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "power fist",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "chainfist",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "For every 5 models in this unit, 1 Deathwing Terminator can replace its storm bolter with one of the following:<ul><li>1 assault cannon</li><li>1 heavy flamer</li><li>1 plasma cannon</li><li>1 storm bolter and 1 cyclone missile launcher (this model's storm bolter cannot be replaced)</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "storm bolter",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "assault cannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "heavy flamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "plasma cannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "storm bolter",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "cyclone missile launcher",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "This unit can be equipped with 1 Watcher in the Dark.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "this-unit"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Watcher in the Dark",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -459,12 +378,7 @@
             "000000230:storm-bolter",
             "000000230:cyclone-missile-launcher"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 5,
-          "count": 1
-        }
+        ]
       },
       {
         "modelType": "Deathwing Terminator",
@@ -511,14 +425,10 @@
             "000000230:storm-bolter",
             "000000230:cyclone-missile-launcher"
           ]
-        ],
-        "targeting": {
-          "type": "ratio",
-          "ratio": 5,
-          "count": 1
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "dark-angels",

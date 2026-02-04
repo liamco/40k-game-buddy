@@ -51,6 +51,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -78,6 +83,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -103,6 +113,11 @@
             "s": 4,
             "ap": -2,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -130,6 +145,11 @@
             "ap": -3,
             "d": 3
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -155,6 +175,14 @@
             "s": 4,
             "ap": -2,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Howling Banshee Exarch"
+            ]
           }
         ]
       },
@@ -182,6 +210,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -205,108 +238,7 @@
           "button": "•",
           "description": "For every 5 models in this unit, it can have 1 Aspect Shrine token."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "The Howling Banshee Exarch's Banshee blade can be replaced with 1 of the following:<ul><li>1 executioner</li><li>1 triskele</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Howling Banshee Exarch"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Banshee blade",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "of the following:<ul><li>1 executioner</li><li>1 triskele</li></ul>",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "The Howling Banshee Exarch's shuriken pistol and Banshee blade can be replaced with 1 mirrorswords.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Howling Banshee Exarch"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "shuriken pistol",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "Banshee blade",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "mirrorswords",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "For every 5 models in this unit, it can have 1 Aspect Shrine token.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 5
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Aspect Shrine token",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -323,7 +255,12 @@
           [
             "000000594:shuriken-pistol",
             "000000594:banshee-blade"
-          ],
+          ]
+        ]
+      },
+      {
+        "modelType": "Howling Banshee Exarch",
+        "items": [
           [
             "000000594:mirrorswords"
           ],
@@ -333,7 +270,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

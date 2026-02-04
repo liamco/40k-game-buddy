@@ -33,10 +33,7 @@ function normalizeLoadout(loadout: string[]): string {
 /**
  * Check if a loadout matches any valid loadout in a group
  */
-function findMatchingLoadout(
-    loadout: string[],
-    validLoadouts: string[][]
-): string[] | null {
+function findMatchingLoadout(loadout: string[], validLoadouts: string[][]): string[] | null {
     const normalizedCurrent = normalizeLoadout(loadout);
 
     for (const valid of validLoadouts) {
@@ -51,16 +48,12 @@ function findMatchingLoadout(
 /**
  * Find the closest valid loadout to the current one
  */
-function findClosestLoadout(
-    loadout: string[],
-    validLoadouts: string[][]
-): { loadout: string[]; missing: string[]; extra: string[] } | null {
+function findClosestLoadout(loadout: string[], validLoadouts: string[][]): { loadout: string[]; missing: string[]; extra: string[] } | null {
     if (validLoadouts.length === 0) {
         return null;
     }
 
-    let best: { loadout: string[]; missing: string[]; extra: string[] } | null =
-        null;
+    let best: { loadout: string[]; missing: string[]; extra: string[] } | null = null;
     let bestScore = -Infinity;
 
     const currentSet = new Set(loadout);
@@ -88,10 +81,7 @@ function findClosestLoadout(
 /**
  * Check if a model type matches a valid loadout group's modelType
  */
-function modelTypeMatchesGroup(
-    modelType: string,
-    groupModelType: string
-): boolean {
+function modelTypeMatchesGroup(modelType: string, groupModelType: string): boolean {
     // "any" matches everything
     if (groupModelType === "any") return true;
 
@@ -105,10 +95,7 @@ function modelTypeMatchesGroup(
     if (normalizedModel === normalizedGroup) return true;
 
     // Handle plural forms
-    if (
-        normalizedModel === normalizedGroup + "s" ||
-        normalizedGroup === normalizedModel + "s"
-    ) {
+    if (normalizedModel === normalizedGroup + "s" || normalizedGroup === normalizedModel + "s") {
         return true;
     }
 
@@ -116,36 +103,43 @@ function modelTypeMatchesGroup(
 }
 
 /**
- * Get valid loadouts for a specific model type
+ * Get valid loadouts for a specific model type.
+ * Combines model-specific loadouts with "any" loadouts (which apply to all models).
+ * Returns a synthetic group containing all applicable loadouts.
  */
-function getValidLoadoutsForModelType(
-    modelType: string,
-    validLoadoutGroups: ValidLoadoutGroup[]
-): ValidLoadoutGroup | null {
-    // First try to find a specific match
+function getValidLoadoutsForModelType(modelType: string, validLoadoutGroups: ValidLoadoutGroup[]): ValidLoadoutGroup | null {
+    const combinedItems: string[][] = [];
+    let hasSpecificMatch = false;
+
+    // Always include "any" group loadouts (they apply to all models)
+    const anyGroup = validLoadoutGroups.find((g) => g.modelType === "any");
+    if (anyGroup) {
+        combinedItems.push(...anyGroup.items);
+    }
+
+    // Also include model-specific loadouts if they exist
     for (const group of validLoadoutGroups) {
-        if (
-            group.modelType !== "any" &&
-            group.modelType !== "all" &&
-            modelTypeMatchesGroup(modelType, group.modelType)
-        ) {
-            return group;
+        if (group.modelType !== "any" && group.modelType !== "all" && modelTypeMatchesGroup(modelType, group.modelType)) {
+            combinedItems.push(...group.items);
+            hasSpecificMatch = true;
         }
     }
 
-    // Fall back to "any" group
-    const anyGroup = validLoadoutGroups.find((g) => g.modelType === "any");
-    return anyGroup || null;
+    if (combinedItems.length === 0) {
+        return null;
+    }
+
+    // Return a synthetic group with all applicable loadouts
+    return {
+        modelType: hasSpecificMatch ? modelType : "any",
+        items: combinedItems,
+    };
 }
 
 /**
  * Validate a single model's loadout
  */
-function validateModelLoadout(
-    modelType: string,
-    loadout: string[],
-    validLoadoutGroups: ValidLoadoutGroup[]
-): LoadoutValidationResult {
+function validateModelLoadout(modelType: string, loadout: string[], validLoadoutGroups: ValidLoadoutGroup[]): LoadoutValidationResult {
     // If no valid loadouts defined, consider everything valid
     if (!validLoadoutGroups || validLoadoutGroups.length === 0) {
         return {
@@ -197,10 +191,7 @@ function validateModelLoadout(
 /**
  * Hook to validate all model loadouts in a unit
  */
-export function useLoadoutValidation(
-    modelInstances: ModelInstance[] | undefined,
-    validLoadoutGroups: ValidLoadoutGroup[] | undefined
-): UnitLoadoutValidation {
+export function useLoadoutValidation(modelInstances: ModelInstance[] | undefined, validLoadoutGroups: ValidLoadoutGroup[] | undefined): UnitLoadoutValidation {
     return useMemo(() => {
         const modelValidations = new Map<string, LoadoutValidationResult>();
         let invalidCount = 0;
@@ -214,11 +205,7 @@ export function useLoadoutValidation(
         }
 
         for (const instance of modelInstances) {
-            const result = validateModelLoadout(
-                instance.modelType,
-                instance.loadout,
-                validLoadoutGroups
-            );
+            const result = validateModelLoadout(instance.modelType, instance.loadout, validLoadoutGroups);
 
             modelValidations.set(instance.instanceId, result);
 
@@ -238,11 +225,7 @@ export function useLoadoutValidation(
 /**
  * Hook to validate a single model's loadout
  */
-export function useModelLoadoutValidation(
-    modelType: string,
-    loadout: string[],
-    validLoadoutGroups: ValidLoadoutGroup[] | undefined
-): LoadoutValidationResult {
+export function useModelLoadoutValidation(modelType: string, loadout: string[], validLoadoutGroups: ValidLoadoutGroup[] | undefined): LoadoutValidationResult {
     return useMemo(() => {
         if (!validLoadoutGroups) {
             return {

@@ -50,6 +50,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -73,6 +78,11 @@
             "s": 3,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -98,6 +108,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -121,6 +136,16 @@
             "s": 4,
             "ap": -1,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1,
+            "modelType": [
+              "Jakhal"
+            ]
           }
         ]
       },
@@ -146,6 +171,11 @@
             "ap": -1,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -169,104 +199,7 @@
           "button": "•",
           "description": "For every 10 models in this unit, 1 Jakhal can be equipped with 1 icon of Khorne."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 10 models in this unit, 1 Jakhal's chainblades can be replaced with 1 mauler chainblade.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 10,
-            "count": 1,
-            "modelType": "Jakhal"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "chainblades",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "mauler chainblade",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "Any number of Dishonoured models can each have their paired manglers replaced with 1 skullsmasher and mangler.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "paired manglers",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "skullsmasher and mangler",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "For every 10 models in this unit, 1 Jakhal can be equipped with 1 icon of Khorne.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 10
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "icon of Khorne",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -286,7 +219,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

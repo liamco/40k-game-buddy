@@ -50,6 +50,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -73,6 +78,11 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -101,6 +111,14 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Legionary"
+            ]
+          }
         ]
       },
       {
@@ -128,6 +146,11 @@
             "ap": -1,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -153,6 +176,14 @@
             "s": 9,
             "ap": -4,
             "d": "D6"
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Legionary"
+            ]
           }
         ]
       },
@@ -198,6 +229,11 @@
             "ap": -2,
             "d": "D6"
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -241,6 +277,14 @@
             "s": 8,
             "ap": -3,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Legionary"
+            ]
           }
         ]
       },
@@ -286,6 +330,14 @@
             "ap": -3,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Visionary"
+            ]
+          }
         ]
       },
       {
@@ -309,6 +361,11 @@
             "s": 5,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -334,6 +391,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -357,6 +419,11 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -384,6 +451,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -409,6 +481,11 @@
             "s": 8,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -436,6 +513,11 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -459,6 +541,14 @@
             "s": 8,
             "ap": -2,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Visionary"
+            ]
           }
         ]
       }
@@ -501,283 +591,7 @@
           "button": "•",
           "description": "Up to four Legionaries can each have their boltgun replaced with one of the following (duplicates are not allowed):<ul><li>1 accursed weapon</li><li>1 Nostraman chainglaive</li><li>1 paired accursed weapons</li><li>1 voice eater and 1 Astartes chainsword</li></ul>"
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "The Visionary's bolt pistol can be replaced with 1 plasma pistol.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Visionary"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "bolt pistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "plasma pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "The Visionary's Nostraman chainblade can be replaced with one of the following:<ul><li>1 accursed weapon</li><li>1 power fist</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Visionary"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "Nostraman chainblade",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "accursed weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "power fist",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "Any number of Legionaries can each have their boltgun replaced with 1 Astartes chainsword.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Astartes chainsword",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 4,
-          "rawText": "If this unit contains 10 models, one Legionary's boltgun can be replaced with one of the following:<ul><li>1 heavy bolter</li><li>1 missile launcher</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "if-unit-size",
-            "unitSizeThreshold": 10
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "If this unit contains 10 models, one Legionary's boltgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "heavy bolter",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "missile launcher",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 5,
-          "rawText": "One Legionary's boltgun can be replaced with one of the following:<ul><li>1 flamer</li><li>1 meltagun</li><li>1 plasma gun</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "n-model-specific",
-            "count": 1,
-            "modelType": "Legionary"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "One Legionary's boltgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "flamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "meltagun",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "plasma gun",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 6,
-          "rawText": "Up to four Legionaries can each have their boltgun replaced with one of the following (duplicates are not allowed):<ul><li>1 accursed weapon</li><li>1 Nostraman chainglaive</li><li>1 paired accursed weapons</li><li>1 voice eater and 1 Astartes chainsword</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "up-to-n",
-            "maxTotal": 4
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "boltgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "accursed weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "Nostraman chainglaive",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "paired accursed weapons",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "voice eater",
-                    "count": 1,
-                    "isAbility": true
-                  },
-                  {
-                    "name": "Astartes chainsword",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -820,13 +634,10 @@
             "000003876:plasma-pistol",
             "000003876:power-fist"
           ]
-        ],
-        "targeting": {
-          "type": "up-to-n",
-          "max": 4
-        }
+        ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

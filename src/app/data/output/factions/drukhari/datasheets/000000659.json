@@ -52,6 +52,14 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Helliarch"
+            ]
+          }
         ]
       },
       {
@@ -80,6 +88,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -106,6 +119,11 @@
             "s": 4,
             "ap": -1,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -135,6 +153,14 @@
             "ap": -2,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Helliarch"
+            ]
+          }
         ]
       },
       {
@@ -163,6 +189,14 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "Helliarch"
+            ]
+          }
         ]
       }
     ],
@@ -186,120 +220,7 @@
           "button": "•",
           "description": "If the Helliarch is equipped with 1 splinter pistol, it can be equipped with 1 hellglaive (that model's hellglaive cannot be replaced)."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "The Helliarch can be equipped with 1 phantasm grenade launcher.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Helliarch"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "phantasm grenade launcher",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "The Helliarch's hellglaive can be replaced with one of the following:<ul><li>1 splinter pistol and 1 power weapon.</li><li>1 splinter pistol and 1 stunclaw.</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "specific-model",
-            "modelType": "Helliarch"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "hellglaive",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "splinter pistol",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "power weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "splinter pistol",
-                    "count": 1,
-                    "isAbility": false
-                  },
-                  {
-                    "name": "stunclaw",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": true
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "If the Helliarch is equipped with 1 splinter pistol, it can be equipped with 1 hellglaive (that model's hellglaive cannot be replaced).",
-          "wargearParsed": false,
-          "targeting": {
-            "type": "unknown"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "hellglaive",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {
-            "restrictedWeapons": [
-              "hellglaive"
-            ]
-          }
-        }
-      ],
-      "allParsed": false
+      ]
     },
     "abilities": [
       {
@@ -334,7 +255,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": false
   },
   "supplement": {
     "key": "codex",

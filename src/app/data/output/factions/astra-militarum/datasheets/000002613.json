@@ -50,6 +50,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -75,6 +80,11 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -102,6 +112,13 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1
           }
         ]
       },
@@ -144,6 +161,13 @@
             "ap": -2,
             "d": "D3"
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1
+          }
         ]
       },
       {
@@ -170,6 +194,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -195,6 +224,11 @@
             "s": 3,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -223,6 +257,13 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1
+          }
         ]
       },
       {
@@ -248,6 +289,13 @@
             "s": 9,
             "ap": -4,
             "d": "D6"
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1
           }
         ]
       },
@@ -293,6 +341,13 @@
             "ap": -3,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "ratio",
+            "ratio": 10,
+            "count": 1
+          }
         ]
       },
       {
@@ -337,6 +392,11 @@
             "ap": -3,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -360,6 +420,11 @@
             "s": 3,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -385,6 +450,11 @@
             "ap": 0,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -408,6 +478,11 @@
             "s": 4,
             "ap": -2,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       }
@@ -462,287 +537,7 @@
           "button": "*",
           "description": "** A model can only take one of these options."
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "For every 10 models in this unit, up to 2 Death Korps Troopers can each have their lasgun replaced with one of the following*:<ul><li>1 flamer</li><li>1 grenade launcher</li><li>1 long-las</li><li>1 meltagun</li><li>1 plasma gun</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio-capped",
-            "ratio": 10,
-            "maxPerRatio": 2
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "lasgun",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "flamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "grenade launcher",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "long-las",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "meltagun",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "plasma gun",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 Death Korps medi-pack (that model's lasgun cannot be replaced)**.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 10
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "Death Korps medi-pack",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {
-            "restrictedWeapons": [
-              "lasgun"
-            ]
-          }
-        },
-        {
-          "line": 3,
-          "rawText": "For every 10 models in this unit, 1 Death Korps Trooper equipped with a lasgun can be equipped with 1 vox-caster (that model's lasgun cannot be replaced).**",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "ratio",
-            "ratio": 10
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "vox-caster",
-                    "count": 1,
-                    "isAbility": true
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {
-            "restrictedWeapons": [
-              "lasgun"
-            ]
-          }
-        },
-        {
-          "line": 4,
-          "rawText": "Any number of Death Korps Watchmasters can each replace their laspistol and chainsword with 1 boltgun and 1 close combat weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "laspistol",
-                "count": 1,
-                "isAbility": false
-              },
-              {
-                "name": "chainsword",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "boltgun and 1 close combat weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 5,
-          "rawText": "Any number of Death Korps Watchmasters can each replace their chainsword with 1 power weapon.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "chainsword",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "power weapon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 6,
-          "rawText": "Any number of Death Korps Watchmasters can each replace their laspistol with one of the following:<ul><li>1 bolt pistol</li><li>1 plasma pistol</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "any-number"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "laspistol",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "bolt pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "plasma pistol",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {}
-        },
-        {
-          "line": 7,
-          "rawText": "*  You cannot select the same option more than once per unit unless it contains 20 models, in which case you cannot select the same option more than twice per unit.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "unknown"
-          },
-          "action": {
-            "type": "unknown",
-            "removes": [],
-            "adds": [],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 8,
-          "rawText": "** A model can only take one of these options.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "unknown"
-          },
-          "action": {
-            "type": "unknown",
-            "removes": [],
-            "adds": [],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [
       {
@@ -791,7 +586,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",

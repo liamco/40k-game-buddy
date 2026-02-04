@@ -48,6 +48,11 @@
             "ap": -3,
             "d": "D6+2"
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -75,6 +80,14 @@
             "s": 4,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "modelType",
+            "modelType": [
+              "of this model"
+            ]
           }
         ]
       },
@@ -117,6 +130,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -142,6 +160,11 @@
             "s": 5,
             "ap": 0,
             "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -169,6 +192,11 @@
             "ap": -1,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -195,6 +223,11 @@
             "ap": -1,
             "d": 1
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -218,6 +251,11 @@
             "s": 8,
             "ap": -3,
             "d": 2
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
           }
         ]
       },
@@ -258,6 +296,11 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       },
       {
@@ -282,6 +325,11 @@
             "ap": -2,
             "d": 2
           }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
         ]
       }
     ],
@@ -305,137 +353,7 @@
           "button": "•",
           "description": "This model can be equipped with up to two of the following:<ul><li>1 missile launcher</li><li>1 bright lance</li><li>1 scatter laser</li><li>1 shuriken cannon</li><li>1 starcannon</li></ul>"
         }
-      ],
-      "parsed": [
-        {
-          "line": 1,
-          "rawText": "Each of this model's shuriken catapults can be replaced with 1 flamer.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "each-model-type",
-            "modelType": "of this model"
-          },
-          "action": {
-            "type": "replace",
-            "removes": [
-              {
-                "name": "shuriken catapults",
-                "count": 1,
-                "isAbility": false
-              }
-            ],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "flamer",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 2,
-          "rawText": "This model can be equipped with 1 ghostglaive.",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "this-model"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "ghostglaive",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": false
-          },
-          "constraints": {}
-        },
-        {
-          "line": 3,
-          "rawText": "This model can be equipped with up to two of the following:<ul><li>1 missile launcher</li><li>1 bright lance</li><li>1 scatter laser</li><li>1 shuriken cannon</li><li>1 starcannon</li></ul>",
-          "wargearParsed": true,
-          "targeting": {
-            "type": "this-model"
-          },
-          "action": {
-            "type": "add",
-            "removes": [],
-            "adds": [
-              {
-                "weapons": [
-                  {
-                    "name": "missile launcher",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "bright lance",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "scatter laser",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "shuriken cannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              },
-              {
-                "weapons": [
-                  {
-                    "name": "starcannon",
-                    "count": 1,
-                    "isAbility": false
-                  }
-                ],
-                "isPackage": false
-              }
-            ],
-            "isChoiceList": true
-          },
-          "constraints": {
-            "maxSelections": 2
-          }
-        }
-      ],
-      "allParsed": true
+      ]
     },
     "abilities": [],
     "validLoadouts": [
@@ -448,7 +366,8 @@
           ]
         ]
       }
-    ]
+    ],
+    "loadoutsParsed": true
   },
   "supplement": {
     "key": "codex",
