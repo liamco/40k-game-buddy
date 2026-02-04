@@ -30,11 +30,11 @@ const formatAbility = (ability: Ability): string => {
     return isNumeric ? `${ability.name} ${ability.parameter}+` : `${ability.name} ${ability.parameter}`;
 };
 
-// Helper to render a stat value, showing modified value in accent color if changed
+// Helper to render a stat value, showing modified value with reversed colors if changed
 const StatValue = ({ value, modified, isSave = false }: { value: number | null; modified?: { base: number; modified: number }; isSave?: boolean }) => {
     if (modified) {
         return (
-            <span className="text-calgarBlue">
+            <span className="inline-flex items-center justify-center min-w-[1.5rem] px-1 py-0.5 bg-mournfangBrown rounded text-skarsnikGreen font-medium">
                 {modified.modified}
                 {isSave ? "+" : ""}
             </span>
@@ -122,10 +122,10 @@ const ModelProfileCard = ({ model, abilities, wargearAbilities, isDisabled, isSe
                     </p>
                     {(model.invSv || modifiedStats.invSv) && (
                         <div className="col-start-3 relative flex justify-center">
-                            <BaseIcon color="deathWorldForest" size="large">
+                            <BaseIcon color={modifiedStats.invSv ? "skarsnikGreen" : "deathWorldForest"} size="large">
                                 <IconShield />
                             </BaseIcon>
-                            <span className={`inline-block ${isDestroyed ? "text-wildRiderRed" : modifiedStats.invSv ? "text-calgarBlue" : "text-fireDragonBright"} absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}>
+                            <span className={`inline-block ${isDestroyed ? "text-wildRiderRed" : modifiedStats.invSv ? "text-mournfangBrown font-medium" : "text-fireDragonBright"} absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}>
                                 {modifiedStats.invSv ? modifiedStats.invSv.modified : model.invSv}
                             </span>
                         </div>
