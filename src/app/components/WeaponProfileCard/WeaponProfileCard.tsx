@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import { WeaponProfile } from "#types/Weapons.tsx";
 
@@ -54,9 +54,10 @@ interface Props {
     bonusAttributes?: BonusAttribute[];
     // Stat bonuses from enhancements/abilities (e.g., +1 Strength)
     statBonuses?: StatBonus[];
+    disabledLabel?: string;
 }
 
-const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisabled, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
+const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisabled, disabledLabel, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
     const handleClick = () => {
         if (canToggle && onToggle) {
             onToggle();
@@ -184,7 +185,12 @@ const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisable
                     {renderStat("d", profile.d)}
                 </div>
             </div>
-            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />}
+            {isDisabled && (
+                <Fragment>
+                    <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethrough} alt="X" />
+                    {disabledLabel && <span className="bg-mournfangBrown border-1 border-fireDragonBright p-2 text-blockcaps-s absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">{disabledLabel}</span>}
+                </Fragment>
+            )}
         </div>
     );
 };

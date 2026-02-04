@@ -76,7 +76,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     };
 
     return (
-        <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr_auto] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
+        <section className="grid p-4 pr-[2px] space-y-4 grid-rows-[auto_auto_1fr_auto] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
             <Dropdown
                 options={unitOptions}
                 selectedLabel={selectedUnit?.displayName}
@@ -107,7 +107,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
             {/* Unit selected and alive - show weapon selection */}
             {selectedUnit && !combatState?.isDestroyed && (
                 <div className="space-y-4">
-                    <SplitHeading label="Select weapon" />
+                    <SplitHeading label="Select weapon" labelClassName="text-blockcaps-s" />
 
                     {groupedWeapons.isCombined ? (
                         // Combined unit: show weapons grouped by source
@@ -152,6 +152,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                                 wargearId={weapon.id}
                                                 isSelected={isSelected && canFire}
                                                 isDisabled={!canFire}
+                                                disabledLabel={reason}
                                                 onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
                                                 bonusAttributes={leaderGrantedAbilities}
                                             />

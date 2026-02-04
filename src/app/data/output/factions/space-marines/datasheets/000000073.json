@@ -18,7 +18,22 @@
   "leader": {
     "description": "",
     "footer": "* This model cannot be attached to a BLADEGUARD VETERAN SQUAD unless this model is equipped with a relic shield, and cannot be attached to a HELLBLASTER SQUAD unless this model is equipped with a plasma pistol.",
-    "conditions": null,
+    "conditions": {
+      "equipmentRequirements": [
+        {
+          "targetUnitKeywords": [
+            "BLADEGUARD VETERAN SQUAD"
+          ],
+          "requiredEquipment": "relic shield"
+        },
+        {
+          "targetUnitKeywords": [
+            "HELLBLASTER SQUAD"
+          ],
+          "requiredEquipment": "plasma pistol"
+        }
+      ]
+    },
     "attachableUnits": []
   },
   "damaged": null,

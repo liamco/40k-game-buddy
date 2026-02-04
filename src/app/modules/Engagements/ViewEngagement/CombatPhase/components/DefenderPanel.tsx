@@ -102,7 +102,7 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     }, [availableModels, leaderModelCount, selectedUnit]);
 
     return (
-        <section className="grid p-4 pr-[2px] space-y-6 grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
+        <section className="grid p-4 pr-[2px] space-y-4 grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
             <Dropdown
                 options={unitOptions}
                 selectedLabel={selectedUnit?.displayName}
@@ -133,7 +133,7 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
             {/* Unit selected and alive - show model selection */}
             {selectedUnit && !combatState?.isDestroyed && (
                 <div className="space-y-4">
-                    <SplitHeading label="Select target model" />
+                    <SplitHeading label="Select target" labelClassName="text-blockcaps-s" />
 
                     <div className="space-y-2">
                         {sortedModels.map(({ model, originalIdx }) => {

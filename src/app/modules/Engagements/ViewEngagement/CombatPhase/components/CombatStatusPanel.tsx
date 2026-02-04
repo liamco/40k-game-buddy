@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
 import { Button } from "#components/Button/Button.tsx";
@@ -37,12 +37,11 @@ const objectiveRangeOptions: { id: string; label: string; data: ObjectiveRangeOp
 export function CombatStatusPanel({ side, combatState, startingStrength, onModelCountChange, onCombatStatusChange, unit }: CombatStatusPanelProps) {
     const [casualtyPanelOpen, setCasualtyPanelOpen] = useState(false);
 
+    // Max wounds for single-model units
+    const maxWounds = unit.models[0]?.w || 1;
+
     const handleBooleanToggle = (key: keyof EngagementForceItemCombatState) => (checked: boolean) => {
         onCombatStatusChange({ [key]: checked });
-    };
-
-    const handleMovementBehaviour = (value: EngagementForceItemCombatState["movementBehaviour"]) => () => {
-        onCombatStatusChange({ movementBehaviour: value });
     };
 
     const handleCasualtyChange = (deadModelIds: string[]) => {
@@ -53,14 +52,52 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
         onCombatStatusChange({ deadModelIds, unitStrength, isDestroyed: aliveCount === 0 ? true : false });
     };
 
-    const handleIncrement = () => {
+    // Calculate unit strength based on wounds for single-model units
+    const calculateWoundStrength = (current: number, max: number): "full" | "belowStarting" | "belowHalf" => {
+        if (current === max) return "full";
+        if (current > max / 2) return "belowStarting";
+        return "belowHalf";
+    };
+
+    const handleWoundsIncrement = () => {
+        const currentWounds = combatState.currentWounds;
+        if (currentWounds >= maxWounds) return;
+
+        const newWounds = currentWounds + 1;
+        const isDamaged = unit.damaged ? newWounds <= unit.damaged.threshold : false;
+
+        onCombatStatusChange({
+            currentWounds: newWounds,
+            isDamaged,
+            isDestroyed: false,
+            unitStrength: calculateWoundStrength(newWounds, maxWounds),
+        });
+    };
+
+    const handleWoundsDecrement = () => {
+        const currentWounds = combatState.currentWounds;
+        if (currentWounds <= 0) return;
+
+        const newWounds = currentWounds - 1;
+        const isDamaged = unit.damaged ? newWounds <= unit.damaged.threshold : false;
+        const isDestroyed = newWounds === 0;
+
+        onCombatStatusChange({
+            currentWounds: newWounds,
+            isDamaged,
+            isDestroyed,
+            unitStrength: calculateWoundStrength(newWounds, maxWounds),
+        });
+    };
+
+    const handleCasualtyIncrement = () => {
         const deadIds = combatState.deadModelIds || [];
         if (deadIds.length === 0) return;
         const newDeadIds = deadIds.slice(0, -1);
         handleCasualtyChange(newDeadIds);
     };
 
-    const handleDecrement = () => {
+    const handleCasualtyDecrement = () => {
         const instances = unit.modelInstances || [];
         const deadIds = combatState.deadModelIds || [];
         if (deadIds.length >= instances.length) return;
@@ -77,7 +114,12 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
 
     const currentObjectiveLabel = objectiveRangeOptions.find((o) => o.data.value === combatState.isInObjectiveRange)?.label || "None";
 
-    console.log(unit.name, combatState.isDestroyed);
+    // Use single-model wound display for vehicles/monsters with damaged mechanic or single-model units
+    const useSingleModelDisplay = () => {
+        if (unit.damaged) return true;
+        if (unit.modelInstances && unit.modelInstances.length === 1) return true;
+        return false;
+    };
 
     const getUnitStrengthLabelColour = () => {
         switch (combatState.unitStrength) {
@@ -90,39 +132,86 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
         }
     };
 
-    const calculateUnitGridCols = () => {
-        if (unit.modelInstances.length <= 5) return unit.modelInstances.length;
+    const getWoundsColour = () => {
+        if (combatState.isDestroyed) return "text-wildRiderRed";
+        if (combatState.isDamaged) return "text-wildRiderRed";
+        if (combatState.unitStrength === "belowHalf") return "text-wildRiderRed";
+        if (combatState.unitStrength === "belowStarting") return "text-fireDragonBright";
+        return "text-skarsnikGreen";
+    };
 
+    const calculateUnitGridCols = () => {
+        if (!unit.modelInstances) return 1;
+        if (unit.modelInstances.length <= 5) return unit.modelInstances.length;
         return Math.ceil(unit.modelInstances.length / 2);
     };
 
     return (
         <section className="space-y-4">
             <div className="flex justify-between items-center">
-                <div className="space-y-1">
-                    <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
+                {useSingleModelDisplay() ? (
+                    <Fragment>
+                        <div className="space-y-1">
+                            <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
 
-                    <div className="flex items-center gap-2">
-                        <button onClick={handleDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.isDestroyed ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}>
-                            <Minus className="w-4 h-4" />
-                        </button>
-                        <button onClick={handleIncrement} disabled={combatState.unitStrength === "full"} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.unitStrength === "full" ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}>
-                            <Plus className="w-4 h-4" />
-                        </button>
-                    </div>
-                </div>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={handleWoundsDecrement}
+                                    disabled={combatState.currentWounds <= 0 || combatState.isDestroyed}
+                                    className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}
+                                >
+                                    <Minus className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={handleWoundsIncrement}
+                                    disabled={combatState.currentWounds >= maxWounds}
+                                    className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.currentWounds >= maxWounds ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}
+                                >
+                                    <Plus className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <div className="text-heading-l">
+                                <span className="text-skarsnikGreen">W</span>
+                                <span className={getWoundsColour()}> {combatState.currentWounds}</span>
+                                <span className="text-fireDragonBright/50">/{maxWounds}</span>
+                            </div>
+                            {unit.damaged && combatState.isDamaged && !combatState.isDestroyed && <div className="inline-block px-2 py-1 bg-wordBearersRed/80 border border-wildRiderRed rounded text-wildRiderRed text-blockcaps-s">Severely Damaged</div>}
+                        </div>
+                    </Fragment>
+                ) : (
+                    <Fragment>
+                        <div className="space-y-1">
+                            <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
 
-                <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
-                    <ul className={`inline-grid gap-1 list-none m-0 p-0`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
-                        {unit.modelInstances.map((m: EngagementModelInstance) => (
-                            <li key={m.instanceId} className={` !mt-0 ${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
-                                <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
-                                    <IconSkull />
-                                </BaseIcon>
-                            </li>
-                        ))}
-                    </ul>
-                </Button>
+                            <div className="flex items-center gap-2">
+                                <button onClick={handleCasualtyDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.isDestroyed ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}>
+                                    <Minus className="w-4 h-4" />
+                                </button>
+                                <button
+                                    onClick={handleCasualtyIncrement}
+                                    disabled={combatState.unitStrength === "full"}
+                                    className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.unitStrength === "full" ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}
+                                >
+                                    <Plus className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
+
+                        <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
+                            <ul className={`inline-grid gap-1 list-none m-0 p-0`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
+                                {unit.modelInstances?.map((m: EngagementModelInstance) => (
+                                    <li key={m.instanceId} className={` !mt-0 ${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
+                                        <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
+                                            <IconSkull />
+                                        </BaseIcon>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Button>
+                    </Fragment>
+                )}
             </div>
             <div className={`flex justify-between items-center ${combatState.isDestroyed ? "cursor-not-allowed opacity-50" : ""}`}>
                 <div className="relative grow max-w-[15rem]">

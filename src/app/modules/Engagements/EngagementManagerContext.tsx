@@ -31,7 +31,7 @@ function getStartingWounds(item: ArmyListItem): number {
     const modelCount = calculateTotalModels(item);
     // For single-model units or units where wounds matter per model
     const firstModel = item.models[0];
-    return (firstModel.W || 1) * modelCount;
+    return (firstModel.w || 1) * modelCount;
 }
 
 // Create default combat state for a unit

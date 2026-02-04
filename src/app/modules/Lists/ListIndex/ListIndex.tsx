@@ -36,7 +36,7 @@ export function ListIndex() {
                     ))}
                 </div>
             )}
-            <AlertDialog open={!!listToDelete} onOpenChange={(open) => !open && setListToDelete(null)}>
+            <AlertDialog variant="destructive" open={!!listToDelete} onOpenChange={(open) => !open && setListToDelete(null)}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>Delete List</AlertDialogTitle>

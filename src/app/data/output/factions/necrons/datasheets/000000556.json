@@ -18,9 +18,16 @@
   "leader": null,
   "damaged": {
     "range": "1-8",
-    "threshold": 0,
+    "threshold": 8,
     "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and you can only select one of the C'tan Powers weapons in your Shooting phase, instead of two.",
-    "mechanics": []
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 4
+      }
+    ]
   },
   "wargear": {
     "defaultLoadout": {

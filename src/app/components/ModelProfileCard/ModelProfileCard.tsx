@@ -102,24 +102,12 @@ const ModelProfileCard = ({ model, abilities, wargearAbilities, isDisabled, isSe
                     <p>W</p>
                     <p>Ld</p>
                     <p>OC</p>
-                    <p>
-                        <StatValue value={model.m} modified={modifiedStats.m} />
-                    </p>
-                    <p>
-                        <StatValue value={model.t} modified={modifiedStats.t} />
-                    </p>
-                    <p>
-                        <StatValue value={model.sv} modified={modifiedStats.sv} isSave />
-                    </p>
-                    <p>
-                        <StatValue value={model.w} modified={modifiedStats.w} />
-                    </p>
-                    <p>
-                        <StatValue value={model.ld} modified={modifiedStats.ld} isSave />
-                    </p>
-                    <p>
-                        <StatValue value={model.oc} modified={modifiedStats.oc} />
-                    </p>
+                    <StatValue value={model.m} modified={modifiedStats.m} />
+                    <StatValue value={model.t} modified={modifiedStats.t} />
+                    <StatValue value={model.sv} modified={modifiedStats.sv} isSave />
+                    <StatValue value={model.w} modified={modifiedStats.w} />
+                    <StatValue value={model.ld} modified={modifiedStats.ld} isSave />
+                    <StatValue value={model.oc} modified={modifiedStats.oc} />
                     {(model.invSv || modifiedStats.invSv) && (
                         <div className="col-start-3 relative flex justify-center">
                             <BaseIcon color={modifiedStats.invSv ? "skarsnikGreen" : "deathWorldForest"} size="large">

@@ -18,9 +18,22 @@
   "leader": null,
   "damaged": {
     "range": "1-7",
-    "threshold": 0,
+    "threshold": 7,
     "description": "While this model has 1-7 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": []
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      },
+      {
+        "entity": "thisModel",
+        "effect": "statPenalty",
+        "attribute": "oc",
+        "value": 4
+      }
+    ]
   },
   "wargear": {
     "defaultLoadout": {

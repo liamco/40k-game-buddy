@@ -18,9 +18,16 @@
   "leader": null,
   "damaged": {
     "range": "1-5",
-    "threshold": 0,
+    "threshold": 5,
     "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
-    "mechanics": []
+    "mechanics": [
+      {
+        "entity": "thisModel",
+        "effect": "rollPenalty",
+        "attribute": "h",
+        "value": 1
+      }
+    ]
   },
   "wargear": {
     "defaultLoadout": {

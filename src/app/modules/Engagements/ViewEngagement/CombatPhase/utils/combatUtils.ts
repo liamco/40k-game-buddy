@@ -334,7 +334,7 @@ export interface CanFireResult {
 export function canFireWeapon(weapon: Weapon | WeaponProfile, movementBehaviour: EngagementForceItemCombatState["movementBehaviour"], canAdvanceAndShoot: boolean = false): CanFireResult {
     // Units that fell back cannot shoot at all (core rule)
     if (movementBehaviour === "fallBack") {
-        return { canFire: false, reason: "Fell back" };
+        return { canFire: false, reason: "Unit fell back" };
     }
 
     // Units that advanced can only fire ASSAULT weapons (unless override)
@@ -343,7 +343,7 @@ export function canFireWeapon(weapon: Weapon | WeaponProfile, movementBehaviour:
             return { canFire: true };
         }
         if (!hasAssaultAttribute(weapon)) {
-            return { canFire: false, reason: "Requires ASSAULT" };
+            return { canFire: false, reason: "Unit advanced" };
         }
     }
 
