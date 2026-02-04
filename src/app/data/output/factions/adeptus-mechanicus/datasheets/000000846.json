@@ -125,7 +125,21 @@
       "factionId": "",
       "description": "At the start of the battle, if this model is leading a KASTELAN ROBOTS unit, that unit enters Aegis Protocols (see below). In your Command phase, if this model is leading a <span class=\"kwb\">KASTELAN</span> <span class=\"kwb\">ROBOTS</span> unit, you can select one protocol from those listed below for that unit to enter. Once a unit enters a protocol, it remains in that protocol until it enters a different one.<br><ul><li><b>Protector Protocol:</b> Add 2 to the Attacks characteristic of ranged weapons equipped by <span class=\"kwb\">KASTELAN</span> <span class=\"kwb\">ROBOT</span> models in that unit.</li><li><b>Conqueror Protocol:</b> Add 2 to the Attacks characteristic of melee weapons equipped by <span class=\"kwb\">KASTELAN</span> <span class=\"kwb\">ROBOT</span> models in that unit.</li><li><b>Aegis Protocol:</b> Add 1 to the Toughness characteristic of <span class=\"kwb\">KASTELAN</span> <span class=\"kwb\">ROBOT</span> models in that unit.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "bearersUnit",
+          "effect": "statBonus",
+          "attribute": "a",
+          "value": 2,
+          "conditions": [
+            {
+              "weaponType": "Melee"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "regex"
     }
   ],
   "keywords": [

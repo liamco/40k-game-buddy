@@ -487,7 +487,16 @@
           ],
           "detachment": "Brandfast Oathband",
           "detachmentId": 1099,
-          "description": "<b>WHEN:</b> Your Shooting phase, just after a Leagues of Votann Vehicle unit from your army has shot.<br><br><b>TARGET:</b> That <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> <span class=\"kwb\">VEHICLE</span> unit.<br><br><b>EFFECT:</b> Select one enemy unit hit by one or more of those attacks. Until the end of the phase, each time a Leagues of Votann Infantry model from your army makes an attack that targets that enemy unit, re-roll a Hit roll of 1."
+          "description": "<b>WHEN:</b> Your Shooting phase, just after a Leagues of Votann Vehicle unit from your army has shot.<br><br><b>TARGET:</b> That <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> <span class=\"kwb\">VEHICLE</span> unit.<br><br><b>EFFECT:</b> Select one enemy unit hit by one or more of those attacks. Until the end of the phase, each time a Leagues of Votann Infantry model from your army makes an attack that targets that enemy unit, re-roll a Hit roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -738,7 +747,16 @@
           "detachment": "Hearthband",
           "detachmentId": 1001,
           "legend": "A rare cloneskein threads this warrior's bone structure and epidermis with metallic fibres.",
-          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. Add 2 to the bearer's Wounds characteristic."
+          "description": "<span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> model only. Add 2 to the bearer's Wounds characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "statBonus",
+              "attribute": "w",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -953,7 +971,16 @@
           ],
           "detachment": "Hearthfire Strike",
           "detachmentId": 951,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability and each time a model in your unit makes an attack with a weapon, you can ignore any or all modifiers to that attack's or that weapon's Ballistic Skill characteristic and any or all modifiers to the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability and each time a model in your unit makes an attack with a weapon, you can ignore any or all modifiers to that attack's or that weapon's Ballistic Skill characteristic and any or all modifiers to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -993,7 +1020,16 @@
           "legend": "With advanced engineering knowledge and cogitational expertise, a hearthfyre arsenal's specialists can apply the resources and information seized by the Kin to eradicate their foes efficiently. Such assets are used to coordinate the devastating fire patterns of the force's support infantry, empowering already heavily armed Kin to the extent that little can escape their murderous fusillades.",
           "description": "At the end of your Command phase, you gain 1YP for each objective marker you control that is not within your deployment zone and has one or more Iron-master and/or Memnyr Strategist models from your army within range of it (to a maximum of 2YP gained from this Detachment rule per turn).<br><br>In your Shooting phase, each time a Brôkhyr, Ironkin Steeljacks or Arkanyst Evaluator unit from your array is selected to shoot, you can spend 1YP. If you do, until the end of the phase, each time a model in that unit makes an attack, re-roll a Hit roll of 1.",
           "detachment": "Hearthfyre Arsenal",
-          "detachmentId": 1100
+          "detachmentId": 1100,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1026,7 +1062,16 @@
           "detachment": "Hearthfyre Arsenal",
           "detachmentId": 1100,
           "legend": "Like any other resource, resolve and bloody-mindedness can be applied in force when and where needed by those with the will to do so.",
-          "description": "Iron-master or Memnyr Strategist model only. While the bearer is leading a unit, add 1 to the Objective Control characteristic of models in that unit."
+          "description": "Iron-master or Memnyr Strategist model only. While the bearer is leading a unit, add 1 to the Objective Control characteristic of models in that unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",
@@ -1254,7 +1299,16 @@
           ],
           "detachment": "Needgaârd Oathband",
           "detachmentId": 1096,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">LEAGUES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">VOTANN</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "LoV",

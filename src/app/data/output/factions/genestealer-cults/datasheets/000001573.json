@@ -203,7 +203,16 @@
         "id": "000001573:flare-launcher",
         "name": "Flare Launcher",
         "description": "The bearer's unit has the <span class=\"kwb\">SMOKE</span> keyword and you can target it with the Smokescreen Stratagem for 0CP.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearer",
+            "effect": "addsKeyword",
+            "keywords": [
+              "SMOKE"
+            ]
+          }
+        ],
+        "mechanicsSource": "regex"
       },
       {
         "id": "000001573:spotter",
@@ -215,7 +224,15 @@
         "id": "000001573:survey-augur",
         "name": "Survey Augur",
         "description": "Each time the bearer's unit has shot, select one enemy unit that was hit by one or more attacks made by the bearer this phase. Until the end of the phase, each time a friendly <span class=\"kwb\">GENESTEALER</span> <span class=\"kwb\">CULTS</span> model makes an attack against that unit, that attack has the [IGNORES COVER] ability.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "targetUnit",
+            "effect": "ignoreModifier",
+            "attribute": "s",
+            "value": "cover"
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [

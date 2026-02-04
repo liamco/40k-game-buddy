@@ -155,7 +155,20 @@
         "id": "000000226:book-of-salvation",
         "name": "Book of Salvation",
         "description": "While this model is leading a unit, add 1 to the Attacks characteristic of melee weapons equipped by models in that unit. When this model is destroyed, each friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit within 6\" of this model must take a Battle-shock test.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearersUnit",
+            "effect": "statBonus",
+            "attribute": "a",
+            "value": 1,
+            "conditions": [
+              {
+                "weaponType": "Melee"
+              }
+            ]
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [],

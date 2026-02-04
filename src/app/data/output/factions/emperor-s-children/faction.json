@@ -536,7 +536,16 @@
           "legend": "Few appear as favoured by the Dark Prince as these warriors, their boons of power a reward for committing ever viler deeds in honour of their patron.",
           "description": "At the start of the battle round, if your <span class=\"kwb\">WARLORD</span> is on the battlefield, you must pledge a number to Slaanesh representing how many enemy units will be destroyed this battle round. At the end of the battle round, if the number of enemy units destroyed this battle round is greater than or equal to your pledge, you gain a number of Pact points equal to your pledge. Otherwise, you do not gain any Pact points this battle round and your <span class=\"kwb\">WARLORD</span> model suffers D3 mortal wounds.<br><br>Emperor's Children units from your army gain a bonus depending on how many Pact points you have gained during the battle, as shown below (these are all cumulative).<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><b>PACT POINTS</b></td><td><b>BONUS</b></td></tr><tr><td><b>1+</b></td><td>Each time a model in this unit makes an attack, re-roll a <span class=\"tooltip00006\" data-tooltip-content=\"#tooltip_content00006\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span> of 1.</td></tr><tr><td><b>3+</b></td><td>Each time a model in this unit makes an attack, re-roll a <span class=\"tooltip00032\" data-tooltip-content=\"#tooltip_content00032\"><span class=\"tt kwbu\">Wound</span> <span class=\"tt kwbu\">roll</span></span> of 1.</td></tr><tr><td><b>5+</b></td><td>Melee weapons equipped by models in this unit have the <span class=\"kwb2 bluefont\"><span class=\"tooltip00078\" data-tooltip-content=\"#tooltip_content00078\"><span class=\"tt kwbu\">[LETHAL</span> <span class=\"tt kwbu\">HITS]</span></span></span> and <span class=\"kwb2 bluefont\"><span class=\"tooltip00016\" data-tooltip-content=\"#tooltip_content00016\"><span class=\"tt kwbu\">[SUSTAINED</span> <span class=\"tt kwbu\">HITS</span> <span class=\"tt kwbu\">1]</span></span></span> abilities.</td></tr><tr><td><b>7+</b></td><td>Each time a model in this unit makes an attack, a <span class=\"tooltip00006\" data-tooltip-content=\"#tooltip_content00006\"><span class=\"tt kwbu\">Critical</span> <span class=\"tt kwbu\">Hit</span></span> is scored on an unmodified <span class=\"tooltip00006\" data-tooltip-content=\"#tooltip_content00006\"><span class=\"tt kwbu\">Hit</span> <span class=\"tt kwbu\">roll</span></span> of 5+.</td></tr></tbody></table></td></tr></tbody></table></div>",
           "detachment": "Coterie of the Conceited",
-          "detachmentId": 1037
+          "detachmentId": 1037,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1201,7 +1210,16 @@
           "legend": "The Emperor's Children are masters of the mechanised assault, leaping from their growling, daemonically tainted vehicles to fall upon the foe with blade and bolter.",
           "description": "Each time an Emperor's Children model from your army makes an attack, if it is a Transport model or disembarked from a <span class=\"kwb\">TRANSPORT</span> this turn, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
           "detachment": "Rapid Evisceration",
-          "detachmentId": 1035
+          "detachmentId": 1035,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1382,7 +1400,16 @@
           "detachment": "Slaanesh's Chosen",
           "detachmentId": 1038,
           "legend": "Even amongst the prideful warriors of the Emperor's Children, this warrior is a towering pillar of arrogance.",
-          "description": "Emperor's Children model only. You can re-roll Battle-shock and Leadership tests taken for the bearer's unit. While the bearer's unit is your army's Favoured Champions, add 1 to the Objective Control characteristic of models in that unit."
+          "description": "Emperor's Children model only. You can re-roll Battle-shock and Leadership tests taken for the bearer's unit. While the bearer's unit is your army's Favoured Champions, add 1 to the Objective Control characteristic of models in that unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "EC",

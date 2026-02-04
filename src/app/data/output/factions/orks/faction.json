@@ -1415,7 +1415,16 @@
           "detachment": "Bully Boyz",
           "detachmentId": 857,
           "legend": "The bigger the Waaagh!, the bigger the boss must be to exert control. This Ork has countless huge battles under his belt and has grown in stature and aggression to match.",
-          "description": "Infantry Warboss model only. Add 2 to the bearer's Wounds characteristic."
+          "description": "Infantry Warboss model only. Add 2 to the bearer's Wounds characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "statBonus",
+              "attribute": "w",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "ORK",
@@ -1494,7 +1503,16 @@
           ],
           "detachment": "Bully Boyz",
           "detachmentId": 857,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Nobz or Meganobz unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1. If a Waaagh! is active for your unit, you can re-roll the Hit roll instead."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Nobz or Meganobz unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1. If a Waaagh! is active for your unit, you can re-roll the Hit roll instead.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "ORK",
@@ -1756,7 +1774,16 @@
           "detachment": "Dread Mob",
           "detachmentId": 855,
           "legend": "By squinting hard through the mismatched lenses of these goggles, even the sneakiest git can be pinpointed.",
-          "description": "Mek model only. Ranged weapons equipped by models in the bearer's unit have the [ignores cover] ability."
+          "description": "Mek model only. Ranged weapons equipped by models in the bearer's unit have the [ignores cover] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "ORK",
@@ -1853,7 +1880,16 @@
           ],
           "detachment": "Dread Mob",
           "detachmentId": 855,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Orks Walker or Grots Vehicle unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Each time you use this Stratagem, you can choose to push it. Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1. If you chose to push it, you can re-roll the Hit roll instead and, until the end of the phase, ranged weapons equipped by models in your unit have the [HAZARDOUS] ability as well."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Orks Walker or Grots Vehicle unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Each time you use this Stratagem, you can choose to push it. Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1. If you chose to push it, you can re-roll the Hit roll instead and, until the end of the phase, ranged weapons equipped by models in your unit have the [HAZARDOUS] ability as well.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "ORK",
@@ -2426,7 +2462,16 @@
           ],
           "detachment": "More Dakka!",
           "detachmentId": 1030,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ORKS</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ORKS</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "ORK",
@@ -2761,7 +2806,16 @@
           ],
           "detachment": "Taktikal Brigade",
           "detachmentId": 995,
-          "description": "<b>WHEN:</b> Command phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ORKS</span> unit from your army that is within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Until the start of the next Command phase, add 1 to the Objective Control characteristic of models in your unit."
+          "description": "<b>WHEN:</b> Command phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ORKS</span> unit from your army that is within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Until the start of the next Command phase, add 1 to the Objective Control characteristic of models in your unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "ORK",

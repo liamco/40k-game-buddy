@@ -1042,7 +1042,22 @@
           "detachment": "Auxiliary Cadre",
           "detachmentId": 1005,
           "legend": "Having proven themselves to their alien charges, this T'au has won their fierce loyalty and become an iconic folk hero to them.",
-          "description": "<span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> model (excluding Kroot models) only. In your Command phase, you can select one <span class=\"kwb\">KROOT</span> or Vespid Stingwings unit within 12\" of the bearer. If you do, until the start of your next Command phase, improve the Leadership characteristic of models in that unit by 1, and while such a unit is not Battle-shocked, add 1 to the Objective Control characteristic of models in that unit."
+          "description": "<span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> model (excluding Kroot models) only. In your Command phase, you can select one <span class=\"kwb\">KROOT</span> or Vespid Stingwings unit within 12\" of the bearer. If you do, until the start of your next Command phase, improve the Leadership characteristic of models in that unit by 1, and while such a unit is not Battle-shocked, add 1 to the Objective Control characteristic of models in that unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            },
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "ld",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",
@@ -1443,7 +1458,16 @@
           ],
           "detachment": "Kauyon",
           "detachmentId": 781,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> unit from your army that has just been selected as an Observer unit (see For the Greater Good).<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack that targets their Spotted unit, improve the Ballistic Skill characteristic of that attack by 1 and, if your unit has the Markerlight keyword, that attack has the [IGNORES COVER] ability."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">T'AU</span> <span class=\"kwb\">EMPIRE</span> unit from your army that has just been selected as an Observer unit (see For the Greater Good).<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack that targets their Spotted unit, improve the Ballistic Skill characteristic of that attack by 1 and, if your unit has the Markerlight keyword, that attack has the [IGNORES COVER] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",
@@ -1546,7 +1570,16 @@
           "detachment": "Kroot Hunting Pack",
           "detachmentId": 847,
           "legend": "This leader has painstakingly established a deep-seated bond with a small flock of Kroothawks. The avian creatures circle on high, spying out and revealing the hiding places of the prey or warning of ambushing enemies with wing-dips, diving stoops and harsh shrieks.",
-          "description": "Kroot model only. Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability, and enemy units that are set up on the battlefield as Reinforcements cannot be set up within 12\" horizontally of the bearer."
+          "description": "Kroot model only. Ranged weapons equipped by models in the bearer's unit have the [IGNORES COVER] ability, and enemy units that are set up on the battlefield as Reinforcements cannot be set up within 12\" horizontally of the bearer.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",
@@ -1946,7 +1979,17 @@
           "detachment": "Retaliation Cadre",
           "detachmentId": 846,
           "legend": "These thigh plates house deployment rails of high-explosive bomblets. As the pilot jets over the foe, the racks can be triggered to dispense a rain of death.",
-          "description": "T'au Empire Battlesuit model only. The bearer has the Grenades keyword, and each time the bearer ends a Normal move, you can select one enemy unit that it moved over during that move. If you do, roll six D6: for each 4+, that enemy unit suffers 1 mortal wound."
+          "description": "T'au Empire Battlesuit model only. The bearer has the Grenades keyword, and each time the bearer ends a Normal move, you can select one enemy unit that it moved over during that move. If you do, roll six D6: for each 4+, that enemy unit suffers 1 mortal wound.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "GRENADES"
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TAU",

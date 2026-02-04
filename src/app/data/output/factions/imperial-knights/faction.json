@@ -471,7 +471,16 @@
           "detachment": "Gate Warden Lance",
           "detachmentId": 1107,
           "legend": "The Noble dubbed with this honourable title has sworn to purge the frontiers of their realm, scouring it clean of the stain of everything foul and inimical to the Code.",
-          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Each time the bearer makes a melee attack, if the bearer is on your defensive line, re-roll a Hit roll of 1 and re-roll a Wound roll of 1."
+          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Each time the bearer makes a melee attack, if the bearer is on your defensive line, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QI",
@@ -481,7 +490,16 @@
           "detachment": "Gate Warden Lance",
           "detachmentId": 1107,
           "legend": "This web of neuro-couplings has been worked into a richly ornamented helmet. Through it, the Noble pilot can access nearby hidden augur nodes deployed by servitor clades of the Sacristans, inloading targeting data to pick out the locations of shrouded besiegers.",
-          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Each time the bearer makes a ranged attack, while the bearer is on your defensive line, weapons equipped by the bearer have the [ignores cover] ability."
+          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Each time the bearer makes a ranged attack, while the bearer is on your defensive line, weapons equipped by the bearer have the [ignores cover] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QI",
@@ -607,7 +625,16 @@
           "legend": "The Nobles of Questor Mechanicus houses commonly fight alongside the armies of forge worlds. They are bound together by their shared devotion to the Machine Cult.",
           "description": "Imperial Knights units from your army have the following the ability:<br><br><b>Sacristan Pledge:</b> In your Command phase, one model in this unit regains 1 lost wound. If this unit is within 3\" of one or more friendly Tech-Priest models, one model in this unit regains up to D3 lost wounds instead.<br><br>Adeptus Mechanicus units from your army have the following ability:<br><br><b>Divine Inspiration:</b> Each time a model in this unit makes a ranged attack, re-roll a Hit roll of 1. If this unit is within 6\" of one or more friendly <span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> units, re-roll a Wound roll of 1 as well.<br><br><span class=\"hi_custom\">FORGE WORLD ALLIES</span><br>You can include the following <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> units in your army: Tech-Priest Dominus; Tech-Priest Manipulus; Skitarii Marshal; Skitarii Rangers; Skitarii Vanguard. The combined points cost of such units depends on your battle size:<br><ul><li><b>Incursion:</b> Up to 250 pts</li><li><b>Strike Force:</b> Up to 500 pts</li><li><b>Onslaught:</b> Up to 750 pts</li></ul><br>No <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> models from your army can be your <span class=\"kwb\">WARLORD</span>.",
           "detachment": "Questor Forgepact",
-          "detachmentId": 988
+          "detachmentId": 988,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -619,7 +646,16 @@
           "detachment": "Questor Forgepact",
           "detachmentId": 988,
           "legend": "The Omnissian priesthood has thrice blessed this champion of the Machine God and their Knight suit's core; it burns with a zeal that cannot be quenched.",
-          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Add 4 to the bearer's Wounds characteristic."
+          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Add 4 to the bearer's Wounds characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "statBonus",
+              "attribute": "w",
+              "value": 4
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QI",
@@ -629,7 +665,16 @@
           "detachment": "Questor Forgepact",
           "detachmentId": 988,
           "legend": "A devotee of the Omnissian creed, this Noble is inspired by the presence of the Adeptus Mechanicus, fighting with greater zeal and vigour in their holy presence.",
-          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Each time the bearer makes a ranged attack, if the bearer is within 6\" of one or more friendly Adeptus Mechanicus units, re-roll a Hit roll of 1."
+          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. Each time the bearer makes a ranged attack, if the bearer is within 6\" of one or more friendly Adeptus Mechanicus units, re-roll a Hit roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QI",
@@ -660,7 +705,22 @@
           "detachment": "Questor Forgepact",
           "detachmentId": 988,
           "legend": "This titanic war machine's carapace bristles with vox-grilles and laud hailers that project binharic prayers to the Machine God; these static chants serve both to unnerve the foe and fill the faithful of the Omnissiah with holy fervour.",
-          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. While an enemy unit is within 6\" of the bearer, worsen the Leadership characteristic of models in that unit by 1. While a friendly Adeptus Mechanicus unit is within 6\" of the bearer, improve the Leadership characteristic of 1 models in that <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit by 1."
+          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. While an enemy unit is within 6\" of the bearer, worsen the Leadership characteristic of models in that unit by 1. While a friendly Adeptus Mechanicus unit is within 6\" of the bearer, improve the Leadership characteristic of 1 models in that <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">MECHANICUS</span> unit by 1.",
+          "mechanics": [
+            {
+              "entity": "enemyUnitsWithinAura",
+              "effect": "statPenalty",
+              "attribute": "ld",
+              "value": 1
+            },
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "ld",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -976,7 +1036,16 @@
           "detachment": "Spearhead-At-Arms",
           "detachmentId": 1109,
           "legend": "A draconian enforcer of stringent standards, when this stern Noble does acknowledge pride in their servants, their Bondsmen zealously strive to retain it.",
-          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. While two or more Armiger models are under the effects of the bearers Bondsman ability, each time each of those <span class=\"kwb\">ARMIGER</span> models makes an attack, you can re-roll a Hit roll of 1."
+          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. While two or more Armiger models are under the effects of the bearers Bondsman ability, each time each of those <span class=\"kwb\">ARMIGER</span> models makes an attack, you can re-roll a Hit roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QI",
@@ -1165,7 +1234,16 @@
           "detachment": "Valourstrike Lance",
           "detachmentId": 1106,
           "legend": "A courtly counsellor against deception and a visionary hunter of lurking prey, this Noble's sage advice unmasks the contemptible before their companions.",
-          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. At the start of your Shooting phase, select one other <span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model from your army that is within 12\" of and visible to the bearer. Until the end of the phase, ranged weapons equipped by that selected model have the [ignores cover] ability."
+          "description": "<span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model only. At the start of your Shooting phase, select one other <span class=\"kwb\">IMPERIAL</span> <span class=\"kwb\">KNIGHTS</span> model from your army that is within 12\" of and visible to the bearer. Until the end of the phase, ranged weapons equipped by that selected model have the [ignores cover] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QI",

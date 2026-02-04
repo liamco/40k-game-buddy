@@ -719,7 +719,16 @@
           "legend": "Mortal thralls and foes alike are sacrificed to empower the fallen nobility.",
           "description": "Titanic Chaos Knights units from your army have the following abilities:<br><br><b>Dread Tyrants (Aura):</b> While a friendly Damned unit is within 9\" of this unit, each time a model in that unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.<br><br>Chaos Knights units from your army have the following abilities:<br><br><b>Dark Sacrifice:</b> Each time a <span class=\"kwb\">CHAOS</span> <span class=\"kwb\">KNIGHTS</span> unit with this ability is selected to shoot or fight, it can make a Dark Sacrifice. If it does, select one friendly <span class=\"kwb\">DAMNED</span> unit within 6\". That <span class=\"kwb\">DAMNED</span> unit must take a Leadership test: if passed, destroy D3 models in that <span class=\"kwb\">DAMNED</span> unit; if failed, destroy D3+3 models in that <span class=\"kwb\">DAMNED</span> unit. In either case, then select one of the following abilities for your <span class=\"kwb\">CHAOS</span> <span class=\"kwb\">KNIGHTS</span> unit's weapons to have until the end of the phase: [LETHAL HITS]; [SUSTAINED HITS 1].<br><br><span class=\"hi_custom\">WRETCHED THRALLS</span><br>You can include Damned units in your army (see Codex: Chaos Space Marines). The combined points cost of such units depends on your battle size:<br><ul><li><b>Incursion:</b> Up to 250 pts</li><li><b>Strike Force:</b> Up to 500 pts</li><li><b>Onslaught:</b> Up to 750 pts</li></ul><br>No <span class=\"kwb\">DAMNED</span> models from your army can be your <span class=\"kwb\">WARLORD</span>.",
           "detachment": "Iconoclast Fiefdom",
-          "detachmentId": 989
+          "detachmentId": 989,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -919,7 +928,22 @@
           "detachment": "Infernal Lance",
           "detachmentId": 1075,
           "legend": "Whether through duelling monstrous foes or thanks to unnatural enhancements and boons, this Fallen Noble and their steed have become powerful indeed.",
-          "description": "<span class=\"kwb\">CHAOS</span> <span class=\"kwb\">KNIGHTS</span> model only. Improve the Weapon Skill characteristic of the bearer's melee weapons by 1. While the bearer is using the Diabolic Power ability, its melee weapons have the [LANCE] ability."
+          "description": "<span class=\"kwb\">CHAOS</span> <span class=\"kwb\">KNIGHTS</span> model only. Improve the Weapon Skill characteristic of the bearer's melee weapons by 1. While the bearer is using the Diabolic Power ability, its melee weapons have the [LANCE] ability.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "addsAbility",
+              "abilities": [
+                "LANCE"
+              ],
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QT",
@@ -929,7 +953,16 @@
           "detachment": "Infernal Lance",
           "detachmentId": 1075,
           "legend": "In rituals that took centuries to conduct, Idolators and dark priests have bound a greater daemon within the reactor of this Chaos Knight, allowing the war machine to syphon the roiling power of the caged entity.",
-          "description": "<span class=\"kwb\">CHAOS</span> <span class=\"kwb\">KNIGHTS</span> model only. Add 2 to the bearer's Wounds characteristic. Each time the bearer's unit makes a Malefic Surge, you can re-roll the Leadership test taken to see if it suffers any mortal wounds."
+          "description": "<span class=\"kwb\">CHAOS</span> <span class=\"kwb\">KNIGHTS</span> model only. Add 2 to the bearer's Wounds characteristic. Each time the bearer's unit makes a Malefic Surge, you can re-roll the Leadership test taken to see if it suffers any mortal wounds.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "statBonus",
+              "attribute": "w",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QT",
@@ -1035,7 +1068,16 @@
           ],
           "detachment": "Infernal Lance",
           "detachmentId": 1075,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Chaos Knights unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Chaos Knights unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QT",
@@ -1216,7 +1258,16 @@
           ],
           "detachment": "Lords of Dread",
           "detachmentId": 1076,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Chaos Knights Character unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Select one enemy <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit. Until the end of the phase, each time a model in your unit makes an attack that targets that enemy unit, re-roll a Hit roll of 1 and re-roll a Wound roll of 1. Each time a model in your unit makes an attack that targets that enemy unit, if that enemy unit is <span class=\"kwb\">TITANIC</span>, you can re-roll the Hit roll and you can re-roll the Wound roll instead."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Chaos Knights Character unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Select one enemy <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit. Until the end of the phase, each time a model in your unit makes an attack that targets that enemy unit, re-roll a Hit roll of 1 and re-roll a Wound roll of 1. Each time a model in your unit makes an attack that targets that enemy unit, if that enemy unit is <span class=\"kwb\">TITANIC</span>, you can re-roll the Hit roll and you can re-roll the Wound roll instead.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "QT",

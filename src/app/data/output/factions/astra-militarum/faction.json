@@ -2514,7 +2514,16 @@
           "legend": "The officers of this company are wily, iron-willed veterans both respected and feared by the troops under their command. At their barked orders, even the weariest soldiers redouble their efforts.",
           "description": "Add 1 to the number of Orders each Astra Militarum Officer model from your army can issue, as stated on their datasheet.<br><br>While an <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> unit from your army is affected by an Order, each time a model in that unit makes an attack, re-roll a Hit roll of 1. If the target of that attack is within range of an objective marker, re-roll a Wound roll of 1 as well.",
           "detachment": "Grizzled Company",
-          "detachmentId": 1121
+          "detachmentId": 1121,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2629,7 +2638,16 @@
           ],
           "detachment": "Grizzled Company",
           "detachmentId": 1121,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ASTRA</span> <span class=\"kwb\">MILITARUM</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2717,7 +2735,16 @@
           "detachment": "Hammer of the Emperor",
           "detachmentId": 1012,
           "legend": "A regimental banner flies from this command vehicle, its colours displaying the might of the Astra Militarum for all to see.",
-          "description": "Vehicle Officer model only. Add 3 to the bearer's Objective Control characteristic."
+          "description": "Vehicle Officer model only. Add 3 to the bearer's Objective Control characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 3
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AM",
@@ -2727,7 +2754,16 @@
           "detachment": "Hammer of the Emperor",
           "detachmentId": 1012,
           "legend": "Drilled endlessly by the officer in command, the crew of this tank are crack shots who know how to make every shell count.",
-          "description": "Vehicle Officer model only. Each time a model in the bearer's unit makes a ranged attack, re-roll a Hit roll of 1."
+          "description": "Vehicle Officer model only. Each time a model in the bearer's unit makes a ranged attack, re-roll a Hit roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [

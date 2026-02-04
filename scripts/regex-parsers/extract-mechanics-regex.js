@@ -27,6 +27,8 @@ const __dirname = path.dirname(__filename);
 
 const DATA_PATH = path.join(__dirname, "..", "..", "src", "app", "data", "output");
 const DRY_RUN = process.env.DRY_RUN === "true";
+// Force re-extraction for specific patterns (comma-separated pattern names)
+const FORCE_PATTERNS = process.env.FORCE_PATTERNS ? process.env.FORCE_PATTERNS.split(",").map((p) => p.trim()) : [];
 
 // Stats for reporting
 const stats = {
@@ -574,6 +576,261 @@ const PATTERNS = {
             return null;
         },
     },
+
+    /**
+     * OC Bonus: "Add 1 to the Objective Control characteristic"
+     * Common in wargear abilities like banners and standards
+     * ~95% reliability
+     */
+    ocBonus: {
+        name: "OC Bonus",
+        extract: (text) => {
+            const match = text.match(/add\s+(\d+)\s+to\s+(?:the\s+)?(?:bearer'?s?\s+)?objective\s+control\s+characteristic/i);
+            if (match) {
+                return [
+                    {
+                        entity: "bearersUnit",
+                        effect: "statBonus",
+                        attribute: "oc",
+                        value: parseInt(match[1], 10),
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Ignores Cover: "have the [IGNORES COVER] ability"
+     * Common in wargear abilities like omnispex
+     * ~95% reliability
+     */
+    ignoresCover: {
+        name: "Ignores Cover",
+        extract: (text) => {
+            if (/(?:has|have)\s+(?:the\s+)?\[?ignores\s+cover\]?(?:\s+ability)?/i.test(text)) {
+                return [
+                    {
+                        entity: "targetUnit",
+                        effect: "ignoreModifier",
+                        attribute: "s",
+                        value: "cover",
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Grenades Keyword: "has the Grenades keyword"
+     * ~99% reliability
+     */
+    grenadesKeyword: {
+        name: "Grenades Keyword",
+        extract: (text) => {
+            if (/(?:has|have)\s+(?:the\s+)?grenades\s+keyword/i.test(text)) {
+                return [
+                    {
+                        entity: "bearersUnit",
+                        effect: "addsKeyword",
+                        keywords: ["GRENADES"],
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Smoke Keyword: "has the SMOKE keyword"
+     * ~99% reliability
+     */
+    smokeKeyword: {
+        name: "Smoke Keyword",
+        extract: (text) => {
+            if (/(?:has|have)\s+(?:the\s+)?smoke\s+keyword/i.test(text)) {
+                return [
+                    {
+                        entity: "bearer",
+                        effect: "addsKeyword",
+                        keywords: ["SMOKE"],
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Reroll Advance and Charge: "re-roll Advance and Charge rolls"
+     * ~95% reliability
+     */
+    rerollAdvanceCharge: {
+        name: "Reroll Advance and Charge",
+        extract: (text) => {
+            if (/(?:you\s+can\s+)?re-?roll\s+advance\s+and\s+charge\s+rolls/i.test(text)) {
+                return [
+                    { entity: "bearersUnit", effect: "reroll", attribute: "advance", value: "all" },
+                    { entity: "bearersUnit", effect: "reroll", attribute: "charge", value: "all" },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Wounds Bonus: "Add 1 to the bearer's Wounds characteristic"
+     * ~95% reliability
+     */
+    woundsBonus: {
+        name: "Wounds Bonus",
+        extract: (text) => {
+            const match = text.match(/add\s+(\d+)\s+to\s+(?:the\s+)?bearer'?s?\s+wounds\s+characteristic/i);
+            if (match) {
+                return [
+                    {
+                        entity: "bearer",
+                        effect: "statBonus",
+                        attribute: "w",
+                        value: parseInt(match[1], 10),
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Reroll Hit Ones: "re-roll a Hit roll of 1"
+     * Note: Different from rerollHits which handles "re-roll hit rolls of 1" (plural)
+     * ~95% reliability
+     */
+    rerollHitOnes: {
+        name: "Reroll Hit Ones (Singular)",
+        extract: (text) => {
+            // Pattern: "re-roll a Hit roll of 1" (singular, used in wargear)
+            if (/re-?roll\s+a\s+hit\s+roll\s+of\s+1/i.test(text)) {
+                return [
+                    {
+                        entity: "bearersUnit",
+                        effect: "reroll",
+                        attribute: "h",
+                        value: "ones",
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Worsen Leadership Aura: "worsen the Leadership characteristic ... by X"
+     * ~90% reliability
+     */
+    worsenLeadership: {
+        name: "Worsen Leadership Aura",
+        extract: (text) => {
+            const match = text.match(/worsen\s+(?:the\s+)?leadership\s+characteristic.*?by\s+(\d+)/i);
+            if (match) {
+                return [
+                    {
+                        entity: "enemyUnitsWithinAura",
+                        effect: "statPenalty",
+                        attribute: "ld",
+                        value: parseInt(match[1], 10),
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Melee Attacks Bonus: "add X to the Attacks characteristic of melee weapons"
+     * ~90% reliability
+     */
+    meleeAttacksBonus: {
+        name: "Melee Attacks Bonus",
+        extract: (text) => {
+            const match = text.match(/add\s+(\d+)\s+to\s+(?:the\s+)?attacks\s+characteristic\s+of\s+(?:.*?)?melee\s+weapons/i);
+            if (match) {
+                return [
+                    {
+                        entity: "bearersUnit",
+                        effect: "statBonus",
+                        attribute: "a",
+                        value: parseInt(match[1], 10),
+                        conditions: [{ weaponType: "Melee" }],
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Improve Leadership: "Improve the Leadership characteristic ... by X"
+     * ~95% reliability
+     */
+    improveLeadership: {
+        name: "Improve Leadership",
+        extract: (text) => {
+            const match = text.match(/improve\s+(?:the\s+)?leadership\s+characteristic.*?by\s+(\d+)/i);
+            if (match) {
+                return [
+                    {
+                        entity: "bearersUnit",
+                        effect: "statBonus",
+                        attribute: "ld",
+                        value: parseInt(match[1], 10),
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Lance Ability: "melee weapons have the [LANCE] ability"
+     * ~95% reliability
+     */
+    lanceAbility: {
+        name: "Lance Ability",
+        extract: (text) => {
+            if (/melee\s+weapons\s+have\s+(?:the\s+)?\[?lance\]?(?:\s+ability)?/i.test(text)) {
+                return [
+                    {
+                        entity: "bearer",
+                        effect: "addsAbility",
+                        abilities: ["LANCE"],
+                        conditions: [{ weaponType: "Melee" }],
+                    },
+                ];
+            }
+            return null;
+        },
+    },
+
+    /**
+     * Fly Keyword: "can FLY", "The bearer can FLY"
+     * ~95% reliability
+     */
+    flyKeyword: {
+        name: "Fly Keyword",
+        extract: (text) => {
+            if (/(?:the\s+)?bearer\s+can\s+fly/i.test(text)) {
+                return [
+                    {
+                        entity: "bearer",
+                        effect: "addsKeyword",
+                        keywords: ["FLY"],
+                    },
+                ];
+            }
+            return null;
+        },
+    },
 };
 
 /**
@@ -606,16 +863,40 @@ function extractMechanics(description) {
 /**
  * Process abilities array and extract mechanics
  */
+/**
+ * Check if an ability would match any of the forced patterns
+ */
+function wouldMatchForcedPattern(description) {
+    if (FORCE_PATTERNS.length === 0) return false;
+    const cleanedText = cleanDescription(description);
+    if (!cleanedText) return false;
+
+    for (const [patternKey, pattern] of Object.entries(PATTERNS)) {
+        if (FORCE_PATTERNS.includes(pattern.name)) {
+            const mechanics = pattern.extract(cleanedText);
+            if (mechanics && mechanics.length > 0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 function processAbilities(abilities, itemName = "Unknown") {
     if (!Array.isArray(abilities)) return abilities;
 
     return abilities.map((ability) => {
         stats.abilitiesProcessed++;
 
-        // Skip if already has mechanics
+        // Check if this ability matches a forced pattern - if so, clear existing mechanics
         if (ability.mechanics && Array.isArray(ability.mechanics) && ability.mechanics.length > 0) {
-            stats.skippedExisting++;
-            return ability;
+            if (ability.description && wouldMatchForcedPattern(ability.description)) {
+                // Clear mechanics to allow re-extraction
+                ability = { ...ability, mechanics: undefined, mechanicsSource: undefined };
+            } else {
+                stats.skippedExisting++;
+                return ability;
+            }
         }
 
         // Skip if no description

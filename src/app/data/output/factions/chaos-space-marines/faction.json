@@ -1896,7 +1896,16 @@
           ],
           "detachment": "Cabal of Chaos",
           "detachmentId": 1058,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Heretic Astartes unit from your army that has not been selected to shoot that phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Heretic Astartes unit from your army that has not been selected to shoot that phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -1959,7 +1968,21 @@
           ],
           "detachment": "Champions of Chaos",
           "detachmentId": 948,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One HERETIc ASTARTES TERMINATOR unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Select any number of models in your unit. Until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by the selected models, and each time you select targets for attacks made by those models, they must target an enemy unit that is wholly on the opposite side of a Hatchway from them."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One HERETIc ASTARTES TERMINATOR unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Select any number of models in your unit. Until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by the selected models, and each time you select targets for attacks made by those models, they must target an enemy unit that is wholly on the opposite side of a Hatchway from them.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 1,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CSM",
@@ -2060,7 +2083,22 @@
           "detachment": "Chaos Cult",
           "detachmentId": 872,
           "legend": "The masters of heretic cults are given to branding their underlings with arcane sigils of command.",
-          "description": "DARK APOSTLE or DAMNED model only. If every other model in the bearer's unit (excluding Dark Disciples) is <span class=\"kwb\">DAMNED</span>, you can re-roll Advance and Charge rolls made for the bearer's unit."
+          "description": "DARK APOSTLE or DAMNED model only. If every other model in the bearer's unit (excluding Dark Disciples) is <span class=\"kwb\">DAMNED</span>, you can re-roll Advance and Charge rolls made for the bearer's unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "advance",
+              "value": "all"
+            },
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "charge",
+              "value": "all"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CSM",
@@ -2123,7 +2161,21 @@
           ],
           "detachment": "Chaos Cult",
           "detachmentId": 872,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One DAMNED unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Your unit can make a Desperate Pact. If it does, your unit suffers D3 mortal wounds (in  addition to any suffered for failing the resulting Leadership test), and until the end of the phase, add 1 to the Attacks characteristic of the melee weapons equipped by models in your unit, and if your unit did not fail the resulting Leadership test when making that Desperate Pact, until the end of the  phase, improve the Strength characteristic of those  weapons by 1 as well."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One DAMNED unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Your unit can make a Desperate Pact. If it does, your unit suffers D3 mortal wounds (in  addition to any suffered for failing the resulting Leadership test), and until the end of the phase, add 1 to the Attacks characteristic of the melee weapons equipped by models in your unit, and if your unit did not fail the resulting Leadership test when making that Desperate Pact, until the end of the  phase, improve the Strength characteristic of those  weapons by 1 as well.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 1,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CSM",
@@ -2199,7 +2251,21 @@
           "legend": "Bile's creations, the Terata, possess a variety of mutations, all of which increase their transhuman lethality - for now.",
           "description": "At the start of the battle, select which augmentations are active for Heretic Astartes Infantry models (excluding Damned models) from your army until the end of the battle. To do so, either select one from the list below, or randomly determine two by rolling two D6. If Fabius Bile is your <span class=\"kwb\">WARLORD</span>, when randomly determining your augmentations, you can re-roll one or both of the dice. Duplicated augmentations have no additional effect.<br><br><div class=\"BreakInsideAvoid\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable tablefont\" bordercolor=\"#888\"><tbody><tr><td><img src=\"/wh40k10ed/img/d1.png\"></td><td><b>Cholinergic Accelerants:</b> Add 1 to the Attacks characteristic of melee weapons equipped by this model.</td></tr><tr><td><img src=\"/wh40k10ed/img/d2.png\"></td><td><b>Hyperadrenal Infusion:</b> Add 2\" to the Move characteristic of this model.</td></tr><tr><td><img src=\"/wh40k10ed/img/d3.png\"></td><td><b>Paraneural Reactions:</b> Improve the Weapon Skill characteristic of melee weapons equipped by this model by 1.</td></tr><tr><td><img src=\"/wh40k10ed/img/d4.png\"></td><td><b>Supracutaneous Chitination:</b> Improve the Toughness characteristic of this model by 1.</td></tr><tr><td><img src=\"/wh40k10ed/img/d5.png\"></td><td><b>Macrotensile Sinews:</b> Add 1 to the Strength characteristic of melee weapons equipped by this model.</td></tr><tr><td><img src=\"/wh40k10ed/img/d6.png\"></td><td><b>Ophthalmic Enhancement:</b> Improve the Ballistic Skill characteristic of ranged weapons equipped by this model by 1.</td></tr></tbody></table></td></tr></tbody></table></div>",
           "detachment": "Creations of Bile",
-          "detachmentId": 991
+          "detachmentId": 991,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 1,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -3199,7 +3265,16 @@
           "legend": "",
           "description": "When mustering your army, when you select a <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span> unit to include in your army, if that unit is not an EPIC HERO and does not already have one of the following keywords, you must select one for that unit and note it on your Army Roster: KHORNE. TZEENTCH, NURGLE, SLAANESH, CHAOS UNDIVIDED. Each time a unit with one of these keywords gains a weapon ability as the result of a Dark Pact and does not fail the resulting Leadership test, until the end of the phase, that unit gains the associated ability below.<br><br><span class=\"hi_custom\">UNITS THAT GAINED [LETHAL HITS]</span><br><ul><li><span class=\"kwb\">KHORNE:</span> Each time a model in this unit makes a melee attack, an unmodified Hit roll of 5+ scores a Critical Hit.</li><li><span class=\"kwb\">TZEENTCH:</span> Each time a model in this unit makes a ranged attack, an unmodified Hit roll of 5+ scores a Critical Hit.</li><li><span class=\"kwb\">CHAOS</span> <span class=\"kwb\">UNDIVIDED:</span> Each time a model in this unit makes an attack, re-roll a Hit  roll of 1.</li></ul><br><span class=\"hi_custom\">UNITS THAT GAINED [SUSTAINED HITS 1]</span><br><ul><li><span class=\"kwb\">NURGLE:</span> Each time a model in this unit makes a ranged attack, an unmodified Hit roll of 5+ scores a Critical Hit.</li><li><span class=\"kwb\">SLAANESH:</span> Each time a model in this unit makes a melee attack, an unmodified Hit roll of 5+ scores a Critical Hit.</li><li><span class=\"kwb\">CHAOS</span> <span class=\"kwb\">UNDIVIDED:</span> Each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li></ul><br><span class=\"hi_custom\">RESTRICTIONS</span><br><ul><li>You cannot select the <span class=\"kwb\">KHORNE</span> keyword for a Psyker unit.</li><li>A Character unit can only be attached to a unit if both units share the same keyword from the list above.</li><li>A unit can only embark within (or start the battle embarked within) a <span class=\"kwb\">TRANSPORT</span> if both of those units share the same keyword from the list above.</li></ul>",
           "detachment": "Pactbound Zealots",
-          "detachmentId": 751
+          "detachmentId": 751,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -3884,7 +3959,16 @@
           ],
           "detachment": "Veterans of the Long War",
           "detachmentId": 867,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span> unit from your army (excluding TZEENTCH units) that has not been selected to shoot this phase<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability, and change the Attacks characteristic of Torrent weapons equipped by models in your unit to 6."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">HERETIC</span> <span class=\"kwb\">ASTARTES</span> unit from your army (excluding TZEENTCH units) that has not been selected to shoot this phase<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability, and change the Attacks characteristic of Torrent weapons equipped by models in your unit to 6.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CSM",

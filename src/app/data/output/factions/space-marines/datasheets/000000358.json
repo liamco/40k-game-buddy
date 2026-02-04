@@ -257,13 +257,30 @@
         "id": "000000358:auspex-array",
         "name": "Auspex Array",
         "description": "Ranged weapons equipped by the bearer have the [IGNORES COVER] ability.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "targetUnit",
+            "effect": "ignoreModifier",
+            "attribute": "s",
+            "value": "cover"
+          }
+        ],
+        "mechanicsSource": "regex"
       },
       {
         "id": "000000358:infernum-halo-launcher",
         "name": "Infernum Halo-launcher",
         "description": "The bearer has the <span class=\"kwb\">SMOKE</span> keyword.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearer",
+            "effect": "addsKeyword",
+            "keywords": [
+              "SMOKE"
+            ]
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [

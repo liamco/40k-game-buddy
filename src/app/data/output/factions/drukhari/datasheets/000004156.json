@@ -546,13 +546,30 @@
         "id": "000004156:kabalite-icon",
         "name": "Kabalite Icon",
         "description": "While the bearer's unit is not Battle-shocked, add 1 to the bearer's Objective Control characteristic.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearersUnit",
+            "effect": "statBonus",
+            "attribute": "oc",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
       },
       {
         "id": "000004156:phantasm-grenade-launcher",
         "name": "Phantasm Grenade Launcher",
         "description": "The bearer's unit has the Smoke keyword.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearer",
+            "effect": "addsKeyword",
+            "keywords": [
+              "SMOKE"
+            ]
+          }
+        ],
+        "mechanicsSource": "regex"
       },
       {
         "id": "000004156:stimm-needler",

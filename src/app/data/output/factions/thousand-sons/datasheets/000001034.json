@@ -142,13 +142,35 @@
         "id": "000001034:brayhorn",
         "name": "Brayhorn",
         "description": "You can re-roll Advance and Charge rolls made for the bearer's unit.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearersUnit",
+            "effect": "reroll",
+            "attribute": "advance",
+            "value": "all"
+          },
+          {
+            "entity": "bearersUnit",
+            "effect": "reroll",
+            "attribute": "charge",
+            "value": "all"
+          }
+        ],
+        "mechanicsSource": "regex"
       },
       {
         "id": "000001034:herd-banner",
         "name": "Herd Banner",
         "description": "While the bearer's unit is within range of one or more objective markers you control, improve the Leadership characteristic of models in the bearer's unit by 1.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearersUnit",
+            "effect": "statBonus",
+            "attribute": "ld",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [

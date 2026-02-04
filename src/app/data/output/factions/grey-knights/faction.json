@@ -828,7 +828,16 @@
           "detachment": "Banishers",
           "detachmentId": 1083,
           "legend": "Wrought from truesilver and noctilith, this ancient arcane sigil renders its bearer and comrades supernaturally accurate in battle.",
-          "description": "<span class=\"kwb\">GREY</span> <span class=\"kwb\">KNIGHTS</span> model only. In your Shooting phase, each time a model in the bearer's unit makes an attack, re-roll a Hit roll of 1."
+          "description": "<span class=\"kwb\">GREY</span> <span class=\"kwb\">KNIGHTS</span> model only. In your Shooting phase, each time a model in the bearer's unit makes an attack, re-roll a Hit roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "GK",
@@ -988,7 +997,16 @@
           "legend": "Erupting from whirling Warp gates with their Nemesis blades blazing, squads of Grey Knights cut a bloody path through their enemies before the foe even realise their peril.",
           "description": "Each time a unit from your army is set up using the Deep Strike ability, until the end of the turn, each time a model in that unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
           "detachment": "Brotherhood Strike",
-          "detachmentId": 1081
+          "detachmentId": 1081,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1202,7 +1220,21 @@
           "detachment": "Hallowed Conclave",
           "detachmentId": 1082,
           "legend": "A veteran of dozens of purgation campaigns, this champion has honed his combat style to cut a bloody path through massed foes easily.",
-          "description": "<span class=\"kwb\">GREY</span> <span class=\"kwb\">KNIGHTS</span> <span class=\"kwb\">TERMINATOR</span> model only. Add 3 to the Attacks characteristic of the bearer's melee weapons."
+          "description": "<span class=\"kwb\">GREY</span> <span class=\"kwb\">KNIGHTS</span> <span class=\"kwb\">TERMINATOR</span> model only. Add 3 to the Attacks characteristic of the bearer's melee weapons.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 3,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "GK",
@@ -1229,7 +1261,21 @@
           ],
           "detachment": "Hallowed Conclave",
           "detachmentId": 1082,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Grey Knights Terminator unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by models in your unit."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Grey Knights Terminator unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by models in your unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 1,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "GK",
@@ -1599,7 +1645,16 @@
           "legend": "Purging corrupted nodes of Warp energy, the Grey Knights establish an ever-expanding area of hallowed ground within which their psychic powers and indomitable resolve are greatly enhanced.",
           "description": "Certain areas of the battlefield are within your army's Hallowed Ground, as follows:<br><ul><li>Your deployment zone is always within your army's Hallowed Ground.</li><li>The area of the battlefield within 6\" of one or more Purifier Squad units from your army is within your army's Hallowed Ground.</li><li>At the start of any phase, if you control at least half of the objective markers within No Man's Land, until the end of that phase, No Man's Land is within your army's Hallowed Ground.</li><li>At the start of any phase, if you control at least half of the objective markers within your opponent's deployment zone, until the end of that phase, your opponent's deployment zone is within your army's Hallowed Ground.</li></ul>Each time a model in a <span class=\"kwb\">GREY</span> <span class=\"kwb\">KNIGHTS</span> unit from your army makes a ranged attack that targets a visible target or makes a melee attack, re-roll a Hit roll of 1. If that unit is a <span class=\"kwb\">PURIFIER</span> <span class=\"kwb\">SQUAD</span> and/or is wholly within your army's Hallowed Ground, you can re-roll the Hit roll instead.",
           "detachment": "Warpbane Task Force",
-          "detachmentId": 992
+          "detachmentId": 992,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1611,7 +1666,16 @@
           "detachment": "Warpbane Task Force",
           "detachmentId": 992,
           "legend": "This reliquary contains a single finger bone taken from the body of the feted former Grand Master, Mandulis. It serves as a symbol of unity and duty.",
-          "description": "<span class=\"kwb\">GREY</span> <span class=\"kwb\">KNIGHTS</span> model only. While the bearer's unit is not Battle-shocked, add 3 to the bearer's Objective Control characteristic."
+          "description": "<span class=\"kwb\">GREY</span> <span class=\"kwb\">KNIGHTS</span> model only. While the bearer's unit is not Battle-shocked, add 3 to the bearer's Objective Control characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 3
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "GK",

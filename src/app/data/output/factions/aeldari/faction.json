@@ -1804,7 +1804,16 @@
           "legend": "The teachings of Khaine's martial aspects are diverse and highly specialised, each completely lethal in its own nuanced fashion.",
           "description": "Each time an Aspect Warriors or Avatar of Khaine unit from your army is selected to shoot or fight, select one of the following abilities for it to gain until the end of the phase:<br><ul><li>Each time a model in this unit makes an attack, re-roll a Hit roll of 1.</li><li>Each time a model in this unit makes an attack, re-roll a Wound roll of 1.</li></ul>",
           "detachment": "Aspect Host",
-          "detachmentId": 1024
+          "detachmentId": 1024,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1855,7 +1864,16 @@
           "detachment": "Aspect Host",
           "detachmentId": 1024,
           "legend": "A commander who knows with absolute certainty which strategic goals must be achieved, this warrior can appraise the battlefield at a glance.",
-          "description": "Autarch or Autarch Wayleaper model only. While the bearer is leading an Aspect Warriors unit, add 1 to the Objective Control characteristic of models in that unit."
+          "description": "Autarch or Autarch Wayleaper model only. While the bearer is leading an Aspect Warriors unit, add 1 to the Objective Control characteristic of models in that unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1995,7 +2013,21 @@
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
           "legend": "This cruel warrior steals a portion of animus from each vanquished foe, keeping a little of Ynnead's due to empower themselves and slay more foes in his name.",
-          "description": "Archon model only. Add 2 to the Attacks characteristic of the bearer's melee weapons."
+          "description": "Archon model only. Add 2 to the Attacks characteristic of the bearer's melee weapons.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 2,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2062,7 +2094,16 @@
           ],
           "detachment": "Devoted of Ynnead",
           "detachmentId": 1022,
-          "description": "<b>WHEN:</b> Fight phase, just after a Ynnari Infantry unit from your army has selected its targets.<br><br><b>TARGET:</b> That <span class=\"kwb\">YNNARI</span> <span class=\"kwb\">INFANTRY</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1. If your unit is below its Starting Strength, you can re-roll the Hit roll instead."
+          "description": "<b>WHEN:</b> Fight phase, just after a Ynnari Infantry unit from your army has selected its targets.<br><br><b>TARGET:</b> That <span class=\"kwb\">YNNARI</span> <span class=\"kwb\">INFANTRY</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1. If your unit is below its Starting Strength, you can re-roll the Hit roll instead.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2584,7 +2625,16 @@
           ],
           "detachment": "Khaine's Arrow",
           "detachmentId": 919,
-          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army (excluding CHARAcTER units).<br><br><b>EFFECT:</b> Until the start of your next Command phase, add 1 to the Objective Control characteristic of models in your unit. In addition, at the end of your turn, select one objective marker you control that your unit is within range of. That objective marker is Secured by your army."
+          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army (excluding CHARAcTER units).<br><br><b>EFFECT:</b> Until the start of your next Command phase, add 1 to the Objective Control characteristic of models in your unit. In addition, at the end of your turn, select one objective marker you control that your unit is within range of. That objective marker is Secured by your army.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },
@@ -2611,7 +2661,16 @@
           "detachment": "Protector Host",
           "detachmentId": 920,
           "legend": "Fighting with lethal agility and perfect balance, this warrior places their every blow to inflict the maximum damage and scythe their enemies' every defence.",
-          "description": "Each time the bearer makes an attack, re-roll a Hit roll of 1, re-roll a Wound roll of 1 and re-roll a Damage roll of 1."
+          "description": "Each time the bearer makes an attack, re-roll a Hit roll of 1, re-roll a Wound roll of 1 and re-roll a Damage roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -2779,7 +2838,16 @@
           ],
           "detachment": "Seer Council",
           "detachmentId": 1023,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that has not been selected to shoot this phase and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability and each time a model in your unit makes an attack, on a Critical Wound, improve the Armour Penetration characteristic of that attack by 1."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Asuryani Infantry unit from your army (excluding Wraith Construct units) that has not been selected to shoot this phase and is within 9\" of one or more friendly Asuryani Psyker models.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability and each time a model in your unit makes an attack, on a Critical Wound, improve the Armour Penetration characteristic of that attack by 1.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3080,7 +3148,16 @@
           "detachment": "Spirit Conclave",
           "detachmentId": 1019,
           "legend": "The mind of this Spiritseer shines with psychic illumination, burning away the veils that cloud the senses of the dead.",
-          "description": "Spiritseer model only. In your Command phase, select one friendly Wraith Construct unit within 12\" of the bearer. Until the start of your next Command phase, add 1 to the Objective Control characteristic of <span class=\"kwb\">INFANTRY</span> models in that unit and add 3 to the Objective Control characteristic of <span class=\"kwb\">MONSTER</span> models in that unit."
+          "description": "Spiritseer model only. In your Command phase, select one friendly Wraith Construct unit within 12\" of the bearer. Until the start of your next Command phase, add 1 to the Objective Control characteristic of <span class=\"kwb\">INFANTRY</span> models in that unit and add 3 to the Objective Control characteristic of <span class=\"kwb\">MONSTER</span> models in that unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",
@@ -3706,7 +3783,16 @@
           ],
           "detachment": "Wraiths of the Void",
           "detachmentId": 921,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability. In addition, each time a model in your unit makes an attack, you can ignore any or all modifiers to that attack's Ballistic Skill characteristic and/or to the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">AELDARI</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability. In addition, each time a model in your unit makes an attack, you can ignore any or all modifiers to that attack's Ballistic Skill characteristic and/or to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AE",

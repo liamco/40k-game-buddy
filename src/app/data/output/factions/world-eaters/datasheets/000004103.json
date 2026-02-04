@@ -99,7 +99,21 @@
       "factionId": "",
       "description": "Once per battle, at the start of the Fight phase, this model can use this ability. If it does, until the end of the phase, add 3 to the Attacks characteristic of melee weapons equipped by this model and those weapons have the [DEVASTATING WOUNDS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "bearersUnit",
+          "effect": "statBonus",
+          "attribute": "a",
+          "value": 3,
+          "conditions": [
+            {
+              "weaponType": "Melee"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "regex"
     },
     {
       "name": "LORD OF THE EIGHTBOUND",

@@ -1671,7 +1671,16 @@
           ],
           "detachment": "Flyblown Host",
           "detachmentId": 980,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Death Guard Infantry unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack, re-roll a Hit roll of 1. If that attack targets a unit within half range, you can re-roll the Hit roll instead."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Death Guard Infantry unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a ranged attack, re-roll a Hit roll of 1. If that attack targets a unit within half range, you can re-roll the Hit roll instead.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DG",
@@ -1743,7 +1752,16 @@
           "detachment": "Mortarion's Hammer",
           "detachmentId": 1050,
           "legend": "Peering at the world through this bloated yellow orb, the bearer of this vile gift sees the souls of the sickened burning bright as targeting flares no matter how their victims try to hide.",
-          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Ranged weapons equipped by models in the bearer's unit have the [ignores cover] ability while targeting an Afflicted enemy unit."
+          "description": "<span class=\"kwb\">DEATH</span> <span class=\"kwb\">GUARD</span> model only. Ranged weapons equipped by models in the bearer's unit have the [ignores cover] ability while targeting an Afflicted enemy unit.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DG",
@@ -1904,7 +1922,16 @@
           "detachment": "Shamblerot Vectorium",
           "detachmentId": 1053,
           "legend": "This sinister artefact emits a reedy dirge to which Poxwalkers seem drawn and by whose mournful notes they appear energised and lent an echo of purpose.",
-          "description": "Noxious Blightbringer only. While the bearer is leading a Poxwalkers unit, add 1 to the Objective Control characteristic of models in that unit, and each time that unit takes a Battle-shock or Leadership test, add 1 to that test."
+          "description": "Noxious Blightbringer only. While the bearer is leading a Poxwalkers unit, add 1 to the Objective Control characteristic of models in that unit, and each time that unit takes a Battle-shock or Leadership test, add 1 to that test.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DG",
@@ -2074,7 +2101,21 @@
           "detachment": "Tallyband Summoners",
           "detachmentId": 1052,
           "legend": "This repugnant daemon weapon extrudes swaying tendrils with lamprey maws to strike at the foe.",
-          "description": "Death Guard model only. Add 2 to the Attacks characteristic of the bearer's melee weapons."
+          "description": "Death Guard model only. Add 2 to the Attacks characteristic of the bearer's melee weapons.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 2,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DG",

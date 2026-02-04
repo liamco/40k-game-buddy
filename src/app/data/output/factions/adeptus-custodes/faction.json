@@ -573,7 +573,21 @@
           "detachment": "Auric Champions",
           "detachmentId": 863,
           "legend": "Said to have been fashioned for dark deeds during the Horus Heresy, this blade is an icon of vengeance.",
-          "description": "Adeptus Custodes model only. Add 2 to the Attacks characteristic of the bearers melee weapons. Once per battle, at the start of any Command phase, triple the bearer's Objective Control characteristic until the end of the turn."
+          "description": "Adeptus Custodes model only. Add 2 to the Attacks characteristic of the bearers melee weapons. Once per battle, at the start of any Command phase, triple the bearer's Objective Control characteristic until the end of the turn.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 2,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -701,7 +715,16 @@
           "legend": "With merciless efficiency, the Sisters of Silence mark their priority prey amidst the maelstrom of shiphoard combat, then focus on their elimination above all else.",
           "description": "At the start of the first battle round, you can select up to two enemy units to be your army's quarry, one of which must be your opponents <span class=\"kwb\">WARLORD</span>. Each time an ANATHEMA PSYKANA unit from your army makes an attack that targets one of your army's quarries, re-roll a Hit roll of 1. Each time an <span class=\"kwb\">ANATHEMA</span> <span class=\"kwb\">PSYKANA</span> unit from your army declares a charge, it can include one or more of your army's quarries as targets of that charge, even if they are not visible to it.",
           "detachment": "Black Ship Guardians",
-          "detachmentId": 910
+          "detachmentId": 910,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -877,7 +900,21 @@
           "detachment": "Lions of the Emperor",
           "detachmentId": 1029,
           "legend": "This Captain-Commander has trained extensively to face multiple foes at once, knowing that the Custodes will always be outnumbered.",
-          "description": "Shield-Captain model only. At the start of the Fight phase, until the end of the phase, add 2 to the Attacks characteristic of melee weapons equipped by the bearer for every 5 enemy models within 6\" of the bearer (rounding down)."
+          "description": "Shield-Captain model only. At the start of the Fight phase, until the end of the phase, add 2 to the Attacks characteristic of melee weapons equipped by the bearer for every 5 enemy models within 6\" of the bearer (rounding down).",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 2,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1176,7 +1213,16 @@
           "detachment": "Shield Host",
           "detachmentId": 765,
           "legend": "This auramite weave garment is draped about its wearers shoulders before they don their battle armour. It forms a final, incredibly resilient layer of protection for them should all their other defences fail.",
-          "description": "Shield-Captain or Blade Champion model only. Add 2 to the bearer's Wounds characteristic."
+          "description": "Shield-Captain or Blade Champion model only. Add 2 to the bearer's Wounds characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "statBonus",
+              "attribute": "w",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1206,7 +1252,16 @@
           "detachment": "Shield Host",
           "detachmentId": 765,
           "legend": "This incredibly advanced precursor to Imperial auspicators is able to see through solid objects and into esoteric spectra, meaning no malcontent against the Throne can ever hide from its bearer's gaze.",
-          "description": "Shield-Captain or Blade Champion model only. While the bearer is leading a unit, ranged weapons equipped by models in that unit have the [IGNORES cover] ability."
+          "description": "Shield-Captain or Blade Champion model only. While the bearer is leading a unit, ranged weapons equipped by models in that unit have the [IGNORES cover] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1279,7 +1334,21 @@
           ],
           "detachment": "Shield Host",
           "detachmentId": 765,
-          "description": "<b>WHEN:</b> Start of the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> unit from your army (excluding Anathema Psykana units) that is below its Starting Strength.<br><br><b>EFFECT:</b> Until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by models in that unit. If your unit is Below Half-strength, until the end of the phase, add 2 to the Attacks characteristic of those melee weapons instead."
+          "description": "<b>WHEN:</b> Start of the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> unit from your army (excluding Anathema Psykana units) that is below its Starting Strength.<br><br><b>EFFECT:</b> Until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by models in that unit. If your unit is Below Half-strength, until the end of the phase, add 2 to the Attacks characteristic of those melee weapons instead.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 1,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1333,7 +1402,22 @@
           "legend": "The venerable war engines of the Adeptus Custodes possess aggressive machine spirits.",
           "description": "<ul><li>While an Adeptus Custodes Vehicle unit from your army is at Starting Strength, unless that unit is an Aircraft or it is Battle-shocked, add 2 to the Objective Control characteristic of models in that unit.</li><li>While an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> <span class=\"kwb\">VEHICLE</span> unit from your army is below Starting Strength, each time a model in that unit makes an attack, re-roll a Hit roll of 1.</li><li>While an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> <span class=\"kwb\">VEHICLE</span> unit from your army is Below Half-strength, each time a model in that unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.</li></ul><br><span class=\"hi_custom\">MORITOI ANCIENTS</span><br><p class=\"ShowFluff legend2\">The Adeptus Custodes' honoured fallen are ever eager for battle.</p>Add 2\" to the Move characteristic of models in <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> <span class=\"kwb\">WALKER</span> units from your army and add 1 to Advance and Charge rolls made for such units.<br><br><span class=\"hi_custom\">KEYWORDS</span><br>In the Muster Armies step, you can select up to 2 <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> <span class=\"kwb\">WALKER</span> models from your army. The selected units gain the <span class=\"kwb\">CHARACTER</span> keyword.<br><br><b>Designer's Note:</b> This means that the selected models can be given Enhancements and one of them can be selected as your <span class=\"kwb\">WARLORD</span>.",
           "detachment": "Solar Spearhead",
-          "detachmentId": 986
+          "detachmentId": 986,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 2
+            },
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1376,7 +1460,16 @@
           "detachment": "Solar Spearhead",
           "detachmentId": 986,
           "legend": "The eldest warriors of the Moritoi are revered champions with centuries of battle experience, and their presence on the battlefield is inspirational.",
-          "description": "Adeptus Custodes Vehicle model only. While a friendly Adeptus Custodes Infantry or Adeptus Custodes Mounted unit is within 6\" of the bearer, each time a model in that unit makes an attack, re-roll a Hit roll of 1."
+          "description": "Adeptus Custodes Vehicle model only. While a friendly Adeptus Custodes Infantry or Adeptus Custodes Mounted unit is within 6\" of the bearer, each time a model in that unit makes an attack, re-roll a Hit roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",
@@ -1458,7 +1551,16 @@
           ],
           "detachment": "Solar Spearhead",
           "detachmentId": 986,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability, and until the end of the phase, each time a model in your unit makes an attack, you can ignore any or all modifiers to that attack's Ballistic Skill characteristic and/or any or all modifiers to the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">CUSTODES</span> unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability, and until the end of the phase, each time a model in your unit makes an attack, you can ignore any or all modifiers to that attack's Ballistic Skill characteristic and/or any or all modifiers to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "AC",

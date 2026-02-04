@@ -746,7 +746,16 @@
           "detachment": "Covenite Coterie",
           "detachmentId": 1114,
           "legend": "This Haemonculus is a savant in the arts of sculpting metal, flesh, sinew and bone alike. Their creations are works of dark and malevolent genius.",
-          "description": "Haemonculus model only. Add 1 to the bearers Wounds characteristic and add 1 to the Toughness characteristic of models in the bearer's unit."
+          "description": "Haemonculus model only. Add 1 to the bearers Wounds characteristic and add 1 to the Toughness characteristic of models in the bearer's unit.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "statBonus",
+              "attribute": "w",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "DRU",
@@ -1437,7 +1446,16 @@
           "legend": "In this saedath, the Harlequins embody the Reaper, whilst their Drukhari companions are mortal killers.",
           "description": "At the start of the battle, Drukhari units from your army are winning the wager.<br><br>Each time a <span class=\"kwb\">DRUKHARI</span> unit from your army destroys an enemy unit, <span class=\"kwb\">DRUKHARI</span> units from your army are winning the wager.<br><br>Each time a Harlequins unit from your army destroys an enemy unit, <span class=\"kwb\">HARLEQUIN</span> units from your army are winning the wager.<br><br>While <span class=\"kwb\">DRUKHARI</span> units from your army are winning the wager, <span class=\"kwb\">HARLEQUIN</span> units from your army are losing the wager, and vice versa.<br><br>Each time a <span class=\"kwb\">DRUKHARI</span> or <span class=\"kwb\">HARLEQUINS</span> model from your army makes an attack, if that model's unit is winning the wager, re-roll a Hit roll of 1. If that model's unit is losing the wager, re-roll a Hit roll of 1 and re-roll a Wound roll of 1 instead.<br><br><span class=\"hi_custom\">HARLEQUINS</span><br>You can include Harlequins units in your army (see Codex: Aeldari). The combined points cost of such units depends on your battle size:<br><ul><li><b>Incursion:</b> Up to 500 pts</li><li><b>Strike Force:</b> Up to 1000 pts</li><li><b>Onslaught:</b> Up to 1500 pts</li></ul><br>No <span class=\"kwb\">HARLEQUINS</span> models from your army can be your <span class=\"kwb\">WARLORD</span>. If you select this Detachment, you cannot use the Corsairs and Travelling Players army rule.",
           "detachment": "Reaper's Wager",
-          "detachmentId": 993
+          "detachmentId": 993,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1745,7 +1763,16 @@
           "legend": "Few warriors in the galaxy are as adept at launching punishing skyborne raids as the Drukhari. Before their prey even realise the peril, the killers of Commorragh are amongst their lines like grinning ghouls. Splinter fire lays low defenders still scrambling into position. Quicksilver assaults leave dozens screaming in maimed agony. Often, the battle is over before it has even truly begun.",
           "description": "Each time a Drukhari unit from your army disembarks from a Transport, until the end of the turn:<br><ul><li>Ranged weapons equipped by models in that disembarking unit have the [ignores cover] ability.</li><li>Melee weapons equipped by models in that disembarking unit have the [lance] ability.</li></ul>",
           "detachment": "Skysplinter Assault",
-          "detachmentId": 831
+          "detachmentId": 831,
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -2023,7 +2050,27 @@
           "legend": "Wyches abuse an array of potentially lethal performance-enhancing combat stimms.",
           "description": "At the start of your Command phase, select which Combat Drugs will be active for your army until the start of your next Command phase. To do so, either select one from the list below (you cannot select the same Combat Drug more than once per battle), or randomly select two by rolling two D6. When doing so randomly, Combat Drugs you have previously selected can become active again, but if you randomly select one that is already active for your army, it has no additional effect.<br><br><span class=\"hi_custom\">1. Adrenalight</span><br>Add 1 to the Attacks characteristic of melee weapons equipped by Wych Cult models from your army.<br><br><span class=\"hi_custom\">2. Hypex</span><br>Add 2\" to the Move characteristic of <span class=\"kwb\">WYCH</span> <span class=\"kwb\">CULT</span> models from your army.<br><br><span class=\"hi_custom\">3. Serpentin</span><br>Improve the Weapon Skill characteristic of melee weapons equipped by <span class=\"kwb\">WYCH</span> <span class=\"kwb\">CULT</span> models from your army by 1.<br><br><span class=\"hi_custom\">4. Painbringer</span><br>Add 1 to the Toughness characteristic of <span class=\"kwb\">WYCH</span> <span class=\"kwb\">CULT</span> models from your army.<br><br><span class=\"hi_custom\">5. Grave Lotus</span><br>Add 1 to the Strength characteristic of melee weapons equipped by <span class=\"kwb\">WYCH</span> <span class=\"kwb\">CULT</span> models from your army.<br><br><span class=\"hi_custom\">6. Splintermind</span><br>Improve the Leadership characteristic of <span class=\"kwb\">WYCH</span> <span class=\"kwb\">CULT</span> models from your army by 1, and improve the Ballistic Skill characteristic of ranged weapons equipped by <span class=\"kwb\">WYCH</span> <span class=\"kwb\">CULT</span> models from your army by 1.",
           "detachment": "Spectacle of Spite",
-          "detachmentId": 1113
+          "detachmentId": 1113,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 1,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            },
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "ld",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [

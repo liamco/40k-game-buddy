@@ -540,7 +540,15 @@
         "id": "000003584:icon-of-despair-aura",
         "name": "Icon of Despair (Aura)",
         "description": "While an enemy unit is within 6\" of the bearer, worsen the Leadership characteristic of models in that unit by 1.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "enemyUnitsWithinAura",
+            "effect": "statPenalty",
+            "attribute": "ld",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [

@@ -201,13 +201,29 @@
         "id": "000000882:praesidium-shield",
         "name": "Praesidium Shield",
         "description": "Add 1 to the bearer's Wounds characteristic.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearer",
+            "effect": "statBonus",
+            "attribute": "w",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
       },
       {
         "id": "000000882:vexilla",
         "name": "Vexilla",
         "description": "Add 1 to the Objective Control characteristic of models in the bearer's unit.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearersUnit",
+            "effect": "statBonus",
+            "attribute": "oc",
+            "value": 1
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [

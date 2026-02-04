@@ -321,7 +321,15 @@
         "id": "000002604:panspectral-scanner",
         "name": "Panspectral Scanner",
         "description": "Each time a model in the bearer's unit makes a ranged attack, re-roll a Hit roll of 1.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "bearersUnit",
+            "effect": "reroll",
+            "attribute": "h",
+            "value": "ones"
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [

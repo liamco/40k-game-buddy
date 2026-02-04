@@ -1163,7 +1163,16 @@
           "legend": "Those who possess the favour of Tzeentch may gain the benefit of the Change Gods all-seeing eye. No foe can hope to conceal themselves from their piercing gaze.",
           "description": "Ranged weapons equipped by <span class=\"kwb\">THOUSAND</span> <span class=\"kwb\">SONS</span> models from your army have the [iGNORES COvER] ability.",
           "detachment": "Chosen Cabal",
-          "detachmentId": 969
+          "detachmentId": 969,
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1815,7 +1824,16 @@
           ],
           "detachment": "Hexwarp Thrallband",
           "detachmentId": 983,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Thousand Sons Psyker unit from your army that has not been selected to shoot this phase and is wholly within your army's Flow of Magic.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability. After your unit has shot this phase, select one enemy unit hit by one or more of those attacks. Until the end of the phase, models in that unit cannot have the Benefit of Cover."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Thousand Sons Psyker unit from your army that has not been selected to shoot this phase and is wholly within your army's Flow of Magic.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability. After your unit has shot this phase, select one enemy unit hit by one or more of those attacks. Until the end of the phase, models in that unit cannot have the Benefit of Cover.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ]
     },

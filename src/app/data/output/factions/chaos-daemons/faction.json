@@ -2863,7 +2863,16 @@
           "detachment": "Rotten and Rusted",
           "detachmentId": 955,
           "legend": "Bounteous and repulsive layers of rancid flab boil from within this entity's grotesque form, bolstering it against even the most dolorous blows.",
-          "description": "Add 2 to the bearers Wounds characteristic."
+          "description": "Add 2 to the bearers Wounds characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearer",
+              "effect": "statBonus",
+              "attribute": "w",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -3242,7 +3251,16 @@
           ],
           "detachment": "Shadow Legion",
           "detachmentId": 1027,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> Up to one Shadow Legion Heretic Astartes unit from your army and up to one Shadow Legion Legiones Daemonica unit from your army. You can only select units that arrived from Reserves this turn.<br><br><b>EFFECT:</b> Until the end of the phase, weapons equipped by models in your selected units have the [IGNORES COVER] ability."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> Up to one Shadow Legion Heretic Astartes unit from your army and up to one Shadow Legion Legiones Daemonica unit from your army. You can only select units that arrived from Reserves this turn.<br><br><b>EFFECT:</b> Until the end of the phase, weapons equipped by models in your selected units have the [IGNORES COVER] ability.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "CD",

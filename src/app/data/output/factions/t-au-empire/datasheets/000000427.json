@@ -197,7 +197,15 @@
         "id": "000000427:oversight-drone",
         "name": "Oversight Drone",
         "description": "Once per battle, when the bearer's unit is selected to shoot, until the end of the phase, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability. <br><br><b>Designer's Note:</b> Place an Oversight Drone token next to the bearer, removing it once this ability has been used.",
-        "mechanics": []
+        "mechanics": [
+          {
+            "entity": "targetUnit",
+            "effect": "ignoreModifier",
+            "attribute": "s",
+            "value": "cover"
+          }
+        ],
+        "mechanicsSource": "regex"
       }
     ],
     "validLoadouts": [

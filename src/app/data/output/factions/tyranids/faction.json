@@ -939,7 +939,21 @@
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
           "legend": "These warrior organisms boast additional fanged maws, jabbing probosci and haemophagic membranes that consume the fluids of their prey.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Add 1 to the Strength characteristic of melee weapons equipped by models in the bearer's unit. The first time the bearer's unit destroys an enemy unit in the Fight phase while the bearer is within 6\" of one or more friendly Harvester units, until the end of the battle, add 1 to the Attacks characteristic of melee weapons equipped by models in the bearer's unit."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Add 1 to the Strength characteristic of melee weapons equipped by models in the bearer's unit. The first time the bearer's unit destroys an enemy unit in the Fight phase while the bearer is within 6\" of one or more friendly Harvester units, until the end of the battle, add 1 to the Attacks characteristic of melee weapons equipped by models in the bearer's unit.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "a",
+              "value": 1,
+              "conditions": [
+                {
+                  "weaponType": "Melee"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "stratagems": [
@@ -1284,7 +1298,16 @@
           "legend": "In their efforts to lay the monstrous beasts of a Crusher Stampede low, the prey only succeed in further enraging the rampaging monsters. The surviving beasts are driven to fight with greater fury the more of their number that fall.",
           "description": "Each time a Tyranids Monster model from your army makes an attack, add 1 to the Hit roll if that model's unit is below its Starting Strength, and add 1 to the Wound roll as well if that model's unit is Below Half-strength. In addition, while a <span class=\"kwb\">TYRANIDS</span> <span class=\"kwb\">MONSTER</span> unit from your army (excluding Battle-shocked units) is at its Starting Strength, add 2 to the Objective Control characteristic of models in that unit.",
           "detachment": "Crusher Stampede",
-          "detachmentId": 769
+          "detachmentId": 769,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1296,7 +1319,16 @@
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
           "legend": "The crushing menace of the Hive Mind rolls off this monstrous creature in waves, causing it to loom even larger in the minds of its quailing prey and lending it absolute dominance of the battlefield.",
-          "description": "Tyranids Monster model only. Add 3 to the bearer's Objective Control characteristic."
+          "description": "Tyranids Monster model only. Add 3 to the bearer's Objective Control characteristic.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "statBonus",
+              "attribute": "oc",
+              "value": 3
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1393,7 +1425,16 @@
           ],
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability, and until the end of the phase each time a model in your unit makes an attack, you can ignore any or all modifiers to that model's Ballistic Skill characteristic and any or all modifiers to the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability, and until the end of the phase each time a model in your unit makes an attack, you can ignore any or all modifiers to that model's Ballistic Skill characteristic and any or all modifiers to the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -1743,7 +1784,16 @@
           "legend": "Burrowing Tyranid bioforms burst from the ground in all their horror.",
           "description": "Each time a Tyranids model from your army makes an attack, re-roll a Hit roll of 1.<br><br>Each time a Burrower unit from your army is set up on the battlefield from Reserves, place a circular 40mm Tunnel Marker anywhere on the battlefield within 1\" of that unit and more than 3\" horizontally away from all enemy units.<br><br>In the Reinforcements step of your Movement phase, when you set up a unit on the battlefield from Reserves, you can set that unit up wholly within 9\" of one of your Tunnel Markers and more than 6\" horizontally away from any enemy units.<br><br>If an enemy model (excluding <span class=\"kwb\">AIRCRAFT</span>) ends any kind of move within 3\" of one of your Tunnel Markers, that Tunnel Marker is removed from the battlefield.<br><br><span class=\"hi_custom\">KEYWORDS</span><br>Mawloc and Trygon units from your army have the <span class=\"kwb\">BURROWER</span> keyword.<br><br>In the Muster Armies step, you can select up to 2 <span class=\"kwb\">TRYGON</span> models from your army. The selected units gain the <span class=\"kwb\">CHARACTER</span> keyword.<br><br><b>Designer's Note:</b> This means that the selected models can be given Enhancements and one of them can be selected as your <span class=\"kwb\">WARLORD</span>.",
           "detachment": "Subterranean Assault",
-          "detachmentId": 1057
+          "detachmentId": 1057,
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         }
       ],
       "enhancements": [
@@ -1982,7 +2032,16 @@
           ],
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Synapse unit from your army that has not been selected to shoot or fight this phase, and one enemy unit within 24\" of and visible to the <span class=\"kwb\">SYNAPSE</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time a friendly <span class=\"kwb\">TYRANIDS</span> model makes an attack that targets that enemy unit, if the attacking model's unit is within 6\" of your <span class=\"kwb\">SYNAPSE</span> unit, re-roll a Hit roll of 1 and re-roll a Wound roll of 1."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Synapse unit from your army that has not been selected to shoot or fight this phase, and one enemy unit within 24\" of and visible to the <span class=\"kwb\">SYNAPSE</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time a friendly <span class=\"kwb\">TYRANIDS</span> model makes an attack that targets that enemy unit, if the attacking model's unit is within 6\" of your <span class=\"kwb\">SYNAPSE</span> unit, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2607,7 +2666,16 @@
           ],
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> If that unit is a Tyranid Warriors unit, select up to one Endless Multitude unit from your army, that is not Battle-shocked, within 6\" of it. Until the end of the phase, each time a model in those units makes an attack, re-roll a Wound roll of 1, and, if it is a <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">WARRIORS</span> unit, re-roll a Hit roll of 1 as well."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> If that unit is a Tyranid Warriors unit, select up to one Endless Multitude unit from your army, that is not Battle-shocked, within 6\" of it. Until the end of the phase, each time a model in those units makes an attack, re-roll a Wound roll of 1, and, if it is a <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">WARRIORS</span> unit, re-roll a Hit roll of 1 as well.",
+          "mechanics": [
+            {
+              "entity": "bearersUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "ones"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
@@ -2646,7 +2714,16 @@
           ],
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Tyranid Warriors with Ranged Bio-weapons unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability. After your unit has resolved its shooting attacks this phase, select one enemy unit hit by one or more of those attacks. Until the end of the turn, models in that unit cannot have the Benefit of Cover."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One Tyranid Warriors with Ranged Bio-weapons unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, ranged weapons equipped by models in your unit have the [IGNORES COVER] ability. After your unit has resolved its shooting attacks this phase, select one enemy unit hit by one or more of those attacks. Until the end of the turn, models in that unit cannot have the Benefit of Cover.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "ignoreModifier",
+              "attribute": "s",
+              "value": "cover"
+            }
+          ],
+          "mechanicsSource": "regex"
         },
         {
           "factionId": "TYR",
