@@ -269,6 +269,52 @@ export class CombatEngine {
                 this.collectedMechanics.push({ mechanic, source, leaderSourceName });
             }
         }
+
+        // Collect wargear abilities from both units
+        this.collectFromWargearAbilities();
+    }
+
+    /**
+     * Collect mechanics from attacker and defender wargear abilities.
+     * Wargear abilities are equipment-granted abilities like Storm Shield (invuln save).
+     */
+    private collectFromWargearAbilities(): void {
+        const attackerUnit = this.context.attacker.unit;
+        const defenderUnit = this.context.defender.unit;
+
+        // Attacker wargear abilities
+        const attackerWargearAbilities = (attackerUnit as any).resolvedWargearAbilities;
+        if (attackerWargearAbilities && Array.isArray(attackerWargearAbilities)) {
+            for (const ability of attackerWargearAbilities) {
+                if (!ability.mechanics || !Array.isArray(ability.mechanics)) continue;
+
+                for (const mechanic of ability.mechanics) {
+                    this.collectedMechanics.push({
+                        mechanic,
+                        source: createEffectSource("wargearAbility", ability.name, {
+                            sourceUnitName: attackerUnit.name,
+                        }),
+                    });
+                }
+            }
+        }
+
+        // Defender wargear abilities
+        const defenderWargearAbilities = (defenderUnit as any).resolvedWargearAbilities;
+        if (defenderWargearAbilities && Array.isArray(defenderWargearAbilities)) {
+            for (const ability of defenderWargearAbilities) {
+                if (!ability.mechanics || !Array.isArray(ability.mechanics)) continue;
+
+                for (const mechanic of ability.mechanics) {
+                    this.collectedMechanics.push({
+                        mechanic,
+                        source: createEffectSource("wargearAbility", ability.name, {
+                            sourceUnitName: defenderUnit.name,
+                        }),
+                    });
+                }
+            }
+        }
     }
 
     /**

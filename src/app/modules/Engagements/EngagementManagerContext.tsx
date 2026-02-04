@@ -169,6 +169,9 @@ function mergeUnitsForEngagement(leaders: ArmyListItem[], bodyguard: ArmyListIte
     // Use first leader as base, but override with merged data
     const { wargear: _wargearData, modelInstances: _, abilities: __, ...baseItem } = leaders[0];
 
+    // Merge resolvedWargearAbilities from all sources
+    const allResolvedWargearAbilities = [...leaders.flatMap((l) => l.resolvedWargearAbilities || []), ...(bodyguard.resolvedWargearAbilities || [])];
+
     // Create a temporary item for combat state calculation
     const tempItem = { ...baseItem, modelInstances } as ArmyListItem;
 
@@ -181,6 +184,7 @@ function mergeUnitsForEngagement(leaders: ArmyListItem[], bodyguard: ArmyListIte
         abilities,
         sourceUnits,
         combatState: createDefaultCombatState(tempItem),
+        resolvedWargearAbilities: allResolvedWargearAbilities.length > 0 ? allResolvedWargearAbilities : undefined,
     };
 }
 

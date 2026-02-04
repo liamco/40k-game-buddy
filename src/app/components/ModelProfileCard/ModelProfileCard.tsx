@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { Model } from "#types/Models.tsx";
-import type { Ability } from "#types/Units.tsx";
+import type { Ability, WargearAbility } from "#types/Units.tsx";
 
 import { Badge } from "#components/Badge/Badge.tsx";
 
@@ -11,9 +11,12 @@ import strikethroughGreen from "#assets/StrikethroughGreen.svg";
 import strikethroughRed from "#assets/StrikethroughRed.svg";
 import IconSkull from "#components/icons/IconSkull.tsx";
 
+import { applyWargearMechanics, ModifiedStats } from "#utils/applyWargearMechanics.ts";
+
 interface Props {
     model: Model & { sourceUnit?: string; isLeader?: boolean };
     abilities?: Ability[];
+    wargearAbilities?: WargearAbility[];
     isDisabled?: boolean;
     isDestroyed?: boolean;
     isSelected?: boolean;
@@ -27,7 +30,31 @@ const formatAbility = (ability: Ability): string => {
     return isNumeric ? `${ability.name} ${ability.parameter}+` : `${ability.name} ${ability.parameter}`;
 };
 
-const ModelProfileCard = ({ model, abilities, isDisabled, isSelected, isDestroyed, onUnitModelChange }: Props) => {
+// Helper to render a stat value, showing modified value in accent color if changed
+const StatValue = ({ value, modified, isSave = false }: { value: number | null; modified?: { base: number; modified: number }; isSave?: boolean }) => {
+    if (modified) {
+        return (
+            <span className="text-calgarBlue">
+                {modified.modified}
+                {isSave ? "+" : ""}
+            </span>
+        );
+    }
+    return (
+        <span>
+            {value}
+            {isSave && value !== null ? "+" : ""}
+        </span>
+    );
+};
+
+const ModelProfileCard = ({ model, abilities, wargearAbilities, isDisabled, isSelected, isDestroyed, onUnitModelChange }: Props) => {
+    // Compute stat modifications from wargear abilities
+    const modifiedStats = useMemo((): ModifiedStats => {
+        if (!wargearAbilities || wargearAbilities.length === 0) return {};
+        return applyWargearMechanics(model, wargearAbilities);
+    }, [model, wargearAbilities]);
+
     const resolveStyles = () => {
         if (isDestroyed) {
             return "bg-wordBearersRed shadow-none border-wildRiderRed  text-wildRiderRed";
@@ -75,18 +102,32 @@ const ModelProfileCard = ({ model, abilities, isDisabled, isSelected, isDestroye
                     <p>W</p>
                     <p>Ld</p>
                     <p>OC</p>
-                    <p>{model.m}</p>
-                    <p>{model.t}</p>
-                    <p>{model.sv}</p>
-                    <p>{model.w}</p>
-                    <p>{model.ld}</p>
-                    <p>{model.oc}</p>
-                    {model.invSv && (
+                    <p>
+                        <StatValue value={model.m} modified={modifiedStats.m} />
+                    </p>
+                    <p>
+                        <StatValue value={model.t} modified={modifiedStats.t} />
+                    </p>
+                    <p>
+                        <StatValue value={model.sv} modified={modifiedStats.sv} isSave />
+                    </p>
+                    <p>
+                        <StatValue value={model.w} modified={modifiedStats.w} />
+                    </p>
+                    <p>
+                        <StatValue value={model.ld} modified={modifiedStats.ld} isSave />
+                    </p>
+                    <p>
+                        <StatValue value={model.oc} modified={modifiedStats.oc} />
+                    </p>
+                    {(model.invSv || modifiedStats.invSv) && (
                         <div className="col-start-3 relative flex justify-center">
                             <BaseIcon color="deathWorldForest" size="large">
                                 <IconShield />
                             </BaseIcon>
-                            <span className={`inline-block ${isDestroyed ? "text-wildRiderRed" : "text-fireDragonBright"} absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}>{model.invSv}</span>
+                            <span className={`inline-block ${isDestroyed ? "text-wildRiderRed" : modifiedStats.invSv ? "text-calgarBlue" : "text-fireDragonBright"} absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]`}>
+                                {modifiedStats.invSv ? modifiedStats.invSv.modified : model.invSv}
+                            </span>
                         </div>
                     )}
                 </div>

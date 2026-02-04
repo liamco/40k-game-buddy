@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useMemo, useCall
 
 import { getAllFactions, loadFactionData, loadFactionConfig, loadDatasheetData } from "../../utils/depotDataLoader";
 import { getUnitById } from "../../utils/unitHelpers";
+import { resolveWargearAbilities } from "../../utils/resolveWargearAbilities";
 import type { Faction, FactionIndex, ArmyList, ArmyListItem, Datasheet, LoadoutConstraint, UnitWeapons, LeaderReference, LeaderConditions, UnitCombatState, Enhancement, Weapon, WarlordEligibility, ModelInstance } from "../../types";
 
 /**
@@ -1073,9 +1074,14 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             return updated;
         });
 
+        // Resolve wargear abilities from all model loadouts
+        const allLoadouts = updatedInstances.map((mi) => mi.loadout);
+        const resolvedAbilities = resolveWargearAbilities(allLoadouts, unit.wargear?.abilities);
+
         const updatedUnit: ArmyListItem = {
             ...unit,
             modelInstances: updatedInstances,
+            resolvedWargearAbilities: resolvedAbilities.length > 0 ? resolvedAbilities : undefined,
         };
 
         const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));
@@ -1094,9 +1100,14 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             loadout: loadoutUpdater(instance),
         }));
 
+        // Resolve wargear abilities from all model loadouts
+        const allLoadouts = updatedInstances.map((mi) => mi.loadout);
+        const resolvedAbilities = resolveWargearAbilities(allLoadouts, unit.wargear?.abilities);
+
         const updatedUnit: ArmyListItem = {
             ...unit,
             modelInstances: updatedInstances,
+            resolvedWargearAbilities: resolvedAbilities.length > 0 ? resolvedAbilities : undefined,
         };
 
         const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));
@@ -1148,10 +1159,15 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
             return { ...instance, loadout: newLoadout };
         });
 
+        // Resolve wargear abilities from all model loadouts
+        const allLoadouts = updatedInstances.map((mi) => mi.loadout);
+        const resolvedAbilities = resolveWargearAbilities(allLoadouts, unit.wargear?.abilities);
+
         const updatedUnit: ArmyListItem = {
             ...unit,
             unitWideSelections: newUnitWideSelections,
             modelInstances: updatedInstances,
+            resolvedWargearAbilities: resolvedAbilities.length > 0 ? resolvedAbilities : undefined,
         };
 
         const updatedItems = list.items.map((item) => (item.listItemId === unitId ? updatedUnit : item));

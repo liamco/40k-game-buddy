@@ -1,4 +1,4 @@
-import { Datasheet, LeaderReference } from "./Units";
+import { Datasheet, LeaderReference, WargearAbility } from "./Units";
 
 export interface ArmyList {
     id: string;
@@ -55,4 +55,8 @@ export type ArmyListItem = Datasheet & {
     // Wargear abilities that are currently active based on equipped weapons
     // Populated by evaluator when loadout changes
     activeWargearAbilities?: string[];
+
+    // Resolved wargear abilities with full data (including mechanics)
+    // Pre-computed from modelInstances loadouts for display and combat
+    resolvedWargearAbilities?: WargearAbility[];
 };

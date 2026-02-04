@@ -5,7 +5,7 @@
 /**
  * Categories of effect sources, ordered by typical application priority
  */
-export type EffectSourceType = "coreRule" | "factionAbility" | "detachmentRule" | "unitAbility" | "leaderAbility" | "enhancement" | "weaponAttribute" | "weaponAbility" | "stratagem";
+export type EffectSourceType = "coreRule" | "factionAbility" | "detachmentRule" | "unitAbility" | "leaderAbility" | "wargearAbility" | "enhancement" | "weaponAttribute" | "weaponAbility" | "stratagem";
 
 /**
  * Priority values for each source type (higher = applied later, can override)
@@ -16,6 +16,7 @@ export const SOURCE_PRIORITIES: Record<EffectSourceType, number> = {
     detachmentRule: 20,
     unitAbility: 30,
     leaderAbility: 40,
+    wargearAbility: 45,
     enhancement: 50,
     weaponAttribute: 60,
     weaponAbility: 70,

@@ -168,7 +168,18 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                             }
                             const isDestroyed = profileInstances.length > 0 && profileInstances.every((m) => deadModelIds.includes(m.instanceId));
 
-                            return <ModelProfileCard key={`${model.name}-${originalIdx}`} model={model} abilities={selectedUnit.item.abilities} isSelected={isSelected} isDisabled={isDisabled} isDestroyed={isDestroyed} onUnitModelChange={onModelChange} />;
+                            return (
+                                <ModelProfileCard
+                                    key={`${model.name}-${originalIdx}`}
+                                    model={model}
+                                    abilities={selectedUnit.item.abilities}
+                                    wargearAbilities={(selectedUnit.item as any).resolvedWargearAbilities}
+                                    isSelected={isSelected}
+                                    isDisabled={isDisabled}
+                                    isDestroyed={isDestroyed}
+                                    onUnitModelChange={onModelChange}
+                                />
+                            );
                         })}
                     </div>
 
