@@ -171,11 +171,11 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
                                 </button>
                             </div>
                         </div>
-                        <div className="text-right">
-                            <div className="text-heading-l">
+                        <div className="text-right space-y-1">
+                            <div className="text-title-xl !tracking-[0.1em] space-x-1">
                                 <span className="text-skarsnikGreen">W</span>
-                                <span className={getWoundsColour()}> {combatState.currentWounds}</span>
-                                <span className="text-fireDragonBright/50">/{maxWounds}</span>
+                                <span className={getWoundsColour()}>{combatState.currentWounds}</span>
+                                <span className="text-skarsnikGreen/80">/{maxWounds}</span>
                             </div>
                             {unit.damaged && combatState.isDamaged && !combatState.isDestroyed && <div className="inline-block px-2 py-1 bg-wordBearersRed/80 border border-wildRiderRed rounded text-wildRiderRed text-blockcaps-s">Severely Damaged</div>}
                         </div>

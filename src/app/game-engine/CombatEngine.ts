@@ -158,6 +158,9 @@ export class CombatEngine {
         // Unit abilities (STEALTH, FEEL NO PAIN, etc.)
         this.collectFromUnitAbilities();
 
+        // Damaged profile penalties (when unit is damaged)
+        this.collectFromDamagedProfile();
+
         // Cover: Improves save by 1 if defender is in cover (unless weapon ignores cover)
         // For saves, a lower number is better, so we use -1 to improve the roll target
         // This must come after collectFromWeapon so ignoreModifier mechanics are available
@@ -313,6 +316,33 @@ export class CombatEngine {
                         }),
                     });
                 }
+            }
+        }
+    }
+
+    /**
+     * Collect mechanics from damaged profiles when units are damaged.
+     * Only collects attacker's damaged mechanics since all current damaged effects
+     * are offensive (affect the unit's own attacks: hit penalties, attack bonuses).
+     * Defender's damaged profile only matters when they attack, not when defending.
+     */
+    private collectFromDamagedProfile(): void {
+        const attackerUnit = this.context.attacker.unit;
+
+        // Only attacker damaged profile - affects their attacks
+        if (attackerUnit.damaged?.mechanics && attackerUnit.combatState?.isDamaged) {
+            for (const mechanic of attackerUnit.damaged.mechanics) {
+                this.collectedMechanics.push({
+                    mechanic: {
+                        entity: mechanic.entity,
+                        effect: mechanic.effect,
+                        attribute: mechanic.attribute,
+                        value: mechanic.value,
+                    },
+                    source: createEffectSource("damagedProfile", "Damaged", {
+                        sourceUnitName: attackerUnit.name,
+                    }),
+                });
             }
         }
     }
