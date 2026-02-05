@@ -21,8 +21,13 @@
     "defaultLoadout": {
       "raw": "<b>Marneus Calgar is equipped with:</b> Gauntlets of Ultramar.<br><br><b>Every Victrix Honour Guard is equipped with:</b> Victrix power sword.",
       "parsed": [
-        "000002199:gauntlets-of-ultramar"
-      ]
+        "000002199:victrix-power-sword"
+      ],
+      "byModelType": {
+        "Victrix Honour Guard": [
+          "000002199:victrix-power-sword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -148,7 +153,40 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a <span class=\"kwb\">MARNEUS</span> <span class=\"kwb\">CALGAR</span> model, that unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -157,7 +195,31 @@
       "factionId": "",
       "description": "At the start of your Command phase, if this unit's Marneus Calgar model is your <span class=\"kwb\">WARLORD</span> and is on the battlefield, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isOnBattlefield",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "WARLORD"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

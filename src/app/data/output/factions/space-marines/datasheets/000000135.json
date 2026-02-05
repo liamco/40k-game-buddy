@@ -23,7 +23,13 @@
       "parsed": [
         "000000135:storm-bolter",
         "000000135:relic-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Captain in Terminator Armour": [
+          "000000135:storm-bolter",
+          "000000135:relic-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -227,7 +233,17 @@
       "factionId": "",
       "description": "You can re-roll Charge rolls made for this model's unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -21,9 +21,27 @@
     "defaultLoadout": {
       "raw": "<b>Every Pink Horror is equipped with:</b> coruscating pink flames; pink claws. <br><br><b>Every Blue Horror added to this unit using the Split ability is equipped with:</b> coruscating blue flames; blue claws. <br><br><b>Every Brimstone Horror added to this unit using the Split ability is equipped with:</b> coruscating yellow flames; yellow claws.",
       "parsed": [
-        "000004127:coruscating-pink-flames",
-        "000004127:pink-claws"
-      ]
+        "000004127:coruscating-blue-flames",
+        "000004127:blue-claws"
+      ],
+      "byModelType": {
+        "Split ability": [
+          "000004127:coruscating-blue-flames",
+          "000004127:blue-claws"
+        ],
+        "Pink Horror": [
+          "000004127:coruscating-pink-flames",
+          "000004127:pink-claws"
+        ],
+        "Blue Horror added to this unit using the Split ability": [
+          "000004127:coruscating-blue-flames",
+          "000004127:blue-claws"
+        ],
+        "Brimstone Horror added to this unit using the Split ability": [
+          "000004127:coruscating-yellow-flames",
+          "000004127:yellow-claws"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +72,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Split ability",
+              "Blue Horror added to this unit using the Split ability"
+            ]
           }
         ]
       },
@@ -86,7 +108,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Pink Horror"
+            ]
           }
         ]
       },
@@ -118,7 +143,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Brimstone Horror added to this unit using the Split ability"
+            ]
           }
         ]
       },
@@ -147,7 +175,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Split ability",
+              "Blue Horror added to this unit using the Split ability"
+            ]
           }
         ]
       },
@@ -176,7 +208,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Pink Horror"
+            ]
           }
         ]
       },
@@ -205,7 +240,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Brimstone Horror added to this unit using the Split ability"
+            ]
           }
         ]
       }

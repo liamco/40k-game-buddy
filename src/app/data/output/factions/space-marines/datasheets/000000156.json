@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> encarmine broadsword.",
       "parsed": [
         "000000156:encarmine-broadsword"
-      ]
+      ],
+      "byModelType": {
+        "The Sanguinor - EPIC HERO": [
+          "000000156:encarmine-broadsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -95,7 +100,38 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of this model, you can re-roll Battle-shock and Leadership tests taken for that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "ld",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "ld",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

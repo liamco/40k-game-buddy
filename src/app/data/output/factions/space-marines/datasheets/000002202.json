@@ -24,7 +24,14 @@
         "000002202:bolt-pistol",
         "000002202:boltgun",
         "000002202:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002202:bolt-pistol",
+          "000002202:boltgun",
+          "000002202:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -152,7 +159,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Devastator Marine"
+            ]
           }
         ]
       },
@@ -220,7 +230,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Devastator Marine"
+            ]
           }
         ]
       },
@@ -252,7 +265,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Devastator Marine"
+            ]
           }
         ]
       },
@@ -302,7 +318,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Devastator Marine"
+            ]
           }
         ]
       },
@@ -335,7 +354,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Devastator Marine"
+            ]
           }
         ]
       },
@@ -387,7 +409,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Devastator Marine"
+            ]
           }
         ]
       },
@@ -776,7 +801,24 @@
       "factionId": "",
       "description": "Once per battle, after making a Hit roll for a model in this unit, you can change that roll to an unmodified 6.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "h",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "h",
+              "operator": "notEquals",
+              "value": "6"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

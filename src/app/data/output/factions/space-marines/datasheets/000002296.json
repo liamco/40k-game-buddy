@@ -23,7 +23,13 @@
       "parsed": [
         "000002296:bolt-pistol",
         "000002296:enmity-s-edge"
-      ]
+      ],
+      "byModelType": {
+        "Lazarus - EPIC HERO": [
+          "000002296:bolt-pistol",
+          "000002296:enmity-s-edge"
+        ]
+      }
     },
     "weapons": [
       {
@@ -119,7 +125,38 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit is destroyed by a melee attack, if that model has not fought this phase, roll one D6. On a 4+, do not remove it from play; that destroyed model can fight after the attacking model's unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER DEATH"
+          ],
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

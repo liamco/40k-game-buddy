@@ -23,7 +23,13 @@
       "parsed": [
         "000002707:absolvor-bolt-pistol",
         "000002707:executioner-relic-blade"
-      ]
+      ],
+      "byModelType": {
+        "Judiciar": [
+          "000002707:absolvor-bolt-pistol",
+          "000002707:executioner-relic-blade"
+        ]
+      }
     },
     "weapons": [
       {
@@ -120,7 +126,25 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit has the Fights First ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHTS FIRST"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -129,7 +153,26 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, until the end of the battle, add 1 to the Attacks characteristic of its executioner relic blade.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "keywords": [
+                "CHARACTER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

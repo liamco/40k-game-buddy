@@ -37,7 +37,15 @@
         "000001191:twin-assault-cannon",
         "000001191:typhoon-missile-launcher",
         "000001191:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Stormraven Gunship": [
+          "000001191:stormstrike-missile-launcher",
+          "000001191:twin-assault-cannon",
+          "000001191:typhoon-missile-launcher",
+          "000001191:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -391,8 +399,22 @@
           [
             "000001191:stormstrike-missile-launcher",
             "000001191:twin-assault-cannon",
+            "000001191:typhoon-missile-launcher",
+            "000001191:armoured-hull",
+            "000001191:hurricane-bolter"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
+            "000001191:twin-assault-cannon",
             "000001191:armoured-hull",
             "000001191:twin-heavy-bolter"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
+            "000001191:twin-assault-cannon",
+            "000001191:armoured-hull",
+            "000001191:twin-heavy-bolter",
+            "000001191:hurricane-bolter"
           ],
           [
             "000001191:stormstrike-missile-launcher",
@@ -402,9 +424,23 @@
           ],
           [
             "000001191:stormstrike-missile-launcher",
+            "000001191:twin-assault-cannon",
+            "000001191:armoured-hull",
+            "000001191:twin-multi-melta",
+            "000001191:hurricane-bolter"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
             "000001191:typhoon-missile-launcher",
             "000001191:armoured-hull",
             "000001191:twin-heavy-plasma-cannon"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
+            "000001191:typhoon-missile-launcher",
+            "000001191:armoured-hull",
+            "000001191:twin-heavy-plasma-cannon",
+            "000001191:hurricane-bolter"
           ],
           [
             "000001191:stormstrike-missile-launcher",
@@ -416,7 +452,21 @@
             "000001191:stormstrike-missile-launcher",
             "000001191:armoured-hull",
             "000001191:twin-heavy-plasma-cannon",
+            "000001191:twin-heavy-bolter",
+            "000001191:hurricane-bolter"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
+            "000001191:armoured-hull",
+            "000001191:twin-heavy-plasma-cannon",
             "000001191:twin-multi-melta"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
+            "000001191:armoured-hull",
+            "000001191:twin-heavy-plasma-cannon",
+            "000001191:twin-multi-melta",
+            "000001191:hurricane-bolter"
           ],
           [
             "000001191:stormstrike-missile-launcher",
@@ -426,6 +476,13 @@
           ],
           [
             "000001191:stormstrike-missile-launcher",
+            "000001191:typhoon-missile-launcher",
+            "000001191:armoured-hull",
+            "000001191:twin-lascannon",
+            "000001191:hurricane-bolter"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
             "000001191:armoured-hull",
             "000001191:twin-lascannon",
             "000001191:twin-heavy-bolter"
@@ -434,7 +491,21 @@
             "000001191:stormstrike-missile-launcher",
             "000001191:armoured-hull",
             "000001191:twin-lascannon",
+            "000001191:twin-heavy-bolter",
+            "000001191:hurricane-bolter"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
+            "000001191:armoured-hull",
+            "000001191:twin-lascannon",
             "000001191:twin-multi-melta"
+          ],
+          [
+            "000001191:stormstrike-missile-launcher",
+            "000001191:armoured-hull",
+            "000001191:twin-lascannon",
+            "000001191:twin-multi-melta",
+            "000001191:hurricane-bolter"
           ]
         ]
       }
@@ -469,7 +540,23 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "operator": "equals",
+              "value": "thisModel"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -36,7 +36,14 @@
         "000002789:tempest-bolter",
         "000002789:twin-heavy-onslaught-gatling-cannon",
         "000002789:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Gladiator Reaper": [
+          "000002789:tempest-bolter",
+          "000002789:twin-heavy-onslaught-gatling-cannon",
+          "000002789:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -250,6 +257,38 @@
             "000002789:tempest-bolter",
             "000002789:twin-heavy-onslaught-gatling-cannon",
             "000002789:armoured-hull"
+          ],
+          [
+            "000002789:tempest-bolter",
+            "000002789:twin-heavy-onslaught-gatling-cannon",
+            "000002789:armoured-hull",
+            "000002789:icarus-rocket-pod"
+          ],
+          [
+            "000002789:tempest-bolter",
+            "000002789:twin-heavy-onslaught-gatling-cannon",
+            "000002789:armoured-hull",
+            "000002789:ironhail-heavy-stubber"
+          ],
+          [
+            "000002789:tempest-bolter",
+            "000002789:twin-heavy-onslaught-gatling-cannon",
+            "000002789:armoured-hull",
+            "000002789:ironhail-heavy-stubber",
+            "000002789:icarus-rocket-pod"
+          ],
+          [
+            "000002789:tempest-bolter",
+            "000002789:twin-heavy-onslaught-gatling-cannon",
+            "000002789:armoured-hull",
+            "000002789:multi-melta"
+          ],
+          [
+            "000002789:tempest-bolter",
+            "000002789:twin-heavy-onslaught-gatling-cannon",
+            "000002789:armoured-hull",
+            "000002789:multi-melta",
+            "000002789:icarus-rocket-pod"
           ]
         ]
       }
@@ -280,7 +319,28 @@
       "factionId": "",
       "description": "This model's twin heavy onslaught gatling cannon has the [SUSTAINED HITS 2] ability while targeting <span class=\"kwb\">INFANTRY</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "INFANTRY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

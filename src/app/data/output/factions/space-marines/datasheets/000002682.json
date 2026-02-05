@@ -23,7 +23,13 @@
       "parsed": [
         "000002682:arma-luminis",
         "000002682:fealty"
-      ]
+      ],
+      "byModelType": {
+        "Lion El'Jonson - EPIC HERO": [
+          "000002682:arma-luminis",
+          "000002682:fealty"
+        ]
+      }
     },
     "weapons": [
       {
@@ -164,7 +170,26 @@
       "factionId": "",
       "description": "At the start of your Command phase, select two Primarch of the First Legion abilities. Until the start of your next Command phase, this model has those abilities.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "Primarch of the First Legion"
+          ],
+          "value": "two",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -211,7 +236,25 @@
       "factionId": "",
       "description": "If this model is in your army, it must be your Warlord.",
       "type": "Special (правая колонка)",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsKeyword",
+          "keywords": [
+            "Warlord"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

@@ -24,7 +24,14 @@
         "000001668:bolt-pistol",
         "000001668:bolt-sniper-rifle",
         "000001668:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000001668:bolt-pistol",
+          "000001668:bolt-sniper-rifle",
+          "000001668:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -261,7 +268,44 @@
       "factionId": "",
       "description": "In your Shooting phase, after this unit has shot, if it contains an Eliminator Sergeant equipped with an instigator bolt carbine, this unit can make a Normal move. If it does so, until the end of the turn, this unit is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Normal move"
+          ],
+          "value": "after shooting",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attributes": [
+                "Eliminator Sergeant equipped with an instigator bolt carbine"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "not eligible to declare a charge"
+          ],
+          "value": "until the end of the turn",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -270,7 +314,27 @@
       "factionId": "",
       "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [DEVASTATING WOUNDS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATING WOUNDS"
+          ],
+          "state": "isStationary",
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

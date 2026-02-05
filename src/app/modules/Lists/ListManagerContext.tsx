@@ -335,12 +335,45 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
         return instances;
     }
 
-    // Prefer pre-parsed default loadout IDs if available (new format)
-    const parsedDefaultLoadout = typeof unit.wargear?.defaultLoadout === "object" ? unit.wargear.defaultLoadout.parsed : undefined;
+    const wargearDefaultLoadout = unit.wargear?.defaultLoadout;
 
-    // Fall back to parsing raw text for legacy data
-    const defaultLoadoutRaw = typeof unit.wargear?.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear?.defaultLoadout?.raw || "";
-    const loadoutByType = parseLoadoutByModelType(defaultLoadoutRaw, unit.unitComposition);
+    // Helper to find default loadout for a specific model type
+    function getDefaultForModelType(modelType: string): string[] {
+        // Check for per-model-type parsed loadouts (new format with byModelType)
+        if (typeof wargearDefaultLoadout === "object" && wargearDefaultLoadout.byModelType) {
+            const byModelType = wargearDefaultLoadout.byModelType as Record<string, string[]>;
+
+            // Check for "*all*" first (applies to all models)
+            if (byModelType["*all*"]) {
+                return [...byModelType["*all*"]];
+            }
+
+            // Try exact match
+            if (byModelType[modelType]) {
+                return [...byModelType[modelType]];
+            }
+
+            // Try case-insensitive/plural match
+            const modelTypeLower = modelType.toLowerCase();
+            for (const [key, value] of Object.entries(byModelType)) {
+                const keyLower = key.toLowerCase();
+                if (keyLower === modelTypeLower || keyLower === modelTypeLower + "s" || keyLower + "s" === modelTypeLower || keyLower.replace(/s$/, "") === modelTypeLower.replace(/s$/, "")) {
+                    return [...value];
+                }
+            }
+        }
+
+        // Fall back to generic parsed array
+        if (typeof wargearDefaultLoadout === "object" && wargearDefaultLoadout.parsed?.length > 0) {
+            return [...wargearDefaultLoadout.parsed];
+        }
+
+        // Legacy text-based fallback
+        const defaultLoadoutRaw = typeof wargearDefaultLoadout === "string" ? wargearDefaultLoadout : wargearDefaultLoadout?.raw || "";
+        const loadoutByType = parseLoadoutByModelType(defaultLoadoutRaw, unit.unitComposition || []);
+        const defaultWeaponNames = loadoutByType.get(modelType) || [];
+        return defaultWeaponNames.map((name) => findWeaponIdByName(unit.wargear?.weapons!, name)).filter((id): id is string => id !== null);
+    }
 
     // Generate instances for each composition line
     for (const comp of unit.unitComposition) {
@@ -351,21 +384,8 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
         // Get count - use min as default
         const count = comp.min || 1;
 
-        let defaultLoadout: string[] = [];
-
-        // Use parsed IDs if available (common case for units with "Every model" loadout)
-        if (parsedDefaultLoadout && parsedDefaultLoadout.length > 0) {
-            defaultLoadout = [...parsedDefaultLoadout];
-        } else {
-            // Fall back to name-based matching for legacy data or complex multi-type units
-            const defaultWeaponNames = loadoutByType.get(modelType) || [];
-            for (const weaponName of defaultWeaponNames) {
-                const weaponId = findWeaponIdByName(unit.wargear?.weapons, weaponName);
-                if (weaponId) {
-                    defaultLoadout.push(weaponId);
-                }
-            }
-        }
+        // Get default loadout for this specific model type
+        const defaultLoadout = getDefaultForModelType(modelType);
 
         // Create instances
         for (let i = 0; i < count; i++) {
@@ -1186,16 +1206,40 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     function getDefaultLoadoutForModelType(unit: ArmyListItem, modelType: string): string[] {
         if (!unit.wargear?.defaultLoadout || !unit.wargear?.weapons) return [];
 
-        // Prefer pre-parsed default loadout IDs if available (new format)
-        // This handles the common case of "Every model is equipped with:" where all models share the same loadout
-        const parsedDefaultLoadout = typeof unit.wargear.defaultLoadout === "object" ? unit.wargear.defaultLoadout.parsed : undefined;
+        const defaultLoadout = unit.wargear.defaultLoadout;
 
-        if (parsedDefaultLoadout && parsedDefaultLoadout.length > 0) {
-            return [...parsedDefaultLoadout];
+        // Check for per-model-type parsed loadouts first (new format with byModelType)
+        if (typeof defaultLoadout === "object" && defaultLoadout.byModelType) {
+            const byModelType = defaultLoadout.byModelType as Record<string, string[]>;
+
+            // Check for "*all*" first (applies to all models)
+            if (byModelType["*all*"]) {
+                return [...byModelType["*all*"]];
+            }
+
+            // Try exact match
+            if (byModelType[modelType]) {
+                return [...byModelType[modelType]];
+            }
+
+            // Try case-insensitive/plural match
+            const modelTypeLower = modelType.toLowerCase();
+            for (const [key, value] of Object.entries(byModelType)) {
+                const keyLower = key.toLowerCase();
+                // Match: "Retributor" vs "Retributors", "Sister Novitiate" vs "Sisters Novitiate"
+                if (keyLower === modelTypeLower || keyLower === modelTypeLower + "s" || keyLower + "s" === modelTypeLower || keyLower.replace(/s$/, "") === modelTypeLower.replace(/s$/, "")) {
+                    return [...value];
+                }
+            }
         }
 
-        // Fall back to name-based matching for legacy data or complex multi-type units
-        const defaultLoadoutRaw = typeof unit.wargear.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear.defaultLoadout?.raw || "";
+        // Fall back to generic parsed array (for "Every model" or first model type)
+        if (typeof defaultLoadout === "object" && defaultLoadout.parsed?.length > 0) {
+            return [...defaultLoadout.parsed];
+        }
+
+        // Legacy text-based fallback for old data format
+        const defaultLoadoutRaw = typeof defaultLoadout === "string" ? defaultLoadout : defaultLoadout?.raw || "";
         const loadoutByType = parseLoadoutByModelType(defaultLoadoutRaw, unit.unitComposition || []);
         const weaponNames = loadoutByType.get(modelType) || loadoutByType.get("Every model") || [];
 

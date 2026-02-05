@@ -22,7 +22,12 @@
       "raw": "<b>Every model is equipped with:</b> chitinous claws and teeth. <br><br>*This unit can only contain 2 Neurogaunt Nodebeasts if it contains 20 Neurogaunts.",
       "parsed": [
         "000002687:chitinous-claws-and-teeth"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002687:chitinous-claws-and-teeth"
+        ]
+      }
     },
     "weapons": [
       {
@@ -81,7 +86,35 @@
       "factionId": "",
       "description": "While this unit is within Synapse Range of a friendly <span class=\"kwb\">TYRANIDS</span> unit (excluding <span class=\"kwb\">NEUROGAUNT</span> units), it has the Synapse keyword.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsKeyword",
+          "keywords": [
+            "Synapse"
+          ],
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "TYRANIDS"
+              ],
+              "operator": "includes",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "NEUROGAUNT"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

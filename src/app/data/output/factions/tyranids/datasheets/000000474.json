@@ -35,7 +35,13 @@
       "parsed": [
         "000000474:psychic-overload",
         "000000474:massive-scything-talons"
-      ]
+      ],
+      "byModelType": {
+        "Maleceptor": [
+          "000000474:psychic-overload",
+          "000000474:massive-scything-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -150,7 +156,38 @@
       "factionId": "",
       "description": "While an enemy unit is within 6\" of this model, each time a model in that unit makes an attack, subtract 1 from the Hit roll, and, if that enemy unit is Below Half-strength, subtract 1 from the Wound roll as well.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBelowHalfStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

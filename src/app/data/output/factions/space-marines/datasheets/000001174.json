@@ -23,7 +23,13 @@
       "parsed": [
         "000001174:absolvor-bolt-pistol",
         "000001174:crozius-arcanum"
-      ]
+      ],
+      "byModelType": {
+        "Chaplain": [
+          "000001174:absolvor-bolt-pistol",
+          "000001174:crozius-arcanum"
+        ]
+      }
     },
     "weapons": [
       {
@@ -135,7 +141,30 @@
       "factionId": "",
       "description": "Once per battle, at the start of any phase, you can select one friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit that is Battle-shocked and within 12\" of this model. That unit is no longer Battle-shocked.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "isBattleShocked",
+          "value": false,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -38,7 +38,16 @@
         "000000139:twin-heavy-bolter",
         "000000139:armoured-hull",
         "wargear-ability:thunderhawk-cluster-bombs"
-      ]
+      ],
+      "byModelType": {
+        "Thunderhawk Gunship": [
+          "000000139:lascannon",
+          "000000139:thunderhawk-heavy-cannon",
+          "000000139:twin-heavy-bolter",
+          "000000139:armoured-hull",
+          "wargear-ability:thunderhawk-cluster-bombs"
+        ]
+      }
     },
     "weapons": [
       {
@@ -246,12 +255,33 @@
         "id": "000000139:thunderhawk-cluster-bombs",
         "name": "Thunderhawk Cluster Bombs",
         "description": "Each time the bearer ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 3+, that unit suffers 1 mortal wound.",
-        "mechanics": [],
+        "mechanics": [
+          {
+            "entity": "opposingUnit",
+            "effect": "mortalWounds",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "state": "hasMoved",
+                "operator": "equals",
+                "value": true
+              },
+              {
+                "entity": "thisUnit",
+                "attribute": "m",
+                "operator": "greaterThan",
+                "value": 0
+              }
+            ]
+          }
+        ],
         "eligibility": [
           {
             "type": "any"
           }
-        ]
+        ],
+        "mechanicsSource": "openai"
       }
     ],
     "validLoadouts": [
@@ -319,7 +349,18 @@
       "factionId": "",
       "description": "Each time a unit with the Deep Strike ability disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Deep Strike"
+          ],
+          "value": "eligible to declare a charge"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

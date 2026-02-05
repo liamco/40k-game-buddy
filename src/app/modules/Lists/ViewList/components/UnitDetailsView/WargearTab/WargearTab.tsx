@@ -558,22 +558,18 @@ const WargearTab = ({ unit, list }: Props) => {
         );
     };
 
-    // Check if there are unit-wide items (items that appear in "all" modelType group)
+    // Get unit-wide options from wargear data
+    // These are "all-models add" options where every model can be equipped with the same optional item
+    const unitWideOptionIds = unit.wargear?.unitWideOptions;
+
+    // Check if there are unit-wide items
     const unitWideItems = useMemo((): SelectableItem[] => {
-        if (!validLoadoutGroups) return [];
+        if (!unitWideOptionIds || unitWideOptionIds.length === 0) return [];
 
-        const allGroup = validLoadoutGroups.find((g) => g.modelType === "all");
-        if (!allGroup) return [];
+        const unitWideIdSet = new Set(unitWideOptionIds);
 
-        const allItemIds = new Set<string>();
-        for (const loadout of allGroup.items) {
-            for (const id of loadout) {
-                allItemIds.add(id);
-            }
-        }
-
-        return allSelectableItems.filter((item) => allItemIds.has(getItemId(item)));
-    }, [validLoadoutGroups, allSelectableItems]);
+        return allSelectableItems.filter((item) => unitWideIdSet.has(getItemId(item)));
+    }, [unitWideOptionIds, allSelectableItems]);
 
     // Render unit-wide options section
     const renderUnitWideSection = () => {

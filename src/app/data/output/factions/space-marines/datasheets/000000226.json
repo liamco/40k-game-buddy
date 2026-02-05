@@ -25,7 +25,15 @@
         "000000226:mind-wipe",
         "000000226:traitor-s-bane",
         "wargear-ability:book-of-salvation"
-      ]
+      ],
+      "byModelType": {
+        "Ezekiel - EPIC HERO": [
+          "000000226:the-deliverer",
+          "000000226:mind-wipe",
+          "000000226:traitor-s-bane",
+          "wargear-ability:book-of-salvation"
+        ]
+      }
     },
     "weapons": [
       {
@@ -222,7 +230,27 @@
       "factionId": "",
       "description": "In your Shooting phase, you can select one enemy unit within 18\" of this model. That enemy unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": null,
+              "abilities": null,
+              "state": null,
+              "keywords": null,
+              "operator": "notEquals",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -23,7 +23,13 @@
       "parsed": [
         "000000125:assault-bolters",
         "000000125:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000125:assault-bolters",
+          "000000125:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -169,7 +175,11 @@
         ]
       }
     ],
-    "loadoutsParsed": true
+    "loadoutsParsed": true,
+    "unitWideOptions": [
+      "000000125:assault-bolters",
+      "000000125:plasma-exterminators"
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -194,7 +204,39 @@
       "factionId": "",
       "description": "In your Movement phase, when this unit is set up on the battlefield using the Deep Strike ability, it can perform a meteoric descent. If it does, this unit can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but until the end of the turn, it is not eligible to declare a charge.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEEP STRIKE"
+          ],
+          "value": "meteoric descent"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "more than 6\" horizontally away from all enemy units",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "operator": "notIncludes",
+              "value": "within 6\""
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "not eligible to declare a charge"
+          ],
+          "state": "until the end of the turn"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

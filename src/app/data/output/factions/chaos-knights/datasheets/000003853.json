@@ -23,7 +23,17 @@
       "parsed": [
         "000003853:corrupted-pistol",
         "000003853:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Traitor Sergeant": [
+          "000003853:corrupted-pistol",
+          "000003853:close-combat-weapon"
+        ],
+        "Traitor Guardsman": [
+          "000003853:lasgun",
+          "000003853:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -53,7 +63,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Traitor Sergeant"
+            ]
           }
         ]
       },
@@ -178,7 +191,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Traitor Guardsmen"
+            ]
           }
         ]
       },
@@ -245,7 +261,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Traitor Guardsmen"
+            ]
           }
         ]
       },
@@ -276,7 +295,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Traitor Guardsman"
+            ]
           }
         ]
       },
@@ -309,7 +331,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Traitor Guardsmen"
+            ]
           }
         ]
       },
@@ -356,7 +381,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Traitor Guardsmen"
+            ]
           }
         ]
       },
@@ -406,7 +434,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Traitor Guardsmen"
+            ]
           }
         ]
       }
@@ -436,17 +467,12 @@
     "abilities": [],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Traitor Sergeant",
         "items": [
           [
             "000003853:corrupted-pistol",
             "000003853:close-combat-weapon"
-          ]
-        ]
-      },
-      {
-        "modelType": "Traitor Sergeant",
-        "items": [
+          ],
           [
             "000003853:close-combat-weapon",
             "000003853:boltgun"

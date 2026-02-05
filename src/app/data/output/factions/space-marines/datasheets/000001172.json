@@ -23,7 +23,13 @@
       "parsed": [
         "000001172:master-crafted-heavy-bolt-rifle",
         "000001172:master-crafted-power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Captain in Gravis Armour": [
+          "000001172:master-crafted-heavy-bolt-rifle",
+          "000001172:master-crafted-power-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -309,7 +315,24 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, halve the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "d",
+          "value": "halved",
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

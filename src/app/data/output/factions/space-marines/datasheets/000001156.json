@@ -38,7 +38,16 @@
         "000001156:incendium-cannon",
         "000001156:twin-ironhail-heavy-stubber",
         "000001156:invictor-fist"
-      ]
+      ],
+      "byModelType": {
+        "Invictor Tactical Warsuit": [
+          "000001156:fragstorm-grenade-launcher",
+          "000001156:heavy-bolter",
+          "000001156:incendium-cannon",
+          "000001156:twin-ironhail-heavy-stubber",
+          "000001156:invictor-fist"
+        ]
+      }
     },
     "weapons": [
       {
@@ -291,7 +300,26 @@
       "factionId": "",
       "description": "Once per turn, in your opponent's Shooting phase, when a friendly Adeptus Astartes Phobos Infantry unit within 6\" of this model is selected as the target of an attack, one model from your army with this ability can use it. If it does, after that enemy unit has finished making its attacks, that model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit [and only if it is an eligible target).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SHOOT AFTER BEING ATTACKED"
+          ],
+          "value": "after enemy unit has finished making its attacks"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "CAN SHOOT AS IF IT WERE YOUR SHOOTING PHASE"
+          ],
+          "value": "only targets that enemy unit"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

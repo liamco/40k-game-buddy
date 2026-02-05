@@ -35,7 +35,13 @@
       "parsed": [
         "000004136:bolt-pistol",
         "000004136:master-crafted-power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Crusade Ancient": [
+          "000004136:bolt-pistol",
+          "000004136:master-crafted-power-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -131,7 +137,30 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 4+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER DEATH"
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -140,7 +169,30 @@
       "factionId": "",
       "description": "The first time a model in this model's unit makes a melee attack that destroys one or more enemy units, until the end of the battle, while this model's unit is not Battle-shocked, add 5 to this model's Objective Control characteristic.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 5,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBattleShocked",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "a",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

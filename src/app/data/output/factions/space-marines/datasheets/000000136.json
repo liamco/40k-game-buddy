@@ -37,7 +37,15 @@
         "000000136:twin-heavy-bolter",
         "000000136:brutalis-bolt-rifles",
         "000000136:brutalis-fists"
-      ]
+      ],
+      "byModelType": {
+        "Brutalis Dreadnought": [
+          "000000136:twin-icarus-ironhail-heavy-stubber",
+          "000000136:twin-heavy-bolter",
+          "000000136:brutalis-bolt-rifles",
+          "000000136:brutalis-fists"
+        ]
+      }
     },
     "weapons": [
       {
@@ -320,7 +328,87 @@
       "factionId": "",
       "description": "Each time this model ends a Charge move, select one enemy unit within Engagement Range of it and roll one D6: on a 2-3, that enemy unit suffers D3 mortal wounds; on a 4-5, that enemy unit suffers 3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "chargeMove",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "value": "D6",
+              "operator": "lessThanOrEqualTo"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "chargeMove",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "value": "D6",
+              "operator": "lessThanOrEqualTo"
+            },
+            {
+              "entity": "thisModel",
+              "value": "D6",
+              "operator": "greaterThanOrEqualTo"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3+3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "attribute": "chargeMove",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "value": "D6",
+              "operator": "equals"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

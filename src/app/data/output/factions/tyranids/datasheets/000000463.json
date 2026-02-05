@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> Broodlord claws and talons.",
       "parsed": [
         "000000463:broodlord-claws-and-talons"
-      ]
+      ],
+      "byModelType": {
+        "Broodlord": [
+          "000000463:broodlord-claws-and-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -97,7 +102,25 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [DEVASTATING WOUNDS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATING WOUNDS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

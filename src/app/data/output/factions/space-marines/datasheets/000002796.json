@@ -23,7 +23,13 @@
       "parsed": [
         "000002796:plasma-pistol",
         "000002796:master-crafted-power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Marshal": [
+          "000002796:plasma-pistol",
+          "000002796:master-crafted-power-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -187,7 +193,38 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, an unmodified Hit roll of 5+ scores a Critical Hit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "autoSuccess",
+          "attribute": "h",
+          "value": "Critical Hit",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "h",
+              "operator": "greaterThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -196,7 +233,52 @@
       "factionId": "",
       "description": "Each time this model's unit is selected to fight, until the end of the phase, add 1 to the Attacks characteristic of this model's master-crafted power weapon for each enemy unit within 6\" of this model (to a maximum of +3).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "greaterThan",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfEnemyObjective",
+              "operator": "greaterThan",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

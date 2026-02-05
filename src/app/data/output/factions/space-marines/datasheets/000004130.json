@@ -23,7 +23,13 @@
       "parsed": [
         "000004130:master-crafted-power-weapon",
         "wargear-ability:storm-shield"
-      ]
+      ],
+      "byModelType": {
+        "Wolf Guard Battle Leader": [
+          "000004130:master-crafted-power-weapon",
+          "wargear-ability:storm-shield"
+        ]
+      }
     },
     "weapons": [
       {
@@ -315,7 +321,30 @@
       "factionId": "",
       "description": "If this model is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 2+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER BEING DESTROYED"
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

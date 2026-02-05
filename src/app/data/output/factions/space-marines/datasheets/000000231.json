@@ -22,7 +22,15 @@
       "raw": "<b>The Knight Master is equipped with:</b> great weapon of the Unforgiven.<br><br><b>Every Deathwing Knight is equipped with:</b> mace of absolution.",
       "parsed": [
         "000000231:great-weapon-of-the-unforgiven"
-      ]
+      ],
+      "byModelType": {
+        "Knight Master": [
+          "000000231:great-weapon-of-the-unforgiven"
+        ],
+        "Deathwing Knight": [
+          "000000231:mace-of-absolution"
+        ]
+      }
     },
     "weapons": [
       {
@@ -53,7 +61,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Knight Master"
+            ]
           }
         ]
       },
@@ -85,7 +96,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Deathwing Knight"
+            ]
           }
         ]
       },
@@ -206,7 +220,15 @@
             "000000231:great-weapon-of-the-unforgiven"
           ],
           [
+            "000000231:great-weapon-of-the-unforgiven",
+            "wargear-ability:watcher-in-the-dark"
+          ],
+          [
             "000000231:relic-weapon"
+          ],
+          [
+            "000000231:relic-weapon",
+            "wargear-ability:watcher-in-the-dark"
           ]
         ]
       },
@@ -215,6 +237,10 @@
         "items": [
           [
             "000000231:mace-of-absolution"
+          ],
+          [
+            "000000231:mace-of-absolution",
+            "wargear-ability:watcher-in-the-dark"
           ]
         ]
       }
@@ -253,7 +279,23 @@
       "factionId": "",
       "description": "Each time an attack is allocated to a model in this unit, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetModel",
+          "effect": "rollPenalty",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "operator": "equals",
+              "value": "thisModel"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

@@ -36,7 +36,14 @@
         "000002787:lancer-laser-destroyer",
         "000002787:storm-bolter",
         "000002787:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Gladiator Lancer": [
+          "000002787:lancer-laser-destroyer",
+          "000002787:storm-bolter",
+          "000002787:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -289,8 +296,72 @@
           ],
           [
             "000002787:lancer-laser-destroyer",
+            "000002787:storm-bolter",
+            "000002787:armoured-hull",
+            "000002787:icarus-rocket-pod"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:storm-bolter",
+            "000002787:armoured-hull",
+            "000002787:ironhail-heavy-stubber"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:storm-bolter",
+            "000002787:armoured-hull",
+            "000002787:ironhail-heavy-stubber",
+            "000002787:icarus-rocket-pod"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:storm-bolter",
+            "000002787:armoured-hull",
+            "000002787:multi-melta"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:storm-bolter",
+            "000002787:armoured-hull",
+            "000002787:multi-melta",
+            "000002787:icarus-rocket-pod"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
             "000002787:armoured-hull",
             "000002787:fragstorm-grenade-launcher"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:armoured-hull",
+            "000002787:fragstorm-grenade-launcher",
+            "000002787:icarus-rocket-pod"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:armoured-hull",
+            "000002787:fragstorm-grenade-launcher",
+            "000002787:ironhail-heavy-stubber"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:armoured-hull",
+            "000002787:fragstorm-grenade-launcher",
+            "000002787:ironhail-heavy-stubber",
+            "000002787:icarus-rocket-pod"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:armoured-hull",
+            "000002787:fragstorm-grenade-launcher",
+            "000002787:multi-melta"
+          ],
+          [
+            "000002787:lancer-laser-destroyer",
+            "000002787:armoured-hull",
+            "000002787:fragstorm-grenade-launcher",
+            "000002787:multi-melta",
+            "000002787:icarus-rocket-pod"
           ]
         ]
       }
@@ -321,7 +392,28 @@
       "factionId": "",
       "description": "Each time this model is selected to shoot, you can re-roll one Hit roll, you can re-roll one Wound roll and you can re-roll one Damage roll when resolving its attacks.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "ones"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones"
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "ones"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

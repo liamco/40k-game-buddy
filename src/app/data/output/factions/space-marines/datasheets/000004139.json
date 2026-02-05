@@ -36,7 +36,14 @@
         "000004139:hurricane-bolter",
         "000004139:twin-assault-cannon",
         "000004139:armoured-tracks"
-      ]
+      ],
+      "byModelType": {
+        "Land Raider Crusader": [
+          "000004139:hurricane-bolter",
+          "000004139:twin-assault-cannon",
+          "000004139:armoured-tracks"
+        ]
+      }
     },
     "weapons": [
       {
@@ -257,6 +264,53 @@
             "000004139:hurricane-bolter",
             "000004139:twin-assault-cannon",
             "000004139:armoured-tracks"
+          ],
+          [
+            "000004139:hurricane-bolter",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks",
+            "000004139:storm-bolter"
+          ],
+          [
+            "000004139:hurricane-bolter",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks",
+            "000004139:multi-melta"
+          ],
+          [
+            "000004139:hurricane-bolter",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks",
+            "000004139:multi-melta",
+            "000004139:storm-bolter"
+          ],
+          [
+            "000004139:hurricane-bolter",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks",
+            "000004139:hunter-killer-missile"
+          ],
+          [
+            "000004139:hurricane-bolter",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks",
+            "000004139:hunter-killer-missile",
+            "000004139:storm-bolter"
+          ],
+          [
+            "000004139:hurricane-bolter",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks",
+            "000004139:hunter-killer-missile",
+            "000004139:multi-melta"
+          ],
+          [
+            "000004139:hurricane-bolter",
+            "000004139:twin-assault-cannon",
+            "000004139:armoured-tracks",
+            "000004139:hunter-killer-missile",
+            "000004139:multi-melta",
+            "000004139:storm-bolter"
           ]
         ]
       }
@@ -287,7 +341,25 @@
       "factionId": "",
       "description": "Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "declare a charge"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasFiredThisPhase",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

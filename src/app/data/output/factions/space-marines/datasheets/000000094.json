@@ -24,7 +24,14 @@
         "000000094:absolvor-bolt-pistol",
         "000000094:twin-bolt-rifle",
         "000000094:crozius-arcanum"
-      ]
+      ],
+      "byModelType": {
+        "Chaplain on Bike": [
+          "000000094:absolvor-bolt-pistol",
+          "000000094:twin-bolt-rifle",
+          "000000094:crozius-arcanum"
+        ]
+      }
     },
     "weapons": [
       {
@@ -167,7 +174,31 @@
       "factionId": "",
       "description": "Each time this model's unit is selected to shoot, you can select one enemy unit within 12\" of and visible to this model. Until the end of the phase, ranged weapons equipped by models in this model's unit have the [DEVASTATING WOUNDS] ability when targeting that enemy unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATING WOUNDS"
+          ],
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isVisible",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "targetUnit",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

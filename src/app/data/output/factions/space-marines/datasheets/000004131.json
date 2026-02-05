@@ -24,7 +24,17 @@
         "000004131:heavy-bolt-pistol",
         "000004131:master-crafted-power-weapon",
         "wargear-ability:storm-shield"
-      ]
+      ],
+      "byModelType": {
+        "Wolf Guard Headtaker": [
+          "000004131:heavy-bolt-pistol",
+          "000004131:master-crafted-power-weapon",
+          "wargear-ability:storm-shield"
+        ],
+        "Hunting Wolf": [
+          "000004131:teeth-and-claws"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +64,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Wolf Guard Headtaker"
+            ]
           }
         ]
       },
@@ -83,7 +96,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Wolf Guard Headtaker"
+            ]
           }
         ]
       },
@@ -141,7 +157,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Hunting Wolf"
+            ]
           }
         ]
       }
@@ -179,7 +198,7 @@
     ],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Wolf Guard Headtaker",
         "items": [
           [
             "000004131:heavy-bolt-pistol",
@@ -193,7 +212,12 @@
         ]
       }
     ],
-    "loadoutsParsed": true
+    "loadoutsParsed": true,
+    "unitWideOptions": [
+      "000004131:master-crafted-power-weapon",
+      "wargear-ability:storm-shield",
+      "000004131:paired-master-crafted-power-weapons"
+    ]
   },
   "supplement": {
     "key": "space-wolves",
@@ -223,7 +247,54 @@
       "factionId": "",
       "description": "At the start of the battle, select one unit from your opponent's army to be this unit's quarry. Weapons equipped by <span class=\"kwb\">HEADTAKERS</span> models in this unit have the [DEVASTATING WOUNDS] and [PRECISION] abilities while targeting its quarry. Each time this unit's quarry is destroyed, select one new enemy unit to be this unit's quarry. This ability can be used even if this unit is embarked within a Transport.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DEVASTATING WOUNDS"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "operator": "equals",
+              "value": "thisUnit's quarry"
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "PRECISION"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "operator": "equals",
+              "value": "thisUnit's quarry"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": "new enemy unit",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

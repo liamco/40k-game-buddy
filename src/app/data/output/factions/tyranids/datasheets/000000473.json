@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> Lictor claws and talons.",
       "parsed": [
         "000000473:lictor-claws-and-talons"
-      ]
+      ],
+      "byModelType": {
+        "Lictor": [
+          "000000473:lictor-claws-and-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -99,7 +104,26 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "CP",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "keywords": [
+                "CHARACTER"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

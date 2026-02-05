@@ -23,7 +23,13 @@
       "parsed": [
         "000000129:twin-heavy-bolter",
         "000000129:armoured-tracks"
-      ]
+      ],
+      "byModelType": {
+        "Razorback": [
+          "000000129:twin-heavy-bolter",
+          "000000129:armoured-tracks"
+        ]
+      }
     },
     "weapons": [
       {
@@ -213,8 +219,40 @@
             "000000129:armoured-tracks"
           ],
           [
+            "000000129:twin-heavy-bolter",
+            "000000129:armoured-tracks",
+            "000000129:storm-bolter"
+          ],
+          [
+            "000000129:twin-heavy-bolter",
+            "000000129:armoured-tracks",
+            "000000129:hunter-killer-missile"
+          ],
+          [
+            "000000129:twin-heavy-bolter",
+            "000000129:armoured-tracks",
+            "000000129:hunter-killer-missile",
+            "000000129:storm-bolter"
+          ],
+          [
             "000000129:armoured-tracks",
             "000000129:twin-lascannon"
+          ],
+          [
+            "000000129:armoured-tracks",
+            "000000129:twin-lascannon",
+            "000000129:storm-bolter"
+          ],
+          [
+            "000000129:armoured-tracks",
+            "000000129:twin-lascannon",
+            "000000129:hunter-killer-missile"
+          ],
+          [
+            "000000129:armoured-tracks",
+            "000000129:twin-lascannon",
+            "000000129:hunter-killer-missile",
+            "000000129:storm-bolter"
           ]
         ]
       }
@@ -245,7 +283,30 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks, Until the end of the phase, each time a friendly model that disembarked from this Transport this turn makes an attack that targets that enemy unit, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isHit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

@@ -36,7 +36,14 @@
         "000000358:blackstar-rocket-launcher",
         "000000358:twin-assault-cannon",
         "000000358:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Corvus Blackstar": [
+          "000000358:blackstar-rocket-launcher",
+          "000000358:twin-assault-cannon",
+          "000000358:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -303,9 +310,73 @@
             "000000358:armoured-hull"
           ],
           [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "wargear-ability:infernum-halo-launcher"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:hurricane-bolter"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:hurricane-bolter",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:hurricane-bolter",
+            "wargear-ability:infernum-halo-launcher"
+          ],
+          [
             "000000358:twin-assault-cannon",
             "000000358:armoured-hull",
             "000000358:stormstrike-missile-launcher"
+          ],
+          [
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:stormstrike-missile-launcher",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:stormstrike-missile-launcher",
+            "wargear-ability:infernum-halo-launcher"
+          ],
+          [
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:stormstrike-missile-launcher",
+            "000000358:hurricane-bolter"
+          ],
+          [
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:stormstrike-missile-launcher",
+            "000000358:hurricane-bolter",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:twin-assault-cannon",
+            "000000358:armoured-hull",
+            "000000358:stormstrike-missile-launcher",
+            "000000358:hurricane-bolter",
+            "wargear-ability:infernum-halo-launcher"
           ],
           [
             "000000358:blackstar-rocket-launcher",
@@ -313,9 +384,73 @@
             "000000358:twin-lascannon"
           ],
           [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "wargear-ability:infernum-halo-launcher"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:hurricane-bolter"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:hurricane-bolter",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:blackstar-rocket-launcher",
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:hurricane-bolter",
+            "wargear-ability:infernum-halo-launcher"
+          ],
+          [
             "000000358:armoured-hull",
             "000000358:twin-lascannon",
             "000000358:stormstrike-missile-launcher"
+          ],
+          [
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:stormstrike-missile-launcher",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:stormstrike-missile-launcher",
+            "wargear-ability:infernum-halo-launcher"
+          ],
+          [
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:stormstrike-missile-launcher",
+            "000000358:hurricane-bolter"
+          ],
+          [
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:stormstrike-missile-launcher",
+            "000000358:hurricane-bolter",
+            "wargear-ability:auspex-array"
+          ],
+          [
+            "000000358:armoured-hull",
+            "000000358:twin-lascannon",
+            "000000358:stormstrike-missile-launcher",
+            "000000358:hurricane-bolter",
+            "wargear-ability:infernum-halo-launcher"
           ]
         ]
       }
@@ -358,7 +493,29 @@
       "factionId": "",
       "description": "Each time this model ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 5+, that unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "m",
+              "operator": "greaterThan",
+              "value": 0
+            },
+            {
+              "entity": "thisModel",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

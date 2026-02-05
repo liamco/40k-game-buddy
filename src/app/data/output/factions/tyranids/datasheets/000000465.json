@@ -35,7 +35,13 @@
       "parsed": [
         "000000465:stinger-salvoes",
         "000000465:massive-scything-talons"
-      ]
+      ],
+      "byModelType": {
+        "Tervigon": [
+          "000000465:stinger-salvoes",
+          "000000465:massive-scything-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -197,7 +203,40 @@
       "factionId": "",
       "description": "In your Command phase, you can select one friendly Termagants unit within 6\" of this model and return up to D3+3 destroyed models to that unit. A <span class=\"kwb\">TERMAGANTS</span> unit cannot be selected for this ability more than once per phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": "D3+3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RETURN MODELS"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -206,7 +245,25 @@
       "factionId": "",
       "description": "While a friendly Termagants unit is within 6\" of this model, ranged weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

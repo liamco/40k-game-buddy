@@ -23,7 +23,13 @@
       "parsed": [
         "000000311:wulfen-weapons",
         "wargear-ability:death-totem"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000311:wulfen-weapons",
+          "wargear-ability:death-totem"
+        ]
+      }
     },
     "weapons": [
       {
@@ -161,7 +167,24 @@
       "factionId": "",
       "description": "Each time an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) within Engagement Range of this unit Falls Back, all models in that enemy unit must take a Desperate Escape test. When doing so, if that enemy unit is Battle-shocked, subtract 1 from each of those tests.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

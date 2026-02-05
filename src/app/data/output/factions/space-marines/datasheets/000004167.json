@@ -25,7 +25,15 @@
         "000004167:onslaught-gatling-cannon",
         "000004167:stormtooth",
         "000004167:power-sword"
-      ]
+      ],
+      "byModelType": {
+        "Suboden Khan - EPIC HERO": [
+          "000004167:heavy-bolt-pistol",
+          "000004167:onslaught-gatling-cannon",
+          "000004167:stormtooth",
+          "000004167:power-sword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -183,7 +191,54 @@
       "factionId": "",
       "description": "This model's unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back. If that unit is already eligible to shoot and declare a charge in a turn in which it Advanced, add 1 to Advance and Charge rolls made for that unit instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "value": ""
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE"
+          ],
+          "value": ""
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

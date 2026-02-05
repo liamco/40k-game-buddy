@@ -35,7 +35,13 @@
       "parsed": [
         "000002715:predator-autocannon",
         "000002715:armoured-tracks"
-      ]
+      ],
+      "byModelType": {
+        "Predator Destructor": [
+          "000002715:predator-autocannon",
+          "000002715:armoured-tracks"
+        ]
+      }
     },
     "weapons": [
       {
@@ -251,6 +257,70 @@
           [
             "000002715:predator-autocannon",
             "000002715:armoured-tracks"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:storm-bolter"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:hunter-killer-missile"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:hunter-killer-missile",
+            "000002715:storm-bolter"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:heavy-bolter"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:heavy-bolter",
+            "000002715:storm-bolter"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:heavy-bolter",
+            "000002715:hunter-killer-missile"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:heavy-bolter",
+            "000002715:hunter-killer-missile",
+            "000002715:storm-bolter"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:lascannon"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:lascannon",
+            "000002715:storm-bolter"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:lascannon",
+            "000002715:hunter-killer-missile"
+          ],
+          [
+            "000002715:predator-autocannon",
+            "000002715:armoured-tracks",
+            "000002715:lascannon",
+            "000002715:hunter-killer-missile",
+            "000002715:storm-bolter"
           ]
         ]
       }
@@ -281,7 +351,26 @@
       "factionId": "",
       "description": "Each time this model makes a ranged attack that targets an <span class=\"kwb\">INFANTRY</span> unit, improve the Armour Penetration characteristic of that attack by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "INFANTRY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

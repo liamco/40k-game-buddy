@@ -24,7 +24,14 @@
         "000000121:bolt-pistol",
         "000000121:invictus",
         "000000121:sword-of-idaeus"
-      ]
+      ],
+      "byModelType": {
+        "Uriel Ventris - EPIC HERO": [
+          "000000121:bolt-pistol",
+          "000000121:invictus",
+          "000000121:sword-of-idaeus"
+        ]
+      }
     },
     "weapons": [
       {
@@ -149,7 +156,24 @@
       "factionId": "",
       "description": "Each time your opponent targets a unit from their army with a Stratagem, if that unit is within 12\" of this model, increase the cost of that use of that Stratagem by 1CP (this is not cumulative with any other rules that would increase the CP cost of that Stratagem).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "CP",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "within 12\" of thisModel",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

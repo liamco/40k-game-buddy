@@ -24,7 +24,14 @@
         "000000322:bolt-pistol",
         "000000322:teeth-and-claws",
         "000000322:wolf-guard-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000322:bolt-pistol",
+          "000000322:teeth-and-claws",
+          "000000322:wolf-guard-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -279,7 +286,24 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a melee attack with its Wolf Guard weapon, if it made a Charge move this turn, add 1 to the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -35,7 +35,13 @@
       "parsed": [
         "000002714:predator-twin-lascannon",
         "000002714:armoured-tracks"
-      ]
+      ],
+      "byModelType": {
+        "Predator Annihilator": [
+          "000002714:predator-twin-lascannon",
+          "000002714:armoured-tracks"
+        ]
+      }
     },
     "weapons": [
       {
@@ -251,6 +257,70 @@
           [
             "000002714:predator-twin-lascannon",
             "000002714:armoured-tracks"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:storm-bolter"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:hunter-killer-missile"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:hunter-killer-missile",
+            "000002714:storm-bolter"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:heavy-bolter"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:heavy-bolter",
+            "000002714:storm-bolter"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:heavy-bolter",
+            "000002714:hunter-killer-missile"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:heavy-bolter",
+            "000002714:hunter-killer-missile",
+            "000002714:storm-bolter"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:lascannon"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:lascannon",
+            "000002714:storm-bolter"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:lascannon",
+            "000002714:hunter-killer-missile"
+          ],
+          [
+            "000002714:predator-twin-lascannon",
+            "000002714:armoured-tracks",
+            "000002714:lascannon",
+            "000002714:hunter-killer-missile",
+            "000002714:storm-bolter"
           ]
         ]
       }
@@ -281,7 +351,27 @@
       "factionId": "",
       "description": "Each time a ranged attack made by this model is allocated to a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> model, you can re-roll the Damage roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

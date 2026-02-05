@@ -23,7 +23,17 @@
       "parsed": [
         "000000596:exarch-s-dragon-fusion-gun",
         "000000596:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Fire Dragon Exarch": [
+          "000000596:exarch-s-dragon-fusion-gun",
+          "000000596:close-combat-weapon"
+        ],
+        "Fire Dragon": [
+          "000000596:dragon-fusion-gun",
+          "000000596:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +64,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Fire Dragon"
+            ]
           }
         ]
       },
@@ -152,7 +165,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Fire Dragon Exarch"
+            ]
           }
         ]
       },
@@ -278,11 +294,30 @@
     ],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Fire Dragon Exarch",
         "items": [
           [
             "000000596:exarch-s-dragon-fusion-gun",
             "000000596:close-combat-weapon"
+          ],
+          [
+            "000000596:exarch-s-dragon-fusion-gun",
+            "000000596:close-combat-weapon",
+            "wargear-ability:aspect-shrine-token"
+          ]
+        ]
+      },
+      {
+        "modelType": "Fire Dragon",
+        "items": [
+          [
+            "000000596:dragon-fusion-gun",
+            "000000596:close-combat-weapon"
+          ],
+          [
+            "000000596:dragon-fusion-gun",
+            "000000596:close-combat-weapon",
+            "wargear-ability:aspect-shrine-token"
           ]
         ]
       }

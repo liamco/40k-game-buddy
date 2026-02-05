@@ -23,7 +23,17 @@
       "parsed": [
         "000004080:bolt-pistol",
         "000004080:power-sword"
-      ]
+      ],
+      "byModelType": {
+        "Obsessionist": [
+          "000004080:bolt-pistol",
+          "000004080:power-sword"
+        ],
+        "Infractor": [
+          "000004080:bolt-pistol",
+          "000004080:duelling-sabre"
+        ]
+      }
     },
     "weapons": [
       {
@@ -138,7 +148,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Infractor"
+            ]
           }
         ]
       },
@@ -169,7 +182,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Obsessionist"
+            ]
           }
         ]
       },
@@ -275,6 +291,11 @@
           [
             "000004080:bolt-pistol",
             "000004080:duelling-sabre"
+          ],
+          [
+            "000004080:bolt-pistol",
+            "000004080:duelling-sabre",
+            "wargear-ability:icon-of-excess"
           ]
         ]
       }

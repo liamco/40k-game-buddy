@@ -329,6 +329,17 @@ const TARGETING_PATTERNS = [
     { name: "this-unit", pattern: /^this unit can be equipped/i, extract: () => ({ type: "this-unit" }) },
     { name: "all-models", pattern: /^all (?:of the )?models in this unit/i, extract: () => ({ type: "all-models" }) },
     {
+        // "For every 5 models in the unit, up to 2 Seraphim can each have..."
+        name: "ratio-capped-with-model-type",
+        pattern: /^for every (\d+) models in (?:this|the) unit,?\s*(?:.*?)up to (\d+)\s+([\w\s-]+?)\s+can/i,
+        extract: (match) => ({
+            type: "ratio",
+            ratio: parseInt(match[1], 10),
+            count: parseInt(match[2], 10),
+            modelType: cleanModelType(match[3].trim()),
+        }),
+    },
+    {
         name: "ratio-capped",
         pattern: /^for every (\d+) models in (?:this|the) unit,? (?:.*?)up to (\d+)/i,
         extract: (match) => ({ type: "ratio-capped", ratio: parseInt(match[1], 10), maxPerRatio: parseInt(match[2], 10) }),
@@ -336,7 +347,17 @@ const TARGETING_PATTERNS = [
     {
         name: "ratio-with-model-type",
         pattern: /^for every (\d+) models in (?:this|the) unit,?\s+(\d+)\s+([\w\s]+?)'s/i,
-        extract: (match) => ({ type: "ratio", ratio: parseInt(match[1], 10), count: parseInt(match[2], 10), modelType: match[3].trim() }),
+        extract: (match) => {
+            const extractedModelType = match[3].trim().toLowerCase();
+            // "model" or "models" is generic, not a specific model type restriction
+            const isGenericModel = extractedModelType === "model" || extractedModelType === "models";
+            return {
+                type: "ratio",
+                ratio: parseInt(match[1], 10),
+                count: parseInt(match[2], 10),
+                ...(isGenericModel ? {} : { modelType: match[3].trim() }),
+            };
+        },
     },
     {
         name: "ratio",
@@ -344,6 +365,16 @@ const TARGETING_PATTERNS = [
         extract: (match) => ({ type: "ratio", ratio: parseInt(match[1], 10) }),
     },
     { name: "any-number", pattern: /^any number of (?:models|[\w\s]+)/i, extract: () => ({ type: "any-number" }) },
+    {
+        // "Up to 2 Celestian Insidiants can each have..." or "Up to 4 Dominions can each have..."
+        name: "up-to-n-model-type",
+        pattern: /^up to (\d+|one|two|three|four|five|six|seven|eight|nine|ten)\s+([\w\s-]+?)\s+can/i,
+        extract: (match) => ({
+            type: "count",
+            count: parseNumber(match[1]),
+            modelType: cleanModelType(match[2].trim()),
+        }),
+    },
     {
         name: "up-to-n",
         pattern: /^up to (\d+|one|two|three|four|five|six|seven|eight|nine|ten)/i,
@@ -700,12 +731,20 @@ function parseDefaultLoadout(defaultLoadoutText, unitComposition) {
     const text = stripHtml(defaultLoadoutText);
     const loadouts = [];
 
-    const modelPatterns = [/(?:The\s+)?(\w[\w\s]+?)\s+(?:model\s+)?is equipped with:\s*([^.]+)/gi, /Every\s+(\w[\w\s]+?)\s+(?:model\s+)?is equipped with:\s*([^.]+)/gi];
+    // Patterns for model-specific loadouts (order matters - more specific first)
+    const modelPatterns = [
+        // "The X is equipped with:" - specific model type
+        /(?:The\s+)([\w\s-]+?)\s+is equipped with:\s*([^.]+)/gi,
+        // "Each X is equipped with:" - specific model type (plural usually)
+        /(?:Each\s+)([\w\s-]+?)\s+is equipped with:\s*([^.]+)/gi,
+        // "Every X is equipped with:" - specific model type
+        /(?:Every\s+)([\w\s-]+?)\s+(?:model\s+)?is equipped with:\s*([^.]+)/gi,
+    ];
 
     for (const pattern of modelPatterns) {
         let match;
         while ((match = pattern.exec(text)) !== null) {
-            const modelType = match[1].trim();
+            let modelType = match[1].trim();
             const itemsText = match[2].trim();
             const items = itemsText
                 .split(/[;,]/)
@@ -713,12 +752,37 @@ function parseDefaultLoadout(defaultLoadoutText, unitComposition) {
                 .filter((s) => s && s.length > 0)
                 .map((s) => s.replace(/^\d+\s+/, ""));
 
+            // If model type is just "model" or "models", it means all models share this loadout
+            if (modelType.toLowerCase() === "model" || modelType.toLowerCase() === "models") {
+                modelType = "*all*";
+            }
+
             if (items.length > 0) {
-                loadouts.push({ modelType, items });
+                // Check if we already have this model type (avoid duplicates from overlapping patterns)
+                const existingIdx = loadouts.findIndex((l) => l.modelType.toLowerCase() === modelType.toLowerCase());
+                if (existingIdx === -1) {
+                    loadouts.push({ modelType, items });
+                }
             }
         }
     }
 
+    // Check for "Every model is equipped with:" pattern (no model type specified = applies to all)
+    const everyModelMatch = text.match(/Every model is equipped with:\s*([^.]+)/i);
+    if (everyModelMatch) {
+        const itemsText = everyModelMatch[1].trim();
+        const items = itemsText
+            .split(/[;,]/)
+            .map((s) => s.trim())
+            .filter((s) => s && s.length > 0)
+            .map((s) => s.replace(/^\d+\s+/, ""));
+
+        if (items.length > 0) {
+            loadouts.push({ modelType: "*all*", items });
+        }
+    }
+
+    // Fallback: generic "equipped with:" if no specific patterns matched
     if (loadouts.length === 0) {
         const genericMatch = text.match(/equipped with:\s*([^.]+)/i);
         if (genericMatch) {
@@ -753,17 +817,43 @@ function getModelTypes(unitComposition) {
 
 function parseDefaultLoadoutStructured(defaultLoadoutText, weapons, abilities, datasheetId, unitComposition) {
     if (!defaultLoadoutText) {
-        return { raw: "", parsed: [] };
+        return { raw: "", parsed: [], byModelType: {} };
     }
 
-    const parsed = parseDefaultLoadout(defaultLoadoutText, unitComposition);
+    const parsedLoadouts = parseDefaultLoadout(defaultLoadoutText, unitComposition);
 
-    if (parsed.length > 0) {
-        const ids = parsed[0].items.map((name) => resolveNameToId(name, weapons, abilities, datasheetId));
-        return { raw: defaultLoadoutText, parsed: ids };
+    if (parsedLoadouts.length === 0) {
+        return { raw: defaultLoadoutText, parsed: [], byModelType: {} };
     }
 
-    return { raw: defaultLoadoutText, parsed: [] };
+    // Build byModelType map: modelType -> array of weapon IDs
+    const byModelType = {};
+    const allIds = new Set();
+
+    for (const loadout of parsedLoadouts) {
+        const ids = loadout.items.map((name) => resolveNameToId(name, weapons, abilities, datasheetId));
+
+        // Store in byModelType map
+        byModelType[loadout.modelType] = ids;
+
+        // Also collect all IDs for the flat "parsed" array
+        for (const id of ids) {
+            allIds.add(id);
+        }
+    }
+
+    // For backwards compatibility, "parsed" contains:
+    // - If there's a "*all*" entry (Every model), use that
+    // - Otherwise, use all unique weapon IDs from all model types
+    let parsed;
+    if (byModelType["*all*"]) {
+        parsed = byModelType["*all*"];
+    } else {
+        // Use first model type's loadout for backwards compatibility
+        parsed = parsedLoadouts[0].items.map((name) => resolveNameToId(name, weapons, abilities, datasheetId));
+    }
+
+    return { raw: defaultLoadoutText, parsed, byModelType };
 }
 
 // ============================================================================
@@ -771,22 +861,62 @@ function parseDefaultLoadoutStructured(defaultLoadoutText, weapons, abilities, d
 // ============================================================================
 
 function loadoutContainsAll(loadout, itemNames, weapons, abilities, datasheetId) {
+    // First, try to match each item individually
+    let allFound = true;
     for (const name of itemNames) {
         const id = resolveNameToId(name, weapons, abilities, datasheetId);
         if (!loadout.includes(id)) {
-            return false;
+            allFound = false;
+            break;
         }
     }
-    return true;
+    if (allFound) return true;
+
+    // If individual matching failed and we have multiple items,
+    // try combining them with "and" to match a compound weapon name
+    // e.g., ["scything talons", "rending claws"] -> "scything talons and rending claws"
+    if (itemNames.length > 1) {
+        const combinedName = itemNames.join(" and ");
+        const combinedId = resolveNameToId(combinedName, weapons, abilities, datasheetId);
+        if (loadout.includes(combinedId)) {
+            return true;
+        }
+
+        // Also try with ", " as separator for compound names like "bone cleaver, lash whip and rending claws"
+        // This handles cases where the last two are joined with "and" but earlier ones with ","
+        if (itemNames.length > 2) {
+            const commaAndName = itemNames.slice(0, -1).join(", ") + " and " + itemNames[itemNames.length - 1];
+            const commaAndId = resolveNameToId(commaAndName, weapons, abilities, datasheetId);
+            if (loadout.includes(commaAndId)) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 function applyReplacement(loadout, removes, adds, weapons, abilities, datasheetId) {
     let newLoadout = [...loadout];
 
+    // First, try to remove items individually
+    let itemsRemoved = 0;
     for (const ref of removes) {
         const name = typeof ref === "string" ? ref : ref.name;
         const id = resolveNameToId(name, weapons, abilities, datasheetId);
+        const beforeLength = newLoadout.length;
         newLoadout = newLoadout.filter((item) => item !== id);
+        if (newLoadout.length < beforeLength) {
+            itemsRemoved++;
+        }
+    }
+
+    // If we couldn't remove all individual items, try removing as a compound weapon
+    if (itemsRemoved < removes.length && removes.length > 1) {
+        const removeNames = removes.map((ref) => (typeof ref === "string" ? ref : ref.name));
+        const combinedName = removeNames.join(" and ");
+        const combinedId = resolveNameToId(combinedName, weapons, abilities, datasheetId);
+        newLoadout = newLoadout.filter((item) => item !== combinedId);
     }
 
     for (const ref of adds) {
@@ -812,6 +942,33 @@ function deduplicateLoadouts(loadouts) {
 }
 
 /**
+ * Normalize a model type name for comparison.
+ * Handles pluralization and common variations.
+ */
+function normalizeModelTypeName(name) {
+    let normalized = name.toLowerCase().trim();
+
+    // Handle words ending in 's' (but not 'ss' like "Assassin")
+    // Process each word to normalize plurals
+    normalized = normalized
+        .split(/\s+/)
+        .map((word) => {
+            // Handle 'ies' -> 'y' (e.g., "missionaries" -> "missionary")
+            if (word.endsWith("ies")) {
+                return word.slice(0, -3) + "y";
+            }
+            // Remove trailing 's' for plurals (but not 'ss' like "assassin")
+            if (word.endsWith("s") && !word.endsWith("ss") && word.length > 2) {
+                return word.slice(0, -1);
+            }
+            return word;
+        })
+        .join(" ");
+
+    return normalized;
+}
+
+/**
  * Check if two model type names match.
  * Handles pluralization (e.g., "Terminator" matches "Terminators")
  * but does NOT do substring matching (e.g., "Terminator" should NOT match "Terminator Sergeant")
@@ -825,6 +982,11 @@ function modelTypesMatch(typeA, typeB) {
 
     // Plural handling: "terminator" matches "terminators"
     if (a === b + "s" || a + "s" === b) return true;
+
+    // Normalized comparison (handles "ies" -> "y", etc.)
+    const normA = normalizeModelTypeName(a);
+    const normB = normalizeModelTypeName(b);
+    if (normA === normB) return true;
 
     return false;
 }
@@ -950,22 +1112,21 @@ function generateLoadoutsForModelType(modelType, baseLoadout, options, weapons, 
                     newLoadouts.push(loadout);
                 }
             } else if (option.action.type === "add") {
-                const isUnconditionalAdd = option.targeting.type !== "conditional";
+                // Always push the existing loadout (without the added item)
+                newLoadouts.push(loadout);
 
-                if (isUnconditionalAdd) {
-                    newLoadouts.push(loadout);
-                } else {
-                    newLoadouts.push(loadout);
+                // For "add" actions, generate a variant WITH the added item
+                // This applies to both conditional and unconditional adds
+                // (e.g., "All models can be equipped with spinemaws" should generate
+                // both the default loadout and the loadout with spinemaws)
+                for (const choice of option.action.adds) {
+                    const addItems = choice.weapons.map((ref) => {
+                        const isAbility = ref.isAbility;
+                        return isAbility ? `wargear-ability:${ref.name.toLowerCase().trim().replace(/\s+/g, "-")}` : resolveNameToId(ref.name, weapons, abilities, datasheetId);
+                    });
 
-                    for (const choice of option.action.adds) {
-                        const addItems = choice.weapons.map((ref) => {
-                            const isAbility = ref.isAbility;
-                            return isAbility ? `wargear-ability:${ref.name.toLowerCase().trim().replace(/\s+/g, "-")}` : resolveNameToId(ref.name, weapons, abilities, datasheetId);
-                        });
-
-                        const newLoadout = [...loadout, ...addItems.filter((id) => !loadout.includes(id))];
-                        newLoadouts.push(newLoadout);
-                    }
+                    const newLoadout = [...loadout, ...addItems.filter((id) => !loadout.includes(id))];
+                    newLoadouts.push(newLoadout);
                 }
             }
         }
@@ -974,6 +1135,68 @@ function generateLoadoutsForModelType(modelType, baseLoadout, options, weapons, 
     }
 
     return loadouts;
+}
+
+// ============================================================================
+// UNIT-WIDE OPTIONS EXTRACTION
+// ============================================================================
+
+/**
+ * Extract unit-wide toggle options from parsed options.
+ *
+ * These are options where targeting.type is "all-models" - either:
+ * - "add" actions (all models can be equipped with X)
+ * - "replace" actions (all models can have X replaced with Y)
+ *
+ * For these options, the UI should show a unit-wide toggle rather than per-model selection.
+ * Returns an array of weapon/ability IDs that are unit-wide toggles.
+ */
+function extractUnitWideOptions(parsedOptions, weapons, abilities, datasheetId) {
+    const unitWideItems = [];
+
+    for (const option of parsedOptions) {
+        // Only process successfully parsed options
+        if (!option.wargearParsed) continue;
+
+        // Check for all-models targeting
+        if (option.targeting?.type === "all-models") {
+            if (option.action?.type === "add") {
+                // Extract the added items
+                const adds = option.action.adds || [];
+                for (const choice of adds) {
+                    for (const ref of choice.weapons || []) {
+                        const id = resolveNameToId(ref.name, weapons, abilities, datasheetId);
+                        if (id && !unitWideItems.includes(id)) {
+                            unitWideItems.push(id);
+                        }
+                    }
+                }
+            } else if (option.action?.type === "replace") {
+                // Extract the original weapon(s) being replaced (so user can deselect)
+                const removes = option.action.removes || [];
+                for (const ref of removes) {
+                    const id = resolveNameToId(ref.name, weapons, abilities, datasheetId);
+                    if (id && !unitWideItems.includes(id)) {
+                        unitWideItems.push(id);
+                    }
+                }
+
+                // Extract the replacement items (what you can replace WITH)
+                // Note: replace actions use "adds" property for the replacement weapons
+                const replacements = option.action.adds || [];
+                for (const choice of replacements) {
+                    for (const ref of choice.weapons || []) {
+                        const id = resolveNameToId(ref.name, weapons, abilities, datasheetId);
+                        if (id && !unitWideItems.includes(id)) {
+                            unitWideItems.push(id);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return unitWideItems;
 }
 
 // ============================================================================
@@ -990,20 +1213,37 @@ function generateLoadoutsForModelType(modelType, baseLoadout, options, weapons, 
  */
 function computeWeaponEligibility(datasheet, parsedOptions) {
     const weapons = datasheet.wargear?.weapons || [];
-    const defaultLoadout = datasheet.wargear?.defaultLoadout?.parsed || [];
+    const defaultLoadoutByModelType = datasheet.wargear?.defaultLoadout?.byModelType || {};
     const datasheetId = datasheet.id;
 
+    // Build a map of weapon ID -> set of model types that have it as default
+    const defaultWeaponModelTypes = new Map();
+    for (const [modelType, weaponIds] of Object.entries(defaultLoadoutByModelType)) {
+        for (const weaponId of weaponIds) {
+            if (!defaultWeaponModelTypes.has(weaponId)) {
+                defaultWeaponModelTypes.set(weaponId, new Set());
+            }
+            defaultWeaponModelTypes.get(weaponId).add(modelType);
+        }
+    }
+
+    // Check if all model types share a weapon (making it truly "any")
+    const allModelTypes = Object.keys(defaultLoadoutByModelType);
+    const modelTypeCount = allModelTypes.length;
+
     // Track eligibility info per weapon
-    // Key: weapon ID, Value: { modelTypes: Set, ratio: { ratio, count } | null, countLimit: { count, modelType? } | null, isDefault: boolean }
+    // Key: weapon ID, Value: { modelTypes: Set, ratio: { ratio, count } | null, countLimit: { count, modelType? } | null, defaultForModelTypes: Set }
     const eligibilityMap = new Map();
 
     // Initialize all weapons
     for (const weapon of weapons) {
+        const defaultForModelTypes = defaultWeaponModelTypes.get(weapon.id) || new Set();
         eligibilityMap.set(weapon.id, {
-            modelTypes: new Set(),
+            modelTypes: new Set(defaultForModelTypes), // Start with model types from default loadout
             ratio: null,
             countLimit: null, // For "up to N" or "N <modelType> can replace" constraints
-            isDefault: defaultLoadout.includes(weapon.id),
+            defaultForModelTypes,
+            isUniversalDefault: defaultForModelTypes.size === modelTypeCount && modelTypeCount > 0,
         });
     }
 
@@ -1022,7 +1262,23 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
                 if (choice.weapons && Array.isArray(choice.weapons)) {
                     for (const ref of choice.weapons) {
                         const name = ref.name;
-                        const matchingWeapon = weapons.find((w) => w.name.toLowerCase().trim() === name.toLowerCase().trim());
+                        const normalizedName = name.toLowerCase().trim();
+
+                        // Try to find weapon with flexible matching (handles plural/singular)
+                        let matchingWeapon = weapons.find((w) => w.name.toLowerCase().trim() === normalizedName);
+
+                        // Try singular form if not found (e.g., "inferno pistols" -> "inferno pistol")
+                        if (!matchingWeapon && normalizedName.endsWith("s")) {
+                            const singularName = normalizedName.slice(0, -1);
+                            matchingWeapon = weapons.find((w) => w.name.toLowerCase().trim() === singularName);
+                        }
+
+                        // Try plural form if not found
+                        if (!matchingWeapon) {
+                            const pluralName = normalizedName + "s";
+                            matchingWeapon = weapons.find((w) => w.name.toLowerCase().trim() === pluralName);
+                        }
+
                         if (matchingWeapon) {
                             addedWeaponIds.add(matchingWeapon.id);
                         }
@@ -1068,12 +1324,9 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
                     // Ratio-based targeting
                     eligibility.ratio = {
                         ratio: targeting.ratio || 5,
-                        count: targeting.count || 1,
+                        count: targeting.count || targeting.maxPerRatio || 1,
+                        modelType: targeting.modelType || null,
                     };
-                    // If there's a model type restriction, add it
-                    if (targeting.modelType) {
-                        eligibility.modelTypes.add(targeting.modelType);
-                    }
                     break;
 
                 case "up-to-n":
@@ -1085,10 +1338,10 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
                     break;
 
                 case "count":
-                    // "1 model can be equipped" - count-based without model type restriction
+                    // "N models can be equipped" or "N ModelType can..." - count-based with optional model type
                     eligibility.countLimit = {
                         count: targeting.count || 1,
-                        modelType: null,
+                        modelType: targeting.modelType || null,
                     };
                     break;
 
@@ -1106,6 +1359,7 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
     }
 
     // Convert eligibility map to the final eligibility array format for each weapon
+    // IMPORTANT: A weapon can have MULTIPLE eligibility rules (e.g., both ratio AND modelType)
     for (const weapon of weapons) {
         const eligibility = eligibilityMap.get(weapon.id);
         if (!eligibility) {
@@ -1115,43 +1369,50 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
 
         const rules = [];
 
-        // If it's a default weapon or has "*any*" marker, it's available to all
-        if (eligibility.isDefault || eligibility.modelTypes.has("*any*")) {
+        // If weapon is a universal default (all model types have it) or has "*any*" marker, it's available to all
+        if (eligibility.isUniversalDefault || eligibility.modelTypes.has("*any*")) {
             rules.push({ type: "any" });
-        } else if (eligibility.ratio) {
-            // Ratio-based eligibility
-            const rule = {
-                type: "ratio",
-                ratio: eligibility.ratio.ratio,
-                count: eligibility.ratio.count,
-            };
-            // Add model type restriction if present (excluding the *any* marker)
-            const realModelTypes = [...eligibility.modelTypes].filter((t) => t !== "*any*");
-            if (realModelTypes.length > 0) {
-                rule.modelType = realModelTypes;
-            }
-            rules.push(rule);
-        } else if (eligibility.countLimit) {
-            // Count-based eligibility (e.g., "1 Battle Sister can replace", "Up to 2 models")
-            const rule = {
-                type: "count",
-                count: eligibility.countLimit.count,
-            };
-            if (eligibility.countLimit.modelType) {
-                rule.modelType = [eligibility.countLimit.modelType];
-            }
-            rules.push(rule);
-        } else if (eligibility.modelTypes.size > 0) {
-            // Model type specific
-            const realModelTypes = [...eligibility.modelTypes].filter((t) => t !== "*any*");
-            if (realModelTypes.length > 0) {
-                rules.push({ type: "modelType", modelType: realModelTypes });
-            } else {
-                rules.push({ type: "any" });
-            }
         } else {
-            // No eligibility info found - default to "any" if no options reference it
-            // This handles weapons that exist but aren't mentioned in options
+            // Add ratio-based eligibility if present
+            if (eligibility.ratio) {
+                const rule = {
+                    type: "ratio",
+                    ratio: eligibility.ratio.ratio,
+                    count: eligibility.ratio.count,
+                };
+                // Add model type restriction if present (from ratio struct)
+                if (eligibility.ratio.modelType) {
+                    rule.modelType = [eligibility.ratio.modelType];
+                }
+                rules.push(rule);
+            }
+
+            // Add count-based eligibility if present
+            if (eligibility.countLimit) {
+                const rule = {
+                    type: "count",
+                    count: eligibility.countLimit.count,
+                };
+                if (eligibility.countLimit.modelType) {
+                    rule.modelType = [eligibility.countLimit.modelType];
+                }
+                rules.push(rule);
+            }
+
+            // Add model type specific eligibility if there are model types
+            // (but only for model types not already covered by ratio or countLimit)
+            const realModelTypes = [...eligibility.modelTypes].filter((t) => t !== "*any*");
+            // Exclude model types already covered by ratio or countLimit
+            const ratioModelType = eligibility.ratio?.modelType;
+            const countModelType = eligibility.countLimit?.modelType;
+            const filteredModelTypes = realModelTypes.filter((t) => t !== ratioModelType && t !== countModelType);
+            if (filteredModelTypes.length > 0) {
+                rules.push({ type: "modelType", modelType: filteredModelTypes });
+            }
+        }
+
+        // If no rules were added, default to "any" (shouldn't happen often)
+        if (rules.length === 0) {
             rules.push({ type: "any" });
         }
 
@@ -1193,11 +1454,14 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
 
             // Found an option that adds this ability - extract eligibility from targeting
             if (targeting.type === "count") {
-                eligibility = { countLimit: { count: targeting.count || 1, modelType: null } };
+                eligibility = { countLimit: { count: targeting.count || 1, modelType: targeting.modelType || null } };
             } else if (targeting.type === "up-to-n") {
                 eligibility = { countLimit: { count: targeting.maxTotal || 1, modelType: null } };
             } else if (targeting.type === "n-model-specific") {
                 eligibility = { countLimit: { count: targeting.count || 1, modelType: targeting.modelType || null } };
+            } else if (targeting.type === "specific-model" || targeting.type === "each-model-type") {
+                // "The Superior can be equipped with..." - restrict to specific model type
+                eligibility = { modelType: targeting.modelType };
             }
             // For other targeting types, leave eligibility as null (means available to all)
             break;
@@ -1213,6 +1477,9 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
                 rule.modelType = [eligibility.countLimit.modelType];
             }
             ability.eligibility = [rule];
+        } else if (eligibility && eligibility.modelType) {
+            // Model type restriction without count limit
+            ability.eligibility = [{ type: "modelType", modelType: [eligibility.modelType] }];
         } else {
             // Default: available to all (or not mentioned in options)
             ability.eligibility = [{ type: "any" }];
@@ -1271,16 +1538,40 @@ function generateValidLoadouts(datasheet, parsedOptions) {
     const sharedLoadouts = new Map();
 
     for (const { modelType } of modelTypes) {
-        let baseLoadout = defaultLoadouts.find((dl) => {
+        // Find the best matching default loadout using normalized matching
+        let baseLoadout = null;
+        const mtType = modelType.toLowerCase();
+        const mtTypeNorm = normalizeModelTypeName(mtType);
+
+        // First pass: exact match or plural/normalized match
+        baseLoadout = defaultLoadouts.find((dl) => {
             const dlType = dl.modelType.toLowerCase();
-            const mtType = modelType.toLowerCase();
-            return dlType === mtType || dlType.includes(mtType) || mtType.includes(dlType) || dlType === mtType + "s" || dlType + "s" === mtType;
+            // Skip "*all*" entries in first pass - they apply to everyone
+            if (dlType === "*all*") return false;
+            // Use modelTypesMatch which handles normalization
+            return modelTypesMatch(dl.modelType, modelType);
         });
 
-        if (!baseLoadout && defaultLoadouts.length > 0) {
-            baseLoadout = defaultLoadouts[0];
+        // Second pass: check for "*all*" loadout (applies to all models)
+        if (!baseLoadout) {
+            baseLoadout = defaultLoadouts.find((dl) => dl.modelType === "*all*");
         }
 
+        // Third pass: partial/substring match (only if no exact match found)
+        // But be careful - only match if one name contains the other as a prefix
+        if (!baseLoadout) {
+            baseLoadout = defaultLoadouts.find((dl) => {
+                const dlType = dl.modelType.toLowerCase();
+                if (dlType === "*all*") return false;
+                const dlTypeNorm = normalizeModelTypeName(dlType);
+                // Only match if one starts with the other (e.g., "Sister" matches "Sister Novitiate")
+                // but NOT substring in middle
+                return dlTypeNorm.startsWith(mtTypeNorm) || mtTypeNorm.startsWith(dlTypeNorm);
+            });
+        }
+
+        // NO fallback to first loadout - if we can't find a match, skip this model type
+        // This prevents wrong loadout assignments
         if (!baseLoadout) continue;
 
         const baseLoadoutIds = baseLoadout.items.map((name) => resolveNameToId(name, weapons, abilities, datasheetId));
@@ -1302,6 +1593,18 @@ function generateValidLoadouts(datasheet, parsedOptions) {
     const result = [];
     const totalModelTypes = modelTypes.length;
 
+    // Check if all model types share the same base loadout
+    // If not, we should NOT consolidate loadouts to "any"
+    const baseLoadoutKeys = new Set();
+    for (const [modelType, data] of loadoutsByModelType) {
+        if (data.loadouts.length > 0) {
+            // Use the first loadout (the base/default) as the key
+            const baseKey = [...data.loadouts[0]].sort().join("|");
+            baseLoadoutKeys.add(baseKey);
+        }
+    }
+    const modelTypesShareSameBase = baseLoadoutKeys.size <= 1;
+
     const anyLoadouts = [];
     const modelTypeSpecificLoadouts = new Map();
 
@@ -1312,7 +1615,10 @@ function generateValidLoadouts(datasheet, parsedOptions) {
             const key = [...loadout].sort().join("|");
             const sharedCount = sharedLoadouts.get(key) || 0;
 
-            if (sharedCount === totalModelTypes && totalModelTypes > 1) {
+            // Only consolidate to "any" if:
+            // 1. The loadout is shared by ALL model types
+            // 2. All model types share the same base loadout (so consolidation makes sense)
+            if (sharedCount === totalModelTypes && totalModelTypes > 1 && modelTypesShareSameBase) {
                 if (!anyLoadouts.some((l) => [...l].sort().join("|") === key)) {
                     anyLoadouts.push(loadout);
                 }
@@ -1335,7 +1641,9 @@ function generateValidLoadouts(datasheet, parsedOptions) {
         result.push({ modelType, items: data.loadouts });
     }
 
-    if (result.length === 1 && result[0].modelType !== "any") {
+    // Only convert single model type to "any" if there's genuinely just one model type
+    // Don't do this if we have multiple model types with different loadouts
+    if (result.length === 1 && result[0].modelType !== "any" && totalModelTypes === 1) {
         result[0].modelType = "any";
     }
 
@@ -1387,6 +1695,14 @@ function processDatasheetFile(filePath) {
 
         // Compute weapon eligibility (which models can see/select each weapon)
         computeWeaponEligibility(datasheet, parsedOptions);
+
+        // Extract unit-wide toggle options (all-models add options)
+        const unitWideOptions = extractUnitWideOptions(parsedOptions, weapons, abilities, datasheet.id);
+        if (unitWideOptions.length > 0) {
+            datasheet.wargear.unitWideOptions = unitWideOptions;
+        } else {
+            delete datasheet.wargear.unitWideOptions;
+        }
 
         // Skip loadout generation if no real options
         if (!hasWargearOptions(datasheet)) {

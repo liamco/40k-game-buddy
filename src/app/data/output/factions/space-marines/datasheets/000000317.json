@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> Foehammer.",
       "parsed": [
         "000000317:foehammer"
-      ]
+      ],
+      "byModelType": {
+        "Arjac Rockfist - EPIC HERO": [
+          "000000317:foehammer"
+        ]
+      }
     },
     "weapons": [
       {
@@ -126,7 +131,38 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit is destroyed by a melee attack, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER BEING DESTROYED"
+          ],
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "hasFoughtThisPhase",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -135,7 +171,42 @@
       "factionId": "",
       "description": "Each time this model makes a melee attack that targets a <span class=\"kwb\">CHARACTER</span> unit, you can re-roll the Hit roll and you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "CHARACTER"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "CHARACTER"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

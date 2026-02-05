@@ -24,7 +24,14 @@
         "000002098:bolt-pistol",
         "000002098:plasma-incinerator",
         "000002098:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002098:bolt-pistol",
+          "000002098:plasma-incinerator",
+          "000002098:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -245,7 +252,47 @@
       "factionId": "",
       "description": "Each time a model in this unit is destroyed, roll one D6: on a 3+, do not remove it from play. The destroyed model can shoot after the attacking model's unit has finished making its attacks, and is then removed from play. When resolving these attacks, any Hazardous tests taken for that attack are automatically passed.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": "destroyed"
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "HAZARDOUS"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": "destroyed"
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "autoSuccess",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": "destroyed"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -254,7 +301,28 @@
       "factionId": "",
       "description": "This ability is triggered even when a model in this unit is destroyed as the result of failing a Hazardous test, meaning such a model may be able to shoot twice in the same phase",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SHOOT TWICE"
+          ],
+          "value": "in the same phase",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "HAZARDOUS"
+              ],
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

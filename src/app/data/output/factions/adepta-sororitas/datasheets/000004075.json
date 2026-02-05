@@ -23,7 +23,24 @@
       "parsed": [
         "000004075:holy-fire",
         "000004075:burning-hands"
-      ]
+      ],
+      "byModelType": {
+        "Miraculist": [
+          "000004075:holy-fire",
+          "000004075:burning-hands"
+        ],
+        "Salvationist": [
+          "000004075:close-combat-weapon",
+          "wargear-ability:salvationist-medikit"
+        ],
+        "Death Cult Assassin": [
+          "000004075:death-cult-blades"
+        ],
+        "Sanctifier": [
+          "000004075:ministorum-hand-flamer",
+          "000004075:sanctifier-melee-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -55,7 +72,17 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "count",
+            "count": 1,
+            "modelType": [
+              "Missionary"
+            ]
+          },
+          {
+            "type": "modelType",
+            "modelType": [
+              "Miraculist"
+            ]
           }
         ]
       },
@@ -160,6 +187,12 @@
             "modelType": [
               "Sanctifier model"
             ]
+          },
+          {
+            "type": "modelType",
+            "modelType": [
+              "Sanctifier"
+            ]
           }
         ]
       },
@@ -239,7 +272,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Miraculist"
+            ]
           }
         ]
       },
@@ -273,6 +309,12 @@
             "modelType": [
               "Sanctifier model"
             ]
+          },
+          {
+            "type": "modelType",
+            "modelType": [
+              "Salvationist"
+            ]
           }
         ]
       },
@@ -303,7 +345,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Death Cult Assassin"
+            ]
           }
         ]
       },
@@ -332,7 +377,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Sanctifier"
+            ]
           }
         ]
       }
@@ -417,15 +465,6 @@
         "items": [
           [
             "000004075:death-cult-blades"
-          ]
-        ]
-      },
-      {
-        "modelType": "Missionarie",
-        "items": [
-          [
-            "000004075:holy-fire",
-            "000004075:burning-hands"
           ]
         ]
       },

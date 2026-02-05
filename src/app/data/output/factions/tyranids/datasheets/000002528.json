@@ -23,7 +23,13 @@
       "parsed": [
         "000002528:monstrous-bonesword-and-lash-whip",
         "000002528:tyrant-talons"
-      ]
+      ],
+      "byModelType": {
+        "Winged Hive Tyrant": [
+          "000002528:monstrous-bonesword-and-lash-whip",
+          "000002528:tyrant-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -198,6 +204,18 @@
           [
             "000002528:monstrous-bonesword-and-lash-whip",
             "000002528:tyrant-talons"
+          ],
+          [
+            "000002528:tyrant-talons",
+            "000002528:heavy-venom-cannon"
+          ],
+          [
+            "000002528:tyrant-talons",
+            "000002528:stranglethorn-cannon"
+          ],
+          [
+            "000002528:tyrant-talons",
+            "000002528:monstrous-scything-talons"
           ]
         ]
       }
@@ -245,7 +263,46 @@
       "factionId": "",
       "description": "At the start of the Fight phase, you can select one enemy unit within 12\" of and visible to this model and roll one D6: on a 1, this <span class=\"kwb\">PSYKER</span> suffers D3 mortal wounds; on a 2+, until the end of the phase, subtract 1 from the Attacks characteristic of weapons equipped by models in that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "targetUnit",
+              "operator": "equals",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "a",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "operator": "equals",
+              "value": "thisModel"
+            },
+            {
+              "entity": "targetUnit",
+              "operator": "greaterThanOrEqualTo",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

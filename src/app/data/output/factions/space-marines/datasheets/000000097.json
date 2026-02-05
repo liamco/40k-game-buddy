@@ -35,7 +35,13 @@
       "parsed": [
         "000000097:hammerfall-heavy-bolter-array",
         "000000097:hammerfall-missile-launcher"
-      ]
+      ],
+      "byModelType": {
+        "Hammerfall Bunker": [
+          "000000097:hammerfall-heavy-bolter-array",
+          "000000097:hammerfall-missile-launcher"
+        ]
+      }
     },
     "weapons": [
       {
@@ -220,7 +226,25 @@
       "factionId": "",
       "description": "Each time a ranged attack is allocated to a model, if that model is not fully visible to every model in the attacking unit because of this <span class=\"kwb\">FORTIFICATION</span>, that model has the Benefit of Cover against that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "Benefit of Cover"
+          ],
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isFullyVisible",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -229,7 +253,40 @@
       "factionId": "",
       "description": "You can target this <span class=\"kwb\">FORTIFICATION</span> with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted another unit with that Stratagem this turn. This <span class=\"kwb\">FORTIFICATION</span> can only be targeted with that Stratagem once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Fire Overwatch"
+          ],
+          "value": "0CP",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Fire Overwatch"
+          ],
+          "value": "once per turn",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

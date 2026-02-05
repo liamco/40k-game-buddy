@@ -24,7 +24,14 @@
         "000000103:bolt-pistol",
         "000000103:melta-rifle",
         "000000103:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000103:bolt-pistol",
+          "000000103:melta-rifle",
+          "000000103:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -211,7 +218,61 @@
       "factionId": "",
       "description": "Each time a ranged attack made by a model in this unit targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> model, you can re-roll the Hit roll, you can re-roll the Wound roll and you can re-roll the Damage roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

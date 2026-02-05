@@ -33,7 +33,13 @@
       "parsed": [
         "000002793:combi-weapon",
         "000002793:master-crafted-power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Castellan": [
+          "000002793:combi-weapon",
+          "000002793:master-crafted-power-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -246,7 +252,35 @@
       "factionId": "",
       "description": "Each time a model in this model's unit makes a melee attack that destroys one or more enemy units, roll one D6: on a 4+, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "D6",
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "greaterThanOrEqualTo",
+              "value": 4
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

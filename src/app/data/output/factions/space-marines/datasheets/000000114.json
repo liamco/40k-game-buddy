@@ -25,7 +25,15 @@
         "000000114:krakstorm-grenade-launcher",
         "000000114:melta-destroyer",
         "000000114:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Storm Speeder Hammerstrike": [
+          "000000114:hammerstrike-missile-launcher",
+          "000000114:krakstorm-grenade-launcher",
+          "000000114:melta-destroyer",
+          "000000114:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -182,7 +190,26 @@
       "factionId": "",
       "description": "Each time this model has shot, select one enemy unit that was hit by one or more attacks made by this model this phase. Until the end of the phase, that enemy unit cannot have the Benefit of Cover.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "IGNORES COVER"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -23,7 +23,13 @@
       "parsed": [
         "000002708:blackout",
         "000002708:the-raven-s-talons"
-      ]
+      ],
+      "byModelType": {
+        "Kayvaan Shrike - EPIC HERO": [
+          "000002708:blackout",
+          "000002708:the-raven-s-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -133,7 +139,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, models in this unit cannot be targeted by ranged attacks unless the attacking model is within 12\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetUnit",
+          "effect": "staticNumber",
+          "attribute": "cannotBeTargeted",
+          "value": "true",
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "range",
+              "operator": "greaterThan",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

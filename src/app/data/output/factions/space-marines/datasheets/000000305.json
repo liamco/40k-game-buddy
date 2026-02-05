@@ -24,7 +24,14 @@
         "000000305:bolt-carbine",
         "000000305:bolt-pistol",
         "000000305:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000305:bolt-carbine",
+          "000000305:bolt-pistol",
+          "000000305:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -315,7 +322,31 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack, re-roll a Wound roll of 1. If the target is within range of an objective marker, you can re-roll the Wound roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": []
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> massive toxic lashes.",
       "parsed": [
         "000000497:massive-toxic-lashes"
-      ]
+      ],
+      "byModelType": {
+        "Toxicrene": [
+          "000000497:massive-toxic-lashes"
+        ]
+      }
     },
     "weapons": [
       {
@@ -119,7 +124,56 @@
       "factionId": "",
       "description": "Each time an enemy unit (excluding <span class=\"kwb\">TITANIC</span> units) within Engagement Range of one or more units from your army with this ability is selected to Fall Back, you can roll one D6: on a 3+, that enemy unit must Remain Stationary instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "state",
+          "value": "Remain Stationary",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "state": "hasAbility",
+              "operator": "equals",
+              "value": "Fall Back"
+            },
+            {
+              "entity": "thisUnit",
+              "state": "hasAbility",
+              "operator": "equals",
+              "value": "this ability"
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "TITANIC"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "selectedToFallBack",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "value": 3,
+              "operator": "greaterThanOrEqualTo"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -128,7 +182,56 @@
       "factionId": "",
       "description": "At the end of your Movement phase, roll one D6 for each enemy unit within 6\" of this model: on a 2-3, that unit suffers 1 mortal wound; on a 4-5, that unit suffers D3 mortal wounds; on a 6, that unit suffers D6 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 2
+            },
+            {
+              "entity": "thisModel",
+              "operator": "lessThanOrEqualTo",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 4
+            },
+            {
+              "entity": "thisModel",
+              "operator": "lessThanOrEqualTo",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": 6
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

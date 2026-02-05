@@ -21,9 +21,19 @@
     "defaultLoadout": {
       "raw": "<b>Every Guardian Defender is equipped with:</b> shuriken catapult; close combat weapon.<br><br><b>The Heavy Weapon Platform is equipped with:</b> shuriken cannon; close combat weapon.",
       "parsed": [
-        "000000589:shuriken-catapult",
+        "000000589:shuriken-cannon",
         "000000589:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Heavy Weapon Platform": [
+          "000000589:shuriken-cannon",
+          "000000589:close-combat-weapon"
+        ],
+        "Guardian Defender": [
+          "000000589:shuriken-catapult",
+          "000000589:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -168,7 +178,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Heavy Weapon Platform"
+            ]
           }
         ]
       },
@@ -199,7 +212,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Guardian Defender"
+            ]
           }
         ]
       },

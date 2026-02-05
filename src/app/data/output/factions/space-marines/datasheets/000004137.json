@@ -24,7 +24,14 @@
         "000004137:sternguard-bolt-pistol",
         "000004137:sternguard-bolt-rifle",
         "000004137:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000004137:sternguard-bolt-pistol",
+          "000004137:sternguard-bolt-rifle",
+          "000004137:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -465,7 +472,24 @@
       "factionId": "",
       "description": "Each time a model in this unit makes an attack that targets the closest eligible target, re-roll a Wound roll of 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "isClosestEligibleTarget",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

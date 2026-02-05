@@ -23,7 +23,13 @@
       "parsed": [
         "000004129:absolvor-bolt-pistol",
         "000004129:crozius-arcanum"
-      ]
+      ],
+      "byModelType": {
+        "Wolf Priest": [
+          "000004129:absolvor-bolt-pistol",
+          "000004129:crozius-arcanum"
+        ]
+      }
     },
     "weapons": [
       {
@@ -117,7 +123,26 @@
       "factionId": "",
       "description": "While this model is leading a unit, in your Command phase, you can return 1 destroyed model (excluding <span class=\"kwb\">CHARACTER</span> models) to that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "RETURN DESTROYED MODEL"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

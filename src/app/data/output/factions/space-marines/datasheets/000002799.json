@@ -23,7 +23,22 @@
       "parsed": [
         "000002799:heavy-bolt-pistol",
         "000002799:master-crafted-power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Sword Brother": [
+          "000002799:heavy-bolt-pistol",
+          "000002799:master-crafted-power-weapon"
+        ],
+        "Initiate": [
+          "000002799:bolt-pistol",
+          "000002799:bolt-rifle",
+          "000002799:close-combat-weapon"
+        ],
+        "Neophyte": [
+          "000002799:bolt-pistol",
+          "000002799:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -53,7 +68,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Initiate",
+              "Neophyte"
+            ]
           }
         ]
       },
@@ -85,7 +104,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Initiate"
+            ]
           }
         ]
       },
@@ -217,7 +239,10 @@
           {
             "type": "ratio",
             "ratio": 10,
-            "count": 1
+            "count": 2,
+            "modelType": [
+              "Initiate"
+            ]
           }
         ]
       },
@@ -308,7 +333,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Sword Brother"
+            ]
           }
         ]
       },
@@ -339,7 +367,10 @@
           {
             "type": "ratio",
             "ratio": 10,
-            "count": 1
+            "count": 2,
+            "modelType": [
+              "Initiate"
+            ]
           }
         ]
       }
@@ -449,7 +480,64 @@
       "factionId": "",
       "description": "In your opponent's Shooting phase, each time an enemy unit has shot, if any models in this unit were destroyed as a result of those attacks, this unit can make a Righteous Zeal move. To do so, roll one D6 and add 2 to the result: models in this unit move a number of inches up to this result, but this unit must end that move as close as possible to the closest enemy unit (excluding <span class=\"kwb\">AIRCRAFT</span>). When doing so, those models can be moved within Engagement Range of that enemy unit. This unit cannot make a Righteous Zeal move while it is Battle-shocked or within Engagement Range of one or more enemy units, and can only make one Righteous Zeal move per phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "isBattleShocked",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Righteous Zeal"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "w",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

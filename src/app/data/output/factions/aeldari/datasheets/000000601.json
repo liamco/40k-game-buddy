@@ -23,7 +23,17 @@
       "parsed": [
         "000000601:exarch-s-death-spinner",
         "000000601:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Warp Spider Exarch": [
+          "000000601:exarch-s-death-spinner",
+          "000000601:close-combat-weapon"
+        ],
+        "Warp Spider": [
+          "000000601:death-spinner",
+          "000000601:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +64,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Warp Spider"
+            ]
           }
         ]
       },
@@ -122,7 +135,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Warp Spider Exarch"
+            ]
           }
         ]
       },
@@ -292,21 +308,27 @@
     ],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Warp Spider Exarch",
         "items": [
           [
             "000000601:exarch-s-death-spinner",
             "000000601:close-combat-weapon"
-          ]
-        ]
-      },
-      {
-        "modelType": "Warp Spider Exarch",
-        "items": [
+          ],
+          [
+            "000000601:exarch-s-death-spinner",
+            "000000601:close-combat-weapon",
+            "wargear-ability:aspect-shrine-token"
+          ],
           [
             "000000601:close-combat-weapon",
             "000000601:spinneret-rifle",
             "000000601:death-weavers"
+          ],
+          [
+            "000000601:close-combat-weapon",
+            "000000601:spinneret-rifle",
+            "000000601:death-weavers",
+            "wargear-ability:aspect-shrine-token"
           ],
           [
             "000000601:close-combat-weapon",
@@ -315,7 +337,32 @@
           ],
           [
             "000000601:close-combat-weapon",
+            "000000601:powerblades",
+            "000000601:death-weavers",
+            "wargear-ability:aspect-shrine-token"
+          ],
+          [
+            "000000601:close-combat-weapon",
             "000000601:powerblade-array"
+          ],
+          [
+            "000000601:close-combat-weapon",
+            "000000601:powerblade-array",
+            "wargear-ability:aspect-shrine-token"
+          ]
+        ]
+      },
+      {
+        "modelType": "Warp Spider",
+        "items": [
+          [
+            "000000601:death-spinner",
+            "000000601:close-combat-weapon"
+          ],
+          [
+            "000000601:death-spinner",
+            "000000601:close-combat-weapon",
+            "wargear-ability:aspect-shrine-token"
           ]
         ]
       }

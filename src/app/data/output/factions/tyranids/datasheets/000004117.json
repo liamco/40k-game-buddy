@@ -22,7 +22,12 @@
       "raw": "<b>The Ravener Prime is equipped with:</b> Prime claws and talons.<br><br><b>3 Raveners are equipped with:</b> Ravener heavy claws and talons.<br><br><b>1 Ravener is equipped with:</b> venom bolt; Ravener heavy claws and talons.",
       "parsed": [
         "000004117:prime-claws-and-talons"
-      ]
+      ],
+      "byModelType": {
+        "Ravener Prime": [
+          "000004117:prime-claws-and-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -163,7 +168,18 @@
       "factionId": "",
       "description": "Weapons equipped by models in this unit have the [SUSTAINED HITS 1] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

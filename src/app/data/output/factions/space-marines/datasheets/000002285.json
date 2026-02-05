@@ -24,7 +24,14 @@
         "000002285:bolt-pistol",
         "000002285:bolt-rifle",
         "000002285:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002285:bolt-pistol",
+          "000002285:bolt-rifle",
+          "000002285:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -357,10 +364,7 @@
           {
             "type": "ratio",
             "ratio": 5,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -503,6 +507,21 @@
             "000002285:bolt-pistol",
             "000002285:bolt-rifle",
             "000002285:close-combat-weapon"
+          ],
+          [
+            "000002285:bolt-pistol",
+            "000002285:bolt-rifle",
+            "000002285:close-combat-weapon",
+            "000002285:astartes-grenade-launcher"
+          ],
+          [
+            "000002285:bolt-pistol",
+            "000002285:eviscerator"
+          ],
+          [
+            "000002285:bolt-pistol",
+            "000002285:eviscerator",
+            "000002285:astartes-grenade-launcher"
           ]
         ]
       }
@@ -533,7 +552,44 @@
       "factionId": "",
       "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model's unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isNotWithinRangeOfFriendlyCharacter",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isNotWithinRangeOfFriendlyChaplain",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -542,7 +598,36 @@
       "factionId": "",
       "description": "Once per turn, you can target this unit with the Fire Overwatch or the Heroic Intervention Stratagem for 0CP. While resolving that Stratagem, each time a model in this unit makes a ranged attack you can re-roll the Hit roll, or you can re-roll the Charge roll made for this unit (whichever applies).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "s",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

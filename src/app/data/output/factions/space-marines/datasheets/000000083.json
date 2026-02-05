@@ -23,7 +23,13 @@
       "parsed": [
         "000000083:heavy-bolt-pistol",
         "000000083:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "Captain with Jump Pack": [
+          "000000083:heavy-bolt-pistol",
+          "000000083:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -388,7 +394,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time that unit ends a Charge move, until the end of the turn, add 1 to the Strength characteristic of melee weapons equipped by models in that unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

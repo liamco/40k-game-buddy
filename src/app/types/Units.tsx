@@ -109,6 +109,7 @@ export interface WargearData {
     options: WargearOptionsContainer; // Wargear customization options
     validLoadouts: ValidLoadoutGroup[]; // Pre-computed valid loadout combinations by model type
     loadoutsParsed: boolean; // true if validLoadouts were successfully generated (validation can be applied)
+    unitWideOptions?: string[]; // Weapon/ability IDs that are "all-models add" options (for unit-wide toggles in UI)
 }
 
 // Consolidated supplement data

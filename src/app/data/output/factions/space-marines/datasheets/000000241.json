@@ -24,7 +24,14 @@
         "000000241:bolt-pistol",
         "000000241:plasma-talon",
         "000000241:black-knight-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000241:bolt-pistol",
+          "000000241:plasma-talon",
+          "000000241:black-knight-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -236,7 +243,42 @@
       "factionId": "",
       "description": "Each time this unit is selected to fight, if it made a Charge move this turn, until the end of the phase, melee weapons equipped by models in this unit have the [ANTI-MONSTER 4+] and [ANTI-VEHICLE 4+] abilities.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ANTI-MONSTER"
+          ],
+          "value": "4+",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ANTI-VEHICLE"
+          ],
+          "value": "4+",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

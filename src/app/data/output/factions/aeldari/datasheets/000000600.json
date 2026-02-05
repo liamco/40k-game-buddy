@@ -23,7 +23,17 @@
       "parsed": [
         "000000600:hawk-s-talon",
         "000000600:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Swooping Hawk Exarch": [
+          "000000600:hawk-s-talon",
+          "000000600:close-combat-weapon"
+        ],
+        "Swooping Hawk": [
+          "000000600:lasblaster",
+          "000000600:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -88,7 +98,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Swooping Hawk Exarch"
+            ]
           }
         ]
       },
@@ -120,7 +133,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Swooping Hawk"
+            ]
           }
         ]
       },
@@ -287,20 +303,25 @@
     ],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Swooping Hawk Exarch",
         "items": [
           [
             "000000600:hawk-s-talon",
             "000000600:close-combat-weapon"
-          ]
-        ]
-      },
-      {
-        "modelType": "Swooping Hawk Exarch",
-        "items": [
+          ],
+          [
+            "000000600:hawk-s-talon",
+            "000000600:close-combat-weapon",
+            "wargear-ability:aspect-shrine-token"
+          ],
           [
             "000000600:close-combat-weapon",
             "000000600:exarch-s-lasblaster"
+          ],
+          [
+            "000000600:close-combat-weapon",
+            "000000600:exarch-s-lasblaster",
+            "wargear-ability:aspect-shrine-token"
           ],
           [
             "000000600:close-combat-weapon",
@@ -309,7 +330,32 @@
           ],
           [
             "000000600:close-combat-weapon",
+            "000000600:sunpistol",
+            "000000600:power-sword",
+            "wargear-ability:aspect-shrine-token"
+          ],
+          [
+            "000000600:close-combat-weapon",
             "000000600:scatter-laser"
+          ],
+          [
+            "000000600:close-combat-weapon",
+            "000000600:scatter-laser",
+            "wargear-ability:aspect-shrine-token"
+          ]
+        ]
+      },
+      {
+        "modelType": "Swooping Hawk",
+        "items": [
+          [
+            "000000600:lasblaster",
+            "000000600:close-combat-weapon"
+          ],
+          [
+            "000000600:lasblaster",
+            "000000600:close-combat-weapon",
+            "wargear-ability:aspect-shrine-token"
           ]
         ]
       }

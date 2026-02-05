@@ -23,7 +23,13 @@
       "parsed": [
         "000000118:thunder-hammer",
         "wargear-ability:storm-shield"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000118:thunder-hammer",
+          "wargear-ability:storm-shield"
+        ]
+      }
     },
     "weapons": [
       {
@@ -168,7 +174,24 @@
       "factionId": "",
       "description": "At the start of the Fight phase, each enemy unit within Engagement Range of this unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "ld",
+          "value": "Battle-shock test",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

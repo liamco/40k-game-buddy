@@ -23,7 +23,13 @@
       "parsed": [
         "000000468:fleshborer",
         "000000468:chitinous-claws-and-teeth"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000468:fleshborer",
+          "000000468:chitinous-claws-and-teeth"
+        ]
+      }
     },
     "weapons": [
       {
@@ -87,10 +93,7 @@
           {
             "type": "ratio",
             "ratio": 10,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -123,10 +126,7 @@
           {
             "type": "ratio",
             "ratio": 10,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -161,10 +161,7 @@
           {
             "type": "ratio",
             "ratio": 10,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -314,7 +311,12 @@
         ]
       }
     ],
-    "loadoutsParsed": true
+    "loadoutsParsed": true,
+    "unitWideOptions": [
+      "000000468:fleshborer",
+      "000000468:termagant-devourer",
+      "000000468:termagant-spinefists"
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -335,7 +337,24 @@
       "factionId": "",
       "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this unit, if this unit is not within Engagement Range of one or more enemy units, it can make a Normal move of up to D6\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

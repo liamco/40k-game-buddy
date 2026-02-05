@@ -23,7 +23,13 @@
       "parsed": [
         "000003873:power-fist",
         "000003873:storm-bolter"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000003873:power-fist",
+          "000003873:storm-bolter"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +60,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Deathwatch Terminator"
+            ]
           }
         ]
       },
@@ -101,7 +110,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Deathwatch Terminator"
+            ]
           }
         ]
       },
@@ -134,7 +146,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Deathwatch Terminator"
+            ]
           }
         ]
       },
@@ -184,7 +199,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 3
+            "count": 3,
+            "modelType": [
+              "Deathwatch Terminator"
+            ]
           }
         ]
       },
@@ -499,7 +517,33 @@
       "factionId": "",
       "description": "You can re-roll Charge rolls made for this unit. Each time this unit ends a Charge move, each enemy unit within Engagement Range of this unit must take a Battle-shock test. If that enemy unit does not have the <span class=\"kwb\">IMPERIUM</span> or <span class=\"kwb\">CHAOS</span> keywords, subtract 1 from that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "Charge rolls",
+          "value": "all"
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "IMPERIUM",
+                "CHAOS"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

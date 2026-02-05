@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> vigil spear.",
       "parsed": [
         "000003871:vigil-spear"
-      ]
+      ],
+      "byModelType": {
+        "Watch Master": [
+          "000003871:vigil-spear"
+        ]
+      }
     },
     "weapons": [
       {
@@ -127,7 +132,26 @@
       "factionId": "",
       "description": "While this model is leading a unit, that unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "value": ""
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE"
+          ],
+          "value": ""
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

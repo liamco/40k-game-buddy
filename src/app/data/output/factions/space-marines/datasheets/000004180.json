@@ -23,7 +23,13 @@
       "parsed": [
         "000004180:absolvor-bolt-pistol",
         "000004180:crozius-arcanum"
-      ]
+      ],
+      "byModelType": {
+        "Chaplain Kastiel - EPIC HERO": [
+          "000004180:absolvor-bolt-pistol",
+          "000004180:crozius-arcanum"
+        ]
+      }
     },
     "weapons": [
       {
@@ -140,7 +146,26 @@
       "factionId": "",
       "description": "This model's unit is eligible to charge in a turn in which it Fell Back.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CHARGE AFTER FALLING BACK"
+          ],
+          "value": "eligible to charge",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFallenBack",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

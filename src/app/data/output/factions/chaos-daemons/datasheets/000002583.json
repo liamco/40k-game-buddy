@@ -21,9 +21,23 @@
     "defaultLoadout": {
       "raw": "<b>Every Blue Horror is equipped with:</b> Coruscating Blue Flames; blue claws. <br><br><b>Every Brimstone Horror added to this unit using the Split ability is equipped with:</b> Coruscating Yellow Flames; yellow claws.",
       "parsed": [
-        "000002583:coruscating-blue-flames",
-        "000002583:blue-claws"
-      ]
+        "000002583:coruscating-yellow-flames",
+        "000002583:yellow-claws"
+      ],
+      "byModelType": {
+        "Split ability": [
+          "000002583:coruscating-yellow-flames",
+          "000002583:yellow-claws"
+        ],
+        "Blue Horror": [
+          "000002583:coruscating-blue-flames",
+          "000002583:blue-claws"
+        ],
+        "Brimstone Horror added to this unit using the Split ability": [
+          "000002583:coruscating-yellow-flames",
+          "000002583:yellow-claws"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +68,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Blue Horror"
+            ]
           }
         ]
       },
@@ -86,7 +103,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Split ability",
+              "Brimstone Horror added to this unit using the Split ability"
+            ]
           }
         ]
       },
@@ -115,7 +136,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Blue Horror"
+            ]
           }
         ]
       },
@@ -144,7 +168,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Split ability",
+              "Brimstone Horror added to this unit using the Split ability"
+            ]
           }
         ]
       }

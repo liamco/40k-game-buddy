@@ -23,7 +23,13 @@
       "parsed": [
         "000000303:bolt-pistol",
         "000000303:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000303:bolt-pistol",
+          "000000303:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -237,7 +243,18 @@
       "factionId": "",
       "description": "This unit is eligible to declare a charge in a turn in which it Advanced.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "value": ""
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

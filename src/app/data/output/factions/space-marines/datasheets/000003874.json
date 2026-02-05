@@ -23,7 +23,21 @@
       "parsed": [
         "000003874:heavy-bolt-pistol",
         "000003874:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "Kill Team Sergeant with Jump Pack": [
+          "000003874:heavy-bolt-pistol",
+          "000003874:astartes-chainsword"
+        ],
+        "Kill Team Intercessor with Jump Pack": [
+          "000003874:heavy-bolt-pistol",
+          "000003874:astartes-chainsword"
+        ],
+        "Kill Team Heavy Intercessor with Jump Pack": [
+          "000003874:assault-bolters",
+          "000003874:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -56,7 +70,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor with Jump Pack"
+            ]
           }
         ]
       },
@@ -123,7 +140,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Sergeant with Jump Pack",
+              "Kill Team Intercessor with Jump Pack"
+            ]
           }
         ]
       },
@@ -229,7 +250,10 @@
           {
             "type": "ratio",
             "ratio": 5,
-            "count": 1,
+            "count": 1
+          },
+          {
+            "type": "modelType",
             "modelType": [
               "Kill Team Sergeant with Jump Pack"
             ]
@@ -261,7 +285,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Sergeant with Jump Pack",
+              "Kill Team Intercessor with Jump Pack"
+            ]
           }
         ]
       },
@@ -290,7 +318,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor with Jump Pack"
+            ]
           }
         ]
       },
@@ -390,7 +421,7 @@
     "abilities": [],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Kill Team Sergeant with Jump Pack",
         "items": [
           [
             "000003874:heavy-bolt-pistol",
@@ -399,12 +430,7 @@
           [
             "000003874:astartes-chainsword",
             "000003874:plasma-pistol"
-          ]
-        ]
-      },
-      {
-        "modelType": "Kill Team Sergeant with Jump Pack",
-        "items": [
+          ],
           [
             "000003874:heavy-bolt-pistol",
             "000003874:power-fist"
@@ -465,7 +491,23 @@
       "factionId": "",
       "description": "Each time this unit is set up on the battlefield, until the end of the turn:<br><ul><li>Improve the Armour Penetration characteristic of weapons equipped by models in this unit by 1.</li><li>Melee weapons equipped by models in this unit have the [LANCE] ability.</li></ul>",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LANCE"
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "ATTACHED UNIT",

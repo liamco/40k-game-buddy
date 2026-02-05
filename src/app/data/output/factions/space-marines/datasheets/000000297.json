@@ -23,7 +23,13 @@
       "parsed": [
         "000000297:plasma-pistol",
         "000000297:artificer-crozius-arcanum"
-      ]
+      ],
+      "byModelType": {
+        "Ulrik the Slayer - EPIC HERO": [
+          "000000297:plasma-pistol",
+          "000000297:artificer-crozius-arcanum"
+        ]
+      }
     },
     "weapons": [
       {
@@ -143,7 +149,56 @@
       "factionId": "",
       "description": "At the start of the battle, select one of the following keywords to be this model's Slayer's Oath: <span class=\"kwb\">CHARACTER</span>; <span class=\"kwb\">MONSTER</span>; <span class=\"kwb\">VEHICLE</span>. The first time this model's unit destroys a unit with this model's Slayer's Oath keyword, if your Detachment rule has a Saga, until the end of the battle, this model's unit receives the benefits of that Detachment rule as if that Saga had been completed.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Slayer's Oath"
+          ],
+          "keywords": [
+            "CHARACTER",
+            "MONSTER",
+            "VEHICLE"
+          ],
+          "value": "selected",
+          "conditions": []
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Detachment rule benefits"
+          ],
+          "value": "until the end of the battle",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "keywords": [
+                "Slayer's Oath"
+              ],
+              "operator": "includes",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "abilities": [
+                "Saga"
+              ],
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "hasDestroyedUnitWithSlayersOath",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -152,7 +207,40 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll. If that attack targets a unit that has this model's Slayer's Oath keyword (see above), add 1 to the Wound roll as well.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "Slayer's Oath"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

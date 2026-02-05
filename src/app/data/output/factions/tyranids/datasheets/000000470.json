@@ -22,7 +22,12 @@
       "raw": "<b>Every model is equipped with:</b> chitinous claws and teeth.",
       "parsed": [
         "000000470:chitinous-claws-and-teeth"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000470:chitinous-claws-and-teeth"
+        ]
+      }
     },
     "weapons": [
       {
@@ -105,11 +110,18 @@
         "items": [
           [
             "000000470:chitinous-claws-and-teeth"
+          ],
+          [
+            "000000470:chitinous-claws-and-teeth",
+            "000000470:spinemaws"
           ]
         ]
       }
     ],
-    "loadoutsParsed": true
+    "loadoutsParsed": true,
+    "unitWideOptions": [
+      "000000470:spinemaws"
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -134,7 +146,24 @@
       "factionId": "",
       "description": "While an enemy unit is within Engagement Range of this unit, halve the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": "half",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

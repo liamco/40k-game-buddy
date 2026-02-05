@@ -233,11 +233,14 @@ const ViewList = () => {
                     renderOption={(datasheet: Datasheet) => (
                         <div className="flex items-center justify-between w-full">
                             <div className="font-medium">{datasheet.name}</div>
-                            {datasheet.isLegends && (
-                                <Badge variant="outline" className="ml-2">
-                                    Legends
-                                </Badge>
-                            )}
+                            <div className="flex items-center gap-1">
+                                {datasheet.supplement?.isSupplement && (
+                                    <Badge variant="outline" className="text-xs">
+                                        {datasheet.supplement.label}
+                                    </Badge>
+                                )}
+                                {datasheet.isLegends && <Badge variant="outline">Legends</Badge>}
+                            </div>
                         </div>
                     )}
                 />

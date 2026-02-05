@@ -24,7 +24,19 @@
         "000002507:bolt-pistol",
         "000002507:boltgun",
         "000002507:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Novitiate Superior": [
+          "000002507:bolt-pistol",
+          "000002507:boltgun",
+          "000002507:close-combat-weapon"
+        ],
+        "Sister Novitiate": [
+          "000002507:autopistol",
+          "000002507:autogun",
+          "000002507:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +66,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Sister Novitiate"
+            ]
           }
         ]
       },
@@ -85,7 +100,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Sister Novitiate"
+            ]
           }
         ]
       },
@@ -116,7 +134,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Novitiate Superior"
+            ]
           }
         ]
       },
@@ -147,7 +168,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Novitiate Superior"
+            ]
           }
         ]
       },
@@ -180,7 +204,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 2
+            "count": 2,
+            "modelType": [
+              "Sisters Novitiate"
+            ]
           }
         ]
       },
@@ -409,18 +436,13 @@
     ],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Novitiate Superior",
         "items": [
           [
             "000002507:bolt-pistol",
             "000002507:boltgun",
             "000002507:close-combat-weapon"
-          ]
-        ]
-      },
-      {
-        "modelType": "Novitiate Superior",
-        "items": [
+          ],
           [
             "000002507:close-combat-weapon",
             "000002507:bolt-pistol",
@@ -430,6 +452,35 @@
             "000002507:close-combat-weapon",
             "000002507:plasma-pistol",
             "000002507:power-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Sisters Novitiate",
+        "items": [
+          [
+            "000002507:autopistol",
+            "000002507:autogun",
+            "000002507:close-combat-weapon"
+          ],
+          [
+            "000002507:autopistol",
+            "000002507:novitiate-melee-weapons"
+          ],
+          [
+            "000002507:autopistol",
+            "000002507:close-combat-weapon",
+            "000002507:ministorum-flamer"
+          ],
+          [
+            "000002507:autopistol",
+            "000002507:close-combat-weapon",
+            "wargear-ability:simulacrum-imperialis"
+          ],
+          [
+            "000002507:autopistol",
+            "000002507:close-combat-weapon",
+            "wargear-ability:sacred-banner"
           ]
         ]
       }

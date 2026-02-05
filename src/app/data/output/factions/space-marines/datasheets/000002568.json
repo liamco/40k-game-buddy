@@ -23,7 +23,13 @@
       "parsed": [
         "000002568:storm-bolter",
         "000002568:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Impulsor": [
+          "000002568:storm-bolter",
+          "000002568:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -271,12 +277,40 @@
         "id": "000002568:orbital-comms-array-aura",
         "name": "Orbital Comms Array (Aura)",
         "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-        "mechanics": [],
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "state": "isWithinRange",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          },
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "value": 5,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "state": "isTargetedByStratagem",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          }
+        ],
         "eligibility": [
           {
             "type": "any"
           }
-        ]
+        ],
+        "mechanicsSource": "openai"
       },
       {
         "id": "000002568:shield-dome",
@@ -307,8 +341,106 @@
             "000002568:armoured-hull"
           ],
           [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:bellicatus-missile-array"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:ironhail-skytalon-array"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:orbital-comms-array"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "wargear-ability:shield-dome"
+          ],
+          [
             "000002568:armoured-hull",
             "000002568:fragstorm-grenade-launcher"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:fragstorm-grenade-launcher",
+            "000002568:bellicatus-missile-array"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:fragstorm-grenade-launcher",
+            "000002568:ironhail-skytalon-array"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:fragstorm-grenade-launcher",
+            "000002568:orbital-comms-array"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:fragstorm-grenade-launcher",
+            "wargear-ability:shield-dome"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:bellicatus-missile-array"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:ironhail-skytalon-array"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:orbital-comms-array"
+          ],
+          [
+            "000002568:storm-bolter",
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "wargear-ability:shield-dome"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:fragstorm-grenade-launcher"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:fragstorm-grenade-launcher",
+            "000002568:bellicatus-missile-array"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:fragstorm-grenade-launcher",
+            "000002568:ironhail-skytalon-array"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:fragstorm-grenade-launcher",
+            "000002568:orbital-comms-array"
+          ],
+          [
+            "000002568:armoured-hull",
+            "000002568:ironhail-heavy-stubber",
+            "000002568:fragstorm-grenade-launcher",
+            "wargear-ability:shield-dome"
           ]
         ]
       }
@@ -344,7 +476,42 @@
       "factionId": "",
       "description": "Units can disembark from this <span class=\"kwb\">TRANSPORT</span> after it has Advanced. Units that do so count as having made a Normal move, and cannot declare a charge that turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DISembark AFTER ADVANCING"
+          ],
+          "value": "Normal move",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasAdvanced",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT DECLARE A CHARGE"
+          ],
+          "value": "this turn",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasDisembarked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

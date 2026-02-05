@@ -23,7 +23,13 @@
       "parsed": [
         "000000151:perdition",
         "000000151:the-axe-mortalis"
-      ]
+      ],
+      "byModelType": {
+        "Commander Dante - EPIC HERO": [
+          "000000151:perdition",
+          "000000151:the-axe-mortalis"
+        ]
+      }
     },
     "weapons": [
       {
@@ -143,7 +149,24 @@
       "factionId": "",
       "description": "At the start of the Fight phase, each enemy unit within 6\" of this model must take a Battle-shock test, subtracting 1 from that test when they do.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

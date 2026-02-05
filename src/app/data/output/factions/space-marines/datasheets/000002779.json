@@ -24,7 +24,28 @@
         "000002779:bolt-pistol",
         "000002779:deathwatch-marksman-bolt-carbine",
         "000002779:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Kill Team Infiltrator": [
+          "000002779:bolt-pistol",
+          "000002779:deathwatch-marksman-bolt-carbine",
+          "000002779:close-combat-weapon"
+        ],
+        "Kill Team Infiltrator with bolt sniper rifle": [
+          "000002779:bolt-pistol",
+          "000002779:bolt-sniper-rifle",
+          "000002779:close-combat-weapon"
+        ],
+        "Kill Team Infiltrator with Deathwatch occulus bolt carbine": [
+          "000002779:bolt-pistol",
+          "000002779:deathwatch-occulus-bolt-carbine",
+          "000002779:paired-combat-blades"
+        ],
+        "Kill Team Infiltrator with combat knife": [
+          "000002779:special-issue-bolt-pistol",
+          "000002779:combat-knife"
+        ]
+      }
     },
     "weapons": [
       {
@@ -54,7 +75,12 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator",
+              "Kill Team Infiltrator with bolt sniper rifle",
+              "Kill Team Infiltrator with Deathwatch occulus bolt carbine"
+            ]
           }
         ]
       },
@@ -86,7 +112,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator with bolt sniper rifle"
+            ]
           }
         ]
       },
@@ -150,7 +179,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator"
+            ]
           }
         ]
       },
@@ -183,7 +215,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator with Deathwatch occulus bolt carbine"
+            ]
           }
         ]
       },
@@ -281,7 +316,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator with combat knife"
+            ]
           }
         ]
       },
@@ -310,7 +348,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator",
+              "Kill Team Infiltrator with bolt sniper rifle"
+            ]
           }
         ]
       },
@@ -341,7 +383,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator with combat knife"
+            ]
           }
         ]
       },
@@ -372,7 +417,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Infiltrator with Deathwatch occulus bolt carbine"
+            ]
           }
         ]
       }
@@ -431,37 +479,80 @@
         "id": "000002779:infiltrator-comms-array",
         "name": "Infiltrator Comms Array",
         "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-        "mechanics": [],
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          },
+          {
+            "entity": "thisUnit",
+            "effect": "staticNumber",
+            "attribute": "CP",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "operator": "greaterThanOrEqualTo",
+                "value": 5
+              }
+            ]
+          }
+        ],
         "eligibility": [
           {
             "type": "any"
           }
-        ]
+        ],
+        "mechanicsSource": "openai"
       },
       {
         "id": "000002779:instigator-bolt-carbine",
         "name": "Instigator Bolt Carbine",
         "description": "In your Shooting phase, after the bearer's unit has shot, the bearer's unit can make a Normal move. If it does, until the end of the turn, the bearer's unit is not eligible to declare a charge.",
-        "mechanics": [],
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "Normal move"
+            ],
+            "value": "after shooting"
+          },
+          {
+            "entity": "thisUnit",
+            "effect": "addsAbility",
+            "abilities": [
+              "not eligible to declare a charge"
+            ],
+            "state": "until the end of the turn",
+            "value": true,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "state": "hasFiredThisPhase",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          }
+        ],
         "eligibility": [
           {
             "type": "any"
           }
-        ]
+        ],
+        "mechanicsSource": "openai"
       }
     ],
-    "validLoadouts": [
-      {
-        "modelType": "any",
-        "items": [
-          [
-            "000002779:bolt-pistol",
-            "000002779:deathwatch-marksman-bolt-carbine",
-            "000002779:close-combat-weapon"
-          ]
-        ]
-      }
-    ],
+    "validLoadouts": [],
     "loadoutsParsed": false
   },
   "supplement": {

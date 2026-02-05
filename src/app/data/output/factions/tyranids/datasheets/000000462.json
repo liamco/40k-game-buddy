@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> Old One Eye's claws and talons.",
       "parsed": [
         "000000462:old-one-eye's-claws-and-talons"
-      ]
+      ],
+      "byModelType": {
+        "Old One Eye - EPIC HERO": [
+          "000000462:old-one-eye's-claws-and-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -105,7 +110,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -114,7 +136,24 @@
       "factionId": "",
       "description": "At the start of each player's Command phase, this model regains up to D3 lost wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

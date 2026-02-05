@@ -34,7 +34,14 @@
         "000001346:bolt-pistol",
         "000001346:master-crafted-bolter",
         "000001346:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Lieutenant": [
+          "000001346:bolt-pistol",
+          "000001346:master-crafted-bolter",
+          "000001346:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -484,7 +491,17 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

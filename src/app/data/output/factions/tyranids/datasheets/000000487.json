@@ -22,7 +22,12 @@
       "raw": "<b>Every model is equipped with:</b> nothing.",
       "parsed": [
         "000000487:nothing"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000487:nothing"
+        ]
+      }
     },
     "weapons": [
       {
@@ -85,7 +90,24 @@
       "factionId": "",
       "description": "Enemy units cannot start or end an Advance move within 6\" of this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "m",
+              "operator": "notIncludes",
+              "value": "thisUnit"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -94,7 +116,66 @@
       "factionId": "",
       "description": "Each time this unit or an enemy unit ends a move, for each model in this unit that is within 3\" of one or more enemy units, select one of those enemy units. That model in this unit is destroyed, then roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D6 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "operator": "equals",
+              "value": "selected enemy unit"
+            },
+            {
+              "entity": "thisUnit",
+              "state": "isWithin3OfEnemyUnits",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": "destroyed"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": "rolled 2-5"
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "mortalWounds",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "operator": "equals",
+              "value": "selected enemy unit"
+            },
+            {
+              "entity": "thisUnit",
+              "state": "isWithin3OfEnemyUnits",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": "destroyed"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": "rolled 6"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

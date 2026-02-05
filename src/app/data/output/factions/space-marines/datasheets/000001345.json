@@ -33,7 +33,13 @@
       "parsed": [
         "000001345:master-crafted-special-issue-bolt-pistol",
         "000001345:combat-knife"
-      ]
+      ],
+      "byModelType": {
+        "Lieutenant in Reiver Armour": [
+          "000001345:master-crafted-special-issue-bolt-pistol",
+          "000001345:combat-knife"
+        ]
+      }
     },
     "weapons": [
       {
@@ -135,7 +141,26 @@
       "factionId": "",
       "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -144,7 +169,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, increase the range of that unit's Terror Troops ability by 3\".",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -35,7 +35,13 @@
       "parsed": [
         "000002727:whirlwind-vengeance-launcher",
         "000002727:armoured-tracks"
-      ]
+      ],
+      "byModelType": {
+        "Whirlwind": [
+          "000002727:whirlwind-vengeance-launcher",
+          "000002727:armoured-tracks"
+        ]
+      }
     },
     "weapons": [
       {
@@ -186,6 +192,22 @@
           [
             "000002727:whirlwind-vengeance-launcher",
             "000002727:armoured-tracks"
+          ],
+          [
+            "000002727:whirlwind-vengeance-launcher",
+            "000002727:armoured-tracks",
+            "000002727:storm-bolter"
+          ],
+          [
+            "000002727:whirlwind-vengeance-launcher",
+            "000002727:armoured-tracks",
+            "000002727:hunter-killer-missile"
+          ],
+          [
+            "000002727:whirlwind-vengeance-launcher",
+            "000002727:armoured-tracks",
+            "000002727:hunter-killer-missile",
+            "000002727:storm-bolter"
           ]
         ]
       }
@@ -216,7 +238,24 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, if one or more of those attacks made with its Whirlwind vengeance launcher scored a hit against an enemy <span class=\"kwb\">INFANTRY</span> unit, that unit must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "ld",
+          "value": "Battle-shock test",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "attribute": "a",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

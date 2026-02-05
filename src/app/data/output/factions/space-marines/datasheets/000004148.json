@@ -23,7 +23,13 @@
       "parsed": [
         "000004148:heavy-bolt-pistol",
         "000004148:claws-of-severax"
-      ]
+      ],
+      "byModelType": {
+        "Aethon Shaan - EPIC HERO": [
+          "000004148:heavy-bolt-pistol",
+          "000004148:claws-of-severax"
+        ]
+      }
     },
     "weapons": [
       {
@@ -128,7 +134,30 @@
       "factionId": "",
       "description": "In your Command phase, you can select one unit from your opponent's army. Until the start of your next Command phase, each time an <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit from your army declares a charge while it is within 12\" of that enemy unit, you can re-roll the Charge roll, but it must declare that enemy unit as a target of that charge (if possible).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "d",
+          "value": "all",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isWithin12Inches",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

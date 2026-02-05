@@ -24,7 +24,14 @@
         "000000292:bolt-pistol",
         "000000292:living-lightning",
         "000000292:staff-of-the-stormcaller"
-      ]
+      ],
+      "byModelType": {
+        "Njal Stormcaller - EPIC HERO": [
+          "000000292:bolt-pistol",
+          "000000292:living-lightning",
+          "000000292:staff-of-the-stormcaller"
+        ]
+      }
     },
     "weapons": [
       {
@@ -172,7 +179,31 @@
       "factionId": "",
       "description": "While this model is leading a unit, ranged weapons equipped by models in that unit have the [ASSAULT] ability and each time that unit Advances, do not make an Advance roll. Instead, until the end of the phase, add 6\" to the Move characteristic of models in this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "m",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -181,7 +212,47 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model's unit has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks made with this model's Living Lightning weapon. Until the start of your next turn, that enemy unit is stormwracked. While a unit is stormwracked, subtract 6\" from the Range characteristic of ranged weapons equipped by models in that unit (to a minimum of 12\").",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "range",
+          "value": 6,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            },
+            {
+              "entity": "targetUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": 12,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "range",
+              "operator": "lessThan",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

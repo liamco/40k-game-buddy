@@ -23,7 +23,13 @@
       "parsed": [
         "000002066:bolt-pistol",
         "000002066:power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002066:bolt-pistol",
+          "000002066:power-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -177,7 +183,10 @@
         "mechanicsSource": "regex",
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Zephyrim Superior"
+            ]
           }
         ]
       }
@@ -197,6 +206,16 @@
         "items": [
           [
             "000002066:power-weapon",
+            "000002066:plasma-pistol"
+          ],
+          [
+            "000002066:bolt-pistol",
+            "000002066:power-weapon",
+            "wargear-ability:sacred-banner"
+          ],
+          [
+            "000002066:power-weapon",
+            "wargear-ability:sacred-banner",
             "000002066:plasma-pistol"
           ]
         ]

@@ -25,7 +25,15 @@
         "000000124:onslaught-gatling-cannon",
         "000000124:twin-ironhail-heavy-stubber",
         "000000124:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Storm Speeder Hailstrike": [
+          "000000124:fragstorm-grenade-launcher",
+          "000000124:onslaught-gatling-cannon",
+          "000000124:twin-ironhail-heavy-stubber",
+          "000000124:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -187,7 +195,33 @@
       "factionId": "",
       "description": "Each time this model has shot, select one enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) hit by one or more of those attacks. Until the end of the phase, each time a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit makes a ranged attack that targets that enemy unit, improve the Armour Penetration characteristic of that attack by 1. The same enemy unit can only be affected by this ability once per phase.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -23,7 +23,13 @@
       "parsed": [
         "000002100:drakkis",
         "000002100:malleus-noctum"
-      ]
+      ],
+      "byModelType": {
+        "Adrax Agatone - EPIC HERO": [
+          "000002100:drakkis",
+          "000002100:malleus-noctum"
+        ]
+      }
     },
     "weapons": [
       {
@@ -119,7 +125,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -128,7 +151,24 @@
       "factionId": "",
       "description": "While an enemy unit is within Engagement Range of this model, halve the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": "halved",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

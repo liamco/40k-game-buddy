@@ -36,7 +36,14 @@
         "000002173:flamestorm-cannon",
         "000002173:twin-assault-cannon",
         "000002173:armoured-tracks"
-      ]
+      ],
+      "byModelType": {
+        "Land Raider Redeemer": [
+          "000002173:flamestorm-cannon",
+          "000002173:twin-assault-cannon",
+          "000002173:armoured-tracks"
+        ]
+      }
     },
     "weapons": [
       {
@@ -257,6 +264,53 @@
             "000002173:flamestorm-cannon",
             "000002173:twin-assault-cannon",
             "000002173:armoured-tracks"
+          ],
+          [
+            "000002173:flamestorm-cannon",
+            "000002173:twin-assault-cannon",
+            "000002173:armoured-tracks",
+            "000002173:storm-bolter"
+          ],
+          [
+            "000002173:flamestorm-cannon",
+            "000002173:twin-assault-cannon",
+            "000002173:armoured-tracks",
+            "000002173:multi-melta"
+          ],
+          [
+            "000002173:flamestorm-cannon",
+            "000002173:twin-assault-cannon",
+            "000002173:armoured-tracks",
+            "000002173:multi-melta",
+            "000002173:storm-bolter"
+          ],
+          [
+            "000002173:flamestorm-cannon",
+            "000002173:twin-assault-cannon",
+            "000002173:armoured-tracks",
+            "000002173:hunter-killer-missile"
+          ],
+          [
+            "000002173:flamestorm-cannon",
+            "000002173:twin-assault-cannon",
+            "000002173:armoured-tracks",
+            "000002173:hunter-killer-missile",
+            "000002173:storm-bolter"
+          ],
+          [
+            "000002173:flamestorm-cannon",
+            "000002173:twin-assault-cannon",
+            "000002173:armoured-tracks",
+            "000002173:hunter-killer-missile",
+            "000002173:multi-melta"
+          ],
+          [
+            "000002173:flamestorm-cannon",
+            "000002173:twin-assault-cannon",
+            "000002173:armoured-tracks",
+            "000002173:hunter-killer-missile",
+            "000002173:multi-melta",
+            "000002173:storm-bolter"
           ]
         ]
       }
@@ -287,7 +341,26 @@
       "factionId": "",
       "description": "Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "declare a charge"
+          ],
+          "value": "this turn",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasMoved",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

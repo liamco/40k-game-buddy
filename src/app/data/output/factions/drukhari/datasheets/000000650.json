@@ -22,7 +22,12 @@
       "raw": "<b>Every model is equipped with:</b> twin torturer's tools.",
       "parsed": [
         "000000650:twin-torturer-s-tools"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000650:twin-torturer-s-tools"
+        ]
+      }
     },
     "weapons": [
       {
@@ -214,7 +219,15 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "ratio",
+            "ratio": 5,
+            "count": 1
+          },
+          {
+            "type": "modelType",
+            "modelType": [
+              "Acothyst"
+            ]
           }
         ]
       },

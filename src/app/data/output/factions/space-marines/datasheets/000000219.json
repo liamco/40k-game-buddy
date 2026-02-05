@@ -23,7 +23,13 @@
       "parsed": [
         "000000219:master-crafted-storm-bolter",
         "000000219:the-sword-of-silence"
-      ]
+      ],
+      "byModelType": {
+        "Belial - EPIC HERO": [
+          "000000219:master-crafted-storm-bolter",
+          "000000219:the-sword-of-silence"
+        ]
+      }
     },
     "weapons": [
       {
@@ -124,7 +130,27 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, if a Critical Hit is scored, that attack has the [PRECISION] ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "PRECISION"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "abilities": [
+                "Critical Hit"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -133,7 +159,27 @@
       "factionId": "",
       "description": "Each time a melee attack is allocated to this model, after the attacking model's unit has finished making its attacks, roll one D6 (to a maximum of six D6 per attacking unit): for each 4+, the attacking unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "operator": "greaterThanOrEqualTo",
+              "value": 4
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

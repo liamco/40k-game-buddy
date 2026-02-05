@@ -24,7 +24,14 @@
         "000000242:heavy-bolter",
         "000000242:plasma-storm-battery",
         "000000242:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Land Speeder Vengeance": [
+          "000000242:heavy-bolter",
+          "000000242:plasma-storm-battery",
+          "000000242:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -224,7 +231,52 @@
       "factionId": "",
       "description": "Once per turn, in your opponent's Shooting phase, when a friendly <b>Adeptus Astartes</b> unit within 6\" of this model is destroyed, this model can use this ability (it cannot use this ability when it is itself destroyed). If it does, after the attacking unit has finished making its attacks, this model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SHOOTING"
+          ],
+          "value": "as if it were your Shooting phase",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "notEquals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "range",
+          "value": "6\"",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDestroyed",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

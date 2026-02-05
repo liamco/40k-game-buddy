@@ -21,11 +21,19 @@ interface Props {
     options: DatasheetOption[] | undefined;
 }
 
+/**
+ * Check if an option description indicates no wargear options available
+ */
+function isNoneOption(description: string): boolean {
+    const normalized = description.trim().toLowerCase();
+    return normalized === "none" || normalized === "none.";
+}
+
 export function WargearRulesPanel({ defaultLoadout, options }: Props) {
     const hasOptions = options && options.length > 0;
 
-    // Filter out footnotes (button === "*")
-    const mainOptions = hasOptions ? options.filter((opt) => opt.button !== "*") : [];
+    // Filter out footnotes (button === "*") and "None" entries
+    const mainOptions = hasOptions ? options.filter((opt) => opt.button !== "*" && !isNoneOption(opt.description)) : [];
     const footnotes = hasOptions ? options.filter((opt) => opt.button === "*") : [];
 
     return (
@@ -39,7 +47,7 @@ export function WargearRulesPanel({ defaultLoadout, options }: Props) {
 
             <div>
                 <SplitHeading label="Wargear options" />
-                {!hasOptions ? (
+                {mainOptions.length === 0 ? (
                     <p className="text-paragraph-s text-fireDragonBright/60">No wargear options available</p>
                 ) : (
                     <ul className={`${styles.WargearRulesList} space-y-4 text-paragraph-s`}>

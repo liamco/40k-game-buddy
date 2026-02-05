@@ -35,7 +35,13 @@
       "parsed": [
         "000002752:toxinjector-harpoon",
         "000002752:monstrous-scything-talons"
-      ]
+      ],
+      "byModelType": {
+        "Norn Assimilator": [
+          "000002752:toxinjector-harpoon",
+          "000002752:monstrous-scything-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -185,7 +191,34 @@
       "factionId": "",
       "description": "Once per turn, when an enemy unit within Engagement Range of this model is selected to Fall Back, roll one D6: on a 2+, that unit suffers D6 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D6",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "attribute": "Fall Back",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "Harpooned",

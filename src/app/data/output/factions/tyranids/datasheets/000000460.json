@@ -23,7 +23,13 @@
       "parsed": [
         "000000460:monstrous-bonesword-and-lash-whip",
         "000000460:monstrous-scything-talons"
-      ]
+      ],
+      "byModelType": {
+        "Hive Tyrant": [
+          "000000460:monstrous-bonesword-and-lash-whip",
+          "000000460:monstrous-scything-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -189,6 +195,23 @@
           [
             "000000460:monstrous-bonesword-and-lash-whip",
             "000000460:stranglethorn-cannon"
+          ],
+          [
+            "000000460:monstrous-scything-talons",
+            "000000460:heavy-venom-cannon"
+          ],
+          [
+            "000000460:heavy-venom-cannon"
+          ],
+          [
+            "000000460:monstrous-scything-talons",
+            "000000460:stranglethorn-cannon"
+          ],
+          [
+            "000000460:stranglethorn-cannon"
+          ],
+          [
+            "000000460:monstrous-scything-talons"
           ]
         ]
       }
@@ -236,7 +259,42 @@
       "factionId": "",
       "description": "While a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 6\" of this model, ranged weapons equipped by models in that unit have the [ASSAULT] and [LETHAL HITS] abilities.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "ASSAULT"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": null,
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": null,
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

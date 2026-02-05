@@ -37,7 +37,15 @@
         "000000239:blacksword-missiles",
         "000000239:twin-heavy-bolter",
         "000000239:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Nephilim Jetfighter": [
+          "000000239:avenger-mega-bolter",
+          "000000239:blacksword-missiles",
+          "000000239:twin-heavy-bolter",
+          "000000239:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -253,7 +261,39 @@
       "factionId": "",
       "description": "Each time a ranged attack targets this model, subtract 1 from the Hit roll. If that attack was made by a model that can Fly, subtract 1 from the Wound roll as well.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingModel",
+          "effect": "rollPenalty",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "operator": "equals",
+              "value": "thisModel"
+            }
+          ]
+        },
+        {
+          "entity": "opposingModel",
+          "effect": "rollPenalty",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "keywords": [
+                "FLY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

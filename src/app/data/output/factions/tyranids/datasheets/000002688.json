@@ -23,7 +23,13 @@
       "parsed": [
         "000002688:psychic-scream",
         "000002688:neurotyrant-claws-and-lashes"
-      ]
+      ],
+      "byModelType": {
+        "Neurotyrant": [
+          "000002688:psychic-scream",
+          "000002688:neurotyrant-claws-and-lashes"
+        ]
+      }
     },
     "weapons": [
       {
@@ -130,7 +136,38 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll. If the target is Battle-shocked, add 1 to the Wound roll as well.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -139,7 +176,24 @@
       "factionId": "",
       "description": "If one or more models from your army with this ability are on the battlefield when you unleash the Shadow in the Warp, subtract 1 from the Battle-shock test each enemy unit on the battlefield must take as a result.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -148,7 +202,26 @@
       "factionId": "",
       "description": "In your Command phase, you can select up to two friendly <span class=\"kwb\">TYRANIDS</span> units within 18\" of this model's unit. Until the start of your next Command phase, the selected units are always considered to be within Synapse Range of your army.<br><br><b>Designer's Note:</b> Place a Neuroloid token next to each selected unit to remind you.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsKeyword",
+          "keywords": [
+            "SYNAPSE"
+          ],
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isStationary",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

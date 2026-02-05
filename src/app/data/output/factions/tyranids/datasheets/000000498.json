@@ -23,7 +23,13 @@
       "parsed": [
         "000000498:sporocyst-bio-weapons",
         "000000498:flensing-whips"
-      ]
+      ],
+      "byModelType": {
+        "Sporocyst": [
+          "000000498:sporocyst-bio-weapons",
+          "000000498:flensing-whips"
+        ]
+      }
     },
     "weapons": [
       {
@@ -116,7 +122,26 @@
       "factionId": "",
       "description": "Once per turn, in your Shooting phase, when selected to shoot, one unit with this ability can use it instead of making any attacks with its ranged weapons. If it does, you can add one new Mucolid Spores unit containing 1 model to your army and set it up anywhere on the battlefield that is wholly within 18\" of this model and more than 9\" horizontally away from all enemy units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "addsAbility",
+          "abilities": [
+            "MUCOLID SPORES"
+          ],
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasFiredThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -125,7 +150,19 @@
       "factionId": "",
       "description": "You can target this model with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted a different unit with that Stratagem this turn. This model can only be targeted with that Stratagem once per turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "Fire Overwatch"
+          ],
+          "value": "once per turn",
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

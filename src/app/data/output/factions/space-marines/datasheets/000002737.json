@@ -23,7 +23,13 @@
       "parsed": [
         "000002737:heavy-bolt-pistol",
         "000002737:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002737:heavy-bolt-pistol",
+          "000002737:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -57,10 +63,7 @@
           {
             "type": "ratio",
             "ratio": 5,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -125,10 +128,7 @@
           {
             "type": "ratio",
             "ratio": 5,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -179,10 +179,7 @@
           {
             "type": "ratio",
             "ratio": 5,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -244,10 +241,7 @@
           {
             "type": "ratio",
             "ratio": 5,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -278,6 +272,10 @@
           {
             "type": "ratio",
             "ratio": 5,
+            "count": 1
+          },
+          {
+            "type": "count",
             "count": 1,
             "modelType": [
               "model"
@@ -312,6 +310,10 @@
           {
             "type": "ratio",
             "ratio": 5,
+            "count": 1
+          },
+          {
+            "type": "count",
             "count": 1,
             "modelType": [
               "model"
@@ -356,6 +358,58 @@
           [
             "000002737:heavy-bolt-pistol",
             "000002737:astartes-chainsword"
+          ],
+          [
+            "000002737:hand-flamer",
+            "000002737:astartes-chainsword"
+          ],
+          [
+            "000002737:hand-flamer",
+            "000002737:power-fist"
+          ],
+          [
+            "000002737:hand-flamer",
+            "000002737:power-weapon"
+          ],
+          [
+            "000002737:heavy-bolt-pistol",
+            "000002737:power-fist"
+          ],
+          [
+            "000002737:heavy-bolt-pistol",
+            "000002737:power-weapon"
+          ],
+          [
+            "000002737:inferno-pistol",
+            "000002737:astartes-chainsword"
+          ],
+          [
+            "000002737:inferno-pistol",
+            "000002737:power-fist"
+          ],
+          [
+            "000002737:inferno-pistol",
+            "000002737:power-weapon"
+          ],
+          [
+            "000002737:plasma-pistol",
+            "000002737:astartes-chainsword"
+          ],
+          [
+            "000002737:plasma-pistol",
+            "000002737:power-fist"
+          ],
+          [
+            "000002737:plasma-pistol",
+            "000002737:power-weapon"
+          ],
+          [
+            "000002737:heavy-bolt-pistol",
+            "000002737:eviscerator"
+          ],
+          [
+            "000002737:plasma-pistol",
+            "000002737:eviscerator"
           ]
         ]
       }
@@ -390,7 +444,44 @@
       "factionId": "",
       "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model's unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "notWithinRangeOfFriendlyCharacter",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "notWithinRangeOfFriendlyChaplain",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -399,7 +490,17 @@
       "factionId": "",
       "description": "You can re-roll Charge rolls made for this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all",
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

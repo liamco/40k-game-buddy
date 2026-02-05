@@ -23,7 +23,13 @@
       "parsed": [
         "000002723:storm-bolter",
         "000002723:armoured-tracks"
-      ]
+      ],
+      "byModelType": {
+        "Rhino": [
+          "000002723:storm-bolter",
+          "000002723:armoured-tracks"
+        ]
+      }
     },
     "weapons": [
       {
@@ -136,6 +142,11 @@
           [
             "000002723:storm-bolter",
             "000002723:armoured-tracks"
+          ],
+          [
+            "000002723:storm-bolter",
+            "000002723:armoured-tracks",
+            "000002723:hunter-killer-missile"
           ]
         ]
       }
@@ -171,7 +182,24 @@
       "factionId": "",
       "description": "At the end of your Command phase, this model regains 1 lost wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isDamaged",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "One Shot",

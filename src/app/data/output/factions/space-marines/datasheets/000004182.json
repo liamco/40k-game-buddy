@@ -23,7 +23,20 @@
       "parsed": [
         "000004182:plasma-pistol",
         "000004182:power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Wolf Scout Pack Leader model": [
+          "000004182:plasma-pistol",
+          "000004182:power-weapon"
+        ],
+        "Wolf Scout": [
+          "000004182:plasma-pistol",
+          "000004182:combat-blade"
+        ],
+        "Hunting Wolf": [
+          "000004182:teeth-and-claws"
+        ]
+      }
     },
     "weapons": [
       {
@@ -186,7 +199,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Wolf Scout Pack Leader model",
+              "Wolf Scout"
+            ]
           }
         ]
       },
@@ -247,7 +264,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Wolf Scout"
+            ]
           }
         ]
       },
@@ -276,7 +296,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Wolf Scout Pack Leader model"
+            ]
           }
         ]
       },
@@ -340,7 +363,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Hunting Wolf"
+            ]
           }
         ]
       }
@@ -405,11 +431,30 @@
         "items": [
           [
             "000004182:plasma-pistol",
-            "000004182:power-weapon"
+            "000004182:combat-blade"
           ],
           [
-            "000004182:power-weapon",
+            "000004182:bolt-pistol,-1-thunderclap",
+            "000004182:runic-stave"
+          ],
+          [
+            "000004182:plasma-pistol",
+            "000004182:combat-blade",
+            "wargear-ability:haywire-mine"
+          ],
+          [
+            "wargear-ability:haywire-mine",
+            "000004182:bolt-pistol,-1-thunderclap",
+            "000004182:runic-stave"
+          ],
+          [
+            "000004182:combat-blade",
             "000004182:plasma-gun"
+          ],
+          [
+            "000004182:combat-blade",
+            "000004182:plasma-gun",
+            "wargear-ability:haywire-mine"
           ]
         ]
       },
@@ -418,24 +463,6 @@
         "items": [
           [
             "000004182:teeth-and-claws"
-          ]
-        ]
-      },
-      {
-        "modelType": "OR",
-        "items": [
-          [
-            "000004182:plasma-pistol",
-            "000004182:power-weapon"
-          ]
-        ]
-      },
-      {
-        "modelType": "Hunting Wolve",
-        "items": [
-          [
-            "000004182:plasma-pistol",
-            "000004182:power-weapon"
           ]
         ]
       }

@@ -23,7 +23,13 @@
       "parsed": [
         "000002798:heavy-bolt-pistol",
         "000002798:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002798:heavy-bolt-pistol",
+          "000002798:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -142,7 +148,10 @@
           {
             "type": "ratio",
             "ratio": 5,
-            "count": 1
+            "count": 2,
+            "modelType": [
+              "Sword Brother"
+            ]
           }
         ]
       },
@@ -383,7 +392,31 @@
       "factionId": "",
       "description": "Each time an enemy unit within Engagement Range of this unit is selected to Fall Back, after it ends that Fall Back move, if this unit is not within Engagement Range of one or more enemy units, this unit can make a Normal move.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Normal move"
+          ],
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "notEquals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

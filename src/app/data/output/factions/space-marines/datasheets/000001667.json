@@ -36,7 +36,14 @@
         "000001667:tempest-bolter",
         "000001667:twin-heavy-onslaught-gatling-cannon",
         "000001667:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Gladiator Reaper": [
+          "000001667:tempest-bolter",
+          "000001667:twin-heavy-onslaught-gatling-cannon",
+          "000001667:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -219,6 +226,25 @@
             "000001667:tempest-bolter",
             "000001667:twin-heavy-onslaught-gatling-cannon",
             "000001667:armoured-hull"
+          ],
+          [
+            "000001667:tempest-bolter",
+            "000001667:twin-heavy-onslaught-gatling-cannon",
+            "000001667:armoured-hull",
+            "000001667:icarus-rocket-pod"
+          ],
+          [
+            "000001667:tempest-bolter",
+            "000001667:twin-heavy-onslaught-gatling-cannon",
+            "000001667:armoured-hull",
+            "000001667:ironhail-heavy-stubber"
+          ],
+          [
+            "000001667:tempest-bolter",
+            "000001667:twin-heavy-onslaught-gatling-cannon",
+            "000001667:armoured-hull",
+            "000001667:ironhail-heavy-stubber",
+            "000001667:icarus-rocket-pod"
           ]
         ]
       }
@@ -249,7 +275,28 @@
       "factionId": "",
       "description": "This model's twin heavy onslaught gatling cannon has the [SUSTAINED HITS 2] ability when targeting <span class=\"kwb\">INFANTRY</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "INFANTRY"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

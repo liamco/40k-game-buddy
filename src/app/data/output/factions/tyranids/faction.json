@@ -5,22 +5,6 @@
   "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids",
   "datasheets": [
     {
-      "id": "000000503",
-      "slug": "barbed-hierodule",
-      "name": "Barbed Hierodule",
-      "factionId": "TYR",
-      "factionSlug": "tyranids",
-      "role": "Other",
-      "roleLabel": "Other",
-      "supplementKey": "codex",
-      "path": "/data/factions/tyranids/datasheets/000000503.json",
-      "supplementLabel": "None",
-      "isSupplement": false,
-      "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Barbed-Hierodule",
-      "isForgeWorld": false,
-      "isLegends": true
-    },
-    {
       "id": "000002686",
       "slug": "barbgaunts",
       "name": "Barbgaunts",
@@ -99,22 +83,6 @@
       "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Deathleaper",
       "isForgeWorld": false,
       "isLegends": false
-    },
-    {
-      "id": "000000500",
-      "slug": "dimachaeron",
-      "name": "Dimachaeron",
-      "factionId": "TYR",
-      "factionSlug": "tyranids",
-      "role": "Other",
-      "roleLabel": "Other",
-      "supplementKey": "codex",
-      "path": "/data/factions/tyranids/datasheets/000000500.json",
-      "supplementLabel": "None",
-      "isSupplement": false,
-      "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Dimachaeron",
-      "isForgeWorld": false,
-      "isLegends": true
     },
     {
       "id": "000000495",
@@ -323,22 +291,6 @@
       "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Lictor",
       "isForgeWorld": false,
       "isLegends": false
-    },
-    {
-      "id": "000000499",
-      "slug": "malanthrope",
-      "name": "Malanthrope",
-      "factionId": "TYR",
-      "factionSlug": "tyranids",
-      "role": "Characters",
-      "roleLabel": "Characters",
-      "supplementKey": "codex",
-      "path": "/data/factions/tyranids/datasheets/000000499.json",
-      "supplementLabel": "None",
-      "isSupplement": false,
-      "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Malanthrope",
-      "isForgeWorld": false,
-      "isLegends": true
     },
     {
       "id": "000000474",
@@ -579,38 +531,6 @@
       "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Screamer-killer",
       "isForgeWorld": false,
       "isLegends": false
-    },
-    {
-      "id": "000000506",
-      "slug": "scythed-hierodule",
-      "name": "Scythed Hierodule",
-      "factionId": "TYR",
-      "factionSlug": "tyranids",
-      "role": "Other",
-      "roleLabel": "Other",
-      "supplementKey": "codex",
-      "path": "/data/factions/tyranids/datasheets/000000506.json",
-      "supplementLabel": "None",
-      "isSupplement": false,
-      "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Scythed-Hierodule",
-      "isForgeWorld": false,
-      "isLegends": true
-    },
-    {
-      "id": "000000483",
-      "slug": "sky-slasher-swarms",
-      "name": "Sky-slasher Swarms",
-      "factionId": "TYR",
-      "factionSlug": "tyranids",
-      "role": "Other",
-      "roleLabel": "Other",
-      "supplementKey": "codex",
-      "path": "/data/factions/tyranids/datasheets/000000483.json",
-      "supplementLabel": "None",
-      "isSupplement": false,
-      "link": "https://wahapedia.ru/wh40k10ed/factions/tyranids/Sky-slasher-Swarms",
-      "isForgeWorld": false,
-      "isLegends": true
     },
     {
       "id": "000000488",
@@ -897,7 +817,50 @@
           "legend": "Even as the beasts of the Assimilation Swarm stalk across the battlefield they make use of the abundant biomass yielded up by the prey worlds slow demise. Warrior organisms heal even the most grievous wounds in moments, or stagger upright and return to the fight after they seemed slain. A strain of revolting vitality flows through the Tyranid broods as though leeched direct from their dismayed victims.",
           "description": "In your Command phase, each Harvester unit from your army can Regenerate one friendly <span class=\"kwb\">TYRANIDS</span> unit that is within 6\" of it. A unit can only be regenerated once per phase. Each time a unit regenerates, do one of the following:<br><ul><li>One model in that unit regains up to D3+1 lost wounds.</li><li>One destroyed Infantry model (excluding Characters) is returned to that unit with its full wounds remaining. If that unit is an Endless Multitude unit, up to 3 destroyed models are returned instead.</li></ul>",
           "detachment": "Assimilation Swarm",
-          "detachmentId": 771
+          "detachmentId": 771,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "w",
+              "value": "D3+1",
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "regenerating"
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "ENDLESS MULTITUDE"
+              ],
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "Endless Multitude"
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "w",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "Endless Multitude"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "enhancements": [
@@ -909,7 +872,36 @@
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
           "legend": "This nightmarish creature seems virtually unkillable, its every hurt healing in moments as it guzzles down the hunks of bubbling biomatter that were once foes.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only (excluding Monsters models). The bearer's unit can be regenerated up to twice per phase, instead of once."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only (excluding Monsters models). The bearer's unit can be regenerated up to twice per phase, instead of once.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "REGENERATE"
+              ],
+              "value": 2,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "keywords": [
+                    "TYRANIDS"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                },
+                {
+                  "entity": "thisModel",
+                  "keywords": [
+                    "MONSTER"
+                  ],
+                  "operator": "notIncludes",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -919,7 +911,57 @@
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
           "legend": "The swarm's warrior organisms fight with instinctive and single-minded ferocity to protect the all-devouring organisms in their midst.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While the bearer is within 6\" of one or more friendly Harvester units, you can target the bearer's unit with the Heroic Intervention Stratagem for 0CP. In addition, while the bearer is within 6\" of one or more friendly <span class=\"kwb\">HARVESTER</span> units, models in the bearer's unit have the Fights First ability."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While the bearer is within 6\" of one or more friendly Harvester units, you can target the bearer's unit with the Heroic Intervention Stratagem for 0CP. In addition, while the bearer is within 6\" of one or more friendly <span class=\"kwb\">HARVESTER</span> units, models in the bearer's unit have the Fights First ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "FIGHTS FIRST"
+              ],
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isWithinRange",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisArmy",
+                  "keywords": [
+                    "HARVESTER"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "Heroic Intervention"
+              ],
+              "value": "0CP",
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isWithinRange",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisArmy",
+                  "keywords": [
+                    "HARVESTER"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -929,7 +971,40 @@
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
           "legend": "Parasitised biomass and revivifying fluids flow through the Assimilation Swarm like lifeblood.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While a friendly Harvester model is within 12\" of the bearer, when using the Feed the Swarm ability, that <span class=\"kwb\">HARVESTER</span> model can Regenerate one friendly <span class=\"kwb\">TYRANIDS</span> unit that is within 9\" of it, instead of one within 6\"."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While a friendly Harvester model is within 12\" of the bearer, when using the Feed the Swarm ability, that <span class=\"kwb\">HARVESTER</span> model can Regenerate one friendly <span class=\"kwb\">TYRANIDS</span> unit that is within 9\" of it, instead of one within 6\".",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "Feed the Swarm"
+              ],
+              "value": "",
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "range",
+              "value": 9,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isWithinRangeOfFriendlyHarvester",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -970,7 +1045,54 @@
           ],
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
-          "description": "<b>WHEN:</b> Your Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that just destroyed an enemy unit.<br><br><b>EFFECT:</b> Your unit immediately Regenerates (See Feed the Swarm). When doing so, if your unit is a Harvester unit and you choose for one model to regain up to D3 lost wounds, that model regains up to 3 lost wounds instead."
+          "description": "<b>WHEN:</b> Your Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that just destroyed an enemy unit.<br><br><b>EFFECT:</b> Your unit immediately Regenerates (See Feed the Swarm). When doing so, if your unit is a Harvester unit and you choose for one model to regain up to D3 lost wounds, that model regains up to 3 lost wounds instead.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "REGENERATES"
+              ],
+              "value": null,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isHarvester",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "w",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isHarvester",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisModel",
+              "effect": "staticNumber",
+              "attribute": "w",
+              "value": "D3",
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isHarvester",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1036,7 +1158,33 @@
           ],
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, melee weapons equipped by models in your unit have the [LETHAL HITS] ability. If your unit is a Harvester unit, each time a model in that unit makes a melee attack, a successful unmodified Hit roll of 5+ scores a Critical Hit as well."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, melee weapons equipped by models in your unit have the [LETHAL HITS] ability. If your unit is a Harvester unit, each time a model in that unit makes a melee attack, a successful unmodified Hit roll of 5+ scores a Critical Hit as well.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LETHAL HITS"
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 5,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "abilities": [
+                    "Harvester"
+                  ],
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1066,7 +1214,26 @@
           ],
           "detachment": "Assimilation Swarm",
           "detachmentId": 771,
-          "description": "<b>WHEN:</b> Any phase, when a <span class=\"kwb\">TYRANIDS</span> unit from your army is destroyed, before the last model in it is removed from play.<br><br><b>TARGET:</b> One Harvester unit from your army that is within 6\" of that destroyed unit.<br><br><b>EFFECT:</b> Regenerate one friendly <span class=\"kwb\">TYRANIDS</span> unit within 6\" of your <span class=\"kwb\">HARVESTER</span> unit (See Feed the Swarm)."
+          "description": "<b>WHEN:</b> Any phase, when a <span class=\"kwb\">TYRANIDS</span> unit from your army is destroyed, before the last model in it is removed from play.<br><br><b>TARGET:</b> One Harvester unit from your army that is within 6\" of that destroyed unit.<br><br><b>EFFECT:</b> Regenerate one friendly <span class=\"kwb\">TYRANIDS</span> unit within 6\" of your <span class=\"kwb\">HARVESTER</span> unit (See Feed the Swarm).",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "FEED THE SWARM"
+              ],
+              "value": null,
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "state": "isDestroyed",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -1081,7 +1248,23 @@
           "legend": "This massed swarm of warrior organisms spills over and around one another as they advance, chitinous killers packing corridors floor to ceiling and bursting open hatchways with sheer weight of numbers.",
           "description": "Each time a <span class=\"kwb\">TYRANIDS</span> unit from your army moves, models in that unit can move through friendly <span class=\"kwb\">TYRANIDS</span> models as if they were not there. In addition, each time a <span class=\"kwb\">TYRANIDS</span> unit from your army attempts to operate a closed Hatchway, if your opponent tries to prevent it, add 1 to your result of the roll-off.",
           "detachment": "Biotide",
-          "detachmentId": 975
+          "detachmentId": 975,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "roll-off",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "opponentArmy",
+                  "operator": "notEquals",
+                  "value": "none"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "enhancements": [
@@ -1093,7 +1276,26 @@
           "detachment": "Biotide",
           "detachmentId": 975,
           "legend": "Like a psionic fire burning in the depths of the void, this organisms mere presence unifies and anchors all the swarms flowing about it.",
-          "description": "While a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 9\" of the bearer (ignoring Walls and closed Hatchways), that unit is within Synapse Range of the bearer and of your army."
+          "description": "While a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 9\" of the bearer (ignoring Walls and closed Hatchways), that unit is within Synapse Range of the bearer and of your army.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "SYNAPSE"
+              ],
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inRangeOfFriendlyObjective",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1103,7 +1305,26 @@
           "detachment": "Biotide",
           "detachmentId": 975,
           "legend": "This internal symbiote can expend itself in a single flood of aggression stimulants and drive its host into a sudden, accelerated attack against a key target.",
-          "description": "Once per battle, at the end of your opponents Charge phase, the bearer can use this Enhancement. If it does, it can declare a charge as if it were your Charge phase."
+          "description": "Once per battle, at the end of your opponents Charge phase, the bearer can use this Enhancement. If it does, it can declare a charge as if it were your Charge phase.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "CHARGE"
+              ],
+              "value": "as if it were your Charge phase",
+              "conditions": [
+                {
+                  "entity": "opponentArmy",
+                  "state": "hasChargedThisTurn",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "stratagems": [
@@ -1144,7 +1365,24 @@
           ],
           "detachment": "Biotide",
           "detachmentId": 975,
-          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One TERMAGANTs unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit can ignore other models in their unit for the purposes of determining visibility. In addition, if your unit is within Synapse Range of your army, each time a model in your unit makes an attack, you can re-roll the Hit roll."
+          "description": "<b>WHEN:</b> Your Shooting phase.<br><br><b>TARGET:</b> One TERMAGANTs unit from your army that has not been selected to shoot this phase.<br><br><b>EFFECT:</b> Until the end of the phase, models in your unit can ignore other models in their unit for the purposes of determining visibility. In addition, if your unit is within Synapse Range of your army, each time a model in your unit makes an attack, you can re-roll the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "failed",
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "state": "inSynapseRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1159,7 +1397,32 @@
           ],
           "detachment": "Biotide",
           "detachmentId": 975,
-          "description": "<b>WHEN:</b> Your Movement phase, just after a <span class=\"kwb\">TYRANIDS</span> unit from your army has opened a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> unit.<br><br><b>EFFECT:</b> Your unit can make a Swarm move. To do so, your unit can be moved up to 3\", but at least one model from your unit must end that move on the opposite side of that Hatchway from the one it started the phase on. When doing so, those models can be moved within Engagement Range of enemy units."
+          "description": "<b>WHEN:</b> Your Movement phase, just after a <span class=\"kwb\">TYRANIDS</span> unit from your army has opened a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> unit.<br><br><b>EFFECT:</b> Your unit can make a Swarm move. To do so, your unit can be moved up to 3\", but at least one model from your unit must end that move on the opposite side of that Hatchway from the one it started the phase on. When doing so, those models can be moved within Engagement Range of enemy units.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "SWARM"
+              ],
+              "value": true
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1253,7 +1516,32 @@
           ],
           "detachment": "Boarding Swarm",
           "detachmentId": 974,
-          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit opens a Hatchway.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within 3\" of that Hatchway and is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Your unit can make a Pounce move. To do so, your unit can be moved up to 3\", but must end that move as close as possible to that Hatchway. When doing so, those models can be moved within Engagement Range of that enemy unit, but only that enemy unit."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit opens a Hatchway.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within 3\" of that Hatchway and is not within Engagement Range of one or more enemy units.<br><br><b>EFFECT:</b> Your unit can make a Pounce move. To do so, your unit can be moved up to 3\", but must end that move as close as possible to that Hatchway. When doing so, those models can be moved within Engagement Range of that enemy unit, but only that enemy unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "Pounce"
+              ],
+              "value": "3\"",
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "state": "inEngagementRange",
+                  "operator": "notEquals",
+                  "value": true
+                },
+                {
+                  "entity": "opposingUnit",
+                  "state": "inEngagementRange",
+                  "operator": "includes",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1268,7 +1556,45 @@
           ],
           "detachment": "Boarding Swarm",
           "detachmentId": 974,
-          "description": "<b>WHEN:</b> Fight phase, just after a <span class=\"kwb\">TYRANIDS</span> unit from your army destroys an enemy unit.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> unit.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 3\". After that move, if your unit is within range of an objective marker and no enemy units are within range of that objective marker, that objective marker is Secured by your army."
+          "description": "<b>WHEN:</b> Fight phase, just after a <span class=\"kwb\">TYRANIDS</span> unit from your army destroys an enemy unit.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> unit.<br><br><b>EFFECT:</b> If your unit is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 3\". After that move, if your unit is within range of an objective marker and no enemy units are within range of that objective marker, that objective marker is Secured by your army.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inEngagementRange",
+                  "operator": "equals",
+                  "value": false
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "Secured"
+              ],
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inRangeOfObjective",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "opposingUnit",
+                  "state": "inRangeOfObjective",
+                  "operator": "equals",
+                  "value": false
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1283,7 +1609,23 @@
           ],
           "detachment": "Boarding Swarm",
           "detachmentId": 974,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. On a 5+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. On a 5+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "value": 5,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "hasFoughtThisPhase",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -1338,7 +1680,30 @@
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
           "legend": "Contained deep within this organism's body is a pulsating sac filled with a cocktail of adrenostimulant fluids linked to a ring of vascular-pneumatic sphincters, allowing them one last-ditch strike.",
-          "description": "Tyranids Monster model only. If the bearer is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 3+, do not remove it from play. It can fight after the attacking model's unit has finished making its attacks, and is then removed from play."
+          "description": "Tyranids Monster model only. If the bearer is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 3+, do not remove it from play. It can fight after the attacking model's unit has finished making its attacks, and is then removed from play.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "hasFoughtThisPhase",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FIGHT AFTER BEING DESTROYED"
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1395,7 +1760,44 @@
           ],
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> That enemy unit must take a Battle-shock test and, until the end of the phase, each time a model in that enemy unit makes an attack that targets your unit, subtract 1 from the Hit roll. If that Battle-shock test was failed, subtract 1 from the Wound roll as well."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> That enemy unit must take a Battle-shock test and, until the end of the phase, each time a model in that enemy unit makes an attack that targets your unit, subtract 1 from the Hit roll. If that Battle-shock test was failed, subtract 1 from the Wound roll as well.",
+          "mechanics": [
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "attribute": "h",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "isBattleShocked",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "attribute": "w",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "isBattleShocked",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisUnit",
+                  "state": "isBattleShocked",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1410,7 +1812,24 @@
           ],
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, you can re-roll the Hit roll."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes an attack, you can re-roll the Hit roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "all",
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "state": "hasFiredThisPhase",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1449,7 +1868,68 @@
           ],
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
-          "description": "<b>WHEN:</b> Your Charge phase, just after a Tyranids Monster model from your army ends a Charge move.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> <span class=\"kwb\">MONSTER</span> model.<br><br><b>EFFECT:</b> Select one enemy unit within Engagement Range of your model and roll six D6: for each 4+, that enemy unit suffers 1 mortal wound."
+          "description": "<b>WHEN:</b> Your Charge phase, just after a Tyranids Monster model from your army ends a Charge move.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> <span class=\"kwb\">MONSTER</span> model.<br><br><b>EFFECT:</b> Select one enemy unit within Engagement Range of your model and roll six D6: for each 4+, that enemy unit suffers 1 mortal wound.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "mortalWounds",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "hasChargedThisTurn",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisModel",
+                  "state": "inEngagementRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "targetUnit",
+              "effect": "mortalWounds",
+              "value": 6,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "hasChargedThisTurn",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisModel",
+                  "state": "inEngagementRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "targetUnit",
+              "effect": "rollBonus",
+              "attribute": "m",
+              "value": 4,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "hasChargedThisTurn",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisModel",
+                  "state": "inEngagementRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1465,7 +1945,26 @@
           ],
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after a Tyranids Monster model from your army with the Deadly Demise ability that cannot <span class=\"kwb\">FLY</span> is destroyed.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> <span class=\"kwb\">MONSTER</span> model. You can use this Stratagem on that model even though it was just destroyed.<br><br><b>EFFECT:</b> Do not roll one D6 to determine whether mortal wounds are inflicted by your model's Deadly Demise ability. Instead, mortal wounds are automatically inflicted."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after a Tyranids Monster model from your army with the Deadly Demise ability that cannot <span class=\"kwb\">FLY</span> is destroyed.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> <span class=\"kwb\">MONSTER</span> model. You can use this Stratagem on that model even though it was just destroyed.<br><br><b>EFFECT:</b> Do not roll one D6 to determine whether mortal wounds are inflicted by your model's Deadly Demise ability. Instead, mortal wounds are automatically inflicted.",
+          "mechanics": [
+            {
+              "entity": "targetModel",
+              "effect": "mortalWounds",
+              "value": "automatic",
+              "conditions": [
+                {
+                  "entity": "opposingModel",
+                  "abilities": [
+                    "DEADLY DEMISE"
+                  ],
+                  "state": "cannot FLY",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1480,7 +1979,38 @@
           ],
           "detachment": "Crusher Stampede",
           "detachmentId": 769,
-          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that has not been selected to move this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a Normal, Advance or Fall Back move, it can move through models (excluding <span class=\"kwb\">TITANIC</span> models) and sections of terrain features that are 4\" or less in height. When doing so: <br><ul><li>It can move within Engagement Range of enemy models, but cannot end that move within Engagement Range of them. </li><li>It can also move through sections of terrain features that are more than 4\" in height, but if it does, after its unit has moved, roll one D6: on a 1, your unit is Battle-shocked.</li></ul>"
+          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that has not been selected to move this phase.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit makes a Normal, Advance or Fall Back move, it can move through models (excluding <span class=\"kwb\">TITANIC</span> models) and sections of terrain features that are 4\" or less in height. When doing so: <br><ul><li>It can move within Engagement Range of enemy models, but cannot end that move within Engagement Range of them. </li><li>It can also move through sections of terrain features that are more than 4\" in height, but if it does, after its unit has moved, roll one D6: on a 1, your unit is Battle-shocked.</li></ul>",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "m",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isBattleShocked",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollPenalty",
+              "attribute": "m",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isBattleShocked",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -1516,7 +2046,35 @@
           "detachment": "Infestation Swarm",
           "detachmentId": 979,
           "legend": "Soon after this nightmarish predator vanishes from sight, its victims feel the hot reek of its breath upon the napes of their necks in the instant before it strikes.",
-          "description": "Once per battle, at the end of your opponent's Fight phase, if the bearer is not within Engagement Range of one or more enemy units, it can use this Enhancement. If it does, remove the bearer from the battlefield and place it into Strategic Reserves. It will arrive back on the battlefield in the Reinforcements step of your next Movement phase as if it had the Deep Strike ability. If this is not possible, the bearer is destroyed. When the bearer is set back up on the battlefield, until the end of the turn, it cannot declare a charge."
+          "description": "Once per battle, at the end of your opponent's Fight phase, if the bearer is not within Engagement Range of one or more enemy units, it can use this Enhancement. If it does, remove the bearer from the battlefield and place it into Strategic Reserves. It will arrive back on the battlefield in the Reinforcements step of your next Movement phase as if it had the Deep Strike ability. If this is not possible, the bearer is destroyed. When the bearer is set back up on the battlefield, until the end of the turn, it cannot declare a charge.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "DEEP STRIKE"
+              ],
+              "value": null,
+              "conditions": []
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "CANNOT DECLARE A CHARGE"
+              ],
+              "value": null,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isBeingLed",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1526,7 +2084,17 @@
           "detachment": "Infestation Swarm",
           "detachmentId": 979,
           "legend": "Able to taste its prey's terrified mental signatures like pheromones, there is nowhere to hide from this beast.",
-          "description": "Each time the bearer declares a charge, it can target enemy units that are not visible to it."
+          "description": "Each time the bearer declares a charge, it can target enemy units that are not visible to it.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "INDIRECT FIRE"
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "stratagems": [
@@ -1567,7 +2135,24 @@
           ],
           "detachment": "Infestation Swarm",
           "detachmentId": 979,
-          "description": "<b>WHEN:</b> Your Movement phase, just after a GREAT DEVOURER unit from your army opens a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">GREAT</span> <span class=\"kwb\">DEVOURER</span> unit.<br><br><b>EFFECT:</b> Your unit can make a Normal move of up to 3\", provided at least one of its models ends that move on the opposite side of that Hatchway from when your unit opened it."
+          "description": "<b>WHEN:</b> Your Movement phase, just after a GREAT DEVOURER unit from your army opens a Hatchway.<br><br><b>TARGET:</b> That <span class=\"kwb\">GREAT</span> <span class=\"kwb\">DEVOURER</span> unit.<br><br><b>EFFECT:</b> Your unit can make a Normal move of up to 3\", provided at least one of its models ends that move on the opposite side of that Hatchway from when your unit opened it.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1582,7 +2167,24 @@
           ],
           "detachment": "Infestation Swarm",
           "detachmentId": 979,
-          "description": "<b>WHEN:</b> Fight phase, just after the enemy <span class=\"kwb\">WARLORD</span> is destroyed (and is not returned to the battlefield) by a GREAT DEVOURER unit from your army.<br><br><b>TARGET:</b> That <span class=\"kwb\">GREAT</span> <span class=\"kwb\">DEVOURER</span> unit.<br><br><b>EFFECT:</b> In your opponent's next Command phase, each enemy unit on the battlefield must take a Battle-shock test, subtracting 1 from the result. This Stratagem cannot cause a unit to take two Battle-shock tests in the same phase."
+          "description": "<b>WHEN:</b> Fight phase, just after the enemy <span class=\"kwb\">WARLORD</span> is destroyed (and is not returned to the battlefield) by a GREAT DEVOURER unit from your army.<br><br><b>TARGET:</b> That <span class=\"kwb\">GREAT</span> <span class=\"kwb\">DEVOURER</span> unit.<br><br><b>EFFECT:</b> In your opponent's next Command phase, each enemy unit on the battlefield must take a Battle-shock test, subtracting 1 from the result. This Stratagem cannot cause a unit to take two Battle-shock tests in the same phase.",
+          "mechanics": [
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "attribute": "ld",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isDestroyed",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1612,7 +2214,64 @@
           "legend": "Every warrior organism in the Tyranid race is fashioned by the ineffable alien will of the Hive Mind. Their flesh and chitin is endlessly mutable, honed into whatever form will prove most lethal to the prey.",
           "description": "At the start of the first battle round, select one of the following Hyper-adaptations to be active for <span class=\"kwb\">TYRANIDS</span> units from your army until the end of the battle:<br><br><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Swarming Instincts</p><p>Each time a <span class=\"kwb\">TYRANIDS</span> model with this Hyper-adaptation makes an attack that targets an <span class=\"kwb\">INFANTRY</span> or <span class=\"kwb\">SWARM</span> unit, that attack has the <span class=\"kwb2 bluefont\"><span class=\"tooltip00016\" data-tooltip-content=\"#tooltip_content00016\"><span class=\"tt kwbu\">[SUSTAINED</span> <span class=\"tt kwbu\">HITS</span> <span class=\"tt kwbu\">1]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Hyper-aggression</p><p>Each time a <span class=\"kwb\">TYRANIDS</span> model with this Hyper-adaptation makes an attack that targets a <span class=\"kwb\">MONSTER</span> or <span class=\"kwb\">VEHICLE</span> unit, that attack has the <span class=\"kwb2 bluefont\"><span class=\"tooltip00078\" data-tooltip-content=\"#tooltip_content00078\"><span class=\"tt kwbu\">[LETHAL</span> <span class=\"tt kwbu\">HITS]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div><div class=\"BreakInsideAvoid\"><table max-width=\"480px\"><tbody><tbody><tr><td class=\"td_w\"><p class=\"impact18\">Hive Predators</p><p>Each time a <span class=\"kwb\">TYRANIDS</span> model with this Hyper-adaptation makes an attack that targets a <span class=\"kwb\">CHARACTER</span> unit, on a <span class=\"tooltip00006\" data-tooltip-content=\"#tooltip_content00006\"><span class=\"tt kwbu\">Critical</span> <span class=\"tt kwbu\">Hit</span></span>, that attack has the <span class=\"kwb2 bluefont\"><span class=\"tooltip00037\" data-tooltip-content=\"#tooltip_content00037\"><span class=\"tt kwbu\">[PRECISION]</span></span></span> ability.</p></td></tr></tbody></tbody></table></div>",
           "detachment": "Invasion Fleet",
-          "detachmentId": 748
+          "detachmentId": 748,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SUSTAINED HITS"
+              ],
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "keywords": [
+                    "INFANTRY",
+                    "SWARM"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "LETHAL HITS"
+              ],
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "keywords": [
+                    "MONSTER",
+                    "VEHICLE"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "PRECISION"
+              ],
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "keywords": [
+                    "CHARACTER"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "enhancements": [
@@ -1634,7 +2293,52 @@
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
           "legend": "This creature was created for one purpose: to completely eradicate the defenders of the target prey world.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Once per turn, you can re-roll one Hit roll, one Wound roll, one Damage roll, one Advance roll, one Charge roll or one saving throw made for the bearer."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Once per turn, you can re-roll one Hit roll, one Wound roll, one Damage roll, one Advance roll, one Charge roll or one saving throw made for the bearer.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "all",
+              "conditions": []
+            },
+            {
+              "entity": "thisModel",
+              "effect": "reroll",
+              "attribute": "w",
+              "value": "all",
+              "conditions": []
+            },
+            {
+              "entity": "thisModel",
+              "effect": "reroll",
+              "attribute": "d",
+              "value": "all",
+              "conditions": []
+            },
+            {
+              "entity": "thisModel",
+              "effect": "reroll",
+              "attribute": "m",
+              "value": "all",
+              "conditions": []
+            },
+            {
+              "entity": "thisModel",
+              "effect": "reroll",
+              "attribute": "a",
+              "value": "all",
+              "conditions": []
+            },
+            {
+              "entity": "thisModel",
+              "effect": "reroll",
+              "attribute": "s",
+              "value": "all",
+              "conditions": []
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1644,7 +2348,26 @@
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
           "legend": "With a neuro-cortex that pulsates with the irresistible power of the Hive Mind, this leader acts as a blazing synaptic beacon to the lesser creatures of the swarm, the better to direct their actions and react to the ever-changing state of battle.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 9\" of the bearer, that unit is within Synapse Range of your army."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 9\" of the bearer, that unit is within Synapse Range of your army.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "SYNAPSE"
+              ],
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inRangeOfFriendlyObjective",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1682,7 +2405,46 @@
           ],
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> Up to two <span class=\"kwb\">TYRANIDS</span> units from your army that are within Synapse Range of your army and are eligible to fight, or one other <span class=\"kwb\">TYRANIDS</span> unit from your army that is eligible to fight.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in any of those selected units makes an attack, an unmodified Hit roll of 5+ scores a Critical Hit."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> Up to two <span class=\"kwb\">TYRANIDS</span> units from your army that are within Synapse Range of your army and are eligible to fight, or one other <span class=\"kwb\">TYRANIDS</span> unit from your army that is eligible to fight.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in any of those selected units makes an attack, an unmodified Hit roll of 5+ scores a Critical Hit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isEligibleToFight",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "keywords": [
+                    "TYRANIDS"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                },
+                {
+                  "entity": "thisUnit",
+                  "state": "inSynapseRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1724,7 +2486,26 @@
           ],
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
-          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> Up to two <span class=\"kwb\">TYRANIDS</span> units from your army that are within Synapse Range of your army, or one other <span class=\"kwb\">TYRANIDS</span> unit from your army.<br><br><b>EFFECT:</b> Select one Hyper-adaptation. Until the start of your next Command phase, that Hyper-adaptation is active for those selected units in addition to any other that may be active for your army.<br><br><b>RESTRICTIONS:</b> You cannot select the same Hyper-adaptation you selected at the start of the first battle round."
+          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> Up to two <span class=\"kwb\">TYRANIDS</span> units from your army that are within Synapse Range of your army, or one other <span class=\"kwb\">TYRANIDS</span> unit from your army.<br><br><b>EFFECT:</b> Select one Hyper-adaptation. Until the start of your next Command phase, that Hyper-adaptation is active for those selected units in addition to any other that may be active for your army.<br><br><b>RESTRICTIONS:</b> You cannot select the same Hyper-adaptation you selected at the start of the first battle round.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "Hyper-adaptation"
+              ],
+              "value": "active",
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "state": "inSynapseRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1739,7 +2520,30 @@
           ],
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
-          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6: on a 4+, do not remove it from play. The destroyed model can fight after the attacking model's unit has finished making its attacks, and is then removed from play."
+          "description": "<b>WHEN:</b> Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6: on a 4+, do not remove it from play. The destroyed model can fight after the attacking model's unit has finished making its attacks, and is then removed from play.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "value": 4,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "hasFoughtThisPhase",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisModel",
+              "effect": "addsAbility",
+              "abilities": [
+                "FIGHT AFTER DEATH"
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1754,7 +2558,44 @@
           ],
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
-          "description": "<b>WHEN:</b> Fight phase, just before a <span class=\"kwb\">TYRANIDS</span> unit from your army Consolidates.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time your unit Consolidates, models in it can move an additional 3\" as long as your unit can end that move within Engagement Range of one or more enemy units. If your unit is within Synapse Range of your army and not within Engagement Range of any enemy units, instead of making that Consolidation move, it can make a Normal move of up to 6\"."
+          "description": "<b>WHEN:</b> Fight phase, just before a <span class=\"kwb\">TYRANIDS</span> unit from your army Consolidates.<br><br><b>TARGET:</b> That <span class=\"kwb\">TYRANIDS</span> unit.<br><br><b>EFFECT:</b> Until the end of the phase, each time your unit Consolidates, models in it can move an additional 3\" as long as your unit can end that move within Engagement Range of one or more enemy units. If your unit is within Synapse Range of your army and not within Engagement Range of any enemy units, instead of making that Consolidation move, it can make a Normal move of up to 6\".",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inEngagementRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 6,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inSynapseRange",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisUnit",
+                  "state": "inEngagementRange",
+                  "operator": "equals",
+                  "value": false
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1769,7 +2610,16 @@
           ],
           "detachment": "Invasion Fleet",
           "detachmentId": 748,
-          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> Up to two Endless Multitude units from your army that are within Synapse Range of your army, or one other <span class=\"kwb\">ENDLESS</span> <span class=\"kwb\">MULTITUDE</span> unit from your army.<br><br><b>EFFECT:</b> You can return up to D3+3 destroyed models to each of the selected units."
+          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> Up to two Endless Multitude units from your army that are within Synapse Range of your army, or one other <span class=\"kwb\">ENDLESS</span> <span class=\"kwb\">MULTITUDE</span> unit from your army.<br><br><b>EFFECT:</b> You can return up to D3+3 destroyed models to each of the selected units.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "w",
+              "value": "D3+3"
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -1835,7 +2685,30 @@
           "detachment": "Subterranean Assault",
           "detachmentId": 1057,
           "legend": "Only rarely manifested by the hive fleets, the Trygon Prime possesses a greatly enhanced synaptic network within its neural cortex, enabling it to more precisely coordinate the assaults of burrowing Tyranid creatures.",
-          "description": "Trygon model only. The bearer gains the Synapse keyword. Improve the Strength and Weapon Skill characteristics of melee weapons equipped by the bearer by 1."
+          "description": "Trygon model only. The bearer gains the Synapse keyword. Improve the Strength and Weapon Skill characteristics of melee weapons equipped by the bearer by 1.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "addsKeyword",
+              "keywords": [
+                "Synapse"
+              ],
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "attribute": "bsWs",
+              "value": 1
+            },
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "attribute": "s",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "stratagems": [
@@ -1867,7 +2740,24 @@
           ],
           "detachment": "Subterranean Assault",
           "detachmentId": 1057,
-          "description": "<b>WHEN:</b> Your Charge phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that was set up as Reinforcements this turn.<br><br><b>EFFECT:</b> Until the end of the phase, friendly Tyranids units within 6\" of your unit can re-roll Charge rolls."
+          "description": "<b>WHEN:</b> Your Charge phase.<br><br><b>TARGET:</b> One Tyranids Monster unit from your army that was set up as Reinforcements this turn.<br><br><b>EFFECT:</b> Until the end of the phase, friendly Tyranids units within 6\" of your unit can re-roll Charge rolls.",
+          "mechanics": [
+            {
+              "entity": "thisArmy",
+              "effect": "reroll",
+              "attribute": "h",
+              "value": "failed",
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "state": "isReinforcements",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1897,7 +2787,25 @@
           ],
           "detachment": "Subterranean Assault",
           "detachmentId": 1057,
-          "description": "<b>WHEN:</b> End of your Movement phase.<br><br><b>TARGET:</b> One Tyranids unit from your army that was set up as Reinforcements this turn.<br><br><b>EFFECT:</b> Until the end of your next Fight phase, weapons equipped by models in your unit have the [SUSTAINED HITS 1] and [IGNORES COVER] abilities."
+          "description": "<b>WHEN:</b> End of your Movement phase.<br><br><b>TARGET:</b> One Tyranids unit from your army that was set up as Reinforcements this turn.<br><br><b>EFFECT:</b> Until the end of your next Fight phase, weapons equipped by models in your unit have the [SUSTAINED HITS 1] and [IGNORES COVER] abilities.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SUSTAINED HITS"
+              ],
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "IGNORES COVER"
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1912,7 +2820,30 @@
           ],
           "detachment": "Subterranean Assault",
           "detachmentId": 1057,
-          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One Tyranids unit from your army, wholly within 9\" of one or more Tunnel Markers you placed.<br><br><b>EFFECT:</b> One model in your unit regains up to D3+1 lost wounds, or you can return up to D3+1 destroyed models with a Wounds characteristic of 1 to your unit, with their full wounds remaining, instead."
+          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One Tyranids unit from your army, wholly within 9\" of one or more Tunnel Markers you placed.<br><br><b>EFFECT:</b> One model in your unit regains up to D3+1 lost wounds, or you can return up to D3+1 destroyed models with a Wounds characteristic of 1 to your unit, with their full wounds remaining, instead.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "w",
+              "value": "D3+1"
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "a",
+              "value": "D3+1",
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isBelowStartingStrength",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1927,7 +2858,26 @@
           ],
           "detachment": "Subterranean Assault",
           "detachmentId": 1057,
-          "description": "<b>WHEN:</b> Command phase.<br><br><b>TARGET:</b> One Mawloc or Trygon unit from your army.<br><br><b>EFFECT:</b> Until the start of your next Command phase, your unit has the Synapse keyword."
+          "description": "<b>WHEN:</b> Command phase.<br><br><b>TARGET:</b> One Mawloc or Trygon unit from your army.<br><br><b>EFFECT:</b> Until the start of your next Command phase, your unit has the Synapse keyword.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "Synapse"
+              ],
+              "state": "until the start of your next Command phase",
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "operator": "equals",
+                  "value": "One Mawloc or Trygon unit"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -1969,7 +2919,22 @@
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
           "legend": "The Hive Mind channels lethal energy through its synaptic bioforms.",
-          "description": "Tyranids Psyker model only. Improve the Strength and Armour Penetration characteristics of psychic weapons equipped by the bearer by 1."
+          "description": "Tyranids Psyker model only. Improve the Strength and Armour Penetration characteristics of psychic weapons equipped by the bearer by 1.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "attribute": "s",
+              "value": 1
+            },
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "attribute": "ap",
+              "value": 1
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1979,7 +2944,75 @@
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
           "legend": "A maelstrom of psychostatic disruption boils about this bioform. It degrades artificial and biological cognition alike, causing teleport signals to fluctuate, geopositioning cogitators to spew contradictory data, and onrushing enemy warriors to reel in confusion.",
-          "description": "Tyranids Synapse model only. Enemy units that arrive on the battlefield from Reserves cannot be set up within 12\" of the bearer. In addition, once per battle, during the first or second battle round, when your opponent declares that a unit will arrive on the battlefield from Strategic Reserves, the bearer can use this Enhancement. If it does, roll one D6: on a 4+, that enemy unit cannot arrive on the battlefield this turn."
+          "description": "Tyranids Synapse model only. Enemy units that arrive on the battlefield from Reserves cannot be set up within 12\" of the bearer. In addition, once per battle, during the first or second battle round, when your opponent declares that a unit will arrive on the battlefield from Strategic Reserves, the bearer can use this Enhancement. If it does, roll one D6: on a 4+, that enemy unit cannot arrive on the battlefield this turn.",
+          "mechanics": [
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "value": 12,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisModel",
+              "effect": "rollBonus",
+              "value": 4,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1989,7 +3022,23 @@
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
           "legend": "The Hive Mind's synaptic network is so strong that even the mangled remains of mortally wounded beasts can be compelled to fight on.",
-          "description": "Tyranids Synapse model only. Each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack."
+          "description": "Tyranids Synapse model only. Each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack.",
+          "mechanics": [
+            {
+              "entity": "thisModel",
+              "effect": "rollPenalty",
+              "attribute": "d",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "opposingModel",
+                  "operator": "notEquals",
+                  "value": "null"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -1999,7 +3048,24 @@
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
           "legend": "This grotesque biomorphic symbiote buries itself in its hosts thorax and emits a droning psychic note. The longer prey are exposed to the sound, the worse their atavistic terror response becomes...",
-          "description": "Tyranids Synapse model only. While an enemy unit is within 9\" of the bearer, worsen that units Leadership characteristic by 1."
+          "description": "Tyranids Synapse model only. While an enemy unit is within 9\" of the bearer, worsen that units Leadership characteristic by 1.",
+          "mechanics": [
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "attribute": "ld",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isStationary",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "stratagems": [
@@ -2016,7 +3082,26 @@
           ],
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
-          "description": "<b>WHEN:</b> Command phase.<br><br><b>TARGET:</b> One Synapse unit from your army.<br><br><b>EFFECT:</b> Until the end of the turn, while a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 9\" of the selected unit, that unit is within Synapse Range of your army."
+          "description": "<b>WHEN:</b> Command phase.<br><br><b>TARGET:</b> One Synapse unit from your army.<br><br><b>EFFECT:</b> Until the end of the turn, while a friendly <span class=\"kwb\">TYRANIDS</span> unit is within 9\" of the selected unit, that unit is within Synapse Range of your army.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "SYNAPSE"
+              ],
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isWithinSynapseRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2057,7 +3142,24 @@
           ],
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Synapse unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Synapse unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "rollPenalty",
+              "attribute": "ap",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "hasFiredThisPhase",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2072,7 +3174,41 @@
           ],
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
-          "description": "<b>WHEN:</b> Any phase, just after an enemy unit fails a Battle-shock test.<br><br><b>TARGET:</b> One Synapse unit from your army within 12\" of that enemy unit.<br><br><b>EFFECT:</b> Roll six D6: for each 3+, that enemy unit suffers 1 mortal wound."
+          "description": "<b>WHEN:</b> Any phase, just after an enemy unit fails a Battle-shock test.<br><br><b>TARGET:</b> One Synapse unit from your army within 12\" of that enemy unit.<br><br><b>EFFECT:</b> Roll six D6: for each 3+, that enemy unit suffers 1 mortal wound.",
+          "mechanics": [
+            {
+              "entity": "opposingUnit",
+              "effect": "mortalWounds",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "Synapse"
+                },
+                {
+                  "entity": "opposingUnit",
+                  "state": "isBattleShocked",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 3,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "operator": "equals",
+                  "value": "failed"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2087,7 +3223,26 @@
           ],
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
-          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within Synapse Range of your army.<br><br><b>EFFECT:</b> Select one Synaptic Imperative, even if you have already selected that imperative this battle. Until the start of your next Command phase, that Synaptic Imperative is active for your unit instead of any other Synaptic Imperative that is active for your army."
+          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within Synapse Range of your army.<br><br><b>EFFECT:</b> Select one Synaptic Imperative, even if you have already selected that imperative this battle. Until the start of your next Command phase, that Synaptic Imperative is active for your unit instead of any other Synaptic Imperative that is active for your army.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "Synaptic Imperative"
+              ],
+              "value": "selected",
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "state": "within Synapse Range",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2102,7 +3257,33 @@
           ],
           "detachment": "Synaptic Nexus",
           "detachmentId": 773,
-          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within Synapse Range of your army and made a Fall Back move this phase.<br><br><b>EFFECT:</b> Your unit is eligible to shoot and declare a charge this turn."
+          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within Synapse Range of your army and made a Fall Back move this phase.<br><br><b>EFFECT:</b> Your unit is eligible to shoot and declare a charge this turn.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "eligible to shoot",
+                "eligible to charge"
+              ],
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "hasFiredThisPhase",
+                  "operator": "notEquals",
+                  "value": true
+                },
+                {
+                  "entity": "thisUnit",
+                  "state": "hasChargedThisTurn",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -2117,7 +3298,33 @@
           "legend": "To be trapped within the hull of a voidship with swarming Tyranids, subjected to the focused horror of the Shadow in the Warp that wreathes them, is more than some can stand.",
           "description": "When you unleash the Shadow in the Warp, subtract 1 from the Battle-shock test each enemy unit on the battlefield must take as a result. For each enemy unit that fails one of those tests, that enemy unit cannot Fire Overwatch this turn.",
           "detachment": "Tyranid Attack",
-          "detachmentId": 973
+          "detachmentId": 973,
+          "mechanics": [
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "attribute": "ld",
+              "value": 1,
+              "conditions": []
+            },
+            {
+              "entity": "opposingUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "CANNOT FIRE OVERWATCH"
+              ],
+              "value": "this turn",
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "attribute": "ld",
+                  "operator": "notEquals",
+                  "value": "passed"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "enhancements": [
@@ -2129,7 +3336,24 @@
           "detachment": "Tyranid Attack",
           "detachmentId": 973,
           "legend": "This gestalt colony of ganglean parasites amplifies the Hive Mind's localised control over its leading warrior organisms, driving them on to greater speed and aggression.",
-          "description": "In your Command phase, select one friendly TYRANiD WARRiORS wiTH MELEE BiO-wEAPONS or TYRANiD WARRiORS wiTH RANGED BiO-wEAPONS unit within 6\" of the bearer. Until the end of the turn, add 2\" to the Move characteristic of models in that unit."
+          "description": "In your Command phase, select one friendly TYRANiD WARRiORS wiTH MELEE BiO-wEAPONS or TYRANiD WARRiORS wiTH RANGED BiO-wEAPONS unit within 6\" of the bearer. Until the end of the turn, add 2\" to the Move characteristic of models in that unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 2,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isWithinRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2139,7 +3363,23 @@
           "detachment": "Tyranid Attack",
           "detachmentId": 973,
           "legend": "Threaded with molecular veins of absorbed alloys and minerals, this bioforms chitinous carapace has a dull glint that hints at its formidable resilience.",
-          "description": "Each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack (note that if given to a <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">PRIME</span> model, this only affects that model and not other models in its unit)."
+          "description": "Each time an attack is allocated to the bearer, subtract 1 from the Damage characteristic of that attack (note that if given to a <span class=\"kwb\">TYRANID</span> <span class=\"kwb\">PRIME</span> model, this only affects that model and not other models in its unit).",
+          "mechanics": [
+            {
+              "entity": "targetModel",
+              "effect": "rollPenalty",
+              "attribute": "d",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "stratagems": [
@@ -2156,7 +3396,26 @@
           ],
           "detachment": "Tyranid Attack",
           "detachmentId": 973,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within Synapse Range of your army and has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, melee weapons equipped by models in your unit have the [SUSTAINED HITS 1] ability."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is within Synapse Range of your army and has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, melee weapons equipped by models in your unit have the [SUSTAINED HITS 1] ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SUSTAINED HITS"
+              ],
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inSynapseRange",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2171,7 +3430,38 @@
           ],
           "detachment": "Tyranid Attack",
           "detachmentId": 973,
-          "description": "<b>WHEN:</b> Your Charge phase.<br><br><b>TARGET:</b> One TYRANIDS SYNAPSE unit from your army and one friendly <span class=\"kwb\">TYRANIDS</span> unit that has not declared a charge this phase.<br><br><b>EFFECT:</b> Select one enemy unit that is visible to your SYNAPSE unit. Until the end of the phase, each time your other unit declares a charge, it can include that enemy unit as a target of that charge, even if it is not visible to it, and when doing so, add 1 to the Charge roll."
+          "description": "<b>WHEN:</b> Your Charge phase.<br><br><b>TARGET:</b> One TYRANIDS SYNAPSE unit from your army and one friendly <span class=\"kwb\">TYRANIDS</span> unit that has not declared a charge this phase.<br><br><b>EFFECT:</b> Select one enemy unit that is visible to your SYNAPSE unit. Until the end of the phase, each time your other unit declares a charge, it can include that enemy unit as a target of that charge, even if it is not visible to it, and when doing so, add 1 to the Charge roll.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "s",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "hasNotDeclaredChargeThisPhase",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "c",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "state": "isVisible",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2211,7 +3501,44 @@
           ],
           "detachment": "Tyranid Attack",
           "detachmentId": 973,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One TYRANID WARRIORS wITH MELEE BIO-wEAPONS or TYRANID WARRIORS wITH RANGED BIO-wEAPONS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed as a result of an attack, do not remove it from play; after the attacking unit has finished making its attacks, roll one D6: on a 3-5, the closest enemy unit within 3\" of and visible to your unit suffers 1 mortal wound; on a 6, the closest enemy unit within 3\" of and visible to your unit suffers 2 mortal wounds. The destroyed model is then removed from play."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase or the Fight phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One TYRANID WARRIORS wITH MELEE BIO-wEAPONS or TYRANID WARRIORS wITH RANGED BIO-wEAPONS unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, each time a model in your unit is destroyed as a result of an attack, do not remove it from play; after the attacking unit has finished making its attacks, roll one D6: on a 3-5, the closest enemy unit within 3\" of and visible to your unit suffers 1 mortal wound; on a 6, the closest enemy unit within 3\" of and visible to your unit suffers 2 mortal wounds. The destroyed model is then removed from play.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "mortalWounds",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "operator": "equals",
+                  "value": "closest enemy unit within 3\" of and visible to your unit"
+                },
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "D6 roll on a 3-5"
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "mortalWounds",
+              "value": 2,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "operator": "equals",
+                  "value": "closest enemy unit within 3\" of and visible to your unit"
+                },
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "D6 roll on a 6"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -2226,7 +3553,66 @@
           "legend": "When Hormagaunts, Termagants and other such expendable warrior organisms attack en masse they make up for their comparative fragility with sheer numbers. Coupled with the speed and ferocity of their onslaught - which only seems to increase as the prey try to gun the creatures down or drive them back - the gathered broods soon overrun even the most determined defenders.",
           "description": "Each time an enemy unit is selected to shoot, after that unit has finished making its attacks, if one or more models from one or more Endless Multitude units from your army were destroyed as a result of those attacks, each such unit can make a Surge move. To do so, roll one D6: that unit can be moved a distance in inches up to the result, but that unit must end that move as close as possible to the closest enemy unit (excluding <span class=\"kwb\">AIRCRAFT</span>). When doing so, those models can be moved within Engagement Range of enemy units. A unit cannot make a Surge move while it is Battle-shocked.",
           "detachment": "Unending Swarm",
-          "detachmentId": 770
+          "detachmentId": 770,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": "D6",
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "hasFiredThisPhase",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "opposingUnit",
+                  "attribute": "w",
+                  "operator": "greaterThan",
+                  "value": 0
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "Surge"
+              ],
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "hasFiredThisPhase",
+                  "operator": "equals",
+                  "value": true
+                },
+                {
+                  "entity": "thisArmy",
+                  "attribute": "w",
+                  "operator": "greaterThan",
+                  "value": 0
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "ENGAGEMENT RANGE"
+              ],
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isBattleShocked",
+                  "operator": "equals",
+                  "value": false
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "enhancements": [
@@ -2238,7 +3624,16 @@
           "detachment": "Unending Swarm",
           "detachmentId": 770,
           "legend": "An overriding need to sink their fangs into the flesh of their prey drives these creatures toward the foe.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Add 2\" to the Move characteristic of models in the bearer's unit."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Add 2\" to the Move characteristic of models in the bearer's unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 2
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2248,7 +3643,27 @@
           "detachment": "Unending Swarm",
           "detachmentId": 770,
           "legend": "These warrior organisms possess limited chameleonic properties that conceal their advance. The benefits of such deceptions decrease as they approach their prey, but can be enough to bring them safely into range to strike.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. At the start of the first battle round, select up to three friendly Endless Multitude units within 9\" of the bearer. Until the end of the battle round, each time a ranged attack targets one of those units, models in that unit have the Benefit of Cover against that attack."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. At the start of the first battle round, select up to three friendly Endless Multitude units within 9\" of the bearer. Until the end of the battle round, each time a ranged attack targets one of those units, models in that unit have the Benefit of Cover against that attack.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "Benefit of Cover"
+              ],
+              "state": "isBeingLed",
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isBeingLed",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2258,7 +3673,24 @@
           "detachment": "Unending Swarm",
           "detachmentId": 770,
           "legend": "A simple but potent biomorphic enhancement of these warrior organisms sees some amongst their number boast diamond-sharp talon tips. Lashing suddenly from amidst the mass of thrashing weapon limbs these plunge through armour to pierce organs and rupture delicate systems.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Each time a model in the bearer's unit makes an attack, on a Critical Wound, improve the Armour Penetration characteristic of that attack by 1."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Each time a model in the bearer's unit makes an attack, on a Critical Wound, improve the Armour Penetration characteristic of that attack by 1.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "ap",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "state": "isCriticalWound",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2268,7 +3700,16 @@
           "detachment": "Unending Swarm",
           "detachmentId": 770,
           "legend": "Biostimulants course through the bodies of these warrior organisms, combining with goading synaptic impulses to lend them an unholy turn of speed.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Each time the bearer's unit Piles In or Consolidates, models in this unit can move an additional 3\"."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. Each time the bearer's unit Piles In or Consolidates, models in this unit can move an additional 3\".",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 3
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "stratagems": [
@@ -2311,7 +3752,32 @@
           ],
           "detachment": "Unending Swarm",
           "detachmentId": 770,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, weapons equipped by models in your unit have the [SUSTAINED HITS 1] ability, and If your unit contains 15 or more models, each time a model in your unit makes an attack, an unmodified Hit roll of 5+ scores a Critical Hit."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, weapons equipped by models in your unit have the [SUSTAINED HITS 1] ability, and If your unit contains 15 or more models, each time a model in your unit makes an attack, an unmodified Hit roll of 5+ scores a Critical Hit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "SUSTAINED HITS"
+              ],
+              "value": 1
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "attribute": "a",
+                  "operator": "greaterThanOrEqualTo",
+                  "value": 15
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2326,7 +3792,36 @@
           ],
           "detachment": "Unending Swarm",
           "detachmentId": 770,
-          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One Endless Multitude unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, each time your unit Advances, do not make an Advance roll. Instead, until the end of the phase, add 6\" to the Move characteristic of models in your unit."
+          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One Endless Multitude unit from your army.<br><br><b>EFFECT:</b> Until the end of the phase, each time your unit Advances, do not make an Advance roll. Instead, until the end of the phase, add 6\" to the Move characteristic of models in your unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 6,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "m",
+              "value": 6,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2341,7 +3836,39 @@
           ],
           "detachment": "Unending Swarm",
           "detachmentId": 770,
-          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit is treated as containing fewer than five models for the purpose of the [BLAST] ability."
+          "description": "<b>WHEN:</b> Your opponent's Shooting phase, just after an enemy unit has selected its targets.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that was selected as the target of one or more of the attacking unit's attacks.<br><br><b>EFFECT:</b> Until the end of the phase, your unit is treated as containing fewer than five models for the purpose of the [BLAST] ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": "fewer than five models",
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "operator": "equals",
+                  "value": "thisUnit"
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsKeyword",
+              "keywords": [
+                "BLAST"
+              ],
+              "value": "until the end of the phase",
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "hasFiredThisPhase",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2356,7 +3883,38 @@
           ],
           "detachment": "Unending Swarm",
           "detachmentId": 770,
-          "description": "<b>WHEN:</b> Any phase, just before an Endless Multitude unit from your army that is within Synapse Range of your army makes a Surge move.<br><br><b>TARGET:</b> That <span class=\"kwb\">ENDLESS</span> <span class=\"kwb\">MULTITUDE</span> unit.<br><br><b>EFFECT:</b> When making that Surge move, you can re-roll the D6 to determine how far your unit moves, and your unit can end that move as close as possible to the closest objective marker (instead of as close as possible to the closest enemy unit]. All other rules for making Surge moves still apply."
+          "description": "<b>WHEN:</b> Any phase, just before an Endless Multitude unit from your army that is within Synapse Range of your army makes a Surge move.<br><br><b>TARGET:</b> That <span class=\"kwb\">ENDLESS</span> <span class=\"kwb\">MULTITUDE</span> unit.<br><br><b>EFFECT:</b> When making that Surge move, you can re-roll the D6 to determine how far your unit moves, and your unit can end that move as close as possible to the closest objective marker (instead of as close as possible to the closest enemy unit]. All other rules for making Surge moves still apply.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "reroll",
+              "attribute": "m",
+              "value": "all",
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "state": "inRangeOfObjective",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": "closest objective marker",
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "inRangeOfObjective",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2371,7 +3929,24 @@
           ],
           "detachment": "Unending Swarm",
           "detachmentId": 770,
-          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that was just destroyed. You can use this Stratagem on that unit even though it was just destroyed.<br><br><b>EFFECT:</b> Add a new unit to your army identical to your destroyed unit, in Strategic Reserves, at its Starting Strength.<br><br><b>RESTRICTIONS:</b> Any destroyed Character units that were attached to your unit are not returned. You can only use this Stratagem once per battle."
+          "description": "<b>WHEN:</b> Any phase.<br><br><b>TARGET:</b> One Endless Multitude unit from your army that was just destroyed. You can use this Stratagem on that unit even though it was just destroyed.<br><br><b>EFFECT:</b> Add a new unit to your army identical to your destroyed unit, in Strategic Reserves, at its Starting Strength.<br><br><b>RESTRICTIONS:</b> Any destroyed Character units that were attached to your unit are not returned. You can only use this Stratagem once per battle.",
+          "mechanics": [
+            {
+              "entity": "thisArmy",
+              "effect": "addsAbility",
+              "abilities": [
+                "ENDLESS MULTITUDE"
+              ],
+              "value": "identical to your destroyed unit"
+            },
+            {
+              "entity": "thisArmy",
+              "effect": "staticNumber",
+              "attribute": "Starting Strength",
+              "value": "at its Starting Strength"
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -2386,7 +3961,42 @@
           "legend": "In the early stages of an invasion, the Hive Mind harries and unbalances its foes with lightning-fast flanking attacks, before encircling them for the final, bloody slaughter.",
           "description": "<span class=\"kwb\">TYRANIDS</span> units with this ability are eligible to charge in a turn in which they Fell Back. Vanguard Invader units with this ability are eligible to charge in a turn in which they Advanced.",
           "detachment": "Vanguard Onslaught",
-          "detachmentId": 772
+          "detachmentId": 772,
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "CHARGE AFTER FELL BACK"
+              ],
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "hasFallenBack",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "CHARGE AFTER ADVANCED"
+              ],
+              "value": true,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "hasAdvanced",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "enhancements": [
@@ -2398,7 +4008,23 @@
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
           "legend": "This warrior organism has identified installations and routes of communication and supply vital to the prey. As the Tyranid invasion commences so the beast orchestrates ambushes and terror raids against these priority targets, ensuring that those enemy reinforcements who do reach the battlefield do so in bloodied disarray.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While the bearer is on the battlefield, each time your opponent sets up a Reserves unit on the battlefield, roll one D6: on a 2+, that unit must take a Battle-shock test."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. While the bearer is on the battlefield, each time your opponent sets up a Reserves unit on the battlefield, roll one D6: on a 2+, that unit must take a Battle-shock test.",
+          "mechanics": [
+            {
+              "entity": "opposingUnit",
+              "effect": "rollPenalty",
+              "attribute": "ld",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "TYRANIDS"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2471,7 +4097,26 @@
           ],
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
-          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Vanguard Invader Infantry unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, melee weapons equipped by models in your unit have the [PRECISION] ability."
+          "description": "<b>WHEN:</b> Fight phase.<br><br><b>TARGET:</b> One Vanguard Invader Infantry unit from your army that has not been selected to fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, melee weapons equipped by models in your unit have the [PRECISION] ability.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "PRECISION"
+              ],
+              "value": null,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "hasNotBeenSelectedToFightThisPhase",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2487,7 +4132,50 @@
           ],
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase, just after a Vanguard Invader unit from your army has selected its targets.<br><br><b>TARGET:</b> That <span class=\"kwb\">VANGUARD</span> <span class=\"kwb\">INVADER</span> unit.<br><br><b>EFFECT:</b> Select one enemy unit that was selected as the target of one or more of your unit's attacks. That enemy unit must take a Battle-shock test. Until the end of the phase, each time a model in your unit makes an attack that targets that enemy unit, add 1 to the Hit roll. If the Battle-shock test was failed, add 1 to the Wound roll as well."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase, just after a Vanguard Invader unit from your army has selected its targets.<br><br><b>TARGET:</b> That <span class=\"kwb\">VANGUARD</span> <span class=\"kwb\">INVADER</span> unit.<br><br><b>EFFECT:</b> Select one enemy unit that was selected as the target of one or more of your unit's attacks. That enemy unit must take a Battle-shock test. Until the end of the phase, each time a model in your unit makes an attack that targets that enemy unit, add 1 to the Hit roll. If the Battle-shock test was failed, add 1 to the Wound roll as well.",
+          "mechanics": [
+            {
+              "entity": "targetUnit",
+              "effect": "rollBonus",
+              "attribute": "h",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "VANGUARD INVADER"
+                }
+              ]
+            },
+            {
+              "entity": "targetUnit",
+              "effect": "rollBonus",
+              "attribute": "w",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "targetUnit",
+                  "state": "isBattleShocked",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "targetUnit",
+              "effect": "rollPenalty",
+              "attribute": "ld",
+              "value": 0,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "operator": "equals",
+                  "value": "VANGUARD INVADER"
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2502,7 +4190,24 @@
           ],
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
-          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is in Reserves, or up to two Vanguard Invader units from your army that are in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, for the purposes of setting up those selected units on the battlefield, treat the current battle round number as being one higher than it actually is."
+          "description": "<b>WHEN:</b> Your Movement phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that is in Reserves, or up to two Vanguard Invader units from your army that are in Reserves.<br><br><b>EFFECT:</b> Until the end of the phase, for the purposes of setting up those selected units on the battlefield, treat the current battle round number as being one higher than it actually is.",
+          "mechanics": [
+            {
+              "entity": "thisArmy",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": "one higher",
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "state": "inReserves",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2558,7 +4263,24 @@
           ],
           "detachment": "Vanguard Onslaught",
           "detachmentId": 772,
-          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> Up to two Vanguard Invader units from your army that are within 9\" of that enemy unit, or one other Tyranids Infantry unit from your army that is within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Those selected units can each make a Normal move of up to 6\".<br><br><b>RESTRICTIONS:</b> You cannot target units that are within Engagement Range of one or more enemy units."
+          "description": "<b>WHEN:</b> Your opponent's Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.<br><br><b>TARGET:</b> Up to two Vanguard Invader units from your army that are within 9\" of that enemy unit, or one other Tyranids Infantry unit from your army that is within 9\" of that enemy unit.<br><br><b>EFFECT:</b> Those selected units can each make a Normal move of up to 6\".<br><br><b>RESTRICTIONS:</b> You cannot target units that are within Engagement Range of one or more enemy units.",
+          "mechanics": [
+            {
+              "entity": "thisArmy",
+              "effect": "staticNumber",
+              "attribute": "m",
+              "value": 6,
+              "conditions": [
+                {
+                  "entity": "opposingUnit",
+                  "state": "inEngagementRange",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     },
@@ -2648,7 +4370,18 @@
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
           "legend": "This bioform and its accompanying organisms possess muscular adaptations that give them incredible speed and endurance.",
-          "description": "<span class=\"kwb\">TYRANIDS</span> model only. The bearer's unit is eligible to declare a charge in a turn in which it Advanced."
+          "description": "<span class=\"kwb\">TYRANIDS</span> model only. The bearer's unit is eligible to declare a charge in a turn in which it Advanced.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "addsAbility",
+              "abilities": [
+                "ASSAULT"
+              ],
+              "value": ""
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ],
       "stratagems": [
@@ -2753,7 +4486,24 @@
           ],
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
-          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One Tyranid Warriors unit from your army that is below its Starting Strength.<br><br><b>EFFECT:</b> Return 1 destroyed model (excluding <span class=\"kwb\">CHARACTER</span> models) to your unit."
+          "description": "<b>WHEN:</b> Your Command phase.<br><br><b>TARGET:</b> One Tyranid Warriors unit from your army that is below its Starting Strength.<br><br><b>EFFECT:</b> Return 1 destroyed model (excluding <span class=\"kwb\">CHARACTER</span> models) to your unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "staticNumber",
+              "attribute": "w",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisUnit",
+                  "state": "isBelowStartingStrength",
+                  "operator": "equals",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         },
         {
           "factionId": "TYR",
@@ -2769,7 +4519,41 @@
           ],
           "detachment": "Warrior Bioform Onslaught",
           "detachmentId": 982,
-          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, add 2 to the Strength characteristic of ranged weapons equipped by models in your unit and add 1 to the Strength characteristic of melee weapons equipped by Tyranid Warriors and Winged Tyranid Prime models in your unit."
+          "description": "<b>WHEN:</b> Your Shooting phase or the Fight phase.<br><br><b>TARGET:</b> One <span class=\"kwb\">TYRANIDS</span> unit from your army that has not been selected to shoot or fight this phase.<br><br><b>EFFECT:</b> Until the end of the phase, add 2 to the Strength characteristic of ranged weapons equipped by models in your unit and add 1 to the Strength characteristic of melee weapons equipped by Tyranid Warriors and Winged Tyranid Prime models in your unit.",
+          "mechanics": [
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "s",
+              "value": 2,
+              "conditions": [
+                {
+                  "entity": "thisArmy",
+                  "state": "hasFiredThisPhase",
+                  "operator": "notEquals",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "entity": "thisUnit",
+              "effect": "rollBonus",
+              "attribute": "s",
+              "value": 1,
+              "conditions": [
+                {
+                  "entity": "thisModel",
+                  "abilities": [
+                    "TYRANID WARRIORS",
+                    "WINGED TYRANID PRIME"
+                  ],
+                  "operator": "includes",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "mechanicsSource": "openai"
         }
       ]
     }

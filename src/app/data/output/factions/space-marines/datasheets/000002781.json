@@ -24,7 +24,23 @@
         "000002781:bolt-pistol",
         "000002781:deathwatch-heavy-bolt-rifle",
         "000002781:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Kill Team Heavy Intercessor": [
+          "000002781:bolt-pistol",
+          "000002781:deathwatch-heavy-bolt-rifle",
+          "000002781:close-combat-weapon"
+        ],
+        "Kill Team Heavy Intercessor with power fists": [
+          "000002781:flamestorm-gauntlets",
+          "000002781:twin-power-fists"
+        ],
+        "Kill Team Heavy Intercessor with melta rifle": [
+          "000002781:bolt-pistol",
+          "000002781:melta-rifle",
+          "000002781:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -85,7 +101,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor",
+              "Kill Team Heavy Intercessor with melta rifle"
+            ]
           }
         ]
       },
@@ -118,7 +138,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor"
+            ]
           }
         ]
       },
@@ -218,7 +241,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor with power fists"
+            ]
           }
         ]
       },
@@ -250,7 +276,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor with melta rifle"
+            ]
           }
         ]
       },
@@ -315,7 +344,11 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor",
+              "Kill Team Heavy Intercessor with melta rifle"
+            ]
           }
         ]
       },
@@ -346,7 +379,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Kill Team Heavy Intercessor with power fists"
+            ]
           }
         ]
       }
@@ -374,24 +410,8 @@
       ]
     },
     "abilities": [],
-    "validLoadouts": [
-      {
-        "modelType": "any",
-        "items": [
-          [
-            "000002781:bolt-pistol",
-            "000002781:deathwatch-heavy-bolt-rifle",
-            "000002781:close-combat-weapon"
-          ],
-          [
-            "000002781:bolt-pistol",
-            "000002781:close-combat-weapon",
-            "000002781:deathwatch-heavy-bolter"
-          ]
-        ]
-      }
-    ],
-    "loadoutsParsed": true
+    "validLoadouts": [],
+    "loadoutsParsed": false
   },
   "supplement": {
     "key": "deathwatch",
@@ -416,7 +436,38 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a ranged attack that targets the closest eligible target, or makes a melee attack in a turn in which it made a Charge move, improve the Strength characteristic of that attack by 2.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "isClosestEligibleTarget",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "name": "ATTACHED UNIT",

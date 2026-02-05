@@ -23,7 +23,18 @@
       "parsed": [
         "000003876:bolt-pistol",
         "000003876:nostraman-chainblade"
-      ]
+      ],
+      "byModelType": {
+        "Visionary": [
+          "000003876:bolt-pistol",
+          "000003876:nostraman-chainblade"
+        ],
+        "Legionary": [
+          "000003876:bolt-pistol",
+          "000003876:boltgun",
+          "000003876:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -82,7 +93,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Legionary"
+            ]
           }
         ]
       },
@@ -369,7 +383,16 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Legionarie"
+            ]
+          },
+          {
+            "type": "modelType",
+            "modelType": [
+              "Visionary"
+            ]
           }
         ]
       },
@@ -427,7 +450,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Legionary"
+            ]
           }
         ]
       },
@@ -458,7 +484,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Visionary"
+            ]
           }
         ]
       },
@@ -490,7 +519,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Legionarie"
+            ]
           }
         ]
       },
@@ -522,7 +554,10 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Legionarie"
+            ]
           }
         ]
       },
@@ -608,24 +643,22 @@
         "eligibility": [
           {
             "type": "count",
-            "count": 4
+            "count": 4,
+            "modelType": [
+              "Legionarie"
+            ]
           }
         ]
       }
     ],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Visionary",
         "items": [
           [
             "000003876:bolt-pistol",
             "000003876:nostraman-chainblade"
-          ]
-        ]
-      },
-      {
-        "modelType": "Visionary",
-        "items": [
+          ],
           [
             "000003876:bolt-pistol",
             "000003876:accursed-weapon"

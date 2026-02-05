@@ -23,7 +23,13 @@
       "parsed": [
         "000002473:artificer-grav-gun",
         "000002473:hand-of-defiance"
-      ]
+      ],
+      "byModelType": {
+        "Tor Garadon - EPIC HERO": [
+          "000002473:artificer-grav-gun",
+          "000002473:hand-of-defiance"
+        ]
+      }
     },
     "weapons": [
       {
@@ -135,7 +141,64 @@
       "factionId": "",
       "description": "Each time this model makes an attack that targets a <span class=\"kwb\">MONSTER</span>, <span class=\"kwb\">VEHICLE</span>, or <span class=\"kwb\">FORTIFICATION</span> unit, improve the Strength, Armour Penetration and Damage characteristics of that attack by 2.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

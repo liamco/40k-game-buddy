@@ -23,7 +23,13 @@
       "parsed": [
         "000002718:special-issue-bolt-pistol",
         "000002718:combat-knife"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002718:special-issue-bolt-pistol",
+          "000002718:combat-knife"
+        ]
+      }
     },
     "weapons": [
       {
@@ -222,13 +228,55 @@
           ],
           [
             "000002718:special-issue-bolt-pistol",
+            "000002718:combat-knife",
+            "wargear-ability:grapnel-launcher"
+          ],
+          [
+            "000002718:special-issue-bolt-pistol",
+            "000002718:combat-knife",
+            "wargear-ability:reiver-grav-chute"
+          ],
+          [
+            "000002718:special-issue-bolt-pistol",
+            "000002718:combat-knife",
+            "wargear-ability:reiver-grav-chute",
+            "wargear-ability:grapnel-launcher"
+          ],
+          [
+            "000002718:special-issue-bolt-pistol",
             "000002718:bolt-carbine",
             "000002718:close-combat-weapon"
+          ],
+          [
+            "000002718:special-issue-bolt-pistol",
+            "000002718:bolt-carbine",
+            "000002718:close-combat-weapon",
+            "wargear-ability:grapnel-launcher"
+          ],
+          [
+            "000002718:special-issue-bolt-pistol",
+            "000002718:bolt-carbine",
+            "000002718:close-combat-weapon",
+            "wargear-ability:reiver-grav-chute"
+          ],
+          [
+            "000002718:special-issue-bolt-pistol",
+            "000002718:bolt-carbine",
+            "000002718:close-combat-weapon",
+            "wargear-ability:reiver-grav-chute",
+            "wargear-ability:grapnel-launcher"
           ]
         ]
       }
     ],
-    "loadoutsParsed": false
+    "loadoutsParsed": false,
+    "unitWideOptions": [
+      "000002718:combat-knife",
+      "000002718:bolt-carbine",
+      "000002718:close-combat-weapon",
+      "wargear-ability:reiver-grav-chute",
+      "wargear-ability:grapnel-launcher"
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -254,7 +302,24 @@
       "factionId": "",
       "description": "At the start of the Fight phase, each enemy unit within Engagement Range of one or more units with this ability must take a Battle-shock test, subtracting 1 from that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -263,7 +328,33 @@
       "factionId": "",
       "description": "While an enemy unit (excluding <span class=\"kwb\">MONSTERS</span> and <span class=\"kwb\">VEHICLES</span>) is within 3\" of one or more units with this ability, subtract 1 from the Objective Control characteristic of models in that enemy unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "oc",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

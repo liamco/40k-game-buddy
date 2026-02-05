@@ -20,7 +20,8 @@
   "wargear": {
     "defaultLoadout": {
       "raw": "",
-      "parsed": []
+      "parsed": [],
+      "byModelType": {}
     },
     "weapons": [
       {
@@ -97,7 +98,25 @@
       "factionId": "",
       "description": "Each time a unit disembarks from this model after it has been set up on the battlefield, that unit is still eligible to declare a charge this turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "declare a charge"
+          ],
+          "value": "this turn",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

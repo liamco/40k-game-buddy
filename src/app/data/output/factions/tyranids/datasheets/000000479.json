@@ -22,7 +22,12 @@
       "raw": "<b>This model is equipped with:</b> Lictor claws and talons.",
       "parsed": [
         "000000479:lictor-claws-and-talons"
-      ]
+      ],
+      "byModelType": {
+        "Deathleaper - EPIC HERO": [
+          "000000479:lictor-claws-and-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -99,7 +104,25 @@
       "factionId": "",
       "description": "Each time this model destroys an enemy <span class=\"kwb\">CHARACTER</span> model, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "keywords": [
+                "CHARACTER"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

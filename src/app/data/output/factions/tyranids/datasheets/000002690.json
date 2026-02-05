@@ -23,7 +23,13 @@
       "parsed": [
         "000002690:bio-plasmic-scream",
         "000002690:screamer-killer-talons"
-      ]
+      ],
+      "byModelType": {
+        "Screamer-Killer": [
+          "000002690:bio-plasmic-scream",
+          "000002690:screamer-killer-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -119,7 +125,24 @@
       "factionId": "",
       "description": "In your Shooting phase, after this model has shot, select one unit hit by one or more of those attacks. That unit must take a Battle-shock test, subtracting 1 from that test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "rollPenalty",
+          "attribute": "ld",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

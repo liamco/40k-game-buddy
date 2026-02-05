@@ -24,7 +24,14 @@
         "000000314:heavy-flamer",
         "000000314:storm-bolter",
         "000000314:murderclaws"
-      ]
+      ],
+      "byModelType": {
+        "Murderfang - EPIC HERO": [
+          "000000314:heavy-flamer",
+          "000000314:storm-bolter",
+          "000000314:murderclaws"
+        ]
+      }
     },
     "weapons": [
       {
@@ -163,7 +170,36 @@
       "factionId": "",
       "description": "In the Fight phase, each time an attack targets a friendly Wulfen unit within 6\" of this model, if a model in that unit is destroyed as a result of that attack, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetUnit",
+          "effect": "rollBonus",
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "targetUnit",
+              "state": "hasFoughtThisPhase",
+              "operator": "equals",
+              "value": false
+            }
+          ]
+        },
+        {
+          "entity": "targetUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "FIGHT AFTER BEING DESTROYED"
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

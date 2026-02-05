@@ -24,7 +24,14 @@
         "000000302:assault-cannon",
         "000000302:heavy-flamer",
         "000000302:trueclaw"
-      ]
+      ],
+      "byModelType": {
+        "Bjorn the Fell-Handed- EPIC HERO": [
+          "000000302:assault-cannon",
+          "000000302:heavy-flamer",
+          "000000302:trueclaw"
+        ]
+      }
     },
     "weapons": [
       {
@@ -281,7 +288,23 @@
       "factionId": "",
       "description": "At the start of your Command phase, if this model is on the battlefield, you gain 1CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "staticNumber",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isOnBattlefield",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -35,7 +35,13 @@
       "parsed": [
         "000000494:distensible-jaw",
         "000000494:mawloc-scything-talons"
-      ]
+      ],
+      "byModelType": {
+        "Mawloc": [
+          "000000494:distensible-jaw",
+          "000000494:mawloc-scything-talons"
+        ]
+      }
     },
     "weapons": [
       {
@@ -131,7 +137,57 @@
       "factionId": "",
       "description": "Each time this model is set up on the battlefield using the Deep Strike ability, roll one D6 for each enemy unit within 12\" of this model: on a 2-4, that unit suffers D3 mortal wounds; on a 5+, that unit suffers 3 mortal wounds and must take a Battle-shock test.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 2,
+              "attribute": "D6"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "lessThanOrEqualTo",
+              "value": 4,
+              "attribute": "D6"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 5,
+              "attribute": "D6"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "BATTLE-SHOCK TEST"
+          ],
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 5,
+              "attribute": "D6"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

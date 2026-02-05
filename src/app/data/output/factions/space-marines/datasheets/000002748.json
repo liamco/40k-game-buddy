@@ -24,7 +24,19 @@
         "000002748:bolt-pistol",
         "000002748:plasma-talon",
         "000002748:master-crafted-power-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Ravenwing Champion": [
+          "000002748:bolt-pistol",
+          "000002748:plasma-talon",
+          "000002748:master-crafted-power-weapon"
+        ],
+        "other": [
+          "000002748:bolt-pistol",
+          "000002748:plasma-talon",
+          "000002748:black-knight-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -71,10 +83,7 @@
           {
             "type": "ratio",
             "ratio": 3,
-            "count": 1,
-            "modelType": [
-              "model"
-            ]
+            "count": 1
           }
         ]
       },
@@ -185,7 +194,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "other"
+            ]
           }
         ]
       },
@@ -214,7 +226,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Ravenwing Champion"
+            ]
           }
         ]
       }
@@ -232,12 +247,17 @@
     "abilities": [],
     "validLoadouts": [
       {
-        "modelType": "any",
+        "modelType": "Ravenwing Champion",
         "items": [
           [
             "000002748:bolt-pistol",
             "000002748:plasma-talon",
             "000002748:master-crafted-power-weapon"
+          ],
+          [
+            "000002748:bolt-pistol",
+            "000002748:master-crafted-power-weapon",
+            "000002748:astartes-grenade-launcher"
           ]
         ]
       }
@@ -267,7 +287,24 @@
       "factionId": "",
       "description": "While this unit contains a Ravenwing Apothecary, in your Command phase, you can return 1 destroyed model (excluding Character and Invader ATV models) to this unit.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "w",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isBelowStartingStrength",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -294,7 +331,30 @@
       "factionId": "",
       "description": "While this unit contains a Ravenwing Champion, add 1 to Advance and Charge rolls made for this unit and you can target this unit with the Heroic Intervention Stratagem for 0CP.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "Heroic Intervention"
+          ],
+          "value": "0CP"
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

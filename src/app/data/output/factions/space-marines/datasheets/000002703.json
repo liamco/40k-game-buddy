@@ -24,7 +24,14 @@
         "000002703:twin-flamer",
         "000002703:siege-drills",
         "000002703:centurion-bolters"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002703:twin-flamer",
+          "000002703:siege-drills",
+          "000002703:centurion-bolters"
+        ]
+      }
     },
     "weapons": [
       {
@@ -242,7 +249,30 @@
       "factionId": "",
       "description": "Melee weapons equipped by models in this unit have the [SUSTAINED HITS 2] ability when targeting <span class=\"kwb\">MONSTER</span>, <span class=\"kwb\">VEHICLE</span> or <span class=\"kwb\">FORTIFICATION</span> units.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "SUSTAINED HITS"
+          ],
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "keywords": [
+                "MONSTER",
+                "VEHICLE",
+                "FORTIFICATION"
+              ],
+              "operator": "includes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

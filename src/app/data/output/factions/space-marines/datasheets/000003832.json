@@ -23,7 +23,13 @@
       "parsed": [
         "000003832:heavy-bolt-pistol",
         "000003832:master-crafted-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "Death Company Captain": [
+          "000003832:heavy-bolt-pistol",
+          "000003832:master-crafted-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -275,7 +281,77 @@
       "factionId": "",
       "description": "Each time this model makes a melee attack, you can re-roll the Hit roll. While this model's unit is not within 6\" of one or more friendly Blood Angels Character models, or 12\" of one or more friendly Chaplain models, it cannot be selected to Fall Back and its Objective Control characteristic is 0.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "all"
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "staticNumber",
+          "attribute": "oc",
+          "value": 0,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isNotWithinRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "Blood Angels Character"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "Chaplain"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "cannotFallBack"
+          ],
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isNotWithinRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "Blood Angels Character"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            },
+            {
+              "entity": "thisArmy",
+              "keywords": [
+                "Chaplain"
+              ],
+              "operator": "notIncludes",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -284,7 +360,97 @@
       "factionId": "",
       "description": "If this model is destroyed by a melee attack, after the attacking unit has finished making its attacks, you can roll one D6, adding 2 to the result if the attacking unit contains the enemy <span class=\"kwb\">WARLORD</span>: on a 2-3, that enemy unit suffers D3 mortal wounds; on a 4-5, that enemy unit suffers 3 mortal wounds; on a 6+, that enemy unit suffers D3+3 mortal wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true,
+              "state": "isDestroyed"
+            },
+            {
+              "entity": "opposingUnit",
+              "operator": "equals",
+              "value": "enemy WARLORD",
+              "state": "isWarlord"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 2,
+              "attribute": "D6"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "lessThanOrEqualTo",
+              "value": 3,
+              "attribute": "D6"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 3,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true,
+              "state": "isDestroyed"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 4,
+              "attribute": "D6"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "lessThanOrEqualTo",
+              "value": 5,
+              "attribute": "D6"
+            }
+          ]
+        },
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3+3",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "operator": "equals",
+              "value": true,
+              "state": "isDestroyed"
+            },
+            {
+              "entity": "thisModel",
+              "operator": "greaterThanOrEqualTo",
+              "value": 6,
+              "attribute": "D6"
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "value": 2,
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "operator": "includes",
+              "value": "enemy WARLORD"
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -23,7 +23,13 @@
       "parsed": [
         "000001606:heavy-bolt-pistol",
         "000001606:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000001606:heavy-bolt-pistol",
+          "000001606:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -371,7 +377,31 @@
       "factionId": "",
       "description": "Each time a model in this unit targets an enemy unit with a melee attack, re-roll a Wound roll of 1. If that enemy unit is within range of an objective marker, you can re-roll the Wound roll instead.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": [
+            {
+              "entity": "targetUnit",
+              "state": "inRangeOfObjective",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "ones",
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -23,7 +23,13 @@
       "parsed": [
         "000000475:warp-blast",
         "000000475:chitinous-claws-and-teeth"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000475:warp-blast",
+          "000000475:chitinous-claws-and-teeth"
+        ]
+      }
     },
     "weapons": [
       {
@@ -136,7 +142,37 @@
       "factionId": "",
       "description": "While an enemy unit is within 6\" of this unit, if this unit contains a Neurothrope, each time that enemy unit fails a Battle-shock test, it suffers D3 mortal wounds and one model in this unit regains up to D3 lost wounds.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "attribute": "ld",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "mortalWounds",
+          "value": "D3",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isBattleShocked",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

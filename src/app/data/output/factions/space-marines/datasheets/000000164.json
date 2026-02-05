@@ -23,7 +23,13 @@
       "parsed": [
         "000000164:absolvor-bolt-pistol",
         "000000164:the-blood-crozius"
-      ]
+      ],
+      "byModelType": {
+        "Lemartes - EPIC HERO": [
+          "000000164:absolvor-bolt-pistol",
+          "000000164:the-blood-crozius"
+        ]
+      }
     },
     "weapons": [
       {
@@ -128,7 +134,24 @@
       "factionId": "",
       "description": "While this model is leading a unit, each time an attack is allocated to a model in that unit, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "targetModel",
+          "effect": "rollPenalty",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -137,7 +160,26 @@
       "factionId": "",
       "description": "While this model is leading a unit, melee weapons equipped by models in that unit have the [LETHAL HITS] ability",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "LETHAL HITS"
+          ],
+          "value": null,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

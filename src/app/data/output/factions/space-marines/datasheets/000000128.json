@@ -24,7 +24,14 @@
         "000000128:bolt-pistol",
         "000000128:marksman-bolt-carbine",
         "000000128:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000000128:bolt-pistol",
+          "000000128:marksman-bolt-carbine",
+          "000000128:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -171,7 +178,33 @@
         "id": "000000128:infiltrator-comms-array",
         "name": "Infiltrator Comms Array",
         "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-        "mechanics": [],
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          },
+          {
+            "entity": "thisUnit",
+            "effect": "staticNumber",
+            "attribute": "cp",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "operator": "greaterThanOrEqualTo",
+                "value": 5
+              }
+            ]
+          }
+        ],
         "eligibility": [
           {
             "type": "count",
@@ -180,7 +213,8 @@
               "Infiltrator"
             ]
           }
-        ]
+        ],
+        "mechanicsSource": "openai"
       }
     ],
     "validLoadouts": [
@@ -191,6 +225,30 @@
             "000000128:bolt-pistol",
             "000000128:marksman-bolt-carbine",
             "000000128:close-combat-weapon"
+          ]
+        ]
+      },
+      {
+        "modelType": "Infiltrator",
+        "items": [
+          [
+            "000000128:bolt-pistol",
+            "000000128:marksman-bolt-carbine",
+            "000000128:close-combat-weapon",
+            "wargear-ability:infiltrator-comms-array"
+          ],
+          [
+            "000000128:bolt-pistol",
+            "000000128:marksman-bolt-carbine",
+            "000000128:close-combat-weapon",
+            "wargear-ability:helix-gauntlet"
+          ],
+          [
+            "000000128:bolt-pistol",
+            "000000128:marksman-bolt-carbine",
+            "000000128:close-combat-weapon",
+            "wargear-ability:helix-gauntlet",
+            "wargear-ability:infiltrator-comms-array"
           ]
         ]
       }

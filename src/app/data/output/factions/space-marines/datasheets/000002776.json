@@ -23,7 +23,13 @@
       "parsed": [
         "000002776:heavy-bolt-pistol",
         "000002776:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002776:heavy-bolt-pistol",
+          "000002776:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -144,7 +150,12 @@
             "ratio": 5,
             "count": 1,
             "modelType": [
-              "Assault Intercessor with Jump Pack",
+              "Assault Intercessor with Jump Pack"
+            ]
+          },
+          {
+            "type": "modelType",
+            "modelType": [
               "Assault Intercessor Sergeant with Jump Pack"
             ]
           }
@@ -274,6 +285,10 @@
           [
             "000002776:heavy-bolt-pistol",
             "000002776:astartes-chainsword"
+          ],
+          [
+            "000002776:astartes-chainsword",
+            "000002776:plasma-pistol"
           ]
         ]
       },
@@ -283,10 +298,6 @@
           [
             "000002776:astartes-chainsword",
             "000002776:hand-flamer"
-          ],
-          [
-            "000002776:astartes-chainsword",
-            "000002776:plasma-pistol"
           ],
           [
             "000002776:heavy-bolt-pistol",
@@ -340,7 +351,43 @@
       "factionId": "",
       "description": "Each time this unit ends a Charge move, select one enemy unit within Engagement Range of it, then roll one D6 for each model in this unit that is within Engagement Range of that enemy unit: for each 4+, that enemy unit suffers 1 mortal wound.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "opposingUnit",
+          "effect": "mortalWounds",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "thisUnit",
+              "attribute": "a",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "h",
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inEngagementRange",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

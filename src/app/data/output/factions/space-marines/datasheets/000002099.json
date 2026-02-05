@@ -23,7 +23,13 @@
       "parsed": [
         "000002099:flamestorm-gauntlets",
         "000002099:twin-power-fists"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000002099:flamestorm-gauntlets",
+          "000002099:twin-power-fists"
+        ]
+      }
     },
     "weapons": [
       {
@@ -180,7 +186,12 @@
         ]
       }
     ],
-    "loadoutsParsed": true
+    "loadoutsParsed": true,
+    "unitWideOptions": [
+      "000002099:flamestorm-gauntlets",
+      "000002099:auto-boltstorm-gauntlets",
+      "000002099:fragstorm-grenade-launcher"
+    ]
   },
   "supplement": {
     "key": "codex",
@@ -201,7 +212,24 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a ranged attack that targets the closest eligible target, improve the Armour Penetration characteristic of that attack by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "targetModel",
+              "state": "isClosest",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

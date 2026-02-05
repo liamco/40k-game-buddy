@@ -25,7 +25,15 @@
         "000000140:grav-pistol",
         "000000140:omnissian-power-axe",
         "000000140:servo-arm"
-      ]
+      ],
+      "byModelType": {
+        "Techmarine": [
+          "000000140:forge-bolter",
+          "000000140:grav-pistol",
+          "000000140:omnissian-power-axe",
+          "000000140:servo-arm"
+        ]
+      }
     },
     "weapons": [
       {
@@ -218,7 +226,31 @@
       "factionId": "",
       "description": "If a friendly Adeptus Astartes Vehicle model is destroyed within 12\" of this model, until the end of the battle, this model's Omnissian power axe has an Attacks characteristic of 7.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "staticNumber",
+          "attribute": "a",
+          "value": 7,
+          "conditions": [
+            {
+              "entity": "thisArmy",
+              "attribute": "a",
+              "state": "isDestroyed",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingModel",
+              "attribute": "range",
+              "operator": "lessThanOrEqualTo",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

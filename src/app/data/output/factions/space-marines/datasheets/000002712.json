@@ -24,7 +24,19 @@
         "000002712:heavy-bolt-pistol",
         "000002712:twin-bolt-rifle",
         "000002712:astartes-chainsword"
-      ]
+      ],
+      "byModelType": {
+        "Outrider Sergeant and every Outrider": [
+          "000002712:heavy-bolt-pistol",
+          "000002712:twin-bolt-rifle",
+          "000002712:astartes-chainsword"
+        ],
+        "Outrider": [
+          "000002712:heavy-bolt-pistol",
+          "000002712:twin-bolt-rifle",
+          "000002712:astartes-chainsword"
+        ]
+      }
     },
     "weapons": [
       {
@@ -272,17 +284,6 @@
             "000002712:astartes-chainsword"
           ]
         ]
-      },
-      {
-        "modelType": "Invader ATV",
-        "items": [
-          [
-            "000002712:bolt-pistol",
-            "000002712:twin-bolt-rifle",
-            "000002712:onslaught-gatling-cannon",
-            "000002712:close-combat-weapon"
-          ]
-        ]
       }
     ],
     "loadoutsParsed": false
@@ -306,7 +307,38 @@
       "factionId": "",
       "description": "Each time a model in this unit makes a melee attack, if this unit made a Charge move this turn, improve the Strength and Damage characteristics of that attack by 1.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        },
+        {
+          "entity": "thisModel",
+          "effect": "rollBonus",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "hasChargedThisTurn",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

@@ -111,9 +111,10 @@ function getCoreAbilityMechanics(abilityName, parameter) {
  * @param {string} description - The description text to analyze
  * @param {string} itemName - Optional name/identifier of the item being processed (for logging)
  * @param {Array} factionStateFlags - Optional faction-specific state flags to include in prompt
+ * @param {object} unitContext - Optional unit context (unitName, keywords) to help with extraction
  * @returns {Promise<Array|null>} - Array of structured effects or null
  */
-export async function extractStructuredEffectsWithOpenAI(description, itemName = "Unknown", factionStateFlags = []) {
+export async function extractStructuredEffectsWithOpenAI(description, itemName = "Unknown", factionStateFlags = [], unitContext = null) {
     if (!description || typeof description !== "string") {
         return null;
     }
@@ -147,8 +148,8 @@ export async function extractStructuredEffectsWithOpenAI(description, itemName =
     const startTime = Date.now();
 
     // Build prompt from schema (single source of truth for valid values)
-    // Include faction-specific state flags if provided
-    const prompt = buildMechanicsPrompt(cleanDescription, factionStateFlags);
+    // Include faction-specific state flags and unit context if provided
+    const prompt = buildMechanicsPrompt(cleanDescription, factionStateFlags, unitContext);
     const fullPrompt = `You are a helpful assistant that extracts structured game rule effects from Warhammer 40k descriptions. Always return valid JSON only.\n\n${prompt}`;
 
     try {
@@ -366,23 +367,46 @@ function extractLeaderConditions(leaderFooter) {
 }
 
 /**
+ * Extracts unit context (name, keywords) from a datasheet object
+ * @param {object} obj - The object to check
+ * @returns {object|null} - Unit context if this is a datasheet, null otherwise
+ */
+function extractUnitContext(obj) {
+    // Check if this looks like a datasheet (has name and keywords array)
+    if (obj && obj.name && obj.keywords && Array.isArray(obj.keywords)) {
+        const keywords = obj.keywords.filter((kw) => kw.keyword && kw.isFactionKeyword !== "true" && kw.isFactionKeyword !== true).map((kw) => kw.keyword);
+        return {
+            unitName: obj.name,
+            keywords: keywords,
+        };
+    }
+    return null;
+}
+
+/**
  * Recursively processes a JSON object to extract effects from abilities, enhancements, stratagems, and detachmentAbilities
  * @param {object} obj - The object to process
  * @param {boolean} skipExistingMechanics - Whether to skip items that already have effects
  * @param {Array} factionStateFlags - Faction-specific state flags to include in OpenAI prompts
+ * @param {object} unitContext - Unit context (name, keywords) for datasheet abilities
  * @returns {Promise<object>} - The processed object with effects added
  */
-async function processObjectForEffects(obj, skipExistingMechanics = true, factionStateFlags = []) {
+async function processObjectForEffects(obj, skipExistingMechanics = true, factionStateFlags = [], unitContext = null) {
     if (Array.isArray(obj)) {
-        return Promise.all(obj.map((item) => processObjectForEffects(item, skipExistingMechanics, factionStateFlags)));
+        return Promise.all(obj.map((item) => processObjectForEffects(item, skipExistingMechanics, factionStateFlags, unitContext)));
     } else if (obj !== null && typeof obj === "object") {
         // If this object has factionStateFlags, use them for nested processing
         const effectiveFactionFlags = obj.factionStateFlags || factionStateFlags;
+
+        // Check if this object is a datasheet and extract unit context
+        const effectiveUnitContext = extractUnitContext(obj) || unitContext;
+
         const processed = {};
 
         for (const key in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                // Special handling for abilities, enhancements, stratagems, factionAbilities, and detachmentAbilities arrays
+                // Special handling for abilities, enhancements, stratagems, factionAbilities, detachmentAbilities arrays
+                // Also handle wargear.abilities for wargear-specific abilities
                 if ((key === "abilities" || key === "enhancements" || key === "stratagems" || key === "factionAbilities" || key === "detachmentAbilities") && Array.isArray(obj[key])) {
                     const itemType =
                         key.charAt(0).toUpperCase() +
@@ -395,7 +419,7 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                     processed[key] = await Promise.all(
                         obj[key].map(async (item, index) => {
                             const itemName = item.name || item.id || `${itemType} ${index + 1}`;
-                            const processedItem = await processObjectForEffects(item, skipExistingMechanics, effectiveFactionFlags);
+                            const processedItem = await processObjectForEffects(item, skipExistingMechanics, effectiveFactionFlags, effectiveUnitContext);
 
                             // Extract effects from the description
                             if (processedItem.description) {
@@ -414,8 +438,8 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                                         processedItem.mechanicsSource = "core";
                                     } else {
                                         // Extract structured effects with OpenAI
-                                        // Pass faction state flags for faction-specific states
-                                        const structuredEffects = await extractStructuredEffectsWithOpenAI(processedItem.description, itemName, effectiveFactionFlags);
+                                        // Pass faction state flags and unit context for better extraction
+                                        const structuredEffects = await extractStructuredEffectsWithOpenAI(processedItem.description, itemName, effectiveFactionFlags, effectiveUnitContext);
                                         if (structuredEffects && structuredEffects.length > 0) {
                                             processedItem.mechanics = structuredEffects;
                                             processedItem.mechanicsSource = "openai";
@@ -429,7 +453,7 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                 } else {
                     // Check if this object should have effects extracted
                     if (shouldExtractMechanics(obj[key]) && typeof obj[key] === "object") {
-                        processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics, effectiveFactionFlags);
+                        processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics, effectiveFactionFlags, effectiveUnitContext);
 
                         // Extract structured effects if this is a stratagem, ability, enhancement, or detachmentAbility
                         if (obj[key].description) {
@@ -450,7 +474,7 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                                     processed[key].mechanics = coreMechanics;
                                     processed[key].mechanicsSource = "core";
                                 } else {
-                                    const structuredEffects = await extractStructuredEffectsWithOpenAI(obj[key].description, itemName, effectiveFactionFlags);
+                                    const structuredEffects = await extractStructuredEffectsWithOpenAI(obj[key].description, itemName, effectiveFactionFlags, effectiveUnitContext);
                                     if (structuredEffects && structuredEffects.length > 0) {
                                         processed[key].mechanics = structuredEffects;
                                         processed[key].mechanicsSource = "openai";
@@ -459,7 +483,7 @@ async function processObjectForEffects(obj, skipExistingMechanics = true, factio
                             }
                         }
                     } else {
-                        processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics, effectiveFactionFlags);
+                        processed[key] = await processObjectForEffects(obj[key], skipExistingMechanics, effectiveFactionFlags, effectiveUnitContext);
                     }
                 }
             }

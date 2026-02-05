@@ -37,7 +37,15 @@
         "000002717:heavy-flamer",
         "000002717:heavy-onslaught-gatling-cannon",
         "000002717:redemptor-fist"
-      ]
+      ],
+      "byModelType": {
+        "Redemptor Dreadnought": [
+          "000002717:twin-fragstorm-grenade-launcher",
+          "000002717:heavy-flamer",
+          "000002717:heavy-onslaught-gatling-cannon",
+          "000002717:redemptor-fist"
+        ]
+      }
     },
     "weapons": [
       {
@@ -388,6 +396,62 @@
             "000002717:onslaught-gatling-cannon",
             "000002717:macro-plasma-incinerator",
             "000002717:twin-storm-bolter"
+          ],
+          [
+            "000002717:twin-fragstorm-grenade-launcher",
+            "000002717:heavy-flamer",
+            "000002717:heavy-onslaught-gatling-cannon",
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod"
+          ],
+          [
+            "000002717:heavy-flamer",
+            "000002717:heavy-onslaught-gatling-cannon",
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod",
+            "000002717:twin-storm-bolter"
+          ],
+          [
+            "000002717:twin-fragstorm-grenade-launcher",
+            "000002717:heavy-flamer",
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod",
+            "000002717:macro-plasma-incinerator"
+          ],
+          [
+            "000002717:heavy-flamer",
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod",
+            "000002717:macro-plasma-incinerator",
+            "000002717:twin-storm-bolter"
+          ],
+          [
+            "000002717:twin-fragstorm-grenade-launcher",
+            "000002717:heavy-onslaught-gatling-cannon",
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod",
+            "000002717:onslaught-gatling-cannon"
+          ],
+          [
+            "000002717:heavy-onslaught-gatling-cannon",
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod",
+            "000002717:onslaught-gatling-cannon",
+            "000002717:twin-storm-bolter"
+          ],
+          [
+            "000002717:twin-fragstorm-grenade-launcher",
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod",
+            "000002717:onslaught-gatling-cannon",
+            "000002717:macro-plasma-incinerator"
+          ],
+          [
+            "000002717:redemptor-fist",
+            "000002717:icarus-rocket-pod",
+            "000002717:onslaught-gatling-cannon",
+            "000002717:macro-plasma-incinerator",
+            "000002717:twin-storm-bolter"
           ]
         ]
       }
@@ -418,7 +482,24 @@
       "factionId": "",
       "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "rollPenalty",
+          "attribute": "d",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "opposingModel",
+              "attribute": "d",
+              "operator": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

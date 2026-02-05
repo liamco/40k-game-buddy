@@ -107,6 +107,88 @@ export const COMBAT_STATUS_FLAGS = [
 ];
 
 // ============================================
+// WEAPON ABILITIES (granted by unit abilities)
+// ============================================
+
+export const WEAPON_ABILITIES = [
+    // Hit roll modifiers
+    { name: "LETHAL HITS", description: "Critical hits (unmodified 6s) automatically wound" },
+    { name: "SUSTAINED HITS", description: "Critical hits score extra hits. Has a value (e.g., SUSTAINED HITS 1, SUSTAINED HITS 2)" },
+    { name: "TORRENT", description: "Automatically hits (no hit roll needed)" },
+    { name: "HEAVY", description: "+1 to hit if unit remained stationary" },
+    { name: "ASSAULT", description: "Can shoot after Advancing" },
+
+    // Wound roll modifiers
+    { name: "DEVASTATING WOUNDS", description: "Critical wounds deal mortal wounds instead of normal damage" },
+    { name: "TWIN-LINKED", description: "Re-roll wound rolls" },
+    { name: "LANCE", description: "+1 to wound if unit charged this turn" },
+    { name: "ANTI-X", description: "Critical wounds on specific targets (e.g., ANTI-INFANTRY 4+, ANTI-VEHICLE 2+)" },
+
+    // Save modifiers
+    { name: "IGNORES COVER", description: "Target does not benefit from cover" },
+
+    // Damage modifiers
+    { name: "MELTA", description: "Extra damage at half range. Has a value (e.g., MELTA 2)" },
+
+    // Other weapon abilities
+    { name: "PRECISION", description: "Can target CHARACTER models in units" },
+    { name: "INDIRECT FIRE", description: "Can target units not visible" },
+    { name: "BLAST", description: "Extra attacks vs larger units" },
+    { name: "HAZARDOUS", description: "Risk of mortal wounds to bearer" },
+    { name: "PISTOL", description: "Can shoot in Engagement Range" },
+    { name: "RAPID FIRE", description: "Extra attacks at half range. Has a value (e.g., RAPID FIRE 1)" },
+    { name: "EXTRA ATTACKS", description: "These attacks are in addition to other weapons" },
+    { name: "ONE SHOT", description: "Can only be used once per battle" },
+    { name: "PSYCHIC", description: "Psychic weapon" },
+];
+
+// ============================================
+// COMMON UNIT KEYWORDS (for conditions)
+// ============================================
+
+export const COMMON_KEYWORDS = [
+    // Unit types
+    "INFANTRY",
+    "VEHICLE",
+    "MONSTER",
+    "MOUNTED",
+    "BEAST",
+    "SWARM",
+    "WALKER",
+    "AIRCRAFT",
+
+    // Special unit types
+    "CHARACTER",
+    "EPIC HERO",
+    "PSYKER",
+    "DAEMON",
+    "TITANIC",
+    "TOWERING",
+
+    // Movement/deployment
+    "FLY",
+    "TRANSPORT",
+    "DEDICATED TRANSPORT",
+
+    // Role
+    "BATTLELINE",
+
+    // Equipment
+    "GRENADES",
+    "SMOKE",
+
+    // Allegiance (often in conditions)
+    "IMPERIUM",
+    "CHAOS",
+];
+
+// ============================================
+// GAME PHASES (for timing context)
+// ============================================
+
+export const GAME_PHASES = ["Command phase", "Movement phase", "Shooting phase", "Charge phase", "Fight phase", "Morale phase"];
+
+// ============================================
 // HELPER FUNCTIONS FOR PROMPT GENERATION
 // ============================================
 
@@ -187,16 +269,45 @@ export function generateOperatorDocs() {
 }
 
 /**
+ * Generates weapon abilities documentation for the OpenAI prompt.
+ */
+export function generateWeaponAbilitiesDocs() {
+    return WEAPON_ABILITIES.map((wa) => `  * "${wa.name}" - ${wa.description}`).join("\n");
+}
+
+/**
+ * Generates common keywords documentation for the OpenAI prompt.
+ */
+export function generateKeywordsDocs() {
+    return COMMON_KEYWORDS.map((k) => `"${k}"`).join(", ");
+}
+
+/**
  * Builds the complete OpenAI prompt with schema values.
  * @param {string} cleanDescription - The cleaned description text to analyze
  * @param {Array} factionStateFlags - Optional faction-specific state flags to include
+ * @param {object} unitContext - Optional unit context (keywords, name, etc.)
  */
-export function buildMechanicsPrompt(cleanDescription, factionStateFlags = []) {
+export function buildMechanicsPrompt(cleanDescription, factionStateFlags = [], unitContext = null) {
+    let contextSection = "";
+    if (unitContext) {
+        const parts = [];
+        if (unitContext.unitName) {
+            parts.push(`Unit Name: ${unitContext.unitName}`);
+        }
+        if (unitContext.keywords && unitContext.keywords.length > 0) {
+            parts.push(`Unit Keywords: ${unitContext.keywords.join(", ")}`);
+        }
+        if (parts.length > 0) {
+            contextSection = `\nUnit Context:\n${parts.join("\n")}\n`;
+        }
+    }
+
     return `Analyze the following Warhammer 40k game rule description and extract structured mechanics in JSON format.
 
 Description: "${cleanDescription}"
-
-Extract all mechanics including dice roll modifiers (hit, wound, save, damage, AP), defensive abilities (Feel No Pain, invulnerable saves), keyword additions, and ability additions. Return them as a JSON array following this exact structure:
+${contextSection}
+Extract all mechanics that affect dice rolls, characteristics, or grant abilities/keywords. Return them as a JSON array following this exact structure:
 
 "mechanics": [ {
   entity:<what does this mechanic target>,
@@ -219,49 +330,86 @@ Extract all mechanics including dice roll modifiers (hit, wound, save, damage, A
   ]
 } ]
 
-Rules:
+=== SCHEMA REFERENCE ===
 
-- "entity" must be one of:
+"entity" must be one of:
 ${generateEntityDocs()}
 
-- "effect" must be one of:
+"effect" must be one of:
 ${generateEffectDocs()}
 
-- "attribute" must be one of:
+"attribute" must be one of:
 ${generateAttributeDocs()}
 
-- "state" (for conditions) must be one of:
+"state" (for conditions) must be one of:
 ${generateStateDocs(factionStateFlags)}
 
-- "keywords" is optional - only include if the mechanic adds a keyword to the entity
-- "keywords" should be an array of strings (e.g., ["INFANTRY", "CHARACTER"])
+"conditions.operator" must be one of: ${generateOperatorDocs()}
 
-- "abilities" is optional - only include if the mechanic adds an ability to the entity
-- "abilities" should be an array of strings (e.g., ["DEEP STRIKE", "STEALTH"])
+=== WEAPON ABILITIES REFERENCE ===
+When an ability grants weapon abilities (shown in [BRACKETS] in rules), use effect:"addsAbility":
+${generateWeaponAbilitiesDocs()}
 
-- "value" should usually be an integer (even if it's negative), but can be a string e.g. "D3", "2D6"
+=== COMMON KEYWORDS REFERENCE ===
+Keywords often appear in conditions (e.g., "if target has INFANTRY keyword"):
+${generateKeywordsDocs()}
 
-- "conditions" is optional - only include if the mechanic needs specific conditions to trigger (e.g., "if target is battle-shocked", "while leading a unit")
+=== IMPORTANT RULES ===
 
-- "conditions.operator" must be one of: ${generateOperatorDocs()}
+1. For weapon abilities with values (SUSTAINED HITS 1, MELTA 2, FEEL NO PAIN 5+), put the number in "value"
+2. For reroll effects, value must be "ones", "failed", or "all"
+3. Save modifications: Higher = worse save, so +1 to save is a PENALTY (rollPenalty), -1 to save is a BONUS (rollBonus)
+4. "thisUnit" vs "thisModel": Use "thisUnit" for abilities affecting the whole unit, "thisModel" for single model effects
+5. Leader abilities: When text says "while this model is leading a unit", the entity is usually "thisUnit" (the combined unit) with condition {state:"isLeadingUnit"}
+6. Ignore the "Leader" ability itself - it just allows attachment, no combat effect
 
-Special cases:
-- Saving throw modifications: The higher the number, the worse the save. A roll bonus should be a negative number and a roll penalty should be a positive number.
-- When adding an ability which carries a number e.g. "SUSTAINED HITS 1" or "FEEL NO PAIN 5+", the value should be the number as an integer.
-- The ability "Leader" can be completely ignored
-- If an ability requires a dice roll such as D3, D6, 2D6, etc, add that to the value exactly as it is written.
-- For reroll effects, the value should be "ones", "failed", or "all"
+=== WHAT TO SKIP (return empty mechanics) ===
 
-Examples:
-- "this model gets +1 to Hit rolls" → {entity:"thisModel", effect:"rollBonus", attribute:"h", value:1}
-- "this model gets a 5+ Feel No Pain" → {entity:"thisModel", effect:"addsAbility", abilities:["FEEL NO PAIN"], value:5}
-- "this model gets a 4+ invulnerable save" → {entity:"thisModel", effect:"staticNumber", attribute:"invSv", value:4}
-- "+1 to Wound if target is battle-shocked" → {entity:"thisModel", effect:"rollBonus", attribute:"w", value:1, conditions:[{entity:"targetUnit", state:"isBattleShocked", operator:"equals", value:true}]}
-- "gains the INFANTRY keyword" → {entity:"thisModel", effect:"addsKeyword", keywords:["INFANTRY"]}
-- "has the Deep Strike ability" → {entity:"thisModel", effect:"addsAbility", abilities:["DEEP STRIKE"]}
-- "While this model is leading a unit, add 1 to Hit rolls" → {entity:"thisUnit", effect:"rollBonus", attribute:"h", value:1, conditions:[{entity:"thisUnit", state:"isLeadingUnit", operator:"equals", value:true}]}
+Do NOT extract mechanics for:
+- Deployment/setup rules (Deep Strike setup, Infiltrators setup, Reserves)
+- Unit organization rules (Combat Squads splitting)
+- Transport capacity or embark/disembark rules
+- CP cost reductions or Stratagem interactions
+- Movement abilities (Scouts move, Fall Back and shoot/charge)
+- Once per battle abilities that don't have combat effects
+- Aura ranges without specific effects
+- Narrative/flavor text
+
+Only extract mechanics that directly affect:
+- Dice rolls (hit, wound, save, damage)
+- Unit/weapon characteristics
+- Granting keywords or abilities
+
+=== EXAMPLES ===
+
+Simple modifiers:
+- "add 1 to Hit rolls" → {entity:"thisUnit", effect:"rollBonus", attribute:"h", value:1}
+- "subtract 1 from Wound rolls" → {entity:"thisUnit", effect:"rollPenalty", attribute:"w", value:1}
+- "a 4+ invulnerable save" → {entity:"thisUnit", effect:"staticNumber", attribute:"invSv", value:4}
+- "a 5+ Feel No Pain" → {entity:"thisUnit", effect:"addsAbility", abilities:["FEEL NO PAIN"], value:5}
+
+Weapon abilities granted:
+- "weapons have the [LETHAL HITS] ability" → {entity:"thisUnit", effect:"addsAbility", abilities:["LETHAL HITS"]}
+- "weapons have the [SUSTAINED HITS 1] ability" → {entity:"thisUnit", effect:"addsAbility", abilities:["SUSTAINED HITS"], value:1}
+- "weapons have the [DEVASTATING WOUNDS] ability" → {entity:"thisUnit", effect:"addsAbility", abilities:["DEVASTATING WOUNDS"]}
+
+Conditional effects:
+- "While this model is leading a unit, add 1 to Hit rolls for models in that unit" → {entity:"thisUnit", effect:"rollBonus", attribute:"h", value:1, conditions:[{entity:"thisModel", state:"isLeadingUnit", operator:"equals", value:true}]}
+- "+1 to Wound against MONSTER or VEHICLE units" → {entity:"thisUnit", effect:"rollBonus", attribute:"w", value:1, conditions:[{entity:"targetUnit", keywords:["MONSTER", "VEHICLE"], operator:"includes", value:true}]}
+- "re-roll hit rolls if target is below half strength" → {entity:"thisUnit", effect:"reroll", attribute:"h", value:"all", conditions:[{entity:"targetUnit", state:"isBelowHalfStrength", operator:"equals", value:true}]}
+
+Rerolls:
 - "re-roll hit rolls of 1" → {entity:"thisUnit", effect:"reroll", attribute:"h", value:"ones"}
-- "automatically hits" → {entity:"thisUnit", effect:"autoSuccess", attribute:"h", value:true}
+- "re-roll failed wound rolls" → {entity:"thisUnit", effect:"reroll", attribute:"w", value:"failed"}
+- "re-roll all hit rolls" → {entity:"thisUnit", effect:"reroll", attribute:"h", value:"all"}
 
-If no mechanics are found, return: {"mechanics": []}`;
+Target effects:
+- "subtract 1 from hit rolls that target this unit" → {entity:"opposingUnit", effect:"rollPenalty", attribute:"h", value:1, conditions:[{entity:"targetUnit", operator:"equals", value:"thisUnit"}]}
+- "enemy units within 6\" get -1 to Leadership" → {entity:"opposingUnit", effect:"rollPenalty", attribute:"ld", value:1}
+
+Mortal wounds:
+- "inflict D3 mortal wounds" → {entity:"targetUnit", effect:"mortalWounds", value:"D3"}
+- "on a 2+, inflict 1 mortal wound" → {entity:"targetUnit", effect:"mortalWounds", value:1}
+
+If no extractable mechanics are found, return: {"mechanics": []}`;
 }

@@ -22,7 +22,15 @@
       "raw": "<b>Every Torment is equipped with:</b> hideous mutations. <br><br><b>Every Mutant is equipped with:</b> blasphemous appendages.",
       "parsed": [
         "000003851:hideous-mutations"
-      ]
+      ],
+      "byModelType": {
+        "Torment": [
+          "000003851:hideous-mutations"
+        ],
+        "Mutant": [
+          "000003851:blasphemous-appendages"
+        ]
+      }
     },
     "weapons": [
       {
@@ -50,7 +58,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Torment"
+            ]
           }
         ]
       },
@@ -79,7 +90,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Mutant"
+            ]
           }
         ]
       }

@@ -24,7 +24,14 @@
         "000002726:bolt-pistol",
         "000002726:gauntlet-of-the-forge",
         "000002726:spear-of-vulkan"
-      ]
+      ],
+      "byModelType": {
+        "Vulkan He'stan - EPIC HERO": [
+          "000002726:bolt-pistol",
+          "000002726:gauntlet-of-the-forge",
+          "000002726:spear-of-vulkan"
+        ]
+      }
     },
     "weapons": [
       {
@@ -158,7 +165,38 @@
       "factionId": "",
       "description": "In your Shooting phase, select one enemy unit within 24\" of and visible to this model. Until the end of the phase, each time a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> model makes a ranged attack with a Torrent or Melta weapon that targets that enemy unit, you can re-roll the Wound roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisArmy",
+          "effect": "reroll",
+          "attribute": "w",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "opposingUnit",
+              "state": "isVisible",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "opposingUnit",
+              "keywords": [
+                "ADEPTUS ASTARTES"
+              ],
+              "operator": "includes",
+              "value": true
+            },
+            {
+              "entity": "thisModel",
+              "state": "inShootingPhase",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",

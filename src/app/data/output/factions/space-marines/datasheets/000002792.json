@@ -21,9 +21,13 @@
     "defaultLoadout": {
       "raw": "* If this unit's Chaplain Grimaldus model is ever destroyed, all of this unit's remaining Cenobyte Servitor models are also destroyed. While embarking within a Transport and while embarked within a <span class=\"kwb\">TRANSPORT</span>, each Cenobyte Servitor model in this unit takes up the space of 0 models.<br><br><b>Chaplain Grimaldus is equipped with:</b> plasma pistol; artificer crozius. <br><br><b>Every Cenobyte Servitor is equipped with:</b> close combat weapon.",
       "parsed": [
-        "000002792:plasma-pistol",
-        "000002792:artificer-crozius"
-      ]
+        "000002792:close-combat-weapon"
+      ],
+      "byModelType": {
+        "Cenobyte Servitor": [
+          "000002792:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -169,7 +173,24 @@
       "factionId": "",
       "description": "While this unit is leading a unit and contains a Chaplain Grimaldus model, each time a model in that unit makes a melee attack, you can re-roll the Hit roll.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "reroll",
+          "attribute": "h",
+          "value": "failed",
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -178,7 +199,27 @@
       "factionId": "",
       "description": "In your Command phase, if this unit contains one or more Cenobyte Servitor models, select one Temple Relics ability (see left). Until the start of your next Command phase, this unit's Chaplain Grimaldus model has that ability.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisModel",
+          "effect": "addsAbility",
+          "abilities": [
+            "Temple Relics ability"
+          ],
+          "state": "until the start of your next Command phase",
+          "value": "selected ability",
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "attribute": "Cenobyte Servitor",
+              "operator": "greaterThanOrEqualTo",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -187,7 +228,22 @@
       "factionId": "",
       "description": "Add 1 to Advance and Charge rolls made for this unit.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "m",
+          "value": 1
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "a",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -196,7 +252,16 @@
       "factionId": "",
       "description": "Add 1 to the Toughness characteristic of models in this unit.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "t",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     },
     {
       "id": "",
@@ -205,7 +270,16 @@
       "factionId": "",
       "description": "Improve the Armour Penetration characteristic of melee weapons equipped by models in this unit by 1.",
       "type": "Primarch",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "ap",
+          "value": 1
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

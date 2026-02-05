@@ -23,7 +23,17 @@
       "parsed": [
         "000002767:agent-firearm",
         "000002767:agent-melee-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Inquisitorial Agent": [
+          "000002767:agent-firearm",
+          "000002767:agent-melee-weapon"
+        ],
+        "Gun Servitor": [
+          "000002767:heavy-bolter",
+          "000002767:agent-melee-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -53,7 +63,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Inquisitorial Agent"
+            ]
           }
         ]
       },
@@ -85,7 +98,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Gun Servitor"
+            ]
           }
         ]
       },

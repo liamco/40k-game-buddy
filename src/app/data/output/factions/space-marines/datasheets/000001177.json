@@ -24,7 +24,14 @@
         "000001177:bolt-pistol",
         "000001177:heavy-bolt-rifle",
         "000001177:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "*all*": [
+          "000001177:bolt-pistol",
+          "000001177:heavy-bolt-rifle",
+          "000001177:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -212,7 +219,30 @@
       "factionId": "",
       "description": "While this unit is within range of an objective marker you control, each time an attack with a Damage characteristic of 1 is allocated to a model in this unit, add 1 to any armour saving throw made against that attack.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "rollBonus",
+          "attribute": "s",
+          "value": 1,
+          "conditions": [
+            {
+              "entity": "thisUnit",
+              "state": "inRangeOfFriendlyObjective",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "entity": "targetModel",
+              "attribute": "d",
+              "operator": "equals",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [

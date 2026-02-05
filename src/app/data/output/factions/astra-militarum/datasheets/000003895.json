@@ -21,10 +21,20 @@
     "defaultLoadout": {
       "raw": "<b>Each Heavy Weapons Gunner is equipped with:</b> lascannon; laspistol; close combat weapon.<br><br><b>The Fire Coordinator is equipped with:</b> laspistol; close combat weapon.",
       "parsed": [
-        "000003895:lascannon",
         "000003895:laspistol",
         "000003895:close-combat-weapon"
-      ]
+      ],
+      "byModelType": {
+        "Fire Coordinator": [
+          "000003895:laspistol",
+          "000003895:close-combat-weapon"
+        ],
+        "Heavy Weapons Gunner": [
+          "000003895:lascannon",
+          "000003895:laspistol",
+          "000003895:close-combat-weapon"
+        ]
+      }
     },
     "weapons": [
       {
@@ -86,7 +96,10 @@
         ],
         "eligibility": [
           {
-            "type": "any"
+            "type": "modelType",
+            "modelType": [
+              "Heavy Weapons Gunner"
+            ]
           }
         ]
       },

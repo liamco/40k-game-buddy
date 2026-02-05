@@ -23,7 +23,13 @@
       "parsed": [
         "000002786:storm-bolter",
         "000002786:armoured-hull"
-      ]
+      ],
+      "byModelType": {
+        "Impulsor": [
+          "000002786:storm-bolter",
+          "000002786:armoured-hull"
+        ]
+      }
     },
     "weapons": [
       {
@@ -302,12 +308,40 @@
         "id": "000002786:orbital-comms-array-aura",
         "name": "Orbital Comms Array (Aura)",
         "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-        "mechanics": [],
+        "mechanics": [
+          {
+            "entity": "thisUnit",
+            "effect": "rollBonus",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "state": "isWithinRange",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          },
+          {
+            "entity": "thisArmy",
+            "effect": "rollBonus",
+            "value": 1,
+            "conditions": [
+              {
+                "entity": "thisUnit",
+                "state": "isWithinRange",
+                "operator": "equals",
+                "value": true
+              }
+            ]
+          }
+        ],
         "eligibility": [
           {
             "type": "any"
           }
-        ]
+        ],
+        "mechanicsSource": "openai"
       },
       {
         "id": "000002786:shield-dome",
@@ -338,8 +372,164 @@
             "000002786:armoured-hull"
           ],
           [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:bellicatus-missile-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:ironhail-skytalon-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:orbital-comms-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "wargear-ability:shield-dome"
+          ],
+          [
             "000002786:armoured-hull",
             "000002786:fragstorm-grenade-launcher"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:bellicatus-missile-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:ironhail-skytalon-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:orbital-comms-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:fragstorm-grenade-launcher",
+            "wargear-ability:shield-dome"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:bellicatus-missile-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:ironhail-skytalon-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:orbital-comms-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "wargear-ability:shield-dome"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:fragstorm-grenade-launcher"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:bellicatus-missile-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:ironhail-skytalon-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:orbital-comms-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:ironhail-heavy-stubber",
+            "000002786:fragstorm-grenade-launcher",
+            "wargear-ability:shield-dome"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:multi-melta"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:bellicatus-missile-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:ironhail-skytalon-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:orbital-comms-array"
+          ],
+          [
+            "000002786:storm-bolter",
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "wargear-ability:shield-dome"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:fragstorm-grenade-launcher"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:bellicatus-missile-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:ironhail-skytalon-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:fragstorm-grenade-launcher",
+            "000002786:orbital-comms-array"
+          ],
+          [
+            "000002786:armoured-hull",
+            "000002786:multi-melta",
+            "000002786:fragstorm-grenade-launcher",
+            "wargear-ability:shield-dome"
           ]
         ]
       }
@@ -375,7 +565,28 @@
       "factionId": "",
       "description": "Units can disembark from this <span class=\"kwb\">TRANSPORT</span> after it has Advanced. Units that do so count as having made a Normal move, and cannot declare a charge that turn.",
       "type": "Datasheet",
-      "parameter": ""
+      "parameter": "",
+      "mechanics": [
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "DISembark AFTER ADVANCE"
+          ],
+          "value": "Normal move",
+          "conditions": []
+        },
+        {
+          "entity": "thisUnit",
+          "effect": "addsAbility",
+          "abilities": [
+            "CANNOT CHARGE"
+          ],
+          "value": "this turn",
+          "conditions": []
+        }
+      ],
+      "mechanicsSource": "openai"
     }
   ],
   "keywords": [
