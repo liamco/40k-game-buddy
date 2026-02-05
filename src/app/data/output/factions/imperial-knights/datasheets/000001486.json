@@ -40,7 +40,7 @@
       "raw": "<b>This model is equipped with:</b> conflagration cannon; 2 shieldbreaker missile launchers; thundercoil harpoon; 2 twin meltaguns; twin siegebreaker cannon; titanic feet.",
       "parsed": [
         "000001486:conflagration-cannon",
-        "000001486:shieldbreaker-missile-launcher",
+        "000001486:shieldbreaker-missile-launcher-x2",
         "000001486:thundercoil-harpoon",
         "000001486:twin-meltagun",
         "000001486:twin-siegebreaker-cannon",
@@ -49,7 +49,7 @@
       "byModelType": {
         "Knight Valiant": [
           "000001486:conflagration-cannon",
-          "000001486:shieldbreaker-missile-launcher",
+          "000001486:shieldbreaker-missile-launcher-x2",
           "000001486:thundercoil-harpoon",
           "000001486:twin-meltagun",
           "000001486:twin-siegebreaker-cannon",
@@ -88,7 +88,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000001486:shieldbreaker-missile-launcher",
@@ -120,7 +121,41 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
+      },
+      {
+        "id": "000001486:shieldbreaker-missile-launcher-x2",
+        "datasheetId": "000001486",
+        "line": 2,
+        "name": "Shieldbreaker missile launcher",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001486",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Shieldbreaker missile launcher",
+            "attributes": [
+              "ANTI-TITANIC 4+",
+              "DEVASTATING WOUNDS"
+            ],
+            "range": 72,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 12,
+            "ap": -6,
+            "d": "D6+1"
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ],
+        "count": 2
       },
       {
         "id": "000001486:thundercoil-harpoon",
@@ -152,7 +187,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000001486:twin-meltagun",
@@ -184,7 +220,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 2
       },
       {
         "id": "000001486:twin-siegebreaker-cannon",
@@ -216,7 +253,41 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
+      },
+      {
+        "id": "000001486:twin-siegebreaker-cannon-x2",
+        "datasheetId": "000001486",
+        "line": 5,
+        "name": "Twin siegebreaker cannon",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000001486",
+            "line": 5,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Twin siegebreaker cannon",
+            "attributes": [
+              "BLAST",
+              "TWIN-LINKED"
+            ],
+            "range": 36,
+            "type": "Ranged",
+            "a": "D6",
+            "bsWs": 3,
+            "s": 6,
+            "ap": 0,
+            "d": 1
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ],
+        "count": 2
       },
       {
         "id": "000001486:titanic-feet",
@@ -245,7 +316,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       }
     ],
     "options": {
@@ -265,11 +337,19 @@
         "items": [
           [
             "000001486:conflagration-cannon",
-            "000001486:shieldbreaker-missile-launcher",
+            "000001486:shieldbreaker-missile-launcher-x2",
             "000001486:thundercoil-harpoon",
             "000001486:twin-meltagun",
             "000001486:twin-siegebreaker-cannon",
             "000001486:titanic-feet"
+          ],
+          [
+            "000001486:conflagration-cannon",
+            "000001486:thundercoil-harpoon",
+            "000001486:twin-meltagun",
+            "000001486:titanic-feet",
+            "000001486:shieldbreaker-missile-launcher",
+            "000001486:twin-siegebreaker-cannon-x2"
           ]
         ]
       }

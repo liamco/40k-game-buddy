@@ -42,6 +42,7 @@ export interface Weapon {
     type: "Ranged" | "Melee";
     profiles: WeaponProfile[];
     eligibility?: EligibilityRule[]; // Rules determining which models can see/select this weapon (OR logic)
+    count?: number; // Number of this weapon the model has (default: 1). Affects attack multiplier in combat.
 }
 
 export interface WeaponProfile {

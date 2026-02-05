@@ -21,12 +21,12 @@
     "defaultLoadout": {
       "raw": "<b>Every model is equipped with:</b> 2 bolt pistols; close combat weapon.",
       "parsed": [
-        "000000904:bolt-pistol",
+        "000000904:bolt-pistol-x2",
         "000000904:close-combat-weapon"
       ],
       "byModelType": {
         "*all*": [
-          "000000904:bolt-pistol",
+          "000000904:bolt-pistol-x2",
           "000000904:close-combat-weapon"
         ]
       }
@@ -59,9 +59,45 @@
         ],
         "eligibility": [
           {
+            "type": "modelType",
+            "modelType": [
+              "Seraphim Superior"
+            ]
+          }
+        ],
+        "count": 1
+      },
+      {
+        "id": "000000904:bolt-pistol-x2",
+        "datasheetId": "000000904",
+        "line": 1,
+        "name": "Bolt pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000904",
+            "line": 1,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Bolt pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 3,
+            "s": 4,
+            "ap": 0,
+            "d": 1
+          }
+        ],
+        "eligibility": [
+          {
             "type": "any"
           }
-        ]
+        ],
+        "count": 2
       },
       {
         "id": "000000904:inferno-pistol",
@@ -98,7 +134,8 @@
               "Seraphim"
             ]
           }
-        ]
+        ],
+        "count": 2
       },
       {
         "id": "000000904:ministorum-hand-flamer",
@@ -136,7 +173,8 @@
               "Seraphim"
             ]
           }
-        ]
+        ],
+        "count": 2
       },
       {
         "id": "000000904:plasma-pistol",
@@ -188,7 +226,8 @@
               "Seraphim Superior"
             ]
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000000904:chainsword",
@@ -220,7 +259,8 @@
               "Seraphim Superior"
             ]
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000000904:close-combat-weapon",
@@ -249,7 +289,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000000904:power-weapon",
@@ -281,7 +322,8 @@
               "Seraphim Superior"
             ]
           }
-        ]
+        ],
+        "count": 1
       }
     ],
     "options": {
@@ -306,7 +348,7 @@
         "modelType": "any",
         "items": [
           [
-            "000000904:bolt-pistol",
+            "000000904:bolt-pistol-x2",
             "000000904:close-combat-weapon"
           ]
         ]

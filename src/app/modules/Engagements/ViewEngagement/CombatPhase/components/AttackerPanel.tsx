@@ -67,9 +67,9 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
         onWeaponChange(null);
     };
 
-    const handleWeaponProfileSelect = (profile: WeaponProfile | null, wargearId?: string) => {
+    const handleWeaponProfileSelect = (profile: WeaponProfile | null, wargearId?: string, weaponCount?: number) => {
         if (profile && wargearId) {
-            onWeaponChange({ profile, wargearId });
+            onWeaponChange({ profile, wargearId, weaponCount: weaponCount || 1 });
         } else {
             onWeaponChange(null);
         }
@@ -125,6 +125,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                                         key={`${weapon.id}-${profile.line}`}
                                                         profile={profile}
                                                         wargearId={weapon.id}
+                                                        weaponCount={weapon.count}
                                                         isSelected={isSelected && canFire}
                                                         isDisabled={!canFire}
                                                         onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
@@ -150,6 +151,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                                 key={`${weapon.id}-${profile.line}`}
                                                 profile={profile}
                                                 wargearId={weapon.id}
+                                                weaponCount={weapon.count}
                                                 isSelected={isSelected && canFire}
                                                 isDisabled={!canFire}
                                                 disabledLabel={reason}

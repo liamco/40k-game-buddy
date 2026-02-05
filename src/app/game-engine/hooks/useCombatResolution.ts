@@ -19,6 +19,7 @@ export interface UseCombatResolutionParams {
     attackerUnit: EngagementForceItem | null;
     attackerForce: EngagementForce;
     weaponProfile: WeaponProfile | null;
+    weaponCount?: number; // Number of this weapon the model has (multiplies attacks)
     modelCount: number;
 
     defenderUnit: EngagementForceItem | null;
@@ -34,19 +35,7 @@ export interface UseCombatResolutionParams {
  * Returns null if required data is missing (attacker, weapon, defender, target)
  */
 export function useCombatResolution(params: UseCombatResolutionParams): CombatResolution | null {
-    const {
-        phase,
-        turn,
-        isPlayerTurn,
-        attackerUnit,
-        attackerForce,
-        weaponProfile,
-        modelCount,
-        defenderUnit,
-        defenderForce,
-        targetModel,
-        activeStratagems,
-    } = params;
+    const { phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems } = params;
 
     return useMemo(() => {
         const context = buildCombatContext({
@@ -56,6 +45,7 @@ export function useCombatResolution(params: UseCombatResolutionParams): CombatRe
             attackerUnit,
             attackerForce,
             weaponProfile,
+            weaponCount,
             modelCount,
             defenderUnit,
             defenderForce,
@@ -66,17 +56,5 @@ export function useCombatResolution(params: UseCombatResolutionParams): CombatRe
         if (!context) return null;
 
         return resolveCombat(context);
-    }, [
-        phase,
-        turn,
-        isPlayerTurn,
-        attackerUnit,
-        attackerForce,
-        weaponProfile,
-        modelCount,
-        defenderUnit,
-        defenderForce,
-        targetModel,
-        activeStratagems,
-    ]);
+    }, [phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems]);
 }

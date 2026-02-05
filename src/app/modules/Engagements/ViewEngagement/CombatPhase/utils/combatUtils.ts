@@ -20,6 +20,7 @@ export interface UnitSelectItem {
 export interface SelectedWeapon {
     profile: WeaponProfile;
     wargearId: string;
+    weaponCount: number; // Number of this weapon the model has (multiplies attacks)
 }
 
 /**
@@ -178,7 +179,7 @@ export function getFirstWeaponForPhase(wargear: EngagementWargear[], phase: "sho
     const weaponType = phase === "shooting" ? "Ranged" : "Melee";
     const weapon = wargear.find((w) => w.type === weaponType);
     if (weapon && weapon.profiles.length > 0) {
-        return { profile: weapon.profiles[0], wargearId: weapon.id };
+        return { profile: weapon.profiles[0], wargearId: weapon.id, weaponCount: weapon.count || 1 };
     }
     return null;
 }
@@ -365,7 +366,7 @@ export function getFirstValidWeaponForMovement(wargear: EngagementWargear[] | un
         // For melee, movement restrictions don't apply
         if (phase === "fight") {
             if (weapon.profiles.length > 0) {
-                return { profile: weapon.profiles[0], wargearId: weapon.id };
+                return { profile: weapon.profiles[0], wargearId: weapon.id, weaponCount: weapon.count || 1 };
             }
             continue;
         }
@@ -373,7 +374,7 @@ export function getFirstValidWeaponForMovement(wargear: EngagementWargear[] | un
         // For shooting, check if weapon can be fired
         const { canFire } = canFireWeapon(weapon, movementBehaviour, canAdvanceAndShoot);
         if (canFire && weapon.profiles.length > 0) {
-            return { profile: weapon.profiles[0], wargearId: weapon.id };
+            return { profile: weapon.profiles[0], wargearId: weapon.id, weaponCount: weapon.count || 1 };
         }
     }
 

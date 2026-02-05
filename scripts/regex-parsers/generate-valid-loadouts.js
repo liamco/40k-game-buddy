@@ -79,7 +79,12 @@ function nameToId(name, datasheetId, isAbility = false) {
  * Handles plural/singular variations (e.g., "heavy bolters" matches "Heavy bolter").
  */
 function resolveNameToId(name, weapons, abilities, datasheetId) {
-    const normalizedName = name.toLowerCase().trim();
+    // Handle both string names and object refs with {name, count}
+    const actualName = typeof name === "object" && name !== null ? name.name : name;
+    if (!actualName || typeof actualName !== "string") {
+        return nameToId(String(name || "unknown"), datasheetId, false);
+    }
+    const normalizedName = actualName.toLowerCase().trim();
 
     // Try exact match first
     let weapon = weapons.find((w) => w.name.toLowerCase().trim() === normalizedName);
@@ -117,7 +122,7 @@ function resolveNameToId(name, weapons, abilities, datasheetId) {
         }
     }
 
-    return nameToId(name, datasheetId, false);
+    return nameToId(actualName, datasheetId, false);
 }
 
 /**
@@ -142,6 +147,25 @@ function cleanWeaponName(name) {
         .replace(/\s+and\s*$/i, "")
         .replace(/\s+/g, " ")
         .trim();
+}
+
+/**
+ * Parse weapon text that may include a count prefix (e.g., "3 heavy bolters")
+ * Returns { name: string, count: number }
+ */
+function parseWeaponWithCount(text) {
+    const trimmed = text.trim();
+    const match = trimmed.match(/^(\d+)\s+(.+)$/);
+    if (match) {
+        return {
+            name: cleanWeaponName(match[2]),
+            count: parseInt(match[1], 10),
+        };
+    }
+    return {
+        name: cleanWeaponName(trimmed),
+        count: 1,
+    };
 }
 
 function parseWeaponChoiceItem(text) {
@@ -685,7 +709,10 @@ function parseAllOptions(options) {
 }
 
 function resolveWargearReference(ref, weapons, abilities) {
-    const normalizedName = ref.name.toLowerCase().trim();
+    // Handle both string refs and object refs with {name, count}
+    const name = typeof ref === "string" ? ref : ref.name;
+    if (!name || typeof name !== "string") return { ...ref, isAbility: false };
+    const normalizedName = name.toLowerCase().trim();
 
     const matchesWeapon = weapons.some((w) => w.name.toLowerCase().trim() === normalizedName);
     if (matchesWeapon) {
@@ -725,11 +752,24 @@ function resolveOptionReferences(parsedOption, weapons, abilities) {
 // DEFAULT LOADOUT PARSING
 // ============================================================================
 
+/**
+ * Parse default loadout text and extract items WITH counts.
+ * Returns array of { modelType: string, items: Array<{name: string, count: number}> }
+ */
 function parseDefaultLoadout(defaultLoadoutText, unitComposition) {
     if (!defaultLoadoutText) return [];
 
     const text = stripHtml(defaultLoadoutText);
     const loadouts = [];
+
+    // Helper to parse items text into array of {name, count}
+    function parseItemsWithCounts(itemsText) {
+        return itemsText
+            .split(/[;,]/)
+            .map((s) => s.trim())
+            .filter((s) => s && s.length > 0)
+            .map((s) => parseWeaponWithCount(s));
+    }
 
     // Patterns for model-specific loadouts (order matters - more specific first)
     const modelPatterns = [
@@ -746,11 +786,7 @@ function parseDefaultLoadout(defaultLoadoutText, unitComposition) {
         while ((match = pattern.exec(text)) !== null) {
             let modelType = match[1].trim();
             const itemsText = match[2].trim();
-            const items = itemsText
-                .split(/[;,]/)
-                .map((s) => s.trim())
-                .filter((s) => s && s.length > 0)
-                .map((s) => s.replace(/^\d+\s+/, ""));
+            const items = parseItemsWithCounts(itemsText);
 
             // If model type is just "model" or "models", it means all models share this loadout
             if (modelType.toLowerCase() === "model" || modelType.toLowerCase() === "models") {
@@ -771,11 +807,7 @@ function parseDefaultLoadout(defaultLoadoutText, unitComposition) {
     const everyModelMatch = text.match(/Every model is equipped with:\s*([^.]+)/i);
     if (everyModelMatch) {
         const itemsText = everyModelMatch[1].trim();
-        const items = itemsText
-            .split(/[;,]/)
-            .map((s) => s.trim())
-            .filter((s) => s && s.length > 0)
-            .map((s) => s.replace(/^\d+\s+/, ""));
+        const items = parseItemsWithCounts(itemsText);
 
         if (items.length > 0) {
             loadouts.push({ modelType: "*all*", items });
@@ -786,11 +818,7 @@ function parseDefaultLoadout(defaultLoadoutText, unitComposition) {
     if (loadouts.length === 0) {
         const genericMatch = text.match(/equipped with:\s*([^.]+)/i);
         if (genericMatch) {
-            const items = genericMatch[1]
-                .split(/[;,]/)
-                .map((s) => s.trim())
-                .filter((s) => s && s.length > 0)
-                .map((s) => s.replace(/^\d+\s+/, ""));
+            const items = parseItemsWithCounts(genericMatch[1]);
 
             const modelType = unitComposition?.[0]?.description ? cleanModelType(stripHtml(unitComposition[0].description)) : "any";
 
@@ -815,6 +843,166 @@ function getModelTypes(unitComposition) {
     }));
 }
 
+// ============================================================================
+// WEAPON COUNT TRACKING AND VARIANT GENERATION
+// ============================================================================
+
+/**
+ * Collect all weapon count usages from default loadouts and parsed options.
+ * Returns a Map: baseWeaponName -> Set of counts used
+ */
+function collectWeaponCountUsages(defaultLoadoutText, parsedOptions, unitComposition) {
+    const countUsages = new Map(); // weaponName (lowercase, singular) -> Set<count>
+
+    function addUsage(name, count) {
+        let key = name.toLowerCase().trim();
+        // Normalize to singular form for matching (weapons array uses singular names)
+        if (key.endsWith("s") && !key.endsWith("ss")) {
+            // Also store the singular version so we match both ways
+            const singularKey = key.slice(0, -1);
+            if (!countUsages.has(singularKey)) {
+                countUsages.set(singularKey, new Set());
+            }
+            countUsages.get(singularKey).add(count);
+        }
+        // Also store the original key
+        if (!countUsages.has(key)) {
+            countUsages.set(key, new Set());
+        }
+        countUsages.get(key).add(count);
+    }
+
+    // Collect from default loadout
+    const defaultLoadouts = parseDefaultLoadout(defaultLoadoutText, unitComposition);
+    for (const loadout of defaultLoadouts) {
+        for (const item of loadout.items) {
+            addUsage(item.name, item.count);
+        }
+    }
+
+    // Collect from parsed options (adds and removes)
+    for (const option of parsedOptions) {
+        if (!option.action) continue;
+
+        // From removes
+        if (option.action.removes) {
+            for (const ref of option.action.removes) {
+                const count = typeof ref === "object" ? ref.count || 1 : 1;
+                const name = typeof ref === "object" ? ref.name : ref;
+                addUsage(name, count);
+            }
+        }
+
+        // From adds (which contains weapon choices)
+        if (option.action.adds) {
+            for (const choice of option.action.adds) {
+                if (choice.weapons) {
+                    for (const weapon of choice.weapons) {
+                        addUsage(weapon.name, weapon.count || 1);
+                    }
+                }
+            }
+        }
+    }
+
+    return countUsages;
+}
+
+/**
+ * Generate weapon count variants for weapons that have multiple count usages.
+ * Modifies the weapons array in place by:
+ * 1. Adding count property to existing weapons (defaulting to highest count seen)
+ * 2. Creating new weapon entries with -x{count} suffix for other counts
+ */
+function generateWeaponCountVariants(weapons, countUsages, datasheetId) {
+    const newWeapons = [];
+
+    // Filter out existing variant weapons (from previous parser runs) to avoid duplicates
+    // Variant weapons have IDs ending in -x{number}
+    const baseWeapons = weapons.filter((w) => !/-x\d+$/.test(w.id));
+
+    for (const weapon of baseWeapons) {
+        const weaponNameLower = weapon.name.toLowerCase().trim();
+        const counts = countUsages.get(weaponNameLower);
+
+        if (!counts || counts.size === 0) {
+            // No count info - default to 1
+            weapon.count = 1;
+            // Remove count from profiles (count lives on weapon, not profile)
+            for (const profile of weapon.profiles || []) {
+                delete profile.count;
+            }
+            newWeapons.push(weapon);
+            continue;
+        }
+
+        const countsArray = Array.from(counts).sort((a, b) => a - b);
+
+        if (countsArray.length === 1) {
+            // Only one count - set it on the weapon
+            weapon.count = countsArray[0];
+            // Remove count from profiles (count lives on weapon, not profile)
+            for (const profile of weapon.profiles || []) {
+                delete profile.count;
+            }
+            newWeapons.push(weapon);
+        } else {
+            // Multiple counts - base weapon gets count 1 (if present) or lowest count
+            // Other counts get variant entries
+            const hasCount1 = countsArray.includes(1);
+            const baseCount = hasCount1 ? 1 : countsArray[0];
+
+            weapon.count = baseCount;
+            // Remove count from profiles (count lives on weapon, not profile)
+            for (const profile of weapon.profiles || []) {
+                delete profile.count;
+            }
+            newWeapons.push(weapon);
+
+            // Create variants for other counts
+            for (const count of countsArray) {
+                if (count === baseCount) continue;
+
+                const variant = JSON.parse(JSON.stringify(weapon)); // Deep clone
+                variant.id = `${datasheetId}:${weapon.name.toLowerCase().replace(/\s+/g, "-")}-x${count}`;
+                variant.count = count;
+                // Remove count from profiles in variant (count lives on weapon, not profile)
+                for (const profile of variant.profiles || []) {
+                    delete profile.count;
+                }
+                newWeapons.push(variant);
+            }
+        }
+    }
+
+    return newWeapons;
+}
+
+/**
+ * Find weapon ID for a given name and count.
+ * Returns the appropriate weapon ID (base or -x{count} variant).
+ */
+function resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId) {
+    const normalizedName = name.toLowerCase().trim();
+    const targetCount = count || 1;
+
+    // First, try to find exact match with count
+    for (const weapon of weapons) {
+        const weaponNameLower = weapon.name.toLowerCase().trim();
+        const weaponCount = weapon.count || 1;
+
+        // Check if name matches (exact, singular, or plural)
+        const nameMatches = weaponNameLower === normalizedName || (normalizedName.endsWith("s") && weaponNameLower === normalizedName.slice(0, -1)) || weaponNameLower + "s" === normalizedName;
+
+        if (nameMatches && weaponCount === targetCount) {
+            return weapon.id;
+        }
+    }
+
+    // If no exact count match found, fall back to base weapon
+    return resolveNameToId(name, weapons, abilities, datasheetId);
+}
+
 function parseDefaultLoadoutStructured(defaultLoadoutText, weapons, abilities, datasheetId, unitComposition) {
     if (!defaultLoadoutText) {
         return { raw: "", parsed: [], byModelType: {} };
@@ -831,7 +1019,8 @@ function parseDefaultLoadoutStructured(defaultLoadoutText, weapons, abilities, d
     const allIds = new Set();
 
     for (const loadout of parsedLoadouts) {
-        const ids = loadout.items.map((name) => resolveNameToId(name, weapons, abilities, datasheetId));
+        // Items now have {name, count} structure - resolve with count awareness
+        const ids = loadout.items.map((item) => resolveNameToIdWithCount(item.name, item.count, weapons, abilities, datasheetId));
 
         // Store in byModelType map
         byModelType[loadout.modelType] = ids;
@@ -850,7 +1039,7 @@ function parseDefaultLoadoutStructured(defaultLoadoutText, weapons, abilities, d
         parsed = byModelType["*all*"];
     } else {
         // Use first model type's loadout for backwards compatibility
-        parsed = parsedLoadouts[0].items.map((name) => resolveNameToId(name, weapons, abilities, datasheetId));
+        parsed = parsedLoadouts[0].items.map((item) => resolveNameToIdWithCount(item.name, item.count, weapons, abilities, datasheetId));
     }
 
     return { raw: defaultLoadoutText, parsed, byModelType };
@@ -860,11 +1049,14 @@ function parseDefaultLoadoutStructured(defaultLoadoutText, weapons, abilities, d
 // LOADOUT GENERATION
 // ============================================================================
 
-function loadoutContainsAll(loadout, itemNames, weapons, abilities, datasheetId) {
-    // First, try to match each item individually
+function loadoutContainsAll(loadout, items, weapons, abilities, datasheetId) {
+    // Items can be strings or objects with {name, count}
+    // First, try to match each item individually with count awareness
     let allFound = true;
-    for (const name of itemNames) {
-        const id = resolveNameToId(name, weapons, abilities, datasheetId);
+    for (const item of items) {
+        const name = typeof item === "string" ? item : item.name;
+        const count = typeof item === "object" ? item.count || 1 : 1;
+        const id = resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
         if (!loadout.includes(id)) {
             allFound = false;
             break;
@@ -875,7 +1067,8 @@ function loadoutContainsAll(loadout, itemNames, weapons, abilities, datasheetId)
     // If individual matching failed and we have multiple items,
     // try combining them with "and" to match a compound weapon name
     // e.g., ["scything talons", "rending claws"] -> "scything talons and rending claws"
-    if (itemNames.length > 1) {
+    if (items.length > 1) {
+        const itemNames = items.map((item) => (typeof item === "string" ? item : item.name));
         const combinedName = itemNames.join(" and ");
         const combinedId = resolveNameToId(combinedName, weapons, abilities, datasheetId);
         if (loadout.includes(combinedId)) {
@@ -899,11 +1092,12 @@ function loadoutContainsAll(loadout, itemNames, weapons, abilities, datasheetId)
 function applyReplacement(loadout, removes, adds, weapons, abilities, datasheetId) {
     let newLoadout = [...loadout];
 
-    // First, try to remove items individually
+    // First, try to remove items individually (with count awareness)
     let itemsRemoved = 0;
     for (const ref of removes) {
         const name = typeof ref === "string" ? ref : ref.name;
-        const id = resolveNameToId(name, weapons, abilities, datasheetId);
+        const count = typeof ref === "object" ? ref.count || 1 : 1;
+        const id = resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
         const beforeLength = newLoadout.length;
         newLoadout = newLoadout.filter((item) => item !== id);
         if (newLoadout.length < beforeLength) {
@@ -921,8 +1115,9 @@ function applyReplacement(loadout, removes, adds, weapons, abilities, datasheetI
 
     for (const ref of adds) {
         const name = typeof ref === "string" ? ref : ref.name;
+        const count = typeof ref === "object" ? ref.count || 1 : 1;
         const isAbility = typeof ref === "object" && ref.isAbility;
-        const id = isAbility ? `wargear-ability:${name.toLowerCase().trim().replace(/\s+/g, "-")}` : resolveNameToId(name, weapons, abilities, datasheetId);
+        const id = isAbility ? `wargear-ability:${name.toLowerCase().trim().replace(/\s+/g, "-")}` : resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
         if (!newLoadout.includes(id)) {
             newLoadout.push(id);
         }
@@ -1099,9 +1294,8 @@ function generateLoadoutsForModelType(modelType, baseLoadout, options, weapons, 
             }
 
             if (option.action.type === "replace") {
-                const removeNames = option.action.removes.map((r) => r.name);
-
-                if (loadoutContainsAll(loadout, removeNames, weapons, abilities, datasheetId)) {
+                // Pass full remove objects (with counts) for count-aware matching
+                if (loadoutContainsAll(loadout, option.action.removes, weapons, abilities, datasheetId)) {
                     newLoadouts.push(loadout);
 
                     for (const choice of option.action.adds) {
@@ -1120,10 +1314,16 @@ function generateLoadoutsForModelType(modelType, baseLoadout, options, weapons, 
                 // (e.g., "All models can be equipped with spinemaws" should generate
                 // both the default loadout and the loadout with spinemaws)
                 for (const choice of option.action.adds) {
-                    const addItems = choice.weapons.map((ref) => {
-                        const isAbility = ref.isAbility;
-                        return isAbility ? `wargear-ability:${ref.name.toLowerCase().trim().replace(/\s+/g, "-")}` : resolveNameToId(ref.name, weapons, abilities, datasheetId);
-                    });
+                    const addItems = choice.weapons
+                        .map((ref) => {
+                            // Handle both string refs and object refs with {name, count}
+                            const name = typeof ref === "string" ? ref : ref.name;
+                            if (!name || typeof name !== "string") return null;
+                            const count = typeof ref === "object" ? ref.count || 1 : 1;
+                            const isAbility = typeof ref === "object" && ref.isAbility;
+                            return isAbility ? `wargear-ability:${name.toLowerCase().trim().replace(/\s+/g, "-")}` : resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
+                        })
+                        .filter(Boolean);
 
                     const newLoadout = [...loadout, ...addItems.filter((id) => !loadout.includes(id))];
                     newLoadouts.push(newLoadout);
@@ -1165,7 +1365,11 @@ function extractUnitWideOptions(parsedOptions, weapons, abilities, datasheetId) 
                 const adds = option.action.adds || [];
                 for (const choice of adds) {
                     for (const ref of choice.weapons || []) {
-                        const id = resolveNameToId(ref.name, weapons, abilities, datasheetId);
+                        // Handle both string refs and object refs with {name, count}
+                        const name = typeof ref === "string" ? ref : ref.name;
+                        if (!name || typeof name !== "string") continue;
+                        const count = typeof ref === "object" ? ref.count || 1 : 1;
+                        const id = resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
                         if (id && !unitWideItems.includes(id)) {
                             unitWideItems.push(id);
                         }
@@ -1175,7 +1379,11 @@ function extractUnitWideOptions(parsedOptions, weapons, abilities, datasheetId) 
                 // Extract the original weapon(s) being replaced (so user can deselect)
                 const removes = option.action.removes || [];
                 for (const ref of removes) {
-                    const id = resolveNameToId(ref.name, weapons, abilities, datasheetId);
+                    // Handle both string refs and object refs with {name, count}
+                    const name = typeof ref === "string" ? ref : ref.name;
+                    if (!name || typeof name !== "string") continue;
+                    const count = typeof ref === "object" ? ref.count || 1 : 1;
+                    const id = resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
                     if (id && !unitWideItems.includes(id)) {
                         unitWideItems.push(id);
                     }
@@ -1186,7 +1394,11 @@ function extractUnitWideOptions(parsedOptions, weapons, abilities, datasheetId) 
                 const replacements = option.action.adds || [];
                 for (const choice of replacements) {
                     for (const ref of choice.weapons || []) {
-                        const id = resolveNameToId(ref.name, weapons, abilities, datasheetId);
+                        // Handle both string refs and object refs with {name, count}
+                        const name = typeof ref === "string" ? ref : ref.name;
+                        if (!name || typeof name !== "string") continue;
+                        const count = typeof ref === "object" ? ref.count || 1 : 1;
+                        const id = resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
                         if (id && !unitWideItems.includes(id)) {
                             unitWideItems.push(id);
                         }
@@ -1261,7 +1473,9 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
             for (const choice of action.adds) {
                 if (choice.weapons && Array.isArray(choice.weapons)) {
                     for (const ref of choice.weapons) {
-                        const name = ref.name;
+                        // Handle both string refs and object refs with {name, count}
+                        const name = typeof ref === "string" ? ref : ref.name;
+                        if (!name || typeof name !== "string") continue;
                         const normalizedName = name.toLowerCase().trim();
 
                         // Try to find weapon with flexible matching (handles plural/singular)
@@ -1313,10 +1527,20 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
 
                 case "n-model-specific":
                     // "1 Battle Sister can replace" - count-based with model type
-                    eligibility.countLimit = {
-                        count: targeting.count || 1,
-                        modelType: targeting.modelType || null,
-                    };
+                    // If we already have a countLimit with the same modelType, sum the counts
+                    // This handles cases like Battle Sisters where multiple options each allow "1 Battle Sister" to replace
+                    {
+                        const newModelType = targeting.modelType || null;
+                        const newCount = targeting.count || 1;
+                        if (eligibility.countLimit && eligibility.countLimit.modelType === newModelType) {
+                            eligibility.countLimit.count += newCount;
+                        } else {
+                            eligibility.countLimit = {
+                                count: newCount,
+                                modelType: newModelType,
+                            };
+                        }
+                    }
                     break;
 
                 case "ratio":
@@ -1339,10 +1563,19 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
 
                 case "count":
                     // "N models can be equipped" or "N ModelType can..." - count-based with optional model type
-                    eligibility.countLimit = {
-                        count: targeting.count || 1,
-                        modelType: targeting.modelType || null,
-                    };
+                    // If we already have a countLimit with the same modelType, sum the counts
+                    {
+                        const newModelType = targeting.modelType || null;
+                        const newCount = targeting.count || 1;
+                        if (eligibility.countLimit && eligibility.countLimit.modelType === newModelType) {
+                            eligibility.countLimit.count += newCount;
+                        } else {
+                            eligibility.countLimit = {
+                                count: newCount,
+                                modelType: newModelType,
+                            };
+                        }
+                    }
                     break;
 
                 case "conditional":
@@ -1440,7 +1673,10 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
                 for (const choice of action.adds) {
                     if (choice.weapons && Array.isArray(choice.weapons)) {
                         for (const ref of choice.weapons) {
-                            if (ref.isAbility && ref.name.toLowerCase().trim() === ability.name.toLowerCase().trim()) {
+                            // Handle both string refs and object refs with {name, count}
+                            const refName = typeof ref === "string" ? ref : ref.name;
+                            const isAbility = typeof ref === "object" && ref.isAbility;
+                            if (isAbility && refName && typeof refName === "string" && refName.toLowerCase().trim() === ability.name.toLowerCase().trim()) {
                                 addsThisAbility = true;
                                 break;
                             }
@@ -1574,7 +1810,12 @@ function generateValidLoadouts(datasheet, parsedOptions) {
         // This prevents wrong loadout assignments
         if (!baseLoadout) continue;
 
-        const baseLoadoutIds = baseLoadout.items.map((name) => resolveNameToId(name, weapons, abilities, datasheetId));
+        // baseLoadout.items contains {name, count} objects from parseDefaultLoadout
+        const baseLoadoutIds = baseLoadout.items.map((item) => {
+            const name = typeof item === "string" ? item : item.name;
+            const count = typeof item === "string" ? 1 : item.count || 1;
+            return resolveNameToIdWithCount(name, count, weapons, abilities, datasheetId);
+        });
 
         let loadouts = generateLoadoutsForModelType(modelType, baseLoadoutIds, parsedOptions, weapons, abilities, datasheetId);
         loadouts = applyConstraints(loadouts, parsedOptions, weapons, abilities, datasheetId);
@@ -1675,20 +1916,27 @@ function processDatasheetFile(filePath) {
             return { modified: false, loadouts: 0, noOptions: true };
         }
 
-        const weapons = datasheet.wargear.weapons || [];
+        let weapons = datasheet.wargear.weapons || [];
         const abilities = datasheet.wargear.abilities || [];
 
-        // Update defaultLoadout structure
+        // Get default loadout text
         const oldDefaultLoadout = datasheet.wargear.defaultLoadout;
         const defaultLoadoutRaw = typeof oldDefaultLoadout === "string" ? oldDefaultLoadout : oldDefaultLoadout?.raw || "";
-        datasheet.wargear.defaultLoadout = parseDefaultLoadoutStructured(defaultLoadoutRaw, weapons, abilities, datasheet.id, datasheet.unitComposition);
 
-        // Parse options from raw (internally, not persisted)
+        // Parse options from raw first (we need them to collect count usages)
         let parsedOptions = [];
         if (datasheet.wargear.options?.raw) {
             parsedOptions = parseAllOptions(datasheet.wargear.options.raw);
             parsedOptions = parsedOptions.map((opt) => resolveOptionReferences(opt, weapons, abilities));
         }
+
+        // Collect weapon count usages and generate variants
+        const countUsages = collectWeaponCountUsages(defaultLoadoutRaw, parsedOptions, datasheet.unitComposition);
+        weapons = generateWeaponCountVariants(weapons, countUsages, datasheet.id);
+        datasheet.wargear.weapons = weapons;
+
+        // Update defaultLoadout structure (now with count-aware weapon resolution)
+        datasheet.wargear.defaultLoadout = parseDefaultLoadoutStructured(defaultLoadoutRaw, weapons, abilities, datasheet.id, datasheet.unitComposition);
 
         // Check if all options were parsed
         const allOptionsParsed = parsedOptions.length === 0 || parsedOptions.every((o) => o.wargearParsed);

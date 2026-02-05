@@ -55,9 +55,11 @@ interface Props {
     statBonuses?: StatBonus[];
     // Label to display when disabled (e.g., constraint reason)
     disabledLabel?: string;
+    // Number of this weapon the model has (displays as "x2", "x3", etc.)
+    weaponCount?: number;
 }
 
-const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisabled, isStacked, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses, disabledLabel }: Props) => {
+const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisabled, isStacked, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses, disabledLabel, weaponCount }: Props) => {
     const handleClick = () => {
         if (canToggle && onToggle) {
             onToggle();
@@ -142,7 +144,10 @@ const WeaponProfileCard = ({ profile, className, isSelected, isLinked, isDisable
         >
             <div className={`${isDisabled ? "opacity-25" : ""} flex justify-between items-center min-h-[61px]`}>
                 <div className="space-y-2">
-                    <h4 className="text-metadata-l">{profile.name}</h4>
+                    <h4 className="text-metadata-l">
+                        {profile.name}
+                        {weaponCount && weaponCount > 1 && <span className={`ml-1 ${isSelected ? "text-mournfangBrown/60" : "text-fireDragonBright/60"}`}>x{weaponCount}</span>}
+                    </h4>
                     {profile.attributes && (
                         <div className="flex flex-wrap gap-2">
                             {profile.attributes?.map((attr: string) => (

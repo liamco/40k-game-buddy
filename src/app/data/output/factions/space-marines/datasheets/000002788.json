@@ -33,13 +33,13 @@
     "defaultLoadout": {
       "raw": "<b>This model is equipped with:</b> 2 multi-meltas; twin las-talon; armoured hull.",
       "parsed": [
-        "000002788:multi-melta",
+        "000002788:multi-melta-x2",
         "000002788:twin-las-talon",
         "000002788:armoured-hull"
       ],
       "byModelType": {
         "Gladiator Valiant": [
-          "000002788:multi-melta",
+          "000002788:multi-melta-x2",
           "000002788:twin-las-talon",
           "000002788:armoured-hull"
         ]
@@ -75,7 +75,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000002788:ironhail-heavy-stubber",
@@ -106,7 +107,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000002788:multi-melta",
@@ -137,7 +139,40 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
+      },
+      {
+        "id": "000002788:multi-melta-x2",
+        "datasheetId": "000002788",
+        "line": 3,
+        "name": "Multi-melta",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000002788",
+            "line": 3,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Multi-melta",
+            "attributes": [
+              "MELTA 2"
+            ],
+            "range": 18,
+            "type": "Ranged",
+            "a": 2,
+            "bsWs": 3,
+            "s": 9,
+            "ap": -4,
+            "d": "D6"
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ],
+        "count": 2
       },
       {
         "id": "000002788:twin-las-talon",
@@ -168,7 +203,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000002788:armoured-hull",
@@ -197,7 +233,8 @@
           {
             "type": "any"
           }
-        ]
+        ],
+        "count": 1
       }
     ],
     "options": {
@@ -222,27 +259,40 @@
         "modelType": "any",
         "items": [
           [
-            "000002788:multi-melta",
+            "000002788:multi-melta-x2",
             "000002788:twin-las-talon",
             "000002788:armoured-hull"
           ],
           [
-            "000002788:multi-melta",
+            "000002788:multi-melta-x2",
             "000002788:twin-las-talon",
             "000002788:armoured-hull",
             "000002788:icarus-rocket-pod"
           ],
           [
-            "000002788:multi-melta",
+            "000002788:multi-melta-x2",
             "000002788:twin-las-talon",
             "000002788:armoured-hull",
             "000002788:ironhail-heavy-stubber"
           ],
           [
-            "000002788:multi-melta",
+            "000002788:multi-melta-x2",
             "000002788:twin-las-talon",
             "000002788:armoured-hull",
             "000002788:ironhail-heavy-stubber",
+            "000002788:icarus-rocket-pod"
+          ],
+          [
+            "000002788:multi-melta-x2",
+            "000002788:twin-las-talon",
+            "000002788:armoured-hull",
+            "000002788:multi-melta"
+          ],
+          [
+            "000002788:multi-melta-x2",
+            "000002788:twin-las-talon",
+            "000002788:armoured-hull",
+            "000002788:multi-melta",
             "000002788:icarus-rocket-pod"
           ]
         ]

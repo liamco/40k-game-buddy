@@ -35,6 +35,7 @@ export interface CombatContext {
         unit: EngagementForceItem;
         force: EngagementForce;
         weaponProfile: WeaponProfile;
+        weaponCount: number; // Number of this weapon the model has (multiplies attacks)
         modelCount: number;
     };
 
@@ -72,6 +73,7 @@ export function buildCombatContext(params: {
     attackerUnit: EngagementForceItem | null;
     attackerForce: EngagementForce;
     weaponProfile: WeaponProfile | null;
+    weaponCount?: number;
     modelCount: number;
     defenderUnit: EngagementForceItem | null;
     defenderForce: EngagementForce;
@@ -79,7 +81,7 @@ export function buildCombatContext(params: {
     targetModel: Model | null;
     activeStratagems?: ActiveStratagem[];
 }): CombatContext | null {
-    const { phase, turn = 1, isPlayerTurn = true, attackerUnit, attackerForce, weaponProfile, modelCount, defenderUnit, defenderForce, defenderModelCount, targetModel, activeStratagems = [] } = params;
+    const { phase, turn = 1, isPlayerTurn = true, attackerUnit, attackerForce, weaponProfile, weaponCount = 1, modelCount, defenderUnit, defenderForce, defenderModelCount, targetModel, activeStratagems = [] } = params;
 
     if (!attackerUnit || !weaponProfile || !defenderUnit || !targetModel) {
         return null;
@@ -93,6 +95,7 @@ export function buildCombatContext(params: {
             unit: attackerUnit,
             force: attackerForce,
             weaponProfile,
+            weaponCount,
             modelCount,
         },
         defender: {

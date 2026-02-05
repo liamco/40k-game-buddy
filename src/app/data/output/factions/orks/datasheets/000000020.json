@@ -21,12 +21,12 @@
     "defaultLoadout": {
       "raw": "<b>The Boss Nob is equipped with:</b> 2 rokkit pistols; choppa.<br><br><b>Each Tankbusta is equipped with:</b> rokkit launcha; close combat weapon.",
       "parsed": [
-        "000000020:rokkit-pistol",
+        "000000020:rokkit-pistol-x2",
         "000000020:choppa"
       ],
       "byModelType": {
         "Boss Nob": [
-          "000000020:rokkit-pistol",
+          "000000020:rokkit-pistol-x2",
           "000000020:choppa"
         ],
         "Tankbusta": [
@@ -68,10 +68,43 @@
               "Tankbusta"
             ]
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000000020:rokkit-pistol",
+        "datasheetId": "000000020",
+        "line": 2,
+        "name": "Rokkit pistol",
+        "type": "Ranged",
+        "profiles": [
+          {
+            "datasheetId": "000000020",
+            "line": 2,
+            "lineInWargear": 1,
+            "dice": "",
+            "name": "Rokkit pistol",
+            "attributes": [
+              "PISTOL"
+            ],
+            "range": 12,
+            "type": "Ranged",
+            "a": 1,
+            "bsWs": 5,
+            "s": 9,
+            "ap": -2,
+            "d": 3
+          }
+        ],
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ],
+        "count": 1
+      },
+      {
+        "id": "000000020:rokkit-pistol-x2",
         "datasheetId": "000000020",
         "line": 2,
         "name": "Rokkit pistol",
@@ -102,7 +135,8 @@
               "Boss Nob"
             ]
           }
-        ]
+        ],
+        "count": 2
       },
       {
         "id": "000000020:choppa",
@@ -134,7 +168,8 @@
               "Boss Nob"
             ]
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000000020:close-combat-weapon",
@@ -166,7 +201,8 @@
               "Tankbusta"
             ]
           }
-        ]
+        ],
+        "count": 1
       },
       {
         "id": "000000020:smash-hammer",
@@ -202,7 +238,8 @@
               "of the Boss Nob"
             ]
           }
-        ]
+        ],
+        "count": 1
       }
     ],
     "options": {
@@ -243,7 +280,7 @@
         "modelType": "Boss Nob",
         "items": [
           [
-            "000000020:rokkit-pistol",
+            "000000020:rokkit-pistol-x2",
             "000000020:choppa"
           ]
         ]

@@ -42,10 +42,12 @@ interface Props {
     profile: WeaponProfile;
     /** Parent wargear ID - used to identify which wargear entry this profile belongs to */
     wargearId?: string;
+    /** Number of this weapon the model has (multiplies attacks) */
+    weaponCount?: number;
     isSelected?: boolean;
     isLinked?: boolean;
     isDisabled?: boolean;
-    onWeaponProfileChange?: (profile: WeaponProfile | null, wargearId?: string) => void;
+    onWeaponProfileChange?: (profile: WeaponProfile | null, wargearId?: string, weaponCount?: number) => void;
     onToggle?: () => void;
     canToggle?: boolean;
     // Click handler for the whole card (used when no button is shown)
@@ -57,14 +59,14 @@ interface Props {
     disabledLabel?: string;
 }
 
-const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisabled, disabledLabel, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
+const WeaponProfileCard = ({ profile, wargearId, weaponCount, isSelected, isLinked, isDisabled, disabledLabel, onWeaponProfileChange, onToggle, canToggle = true, onCardClick, bonusAttributes, statBonuses }: Props) => {
     const handleClick = () => {
         if (canToggle && onToggle) {
             onToggle();
         } else if (onCardClick) {
             onCardClick();
         } else if (onWeaponProfileChange) {
-            onWeaponProfileChange(profile, wargearId);
+            onWeaponProfileChange(profile, wargearId, weaponCount);
         }
     };
 
@@ -142,7 +144,10 @@ const WeaponProfileCard = ({ profile, wargearId, isSelected, isLinked, isDisable
         >
             <div className={`${isDisabled ? "opacity-25" : ""} space-y-2`}>
                 <div className="flex items-center justify-between">
-                    <h4 className="text-metadata-l">{profile.name}</h4>
+                    <h4 className="text-metadata-l">
+                        {profile.name}
+                        {weaponCount && weaponCount > 1 ? ` x ${weaponCount}` : ""}
+                    </h4>
                 </div>
                 {(profile.attributes || (bonusAttributes && bonusAttributes.length > 0)) && (
                     <div className="flex flex-wrap gap-2">

@@ -55,6 +55,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
         attackerUnit: selectedAttackerUnit?.item ?? null,
         attackerForce: attackingForce,
         weaponProfile: selectedWeapon?.profile ?? null,
+        weaponCount: selectedWeapon?.weaponCount,
         modelCount: attackerModelCount,
         defenderUnit: selectedDefenderUnit?.item ?? null,
         defenderForce: defendingForce,

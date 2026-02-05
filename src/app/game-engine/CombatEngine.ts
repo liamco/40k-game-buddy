@@ -110,6 +110,8 @@ export class CombatEngine {
             blastBonusPerModel: blastEffect?.bonusPerModel ?? null,
             defenderModelCount: this.context.defender.modelCount,
 
+            weaponCount: this.context.attacker.weaponCount,
+
             weaponEffects: this.weaponEffects,
         };
     }

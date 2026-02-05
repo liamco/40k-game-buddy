@@ -427,7 +427,9 @@ const WargearTab = ({ unit, list }: Props) => {
     }, [unit.modelInstances, modelHasOptions]);
 
     // Render a weapon profile card
-    const renderWeaponProfile = (profile: WeaponProfile, isSelected: boolean, onClick?: () => void, isStacked?: boolean) => <WargearProfileCard key={profile.name} profile={profile} isSelected={isSelected} isDisabled={false} isStacked={isStacked} onCardClick={onClick} />;
+    const renderWeaponProfile = (profile: WeaponProfile, isSelected: boolean, onClick?: () => void, isStacked?: boolean, weaponCount?: number) => (
+        <WargearProfileCard key={profile.name} profile={profile} isSelected={isSelected} isDisabled={false} isStacked={isStacked} onCardClick={onClick} weaponCount={weaponCount} />
+    );
 
     // Render an ability card
     const renderAbility = (ability: WargearAbility, isSelected: boolean, onClick?: () => void, isStacked?: boolean) => <WargearAbilityCard key={ability.id || ability.name} ability={ability} isSelected={isSelected} isDisabled={false} isStacked={isStacked} onCardClick={onClick} />;
@@ -438,13 +440,14 @@ const WargearTab = ({ unit, list }: Props) => {
             const weapon = item.weapon;
             const profiles = weapon.profiles || [];
             const hasMultipleProfiles = profiles.length > 1;
+            const weaponCount = weapon.count;
 
             return (
                 <div key={weapon.id} className="space-y-0">
                     {profiles.map((profile, idx) => (
                         <div key={`${weapon.id}-${idx}`} className="relative">
                             {idx > 0 && <div className="absolute -top-1 left-0 right-0 border-t border-dashed border-fireDragonBright/30" />}
-                            {renderWeaponProfile(profile, isSelected, onClick, hasMultipleProfiles)}
+                            {renderWeaponProfile(profile, isSelected, onClick, hasMultipleProfiles, weaponCount)}
                         </div>
                     ))}
                 </div>

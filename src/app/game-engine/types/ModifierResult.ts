@@ -132,6 +132,9 @@ export interface CombatResolution {
     blastBonusPerModel: number | null; // +X attacks from BLAST per model
     defenderModelCount: number; // Number of alive models in target unit
 
+    // Weapon count (number of this weapon the model has, multiplies attacks)
+    weaponCount: number;
+
     // All weapon special effects (for display)
     weaponEffects: SpecialEffect[];
 }

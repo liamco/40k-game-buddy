@@ -18,7 +18,7 @@ interface AttackResolverProps {
  * each attack step with attributed modifiers.
  */
 export function AttackResolver({ resolution, modelCount }: AttackResolverProps) {
-    // Calculate total attacks display (including BLAST bonus)
+    // Calculate total attacks display (including BLAST bonus and weapon count)
     const attacksDisplay = useMemo(() => {
         if (!resolution || modelCount === 0) {
             return { perModel: "-", total: "-" };
@@ -26,22 +26,26 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
 
         const baseAttacks = resolution.baseAttacks;
         const blastBonus = resolution.blastBonusPerModel;
+        const weaponCount = resolution.weaponCount || 1;
 
         if (typeof baseAttacks === "number") {
-            // Apply BLAST bonus per model
-            const attacksPerModel = blastBonus !== null ? baseAttacks + blastBonus : baseAttacks;
+            // Apply BLAST bonus per model, then multiply by weapon count
+            const attacksPerWeapon = blastBonus !== null ? baseAttacks + blastBonus : baseAttacks;
+            const attacksPerModel = attacksPerWeapon * weaponCount;
 
             return {
-                perModel: String(attacksPerModel),
+                perModel: weaponCount > 1 ? `${attacksPerWeapon} x${weaponCount}` : String(attacksPerModel),
                 total: String(attacksPerModel * modelCount),
             };
         }
 
-        // Dice expression (e.g., "D6", "D3+1") - BLAST adds flat bonus
-        let perModelDisplay = String(baseAttacks);
+        // Dice expression (e.g., "D6", "D3+1") - BLAST adds flat bonus, then multiply by weapon count
+        let perWeaponDisplay = String(baseAttacks);
         if (blastBonus !== null && blastBonus > 0) {
-            perModelDisplay = `${baseAttacks}+${blastBonus}`;
+            perWeaponDisplay = `${baseAttacks}+${blastBonus}`;
         }
+
+        const perModelDisplay = weaponCount > 1 ? `(${perWeaponDisplay}) x${weaponCount}` : perWeaponDisplay;
 
         return {
             perModel: perModelDisplay,
