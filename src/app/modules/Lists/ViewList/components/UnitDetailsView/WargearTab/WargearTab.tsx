@@ -204,14 +204,15 @@ const WargearTab = ({ unit, list }: Props) => {
     // Count total models in the unit
     const totalModels = unit.modelInstances?.length || 0;
 
-    // Pre-compute which model indices are eligible for each slot-based weapon (ratio or count)
+    // Pre-compute which model indices are eligible for each slot-based item (ratio or count)
     // For ratio 1:5, only the first N eligible models (by index) see the weapon
-    // For count 2, only the first 2 eligible models see the weapon
-    const slotBasedWeaponEligibleModels = useMemo(() => {
-        const assignments = new Map<string, Set<number>>(); // weaponId -> set of eligible model indices
+    // For count 2, only the first 2 eligible models see the weapon/ability
+    const slotBasedItemEligibleModels = useMemo(() => {
+        const assignments = new Map<string, Set<number>>(); // itemId -> set of eligible model indices
 
         if (!unit.modelInstances) return assignments;
 
+        // Process weapons
         for (const weapon of weapons) {
             // Find ratio or count rule
             const slotRule = weapon.eligibility?.find((r): r is EligibilityRule & { type: "ratio" | "count" } => r.type === "ratio" || r.type === "count");
@@ -245,8 +246,32 @@ const WargearTab = ({ unit, list }: Props) => {
             assignments.set(weapon.id, eligibleIndices);
         }
 
+        // Process abilities
+        for (const ability of abilities) {
+            const slotRule = ability.eligibility?.find((r): r is EligibilityRule & { type: "count" } => r.type === "count");
+            if (!slotRule) continue;
+
+            const slots = slotRule.count;
+            const eligibleIndices = new Set<number>();
+            let assigned = 0;
+
+            unit.modelInstances.forEach((instance, idx) => {
+                if (assigned >= slots) return;
+
+                // Check model type restriction if specified
+                if (slotRule.modelType && !modelTypeMatchesAny(instance.modelType, slotRule.modelType)) {
+                    return;
+                }
+
+                eligibleIndices.add(idx);
+                assigned++;
+            });
+
+            assignments.set(createAbilityVirtualId(ability.name), eligibleIndices);
+        }
+
         return assignments;
-    }, [weapons, totalModels, unit.modelInstances]);
+    }, [weapons, abilities, totalModels, unit.modelInstances]);
 
     // Build list of all selectable items (weapons + abilities)
     const allSelectableItems = useMemo((): SelectableItem[] => {
@@ -265,24 +290,44 @@ const WargearTab = ({ unit, list }: Props) => {
         return items;
     }, [weapons, abilities]);
 
-    // Get items available to a specific model instance based on weapon eligibility
+    // Get items available to a specific model instance based on eligibility
     const getItemsForModelInstance = useCallback(
         (instance: ModelInstance, modelIndex: number): SelectableItem[] => {
             const context: EligibilityContext = {
                 modelType: instance.modelType,
                 modelIndex,
-                slotBasedWeaponEligibleModels,
+                slotBasedWeaponEligibleModels: slotBasedItemEligibleModels,
             };
 
             return allSelectableItems.filter((item) => {
                 if (item.type === "weapon") {
                     return isWeaponEligibleForModel(item.weapon, context);
                 }
-                // Abilities are always shown for now
-                return true;
+                // Check ability eligibility
+                const ability = item.ability;
+                const rules = ability.eligibility;
+
+                if (!rules || rules.length === 0) {
+                    return true; // No rules means available to all
+                }
+
+                for (const rule of rules) {
+                    if (rule.type === "any") {
+                        return true;
+                    }
+                    if (rule.type === "count") {
+                        // Check if this model is in the pre-computed eligible indices
+                        const abilityId = createAbilityVirtualId(ability.name);
+                        const eligibleIndices = slotBasedItemEligibleModels.get(abilityId);
+                        if (eligibleIndices?.has(modelIndex)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
             });
         },
-        [allSelectableItems, slotBasedWeaponEligibleModels]
+        [allSelectableItems, slotBasedItemEligibleModels]
     );
 
     // Check if model has any options (more than just default weapons)
@@ -588,7 +633,7 @@ const WargearTab = ({ unit, list }: Props) => {
             <div className="relative">
                 <div className="space-y-6 sticky top-6">
                     {loadoutValidation.hasAnyInvalid && <InvalidLoadoutWarning validation={loadoutValidation} weapons={weapons} abilities={abilities} />}
-                    <WargearRulesPanel options={unit.wargear?.options?.raw} />
+                    <WargearRulesPanel defaultLoadout={unit.wargear?.defaultLoadout?.raw} options={unit.wargear?.options?.raw} />
                 </div>
             </div>
         </div>

@@ -21,8 +21,8 @@
     "defaultLoadout": {
       "raw": "<b>This model is equipped with:</b> 2 cognis heavy stubbers; 2 heavy phosphor blasters; twin cognis lascannon; armoured hull; command uplink.",
       "parsed": [
-        "000002086:cognis-heavy-stubbers",
-        "000002086:heavy-phosphor-blasters",
+        "000002086:cognis-heavy-stubber",
+        "000002086:heavy-phosphor-blaster",
         "000002086:twin-cognis-lascannon",
         "000002086:armoured-hull",
         "wargear-ability:command-uplink"
@@ -178,13 +178,23 @@
             ]
           }
         ],
-        "mechanicsSource": "regex"
+        "mechanicsSource": "regex",
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ]
       },
       {
         "id": "000002086:command-uplink",
         "name": "Command Uplink",
         "description": "Each time you select the bearer's unit as the target of a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-        "mechanics": []
+        "mechanics": [],
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ]
       }
     ],
     "validLoadouts": [
@@ -192,15 +202,15 @@
         "modelType": "any",
         "items": [
           [
-            "000002086:cognis-heavy-stubbers",
-            "000002086:heavy-phosphor-blasters",
+            "000002086:cognis-heavy-stubber",
+            "000002086:heavy-phosphor-blaster",
             "000002086:twin-cognis-lascannon",
             "000002086:armoured-hull",
             "wargear-ability:command-uplink"
           ],
           [
-            "000002086:cognis-heavy-stubbers",
-            "000002086:heavy-phosphor-blasters",
+            "000002086:cognis-heavy-stubber",
+            "000002086:heavy-phosphor-blaster",
             "000002086:twin-cognis-lascannon",
             "000002086:armoured-hull",
             "wargear-ability:chaff-launcher"

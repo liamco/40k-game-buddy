@@ -75,19 +75,46 @@ function nameToId(name, datasheetId, isAbility = false) {
 }
 
 /**
- * Find weapon/ability by name and return its ID
+ * Find weapon/ability by name and return its ID.
+ * Handles plural/singular variations (e.g., "heavy bolters" matches "Heavy bolter").
  */
 function resolveNameToId(name, weapons, abilities, datasheetId) {
     const normalizedName = name.toLowerCase().trim();
 
-    const weapon = weapons.find((w) => w.name.toLowerCase().trim() === normalizedName);
+    // Try exact match first
+    let weapon = weapons.find((w) => w.name.toLowerCase().trim() === normalizedName);
     if (weapon) {
         return weapon.id;
     }
 
-    const ability = abilities.find((a) => a.name.toLowerCase().trim() === normalizedName);
+    // Try singular form (remove trailing 's')
+    if (normalizedName.endsWith("s")) {
+        const singularName = normalizedName.slice(0, -1);
+        weapon = weapons.find((w) => w.name.toLowerCase().trim() === singularName);
+        if (weapon) {
+            return weapon.id;
+        }
+    }
+
+    // Try plural form (add trailing 's')
+    const pluralName = normalizedName + "s";
+    weapon = weapons.find((w) => w.name.toLowerCase().trim() === pluralName);
+    if (weapon) {
+        return weapon.id;
+    }
+
+    // Try abilities with same logic
+    let ability = abilities.find((a) => a.name.toLowerCase().trim() === normalizedName);
     if (ability) {
         return `wargear-ability:${normalizedName.replace(/\s+/g, "-")}`;
+    }
+
+    if (normalizedName.endsWith("s")) {
+        const singularName = normalizedName.slice(0, -1);
+        ability = abilities.find((a) => a.name.toLowerCase().trim() === singularName);
+        if (ability) {
+            return `wargear-ability:${singularName.replace(/\s+/g, "-")}`;
+        }
     }
 
     return nameToId(name, datasheetId, false);
@@ -336,6 +363,11 @@ const TARGETING_PATTERNS = [
         name: "specific-model",
         pattern: /^the ([\w\s]+?)(?:'s|'s|\s+can)/i,
         extract: (match) => ({ type: "specific-model", modelType: match[1].trim() }),
+    },
+    {
+        name: "n-model-generic",
+        pattern: /^(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\s+models?\s+can\s+(?:be\s+)?equipped/i,
+        extract: (match) => ({ type: "count", count: parseNumber(match[1]) }),
     },
     {
         name: "n-model-specific",
@@ -1052,6 +1084,14 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
                     };
                     break;
 
+                case "count":
+                    // "1 model can be equipped" - count-based without model type restriction
+                    eligibility.countLimit = {
+                        count: targeting.count || 1,
+                        modelType: null,
+                    };
+                    break;
+
                 case "conditional":
                     // Conditional targeting - for now treat as available to all
                     eligibility.modelTypes.add("*any*");
@@ -1116,6 +1156,67 @@ function computeWeaponEligibility(datasheet, parsedOptions) {
         }
 
         weapon.eligibility = rules;
+    }
+
+    // Now process abilities similarly
+    const abilities = datasheet.wargear?.abilities || [];
+
+    for (const ability of abilities) {
+        const abilityId = ability.id;
+        let eligibility = null;
+
+        // Look for options that add this ability
+        for (const option of parsedOptions) {
+            if (!option.wargearParsed) continue;
+            if (option.action.type === "unknown") continue;
+
+            const action = option.action;
+            const targeting = option.targeting;
+
+            // Check if this option adds this ability
+            let addsThisAbility = false;
+            if (action.adds && Array.isArray(action.adds)) {
+                for (const choice of action.adds) {
+                    if (choice.weapons && Array.isArray(choice.weapons)) {
+                        for (const ref of choice.weapons) {
+                            if (ref.isAbility && ref.name.toLowerCase().trim() === ability.name.toLowerCase().trim()) {
+                                addsThisAbility = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (addsThisAbility) break;
+                }
+            }
+
+            if (!addsThisAbility) continue;
+
+            // Found an option that adds this ability - extract eligibility from targeting
+            if (targeting.type === "count") {
+                eligibility = { countLimit: { count: targeting.count || 1, modelType: null } };
+            } else if (targeting.type === "up-to-n") {
+                eligibility = { countLimit: { count: targeting.maxTotal || 1, modelType: null } };
+            } else if (targeting.type === "n-model-specific") {
+                eligibility = { countLimit: { count: targeting.count || 1, modelType: targeting.modelType || null } };
+            }
+            // For other targeting types, leave eligibility as null (means available to all)
+            break;
+        }
+
+        // Set eligibility rules for the ability
+        if (eligibility && eligibility.countLimit) {
+            const rule = {
+                type: "count",
+                count: eligibility.countLimit.count,
+            };
+            if (eligibility.countLimit.modelType) {
+                rule.modelType = [eligibility.countLimit.modelType];
+            }
+            ability.eligibility = [rule];
+        } else {
+            // Default: available to all (or not mentioned in options)
+            ability.eligibility = [{ type: "any" }];
+        }
     }
 }
 

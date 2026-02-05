@@ -335,8 +335,10 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
         return instances;
     }
 
-    // Parse default loadouts per model type
-    // Handle both old (string) and new (object with raw/parsed) defaultLoadout formats
+    // Prefer pre-parsed default loadout IDs if available (new format)
+    const parsedDefaultLoadout = typeof unit.wargear?.defaultLoadout === "object" ? unit.wargear.defaultLoadout.parsed : undefined;
+
+    // Fall back to parsing raw text for legacy data
     const defaultLoadoutRaw = typeof unit.wargear?.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear?.defaultLoadout?.raw || "";
     const loadoutByType = parseLoadoutByModelType(defaultLoadoutRaw, unit.unitComposition);
 
@@ -349,15 +351,19 @@ function generateDefaultModelInstances(unit: ArmyListItem, listItemId: string): 
         // Get count - use min as default
         const count = comp.min || 1;
 
-        // Get default weapon names for this model type
-        const defaultWeaponNames = loadoutByType.get(modelType) || [];
+        let defaultLoadout: string[] = [];
 
-        // Convert weapon names to IDs
-        const defaultLoadout: string[] = [];
-        for (const weaponName of defaultWeaponNames) {
-            const weaponId = findWeaponIdByName(unit.wargear?.weapons, weaponName);
-            if (weaponId) {
-                defaultLoadout.push(weaponId);
+        // Use parsed IDs if available (common case for units with "Every model" loadout)
+        if (parsedDefaultLoadout && parsedDefaultLoadout.length > 0) {
+            defaultLoadout = [...parsedDefaultLoadout];
+        } else {
+            // Fall back to name-based matching for legacy data or complex multi-type units
+            const defaultWeaponNames = loadoutByType.get(modelType) || [];
+            for (const weaponName of defaultWeaponNames) {
+                const weaponId = findWeaponIdByName(unit.wargear?.weapons, weaponName);
+                if (weaponId) {
+                    defaultLoadout.push(weaponId);
+                }
             }
         }
 
@@ -1180,7 +1186,15 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
     function getDefaultLoadoutForModelType(unit: ArmyListItem, modelType: string): string[] {
         if (!unit.wargear?.defaultLoadout || !unit.wargear?.weapons) return [];
 
-        // Handle both old (string) and new (object with raw/parsed) defaultLoadout formats
+        // Prefer pre-parsed default loadout IDs if available (new format)
+        // This handles the common case of "Every model is equipped with:" where all models share the same loadout
+        const parsedDefaultLoadout = typeof unit.wargear.defaultLoadout === "object" ? unit.wargear.defaultLoadout.parsed : undefined;
+
+        if (parsedDefaultLoadout && parsedDefaultLoadout.length > 0) {
+            return [...parsedDefaultLoadout];
+        }
+
+        // Fall back to name-based matching for legacy data or complex multi-type units
         const defaultLoadoutRaw = typeof unit.wargear.defaultLoadout === "string" ? unit.wargear.defaultLoadout : unit.wargear.defaultLoadout?.raw || "";
         const loadoutByType = parseLoadoutByModelType(defaultLoadoutRaw, unit.unitComposition || []);
         const weaponNames = loadoutByType.get(modelType) || loadoutByType.get("Every model") || [];

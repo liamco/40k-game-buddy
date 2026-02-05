@@ -370,7 +370,12 @@
         "id": "000004074:salvationist-medikit",
         "name": "Salvationist Medikit",
         "description": "In your Command phase, if the bearer is on the battlefield, you can return up to D3 destroyed models (excluding <span class=\"kwb\">CHARACTER</span> models) to this unit.",
-        "mechanics": []
+        "mechanics": [],
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ]
       },
       {
         "id": "000004074:simulacrum-imperialis",
@@ -384,7 +389,16 @@
             "value": 1
           }
         ],
-        "mechanicsSource": "regex"
+        "mechanicsSource": "regex",
+        "eligibility": [
+          {
+            "type": "count",
+            "count": 1,
+            "modelType": [
+              "Sanctifier model"
+            ]
+          }
+        ]
       }
     ],
     "validLoadouts": [

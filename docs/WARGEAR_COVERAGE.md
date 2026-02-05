@@ -55,26 +55,26 @@ This report tracks all datasheets with wargear loadout options and their testing
 
 | Status | Datasheet | Complexity | Notes |
 |--------|-----------|------------|-------|
-| [!] | Battle Sisters Squad | M13 L3 | Sister superior missing valid loadouts containing chainsword or power weapon. Sisters with a Simalcrum Imperialis are marked as invalid. |
+| [~] | Battle Sisters Squad | M13 L3 | Sister superior can take a CCW, power weapon and Chainsword. Ok.  |
 | [x] | Canoness | L1 | |
 | [x] | Canoness with Jump Pack | L1 | |
-| [!] | Castigator | L1 | Default loadout invalid. Storm bolter and HK not counting as addons |
+| [x] | Castigator | L1 |  |
 | [!] | Celestian Insidiants | M2 L2 | Almost no rules validate |
 | [x] | Celestian Sacresants | M4 L2 | |
-| [ ] | Dominion Squad | M7 L2 | |
-| [ ] | Exorcist | L1 | |
-| [ ] | Immolator | L1 | |
-| [ ] | Ministorum Priest | L1 | |
-| [ ] | Mortifiers | L1 | |
-| [ ] | Palatine | L1 | |
-| [ ] | Paragon Warsuits | L1 | |
-| [ ] | Penitent Engines | L1 | |
-| [ ] | Retributor Squad | M9 L2 | |
-| [ ] | Sanctifiers | M3 L5 | |
-| [ ] | Seraphim Squad | M4 L2 | |
-| [ ] | Sisters Novitiate Squad | M2 L2 | |
-| [ ] | Sororitas Rhino | L1 | |
-| [ ] | Zephyrim Squad | M1 L2 | |
+| [!] | Dominion Squad | M7 L2 | One Dominion is missing the "up to 4 dominions" rule. Superior shouldn't be able to access storm bolter, meltagun or flamer |
+| [x] | Exorcist | L1 | |
+| [x] | Immolator | L1 | |
+| [~] | Ministorum Priest | L1 | Second vindicator (melee) isn't auto equipped as part of the default loadout |
+| [x] | Mortifiers | L1 | |
+| [x] | Palatine | L1 | |
+| [x] | Paragon Warsuits | L1 | |
+| [x] | Penitent Engines | L1 | |
+| [!] | Retributor Squad | M9 L2 | incorrect default loadout on Retributors . Retributors shouldn't be able to access boltguns. Superior shouldn't be able to access heavy bolter.|
+| [!] | Sanctifiers | M3 L5 | Nearly every model type is assigned the wrong default loadout in the UI |
+| [!] | Seraphim Squad | M4 L2 | ratio constraint for Seraphim isn't working - inferno pistols and hand flamers are available on all models. No valid loadout works on Superior. |
+| [!] | Sisters Novitiate Squad | M2 L2 | Wrong defaults, constraints not working |
+| [x] | Sororitas Rhino | L1 | |
+| [~] | Zephyrim Squad | M1 L2 | Sacred banner not restricted to Superior |
 
 ## Adeptus Custodes
 

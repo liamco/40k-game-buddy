@@ -21,7 +21,7 @@
     "defaultLoadout": {
       "raw": "<b>This model is equipped with:</b> 2 storm bolters; armoured hull.",
       "parsed": [
-        "000002568:storm-bolters",
+        "000002568:storm-bolter",
         "000002568:armoured-hull"
       ]
     },
@@ -271,7 +271,12 @@
         "id": "000002568:orbital-comms-array-aura",
         "name": "Orbital Comms Array (Aura)",
         "description": "While a friendly <span class=\"kwb\">ADEPTUS</span> <span class=\"kwb\">ASTARTES</span> unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
-        "mechanics": []
+        "mechanics": [],
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ]
       },
       {
         "id": "000002568:shield-dome",
@@ -285,7 +290,12 @@
             "value": 5
           }
         ],
-        "mechanicsSource": "regex"
+        "mechanicsSource": "regex",
+        "eligibility": [
+          {
+            "type": "any"
+          }
+        ]
       }
     ],
     "validLoadouts": [
@@ -293,12 +303,12 @@
         "modelType": "any",
         "items": [
           [
-            "000002568:storm-bolters",
+            "000002568:storm-bolter",
             "000002568:armoured-hull"
           ],
           [
             "000002568:armoured-hull",
-            "000002568:fragstorm-grenade-launchers"
+            "000002568:fragstorm-grenade-launcher"
           ]
         ]
       }

@@ -85,6 +85,7 @@ export interface WargearAbility {
     name: string; // Display name (e.g., "Storm Shield")
     description?: string; // Ability text describing the effect
     mechanics?: Mechanic[]; // Parsed game effects for calculations
+    eligibility?: EligibilityRule[]; // Which models can select this ability
 }
 
 // Default loadout structure with raw HTML and parsed weapon IDs

@@ -21,7 +21,7 @@
     "defaultLoadout": {
       "raw": "<b>The Boss Nob is equipped with:</b> 2 rokkit pistols; choppa.<br><br><b>Each Tankbusta is equipped with:</b> rokkit launcha; close combat weapon.",
       "parsed": [
-        "000000020:rokkit-pistols",
+        "000000020:rokkit-pistol",
         "000000020:choppa"
       ]
     },
@@ -204,7 +204,16 @@
         "id": "000000020:pulsa-rokkit",
         "name": "Pulsa Rokkit",
         "description": "Once per battle, when the bearer's unit is selected to shoot in your Shooting phase, the bearer can use its pulsa rokkit. If it does, until the end of the phase, improve the Strength and Armour Penetration characteristics of ranged weapons equipped by models in the bearer's unit by 1.",
-        "mechanics": []
+        "mechanics": [],
+        "eligibility": [
+          {
+            "type": "count",
+            "count": 1,
+            "modelType": [
+              "Tankbusta"
+            ]
+          }
+        ]
       }
     ],
     "validLoadouts": [
@@ -212,7 +221,7 @@
         "modelType": "Boss Nob",
         "items": [
           [
-            "000000020:rokkit-pistols",
+            "000000020:rokkit-pistol",
             "000000020:choppa"
           ]
         ]

@@ -137,9 +137,16 @@ function getValidLoadoutsForModelType(modelType: string, validLoadoutGroups: Val
 }
 
 /**
- * Validate a single model's loadout
+ * Validate a single model's loadout.
+ *
+ * @param modelType - The type of model being validated
+ * @param loadout - The model's current loadout (weapon/ability IDs)
+ * @param validLoadoutGroups - Valid loadout combinations for the unit
+ * @param weaponsInValidLoadouts - Set of weapon IDs that appear in any valid loadout.
+ *                                  Weapons not in this set are "addons" (optional extras
+ *                                  that don't replace anything) and are excluded from validation.
  */
-function validateModelLoadout(modelType: string, loadout: string[], validLoadoutGroups: ValidLoadoutGroup[]): LoadoutValidationResult {
+function validateModelLoadout(modelType: string, loadout: string[], validLoadoutGroups: ValidLoadoutGroup[], weaponsInValidLoadouts: Set<string>): LoadoutValidationResult {
     // If no valid loadouts defined, consider everything valid
     if (!validLoadoutGroups || validLoadoutGroups.length === 0) {
         return {
@@ -150,6 +157,11 @@ function validateModelLoadout(modelType: string, loadout: string[], validLoadout
             extraItems: [],
         };
     }
+
+    // Filter out addon weapons (weapons not in any valid loadout) before validation.
+    // Addon weapons are optional "can be equipped with" items that don't replace anything,
+    // so they're intentionally excluded from valid loadout combinations.
+    const coreLoadout = loadout.filter((id) => weaponsInValidLoadouts.has(id));
 
     const group = getValidLoadoutsForModelType(modelType, validLoadoutGroups);
 
@@ -165,7 +177,7 @@ function validateModelLoadout(modelType: string, loadout: string[], validLoadout
     }
 
     // Check for exact match
-    const match = findMatchingLoadout(loadout, group.items);
+    const match = findMatchingLoadout(coreLoadout, group.items);
     if (match) {
         return {
             isValid: true,
@@ -177,7 +189,7 @@ function validateModelLoadout(modelType: string, loadout: string[], validLoadout
     }
 
     // Find closest match for feedback
-    const closest = findClosestLoadout(loadout, group.items);
+    const closest = findClosestLoadout(coreLoadout, group.items);
 
     return {
         isValid: false,
@@ -204,8 +216,19 @@ export function useLoadoutValidation(modelInstances: ModelInstance[] | undefined
             };
         }
 
+        // Compute set of weapons that appear in any valid loadout.
+        // Weapons not in this set are "addons" and will be excluded from validation.
+        const weaponsInValidLoadouts = new Set<string>();
+        for (const group of validLoadoutGroups) {
+            for (const loadout of group.items) {
+                for (const itemId of loadout) {
+                    weaponsInValidLoadouts.add(itemId);
+                }
+            }
+        }
+
         for (const instance of modelInstances) {
-            const result = validateModelLoadout(instance.modelType, instance.loadout, validLoadoutGroups);
+            const result = validateModelLoadout(instance.modelType, instance.loadout, validLoadoutGroups, weaponsInValidLoadouts);
 
             modelValidations.set(instance.instanceId, result);
 
@@ -237,6 +260,16 @@ export function useModelLoadoutValidation(modelType: string, loadout: string[], 
             };
         }
 
-        return validateModelLoadout(modelType, loadout, validLoadoutGroups);
+        // Compute set of weapons that appear in any valid loadout
+        const weaponsInValidLoadouts = new Set<string>();
+        for (const group of validLoadoutGroups) {
+            for (const loadout of group.items) {
+                for (const itemId of loadout) {
+                    weaponsInValidLoadouts.add(itemId);
+                }
+            }
+        }
+
+        return validateModelLoadout(modelType, loadout, validLoadoutGroups, weaponsInValidLoadouts);
     }, [modelType, loadout, validLoadoutGroups]);
 }
