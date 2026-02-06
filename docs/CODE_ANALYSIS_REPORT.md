@@ -1,13 +1,22 @@
 # Code Analysis Report
 
-**Date:** 2026-02-02 (Updated)  
-**Scope:** Game Engine (`src/app/game-engine/`) and Engagements Module (`src/app/modules/Engagements/`)
+**Date:** 2026-02-06 (Updated)  
+**Scope:** Game Engine (`src/app/game-engine/`), Engagements Module (`src/app/modules/Engagements/`), and Types (`src/app/types/`)
 
 ---
 
 ## Executive Summary
 
-This report identifies code quality issues, architectural concerns, and improvement opportunities across the game engine and Engagements module. Issues are categorized by severity and include specific file/line references.
+This report identifies code quality issues, architectural concerns, and improvement opportunities. Since the last report (2026-02-02), some issues have been fixed, others remain, and new issues have emerged. The codebase has grown with enhancement system integration.
+
+**Key Changes Since Last Report:**
+- Enhancement system integrated into combat engine
+- CombatEngine grown from ~596 to 895 lines
+- Debug console.log removed (FIXED)
+- Model sorting memoization added (FIXED)
+- New type safety issues introduced with enhancement mechanics
+
+**Note:** Some features (RAPID FIRE, MELTA, reroll effects, mortal wounds, etc.) are outside current application scope and tracked separately in the roadmap.
 
 ---
 
@@ -15,165 +24,117 @@ This report identifies code quality issues, architectural concerns, and improvem
 
 ### High Priority Issues
 
-#### 1. Unimplemented Effect Types
+#### 1. Type Safety Gaps (8 instances of `any`)
 
-**Location:** `src/app/game-engine/types/Mechanic.ts:14`
+**Status:** STILL PRESENT / WORSENED
 
-```typescript
-export type Effect = "rollBonus" | "rollPenalty" | "staticNumber" | "addsKeyword" | 
-                     "addsAbility" | "reroll" | "autoSuccess" | "mortalWounds" | 
-                     "ignoreModifier" | "halveDamage" | "minDamage" | "setsFnp";
-```
-
-- **Defined:** 12 effect types
-- **Fully Implemented:** 8 types
-  - `rollBonus` - in `evaluateStep()`, adds to hit/wound/save modifiers
-  - `rollPenalty` - in `evaluateStep()`, subtracts from modifiers
-  - `setsFnp` - in `deriveStaticValue("fnp")`, sets Feel No Pain value (unified with staticNumber)
-  - `addsAbility` - in `processAbilityGrantingMechanics()`, converts to special effects (LETHAL HITS, etc.)
-  - `autoSuccess` - in `hasAutoSuccessForAttribute()`, checked in `computeFinalToHit()` which returns `"auto"` (used by TORRENT)
-  - `ignoreModifier` - in `hasIgnoreModifierFor()`, suppresses specific modifiers like cover bonus (used by IGNORES COVER)
-  - `staticNumber` - in `deriveStaticValue()`, sets characteristic values like invSv (used by Storm Shield)
-  - `addsKeyword` - in `collectGrantedKeywords()`, grants keywords for condition evaluation (used by wargear like Ironclad Assault Launchers)
-- **Unimplemented:** 4 types (`reroll`, `mortalWounds`, `halveDamage`, `minDamage`)
-
-No type safety prevents using unimplemented effects, leading to silent failures.
+| Location | Issue |
+|----------|-------|
+| `CombatEngine.ts:241` | `value?: any` parameter in createSpecialEffectForAbility |
+| `CombatEngine.ts:294` | `(attackerUnit as any).resolvedWargearAbilities` |
+| `CombatEngine.ts:311` | `(defenderUnit as any).resolvedWargearAbilities` |
+| `CombatEngine.ts:393` | `isEnhancementBearerAlive(unit: any)` - NEW |
+| `CombatEngine.ts:645` | `isLeaderAlive(unit: any)` |
+| `CombatEngine.ts:719` | `compare(actual: any, operator: string, expected: any)` |
+| `CombatEngine.ts:752` | `return baseToHit as any` |
+| `coreAbilities.ts:20` | Unsafe JSON cast without runtime validation |
 
 ---
 
-#### 2. Missing Range Conditions
+#### 2. Dead Code - Stratagem System
 
-**Location:** `src/app/game-engine/CombatEngine.ts:366+`
-
-The `inHalfRange` state is referenced in RAPID FIRE and MELTA conditions in `weaponAttributes.ts`, but `getStateValue()` doesn't handle it:
-
-```typescript
-// weaponAttributes.ts - RAPID FIRE condition
-conditions: [{ entity: "thisUnit", state: "inHalfRange", operator: "equals", value: true }]
-
-// CombatEngine.ts - getStateValue() has no case for "inHalfRange"
-// Returns false, so RAPID FIRE and MELTA bonuses NEVER apply
-```
-
-**Impact:** RAPID FIRE and MELTA weapon bonuses are currently broken.
-
----
-
-#### 3. Type Safety Gaps
-
-**A. Unsafe `any` types**
-
-- `CombatEngine.ts:447` - `compare()` function accepts `any`:
-  ```typescript
-  private compare(actual: any, operator: string, expected: any): boolean
-  ```
-
-- `CombatEngine.ts:480` - Type assertion discards type info:
-  ```typescript
-  return baseToHit as any;
-  ```
-
-**B. Unsafe JSON import**
-
-- `coreAbilities.ts:20`:
-  ```typescript
-  const registry = coreAbilitiesData as CoreAbilitiesRegistry;
-  ```
-  No runtime validation that JSON matches expected schema.
-
-**C. Mechanic value type too permissive**
-
-- `Mechanic.ts` - `value` allows any of 3 types but effects require specific types:
-  ```typescript
-  value: boolean | number | string;
-  ```
-  Should use discriminated union: `{ effect: "rollBonus"; value: number } | ...`
-
----
-
-#### 4. Dead Code - Stratagem System
-
-**Location:** `src/app/game-engine/CombatEngine.ts:174`
+**Status:** STILL PRESENT  
+**Location:** `CombatEngine.ts:193-194`
 
 ```typescript
+// Future: stratagems, etc.
 // this.collectFromStratagems();
 ```
 
-- `activeStratagems` accepted in `CombatContext` but never used
-- `collectFromStratagems()` function doesn't exist
-- Stratagems are completely non-functional
+- `activeStratagems` accepted in CombatContext but never used
+- `collectFromStratagems()` doesn't exist
+- Stratagems completely non-functional
 
 ---
 
-#### 5. Incomplete Critical Hit/Wound Logic
+#### 3. Critical Hit/Wound Effects Not Applied
 
-**Location:** `src/app/game-engine/CombatEngine.ts:499-530`
+**Status:** PARTIAL - Informational only  
+**Location:** `CombatEngine.ts:74-75, 797-836`
 
-- `criticalHitThreshold` and `criticalWoundThreshold` are computed
-- But effects (auto-wound on critical hit, mortal wounds on critical wound) are not applied
-- Results are informational only, not evaluated in damage calculation
+- Thresholds computed and returned in result
+- ANTI-X logic implemented for critical wound threshold
+- But effects never applied:
+  - LETHAL HITS auto-wound not triggered
+  - SUSTAINED HITS extra hits not generated
+  - Mortal wounds on critical wounds not dealt
 
 ---
 
 ### Medium Priority Issues
 
-#### 1. Code Duplication
+#### 4. CombatEngine Size - WORSENED
 
-**A. Entity Resolution**
-- `resolveEntityToUnit()` called multiple times per condition evaluation
-- Should resolve once and pass unit reference
+**Status:** GROWN from ~596 to 895 lines (+50%)  
+**Location:** `CombatEngine.ts`
 
-**B. State Aliases**
-- Multiple aliases for same state: `isInCover` vs `inCover`, `hasChargedThisTurn` vs `hasCharged`
-- Should normalize state names before checking
+Now handles 6+ responsibilities:
+1. Collecting mechanics from weapons, abilities, enhancements, wargear, damaged profiles
+2. Evaluating conditions
+3. Aggregating modifiers
+4. Computing final values
+5. Formatting for display
+6. Leader/enhancement bearer alive checks
 
-**C. ANTI-X Regex Parsing**
-- Same regex pattern appears in `weaponAttributes.ts` and `CombatEngine.ts`
-- Should extract to shared constant
-
----
-
-#### 2. CombatEngine Does Too Much
-
-**Location:** `src/app/game-engine/CombatEngine.ts` (596 lines)
-
-Single class handles:
-- Collecting mechanics from sources
-- Evaluating conditions
-- Aggregating modifiers
-- Computing final values
-- Formatting for display
-
-**Recommendation:** Split into focused classes:
-- `MechanicCollector`
-- `ConditionEvaluator`
-- `ModifierAggregator`
-- `DisplayFormatter`
+**New Methods Added:**
+- `collectFromEnhancement()` (line 361)
+- `isEnhancementBearerAlive()` (line 393)
 
 ---
 
-#### 3. Weapon Attributes Parsing
+#### 5. Code Duplication
 
-**Location:** `src/app/game-engine/weaponAttributes.ts` (352 lines)
-
-Large `parseWeaponAttribute()` function with switch/if statements.
-
-**Recommendation:** Refactor to registry pattern similar to core abilities:
+**A. State Aliases - STILL PRESENT**
 ```typescript
-const WEAPON_ATTRIBUTE_REGISTRY = {
-  "ASSAULT": { mechanic: null, specialEffect: { type: "assault" } },
-  "HEAVY": { mechanic: { effect: "rollBonus", ... }, specialEffect: { type: "heavy" } },
-  // ...
-};
+// CombatEngine.ts:604-615
+case "isInCover":
+case "inCover":
+case "hasChargedThisTurn":
+case "hasCharged":
+case "hasFiredThisPhase":
+case "hasShot":
+```
+
+**B. ANTI-X Regex - DUPLICATED**
+- `weaponAttributes.ts:274` - `/^ANTI-(.+)\s+(\d)\+$/`
+- `CombatEngine.ts:818` - Same pattern
+
+**C. Entity Resolution - Called 20+ times per combat**
+
+---
+
+#### 6. NEW: ANTI-X Condition Bug
+
+**Location:** `weaponAttributes.ts:284-290`
+
+```typescript
+conditions: [
+    {
+        entity: "targetUnit",
+        keywords: [keyword],
+        operator: "includes",
+        value: keyword,  // <-- BUG: should be 'true'
+    },
+],
 ```
 
 ---
 
 ### Low Priority Issues
 
-1. **No memoization** of keyword lookups - `getUnitKeywords()` called multiple times per resolve
-2. **Linear search** through mechanics for each step - should index by attribute
-3. **Unused function** - `filterCombatRelevantMechanics()` in `abilityMechanics.ts` never called
+- `filterCombatRelevantMechanics()` in `abilityMechanics.ts:118-122` - Never called (dead code)
+- No memoization of keyword lookups
+- Linear search through mechanics for each step
 
 ---
 
@@ -183,199 +144,203 @@ const WEAPON_ATTRIBUTE_REGISTRY = {
 
 #### 1. Props Drilling
 
-**Location:** `src/app/modules/Engagements/ViewEngagement/CombatPhase/Octagon.tsx`
+**Status:** STILL PRESENT  
+**Location:** `Octagon.tsx:176-196`
 
-```typescript
-<AttackerPanel
-  gamePhase={gamePhase}
-  force={attackingForce}
-  unitItems={attackerUnitItems}
-  selectedUnit={selectedAttackerUnit}
-  onUnitChange={handleAttackerUnitChange}
-  selectedWeapon={selectedWeapon}
-  onWeaponChange={handleWeaponChange}
-  onCombatStatusChange={handleAttackerCombatStatusChange}
-/>
-```
+- AttackerPanel: 8 props
+- DefenderPanel: 9 props
 
-8+ props passed to each panel component.
-
-**Recommendation:** Extract `AttackerPanelState` context or use compound component pattern.
+No context extraction implemented.
 
 ---
 
-#### 2. God Component
+#### 2. God Component - Octagon.tsx
 
-**Location:** `src/app/modules/Engagements/ViewEngagement/CombatPhase/Octagon.tsx` (201 lines)
+**Status:** STILL PRESENT  
+**Location:** `Octagon.tsx` - 202 lines
 
-Handles too many responsibilities:
-- Unit selection state management
-- Weapon selection logic
-- Model selection validation
-- Precision targeting rules
-- Movement behavior constraints
-- Combat resolution integration
-- Phase-specific logic
-
-**Recommendation:** Split into focused hooks:
-- `useUnitSelection()`
-- `useWeaponSelection()`
-- `useCombatTargeting()`
+Still handles 7 responsibilities:
+1. Unit selection state management
+2. Weapon selection logic
+3. Model selection validation
+4. Precision targeting rules
+5. Movement behavior constraints
+6. Combat resolution integration
+7. Phase-specific logic
 
 ---
 
-#### 3. State Inconsistency
+#### 3. State Inconsistency - forceType Ignored
 
-**Location:** `src/app/modules/Engagements/EngagementManagerContext.tsx:321-346`
+**Status:** STILL PRESENT  
+**Location:** `EngagementManagerContext.tsx:342-365`
 
 ```typescript
 const updateUnitCombatState = useCallback((engagementId, forceType, unitId, updates) => {
-  // forceType parameter IGNORED - re-derived by searching both forces
-  const unitInForceA = engagement.engagementForceA.items.some((item) => item.listItemId === unitId);
-  const forceKey = unitInForceA ? "engagementForceA" : "engagementForceB";
-  // ...
-});
+    // forceType parameter IGNORED - re-derived by searching both forces
+    const unitInForceA = engagement.engagementForceA.items.some((item) => item.listItemId === unitId);
 ```
-
-**Issues:**
-- If unit ID exists in both forces, behavior is unpredictable
-- No validation that unit exists
-- `forceType` parameter ignored and re-derived
 
 ---
 
 #### 4. Dead Code
 
-**A. Debug logging**
-- `CombatStatusPanel.tsx:80`: `console.log(unit.name, combatState.isDestroyed)`
-
-**B. Unused state variables**
-- `Octagon.tsx:41-42`:
-  ```typescript
-  const [activeAttackerStratagems, setActiveAttackerStratagems] = useState<string[]>([]);
-  const [activeDefenderStratagems, setActiveDefenderStratagems] = useState<string[]>([]);
-  ```
+| Issue | Status | Location |
+|-------|--------|----------|
+| Console.log in CombatStatusPanel | **FIXED** | Was line 80 |
+| Unused stratagem state | PRESENT | `Octagon.tsx:41-42` |
+| Unused `getFirstWeaponProfileForPhase` | NEW | `combatUtils.ts:55` |
 
 ---
 
 ### Medium Priority Issues
 
-#### 1. Duplication
+#### 5. Duplication
 
-**A. Turn flag reset logic**
-- `advanceTurn()` and `resetTurnFlags()` in `EngagementManagerContext.tsx` duplicate flag reset logic
-- Should extract shared `_resetAllUnitFlags()` helper
+**A. Turn Flag Reset - STILL PRESENT**  
+`EngagementManagerContext.tsx:436-466` and `468-497` have identical reset logic.
 
-**B. Model availability checking**
-- Scattered across `CombatStatusPanel.tsx`, `DefenderPanel.tsx`, `CasualtyPanel.tsx`
-- Should create shared `useModelAvailability()` hook
+**B. Model Availability Checking - STILL PRESENT**  
+Scattered across `CombatStatusPanel.tsx`, `DefenderPanel.tsx`, `CasualtyPanel.tsx`.
 
-**C. Weapon selection logic**
-- Duplicated across multiple callbacks in `Octagon.tsx`
-- Should consolidate into derived state hook
+**C. Weapon Selection Logic - STILL PRESENT**  
+Multiple similar callbacks in `Octagon.tsx:66-111`.
 
 ---
 
-#### 2. Missing Memoization
+#### 6. Missing Memoization
 
-**A. Model sorting**
-- `DefenderPanel.tsx:38-63` - O(n log n) sort on every render
-- Should pre-sort during unit creation
-
-**B. Inline callbacks**
-- `Dancefloor.tsx:11` creates new function on every render:
-  ```typescript
-  const handleCombatStatusChange = (unitId, updates) => {
-    onUpdateUnitCombatState("attacking", unitId, updates);
-  };
-  ```
-  Should use `useCallback()`
+| Issue | Status | Location |
+|-------|--------|----------|
+| Model sorting | **FIXED** | `DefenderPanel.tsx:39-44` |
+| Inline callback in Dancefloor | PRESENT | `Dancefloor.tsx:14-16` |
+| useMemo missing deps | NEW | `DefenderPanel.tsx:73-90` |
 
 ---
 
-#### 3. combatUtils.ts Needs Reorganization
+#### 7. combatUtils.ts Organization
 
-**Location:** `src/app/modules/Engagements/ViewEngagement/CombatPhase/utils/combatUtils.ts`
+**Status:** STILL PRESENT  
+**Location:** `combatUtils.ts` - 446 lines, 15 exported functions
 
-16 exported functions with mixed concerns.
+Mixed concerns - should split into:
+- `unitSelection.ts`
+- `weaponSelection.ts`
+- `targetingRules.ts`
+- `movementRules.ts`
+- `abilityDisplay.ts`
 
-**Recommendation:** Split into focused modules:
+---
+
+## Types Analysis
+
+### High Priority Issues
+
+#### 1. Loose `mechanics` Types
+
+**Status:** NEW  
+**Locations:**
+- `Enhancements.tsx:10` - `mechanics?: any[]`
+- `Units.tsx:136` - `keywords?: any[]`
+- `Units.tsx:138` - `unitComposition?: any[]`
+- `Detachments.tsx:6` - `abilities?: any[]`
+
+Should use `Mechanic[]` from game engine types.
+
+---
+
+#### 2. Mechanic Value Type Too Permissive
+
+**Status:** STILL PRESENT  
+**Location:** `Mechanic.ts:61`
+
+```typescript
+value: boolean | number | string;  // Allows invalid combinations
 ```
-combatUtils/
-  ├── unitSelection.ts
-  ├── weaponSelection.ts
-  ├── targetingRules.ts
-  └── movementRules.ts
-```
+
+Should use discriminated union per effect type.
 
 ---
 
-#### 4. Missing Validation
+### Good Patterns Found
 
-No validation utilities for:
-- Unit exists in engagement
-- Combat state is valid
-- Model instance IDs match unit
-- Weapon belongs to unit
-
-**Recommendation:** Create `validation.ts` module.
+- `EngagementForceItem` uses proper `Omit` + intersection pattern (`Engagements.tsx:73-83`)
+- `EngagementAbility` cleanly extends `Ability` (`Engagements.tsx:20-23`)
+- No circular dependencies in type imports
+- `resolveWargearAbilities()` has clean type signatures
 
 ---
 
 ## Summary Table
 
-| Category | Severity | Count | Key Issues |
-|----------|----------|-------|-----------|
-| Unimplemented Features | High | 3 | 4 effect types, range conditions, stratagems |
-| Type Safety | High | 4 | `any` types, unsafe casts, loose parameters |
-| Dead Code | Medium | 4 | Console.log, unused state, commented code |
-| Duplication | Medium | 6 | Entity resolution, state aliases, turn flags |
-| Architecture | High | 3 | God components, props drilling, mixed concerns |
-| Performance | Low | 4 | Missing memoization, linear searches |
+| Category | Severity | Count | Status vs Last Report |
+|----------|----------|-------|----------------------|
+| Type Safety (`any`) | High | 8+ | WORSENED (+2 new) |
+| Dead Code | High | 3 | IMPROVED (1 fixed) |
+| Architecture | High | 3 | WORSENED (CombatEngine +50%) |
+| Duplication | Medium | 6 | UNCHANGED |
+| Performance | Low | 4 | PARTIALLY FIXED (1 memoization) |
+| New Type Issues | High | 4 | NEW (loose mechanics types) |
 
 ---
 
 ## Recommended Priority Order
 
-### Immediate (Bug Fixes)
-1. Implement `inHalfRange` state evaluation (RAPID FIRE/MELTA currently broken)
-2. Remove debug `console.log` statements
-
 ### Short Term (Code Quality)
-1. Split `Octagon.tsx` into focused hooks
-2. Extract weapon attribute parsing to registry pattern
-3. Add JSON schema validation for `core-abilities.json`
-4. Fix state inconsistency in `updateUnitCombatState()`
+1. Fix `Enhancement.mechanics` type to use `Mechanic[]`
+2. Remove unused stratagem state from Octagon.tsx
+3. Add missing useMemo dependencies in DefenderPanel
+4. Extract turn flag reset to shared helper
+5. Fix ANTI-X condition bug - `value` should be `true` not keyword string
 
 ### Medium Term (Architecture)
-1. Split `CombatEngine` into focused classes
-2. Reorganize `combatUtils.ts` into modules
-3. Create validation utilities
-4. Extract shared hooks for model availability
+1. Split CombatEngine into focused classes (now 895 lines)
+2. Extract Octagon.tsx into focused hooks
+3. Create context for attack/defense state (eliminate props drilling)
+4. Reorganize combatUtils.ts into modules
 
 ### Long Term (Features)
 1. Implement stratagem system
-2. Implement remaining effect types (rerolls, mortal wounds, etc.)
-3. Add comprehensive type guards and discriminated unions
-4. Complete critical hit/wound damage application
+2. Apply critical hit/wound effects (currently informational only)
+3. Add discriminated unions for Mechanic type
 
 ---
 
-## Appendix: File References
+## Future Roadmap (Out of Current Scope)
 
-### Game Engine Files
-- `src/app/game-engine/CombatEngine.ts` - Main combat resolution
-- `src/app/game-engine/abilityMechanics.ts` - Ability extraction
-- `src/app/game-engine/weaponAttributes.ts` - Weapon parsing
-- `src/app/game-engine/coreAbilities.ts` - Core ability registry
-- `src/app/game-engine/types/Mechanic.ts` - Effect/condition types
-- `src/app/game-engine/types/ModifierResult.ts` - Output types
-- `src/app/game-engine/types/EffectSource.ts` - Source attribution
+The following features are tracked separately and not prioritized for current development:
 
-### Engagements Module Files
-- `src/app/modules/Engagements/EngagementManagerContext.tsx` - State management
-- `src/app/modules/Engagements/ViewEngagement/CombatPhase/components/Octagon.tsx` - Combat UI
-- `src/app/modules/Engagements/ViewEngagement/CombatPhase/components/AttackerPanel.tsx`
-- `src/app/modules/Engagements/ViewEngagement/CombatPhase/components/DefenderPanel.tsx`
-- `src/app/modules/Engagements/ViewEngagement/CombatPhase/utils/combatUtils.ts`
-- `src/app/modules/Engagements/ViewEngagement/MovementPhase/utils/movementEffects.ts`
+1. **RAPID FIRE / MELTA support** - Requires `inHalfRange` state evaluation in CombatEngine
+2. **Unimplemented effect types:**
+   - `reroll` - Dice reroll mechanics
+   - `mortalWounds` - Mortal wound application
+   - `halveDamage` - Damage reduction
+   - `minDamage` - Minimum damage floors
+
+---
+
+## Files Reference
+
+### Game Engine
+| File | Lines | Issues |
+|------|-------|--------|
+| `CombatEngine.ts` | 895 | 8 `any` types, missing inHalfRange, stratagem dead code |
+| `weaponAttributes.ts` | 352 | ANTI-X bug, regex duplication |
+| `abilityMechanics.ts` | 154 | Unused filter function |
+| `types/Mechanic.ts` | 62 | Loose value type |
+
+### Engagements Module
+| File | Lines | Issues |
+|------|-------|--------|
+| `Octagon.tsx` | 202 | Props drilling, god component, unused state |
+| `EngagementManagerContext.tsx` | 500+ | forceType ignored, turn flag duplication |
+| `combatUtils.ts` | 446 | Mixed concerns, unused export |
+| `DefenderPanel.tsx` | 200+ | Missing useMemo deps |
+| `Dancefloor.tsx` | 50+ | Inline callback not memoized |
+
+### Types
+| File | Issues |
+|------|--------|
+| `Enhancements.tsx` | `mechanics?: any[]` |
+| `Units.tsx` | `keywords?: any[]`, `unitComposition?: any[]` |
+| `Detachments.tsx` | `abilities?: any[]` |

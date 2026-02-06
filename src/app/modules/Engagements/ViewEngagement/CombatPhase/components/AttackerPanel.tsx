@@ -3,7 +3,7 @@ import React, { useMemo, Fragment } from "react";
 import type { EngagementForce, EngagementForceItemCombatState, EngagementWargear } from "#types/Engagements";
 import type { WeaponProfile, GamePhase } from "#types/index";
 
-import { type UnitSelectItem, type SelectedWeapon, filterWargearByAliveModels, groupWargearBySource, canFireWeapon, getLeaderGrantedWeaponAbilities } from "../utils/combatUtils";
+import { type UnitSelectItem, type SelectedWeapon, filterWargearByAliveModels, groupWargearBySource, canFireWeapon, getLeaderGrantedWeaponAbilities, getEnhancementGrantedWeaponAbilities } from "../utils/combatUtils";
 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown.tsx";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
@@ -61,6 +61,16 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     const leaderGrantedAbilities = useMemo(() => {
         return getLeaderGrantedWeaponAbilities(selectedUnit?.item);
     }, [selectedUnit?.item, combatState?.deadModelIds]);
+
+    // Get enhancement-granted weapon abilities
+    const enhancementGrantedAbilities = useMemo(() => {
+        return getEnhancementGrantedWeaponAbilities(selectedUnit?.item);
+    }, [selectedUnit?.item, combatState?.deadModelIds]);
+
+    // Combine all bonus attributes for weapon cards
+    const allBonusAttributes = useMemo(() => {
+        return [...leaderGrantedAbilities, ...enhancementGrantedAbilities];
+    }, [leaderGrantedAbilities, enhancementGrantedAbilities]);
 
     const handleUnitSelect = (unit: UnitSelectItem) => {
         onUnitChange(unit);
@@ -129,7 +139,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                                         isSelected={isSelected && canFire}
                                                         isDisabled={!canFire}
                                                         onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
-                                                        bonusAttributes={leaderGrantedAbilities}
+                                                        bonusAttributes={allBonusAttributes}
                                                     />
                                                 );
                                             })}
@@ -156,7 +166,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                                                 isDisabled={!canFire}
                                                 disabledLabel={reason}
                                                 onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
-                                                bonusAttributes={leaderGrantedAbilities}
+                                                bonusAttributes={allBonusAttributes}
                                             />
                                         );
                                     })}

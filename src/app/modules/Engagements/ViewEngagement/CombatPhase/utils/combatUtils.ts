@@ -125,6 +125,70 @@ export function getLeaderGrantedWeaponAbilities(unit: EngagementForceItem | unde
 }
 
 /**
+ * Extract weapon abilities granted by enhancements.
+ * These are abilities with `addsAbility` effect from the unit's enhancement.
+ *
+ * @param unit The unit to check
+ * @returns Array of BonusAttribute objects for display on weapon cards
+ */
+export function getEnhancementGrantedWeaponAbilities(unit: EngagementForceItem | undefined): BonusAttribute[] {
+    if (!unit?.enhancement?.mechanics) return [];
+
+    const bonuses: BonusAttribute[] = [];
+    const deadModelIds = unit.combatState?.deadModelIds || [];
+    const modelInstances = unit.modelInstances || [];
+
+    // Check if enhancement bearer (character) is still alive
+    const isEnhancementBearerAlive = (): boolean => {
+        // If no model instances, assume alive (standalone character case)
+        if (modelInstances.length === 0) return true;
+
+        // Check if unit has source units (merged unit)
+        if (unit.sourceUnits && unit.sourceUnits.length > 1) {
+            // In a merged unit, find the leader (character with enhancement)
+            const leaderSource = unit.sourceUnits.find((s) => s.isLeader);
+            if (leaderSource) {
+                // Find models from the leader
+                const leaderModels = modelInstances.filter((m) => m.sourceUnitName === leaderSource.name);
+                return leaderModels.some((m) => !deadModelIds.includes(m.instanceId));
+            }
+        }
+
+        // Standalone character: check if any model is alive
+        return modelInstances.some((m) => !deadModelIds.includes(m.instanceId));
+    };
+
+    if (!isEnhancementBearerAlive()) return [];
+
+    // Check if unit is leading (for isLeadingUnit conditions)
+    const isLeadingUnit = unit.sourceUnits && unit.sourceUnits.length > 1;
+
+    for (const mechanic of unit.enhancement.mechanics) {
+        if (mechanic.effect !== "addsAbility") continue;
+        if (!mechanic.abilities || !Array.isArray(mechanic.abilities)) continue;
+
+        // Check for isLeadingUnit condition
+        const hasLeadingCondition = mechanic.conditions?.some((c: any) => c.state === "isLeadingUnit");
+        if (hasLeadingCondition && !isLeadingUnit) continue;
+
+        // Extract weapon abilities
+        for (const abilityName of mechanic.abilities) {
+            const upperName = abilityName.toUpperCase();
+            if (WEAPON_ABILITY_NAMES.includes(upperName)) {
+                bonuses.push({
+                    name: upperName,
+                    value: typeof mechanic.value === "number" ? mechanic.value : null,
+                    sourceName: unit.enhancement.name,
+                    sourceType: "enhancement",
+                });
+            }
+        }
+    }
+
+    return bonuses;
+}
+
+/**
  * Get the critical effect that applies to a specific attack step.
  *
  * Critical effects by step:

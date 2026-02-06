@@ -11,7 +11,7 @@ import { createEffectSource } from "./types/EffectSource";
 import type { StepModifiers, CombatResolution, AttackStepType, AttributedModifier, SpecialEffect } from "./types/ModifierResult";
 import { createEmptyStepModifiers } from "./types/ModifierResult";
 import { extractWeaponMechanics } from "./weaponAttributes";
-import { extractAbilityMechanics } from "./abilityMechanics";
+import { extractAbilityMechanics, extractEnhancementMechanics } from "./abilityMechanics";
 
 /**
  * A mechanic paired with its source for attribution
@@ -159,6 +159,9 @@ export class CombatEngine {
 
         // Unit abilities (STEALTH, FEEL NO PAIN, etc.)
         this.collectFromUnitAbilities();
+
+        // Enhancements (character upgrades that grant abilities/stat bonuses)
+        this.collectFromEnhancement();
 
         // Damaged profile penalties (when unit is damaged)
         this.collectFromDamagedProfile();
@@ -347,6 +350,69 @@ export class CombatEngine {
                 });
             }
         }
+    }
+
+    /**
+     * Collect mechanics from enhancements attached to characters.
+     * For offensive effects (attacksMade), collects from attacker's enhancement.
+     * For defensive effects (attacksAgainst), collects from defender's enhancement.
+     * Effects only apply while the enhancement bearer (character) is alive.
+     */
+    private collectFromEnhancement(): void {
+        const attackerUnit = this.context.attacker.unit;
+        const defenderUnit = this.context.defender.unit;
+
+        // Attacker enhancement (affects attacks made)
+        if (this.isEnhancementBearerAlive(attackerUnit)) {
+            const attackerMechanics = extractEnhancementMechanics(attackerUnit.enhancement, attackerUnit.name);
+
+            for (const { mechanic, source, appliesTo } of attackerMechanics) {
+                if (appliesTo === "attacksMade") {
+                    this.collectedMechanics.push({ mechanic, source });
+                }
+            }
+        }
+
+        // Defender enhancement (affects attacks received)
+        if (this.isEnhancementBearerAlive(defenderUnit)) {
+            const defenderMechanics = extractEnhancementMechanics(defenderUnit.enhancement, defenderUnit.name);
+
+            for (const { mechanic, source, appliesTo } of defenderMechanics) {
+                if (appliesTo === "attacksAgainst") {
+                    this.collectedMechanics.push({ mechanic, source });
+                }
+            }
+        }
+    }
+
+    /**
+     * Check if the enhancement bearer (character) is still alive.
+     * In standalone units, this is the character themselves.
+     * In merged units, this is the leader character who had the enhancement.
+     */
+    private isEnhancementBearerAlive(unit: any): boolean {
+        if (!unit.enhancement) return false;
+
+        const deadModelIds = unit.combatState?.deadModelIds || [];
+        const modelInstances = unit.modelInstances || [];
+
+        // If no model instances, assume alive (standalone character case)
+        if (modelInstances.length === 0) return true;
+
+        // Check if unit has source units (merged unit)
+        const sourceUnits = unit.sourceUnits;
+        if (sourceUnits && Array.isArray(sourceUnits) && sourceUnits.length > 1) {
+            // In a merged unit, find the leader (character with enhancement)
+            const leaderSource = sourceUnits.find((su: any) => su.isLeader);
+            if (leaderSource) {
+                // Find models from the leader
+                const leaderModels = modelInstances.filter((m: any) => m.sourceUnitName === leaderSource.name);
+                return leaderModels.some((m: any) => !deadModelIds.includes(m.instanceId));
+            }
+        }
+
+        // Standalone character: check if any model is alive
+        return modelInstances.some((m: any) => !deadModelIds.includes(m.instanceId));
     }
 
     /**

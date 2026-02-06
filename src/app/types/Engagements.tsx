@@ -1,3 +1,4 @@
+import { Enhancement } from "./Enhancements";
 import { ArmyListItem, ModelInstance } from "./Lists";
 import { Ability } from "./Units";
 import { Weapon } from "./Weapons";
@@ -69,7 +70,7 @@ export interface EngagementForce {
     items: EngagementForceItem[];
 }
 
-export type EngagementForceItem = Omit<ArmyListItem, "wargear" | "modelInstances" | "abilities"> & {
+export type EngagementForceItem = Omit<ArmyListItem, "wargear" | "modelInstances" | "abilities" | "enhancement"> & {
     wargear: EngagementWargear[];
     modelInstances?: EngagementModelInstance[];
     /** Abilities with source tracking for combined units */
@@ -77,6 +78,8 @@ export type EngagementForceItem = Omit<ArmyListItem, "wargear" | "modelInstances
     combatState: EngagementForceItemCombatState;
     /** For combined units: tracks the original source units (leaders + bodyguard) */
     sourceUnits?: SourceUnit[];
+    /** Full enhancement with mechanics (resolved from detachment data) */
+    enhancement?: Enhancement;
 };
 
 export interface EngagementForceItemCombatState {

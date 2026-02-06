@@ -1,3 +1,4 @@
+import { Enhancement } from "./Enhancements";
 import { Datasheet, LeaderReference, WargearAbility } from "./Units";
 
 export interface ArmyList {
@@ -43,7 +44,7 @@ export type ArmyListItem = Datasheet & {
     pointsCost?: number;
     leading?: LeaderReference; // Unit this leader is attached to
     leadBy?: LeaderReference[]; // Leaders attached to this unit (supports multiple)
-    enhancement?: { id: string; name: string; cost?: number }; // Enhancement attached to this leader
+    enhancement?: Enhancement; // Full enhancement with mechanics attached to this leader
 
     // Per-model weapon tracking
     modelInstances?: ModelInstance[]; // Each model with its loadout

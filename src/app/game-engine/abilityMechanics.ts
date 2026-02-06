@@ -5,6 +5,7 @@
  * Pairs mechanics with their source for proper attribution in the UI.
  */
 
+import type { Enhancement } from "#types/Enhancements";
 import type { Ability } from "#types/Units";
 import type { EngagementAbility } from "#types/Engagements";
 import type { Mechanic } from "./types/Mechanic";
@@ -118,4 +119,36 @@ export function filterCombatRelevantMechanics(mechanics: SourcedAbilityMechanic[
     const combatEffects = new Set(["rollBonus", "rollPenalty", "setsFnp", "autoSuccess", "reroll"]);
 
     return mechanics.filter(({ mechanic }) => combatEffects.has(mechanic.effect));
+}
+
+/**
+ * Extract combat mechanics from an enhancement.
+ * Similar to extractAbilityMechanics but for Enhancement objects.
+ *
+ * @param enhancement - The enhancement attached to a character
+ * @param unitName - Name of the unit (for source attribution)
+ * @returns Array of mechanics with source attribution
+ */
+export function extractEnhancementMechanics(enhancement: Enhancement | undefined, unitName: string): SourcedAbilityMechanic[] {
+    if (!enhancement?.mechanics || enhancement.mechanics.length === 0) {
+        return [];
+    }
+
+    const results: SourcedAbilityMechanic[] = [];
+
+    for (const mechanic of enhancement.mechanics) {
+        const appliesTo = getApplicationTarget(mechanic);
+
+        results.push({
+            mechanic,
+            source: createEffectSource("enhancement", enhancement.name, {
+                sourceUnitName: unitName,
+                sourceId: enhancement.id,
+            }),
+            appliesTo,
+            leaderSourceName: undefined,
+        });
+    }
+
+    return results;
 }

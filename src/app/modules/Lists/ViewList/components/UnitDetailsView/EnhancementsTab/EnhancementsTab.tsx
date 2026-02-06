@@ -39,7 +39,7 @@ const EnhancementsTab = ({ unit, list, detachmentEnhancements, usedEnhancements 
                         isUsedByOther={isUsedByOther}
                         usedBy={usedByLeader}
                         handleAttachEnhancement={() => {
-                            attachEnhancementToLeader(list, unit.listItemId, { id: enhancement.id, name: enhancement.name, cost: enhancement.cost });
+                            attachEnhancementToLeader(list, unit.listItemId, enhancement);
                         }}
                     />
                 );

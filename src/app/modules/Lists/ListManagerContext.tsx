@@ -614,7 +614,7 @@ interface ListManagerContextType {
     // Attachment operations
     attachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string, forceReplace?: boolean) => ArmyList;
     detachLeaderFromUnit: (list: ArmyList, leaderItemId: string) => ArmyList;
-    attachEnhancementToLeader: (list: ArmyList, leaderItemId: string, enhancement: { id: string; name: string; cost?: number }) => ArmyList;
+    attachEnhancementToLeader: (list: ArmyList, leaderItemId: string, enhancement: Enhancement) => ArmyList;
     canAttachLeaderToUnit: (list: ArmyList, leaderItemId: string, targetUnitItemId: string) => MultiLeaderValidationResult;
 
     // Helper functions
@@ -1362,14 +1362,16 @@ export function ListManagerProvider({ children }: ListManagerProviderProps) {
         return updatedList;
     }, []);
 
-    const attachEnhancementToLeader = useCallback((list: ArmyList, leaderItemId: string, enhancement: { id: string; name: string; cost?: number }): ArmyList => {
+    const attachEnhancementToLeader = useCallback((list: ArmyList, leaderItemId: string, enhancement: Enhancement): ArmyList => {
         const updatedItems = list.items.map((item) => {
             if (item.listItemId === leaderItemId) {
+                // Toggle off if same enhancement selected
                 if (item.enhancement?.id === enhancement.id) {
                     const { enhancement: _, ...rest } = item;
                     return rest;
                 }
-                return { ...item, enhancement: { id: enhancement.id, name: enhancement.name, cost: enhancement.cost } };
+                // Store the full enhancement including mechanics
+                return { ...item, enhancement };
             }
             return item;
         });
