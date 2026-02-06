@@ -192,7 +192,15 @@
           "abilities": [
             "FEEL NO PAIN"
           ],
-          "value": 4
+          "value": 4,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
         }
       ],
       "mechanicsSource": "regex"
@@ -212,7 +220,15 @@
           "abilities": [
             "STEALTH"
           ],
-          "value": true
+          "value": true,
+          "conditions": [
+            {
+              "entity": "thisModel",
+              "state": "isLeadingUnit",
+              "operator": "equals",
+              "value": true
+            }
+          ]
         }
       ],
       "mechanicsSource": "regex"

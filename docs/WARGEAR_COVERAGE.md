@@ -55,7 +55,7 @@ This report tracks all datasheets with wargear loadout options and their testing
 
 | Status | Datasheet | Complexity | Notes |
 |--------|-----------|------------|-------|
-| [~] | Battle Sisters Squad | M13 L3 | Sister superior can take a CCW, power weapon and Chainsword. Ok.  |
+| [x] | Battle Sisters Squad | M13 L3 |  |
 | [x] | Canoness | L1 | |
 | [x] | Canoness with Jump Pack | L1 | |
 | [x] | Castigator | L1 |  |
@@ -71,7 +71,7 @@ This report tracks all datasheets with wargear loadout options and their testing
 | [x] | Penitent Engines | L1 | |
 | [!] | Retributor Squad | M9 L2 | incorrect default loadout on Retributors . Retributors shouldn't be able to access boltguns. Superior shouldn't be able to access heavy bolter.|
 | [!] | Sanctifiers | M3 L5 | Nearly every model type is assigned the wrong default loadout in the UI |
-| [x] | Seraphim Squad | M4 L2 | No valid loadout works on Superior. |
+| [x] | Seraphim Squad | M4 L2 | |
 | [!] | Sisters Novitiate Squad | M2 L2 | Wrong defaults, constraints not working |
 | [x] | Sororitas Rhino | L1 | |
 | [~] | Zephyrim Squad | M1 L2 | Sacred banner not accessible to Superior |
