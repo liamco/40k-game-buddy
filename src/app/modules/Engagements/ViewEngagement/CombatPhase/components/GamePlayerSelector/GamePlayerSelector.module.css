@@ -1,0 +1,22 @@
+@reference "tailwindcss";
+
+.GamePlayerSelectorButton {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+
+    border-color: var(--color-mournfangBrown);
+    color: var(--color-fireDragonBright);
+    fill: var(--color-fireDragonBright);
+
+    @apply border-1 opacity-60 p-2 gap-2 transition-colors transition-opacity;
+}
+
+.GamePlayerSelectorButtonActive {
+    background-color: var(--color-fireDragonBright);
+    color: var(--color-mournfangBrown);
+    border-color: var(--color-fireDragonBright);
+    opacity: 100%;
+    box-shadow: var(--shadow-glow-orange);
+}

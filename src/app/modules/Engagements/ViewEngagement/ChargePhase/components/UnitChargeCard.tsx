@@ -4,9 +4,9 @@ import { EngagementForceItemCombatState } from "#types/Engagements.tsx";
 import { type UnitSelectItem } from "../../CombatPhase/utils/combatUtils";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { Badge } from "#components/Badge/Badge";
-import { getMovementEffects, getMovementRelevantBadges, groupMovementEffects, formatSourceAttribution, type GroupedMovementEffect } from "../utils/movementEffects";
+import { getChargeEffects, getChargeRelevantBadges, groupChargeEffects, getChargeEligibility, formatSourceAttribution, type GroupedChargeEffect } from "../utils/chargeEffects";
 
-import styles from "./UnitMovementCard.module.css";
+import styles from "./UnitChargeCard.module.css";
 import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import strikethrough from "#assets/StrikethroughRed.svg";
@@ -16,7 +16,7 @@ interface Props {
     onCombatStatusChange: (unitId: string, updates: Partial<EngagementForceItemCombatState>) => void;
 }
 
-const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
+const UnitChargeCard = ({ unitItem, onCombatStatusChange }: Props) => {
     const { item, displayName } = unitItem;
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -25,62 +25,60 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
         return item.models?.[0]?.m ?? "?";
     }, [item.models]);
 
-    // Extract movement effects and badges
-    const movementEffects = useMemo(() => getMovementEffects(unitItem), [unitItem]);
+    // Check charge eligibility
+    const eligibility = useMemo(() => getChargeEligibility(unitItem), [unitItem]);
 
-    const badges = useMemo(() => getMovementRelevantBadges(unitItem), [unitItem]);
-
-    const groupedEffects = useMemo(() => groupMovementEffects(movementEffects), [movementEffects]);
-
+    // Extract charge effects and badges
+    const chargeEffects = useMemo(() => getChargeEffects(unitItem), [unitItem]);
+    const badges = useMemo(() => getChargeRelevantBadges(unitItem), [unitItem]);
+    const groupedEffects = useMemo(() => groupChargeEffects(chargeEffects), [chargeEffects]);
     const hasEffects = groupedEffects.length > 0;
 
-    const handleMovementChange = (value: string) => {
+    const handleChargeChange = (value: string) => {
         onCombatStatusChange(item.listItemId, {
-            movementBehaviour: value as EngagementForceItemCombatState["movementBehaviour"],
+            hasCharged: value === "charge",
         });
     };
 
+    const radioValue = item.combatState.hasCharged ? "charge" : "hold";
+
+    const resolveCardClass = () => {
+        if (item.combatState.isDestroyed) return styles.UnitChargeCardDestroyed;
+        if (!eligibility.eligible) return styles.UnitChargeCardBlocked;
+        if (item.combatState.hasCharged) return styles.UnitChargeCardTouched;
+        return "";
+    };
+
     const resolveBadgeClass = () => {
-        if (item.combatState.movementBehaviour) {
-            return "secondaryAlt";
-        }
-
-        if (item.combatState.isDestroyed) {
-            return "destructive";
-        }
-
+        if (item.combatState.hasCharged) return "secondaryAlt";
+        if (item.combatState.isDestroyed) return "destructive";
         return "outlineAlt";
     };
 
     const resolveMoveStatClass = () => {
-        if (item.combatState.isDestroyed) {
-            return "text-wordBearersRed bg-wildRiderRed";
-        }
-
+        if (item.combatState.isDestroyed) return "text-wordBearersRed bg-wildRiderRed";
         return "bg-rhinoxHide text-fireDragonBright";
     };
 
     const resolveSwitchBorderClass = () => {
-        if (item.combatState.movementBehaviour) {
-            return "border-mournfangBrown";
-        }
-
-        if (item.combatState.isDestroyed) {
-            return "border-wildRiderRed";
-        }
-
+        if (item.combatState.hasCharged) return "border-mournfangBrown";
+        if (item.combatState.isDestroyed) return "border-wildRiderRed";
+        if (!eligibility.eligible) return "border-skarsnikGreen";
         return "border-fireDragonBright";
     };
 
     return (
-        <div className={`${styles.UnitMovementCard} ${item.combatState.movementBehaviour ? styles.UnitMovementCardTouched : null} ${item.combatState.isDestroyed ? styles.UnitMovementCardDestroyed : null}`}>
+        <div className={`${styles.UnitChargeCard} ${resolveCardClass()}`}>
             <div className="space-y-2">
                 <div className="flex justify-between items-center gap-2">
                     <h3 className="text-blockcaps-s">{displayName}</h3>
                     <span className={`text-blockcaps-l rounded p-2 ${resolveMoveStatClass()}`}>{movementValue}"</span>
                 </div>
 
-                {hasEffects && (
+                {/* Blocked reason */}
+                {!eligibility.eligible && !item.combatState.isDestroyed && <p className="text-blockcaps-xs">{eligibility.reason}</p>}
+
+                {hasEffects && eligibility.eligible && (
                     <div className="flex justify-between items-center">
                         <div className="flex flex-wrap gap-1">
                             {badges.map((badge) => (
@@ -108,28 +106,24 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
 
             {/* Expanded effects panel */}
             {isExpanded && hasEffects && (
-                <div className={`mb-4 border-t ${item.combatState.movementBehaviour ? "border-mournfangBrown" : "border-fireDragonBright"} pt-3 space-y-2`}>
+                <div className={`mb-4 border-t ${item.combatState.hasCharged ? "border-mournfangBrown" : "border-fireDragonBright"} pt-3 space-y-2`}>
                     {groupedEffects.map((effect, idx) => (
-                        <MovementEffectRow key={idx} effect={effect} />
+                        <ChargeEffectRow key={idx} effect={effect} />
                     ))}
                 </div>
             )}
 
-            {/* Movement choice buttons */}
-            <RadioGroupPrimitive.Root value={item.combatState.movementBehaviour} onValueChange={handleMovementChange} className={`grid grid-cols-4 border-1 rounded ${resolveSwitchBorderClass()}`} defaultValue="hold">
-                <RadioGroupPrimitive.Item value="hold" className="px-2 py-1 cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-deathWorldForest">
-                    <span className="text-blockcaps-xs">Hold</span>
-                </RadioGroupPrimitive.Item>
-                <RadioGroupPrimitive.Item value="move" className={`px-1 py-3 border-l-1 ${resolveSwitchBorderClass()} cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright`}>
-                    <span className="text-blockcaps-xs">Move</span>
-                </RadioGroupPrimitive.Item>
-                <RadioGroupPrimitive.Item value="advance" className={`px-1 py-3 border-l-1 ${resolveSwitchBorderClass()} cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright`}>
-                    <span className="text-blockcaps-xs">Advance</span>
-                </RadioGroupPrimitive.Item>
-                <RadioGroupPrimitive.Item value="fallBack" className={`px-1 py-3 border-l-1 ${resolveSwitchBorderClass()} cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright`}>
-                    <span className="text-blockcaps-xs">Fall back</span>
-                </RadioGroupPrimitive.Item>
-            </RadioGroupPrimitive.Root>
+            {/* Charge choice buttons */}
+            {eligibility.eligible && (
+                <RadioGroupPrimitive.Root value={radioValue} onValueChange={handleChargeChange} className={`grid grid-cols-2 border-1 rounded ${resolveSwitchBorderClass()}`}>
+                    <RadioGroupPrimitive.Item value="hold" className="px-2 py-1 cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright">
+                        <span className="text-blockcaps-xs">Hold</span>
+                    </RadioGroupPrimitive.Item>
+                    <RadioGroupPrimitive.Item value="charge" className={`px-1 py-3 border-l-1 ${resolveSwitchBorderClass()} cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright`}>
+                        <span className="text-blockcaps-xs">Charge</span>
+                    </RadioGroupPrimitive.Item>
+                </RadioGroupPrimitive.Root>
+            )}
 
             {item.combatState.isDestroyed && (
                 <Fragment>
@@ -146,24 +140,20 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
 };
 
 /**
- * Display a single movement effect row with description and source attribution
+ * Display a single charge effect row with description and source attribution
  */
-function MovementEffectRow({ effect }: { effect: GroupedMovementEffect }) {
-    // Group sources by type for better display
+function ChargeEffectRow({ effect }: { effect: GroupedChargeEffect }) {
     const weaponSources = effect.sources.filter((s) => s.type === "weapon");
     const abilitySources = effect.sources.filter((s) => s.type !== "weapon");
 
-    // Build attribution string
     let attribution = "";
 
     if (weaponSources.length > 0) {
-        const attribute = weaponSources[0].attribute;
         if (weaponSources.length === 1) {
             attribution = formatSourceAttribution(weaponSources[0]);
         } else {
-            // Multiple weapons with same attribute
             const weaponNames = weaponSources.map((s) => s.name.toUpperCase()).join(", ");
-            attribution = `${weaponNames} have ${attribute}`;
+            attribution = `${weaponNames} have ${weaponSources[0].attribute}`;
         }
     } else if (abilitySources.length > 0) {
         attribution = formatSourceAttribution(abilitySources[0]);
@@ -177,4 +167,4 @@ function MovementEffectRow({ effect }: { effect: GroupedMovementEffect }) {
     );
 }
 
-export default UnitMovementCard;
+export default UnitChargeCard;

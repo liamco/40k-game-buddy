@@ -1,0 +1,40 @@
+@reference "tailwindcss";
+
+.UnitChargeCard {
+    position: relative;
+    background-color: var(--color-mournfangBrown);
+    border: 1px solid var(--color-fireDragonBright);
+    color: var(--color-fireDragonBright);
+
+    @apply rounded p-4 flex space-y-4 flex-col justify-between;
+}
+
+.UnitChargeCardTouched {
+    background-color: var(--color-fireDragonBright);
+    border: 1px solid var(--color-fireDragonBright);
+    color: var(--color-mournfangBrown);
+}
+
+.UnitChargeCardBlocked {
+    background-color: var(--color-deathWorldForest);
+    border: 1px solid var(--color-skarsnikGreen);
+    color: var(--color-skarsnikGreen);
+    cursor: not-allowed;
+
+    > * {
+        opacity: 60%;
+        pointer-events: none;
+    }
+}
+
+.UnitChargeCardDestroyed {
+    background-color: var(--color-rhinoxHide);
+    border: 1px solid var(--color-wildRiderRed);
+    color: var(--color-wildRiderRed);
+    cursor: not-allowed;
+
+    > * {
+        opacity: 40%;
+        pointer-events: none;
+    }
+}

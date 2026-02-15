@@ -43,7 +43,7 @@ const WEAPON_ATTRIBUTE_EFFECTS: Record<string, { description: string; relevantMo
         relevantMovement: ["advance"],
     },
     HEAVY: {
-        description: "Gets +1 to hit if holding",
+        description: "Gets +1 to hit if stationary",
         relevantMovement: ["hold"],
     },
     LANCE: {

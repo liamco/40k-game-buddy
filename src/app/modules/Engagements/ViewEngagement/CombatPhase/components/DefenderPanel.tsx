@@ -102,7 +102,8 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     }, [availableModels, leaderModelCount, selectedUnit]);
 
     return (
-        <section className="grid p-4 pr-[2px] space-y-4 grid-rows-[auto_auto_1fr] border-1 border-skarsnikGreen rounded overflow-auto h-[calc(100vh-161.5px)]" style={{ scrollbarGutter: "stable" }}>
+        <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr] overflow-auto h-[calc(100vh-108px)]" style={{ scrollbarGutter: "stable" }}>
+            <SplitHeading label="Target unit" labelClassName="text-blockcaps-xs" />
             <Dropdown
                 options={unitOptions}
                 selectedLabel={selectedUnit?.displayName}
@@ -128,13 +129,13 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
             )}
 
             {/* Combat status panel - shown when unit is selected (alive or destroyed) */}
-            {selectedUnit && combatState && <CombatStatusPanel side="defender" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
+            {selectedUnit && combatState && (
+                <CombatStatusPanel side="defender" gamePhase={gamePhase} combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />
+            )}
 
             {/* Unit selected and alive - show model selection */}
             {selectedUnit && !combatState?.isDestroyed && (
                 <div className="space-y-4">
-                    <SplitHeading label="Select target" labelClassName="text-blockcaps-s" />
-
                     <div className="space-y-2">
                         {sortedModels.map(({ model, originalIdx }) => {
                             const isSelected = selectedModel?.name === model.name;

@@ -1,22 +1,22 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import type { GamePhase } from "../../../types";
 import type { EngagementForceItemCombatState } from "#types/Engagements";
 import { useEngagementManager } from "../EngagementManagerContext";
 
-import GamePhaseSelector from "#components/GamePhaseSelector/GamePhaseSelector.tsx";
+import GamePhaseSelector from "#modules/Engagements/ViewEngagement/CombatPhase/components/GamePhaseSelector/GamePhaseSelector.tsx";
+import GamePlayerSelector from "#modules/Engagements/ViewEngagement/CombatPhase/components/GamePlayerSelector/GamePlayerSelector.tsx";
 import IconCrossedSwords from "#components/icons/IconCrossedSwords.tsx";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
-import FactionBadge from "#components/FactionBadge/FactionBadge.tsx";
 import Octagon from "./CombatPhase/Octagon";
 import Dancefloor from "./MovementPhase/Dancefloor";
-
-// Convert between GamePhase (uppercase) and EngagementPhase (lowercase)
+import ChargePhase from "./ChargePhase/ChargePhase";
+import { Button } from "#components/Button/Button.tsx";
 
 const ViewEngagement = () => {
     const { engagementId } = useParams<{ engagementId: string }>();
-    const { getEngagementById, engagementsLoaded, updateEngagementPhase, setActiveForce, updateUnitCombatState } = useEngagementManager();
+    const { getEngagementById, engagementsLoaded, updateEngagementPhase, setActiveForce, updateUnitCombatState, resetTurnFlags } = useEngagementManager();
 
     const engagement = engagementId ? getEngagementById(engagementId) : undefined;
 
@@ -43,12 +43,20 @@ const ViewEngagement = () => {
         updateEngagementPhase(engagement.id, phase);
     };
 
-    const activeForce = engagement.activeForceId === engagement.engagementForceB.sourceListId ? engagement.engagementForceB : engagement.engagementForceA;
-
-    const inactiveForce = engagement.activeForceId === engagement.engagementForceB.sourceListId ? engagement.engagementForceA : engagement.engagementForceB;
-
-    const handleSwitchTurn = () => {
+    const handleEndTurn = () => {
+        resetTurnFlags(engagement.id);
         setActiveForce(engagement.id, inactiveForce.sourceListId);
+        updateEngagementPhase(engagement.id, "command");
+    };
+
+    const allForces = [engagement.engagementForceA, engagement.engagementForceB, engagement.engagementForceC, engagement.engagementForceD].filter((f): f is NonNullable<typeof f> => f != null);
+
+    const activeForce = allForces.find((f) => f.sourceListId === engagement.activeForceId) ?? engagement.engagementForceA;
+
+    const inactiveForce = allForces.find((f) => f.sourceListId !== engagement.activeForceId) ?? engagement.engagementForceB;
+
+    const handleSetActiveForce = (forceId: string) => {
+        setActiveForce(engagement.id, forceId);
     };
 
     // Handler for updating unit combat state - maps forceType to the correct engagement force
@@ -60,26 +68,35 @@ const ViewEngagement = () => {
     );
 
     return (
-        <main className="w-full h-full grid grid-rows-[auto_1fr] ">
-            <header className="space-y-2">
-                <div>
-                    <h1 className="text-blockcaps-s block">{`Engagement ${engagement.id} / ${engagement.currentTurn}.1`}</h1>
+        <div className="w-full h-full grid grid-cols-[250px_1fr] gap-6">
+            <aside className="flex flex-col justify-between">
+                <div className="space-y-4">
+                    <header className="text-center space-y-1">
+                        <h1 className="text-blockcaps-s block">{`Op #${engagement.id}`}</h1>
+                        <span className="text-blockcaps-xs">
+                            {engagement.type} / {engagement.size}
+                        </span>
+                    </header>
+                    <nav className="py-6 px-3 space-y-8 relative">
+                        <div className="absolute top-0 left-0 w-full h-2 border-1 border-skarsnikGreen border-b-0" />
+                        <div className="space-y-8">
+                            <div className="space-y-2">
+                                <span className="text-blockcaps-s text-center block text-shadow-glow-green">Active force</span>
+                                <GamePlayerSelector players={allForces} activeForceId={engagement.activeForceId} onClick={handleSetActiveForce} />
+                            </div>
+                            <div className="space-y-2">
+                                <span className="text-blockcaps-s text-center block text-shadow-glow-green">Phase</span>
+                                <GamePhaseSelector currentPhase={engagement.currentPhase} onPhaseChange={handlePhaseChange} />
+                            </div>
+                        </div>
+                        <Button variant="destructive" size="lg" className="w-full shadow-glow-red" onClick={handleEndTurn}>
+                            End turn
+                        </Button>
+                        <div className="absolute bottom-0 left-0 w-full h-2 border-1 border-skarsnikGreen border-t-0" />
+                    </nav>
                 </div>
-                <div className="flex justify-between items-center gap-4">
-                    <div className="flex bg-mournfangBrown rounded p-2 gap-6 items-center shrink-1 grow-1">
-                        <button onClick={handleSwitchTurn} className="text-left text-fireDragonBright shrink-0 cursor-pointer">
-                            <span className="text-blockcaps-xs block">Active force</span>
-                            <span className="text-blockcaps-s block">{activeForce.factionName}</span>
-                        </button>
-                        <GamePhaseSelector currentPhase={engagement.currentPhase} onPhaseChange={handlePhaseChange} />
-                    </div>
-                    <div className="flex gap-4 shrink-1 items-center">
-                        <FactionBadge faction={engagement.engagementForceA} />
-                        <span>vs</span>
-                        <FactionBadge faction={engagement.engagementForceB} />
-                    </div>
-                </div>
-            </header>
+            </aside>
+
             {engagement.currentPhase === "command" && (
                 <div className="p-6">
                     <h2 className="text-title-m">Command Phase</h2>
@@ -88,13 +105,8 @@ const ViewEngagement = () => {
             )}
             {engagement.currentPhase === "movement" && <Dancefloor attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
             {(engagement.currentPhase === "shooting" || engagement.currentPhase === "fight") && <Octagon gamePhase={engagement.currentPhase} attackingForce={activeForce} defendingForce={inactiveForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
-            {engagement.currentPhase === "charge" && (
-                <div className="p-6">
-                    <h2 className="text-title-m">Charge Phase</h2>
-                    <p>Declare and resolve charge attempts.</p>
-                </div>
-            )}
-        </main>
+            {engagement.currentPhase === "charge" && <ChargePhase attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
+        </div>
     );
 };
 

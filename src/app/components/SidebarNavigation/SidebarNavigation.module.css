@@ -1,25 +1,17 @@
 @reference "tailwindcss";
 
-.SidebarNavigationItem {
-    @apply relative inline-block p-2 rounded;
-    fill: var(--color-fireDragonBright);
+.SidebarNavigation {
+    position: absolute;
+    writing-mode: vertical-lr;
+    @apply flex flex-row pt-6 top-12 left-6 -rotate-180 translate-x-[-2px];
+}
 
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 100%;
-        margin-right: -2px;
-        width: 100px;
-        height: 100%;
-    }
+.SidebarNavigationItem {
+    @apply relative inline-block py-2 px-4 rounded-tr rounded-br;
 }
 
 .SidebarNavigationItemActive {
-    background-color: var(--color-fireDragonBright);
-    fill: var(--color-mournfangBrown);
-
-    &:before {
-        background-color: var(--color-fireDragonBright);
-    }
+    box-shadow: var(--shadow-glow-green);
+    background-color: var(--color-skarsnikGreen);
+    color: var(--color-mournfangBrown);
 }

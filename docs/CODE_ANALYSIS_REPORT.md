@@ -234,9 +234,45 @@ Mixed concerns - should split into:
 
 ## Types Analysis
 
+### Overview
+
+**Total: 196 types** across 84 files (130 exported, 66 local/private)
+
+---
+
 ### High Priority Issues
 
-#### 1. Loose `mechanics` Types
+#### 1. Duplicate Type Definitions
+
+**Status:** NEW  
+**Files:**
+- `src/app/components/WeaponProfileCard/WeaponProfileCard.tsx`
+- `src/app/modules/Lists/ViewList/components/UnitDetailsView/WargearTab/WargearProfileCard.tsx`
+
+**Duplicated Types (identical in both files):**
+- `BonusSourceType`
+- `BonusAttribute`
+- `StatBonus`
+- `CounterControls`
+
+**Recommendation:** Move to `src/app/types/Weapons.tsx`
+
+---
+
+#### 2. Conflicting EffectSource Types
+
+**Status:** NEW  
+**Files:**
+- `src/app/game-engine/types/EffectSource.ts` - 10 source types with priority system
+- `src/app/modules/Engagements/ViewEngagement/MovementPhase/utils/movementEffects.ts` - 5 source types, no priority
+
+**Issue:** Two completely different types with the same name for different purposes.
+
+**Recommendation:** Rename movement version to `MovementEffectSource`
+
+---
+
+#### 3. Loose `mechanics` Types
 
 **Status:** NEW  
 **Locations:**
@@ -249,7 +285,7 @@ Should use `Mechanic[]` from game engine types.
 
 ---
 
-#### 2. Mechanic Value Type Too Permissive
+#### 4. Mechanic Value Type Too Permissive
 
 **Status:** STILL PRESENT  
 **Location:** `Mechanic.ts:61`
@@ -259,6 +295,44 @@ value: boolean | number | string;  // Allows invalid combinations
 ```
 
 Should use discriminated union per effect type.
+
+---
+
+### Medium Priority Issues
+
+#### 5. Scattered Wargear Types
+
+**10+ types across 4 locations:**
+
+| Location | Types |
+|----------|-------|
+| `Units.tsx` | WargearData, WargearAbility, WargearOptionDef |
+| `Weapons.tsx` | Weapon, WeaponProfile, EligibilityRule |
+| `parser/types.ts` | TargetingDef, ActionDef, ConstraintsDef, WeaponRef, WeaponChoice |
+| `evaluator/types.ts` | EvaluatedOption, ModelEvaluation, UnitEvaluation |
+
+**Recommendation:** Create `src/app/types/Wargear.tsx` to consolidate
+
+---
+
+#### 6. Naming Inconsistencies
+
+- `WargearOptionDef` vs `RawWargearOption` - unclear distinction
+- `DisplayModifier` vs `Modifier` vs `AttributedModifier` - confusing overlap
+- `EngagementAbility` extends `Ability` but relationship not obvious from names
+
+---
+
+### Low Priority Issues
+
+#### 7. Low-Usage / Review Candidates
+
+| Type | Location | Status |
+|------|----------|--------|
+| `FactionStateFlag` | Factions.tsx | Rarely used, verify need |
+| `LoadoutConstraint` | index.ts | Referenced once |
+| `UnitCombatState` | index.ts | May be superseded by `EngagementForceItemCombatState` |
+| `EligibilityRule*` types | Weapons.tsx | Verify if still used |
 
 ---
 
@@ -280,24 +354,34 @@ Should use discriminated union per effect type.
 | Architecture | High | 3 | WORSENED (CombatEngine +50%) |
 | Duplication | Medium | 6 | UNCHANGED |
 | Performance | Low | 4 | PARTIALLY FIXED (1 memoization) |
-| New Type Issues | High | 4 | NEW (loose mechanics types) |
+| Loose mechanics types | High | 4 | NEW |
+| Duplicate type definitions | High | 4 | NEW (WeaponProfileCard/WargearProfileCard) |
+| Conflicting type names | Medium | 1 | NEW (EffectSource) |
+| Scattered wargear types | Medium | 10+ | NEW |
+| Low-usage types | Low | 4 | NEW (review candidates) |
+
+**Type System Total:** 196 types across 84 files
 
 ---
 
 ## Recommended Priority Order
 
 ### Short Term (Code Quality)
-1. Fix `Enhancement.mechanics` type to use `Mechanic[]`
-2. Remove unused stratagem state from Octagon.tsx
-3. Add missing useMemo dependencies in DefenderPanel
-4. Extract turn flag reset to shared helper
-5. Fix ANTI-X condition bug - `value` should be `true` not keyword string
+1. Consolidate duplicate bonus types (`BonusSourceType`, `BonusAttribute`, `StatBonus`, `CounterControls`) into `Weapons.tsx`
+2. Rename conflicting `EffectSource` in movementEffects.ts to `MovementEffectSource`
+3. Fix `Enhancement.mechanics` type to use `Mechanic[]`
+4. Remove unused stratagem state from Octagon.tsx
+5. Add missing useMemo dependencies in DefenderPanel
+6. Extract turn flag reset to shared helper
+7. Fix ANTI-X condition bug - `value` should be `true` not keyword string
 
 ### Medium Term (Architecture)
 1. Split CombatEngine into focused classes (now 895 lines)
 2. Extract Octagon.tsx into focused hooks
 3. Create context for attack/defense state (eliminate props drilling)
 4. Reorganize combatUtils.ts into modules
+5. Create `src/app/types/Wargear.tsx` to consolidate scattered wargear types
+6. Review and document low-usage types (FactionStateFlag, LoadoutConstraint, UnitCombatState)
 
 ### Long Term (Features)
 1. Implement stratagem system

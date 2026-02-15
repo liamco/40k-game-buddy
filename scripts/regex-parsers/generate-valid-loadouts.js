@@ -172,22 +172,41 @@ function parseWeaponChoiceItem(text) {
     const cleaned = text.trim();
     if (!cleaned) return null;
 
-    if (/\s+and\s+\d+\s+/i.test(cleaned)) {
-        const parts = cleaned.split(/\s+and\s+/i);
+    // Check if this is a multi-weapon package (contains "and" with counts, or commas with counts)
+    // Pattern: "1 X, 1 Y and 1 Z" or "1 X and 1 Y"
+    const hasMultipleWeapons = /,\s*\d+\s+/.test(cleaned) || /\s+and\s+\d+\s+/i.test(cleaned);
+
+    if (hasMultipleWeapons) {
         const weapons = [];
 
-        for (const part of parts) {
-            const match = part.trim().match(/^(\d+)\s+(.+)$/);
-            if (match) {
-                weapons.push({
-                    name: cleanWeaponName(match[2]),
-                    count: parseInt(match[1], 10),
-                });
+        // Split on comma first, then handle "and" in the last segment
+        // "1 boltstorm gauntlet, 1 power fist and 1 relic chainsword"
+        // becomes ["1 boltstorm gauntlet", "1 power fist and 1 relic chainsword"]
+        const commaParts = cleaned.split(/,\s*/);
+
+        for (const commaPart of commaParts) {
+            // Each comma part might still contain "and", e.g., "1 power fist and 1 relic chainsword"
+            const andParts = commaPart.split(/\s+and\s+/i);
+
+            for (const part of andParts) {
+                const match = part.trim().match(/^(\d+)\s+(.+)$/);
+                if (match) {
+                    weapons.push({
+                        name: cleanWeaponName(match[2]),
+                        count: parseInt(match[1], 10),
+                    });
+                }
             }
         }
 
         if (weapons.length > 1) {
             return { weapons, isPackage: true };
+        }
+
+        // If we only got one weapon despite detecting multi-weapon pattern,
+        // fall through to single weapon parsing
+        if (weapons.length === 1) {
+            return { weapons, isPackage: false };
         }
     }
 

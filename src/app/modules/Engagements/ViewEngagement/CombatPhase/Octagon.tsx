@@ -172,7 +172,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
     }, [movementBehaviour, gamePhase]);
 
     return (
-        <main className="w-full h-full grid grid-cols-[4fr_4fr_3fr] gap-2 mt-6">
+        <main className="w-full h-full grid grid-cols-[4fr_4fr_3fr] gap-2">
             <AttackerPanel
                 gamePhase={gamePhase}
                 force={attackingForce}

@@ -16,14 +16,14 @@ const EngagementIndex = () => {
 
     if (!engagementsLoaded) {
         return (
-            <div className="w-full h-full flex items-center justify-center border-1 border-skarsnikGreen">
+            <div className="w-full h-full flex items-center justify-center">
                 <p>Loading...</p>
             </div>
         );
     }
 
     return (
-        <div className="space-y-4 w-full h-full items-center justify-center flex flex-col border-1 border-skarsnikGreen">
+        <div className="space-y-4 w-full h-full items-center justify-center flex flex-col">
             <BaseIcon size="large">
                 <IconCrossedSwords />
             </BaseIcon>

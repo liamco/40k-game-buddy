@@ -22,29 +22,30 @@ const bgStyle = {
 
 export default function App() {
     return (
-        <div className="grid grid-cols-[auto_1fr] gap-6 h-[100vh] overflow-hidden p-6">
+        <div className="h-[100vh] grid pl-[60px] relative overflow-hidden p-6">
             <div style={bgStyle} className="absolute top-0 left-0 w-full h-full pointer-events-none" />
-            <nav className="flex flex-col gap-6">
-                <NavLink to="/">
+            <SidebarNavigation />
+            <main className="border-1 border-skarsnikGreen border-t-0 p-6 relative">
+                <div className="flex gap-4 items-center absolute left-0 top-0 translate-y-[-50%] w-full">
+                    <hr className="grow border-none h-[1px] bg-skarsnikGreen" />
                     <Logo />
-                </NavLink>
-                <SidebarNavigation />
-            </nav>
-
-            <EngagementManagerProvider>
-                <Routes>
-                    <Route path="/engagements">
-                        <Route index element={<EngagementIndex />} />
-                        <Route path="new" element={<CreateEngagement />} />
-                        <Route path="view/:engagementId" element={<ViewEngagement />} />
-                    </Route>
-                    <Route path="/lists">
-                        <Route index element={<ListIndex />} />
-                        <Route path="new" element={<CreateList />} />
-                        <Route path="view/:listId" element={<ViewList />} />
-                    </Route>
-                </Routes>
-            </EngagementManagerProvider>
+                    <hr className="grow border-none h-[1px] bg-skarsnikGreen" />
+                </div>
+                <EngagementManagerProvider>
+                    <Routes>
+                        <Route path="/engagements">
+                            <Route index element={<EngagementIndex />} />
+                            <Route path="new" element={<CreateEngagement />} />
+                            <Route path="view/:engagementId" element={<ViewEngagement />} />
+                        </Route>
+                        <Route path="/lists">
+                            <Route index element={<ListIndex />} />
+                            <Route path="new" element={<CreateList />} />
+                            <Route path="view/:listId" element={<ViewList />} />
+                        </Route>
+                    </Routes>
+                </EngagementManagerProvider>
+            </main>
 
             <Scanlines />
         </div>

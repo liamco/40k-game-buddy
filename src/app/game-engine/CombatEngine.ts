@@ -169,7 +169,7 @@ export class CombatEngine {
         // Cover: Improves save by 1 if defender is in cover (unless weapon ignores cover)
         // For saves, a lower number is better, so we use -1 to improve the roll target
         // This must come after collectFromWeapon so ignoreModifier mechanics are available
-        if (this.context.defender.unit.combatState?.isInCover) {
+        if (this.context.defender.unit.combatState?.isInCover && this.context.phase === "shooting") {
             const ignoresCover = this.hasIgnoreModifierFor("s", "cover");
             if (!ignoresCover) {
                 this.collectedMechanics.push({

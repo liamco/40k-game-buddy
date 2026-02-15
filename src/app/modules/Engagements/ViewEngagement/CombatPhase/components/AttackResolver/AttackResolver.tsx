@@ -102,7 +102,7 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
     const woundCriticalEffect = useMemo(() => (resolution ? getCriticalEffectForStep(resolution.weaponEffects, "woundRoll") : null), [resolution]);
 
     return (
-        <section className="grid grid-rows-5 rounded overflow-auto h-[calc(100vh-161.5px)]">
+        <section className="grid grid-rows-5 rounded overflow-auto h-full">
             {resolution ? (
                 <Fragment>
                     <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={resolution.attacksModifiers.forDisplay.bonuses} penalties={resolution.attacksModifiers.forDisplay.penalties} finalValue={attacksDisplay.total} />

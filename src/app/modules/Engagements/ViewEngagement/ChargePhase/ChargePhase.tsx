@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { EngagementForce, EngagementForceItemCombatState } from "#types/Engagements.tsx";
-import { buildUnitSelectItems, type UnitSelectItem } from "../CombatPhase/utils/combatUtils";
-import UnitMovementCard from "./components/UnitMovementCard";
+import { buildUnitSelectItems } from "../CombatPhase/utils/combatUtils";
+import UnitChargeCard from "./components/UnitChargeCard";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
     onUpdateUnitCombatState: (forceType: "attacking" | "defending", unitId: string, updates: Partial<EngagementForceItemCombatState>) => void;
 }
 
-const Dancefloor = ({ attackingForce, onUpdateUnitCombatState }: Props) => {
+const ChargePhase = ({ attackingForce, onUpdateUnitCombatState }: Props) => {
     const unitItems = useMemo(() => buildUnitSelectItems(attackingForce), [attackingForce]);
 
     const handleCombatStatusChange = (unitId: string, updates: Partial<EngagementForceItemCombatState>) => {
@@ -21,11 +21,11 @@ const Dancefloor = ({ attackingForce, onUpdateUnitCombatState }: Props) => {
             <SplitHeading label="Available units" />
             <div className="grid grid-cols-3 gap-6">
                 {unitItems.map((unitItem) => (
-                    <UnitMovementCard key={unitItem.item.listItemId} unitItem={unitItem} onCombatStatusChange={handleCombatStatusChange} />
+                    <UnitChargeCard key={unitItem.item.listItemId} unitItem={unitItem} onCombatStatusChange={handleCombatStatusChange} />
                 ))}
             </div>
         </div>
     );
 };
 
-export default Dancefloor;
+export default ChargePhase;

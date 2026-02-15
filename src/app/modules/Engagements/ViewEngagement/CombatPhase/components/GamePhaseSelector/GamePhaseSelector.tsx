@@ -1,4 +1,3 @@
-import React, { Fragment } from "react";
 import type { EngagementPhase } from "#types/Engagements.tsx";
 import GamePhaseSelectorItem from "./GamePhaseSelectorItem";
 
@@ -22,7 +21,7 @@ const PHASES: Phase[] = [
 
 const GamePhaseSelector = ({ currentPhase, onPhaseChange }: GamePhaseSelectorProps) => {
     return (
-        <div className={`grid grid-cols-5 grow max-w-[810px] border-1 border-fireDragonBright rounded`}>
+        <div className="space-y-1">
             {PHASES.map((phase, index) => (
                 <GamePhaseSelectorItem key={phase.id} index={index} currentPhase={currentPhase} phase={phase} onPhaseChange={onPhaseChange} />
             ))}

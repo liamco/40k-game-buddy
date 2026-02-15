@@ -50,9 +50,9 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
     const Icon = stepType ? stepIcons[stepType] : null;
 
     return (
-        <section className="relative border-1 border-t-0 first:border-t-1  border-skarsnikGreen">
+        <section className="relative border-1 border-t-0 first:border-t-1  border-deathWorldForest">
             <div className={`grid h-full grid-rows-[auto_1fr] ${disabled ? "opacity-25" : ""}`}>
-                <header className="border-b-1 border-skarsnikGreen bg-deathWorldForest p-2 flex items-center justify-between">
+                <header className=" bg-deathWorldForest p-2 flex items-center justify-between">
                     <span className="text-blockcaps-s">{label}</span>
                     <div className="flex items-center gap-2">
                         {criticalEffect && <span className="text-blockcaps-s text-fireDragonBright">{criticalEffect.name}</span>}
@@ -70,12 +70,6 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
                     <FinalResultBox className={finalClassName} value={finalValue} isCritical={isCritical} />
                 </div>
             </div>
-
-            {disabled && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <img src={strikethrough} alt="" className="w-full h-full" />
-                </div>
-            )}
         </section>
     );
 };

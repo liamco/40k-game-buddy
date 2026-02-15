@@ -76,7 +76,7 @@ const CreateEngagement = () => {
     };
 
     return (
-        <main className="w-full h-full items-center justify-center p-6 flex flex-col gap-12 border-1 border-skarsnikGreen">
+        <main className="w-full h-full items-center justify-center flex flex-col gap-12">
             <div className="text-center space-y-4">
                 <BaseIcon size="large">
                     <IconCrossedSwords />

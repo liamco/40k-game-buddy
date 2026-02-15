@@ -44,7 +44,7 @@ export function createDefaultCombatState(item: ArmyListItem): EngagementForceIte
         currentWounds: getStartingWounds(item),
         isBattleShocked: false,
         isDestroyed: false,
-        movementBehaviour: "hold",
+        movementBehaviour: null,
         hasShot: false,
         hasCharged: false,
         hasFought: false,
@@ -445,7 +445,7 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
                         ...item,
                         combatState: {
                             ...item.combatState,
-                            movementBehaviour: "hold",
+                            movementBehaviour: null,
                             hasShot: false,
                             hasCharged: false,
                             hasFought: false,
@@ -476,7 +476,7 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
                         ...item,
                         combatState: {
                             ...item.combatState,
-                            movementBehaviour: "hold",
+                            movementBehaviour: null,
                             hasShot: false,
                             hasCharged: false,
                             hasFought: false,

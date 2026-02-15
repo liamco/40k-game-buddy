@@ -3,6 +3,7 @@ import { Plus, Minus } from "lucide-react";
 
 import { Button } from "#components/Button/Button.tsx";
 import Dropdown from "#components/Dropdown/Dropdown.tsx";
+import type { GamePhase } from "../../../../types";
 import type { EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance } from "#types/Engagements";
 import { calculateUnitStrength, getUnitStrengthLabel } from "../../../EngagementManagerContext";
 
@@ -13,6 +14,7 @@ import IconSkull from "#components/icons/IconSkull.tsx";
 
 interface CombatStatusPanelProps {
     side: "attacker" | "defender";
+    gamePhase?: GamePhase;
     combatState: EngagementForceItemCombatState;
     modelCount: number;
     startingStrength: number;
@@ -34,7 +36,7 @@ const objectiveRangeOptions: { id: string; label: string; data: ObjectiveRangeOp
     { id: "contested", label: "Contested Objective", data: { value: "contested" } },
 ];
 
-export function CombatStatusPanel({ side, combatState, startingStrength, onModelCountChange, onCombatStatusChange, unit }: CombatStatusPanelProps) {
+export function CombatStatusPanel({ side, gamePhase, combatState, startingStrength, onModelCountChange, onCombatStatusChange, unit }: CombatStatusPanelProps) {
     const [casualtyPanelOpen, setCasualtyPanelOpen] = useState(false);
 
     // Max wounds for single-model units
@@ -222,7 +224,7 @@ export function CombatStatusPanel({ side, combatState, startingStrength, onModel
                     <CombatStatusToken disabled={combatState.isDestroyed} icon={combatState.movementBehaviour} active />
 
                     {side === "attacker" && <></>}
-                    {side === "defender" && (
+                    {side === "defender" && gamePhase !== "fight" && (
                         <>
                             <CombatStatusToken disabled={combatState.isDestroyed} variant="highlight" icon="cover" active={combatState.isInCover} onChange={handleBooleanToggle("isInCover")} />
                         </>
