@@ -3,6 +3,7 @@
  */
 
 import type { EngagementForceItem, EngagementForce } from "#types/Engagements";
+import type { FactionAbility } from "#types/Factions";
 import type { WeaponProfile, Model, GamePhase } from "#types/index";
 import type { Mechanic } from "./Mechanic";
 
@@ -37,6 +38,7 @@ export interface CombatContext {
         weaponProfile: WeaponProfile;
         weaponCount: number; // Number of this weapon the model has (multiplies attacks)
         modelCount: number;
+        factionAbilities?: FactionAbility[];
     };
 
     defender: {
@@ -80,8 +82,9 @@ export function buildCombatContext(params: {
     defenderModelCount?: number;
     targetModel: Model | null;
     activeStratagems?: ActiveStratagem[];
+    attackerFactionAbilities?: FactionAbility[];
 }): CombatContext | null {
-    const { phase, turn = 1, isPlayerTurn = true, attackerUnit, attackerForce, weaponProfile, weaponCount = 1, modelCount, defenderUnit, defenderForce, defenderModelCount, targetModel, activeStratagems = [] } = params;
+    const { phase, turn = 1, isPlayerTurn = true, attackerUnit, attackerForce, weaponProfile, weaponCount = 1, modelCount, defenderUnit, defenderForce, defenderModelCount, targetModel, activeStratagems = [], attackerFactionAbilities } = params;
 
     if (!attackerUnit || !weaponProfile || !defenderUnit || !targetModel) {
         return null;
@@ -97,6 +100,7 @@ export function buildCombatContext(params: {
             weaponProfile,
             weaponCount,
             modelCount,
+            factionAbilities: attackerFactionAbilities,
         },
         defender: {
             unit: defenderUnit,

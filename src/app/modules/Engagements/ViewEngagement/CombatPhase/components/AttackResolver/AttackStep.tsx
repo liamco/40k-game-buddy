@@ -44,9 +44,10 @@ interface Props {
     disabled?: boolean;
     isCritical?: boolean;
     criticalEffect?: CriticalEffect | null;
+    rerollSource?: string;
 }
 
-const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties, finalValue, finalClassName, disabled, isCritical, criticalEffect }: Props) => {
+const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties, finalValue, finalClassName, disabled, isCritical, criticalEffect, rerollSource }: Props) => {
     const Icon = stepType ? stepIcons[stepType] : null;
 
     return (
@@ -55,6 +56,7 @@ const AttackStep = ({ label, stepType, statLabel, statValue, bonuses, penalties,
                 <header className=" bg-deathWorldForest p-2 flex items-center justify-between">
                     <span className="text-blockcaps-s">{label}</span>
                     <div className="flex items-center gap-2">
+                        {rerollSource && <span className="text-blockcaps-s text-skarsnikGreen">REROLL</span>}
                         {criticalEffect && <span className="text-blockcaps-s text-fireDragonBright">{criticalEffect.name}</span>}
                         {Icon && (
                             <BaseIcon>

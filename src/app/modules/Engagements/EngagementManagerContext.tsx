@@ -51,6 +51,7 @@ export function createDefaultCombatState(item: ArmyListItem): EngagementForceIte
         isInCover: false,
         isInEngagementRange: false,
         isInObjectiveRange: "none",
+        stateFlags: {},
     };
 }
 
@@ -261,6 +262,7 @@ interface EngagementManagerContextType {
 
     // Combat state operations
     updateUnitCombatState: (engagementId: string, forceType: "attacking" | "defending", unitId: string, updates: Partial<EngagementForceItemCombatState>) => void;
+    updateUnitStateFlag: (engagementId: string, forceKey: "engagementForceA" | "engagementForceB", unitId: string, flagName: string, flagValue: boolean) => void;
     resetUnitCombatState: (engagementId: string, forceType: "attacking" | "defending", unitId: string) => void;
     resetAllCombatStates: (engagementId: string) => void;
 
@@ -367,6 +369,37 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
         );
     }, []);
 
+    const updateUnitStateFlag = useCallback((engagementId: string, forceKey: "engagementForceA" | "engagementForceB", unitId: string, flagName: string, flagValue: boolean) => {
+        setEngagements((prev) =>
+            prev.map((engagement) => {
+                if (engagement.id !== engagementId) return engagement;
+
+                const force = engagement[forceKey];
+
+                // For singleSelect: clear the flag from all units in the force first, then set on target
+                const updatedItems = force.items.map((item) => {
+                    const currentFlags = { ...item.combatState.stateFlags };
+                    // Clear this flag from all units
+                    delete currentFlags[flagName];
+                    // Set it on the target unit
+                    if (item.listItemId === unitId && flagValue) {
+                        currentFlags[flagName] = true;
+                    }
+                    return {
+                        ...item,
+                        combatState: { ...item.combatState, stateFlags: currentFlags },
+                    };
+                });
+
+                return {
+                    ...engagement,
+                    [forceKey]: { ...force, items: updatedItems },
+                    updatedAt: Date.now(),
+                };
+            })
+        );
+    }, []);
+
     const resetUnitCombatState = useCallback((engagementId: string, forceType: "attacking" | "defending", unitId: string) => {
         setEngagements((prev) =>
             prev.map((engagement) => {
@@ -449,6 +482,7 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
                             hasShot: false,
                             hasCharged: false,
                             hasFought: false,
+                            stateFlags: {},
                         },
                     })),
                 });
@@ -480,6 +514,7 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
                             hasShot: false,
                             hasCharged: false,
                             hasFought: false,
+                            stateFlags: {},
                         },
                     })),
                 });
@@ -514,6 +549,7 @@ export function EngagementManagerProvider({ children }: EngagementManagerProvide
         deleteEngagement,
         getEngagementById,
         updateUnitCombatState,
+        updateUnitStateFlag,
         resetUnitCombatState,
         resetAllCombatStates,
         updateEngagementPhase,

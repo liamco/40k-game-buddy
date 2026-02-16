@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 
 import type { EngagementForce, EngagementForceItemCombatState } from "#types/Engagements.tsx";
+import type { FactionAbility } from "#types/Factions.tsx";
 import type { GamePhase } from "#types/index";
 import type { Model } from "#types/Models.tsx";
 
 import { useCombatResolution } from "#game-engine";
+import { loadFactionConfig } from "#utils/depotDataLoader.ts";
 
 import { buildUnitSelectItems, findUnitByItemId, getFirstWeaponForPhase, getFirstValidDefenderModel, hasPrecisionAttribute, countAliveModelsWithWeapon, canFireWeapon, getFirstValidWeaponForMovement, type UnitSelectItem, type SelectedWeapon } from "./utils/combatUtils";
 
@@ -25,6 +27,19 @@ interface OctagonProps {
  * the appropriate data down to the AttackerPanel, DefenderPanel, and AttackResolver.
  */
 export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUnitCombatState }: OctagonProps) => {
+    // Load attacker's faction abilities from plugin config
+    const [attackerFactionAbilities, setAttackerFactionAbilities] = useState<FactionAbility[]>([]);
+    useEffect(() => {
+        let cancelled = false;
+        loadFactionConfig(attackingForce.factionSlug).then((config) => {
+            if (cancelled) return;
+            setAttackerFactionAbilities(config?.abilities ?? []);
+        });
+        return () => {
+            cancelled = true;
+        };
+    }, [attackingForce.factionSlug]);
+
     // Build unit select items for each force (units are already merged at engagement creation)
     const attackerUnitItems = useMemo(() => buildUnitSelectItems(attackingForce), [attackingForce]);
     const defenderUnitItems = useMemo(() => buildUnitSelectItems(defendingForce), [defendingForce]);
@@ -60,6 +75,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
         defenderUnit: selectedDefenderUnit?.item ?? null,
         defenderForce: defendingForce,
         targetModel: selectedDefenderModel,
+        attackerFactionAbilities,
     });
 
     // Handle attacker unit selection

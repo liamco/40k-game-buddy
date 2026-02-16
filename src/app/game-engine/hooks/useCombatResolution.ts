@@ -5,6 +5,7 @@
 import { useMemo } from "react";
 
 import type { EngagementForceItem, EngagementForce } from "#types/Engagements";
+import type { FactionAbility } from "#types/Factions";
 import type { WeaponProfile, Model, GamePhase } from "#types/index";
 
 import { buildCombatContext, type CombatContext, type ActiveStratagem } from "../types/CombatContext";
@@ -27,6 +28,7 @@ export interface UseCombatResolutionParams {
     targetModel: Model | null;
 
     activeStratagems?: ActiveStratagem[];
+    attackerFactionAbilities?: FactionAbility[];
 }
 
 /**
@@ -35,7 +37,7 @@ export interface UseCombatResolutionParams {
  * Returns null if required data is missing (attacker, weapon, defender, target)
  */
 export function useCombatResolution(params: UseCombatResolutionParams): CombatResolution | null {
-    const { phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems } = params;
+    const { phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems, attackerFactionAbilities } = params;
 
     return useMemo(() => {
         const context = buildCombatContext({
@@ -51,10 +53,11 @@ export function useCombatResolution(params: UseCombatResolutionParams): CombatRe
             defenderForce,
             targetModel,
             activeStratagems,
+            attackerFactionAbilities,
         });
 
         if (!context) return null;
 
         return resolveCombat(context);
-    }, [phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems]);
+    }, [phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems, attackerFactionAbilities]);
 }

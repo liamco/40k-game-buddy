@@ -12,6 +12,7 @@ import EmptyState from "#components/EmptyState/EmptyState.tsx";
 import Octagon from "./CombatPhase/Octagon";
 import Dancefloor from "./MovementPhase/Dancefloor";
 import ChargePhase from "./ChargePhase/ChargePhase";
+import CommandPhase from "./CommandPhase/CommandPhase";
 import { Button } from "#components/Button/Button.tsx";
 
 const ViewEngagement = () => {
@@ -97,12 +98,7 @@ const ViewEngagement = () => {
                 </div>
             </aside>
 
-            {engagement.currentPhase === "command" && (
-                <div className="p-6">
-                    <h2 className="text-title-m">Command Phase</h2>
-                    <p>Resolve command phase abilities and generate command points.</p>
-                </div>
-            )}
+            {engagement.currentPhase === "command" && <CommandPhase attackingForce={activeForce} defendingForce={inactiveForce} engagementId={engagement.id} />}
             {engagement.currentPhase === "movement" && <Dancefloor attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
             {(engagement.currentPhase === "shooting" || engagement.currentPhase === "fight") && <Octagon gamePhase={engagement.currentPhase} attackingForce={activeForce} defendingForce={inactiveForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
             {engagement.currentPhase === "charge" && <ChargePhase attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}

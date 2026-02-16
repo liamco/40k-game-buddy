@@ -135,6 +135,9 @@ export interface CombatResolution {
     // Weapon count (number of this weapon the model has, multiplies attacks)
     weaponCount: number;
 
+    // Reroll effects keyed by attribute ("h", "w", "s", "a", "d", "fnp")
+    rerolls: Record<string, EffectSource>;
+
     // All weapon special effects (for display)
     weaponEffects: SpecialEffect[];
 }

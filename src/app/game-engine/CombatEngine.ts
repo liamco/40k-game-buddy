@@ -112,6 +112,8 @@ export class CombatEngine {
 
             weaponCount: this.context.attacker.weaponCount,
 
+            rerolls: this.buildRerollMap(),
+
             weaponEffects: this.weaponEffects,
         };
     }
@@ -184,8 +186,14 @@ export class CombatEngine {
             }
         }
 
+        // Attacker faction abilities (Oath of Moment, etc.)
+        this.collectFromFactionAbilities();
+
         // Convert addsAbility mechanics to special effects (LETHAL HITS, SUSTAINED HITS, etc.)
         this.processAbilityGrantingMechanics();
+
+        // Convert reroll mechanics to special effects
+        this.processRerollMechanics();
 
         // Collect keywords granted by addsKeyword mechanics
         this.collectGrantedKeywords();
@@ -251,6 +259,36 @@ export class CombatEngine {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Process mechanics with effect "reroll" and convert them to SpecialEffects.
+     * Evaluates conditions so rerolls only apply when their criteria are met.
+     */
+    private processRerollMechanics(): void {
+        for (const { mechanic, source, leaderSourceName } of this.collectedMechanics) {
+            if (mechanic.effect !== "reroll") continue;
+            if (!this.evaluateConditions(mechanic.conditions, leaderSourceName)) continue;
+
+            this.weaponEffects.push({
+                type: "reroll",
+                value: mechanic.attribute, // "h" for hit, "w" for wound
+                source,
+            });
+        }
+    }
+
+    /**
+     * Build a map of reroll effects keyed by attribute code.
+     */
+    private buildRerollMap(): Record<string, EffectSource> {
+        const map: Record<string, EffectSource> = {};
+        for (const effect of this.weaponEffects) {
+            if (effect.type === "reroll" && typeof effect.value === "string") {
+                map[effect.value] = effect.source;
+            }
+        }
+        return map;
     }
 
     /**
@@ -381,6 +419,26 @@ export class CombatEngine {
                 if (appliesTo === "attacksAgainst") {
                     this.collectedMechanics.push({ mechanic, source });
                 }
+            }
+        }
+    }
+
+    /**
+     * Collect mechanics from attacker's faction abilities (e.g., Oath of Moment).
+     * Faction abilities come from the plugin config and apply army-wide.
+     */
+    private collectFromFactionAbilities(): void {
+        const factionAbilities = this.context.attacker.factionAbilities;
+        if (!factionAbilities || factionAbilities.length === 0) return;
+
+        for (const ability of factionAbilities) {
+            if (!ability.mechanics || ability.mechanics.length === 0) continue;
+
+            for (const mechanic of ability.mechanics) {
+                this.collectedMechanics.push({
+                    mechanic,
+                    source: createEffectSource("factionAbility", ability.name),
+                });
             }
         }
     }
@@ -631,7 +689,7 @@ export class CombatEngine {
             case "isLeadingUnit":
                 return this.isLeaderAlive(unit, leaderSourceName);
             default:
-                return false;
+                return combatState.stateFlags?.[state] ?? false;
         }
     }
 

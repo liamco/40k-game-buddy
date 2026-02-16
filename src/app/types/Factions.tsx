@@ -24,6 +24,12 @@ export interface Faction {
     detachmentCount: number;
 }
 
+export interface FactionAbilityInterface {
+    type: FactionAbilityUIType;
+    value: string;
+    scope: Entity;
+}
+
 export interface FactionAbility {
     id: string;
     name: string;
@@ -31,6 +37,8 @@ export interface FactionAbility {
     description: string;
     legend?: string;
     mechanics?: any[];
+    phase?: string[];
+    interface?: FactionAbilityInterface;
 }
 
 type FactionAbilityUIType = "singleSelect" | "multiSelect";

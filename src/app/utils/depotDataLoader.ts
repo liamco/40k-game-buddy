@@ -1,5 +1,5 @@
 import factionsIndexData from "../data/output/index.json";
-import type { Faction, Datasheet, Faction, Stratagem, FactionIndex } from "../types";
+import type { Faction, Datasheet, Stratagem, FactionIndex, FactionAbility } from "../types";
 
 // Use Vite's import.meta.glob for dynamic imports
 // Note: The paths must match exactly, so we'll use a function to construct them
@@ -27,6 +27,7 @@ const factionConfigModules = import.meta.glob("../data/plugins/*/faction.json", 
 export interface FactionConfig {
     factionIcon?: string;
     detachmentSupplements?: Record<string, string>;
+    abilities?: FactionAbility[];
 }
 
 // Load faction data from JSON

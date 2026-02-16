@@ -105,7 +105,7 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
         <section className="grid grid-rows-5 rounded overflow-auto h-full">
             {resolution ? (
                 <Fragment>
-                    <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={resolution.attacksModifiers.forDisplay.bonuses} penalties={resolution.attacksModifiers.forDisplay.penalties} finalValue={attacksDisplay.total} />
+                    <AttackStep stepType="attacks" label="Attacks" statLabel="A" statValue={attacksDisplay.perModel} bonuses={resolution.attacksModifiers.forDisplay.bonuses} penalties={resolution.attacksModifiers.forDisplay.penalties} finalValue={attacksDisplay.total} rerollSource={resolution.rerolls["a"]?.name} />
                     <AttackStep
                         stepType="hitChance"
                         label="To hit"
@@ -115,6 +115,7 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
                         penalties={resolution.hitModifiers.forDisplay.penalties}
                         finalValue={toHitDisplay.finalValue}
                         criticalEffect={hitCriticalEffect}
+                        rerollSource={resolution.rerolls["h"]?.name}
                     />
                     <AttackStep
                         stepType="woundChance"
@@ -126,6 +127,7 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
                         finalValue={woundDisplay.finalValue}
                         isCritical={woundDisplay.isCritical}
                         criticalEffect={woundCriticalEffect}
+                        rerollSource={resolution.rerolls["w"]?.name}
                     />
                     <AttackStep
                         stepType="saveChance"
@@ -135,8 +137,9 @@ export function AttackResolver({ resolution, modelCount }: AttackResolverProps) 
                         bonuses={resolution.saveModifiers.forDisplay.bonuses}
                         penalties={resolution.weaponAp !== 0 ? [{ label: "AP", value: resolution.weaponAp }] : []}
                         finalValue={saveDisplay.finalValue}
+                        rerollSource={resolution.rerolls["s"]?.name}
                     />
-                    <AttackStep stepType="feelNoPain" label="Feel no pain" bonuses={resolution.fnpModifiers.forDisplay.bonuses} penalties={resolution.fnpModifiers.forDisplay.penalties} finalValue={resolution.finalFnp ? `${resolution.finalFnp}+` : "-"} disabled={!resolution.finalFnp} />
+                    <AttackStep stepType="feelNoPain" label="Feel no pain" bonuses={resolution.fnpModifiers.forDisplay.bonuses} penalties={resolution.fnpModifiers.forDisplay.penalties} finalValue={resolution.finalFnp ? `${resolution.finalFnp}+` : "-"} disabled={!resolution.finalFnp} rerollSource={resolution.rerolls["fnp"]?.name} />
                 </Fragment>
             ) : (
                 <div className="col-span-5 py-8 text-center w-full flex items-center justify-center gap-4">

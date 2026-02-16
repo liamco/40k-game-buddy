@@ -97,4 +97,5 @@ export interface EngagementForceItemCombatState {
     isInObjectiveRange: "none" | "friendly" | "enemy" | "contested";
     isInEngagementRange: boolean;
     isInCover: boolean;
+    stateFlags?: Record<string, boolean>;
 }

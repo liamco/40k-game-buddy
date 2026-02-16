@@ -40,16 +40,18 @@
                     "name": "Oath of Moment - Hit reroll",
                     "entity": "thisArmy",
                     "effect": "reroll",
-                    "attribute": "hit",
+                    "attribute": "h",
                     "conditions": [
                         {
                             "entity": "opposingUnit",
-                            "attribute": "oathOfMomentTarget",
+                            "state": "oathOfMomentTarget",
+                            "operator": "equals",
                             "value": true
                         },
                         {
                             "entity": "thisArmy",
                             "keywords": ["BLACK TEMPLARS"],
+                            "operator": "notIncludes",
                             "value": false
                         }
                     ]
@@ -58,12 +60,19 @@
                     "name": "Oath of Moment - Wound bonus",
                     "entity": "thisArmy",
                     "effect": "rollBonus",
-                    "attribute": "wound",
+                    "attribute": "w",
                     "value": 1,
                     "conditions": [
                         {
+                            "entity": "opposingUnit",
+                            "state": "oathOfMomentTarget",
+                            "operator": "equals",
+                            "value": true
+                        },
+                        {
                             "entity": "thisArmy",
                             "keywords": ["BLOOD ANGELS", "DARK ANGELS", "BLACK TEMPLARS", "DEATHWATCH", "SPACE WOLVES"],
+                            "operator": "notIncludes",
                             "value": false
                         }
                     ]
