@@ -1071,25 +1071,25 @@ function groupWeaponProfiles(wargear) {
 }
 
 /**
- * Reads and parses a faction-config.json file if it exists
- * Looks in src/app/data/mappings/{faction-slug}/faction-config.json
+ * Reads and parses a faction plugin config (faction.json) if it exists
+ * Looks in src/app/data/plugins/{faction-slug}/faction.json
  * @param {string} factionSlug - The faction slug (e.g., "space-marines")
  * @param {boolean} logMissing - Whether to log a message if no config is found
  * @returns {object|null} - The parsed config or null if not found
  */
 function readFactionConfig(factionSlug, logMissing = false) {
-    const configPath = path.join(__dirname, "..", "..", "src", "app", "data", "mappings", factionSlug, "faction-config.json");
+    const configPath = path.join(__dirname, "..", "..", "src", "app", "data", "plugins", factionSlug, "faction.json");
     if (fs.existsSync(configPath)) {
         try {
             const content = fs.readFileSync(configPath, "utf-8");
             return JSON.parse(content);
         } catch (error) {
-            console.warn(`   ⚠️  Could not parse faction-config.json for ${factionSlug}: ${error.message}`);
+            console.warn(`   ⚠️  Could not parse faction.json plugin for ${factionSlug}: ${error.message}`);
             return null;
         }
     }
     if (logMissing) {
-        console.log(`   ℹ️  No faction-config.json found for ${factionSlug}`);
+        console.log(`   ℹ️  No faction.json plugin found for ${factionSlug}`);
     }
     return null;
 }
@@ -1197,7 +1197,7 @@ async function processJsonFile(filePath, depotdataPath, outputPath, factionConfi
 
             if (factionSlug) {
                 // Check cache first, otherwise read and cache the config
-                // Config files are in src/app/data/mappings/{faction-slug}/faction-config.json
+                // Config files are in src/app/data/plugins/{faction-slug}/faction.json
                 if (!factionConfigCache.has(factionSlug)) {
                     factionConfigCache.set(factionSlug, readFactionConfig(factionSlug, true));
                 }
@@ -1354,7 +1354,7 @@ async function main() {
     let errorCount = 0;
     let fileIndex = 0;
 
-    // Cache for faction-config.json files to avoid re-reading them
+    // Cache for faction plugin config files to avoid re-reading them
     const factionConfigCache = new Map();
 
     let skippedLegendsCount = 0;

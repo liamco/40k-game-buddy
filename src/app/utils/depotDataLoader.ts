@@ -19,7 +19,7 @@ const globalStratagemModules = import.meta.glob("../data/output/core-stratagems.
     import: "default",
 });
 
-const factionConfigModules = import.meta.glob("../data/mappings/*/faction-config.json", {
+const factionConfigModules = import.meta.glob("../data/plugins/*/faction.json", {
     eager: false,
     import: "default",
 });
@@ -144,10 +144,10 @@ export async function loadFactionStratagemData(factionSlug: string, detachmentSl
     }
 }
 
-// Load faction config from mappings folder
+// Load faction config from plugins folder
 export async function loadFactionConfig(slug: string): Promise<FactionConfig | null> {
     try {
-        const moduleKey = Object.keys(factionConfigModules).find((key) => key.includes(`/${slug}/faction-config.json`));
+        const moduleKey = Object.keys(factionConfigModules).find((key) => key.includes(`/${slug}/faction.json`));
 
         if (!moduleKey) {
             // Config file doesn't exist for this faction - that's okay
