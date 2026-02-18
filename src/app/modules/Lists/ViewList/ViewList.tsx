@@ -204,7 +204,7 @@ const ViewList = () => {
 
     return (
         <main className="w-full h-full grid grid-cols-[1fr_3fr] gap-6">
-            <aside className="grid grid-rows-[auto_auto_auto_auto_1fr] gap-6 h-[calc(100vh-54px)] overflow-auto">
+            <aside className="grid grid-rows-[auto_auto_auto_auto_1fr] gap-6 h-[calc(100vh-108px)] overflow-auto">
                 <Link to="/lists" className="inline-flex items-center">
                     <ArrowLeft className="h-4 w-4 mr-1" />
                     <span className="text-blockcaps-m">Back to Lists</span>
@@ -216,11 +216,9 @@ const ViewList = () => {
                     </div>
                     <div className="flex justify-between items-start">
                         <span>{selectedList.factionName}</span>
-                        <div className="flex items-center gap-2">
-                            <span>{selectedList.detachmentName}</span>
-                            {effectiveSupplement && !selectedDetachment?.supplementSlug && <Badge variant="outline">{formatSupplementName(effectiveSupplement)} units</Badge>}
-                        </div>
+                        <span>{selectedList.detachmentName}</span>
                     </div>
+                    <div className="flex items-center gap-2">{effectiveSupplement && !selectedDetachment?.supplementSlug && <Badge variant="outline">{formatSupplementName(effectiveSupplement)} units</Badge>}</div>
                 </div>
                 <SplitHeading label="units in roster" />
                 <Dropdown

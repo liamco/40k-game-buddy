@@ -15,22 +15,21 @@ export function ListIndex() {
     const [listToDelete, setListToDelete] = useState<{ id: string; name: string } | null>(null);
 
     return (
-        <div className="w-full h-full border-1 border-skarsnikGreen">
-            <header className="p-6 border-b-1 border-skarsnikGreen">
-                <div className="flex items-center justify-between">
-                    <h1>Your Lists</h1>
-                    <Link to="/lists/new">
-                        <Button size="sm">
-                            <Plus className="h-4 w-4 mr-1" />
-                            New
-                        </Button>
-                    </Link>
-                </div>
+        <div className="w-full h-full space-y-6">
+            <header className="flex items-center justify-between">
+                <h1>Rosters</h1>
+                <Link to="/lists/new">
+                    <Button size="sm">
+                        <Plus className="h-4 w-4 mr-1" />
+                        New
+                    </Button>
+                </Link>
             </header>
+
             {lists.length === 0 ? (
                 <EmptyState leadingIcon={<IconList />} label="Lists lost or redacted." />
             ) : (
-                <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {lists.map((list) => (
                         <ListListItem key={list.id} list={list} onDeleteClick={setListToDelete} />
                     ))}
