@@ -16,6 +16,18 @@ import UnitListItem from "./components/UnitListItem/UnitListItem";
 import UnitDetailsView from "./components/UnitDetailsView/UnitDetailsView";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 
+const ROLE_ORDER: { key: string; label: string }[] = [
+    { key: "Characters", label: "Characters" },
+    { key: "Battleline", label: "Battleline" },
+    { key: "Dedicated Transports", label: "Transports" },
+    { key: "Other", label: "Other" },
+];
+
+const getRoleKey = (role: string | undefined): string => {
+    if (role && ROLE_ORDER.some((r) => r.key === role)) return role;
+    return "Other";
+};
+
 const ViewList = () => {
     const { addDatasheetToList, calculateItemPoints, factionData, getListById, lists, listsLoaded, loadFactionDataBySlug, removeItemFromList } = useListManager();
 
@@ -100,11 +112,11 @@ const ViewList = () => {
         });
     }, [factionData, selectedDetachment, effectiveSupplement]);
 
-    const orderedListItems = useMemo(() => {
+    const groupedListItems = useMemo((): { role: string; items: ArmyListItem[] }[] => {
         if (!selectedList) return [];
         const items = [...selectedList.items];
         const processed = new Set<string>();
-        const groups: { sortKey: string; items: ArmyListItem[] }[] = [];
+        const groups: { sortKey: string; role: string; items: ArmyListItem[] }[] = [];
 
         // First pass: Create groups for bodyguard units with their leaders
         items.forEach((item) => {
@@ -125,9 +137,10 @@ const ViewList = () => {
                 leaders.forEach((leader) => processed.add(leader.listItemId));
                 processed.add(item.listItemId);
 
-                // Add group with leaders first, then bodyguard unit
+                // Role is based on the bodyguard (primary unit)
                 groups.push({
                     sortKey,
+                    role: getRoleKey(item.role),
                     items: [...leaders, item],
                 });
             }
@@ -140,6 +153,7 @@ const ViewList = () => {
             if (item.leading) {
                 groups.push({
                     sortKey: item.name,
+                    role: getRoleKey(item.role),
                     items: [item],
                 });
                 processed.add(item.listItemId);
@@ -151,17 +165,31 @@ const ViewList = () => {
             if (!processed.has(item.listItemId)) {
                 groups.push({
                     sortKey: item.name,
+                    role: getRoleKey(item.role),
                     items: [item],
                 });
                 processed.add(item.listItemId);
             }
         });
 
-        // Sort groups alphabetically by sortKey
-        groups.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+        // Bucket groups by role, then sort within each bucket
+        const warlordItemId = selectedList.warlordItemId;
+        return ROLE_ORDER.map(({ key, label }) => {
+            const bucket = groups.filter((g) => g.role === key);
 
-        // Flatten groups into final ordered list
-        return groups.flatMap((group) => group.items);
+            // Sort alphabetically, but warlord group first in Characters
+            bucket.sort((a, b) => {
+                if (key === "Characters" && warlordItemId) {
+                    const aHasWarlord = a.items.some((i) => i.listItemId === warlordItemId);
+                    const bHasWarlord = b.items.some((i) => i.listItemId === warlordItemId);
+                    if (aHasWarlord && !bHasWarlord) return -1;
+                    if (!aHasWarlord && bHasWarlord) return 1;
+                }
+                return a.sortKey.localeCompare(b.sortKey);
+            });
+
+            return { role: label, items: bucket.flatMap((g) => g.items) };
+        }).filter((section) => section.items.length > 0);
     }, [selectedList]);
 
     // Show loading state while data is being fetched
@@ -243,45 +271,45 @@ const ViewList = () => {
                     )}
                 />
                 <div className="space-y-2">
-                    {orderedListItems.map((item, index) => {
-                        const isSelected = selectedItem?.listItemId === item.listItemId;
-                        const isLeader = !!item.leading;
-                        const isAttachedUnit = !!(item.leadBy && item.leadBy.length > 0);
-                        const leaderCount = item.leadBy?.length || 0;
-                        const prevItem = orderedListItems[index - 1];
-                        const nextItem = orderedListItems[index + 1];
+                    {groupedListItems.map((section) => (
+                        <div key={section.role} className="space-y-2">
+                            <SplitHeading label={section.role} />
+                            {section.items.map((item, index) => {
+                                const isSelected = selectedItem?.listItemId === item.listItemId;
+                                const isLeader = !!item.leading;
+                                const isAttachedUnit = !!(item.leadBy && item.leadBy.length > 0);
+                                const leaderCount = item.leadBy?.length || 0;
+                                const prevItem = section.items[index - 1];
+                                const nextItem = section.items[index + 1];
 
-                        const isGroupedWithPrev = !!((isAttachedUnit && prevItem?.leading?.id === item.id && prevItem?.leading?.name === item.name) || (isLeader && prevItem?.leading?.id === item.leading?.id && prevItem?.leading?.name === item.leading?.name));
+                                const isGroupedWithPrev = !!((isAttachedUnit && prevItem?.leading?.id === item.id && prevItem?.leading?.name === item.name) || (isLeader && prevItem?.leading?.id === item.leading?.id && prevItem?.leading?.name === item.leading?.name));
 
-                        // Check if next item is grouped with this item
-                        const isGroupedWithNext = !!(
-                            // This is a leader and next is also a leader attached to the same target
-                            (
-                                (isLeader && nextItem?.leading?.id === item.leading?.id && nextItem?.leading?.name === item.leading?.name) ||
-                                // This is a leader and next is the bodyguard unit we're attached to
-                                (isLeader && nextItem?.leadBy?.some((l) => l.id === item.id && l.name === item.name))
-                            )
-                        );
+                                const isGroupedWithNext = !!(
+                                    (isLeader && nextItem?.leading?.id === item.leading?.id && nextItem?.leading?.name === item.leading?.name) ||
+                                    (isLeader && nextItem?.leadBy?.some((l) => l.id === item.id && l.name === item.name))
+                                );
 
-                        const isWarlord = selectedList.warlordItemId === item.listItemId;
+                                const isWarlord = selectedList.warlordItemId === item.listItemId;
 
-                        return (
-                            <UnitListItem
-                                key={item.listItemId}
-                                item={item}
-                                isSelected={isSelected}
-                                isLeader={isLeader}
-                                isWarlord={isWarlord}
-                                isAttachedUnit={isAttachedUnit}
-                                isGroupedWithPrev={isGroupedWithPrev}
-                                isGroupedWithNext={isGroupedWithNext}
-                                leaderCount={leaderCount}
-                                calculateItemPoints={calculateItemPoints}
-                                handleRemoveItem={handleRemoveItem}
-                                setSelectedItem={(item) => setSelectedItemId(item.listItemId)}
-                            />
-                        );
-                    })}
+                                return (
+                                    <UnitListItem
+                                        key={item.listItemId}
+                                        item={item}
+                                        isSelected={isSelected}
+                                        isLeader={isLeader}
+                                        isWarlord={isWarlord}
+                                        isAttachedUnit={isAttachedUnit}
+                                        isGroupedWithPrev={isGroupedWithPrev}
+                                        isGroupedWithNext={isGroupedWithNext}
+                                        leaderCount={leaderCount}
+                                        calculateItemPoints={calculateItemPoints}
+                                        handleRemoveItem={handleRemoveItem}
+                                        setSelectedItem={(item) => setSelectedItemId(item.listItemId)}
+                                    />
+                                );
+                            })}
+                        </div>
+                    ))}
                 </div>
             </aside>
             {selectedItem ? (
