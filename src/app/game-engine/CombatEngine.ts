@@ -805,6 +805,9 @@ export class CombatEngine {
         const hasAutoHit = this.hasAutoSuccessForAttribute("h");
         if (hasAutoHit) return "auto";
 
+        // Overwatch: always 6+ (TORRENT auto-hit already handled above)
+        if (this.context.isOverwatch) return 6;
+
         if (typeof baseToHit === "string") {
             // Variable BS/WS (rare, but handle it)
             return baseToHit as any;

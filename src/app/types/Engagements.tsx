@@ -41,6 +41,8 @@ export type EngagementSize = "combat-patrol" | "incursion" | "strike-force" | "o
 
 export type EngagementPhase = "command" | "movement" | "shooting" | "charge" | "fight";
 
+export type OutOfPhaseEvent = "overwatch" | "fightback" | null;
+
 export interface Engagement {
     id: string;
     name?: string;

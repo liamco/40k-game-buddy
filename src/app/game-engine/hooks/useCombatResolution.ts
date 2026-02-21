@@ -29,6 +29,7 @@ export interface UseCombatResolutionParams {
 
     activeStratagems?: ActiveStratagem[];
     attackerFactionAbilities?: FactionAbility[];
+    isOverwatch?: boolean;
 }
 
 /**
@@ -37,7 +38,7 @@ export interface UseCombatResolutionParams {
  * Returns null if required data is missing (attacker, weapon, defender, target)
  */
 export function useCombatResolution(params: UseCombatResolutionParams): CombatResolution | null {
-    const { phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems, attackerFactionAbilities } = params;
+    const { phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems, attackerFactionAbilities, isOverwatch } = params;
 
     return useMemo(() => {
         const context = buildCombatContext({
@@ -54,10 +55,11 @@ export function useCombatResolution(params: UseCombatResolutionParams): CombatRe
             targetModel,
             activeStratagems,
             attackerFactionAbilities,
+            isOverwatch,
         });
 
         if (!context) return null;
 
         return resolveCombat(context);
-    }, [phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems, attackerFactionAbilities]);
+    }, [phase, turn, isPlayerTurn, attackerUnit, attackerForce, weaponProfile, weaponCount, modelCount, defenderUnit, defenderForce, targetModel, activeStratagems, attackerFactionAbilities, isOverwatch]);
 }

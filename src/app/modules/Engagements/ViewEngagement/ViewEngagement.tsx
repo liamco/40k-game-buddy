@@ -1,8 +1,8 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import type { GamePhase } from "../../../types";
-import type { EngagementForceItemCombatState } from "#types/Engagements";
+import type { EngagementForceItemCombatState, OutOfPhaseEvent } from "#types/Engagements";
 import { useEngagementManager } from "../EngagementManagerContext";
 
 import GamePhaseSelector from "#modules/Engagements/ViewEngagement/CombatPhase/components/GamePhaseSelector/GamePhaseSelector.tsx";
@@ -40,14 +40,22 @@ const ViewEngagement = () => {
         );
     }
 
+    const [outOfPhaseEvent, setOutOfPhaseEvent] = useState<OutOfPhaseEvent>(null);
+
     const handlePhaseChange = (phase: GamePhase) => {
+        setOutOfPhaseEvent(null);
         updateEngagementPhase(engagement.id, phase);
     };
 
     const handleEndTurn = () => {
+        setOutOfPhaseEvent(null);
         resetTurnFlags(engagement.id);
         setActiveForce(engagement.id, inactiveForce.sourceListId);
         updateEngagementPhase(engagement.id, "command");
+    };
+
+    const handleToggleOutOfPhaseEvent = (event: "overwatch" | "fightback") => {
+        setOutOfPhaseEvent((prev) => (prev === event ? null : event));
     };
 
     const allForces = [engagement.engagementForceA, engagement.engagementForceB, engagement.engagementForceC, engagement.engagementForceD].filter((f): f is NonNullable<typeof f> => f != null);
@@ -59,6 +67,11 @@ const ViewEngagement = () => {
     const handleSetActiveForce = (forceId: string) => {
         setActiveForce(engagement.id, forceId);
     };
+
+    // Derive effective phase and forces when an out-of-phase event is active
+    const effectivePhase: GamePhase = outOfPhaseEvent === "overwatch" ? "shooting" : outOfPhaseEvent === "fightback" ? "fight" : engagement.currentPhase;
+    const octagonAttacker = outOfPhaseEvent ? inactiveForce : activeForce;
+    const octagonDefender = outOfPhaseEvent ? activeForce : inactiveForce;
 
     // Handler for updating unit combat state - maps forceType to the correct engagement force
     const handleUpdateUnitCombatState = useCallback(
@@ -90,6 +103,27 @@ const ViewEngagement = () => {
                                 <GamePhaseSelector currentPhase={engagement.currentPhase} onPhaseChange={handlePhaseChange} />
                             </div>
                         </div>
+                        <div className="space-y-2">
+                            <span className="text-blockcaps-s text-center block text-shadow-glow-green">Reactions</span>
+                            <div className="space-y-1">
+                                <button
+                                    onClick={() => handleToggleOutOfPhaseEvent("overwatch")}
+                                    className={`flex items-center w-full border-1 p-3 gap-2 transition-colors transition-opacity cursor-pointer ${
+                                        outOfPhaseEvent === "overwatch" ? "bg-fireDragonBright text-mournfangBrown opacity-100" : "border-mournfangBrown text-fireDragonBright opacity-60"
+                                    }`}
+                                >
+                                    <p className="text-blockcaps-s">Overwatch</p>
+                                </button>
+                                <button
+                                    onClick={() => handleToggleOutOfPhaseEvent("fightback")}
+                                    className={`flex items-center w-full border-1 p-3 gap-2 transition-colors transition-opacity cursor-pointer ${
+                                        outOfPhaseEvent === "fightback" ? "bg-fireDragonBright text-mournfangBrown opacity-100" : "border-mournfangBrown text-fireDragonBright opacity-60"
+                                    }`}
+                                >
+                                    <p className="text-blockcaps-s">Fight Back</p>
+                                </button>
+                            </div>
+                        </div>
                         <Button variant="destructive" size="lg" className="w-full shadow-glow-red" onClick={handleEndTurn}>
                             End turn
                         </Button>
@@ -98,10 +132,16 @@ const ViewEngagement = () => {
                 </div>
             </aside>
 
-            {engagement.currentPhase === "command" && <CommandPhase attackingForce={activeForce} defendingForce={inactiveForce} engagementId={engagement.id} />}
-            {engagement.currentPhase === "movement" && <Dancefloor attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
-            {(engagement.currentPhase === "shooting" || engagement.currentPhase === "fight") && <Octagon gamePhase={engagement.currentPhase} attackingForce={activeForce} defendingForce={inactiveForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
-            {engagement.currentPhase === "charge" && <ChargePhase attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
+            {outOfPhaseEvent ? (
+                <Octagon gamePhase={effectivePhase} attackingForce={octagonAttacker} defendingForce={octagonDefender} onUpdateUnitCombatState={handleUpdateUnitCombatState} isOverwatch={outOfPhaseEvent === "overwatch"} />
+            ) : (
+                <>
+                    {engagement.currentPhase === "command" && <CommandPhase attackingForce={activeForce} defendingForce={inactiveForce} engagementId={engagement.id} />}
+                    {engagement.currentPhase === "movement" && <Dancefloor attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
+                    {(engagement.currentPhase === "shooting" || engagement.currentPhase === "fight") && <Octagon gamePhase={engagement.currentPhase} attackingForce={activeForce} defendingForce={inactiveForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
+                    {engagement.currentPhase === "charge" && <ChargePhase attackingForce={activeForce} onUpdateUnitCombatState={handleUpdateUnitCombatState} />}
+                </>
+            )}
         </div>
     );
 };

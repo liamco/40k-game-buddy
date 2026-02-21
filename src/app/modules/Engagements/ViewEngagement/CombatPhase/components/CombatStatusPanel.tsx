@@ -155,7 +155,7 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
             <div className="row-span-2 col-span-3 p-3 border border-deathWorldForest flex flex-col justify-between">
                 <span className={`text-blockcaps-xs-tight opacity-75 ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
                 {useSingleModelDisplay() ? (
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                         <div className="text-right space-y-1">
                             <div className="text-title-xl !tracking-[0.1em] space-x-1">
                                 <span className="text-skarsnikGreen">W</span>

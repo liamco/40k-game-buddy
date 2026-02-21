@@ -19,6 +19,7 @@ interface OctagonProps {
     attackingForce: EngagementForce;
     defendingForce: EngagementForce;
     onUpdateUnitCombatState: (forceType: "attacking" | "defending", unitId: string, updates: Partial<EngagementForceItemCombatState>) => void;
+    isOverwatch?: boolean;
 }
 
 /**
@@ -26,7 +27,7 @@ interface OctagonProps {
  * It manages all state for attacker/defender selections and passes
  * the appropriate data down to the AttackerPanel, DefenderPanel, and AttackResolver.
  */
-export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUnitCombatState }: OctagonProps) => {
+export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUnitCombatState, isOverwatch }: OctagonProps) => {
     // Load attacker's faction abilities from plugin config
     const [attackerFactionAbilities, setAttackerFactionAbilities] = useState<FactionAbility[]>([]);
     useEffect(() => {
@@ -76,6 +77,7 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
         defenderForce: defendingForce,
         targetModel: selectedDefenderModel,
         attackerFactionAbilities,
+        isOverwatch,
     });
 
     // Handle attacker unit selection

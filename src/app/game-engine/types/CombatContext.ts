@@ -49,6 +49,9 @@ export interface CombatContext {
     };
 
     activeStratagems: ActiveStratagem[];
+
+    /** When true, all non-TORRENT hits require 6+ (overwatch reaction) */
+    isOverwatch?: boolean;
 }
 
 /**
@@ -83,8 +86,9 @@ export function buildCombatContext(params: {
     targetModel: Model | null;
     activeStratagems?: ActiveStratagem[];
     attackerFactionAbilities?: FactionAbility[];
+    isOverwatch?: boolean;
 }): CombatContext | null {
-    const { phase, turn = 1, isPlayerTurn = true, attackerUnit, attackerForce, weaponProfile, weaponCount = 1, modelCount, defenderUnit, defenderForce, defenderModelCount, targetModel, activeStratagems = [], attackerFactionAbilities } = params;
+    const { phase, turn = 1, isPlayerTurn = true, attackerUnit, attackerForce, weaponProfile, weaponCount = 1, modelCount, defenderUnit, defenderForce, defenderModelCount, targetModel, activeStratagems = [], attackerFactionAbilities, isOverwatch } = params;
 
     if (!attackerUnit || !weaponProfile || !defenderUnit || !targetModel) {
         return null;
@@ -109,5 +113,6 @@ export function buildCombatContext(params: {
             modelCount: defenderModelCount ?? calculateAliveModelCount(defenderUnit),
         },
         activeStratagems,
+        isOverwatch,
     };
 }
