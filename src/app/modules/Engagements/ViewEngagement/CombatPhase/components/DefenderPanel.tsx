@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useState, useMemo } from "react";
 
 import type { EngagementForce, EngagementForceItemCombatState } from "#types/Engagements";
 import type { Model, GamePhase } from "#types/index";
@@ -9,6 +9,7 @@ import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown";
 import SplitHeading from "#components/SplitHeading/SplitHeading";
 import ModelProfileCard from "#components/ModelProfileCard/ModelProfileCard";
 import CombatStatusPanel from "./CombatStatusPanel";
+import UnitInfoDialog from "./UnitInfoDialog";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import { Badge } from "#components/Badge/Badge.tsx";
@@ -29,6 +30,8 @@ interface DefenderPanelProps {
 }
 
 export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedModel, onModelChange, selectedWeapon, onCombatStatusChange }: DefenderPanelProps) {
+    const [infoOpen, setInfoOpen] = useState(false);
+
     // Convert unit items to dropdown options
     const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
         return unitItems.map((unit) => ({
@@ -124,12 +127,14 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                     )}
                     triggerClassName="grow-1 rounded-l-none border-l-0"
                 />
-                <Button variant="ghostSecondary" className="h-full border border-deathWorldForest rounded">
+                <Button variant="ghostSecondary" className="h-full border border-deathWorldForest rounded" disabled={!selectedUnit} onClick={() => selectedUnit && setInfoOpen(true)}>
                     <BaseIcon>
                         <InfoIcon />
                     </BaseIcon>
                 </Button>
             </div>
+
+            {selectedUnit && <UnitInfoDialog unit={selectedUnit.item} open={infoOpen} onOpenChange={setInfoOpen} />}
 
             {/* No unit selected */}
             {!selectedUnit && (

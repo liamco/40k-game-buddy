@@ -1,4 +1,4 @@
-import React, { useMemo, Fragment } from "react";
+import React, { useState, useMemo, Fragment } from "react";
 
 import type { EngagementForce, EngagementForceItemCombatState, EngagementWargear } from "#types/Engagements";
 import type { WeaponProfile, GamePhase } from "#types/index";
@@ -9,6 +9,7 @@ import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown.tsx
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 import WeaponProfileCard from "#components/WeaponProfileCard/WeaponProfileCard.tsx";
 import CombatStatusPanel from "./CombatStatusPanel.tsx";
+import UnitInfoDialog from "./UnitInfoDialog.tsx";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import { Badge } from "#components/Badge/Badge.tsx";
@@ -28,6 +29,8 @@ interface AttackerPanelProps {
 }
 
 export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedWeapon, onWeaponChange, onCombatStatusChange }: AttackerPanelProps) {
+    const [infoOpen, setInfoOpen] = useState(false);
+
     // Convert unit items to dropdown options
     const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
         return unitItems.map((unit) => ({
@@ -107,12 +110,14 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
                     )}
                     triggerClassName="grow-1 rounded-l-none border-l-0"
                 />
-                <Button variant="ghostSecondary" className="h-full border border-deathWorldForest rounded">
+                <Button variant="ghostSecondary" className="h-full border border-deathWorldForest rounded" disabled={!selectedUnit} onClick={() => selectedUnit && setInfoOpen(true)}>
                     <BaseIcon>
                         <InfoIcon />
                     </BaseIcon>
                 </Button>
             </div>
+
+            {selectedUnit && <UnitInfoDialog unit={selectedUnit.item} open={infoOpen} onOpenChange={setInfoOpen} />}
 
             {/* No unit selected */}
             {!selectedUnit && (
