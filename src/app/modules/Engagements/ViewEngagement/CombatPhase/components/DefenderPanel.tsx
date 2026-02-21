@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, Fragment } from "react";
 
 import type { EngagementForce, EngagementForceItemCombatState } from "#types/Engagements";
 import type { Model, GamePhase } from "#types/index";
@@ -10,6 +10,7 @@ import SplitHeading from "#components/SplitHeading/SplitHeading";
 import ModelProfileCard from "#components/ModelProfileCard/ModelProfileCard";
 import CombatStatusPanel from "./CombatStatusPanel";
 import UnitInfoDialog from "./UnitInfoDialog";
+import { StratagemDialog, useStratagems } from "./StratagemDialog";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import { Badge } from "#components/Badge/Badge.tsx";
@@ -31,6 +32,8 @@ interface DefenderPanelProps {
 
 export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedModel, onModelChange, selectedWeapon, onCombatStatusChange }: DefenderPanelProps) {
     const [infoOpen, setInfoOpen] = useState(false);
+    const [stratagemOpen, setStratagemOpen] = useState(false);
+    const { grouped: stratagemGrouped, totalCount: stratagemCount } = useStratagems(force, gamePhase, "defender");
 
     // Convert unit items to dropdown options
     const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
@@ -108,7 +111,7 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     }, [availableModels, leaderModelCount, selectedUnit]);
 
     return (
-        <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr] overflow-auto h-[calc(100vh-108px)]" style={{ scrollbarGutter: "stable" }}>
+        <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr_auto] overflow-auto h-[calc(100vh-108px)]" style={{ scrollbarGutter: "stable" }}>
             <SplitHeading label="Target unit" labelClassName="text-blockcaps-xs" />
             <div className="flex gap-2 items-center">
                 <Dropdown
@@ -150,57 +153,65 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
 
             {/* Unit selected and alive - show model selection */}
             {selectedUnit && !combatState?.isDestroyed && (
-                <div className="space-y-4">
-                    <div className="space-y-2">
-                        {sortedModels.map(({ model, originalIdx }) => {
-                            const isSelected = selectedModel?.name === model.name;
+                <Fragment>
+                    <div className="space-y-4">
+                        <div className="space-y-2">
+                            {sortedModels.map(({ model, originalIdx }) => {
+                                const isSelected = selectedModel?.name === model.name;
 
-                            // For combined units, leader models come first in the original array.
-                            // Models at originalIdx < leaderModelCount are leaders and need PRECISION to target,
-                            // UNLESS all bodyguard models have been killed.
-                            const isLeaderModel = selectedUnit?.item.sourceUnits && selectedUnit.item.sourceUnits.length > 1 && originalIdx < leaderModelCount;
-                            const isDisabled = isLeaderModel && !hasPrecision && !allBodyguardsKilled;
+                                // For combined units, leader models come first in the original array.
+                                // Models at originalIdx < leaderModelCount are leaders and need PRECISION to target,
+                                // UNLESS all bodyguard models have been killed.
+                                const isLeaderModel = selectedUnit?.item.sourceUnits && selectedUnit.item.sourceUnits.length > 1 && originalIdx < leaderModelCount;
+                                const isDisabled = isLeaderModel && !hasPrecision && !allBodyguardsKilled;
 
-                            // Check if all model instances of this profile are dead
-                            // For combined units, match by sourceUnitName using originalIdx
-                            // For single units, match all instances to the single profile
-                            const instances = selectedUnit.item.modelInstances || [];
-                            const deadModelIds = combatState?.deadModelIds || [];
-                            const sourceUnits = selectedUnit.item.sourceUnits;
+                                // Check if all model instances of this profile are dead
+                                // For combined units, match by sourceUnitName using originalIdx
+                                // For single units, match all instances to the single profile
+                                const instances = selectedUnit.item.modelInstances || [];
+                                const deadModelIds = combatState?.deadModelIds || [];
+                                const sourceUnits = selectedUnit.item.sourceUnits;
 
-                            let profileInstances: typeof instances;
-                            if (sourceUnits && sourceUnits.length > 1) {
-                                // Combined unit: originalIdx maps to sourceUnits order (leaders first, then bodyguard)
-                                // Models are merged as [...leaderModels, ...bodyguardModels]
-                                const sourceUnit = sourceUnits[originalIdx];
-                                if (sourceUnit) {
-                                    profileInstances = instances.filter((m) => m.sourceUnitName === sourceUnit.name);
+                                let profileInstances: typeof instances;
+                                if (sourceUnits && sourceUnits.length > 1) {
+                                    // Combined unit: originalIdx maps to sourceUnits order (leaders first, then bodyguard)
+                                    // Models are merged as [...leaderModels, ...bodyguardModels]
+                                    const sourceUnit = sourceUnits[originalIdx];
+                                    if (sourceUnit) {
+                                        profileInstances = instances.filter((m) => m.sourceUnitName === sourceUnit.name);
+                                    } else {
+                                        profileInstances = [];
+                                    }
                                 } else {
-                                    profileInstances = [];
+                                    // Single unit: all instances belong to this profile
+                                    profileInstances = instances;
                                 }
-                            } else {
-                                // Single unit: all instances belong to this profile
-                                profileInstances = instances;
-                            }
-                            const isDestroyed = profileInstances.length > 0 && profileInstances.every((m) => deadModelIds.includes(m.instanceId));
+                                const isDestroyed = profileInstances.length > 0 && profileInstances.every((m) => deadModelIds.includes(m.instanceId));
 
-                            return (
-                                <ModelProfileCard
-                                    key={`${model.name}-${originalIdx}`}
-                                    model={model}
-                                    abilities={selectedUnit.item.abilities}
-                                    wargearAbilities={(selectedUnit.item as any).resolvedWargearAbilities}
-                                    isSelected={isSelected}
-                                    isDisabled={isDisabled}
-                                    isDestroyed={isDestroyed}
-                                    onUnitModelChange={onModelChange}
-                                />
-                            );
-                        })}
+                                return (
+                                    <ModelProfileCard
+                                        key={`${model.name}-${originalIdx}`}
+                                        model={model}
+                                        abilities={selectedUnit.item.abilities}
+                                        wargearAbilities={(selectedUnit.item as any).resolvedWargearAbilities}
+                                        isSelected={isSelected}
+                                        isDisabled={isDisabled}
+                                        isDestroyed={isDestroyed}
+                                        onUnitModelChange={onModelChange}
+                                    />
+                                );
+                            })}
+                        </div>
+
+                        {sortedModels.length === 0 && <p className="text-blockcaps-s opacity-50">No model profiles available</p>}
                     </div>
-
-                    {sortedModels.length === 0 && <p className="text-blockcaps-s opacity-50">No model profiles available</p>}
-                </div>
+                    <footer className="pt-2">
+                        <Button variant="ghostSecondary" className="w-full border border-deathWorldForest" onClick={() => setStratagemOpen(true)}>
+                            {stratagemCount} Defender {stratagemCount === 1 ? "stratagem" : "stratagems"} available
+                        </Button>
+                        <StratagemDialog side="defender" gamePhase={gamePhase} force={force} grouped={stratagemGrouped} totalCount={stratagemCount} open={stratagemOpen} onOpenChange={setStratagemOpen} />
+                    </footer>
+                </Fragment>
             )}
 
             {/* Unit selected but destroyed */}

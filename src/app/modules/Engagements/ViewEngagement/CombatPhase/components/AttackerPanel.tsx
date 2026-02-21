@@ -10,6 +10,7 @@ import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 import WeaponProfileCard from "#components/WeaponProfileCard/WeaponProfileCard.tsx";
 import CombatStatusPanel from "./CombatStatusPanel.tsx";
 import UnitInfoDialog from "./UnitInfoDialog.tsx";
+import { StratagemDialog, useStratagems } from "./StratagemDialog.tsx";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import { Badge } from "#components/Badge/Badge.tsx";
@@ -30,6 +31,8 @@ interface AttackerPanelProps {
 
 export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUnitChange, selectedWeapon, onWeaponChange, onCombatStatusChange }: AttackerPanelProps) {
     const [infoOpen, setInfoOpen] = useState(false);
+    const [stratagemOpen, setStratagemOpen] = useState(false);
+    const { grouped: stratagemGrouped, totalCount: stratagemCount } = useStratagems(force, gamePhase, "attacker");
 
     // Convert unit items to dropdown options
     const unitOptions = useMemo((): DropdownOption<UnitSelectItem>[] => {
@@ -119,80 +122,84 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
 
             {selectedUnit && <UnitInfoDialog unit={selectedUnit.item} open={infoOpen} onOpenChange={setInfoOpen} />}
 
-            {/* No unit selected */}
             {!selectedUnit && (
                 <div className="flex items-center justify-center p-8">
                     <p className="text-blockcaps-m opacity-50">Select an attacking unit</p>
                 </div>
             )}
 
-            {/* Combat status panel - shown when unit is selected (alive or destroyed) */}
             {selectedUnit && combatState && <CombatStatusPanel side="attacker" combatState={combatState} modelCount={combatState.modelCount} startingStrength={startingStrength} onModelCountChange={() => {}} onCombatStatusChange={onCombatStatusChange} unit={selectedUnit.item} />}
 
-            {/* Unit selected and alive - show weapon selection */}
             {selectedUnit && !combatState?.isDestroyed && (
-                <div className="space-y-4">
-                    {groupedWeapons.isCombined ? (
-                        // Combined unit: show weapons grouped by source
-                        <div className="space-y-6">
-                            {groupedWeapons.sourceNames.map((source) => (
-                                <div key={source} className="space-y-2">
-                                    <span className="inline-block text-blockcaps-s opacity-75">{source}</span>
-                                    {groupedWeapons.groups[source].map((weapon: EngagementWargear) => (
-                                        <Fragment key={weapon.id}>
-                                            {weapon.profiles.map((profile: WeaponProfile) => {
-                                                const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
-                                                const { canFire, reason } = gamePhase === "shooting" ? canFireWeapon(profile, combatState?.movementBehaviour || "hold") : { canFire: true, reason: undefined };
-                                                return (
-                                                    <WeaponProfileCard
-                                                        key={`${weapon.id}-${profile.line}`}
-                                                        profile={profile}
-                                                        wargearId={weapon.id}
-                                                        weaponCount={weapon.count}
-                                                        isSelected={isSelected && canFire}
-                                                        isDisabled={!canFire}
-                                                        onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
-                                                        bonusAttributes={allBonusAttributes}
-                                                    />
-                                                );
-                                            })}
-                                        </Fragment>
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        // Single unit: show weapons without grouping
-                        <div className="space-y-2">
-                            {filteredWeapons.map((weapon) => (
-                                <Fragment key={weapon.id}>
-                                    {weapon.profiles.map((profile: WeaponProfile) => {
-                                        const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
-                                        const { canFire, reason } = gamePhase === "shooting" ? canFireWeapon(profile, combatState?.movementBehaviour || "hold") : { canFire: true, reason: undefined };
-                                        return (
-                                            <WeaponProfileCard
-                                                key={`${weapon.id}-${profile.line}`}
-                                                profile={profile}
-                                                wargearId={weapon.id}
-                                                weaponCount={weapon.count}
-                                                isSelected={isSelected && canFire}
-                                                isDisabled={!canFire}
-                                                disabledLabel={reason}
-                                                onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
-                                                bonusAttributes={allBonusAttributes}
-                                            />
-                                        );
-                                    })}
-                                </Fragment>
-                            ))}
-                        </div>
-                    )}
+                <Fragment>
+                    <div className="space-y-4">
+                        {groupedWeapons.isCombined ? (
+                            // Combined unit: show weapons grouped by source
+                            <div className="space-y-6">
+                                {groupedWeapons.sourceNames.map((source) => (
+                                    <div key={source} className="space-y-2">
+                                        <span className="inline-block text-blockcaps-s opacity-75">{source}</span>
+                                        {groupedWeapons.groups[source].map((weapon: EngagementWargear) => (
+                                            <Fragment key={weapon.id}>
+                                                {weapon.profiles.map((profile: WeaponProfile) => {
+                                                    const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
+                                                    const { canFire, reason } = gamePhase === "shooting" ? canFireWeapon(profile, combatState?.movementBehaviour || "hold") : { canFire: true, reason: undefined };
+                                                    return (
+                                                        <WeaponProfileCard
+                                                            key={`${weapon.id}-${profile.line}`}
+                                                            profile={profile}
+                                                            wargearId={weapon.id}
+                                                            weaponCount={weapon.count}
+                                                            isSelected={isSelected && canFire}
+                                                            isDisabled={!canFire}
+                                                            onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
+                                                            bonusAttributes={allBonusAttributes}
+                                                        />
+                                                    );
+                                                })}
+                                            </Fragment>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            // Single unit: show weapons without grouping
+                            <div className="space-y-2">
+                                {filteredWeapons.map((weapon) => (
+                                    <Fragment key={weapon.id}>
+                                        {weapon.profiles.map((profile: WeaponProfile) => {
+                                            const isSelected = selectedWeapon?.wargearId === weapon.id && selectedWeapon?.profile.line === profile.line;
+                                            const { canFire, reason } = gamePhase === "shooting" ? canFireWeapon(profile, combatState?.movementBehaviour || "hold") : { canFire: true, reason: undefined };
+                                            return (
+                                                <WeaponProfileCard
+                                                    key={`${weapon.id}-${profile.line}`}
+                                                    profile={profile}
+                                                    wargearId={weapon.id}
+                                                    weaponCount={weapon.count}
+                                                    isSelected={isSelected && canFire}
+                                                    isDisabled={!canFire}
+                                                    disabledLabel={reason}
+                                                    onWeaponProfileChange={canFire ? handleWeaponProfileSelect : undefined}
+                                                    bonusAttributes={allBonusAttributes}
+                                                />
+                                            );
+                                        })}
+                                    </Fragment>
+                                ))}
+                            </div>
+                        )}
 
-                    {filteredWeapons.length === 0 && <p className="text-blockcaps-s opacity-50">No {gamePhase === "shooting" ? "ranged" : "melee"} weapons available</p>}
-                </div>
+                        {filteredWeapons.length === 0 && <p className="text-blockcaps-s opacity-50">No {gamePhase === "shooting" ? "ranged" : "melee"} weapons available</p>}
+                    </div>
+                    <footer className="pt-2">
+                        <Button variant="ghostSecondary" className="w-full border border-deathWorldForest" onClick={() => setStratagemOpen(true)}>
+                            {stratagemCount} Attacker {stratagemCount === 1 ? "stratagem" : "stratagems"} available
+                        </Button>
+                        <StratagemDialog side="attacker" gamePhase={gamePhase} force={force} grouped={stratagemGrouped} totalCount={stratagemCount} open={stratagemOpen} onOpenChange={setStratagemOpen} />
+                    </footer>
+                </Fragment>
             )}
 
-            {/* Unit selected but destroyed */}
             {selectedUnit && combatState?.isDestroyed && (
                 <div className="flex items-center justify-center p-8 text-wildRiderRed border-2 border-wildRiderRed">
                     <EmptyState variant="red" label="Everyones dead Dave" leadingIcon={<IconSkull />} />
