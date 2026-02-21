@@ -77,7 +77,6 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
 
     const handleUnitSelect = (unit: UnitSelectItem) => {
         onUnitChange(unit);
-        onWeaponChange(null);
     };
 
     const handleWeaponProfileSelect = (profile: WeaponProfile | null, wargearId?: string, weaponCount?: number) => {
