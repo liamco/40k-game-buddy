@@ -12,6 +12,9 @@ import CombatStatusPanel from "./CombatStatusPanel.tsx";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import { Badge } from "#components/Badge/Badge.tsx";
+import { Button } from "#components/Button/Button.tsx";
+import BaseIcon from "#components/icons/BaseIcon.tsx";
+import { InfoIcon } from "lucide-react";
 
 interface AttackerPanelProps {
     gamePhase: GamePhase;
@@ -88,22 +91,29 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     return (
         <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr_auto] overflow-auto h-[calc(100vh-108px)]" style={{ scrollbarGutter: "stable" }}>
             <SplitHeading label="Attacking unit" labelClassName="text-blockcaps-xs" />
-            <Dropdown
-                options={unitOptions}
-                selectedLabel={selectedUnit?.displayName}
-                placeholder="Select attacking unit..."
-                searchable
-                searchPlaceholder="Search units..."
-                emptyMessage="No units found"
-                onSelect={handleUnitSelect}
-                optionClassName={(unit) => (unit.item.combatState.isDestroyed ? "bg-wordBearersRed hover:bg-wordBearersRed hover:text-wildRiderRed text-wildRiderRed" : "")}
-                renderOption={(unit) => (
-                    <div className="flex p-2 items-center justify-between">
-                        <span className="text-blockcaps-m">{unit.displayName}</span> {unit.item.combatState.isDestroyed ? <Badge variant="destructive">Unit destroyed</Badge> : null}
-                    </div>
-                )}
-                triggerClassName="grow-1 rounded-l-none border-l-0"
-            />
+            <div className="flex gap-2 items-center">
+                <Dropdown
+                    options={unitOptions}
+                    selectedLabel={selectedUnit?.displayName}
+                    placeholder="Select attacking unit..."
+                    searchable
+                    searchPlaceholder="Search units..."
+                    emptyMessage="No units found"
+                    onSelect={handleUnitSelect}
+                    optionClassName={(unit) => (unit.item.combatState.isDestroyed ? "bg-wordBearersRed hover:bg-wordBearersRed hover:text-wildRiderRed text-wildRiderRed" : "")}
+                    renderOption={(unit) => (
+                        <div className="flex p-2 items-center justify-between">
+                            <span className="text-blockcaps-m">{unit.displayName}</span> {unit.item.combatState.isDestroyed ? <Badge variant="destructive">Unit destroyed</Badge> : null}
+                        </div>
+                    )}
+                    triggerClassName="grow-1 rounded-l-none border-l-0"
+                />
+                <Button variant="ghostSecondary" className="h-full border border-deathWorldForest rounded">
+                    <BaseIcon>
+                        <InfoIcon />
+                    </BaseIcon>
+                </Button>
+            </div>
 
             {/* No unit selected */}
             {!selectedUnit && (

@@ -33,18 +33,13 @@ const Variant = {
 const CombatStatusToken = ({ variant = "default", active = false, disabled = false, onChange, icon }: Props) => {
     const IconComponent = tokenIcons[icon] ? tokenIcons[icon] : null;
 
-    return (
-        <label className={styles.CombatStatusTokenWrapper}>
-            <input type="checkbox" checked={active} disabled={disabled} onChange={(e) => (onChange ? onChange(e.target.checked) : null)} className={`${styles.CombatStatusToken} ${active ? styles.isActive : ""}  ${Variant[variant]}`} />
-            {IconComponent && (
-                <span className={`${onChange != undefined ? "cursor-pointer" : ""}`}>
-                    <BaseIcon size="medium" color="currentColor">
-                        <IconComponent />
-                    </BaseIcon>
-                </span>
-            )}
-        </label>
-    );
+    if (IconComponent) {
+        return (
+            <BaseIcon size="medium" color="currentColor">
+                <IconComponent />
+            </BaseIcon>
+        );
+    }
 };
 
 export default CombatStatusToken;

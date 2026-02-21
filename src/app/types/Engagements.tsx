@@ -91,6 +91,7 @@ export interface EngagementForceItemCombatState {
     isDestroyed: boolean;
     isBattleShocked: boolean;
     movementBehaviour?: "hold" | "move" | "advance" | "fallBack" | null;
+    activeEffects?: string[];
     hasShot: boolean;
     hasCharged: boolean;
     hasFought: boolean;

@@ -81,8 +81,8 @@ export function Dropdown<T>({ options, selectedLabel, placeholder = "Select...",
     return (
         <Popover open={open} onOpenChange={handleOpenChange} modal={true}>
             <PopoverTrigger className={`w-full flex justify-between items-center rounded ${variantStyles[variant].trigger} ${triggerClassName} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`} disabled={disabled}>
-                <span>{selectedLabel || placeholder}</span>
-                {searchable ? <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" /> : <ChevronDown className={`ml-2 h-4 w-4 shrink-0 ${variant === "minimal" ? "opacity-[0%]" : "opacity-50"}`} />}
+                <span className="text-blockcaps-s text-left">{selectedLabel || placeholder}</span>
+                {searchable ? <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" /> : <ChevronDown className={`ml-2 h-4 w-4 shrink-0 ${variant === "minimal" ? "hidden" : "opacity-50"}`} />}
             </PopoverTrigger>
             <PopoverContent
                 className="p-0 border-0"

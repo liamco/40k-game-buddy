@@ -11,6 +11,8 @@ import CombatStatusToken from "./CombatStatusToken/CombatStatusToken";
 import { CasualtyPanel } from "./CasualtyPanel";
 import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
+import IconShock from "#components/icons/IconShock.tsx";
+import IconDefender from "#components/icons/IconDefender.tsx";
 
 interface CombatStatusPanelProps {
     side: "attacker" | "defender";
@@ -31,9 +33,9 @@ interface ObjectiveRangeOption {
 
 const objectiveRangeOptions: { id: string; label: string; data: ObjectiveRangeOption }[] = [
     { id: "none", label: "None", data: { value: "none" } },
-    { id: "friendly", label: "Friendly Objective", data: { value: "friendly" } },
-    { id: "enemy", label: "Enemy Objective", data: { value: "enemy" } },
-    { id: "contested", label: "Contested Objective", data: { value: "contested" } },
+    { id: "friendly", label: "Friendly", data: { value: "friendly" } },
+    { id: "enemy", label: "Enemy", data: { value: "enemy" } },
+    { id: "contested", label: "Contested", data: { value: "contested" } },
 ];
 
 export function CombatStatusPanel({ side, gamePhase, combatState, startingStrength, onModelCountChange, onCombatStatusChange, unit }: CombatStatusPanelProps) {
@@ -42,8 +44,8 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
     // Max wounds for single-model units
     const maxWounds = unit.models[0]?.w || 1;
 
-    const handleBooleanToggle = (key: keyof EngagementForceItemCombatState) => (checked: boolean) => {
-        onCombatStatusChange({ [key]: checked });
+    const handleBooleanToggle = (key: "isBattleShocked" | "isInCover") => {
+        onCombatStatusChange({ [key]: !combatState[key] });
     };
 
     const handleCasualtyChange = (deadModelIds: string[]) => {
@@ -149,30 +151,11 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
     };
 
     return (
-        <section className="space-y-4">
-            <div className="flex justify-between items-center">
+        <section className="grid grid-cols-6 gap-2">
+            <div className="row-span-2 col-span-3 p-3 border border-deathWorldForest flex flex-col justify-between">
+                <span className={`text-blockcaps-xs-tight opacity-75 ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
                 {useSingleModelDisplay() ? (
-                    <Fragment>
-                        <div className="space-y-1">
-                            <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
-
-                            <div className="flex items-center gap-2">
-                                <button
-                                    onClick={handleWoundsDecrement}
-                                    disabled={combatState.currentWounds <= 0 || combatState.isDestroyed}
-                                    className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}
-                                >
-                                    <Minus className="w-4 h-4" />
-                                </button>
-                                <button
-                                    onClick={handleWoundsIncrement}
-                                    disabled={combatState.currentWounds >= maxWounds}
-                                    className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.currentWounds >= maxWounds ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}
-                                >
-                                    <Plus className="w-4 h-4" />
-                                </button>
-                            </div>
-                        </div>
+                    <div className="flex justify-between">
                         <div className="text-right space-y-1">
                             <div className="text-title-xl !tracking-[0.1em] space-x-1">
                                 <span className="text-skarsnikGreen">W</span>
@@ -181,30 +164,25 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
                             </div>
                             {unit.damaged && combatState.isDamaged && !combatState.isDestroyed && <div className="inline-block px-2 py-1 bg-wordBearersRed/80 border border-wildRiderRed rounded text-wildRiderRed text-blockcaps-s">Severely Damaged</div>}
                         </div>
-                    </Fragment>
-                ) : (
-                    <Fragment>
-                        <div className="space-y-1">
-                            <span className={`text-blockcaps-s ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
-
-                            <div className="flex items-center gap-2">
-                                <button onClick={handleCasualtyDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.isDestroyed ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}>
-                                    <Minus className="w-4 h-4" />
-                                </button>
-                                <button
-                                    onClick={handleCasualtyIncrement}
-                                    disabled={combatState.unitStrength === "full"}
-                                    className={`cursor-pointer p-2 rounded bg-fireDragonBright text-mournfangBrown transition-colors ${combatState.unitStrength === "full" ? "bg-fireDragonBright/30 !cursor-not-allowed" : ""}`}
-                                >
-                                    <Plus className="w-4 h-4" />
-                                </button>
-                            </div>
+                        <div className={`flex items-center border ${combatState.isDamaged ? "text-wildRiderRed border-wildRiderRed" : "text-fireDragonBright border-mournfangBrown"}`}>
+                            <button
+                                onClick={handleWoundsDecrement}
+                                disabled={combatState.currentWounds <= 0 || combatState.isDestroyed}
+                                className={`cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "!cursor-not-allowed" : ""}`}
+                            >
+                                <Minus className="w-4 h-4" />
+                            </button>
+                            <button onClick={handleWoundsIncrement} disabled={combatState.currentWounds >= maxWounds} className={`border-l cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds >= maxWounds ? "!cursor-not-allowed" : ""}`}>
+                                <Plus className="w-4 h-4" />
+                            </button>
                         </div>
-
+                    </div>
+                ) : (
+                    <div className="flex justify-between items-end">
                         <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
-                            <ul className={`inline-grid gap-1 list-none m-0 p-0`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))`, direction: "rtl" }}>
+                            <ul className={`inline-grid gap-1 list-none m-0 p-0`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))` }}>
                                 {unit.modelInstances?.map((m: EngagementModelInstance) => (
-                                    <li key={m.instanceId} className={` !mt-0 ${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-1`}>
+                                    <li key={m.instanceId} className={` !mt-0 ${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-0.5`}>
                                         <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
                                             <IconSkull />
                                         </BaseIcon>
@@ -212,27 +190,71 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
                                 ))}
                             </ul>
                         </Button>
-                    </Fragment>
+                        <div className={`flex items-center border ${combatState.isDamaged ? "text-wildRiderRed border-wildRiderRed" : "text-fireDragonBright border-mournfangBrown"}`}>
+                            <button onClick={handleCasualtyDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "!cursor-not-allowed" : ""}`}>
+                                <Minus className="w-4 h-4" />
+                            </button>
+                            <button onClick={handleCasualtyIncrement} disabled={combatState.unitStrength === "full"} className={`cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "!cursor-not-allowed" : ""}`}>
+                                <Plus className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+                )}
+                <CasualtyPanel open={casualtyPanelOpen} onOpenChange={setCasualtyPanelOpen} unit={unit} deadModelIds={combatState.deadModelIds || []} onCasualtyChange={handleCasualtyChange} />
+            </div>
+            <button
+                type="button"
+                className={`col-span-3 space-y-2 p-3 border text-left ${combatState.isBattleShocked ? "border-wildRiderRed text-wildRiderRed shadow-glow-red" : "border-deathWorldForest"}`}
+                onClick={() => {
+                    handleBooleanToggle("isBattleShocked");
+                }}
+                disabled={combatState.isDestroyed}
+            >
+                <span className="text-blockcaps-s block opacity-75">Battle shock</span>
+                {combatState.isBattleShocked ? (
+                    <BaseIcon color={combatState.isBattleShocked ? "wildRiderRed" : "wordBearersRed"}>
+                        <IconShock />
+                    </BaseIcon>
+                ) : (
+                    <span className="block h-[1.07rem]">-</span>
+                )}
+            </button>
+            <div className="col-span-3 space-y-2 p-3 border border-mournfangBrown text-fireDragonBright">
+                <span className="text-blockcaps-s block opacity-75">Effects</span>
+                {combatState.activeEffects ? (
+                    <BaseIcon color="fireDragonBright">
+                        <IconShock />
+                    </BaseIcon>
+                ) : (
+                    <span className="block h-[1.07rem]">-</span>
                 )}
             </div>
-            <div className={`flex justify-between items-center ${combatState.isDestroyed ? "cursor-not-allowed opacity-50" : ""}`}>
-                <div className="relative grow max-w-[15rem]">
-                    <span className="text-blockcaps-s">In Obj Range</span>
-                    <Dropdown variant="minimal" disabled={combatState.isDestroyed} triggerClassName="w-full" options={objectiveRangeOptions} selectedLabel={currentObjectiveLabel} placeholder="Select..." onSelect={handleObjectiveRangeChange} />
-                </div>
-                <div className="flex gap-2">
+            <div className="col-span-2 space-y-2 p-3 border border-deathWorldForest flex flex-col justify-between">
+                <span className="text-blockcaps-s opacity-75">Movement</span>
+                <div className="flex justify-between items-center">
+                    <span className="text-blockcaps-s">{combatState.movementBehaviour}</span>
                     <CombatStatusToken disabled={combatState.isDestroyed} icon={combatState.movementBehaviour} active />
-
-                    {side === "attacker" && <></>}
-                    {side === "defender" && gamePhase !== "fight" && (
-                        <>
-                            <CombatStatusToken disabled={combatState.isDestroyed} variant="highlight" icon="cover" active={combatState.isInCover} onChange={handleBooleanToggle("isInCover")} />
-                        </>
-                    )}
-                    <CombatStatusToken disabled={combatState.isDestroyed} icon="shock" variant="destructive" active={combatState.isBattleShocked} onChange={handleBooleanToggle("isBattleShocked")} />
                 </div>
             </div>
-            <CasualtyPanel open={casualtyPanelOpen} onOpenChange={setCasualtyPanelOpen} unit={unit} deadModelIds={combatState.deadModelIds || []} onCasualtyChange={handleCasualtyChange} />
+            <button
+                type="button"
+                className={`text-left space-y-2  col-span-2 p-3 border ${combatState.isInCover ? "border-skarsnikGreen shadow-glow-green" : "border-deathWorldForest"} ${side != "defender" && gamePhase !== "fight" ? "cursor-not-allowed" : ""}`}
+                onClick={() => handleBooleanToggle("isInCover")}
+                disabled={(side != "defender" && gamePhase !== "fight") || combatState.isDestroyed}
+            >
+                <span className="text-blockcaps-s block opacity-75">In cover</span>
+                {combatState.isInCover ? (
+                    <BaseIcon color="skarsnikGreen">
+                        <IconDefender />
+                    </BaseIcon>
+                ) : (
+                    <span className="block h-[1.07rem]">-</span>
+                )}
+            </button>
+            <div className="col-span-2 p-3 space-y-2 border border-deathWorldForest flex flex-col justify-between">
+                <span className="text-blockcaps-s opacity-75">Near obj</span>
+                <Dropdown variant="minimal" disabled={combatState.isDestroyed} triggerClassName="w-full" options={objectiveRangeOptions} selectedLabel={currentObjectiveLabel} placeholder="Select..." onSelect={handleObjectiveRangeChange} />
+            </div>
         </section>
     );
 }

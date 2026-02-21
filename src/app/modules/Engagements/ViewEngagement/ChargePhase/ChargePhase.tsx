@@ -17,7 +17,7 @@ const ChargePhase = ({ attackingForce, onUpdateUnitCombatState }: Props) => {
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 overflow-auto h-[calc(100vh-108px)]">
             <SplitHeading label="Available units" />
             <div className="grid grid-cols-3 gap-6">
                 {unitItems.map((unitItem) => (

@@ -117,7 +117,7 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
 
             {/* Movement choice buttons */}
             <RadioGroupPrimitive.Root value={item.combatState.movementBehaviour} onValueChange={handleMovementChange} className={`grid grid-cols-4 border-1 rounded ${resolveSwitchBorderClass()}`} defaultValue="hold">
-                <RadioGroupPrimitive.Item value="hold" className="px-2 py-1 cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-deathWorldForest">
+                <RadioGroupPrimitive.Item value="hold" className={`px-1 py-3 ${resolveSwitchBorderClass()} cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright`}>
                     <span className="text-blockcaps-xs">Hold</span>
                 </RadioGroupPrimitive.Item>
                 <RadioGroupPrimitive.Item value="move" className={`px-1 py-3 border-l-1 ${resolveSwitchBorderClass()} cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright`}>
