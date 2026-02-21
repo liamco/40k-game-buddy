@@ -83,16 +83,16 @@ const ViewEngagement = () => {
 
     return (
         <div className="w-full h-full grid grid-cols-[250px_1fr] gap-6">
-            <aside className="flex flex-col justify-between">
-                <div className="space-y-4">
-                    <header className="text-center space-y-1">
-                        <h1 className="text-blockcaps-s block">{`Op #${engagement.id}`}</h1>
-                        <span className="text-blockcaps-xs">
-                            {engagement.type} / {engagement.size}
-                        </span>
-                    </header>
-                    <nav className="py-6 px-3 space-y-8 relative">
-                        <div className="absolute top-0 left-0 w-full h-2 border-1 border-skarsnikGreen border-b-0" />
+            <aside className="flex flex-col space-y-4">
+                <header className="text-center space-y-1">
+                    <h1 className="text-blockcaps-s block">{`Op #${engagement.id}`}</h1>
+                    <span className="text-blockcaps-xs">
+                        {engagement.type} / {engagement.size}
+                    </span>
+                </header>
+                <nav className="grow py-6 px-3 space-y-8 relative flex flex-col">
+                    <div className="absolute top-0 left-0 w-full h-2 border-1 border-skarsnikGreen border-b-0" />
+                    <div className="flex flex-col grow space-y-8">
                         <div className="space-y-8">
                             <div className="space-y-2">
                                 <span className="text-blockcaps-s text-center block text-shadow-glow-green">Active force</span>
@@ -108,28 +108,24 @@ const ViewEngagement = () => {
                             <div className="space-y-1">
                                 <button
                                     onClick={() => handleToggleOutOfPhaseEvent("overwatch")}
-                                    className={`flex items-center w-full border-1 p-3 gap-2 transition-colors transition-opacity cursor-pointer ${
-                                        outOfPhaseEvent === "overwatch" ? "bg-fireDragonBright text-mournfangBrown opacity-100" : "border-mournfangBrown text-fireDragonBright opacity-60"
-                                    }`}
+                                    className={`flex items-center w-full border-1 p-3 gap-2 transition-colors transition-opacity cursor-pointer ${outOfPhaseEvent === "overwatch" ? "bg-fireDragonBright text-mournfangBrown opacity-100" : "border-mournfangBrown text-fireDragonBright opacity-60"}`}
                                 >
                                     <p className="text-blockcaps-s">Overwatch</p>
                                 </button>
                                 <button
                                     onClick={() => handleToggleOutOfPhaseEvent("fightback")}
-                                    className={`flex items-center w-full border-1 p-3 gap-2 transition-colors transition-opacity cursor-pointer ${
-                                        outOfPhaseEvent === "fightback" ? "bg-fireDragonBright text-mournfangBrown opacity-100" : "border-mournfangBrown text-fireDragonBright opacity-60"
-                                    }`}
+                                    className={`flex items-center w-full border-1 p-3 gap-2 transition-colors transition-opacity cursor-pointer ${outOfPhaseEvent === "fightback" ? "bg-fireDragonBright text-mournfangBrown opacity-100" : "border-mournfangBrown text-fireDragonBright opacity-60"}`}
                                 >
                                     <p className="text-blockcaps-s">Fight Back</p>
                                 </button>
                             </div>
                         </div>
-                        <Button variant="destructive" size="lg" className="w-full shadow-glow-red" onClick={handleEndTurn}>
-                            End turn
-                        </Button>
-                        <div className="absolute bottom-0 left-0 w-full h-2 border-1 border-skarsnikGreen border-t-0" />
-                    </nav>
-                </div>
+                    </div>
+                    <Button variant="destructive" size="lg" className="w-full shadow-glow-red !mb-0" onClick={handleEndTurn}>
+                        End turn
+                    </Button>
+                    <div className="absolute bottom-0 left-0 w-full h-2 border-1 border-skarsnikGreen border-t-0" />
+                </nav>
             </aside>
 
             {outOfPhaseEvent ? (

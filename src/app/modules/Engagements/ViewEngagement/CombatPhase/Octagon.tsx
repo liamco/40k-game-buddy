@@ -84,8 +84,9 @@ export const Octagon = ({ gamePhase, attackingForce, defendingForce, onUpdateUni
     const handleAttackerUnitChange = useCallback(
         (unit: UnitSelectItem) => {
             setSelectedAttackerItemId(unit.item.listItemId);
-            // Auto-select first weapon for the current phase
-            const weapon = getFirstWeaponForPhase(unit.item.wargear || [], gamePhase === "shooting" || gamePhase === "fight" ? gamePhase : "shooting");
+            // Auto-select first valid weapon for the current phase (respects movement restrictions)
+            const phase = gamePhase === "shooting" || gamePhase === "fight" ? gamePhase : "shooting";
+            const weapon = getFirstValidWeaponForMovement(unit.item.wargear, phase, unit.item.combatState?.movementBehaviour);
             setSelectedWeapon(weapon);
         },
         [gamePhase]
