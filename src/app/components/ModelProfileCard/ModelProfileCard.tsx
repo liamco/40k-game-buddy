@@ -7,7 +7,7 @@ import { Badge } from "#components/Badge/Badge.tsx";
 import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconShield from "#components/icons/IconShield.tsx";
 
-import strikethroughGreen from "#assets/StrikethroughGreen.svg";
+import strikethroughOrange from "#assets/StrikethroughOrange.svg";
 import strikethroughRed from "#assets/StrikethroughRed.svg";
 import IconSkull from "#components/icons/IconSkull.tsx";
 
@@ -57,7 +57,7 @@ const ModelProfileCard = ({ model, abilities, wargearAbilities, isDisabled, isSe
 
     const resolveStyles = () => {
         if (isDestroyed) {
-            return "bg-wordBearersRed shadow-none border-wildRiderRed  text-wildRiderRed";
+            return "bg-wordBearersRed shadow-none border-wildRiderRed text-wildRiderRed";
         }
         if (isDisabled) {
             return "";
@@ -120,7 +120,7 @@ const ModelProfileCard = ({ model, abilities, wargearAbilities, isDisabled, isSe
                     )}
                 </div>
             </div>
-            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethroughGreen} alt="X" />}
+            {isDisabled && <img className="absolute w-full h-full top-0 bottom-0 right-0 left-0" src={strikethroughOrange} alt="X" />}
             {isDestroyed && (
                 <Fragment>
                     <img className="absolute w-full h-full top-0 left-0 pointer-events-none" src={strikethroughRed} alt="X" />

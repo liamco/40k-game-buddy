@@ -75,7 +75,7 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
 
         return "border-fireDragonBright";
     };
-    console.log(item.combatState.movementBehaviour);
+
     return (
         <div className={`${styles.UnitMovementCard} ${item.combatState.movementBehaviour ? styles.UnitMovementCardTouched : null} ${item.combatState.isDestroyed ? styles.UnitMovementCardDestroyed : null}`}>
             <div className="space-y-2">
