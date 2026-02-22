@@ -82,7 +82,7 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
                     <div className="flex gap-2 items-center">
                         <h3 className="text-blockcaps-s">{displayName}</h3>
                         <Button variant="ghostPrimary" className="h-full rounded" onClick={() => setInfoOpen(true)}>
-                            <BaseIcon color="fireDragonBright">
+                            <BaseIcon color={item.combatState.movementBehaviour ? "mournfangBrown" : "fireDragonBright"}>
                                 <InfoIcon />
                             </BaseIcon>
                         </Button>
