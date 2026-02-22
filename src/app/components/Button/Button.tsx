@@ -18,6 +18,7 @@ const buttonVariants = cva(
                 destructive: "bg-wildRiderRed text-wordBearersRed hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
                 warning: "bg-yurielYellow text-averland px-3 py-2 hover:bg-yurielYellow/80",
                 ghost: "bg-transparent text-fireDragonBright px-3 py-2 text-shadow-glow-green hover:bg-mournfangBrown",
+                ghostPrimary: "bg-transparent text-fireDragonBright px-3 py-2 text-shadow-glow-orange hover:bg-mournfangBrown",
                 ghostSecondary: "bg-transparent text-skarsnikGreen px-3 py-2 text-shadow-glow-orange hover:bg-deathWorldForest",
                 ghostDestructive: "bg-transparent text-wildRiderRed px-3 py-2 text-shadow-glow-orange hover:bg-mournfangBrown",
                 ghostWarning: "bg-transparent text-yurielYellow px-3 py-2 hover:bg-averland/50",

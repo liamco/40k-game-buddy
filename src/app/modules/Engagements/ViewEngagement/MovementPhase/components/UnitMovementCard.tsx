@@ -1,5 +1,5 @@
 import { useState, useMemo, Fragment } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, InfoIcon } from "lucide-react";
 import { EngagementForceItemCombatState } from "#types/Engagements.tsx";
 import { type UnitSelectItem } from "../../CombatPhase/utils/combatUtils";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
@@ -10,6 +10,8 @@ import styles from "./UnitMovementCard.module.css";
 import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import strikethrough from "#assets/StrikethroughRed.svg";
+import { Button } from "#components/Button/Button.tsx";
+import UnitInfoDialog from "../../CombatPhase/components/UnitInfoDialog.tsx";
 
 interface Props {
     unitItem: UnitSelectItem;
@@ -19,6 +21,7 @@ interface Props {
 const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
     const { item, displayName } = unitItem;
     const [isExpanded, setIsExpanded] = useState(false);
+    const [infoOpen, setInfoOpen] = useState(false);
 
     // Get movement value from first model
     const movementValue = useMemo(() => {
@@ -76,7 +79,14 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
         <div className={`${styles.UnitMovementCard} ${item.combatState.movementBehaviour ? styles.UnitMovementCardTouched : null} ${item.combatState.isDestroyed ? styles.UnitMovementCardDestroyed : null}`}>
             <div className="space-y-2">
                 <div className="flex justify-between items-center gap-2">
-                    <h3 className="text-blockcaps-s">{displayName}</h3>
+                    <div className="flex gap-2 items-center">
+                        <h3 className="text-blockcaps-s">{displayName}</h3>
+                        <Button variant="ghostPrimary" className="h-full rounded" onClick={() => setInfoOpen(true)}>
+                            <BaseIcon color="fireDragonBright">
+                                <InfoIcon />
+                            </BaseIcon>
+                        </Button>
+                    </div>
                     <span className={`text-blockcaps-l rounded p-2 ${resolveMoveStatClass()}`}>{movementValue}"</span>
                 </div>
 
@@ -141,6 +151,8 @@ const UnitMovementCard = ({ unitItem, onCombatStatusChange }: Props) => {
                     </div>
                 </Fragment>
             )}
+
+            <UnitInfoDialog unit={item} open={infoOpen} onOpenChange={setInfoOpen} />
         </div>
     );
 };
