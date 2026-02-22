@@ -12,6 +12,7 @@ import IconSkull from "#components/icons/IconSkull.tsx";
 import strikethrough from "#assets/StrikethroughRed.svg";
 import { Button } from "#components/Button/Button.tsx";
 import UnitInfoDialog from "../../CombatPhase/components/UnitInfoDialog.tsx";
+import IconInfo from "#components/icons/IconInfo.tsx";
 
 interface Props {
     unitItem: UnitSelectItem;
@@ -74,11 +75,11 @@ const UnitChargeCard = ({ unitItem, onCombatStatusChange }: Props) => {
         <div className={`${styles.UnitChargeCard} ${resolveCardClass()}`}>
             <div className="space-y-2">
                 <div className="flex justify-between items-center gap-2">
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-1 items-center">
                         <h3 className="text-blockcaps-s">{displayName}</h3>
-                        <Button variant="ghostPrimary" className="h-full rounded" onClick={() => setInfoOpen(true)}>
+                        <Button variant="ghostPrimary" className="h-full rounded !p-1" onClick={() => setInfoOpen(true)}>
                             <BaseIcon color={item.combatState.movementBehaviour ? "mournfangBrown" : "fireDragonBright"}>
-                                <InfoIcon />
+                                <IconInfo />
                             </BaseIcon>
                         </Button>
                     </div>
