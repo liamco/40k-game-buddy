@@ -39,22 +39,23 @@ const UnitChargeCard = ({ unitItem, onCombatStatusChange }: Props) => {
     const hasEffects = groupedEffects.length > 0;
 
     const handleChargeChange = (value: string) => {
+        console.log(value);
         onCombatStatusChange(item.listItemId, {
-            hasCharged: value === "charge",
+            chargeBehaviour: value as EngagementForceItemCombatState["chargeBehaviour"],
         });
     };
 
-    const radioValue = item.combatState.hasCharged ? "charge" : "hold";
+    const radioValue = item.combatState.chargeBehaviour ?? "";
 
     const resolveCardClass = () => {
         if (item.combatState.isDestroyed) return styles.UnitChargeCardDestroyed;
         if (!eligibility.eligible) return styles.UnitChargeCardBlocked;
-        if (item.combatState.hasCharged) return styles.UnitChargeCardTouched;
+        if (item.combatState.chargeBehaviour) return styles.UnitChargeCardTouched;
         return "";
     };
 
     const resolveBadgeClass = () => {
-        if (item.combatState.hasCharged) return "secondaryAlt";
+        if (item.combatState.chargeBehaviour) return "secondaryAlt";
         if (item.combatState.isDestroyed) return "destructive";
         return "outlineAlt";
     };
@@ -65,7 +66,7 @@ const UnitChargeCard = ({ unitItem, onCombatStatusChange }: Props) => {
     };
 
     const resolveSwitchBorderClass = () => {
-        if (item.combatState.hasCharged) return "border-mournfangBrown";
+        if (item.combatState.chargeBehaviour) return "border-mournfangBrown";
         if (item.combatState.isDestroyed) return "border-wildRiderRed";
         if (!eligibility.eligible) return "border-skarsnikGreen";
         return "border-fireDragonBright";
@@ -117,7 +118,7 @@ const UnitChargeCard = ({ unitItem, onCombatStatusChange }: Props) => {
 
             {/* Expanded effects panel */}
             {isExpanded && hasEffects && (
-                <div className={`mb-4 border-t ${item.combatState.hasCharged ? "border-mournfangBrown" : "border-fireDragonBright"} pt-3 space-y-2`}>
+                <div className={`mb-4 border-t ${item.combatState.chargeBehaviour === "charge" ? "border-mournfangBrown" : "border-fireDragonBright"} pt-3 space-y-2`}>
                     {groupedEffects.map((effect, idx) => (
                         <ChargeEffectRow key={idx} effect={effect} />
                     ))}
@@ -126,7 +127,7 @@ const UnitChargeCard = ({ unitItem, onCombatStatusChange }: Props) => {
 
             {/* Charge choice buttons */}
             {eligibility.eligible && (
-                <RadioGroupPrimitive.Root value={radioValue} onValueChange={handleChargeChange} className={`grid grid-cols-2 border-1 rounded ${resolveSwitchBorderClass()}`}>
+                <RadioGroupPrimitive.Root value={radioValue} defaultValue="hold" onValueChange={handleChargeChange} className={`grid grid-cols-2 border-1 rounded ${resolveSwitchBorderClass()}`}>
                     <RadioGroupPrimitive.Item value="hold" className="px-2 py-1 cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright">
                         <span className="text-blockcaps-xs">Hold</span>
                     </RadioGroupPrimitive.Item>

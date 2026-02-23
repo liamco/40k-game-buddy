@@ -667,10 +667,8 @@ export class CombatEngine {
                 return combatState.isInEngagementRange ?? false;
             case "hasChargedThisTurn":
             case "hasCharged":
-                return combatState.hasCharged ?? false;
+                return combatState.chargeBehaviour === "charge";
             case "hasFiredThisPhase":
-            case "hasShot":
-                return combatState.hasShot ?? false;
             case "isBelowHalfStrength":
                 return combatState.unitStrength === "belowHalf";
             case "isBelowStartingStrength":
@@ -678,10 +676,8 @@ export class CombatEngine {
             case "isDamaged":
                 return combatState.isDamaged ?? false;
             // Phase-based conditions (check context, not unit state)
-            case "isRangedPhase":
             case "isShootingPhase":
                 return this.context.phase === "shooting";
-            case "isMeleePhase":
             case "isFightPhase":
                 return this.context.phase === "fight";
             // Leader condition: unit has an attached leader who is still alive

@@ -102,7 +102,6 @@ case "inCover":
 case "hasChargedThisTurn":
 case "hasCharged":
 case "hasFiredThisPhase":
-case "hasShot":
 ```
 
 **B. ANTI-X Regex - DUPLICATED**

@@ -93,10 +93,8 @@ export interface EngagementForceItemCombatState {
     isDestroyed: boolean;
     isBattleShocked: boolean;
     movementBehaviour?: "hold" | "move" | "advance" | "fallBack" | null;
+    chargeBehaviour: "hold" | "charge" | null;
     activeEffects?: string[];
-    hasShot: boolean;
-    hasCharged: boolean;
-    hasFought: boolean;
     isInObjectiveRange: "none" | "friendly" | "enemy" | "contested";
     isInEngagementRange: boolean;
     isInCover: boolean;

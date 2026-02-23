@@ -19,7 +19,7 @@ const ChargePhase = ({ attackingForce, onUpdateUnitCombatState }: Props) => {
     return (
         <div className="space-y-4 overflow-auto h-[calc(100vh-108px)]">
             <SplitHeading label="Available units" />
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-4">
                 {unitItems.map((unitItem) => (
                     <UnitChargeCard key={unitItem.item.listItemId} unitItem={unitItem} onCombatStatusChange={handleCombatStatusChange} />
                 ))}
