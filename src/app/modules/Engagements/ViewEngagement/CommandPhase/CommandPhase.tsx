@@ -25,9 +25,7 @@ const CommandPhase = ({ attackingForce, defendingForce, engagementId }: Props) =
     const defendingForceKey = useMemo(() => {
         const engagement = getEngagementById(engagementId);
         if (!engagement) return "engagementForceB" as const;
-        return engagement.engagementForceA.sourceListId === defendingForce.sourceListId
-            ? ("engagementForceA" as const)
-            : ("engagementForceB" as const);
+        return engagement.engagementForceA.sourceListId === defendingForce.sourceListId ? ("engagementForceA" as const) : ("engagementForceB" as const);
     }, [engagementId, defendingForce.sourceListId, getEngagementById]);
 
     // Load faction config to get command phase abilities
@@ -60,9 +58,7 @@ const CommandPhase = ({ attackingForce, defendingForce, engagementId }: Props) =
 
     // Units eligible for battle-shock tests (active player's units below half strength)
     const battleShockUnits = useMemo(() => {
-        return attackingForce.items.filter(
-            (item) => !item.combatState.isDestroyed && item.combatState.unitStrength === "belowHalf"
-        );
+        return attackingForce.items.filter((item) => !item.combatState.isDestroyed && item.combatState.unitStrength === "belowHalf");
     }, [attackingForce.items]);
 
     // Find which unit currently has a given state flag set
@@ -92,7 +88,7 @@ const CommandPhase = ({ attackingForce, defendingForce, engagementId }: Props) =
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 FullScreenHeight">
             <SplitHeading label="Command Phase" />
 
             {/* Battle-shock Tests */}
@@ -108,10 +104,7 @@ const CommandPhase = ({ attackingForce, defendingForce, engagementId }: Props) =
                             const radioValue = isShocked ? "failed" : isShocked === false ? "passed" : "";
 
                             return (
-                                <div
-                                    key={item.listItemId}
-                                    className={`border rounded p-4 space-y-3 ${isShocked ? "border-wildRiderRed/50" : "border-skarsnikGreen/30"}`}
-                                >
+                                <div key={item.listItemId} className={`border rounded p-4 space-y-3 ${isShocked ? "border-wildRiderRed/50" : "border-skarsnikGreen/30"}`}>
                                     <div className="flex justify-between items-center gap-2">
                                         <h4 className="text-blockcaps-s">{item.name}</h4>
                                         <div className="flex items-center gap-2">
@@ -125,31 +118,17 @@ const CommandPhase = ({ attackingForce, defendingForce, engagementId }: Props) =
                                                     </span>
                                                 </Badge>
                                             )}
-                                            <span className="text-blockcaps-l rounded p-2 bg-rhinoxHide text-fireDragonBright">
-                                                Ld {ld}+
-                                            </span>
+                                            <span className="text-blockcaps-l rounded p-2 bg-rhinoxHide text-fireDragonBright">Ld {ld}+</span>
                                         </div>
                                     </div>
 
                                     <p className="text-xs text-skarsnikGreen/60">Roll 2D6 — {ld}+ to pass</p>
 
-                                    <RadioGroupPrimitive.Root
-                                        value={radioValue}
-                                        onValueChange={(value) =>
-                                            handleBattleShockResult(item.listItemId, value as "passed" | "failed")
-                                        }
-                                        className={`grid grid-cols-2 border-1 rounded ${isShocked ? "border-wildRiderRed" : "border-fireDragonBright"}`}
-                                    >
-                                        <RadioGroupPrimitive.Item
-                                            value="passed"
-                                            className="px-2 py-3 cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright"
-                                        >
+                                    <RadioGroupPrimitive.Root value={radioValue} onValueChange={(value) => handleBattleShockResult(item.listItemId, value as "passed" | "failed")} className={`grid grid-cols-2 border-1 rounded ${isShocked ? "border-wildRiderRed" : "border-fireDragonBright"}`}>
+                                        <RadioGroupPrimitive.Item value="passed" className="px-2 py-3 cursor-pointer data-[state=checked]:bg-mournfangBrown data-[state=checked]:text-fireDragonBright">
                                             <span className="text-blockcaps-xs">Pass</span>
                                         </RadioGroupPrimitive.Item>
-                                        <RadioGroupPrimitive.Item
-                                            value="failed"
-                                            className={`px-2 py-3 border-l-1 ${isShocked ? "border-wildRiderRed" : "border-fireDragonBright"} cursor-pointer data-[state=checked]:bg-wordBearersRed data-[state=checked]:text-wildRiderRed`}
-                                        >
+                                        <RadioGroupPrimitive.Item value="failed" className={`px-2 py-3 border-l-1 ${isShocked ? "border-wildRiderRed" : "border-fireDragonBright"} cursor-pointer data-[state=checked]:bg-wordBearersRed data-[state=checked]:text-wildRiderRed`}>
                                             <span className="text-blockcaps-xs">Fail</span>
                                         </RadioGroupPrimitive.Item>
                                     </RadioGroupPrimitive.Root>
@@ -166,9 +145,7 @@ const CommandPhase = ({ attackingForce, defendingForce, engagementId }: Props) =
                     <SplitHeading label="Faction Abilities" />
                     {commandAbilities.map((ability) => {
                         const selectedUnitId = ability.interface ? getSelectedUnitId(ability.interface.value) : null;
-                        const selectedUnit = selectedUnitId
-                            ? defendingForce.items.find((i) => i.listItemId === selectedUnitId)
-                            : null;
+                        const selectedUnit = selectedUnitId ? defendingForce.items.find((i) => i.listItemId === selectedUnitId) : null;
                         const isComplete = selectedUnitId !== null;
 
                         return (
@@ -177,29 +154,16 @@ const CommandPhase = ({ attackingForce, defendingForce, engagementId }: Props) =
                                     <Checkbox checked={isComplete} className="mt-0.5 pointer-events-none" />
                                     <div className="flex-1 space-y-1">
                                         <h3 className="text-blockcaps-s">{ability.name}</h3>
-                                        {ability.legend && (
-                                            <p className="text-xs text-skarsnikGreen/60 line-clamp-2">{ability.legend}</p>
-                                        )}
+                                        {ability.legend && <p className="text-xs text-skarsnikGreen/60 line-clamp-2">{ability.legend}</p>}
                                     </div>
                                 </div>
 
-                                {ability.interface?.type === "singleSelect" &&
-                                    ability.interface.scope === "opposingUnit" && (
-                                        <div className="space-y-2">
-                                            <label className="text-xs text-skarsnikGreen/80">
-                                                Select target enemy unit
-                                            </label>
-                                            <Dropdown
-                                                options={unitOptions}
-                                                selectedLabel={selectedUnit?.name}
-                                                placeholder="Choose an enemy unit..."
-                                                searchable={unitOptions.length > 6}
-                                                onSelect={(unitId) =>
-                                                    handleSelect(ability.interface!.value, unitId)
-                                                }
-                                            />
-                                        </div>
-                                    )}
+                                {ability.interface?.type === "singleSelect" && ability.interface.scope === "opposingUnit" && (
+                                    <div className="space-y-2">
+                                        <label className="text-xs text-skarsnikGreen/80">Select target enemy unit</label>
+                                        <Dropdown options={unitOptions} selectedLabel={selectedUnit?.name} placeholder="Choose an enemy unit..." searchable={unitOptions.length > 6} onSelect={(unitId) => handleSelect(ability.interface!.value, unitId)} />
+                                    </div>
+                                )}
                             </div>
                         );
                     })}

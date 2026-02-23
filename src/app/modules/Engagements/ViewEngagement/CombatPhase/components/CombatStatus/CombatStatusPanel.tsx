@@ -3,12 +3,12 @@ import { Plus, Minus } from "lucide-react";
 
 import { Button } from "#components/Button/Button.tsx";
 import Dropdown from "#components/Dropdown/Dropdown.tsx";
-import type { GamePhase } from "../../../../types";
+import type { GamePhase } from "#types/index";
 import type { EngagementForceItem, EngagementForceItemCombatState, EngagementModelInstance } from "#types/Engagements";
-import { calculateUnitStrength, getUnitStrengthLabel } from "../../../EngagementManagerContext";
+import { calculateUnitStrength, getUnitStrengthLabel } from "../../../../EngagementManagerContext";
 
-import CombatStatusToken from "./CombatStatusToken/CombatStatusToken";
-import { CasualtyPanel } from "./CasualtyPanel";
+import CombatStatusToken from "../CombatStatusToken/CombatStatusToken";
+import { CasualtyPanel } from "../CasualtyPanel";
 import BaseIcon from "#components/icons/BaseIcon.tsx";
 import IconSkull from "#components/icons/IconSkull.tsx";
 import IconShock from "#components/icons/IconShock.tsx";
@@ -155,7 +155,7 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
             <div className="row-span-2 col-span-3 p-3 border border-deathWorldForest flex flex-col justify-between">
                 <span className={`text-blockcaps-xs-tight opacity-75 ${getUnitStrengthLabelColour()} block`}>{!combatState.isDestroyed ? getUnitStrengthLabel(combatState.unitStrength) : "Unit destroyed"}</span>
                 {useSingleModelDisplay() ? (
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-end">
                         <div className="text-right space-y-1">
                             <div className="text-title-xl !tracking-[0.1em] space-x-1">
                                 <span className="text-skarsnikGreen">W</span>
@@ -178,25 +178,25 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
                         </div>
                     </div>
                 ) : (
-                    <div className="flex justify-between items-end">
-                        <Button variant="unstyled" className="block" onClick={() => setCasualtyPanelOpen(true)}>
-                            <ul className={`inline-grid gap-1 list-none m-0 p-0`} style={{ gridTemplateColumns: `repeat(${calculateUnitGridCols()}, minmax(0, 1fr))` }}>
-                                {unit.modelInstances?.map((m: EngagementModelInstance) => (
-                                    <li key={m.instanceId} className={` !mt-0 ${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-0.5`}>
-                                        <BaseIcon size="small" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
-                                            <IconSkull />
-                                        </BaseIcon>
-                                    </li>
-                                ))}
-                            </ul>
+                    <div className="grid grid-cols-[1fr_auto] gap-2 w-full">
+                        <Button variant="unstyled" className="justify-start flex flex-wrap-reverse gap-0.5 m-0 p-0 max-w-[7.5rem]" onClick={() => setCasualtyPanelOpen(true)}>
+                            {unit.modelInstances?.map((m: EngagementModelInstance) => (
+                                <div key={m.instanceId} className={`!mt-0 ${combatState.deadModelIds.includes(m.instanceId) ? "bg-wordBearersRed" : "bg-deathWorldForest"} p-0.75`}>
+                                    <BaseIcon size="small" className="!block" color={combatState.deadModelIds.includes(m.instanceId) ? "wildRiderRed" : "default"}>
+                                        <IconSkull />
+                                    </BaseIcon>
+                                </div>
+                            ))}
                         </Button>
-                        <div className={`flex items-center border ${combatState.isDamaged ? "text-wildRiderRed border-wildRiderRed" : "text-fireDragonBright border-mournfangBrown"}`}>
-                            <button onClick={handleCasualtyDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "!cursor-not-allowed" : ""}`}>
-                                <Minus className="w-4 h-4" />
-                            </button>
-                            <button onClick={handleCasualtyIncrement} disabled={combatState.unitStrength === "full"} className={`cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "!cursor-not-allowed" : ""}`}>
-                                <Plus className="w-4 h-4" />
-                            </button>
+                        <div className="flex items-end">
+                            <div className={`flex items-center border ${combatState.isDamaged ? "text-wildRiderRed border-wildRiderRed" : "text-fireDragonBright border-mournfangBrown"}`}>
+                                <button onClick={handleCasualtyDecrement} disabled={combatState.isDestroyed} className={`cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "!cursor-not-allowed" : ""}`}>
+                                    <Minus className="w-4 h-4" />
+                                </button>
+                                <button onClick={handleCasualtyIncrement} disabled={combatState.unitStrength === "full"} className={`cursor-pointer p-2 hover:bg-mournfangBrown transition-colors ${combatState.currentWounds <= 0 || combatState.isDestroyed ? "!cursor-not-allowed" : ""}`}>
+                                    <Plus className="w-4 h-4" />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -204,7 +204,7 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
             </div>
             <button
                 type="button"
-                className={`col-span-3 space-y-2 p-3 border text-left ${combatState.isBattleShocked ? "border-wildRiderRed text-wildRiderRed shadow-glow-red" : "border-deathWorldForest"}`}
+                className={`col-span-3 p-3 border flex items-center justify-between cursor-pointer text-left ${combatState.isBattleShocked ? "border-wildRiderRed text-wildRiderRed shadow-glow-red" : "border-deathWorldForest"}`}
                 onClick={() => {
                     handleBooleanToggle("isBattleShocked");
                 }}
@@ -216,7 +216,7 @@ export function CombatStatusPanel({ side, gamePhase, combatState, startingStreng
                         <IconShock />
                     </BaseIcon>
                 ) : (
-                    <span className="block h-[1.07rem]">-</span>
+                    <span className="block h-4">-</span>
                 )}
             </button>
             <div className="col-span-3 space-y-2 p-3 border border-mournfangBrown text-fireDragonBright">

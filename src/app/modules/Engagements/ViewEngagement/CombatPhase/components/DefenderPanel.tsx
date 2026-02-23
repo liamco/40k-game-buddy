@@ -8,7 +8,7 @@ import { type UnitSelectItem, type SelectedWeapon, hasPrecisionAttribute } from 
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown";
 import SplitHeading from "#components/SplitHeading/SplitHeading";
 import ModelProfileCard from "#components/ModelProfileCard/ModelProfileCard";
-import CombatStatusPanel from "./CombatStatusPanel";
+import CombatStatusPanel from "./CombatStatus/CombatStatusPanel";
 import UnitInfoDialog from "./UnitInfoDialog";
 import { StratagemDialog, useStratagems } from "./StratagemDialog";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
@@ -111,7 +111,7 @@ export function DefenderPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     }, [availableModels, leaderModelCount, selectedUnit]);
 
     return (
-        <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr_auto] overflow-auto h-[calc(100vh-108px)]" style={{ scrollbarGutter: "stable" }}>
+        <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr_auto] FullScreenHeight" style={{ scrollbarGutter: "stable" }}>
             <SplitHeading label="Target unit" labelClassName="text-blockcaps-xs" />
             <div className="flex gap-2 items-center">
                 <Dropdown

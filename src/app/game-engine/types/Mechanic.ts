@@ -60,4 +60,5 @@ export interface Mechanic {
     state?: string[];
     value: boolean | number | string;
     conditions?: Condition[];
+    phase?: ("shooting" | "fight")[];
 }

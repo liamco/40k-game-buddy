@@ -189,6 +189,11 @@ export class CombatEngine {
         // Attacker faction abilities (Oath of Moment, etc.)
         this.collectFromFactionAbilities();
 
+        // Filter out mechanics that don't apply in the current phase
+        this.collectedMechanics = this.collectedMechanics.filter(
+            ({ mechanic }) => !mechanic.phase || mechanic.phase.includes(this.context.phase)
+        );
+
         // Convert addsAbility mechanics to special effects (LETHAL HITS, SUSTAINED HITS, etc.)
         this.processAbilityGrantingMechanics();
 

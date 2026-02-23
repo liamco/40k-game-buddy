@@ -79,7 +79,7 @@ const UnitChargeCard = ({ unitItem, onCombatStatusChange }: Props) => {
                     <div className="flex gap-1 items-center">
                         <h3 className="text-blockcaps-s">{displayName}</h3>
                         <Button variant="ghostPrimary" className="h-full rounded !p-1" onClick={() => setInfoOpen(true)}>
-                            <BaseIcon color={item.combatState.movementBehaviour ? "mournfangBrown" : "fireDragonBright"}>
+                            <BaseIcon color={item.combatState.chargeBehaviour ? "mournfangBrown" : "fireDragonBright"}>
                                 <IconInfo />
                             </BaseIcon>
                         </Button>

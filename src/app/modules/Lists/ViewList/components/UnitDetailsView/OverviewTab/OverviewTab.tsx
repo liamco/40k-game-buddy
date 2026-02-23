@@ -63,6 +63,37 @@ const OverviewTab = ({ unit, list }: Props) => {
                 </div>
             )}
 
+            {(() => {
+                const factionAbilities = unit.abilities.filter((a) => a.type !== "Core" && a.type !== "Datasheet");
+                const datasheetAbilities = unit.abilities.filter((a) => a.type === "Datasheet" && a.name.toUpperCase() !== "LEADER");
+                const allAbilities = [...factionAbilities, ...datasheetAbilities];
+
+                return (
+                    allAbilities.length > 0 && (
+                        <div className="space-y-3">
+                            <SplitHeading label="Abilities" />
+                            <div className="space-y-2">
+                                {allAbilities.map((ability) => (
+                                    <div key={ability.name} className="border border-fireDragonBright/30 rounded p-3 space-y-1">
+                                        <p className="text-blockcaps-s text-fireDragonBright">
+                                            {ability.name}
+                                            {ability.parameter && (
+                                                <span className="ml-1">
+                                                    {/^\d+$/.test(ability.parameter) ? `${ability.parameter}+` : ability.parameter}
+                                                </span>
+                                            )}
+                                        </p>
+                                        {ability.description && (
+                                            <p className="text-sm opacity-80" dangerouslySetInnerHTML={{ __html: ability.description }} />
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )
+                );
+            })()}
+
             {unit.transport && (
                 <div className="space-y-4">
                     <SplitHeading label="Transport" />

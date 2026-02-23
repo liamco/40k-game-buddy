@@ -17,7 +17,7 @@ const Dancefloor = ({ attackingForce, onUpdateUnitCombatState }: Props) => {
     };
 
     return (
-        <div className="space-y-4 overflow-auto h-[calc(100vh-108px)]">
+        <div className="space-y-4 FullScreenHeight">
             <SplitHeading label="Available units" />
             <div className="grid grid-cols-3 gap-4">
                 {unitItems.map((unitItem) => (

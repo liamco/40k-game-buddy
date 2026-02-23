@@ -45,7 +45,7 @@ const UnitDetailsView = ({ unit, list }: Props) => {
     const showEnhancementsTab = hasCharacterKeyword && !hasEpicHeroKeyword;
 
     return (
-        <div className="border-1 border-skarsnikGreen grid-rows-[auto_1fr] h-[calc(100vh-108px)] grid overflow-auto">
+        <div className="border-1 border-skarsnikGreen grid grid-rows-[auto_1fr] FullScreenHeight">
             <header className="space-y-4 bg-deathWorldForest p-6">
                 <div className="flex justify-between">
                     <h3 className="text-title-m">{unit.name}</h3>

@@ -232,7 +232,7 @@ const ViewList = () => {
 
     return (
         <main className="w-full h-full grid grid-cols-[1fr_3fr] gap-6">
-            <aside className="grid grid-rows-[auto_auto_auto_auto_1fr] gap-6 h-[calc(100vh-108px)] overflow-auto">
+            <aside className="grid grid-rows-[auto_auto_auto_auto_1fr] gap-6 FullScreenHeight">
                 <Link to="/lists" className="inline-flex items-center">
                     <ArrowLeft className="h-4 w-4 mr-1" />
                     <span className="text-blockcaps-m">Back to Lists</span>
@@ -284,10 +284,7 @@ const ViewList = () => {
 
                                 const isGroupedWithPrev = !!((isAttachedUnit && prevItem?.leading?.id === item.id && prevItem?.leading?.name === item.name) || (isLeader && prevItem?.leading?.id === item.leading?.id && prevItem?.leading?.name === item.leading?.name));
 
-                                const isGroupedWithNext = !!(
-                                    (isLeader && nextItem?.leading?.id === item.leading?.id && nextItem?.leading?.name === item.leading?.name) ||
-                                    (isLeader && nextItem?.leadBy?.some((l) => l.id === item.id && l.name === item.name))
-                                );
+                                const isGroupedWithNext = !!((isLeader && nextItem?.leading?.id === item.leading?.id && nextItem?.leading?.name === item.leading?.name) || (isLeader && nextItem?.leadBy?.some((l) => l.id === item.id && l.name === item.name)));
 
                                 const isWarlord = selectedList.warlordItemId === item.listItemId;
 

@@ -8,7 +8,7 @@ import { type UnitSelectItem, type SelectedWeapon, filterWargearByAliveModels, g
 import Dropdown, { type DropdownOption } from "#components/Dropdown/Dropdown.tsx";
 import SplitHeading from "#components/SplitHeading/SplitHeading.tsx";
 import WeaponProfileCard from "#components/WeaponProfileCard/WeaponProfileCard.tsx";
-import CombatStatusPanel from "./CombatStatusPanel.tsx";
+import CombatStatusPanel from "./CombatStatus/CombatStatusPanel.tsx";
 import UnitInfoDialog from "./UnitInfoDialog.tsx";
 import { StratagemDialog, useStratagems } from "./StratagemDialog.tsx";
 import EmptyState from "#components/EmptyState/EmptyState.tsx";
@@ -94,7 +94,7 @@ export function AttackerPanel({ gamePhase, force, unitItems, selectedUnit, onUni
     };
 
     return (
-        <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr_auto] overflow-auto h-[calc(100vh-108px)]" style={{ scrollbarGutter: "stable" }}>
+        <section className="grid pr-[2px] space-y-4 grid-rows-[auto_auto_auto_1fr_auto] FullScreenHeight" style={{ scrollbarGutter: "stable" }}>
             <SplitHeading label="Attacking unit" labelClassName="text-blockcaps-xs" />
             <div className="flex gap-2 items-center">
                 <Dropdown
